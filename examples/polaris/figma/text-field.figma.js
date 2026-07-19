@@ -149,6 +149,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -159,7 +160,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -181,6 +186,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -188,6 +194,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -210,6 +217,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -233,6 +241,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -244,11 +253,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -298,11 +312,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -330,11 +349,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -397,6 +421,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -407,7 +432,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -429,6 +458,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -436,6 +466,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -458,6 +489,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -481,6 +513,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -492,11 +525,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -546,11 +584,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -578,11 +621,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -647,6 +695,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -657,7 +706,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -679,6 +732,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -686,6 +740,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -708,6 +763,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -731,6 +787,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -742,11 +799,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -773,7 +835,8 @@ const COMPONENTS = [
                             "paddingBottom": "p/space-150",
                             "paddingLeft": "p/space-300",
                             "paddingRight": "p/space-300",
-                            "minWidth": "imported/shared/size-0"
+                            "minWidth": "imported/shared/size-0",
+                            "minHeight": "p/space-800"
                           },
                           "children": [
                             {
@@ -796,11 +859,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -828,11 +896,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -867,6 +940,7 @@ const COMPONENTS = [
                             "bottomRightRadius": "imported/shared/size-8",
                             "strokeWeight": "p/border-width-0",
                             "minWidth": "imported/shared/size-0",
+                            "minHeight": "p/space-800",
                             "strokeLeftWeight": "imported/text-field/backdrop/border-left-width/borderless",
                             "strokeRightWeight": "imported/text-field/backdrop/border-right-width/borderless",
                             "strokeTopWeight": "imported/text-field/backdrop/border-top-width/borderless"
@@ -895,6 +969,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -905,7 +980,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -927,6 +1006,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -934,6 +1014,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -956,6 +1037,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -979,6 +1061,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -990,11 +1073,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -1021,7 +1109,8 @@ const COMPONENTS = [
                             "paddingBottom": "p/space-050",
                             "paddingLeft": "p/space-300",
                             "paddingRight": "p/space-300",
-                            "minWidth": "imported/shared/size-0"
+                            "minWidth": "imported/shared/size-0",
+                            "minHeight": "p/space-800"
                           },
                           "children": [
                             {
@@ -1044,11 +1133,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -1076,11 +1170,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -1115,6 +1214,7 @@ const COMPONENTS = [
                             "bottomRightRadius": "imported/shared/size-8",
                             "strokeWeight": "p/border-width-0",
                             "minWidth": "imported/shared/size-0",
+                            "minHeight": "p/space-800",
                             "paddingTop": "p/space-050",
                             "paddingBottom": "p/space-050",
                             "strokeLeftWeight": "imported/text-field/backdrop/border-left-width/borderless",
@@ -1147,6 +1247,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1157,7 +1258,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1179,6 +1284,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1186,6 +1292,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -1208,6 +1315,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1231,6 +1339,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1242,11 +1351,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -1296,11 +1410,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -1328,11 +1447,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -1395,6 +1519,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1405,7 +1530,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1427,6 +1556,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1434,6 +1564,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -1456,6 +1587,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1479,6 +1611,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1490,11 +1623,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -1544,11 +1682,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -1576,11 +1719,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -1643,6 +1791,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1653,7 +1802,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1675,6 +1828,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1682,6 +1836,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -1704,6 +1859,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1727,6 +1883,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1738,11 +1895,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -1792,11 +1954,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -1824,11 +1991,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -1891,6 +2063,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "CENTER"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1901,7 +2074,11 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "bottom": 4
+              },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1923,6 +2100,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1930,6 +2108,7 @@ const COMPONENTS = [
                           "type": "text",
                           "name": "label-2",
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "characters": "Store name",
@@ -1952,6 +2131,7 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
@@ -1975,6 +2155,7 @@ const COMPONENTS = [
                         "counter": "CENTER"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1986,11 +2167,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 12,
+                            "right": 6
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-3",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "$",
@@ -2040,11 +2226,16 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
+                          },
                           "children": [
                             {
                               "type": "text",
                               "name": "label-4",
                               "bindings": {
+                                "minHeight": "imported/shared/size-0",
                                 "minWidth": "imported/shared/size-0"
                               },
                               "characters": "USD",
@@ -2072,11 +2263,16 @@ const COMPONENTS = [
                             "strokeLeftWeight": "imported/shared/size-0",
                             "strokeRightWeight": "imported/shared/size-0",
                             "strokeTopWeight": "imported/shared/size-0",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0",
                             "paddingBottom": "imported/shared/size-0",
                             "paddingLeft": "imported/shared/size-0",
                             "paddingRight": "imported/shared/size-0",
                             "paddingTop": "imported/shared/size-0"
+                          },
+                          "margins": {
+                            "left": 4,
+                            "right": 12
                           },
                           "opacity": 0,
                           "children": [
@@ -2360,9 +2556,13 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     parent.insertChild(0, childNode);
     childNode.layoutPositioning = 'ABSOLUTE';
     childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    childNode.x = 0;
-    childNode.y = 0;
-    childNode.resize(Math.max(1, parent.width), Math.max(1, parent.height));
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    childNode.x = o.left;
+    childNode.y = o.top;
+    childNode.resize(
+      Math.max(1, parent.width - o.left - o.right),
+      Math.max(1, parent.height - o.top - o.bottom),
+    );
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 

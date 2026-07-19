@@ -36,9 +36,8 @@ const COMPONENTS = [
             "px": 640,
             "varName": "size/banner/width"
           },
-          "fill": "color/surface/raised",
-          "stroke": "color/border/subtle",
           "bindings": {
+            "minHeight": "size/toolbar/md",
             "strokeWeight": "border-width/100",
             "topLeftRadius": "radius/control",
             "topRightRadius": "radius/control",
@@ -50,6 +49,8 @@ const COMPONENTS = [
             "paddingTop": "space/inset-y/sm",
             "paddingBottom": "space/inset-y/sm"
           },
+          "fill": "color/surface/raised",
+          "stroke": "color/border/subtle",
           "children": [
             {
               "type": "slot",
@@ -115,9 +116,8 @@ const COMPONENTS = [
             "px": 640,
             "varName": "size/banner/width"
           },
-          "fill": "color/surface/raised",
-          "stroke": "color/border/subtle",
           "bindings": {
+            "minHeight": "size/toolbar/sm",
             "strokeWeight": "border-width/100",
             "topLeftRadius": "radius/control",
             "topRightRadius": "radius/control",
@@ -129,6 +129,8 @@ const COMPONENTS = [
             "paddingTop": "space/inset-y/sm",
             "paddingBottom": "space/inset-y/sm"
           },
+          "fill": "color/surface/raised",
+          "stroke": "color/border/subtle",
           "children": [
             {
               "type": "slot",
@@ -194,9 +196,8 @@ const COMPONENTS = [
             "px": 640,
             "varName": "size/banner/width"
           },
-          "fill": "color/surface/raised",
-          "stroke": "color/border/subtle",
           "bindings": {
+            "minHeight": "size/toolbar/lg",
             "strokeWeight": "border-width/100",
             "topLeftRadius": "radius/control",
             "topRightRadius": "radius/control",
@@ -208,6 +209,8 @@ const COMPONENTS = [
             "paddingTop": "space/inset-y/sm",
             "paddingBottom": "space/inset-y/sm"
           },
+          "fill": "color/surface/raised",
+          "stroke": "color/border/subtle",
           "children": [
             {
               "type": "slot",

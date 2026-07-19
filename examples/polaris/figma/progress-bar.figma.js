@@ -51,6 +51,7 @@ const COMPONENTS = [
           "lits": {
             "height": 16
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -61,6 +62,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-info",
@@ -91,6 +93,7 @@ const COMPONENTS = [
           "lits": {
             "height": 16
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -101,6 +104,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-brand",
@@ -131,6 +135,7 @@ const COMPONENTS = [
           "lits": {
             "height": 16
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -141,6 +146,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-success",
@@ -171,6 +177,7 @@ const COMPONENTS = [
           "lits": {
             "height": 16
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -181,6 +188,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-critical",
@@ -211,6 +219,7 @@ const COMPONENTS = [
           "lits": {
             "height": 8
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -221,6 +230,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-info",
@@ -251,6 +261,7 @@ const COMPONENTS = [
           "lits": {
             "height": 8
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -261,6 +272,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-brand",
@@ -291,6 +303,7 @@ const COMPONENTS = [
           "lits": {
             "height": 8
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -301,6 +314,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-success",
@@ -331,6 +345,7 @@ const COMPONENTS = [
           "lits": {
             "height": 8
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -341,6 +356,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-critical",
@@ -371,6 +387,7 @@ const COMPONENTS = [
           "lits": {
             "height": 32
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -381,6 +398,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-info",
@@ -411,6 +429,7 @@ const COMPONENTS = [
           "lits": {
             "height": 32
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -421,6 +440,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-brand",
@@ -451,6 +471,7 @@ const COMPONENTS = [
           "lits": {
             "height": 32
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -461,6 +482,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-success",
@@ -491,6 +513,7 @@ const COMPONENTS = [
           "lits": {
             "height": 32
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -501,6 +524,7 @@ const COMPONENTS = [
                 "counter": "MIN"
               },
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "p/color-bg-fill-critical",

@@ -58,7 +58,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -107,6 +114,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -161,7 +172,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -174,6 +192,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -228,7 +250,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -280,6 +309,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -334,7 +367,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -347,6 +387,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -401,7 +445,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -414,6 +465,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -467,7 +522,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -516,6 +578,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -570,7 +636,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -583,6 +656,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -637,7 +714,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -689,6 +773,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -743,7 +831,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -756,6 +851,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -810,7 +909,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -823,6 +929,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -876,7 +986,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -925,6 +1042,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -979,7 +1100,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -992,6 +1120,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1046,7 +1178,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -1098,6 +1237,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1152,7 +1295,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -1165,6 +1315,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1219,7 +1373,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -1232,6 +1393,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1285,7 +1450,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -1334,6 +1506,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1388,7 +1564,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -1401,6 +1584,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1455,7 +1642,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -1507,6 +1701,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1561,7 +1759,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -1574,6 +1779,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1628,7 +1837,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -1641,6 +1857,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1694,7 +1914,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -1743,6 +1970,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1797,7 +2028,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -1810,6 +2048,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1864,7 +2106,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -1916,6 +2165,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -1970,7 +2223,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -1983,6 +2243,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2037,7 +2301,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -2050,6 +2321,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2103,7 +2378,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -2152,6 +2434,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2206,7 +2492,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -2219,6 +2512,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2273,7 +2570,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -2325,6 +2629,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2379,7 +2687,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -2392,6 +2707,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2446,7 +2765,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -2459,6 +2785,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2512,7 +2842,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -2561,6 +2898,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2615,7 +2956,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -2628,6 +2976,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2682,7 +3034,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -2734,6 +3093,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2788,7 +3151,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -2801,6 +3171,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2855,7 +3229,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -2868,6 +3249,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -2921,7 +3306,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -2970,6 +3362,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3024,7 +3420,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -3037,6 +3440,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3091,7 +3498,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -3143,6 +3557,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3197,7 +3615,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -3210,6 +3635,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3264,7 +3693,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -3277,6 +3713,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3330,7 +3770,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -3379,6 +3826,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3433,7 +3884,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -3446,6 +3904,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3500,7 +3962,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -3552,6 +4021,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3606,7 +4079,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -3619,6 +4099,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3673,7 +4157,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -3686,6 +4177,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3739,7 +4234,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -3788,6 +4290,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3842,7 +4348,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -3855,6 +4368,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -3909,7 +4426,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -3961,6 +4485,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4015,7 +4543,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -4028,6 +4563,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4082,7 +4621,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -4095,6 +4641,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4148,7 +4698,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -4197,6 +4754,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4251,7 +4812,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -4264,6 +4832,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4318,7 +4890,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -4370,6 +4949,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4424,7 +5007,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -4437,6 +5027,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4491,7 +5085,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -4504,6 +5105,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4557,7 +5162,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -4606,6 +5218,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4660,7 +5276,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -4673,6 +5296,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4727,7 +5354,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -4779,6 +5413,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4833,7 +5471,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -4846,6 +5491,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4900,7 +5549,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -4913,6 +5569,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -4966,7 +5626,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -5015,6 +5682,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5069,7 +5740,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -5082,6 +5760,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5136,7 +5818,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -5188,6 +5877,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5242,7 +5935,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -5255,6 +5955,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5309,7 +6013,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -5322,6 +6033,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5375,7 +6090,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -5424,6 +6146,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5478,7 +6204,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -5491,6 +6224,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5545,7 +6282,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -5597,6 +6341,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5651,7 +6399,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -5664,6 +6419,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5718,7 +6477,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -5731,6 +6497,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5784,7 +6554,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -5833,6 +6610,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5887,7 +6668,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -5900,6 +6688,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -5954,7 +6746,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -6006,6 +6805,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6060,7 +6863,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -6073,6 +6883,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6127,7 +6941,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -6140,6 +6961,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6193,7 +7018,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -6242,6 +7074,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6296,7 +7132,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -6309,6 +7152,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6363,7 +7210,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -6415,6 +7269,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6469,7 +7327,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -6482,6 +7347,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6536,7 +7405,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -6549,6 +7425,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6602,7 +7482,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -6651,6 +7538,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6705,7 +7596,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -6718,6 +7616,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6772,7 +7674,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -6824,6 +7733,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6878,7 +7791,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -6891,6 +7811,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -6945,7 +7869,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -6958,6 +7889,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7011,7 +7946,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -7060,6 +8002,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7114,7 +8060,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -7127,6 +8080,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7181,7 +8138,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -7233,6 +8197,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7287,7 +8255,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -7300,6 +8275,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7354,7 +8333,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -7367,6 +8353,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7420,7 +8410,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -7469,6 +8466,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7523,7 +8524,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -7536,6 +8544,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7590,7 +8602,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -7642,6 +8661,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7696,7 +8719,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -7709,6 +8739,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7763,7 +8797,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -7776,6 +8817,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7829,7 +8874,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -7878,6 +8930,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7932,7 +8988,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -7945,6 +9008,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -7999,7 +9066,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -8051,6 +9125,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8105,7 +9183,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -8118,6 +9203,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8172,7 +9261,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-100",
             "paddingLeft": "p/space-200",
             "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
             "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": -4,
+            "left": -8,
+            "right": -8,
+            "top": -4
           },
           "lits": {
             "fillClear": true
@@ -8185,6 +9281,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8238,7 +9338,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -8287,6 +9394,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8341,7 +9452,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -8354,6 +9472,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8408,7 +9530,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -8460,6 +9589,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8514,7 +9647,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -8527,6 +9667,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8581,7 +9725,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -8594,6 +9745,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8647,7 +9802,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -8696,6 +9858,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8750,7 +9916,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -8763,6 +9936,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8817,7 +9994,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -8869,6 +10053,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8923,7 +10111,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -8936,6 +10131,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -8990,7 +10189,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -9003,6 +10209,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9056,7 +10266,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -9105,6 +10322,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9159,7 +10380,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -9172,6 +10400,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9226,7 +10458,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -9278,6 +10517,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9332,7 +10575,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -9345,6 +10595,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9399,7 +10653,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -9412,6 +10673,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9465,7 +10730,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -9514,6 +10786,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9568,7 +10844,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -9581,6 +10864,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9635,7 +10922,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -9687,6 +10981,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9741,7 +11039,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -9754,6 +11059,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9808,7 +11117,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -9821,6 +11137,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9874,7 +11194,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -9923,6 +11250,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -9977,7 +11308,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -9990,6 +11328,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10044,7 +11386,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -10096,6 +11445,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10150,7 +11503,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -10163,6 +11523,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10217,7 +11581,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -10230,6 +11601,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10283,7 +11658,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -10332,6 +11714,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10386,7 +11772,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -10399,6 +11792,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10453,7 +11850,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -10505,6 +11909,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10559,7 +11967,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -10572,6 +11987,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10626,7 +12045,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -10639,6 +12065,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10692,7 +12122,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -10741,6 +12178,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10795,7 +12236,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -10808,6 +12256,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10862,7 +12314,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -10914,6 +12373,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -10968,7 +12431,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -10981,6 +12451,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11035,7 +12509,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -11048,6 +12529,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11101,7 +12586,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -11150,6 +12642,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11204,7 +12700,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -11217,6 +12720,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11271,7 +12778,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -11323,6 +12837,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11377,7 +12895,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -11390,6 +12915,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11444,7 +12973,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -11457,6 +12993,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11510,7 +13050,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -11559,6 +13106,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11613,7 +13164,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -11626,6 +13184,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11680,7 +13242,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -11732,6 +13301,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11786,7 +13359,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -11799,6 +13379,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11853,7 +13437,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -11866,6 +13457,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -11919,7 +13514,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -11968,6 +13570,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12022,7 +13628,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -12035,6 +13648,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12089,7 +13706,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -12141,6 +13765,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12195,7 +13823,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -12208,6 +13843,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12262,7 +13901,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -12275,6 +13921,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12328,7 +13978,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -12377,6 +14034,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12431,7 +14092,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -12444,6 +14112,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12498,7 +14170,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -12550,6 +14229,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12604,7 +14287,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -12617,6 +14307,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12671,7 +14365,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -12684,6 +14385,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12737,7 +14442,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -12786,6 +14498,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12840,7 +14556,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -12853,6 +14576,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -12907,7 +14634,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -12959,6 +14693,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13013,7 +14751,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -13026,6 +14771,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13080,7 +14829,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -13093,6 +14849,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13146,7 +14906,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -13195,6 +14962,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13249,7 +15020,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -13262,6 +15040,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13316,7 +15098,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -13368,6 +15157,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13422,7 +15215,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -13435,6 +15235,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13489,7 +15293,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -13502,6 +15313,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13555,7 +15370,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -13604,6 +15426,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13658,7 +15484,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -13671,6 +15504,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13725,7 +15562,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -13777,6 +15621,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13831,7 +15679,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -13844,6 +15699,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13898,7 +15757,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -13911,6 +15777,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -13964,7 +15834,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -14013,6 +15890,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14067,7 +15948,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -14080,6 +15968,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14134,7 +16026,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -14186,6 +16085,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14240,7 +16143,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -14253,6 +16163,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14307,7 +16221,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -14320,6 +16241,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14373,7 +16298,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -14422,6 +16354,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14476,7 +16412,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -14489,6 +16432,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14543,7 +16490,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -14595,6 +16549,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14649,7 +16607,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -14662,6 +16627,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14716,7 +16685,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -14729,6 +16705,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14782,7 +16762,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -14831,6 +16818,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14885,7 +16876,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -14898,6 +16896,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -14952,7 +16954,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -15004,6 +17013,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15058,7 +17071,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -15071,6 +17091,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15125,7 +17149,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -15138,6 +17169,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15191,7 +17226,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -15240,6 +17282,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15294,7 +17340,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -15307,6 +17360,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15361,7 +17418,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -15413,6 +17477,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15467,7 +17535,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -15480,6 +17555,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15534,7 +17613,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -15547,6 +17633,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15600,7 +17690,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -15649,6 +17746,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15703,7 +17804,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -15716,6 +17824,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15770,7 +17882,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -15822,6 +17941,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15876,7 +17999,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -15889,6 +18019,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -15943,7 +18077,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -15956,6 +18097,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16009,7 +18154,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill",
           "effectStack": [
@@ -16058,6 +18210,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16112,7 +18268,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -16125,6 +18288,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16179,7 +18346,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "p/color-bg-fill-brand",
           "effectStack": [
@@ -16231,6 +18405,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16285,7 +18463,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -16298,6 +18483,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16352,7 +18541,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
             "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -16365,6 +18561,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16420,7 +18620,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-disabled/secondary",
           "effectStack": [],
@@ -16433,6 +18640,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16487,7 +18698,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -16503,6 +18721,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16557,7 +18779,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-disabled/primary",
           "effectStack": [],
@@ -16570,6 +18799,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16624,7 +18857,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -16640,6 +18880,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16694,7 +18938,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -16710,6 +18961,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16764,8 +19019,15 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-focus-visible/secondary/none",
           "effectStack": [
@@ -16815,6 +19077,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16869,8 +19135,15 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -16885,6 +19158,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -16939,8 +19216,15 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-focus-visible/primary/none",
           "effectStack": [
@@ -16993,6 +19277,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17047,8 +19335,15 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -17063,6 +19358,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17117,8 +19416,15 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -17133,6 +19439,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17187,7 +19497,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-active/secondary/none",
           "effectStack": [
@@ -17237,6 +19554,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17291,7 +19612,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -17307,6 +19635,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17361,7 +19693,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-active/primary/none",
           "effectStack": [
@@ -17387,6 +19726,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17441,7 +19784,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -17457,6 +19807,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17511,7 +19865,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -17527,6 +19888,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17581,7 +19946,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-hover/secondary/none",
           "effectStack": [
@@ -17631,6 +20003,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17685,7 +20061,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -17700,6 +20083,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17754,7 +20141,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "fill": "imported/button/root/background-color-state-hover/primary/none",
           "effectStack": [
@@ -17807,6 +20201,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17861,7 +20259,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
           },
           "lits": {
             "fillClear": true
@@ -17876,6 +20281,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {
@@ -17930,7 +20339,14 @@ const COMPONENTS = [
             "paddingBottom": "p/space-150",
             "paddingLeft": "p/space-300",
             "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
             "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": -6,
+            "left": -12,
+            "right": -12,
+            "top": -6
           },
           "lits": {
             "fillClear": true
@@ -17945,6 +20361,10 @@ const COMPONENTS = [
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
               },
               "children": [
                 {

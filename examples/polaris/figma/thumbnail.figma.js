@@ -46,7 +46,8 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 24,
-            "width": 60
+            "width": 60,
+            "height": 60
           },
           "children": [
             {
@@ -59,7 +60,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
+              },
+              "imgPlaceholder": true,
+              "lits": {
+                "fillColor": {
+                  "r": 0.8509803921568627,
+                  "g": 0.8509803921568627,
+                  "b": 0.8509803921568627
+                }
               },
               "children": []
             }
@@ -87,7 +97,8 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 24,
-            "width": 24
+            "width": 24,
+            "height": 24
           },
           "children": [
             {
@@ -100,7 +111,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
+              },
+              "imgPlaceholder": true,
+              "lits": {
+                "fillColor": {
+                  "r": 0.8509803921568627,
+                  "g": 0.8509803921568627,
+                  "b": 0.8509803921568627
+                }
               },
               "children": []
             }
@@ -128,7 +148,8 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 24,
-            "width": 40
+            "width": 40,
+            "height": 40
           },
           "children": [
             {
@@ -141,7 +162,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
+              },
+              "imgPlaceholder": true,
+              "lits": {
+                "fillColor": {
+                  "r": 0.8509803921568627,
+                  "g": 0.8509803921568627,
+                  "b": 0.8509803921568627
+                }
               },
               "children": []
             }
@@ -169,7 +199,8 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 24,
-            "width": 80
+            "width": 80,
+            "height": 80
           },
           "children": [
             {
@@ -182,7 +213,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
+              },
+              "imgPlaceholder": true,
+              "lits": {
+                "fillColor": {
+                  "r": 0.8509803921568627,
+                  "g": 0.8509803921568627,
+                  "b": 0.8509803921568627
+                }
               },
               "children": []
             }
@@ -466,9 +506,13 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     parent.insertChild(0, childNode);
     childNode.layoutPositioning = 'ABSOLUTE';
     childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    childNode.x = 0;
-    childNode.y = 0;
-    childNode.resize(Math.max(1, parent.width), Math.max(1, parent.height));
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    childNode.x = o.left;
+    childNode.y = o.top;
+    childNode.resize(
+      Math.max(1, parent.width - o.left - o.right),
+      Math.max(1, parent.height - o.top - o.bottom),
+    );
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 

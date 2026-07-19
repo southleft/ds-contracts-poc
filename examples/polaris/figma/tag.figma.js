@@ -93,6 +93,7 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label-2",
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "characters": "Wholesale",
@@ -131,6 +132,13 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "insetOverlay": true,
+              "insetOffsets": {
+                "top": 2,
+                "right": 2,
+                "bottom": 2,
+                "left": 53.9219
+              },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-7",
                 "bottomRightRadius": "imported/shared/size-7",
@@ -145,6 +153,12 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
+              "margins": {
+                "bottom": 0,
+                "left": 0,
+                "right": 0,
+                "top": 0
+              },
               "opacity": 0,
               "children": [
                 {
@@ -156,6 +170,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -230,6 +245,7 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label-2",
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "characters": "Wholesale",
@@ -268,6 +284,13 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "insetOverlay": true,
+              "insetOffsets": {
+                "top": 2,
+                "right": 2,
+                "bottom": 2,
+                "left": 53.9219
+              },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-7",
                 "bottomRightRadius": "imported/shared/size-7",
@@ -282,6 +305,12 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
+              "margins": {
+                "bottom": 0,
+                "left": 0,
+                "right": 0,
+                "top": 0
+              },
               "opacity": 0,
               "children": [
                 {
@@ -293,6 +322,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -367,6 +397,7 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label-2",
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "characters": "Wholesale",
@@ -405,6 +436,13 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "insetOverlay": true,
+              "insetOffsets": {
+                "top": 2,
+                "right": 2,
+                "bottom": 2,
+                "left": 53.9219
+              },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-7",
                 "bottomRightRadius": "imported/shared/size-7",
@@ -419,6 +457,12 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
+              "margins": {
+                "bottom": 0,
+                "left": 0,
+                "right": 0,
+                "top": 0
+              },
               "opacity": 0,
               "children": [
                 {
@@ -430,6 +474,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -504,6 +549,7 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label-2",
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "characters": "Wholesale",
@@ -542,6 +588,13 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "insetOverlay": true,
+              "insetOffsets": {
+                "top": 2,
+                "right": 2,
+                "bottom": 2,
+                "left": 53.9219
+              },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-7",
                 "bottomRightRadius": "imported/shared/size-7",
@@ -556,6 +609,12 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
+              "margins": {
+                "bottom": 0,
+                "left": 0,
+                "right": 0,
+                "top": 0
+              },
               "opacity": 0,
               "children": [
                 {
@@ -567,6 +626,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -855,6 +915,25 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
+// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
+// in-flow siblings — matching the declared anatomy and the HTML render.
+function applyInsetOverlay(parent, childNode, childSpec) {
+  if (!childSpec.insetOverlay) return;
+  try {
+    parent.insertChild(0, childNode);
+    childNode.layoutPositioning = 'ABSOLUTE';
+    childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    childNode.x = o.left;
+    childNode.y = o.top;
+    childNode.resize(
+      Math.max(1, parent.width - o.left - o.right),
+      Math.max(1, parent.height - o.top - o.bottom),
+    );
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -985,6 +1064,7 @@ async function buildNode(spec, registry) {
     ) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
+    applyInsetOverlay(node, childNode, child);
   }
   return node;
 }
@@ -1086,6 +1166,7 @@ async function amendSet(set, C) {
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
+    applyInsetOverlay(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }
@@ -1221,6 +1302,7 @@ async function amendComponent(comp, C) {
     } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
+    applyInsetOverlay(comp, childNode, childSpec);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

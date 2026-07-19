@@ -25,6 +25,10 @@ const COMPONENTS = [
         "default": ""
       },
       {
+        "property": "Initials",
+        "default": ""
+      },
+      {
         "property": "Source",
         "default": ""
       },
@@ -58,20 +62,31 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 20,
-            "width": 28
+            "width": 28,
+            "height": 28
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "initials",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
-              "characters": "Avatar",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "textFill": "p/color-avatar-one-text-on-bg-fill",
-              "contentProp": "Initials"
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "initials-md",
+                  "svg": "<svg viewBox=\"0 0 33 33\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "iconSize": 28
+                }
+              ]
             }
           ]
         }
@@ -97,20 +112,31 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 20,
-            "width": 20
+            "width": 20,
+            "height": 20
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "initials",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
-              "characters": "Avatar",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "textFill": "p/color-avatar-one-text-on-bg-fill",
-              "contentProp": "Initials"
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "initials-xs",
+                  "svg": "<svg viewBox=\"0 0 33 33\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"3\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "iconSize": 20
+                }
+              ]
             }
           ]
         }
@@ -136,20 +162,31 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 20,
-            "width": 24
+            "width": 24,
+            "height": 24
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "initials",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
-              "characters": "Avatar",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "textFill": "p/color-avatar-one-text-on-bg-fill",
-              "contentProp": "Initials"
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "initials-sm",
+                  "svg": "<svg viewBox=\"0 0 33 33\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "iconSize": 24
+                }
+              ]
             }
           ]
         }
@@ -175,20 +212,31 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 20,
-            "width": 32
+            "width": 32,
+            "height": 32
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "initials",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
-              "characters": "Avatar",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "textFill": "p/color-avatar-one-text-on-bg-fill",
-              "contentProp": "Initials"
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "initials-lg",
+                  "svg": "<svg viewBox=\"0 0 33 33\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "iconSize": 32
+                }
+              ]
             }
           ]
         }
@@ -214,20 +262,31 @@ const COMPONENTS = [
           },
           "lits": {
             "minWidth": 20,
-            "width": 40
+            "width": 40,
+            "height": 40
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "initials",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "insetOverlay": true,
               "bindings": {
+                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
-              "characters": "Avatar",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "textFill": "p/color-avatar-one-text-on-bg-fill",
-              "contentProp": "Initials"
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "initials-xl",
+                  "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "iconSize": 40
+                }
+              ]
             }
           ]
         }
@@ -500,6 +559,25 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
+// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
+// in-flow siblings — matching the declared anatomy and the HTML render.
+function applyInsetOverlay(parent, childNode, childSpec) {
+  if (!childSpec.insetOverlay) return;
+  try {
+    parent.insertChild(0, childNode);
+    childNode.layoutPositioning = 'ABSOLUTE';
+    childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    childNode.x = o.left;
+    childNode.y = o.top;
+    childNode.resize(
+      Math.max(1, parent.width - o.left - o.right),
+      Math.max(1, parent.height - o.top - o.bottom),
+    );
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -616,6 +694,7 @@ async function buildNode(spec, registry) {
     ) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
+    applyInsetOverlay(node, childNode, child);
   }
   return node;
 }
@@ -717,6 +796,7 @@ async function amendSet(set, C) {
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
+    applyInsetOverlay(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }
@@ -852,6 +932,7 @@ async function amendComponent(comp, C) {
     } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
+    applyInsetOverlay(comp, childNode, childSpec);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
