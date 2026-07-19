@@ -1,0 +1,368 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Changes the size of the button, giving it more or less padding",
+      "type": {
+        "enum": [
+          "micro",
+          "slim",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "micro": "Micro",
+            "slim": "Slim",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "textAlign",
+      "description": "Changes the inner text alignment of the button",
+      "type": {
+        "enum": [
+          "left",
+          "right",
+          "center",
+          "start",
+          "end"
+        ]
+      },
+      "default": "center",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Text Align",
+          "values": {
+            "left": "Left",
+            "right": "Right",
+            "center": "Center",
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "textAlign"
+        }
+      }
+    },
+    {
+      "name": "fullWidth",
+      "description": "Allows the button to grow to the width of its container",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Full Width"
+        },
+        "code": {
+          "prop": "fullWidth"
+        }
+      }
+    },
+    {
+      "name": "removeUnderline",
+      "description": "Removes underline from button text (including on interaction)",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Remove Underline"
+        },
+        "code": {
+          "prop": "removeUnderline"
+        }
+      }
+    },
+    {
+      "name": "dataPrimaryLink",
+      "description": "Indicates whether or not the button is the primary navigation link when rendered inside of an `IndexTable.Row`",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Data Primary Link"
+        },
+        "code": {
+          "prop": "dataPrimaryLink"
+        }
+      }
+    },
+    {
+      "name": "tone",
+      "description": "Sets the color treatment of the Button.",
+      "type": {
+        "enum": [
+          "critical",
+          "success"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone",
+          "values": {
+            "critical": "Critical",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "tone"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "description": "Changes the visual appearance of the Button.",
+      "type": {
+        "enum": [
+          "plain",
+          "primary",
+          "secondary",
+          "tertiary",
+          "monochromePlain"
+        ]
+      },
+      "default": "secondary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "plain": "Plain",
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "tertiary": "Tertiary",
+            "monochromePlain": "Monochrome Plain"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "active",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "border-radius": "{p.border-radius-200}",
+        "gap": "{p.space-050}",
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-0}",
+        "border-left-width": "{imported.shared.size-0}",
+        "border-right-width": "{imported.shared.size-0}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-0}",
+        "bottom": "{imported.shared.size-0}",
+        "font-size": "{imported.button.root.font-size}",
+        "font-weight": "{imported.button.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.button.root.line-height}",
+        "margin-bottom": "{imported.button.root.margin-bottom.{variant}.{size}}",
+        "margin-left": "{imported.button.root.margin-left.{variant}.{size}}",
+        "margin-right": "{imported.button.root.margin-right.{variant}.{size}}",
+        "margin-top": "{imported.button.root.margin-top.{variant}.{size}}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.button.root.row-gap}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "plain": {
+              "color": "{p.color-text-link}"
+            },
+            "primary": {
+              "background-color": "{p.color-bg-fill-brand}",
+              "color": "{p.color-text-brand-on-bg-fill}",
+              "box-shadow": "{p.shadow-button-primary}"
+            },
+            "secondary": {
+              "background": "{p.color-bg-fill}",
+              "color": "{p.color-text}",
+              "box-shadow": "{p.shadow-button}"
+            },
+            "tertiary": {
+              "color": "{p.color-text}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "micro": {
+              "padding-block": "{p.space-100}",
+              "padding-inline": "{p.space-200}",
+              "min-height": "{p.height-700}",
+              "min-width": "{p.width-700}"
+            },
+            "slim": {
+              "padding-block": "{p.space-150}",
+              "padding-inline": "{p.space-300}",
+              "min-height": "{p.height-800}",
+              "min-width": "{p.width-800}"
+            },
+            "medium": {
+              "padding-block": "{p.space-150}",
+              "padding-inline": "{p.space-300}",
+              "min-height": "{p.height-800}",
+              "min-width": "{p.width-800}"
+            },
+            "large": {
+              "padding-block": "{p.space-150}",
+              "padding-inline": "{p.space-300}",
+              "min-height": "{p.height-900}",
+              "min-width": "{p.height-900}"
+            }
+          }
+        },
+        {
+          "prop": "tone",
+          "map": {
+            "critical": {
+              "outline-color": "{imported.button.root.outline-color.{variant}.critical}"
+            },
+            "success": {
+              "outline-color": "{imported.button.root.outline-color.{variant}.success}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "monochromePlain": {
+              "outline-color": "{imported.button.root.outline-color.monochromePlain.none}"
+            },
+            "plain": {
+              "outline-color": "{imported.button.root.outline-color.plain.none}"
+            },
+            "primary": {
+              "outline-color": "{imported.button.root.outline-color.primary.none}"
+            },
+            "secondary": {
+              "outline-color": "{imported.button.root.outline-color.secondary.none}"
+            },
+            "tertiary": {
+              "outline-color": "{imported.button.root.outline-color.tertiary.none}"
+            }
+          }
+        }
+      ],
+      "literals": {
+        "background": "transparent"
+      },
+      "states": {
+        "disabled": {
+          "background": "{p.color-bg-fill-disabled}",
+          "color": "{p.color-text-disabled}",
+          "fill": "{p.color-icon-disabled}",
+          "background-color": "{imported.button.root.background-color-state-disabled.{variant}}",
+          "outline-color": "{imported.button.root.outline-color-state-disabled.{variant}}"
+        },
+        "active": {
+          "background-color": "{imported.button.root.background-color-state-active.{variant}.none}",
+          "color": "{imported.button.root.color-state-active.{variant}.none}",
+          "fill": "{imported.button.root.fill-state-active.{variant}.none}",
+          "outline-color": "{imported.button.root.outline-color-state-active.{variant}.none}"
+        },
+        "focus-visible": {
+          "background-color": "{imported.button.root.background-color-state-focus-visible.{variant}.none}",
+          "border-bottom-left-radius": "{imported.button.root.border-bottom-left-radius-state-focus-visible.{variant}}",
+          "border-bottom-right-radius": "{imported.button.root.border-bottom-right-radius-state-focus-visible.{variant}}",
+          "border-top-left-radius": "{imported.button.root.border-top-left-radius-state-focus-visible.{variant}}",
+          "border-top-right-radius": "{imported.button.root.border-top-right-radius-state-focus-visible.{variant}}",
+          "color": "{imported.button.root.color-state-focus-visible.{variant}.none}",
+          "outline-color": "{imported.button.root.outline-color-state-focus-visible}",
+          "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "background-color": "{imported.button.root.background-color-state-hover.{variant}.none}",
+          "color": "{imported.button.root.color-state-hover.{variant}.none}",
+          "outline-color": "{imported.button.root.outline-color-state-hover.{variant}.none}"
+        }
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "tokens": {
+            "font-size": "{p.text-body-sm-font-size}",
+            "font-weight": "{p.font-weight-medium}",
+            "line-height": "{p.text-body-sm-font-line-height}",
+            "letter-spacing": "{p.text-body-sm-font-letter-spacing}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "font-size": "{p.text-body-md-font-size}",
+                  "line-height": "{p.text-body-md-font-line-height}",
+                  "letter-spacing": "{p.text-body-md-font-letter-spacing}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "plain": {
+                  "font-weight": "{p.font-weight-regular}"
+                },
+                "monochromePlain": {
+                  "font-weight": "{p.font-weight-regular}"
+                },
+                "primary": {
+                  "font-weight": "{p.font-weight-semibold}"
+                }
+              }
+            }
+          ],
+          "text": "Button"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Button/Button",
+      "export": "Button"
+    }
+  }
+}

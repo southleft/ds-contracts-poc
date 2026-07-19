@@ -1,0 +1,125 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.tag",
+  "name": "Tag",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "disabled",
+      "description": "Disables the tag",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "accessibilityLabel",
+      "description": "A string to use when tag has more than textual content",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Accessibility Label"
+        },
+        "code": {
+          "prop": "accessibilityLabel"
+        }
+      }
+    },
+    {
+      "name": "url",
+      "description": "Url to navigate to when tag is clicked or keypressed.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Url"
+        },
+        "code": {
+          "prop": "url"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center"
+      },
+      "tokens": {
+        "background-color": "{p.color-bg-fill-tertiary}",
+        "color": "{p.color-text}",
+        "border-radius": "{p.border-radius-200}",
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "padding-left": "{imported.tag.root.padding-left}",
+        "padding-right": "{imported.tag.root.padding-right}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "tokens": {
+            "font-size": "{p.text-body-sm-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-sm-font-line-height}",
+            "letter-spacing": "{p.text-body-sm-font-letter-spacing}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "text": "Wholesale",
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-b5b5b5}"
+            }
+          }
+        }
+      },
+      "states": {
+        "disabled": {
+          "background-color": "{imported.tag.root.background-color-state-disabled}",
+          "border-bottom-color": "{imported.shared.color-b5b5b5}",
+          "border-left-color": "{imported.shared.color-b5b5b5}",
+          "border-right-color": "{imported.shared.color-b5b5b5}",
+          "border-top-color": "{imported.shared.color-b5b5b5}",
+          "caret-color": "{imported.shared.color-b5b5b5}",
+          "color": "{imported.shared.color-b5b5b5}",
+          "column-rule-color": "{imported.shared.color-b5b5b5}",
+          "outline-color": "{imported.shared.color-b5b5b5}",
+          "text-decoration-color": "{imported.shared.color-b5b5b5}",
+          "text-emphasis-color": "{imported.shared.color-b5b5b5}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Tag/Tag",
+      "export": "Tag"
+    }
+  }
+}

@@ -1,0 +1,429 @@
+{
+  "component": "Tag",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "148.0.7778.96",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 160,
+    "cellsEqual": 124,
+    "pctEqual": 77.5,
+    "rowsFullyEqual": 0,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "meanExact": 3.5314941406249996,
+    "meanAA": 1.090087890625,
+    "maxAA": 1.611328125
+  },
+  "fusion": {
+    "boundConfirmed": 6,
+    "boundCells": 7,
+    "contradictions": 1,
+    "mintedLeaves": 8,
+    "mintedLeavesUnfolded": 8,
+    "baseBindings": 13,
+    "stateBindings": 31,
+    "codeOnlyChannels": 9,
+    "overflowBindings": 21,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "enabled__default",
+      "pctAA": 1.611328125,
+      "pctExact": 2.5260416666666665,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "enabled__hover",
+      "pctAA": 1.611328125,
+      "pctExact": 2.5260416666666665,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "enabled__focus-visible",
+      "pctAA": 1.611328125,
+      "pctExact": 2.5260416666666665,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "enabled__active",
+      "pctAA": 1.611328125,
+      "pctExact": 2.5260416666666665,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "disabled__default",
+      "pctAA": 0.56884765625,
+      "pctExact": 4.536946614583333,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "disabled__hover",
+      "pctAA": 0.56884765625,
+      "pctExact": 4.536946614583333,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "disabled__focus-visible",
+      "pctAA": 0.56884765625,
+      "pctExact": 4.536946614583333,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "disabled__active",
+      "pctAA": 0.56884765625,
+      "pctExact": 4.536946614583333,
+      "channelsMismatched": 5
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.max-width",
+      8
+    ],
+    [
+      "root.position",
+      8
+    ],
+    [
+      "label.display",
+      8
+    ],
+    [
+      "label.text-wrap-mode",
+      8
+    ],
+    [
+      "root.background-color",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "overflow: text.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.line-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text.border-bottom-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.border-left-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.border-right-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.border-top-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.caret-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.column-rule-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.outline-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.text-decoration-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.text-emphasis-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "code-only: root.max-width — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: root.position — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: text.overflow-x — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: text.overflow-y — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: text.text-overflow — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: text.text-wrap-mode — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: label.display — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only: label.text-wrap-mode — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+    "code-only[disabled]: root.transition-property — value shape outside mintable kinds"
+  ],
+  "rows": [
+    {
+      "key": "enabled__default",
+      "channelsCompared": 20,
+      "channelsEqual": 16,
+      "pctExact": 2.5260416666666665,
+      "pctAA": 1.611328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "enabled__hover",
+      "channelsCompared": 20,
+      "channelsEqual": 16,
+      "pctExact": 2.5260416666666665,
+      "pctAA": 1.611328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "enabled__focus-visible",
+      "channelsCompared": 20,
+      "channelsEqual": 16,
+      "pctExact": 2.5260416666666665,
+      "pctAA": 1.611328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "enabled__active",
+      "channelsCompared": 20,
+      "channelsEqual": 16,
+      "pctExact": 2.5260416666666665,
+      "pctAA": 1.611328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "disabled__default",
+      "channelsCompared": 20,
+      "channelsEqual": 15,
+      "pctExact": 4.536946614583333,
+      "pctAA": 0.56884765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "disabled__hover",
+      "channelsCompared": 20,
+      "channelsEqual": 15,
+      "pctExact": 4.536946614583333,
+      "pctAA": 0.56884765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "disabled__focus-visible",
+      "channelsCompared": 20,
+      "channelsEqual": 15,
+      "pctExact": 4.536946614583333,
+      "pctAA": 0.56884765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    },
+    {
+      "key": "disabled__active",
+      "channelsCompared": 20,
+      "channelsEqual": 15,
+      "pctExact": 4.536946614583333,
+      "pctAA": 0.56884765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "relative"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "text-wrap-mode",
+          "ours": "wrap",
+          "theirs": "nowrap"
+        }
+      ]
+    }
+  ]
+}

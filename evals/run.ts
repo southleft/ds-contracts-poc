@@ -2771,6 +2771,100 @@ const cases: Case[] = [
       if (!out.includes('truth-table rows match')) throw new Error(`missing truth-table consistency line:\n${out}`);
     },
   },
+  {
+    // COMPUTED FLOOR (extract/computed — the productionized capture spike):
+    // the COMMITTED Button captured-truth fixture replays offline through
+    // the shared replay implementation in real Chromium, and computed
+    // re-read equality holds at the committed floor (no harness, no npm
+    // sandbox, no network — the fixture IS the capture). Plus the §1.4
+    // enumeration certificate: a synthetic ≥3-axis interaction is REFUSED BY
+    // NAME under per-axis+pairwise policy, and the artifact set is
+    // internally consistent (scorecard counts = numbers counts — the
+    // prose-drift guard between receipts). Missing Chromium fails by name
+    // (CERTIFICATION convention: `npx playwright install chromium` or
+    // PLAYWRIGHT_CHROMIUM_PATH).
+    id: 'computed-floor-gate',
+    claim: 'C1-determinism',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { chromium } from 'playwright-core';
+        import { chromiumExecutable } from './extract/figma/visual-parity/render.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { validateContract } from './core/emit-react.ts';
+        import { enumerate, pairwiseCertificate } from './extract/computed/lib.ts';
+        import { buildReplayHtml, reconstructCaptures, rereadEquality } from './extract/computed/replay.ts';
+
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+
+        // 1) enumeration policy + the ≥3-axis certificate (pure)
+        const axes = [
+          { prop: 'a', values: ['a1', 'a2', 'a3', 'a4'] },
+          { prop: 'b', values: ['b1', 'b2', 'b3', 'b4'] },
+          { prop: 'c', values: ['c1', 'c2', 'c3', 'c4'] },
+          { prop: 'd', values: ['d1', 'd2', 'd3', 'd4'] },
+        ];
+        const en = enumerate(axes, [], 100, { a: 'a1', b: 'b1', c: 'c1', d: 'd1' });
+        if (en.policy !== 'per-axis+pairwise') throw new Error('256 > 100 must switch to per-axis+pairwise, got ' + en.policy);
+        if (en.combos.length >= 256 || en.combos.length < 20) throw new Error('pairwise row count implausible: ' + en.combos.length);
+        // planted ≥3-axis interaction: value depends on a AND b AND c jointly
+        const threeAxis = en.combos.map((cm) => ({ axisValues: cm.axisValues, value: [cm.axisValues.a, cm.axisValues.b, cm.axisValues.c].join('+') }));
+        const refusals = pairwiseCertificate(threeAxis, axes);
+        if (refusals.length === 0 || !refusals[0].includes('pairwise-inconsistent')) {
+          throw new Error('planted 3-axis interaction NOT refused by name: ' + JSON.stringify(refusals));
+        }
+        // a clean 2-axis function must pass the certificate
+        const twoAxis = en.combos.map((cm) => ({ axisValues: cm.axisValues, value: [cm.axisValues.a, cm.axisValues.b].join('+') }));
+        if (pairwiseCertificate(twoAxis, axes).length !== 0) throw new Error('2-axis function wrongly refused');
+
+        // 2) committed artifact set: schema-valid + generator-valid enriched
+        //    contract, and scorecard/numbers agree (receipts cannot drift)
+        const dir = path.resolve('extract/computed/out/button');
+        const truth = j(path.join(dir, 'captured-truth.json'));
+        const enriched = ContractSchema.parse(j(path.join(dir, 'enriched.contract.json')));
+        const errs = [];
+        validateContract(enriched, new Map([[enriched.id, enriched]]), errs, new Map());
+        if (errs.length) throw new Error('committed enriched contract fails validateContract: ' + errs[0]);
+        const numbers = j(path.join(dir, 'numbers.json'));
+        const scorecard = j(path.join(dir, 'scorecard.json'));
+        for (const [a, b, what] of [
+          [scorecard.fusion.contradictions, numbers.bound.contradictions, 'contradictions'],
+          [scorecard.fusion.mintedLeaves, numbers.minted.leaves, 'minted leaves'],
+          [scorecard.fusion.boundConfirmed, numbers.bound.confirmed, 'bound confirmed'],
+        ]) { if (a !== b) throw new Error('scorecard/numbers drift on ' + what + ': ' + a + ' vs ' + b); }
+        if (numbers.folds.mintedLeavesFolded >= numbers.folds.mintedLeavesUnfolded) {
+          throw new Error('folding pass receipt implausible: folded ' + numbers.folds.mintedLeavesFolded + ' >= unfolded ' + numbers.folds.mintedLeavesUnfolded);
+        }
+
+        // 3) offline replay of the committed capture in real Chromium
+        const captures = reconstructCaptures(truth);
+        if (captures.length !== numbers.captures) throw new Error('reconstruction count ' + captures.length + ' != committed ' + numbers.captures);
+        const specs = captures.map((c) => ({ key: c.combo + '__' + c.interaction, root: c.root }));
+        const html = buildReplayHtml(specs, truth._provenance.stage, 'light');
+        const tmp = path.join('evals', '.computed-replay.html');
+        fs.writeFileSync(tmp, html);
+        (async () => {
+          const browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
+          try {
+            const page = await browser.newPage();
+            await page.goto('file://' + path.resolve(tmp));
+            await page.waitForFunction('window.__READY === true');
+            await page.evaluate('document.fonts.ready');
+            const reread = await rereadEquality((js) => page.evaluate(js), specs, truth._provenance.channels);
+            if (reread.pct < 99.9) throw new Error('replay computed equality ' + reread.pct.toFixed(3) + '% below the 99.9% floor');
+            if (reread.pct < numbers.replayComputedEquality.pct - 0.05) {
+              throw new Error('replay equality regressed vs committed: ' + reread.pct.toFixed(3) + '% vs ' + numbers.replayComputedEquality.pct.toFixed(3) + '%');
+            }
+            console.log('computed-floor replay: ' + reread.cellsMatched + '/' + reread.cellsCompared + ' cells (' + reread.pct.toFixed(3) + '%) across ' + specs.length + ' captures');
+          } finally { await browser.close(); fs.rmSync(tmp, { force: true }); }
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('computed-floor replay:')) {
+        throw new Error(`computed-floor gate failed:\n${probe.out}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

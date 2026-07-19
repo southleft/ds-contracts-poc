@@ -1,0 +1,127 @@
+{
+  "component": "Tag",
+  "browser": "148.0.7778.96",
+  "captures": 8,
+  "combos": 2,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 942,
+  "elementsPerCapture": 3,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 15,
+    "text": 6,
+    "label": 5
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 8,
+    "mintedLeavesFolded": 8
+  },
+  "bound": {
+    "cellsChecked": 7,
+    "confirmed": 6,
+    "contradictions": 1,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 8,
+    "baseBindings": 13,
+    "stateBindings": 31,
+    "byShape": {
+      "uniform": 44,
+      "perAxis": 0,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "codeOnly": {
+    "base": 8,
+    "state": 1,
+    "overflowBindings": 21
+  },
+  "pseudoElementFindings": 0,
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 22560,
+    "cellsMatched": 22544,
+    "pct": 99.9290780141844,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration"
+    ],
+    "topMismatchedChannels": [
+      [
+        "perspective-origin",
+        16
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 8,
+    "exact": {
+      "mean": 0.001220703125,
+      "max": 0.00244140625,
+      "perfect": 4
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
+    },
+    "worst": [
+      {
+        "key": "enabled__default",
+        "pctExact": 0.00244140625,
+        "pctAA": 0
+      },
+      {
+        "key": "enabled__hover",
+        "pctExact": 0.00244140625,
+        "pctAA": 0
+      },
+      {
+        "key": "enabled__focus-visible",
+        "pctExact": 0.00244140625,
+        "pctAA": 0
+      },
+      {
+        "key": "enabled__active",
+        "pctExact": 0.00244140625,
+        "pctAA": 0
+      },
+      {
+        "key": "disabled__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "disabled__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "disabled__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "disabled__active",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 77.5,
+    "rowsFullyEqual": 0,
+    "rows": 8,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 8
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 2
+}
