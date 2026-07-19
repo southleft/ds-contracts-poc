@@ -1,0 +1,56 @@
+{
+  "component": "RadioButton",
+  "contractId": "polaris.radio-button",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "mountNote": "mounted labelHidden: contract anatomy carries no label part (see Checkbox note).",
+  "cells": [
+    {
+      "cell": "RadioButton",
+      "kind": "base",
+      "pctExactUnmasked": 45.5,
+      "pctAAUnmasked": 17.56,
+      "pctAAMasked": 17.56,
+      "maskCoveragePct": 0,
+      "canvasPx": "40x40",
+      "realPx": "32x32",
+      "inkCanvasPct": 21.5,
+      "inkRealPct": 17,
+      "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+    }
+  ],
+  "summary": {
+    "cells": 1,
+    "meanExactUnmasked": 45.5,
+    "meanAAUnmasked": 17.56,
+    "meanAAMasked": 17.56,
+    "maxAAMasked": 17.56,
+    "worstCell": "RadioButton",
+    "cellsOver10Masked": [
+      {
+        "cell": "RadioButton",
+        "pctAAMasked": 17.56,
+        "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+      }
+    ],
+    "blankCanvasCells": []
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": true
+  }
+}

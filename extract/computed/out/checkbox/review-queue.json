@@ -6,8 +6,8 @@
   "browser": "148.0.7778.96",
   "items": [
     {
-      "id": "enabled|backdrop|border-width",
-      "combo": "enabled",
+      "id": "unchecked.enabled|backdrop|border-width",
+      "combo": "unchecked.enabled",
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
@@ -22,6 +22,86 @@
         "p.font-letter-spacing-normal",
         "p.height-0",
         "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "checked.enabled|backdrop|border-width",
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel.",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "checked.enabled|backdrop|border-color",
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "indeterminate.enabled|backdrop|border-width",
+      "combo": "indeterminate.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel.",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "indeterminate.enabled|backdrop|border-color",
+      "combo": "indeterminate.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
       ],
       "status": "open"
     }

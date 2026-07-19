@@ -1,0 +1,190 @@
+{
+  "component": "Banner",
+  "contractId": "polaris.banner",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Tone=Info",
+      "kind": "base",
+      "pctExactUnmasked": 55.12,
+      "pctAAUnmasked": 47.19,
+      "pctAAMasked": 54.39,
+      "maskCoveragePct": 43.72,
+      "canvasPx": "383x26",
+      "realPx": "360x188",
+      "inkCanvasPct": 4.94,
+      "inkRealPct": 50.57,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 50.57% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Success",
+      "kind": "base",
+      "pctExactUnmasked": 55.12,
+      "pctAAUnmasked": 46.47,
+      "pctAAMasked": 54.34,
+      "maskCoveragePct": 43.72,
+      "canvasPx": "383x26",
+      "realPx": "360x188",
+      "inkCanvasPct": 4.94,
+      "inkRealPct": 49.77,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 49.77% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Warning",
+      "kind": "base",
+      "pctExactUnmasked": 55.12,
+      "pctAAUnmasked": 47.17,
+      "pctAAMasked": 54.44,
+      "maskCoveragePct": 43.72,
+      "canvasPx": "383x26",
+      "realPx": "360x188",
+      "inkCanvasPct": 4.94,
+      "inkRealPct": 50.57,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 50.57% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Critical",
+      "kind": "base",
+      "pctExactUnmasked": 55.12,
+      "pctAAUnmasked": 46.15,
+      "pctAAMasked": 53.84,
+      "maskCoveragePct": 43.72,
+      "canvasPx": "383x26",
+      "realPx": "360x188",
+      "inkCanvasPct": 4.94,
+      "inkRealPct": 49.63,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 49.63% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Info, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "pctExactUnmasked": 58.71,
+      "pctAAUnmasked": 52.42,
+      "pctAAMasked": 59.89,
+      "maskCoveragePct": 42.2,
+      "canvasPx": "394x48",
+      "realPx": "368x192",
+      "inkCanvasPct": 9.25,
+      "inkRealPct": 51.9,
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Success, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "pctExactUnmasked": 58.71,
+      "pctAAUnmasked": 51.83,
+      "pctAAMasked": 59.99,
+      "maskCoveragePct": 42.2,
+      "canvasPx": "394x48",
+      "realPx": "368x192",
+      "inkCanvasPct": 9.25,
+      "inkRealPct": 51.15,
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Warning, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "pctExactUnmasked": 58.71,
+      "pctAAUnmasked": 52.46,
+      "pctAAMasked": 59.95,
+      "maskCoveragePct": 42.2,
+      "canvasPx": "394x48",
+      "realPx": "368x192",
+      "inkCanvasPct": 9.25,
+      "inkRealPct": 51.9,
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    },
+    {
+      "cell": "Tone=Critical, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "pctExactUnmasked": 58.71,
+      "pctAAUnmasked": 51.54,
+      "pctAAMasked": 59.55,
+      "maskCoveragePct": 42.2,
+      "canvasPx": "394x48",
+      "realPx": "368x192",
+      "inkCanvasPct": 9.25,
+      "inkRealPct": 51.01,
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+    }
+  ],
+  "summary": {
+    "cells": 8,
+    "meanExactUnmasked": 56.91,
+    "meanAAUnmasked": 49.4,
+    "meanAAMasked": 57.05,
+    "maxAAMasked": 59.99,
+    "worstCell": "Tone=Success, State=Focus Visible",
+    "cellsOver10Masked": [
+      {
+        "cell": "Tone=Info",
+        "pctAAMasked": 54.39,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 50.57% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Success",
+        "pctAAMasked": 54.34,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 49.77% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Warning",
+        "pctAAMasked": 54.44,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 50.57% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Critical",
+        "pctAAMasked": 53.84,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.94% vs real ink 49.63% of the union canvas — the masked % understates the miss; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Info, State=Focus Visible",
+        "pctAAMasked": 59.89,
+        "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Success, State=Focus Visible",
+        "pctAAMasked": 59.99,
+        "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Warning, State=Focus Visible",
+        "pctAAMasked": 59.95,
+        "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      },
+      {
+        "cell": "Tone=Critical, State=Focus Visible",
+        "pctAAMasked": 59.55,
+        "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      }
+    ],
+    "blankCanvasCells": [
+      "Tone=Info",
+      "Tone=Success",
+      "Tone=Warning",
+      "Tone=Critical"
+    ]
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": false
+  }
+}

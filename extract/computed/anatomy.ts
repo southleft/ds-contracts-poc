@@ -230,6 +230,11 @@ export interface PresenceFact {
   visibleWhen?: { prop: string };
   /** stylesWhen display:none entries for complement factors. */
   hiddenWhen: Array<{ prop: string; equals?: string }>;
+  /** Defaultless-axis strategy: the part is HIDDEN AT BASE (declared
+   *  display:none) and SHOWN per set value — the only spelling for
+   *  "present iff the defaultless prop is set" (the unset pseudo-value is
+   *  not a contract enum value, so hiddenWhen cannot name it). */
+  shownWhen: Array<{ prop: string; equals: string }>;
   receipts: string[];
 }
 
@@ -247,7 +252,7 @@ export function factorPresence(
   partName: string,
 ): PresenceFact | null {
   const receipts: string[] = [];
-  if (presentCombos.length === allCombos.length) return { hiddenWhen: [], receipts };
+  if (presentCombos.length === allCombos.length) return { hiddenWhen: [], shownWhen: [], receipts };
   if (presentCombos.length === 0) return null;
   const presentKeys = new Set(presentCombos.map((c) => c.key));
   // per-axis observed value sets among present combos (state props are axes
@@ -269,11 +274,22 @@ export function factorPresence(
       return null; // not a product — refuse upstream by name
     }
   }
-  const fact: PresenceFact = { hiddenWhen: [], receipts };
+  const fact: PresenceFact = { hiddenWhen: [], shownWhen: [], receipts };
   for (const ax of axisNames) {
     const va = sets.get(ax)!;
     const all = valuesFor(ax);
     if (va.size === all.length) continue; // axis does not constrain presence
+    const spec = axes.find((x) => x.prop === ax);
+    if (spec?.unset !== undefined && !presenceProps.has(ax) && !va.has(spec.unset)) {
+      // defaultless enum axis, present only when SET: base-hidden strategy —
+      // the unset pseudo-value is not a contract enum value, so the
+      // complement has no hiddenWhen spelling. Show per set value instead.
+      for (const v of all) {
+        if (v === spec.unset || !va.has(v)) continue;
+        fact.shownWhen.push({ prop: ax, equals: v });
+      }
+      continue;
+    }
     if (presenceProps.has(ax)) {
       if (va.size === 1 && va.has(PRESENCE_ON)) {
         if (fact.visibleWhen) {
@@ -291,8 +307,10 @@ export function factorPresence(
       if (va.size === 1 && va.has('false')) fact.hiddenWhen.push({ prop: ax });
       else return null; // present only when disabled — no spelling
     } else {
-      // enum axis: hide on each complement value
+      // enum axis: hide on each complement value (the unset pseudo-value is
+      // handled by the base-hidden branch above and never lands here)
       for (const v of all) {
+        if (v === spec?.unset) continue;
         if (!va.has(v)) fact.hiddenWhen.push({ prop: ax, equals: v });
       }
     }
@@ -574,6 +592,54 @@ export function promoteAnatomy(
       part.description = `Promoted from the computed floor (round 4): rendered anatomy ${e.sig} — this element exists in the real component's DOM; the static layer had no part for it.`;
     }
 
+    // Visually-hidden (sr-only) fact: the real component clips these parts
+    // out of the visual (clip-path inset(50%) / 1px clip box). The promoted
+    // part carries declared display:none — visually identical; the a11y
+    // surface of the GENERATED component is contract-owned (semantics/role),
+    // NAMED as a downgrade receipt.
+    const srOnly = (() => {
+      const st = e.rep.style;
+      if ((st['clip-path'] ?? '').startsWith('inset(50%')) return true;
+      if (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px') return true;
+      return false;
+    })();
+    if (srOnly) {
+      part.declared = { ...part.declared, display: 'none' };
+      receipts.push(`sr-only-carried-as-hidden: ${e.partName} is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)`);
+      return part; // no children/facts needed beyond the hidden box
+    }
+
+    // Absolute-position fact: a promoted part whose computed position is
+    // uniformly absolute is an overlay (Thumbnail's img fills its card) —
+    // carried via the declared registry (round 4 grammar); its inset
+    // channels mint like any other px channel.
+    {
+      const positions = new Set<string>();
+      for (const combo of presentBy.get(i) ?? []) {
+        const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+        if (el) positions.add(el.node.style['position']);
+      }
+      if (positions.size === 1 && [...positions][0] === 'absolute') {
+        part.declared = { ...part.declared, position: 'absolute' };
+      }
+    }
+
+    // img parts: the capture reads no attributes — src/alt are wired by
+    // prop-name heuristic (source/src → src, alt/accessibilityLabel → alt),
+    // receipted; without a src the promoted img is an empty broken box.
+    if (e.rep.tag === 'img') {
+      const findProp = (...names: string[]) => contract.props.find((pr) => pr.type === 'text' && names.includes(pr.name))?.name;
+      const srcProp = findProp('source', 'src');
+      const altProp = findProp('alt', 'accessibilityLabel');
+      const attrs: Record<string, string> = {};
+      if (srcProp) attrs['src'] = `{${srcProp}}`;
+      if (altProp) attrs['alt'] = `{${altProp}}`;
+      if (Object.keys(attrs).length > 0) {
+        part.attrs = { ...attrs, ...part.attrs };
+        receipts.push(`img-attrs-wired: ${e.partName} src/alt bound by prop-name heuristic (${Object.entries(attrs).map(([a, v]) => `${a}=${v}`).join(', ')}) — the capture reads no attributes (named)`);
+      }
+    }
+
     // Display fact: every promoted part carries its computed display
     // EXPLICITLY — the emitters default structural parts to flex, but the
     // real tree mixes block/inline containers, and a wrong container display
@@ -646,6 +712,19 @@ export function promoteAnatomy(
         return null;
       }
       if (fact.visibleWhen) part.visibleWhen = { prop: fact.visibleWhen.prop };
+      if (fact.shownWhen.length > 0) {
+        // base-hidden: declared display none; each SET value restores the
+        // part's own uniform display (captured; flex default for containers)
+        const restore =
+          part.layout?.display ??
+          (part.declared?.['display'] && part.declared['display'] !== 'none' ? part.declared['display'] : undefined) ??
+          (Object.keys(e.children).length > 0 ? 'flex' : 'inline');
+        part.declared = { ...part.declared, display: 'none' };
+        part.stylesWhen = [
+          ...(part.stylesWhen ?? []),
+          ...fact.shownWhen.map((sw) => ({ prop: sw.prop, equals: sw.equals, styles: { display: String(restore) } })),
+        ];
+      }
       if (fact.hiddenWhen.length > 0) {
         part.stylesWhen = [
           ...(part.stylesWhen ?? []),
@@ -654,7 +733,7 @@ export function promoteAnatomy(
       }
       receipts.push(...fact.receipts);
       receipts.push(
-        `presence-carried: ${e.partName} (${present.length}/${enabled.length} combos) → ${part.visibleWhen ? `visibleWhen ${part.visibleWhen.prop}` : ''}${fact.hiddenWhen.length ? ` hidden-when ${fact.hiddenWhen.map((h) => h.equals ? `${h.prop}=${h.equals}` : h.prop).join(', ')}` : ''}`,
+        `presence-carried: ${e.partName} (${present.length}/${enabled.length} combos) → ${part.visibleWhen ? `visibleWhen ${part.visibleWhen.prop}` : ''}${fact.shownWhen.length ? ` base-hidden, shown-when ${fact.shownWhen.map((h) => `${h.prop}=${h.equals}`).join(', ')}` : ''}${fact.hiddenWhen.length ? ` hidden-when ${fact.hiddenWhen.map((h) => h.equals ? `${h.prop}=${h.equals}` : h.prop).join(', ')}` : ''}`,
       );
     }
 
@@ -668,13 +747,24 @@ export function promoteAnatomy(
         return part;
       }
       // per-value icon parts nested under the host box part (names prefixed
-      // by the host part — part names are contract-global)
+      // by the host part — part names are contract-global). A glyph keyed by
+      // the UNSET pseudo-value of a defaultless axis is the DEFAULT glyph:
+      // visible unless a set value applies (stylesWhen display:none per set
+      // value — the pseudo-value is not a contract enum value).
       part.parts = {};
       for (const pv of plan.perValue) {
+        const axisSpec = space.axes.find((ax) => ax.prop === pv.prop);
+        const isUnsetValue = axisSpec?.unset !== undefined && pv.value === axisSpec.unset;
         const child: Part = {
           icon: { asset: pv.asset, size: pv.size },
-          visibleWhen: { prop: pv.prop!, equals: pv.value },
-          description: `Per-value svg content promoted from the computed floor: the glyph drawn when ${pv.prop}=${pv.value}.`,
+          ...(isUnsetValue
+            ? {
+                stylesWhen: axisSpec!.values
+                  .filter((v) => v !== axisSpec!.unset)
+                  .map((v) => ({ prop: pv.prop!, equals: v, styles: { display: 'none' } })),
+              }
+            : { visibleWhen: { prop: pv.prop!, equals: pv.value } }),
+          description: `Per-value svg content promoted from the computed floor: the glyph drawn when ${pv.prop}=${isUnsetValue ? `unset (default)` : pv.value}.`,
         };
         part.parts[`${e.partName}-${pv.value!.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase()}`] = child;
       }

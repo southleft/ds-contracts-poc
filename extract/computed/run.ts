@@ -72,6 +72,7 @@ import {
 } from './replay.js';
 import { runGate } from './gate.js';
 import { promoteAnatomy } from './anatomy.js';
+import { labeledPair } from './label-png.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
 import { kebab } from '../types.js';
 import { flatten, normalizeValue, type Capture, type CapturedNode, type FlatEl, type StyleMap } from './lib.js';
@@ -612,28 +613,6 @@ async function main() {
       pixelRows.push({ key: spec.key, pctExact: (100 * diffExact) / total, pctAA: (100 * diffAA) / total });
     }
     const worst = [...pixelRows].sort((x, y) => y.pctAA - x.pctAA || y.pctExact - x.pctExact).slice(0, 8);
-    // paired receipts: base + one hover + one focus + the worst pair
-    const receiptsDir = path.join(outDir, 'receipts');
-    mkdirSync(receiptsDir, { recursive: true });
-    const receiptKeys = [...new Set([
-      `${space.baseComboKey}__default`,
-      `${space.enumeration.combos.find((c) => Object.values(c.stateFlags).every((f) => !f))?.key}__hover`,
-      `${space.enumeration.combos.find((c) => Object.values(c.stateFlags).every((f) => !f))?.key}__focus-visible`,
-      worst[0]?.key,
-    ])].filter((x): x is string => Boolean(x) && !x.startsWith('undefined'));
-    for (const key of receiptKeys) {
-      const aPath = path.join(scratchShots, `${comp.name}--${key}.png`);
-      const bPath = path.join(replayShots, `${key}.png`);
-      if (!existsSync(aPath) || !existsSync(bPath)) continue;
-      const a = PNG.sync.read(readFileSync(aPath));
-      const b = PNG.sync.read(readFileSync(bPath));
-      const gap = 12;
-      const outPng = new PNG({ width: a.width + b.width + gap, height: Math.max(a.height, b.height) });
-      outPng.data.fill(220);
-      PNG.bitblt(a, outPng, 0, 0, a.width, a.height, 0, 0);
-      PNG.bitblt(b, outPng, 0, 0, b.width, b.height, a.width + gap, 0);
-      writeFileSync(path.join(receiptsDir, `pair--${key}.png`), PNG.sync.write(outPng));
-    }
     await replayPage.close();
 
     // ---- phase 4: the fidelity gate (contract-mediated) ----
@@ -675,6 +654,37 @@ async function main() {
       contextStyles: run1.controls['span']?.style ?? {},
     });
     await gatePage.close();
+
+    // ---- paired receipts (owner directive: SELF-EXPLANATORY — each half
+    // labeled in the image margin). LEFT = the real npm package render,
+    // RIGHT = the CONTRACT render (enriched contract → emit-html), i.e. the
+    // owner-facing one-to-one claim. Keys: base, one hover, one focus, the
+    // worst gate row, and (round 4) one all-presence-on combo. ----
+    const receiptsDir = path.join(outDir, 'receipts');
+    mkdirSync(receiptsDir, { recursive: true });
+    const allOnCombo = space.enumeration.combos.find(
+      (c) =>
+        Object.values(c.stateFlags).every((f) => !f) &&
+        [...space.presence.keys()].every((pp) => c.axisValues[pp] === 'on') &&
+        space.axes.filter((ax) => !space.presence.has(ax.prop)).every((ax) => c.axisValues[ax.prop] === space.baseAxisValues[ax.prop]),
+    );
+    const worstGate = [...scorecard.rows].sort((x, y) => y.pctAA - x.pctAA)[0];
+    const receiptKeys = [...new Set([
+      `${space.baseComboKey}__default`,
+      ...(allOnCombo ? [`${allOnCombo.key}__default`] : []),
+      `${space.baseComboKey}__hover`,
+      `${space.baseComboKey}__focus-visible`,
+      worstGate?.key,
+    ])].filter((x): x is string => Boolean(x));
+    for (const key of receiptKeys) {
+      const aPath = path.join(scratchShots, `${comp.name}--${key}.png`);
+      const bPath = path.join(outDir, 'gate-shots', `${key}.png`);
+      if (!existsSync(aPath) || !existsSync(bPath)) continue;
+      const a = PNG.sync.read(readFileSync(aPath));
+      const b = PNG.sync.read(readFileSync(bPath));
+      const outPng = labeledPair(a, b, 'REAL POLARIS (NPM PACKAGE)', 'CONTRACT RENDER (EMIT-HTML)');
+      writeFileSync(path.join(receiptsDir, `pair--${key}.png`), PNG.sync.write(outPng));
+    }
 
     // ---- artifacts ----
     const fmt = (n: number) => n.toFixed(3);

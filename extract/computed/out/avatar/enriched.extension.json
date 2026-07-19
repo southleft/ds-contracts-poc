@@ -96,51 +96,15 @@
             }
           }
         },
-        "part-0-0-0": {
-          "stroke-width": {
-            "xs": {
-              "$value": "3px",
-              "$type": "dimension"
+        "initials": {
+          "color": {
+            "off": {
+              "$value": "#fdeffd",
+              "$type": "color"
             },
-            "sm": {
-              "$value": "2.5px",
-              "$type": "dimension"
-            },
-            "md": {
-              "$value": "2.5px",
-              "$type": "dimension"
-            },
-            "lg": {
-              "$value": "2.5px",
-              "$type": "dimension"
-            },
-            "xl": {
-              "$value": "2px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "part-0-0-1": {
-          "stroke-width": {
-            "xs": {
-              "$value": "3px",
-              "$type": "dimension"
-            },
-            "sm": {
-              "$value": "2.5px",
-              "$type": "dimension"
-            },
-            "md": {
-              "$value": "2.5px",
-              "$type": "dimension"
-            },
-            "lg": {
-              "$value": "2.5px",
-              "$type": "dimension"
-            },
-            "xl": {
-              "$value": "2px",
-              "$type": "dimension"
+            "on": {
+              "$value": "#fff6f8",
+              "$type": "color"
             }
           }
         }
@@ -149,10 +113,6 @@
         "size-0": {
           "$value": "0px",
           "$type": "dimension"
-        },
-        "color-fdeffd": {
-          "$value": "#fdeffd",
-          "$type": "color"
         }
       }
     }
@@ -321,109 +281,163 @@
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0",
+      "part": "label",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.1",
+      "part": "part-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -432,11 +446,6 @@
   "foldedStateSkips": [],
   "layout": {
     "enriched": [
-      {
-        "part": "initials",
-        "field": "display",
-        "value": "flex"
-      },
       {
         "part": "initials",
         "field": "align",
@@ -495,173 +504,15 @@
       "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "absolute",
       "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "content-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "overflow-x",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "overflow-y",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "user-select",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\")",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "fill",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "user-select",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\")",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "fill",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "stroke-linecap",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "round",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "stroke-linejoin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "round",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "user-select",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [],
   "overflowBindings": [
     {
-      "part": "icon",
+      "part": "initials",
       "channel": "color",
-      "ref": "{imported.shared.color-fdeffd}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "color",
-      "ref": "{imported.shared.color-fdeffd}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "stroke",
-      "ref": "{imported.shared.color-fdeffd}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0",
-      "channel": "stroke-width",
-      "ref": "{imported.avatar.part-0-0-0.stroke-width.{size}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "color",
-      "ref": "{imported.shared.color-fdeffd}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "stroke",
-      "ref": "{imported.shared.color-fdeffd}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.1",
-      "channel": "stroke-width",
-      "ref": "{imported.avatar.part-0-0-1.stroke-width.{size}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "ref": "{imported.avatar.initials.color.{withInitials}}",
+      "refusal": "presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue)"
     }
   ],
   "pairwiseRefusals": [],
@@ -669,7 +520,7 @@
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
-        "combo": "xs",
+        "combo": "xs.off",
         "interaction": "default",
         "part": "root",
         "pseudo": "::after",
@@ -678,7 +529,7 @@
         }
       },
       {
-        "combo": "sm",
+        "combo": "xs.on",
         "interaction": "default",
         "part": "root",
         "pseudo": "::after",
@@ -687,7 +538,7 @@
         }
       },
       {
-        "combo": "md",
+        "combo": "sm.off",
         "interaction": "default",
         "part": "root",
         "pseudo": "::after",
@@ -696,7 +547,7 @@
         }
       },
       {
-        "combo": "lg",
+        "combo": "sm.on",
         "interaction": "default",
         "part": "root",
         "pseudo": "::after",
@@ -705,7 +556,52 @@
         }
       },
       {
-        "combo": "xl",
+        "combo": "md.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md.on",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "lg.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "lg.on",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "xl.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "xl.on",
         "interaction": "default",
         "part": "root",
         "pseudo": "::after",
@@ -714,11 +610,11 @@
         }
       }
     ],
-    "totalFindings": 5
+    "totalFindings": 10
   },
   "bindingContradictions": [
     {
-      "combo": "xs",
+      "combo": "xs.off",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -729,7 +625,27 @@
       "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
     },
     {
-      "combo": "sm",
+      "combo": "xs.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "xs.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "xs.on",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -740,7 +656,7 @@
       "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
     },
     {
-      "combo": "md",
+      "combo": "sm.off",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -751,7 +667,27 @@
       "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
     },
     {
-      "combo": "lg",
+      "combo": "sm.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "sm.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "sm.on",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -762,7 +698,122 @@
       "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
     },
     {
-      "combo": "xl",
+      "combo": "md.off",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "md.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "md.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "md.on",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "lg.off",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "lg.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "lg.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "lg.on",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "xl.off",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "xl.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "xl.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "xl.on",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -774,11 +825,54 @@
     }
   ],
   "interactionOnDisabled": [],
-  "structureReceipts": [],
+  "structureReceipts": [
+    "union-part-added: xs.on__default @0.0.0 (text|Avatar__Text)",
+    "part-missing: xs.on__default part-0-0-0",
+    "part-missing: xs.on__default part-0-0-1",
+    "part-missing: xs.on__hover part-0-0-0",
+    "part-missing: xs.on__hover part-0-0-1",
+    "part-missing: xs.on__focus-visible part-0-0-0",
+    "part-missing: xs.on__focus-visible part-0-0-1",
+    "part-missing: xs.on__active part-0-0-0",
+    "part-missing: xs.on__active part-0-0-1",
+    "part-missing: sm.on__default part-0-0-0",
+    "part-missing: sm.on__default part-0-0-1",
+    "part-missing: sm.on__hover part-0-0-0",
+    "part-missing: sm.on__hover part-0-0-1",
+    "part-missing: sm.on__focus-visible part-0-0-0",
+    "part-missing: sm.on__focus-visible part-0-0-1",
+    "part-missing: sm.on__active part-0-0-0",
+    "part-missing: sm.on__active part-0-0-1",
+    "part-missing: md.on__default part-0-0-0",
+    "part-missing: md.on__default part-0-0-1",
+    "part-missing: md.on__hover part-0-0-0",
+    "part-missing: md.on__hover part-0-0-1",
+    "part-missing: md.on__focus-visible part-0-0-0",
+    "part-missing: md.on__focus-visible part-0-0-1",
+    "part-missing: md.on__active part-0-0-0",
+    "part-missing: md.on__active part-0-0-1",
+    "part-missing: lg.on__default part-0-0-0",
+    "part-missing: lg.on__default part-0-0-1",
+    "part-missing: lg.on__hover part-0-0-0",
+    "part-missing: lg.on__hover part-0-0-1",
+    "part-missing: lg.on__focus-visible part-0-0-0",
+    "part-missing: lg.on__focus-visible part-0-0-1",
+    "part-missing: lg.on__active part-0-0-0",
+    "part-missing: lg.on__active part-0-0-1",
+    "part-missing: xl.on__default part-0-0-0",
+    "part-missing: xl.on__default part-0-0-1",
+    "part-missing: xl.on__hover part-0-0-0",
+    "part-missing: xl.on__hover part-0-0-1",
+    "part-missing: xl.on__focus-visible part-0-0-0",
+    "part-missing: xl.on__focus-visible part-0-0-1",
+    "part-missing: xl.on__active part-0-0-0",
+    "part-missing: xl.on__active part-0-0-1"
+  ],
   "styledChannelReceipts": [
     "control-fallback: no control for <svg> — span control used (part icon)",
-    "control-fallback: no control for <path> — span control used (part part-0.0.0)",
-    "control-fallback: no control for <path> — span control used (part part-0.0.1)"
+    "control-fallback: no control for <text> — span control used (part label)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-1)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -795,18 +889,49 @@
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-1",
         "join": "computed-only"
       }
     ],
     "staticOnly": []
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "initials"
+    ],
+    "svgAssets": [
+      "avatar-initials-lg",
+      "avatar-initials-md",
+      "avatar-initials-sm",
+      "avatar-initials-xl",
+      "avatar-initials-xs"
+    ],
+    "receipts": [
+      "presence-prop-added: withInitials (boolean, default false; library prop initials)",
+      "svg-viewbox-bumped: Avatar.initials@xs.off — computed size 20 < path extent 33; viewBox reconstructed as 0 0 33 33 (named reconstruction)",
+      "svg-child-outside-grammar: Avatar.initials@xs.on — <text> (v1 carries path/g only); asset refused",
+      "svg-viewbox-bumped: Avatar.initials@sm.off — computed size 24 < path extent 33; viewBox reconstructed as 0 0 33 33 (named reconstruction)",
+      "svg-child-outside-grammar: Avatar.initials@sm.on — <text> (v1 carries path/g only); asset refused",
+      "svg-viewbox-bumped: Avatar.initials@md.off — computed size 28 < path extent 33; viewBox reconstructed as 0 0 33 33 (named reconstruction)",
+      "svg-child-outside-grammar: Avatar.initials@md.on — <text> (v1 carries path/g only); asset refused",
+      "svg-viewbox-bumped: Avatar.initials@lg.off — computed size 32 < path extent 33; viewBox reconstructed as 0 0 33 33 (named reconstruction)",
+      "svg-child-outside-grammar: Avatar.initials@lg.on — <text> (v1 carries path/g only); asset refused",
+      "svg-viewbox-reconstructed: Avatar.initials@xl.off — 0 0 40 40 from computed size 40×40 (path extent 33.0; viewBox is not a computed style — named reconstruction)",
+      "svg-child-outside-grammar: Avatar.initials@xl.on — <text> (v1 carries path/g only); asset refused"
+    ],
+    "refusals": []
+  },
   "enrichmentNotes": [
-    "layout enriched: initials.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: initials.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: initials.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",

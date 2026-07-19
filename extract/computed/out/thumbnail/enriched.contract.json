@@ -136,6 +136,32 @@
           }
         }
       ],
+      "parts": {
+        "part-0": {
+          "element": "img",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy img| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "max-height": "100%",
+            "max-width": "100%",
+            "overflow-x": "clip",
+            "overflow-y": "clip"
+          },
+          "attrs": {
+            "alt": "{alt}"
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.thumbnail.part-0.color}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          }
+        }
+      },
       "declared": {
         "max-width": "100%",
         "overflow-x": "hidden",

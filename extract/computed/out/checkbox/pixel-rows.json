@@ -1,42 +1,122 @@
 [
   {
-    "key": "enabled__default",
+    "key": "unchecked.enabled__default",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "enabled__hover",
+    "key": "unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "enabled__focus-visible",
+    "key": "unchecked.enabled__focus-visible",
     "pctExact": 0.0390625,
     "pctAA": 0
   },
   {
-    "key": "enabled__active",
+    "key": "unchecked.enabled__active",
     "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
-    "key": "disabled__default",
+    "key": "unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__hover",
+    "key": "unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__focus-visible",
+    "key": "unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__active",
+    "key": "unchecked.disabled__active",
     "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.enabled__default",
+    "pctExact": 0.09928385416666667,
+    "pctAA": 0.057779947916666664
+  },
+  {
+    "key": "checked.enabled__hover",
+    "pctExact": 0.09928385416666667,
+    "pctAA": 0.057779947916666664
+  },
+  {
+    "key": "checked.enabled__focus-visible",
+    "pctExact": 0.1318359375,
+    "pctAA": 0.057779947916666664
+  },
+  {
+    "key": "checked.enabled__active",
+    "pctExact": 0.09928385416666667,
+    "pctAA": 0.057779947916666664
+  },
+  {
+    "key": "checked.disabled__default",
+    "pctExact": 0.08951822916666667,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__hover",
+    "pctExact": 0.08951822916666667,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__focus-visible",
+    "pctExact": 0.08951822916666667,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__active",
+    "pctExact": 0.08951822916666667,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate.enabled__default",
+    "pctExact": 0.087890625,
+    "pctAA": 0.0390625
+  },
+  {
+    "key": "indeterminate.enabled__hover",
+    "pctExact": 0.087890625,
+    "pctAA": 0.0390625
+  },
+  {
+    "key": "indeterminate.enabled__focus-visible",
+    "pctExact": 0.12044270833333333,
+    "pctAA": 0.0390625
+  },
+  {
+    "key": "indeterminate.enabled__active",
+    "pctExact": 0.087890625,
+    "pctAA": 0.0390625
+  },
+  {
+    "key": "indeterminate.disabled__default",
+    "pctExact": 0.078125,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate.disabled__hover",
+    "pctExact": 0.078125,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate.disabled__focus-visible",
+    "pctExact": 0.078125,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate.disabled__active",
+    "pctExact": 0.078125,
     "pctAA": 0
   }
 ]

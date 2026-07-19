@@ -1,22 +1,23 @@
 {
   "component": "Avatar",
   "browser": "148.0.7778.96",
-  "captures": 20,
-  "combos": 5,
+  "captures": 40,
+  "combos": 10,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 942,
-  "elementsPerCapture": 5,
+  "elementsPerCapture": 6,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 25,
     "initials": 21,
     "icon": 14,
-    "part-0.0.0": 18,
-    "part-0.0.1": 20
+    "label": 17,
+    "part-0-0-0": 18,
+    "part-0-0-1": 20
   },
   "folds": {
-    "count": 45,
+    "count": 54,
     "receipts": [
       {
         "part": "root",
@@ -181,130 +182,184 @@
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "border-bottom-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "border-left-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "border-right-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "border-top-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.0",
+        "part": "label",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "border-bottom-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "border-left-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "border-right-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "border-top-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.1",
+        "part": "part-0-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 32,
-    "mintedLeavesFolded": 32
+    "mintedLeavesUnfolded": 59,
+    "mintedLeavesFolded": 23
   },
   "bound": {
-    "cellsChecked": 20,
-    "confirmed": 15,
-    "contradictions": 5,
-    "untriaged": 0
+    "cellsChecked": 40,
+    "confirmed": 20,
+    "contradictions": 20,
+    "untriaged": 10
   },
   "minted": {
-    "leaves": 32,
-    "baseBindings": 26,
+    "leaves": 23,
+    "baseBindings": 15,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 20,
-      "perAxis": 6,
+      "uniform": 10,
+      "perAxis": 5,
       "perPair": 0,
       "refused": 0
     }
@@ -314,86 +369,112 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 15,
+    "base": 1,
     "state": 0,
-    "overflowBindings": 11
+    "overflowBindings": 1
   },
-  "pseudoElementFindings": 5,
+  "pseudoElementFindings": 10,
+  "anatomyPromotion": {
+    "partsCarried": 2,
+    "svgAssets": 5,
+    "refusals": 0
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 94000,
-    "cellsMatched": 94000,
-    "pct": 100,
+    "cellsCompared": 169200,
+    "cellsMatched": 169100,
+    "pct": 99.94089834515367,
     "namedExclusions": [
       "app-region",
       "text-decoration"
     ],
-    "topMismatchedChannels": []
+    "topMismatchedChannels": [
+      [
+        "block-size",
+        20
+      ],
+      [
+        "height",
+        20
+      ],
+      [
+        "inline-size",
+        20
+      ],
+      [
+        "perspective-origin",
+        20
+      ],
+      [
+        "width",
+        20
+      ]
+    ]
   },
   "pixel": {
-    "pairs": 20,
+    "pairs": 40,
     "exact": {
-      "mean": 0.4200846354166667,
-      "max": 0.6233723958333334,
+      "mean": 0.4481404622395832,
+      "max": 0.6331380208333334,
       "perfect": 0
     },
     "aa": {
-      "mean": 0.2888997395833333,
+      "mean": 0.26131184895833337,
       "max": 0.4695638020833333,
       "perfect": 0
     },
     "worst": [
       {
-        "key": "xl__default",
+        "key": "xl.off__default",
         "pctExact": 0.6233723958333334,
         "pctAA": 0.4695638020833333
       },
       {
-        "key": "xl__hover",
+        "key": "xl.off__hover",
         "pctExact": 0.6233723958333334,
         "pctAA": 0.4695638020833333
       },
       {
-        "key": "xl__focus-visible",
+        "key": "xl.off__focus-visible",
         "pctExact": 0.6233723958333334,
         "pctAA": 0.4695638020833333
       },
       {
-        "key": "xl__active",
+        "key": "xl.off__active",
         "pctExact": 0.6233723958333334,
         "pctAA": 0.4695638020833333
       },
       {
-        "key": "lg__default",
+        "key": "lg.off__default",
         "pctExact": 0.5192057291666666,
         "pctAA": 0.3523763020833333
       },
       {
-        "key": "lg__hover",
+        "key": "lg.off__hover",
         "pctExact": 0.5192057291666666,
         "pctAA": 0.3523763020833333
       },
       {
-        "key": "lg__focus-visible",
+        "key": "lg.off__focus-visible",
         "pctExact": 0.5192057291666666,
         "pctAA": 0.3523763020833333
       },
       {
-        "key": "lg__active",
+        "key": "lg.off__active",
         "pctExact": 0.5192057291666666,
         "pctAA": 0.3523763020833333
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 91.30434782608695,
+    "computedPctEqual": 68.47826086956522,
     "rowsFullyEqual": 0,
-    "rows": 20,
+    "rows": 40,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 20
+    "pairs": 40
   },
   "focusVisibleDriverMatched": 0,
-  "focusVisibleDriverTotal": 5
+  "focusVisibleDriverTotal": 10
 }

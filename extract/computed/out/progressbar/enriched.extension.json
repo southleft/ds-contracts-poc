@@ -79,6 +79,31 @@
         "value": "hidden"
       },
       {
+        "part": "progress",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "progress",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "progress",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "progress",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "progress",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
         "part": "indicator",
         "channel": "transition-duration",
         "value": "0.5s"
@@ -92,6 +117,26 @@
         "part": "indicator",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
       }
     ],
     "state": []
@@ -99,44 +144,9 @@
   "codeOnlyChannels": [
     {
       "part": "progress",
-      "channel": "appearance",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "auto",
-      "distinctValues": 1
-    },
-    {
-      "part": "progress",
       "channel": "clip-path",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "inset(50%)",
-      "distinctValues": 1
-    },
-    {
-      "part": "progress",
-      "channel": "overflow-x",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "progress",
-      "channel": "overflow-y",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "progress",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
-      "distinctValues": 1
-    },
-    {
-      "part": "progress",
-      "channel": "text-wrap-mode",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "nowrap",
       "distinctValues": 1
     },
     {
@@ -152,117 +162,10 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "inset(50%)",
       "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "overflow-x",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "overflow-y",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "text-wrap-mode",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "nowrap",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [],
-  "overflowBindings": [
-    {
-      "part": "progress",
-      "channel": "bottom",
-      "ref": "{imported.progress-bar.progress.bottom}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "progress",
-      "channel": "left",
-      "ref": "{imported.progress-bar.progress.left}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "progress",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "progress",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "progress",
-      "channel": "right",
-      "ref": "{imported.progress-bar.progress.right}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "progress",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "progress",
-      "channel": "vertical-align",
-      "ref": "{imported.progress-bar.progress.vertical-align}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "bottom",
-      "ref": "{imported.progress-bar.label.bottom.{size}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "right",
-      "ref": "{imported.progress-bar.label.right}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    }
-  ],
+  "overflowBindings": [],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
@@ -296,11 +199,36 @@
     ],
     "staticOnly": []
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "progress",
+      "indicator",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "sr-only-carried-as-hidden: progress is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "literal-text-carried: label = \"25%\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
+    ],
+    "refusals": []
+  },
   "enrichmentNotes": [
     "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progress.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progress.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progress.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progress.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progress.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: indicator.transition-duration = 0.5s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: indicator.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: indicator.transition-timing-function = cubic-bezier(0.25, 0.1, 0.25, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: indicator.transition-timing-function = cubic-bezier(0.25, 0.1, 0.25, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]
 }

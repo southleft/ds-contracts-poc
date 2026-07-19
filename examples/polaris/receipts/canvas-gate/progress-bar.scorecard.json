@@ -1,0 +1,205 @@
+{
+  "component": "ProgressBar",
+  "contractId": "polaris.progress-bar",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Size=Medium, Tone=Highlight",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x128",
+      "realPx": "88x96",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Medium, Tone=Primary",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x128",
+      "realPx": "88x128",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Medium, Tone=Success",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x128",
+      "realPx": "88x128",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Medium, Tone=Critical",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x128",
+      "realPx": "88x128",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Small, Tone=Highlight",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x112",
+      "realPx": "88x112",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Small, Tone=Primary",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x112",
+      "realPx": "88x112",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Small, Tone=Success",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x112",
+      "realPx": "88x112",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Small, Tone=Critical",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x112",
+      "realPx": "88x112",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Large, Tone=Highlight",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x160",
+      "realPx": "88x160",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Large, Tone=Primary",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x160",
+      "realPx": "88x160",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Large, Tone=Success",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x160",
+      "realPx": "88x160",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    },
+    {
+      "cell": "Size=Large, Tone=Critical",
+      "kind": "base",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x160",
+      "realPx": "88x160",
+      "inkCanvasPct": 0,
+      "inkRealPct": 0,
+      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+    }
+  ],
+  "summary": {
+    "cells": 12,
+    "meanExactUnmasked": 0,
+    "meanAAUnmasked": 0,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
+    "worstCell": "Size=Medium, Tone=Highlight",
+    "cellsOver10Masked": [],
+    "blankCanvasCells": [
+      "Size=Medium, Tone=Highlight",
+      "Size=Medium, Tone=Primary",
+      "Size=Medium, Tone=Success",
+      "Size=Medium, Tone=Critical",
+      "Size=Small, Tone=Highlight",
+      "Size=Small, Tone=Primary",
+      "Size=Small, Tone=Success",
+      "Size=Small, Tone=Critical",
+      "Size=Large, Tone=Highlight",
+      "Size=Large, Tone=Primary",
+      "Size=Large, Tone=Success",
+      "Size=Large, Tone=Critical"
+    ]
+  },
+  "acceptance": {
+    "maskedMeanLE5": true,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": false
+  }
+}

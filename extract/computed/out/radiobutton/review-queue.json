@@ -4,5 +4,46 @@
   "contract": "examples/polaris/extraction/static-contracts/radio-button.contract.json",
   "generatedBy": "extract/computed/run.ts",
   "browser": "148.0.7778.96",
-  "items": []
+  "items": [
+    {
+      "id": "checked.enabled|backdrop|background-color",
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "background-color",
+      "ref": "{p.color-input-bg-surface}",
+      "computedProp": "background-color",
+      "expected": "rgba(253, 253, 253, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "checked.enabled|backdrop|border-color",
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    }
+  ]
 }

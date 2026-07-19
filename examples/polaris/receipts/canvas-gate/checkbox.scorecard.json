@@ -1,0 +1,111 @@
+{
+  "component": "Checkbox",
+  "contractId": "polaris.checkbox",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "mountNote": "mounted labelHidden: the contract anatomy carries no label part (input+backdrop only), so the real mount is scoped to the anatomy the canvas draws — named alignment, not a fudge.",
+  "cells": [
+    {
+      "cell": "Checkbox",
+      "kind": "base",
+      "pctExactUnmasked": 1.21,
+      "pctAAUnmasked": 0.43,
+      "pctAAMasked": 0.43,
+      "maskCoveragePct": 0,
+      "canvasPx": "136x136",
+      "realPx": "32x32",
+      "inkCanvasPct": 0,
+      "inkRealPct": 1.21,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 1.21% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
+    },
+    {
+      "cell": "State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "pctExactUnmasked": 4.33,
+      "pctAAUnmasked": 0.43,
+      "pctAAMasked": 0.43,
+      "maskCoveragePct": 0,
+      "canvasPx": "136x136",
+      "realPx": "32x32",
+      "inkCanvasPct": 0,
+      "inkRealPct": 1.21,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 1.21% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
+    },
+    {
+      "cell": "State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "pctExactUnmasked": 38.25,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "40x40",
+      "realPx": "32x32",
+      "inkCanvasPct": 97,
+      "inkRealPct": 61,
+      "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
+    },
+    {
+      "cell": "State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "pctExactUnmasked": 5.62,
+      "pctAAUnmasked": 3.03,
+      "pctAAMasked": 3.03,
+      "maskCoveragePct": 0,
+      "canvasPx": "136x136",
+      "realPx": "44x44",
+      "inkCanvasPct": 0,
+      "inkRealPct": 4.56,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 4.56% of the union canvas — the masked % understates the miss; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
+    },
+    {
+      "cell": "State=Active",
+      "kind": "state",
+      "state": "active",
+      "pctExactUnmasked": 5.49,
+      "pctAAUnmasked": 2.03,
+      "pctAAMasked": 2.03,
+      "maskCoveragePct": 0,
+      "canvasPx": "136x136",
+      "realPx": "32x32",
+      "inkCanvasPct": 0,
+      "inkRealPct": 2.38,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 2.38% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
+    }
+  ],
+  "summary": {
+    "cells": 5,
+    "meanExactUnmasked": 10.98,
+    "meanAAUnmasked": 1.18,
+    "meanAAMasked": 1.18,
+    "maxAAMasked": 3.03,
+    "worstCell": "State=Focus Visible",
+    "cellsOver10Masked": [],
+    "blankCanvasCells": [
+      "Checkbox",
+      "State=Hover",
+      "State=Focus Visible",
+      "State=Active"
+    ]
+  },
+  "acceptance": {
+    "maskedMeanLE5": true,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": false
+  }
+}

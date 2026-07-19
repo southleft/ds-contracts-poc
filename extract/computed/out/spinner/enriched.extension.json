@@ -3,30 +3,7 @@
   "generatedBy": "extract/computed/run.ts",
   "library": "@shopify/polaris@13.9.5",
   "browser": "148.0.7778.96",
-  "mintedTokens": {
-    "imported": {
-      "spinner": {
-        "icon": {
-          "fill": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        },
-        "part-0-0": {
-          "fill": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        }
-      },
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        }
-      }
-    }
-  },
+  "mintedTokens": {},
   "folds": [],
   "foldedStateSkips": [],
   "layout": {
@@ -40,124 +17,9 @@
     "base": [],
     "state": []
   },
-  "codeOnlyChannels": [
-    {
-      "part": "icon",
-      "channel": "animation-duration",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "0.5s",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "animation-iteration-count",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "infinite",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "animation-name",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "p-motion-keyframes-spin",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "animation-timing-function",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "linear",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "content-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "overflow-x",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "overflow-y",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "matrix(1, 0, 0, 1, 0, 0)",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 7.229 1.173 A 9.25 9.25 0 1 0 18.884 12.585 A 1.25 1.25 0 1 0 16.484 11.887 A 6.75 6.75 0 1 1 7.978 3.558 A 1.25 1.25 0 1 0 7.228 1.173 Z\")",
-      "distinctValues": 2
-    },
-    {
-      "part": "part-0.0",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    }
-  ],
+  "codeOnlyChannels": [],
   "stateOverflow": [],
-  "overflowBindings": [
-    {
-      "part": "icon",
-      "channel": "fill",
-      "ref": "{imported.spinner.icon.fill}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0",
-      "channel": "fill",
-      "ref": "{imported.spinner.part-0-0.fill}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    }
-  ],
+  "overflowBindings": [],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
@@ -169,7 +31,7 @@
   "structureReceipts": [],
   "styledChannelReceipts": [
     "control-fallback: no control for <svg> — span control used (part icon)",
-    "control-fallback: no control for <path> — span control used (part part-0.0)"
+    "control-fallback: no control for <path> — span control used (part part-0-0)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -182,13 +44,31 @@
         "join": "computed-only"
       },
       {
-        "part": "part-0.0",
+        "part": "part-0-0",
         "join": "computed-only"
       }
     ],
     "staticOnly": [
       "glyphLarge",
       "glyphSmall"
+    ]
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [
+      "spinner-root-large",
+      "spinner-root-small"
+    ],
+    "receipts": [
+      "svg-viewbox-reconstructed: Spinner.root@small — 0 0 20 20 from computed size 20×20 (path extent 18.9; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Spinner.root@large — 0 0 44 44 from computed size 44×44 (path extent 43.5; viewBox is not a computed style — named reconstruction)"
+    ],
+    "refusals": [
+      "static-part-unrendered: reviewed static part \"glyphLarge\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+      "static-part-unrendered: reviewed static part \"glyphSmall\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
     ]
   },
   "enrichmentNotes": []

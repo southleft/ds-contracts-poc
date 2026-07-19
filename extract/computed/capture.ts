@@ -364,7 +364,14 @@ createRoot(document.getElementById('root')).render(<App />);
     `<!doctype html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="bundle.css">
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
-</head><body><div id="root"></div><script src="bundle.js"></script></body></html>`,
+</head><body><div id="root"></div>
+<script>
+// Round 4: link-bearing combos (Tag url) must not NAVIGATE when the active-
+// state driver's mouse.up lands — a navigation destroys the page context
+// mid-sweep. :active/:hover pseudo-state matching is unaffected.
+document.addEventListener('click', (e) => e.preventDefault(), true);
+</script>
+<script src="bundle.js"></script></body></html>`,
   );
   return path.join(pageDir, 'index.html');
 }

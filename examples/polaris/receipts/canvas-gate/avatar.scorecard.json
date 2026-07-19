@@ -1,0 +1,127 @@
+{
+  "component": "Avatar",
+  "contractId": "polaris.avatar",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Size=Md",
+      "kind": "base",
+      "pctExactUnmasked": 52.34,
+      "pctAAUnmasked": 37.14,
+      "pctAAMasked": 59.22,
+      "maskCoveragePct": 71.43,
+      "canvasPx": "80x32",
+      "realPx": "56x56",
+      "inkCanvasPct": 42.37,
+      "inkRealPct": 67.95,
+      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+    },
+    {
+      "cell": "Size=Xs",
+      "kind": "base",
+      "pctExactUnmasked": 39.43,
+      "pctAAUnmasked": 23.4,
+      "pctAAMasked": 11.84,
+      "maskCoveragePct": 57.75,
+      "canvasPx": "80x79",
+      "realPx": "40x40",
+      "inkCanvasPct": 24.57,
+      "inkRealPct": 24.68,
+      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+    },
+    {
+      "cell": "Size=Sm",
+      "kind": "base",
+      "pctExactUnmasked": 45.42,
+      "pctAAUnmasked": 26.38,
+      "pctAAMasked": 45.16,
+      "maskCoveragePct": 83.33,
+      "canvasPx": "80x32",
+      "realPx": "48x48",
+      "inkCanvasPct": 45.16,
+      "inkRealPct": 57.6,
+      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+    },
+    {
+      "cell": "Size=Lg",
+      "kind": "base",
+      "pctExactUnmasked": 61.25,
+      "pctAAUnmasked": 46.86,
+      "pctAAMasked": 66.67,
+      "maskCoveragePct": 62.5,
+      "canvasPx": "80x30",
+      "realPx": "64x64",
+      "inkCanvasPct": 37.19,
+      "inkRealPct": 76.56,
+      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+    },
+    {
+      "cell": "Size=Xl",
+      "kind": "base",
+      "pctExactUnmasked": 74.42,
+      "pctAAUnmasked": 62.13,
+      "pctAAMasked": 91.63,
+      "maskCoveragePct": 50,
+      "canvasPx": "80x32",
+      "realPx": "80x80",
+      "inkCanvasPct": 37.28,
+      "inkRealPct": 97.25,
+      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+    }
+  ],
+  "summary": {
+    "cells": 5,
+    "meanExactUnmasked": 54.57,
+    "meanAAUnmasked": 39.18,
+    "meanAAMasked": 54.9,
+    "maxAAMasked": 91.63,
+    "worstCell": "Size=Xl",
+    "cellsOver10Masked": [
+      {
+        "cell": "Size=Md",
+        "pctAAMasked": 59.22,
+        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      },
+      {
+        "cell": "Size=Xs",
+        "pctAAMasked": 11.84,
+        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      },
+      {
+        "cell": "Size=Sm",
+        "pctAAMasked": 45.16,
+        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      },
+      {
+        "cell": "Size=Lg",
+        "pctAAMasked": 66.67,
+        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      },
+      {
+        "cell": "Size=Xl",
+        "pctAAMasked": 91.63,
+        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      }
+    ],
+    "blankCanvasCells": []
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": true
+  }
+}

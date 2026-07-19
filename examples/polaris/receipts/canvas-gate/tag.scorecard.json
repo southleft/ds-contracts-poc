@@ -1,0 +1,74 @@
+{
+  "component": "Tag",
+  "contractId": "polaris.tag",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Tag",
+      "kind": "base",
+      "pctExactUnmasked": 32.17,
+      "pctAAUnmasked": 15.3,
+      "pctAAMasked": 47.99,
+      "maskCoveragePct": 84.44,
+      "canvasPx": "120x40",
+      "realPx": "144x40",
+      "inkCanvasPct": 79.88,
+      "inkRealPct": 96.53,
+      "note": "EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+    },
+    {
+      "cell": "State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "pctExactUnmasked": 34.61,
+      "pctAAUnmasked": 8.46,
+      "pctAAMasked": 27.72,
+      "maskCoveragePct": 76.77,
+      "canvasPx": "124x44",
+      "realPx": "144x40",
+      "inkCanvasPct": 83.21,
+      "inkRealPct": 87.56,
+      "note": "EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag; EMITTER-DEFECT (channel table confirms): the disabled state override carries border-*-color only; the compile materializes spec.stroke and the renderer defaults border-width to 1px — the real disabled Tag keeps border-width 0 (no ring)"
+    }
+  ],
+  "summary": {
+    "cells": 2,
+    "meanExactUnmasked": 33.39,
+    "meanAAUnmasked": 11.88,
+    "meanAAMasked": 37.86,
+    "maxAAMasked": 47.99,
+    "worstCell": "Tag",
+    "cellsOver10Masked": [
+      {
+        "cell": "Tag",
+        "pctAAMasked": 47.99,
+        "note": "EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      },
+      {
+        "cell": "State=Disabled",
+        "pctAAMasked": 27.72,
+        "note": "EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag; EMITTER-DEFECT (channel table confirms): the disabled state override carries border-*-color only; the compile materializes spec.stroke and the renderer defaults border-width to 1px — the real disabled Tag keeps border-width 0 (no ring)"
+      }
+    ],
+    "blankCanvasCells": []
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": true
+  }
+}

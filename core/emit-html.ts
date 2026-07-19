@@ -445,6 +445,12 @@ function componentCss(contract: Contract): string[] {
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
     }
+    // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
+    // img) fills its inset box — for replaced elements, auto width under
+    // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.
+    if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
+      decls.push('width: 100%', 'height: 100%');
+    }
     for (const [state, overrides] of Object.entries(part.declaredStates ?? {})) {
       const sel = STATE_SELECTORS[state];
       if (!sel) continue; // refused by validateContract

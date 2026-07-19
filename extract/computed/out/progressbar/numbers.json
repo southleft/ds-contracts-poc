@@ -38,15 +38,20 @@
     }
   },
   "declared": {
-    "base": 5,
+    "base": 14,
     "state": 0
   },
   "codeOnly": {
-    "base": 12,
+    "base": 3,
     "state": 0,
-    "overflowBindings": 13
+    "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 4,
+    "svgAssets": 0,
+    "refusals": 0
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
@@ -115,7 +120,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 92.85714285714286,
+    "computedPctEqual": 92.10526315789474,
     "rowsFullyEqual": 0,
     "rows": 48,
     "pixelPerfectExact": 0,

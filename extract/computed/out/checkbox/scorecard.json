@@ -3,186 +3,149 @@
   "generatedBy": "extract/computed/gate.ts",
   "browser": "148.0.7778.96",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
-  "combos": 2,
+  "combos": 6,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 488,
-    "cellsEqual": 386,
-    "pctEqual": 79.09836065573771,
+    "cellsCompared": 2800,
+    "cellsEqual": 2030,
+    "pctEqual": 72.5,
     "rowsFullyEqual": 0,
-    "rows": 8
+    "rows": 24
   },
   "pixel": {
-    "pairs": 8,
+    "pairs": 24,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 2.756754557291667,
-    "meanAA": 0.9319051106770835,
-    "maxAA": 1.26708984375
+    "meanExact": 4.6232774522569455,
+    "meanAA": 2.4359130859375,
+    "maxAA": 4.309895833333333
   },
   "fusion": {
     "boundConfirmed": 1,
-    "boundCells": 2,
-    "contradictions": 1,
-    "mintedLeaves": 31,
-    "mintedLeavesUnfolded": 25,
-    "baseBindings": 67,
+    "boundCells": 6,
+    "contradictions": 5,
+    "mintedLeaves": 93,
+    "mintedLeavesUnfolded": 89,
+    "baseBindings": 56,
     "stateBindings": 47,
-    "codeOnlyChannels": 40,
-    "overflowBindings": 80,
-    "folds": 26
+    "codeOnlyChannels": 11,
+    "overflowBindings": 43,
+    "folds": 44
   },
   "worstRows": [
     {
-      "key": "enabled__focus-visible",
-      "pctAA": 1.26708984375,
-      "pctExact": 3.251953125,
-      "channelsMismatched": 4
+      "key": "indeterminate.disabled__focus-visible",
+      "pctAA": 4.309895833333333,
+      "pctExact": 6.205240885416667,
+      "channelsMismatched": 31
     },
     {
-      "key": "enabled__active",
-      "pctAA": 1.0888671875,
-      "pctExact": 2.8287760416666665,
-      "channelsMismatched": 8
+      "key": "checked.disabled__focus-visible",
+      "pctAA": 4.204915364583333,
+      "pctExact": 6.092936197916667,
+      "channelsMismatched": 48
     },
     {
-      "key": "enabled__hover",
-      "pctAA": 0.908203125,
-      "pctExact": 2.8287760416666665,
-      "channelsMismatched": 8
+      "key": "indeterminate.enabled__focus-visible",
+      "pctAA": 3.583984375,
+      "pctExact": 5.59326171875,
+      "channelsMismatched": 13
     },
     {
-      "key": "disabled__default",
-      "pctAA": 0.8390299479166666,
-      "pctExact": 2.8165690104166665,
-      "channelsMismatched": 20
+      "key": "checked.enabled__focus-visible",
+      "pctAA": 3.49853515625,
+      "pctExact": 5.50048828125,
+      "channelsMismatched": 29
     },
     {
-      "key": "disabled__hover",
-      "pctAA": 0.8390299479166666,
-      "pctExact": 2.8165690104166665,
-      "channelsMismatched": 20
+      "key": "unchecked.enabled__focus-visible",
+      "pctAA": 3.3658854166666665,
+      "pctExact": 6.279296875,
+      "channelsMismatched": 29
     },
     {
-      "key": "disabled__focus-visible",
-      "pctAA": 0.8390299479166666,
-      "pctExact": 2.8165690104166665,
-      "channelsMismatched": 20
+      "key": "unchecked.disabled__focus-visible",
+      "pctAA": 3.1062825520833335,
+      "pctExact": 5.980631510416667,
+      "channelsMismatched": 47
     },
     {
-      "key": "disabled__active",
-      "pctAA": 0.8390299479166666,
-      "pctExact": 2.8165690104166665,
-      "channelsMismatched": 20
+      "key": "checked.disabled__default",
+      "pctAA": 2.6814778645833335,
+      "pctExact": 4.569498697916667,
+      "channelsMismatched": 48
     },
     {
-      "key": "enabled__default",
-      "pctAA": 0.8349609375,
-      "pctExact": 1.8782552083333333,
-      "channelsMismatched": 2
+      "key": "checked.disabled__hover",
+      "pctAA": 2.6814778645833335,
+      "pctExact": 4.569498697916667,
+      "channelsMismatched": 48
     }
   ],
   "topMismatchedChannels": [
     [
       "backdrop.transform",
-      8
+      24
     ],
     [
       "backdrop.transition-behavior",
-      8
+      24
     ],
     [
-      "backdrop.background-color",
-      7
+      "icon.position",
+      24
     ],
     [
       "backdrop.border-bottom-color",
-      6
+      23
     ],
     [
       "backdrop.border-left-color",
-      6
+      21
     ],
     [
       "backdrop.border-right-color",
-      6
+      21
     ],
     [
       "backdrop.border-top-color",
-      6
+      21
     ],
     [
-      "backdrop.box-shadow",
-      6
+      "icon-4.border-bottom-color",
+      16
     ],
     [
-      "input.outline-color",
-      5
+      "icon-4.border-left-color",
+      16
     ],
     [
-      "root.cursor",
-      4
+      "icon-4.border-right-color",
+      16
     ],
     [
-      "input.border-bottom-color",
-      4
+      "icon-4.border-top-color",
+      16
     ],
     [
-      "input.border-left-color",
-      4
+      "icon-4.bottom",
+      16
     ],
     [
-      "input.border-right-color",
-      4
+      "icon-4.caret-color",
+      16
     ],
     [
-      "input.border-top-color",
-      4
+      "icon-4.color",
+      16
     ],
     [
-      "input.caret-color",
-      4
+      "icon-4.column-rule-color",
+      16
     ]
   ],
   "namedLosses": [
-    "overflow: choice__control.flex-shrink — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__control.margin-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.margin-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.margin-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.margin-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.margin-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: checkbox.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.margin-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.margin-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.margin-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.margin-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.opacity — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.opacity — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.stroke — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.stroke-dasharray — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.stroke-dashoffset — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.2.0.0.stroke-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: backdrop.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-right-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -193,86 +156,57 @@
     "overflow: backdrop.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.box-shadow [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: choice__label.border-bottom-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.border-left-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.border-right-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.border-top-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.caret-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.column-rule-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.outline-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.text-decoration-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: choice__label.text-emphasis-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: choice__label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: input.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: label.border-bottom-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.border-left-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.border-right-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.border-top-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.caret-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.column-rule-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.outline-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.text-decoration-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.text-emphasis-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: backdrop.background-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: input.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: input.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: backdrop.background-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.box-shadow [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "code-only: choice__control.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: choice__control.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: choice__control.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: checkbox.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: checkbox.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: input.position — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: backdrop.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: backdrop.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon.pointer-events — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: icon.position — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: icon-2.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-2.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.pointer-events — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.position — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: icon-2.shape-rendering — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-2.text-rendering — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.2.0.0.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.2.0.0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.2.0.0.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.2.0.0.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.2.0.0.pointer-events — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.2.0.0.shape-rendering — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.2.0.0.stroke-linecap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.2.0.0.stroke-linejoin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.2.0.0.text-rendering — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.2.0.0.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: choice__label.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only[disabled]: checkbox.cursor — value shape outside mintable kinds and outside the declared vocabulary",
-    "code-only[disabled]: choice__control.cursor — value shape outside mintable kinds and outside the declared vocabulary",
-    "code-only[disabled]: choice__label.cursor — value shape outside mintable kinds and outside the declared vocabulary",
-    "code-only[disabled]: icon-2.cursor — value shape outside mintable kinds and outside the declared vocabulary",
-    "code-only[disabled]: icon.cursor — value shape outside mintable kinds and outside the declared vocabulary",
-    "code-only[disabled]: label.cursor — value shape outside mintable kinds and outside the declared vocabulary",
-    "code-only[disabled]: part-0.0.2.0.0.cursor — value shape outside mintable kinds and outside the declared vocabulary"
+    "code-only: icon.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.transition-delay — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: icon.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: icon.transition-property — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: icon.transition-timing-function — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only[disabled]: icon-2.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
   ],
   "rows": [
     {
-      "key": "enabled__default",
-      "channelsCompared": 61,
-      "channelsEqual": 59,
-      "pctExact": 1.8782552083333333,
-      "pctAA": 0.8349609375,
+      "key": "unchecked.enabled__default",
+      "channelsCompared": 125,
+      "channelsEqual": 102,
+      "pctExact": 3.5725911458333335,
+      "pctAA": 1.5779622395833333,
       "mismatches": [
         {
           "part": "backdrop",
@@ -285,15 +219,141 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
         }
       ]
     },
     {
-      "key": "enabled__hover",
-      "channelsCompared": 61,
-      "channelsEqual": 53,
-      "pctExact": 2.8287760416666665,
-      "pctAA": 0.908203125,
+      "key": "unchecked.enabled__hover",
+      "channelsCompared": 125,
+      "channelsEqual": 96,
+      "pctExact": 4.469401041666667,
+      "pctAA": 1.6162109375,
       "mismatches": [
         {
           "part": "backdrop",
@@ -304,25 +364,25 @@
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(97, 97, 97, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(97, 97, 97, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(97, 97, 97, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(97, 97, 97, 1)"
         },
         {
@@ -342,15 +402,141 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
         }
       ]
     },
     {
-      "key": "enabled__focus-visible",
-      "channelsCompared": 61,
-      "channelsEqual": 57,
-      "pctExact": 3.251953125,
-      "pctAA": 1.26708984375,
+      "key": "unchecked.enabled__focus-visible",
+      "channelsCompared": 125,
+      "channelsEqual": 96,
+      "pctExact": 6.279296875,
+      "pctAA": 3.3658854166666665,
       "mismatches": [
         {
           "part": "input",
@@ -366,6 +552,30 @@
         },
         {
           "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(136, 136, 136, 1)",
+          "theirs": "rgba(138, 138, 138, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(136, 136, 136, 1)",
+          "theirs": "rgba(138, 138, 138, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(136, 136, 136, 1)",
+          "theirs": "rgba(138, 138, 138, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(136, 136, 136, 1)",
+          "theirs": "rgba(138, 138, 138, 1)"
+        },
+        {
+          "part": "backdrop",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(1, 0, 0, 1, 0, 0)"
@@ -375,15 +585,141 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
         }
       ]
     },
     {
-      "key": "enabled__active",
-      "channelsCompared": 61,
-      "channelsEqual": 53,
-      "pctExact": 2.8287760416666665,
-      "pctAA": 1.0888671875,
+      "key": "unchecked.enabled__active",
+      "channelsCompared": 125,
+      "channelsEqual": 96,
+      "pctExact": 4.469401041666667,
+      "pctAA": 1.84326171875,
       "mismatches": [
         {
           "part": "backdrop",
@@ -394,25 +730,25 @@
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(138, 138, 138, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
@@ -432,18 +768,156 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
         }
       ]
     },
     {
-      "key": "disabled__default",
-      "channelsCompared": 61,
-      "channelsEqual": 41,
-      "pctExact": 2.8165690104166665,
-      "pctAA": 0.8390299479166666,
+      "key": "unchecked.disabled__default",
+      "channelsCompared": 125,
+      "channelsEqual": 78,
+      "pctExact": 4.457194010416667,
+      "pctAA": 1.5828450520833333,
       "mismatches": [
         {
           "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
@@ -511,31 +985,31 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(250, 250, 250, 1)",
+          "ours": "rgba(255, 255, 255, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
         },
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(138, 138, 138, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(138, 138, 138, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(138, 138, 138, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(138, 138, 138, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
@@ -561,18 +1035,180 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
         }
       ]
     },
     {
-      "key": "disabled__hover",
-      "channelsCompared": 61,
-      "channelsEqual": 41,
-      "pctExact": 2.8165690104166665,
-      "pctAA": 0.8390299479166666,
+      "key": "unchecked.disabled__hover",
+      "channelsCompared": 125,
+      "channelsEqual": 78,
+      "pctExact": 4.457194010416667,
+      "pctAA": 1.5828450520833333,
       "mismatches": [
         {
           "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
@@ -640,31 +1276,31 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(250, 250, 250, 1)",
+          "ours": "rgba(255, 255, 255, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
         },
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
@@ -690,18 +1326,180 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
         }
       ]
     },
     {
-      "key": "disabled__focus-visible",
-      "channelsCompared": 61,
-      "channelsEqual": 41,
-      "pctExact": 2.8165690104166665,
-      "pctAA": 0.8390299479166666,
+      "key": "unchecked.disabled__focus-visible",
+      "channelsCompared": 125,
+      "channelsEqual": 78,
+      "pctExact": 5.980631510416667,
+      "pctAA": 3.1062825520833335,
       "mismatches": [
         {
           "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
@@ -769,31 +1567,31 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(250, 250, 250, 1)",
+          "ours": "rgba(255, 255, 255, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
         },
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(136, 136, 136, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(136, 136, 136, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(136, 136, 136, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(136, 136, 136, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
@@ -819,18 +1617,180 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
         }
       ]
     },
     {
-      "key": "disabled__active",
-      "channelsCompared": 61,
-      "channelsEqual": 41,
-      "pctExact": 2.8165690104166665,
-      "pctAA": 0.8390299479166666,
+      "key": "unchecked.disabled__active",
+      "channelsCompared": 125,
+      "channelsEqual": 78,
+      "pctExact": 4.457194010416667,
+      "pctAA": 1.5828450520833333,
       "mismatches": [
         {
           "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
@@ -898,31 +1858,31 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(250, 250, 250, 1)",
+          "ours": "rgba(255, 255, 255, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
         },
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(97, 97, 97, 1)",
+          "ours": "rgba(104, 104, 104, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
@@ -948,6 +1908,3132 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__default",
+      "channelsCompared": 125,
+      "channelsEqual": 100,
+      "pctExact": 3.6735026041666665,
+      "pctAA": 1.7659505208333333,
+      "mismatches": [
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(138, 138, 138, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__hover",
+      "channelsCompared": 125,
+      "channelsEqual": 97,
+      "pctExact": 3.6735026041666665,
+      "pctAA": 1.7659505208333333,
+      "mismatches": [
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__focus-visible",
+      "channelsCompared": 125,
+      "channelsEqual": 96,
+      "pctExact": 5.50048828125,
+      "pctAA": 3.49853515625,
+      "mismatches": [
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(135, 135, 135, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__active",
+      "channelsCompared": 125,
+      "channelsEqual": 97,
+      "pctExact": 3.6735026041666665,
+      "pctAA": 1.7659505208333333,
+      "mismatches": [
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__default",
+      "channelsCompared": 125,
+      "channelsEqual": 77,
+      "pctExact": 4.569498697916667,
+      "pctAA": 2.6814778645833335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(138, 138, 138, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__hover",
+      "channelsCompared": 125,
+      "channelsEqual": 77,
+      "pctExact": 4.569498697916667,
+      "pctAA": 2.6814778645833335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__focus-visible",
+      "channelsCompared": 125,
+      "channelsEqual": 77,
+      "pctExact": 6.092936197916667,
+      "pctAA": 4.204915364583333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(135, 135, 135, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__active",
+      "channelsCompared": 125,
+      "channelsEqual": 77,
+      "pctExact": 4.569498697916667,
+      "pctAA": 2.6814778645833335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-bottom-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "bottom",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "caret-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "column-rule-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon-4",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "left",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-x",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "overflow-y",
+          "ours": "visible",
+          "theirs": "hidden"
+        },
+        {
+          "part": "icon-4",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "icon-4",
+          "channel": "shape-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-decoration-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        },
+        {
+          "part": "icon-4",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "geometricprecision"
+        },
+        {
+          "part": "icon-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "0px"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__default",
+      "channelsCompared": 100,
+      "channelsEqual": 91,
+      "pctExact": 3.662109375,
+      "pctAA": 1.7472330729166667,
+      "mismatches": [
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(138, 138, 138, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__hover",
+      "channelsCompared": 100,
+      "channelsEqual": 88,
+      "pctExact": 3.662109375,
+      "pctAA": 1.7472330729166667,
+      "mismatches": [
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__focus-visible",
+      "channelsCompared": 100,
+      "channelsEqual": 87,
+      "pctExact": 5.59326171875,
+      "pctAA": 3.583984375,
+      "mismatches": [
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(136, 136, 136, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__active",
+      "channelsCompared": 100,
+      "channelsEqual": 88,
+      "pctExact": 3.662109375,
+      "pctAA": 1.7472330729166667,
+      "mismatches": [
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__default",
+      "channelsCompared": 100,
+      "channelsEqual": 69,
+      "pctExact": 4.569498697916667,
+      "pctAA": 2.6741536458333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(138, 138, 138, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__hover",
+      "channelsCompared": 100,
+      "channelsEqual": 69,
+      "pctExact": 4.569498697916667,
+      "pctAA": 2.6741536458333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__focus-visible",
+      "channelsCompared": 100,
+      "channelsEqual": 69,
+      "pctExact": 6.205240885416667,
+      "pctAA": 4.309895833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(136, 136, 136, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(51, 51, 51, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__active",
+      "channelsCompared": 100,
+      "channelsEqual": 69,
+      "pctExact": 4.569498697916667,
+      "pctAA": 2.6741536458333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "choice__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "background-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0.08)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-bottom-color",
+          "ours": "rgba(104, 104, 104, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-left-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-right-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "border-top-color",
+          "ours": "rgba(89, 89, 89, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "box-shadow",
+          "ours": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
+          "theirs": "none"
+        },
+        {
+          "part": "backdrop",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "backdrop",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "icon",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "absolute"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-delay",
+          "ours": "0s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-duration",
+          "ours": "0s",
+          "theirs": "0.15s, 0.15s"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-property",
+          "ours": "all",
+          "theirs": "opacity, transform"
+        },
+        {
+          "part": "icon",
+          "channel": "transition-timing-function",
+          "ours": "ease",
+          "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+        },
+        {
+          "part": "choice__label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "default"
         }
       ]
     }

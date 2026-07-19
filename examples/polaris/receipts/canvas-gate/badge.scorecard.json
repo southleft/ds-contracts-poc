@@ -1,0 +1,48 @@
+{
+  "component": "Badge",
+  "contractId": "polaris.badge",
+  "contractVersion": "0.2.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Badge",
+      "kind": "base",
+      "pctExactUnmasked": 11.64,
+      "pctAAUnmasked": 0.12,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 95.66,
+      "inkRealPct": 95.66
+    }
+  ],
+  "summary": {
+    "cells": 1,
+    "meanExactUnmasked": 11.64,
+    "meanAAUnmasked": 0.12,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
+    "worstCell": "Badge",
+    "cellsOver10Masked": [],
+    "blankCanvasCells": []
+  },
+  "acceptance": {
+    "maskedMeanLE5": true,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": true
+  }
+}
