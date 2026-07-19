@@ -42,6 +42,12 @@
       "parts": {
         "label": {
           "element": "span",
+          "tokens": {
+            "font-size": "{p.text-body-sm-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-sm-font-line-height}",
+            "letter-spacing": "{p.text-body-sm-font-letter-spacing}"
+          },
           "text": "Fulfilled"
         }
       }

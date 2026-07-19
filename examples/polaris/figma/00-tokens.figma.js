@@ -16,13 +16,28 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
 
-function hexToRgb(hex) {
-  const h = hex.replace('#', '');
-  return {
+function hexToRgb(value) {
+  // Foreign DTCG wraps carry color values VERBATIM — Polaris spells them as
+  // 'rgba(r, g, b, a)' strings, not hex (the Phase B live run failed on
+  // setValueForMode with NaN channels; the fix now lives at the source).
+  // Accepts #rgb / #rrggbb / #rrggbbaa and rgb() / rgba(); alpha preserved.
+  const v = String(value).trim();
+  const fn = v.match(/^rgba?\(([^)]+)\)$/);
+  if (fn) {
+    const parts = fn[1].split(/[\s,/]+/).filter(Boolean).map(parseFloat);
+    const c = { r: parts[0] / 255, g: parts[1] / 255, b: parts[2] / 255 };
+    if (parts.length > 3 && !Number.isNaN(parts[3])) c.a = parts[3];
+    return c;
+  }
+  let h = v.replace('#', '');
+  if (h.length === 3) h = h.split('').map((ch) => ch + ch).join('');
+  const c = {
     r: parseInt(h.slice(0, 2), 16) / 255,
     g: parseInt(h.slice(2, 4), 16) / 255,
     b: parseInt(h.slice(4, 6), 16) / 255,
   };
+  if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
+  return c;
 }
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();

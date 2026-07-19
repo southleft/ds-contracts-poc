@@ -35,6 +35,7 @@ import {
   isNativeCheckablePart,
   pascal,
   resolveLayout,
+  resolveLiterals,
   resolveTokens,
   slotFigmaProperty,
   slotVisibilityProperty,
@@ -101,6 +102,28 @@ export interface NodeSpec {
   /** PIXEL line height (dump v1.3) — the runtime sets
    *  node.lineHeight = { unit: 'PIXELS', value }. */
   lineHeight?: number;
+  /** v14 literals: literal-fidelity channels resolved from component-private
+   *  source literals (schema `literals`/`literalsByProp`) — there is no
+   *  variable to bind, so the runtime applies plain values. Colors are
+   *  compile-parsed to RGBA so the runtime stays dumb; `fillClear` renders
+   *  an explicit `transparent` as NO paint (never a default gray artifact).
+   *  Applied by a CONDITIONAL runtime block: contracts without literals emit
+   *  byte-identical scripts (the golden discipline). */
+  lits?: {
+    fillClear?: boolean;
+    fillColor?: { r: number; g: number; b: number; a?: number };
+    width?: number;
+    height?: number;
+    minWidth?: number;
+    minHeight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    itemSpacing?: number;
+    radius?: number;
+    strokeWeight?: number;
+  };
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
@@ -387,13 +410,28 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
 
-function hexToRgb(hex) {
-  const h = hex.replace('#', '');
-  return {
+function hexToRgb(value) {
+  // Foreign DTCG wraps carry color values VERBATIM — Polaris spells them as
+  // 'rgba(r, g, b, a)' strings, not hex (the Phase B live run failed on
+  // setValueForMode with NaN channels; the fix now lives at the source).
+  // Accepts #rgb / #rrggbb / #rrggbbaa and rgb() / rgba(); alpha preserved.
+  const v = String(value).trim();
+  const fn = v.match(/^rgba?\\(([^)]+)\\)$/);
+  if (fn) {
+    const parts = fn[1].split(/[\\s,/]+/).filter(Boolean).map(parseFloat);
+    const c = { r: parts[0] / 255, g: parts[1] / 255, b: parts[2] / 255 };
+    if (parts.length > 3 && !Number.isNaN(parts[3])) c.a = parts[3];
+    return c;
+  }
+  let h = v.replace('#', '');
+  if (h.length === 3) h = h.split('').map((ch) => ch + ch).join('');
+  const c = {
     r: parseInt(h.slice(0, 2), 16) / 255,
     g: parseInt(h.slice(2, 4), 16) / 255,
     b: parseInt(h.slice(4, 6), 16) / 255,
   };
+  if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
+  return c;
 }
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
@@ -588,6 +626,12 @@ function applyTokens(
     }
     const varName = figmaName(tokenPath);
     switch (cssProp) {
+      // `background` carries the same single-token binding as
+      // `background-color` (the promotion's CSS-shorthand color layer; the
+      // HTML surface renders it as `background:`) — the cross-generator gap
+      // the Phase B canvas surfaced: Avatar's HTML carried
+      // p.color-avatar-bg-fill while this emitter dropped the channel.
+      case 'background':
       case 'background-color':
         spec.fill = varName;
         break;
@@ -676,6 +720,93 @@ function applyTokens(
     }
   }
   return next;
+}
+
+/** v14 literals: parse a bounded literal dimension to px (rem/em at the
+ *  documented 1rem = 16px base — same conversion the engine tree applies). */
+function parseLitPx(value: string): number | undefined {
+  const m = value.trim().match(/^(-?\d+(?:\.\d+)?)(px|rem|em)?$/);
+  if (!m) return undefined;
+  const n = parseFloat(m[1]);
+  return m[2] === 'rem' || m[2] === 'em' ? n * 16 : n;
+}
+
+/** v14 literals: parse a hex / rgb() / rgba() literal color to RGBA floats
+ *  (compile-time — the runtime never parses color strings). */
+function parseLitColor(value: string): { r: number; g: number; b: number; a?: number } | undefined {
+  const v = value.trim();
+  const fn = v.match(/^rgba?\(([^)]+)\)$/);
+  if (fn) {
+    const parts = fn[1].split(/[\s,/]+/).filter(Boolean).map(parseFloat);
+    if (parts.length < 3 || parts.slice(0, 3).some(Number.isNaN)) return undefined;
+    const c: { r: number; g: number; b: number; a?: number } = {
+      r: parts[0] / 255, g: parts[1] / 255, b: parts[2] / 255,
+    };
+    if (parts.length > 3 && !Number.isNaN(parts[3])) c.a = parts[3];
+    return c;
+  }
+  let h = v.replace('#', '');
+  if (!/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$|^[0-9a-fA-F]{8}$/.test(h)) return undefined;
+  if (h.length === 3) h = h.split('').map((ch) => ch + ch).join('');
+  const c: { r: number; g: number; b: number; a?: number } = {
+    r: parseInt(h.slice(0, 2), 16) / 255,
+    g: parseInt(h.slice(2, 4), 16) / 255,
+    b: parseInt(h.slice(4, 6), 16) / 255,
+  };
+  if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
+  return c;
+}
+
+/** v14 literals: distribute a part's resolved literal channels into the
+ *  spec's `lits` struct (frame-kind runtime application) and the text ctx
+ *  (font-size/line-height). Channels with no canvas projection here
+ *  (`inherit`/`currentColor` paints, letter-spacing) stay CSS-side — the
+ *  same documented fidelity scope as font-family. */
+function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCtx): TextCtx {
+  const next: TextCtx = { ...ctx };
+  const li = () => (spec.lits ??= {});
+  for (const [cssProp, value] of Object.entries(lits)) {
+    switch (cssProp) {
+      case 'background':
+      case 'background-color': {
+        if (value === 'transparent') { li().fillClear = true; break; }
+        const c = parseLitColor(value);
+        if (c) li().fillColor = c;
+        break;
+      }
+      case 'width': { const n = parseLitPx(value); if (n !== undefined) li().width = n; break; }
+      case 'height': { const n = parseLitPx(value); if (n !== undefined) li().height = n; break; }
+      case 'min-width': { const n = parseLitPx(value); if (n !== undefined) li().minWidth = n; break; }
+      case 'min-height': { const n = parseLitPx(value); if (n !== undefined) li().minHeight = n; break; }
+      case 'padding-block': { const n = parseLitPx(value); if (n !== undefined) { li().paddingTop = n; li().paddingBottom = n; } break; }
+      case 'padding-inline': { const n = parseLitPx(value); if (n !== undefined) { li().paddingLeft = n; li().paddingRight = n; } break; }
+      case 'gap': { const n = parseLitPx(value); if (n !== undefined) li().itemSpacing = n; break; }
+      case 'border-radius': { const n = parseLitPx(value); if (n !== undefined) li().radius = n; break; }
+      case 'border-width': { const n = parseLitPx(value); if (n !== undefined) li().strokeWeight = n; break; }
+      case 'font-size': {
+        const n = parseLitPx(value);
+        if (n !== undefined) { next.fontSize = n; next.fontSizePath = undefined; }
+        break;
+      }
+      case 'line-height': { const n = parseLitPx(value); if (n !== undefined) next.lineHeight = n; break; }
+      default:
+        break;
+    }
+  }
+  if (spec.lits && Object.keys(spec.lits).length === 0) delete spec.lits;
+  return next;
+}
+
+/** Token bindings + literal channels for one part under one combo — the ONE
+ *  styling entry point every part kind compiles through. */
+function applyStyling(
+  spec: NodeSpec,
+  part: Part,
+  subst: Record<string, string>,
+  ctx: TextCtx,
+): TextCtx {
+  const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+  return applyLiterals(spec, resolveLiterals(part, subst), t);
 }
 
 /** State-preview overrides pass through applyTokens with one honest
@@ -780,7 +911,7 @@ function formControlSpec(
     layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'CENTER' },
     grow: part.layout?.grow || undefined,
   };
-  const childCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+  const childCtx = applyStyling(spec, part, subst, ctx);
   const ref = (part.attrs?.placeholder ?? '').match(PLACEHOLDER_ATTR_REF);
   const prop = ref
     ? contract.props.find((p) => p.type === 'text' && p.name === ref[1])
@@ -1020,7 +1151,7 @@ function partToSpecInner(
   // fill from tokens, placement/rotation from the compiled stylesWhen.
   if (part.shape) {
     const spec: NodeSpec = { type: 'shape', name, shape: { ...part.shape } };
-    applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+    applyStyling(spec, part, subst, ctx);
     const placement = shapePlacement(part, contract, subst);
     if (placement.absolute) spec.absolute = placement.absolute;
     if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
@@ -1063,13 +1194,13 @@ function partToSpecInner(
         return { dep: dep.name, props: mapDepProps(dep, item.props ?? {}, subst, item.text) };
       });
     }
-    applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+    applyStyling(spec, part, subst, ctx);
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
   if (part.text !== undefined) {
     const spec: NodeSpec = { type: 'text', name };
-    const textCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+    const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = part.text;
     spec.fontSize = textCtx.fontSize ?? 14;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
@@ -1086,7 +1217,7 @@ function partToSpecInner(
     };
     const fraction = Math.min(1, Math.max(0, num(part.meter.valueProp, 0) / (num(part.meter.maxProp, 100) || 100)));
     const spec: NodeSpec = { type: 'frame', name, layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' }, pct: fraction, children: [] };
-    applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+    applyStyling(spec, part, subst, ctx);
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -1095,7 +1226,7 @@ function partToSpecInner(
       (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
     )!;
     const spec: NodeSpec = { type: 'text', name };
-    const textCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+    const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = typeof prop.default === 'string' ? prop.default : contract.name;
     spec.fontSize = textCtx.fontSize ?? 16;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
@@ -1112,7 +1243,7 @@ function partToSpecInner(
     layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
-  const childCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+  const childCtx = applyStyling(spec, part, subst, ctx);
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
@@ -1234,7 +1365,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     // — per-size padding-inline/height on the owner's Button) resolve per
     // combo exactly like every child part's. Byte-neutral for contracts
     // without tokensByProp (resolveTokens returns the base map unchanged).
-    const ctx = applyTokens(rootSpec, resolveTokens(root, subst), subst, {});
+    const ctx = applyStyling(rootSpec, root, subst, {});
     applyStylesWhenOpacity(rootSpec, root, contract, subst);
     if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
@@ -1305,7 +1436,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         };
         // Same resolveTokens rule as the base loop: per-combo tokensByProp
         // overrides apply BEFORE the state overrides layer on top.
-        const baseCtx = applyTokens(rootSpec, resolveTokens(root, subst), subst, {});
+        const baseCtx = applyStyling(rootSpec, root, subst, {});
         const ctx = applyTokens(
           rootSpec,
           translateStateOverrides(overrides[stateName] ?? {}),
@@ -1485,7 +1616,19 @@ const shapeRuntime = (has: boolean): string =>
       : figma.createPolygon();
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
     node.resize(spec.shape.width, spec.shape.height);
-    if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    node.fills = spec.fill ? [boundPaint(spec.fill, node)] : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
     if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
   }`
     : '';
@@ -1560,6 +1703,40 @@ const absoluteCall = (has: boolean, args: string): string =>
   has ? `
     applyShapeAbsolute(${args});` : '';
 
+/** v14 literals: literal-fidelity channel application (applyFrameSpec tail).
+ *  Emitted ONLY when a compiled spec carries lits — contracts without
+ *  literals emit byte-identical scripts (the golden discipline, same as
+ *  shapeRuntime/opacityRuntime). */
+const litsRuntime = (has: boolean): string =>
+  has
+    ? `
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    if (li.fillClear) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }`
+    : '';
+
 function buildComponentScript(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -1583,6 +1760,7 @@ function buildComponentScript(
   const hasShadow = dataSome(data, (x) => x.dropShadow !== undefined);
   const hasLineHeight = dataSome(data, (x) => x.lineHeight !== undefined);
   const hasAbsolute = dataSome(data, (x) => x.absolute !== undefined);
+  const hasLits = dataSome(data, (x) => x.lits !== undefined);
 
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -1778,7 +1956,7 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }
+  }${litsRuntime(hasLits)}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -2026,6 +2204,7 @@ function buildBatchScript(datas: ComponentData[], fileKey: string | null): strin
   const hasShadow = datas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
   const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
   const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
+  const hasLits = datas.some((d) => dataSome(d, (x) => x.lits !== undefined));
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Batch sync: ${datas.map((d) => d.setName).join(', ')} (existing components skip).
 const COMPONENTS = ${JSON.stringify(datas)};
@@ -2183,7 +2362,7 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }
+  }${litsRuntime(hasLits)}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —

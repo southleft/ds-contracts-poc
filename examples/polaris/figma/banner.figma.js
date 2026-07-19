@@ -26,18 +26,20 @@ const VARIANTS = [
           "type": "text",
           "name": "title",
           "characters": "Banner",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontStyle": "Medium",
           "textFill": "p/color-text-info-on-bg-fill",
+          "lineHeight": 20,
           "contentProp": "Title"
         },
         {
           "type": "text",
           "name": "body",
           "characters": "Your order has shipped.",
-          "fontSize": 14,
+          "fontSize": 13,
           "fontStyle": "Medium",
-          "textFill": "p/color-text-info-on-bg-fill"
+          "textFill": "p/color-text-info-on-bg-fill",
+          "lineHeight": 20
         }
       ]
     }
@@ -60,18 +62,20 @@ const VARIANTS = [
           "type": "text",
           "name": "title",
           "characters": "Banner",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontStyle": "Medium",
           "textFill": "p/color-text-success-on-bg-fill",
+          "lineHeight": 20,
           "contentProp": "Title"
         },
         {
           "type": "text",
           "name": "body",
           "characters": "Your order has shipped.",
-          "fontSize": 14,
+          "fontSize": 13,
           "fontStyle": "Medium",
-          "textFill": "p/color-text-success-on-bg-fill"
+          "textFill": "p/color-text-success-on-bg-fill",
+          "lineHeight": 20
         }
       ]
     }
@@ -94,18 +98,20 @@ const VARIANTS = [
           "type": "text",
           "name": "title",
           "characters": "Banner",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontStyle": "Medium",
           "textFill": "p/color-text-warning-on-bg-fill",
+          "lineHeight": 20,
           "contentProp": "Title"
         },
         {
           "type": "text",
           "name": "body",
           "characters": "Your order has shipped.",
-          "fontSize": 14,
+          "fontSize": 13,
           "fontStyle": "Medium",
-          "textFill": "p/color-text-warning-on-bg-fill"
+          "textFill": "p/color-text-warning-on-bg-fill",
+          "lineHeight": 20
         }
       ]
     }
@@ -128,18 +134,20 @@ const VARIANTS = [
           "type": "text",
           "name": "title",
           "characters": "Banner",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontStyle": "Medium",
           "textFill": "p/color-text-critical-on-bg-fill",
+          "lineHeight": 20,
           "contentProp": "Title"
         },
         {
           "type": "text",
           "name": "body",
           "characters": "Your order has shipped.",
-          "fontSize": 14,
+          "fontSize": 13,
           "fontStyle": "Medium",
-          "textFill": "p/color-text-critical-on-bg-fill"
+          "textFill": "p/color-text-critical-on-bg-fill",
+          "lineHeight": 20
         }
       ]
     }
@@ -361,6 +369,7 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

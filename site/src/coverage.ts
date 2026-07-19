@@ -183,8 +183,17 @@ reg('layout', 'layout-by-prop', [
 reg('tokens', 'tokens', ['part.tokens']);
 reg('tokens', 'tokens-by-prop', [
   'part.tokensByProp',
+  // v14: single-entry and ordered-array spellings of the field.
+  'part.tokensByProp.prop',
+  'part.tokensByProp.array',
   'tokensByProp.prop',
   'tokensByProp.map',
+]);
+reg('tokens', 'literals', [
+  'part.literals',
+  'part.literalsByProp',
+  'literalsByProp.prop',
+  'literalsByProp.map',
 ]);
 
 // --- States ----------------------------------------------------------------

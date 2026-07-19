@@ -9,8 +9,29 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  background: var(--p-color-avatar-bg-fill);
-  color: var(--p-color-avatar-text-on-bg-fill);
+  background: var(--p-color-avatar-one-bg-fill);
+  color: var(--p-color-avatar-one-text-on-bg-fill);
+  min-width: 20px;
+}
+
+.avatar--size-xs {
+  width: 20px;
+}
+
+.avatar--size-sm {
+  width: 24px;
+}
+
+.avatar--size-md {
+  width: 28px;
+}
+
+.avatar--size-lg {
+  width: 32px;
+}
+
+.avatar--size-xl {
+  width: 40px;
 }
 
 .avatar__initials {

@@ -32,9 +32,10 @@ const VARIANTS = [
           "type": "text",
           "name": "label",
           "characters": "Wholesale",
-          "fontSize": 14,
+          "fontSize": 12,
           "fontStyle": "Medium",
-          "textFill": "p/color-text"
+          "textFill": "p/color-text",
+          "lineHeight": 16
         }
       ]
     }
@@ -256,6 +257,7 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

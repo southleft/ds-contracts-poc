@@ -27,6 +27,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 16
+      },
       "children": [
         {
           "type": "frame",
@@ -61,6 +64,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 16
+      },
       "children": [
         {
           "type": "frame",
@@ -95,6 +101,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 16
+      },
       "children": [
         {
           "type": "frame",
@@ -129,6 +138,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 16
+      },
       "children": [
         {
           "type": "frame",
@@ -163,6 +175,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 8
+      },
       "children": [
         {
           "type": "frame",
@@ -197,6 +212,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 8
+      },
       "children": [
         {
           "type": "frame",
@@ -231,6 +249,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 8
+      },
       "children": [
         {
           "type": "frame",
@@ -265,6 +286,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 8
+      },
       "children": [
         {
           "type": "frame",
@@ -299,6 +323,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 32
+      },
       "children": [
         {
           "type": "frame",
@@ -333,6 +360,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 32
+      },
       "children": [
         {
           "type": "frame",
@@ -367,6 +397,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 32
+      },
       "children": [
         {
           "type": "frame",
@@ -401,6 +434,9 @@ const VARIANTS = [
         "bottomRightRadius": "p/border-radius-100"
       },
       "fill": "p/color-bg-fill-tertiary",
+      "lits": {
+        "height": 32
+      },
       "children": [
         {
           "type": "frame",
@@ -600,6 +636,31 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    if (li.fillClear) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }

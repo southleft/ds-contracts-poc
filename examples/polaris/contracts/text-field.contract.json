@@ -614,14 +614,24 @@
             "font-weight": "{p.font-weight-regular}",
             "line-height": "{p.font-line-height-600}"
           },
-          "tokensByProp": {
-            "prop": "variant",
-            "map": {
-              "borderless": {
-                "min-height": "{p.space-800}"
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "min-height": "{p.space-800}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "slim": {
+                  "padding-block": "{p.space-050}"
+                }
               }
             }
-          },
+          ],
           "states": {
             "disabled": {
               "color": "{p.color-text-disabled}"
@@ -641,14 +651,24 @@
             "border-width": "{p.border-width-0165}",
             "border-color": "{p.color-input-border}"
           },
-          "tokensByProp": {
-            "prop": "variant",
-            "map": {
-              "borderless": {
-                "min-height": "{p.space-800}"
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "min-height": "{p.space-800}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "slim": {
+                  "padding-block": "{p.space-050}"
+                }
               }
             }
-          }
+          ]
         }
       }
     }

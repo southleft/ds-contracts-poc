@@ -10,8 +10,22 @@
   border: 0;
   background: var(--p-color-bg-surface);
   border-radius: var(--p-border-radius-200);
+  min-width: 24px;
 }
 
 .size-extraSmall {
   border-radius: var(--p-border-radius-150);
+  width: 24px;
+}
+
+.size-small {
+  width: 40px;
+}
+
+.size-medium {
+  width: 60px;
+}
+
+.size-large {
+  width: 80px;
 }

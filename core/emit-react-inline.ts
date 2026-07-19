@@ -30,6 +30,7 @@ import {
   resolveLayout,
   shapeCssDecls,
   slotsOf,
+  tokensByPropEntries,
   walkAnatomy,
   type Contract,
   type Part,
@@ -255,13 +256,29 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     // v10 tokensByProp: per-enum-value token overrides merged over the base
     // (resolved to literals like every other token here).
-    if (part.tokensByProp) {
-      for (const [value, overrides] of Object.entries(part.tokensByProp.map)) {
+    // v14: multiple entries in order — later entries' variant styles are
+    // added later and win per channel (Object.assign merge order downstream).
+    for (const entry of tokensByPropEntries(part)) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
         const decls: StyleRecord = {};
         for (const [cssProp, ref] of Object.entries(overrides)) {
           decls[camel(cssProp)] = resolveValue(stripBraces(ref));
         }
-        addVariant(part.tokensByProp.prop, value, partName, decls);
+        addVariant(entry.prop, value, partName, decls);
+      }
+    }
+    // v14 literals: base literal channels + per-value overrides — already
+    // literal values, no token resolution.
+    for (const [cssProp, lit] of Object.entries(part.literals ?? {})) {
+      s[camel(cssProp)] = lit;
+    }
+    for (const entry of part.literalsByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        const decls: StyleRecord = {};
+        for (const [cssProp, lit] of Object.entries(overrides)) {
+          decls[camel(cssProp)] = lit;
+        }
+        addVariant(entry.prop, value, partName, decls);
       }
     }
     // layoutByProp: per-enum-value layout overrides merged over the base.

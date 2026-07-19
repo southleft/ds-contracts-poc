@@ -23,7 +23,11 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { ContractSchema, type Contract } from '../../../scripts/contract-schema.js';
+import {
+  ContractSchema,
+  LITERAL_CHANNELS,
+  type Contract,
+} from '../../../scripts/contract-schema.js';
 import { emitHtml, emitReact } from '../../../core/index.js';
 import { tokenInventoryFromJson } from '../../../core/tokens.js';
 import {
@@ -32,11 +36,17 @@ import {
   parseModuleCss,
   resolveToRef,
   splitPaddingShorthand,
+  varDefinitionContexts,
   type FlatRule,
   type StateName,
   type TokenLookup,
 } from './lib-css.js';
-import { CURATION, type ComponentCuration, type PartCuration } from './curation.js';
+import {
+  CURATION,
+  type ComponentCuration,
+  type CompositionTypographyCuration,
+  type PartCuration,
+} from './curation.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
 const EXAMPLE = path.dirname(HERE);
@@ -112,13 +122,33 @@ function* walkCuration(parts: PartCuration[] | undefined): Generator<PartCuratio
   }
 }
 
+/** Literal values the promotion CARRIES when a var() chain resolves to one:
+ *  px/rem/em/unitless numbers, hex and rgb()/rgba() colors, and
+ *  `transparent`. Inheritance keywords (inherit/currentColor) resolve
+ *  deterministically too but carry no standalone fact — refused by name. */
+const CARRIABLE_LITERAL = /^(-?\d+(\.\d+)?(px|rem|em)?|transparent|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
+
 interface ResolvedChannels {
   tokens: Record<string, string>;
+  /** COVERAGE ROUND: channel → literal value chain-resolved from the same
+   *  package's CSS (schema v14 `literals`), each with provenance in lines. */
+  literals: Record<string, string>;
   layout: Record<string, unknown>;
   /** channel → the would-be ledger line; the CALLER pushes lines only for
    *  bindings actually attached to the contract (a "carried" line must mean
-   *  exactly that). */
+   *  exactly that). Literal lines are keyed `lit:${channel}`. */
   lines: Record<string, string>;
+}
+
+/** Line number of a custom-property definition in the raw CSS (provenance
+ *  for carried literals); undefined when not uniquely locatable. */
+function defLineOf(raw: string, varName: string): number | undefined {
+  const lines = raw.split('\n');
+  const hits: number[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes(`--${varName}:`)) hits.push(i + 1);
+  }
+  return hits.length === 1 ? hits[0] : undefined;
 }
 
 /** Resolve the whitelisted channels for one (context, target) query. */
@@ -130,13 +160,34 @@ function resolveChannels(
   ledger: Ledger,
   where: string,
   usedOrders?: Set<number>,
+  cssFile?: string,
+  rawCss?: string,
 ): ResolvedChannels {
   const defs = customPropDefs(rules, rootClasses);
   const { winners, refusals } = effectiveDecls(rules, { rootClasses, partSelector, state }, usedOrders);
   for (const r of refusals) ledger.refused.push(`${where}: ${r}`);
   const tokens: Record<string, string> = {};
+  const literals: Record<string, string> = {};
   const layout: Record<string, unknown> = {};
   const lines: Record<string, string> = {};
+
+  // NARROWED refusal for an unresolvable var: name WHERE the file defines it
+  // (@media-only → media-dependent; other class contexts → axis-scoped;
+  // nowhere → runtime-set) instead of the generic no-definition message.
+  const narrowUnresolvable = (reason: string): string => {
+    const m = reason.match(/^var\(--([A-Za-z0-9_-]+)\) resolves to NO token and has no reachable definition in this class context$/);
+    if (!m) return reason;
+    const varName = m[1];
+    const ctxs = varDefinitionContexts(rules, varName);
+    const file = cssFile ?? 'this file';
+    if (ctxs.selectors.length === 0 && ctxs.media.length === 0) {
+      return `var(--${varName}) is RUNTIME-SET — no definition anywhere in ${file} (Polaris supplies it at runtime: inline style, global stylesheet, or wrapper component); refused by name`;
+    }
+    if (ctxs.selectors.length === 0) {
+      return `var(--${varName}) is MEDIA-DEPENDENT — defined only under \`${ctxs.media.join('`, `')}\` in ${file}; breakpoint-conditional styling is not a contract channel`;
+    }
+    return `var(--${varName}) is defined only in other class contexts (\`${ctxs.selectors.join('`, `')}\`) in ${file} — carried where those contexts are promoted axes, refused in this one`;
+  };
 
   const tryCarry = (channel: string, value: string, selector: string) => {
     const res = resolveToRef(value, defs, lookup);
@@ -144,6 +195,28 @@ function resolveChannels(
       tokens[channel] = res.ref;
       lines[channel] =
         `${where}: ${channel} → \`${res.ref}\` (from \`${selector} { ${channel === value ? value : `${channel}: ${value}`} }\`${res.via.length > 0 ? ` via ${res.via.join(' → ')}` : ''})`;
+      return;
+    }
+    // COVERAGE ROUND: a var() chain landing on a same-package literal
+    // definition carries as a LITERAL (schema v14) with full provenance —
+    // chain, defining selector, file and (when unique) line.
+    if (res.kind === 'literal') {
+      if (LITERAL_CHANNELS.has(channel) && CARRIABLE_LITERAL.test(res.value)) {
+        const lastVar = [...res.via].reverse().find((x) => x.startsWith('--'))?.replace(/ .*$/, '');
+        const line = rawCss && lastVar ? defLineOf(rawCss, lastVar.slice(2)) : undefined;
+        literals[channel] = res.value;
+        lines[`lit:${channel}`] =
+          `${where}: ${channel} → literal \`${res.value}\` (resolved through ${res.via.join(' → ')}; defined by \`${res.defSelector}\`${cssFile ? ` in ${cssFile}${line ? `:${line}` : ''}` : ''})`;
+        return;
+      }
+      const why = /^(inherit|currentColor)$/.test(res.value)
+        ? `inheritance keyword \`${res.value}\` carries no standalone fact`
+        : !LITERAL_CHANNELS.has(channel)
+          ? `channel "${channel}" is outside the bounded literal-channel set`
+          : `literal \`${res.value}\` is outside the bounded literal grammar`;
+      ledger.refused.push(
+        `${where}: ${channel} — chain-resolved literal \`${res.value}\` (via ${res.via.join(' → ')}) NOT carried: ${why} (\`${selector}\`)`,
+      );
       return;
     }
     // CSS's own shorthand semantics for a multi-layer background: the LAST
@@ -165,7 +238,8 @@ function resolveChannels(
         return;
       }
     }
-    const reason = res.kind === 'refused' ? res.reason : `multi-layer value "${value}" is not a single binding`;
+    const reason =
+      res.kind === 'refused' ? narrowUnresolvable(res.reason) : `multi-layer value "${value}" is not a single binding`;
     ledger.refused.push(`${where}: ${channel} — ${reason} (\`${selector}\`)`);
   };
 
@@ -211,7 +285,115 @@ function resolveChannels(
     const dir = winners.get('flex-direction')?.value;
     if (dir === 'row' || dir === 'column') layout.direction = dir;
   }
-  return { tokens, layout, lines };
+  return { tokens, literals, layout, lines };
+}
+
+/** Typography channels the composition carry is bounded to (workstream 2). */
+const TYPO_CHANNELS = new Set(['font-size', 'font-weight', 'line-height', 'letter-spacing', 'font-family']);
+
+/** Parsed CSS of composition-typography CHILD components, by curation name. */
+const childCssCache = new Map<string, { cur: ComponentCuration; rules: FlatRule[]; raw: string }>();
+function childCss(name: string): { cur: ComponentCuration; rules: FlatRule[]; raw: string } {
+  let c = childCssCache.get(name);
+  if (!c) {
+    const childCur = CURATION.find((x) => x.name === name);
+    if (!childCur) throw new Error(`composition typography: no curation named "${name}"`);
+    const raw = readFileSync(path.join(COMPONENTS_ROOT, childCur.cssFile), 'utf8');
+    c = { cur: childCur, rules: parseModuleCss(raw), raw };
+    childCssCache.set(name, c);
+  }
+  return c;
+}
+
+type TbpEntry = { prop: string; map: Record<string, Record<string, string>> };
+
+/** COVERAGE ROUND: resolve one axis's per-value overrides against a base —
+ *  tokens AND literals — with mixed-kind channels (token for one value,
+ *  literal for another on the SAME axis) refused wholesale by name. Carried
+ *  lines are pushed only for surviving channels. */
+function promoteAxis(
+  rules: FlatRule[],
+  cur: ComponentCuration,
+  axis: { prop: string; classOf: Record<string, string> },
+  target: string | undefined,
+  base: ResolvedChannels,
+  ledger: Ledger,
+  partLabel: string,
+  usedOrders: Set<number>,
+  rawCss: string,
+): { tokenMap: Record<string, Record<string, string>>; literalMap: Record<string, Record<string, string>> } {
+  interface Override { value: string; ch: string; kind: 'token' | 'literal'; val: string; line: string }
+  const overrides: Override[] = [];
+  for (const [value, cls] of Object.entries(axis.classOf)) {
+    const ctx = new Set([cur.rootClass, cls]);
+    const where = `${partLabel} [${axis.prop}=${value}]`;
+    const scoped = resolveChannels(rules, ctx, target, undefined, ledger, where, usedOrders, cur.cssFile, rawCss);
+    for (const [ch, ref] of Object.entries(scoped.tokens)) {
+      if (base.tokens[ch] !== ref) overrides.push({ value, ch, kind: 'token', val: ref, line: scoped.lines[ch] });
+    }
+    for (const [ch, lit] of Object.entries(scoped.literals)) {
+      if (base.literals[ch] !== lit) overrides.push({ value, ch, kind: 'literal', val: lit, line: scoped.lines[`lit:${ch}`] });
+    }
+  }
+  // Mixed-kind channels across one axis's values — refused wholesale.
+  const kindsByCh = new Map<string, Set<string>>();
+  for (const o of overrides) (kindsByCh.get(o.ch) ?? kindsByCh.set(o.ch, new Set()).get(o.ch)!).add(o.kind);
+  const mixed = new Set([...kindsByCh.entries()].filter(([, ks]) => ks.size > 1).map(([ch]) => ch));
+  for (const ch of mixed) {
+    const spelled = overrides
+      .filter((o) => o.ch === ch)
+      .map((o) => `${o.value}: ${o.kind} \`${o.val}\``)
+      .join(' · ');
+    ledger.refused.push(
+      `${partLabel}: axis ${axis.prop} resolves channel "${ch}" to a TOKEN for some values and a LITERAL for others (${spelled}) — a mixed-kind axis channel is ambiguous; refused by name`,
+    );
+  }
+  const tokenMap: Record<string, Record<string, string>> = {};
+  const literalMap: Record<string, Record<string, string>> = {};
+  for (const o of overrides) {
+    if (mixed.has(o.ch)) continue;
+    const bucket = o.kind === 'token' ? tokenMap : literalMap;
+    (bucket[o.value] ??= {})[o.ch] = o.val;
+    ledger.carried.push(o.line);
+  }
+  return { tokenMap, literalMap };
+}
+
+/** Order axes by the SOURCE ORDER of their first class rule in the module
+ *  css — Polaris's own cascade ("font-weight must be below variant styles so
+ *  it can override" — Text.module.css) becomes the entries' documented
+ *  later-wins order. Ties keep curation order. */
+function orderAxes<T extends { classOf: Record<string, string> }>(axes: T[], rules: FlatRule[]): T[] {
+  const orderOf = (axis: T): number => {
+    let min = Number.MAX_SAFE_INTEGER;
+    for (const cls of Object.values(axis.classOf)) {
+      const re = new RegExp(`\\.${cls}(?![A-Za-z0-9_-])`);
+      for (const rule of rules) {
+        if (rule.atRules.length === 0 && re.test(rule.selector)) {
+          min = Math.min(min, rule.order);
+          break;
+        }
+      }
+    }
+    return min;
+  };
+  return [...axes]
+    .map((a, i) => ({ a, i, o: orderOf(a) }))
+    .sort((x, y) => x.o - y.o || x.i - y.i)
+    .map((x) => x.a);
+}
+
+/** Attach tokensByProp/literalsByProp entries to a built part/root object —
+ *  single-object spelling when exactly one token entry (byte-friendly for
+ *  unaffected contracts), ordered array beyond that. */
+function attachEntries(
+  target: Record<string, unknown>,
+  tokenEntries: TbpEntry[],
+  literalEntries: TbpEntry[],
+): void {
+  if (tokenEntries.length === 1) target.tokensByProp = tokenEntries[0];
+  else if (tokenEntries.length > 1) target.tokensByProp = tokenEntries;
+  if (literalEntries.length > 0) target.literalsByProp = literalEntries;
 }
 
 function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: string[]; counts: { carried: number; refused: number; curated: number } } {
@@ -265,6 +447,7 @@ function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: str
   });
 
   const rootCtx = new Set([cur.rootClass]);
+  const orderedAxes = orderAxes(axes, rules);
 
   const buildPart = (pc: PartCuration): Record<string, unknown> => {
     const part: Record<string, unknown> = {};
@@ -281,52 +464,32 @@ function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: str
       ledger.curated.push(`part ${pc.name}: literal geometry carried as shape (${pc.shape.width}×${pc.shape.height}) — ${pc.shapeCite ?? 'CITATION MISSING'}`);
     }
     const target = pc.cssClass ?? pc.nestedSelector;
+    const tokenEntries: TbpEntry[] = [];
+    const literalEntries: TbpEntry[] = [];
     if (target) {
       const where = `part ${pc.name} (${target})`;
-      const base = resolveChannels(rules, rootCtx, target, undefined, ledger, where, usedOrders);
+      const base = resolveChannels(rules, rootCtx, target, undefined, ledger, where, usedOrders, cur.cssFile, rawCss);
       if (Object.keys(base.tokens).length > 0) {
         part.tokens = base.tokens;
         for (const ch of Object.keys(base.tokens)) ledger.carried.push(base.lines[ch]);
       }
-      if (Object.keys(base.layout).length > 0) part.layout = base.layout;
-      // Per-axis overrides (ONE tokensByProp per part — first axis with any
-      // difference wins; further axes with differences are named).
-      let tbp: { prop: string; map: Record<string, Record<string, string>> } | null = null;
-      for (const axis of axes) {
-        const map: Record<string, Record<string, string>> = {};
-        const axisLines = new Map<string, string[]>();
-        for (const [value, cls] of Object.entries(axis.classOf)) {
-          const ctx = new Set([cur.rootClass, cls]);
-          const scoped = resolveChannels(rules, ctx, target, undefined, ledger, `part ${pc.name} [${axis.prop}=${value}]`, usedOrders);
-          const overrides: Record<string, string> = {};
-          const overrideLines: string[] = [];
-          for (const [ch, ref] of Object.entries(scoped.tokens)) {
-            if (base.tokens[ch] !== ref) {
-              overrides[ch] = ref;
-              overrideLines.push(scoped.lines[ch]);
-            }
-          }
-          if (Object.keys(overrides).length > 0) map[value] = overrides;
-          axisLines.set(value, overrideLines);
-        }
-        if (Object.keys(map).length === 0) continue;
-        if (tbp) {
-          const lost = Object.entries(map)
-            .map(([v, o]) => `${v}: ${Object.entries(o).map(([ch, ref]) => `${ch} → ${ref}`).join(', ')}`)
-            .join(' · ');
-          ledger.refused.push(
-            `part ${pc.name}: axis ${axis.prop} also resolves per-value bindings (${lost}) but the schema carries ONE tokensByProp per part (axis "${tbp.prop}" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces`,
-          );
-          continue;
-        }
-        tbp = { prop: axis.prop, map };
-        for (const ls of axisLines.values()) for (const l of ls) ledger.carried.push(l);
+      if (Object.keys(base.literals).length > 0) {
+        part.literals = base.literals;
+        for (const ch of Object.keys(base.literals)) ledger.carried.push(base.lines[`lit:${ch}`]);
       }
-      if (tbp) part.tokensByProp = tbp;
+      if (Object.keys(base.layout).length > 0) part.layout = base.layout;
+      // Per-axis overrides — EVERY axis with differences carries (schema v14
+      // lifted the one-tokensByProp limit); entries in CSS source order so
+      // the later-wins array semantics mirror the cascade they came from.
+      for (const axis of orderedAxes) {
+        const { tokenMap, literalMap } = promoteAxis(rules, cur, axis, target, base, ledger, `part ${pc.name}`, usedOrders, rawCss);
+        if (Object.keys(tokenMap).length > 0) tokenEntries.push({ prop: axis.prop, map: tokenMap });
+        if (Object.keys(literalMap).length > 0) literalEntries.push({ prop: axis.prop, map: literalMap });
+      }
       // Part-level states: color-kind channels only.
       const states: Record<string, Record<string, string>> = {};
       for (const st of STATES) {
-        const scoped = resolveChannels(rules, rootCtx, target, st, ledger, `part ${pc.name} :${st}`, usedOrders);
+        const scoped = resolveChannels(rules, rootCtx, target, st, ledger, `part ${pc.name} :${st}`, usedOrders, cur.cssFile, rawCss);
         const overrides: Record<string, string> = {};
         for (const [ch, ref] of Object.entries(scoped.tokens)) {
           if (base.tokens[ch] === ref) continue;
@@ -344,58 +507,154 @@ function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: str
       }
       if (Object.keys(states).length > 0) part.states = states;
     }
+    // COVERAGE ROUND workstream 2: composition-owned typography, resolved
+    // mechanically from the CHILD component's own module.css.
+    if (pc.typographyFrom) {
+      const comp = applyCompositionTypography(pc, part);
+      tokenEntries.push(...comp.tokenEntries);
+      literalEntries.push(...comp.literalEntries);
+    }
+    attachEntries(part, tokenEntries, literalEntries);
     if (pc.parts && pc.parts.length > 0) {
       part.parts = Object.fromEntries(pc.parts.map((child) => [child.name, buildPart(child)]));
     }
     return part;
   };
 
+  // COVERAGE ROUND workstream 2: resolve a child-typography query — child
+  // root class + one class per (childProp, value) — against the CHILD's own
+  // module.css, bounded to typography channels. The child's own refusals are
+  // already named under the child's promotion section; this query's scratch
+  // ledger is discarded (named in the curated note below).
+  const resolveChildTypo = (
+    tf: CompositionTypographyCuration,
+    childProps: Record<string, string>,
+    where: string,
+  ): ResolvedChannels => {
+    const child = childCss(tf.child);
+    const ctx = new Set([child.cur.rootClass]);
+    for (const [prop, value] of Object.entries(childProps)) {
+      const axis = child.cur.axes.find((a) => a.prop === prop);
+      if (!axis) throw new Error(`${cur.name}: composition typography — child "${tf.child}" has no curated axis "${prop}"`);
+      const cls = axis.classOf[value];
+      if (!cls) throw new Error(`${cur.name}: composition typography — child axis "${prop}" has no class for value "${value}"`);
+      ctx.add(cls);
+    }
+    const scratch: Ledger = { carried: [], refused: [], curated: [] };
+    const res = resolveChannels(child.rules, ctx, undefined, undefined, scratch, where, undefined, child.cur.cssFile, child.raw);
+    const out: ResolvedChannels = { tokens: {}, literals: {}, layout: {}, lines: {} };
+    for (const [ch, ref] of Object.entries(res.tokens)) {
+      if (!TYPO_CHANNELS.has(ch)) continue;
+      out.tokens[ch] = ref;
+      out.lines[ch] = res.lines[ch];
+    }
+    for (const [ch, lit] of Object.entries(res.literals)) {
+      if (!TYPO_CHANNELS.has(ch)) continue;
+      out.literals[ch] = lit;
+      out.lines[`lit:${ch}`] = res.lines[`lit:${ch}`];
+    }
+    return out;
+  };
+
+  const spellProps = (p: Record<string, string>) =>
+    Object.entries(p).map(([k, v]) => `${k}=${v}`).join(' ');
+
+  const applyCompositionTypography = (
+    pc: PartCuration,
+    part: Record<string, unknown>,
+  ): { tokenEntries: TbpEntry[]; literalEntries: TbpEntry[] } => {
+    const tf = pc.typographyFrom!;
+    ledger.curated.push(
+      `part ${pc.name}: composition-owned typography promoted THROUGH ${tf.child} (bounded to ${[...TYPO_CHANNELS].join('/')}) — ${tf.cite}. ` +
+        `Every carried channel below resolved mechanically from ${childCss(tf.child).cur.cssFile} under ${tf.child}'s own reviewed class map; ` +
+        `${tf.child}'s own refusals stay named under its promotion section`,
+    );
+    for (const r of tf.refusals ?? []) ledger.refused.push(`part ${pc.name} [composition]: ${r}`);
+    const base = resolveChildTypo(tf, tf.base, `part ${pc.name} [composition ${tf.child} ${spellProps(tf.base)}]`);
+    if (Object.keys(base.tokens).length > 0) {
+      for (const [ch, ref] of Object.entries(base.tokens)) {
+        const existing = (part.tokens as Record<string, string> | undefined)?.[ch];
+        if (existing && existing !== ref) {
+          throw new Error(`${cur.name}: part ${pc.name} composition typography channel "${ch}" collides with a CSS-derived binding`);
+        }
+        part.tokens = { ...(part.tokens as Record<string, string> | undefined), [ch]: ref };
+        ledger.carried.push(base.lines[ch]);
+      }
+    }
+    if (Object.keys(base.literals).length > 0) {
+      for (const [ch, lit] of Object.entries(base.literals)) {
+        part.literals = { ...(part.literals as Record<string, string> | undefined), [ch]: lit };
+        ledger.carried.push(base.lines[`lit:${ch}`]);
+      }
+    }
+    const tokenEntries: TbpEntry[] = [];
+    const literalEntries: TbpEntry[] = [];
+    for (const bp of tf.byParentProp ?? []) {
+      const parentValues = enumValuesOf(bp.prop);
+      if (!parentValues) {
+        throw new Error(`${cur.name}: composition typography byParentProp "${bp.prop}" is not an extracted enum prop`);
+      }
+      const tMap: Record<string, Record<string, string>> = {};
+      const lMap: Record<string, Record<string, string>> = {};
+      for (const [pv, changes] of Object.entries(bp.map)) {
+        if (!parentValues.includes(pv)) {
+          throw new Error(`${cur.name}: composition typography byParentProp ${bp.prop} maps unknown value "${pv}"`);
+        }
+        const merged = { ...tf.base, ...changes };
+        const scoped = resolveChildTypo(
+          tf,
+          merged,
+          `part ${pc.name} [${bp.prop}=${pv} → ${tf.child} ${spellProps(merged)}]`,
+        );
+        for (const [ch, ref] of Object.entries(scoped.tokens)) {
+          if (base.tokens[ch] !== ref) {
+            (tMap[pv] ??= {})[ch] = ref;
+            ledger.carried.push(scoped.lines[ch]);
+          }
+        }
+        for (const [ch, lit] of Object.entries(scoped.literals)) {
+          if (base.literals[ch] !== lit) {
+            (lMap[pv] ??= {})[ch] = lit;
+            ledger.carried.push(scoped.lines[`lit:${ch}`]);
+          }
+        }
+      }
+      if (Object.keys(tMap).length > 0) tokenEntries.push({ prop: bp.prop, map: tMap });
+      if (Object.keys(lMap).length > 0) literalEntries.push({ prop: bp.prop, map: lMap });
+    }
+    return { tokenEntries, literalEntries };
+  };
+
   // ROOT
   const root: Record<string, unknown> = {};
   const rootWhere = `root (.${cur.rootClass})`;
-  const rootBase = resolveChannels(rules, rootCtx, undefined, undefined, ledger, rootWhere, usedOrders);
+  const rootBase = resolveChannels(rules, rootCtx, undefined, undefined, ledger, rootWhere, usedOrders, cur.cssFile, rawCss);
   if (Object.keys(rootBase.tokens).length > 0) {
     root.tokens = rootBase.tokens;
     for (const ch of Object.keys(rootBase.tokens)) ledger.carried.push(rootBase.lines[ch]);
   }
+  if (Object.keys(rootBase.literals).length > 0) {
+    root.literals = rootBase.literals;
+    for (const ch of Object.keys(rootBase.literals)) ledger.carried.push(rootBase.lines[`lit:${ch}`]);
+  }
   if (Object.keys(rootBase.layout).length > 0) root.layout = rootBase.layout;
 
-  let rootTbp: { prop: string; map: Record<string, Record<string, string>> } | null = null;
-  for (const axis of axes) {
-    const map: Record<string, Record<string, string>> = {};
-    const axisLines = new Map<string, string[]>();
-    for (const [value, cls] of Object.entries(axis.classOf)) {
-      const ctx = new Set([cur.rootClass, cls]);
-      const scoped = resolveChannels(rules, ctx, undefined, undefined, ledger, `root [${axis.prop}=${value}]`, usedOrders);
-      const overrides: Record<string, string> = {};
-      const overrideLines: string[] = [];
-      for (const [ch, ref] of Object.entries(scoped.tokens)) {
-        if (rootBase.tokens[ch] !== ref) {
-          overrides[ch] = ref;
-          overrideLines.push(scoped.lines[ch]);
-        }
-      }
-      if (Object.keys(overrides).length > 0) map[value] = overrides;
-      axisLines.set(value, overrideLines);
+  // Per-axis overrides — every axis carries (schema v14); entries in CSS
+  // source order (later entries win per channel, the cascade's own rule).
+  {
+    const rootTokenEntries: TbpEntry[] = [];
+    const rootLiteralEntries: TbpEntry[] = [];
+    for (const axis of orderedAxes) {
+      const { tokenMap, literalMap } = promoteAxis(rules, cur, axis, undefined, rootBase, ledger, 'root', usedOrders, rawCss);
+      if (Object.keys(tokenMap).length > 0) rootTokenEntries.push({ prop: axis.prop, map: tokenMap });
+      if (Object.keys(literalMap).length > 0) rootLiteralEntries.push({ prop: axis.prop, map: literalMap });
     }
-    if (Object.keys(map).length === 0) continue;
-    if (rootTbp) {
-      const lost = Object.entries(map)
-        .map(([v, o]) => `${v}: ${Object.entries(o).map(([ch, ref]) => `${ch} → ${ref}`).join(', ')}`)
-        .join(' · ');
-      ledger.refused.push(
-        `root: axis ${axis.prop} also resolves per-value bindings (${lost}) but the schema carries ONE tokensByProp per part (axis "${rootTbp.prop}" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces`,
-      );
-      continue;
-    }
-    rootTbp = { prop: axis.prop, map };
-    for (const ls of axisLines.values()) for (const l of ls) ledger.carried.push(l);
+    attachEntries(root, rootTokenEntries, rootLiteralEntries);
   }
-  if (rootTbp) root.tokensByProp = rootTbp;
 
   const rootStates: Record<string, Record<string, string>> = {};
   for (const st of STATES) {
-    const scoped = resolveChannels(rules, rootCtx, undefined, st, ledger, `root :${st}`, usedOrders);
+    const scoped = resolveChannels(rules, rootCtx, undefined, st, ledger, `root :${st}`, usedOrders, cur.cssFile, rawCss);
     const overrides: Record<string, string> = {};
     for (const [ch, ref] of Object.entries(scoped.tokens)) {
       if (rootBase.tokens[ch] !== ref) {
@@ -415,6 +674,21 @@ function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: str
     const target = extra.part === 'root' ? root : undefined;
     if (!target) throw new Error(`${cur.name}: extraBindings target "${extra.part}" — only root is supported`);
     if (extra.tokens) {
+      // A cited binding may REPLACE a CSS-derived one (Avatar: the styleOne
+      // default palette replaces the base avatar-bg pair Polaris itself
+      // always overrides). The replaced channel's carried line is withdrawn
+      // — a "carried" line must mean exactly what the contract carries —
+      // and the replacement is named in the curated record.
+      const prev = target.tokens as Record<string, string> | undefined;
+      for (const ch of Object.keys(extra.tokens)) {
+        if (prev?.[ch] && prev[ch] !== extra.tokens[ch]) {
+          const prefix = `root (.${cur.rootClass}): ${ch} → `;
+          ledger.carried = ledger.carried.filter((l) => !l.startsWith(prefix));
+          ledger.curated.push(
+            `cited binding REPLACES the CSS-derived root ${ch} binding \`${prev[ch]}\` (see the citation below) — the base line is withdrawn from the carried list`,
+          );
+        }
+      }
       target.tokens = { ...(target.tokens as Record<string, string> | undefined), ...extra.tokens };
     }
     if (extra.tokensByProp) {

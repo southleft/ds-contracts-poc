@@ -13,6 +13,13 @@
   border-radius: var(--p-border-radius-200);
 }
 
+.tag__label {
+  font-size: var(--p-text-body-sm-font-size);
+  font-weight: var(--p-text-body-sm-font-weight);
+  line-height: var(--p-text-body-sm-font-line-height);
+  letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+}
+
 /* showcase chrome */
 .showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
 .showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

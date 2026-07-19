@@ -16,6 +16,7 @@
  *   - optional parts render conditionally on their slot prop
  */
 import {
+  LITERAL_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
   isNativeCheckablePart,
@@ -23,6 +24,7 @@ import {
   shapeCssDecls,
   slotsOf,
   statePreviewSubstProps,
+  tokensByPropEntries,
   walkAnatomy,
   type Contract,
   type Part,
@@ -323,8 +325,12 @@ export function validateContract(
     // key one of its values, and every mapped ref plain (per-value maps ARE
     // the substitution — a placeholder inside one is double substitution);
     // component parts style themselves via their own contract.
-    if (part.tokensByProp) {
-      const tbp = part.tokensByProp;
+    // v14: MULTIPLE entries (ordered). Refusal rules: two entries may not
+    // share BOTH a prop and a channel (a conflicting channel+prop pair is
+    // ambiguous — refused by name); entries on DIFFERENT props may overlap
+    // channels (later entry wins — the documented cascade order).
+    const tbpEntries = tokensByPropEntries(part);
+    for (const tbp of tbpEntries) {
       const tbpProp = contract.props.find((pr) => pr.name === tbp.prop);
       if (!tbpProp) {
         errors.push(`${contract.id}: part "${name}" tokensByProp references unknown prop "${tbp.prop}"`);
@@ -347,6 +353,73 @@ export function validateContract(
       if (part.component) {
         errors.push(`${contract.id}: part "${name}" is a component instance — tokensByProp cannot restyle it (the child contract owns its styling)`);
       }
+    }
+    // v14 conflict rule across tokensByProp entries AND literalsByProp
+    // entries: the same (prop, channel) pair claimed twice is refused by
+    // name — within one field or across the token/literal fields.
+    {
+      const claimed = new Map<string, string>(); // "prop|channel" → field label
+      const claim = (prop: string, channel: string, label: string) => {
+        const key = `${prop}|${channel}`;
+        const prior = claimed.get(key);
+        if (prior) {
+          errors.push(
+            `${contract.id}: part "${name}" carries channel "${channel}" for prop "${prop}" in two entries (${prior} and ${label}) — a conflicting channel+prop pair is refused by name`,
+          );
+        } else {
+          claimed.set(key, label);
+        }
+      };
+      tbpEntries.forEach((entry, i) => {
+        const channels = new Set(Object.values(entry.map).flatMap((o) => Object.keys(o)));
+        for (const ch of channels) claim(entry.prop, ch, `tokensByProp[${i}]`);
+      });
+      (part.literalsByProp ?? []).forEach((entry, i) => {
+        const channels = new Set(Object.values(entry.map).flatMap((o) => Object.keys(o)));
+        for (const ch of channels) claim(entry.prop, ch, `literalsByProp[${i}]`);
+      });
+    }
+    // v14 literals: bounded channels only; literalsByProp props must be
+    // declared enums with valid value keys; a channel carried by BOTH
+    // base `tokens` and base `literals` is ambiguous — refused by name.
+    for (const [cssProp] of Object.entries(part.literals ?? {})) {
+      if (!LITERAL_CHANNELS.has(cssProp)) {
+        errors.push(
+          `${contract.id}: part "${name}" literals sets "${cssProp}" which is not a literal channel (${[...LITERAL_CHANNELS].join(', ')})`,
+        );
+      }
+      if (part.tokens && cssProp in part.tokens) {
+        errors.push(
+          `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a token binding and a literal — ambiguous, refused by name`,
+        );
+      }
+    }
+    for (const entry of part.literalsByProp ?? []) {
+      const lbpProp = contract.props.find((pr) => pr.name === entry.prop);
+      if (!lbpProp) {
+        errors.push(`${contract.id}: part "${name}" literalsByProp references unknown prop "${entry.prop}"`);
+      } else if (!isEnum(lbpProp)) {
+        errors.push(`${contract.id}: part "${name}" literalsByProp prop "${entry.prop}" must be an enum prop`);
+      } else {
+        for (const [k, overrides] of Object.entries(entry.map)) {
+          if (!lbpProp.type.enum.includes(k)) {
+            errors.push(`${contract.id}: part "${name}" literalsByProp map key "${k}" is not a value of prop "${entry.prop}"`);
+          }
+          for (const ch of Object.keys(overrides)) {
+            if (!LITERAL_CHANNELS.has(ch)) {
+              errors.push(
+                `${contract.id}: part "${name}" literalsByProp sets "${ch}" which is not a literal channel (${[...LITERAL_CHANNELS].join(', ')})`,
+              );
+            }
+          }
+        }
+      }
+      if (part.component) {
+        errors.push(`${contract.id}: part "${name}" is a component instance — literalsByProp cannot restyle it (the child contract owns its styling)`);
+      }
+    }
+    if (part.literals && part.component) {
+      errors.push(`${contract.id}: part "${name}" is a component instance — literals cannot restyle it (the child contract owns its styling)`);
     }
     // v13 part-level states (P18 second half): per-state token overrides on
     // a NON-ref part — refusal-ruled, never silent: unknown state names
@@ -862,7 +935,9 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
     rootDecls.push('margin: 0');
   }
-  const hasBorder = 'border-width' in rootTokens || 'border-color' in rootTokens;
+  const hasBorder =
+    'border-width' in rootTokens || 'border-color' in rootTokens ||
+    'border-width' in (root.literals ?? {});
   if (hasBorder) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
   // Fluid components: a max-width binding means "fill available space up to
@@ -962,8 +1037,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // v10 tokensByProp on the root: per-enum-value overrides land in the SAME
   // enum-class rules substituted refs use — emitted after .root, so the
   // override wins at equal specificity (the layoutByProp discipline).
-  if (root.tokensByProp) {
-    const { prop: tbpProp, map } = root.tokensByProp;
+  // v14: MULTIPLE entries emit in declaration order — a later entry's class
+  // rule lands later in the sheet, so at equal specificity the later entry
+  // wins per channel (the CSS source-order cascade the values came from).
+  for (const { prop: tbpProp, map } of tokensByPropEntries(root)) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const refPath = stripBraces(ref);
@@ -971,6 +1048,22 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         const cls = `${tbpProp}-${value}`;
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, cssVar(refPath));
+      }
+    }
+  }
+
+  // v14 literals: bounded literal channels ride the same rule shapes as
+  // token bindings — base decls on .root, per-value overrides as enum-class
+  // rules (validated in validateContract; refused channels never reach here).
+  for (const [cssProp, lit] of Object.entries(root.literals ?? {})) {
+    rootDecls.push(`${cssProp}: ${lit}`);
+  }
+  for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
+    for (const [value, overrides] of Object.entries(map)) {
+      for (const [cssProp, lit] of Object.entries(overrides)) {
+        const cls = `${lbpProp}-${value}`;
+        if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+        enumRules.get(cls)!.set(cssProp, lit);
       }
     }
   }
@@ -1168,20 +1261,35 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         decls.push(`${cssProp}: ${cssVar(refPath)}`);
       }
     }
-    if ((part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens))) {
+    if (
+      (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) ||
+      (part.literals && 'border-width' in part.literals)
+    ) {
       decls.push('border-style: solid');
     }
     // v10 tokensByProp on a nested part: descendant rule under the root's
     // enum class — exactly the nested-token-substitution rule shape.
-    if (part.tokensByProp) {
-      for (const [value, overrides] of Object.entries(part.tokensByProp.map)) {
+    // v14: multiple entries emit in order (later entries win per channel).
+    for (const entry of tokensByPropEntries(part)) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
         for (const [cssProp, ref] of Object.entries(overrides)) {
           const refPath = stripBraces(ref);
           if (!checkToken(refPath, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
           nestedSubRules.push(
-            `\n.${part.tokensByProp.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
+            `\n.${entry.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
           );
         }
+      }
+    }
+    // v14 literals on a nested part: base decls + per-value descendant rules.
+    for (const [cssProp, lit] of Object.entries(part.literals ?? {})) {
+      decls.push(`${cssProp}: ${lit}`);
+    }
+    for (const entry of part.literalsByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        const lDecls = Object.entries(overrides).map(([cssProp, lit]) => `  ${cssProp}: ${lit};`);
+        if (lDecls.length === 0) continue;
+        nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n${lDecls.join('\n')}\n}`);
       }
     }
     // v13 part-level states (P18 second half): descendant rules under the

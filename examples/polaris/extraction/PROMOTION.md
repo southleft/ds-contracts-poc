@@ -11,17 +11,19 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## Button (`polaris.button`)
 
 - source: `polaris-react/src/components/Button/Button.module.css` + extracted API (`out/contracts/button.contract.json`)
-- carried: 13 binding(s) · refused by name: 333 · curated decisions: 4
+- carried: 39 binding(s) · refused by name: 316 · curated decisions: 5
 
 ### Curated decisions
-- NOTE: label: Polaris renders children through the Text primitive (variant bodySm, fontWeight medium) — children is platform API (named skip in extraction), so the showcase renders a static sample label and typography channels are NOT carried (they live in Text.module.css, another component's file)
+- NOTE: label typography IS now carried (coverage round, workstream 2): Button renders children through the Text primitive with literal prop values readable in Button.tsx — the composition chain is deterministic, so bodySm/medium (and the single-axis branches) resolve mechanically from Text.module.css under Text's own class map; the two runtime/multi-axis branches are named refusals on the label part
 - NOTE: tone styling is conditioned on BOTH tone and variant classes (`.toneCritical:is(.variantPrimary)`) — a value conditioned on more than one axis is refused by name (the mint-code discipline), so tone carries no bindings
 - NOTE: primary/tertiary background pairs a gradient layer with the fill token (`var(--pc-button-bg-gradient), var(--p-color-bg-fill-brand)`) — a two-layer background is not a single binding; refused by name where it occurs
 - NOTE: icon/disclosure props are named extraction skips (composed types); the icon anatomy is not promoted
+- part label: composition-owned typography promoted THROUGH Text (bounded to font-size/font-weight/line-height/letter-spacing/font-family) — Button.tsx 184-193: children render through `<Text as="span" variant={textVariant} fontWeight={textFontWeight}>`; textVariant/textFontWeight computed at Button.tsx 171-182. Every carried channel below resolved mechanically from Text/Text.module.css under Text's own reviewed class map; Text's own refusals stay named under its promotion section
 
 ### Carried bindings (each cites its CSS rule)
 - root (.Button): border-radius → `{p.border-radius-200}` (from `.Button { border-radius: var(--p-border-radius-200) }`)
 - root (.Button): gap → `{p.space-050}` (from `.Button { gap: var(--pc-button-gap) }` via --pc-button-gap)
+- root (.Button): background → literal `transparent` (resolved through --pc-button-bg; defined by `.Button` in Button/Button.module.css)
 - root [variant=plain]: color → `{p.color-text-link}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
 - root [variant=primary]: background-color → `{p.color-bg-fill-brand}` (the COLOR layer of the multi-layer `.Button { background: var(--pc-button-bg) }` — CSS shorthand semantics)
 - root [variant=primary]: color → `{p.color-text-brand-on-bg-fill}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
@@ -30,9 +32,34 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=secondary]: color → `{p.color-text}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
 - root [variant=secondary]: box-shadow → `{p.shadow-button}` (from `.Button { box-shadow: var(--pc-button-box-shadow) }` via --pc-button-box-shadow)
 - root [variant=tertiary]: color → `{p.color-text}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
+- root [size=micro]: padding-block → `{p.space-100}` (from `.Button { padding-block: var(--pc-button-padding-block) }` via --pc-button-padding-block)
+- root [size=micro]: padding-inline → `{p.space-200}` (from `.Button { padding-inline: var(--pc-button-padding-inline) }` via --pc-button-padding-inline)
+- root [size=micro]: min-height → `{p.height-700}` (from `.sizeMicro { min-height: var(--p-height-700) }`)
+- root [size=micro]: min-width → `{p.width-700}` (from `.sizeMicro { min-width: var(--p-width-700) }`)
+- root [size=slim]: padding-block → `{p.space-150}` (from `.Button { padding-block: var(--pc-button-padding-block) }` via --pc-button-padding-block)
+- root [size=slim]: padding-inline → `{p.space-300}` (from `.Button { padding-inline: var(--pc-button-padding-inline) }` via --pc-button-padding-inline)
+- root [size=slim]: min-height → `{p.height-800}` (from `.sizeSlim, .sizeMedium { min-height: var(--p-height-800) }`)
+- root [size=slim]: min-width → `{p.width-800}` (from `.sizeSlim, .sizeMedium { min-width: var(--p-width-800) }`)
+- root [size=medium]: padding-block → `{p.space-150}` (from `.Button { padding-block: var(--pc-button-padding-block) }` via --pc-button-padding-block)
+- root [size=medium]: padding-inline → `{p.space-300}` (from `.Button { padding-inline: var(--pc-button-padding-inline) }` via --pc-button-padding-inline)
+- root [size=medium]: min-height → `{p.height-800}` (from `.sizeSlim, .sizeMedium { min-height: var(--p-height-800) }`)
+- root [size=medium]: min-width → `{p.width-800}` (from `.sizeSlim, .sizeMedium { min-width: var(--p-width-800) }`)
+- root [size=large]: padding-block → `{p.space-150}` (from `.Button { padding-block: var(--pc-button-padding-block) }` via --pc-button-padding-block)
+- root [size=large]: padding-inline → `{p.space-300}` (from `.Button { padding-inline: var(--pc-button-padding-inline) }` via --pc-button-padding-inline)
+- root [size=large]: min-height → `{p.height-900}` (from `.sizeLarge { min-height: var(--p-height-900) }`)
+- root [size=large]: min-width → `{p.height-900}` (from `.sizeLarge { min-width: var(--p-height-900) }`)
 - root :disabled: background → `{p.color-bg-fill-disabled}` (from `.Button:disabled, .Button[disabled], .disabled { background: var(--pc-button-bg_disabled) }` via --pc-button-bg_disabled)
 - root :disabled: color → `{p.color-text-disabled}` (from `.Button:disabled, .Button[disabled], .disabled { color: var(--pc-button-color_disabled) }` via --pc-button-color_disabled)
 - root :disabled: fill → `{p.color-icon-disabled}` (from `.Button.Button:disabled, .Button.Button[disabled], .disabled.disabled svg { fill: var(--pc-button-icon-fill_disabled) }` via --pc-button-icon-fill_disabled)
+- part label [composition Text variant=bodySm fontWeight=medium]: font-size → `{p.text-body-sm-font-size}` (from `.bodySm { font-size: var(--p-text-body-sm-font-size) }`)
+- part label [composition Text variant=bodySm fontWeight=medium]: font-weight → `{p.font-weight-medium}` (from `.medium { font-weight: var(--p-font-weight-medium) }`)
+- part label [composition Text variant=bodySm fontWeight=medium]: line-height → `{p.text-body-sm-font-line-height}` (from `.bodySm { line-height: var(--p-text-body-sm-font-line-height) }`)
+- part label [composition Text variant=bodySm fontWeight=medium]: letter-spacing → `{p.text-body-sm-font-letter-spacing}` (from `.bodySm { letter-spacing: var(--p-text-body-sm-font-letter-spacing) }`)
+- part label [size=large → Text variant=bodyMd fontWeight=medium]: font-size → `{p.text-body-md-font-size}` (from `.bodyMd { font-size: var(--p-text-body-md-font-size) }`)
+- part label [size=large → Text variant=bodyMd fontWeight=medium]: line-height → `{p.text-body-md-font-line-height}` (from `.bodyMd { line-height: var(--p-text-body-md-font-line-height) }`)
+- part label [size=large → Text variant=bodyMd fontWeight=medium]: letter-spacing → `{p.text-body-md-font-letter-spacing}` (from `.bodyMd { letter-spacing: var(--p-text-body-md-font-letter-spacing) }`)
+- part label [variant=plain → Text variant=bodySm fontWeight=regular]: font-weight → `{p.font-weight-regular}` (from `.regular { font-weight: var(--p-font-weight-regular) }`)
+- part label [variant=monochromePlain → Text variant=bodySm fontWeight=regular]: font-weight → `{p.font-weight-regular}` (from `.regular { font-weight: var(--p-font-weight-regular) }`)
 
 ### Refused by name
 - at-rule: `@media (--p-breakpoints-md-up) { .sizeMicro { min-height: var(--p-height-600) } }` — conditional styling is not a contract channel
@@ -54,12 +81,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root (.Button): selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root (.Button): selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root (.Button): selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root (.Button): background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root (.Button): color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root (.Button): color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root (.Button): border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root (.Button): padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root (.Button): padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root (.Button): box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root (.Button): padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root (.Button): padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root (.Button): box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [variant=plain]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [variant=plain]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -73,11 +99,10 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=plain]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=plain]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=plain]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [variant=plain]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
 - root [variant=plain]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [variant=plain]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=plain]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=plain]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=plain]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=plain]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=plain]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [variant=primary]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [variant=primary]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -93,8 +118,8 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=primary]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
 - root [variant=primary]: background image layer `var(--pc-button-bg-gradient)` — a gradient/image overlay is not a single token binding; not carried (`.Button`)
 - root [variant=primary]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [variant=primary]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=primary]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=primary]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=primary]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
 - root [variant=secondary]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [variant=secondary]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -109,8 +134,8 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=secondary]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=secondary]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
 - root [variant=secondary]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [variant=secondary]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=secondary]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=secondary]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=secondary]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
 - root [variant=tertiary]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [variant=tertiary]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -124,11 +149,10 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=tertiary]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=tertiary]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=tertiary]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [variant=tertiary]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
 - root [variant=tertiary]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [variant=tertiary]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=tertiary]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=tertiary]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=tertiary]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=tertiary]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=tertiary]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [variant=monochromePlain]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [variant=monochromePlain]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -142,12 +166,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=monochromePlain]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=monochromePlain]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [variant=monochromePlain]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [variant=monochromePlain]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [variant=monochromePlain]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=monochromePlain]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [variant=monochromePlain]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [variant=monochromePlain]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=monochromePlain]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [variant=monochromePlain]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=monochromePlain]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=monochromePlain]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [variant=monochromePlain]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [tone=critical]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [tone=critical]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -161,12 +184,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [tone=critical]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [tone=critical]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [tone=critical]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [tone=critical]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [tone=critical]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=critical]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [tone=critical]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [tone=critical]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [tone=critical]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [tone=critical]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=critical]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [tone=critical]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [tone=critical]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [tone=success]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [tone=success]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -180,12 +202,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [tone=success]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [tone=success]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [tone=success]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [tone=success]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [tone=success]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=success]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [tone=success]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [tone=success]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [tone=success]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [tone=success]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=success]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [tone=success]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [tone=success]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [size=micro]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [size=micro]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -199,10 +220,9 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [size=micro]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=micro]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=micro]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [size=micro]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [size=micro]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=micro]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [size=micro]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [size=micro]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=micro]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [size=slim]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [size=slim]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -216,10 +236,9 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [size=slim]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=slim]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=slim]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [size=slim]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [size=slim]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=slim]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [size=slim]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [size=slim]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=slim]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [size=medium]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [size=medium]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -233,10 +252,9 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [size=medium]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=medium]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=medium]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [size=medium]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [size=medium]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=medium]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [size=medium]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [size=medium]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=medium]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [size=large]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [size=large]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -250,11 +268,9 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [size=large]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=large]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [size=large]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [size=large]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [size=large]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=large]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [size=large]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [size=large]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root: axis size also resolves per-value bindings (micro: padding-block → {p.space-100}, padding-inline → {p.space-200}, min-height → {p.height-700}, min-width → {p.width-700} · slim: padding-block → {p.space-150}, padding-inline → {p.space-300}, min-height → {p.height-800}, min-width → {p.width-800} · medium: padding-block → {p.space-150}, padding-inline → {p.space-300}, min-height → {p.height-800}, min-width → {p.width-800} · large: padding-block → {p.space-150}, padding-inline → {p.space-300}, min-height → {p.height-900}, min-width → {p.height-900}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
+- root [size=large]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [textAlign=left]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [textAlign=left]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -268,12 +284,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [textAlign=left]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=left]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=left]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [textAlign=left]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [textAlign=left]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=left]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [textAlign=left]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [textAlign=left]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=left]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=left]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=left]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=left]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=left]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [textAlign=right]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [textAlign=right]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -287,12 +302,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [textAlign=right]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=right]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=right]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [textAlign=right]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [textAlign=right]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=right]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [textAlign=right]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [textAlign=right]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=right]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=right]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=right]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=right]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=right]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [textAlign=center]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [textAlign=center]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -306,12 +320,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [textAlign=center]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=center]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=center]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [textAlign=center]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [textAlign=center]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=center]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [textAlign=center]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [textAlign=center]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=center]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=center]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=center]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=center]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=center]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [textAlign=start]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [textAlign=start]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -325,12 +338,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [textAlign=start]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=start]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=start]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [textAlign=start]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [textAlign=start]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=start]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [textAlign=start]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [textAlign=start]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=start]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=start]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=start]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=start]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=start]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root [textAlign=end]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root [textAlign=end]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -344,12 +356,11 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [textAlign=end]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=end]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root [textAlign=end]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root [textAlign=end]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
-- root [textAlign=end]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=end]: color — chain-resolved literal `inherit` (via --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button`)
 - root [textAlign=end]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
-- root [textAlign=end]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=end]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
-- root [textAlign=end]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=end]: padding-block — var(--pc-button-padding-block) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=end]: padding-inline — var(--pc-button-padding-inline) is defined only in other class contexts (`.iconOnly`, `.iconOnly:is(.sizeLarge)`, `.iconOnly:is(.sizeMicro)`, `.iconOnly:is(.variantPlain, .variantMonochromePlain)`, `.sizeLarge`, `.sizeMicro`, `.sizeSlim, .sizeMedium`) in Button/Button.module.css — carried where those contexts are promoted axes, refused in this one (`.Button`)
+- root [textAlign=end]: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button`)
 - root :hover: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root :hover: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -363,9 +374,8 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root :hover: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :hover: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :hover: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root :hover: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:hover`)
-- root :hover: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button:hover`)
-- root :hover: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:hover`)
+- root :hover: color — chain-resolved literal `inherit` (via --pc-button-color_hover → --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button:hover`)
+- root :hover: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow_hover → --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button:hover`)
 - root :active: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root :active: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -379,10 +389,9 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root :active: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :active: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :active: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root :active: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:active, .Button[data-state='open']`)
-- root :active: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button:active, .Button[data-state='open']`)
-- root :active: fill — literal value "currentColor" — a raw value is reported, never turned into an invented token (`.Button.Button:active, .Button.Button[data-state='open'] svg`)
-- root :active: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:active, .Button[data-state='open']`)
+- root :active: color — chain-resolved literal `inherit` (via --pc-button-color_active → --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button:active, .Button[data-state='open']`)
+- root :active: fill — chain-resolved literal `currentColor` (via --pc-button-icon-fill_active → --pc-button-icon-fill) NOT carried: inheritance keyword `currentColor` carries no standalone fact (`.Button.Button:active, .Button.Button[data-state='open'] svg`)
+- root :active: box-shadow — chain-resolved literal `transparent` (via --pc-button-box-shadow_active → --pc-button-box-shadow) NOT carried: channel "box-shadow" is outside the bounded literal-channel set (`.Button:active, .Button[data-state='open']`)
 - root :focus-visible: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root :focus-visible: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -396,8 +405,7 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root :focus-visible: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :focus-visible: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :focus-visible: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
-- root :focus-visible: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:focus-visible`)
-- root :focus-visible: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button:focus-visible`)
+- root :focus-visible: color — chain-resolved literal `inherit` (via --pc-button-color_hover → --pc-button-color) NOT carried: inheritance keyword `inherit` carries no standalone fact (`.Button:focus-visible`)
 - root :disabled: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
   > *" — only descendant part selectors are promoted
 - root :disabled: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
@@ -412,6 +420,8 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root :disabled: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
 - root :disabled: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
 - root :disabled: box-shadow — literal value "none" — a raw value is reported, never turned into an invented token (`.Button:disabled, .Button[disabled], .disabled`)
+- part label [composition]: label fontWeight for variant=primary is `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177, useBreakpoints) — a media-dependent RUNTIME branch; refused by name (the carried base 'medium' renders, and the sub-md verification shows the divergence as a named triaged row)
+- part label [composition]: label variant becomes bodyMd for plain/monochromePlain only when size !== 'micro' (Button.tsx 179-182) — conditioned on BOTH variant and size; a value conditioned on more than one axis is refused by name (the mint-code discipline), so plain keeps the carried bodySm base and the divergence is a named triaged row
 - unmatched rule `.Button.Button svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
 - unmatched rule `.Button.Button:hover svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
 - unmatched rule `.pressed.pressed, .pressed.pressed:hover, .pressed.pressed:active, .pressed.pressed:focus-visible svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
@@ -435,12 +445,12 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## Badge (`polaris.badge`)
 
 - source: `polaris-react/src/components/Badge/Badge.module.css` + extracted API (`out/contracts/badge.contract.json`)
-- carried: 6 binding(s) · refused by name: 37 · curated decisions: 3
+- carried: 10 binding(s) · refused by name: 38 · curated decisions: 3
 
 ### Curated decisions
 - NOTE: tone / progress / icon / size props are NAMED extraction drops: BadgeProps is an intersection with a union of interfaces in the sibling types.ts — outside single-file scope. The committed contract carries the extracted API verbatim (1 prop), so only the DEFAULT badge is comparable; the tone axis is the showcase's clearest architecture-gap exhibit
-- NOTE: label typography rides the Text primitive (bodySm) inside the badge — not carried (another file); root-level font-weight IS carried (declared on .Badge itself)
-- sample label "Fulfilled" carried as a static text part — Polaris's children prop is platform API (named extraction skip); a static surface needs sample ink and both sides of the receipts render the same string
+- NOTE: label typography IS now carried (coverage round, workstream 2): the bodySm chain through the Text primitive is deterministic (literal prop in Badge.tsx); the tone-conditional fontWeight branch stays a named refusal (tone is a dropped prop)
+- part label: composition-owned typography promoted THROUGH Text (bounded to font-size/font-weight/line-height/letter-spacing/font-family) — Badge.tsx 111-116: children render through `<Text as="span" variant="bodySm" fontWeight={tone === 'new' ? 'medium' : undefined}>`. Every carried channel below resolved mechanically from Text/Text.module.css under Text's own reviewed class map; Text's own refusals stay named under its promotion section
 
 ### Carried bindings (each cites its CSS rule)
 - root (.Badge): background-color → `{p.color-bg-fill-transparent-secondary}` (from `.Badge { background-color: var(--p-color-bg-fill-transparent-secondary) }`)
@@ -449,6 +459,10 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root (.Badge): padding-block → `{p.space-050}` (from `.Badge { padding-block: var(--pc-badge-vertical-padding) }` via --pc-badge-vertical-padding)
 - root (.Badge): padding-inline → `{p.space-200}` (from `.Badge { padding-inline: var(--pc-badge-horizontal-padding) }` via --pc-badge-horizontal-padding)
 - root (.Badge): font-weight → `{p.font-weight-medium}` (from `.Badge { font-weight: var(--p-font-weight-medium) }`)
+- part label [composition Text variant=bodySm]: font-size → `{p.text-body-sm-font-size}` (from `.bodySm { font-size: var(--p-text-body-sm-font-size) }`)
+- part label [composition Text variant=bodySm]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodySm { font-weight: var(--p-text-body-sm-font-weight) }`)
+- part label [composition Text variant=bodySm]: line-height → `{p.text-body-sm-font-line-height}` (from `.bodySm { line-height: var(--p-text-body-sm-font-line-height) }`)
+- part label [composition Text variant=bodySm]: letter-spacing → `{p.text-body-sm-font-letter-spacing}` (from `.bodySm { letter-spacing: var(--p-text-body-sm-font-letter-spacing) }`)
 
 ### Refused by name
 - at-rule: `@media print { .Badge { border: solid var(--p-border-width-025) var(--p-color-border) } }` — conditional styling is not a contract channel
@@ -457,6 +471,7 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root :active: combinator in ".Icon + *" — only descendant part selectors are promoted
 - root :focus-visible: combinator in ".Icon + *" — only descendant part selectors are promoted
 - root :disabled: combinator in ".Icon + *" — only descendant part selectors are promoted
+- part label [composition]: label fontWeight becomes 'medium' when tone === 'new' (Badge.tsx 114) — `tone` is a NAMED extraction drop (sibling-file union type), so a branch conditioned on it cannot carry; refused by name
 - unmatched rule `.Badge svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
 - unmatched rule `.toneSuccess` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
 - unmatched rule `.toneSuccess svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
@@ -492,7 +507,7 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## Banner (`polaris.banner`)
 
 - source: `polaris-react/src/components/Banner/Banner.module.css` + extracted API (`out/contracts/banner.contract.json`)
-- carried: 9 binding(s) · refused by name: 27 · curated decisions: 6
+- carried: 17 binding(s) · refused by name: 27 · curated decisions: 8
 
 ### Curated decisions
 - NOTE: tone → colors is a STYLING CHANNEL OUTSIDE CSS MODULES (prop-driven Box tokens) — the extractor cannot see it; the promotion cites Banner/utilities.ts and carries the withinPage variant (the default rendering context). The withinContentContainer palette is NOT carried (context-conditional, not a prop)
@@ -500,6 +515,8 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - NOTE: title typography (headingSm) rides the Text primitive — not carried; the body sample text is a static showcase part (children is platform API)
 - NOTE: Polaris renders the tone surface on an inner Box, not the outer .Polaris-Banner (which stays bg-surface): the verify rows point at that inner Box by selector, and the structural difference is a named note
 - CITED PROMOTION (root): Banner/utilities.ts bannerAttributes[tone].withinPage — tone colors do NOT live in Banner.module.css; they thread through the Box primitive's background/color props as token aliases ('bg-fill-success' → --p-color-bg-fill-success). Promoted from that source map, alias names verbatim
+- part title: composition-owned typography promoted THROUGH Text (bounded to font-size/font-weight/line-height/letter-spacing/font-family) — Banner.tsx 125-127: the title renders through `<Text as="h2" variant="headingSm" breakWord>` (breakWord is an overflow behavior, not a typography channel). Every carried channel below resolved mechanically from Text/Text.module.css under Text's own reviewed class map; Text's own refusals stay named under its promotion section
+- part body: composition-owned typography promoted THROUGH Text (bounded to font-size/font-weight/line-height/letter-spacing/font-family) — Banner.tsx 167-171: children render through `<Text as="span" variant="bodyMd">`. Every carried channel below resolved mechanically from Text/Text.module.css under Text's own reviewed class map; Text's own refusals stay named under its promotion section
 - semantics.roleByProp promoted — Banner.tsx: role={tone === 'warning' || tone === 'critical' ? 'alert' : 'status'}
 
 ### Carried bindings (each cites its CSS rule)
@@ -512,6 +529,14 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [tone=critical]: color → `{p.color-text-critical-on-bg-fill}` (cited, see above)
 - root [tone=info]: background-color → `{p.color-bg-fill-info}` (cited, see above)
 - root [tone=info]: color → `{p.color-text-info-on-bg-fill}` (cited, see above)
+- part title [composition Text variant=headingSm]: font-size → `{p.text-heading-sm-font-size}` (from `.headingSm { font-size: var(--p-text-heading-sm-font-size) }`)
+- part title [composition Text variant=headingSm]: font-weight → `{p.text-heading-sm-font-weight}` (from `.headingSm { font-weight: var(--p-text-heading-sm-font-weight) }`)
+- part title [composition Text variant=headingSm]: line-height → `{p.text-heading-sm-font-line-height}` (from `.headingSm { line-height: var(--p-text-heading-sm-font-line-height) }`)
+- part title [composition Text variant=headingSm]: letter-spacing → `{p.text-heading-sm-font-letter-spacing}` (from `.headingSm { letter-spacing: var(--p-text-heading-sm-font-letter-spacing) }`)
+- part body [composition Text variant=bodyMd]: font-size → `{p.text-body-md-font-size}` (from `.bodyMd { font-size: var(--p-text-body-md-font-size) }`)
+- part body [composition Text variant=bodyMd]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodyMd { font-weight: var(--p-text-body-sm-font-weight) }`)
+- part body [composition Text variant=bodyMd]: line-height → `{p.text-body-md-font-line-height}` (from `.bodyMd { line-height: var(--p-text-body-md-font-line-height) }`)
+- part body [composition Text variant=bodyMd]: letter-spacing → `{p.text-body-md-font-letter-spacing}` (from `.bodyMd { letter-spacing: var(--p-text-body-md-font-letter-spacing) }`)
 
 ### Refused by name
 - mixin: `@mixin shadow-bevel var(--p-shadow-200), var(--p-border-radius-0)` — postcss mixin, expands outside the promoted rule model
@@ -1422,7 +1447,7 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## TextField (`polaris.text-field`)
 
 - source: `polaris-react/src/components/TextField/TextField.module.css` + extracted API (`out/contracts/text-field.contract.json`)
-- carried: 14 binding(s) · refused by name: 908 · curated decisions: 6
+- carried: 16 binding(s) · refused by name: 906 · curated decisions: 6
 
 ### Curated decisions
 - NOTE: the 34-prop API surface is the gauntlet's headline redemption: TextField extracted silently HOLLOW (0 props) in the 2026-07-12 run (intersection-of-named-refs, failure class C); the post-gauntlet fix carries the full surface with the composition note attached
@@ -1441,12 +1466,14 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - part input (.Input): font-weight → `{p.font-weight-regular}` (from `.Input { font-weight: var(--p-font-weight-regular) }`)
 - part input (.Input): line-height → `{p.font-line-height-600}` (from `.Input { line-height: var(--p-font-line-height-600) }`)
 - part input [variant=borderless]: min-height → `{p.space-800}` (from `.borderless .Input, .borderless .Backdrop { min-height: var(--p-space-800) }`)
+- part input [size=slim]: padding-block → `{p.space-050}` (from `.slim .Input, .slim .Backdrop { padding-block: var(--p-space-050) }`)
 - part input :disabled: color → `{p.color-text-disabled}` (from `.Input:disabled { color: var(--p-color-text-disabled) }`)
 - part backdrop (.Backdrop): background-color → `{p.color-input-bg-surface}` (from `.Backdrop { background-color: var(--p-color-input-bg-surface) }`)
 - part backdrop (.Backdrop): border-radius → `{p.border-radius-200}` (from `.Backdrop { border-radius: var(--p-border-radius-200) }`)
 - part backdrop (.Backdrop): border-width → `{p.border-width-0165}` (from `.Backdrop { border-width: var(--p-border-width-0165) }`)
 - part backdrop (.Backdrop): border-color → `{p.color-input-border}` (from `.Backdrop { border-color: var(--p-color-input-border) }`)
 - part backdrop [variant=borderless]: min-height → `{p.space-800}` (from `.borderless .Input, .borderless .Backdrop { min-height: var(--p-space-800) }`)
+- part backdrop [size=slim]: padding-block → `{p.space-050}` (from `.slim .Input, .slim .Backdrop { padding-block: var(--p-space-050) }`)
 
 ### Refused by name
 - at-rule: `@media (--p-breakpoints-md-up) { .AutoSizeWrapper::after, .AutoSizeWrapper input, .AutoSizeWrapper textarea { font-size: var(--p-font-size-325) } }` — conditional styling is not a contract channel
@@ -1846,7 +1873,7 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - part input (.Input): background — literal value "none" — a raw value is reported, never turned into an invented token (`.Input`)
 - part input (.Input): border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Input`)
 - part input (.Input): letter-spacing — literal value "initial" — a raw value is reported, never turned into an invented token (`.Input`)
-- part input (.Input): min-height — var(--pg-control-height) resolves to NO token and has no reachable definition in this class context (`.Input`)
+- part input (.Input): min-height — var(--pg-control-height) is RUNTIME-SET — no definition anywhere in TextField/TextField.module.css (Polaris supplies it at runtime: inline style, global stylesheet, or wrapper component); refused by name (`.Input`)
 - part input (.Input): min-width — literal value "0" — a raw value is reported, never turned into an invented token (`.Input`)
 - part input (.Input): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
 - part input [variant=borderless]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
@@ -1940,7 +1967,6 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - part input [size=slim]: min-height — literal value "28px" — a raw value is reported, never turned into an invented token (`.slim .Input, .slim .Backdrop`)
 - part input [size=slim]: min-width — literal value "0" — a raw value is reported, never turned into an invented token (`.Input`)
 - part input [size=slim]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
-- part input: axis size also resolves per-value bindings (slim: padding-block → {p.space-050}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
 - part input :hover: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
 - part input :hover: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
 - part input :hover: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
@@ -2212,7 +2238,6 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - part backdrop [size=slim]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
     > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
 - part backdrop [size=slim]: min-height — literal value "28px" — a raw value is reported, never turned into an invented token (`.slim .Input, .slim .Backdrop`)
-- part backdrop: axis size also resolves per-value bindings (slim: padding-block → {p.space-050}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
 - part backdrop :hover: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
 - part backdrop :hover: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
 - part backdrop :hover: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
@@ -2404,19 +2429,23 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## Tag (`polaris.tag`)
 
 - source: `polaris-react/src/components/Tag/Tag.module.css` + extracted API (`out/contracts/tag.contract.json`)
-- carried: 3 binding(s) · refused by name: 48 · curated decisions: 5
+- carried: 7 binding(s) · refused by name: 48 · curated decisions: 5
 
 ### Curated decisions
 - NOTE: disabled styling is a boolean-driven CLASS on a span (`&.disabled`), not a :disabled pseudo-state — boolean-conditional token bindings have no contract channel (stylesWhen is literal-only by design); named gap
 - NOTE: the size prop and onClick/onRemove/url interplay are named extraction notes (union-typed props); the default (non-interactive span) rendering is the comparable state
-- NOTE: padding-inline is `calc(var(--p-space-100) + var(--p-space-050))` — calc() over two tokens is not a single binding; named refusal
-- NOTE: label typography rides the Text primitive (bodySm, truncate) — not carried
-- sample label "Wholesale" carried as a static text part — Polaris's children prop is platform API (named extraction skip); a static surface needs sample ink and both sides of the receipts render the same string
+- NOTE: padding-inline is `calc(var(--p-space-100) + var(--p-space-050))` — calc() over two TOKENS is a derived value, not a single binding; named refusal (literal-only calc chains DO carry — see ProgressBar)
+- NOTE: label typography IS now carried (coverage round, workstream 2): the bodySm chain through the Text primitive is deterministic (literal prop in Tag.tsx)
+- part label: composition-owned typography promoted THROUGH Text (bounded to font-size/font-weight/line-height/letter-spacing/font-family) — Tag.tsx 64: children render through `<Text as="span" variant="bodySm" truncate>` (truncate is an overflow behavior, not a typography channel). Every carried channel below resolved mechanically from Text/Text.module.css under Text's own reviewed class map; Text's own refusals stay named under its promotion section
 
 ### Carried bindings (each cites its CSS rule)
 - root (.Tag): background-color → `{p.color-bg-fill-tertiary}` (from `.Tag { background-color: var(--p-color-bg-fill-tertiary) }`)
 - root (.Tag): color → `{p.color-text}` (from `.Tag { color: var(--p-color-text) }`)
 - root (.Tag): border-radius → `{p.border-radius-200}` (from `.Tag { border-radius: var(--p-border-radius-200) }`)
+- part label [composition Text variant=bodySm]: font-size → `{p.text-body-sm-font-size}` (from `.bodySm { font-size: var(--p-text-body-sm-font-size) }`)
+- part label [composition Text variant=bodySm]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodySm { font-weight: var(--p-text-body-sm-font-weight) }`)
+- part label [composition Text variant=bodySm]: line-height → `{p.text-body-sm-font-line-height}` (from `.bodySm { line-height: var(--p-text-body-sm-font-line-height) }`)
+- part label [composition Text variant=bodySm]: letter-spacing → `{p.text-body-sm-font-letter-spacing}` (from `.bodySm { letter-spacing: var(--p-text-body-sm-font-letter-spacing) }`)
 
 ### Refused by name
 - at-rule: `@media (hover: none) { .sizeLarge.removable.linkable .Button { background-color: var(--p-color-bg-fill-tertiary) } }` — conditional styling is not a contract channel
@@ -2425,7 +2454,7 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - mixin: `@mixin focus-ring base, 0, focused` — postcss mixin, expands outside the promoted rule model
 - root (.Tag): pseudo/attribute ":" in ".Link.segmented::after" — not promotable
 - root (.Tag): unsupported :not() contents in ".Link:focus-visible:not(:active)"
-- root (.Tag): padding-inline — value "calc(var(--p-space-100) + var(--p-space-050))" mixes var() with other content — not a single binding (`.Tag`)
+- root (.Tag): padding-inline — calc() over token `{p.space-050}` is a derived value, not a single binding (`.Tag`)
 - root :hover: pseudo/attribute ":" in ".Link.segmented::after" — not promotable
 - root :hover: unsupported :not() contents in ".Link:focus-visible:not(:active)"
 - root :active: pseudo/attribute ":" in ".Link.segmented::after" — not promotable
@@ -2466,43 +2495,42 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## Avatar (`polaris.avatar`)
 
 - source: `polaris-react/src/components/Avatar/Avatar.module.css` + extracted API (`out/contracts/avatar.contract.json`)
-- carried: 4 binding(s) · refused by name: 57 · curated decisions: 3
+- carried: 10 binding(s) · refused by name: 46 · curated decisions: 7
 
 ### Curated decisions
-- NOTE: per-size widths are component-private literals (--pc-avatar-*-size: 20…40px) — named refusals; the size axis carries no bindings and the receipts show the geometry gap
+- NOTE: per-size widths NOW carry (coverage round, workstream 1): --pc-avatar-*-size chains resolve to their literal definitions on .Avatar (20…40px) — carried as per-size literals with provenance; the per-size border-radius values are RAW literals (never behind a var chain), which stay named refusals by the raw-value discipline
+- NOTE: the avatar's square aspect rides an ::after { padding-bottom: 100% } pseudo-element — a named refusal, so no height channel carries (width does)
 - NOTE: Polaris renders initials as SVG <text> inside the avatar circle; this surface renders a styled span — the initials part's font bindings (.Text rule) carry, the SVG projection does not
-- NOTE: the name-hash background variations (styleOne…styleSeven) are driven by a hash of the name prop — value-derived styling has no contract channel; named gap (base avatar-bg-fill carries)
+- NOTE: the name-hash palette SELECTION (styleOne…styleSeven by xorHash of the name) is value-derived styling with no contract channel — named gap; the carried default is Polaris's own name-less default (STYLE_CLASSES[0] → styleOne), cited in the promotion, so initials are never invisible on any surface
+- cited binding REPLACES the CSS-derived root background binding `{p.color-avatar-bg-fill}` (see the citation below) — the base line is withdrawn from the carried list
+- cited binding REPLACES the CSS-derived root color binding `{p.color-avatar-text-on-bg-fill}` (see the citation below) — the base line is withdrawn from the carried list
+- CITED PROMOTION (root): Avatar.tsx 50-53: `styleClass(name)` returns STYLE_CLASSES[0] ('One' → .styleOne) when name is undefined — Polaris's OWN documented default; the seven palette VALUES are enumerable literals (.styleOne…styleSeven in Avatar.module.css, each a single-token binding), so the DEFAULT palette entry is carried (default-to-first, per the source) and the hash SELECTION over a provided name stays a named refusal (value-derived styling has no contract channel). These replace the base .Avatar avatar-bg-fill/avatar-text-on-bg-fill pair, which Polaris itself always overrides with a style class on initials avatars (Avatar.tsx 126-129)
 
 ### Carried bindings (each cites its CSS rule)
-- root (.Avatar): background → `{p.color-avatar-bg-fill}` (from `.Avatar { background: var(--p-color-avatar-bg-fill) }`)
-- root (.Avatar): color → `{p.color-avatar-text-on-bg-fill}` (from `.Avatar { color: var(--p-color-avatar-text-on-bg-fill) }`)
+- root (.Avatar): min-width → literal `20px` (resolved through --pc-avatar-xs-size; defined by `.Avatar` in Avatar/Avatar.module.css:3)
+- root [size=xs]: width → literal `20px` (resolved through --pc-avatar-xs-size; defined by `.Avatar` in Avatar/Avatar.module.css:3)
+- root [size=sm]: width → literal `24px` (resolved through --pc-avatar-sm-size; defined by `.Avatar` in Avatar/Avatar.module.css:4)
+- root [size=md]: width → literal `28px` (resolved through --pc-avatar-md-size; defined by `.Avatar` in Avatar/Avatar.module.css:5)
+- root [size=lg]: width → literal `32px` (resolved through --pc-avatar-lg-size; defined by `.Avatar` in Avatar/Avatar.module.css:6)
+- root [size=xl]: width → literal `40px` (resolved through --pc-avatar-xl-size; defined by `.Avatar` in Avatar/Avatar.module.css:7)
+- root: background → `{p.color-avatar-one-bg-fill}` (cited, see above)
+- root: color → `{p.color-avatar-one-text-on-bg-fill}` (cited, see above)
 - part initials (.Text): font-size → `{p.font-size-400}` (from `.Text { font-size: var(--p-font-size-400) }`)
 - part initials (.Text): font-weight → `{p.font-weight-regular}` (from `.Text { font-weight: var(--p-font-weight-regular) }`)
 
 ### Refused by name
 - at-rule: `@media (forced-colors: active) { .Avatar { border: var(--p-border-width-025) solid transparent } }` — conditional styling is not a contract channel
 - root (.Avatar): pseudo/attribute ":" in ".Avatar::after" — not promotable
-- root (.Avatar): min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
 - root [size=xs]: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root [size=xs]: border-radius — literal value "4px" — a raw value is reported, never turned into an invented token (`.sizeXs`)
-- root [size=xs]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
-- root [size=xs]: width — literal value "20px" — a raw value is reported, never turned into an invented token (`.sizeXs`)
 - root [size=sm]: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root [size=sm]: border-radius — literal value "6px" — a raw value is reported, never turned into an invented token (`.sizeSm`)
-- root [size=sm]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
-- root [size=sm]: width — literal value "24px" — a raw value is reported, never turned into an invented token (`.sizeSm`)
 - root [size=md]: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root [size=md]: border-radius — literal value "6px" — a raw value is reported, never turned into an invented token (`.sizeMd`)
-- root [size=md]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
-- root [size=md]: width — literal value "28px" — a raw value is reported, never turned into an invented token (`.sizeMd`)
 - root [size=lg]: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root [size=lg]: border-radius — literal value "8px" — a raw value is reported, never turned into an invented token (`.sizeLg`)
-- root [size=lg]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
-- root [size=lg]: width — literal value "32px" — a raw value is reported, never turned into an invented token (`.sizeLg`)
 - root [size=xl]: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root [size=xl]: border-radius — literal value "8px" — a raw value is reported, never turned into an invented token (`.sizeXl`)
-- root [size=xl]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
-- root [size=xl]: width — literal value "40px" — a raw value is reported, never turned into an invented token (`.sizeXl`)
 - root :hover: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root :active: pseudo/attribute ":" in ".Avatar::after" — not promotable
 - root :focus-visible: pseudo/attribute ":" in ".Avatar::after" — not promotable
@@ -2564,14 +2592,18 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ## ProgressBar (`polaris.progress-bar`)
 
 - source: `polaris-react/src/components/ProgressBar/ProgressBar.module.css` + extracted API (`out/contracts/progress-bar.contract.json`)
-- carried: 9 binding(s) · refused by name: 32 · curated decisions: 2
+- carried: 12 binding(s) · refused by name: 29 · curated decisions: 3
 
 ### Curated decisions
-- NOTE: the bar heights are component-private literals with calc() scaling (--pc-progress-bar-height-base: 16px; small/large are calc() over it) — named refusals; the receipts show the missing height honestly
+- NOTE: the bar heights NOW carry (coverage round, workstream 1): --pc-progress-bar-height-* chains resolve to their literal definitions on .ProgressBar — 16px base, and the small/large calc() scalings evaluate deterministically over that resolved literal (8px / 32px) — carried as per-size literals with provenance
+- NOTE: the indicator's `height: inherit` is an inheritance keyword — it carries no standalone fact; named refusal (the track height carries, the indicator's own height channel does not)
 - NOTE: the fill fraction is runtime behavior (CSSTransition + scaleX(progress/100)) — the schema's meter channel needs a max prop and Polaris's API has none (max is hard-coded 100), so the indicator is carried as a plain part and the verify combos pass animated={false} on the Polaris side (fill at 0 both sides)
 
 ### Carried bindings (each cites its CSS rule)
 - root (.ProgressBar): border-radius → `{p.border-radius-100}` (from `.ProgressBar { border-radius: var(--p-border-radius-100) }`)
+- root [size=small]: height → literal `8px` (resolved through --pc-progress-bar-height-small → --pc-progress-bar-height-base; defined by `.ProgressBar` in ProgressBar/ProgressBar.module.css:3)
+- root [size=medium]: height → literal `16px` (resolved through --pc-progress-bar-height-base; defined by `.ProgressBar` in ProgressBar/ProgressBar.module.css:3)
+- root [size=large]: height → literal `32px` (resolved through --pc-progress-bar-height-large → --pc-progress-bar-height-base; defined by `.ProgressBar` in ProgressBar/ProgressBar.module.css:3)
 - root [tone=highlight]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
 - root [tone=primary]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
 - root [tone=success]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
@@ -2587,48 +2619,54 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - mixin: `@mixin scope-custom-property progress-bar, duration` — postcss mixin, expands outside the promoted rule model
 - mixin: `@mixin scope-custom-property progress-bar, percent` — postcss mixin, expands outside the promoted rule model
 - mixin: `@mixin visually-hidden` — postcss mixin, expands outside the promoted rule model
-- root (.ProgressBar): background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
+- root (.ProgressBar): background-color — var(--pc-progress-bar-background) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.ProgressBar`)
 - root (.ProgressBar): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [size=small]: background-color — var(--pc-progress-bar-background) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.ProgressBar`)
+- root [size=small]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [size=medium]: background-color — var(--pc-progress-bar-background) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.ProgressBar`)
+- root [size=medium]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [size=large]: background-color — var(--pc-progress-bar-background) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.ProgressBar`)
+- root [size=large]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
 - root [tone=highlight]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
 - root [tone=primary]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
 - root [tone=success]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
 - root [tone=critical]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
-- root [size=small]: background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
-- root [size=small]: height — value "calc(
-    var(--pc-progress-bar-height-base) * 0.5
-  )" mixes var() with other content — not a single binding (`.sizeSmall`)
-- root [size=small]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
-- root [size=medium]: background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
-- root [size=medium]: height — literal value "16px" — a raw value is reported, never turned into an invented token (`.sizeMedium`)
-- root [size=medium]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
-- root [size=large]: background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
-- root [size=large]: height — value "calc(var(--pc-progress-bar-height-base) * 2)" mixes var() with other content — not a single binding (`.sizeLarge`)
-- root [size=large]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
-- part indicator (.Indicator): background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
+- part indicator (.Indicator): background-color — var(--pc-progress-bar-indicator) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.Indicator`)
 - part indicator (.Indicator): height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [size=small]: background-color — var(--pc-progress-bar-indicator) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.Indicator`)
+- part indicator [size=small]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [size=medium]: background-color — var(--pc-progress-bar-indicator) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.Indicator`)
+- part indicator [size=medium]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [size=large]: background-color — var(--pc-progress-bar-indicator) is defined only in other class contexts (`.toneCritical`, `.toneHighlight`, `.tonePrimary`, `.toneSuccess`) in ProgressBar/ProgressBar.module.css — carried where those contexts are promoted axes, refused in this one (`.Indicator`)
+- part indicator [size=large]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
 - part indicator [tone=highlight]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
 - part indicator [tone=primary]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
 - part indicator [tone=success]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
 - part indicator [tone=critical]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
-- part indicator [size=small]: background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
-- part indicator [size=small]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
-- part indicator [size=medium]: background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
-- part indicator [size=medium]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
-- part indicator [size=large]: background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
-- part indicator [size=large]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
 
 ## Text (`polaris.text`)
 
 - source: `polaris-react/src/components/Text/Text.module.css` + extracted API (`out/contracts/text.contract.json`)
-- carried: 44 binding(s) · refused by name: 17 · curated decisions: 4
+- carried: 57 binding(s) · refused by name: 15 · curated decisions: 6
 
 ### Curated decisions
 - NOTE: the `as` axis maps values to HTML elements — three of Polaris's values (dt, dd, legend) are outside the contract element vocabulary, so elementByProp is NOT promoted (its coverage rule refuses partial maps); the root element is fixed to `p` and the gap is named
 - NOTE: tone values 'base' and 'inherit' have no styling class in the module.css — absent from the promoted map by construction
+- NOTE: the fontWeight and tone maps NOW carry (coverage round, workstream 3): schema v14 lifts the one-tokensByProp-per-part limit — entries ride in CSS source order, so the fontWeight map overrides the variant scale exactly as Polaris's own cascade comment demands ("font-weight must be below variant styles so it can override")
+- NOTE: fontWeight/tone/alignment have NO extracted default — an unset axis applies no class on any surface (the React runtime's own semantics), so the carried maps never invent a default value
 - NOTE: the responsive variant classes step font-size at breakpoints via custom-media @media rules — named refusals; the carried bindings are the base (sub-md) values and verification renders sub-md
 - sample label "Online store dashboard" carried as a static text part — Polaris's children prop is platform API (named extraction skip); a static surface needs sample ink and both sides of the receipts render the same string
 
 ### Carried bindings (each cites its CSS rule)
+- root [tone=success]: color → `{p.color-text-success}` (from `.success { color: var(--p-color-text-success) }`)
+- root [tone=critical]: color → `{p.color-text-critical}` (from `.critical { color: var(--p-color-text-critical) }`)
+- root [tone=caution]: color → `{p.color-text-caution}` (from `.caution { color: var(--p-color-text-caution) }`)
+- root [tone=subdued]: color → `{p.color-text-secondary}` (from `.subdued { color: var(--p-color-text-secondary) }`)
+- root [tone=disabled]: color → `{p.color-text-disabled}` (from `.disabled { color: var(--p-color-text-disabled) }`)
+- root [tone=magic]: color → `{p.color-text-magic}` (from `.magic { color: var(--p-color-text-magic) }`)
+- root [tone=magic-subdued]: color → `{p.color-text-magic-secondary}` (from `.magic-subdued { color: var(--p-color-text-magic-secondary) }`)
+- root [tone=text-inverse]: color → `{p.color-text-inverse}` (from `.text-inverse { color: var(--p-color-text-inverse) }`)
+- root [tone=text-inverse-secondary]: color → `{p.color-text-inverse-secondary}` (from `.text-inverse-secondary { color: var(--p-color-text-inverse-secondary) }`)
 - root [variant=headingXs]: font-size → `{p.text-heading-xs-font-size}` (from `.headingXs { font-size: var(--p-text-heading-xs-font-size) }`)
 - root [variant=headingXs]: font-weight → `{p.text-heading-xs-font-weight}` (from `.headingXs { font-weight: var(--p-text-heading-xs-font-weight) }`)
 - root [variant=headingXs]: line-height → `{p.text-heading-xs-font-line-height}` (from `.headingXs { line-height: var(--p-text-heading-xs-font-line-height) }`)
@@ -2673,6 +2711,10 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root [variant=bodyLg]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodyLg { font-weight: var(--p-text-body-sm-font-weight) }`)
 - root [variant=bodyLg]: line-height → `{p.text-body-lg-font-line-height}` (from `.bodyLg { line-height: var(--p-text-body-lg-font-line-height) }`)
 - root [variant=bodyLg]: letter-spacing → `{p.text-body-lg-font-letter-spacing}` (from `.bodyLg { letter-spacing: var(--p-text-body-lg-font-letter-spacing) }`)
+- root [fontWeight=regular]: font-weight → `{p.font-weight-regular}` (from `.regular { font-weight: var(--p-font-weight-regular) }`)
+- root [fontWeight=medium]: font-weight → `{p.font-weight-medium}` (from `.medium { font-weight: var(--p-font-weight-medium) }`)
+- root [fontWeight=semibold]: font-weight → `{p.font-weight-semibold}` (from `.semibold { font-weight: var(--p-font-weight-semibold) }`)
+- root [fontWeight=bold]: font-weight → `{p.font-weight-bold}` (from `.bold { font-weight: var(--p-font-weight-bold) }`)
 
 ### Refused by name
 - at-rule: `@media (--p-breakpoints-md-up) { .headingXl { font-size: var(--p-text-heading-xl-font-size) } }` — conditional styling is not a contract channel
@@ -2688,18 +2730,16 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - at-rule: `@media (--p-breakpoints-md-up) { .heading3xl { letter-spacing: var(--p-text-heading-3xl-font-letter-spacing) } }` — conditional styling is not a contract channel
 - at-rule: `@media (--p-breakpoints-md-up) { .heading3xl { line-height: var(--p-text-heading-3xl-font-line-height) } }` — conditional styling is not a contract channel
 - mixin: `@mixin visually-hidden` — postcss mixin, expands outside the promoted rule model
-- root: axis fontWeight also resolves per-value bindings (regular: font-weight → {p.font-weight-regular} · medium: font-weight → {p.font-weight-medium} · semibold: font-weight → {p.font-weight-semibold} · bold: font-weight → {p.font-weight-bold}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
-- root: axis tone also resolves per-value bindings (success: color → {p.color-text-success} · critical: color → {p.color-text-critical} · caution: color → {p.color-text-caution} · subdued: color → {p.color-text-secondary} · disabled: color → {p.color-text-disabled} · magic: color → {p.color-text-magic} · magic-subdued: color → {p.color-text-magic-secondary} · text-inverse: color → {p.color-text-inverse} · text-inverse-secondary: color → {p.color-text-inverse-secondary}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
 - unmatched rule `.base` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
 - unmatched rule `.inherit` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
 
 ## Thumbnail (`polaris.thumbnail`)
 
 - source: `polaris-react/src/components/Thumbnail/Thumbnail.module.css` + extracted API (`out/contracts/thumbnail.contract.json`)
-- carried: 3 binding(s) · refused by name: 58 · curated decisions: 4
+- carried: 8 binding(s) · refused by name: 49 · curated decisions: 4
 
 ### Curated decisions
-- NOTE: per-size widths are component-private literals (--pc-thumbnail-*-size: 24…80px) — named refusals; the size axis still carries the extraSmall border-radius override (border-radius-150), the showcase's cleanest tokensByProp exhibit
+- NOTE: per-size widths NOW carry (coverage round, workstream 1): --pc-thumbnail-*-size chains resolve to their literal definitions (24…80px) — per-size literals with provenance; the extraSmall border-radius override (border-radius-150) still rides tokensByProp, the showcase's cleanest per-axis exhibit
 - NOTE: the inset bevel rides an ::after pseudo-element (shadow-border-inset) — named refusal
 - NOTE: the image itself is the source prop (URL) — media content, not a styling channel
 - prop `alt`: showcase sample default 'Black choker necklace' added (required text prop; the generator needs a canvas/story sample) — Polaris itself declares NO default for it
@@ -2707,7 +2747,12 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 ### Carried bindings (each cites its CSS rule)
 - root (.Thumbnail): background → `{p.color-bg-surface}` (from `.Thumbnail { background: var(--p-color-bg-surface) }`)
 - root (.Thumbnail): border-radius → `{p.border-radius-200}` (from `.Thumbnail { border-radius: var(--p-border-radius-200) }`)
+- root (.Thumbnail): min-width → literal `24px` (resolved through --pc-thumbnail-extra-small-size; defined by `.Thumbnail` in Thumbnail/Thumbnail.module.css:3)
 - root [size=extraSmall]: border-radius → `{p.border-radius-150}` (from `.Thumbnail.sizeExtraSmall, .Thumbnail.sizeExtraSmall::after { border-radius: var(--p-border-radius-150) }`)
+- root [size=extraSmall]: width → literal `24px` (resolved through --pc-thumbnail-extra-small-size; defined by `.Thumbnail` in Thumbnail/Thumbnail.module.css:3)
+- root [size=small]: width → literal `40px` (resolved through --pc-thumbnail-small-size; defined by `.Thumbnail` in Thumbnail/Thumbnail.module.css:4)
+- root [size=medium]: width → literal `60px` (resolved through --pc-thumbnail-medium-size; defined by `.Thumbnail` in Thumbnail/Thumbnail.module.css:5)
+- root [size=large]: width → literal `80px` (resolved through --pc-thumbnail-large-size; defined by `.Thumbnail` in Thumbnail/Thumbnail.module.css:6)
 
 ### Refused by name
 - root (.Thumbnail): combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
@@ -2715,35 +2760,26 @@ styling fact the contract does NOT carry, with the reason. Nothing is silent.
 - root (.Thumbnail): pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
 - root (.Thumbnail): pseudo/attribute ":" in ".Thumbnail::after" — not promotable
 - root (.Thumbnail): pseudo/attribute ":" in ".Thumbnail::before" — not promotable
-- root (.Thumbnail): min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
 - root [size=extraSmall]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
 - root [size=extraSmall]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
 - root [size=extraSmall]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
 - root [size=extraSmall]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
 - root [size=extraSmall]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
-- root [size=extraSmall]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
-- root [size=extraSmall]: width — literal value "24px" — a raw value is reported, never turned into an invented token (`.sizeExtraSmall`)
 - root [size=small]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
 - root [size=small]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
 - root [size=small]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
 - root [size=small]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
 - root [size=small]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
-- root [size=small]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
-- root [size=small]: width — literal value "40px" — a raw value is reported, never turned into an invented token (`.sizeSmall`)
 - root [size=medium]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
 - root [size=medium]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
 - root [size=medium]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
 - root [size=medium]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
 - root [size=medium]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
-- root [size=medium]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
-- root [size=medium]: width — literal value "60px" — a raw value is reported, never turned into an invented token (`.sizeMedium`)
 - root [size=large]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
 - root [size=large]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
 - root [size=large]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
 - root [size=large]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
 - root [size=large]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
-- root [size=large]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
-- root [size=large]: width — literal value "80px" — a raw value is reported, never turned into an invented token (`.sizeLarge`)
 - root :hover: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
 - root :hover: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
 - root :hover: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable

@@ -32,6 +32,7 @@ import {
   isNativeCheckablePart,
   shapeCssDecls,
   slotsOf,
+  tokensByPropEntries,
   walkAnatomy,
   type Contract,
   type Part,
@@ -208,13 +209,28 @@ function componentCss(contract: Contract): string[] {
 
   // v10 tokensByProp on the root: per-enum-value overrides land in the SAME
   // enum-modifier rules substituted refs use — mirrors emit-react generateCss.
-  if (root.tokensByProp) {
-    const { prop: tbpProp, map } = root.tokensByProp;
+  // v14: multiple entries in order — a later entry's rules are emitted later,
+  // so at equal specificity the later entry wins per channel.
+  for (const { prop: tbpProp, map } of tokensByPropEntries(root)) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const key = `${tbpProp} ${value}`;
         const entry = enumRules.get(key) ?? { prop: tbpProp, value, decls: [] };
         entry.decls.push(`${cssProp}: ${cssVar(stripBraces(ref))}`);
+        enumRules.set(key, entry);
+      }
+    }
+  }
+  // v14 literals on the root: base decls + per-value enum-modifier rules.
+  for (const [cssProp, lit] of Object.entries(root.literals ?? {})) {
+    rootDecls.push(`${cssProp}: ${lit}`);
+  }
+  for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
+    for (const [value, overrides] of Object.entries(map)) {
+      for (const [cssProp, lit] of Object.entries(overrides)) {
+        const key = `${lbpProp} ${value}`;
+        const entry = enumRules.get(key) ?? { prop: lbpProp, value, decls: [] };
+        entry.decls.push(`${cssProp}: ${lit}`);
         enumRules.set(key, entry);
       }
     }
@@ -364,8 +380,23 @@ function componentCss(contract: Contract): string[] {
       }
       decls.push(`${cssProp}: ${cssVar(refPath)}`);
     }
-    if (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) {
+    if (
+      (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) ||
+      (part.literals && 'border-width' in part.literals)
+    ) {
       decls.push('border-style: solid');
+    }
+    // v14 literals on a nested part: base decls + per-value descendant rules.
+    for (const [cssProp, lit] of Object.entries(part.literals ?? {})) {
+      decls.push(`${cssProp}: ${lit}`);
+    }
+    for (const entry of part.literalsByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        subRules.push([
+          `${enumCls(entry.prop, value)} ${partCls(name)}`,
+          Object.entries(overrides).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+        ]);
+      }
     }
     // A box holding a visually-managed native input anchors it and carries
     // the focus ring — mirrors core/emit-react.ts generateCss.
@@ -381,10 +412,11 @@ function componentCss(contract: Contract): string[] {
     for (const [sel, d] of subRules) rule(sel, d);
     // v10 tokensByProp on a nested part: descendant rule under the root's
     // enum modifier class — the nested-token-substitution rule shape.
-    if (part.tokensByProp) {
-      for (const [value, overrides] of Object.entries(part.tokensByProp.map)) {
+    // v14: multiple entries in order (later entries win per channel).
+    for (const entry of tokensByPropEntries(part)) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
         rule(
-          `${enumCls(part.tokensByProp.prop, value)} ${partCls(name)}`,
+          `${enumCls(entry.prop, value)} ${partCls(name)}`,
           Object.entries(overrides).map(([cssProp, ref]) => `${cssProp}: ${cssVar(stripBraces(ref))}`),
         );
       }
@@ -613,7 +645,17 @@ function renderComponentHtml(
   const el = elementByProp
     ? (elementByProp.map[propValue(elementByProp.prop) ?? ''] ?? contract.semantics.element)
     : contract.semantics.element;
-  const classes = [k, ...enumProps(contract).map((p) => `${k}--${p.name}-${state.subst[p.name]}`)];
+  // A defaultless enum prop left unset applies NO modifier class — exactly
+  // what the React surface renders at runtime (styles[`prop-undefined`] is
+  // undefined and cx skips it). Polaris's optional styling axes (Text
+  // fontWeight/tone) depend on this: unset means "the other axes' classes
+  // decide", never "the first enum value".
+  const classes = [
+    k,
+    ...enumProps(contract)
+      .filter((p) => state.subst[p.name] !== undefined)
+      .map((p) => `${k}--${p.name}-${state.subst[p.name]}`),
+  ];
   const attrs: string[] = [`class="${classes.join(' ')}"`];
   const supportsDisabled = ['button', 'input', 'textarea', 'select', 'fieldset'].includes(el);
   for (const p of boolProps(contract)) {
@@ -679,7 +721,12 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
 
   const defaultsState = (): RenderState => {
     const s: RenderState = { subst: {}, bools: {} };
-    for (const p of enumProps(contract)) s.subst[p.name] = String(p.default ?? p.type.enum[0]);
+    // Defaultless enum props stay UNSET (no modifier class, no override) —
+    // the React runtime's semantics; showcase items that exercise a value
+    // set it explicitly below.
+    for (const p of enumProps(contract)) {
+      if (p.default !== undefined) s.subst[p.name] = String(p.default);
+    }
     for (const p of boolProps(contract)) s.bools[p.name] = p.default === true;
     return s;
   };

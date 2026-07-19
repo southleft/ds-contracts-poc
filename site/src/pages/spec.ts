@@ -25,6 +25,7 @@ import {
   VariantLayoutSchema,
   LayoutByPropSchema,
   TokensByPropSchema,
+  LiteralsByPropSchema,
   StylesWhenSchema,
   OverlaySchema,
   ShapeSchema,
@@ -468,7 +469,7 @@ function tokensPage(): { route: string; html: string } {
       'tokens-by-prop',
       'Tokens by prop',
       ['generated', 'curated'],
-      `<p><code>tokensByProp: { prop, map }</code> — the value-level sibling of the substituted reference. A substituted ref can only carry bindings whose token <em>names</em> spell the axis value; real foreign vocabularies name tokens by scale step (<code>{spacing.200}</code> on large, <code>{spacing.150}</code> on small), so a binding that is a plain function of one enum axis needs a per-value map. Map values are overrides merged over the part’s base <code>tokens</code>; only the values that deviate appear, and refs are plain — no placeholders.</p>` +
+      `<p><code>tokensByProp: { prop, map }</code> — the value-level sibling of the substituted reference. A substituted ref can only carry bindings whose token <em>names</em> spell the axis value; real foreign vocabularies name tokens by scale step (<code>{spacing.200}</code> on large, <code>{spacing.150}</code> on small), so a binding that is a plain function of one enum axis needs a per-value map. Map values are overrides merged over the part’s base <code>tokens</code>; only the values that deviate appear, and refs are plain — no placeholders.</p><p><strong>Multiple entries (v14):</strong> a part may carry an <em>ordered array</em> of entries — one per driving axis (Button: variant colors <em>and</em> size paddings; Text: the variant scale <em>and</em> the fontWeight map). The single-object spelling stays valid. When two entries on <em>different</em> props override the same channel, the later entry wins — mirroring the CSS source-order cascade the values were extracted from. Two entries may not claim the same channel for the same prop: a conflicting channel+prop pair is refused by name.</p>` +
         fieldList(TokensByPropSchema as AnySchema, {
           prop: 'The driving enum prop, by canonical name.',
           map: 'enum value → (CSS property → plain TokenRef), merged over the base tokens.',
@@ -477,8 +478,36 @@ function tokensPage(): { route: string; html: string } {
           'the driving prop must be a declared enum; every map key one of its values',
           'a placeholder inside a mapped ref — per-value maps <em>are</em> the substitution; a placeholder would be double substitution',
           'a component-instance part — the child contract owns its styling',
+          'two entries claiming the same channel for the same prop (a conflicting channel+prop pair) — within tokensByProp or across tokensByProp/literalsByProp',
         ]) +
         shippingExample('token.contract.json', { paths: ['anatomy.root.tokensByProp'] }),
+    ),
+    section(
+      'literals',
+      'Literal channels',
+      ['generated', 'curated'],
+      `<p><code>literals</code> and <code>literalsByProp</code> (v14) carry the styling facts a foreign system keeps as <em>component-private literals</em> — Polaris’s <code>--pc-*</code> pixel geometry (ProgressBar’s per-size track heights, Avatar’s per-size widths, Button’s <code>transparent</code> base background). A literal is only carried when it was resolved <em>deterministically</em> through the source’s own var() chain at promotion time, with provenance; it is never minted into a token — the value is honestly literal, and renaming it against a real token is the adopter’s call.</p><p>The grammar is bounded: px/rem/em/unitless numbers, hex and <code>rgb()</code>/<code>rgba()</code> colors, and the CSS keywords <code>transparent</code>/<code>inherit</code>/<code>currentColor</code>. The channel set is bounded too (geometry and paint channels — see the refusal list). <code>literalsByProp</code> is the per-enum-value form, an ordered array with exactly the tokensByProp entry semantics.</p>` +
+        fieldList(LiteralsByPropSchema as AnySchema, {
+          prop: 'The driving enum prop, by canonical name.',
+          map: 'enum value → (CSS property → bounded literal), merged over the base literals.',
+        }) +
+        refusals('Refusals:', [
+          'a channel outside the bounded literal-channel set (background/background-color, color, height/width/min-*, padding-block/-inline, gap, border-radius, border-width, font-size, line-height, letter-spacing)',
+          'a value outside the bounded grammar (no gradients, no calc(), no keywords beyond transparent/inherit/currentColor)',
+          'a channel carried as BOTH a token binding and a literal on the same part — ambiguous',
+          'a component-instance part — the child contract owns its styling',
+        ]) +
+        illustrativeExample(
+          PartSchema,
+          {
+            element: 'div',
+            tokens: { 'background-color': '{color.progress.track}' },
+            literalsByProp: [
+              { prop: 'size', map: { small: { height: '8px' }, medium: { height: '16px' }, large: { height: '32px' } } },
+            ],
+          },
+          'per-size literal track heights (schema v14 — the Polaris ProgressBar shape)',
+        ),
     ),
   ].join('');
   return specPage(

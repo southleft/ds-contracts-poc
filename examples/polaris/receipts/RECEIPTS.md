@@ -15,20 +15,29 @@ every line is in extraction/PROMOTION.md.
 
 | component | combos | rows compared | rows matched | mismatched | named refusal lines (PROMOTION.md) |
 |---|---|---|---|---|---|
-| `polaris.button` | 6 | 26 | 26 | 0 | 333 |
-| `polaris.badge` | 1 | 6 | 6 | 0 | 37 |
-| `polaris.banner` | 4 | 8 | 8 | 0 | 27 |
+| `polaris.button` | 6 | 77 | 74 | 3 | 316 |
+| `polaris.badge` | 1 | 10 | 10 | 0 | 38 |
+| `polaris.banner` | 4 | 40 | 40 | 0 | 27 |
 | `polaris.checkbox` | 1 | 2 | 1 | 1 | 502 |
 | `polaris.radio-button` | 1 | 4 | 4 | 0 | 339 |
-| `polaris.text-field` | 1 | 11 | 11 | 0 | 907 |
-| `polaris.tag` | 1 | 3 | 3 | 0 | 43 |
-| `polaris.avatar` | 1 | 4 | 2 | 2 | 57 |
+| `polaris.text-field` | 1 | 11 | 11 | 0 | 905 |
+| `polaris.tag` | 1 | 7 | 7 | 0 | 43 |
+| `polaris.avatar` | 3 | 18 | 12 | 6 | 46 |
 | `polaris.spinner` | 2 | 4 | 4 | 0 | 8 |
-| `polaris.progress-bar` | 4 | 12 | 12 | 0 | 32 |
-| `polaris.text` | 4 | 16 | 15 | 1 | 17 |
-| `polaris.thumbnail` | 2 | 4 | 4 | 0 | 58 |
+| `polaris.progress-bar` | 6 | 24 | 24 | 0 | 29 |
+| `polaris.text` | 4 | 17 | 17 | 0 | 15 |
+| `polaris.thumbnail` | 2 | 8 | 8 | 0 | 49 |
 
 ## Mismatched rows (named, no tolerance)
+
+### polaris.button
+
+- `variant-primary` label.font-weight — ours: `font-weight: 550` · theirs: `font-weight: 650`
+  - NAMED CAUSE: Polaris computes the primary label's fontWeight as `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177) — a media-dependent runtime branch, refused by name in PROMOTION.md; the carried base 'medium' renders on our side while sub-md Polaris renders semibold
+- `variant-plain` label.font-size — ours: `font-size: 12px` · theirs: `font-size: 13px`
+  - NAMED CAUSE: Polaris upgrades plain/monochromePlain labels to bodyMd when size !== 'micro' (Button.tsx 179-182) — a two-axis condition, refused by name (mint-code discipline); the carried bodySm base renders on our side
+- `variant-plain` label.line-height — ours: `line-height: 16px` · theirs: `line-height: 20px`
+  - NAMED CAUSE: same two-axis plain/monochromePlain bodyMd branch as the font-size row — refused by name, carried base renders
 
 ### polaris.checkbox
 
@@ -37,15 +46,18 @@ every line is in extraction/PROMOTION.md.
 
 ### polaris.avatar
 
-- `default` root.background — ours: `background-color: rgb(181, 181, 181)` · theirs: `background-color: rgb(253, 75, 146)`
-  - NAMED CAUSE: Polaris hashes the name/initials into one of seven palette classes (styleOne…styleSeven) that override the base avatar tokens — value-derived styling has no contract channel (named in PROMOTION.md), so the carried BASE binding renders the base palette while Polaris renders the hashed one
-- `default` root.color — ours: `color: rgb(255, 255, 255)` · theirs: `color: rgb(255, 246, 248)`
-  - NAMED CAUSE: same name-hash palette override as background — the base color token is carried, the hashed one is not derivable from a prop
-
-### polaris.text
-
-- `body-sm-bold` root.font-weight — ours: `font-weight: 450` · theirs: `font-weight: 700`
-  - NAMED CAUSE: the fontWeight axis mechanically resolves per-value bindings (.bold → {p.font-weight-bold}) but the schema carries ONE tokensByProp per part and the variant axis won by curation order — the named schema limit in PROMOTION.md; the combo shows Polaris's bold (700) against the variant's weight (450)
+- `default` root.background — ours: `background-color: rgb(197, 48, 197)` · theirs: `background-color: rgb(253, 75, 146)`
+  - NAMED CAUSE: Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one
+- `default` root.color — ours: `color: rgb(253, 239, 253)` · theirs: `color: rgb(255, 246, 248)`
+  - NAMED CAUSE: same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop
+- `size-xs` root.background — ours: `background-color: rgb(197, 48, 197)` · theirs: `background-color: rgb(253, 75, 146)`
+  - NAMED CAUSE: Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one
+- `size-xs` root.color — ours: `color: rgb(253, 239, 253)` · theirs: `color: rgb(255, 246, 248)`
+  - NAMED CAUSE: same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop
+- `size-xl` root.background — ours: `background-color: rgb(197, 48, 197)` · theirs: `background-color: rgb(253, 75, 146)`
+  - NAMED CAUSE: Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one
+- `size-xl` root.color — ours: `color: rgb(253, 239, 253)` · theirs: `color: rgb(255, 246, 248)`
+  - NAMED CAUSE: same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop
 
 ## Receipt chrome (named)
 

@@ -334,7 +334,19 @@ async function buildNode(spec, registry) {
       : figma.createPolygon();
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
     node.resize(spec.shape.width, spec.shape.height);
-    if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    node.fills = spec.fill ? [boundPaint(spec.fill, node)] : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
     if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();

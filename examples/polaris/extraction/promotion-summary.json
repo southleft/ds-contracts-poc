@@ -1,18 +1,18 @@
 {
   "polaris.button": {
-    "carried": 13,
-    "refused": 333,
-    "curated": 4
+    "carried": 39,
+    "refused": 316,
+    "curated": 5
   },
   "polaris.badge": {
-    "carried": 6,
-    "refused": 37,
+    "carried": 10,
+    "refused": 38,
     "curated": 3
   },
   "polaris.banner": {
-    "carried": 9,
+    "carried": 17,
     "refused": 27,
-    "curated": 6
+    "curated": 8
   },
   "polaris.checkbox": {
     "carried": 3,
@@ -25,19 +25,19 @@
     "curated": 3
   },
   "polaris.text-field": {
-    "carried": 14,
-    "refused": 907,
+    "carried": 16,
+    "refused": 905,
     "curated": 6
   },
   "polaris.tag": {
-    "carried": 3,
+    "carried": 7,
     "refused": 43,
     "curated": 5
   },
   "polaris.avatar": {
-    "carried": 4,
-    "refused": 57,
-    "curated": 3
+    "carried": 10,
+    "refused": 46,
+    "curated": 7
   },
   "polaris.spinner": {
     "carried": 2,
@@ -45,18 +45,18 @@
     "curated": 2
   },
   "polaris.progress-bar": {
-    "carried": 9,
-    "refused": 32,
-    "curated": 2
+    "carried": 12,
+    "refused": 29,
+    "curated": 3
   },
   "polaris.text": {
-    "carried": 44,
-    "refused": 17,
-    "curated": 4
+    "carried": 57,
+    "refused": 15,
+    "curated": 6
   },
   "polaris.thumbnail": {
-    "carried": 3,
-    "refused": 58,
+    "carried": 8,
+    "refused": 49,
     "curated": 4
   }
 }

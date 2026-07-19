@@ -123,12 +123,24 @@
       "parts": {
         "title": {
           "element": "h2",
+          "tokens": {
+            "font-size": "{p.text-heading-sm-font-size}",
+            "font-weight": "{p.text-heading-sm-font-weight}",
+            "line-height": "{p.text-heading-sm-font-line-height}",
+            "letter-spacing": "{p.text-heading-sm-font-letter-spacing}"
+          },
           "content": {
             "prop": "title"
           }
         },
         "body": {
           "element": "span",
+          "tokens": {
+            "font-size": "{p.text-body-md-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-md-font-line-height}",
+            "letter-spacing": "{p.text-body-md-font-letter-spacing}"
+          },
           "text": "Your order has shipped."
         }
       }

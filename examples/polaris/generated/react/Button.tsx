@@ -32,7 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   const classes = [styles.root, styles[`size-${size}`], styles[`textAlign-${textAlign}`], styles[`tone-${tone}`], styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
     <button ref={ref} className={classes} data-full-width={fullWidth || undefined} data-remove-underline={removeUnderline || undefined} data-data-primary-link={dataPrimaryLink || undefined} {...rest}>
-      {children}
+      <span className={styles.label}>Button</span>
     </button>
   );
 });

@@ -12,23 +12,23 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 
 | contract | variants compiled | variant axes | distinct bound variable names | script committed |
 |---|---|---|---|---|
-| `polaris.avatar` | 5 | 1 | 1 | yes |
+| `polaris.avatar` | 5 | 1 | 2 | yes |
 | `polaris.badge` | 1 | 0 | 5 | yes |
 | `polaris.banner` | 4 | 1 | 8 | yes |
-| `polaris.button` | 200 | 4 | 3 | yes |
+| `polaris.button` | 200 | 4 | 14 | yes |
 | `polaris.checkbox` | 1 | 0 | 2 | yes |
 | `polaris.progress-bar` | 12 | 2 | 6 | yes |
 | `polaris.radio-button` | 1 | 0 | 4 | yes |
 | `polaris.spinner` | 2 | 1 | 0 | yes |
 | `polaris.tag` | 1 | 0 | 3 | yes |
-| `polaris.text-field` | 1344 | 5 | 6 | NO — variant explosion (see below) |
-| `polaris.text` | 23232 | 5 | 0 | NO — variant explosion (see below) |
-| `polaris.thumbnail` | 4 | 1 | 2 | yes |
+| `polaris.text-field` | 1344 | 5 | 7 | NO — variant explosion (see below) |
+| `polaris.text` | 23232 | 5 | 9 | NO — variant explosion (see below) |
+| `polaris.thumbnail` | 4 | 1 | 3 | yes |
 
 ## Variant-explosion exclusions (compiled, verified, NOT committed)
 
-- `polaris.text-field`: 1344 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 2.3MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
-- `polaris.text`: 23232 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 13.8MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
+- `polaris.text-field`: 1344 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 2.4MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
+- `polaris.text`: 23232 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 14.7MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
 
 ## Token variable upsert — named BYO limits
 

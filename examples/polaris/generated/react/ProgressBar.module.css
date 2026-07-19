@@ -27,6 +27,18 @@
   background-color: var(--p-color-bg-fill-tertiary);
 }
 
+.size-small {
+  height: 8px;
+}
+
+.size-medium {
+  height: 16px;
+}
+
+.size-large {
+  height: 32px;
+}
+
 .tone-highlight .indicator {
   background-color: var(--p-color-bg-fill-info);
 }

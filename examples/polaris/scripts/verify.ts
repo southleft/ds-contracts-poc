@@ -42,7 +42,11 @@ import path from 'node:path';
 import { chromium, type Browser, type Page } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { ContractSchema, type Contract } from '../../../scripts/contract-schema.js';
-import { resolveTokens, walkAnatomy, type Part } from '../../../scripts/contract-schema.js';
+import {
+  tokensByPropEntries,
+  walkAnatomy,
+  type Part,
+} from '../../../scripts/contract-schema.js';
 import { emitHtml } from '../../../core/index.js';
 import { tokenInventoryFromJson } from '../../../core/tokens.js';
 import { kebab } from '../../../extract/types.js';
@@ -252,13 +256,34 @@ function rowsFor(cur: ComponentCuration, combo: Record<string, string | number |
   const subst: Record<string, string> = {};
   for (const p of contract.props) {
     if (typeof p.type === 'object' && 'enum' in p.type) {
-      subst[p.name] = String(combo[p.name] ?? p.default ?? p.type.enum[0]);
+      // A defaultless enum prop left unset stays UNSET — no modifier class
+      // renders on any surface and no per-value override applies (the React
+      // runtime's own semantics; emit-html mirrors it).
+      const v = combo[p.name] ?? p.default;
+      if (v !== undefined) subst[p.name] = String(v);
     }
   }
   const rows: RowSpec[] = [];
   const pushRows = (partName: string, part: Part, oursSelector: string, theirsSelector: string | undefined, rootRowSelector?: Record<string, string>) => {
     if (!theirsSelector && !rootRowSelector) return;
-    const carried = resolveTokens(part, subst);
+    // Carried channels for this combo: token bindings AND (v14) literal
+    // channels. Precedence mirrors the emitted CSS cascade: BASE maps first
+    // (token/literal overlap in bases is refused at validation), then
+    // per-value overrides in entry order (enum-class rules land after the
+    // base rule, so an override always beats a base of either kind — e.g.
+    // Button's variant background token beats the base `transparent`
+    // literal). A literal row's `ref` column shows the literal value.
+    const carried: Record<string, string> = {};
+    for (const [ch, ref] of Object.entries(part.tokens ?? {})) carried[ch] = ref;
+    for (const [ch, lit] of Object.entries(part.literals ?? {})) carried[ch] = `literal ${lit}`;
+    for (const e of tokensByPropEntries(part)) {
+      const o = e.map[subst[e.prop] ?? ''];
+      if (o) for (const [ch, ref] of Object.entries(o)) carried[ch] = ref;
+    }
+    for (const e of part.literalsByProp ?? []) {
+      const o = e.map[subst[e.prop] ?? ''];
+      if (o) for (const [ch, lit] of Object.entries(o)) carried[ch] = `literal ${lit}`;
+    }
     for (const [channel, ref] of Object.entries(carried)) {
       if (!COMPUTED[channel]) continue;
       const theirs = rootRowSelector?.[channel] ?? theirsSelector;

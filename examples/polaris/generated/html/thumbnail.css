@@ -11,10 +11,24 @@
   border: 0;
   background: var(--p-color-bg-surface);
   border-radius: var(--p-border-radius-200);
+  min-width: 24px;
 }
 
 .thumbnail--size-extraSmall {
   border-radius: var(--p-border-radius-150);
+  width: 24px;
+}
+
+.thumbnail--size-small {
+  width: 40px;
+}
+
+.thumbnail--size-medium {
+  width: 60px;
+}
+
+.thumbnail--size-large {
+  width: 80px;
 }
 
 /* showcase chrome */
