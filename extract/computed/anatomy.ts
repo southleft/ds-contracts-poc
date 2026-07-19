@@ -852,6 +852,33 @@ export function promoteAnatomy(
   // captured nesting; unmatched static parts are re-attached afterwards.
   const newRoot = structuredClone(rootPart);
   delete newRoot.parts;
+  // Root display fact: computed truth wins the display channel (the static
+  // extraction's layout.display is a source-reading guess; TextField's root
+  // is a block in the browser, and a flex guess put the label beside the
+  // field) — override is RECEIPTED, never silent.
+  {
+    const displays = new Set<string>();
+    for (const combo of enabled) {
+      const el = union.alignedByKey.get(`${combo.key}__default`)?.[0];
+      if (el) displays.add(el.node.style['display']);
+    }
+    if (displays.size === 1) {
+      const d = [...displays][0];
+      if (d === 'flex' || d === 'inline-flex') {
+        if (newRoot.layout?.display !== d) {
+          receipts.push(`root-display-carried: ${d}${newRoot.layout?.display ? ` (overrides reviewed "${newRoot.layout.display}" — computed truth wins display, receipted)` : ''}`);
+        }
+        newRoot.layout = { ...newRoot.layout, display: d };
+      } else if (/^(inline|inline-block|block|contents)$/.test(d)) {
+        if (newRoot.layout?.display) {
+          receipts.push(`root-display-carried: ${d} via declared (overrides reviewed layout.display "${newRoot.layout.display}" — computed truth wins display, receipted)`);
+          delete newRoot.layout.display;
+          if (Object.keys(newRoot.layout).length === 0) delete newRoot.layout;
+        }
+        newRoot.declared = { display: d, ...newRoot.declared };
+      }
+    }
+  }
   const rootChildren: Record<string, Part> = {};
   for (const c of rootEntry.children) {
     const cp = buildPart(c);
