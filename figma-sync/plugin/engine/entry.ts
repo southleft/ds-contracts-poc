@@ -282,10 +282,19 @@ export function createPluginEngine(data: PluginEngineData) {
     | { ok: false; issues: PlainIssue[] } {
     const issues: PlainIssue[] = [];
     const incoming: Contract[] = [];
+    const seen = new Set<string>();
     rawContracts.forEach((raw, i) => {
       const v = validateOne(raw, labelOf(raw, i));
-      if (v.ok) incoming.push(v.contract);
-      else issues.push(...v.issues);
+      if (!v.ok) {
+        issues.push(...v.issues);
+        return;
+      }
+      if (seen.has(v.contract.id)) {
+        issues.push(plain(`This bundle carries "${v.contract.id}" twice — each contract id must appear once.`));
+        return;
+      }
+      seen.add(v.contract.id);
+      incoming.push(v.contract);
     });
     if (issues.length > 0) return { ok: false, issues };
 
@@ -434,8 +443,22 @@ return { inventory: rows };
     });
     const byId = scopeFor(incoming);
 
+    const seenIds = new Set<string>();
     rawContracts.forEach((raw, i) => {
       const contract = parsedByIndex.get(i);
+      if (contract) {
+        if (seenIds.has(contract.id)) {
+          rows.push({
+            contractId: contract.id,
+            setName: contract.name,
+            version: contract.version,
+            action: 'refused',
+            line: `• ${contract.name}: refused — this bundle carries "${contract.id}" twice; each contract id must appear once.`,
+          });
+          return;
+        }
+        seenIds.add(contract.id);
+      }
       if (!contract) {
         const v = validateOne(raw, labelOf(raw, i));
         const first = v.ok ? plain('unknown') : v.issues[0];
