@@ -573,7 +573,8 @@ async function main() {
       },
       focusVisibleDriverMatched: aligned.captures.filter((c) => c.interaction === 'focus-visible' && c.focusVisibleMatched).length,
       focusVisibleDriverTotal: aligned.captures.filter((c) => c.interaction === 'focus-visible').length,
-      runtimeSeconds: Math.round((Date.now() - t0) / 1000),
+      // NO runtimeSeconds here: committed receipts must byte-reproduce
+      // (wall time prints on the console instead)
     };
 
     // ---- delta ledger ----
