@@ -1,0 +1,175 @@
+# DESIGN-LED journey — contracts change (a merged/opened design proposal);
+# CI regenerates the code and shows reviewers what it looks like.
+#
+# On every pull request that touches contracts/ this workflow:
+#   1. regenerates React + CSS Modules + Storybook stories from the changed
+#      contracts with the PUBLISHED @ds-contracts/cli@0.1.0,
+#   2. GATE — `ds-contracts diff`: after regeneration, contracts ⟷ code parity
+#      must hold. Exit codes are the contract: 0 clean · 1 drift (fails the
+#      job, findings named on stderr) · 2 configuration error,
+#   3. builds Storybook over the regenerated stories,
+#   4. screenshots every story of every changed component (playwright over the
+#      static Storybook build — no dev server),
+#   5. uploads the screenshots as an artifact and posts a PR comment with the
+#      changed-component list (plain GITHUB_TOKEN REST call — no external
+#      services, no marketplace actions for the comment).
+#
+# Consumer-repo layout this recipe assumes (see examples/ci/README.md):
+#   contracts/*.contract.json        the adopted contracts (the truth)
+#   tokens/*.dtcg.json               DTCG token sources
+#   src/generated/                   generation target (checked in or ignored)
+#   .storybook/                      the evals/fixtures/storybook-skeleton config
+#   ds-contracts.config.json         code.root = src/generated, diagnose.contracts = contracts
+#
+# Validated locally step-by-step against the published CLI:
+# examples/ci/VALIDATION.md (produced by examples/ci/validate.mjs).
+
+name: contracts-design-led
+
+on:
+  pull_request:
+    paths:
+      - 'contracts/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  regenerate-and-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install consumer-repo dependencies (Storybook, React)
+        run: npm ci
+
+      - name: Regenerate code + stories from the contracts
+        run: |
+          npx --yes @ds-contracts/cli@0.1.0 generate contracts \
+            --out src/generated \
+            --tokens tokens/polaris-light.dtcg.json,tokens/polaris-minted.dtcg.json \
+            --icons icons \
+            --stories
+
+      - name: "GATE: contracts ⟷ regenerated code parity (exit 0 clean · 1 drift · 2 config error)"
+        run: |
+          npx --yes @ds-contracts/cli@0.1.0 diff ds-contracts.config.json
+
+      - name: Build Storybook (static — no dev server)
+        run: npm run build-storybook
+
+      - name: Name the changed contracts
+        run: |
+          # CHANGED_CONTRACTS can be pre-set (workflow_dispatch / local
+          # validation); on a PR it falls out of the base..head diff.
+          if [ -z "${CHANGED_CONTRACTS:-}" ]; then
+            CHANGED_CONTRACTS=$(git diff --name-only "origin/${GITHUB_BASE_REF}...HEAD" -- 'contracts/*.contract.json')
+          fi
+          printf '%s\n' $CHANGED_CONTRACTS > changed-contracts.txt
+          echo "Changed contracts:" && cat changed-contracts.txt
+
+      - name: Install playwright (pinned — matches the browser revision cache)
+        run: |
+          npm i --no-save playwright@1.61.1
+          npx playwright install chromium
+
+      - name: Screenshot the changed stories
+        run: |
+          node --input-type=module <<'EOF'
+          import { createServer } from "node:http";
+          import { readFileSync, existsSync, mkdirSync, statSync } from "node:fs";
+          import path from "node:path";
+          import { chromium } from "playwright";
+
+          const STATIC = "storybook-static";
+          const MIME = {
+            ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript",
+            ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml",
+            ".png": "image/png", ".woff2": "font/woff2",
+          };
+          const server = createServer((req, res) => {
+            const rel = decodeURIComponent(new URL(req.url, "http://x").pathname);
+            let file = path.join(STATIC, rel === "/" ? "index.html" : rel);
+            if (!existsSync(file) || statSync(file).isDirectory()) { res.writeHead(404); res.end(); return; }
+            res.writeHead(200, { "content-type": MIME[path.extname(file)] ?? "application/octet-stream" });
+            res.end(readFileSync(file));
+          });
+          await new Promise((r) => server.listen(0, "127.0.0.1", r));
+          const base = `http://127.0.0.1:${server.address().port}`;
+
+          // Changed contract files → component names → story ids (Storybook's
+          // own static index — the emitted stories title as Components/<Name>).
+          const changed = readFileSync("changed-contracts.txt", "utf8").split("\n").filter(Boolean);
+          const names = changed.map((f) => JSON.parse(readFileSync(f, "utf8")).name);
+          const index = JSON.parse(readFileSync(`${STATIC}/index.json`, "utf8"));
+          const stories = Object.values(index.entries).filter(
+            (e) => e.type === "story" && names.some((n) => e.title === `Components/${n}`),
+          );
+          if (stories.length === 0) throw new Error(`no stories found for changed components: ${names.join(", ")}`);
+
+          mkdirSync("screenshots", { recursive: true });
+          const browser = await chromium.launch({
+            executablePath: process.env.CHROMIUM_PATH || undefined,
+          });
+          const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
+          for (const s of stories) {
+            await page.goto(`${base}/iframe.html?id=${s.id}&viewMode=story`, { waitUntil: "networkidle" });
+            await page.waitForSelector("#storybook-root > *", { state: "visible" });
+            const root = page.locator("#storybook-root");
+            await root.screenshot({ path: `screenshots/${s.id}.png` });
+            console.log(`screenshots/${s.id}.png`);
+          }
+          await browser.close();
+          server.close();
+          EOF
+
+      - name: Upload the story screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-screenshots
+          path: screenshots/
+
+      - name: Compose the PR comment
+        run: |
+          node --input-type=module <<'EOF'
+          import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+          const changed = readFileSync("changed-contracts.txt", "utf8").split("\n").filter(Boolean);
+          const shots = readdirSync("screenshots").filter((f) => f.endsWith(".png")).sort();
+          const lines = [
+            "## ds-contracts — design-led review",
+            "",
+            "Contracts changed in this PR regenerated code + stories (parity gate: clean).",
+            "",
+            "| Contract | Version |",
+            "| --- | --- |",
+            ...changed.map((f) => {
+              const c = JSON.parse(readFileSync(f, "utf8"));
+              return `| \`${c.id}\` (${c.name}) | ${c.version} |`;
+            }),
+            "",
+            `**${shots.length} story screenshot(s)** in the \`story-screenshots\` artifact:`,
+            ...shots.map((f) => `- \`${f}\``),
+            "",
+            "_Review the stories against the Figma frames, then merge — the generated code IS the contract._",
+          ];
+          writeFileSync("comment.json", JSON.stringify({ body: lines.join("\n") }) + "\n");
+          console.log(lines.join("\n"));
+          EOF
+
+      - name: Post the PR comment (plain GITHUB_TOKEN — no external services)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          curl -sf -X POST \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
+            -d @comment.json

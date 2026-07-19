@@ -1,0 +1,22 @@
+{
+  "name": "storybook-skeleton",
+  "$comment": "The smallest viable Storybook package layout that ds-contracts-emitted stories render in. Committed as an eval fixture (journey-engineer) and reused by examples/ci/validate.mjs as the design-led consumer-repo skeleton. Versions pinned to the reference repo's own devDependencies.",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/react-vite": "^10.4.6",
+    "@types/react": "^19.2.7",
+    "@vitejs/plugin-react": "^6.0.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "storybook": "^10.4.6",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.3"
+  }
+}

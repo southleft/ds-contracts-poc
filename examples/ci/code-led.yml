@@ -1,0 +1,99 @@
+# CODE-LED journey — code is truth; CI keeps the contracts current.
+#
+# On every push to main (and on each published release) this workflow:
+#   1. runs the PUBLISHED @ds-contracts/cli@0.1.0 `extract` over the component
+#      source (config: ds-contracts.config.json, committed in the repo),
+#   2. adopts the freshly proposed contracts into contracts/ (code-led means
+#      code wins — extraction output IS the new truth),
+#   3. commits the refreshed contracts/ back to the branch,
+#   4. uploads a CONTRACTS-BUNDLE artifact — the exact envelope the plugin
+#      bridge carries ({ "type": "CONTRACTS-BUNDLE", "version": 1,
+#      "contracts": [...] }, workers/assist/src/bridge.ts) — so a designer can
+#      deliver it to the Figma plugin with
+#      `npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>`,
+#   5. writes the proposal/skip counts into the job summary.
+#
+# Roadmap (named, not v1): a fully-async CI→designer channel that pushes the
+# bundle to the plugin without a human in the loop. v1 is deliberately a human
+# running `ds-contracts figma push` with this artifact — the pairing code is
+# minted where the designer is looking. See examples/ci/README.md.
+#
+# Validated locally step-by-step against the published CLI:
+# examples/ci/VALIDATION.md (produced by examples/ci/validate.mjs).
+
+name: contracts-code-led
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  extract-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Extract contracts from code
+        run: |
+          npx --yes @ds-contracts/cli@0.1.0 extract ds-contracts.config.json | tee extract.log
+
+      - name: Adopt the proposed contracts (code-led — extraction is the new truth)
+        run: |
+          # ds-contracts extract writes proposals to <out>/contracts/
+          # (out = "ds-contracts/out" in the default config).
+          mkdir -p contracts
+          cp ds-contracts/out/contracts/*.contract.json contracts/
+
+      - name: Build the CONTRACTS-BUNDLE artifact (the plugin-bridge envelope)
+        run: |
+          node --input-type=module <<'EOF'
+          import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+          const files = readdirSync("contracts").filter((f) => f.endsWith(".contract.json")).sort();
+          if (files.length === 0) throw new Error("no contracts to bundle");
+          const contracts = files.map((f) => JSON.parse(readFileSync(`contracts/${f}`, "utf8")));
+          const bundle = { type: "CONTRACTS-BUNDLE", version: 1, contracts };
+          writeFileSync("contracts-bundle.json", JSON.stringify(bundle, null, 2) + "\n");
+          console.log(`contracts-bundle.json: ${contracts.length} contract(s)`);
+          EOF
+
+      - name: Commit the refreshed contracts back to the branch
+        # CI-only: pushes with the workflow's GITHUB_TOKEN. No-op when
+        # extraction changed nothing (the diff check guards the commit).
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add contracts
+          if git diff --cached --quiet; then
+            echo "contracts/ unchanged — nothing to commit"
+          else
+            git commit -m "contracts: refresh from code (ds-contracts extract, ${GITHUB_SHA::7})"
+            git push
+          fi
+
+      - name: Upload the CONTRACTS-BUNDLE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CONTRACTS-BUNDLE
+          path: contracts-bundle.json
+
+      - name: Job summary — proposal / skip counts
+        run: |
+          {
+            echo "## ds-contracts extract"
+            echo ""
+            grep -E "proposed contract" extract.log | sed 's/^/- /'
+            grep -E "seen but not extractable" extract.log | sed 's/^/- /' || echo "- 0 components skipped"
+            echo ""
+            echo "Artifact **CONTRACTS-BUNDLE** is ready for the designer:"
+            echo '`npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>`'
+            echo "(the code comes from the Figma plugin's Receive panel)"
+          } >> "$GITHUB_STEP_SUMMARY"
