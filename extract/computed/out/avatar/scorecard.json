@@ -16,7 +16,7 @@
     "pairs": 20,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 1.85498046875,
+    "meanExact": 1.8466796875,
     "meanAA": 1.2882486979166667,
     "maxAA": 2.8507486979166665
   },
@@ -36,49 +36,49 @@
     {
       "key": "xl__default",
       "pctAA": 2.8507486979166665,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "channelsMismatched": 4
     },
     {
       "key": "xl__hover",
       "pctAA": 2.8507486979166665,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "channelsMismatched": 4
     },
     {
       "key": "xl__focus-visible",
       "pctAA": 2.8507486979166665,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "channelsMismatched": 4
     },
     {
       "key": "xl__active",
       "pctAA": 2.8507486979166665,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "channelsMismatched": 4
     },
     {
       "key": "lg__default",
       "pctAA": 1.48193359375,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "channelsMismatched": 4
     },
     {
       "key": "lg__hover",
       "pctAA": 1.48193359375,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "channelsMismatched": 4
     },
     {
       "key": "lg__focus-visible",
       "pctAA": 1.48193359375,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "channelsMismatched": 4
     },
     {
       "key": "lg__active",
       "pctAA": 1.48193359375,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "channelsMismatched": 4
     }
   ],
@@ -133,7 +133,7 @@
       "key": "xs__default",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 0.6494140625,
+      "pctExact": 0.6461588541666666,
       "pctAA": 0.35888671875,
       "mismatches": [
         {
@@ -166,7 +166,7 @@
       "key": "xs__hover",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 0.6494140625,
+      "pctExact": 0.6461588541666666,
       "pctAA": 0.35888671875,
       "mismatches": [
         {
@@ -199,7 +199,7 @@
       "key": "xs__focus-visible",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 0.6494140625,
+      "pctExact": 0.6461588541666666,
       "pctAA": 0.35888671875,
       "mismatches": [
         {
@@ -232,7 +232,7 @@
       "key": "xs__active",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 0.6494140625,
+      "pctExact": 0.6461588541666666,
       "pctAA": 0.35888671875,
       "mismatches": [
         {
@@ -265,7 +265,7 @@
       "key": "sm__default",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.0782877604166667,
+      "pctExact": 1.0750325520833333,
       "pctAA": 0.6868489583333334,
       "mismatches": [
         {
@@ -298,7 +298,7 @@
       "key": "sm__hover",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.0782877604166667,
+      "pctExact": 1.0750325520833333,
       "pctAA": 0.6868489583333334,
       "mismatches": [
         {
@@ -331,7 +331,7 @@
       "key": "sm__focus-visible",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.0782877604166667,
+      "pctExact": 1.0750325520833333,
       "pctAA": 0.6868489583333334,
       "mismatches": [
         {
@@ -364,7 +364,7 @@
       "key": "sm__active",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.0782877604166667,
+      "pctExact": 1.0750325520833333,
       "pctAA": 0.6868489583333334,
       "mismatches": [
         {
@@ -397,7 +397,7 @@
       "key": "md__default",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.5852864583333333,
+      "pctExact": 1.58203125,
       "pctAA": 1.0628255208333333,
       "mismatches": [
         {
@@ -430,7 +430,7 @@
       "key": "md__hover",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.5852864583333333,
+      "pctExact": 1.58203125,
       "pctAA": 1.0628255208333333,
       "mismatches": [
         {
@@ -463,7 +463,7 @@
       "key": "md__focus-visible",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.5852864583333333,
+      "pctExact": 1.58203125,
       "pctAA": 1.0628255208333333,
       "mismatches": [
         {
@@ -496,7 +496,7 @@
       "key": "md__active",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 1.5852864583333333,
+      "pctExact": 1.58203125,
       "pctAA": 1.0628255208333333,
       "mismatches": [
         {
@@ -529,7 +529,7 @@
       "key": "lg__default",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "pctAA": 1.48193359375,
       "mismatches": [
         {
@@ -562,7 +562,7 @@
       "key": "lg__hover",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "pctAA": 1.48193359375,
       "mismatches": [
         {
@@ -595,7 +595,7 @@
       "key": "lg__focus-visible",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "pctAA": 1.48193359375,
       "mismatches": [
         {
@@ -628,7 +628,7 @@
       "key": "lg__active",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 2.2054036458333335,
+      "pctExact": 2.18994140625,
       "pctAA": 1.48193359375,
       "mismatches": [
         {
@@ -661,7 +661,7 @@
       "key": "xl__default",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "pctAA": 2.8507486979166665,
       "mismatches": [
         {
@@ -694,7 +694,7 @@
       "key": "xl__hover",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "pctAA": 2.8507486979166665,
       "mismatches": [
         {
@@ -727,7 +727,7 @@
       "key": "xl__focus-visible",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "pctAA": 2.8507486979166665,
       "mismatches": [
         {
@@ -760,7 +760,7 @@
       "key": "xl__active",
       "channelsCompared": 46,
       "channelsEqual": 42,
-      "pctExact": 3.7565104166666665,
+      "pctExact": 3.740234375,
       "pctAA": 2.8507486979166665,
       "mismatches": [
         {

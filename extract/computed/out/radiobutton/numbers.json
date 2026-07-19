@@ -143,9 +143,9 @@
   "pixel": {
     "pairs": 8,
     "exact": {
-      "mean": 0.026346842447916668,
-      "max": 0.12532552083333334,
-      "perfect": 0
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
     },
     "aa": {
       "mean": 0,
@@ -154,43 +154,43 @@
     },
     "worst": [
       {
-        "key": "enabled__focus-visible",
-        "pctExact": 0.12532552083333334,
+        "key": "enabled__default",
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__hover",
-        "pctExact": 0.032552083333333336,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "enabled__default",
-        "pctExact": 0.022786458333333332,
+        "key": "enabled__focus-visible",
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__active",
-        "pctExact": 0.020345052083333332,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "disabled__default",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "disabled__hover",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "disabled__focus-visible",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "disabled__active",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       }
     ]

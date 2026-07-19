@@ -1,7 +1,7 @@
 {
   "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
   "component": "Thumbnail",
-  "contract": "examples/polaris/contracts/thumbnail.contract.json",
+  "contract": "examples/polaris/extraction/static-contracts/thumbnail.contract.json",
   "generatedBy": "extract/computed/run.ts",
   "browser": "148.0.7778.96",
   "items": []
