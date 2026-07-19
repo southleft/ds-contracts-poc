@@ -650,6 +650,22 @@ re-embed was initially missed — and the plugin zip drift guard refused the
 build until the canonical script was re-embedded, exactly as designed, third
 time it has fired. **99/99 evals.**
 
+## 2026-07-19 — Published: the spec has an install command
+
+`@ds-contracts/schema` 15.0.0 and `@ds-contracts/cli` 0.1.0 are live on the
+public npm registry under the `ds-contracts` org — the first shipped artifacts
+of the Two Journeys product. The CLI carries the whole surface as one
+zero-required-dependency binary (`init / extract` incl. the lazy computed
+floor `/ generate --out --target --emitter --stories / figma` + `figma push`
+through the bridge `/ diff` with CI exit codes `/ propose-pr`), every verb
+eval-pinned by a consumer-style smoke test that runs byte-stable twice from a
+scratch directory. The emitter registry is open (`registerEmitter()` — four
+built-ins unchanged, plugins appear in every consumer automatically), the
+schema package ships the live Zod document + generated JSON schema
+byte-identical to the repo's, and the publish was stranger-verified: a clean
+directory, `npm exec @ds-contracts/cli`, a working config in one command.
+**115/115.**
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
