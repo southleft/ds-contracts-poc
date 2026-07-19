@@ -6,8 +6,328 @@
   "browser": "148.0.7778.96",
   "items": [
     {
-      "id": "borderless.slim.enabled|input|min-height",
-      "combo": "borderless.slim.enabled",
+      "id": "inherit.slim.off.on.off.enabled|input|padding-inline",
+      "combo": "inherit.slim.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.off.on.on.enabled|input|padding-inline",
+      "combo": "inherit.slim.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.on.off.off.enabled|input|padding-inline",
+      "combo": "inherit.slim.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.on.off.on.enabled|input|padding-inline",
+      "combo": "inherit.slim.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.on.on.off.enabled|input|padding-inline",
+      "combo": "inherit.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.on.on.off.enabled|input|padding-inline",
+      "combo": "inherit.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.on.on.on.enabled|input|padding-inline",
+      "combo": "inherit.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.slim.on.on.on.enabled|input|padding-inline",
+      "combo": "inherit.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.off.on.off.enabled|input|padding-inline",
+      "combo": "inherit.medium.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.off.on.on.enabled|input|padding-inline",
+      "combo": "inherit.medium.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.on.off.off.enabled|input|padding-inline",
+      "combo": "inherit.medium.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.on.off.on.enabled|input|padding-inline",
+      "combo": "inherit.medium.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.on.on.off.enabled|input|padding-inline",
+      "combo": "inherit.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.on.on.off.enabled|input|padding-inline",
+      "combo": "inherit.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.on.on.on.enabled|input|padding-inline",
+      "combo": "inherit.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "inherit.medium.on.on.on.enabled|input|padding-inline",
+      "combo": "inherit.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.off.off.enabled|input|min-height",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "input",
       "channel": "min-height",
       "ref": "{p.space-800}",
@@ -23,8 +343,8 @@
       "status": "open"
     },
     {
-      "id": "borderless.slim.enabled|backdrop|border-width",
-      "combo": "borderless.slim.enabled",
+      "id": "borderless.slim.off.off.off.enabled|backdrop|border-width",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
@@ -43,8 +363,8 @@
       "status": "open"
     },
     {
-      "id": "borderless.slim.enabled|backdrop|border-color",
-      "combo": "borderless.slim.enabled",
+      "id": "borderless.slim.off.off.off.enabled|backdrop|border-color",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
@@ -63,8 +383,8 @@
       "status": "open"
     },
     {
-      "id": "borderless.slim.enabled|backdrop|min-height",
-      "combo": "borderless.slim.enabled",
+      "id": "borderless.slim.off.off.off.enabled|backdrop|min-height",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "backdrop",
       "channel": "min-height",
       "ref": "{p.space-800}",
@@ -80,8 +400,25 @@
       "status": "open"
     },
     {
-      "id": "borderless.medium.enabled|backdrop|border-width",
-      "combo": "borderless.medium.enabled",
+      "id": "borderless.slim.off.off.on.enabled|input|min-height",
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.off.on.enabled|backdrop|border-width",
+      "combo": "borderless.slim.off.off.on.enabled",
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
@@ -100,8 +437,1109 @@
       "status": "open"
     },
     {
-      "id": "borderless.medium.enabled|backdrop|border-color",
-      "combo": "borderless.medium.enabled",
+      "id": "borderless.slim.off.off.on.enabled|backdrop|border-color",
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.off.on.enabled|backdrop|min-height",
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.off.enabled|input|padding-inline",
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.off.enabled|input|min-height",
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.off.enabled|backdrop|border-width",
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.off.enabled|backdrop|border-color",
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.off.enabled|backdrop|min-height",
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.on.enabled|input|padding-inline",
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.on.enabled|input|min-height",
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.on.enabled|backdrop|border-width",
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.on.enabled|backdrop|border-color",
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.off.on.on.enabled|backdrop|min-height",
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.off.enabled|input|padding-inline",
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.off.enabled|input|min-height",
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.off.enabled|backdrop|border-width",
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.off.enabled|backdrop|border-color",
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.off.enabled|backdrop|min-height",
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.on.enabled|input|padding-inline",
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.on.enabled|input|min-height",
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.on.enabled|backdrop|border-width",
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.on.enabled|backdrop|border-color",
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.off.on.enabled|backdrop|min-height",
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.off.enabled|input|padding-inline",
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.off.enabled|input|padding-inline",
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.off.enabled|input|min-height",
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.off.enabled|backdrop|border-width",
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.off.enabled|backdrop|border-color",
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.off.enabled|backdrop|min-height",
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.on.enabled|input|padding-inline",
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.on.enabled|input|padding-inline",
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.on.enabled|input|min-height",
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.on.enabled|backdrop|border-width",
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.on.enabled|backdrop|border-color",
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.slim.on.on.on.enabled|backdrop|min-height",
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)",
+      "candidates": [
+        "p.font-line-height-700",
+        "p.height-700",
+        "p.width-700"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.off.off.enabled|backdrop|border-width",
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.off.off.enabled|backdrop|border-color",
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.off.on.enabled|backdrop|border-width",
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.off.on.enabled|backdrop|border-color",
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.on.off.enabled|input|padding-inline",
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.on.off.enabled|backdrop|border-width",
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.on.off.enabled|backdrop|border-color",
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.on.on.enabled|input|padding-inline",
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.on.on.enabled|backdrop|border-width",
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.off.on.on.enabled|backdrop|border-color",
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.off.off.enabled|input|padding-inline",
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.off.off.enabled|backdrop|border-width",
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.off.off.enabled|backdrop|border-color",
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.off.on.enabled|input|padding-inline",
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.off.on.enabled|backdrop|border-width",
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.off.on.enabled|backdrop|border-color",
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.off.enabled|input|padding-inline",
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.off.enabled|input|padding-inline",
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.off.enabled|backdrop|border-width",
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.off.enabled|backdrop|border-color",
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.on.enabled|input|padding-inline",
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.on.enabled|input|padding-inline",
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.on.enabled|backdrop|border-width",
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "borderless.medium.on.on.on.enabled|backdrop|border-color",
+      "combo": "borderless.medium.on.on.on.enabled",
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",

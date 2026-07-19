@@ -256,7 +256,7 @@ async function main() {
     const folds = detectFolds(aligned, styled);
     const { rows: boundRows, untriaged } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);
     const boundConfirmed = boundRows.filter((r) => r.verdict === 'confirmed').length;
-    const contradictions = boundRows.filter((r) => r.verdict !== 'confirmed');
+    const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     console.log(`    bound: ${boundConfirmed}/${boundRows.length} confirmed · ${contradictions.length} contradictions (${untriaged.length} untriaged) · ${folds.length} folds`);
 
     const layout = enrichLayout(aligned, space, styled, promotion.contract);

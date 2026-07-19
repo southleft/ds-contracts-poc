@@ -328,7 +328,7 @@ export interface BoundRow {
   computedProp: string;
   expected: string;
   observed: string;
-  verdict: 'confirmed' | 'contradiction' | 'part-missing';
+  verdict: 'confirmed' | 'contradiction' | 'part-absent';
   cause?: string;
 }
 
@@ -373,7 +373,9 @@ export async function boundCheck(
         if (!computedProps) continue;
         for (const cp of computedProps) {
           if (!el) {
-            rows.push({ combo: combo.key, part: a.partNames[pi], channel, ref, computedProp: cp, expected: '', observed: '', verdict: 'part-missing' });
+            // Round 4: a presence-gated part legitimately absent in this
+            // combo — the binding is untestable there, NOT contradicted.
+            rows.push({ combo: combo.key, part: a.partNames[pi], channel, ref, computedProp: cp, expected: '', observed: '', verdict: 'part-absent' });
             continue;
           }
           const expected = await probeToken(ref, cp);
@@ -387,8 +389,9 @@ export async function boundCheck(
       }
     }
   }
-  // Named-cause triage from config (the verify.ts curation discipline)
-  const contradicted = rows.filter((r) => r.verdict !== 'confirmed');
+  // Named-cause triage from config (the verify.ts curation discipline).
+  // part-absent rows are informational (presence-gated parts).
+  const contradicted = rows.filter((r) => r.verdict === 'contradiction');
   for (const r of contradicted) {
     const axisValues: Record<string, string> = {};
     space.axes.forEach((ax, i) => { axisValues[ax.prop] = r.combo.split('.')[i]; });

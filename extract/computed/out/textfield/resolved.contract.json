@@ -573,6 +573,36 @@
           "prop": "loading"
         }
       }
+    },
+    {
+      "name": "withPrefix",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `prefix` (\"$\"); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithPrefix"
+        },
+        "code": {
+          "prop": "withPrefix"
+        }
+      }
+    },
+    {
+      "name": "withSuffix",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `suffix` (\"USD\"); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithSuffix"
+        },
+        "code": {
+          "prop": "withSuffix"
+        }
+      }
     }
   ],
   "events": [
@@ -603,162 +633,547 @@
         "color": "{p.color-text}"
       },
       "parts": {
-        "input": {
-          "element": "input",
+        "labelled__labelwrapper": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Labelled__LabelWrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "justify": "space-between"
+          },
+          "parts": {
+            "label": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Label — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "parts": {
+                "label__text": {
+                  "element": "label",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|Label__Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "cursor": "default"
+                  },
+                  "parts": {
+                    "label-2": {
+                      "text": "Store name",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "inline",
+                        "cursor": "default"
+                      },
+                      "tokens": {
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      },
+                      "states": {
+                        "disabled": {
+                          "color": "{imported.shared.color-b5b5b5}"
+                        }
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "flex-grow": "{imported.shared.num-1}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.shared.color-b5b5b5}"
+                    }
+                  }
+                }
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-b5b5b5}"
+                }
+              }
+            }
+          },
+          "tokens": {
+            "margin-bottom": "{imported.shared.size-4}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-b5b5b5}"
+            }
+          }
+        },
+        "connected": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Connected — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
             "align": "center"
           },
-          "tokens": {
-            "color": "{p.color-text}",
-            "padding-block": "{p.space-150}",
-            "padding-inline": "{p.space-300}",
-            "font-size": "{p.font-size-400}",
-            "font-weight": "{p.font-weight-regular}",
-            "line-height": "{p.font-line-height-600}",
-            "bottom": "{imported.shared.size-0}",
-            "flex-grow": "{imported.shared.num-1}",
-            "left": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}",
-            "z-index": "{imported.text-field.input.z-index}"
-          },
-          "tokensByProp": [
-            {
-              "prop": "variant",
-              "map": {
-                "borderless": {
-                  "min-height": "{p.space-800}"
+          "parts": {
+            "connected__item": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Connected__Item — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "relative"
+              },
+              "layout": {
+                "grow": true
+              },
+              "parts": {
+                "textfield": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|TextField — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "parts": {
+                    "prefix": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|TextField__Prefix — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "cursor": "text",
+                        "position": "relative",
+                        "user-select": "none"
+                      },
+                      "visibleWhen": {
+                        "prop": "withPrefix"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "disabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "parts": {
+                        "label-3": {
+                          "text": "$",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "inline",
+                            "cursor": "text",
+                            "user-select": "none"
+                          },
+                          "visibleWhen": {
+                            "prop": "withPrefix"
+                          },
+                          "stylesWhen": [
+                            {
+                              "prop": "disabled",
+                              "styles": {
+                                "display": "none"
+                              }
+                            }
+                          ],
+                          "tokens": {
+                            "color": "{imported.shared.color-616161}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-616161}",
+                        "flex-shrink": "{imported.shared.num-0}",
+                        "left": "{imported.shared.size-0}",
+                        "margin-left": "{imported.shared.size-12}",
+                        "margin-right": "{imported.text-field.prefix.margin-right}",
+                        "right": "{imported.shared.size-0}",
+                        "top": "{imported.shared.size-0}",
+                        "z-index": "{imported.shared.num-20}"
+                      }
+                    },
+                    "input": {
+                      "element": "input",
+                      "layout": {
+                        "display": "flex",
+                        "align": "center"
+                      },
+                      "tokens": {
+                        "color": "{p.color-text}",
+                        "padding-block": "{p.space-150}",
+                        "padding-inline": "{p.space-300}",
+                        "font-size": "{p.font-size-400}",
+                        "font-weight": "{p.font-weight-regular}",
+                        "line-height": "{p.font-line-height-600}",
+                        "bottom": "{imported.shared.size-0}",
+                        "flex-grow": "{imported.shared.num-1}",
+                        "left": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "top": "{imported.shared.size-0}",
+                        "z-index": "{imported.shared.num-20}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "borderless": {
+                              "min-height": "{p.space-800}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "size",
+                          "map": {
+                            "slim": {
+                              "padding-block": "{p.space-050}"
+                            }
+                          }
+                        }
+                      ],
+                      "states": {
+                        "disabled": {
+                          "color": "{p.color-text-disabled}"
+                        }
+                      },
+                      "attrs": {
+                        "name": "{name}",
+                        "value": "{value}",
+                        "placeholder": "{placeholder}"
+                      },
+                      "declared": {
+                        "cursor": "text",
+                        "font-feature-settings": "normal",
+                        "overflow-x": "clip",
+                        "overflow-y": "clip",
+                        "position": "relative",
+                        "text-rendering": "auto"
+                      },
+                      "declaredStates": {
+                        "disabled": {
+                          "cursor": "default"
+                        }
+                      }
+                    },
+                    "suffix": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|TextField__Suffix — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "cursor": "text",
+                        "position": "relative",
+                        "user-select": "none"
+                      },
+                      "visibleWhen": {
+                        "prop": "withSuffix"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "disabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "parts": {
+                        "label-4": {
+                          "text": "USD",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "inline",
+                            "cursor": "text",
+                            "user-select": "none"
+                          },
+                          "visibleWhen": {
+                            "prop": "withSuffix"
+                          },
+                          "stylesWhen": [
+                            {
+                              "prop": "disabled",
+                              "styles": {
+                                "display": "none"
+                              }
+                            }
+                          ],
+                          "tokens": {
+                            "color": "{imported.shared.color-616161}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-616161}",
+                        "flex-shrink": "{imported.shared.num-0}",
+                        "left": "{imported.shared.size-0}",
+                        "margin-left": "{imported.shared.size-4}",
+                        "margin-right": "{imported.shared.size-12}",
+                        "right": "{imported.shared.size-0}",
+                        "top": "{imported.shared.size-0}",
+                        "z-index": "{imported.shared.num-20}"
+                      }
+                    },
+                    "clearbutton": {
+                      "element": "button",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|TextField__ClearButton — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "position": "absolute",
+                        "appearance": "none",
+                        "border-bottom-style": "none",
+                        "border-left-style": "none",
+                        "border-right-style": "none",
+                        "border-top-style": "none",
+                        "cursor": "pointer",
+                        "transition-delay": "0s, 0s",
+                        "transition-duration": "0.1s, 0.1s",
+                        "transition-property": "visibility, opacity",
+                        "transition-timing-function": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+                      },
+                      "visibleWhen": {
+                        "prop": "clearButton"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "disabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "parts": {
+                        "label-5": {
+                          "text": "Clear",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "none",
+                            "cursor": "pointer",
+                            "font-feature-settings": "normal",
+                            "overflow-x": "hidden",
+                            "overflow-y": "hidden",
+                            "position": "absolute",
+                            "text-align": "center",
+                            "text-rendering": "auto",
+                            "text-wrap-mode": "nowrap"
+                          },
+                          "tokens": {
+                            "bottom": "{imported.text-field.label-5.bottom}",
+                            "font-weight": "{imported.text-field.label-5.font-weight}",
+                            "left": "{imported.text-field.label-5.left}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "right": "{imported.text-field.label-5.right}",
+                            "top": "{imported.shared.size-0}"
+                          }
+                        },
+                        "icon": {
+                          "element": "span",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "cursor": "pointer",
+                            "font-feature-settings": "normal",
+                            "max-height": "100%",
+                            "max-width": "100%",
+                            "text-align": "center",
+                            "text-rendering": "auto"
+                          },
+                          "visibleWhen": {
+                            "prop": "clearButton"
+                          },
+                          "stylesWhen": [
+                            {
+                              "prop": "disabled",
+                              "styles": {
+                                "display": "none"
+                              }
+                            }
+                          ],
+                          "icon": {
+                            "asset": "text-field-icon",
+                            "size": 20
+                          },
+                          "tokens": {
+                            "font-weight": "{imported.text-field.icon.font-weight}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "background-color": "{imported.text-field.clearbutton.background-color}",
+                        "border-bottom-width": "{imported.shared.size-0}",
+                        "border-left-width": "{imported.shared.size-0}",
+                        "border-right-width": "{imported.shared.size-0}",
+                        "border-top-width": "{imported.shared.size-0}",
+                        "color": "{imported.text-field.clearbutton.color}",
+                        "font-size": "{imported.text-field.clearbutton.font-size}",
+                        "line-height": "{imported.text-field.clearbutton.line-height}",
+                        "margin-left": "{imported.shared.size-4}",
+                        "margin-right": "{imported.shared.size-12}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "opacity": "{imported.shared.num-0}",
+                        "padding-bottom": "{imported.shared.size-0}",
+                        "padding-left": "{imported.shared.size-0}",
+                        "padding-right": "{imported.shared.size-0}",
+                        "padding-top": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "z-index": "{imported.shared.num-20}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "size",
+                          "map": {
+                            "medium": {
+                              "bottom": "{imported.text-field.clearbutton.bottom.medium}",
+                              "top": "{imported.text-field.clearbutton.top.medium}"
+                            },
+                            "slim": {
+                              "bottom": "{imported.text-field.clearbutton.bottom.slim}",
+                              "top": "{imported.text-field.clearbutton.top.slim}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "backdrop": {
+                      "element": "div",
+                      "tokens": {
+                        "background-color": "{p.color-input-bg-surface}",
+                        "border-radius": "{p.border-radius-200}",
+                        "border-width": "{p.border-width-0165}",
+                        "border-color": "{p.color-input-border}",
+                        "border-bottom-left-radius": "{imported.shared.size-8}",
+                        "border-bottom-right-radius": "{imported.shared.size-8}",
+                        "border-top-right-radius": "{imported.shared.size-8}",
+                        "bottom": "{imported.shared.size-0}",
+                        "left": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "top": "{imported.shared.size-0}",
+                        "z-index": "{imported.text-field.backdrop.z-index}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "borderless": {
+                              "min-height": "{p.space-800}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "size",
+                          "map": {
+                            "slim": {
+                              "padding-block": "{p.space-050}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "borderless": {
+                              "border-left-color": "{imported.text-field.backdrop.border-left-color.borderless}",
+                              "border-left-width": "{imported.text-field.backdrop.border-left-width.borderless}",
+                              "border-right-color": "{imported.text-field.backdrop.border-right-color.borderless}",
+                              "border-right-width": "{imported.text-field.backdrop.border-right-width.borderless}",
+                              "border-top-color": "{imported.text-field.backdrop.border-top-color.borderless}",
+                              "border-top-width": "{imported.text-field.backdrop.border-top-width.borderless}"
+                            },
+                            "inherit": {
+                              "border-left-color": "{imported.text-field.backdrop.border-left-color.inherit}",
+                              "border-left-width": "{imported.text-field.backdrop.border-left-width.inherit}",
+                              "border-right-color": "{imported.text-field.backdrop.border-right-color.inherit}",
+                              "border-right-width": "{imported.text-field.backdrop.border-right-width.inherit}",
+                              "border-top-color": "{imported.text-field.backdrop.border-top-color.inherit}",
+                              "border-top-width": "{imported.text-field.backdrop.border-top-width.inherit}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "borderless": {
+                              "border-width": "{p.border-width-0}"
+                            }
+                          }
+                        }
+                      ],
+                      "declared": {
+                        "display": "block",
+                        "position": "absolute",
+                        "cursor": "text",
+                        "pointer-events": "none"
+                      },
+                      "layout": {
+                        "grow": true
+                      },
+                      "declaredStates": {
+                        "active": {
+                          "outline-style": "solid"
+                        },
+                        "disabled": {
+                          "cursor": "auto"
+                        },
+                        "focus-visible": {
+                          "outline-style": "solid"
+                        }
+                      },
+                      "states": {
+                        "active": {
+                          "background-color": "{imported.text-field.backdrop.background-color-state-active}"
+                        },
+                        "disabled": {
+                          "background-color": "{imported.text-field.backdrop.background-color-state-disabled}",
+                          "color": "{imported.shared.color-b5b5b5}"
+                        },
+                        "focus-visible": {
+                          "background-color": "{imported.text-field.backdrop.background-color-state-focus-visible}"
+                        },
+                        "hover": {
+                          "background-color": "{imported.text-field.backdrop.background-color-state-hover}"
+                        }
+                      }
+                    }
+                  },
+                  "declared": {
+                    "cursor": "text",
+                    "position": "relative"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "auto"
+                    }
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.shared.color-b5b5b5}"
+                    }
+                  }
                 }
-              }
-            },
-            {
-              "prop": "size",
-              "map": {
-                "slim": {
-                  "padding-block": "{p.space-050}"
-                }
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "flex-grow": "{imported.shared.num-1}",
+                "left": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "z-index": "{imported.shared.num-20}"
               }
             }
-          ],
-          "states": {
-            "disabled": {
-              "color": "{p.color-text-disabled}"
-            }
-          },
-          "attrs": {
-            "name": "{name}",
-            "value": "{value}",
-            "placeholder": "{placeholder}"
           },
           "declared": {
-            "cursor": "text",
-            "font-feature-settings": "normal",
-            "overflow-x": "clip",
-            "overflow-y": "clip",
-            "position": "relative",
-            "text-rendering": "auto"
+            "position": "relative"
           },
-          "declaredStates": {
-            "disabled": {
-              "cursor": "default"
-            }
-          }
-        },
-        "backdrop": {
-          "element": "div",
           "tokens": {
-            "background-color": "{p.color-input-bg-surface}",
-            "border-radius": "{p.border-radius-200}",
-            "border-width": "{p.border-width-0165}",
-            "border-color": "{p.color-input-border}",
-            "border-bottom-left-radius": "{imported.shared.size-8}",
-            "border-bottom-right-radius": "{imported.shared.size-8}",
-            "border-top-right-radius": "{imported.shared.size-8}",
             "bottom": "{imported.shared.size-0}",
             "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}",
-            "z-index": "{imported.text-field.backdrop.z-index}"
-          },
-          "tokensByProp": [
-            {
-              "prop": "variant",
-              "map": {
-                "borderless": {
-                  "min-height": "{p.space-800}"
-                }
-              }
-            },
-            {
-              "prop": "size",
-              "map": {
-                "slim": {
-                  "padding-block": "{p.space-050}"
-                }
-              }
-            },
-            {
-              "prop": "variant",
-              "map": {
-                "borderless": {
-                  "border-left-color": "{imported.text-field.backdrop.border-left-color.borderless}",
-                  "border-left-width": "{imported.text-field.backdrop.border-left-width.borderless}",
-                  "border-right-color": "{imported.text-field.backdrop.border-right-color.borderless}",
-                  "border-right-width": "{imported.text-field.backdrop.border-right-width.borderless}",
-                  "border-top-color": "{imported.text-field.backdrop.border-top-color.borderless}",
-                  "border-top-width": "{imported.text-field.backdrop.border-top-width.borderless}"
-                },
-                "inherit": {
-                  "border-left-color": "{imported.text-field.backdrop.border-left-color.inherit}",
-                  "border-left-width": "{imported.text-field.backdrop.border-left-width.inherit}",
-                  "border-right-color": "{imported.text-field.backdrop.border-right-color.inherit}",
-                  "border-right-width": "{imported.text-field.backdrop.border-right-width.inherit}",
-                  "border-top-color": "{imported.text-field.backdrop.border-top-color.inherit}",
-                  "border-top-width": "{imported.text-field.backdrop.border-top-width.inherit}"
-                }
-              }
-            },
-            {
-              "prop": "variant",
-              "map": {
-                "borderless": {
-                  "border-width": "{p.border-width-0}"
-                }
-              }
-            }
-          ],
-          "declared": {
-            "cursor": "text",
-            "pointer-events": "none"
-          },
-          "declaredStates": {
-            "active": {
-              "outline-style": "solid"
-            },
-            "disabled": {
-              "cursor": "auto"
-            },
-            "focus-visible": {
-              "outline-style": "solid"
-            }
-          },
-          "states": {
-            "active": {
-              "background-color": "{imported.text-field.backdrop.background-color-state-active}"
-            },
-            "disabled": {
-              "background-color": "{imported.text-field.backdrop.background-color-state-disabled}",
-              "color": "{imported.shared.color-b5b5b5}"
-            },
-            "focus-visible": {
-              "background-color": "{imported.text-field.backdrop.background-color-state-focus-visible}"
-            },
-            "hover": {
-              "background-color": "{imported.text-field.backdrop.background-color-state-hover}"
-            }
+            "top": "{imported.shared.size-0}"
           }
         }
       }

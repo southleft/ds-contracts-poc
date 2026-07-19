@@ -125,9 +125,11 @@ export function buildUnion(
           align(uc, c.el, childPath);
         } else {
           // new union node — inserted right after the previously matched
-          // sibling so union order follows document order.
+          // sibling (or at the END when nothing matched yet: base-tree order
+          // stays stable, so base elements keep first claim on names).
           const uc = mk(c.el, childPath, u, false, key);
-          u.children.splice(lastIdx + 1, 0, uc);
+          const at = lastIdx === -1 ? u.children.length : lastIdx + 1;
+          u.children.splice(at, 0, uc);
           lastIdx = u.children.indexOf(uc);
           receipts.push(`union-part-added: ${key} @${childPath} (${csig})`);
           align(uc, c.el, childPath);
@@ -214,9 +216,12 @@ export function rejoinStaticParts(
       if (wantText !== undefined) return textOf(e.rep) === wantText;
       return false; // element-only evidence is too weak to claim a reviewed name
     });
-    if (candidates.length === 1) {
-      receipts.push(`static-rejoin: captured "${candidates[0].partName}" renamed to reviewed static part "${name}" (element ${el}${wantText !== undefined ? ` + content "${wantText}"` : ''})`);
-      candidates[0].partName = name;
+    const pick = candidates.length === 1 ? candidates[0]
+      : candidates.filter((c) => c.inBase).length === 1 ? candidates.filter((c) => c.inBase)[0]
+      : null;
+    if (pick) {
+      receipts.push(`static-rejoin: captured "${pick.partName}" renamed to reviewed static part "${name}" (element ${el}${wantText !== undefined ? ` + content "${wantText}"` : ''}${candidates.length > 1 ? '; base-capture candidate preferred' : ''})`);
+      pick.partName = name;
       captured.add(name);
     }
   }
@@ -250,6 +255,9 @@ export function factorPresence(
   presenceProps: Set<string>,
   stateProps: string[],
   partName: string,
+  /** Contract prop names — a factor can only spell conditions on real props
+   *  (Button declares the disabled STATE with no disabled prop). */
+  contractProps?: Set<string>,
 ): PresenceFact | null {
   const receipts: string[] = [];
   if (presentCombos.length === allCombos.length) return { hiddenWhen: [], shownWhen: [], receipts };
@@ -304,8 +312,16 @@ export function factorPresence(
         fact.hiddenWhen.push({ prop: ax });
       }
     } else if (stateProps.includes(ax)) {
-      if (va.size === 1 && va.has('false')) fact.hiddenWhen.push({ prop: ax });
-      else return null; // present only when disabled — no spelling
+      if (va.size === 1 && va.has('false')) {
+        if (contractProps && !contractProps.has(ax)) {
+          // the contract declares the STATE with no prop (Button disabled) —
+          // there is no stylesWhen spelling; DROP the factor (the part
+          // renders in the state plane too), receipted.
+          receipts.push(`state-axis-presence-dropped: ${partName} absent under ${ax} but the contract has no "${ax}" prop — factor dropped, part renders in that plane (named residue)`);
+        } else {
+          fact.hiddenWhen.push({ prop: ax });
+        }
+      } else return null; // present only when disabled — no spelling
     } else {
       // enum axis: hide on each complement value (the unset pseudo-value is
       // handled by the base-hidden branch above and never lands here)
@@ -360,11 +376,34 @@ export function reconstructSvg(
         const fill = el.style['fill'] ?? '';
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
+        // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED
+        // path — fill-only reconstruction rendered it invisible). Computed
+        // px lengths convert to user units 1:1 (viewBox == computed size).
+        const stroke = el.style['stroke'];
+        const strokeAttrs: string[] = [];
+        if (stroke && stroke !== 'none') {
+          strokeAttrs.push(` stroke="${stroke}"`);
+          const sw = el.style['stroke-width'];
+          const swNum = /^(-?\d+(?:\.\d+)?)px$/.exec(sw ?? '');
+          if (swNum && Number(swNum[1]) !== 1) strokeAttrs.push(` stroke-width="${swNum[1]}"`);
+          for (const [ch, attr] of [
+            ['stroke-linecap', 'stroke-linecap'],
+            ['stroke-linejoin', 'stroke-linejoin'],
+          ] as const) {
+            const v = el.style[ch];
+            if (v && v !== 'butt' && v !== 'miter') strokeAttrs.push(` ${attr}="${v}"`);
+          }
+          for (const ch of ['stroke-dasharray', 'stroke-dashoffset'] as const) {
+            const v = el.style[ch];
+            if (v && v !== 'none' && v !== '0px') strokeAttrs.push(` ${ch}="${v.replace(/px/g, '')}"`);
+          }
+        }
         paths.push(
           `<path d="${d}"` +
             (fill ? ` fill="${fill}"` : '') +
             (fillRule === 'evenodd' ? ' fill-rule="evenodd"' : '') +
             (opacity && opacity !== '1' ? ` opacity="${opacity}"` : '') +
+            strokeAttrs.join('') +
             '/>',
         );
       } else if (el.tag === 'g') {
@@ -734,7 +773,7 @@ export function promoteAnatomy(
     // presence facts
     const present = presentBy.get(i) ?? [];
     if (present.length < enabled.length) {
-      const fact = factorPresence(present, enabled, space.axes, presenceProps, stateProps, e.partName);
+      const fact = factorPresence(present, enabled, space.axes, presenceProps, stateProps, e.partName, new Set(contract.props.map((p) => p.name)));
       if (!fact) {
         refusals.push(`part-presence-uncorrelated: ${e.partName} present in ${present.length}/${enabled.length} enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)`);
         return null;

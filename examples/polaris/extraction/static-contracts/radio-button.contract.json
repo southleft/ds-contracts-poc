@@ -4,7 +4,7 @@
   "name": "RadioButton",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) \u2014 API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT \u00a9 Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts \u2014 every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) \u2014 API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT \u00a9 Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts \u2014 every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color, background-color) removed \u2014 the checked axis contests them per value; the floor rebuilds from browser truth.",
   "semantics": {
     "element": "span"
   },
@@ -119,10 +119,8 @@
             "height": 20
           },
           "tokens": {
-            "background-color": "{p.color-input-bg-surface}",
             "border-radius": "{p.border-radius-full}",
-            "border-width": "{p.border-width-0165}",
-            "border-color": "{p.color-input-border}"
+            "border-width": "{p.border-width-0165}"
           }
         }
       }

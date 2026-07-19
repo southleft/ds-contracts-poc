@@ -145,7 +145,7 @@ async function main() {
     const folds = detectFolds(aligned, styled);
     const { rows: boundRows } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);
     const boundConfirmed = boundRows.filter((r) => r.verdict === 'confirmed').length;
-    const contradictions = boundRows.filter((r) => r.verdict !== 'confirmed');
+    const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
     const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes);

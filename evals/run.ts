@@ -3047,7 +3047,16 @@ const cases: Case[] = [
         const truth = j(path.join(dir, 'captured-truth.json'));
         const enriched = ContractSchema.parse(j(path.join(dir, 'enriched.contract.json')));
         const errs = [];
-        validateContract(enriched, new Map([[enriched.id, enriched]]), errs, new Map());
+        // round 4: promoted contracts may reference floor-reconstructed svg
+        // assets — validate against the same merged icon map the floor used
+        const icons = new Map();
+        for (const iconDir of ['examples/polaris/assets/icons', path.join(dir, 'assets')]) {
+          if (!fs.existsSync(iconDir)) continue;
+          for (const f of fs.readdirSync(iconDir)) {
+            if (f.endsWith('.svg')) icons.set(f.slice(0, -4), fs.readFileSync(path.join(iconDir, f), 'utf8').trim());
+          }
+        }
+        validateContract(enriched, new Map([[enriched.id, enriched]]), errs, icons);
         if (errs.length) throw new Error('committed enriched contract fails validateContract: ' + errs[0]);
         const numbers = j(path.join(dir, 'numbers.json'));
         const scorecard = j(path.join(dir, 'scorecard.json'));
@@ -3086,6 +3095,139 @@ const cases: Case[] = [
       if (probe.status !== 0 || !probe.out.includes('computed-floor replay:')) {
         throw new Error(`computed-floor gate failed:\n${probe.out}`);
       }
+    },
+  },
+  {
+    // ROUND 4 — DOM-ANATOMY PROMOTION: the committed Banner contract carries
+    // the anatomy the owner's reference shows — the tone RIBBON (an inner
+    // box whose background rides a per-tone map), per-tone icon glyph parts
+    // with committed svg assets, the dismiss button gated on the promoted
+    // `dismissible` boolean, and the action row gated on `withAction`. The
+    // emitted static HTML renders all of it (ribbon classes + inline svg).
+    id: 'dom-anatomy-promotion',
+    claim: 'C3-detection',
+    run: () => {
+      const j = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8'));
+      const banner = ContractSchema.parse(j('examples/polaris/contracts/banner.contract.json')) as SchemaContract;
+      const parts: Array<[string, SchemaPart]> = [];
+      const walk = (name: string, part: SchemaPart) => {
+        parts.push([name, part]);
+        for (const [n, c] of Object.entries(part.parts ?? {})) walk(n, c as SchemaPart);
+      };
+      for (const [n, c] of Object.entries(banner.anatomy)) walk(n, c as SchemaPart);
+      // ribbon: a non-root part with a per-tone background-color map
+      const ribbon = parts.find(([n, p]) => {
+        if (n === 'root') return false;
+        const tbp = p.tokensByProp;
+        const entries = tbp ? (Array.isArray(tbp) ? tbp : [tbp]) : [];
+        return entries.some((e) => e.prop === 'tone' && Object.values(e.map).some((m) => 'background-color' in m));
+      });
+      if (!ribbon) throw new Error('promoted Banner contract has NO tone-ribbon part (per-tone background-color map missing)');
+      // per-tone glyph parts with committed assets
+      const iconsDir = path.join(ROOT, 'examples/polaris/assets/icons');
+      const glyphs = parts.filter(([, p]) => p.icon && p.visibleWhen?.prop === 'tone');
+      if (glyphs.length < 4) throw new Error(`expected ≥4 per-tone icon glyph parts, found ${glyphs.length}`);
+      for (const [n, p] of glyphs) {
+        if (!existsSync(path.join(iconsDir, `${p.icon!.asset}.svg`))) {
+          throw new Error(`glyph part "${n}" references missing asset ${p.icon!.asset}.svg`);
+        }
+      }
+      // presence props + gated subtrees
+      for (const propName of ['dismissible', 'withAction']) {
+        const prop = banner.props.find((pr) => pr.name === propName);
+        if (!prop || prop.type !== 'boolean') throw new Error(`promoted boolean prop "${propName}" missing`);
+        const gated = parts.find(([, p]) => p.visibleWhen?.prop === propName);
+        if (!gated) throw new Error(`no part gated on "${propName}"`);
+      }
+      const dismissBtn = parts.find(([, p]) => p.element === 'button' && p.visibleWhen?.prop === 'dismissible');
+      if (!dismissBtn) throw new Error('dismiss button part (element button, visibleWhen dismissible) missing');
+      // the emitted static HTML draws the ribbon + glyph svg
+      const icons = new Map<string, string>();
+      for (const f of readdirSync(iconsDir)) {
+        if (f.endsWith('.svg')) icons.set(f.slice(0, -4), readFileSync(path.join(iconsDir, f), 'utf8').trim());
+      }
+      const tokens = tokenInventoryFromJson(
+        ['examples/polaris/tokens/polaris.dtcg.json', 'examples/polaris/tokens/polaris-minted.dtcg.json']
+          .filter((f) => existsSync(path.join(ROOT, f)))
+          .map((f) => j(f)),
+      );
+      const clone = structuredClone(banner);
+      for (const pr of clone.props) {
+        if (pr.name === 'dismissible' || pr.name === 'withAction') pr.default = true;
+      }
+      const out = coreEmitHtml(clone, { tokens, icons, contracts: new Map([[clone.id, clone]]) });
+      if (!out.html.includes('<svg')) throw new Error('emitted Banner HTML contains no inline svg glyph');
+      if (!out.css.includes('background-color: var(--imported-banner-')) {
+        throw new Error('emitted Banner CSS carries no minted ribbon background');
+      }
+      console.log(`dom-anatomy-promotion: ribbon "${ribbon[0]}", ${glyphs.length} tone glyphs, dismiss+action gated parts present; HTML renders inline svg`);
+    },
+  },
+  {
+    // ROUND 4 — SVG CONTENT ROUND TRIP: the committed captured truth's svg
+    // subtree reconstructs BYTE-EQUAL to the committed icon asset (capture →
+    // reconstructSvg → assets/icons), and the reconstructed markup carries
+    // real path data that survives into the emitted HTML.
+    id: 'svg-content-round-trip',
+    claim: 'C1-determinism',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { reconstructCaptures } from './extract/computed/replay.ts';
+        import { reconstructSvg } from './extract/computed/anatomy.ts';
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+        const truth = j('extract/computed/out/banner/captured-truth.json');
+        const base = reconstructCaptures(truth)[0];
+        // find the tone-icon svg element in the base tree
+        let svgNode = null;
+        const walk = (n) => {
+          if (n.tag === 'svg' && !svgNode) { svgNode = n; return; }
+          for (const c of n.nodes) if (c.t === 'el') walk(c.el);
+        };
+        walk(base.root);
+        if (!svgNode) throw new Error('no svg element in the committed banner base capture');
+        const receipts = [];
+        const r = reconstructSvg(svgNode, receipts, 'eval');
+        if (!r) throw new Error('reconstructSvg refused the committed banner glyph: ' + receipts.join('; '));
+        if (!/^<svg viewBox="0 0 \\d+ \\d+"/.test(r.markup)) throw new Error('markup missing viewBox: ' + r.markup.slice(0, 60));
+        if (!r.markup.includes('<path d="M')) throw new Error('markup missing path data');
+        // the committed asset for the base tone (info) byte-matches
+        const asset = fs.readFileSync('examples/polaris/assets/icons/banner-icon-info.svg', 'utf8').trim();
+        if (asset !== r.markup) throw new Error('committed asset differs from a fresh reconstruction:\\n' + asset.slice(0, 120) + '\\nvs\\n' + r.markup.slice(0, 120));
+        console.log('svg round trip: ' + r.markup.length + ' bytes, viewBox reconstructed, byte-equal to the committed asset');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('svg round trip:')) {
+        throw new Error(`svg round trip failed:\n${probe.out}`);
+      }
+    },
+  },
+  {
+    // ROUND 4 — CANVAS PIXEL GATE receipts: the committed per-component
+    // scorecards exist for the 10 pixel-scoped components, quote per-cell
+    // masked numbers, keep the summary consistent with the rows (prose-drift
+    // guard), and name a cause on every cell over 10%.
+    id: 'canvas-pixel-gate-receipts',
+    claim: 'C3-detection',
+    run: () => {
+      const dir = path.join(ROOT, 'examples/polaris/receipts/canvas-gate');
+      const comps = ['button', 'badge', 'tag', 'banner', 'checkbox', 'radio-button', 'avatar', 'progress-bar', 'thumbnail', 'spinner'];
+      for (const c of comps) {
+        const f = path.join(dir, `${c}.scorecard.json`);
+        if (!existsSync(f)) throw new Error(`missing canvas-gate scorecard: ${c}`);
+        const sc = JSON.parse(readFileSync(f, 'utf8')) as {
+          cells: Array<{ cell: string; pctAAMasked: number; note?: string }>;
+          summary: { meanAAMasked: number; maxAAMasked: number };
+          acceptance: { allCellsOver10Named: boolean };
+        };
+        if (!Array.isArray(sc.cells) || sc.cells.length === 0) throw new Error(`${c}: no cells scored`);
+        const mean = sc.cells.reduce((n, r) => n + r.pctAAMasked, 0) / sc.cells.length;
+        if (Math.abs(mean - sc.summary.meanAAMasked) > 0.05) {
+          throw new Error(`${c}: summary meanAAMasked ${sc.summary.meanAAMasked} drifts from rows (${mean.toFixed(3)})`);
+        }
+        if (!sc.acceptance.allCellsOver10Named) throw new Error(`${c}: cells over 10% without named causes`);
+      }
+      console.log(`canvas-pixel-gate: ${comps.length} scorecards present, summaries row-consistent, every >10% cell named`);
     },
   },
 ];
