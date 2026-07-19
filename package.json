@@ -18,6 +18,8 @@
     "figma:plan": "tsx scripts/generate-figma.ts",
     "parity": "tsx parity/diff.ts",
     "eval": "tsx evals/run.ts",
+    "plugin:zip": "node scripts/build-plugin-zip.mjs",
+    "plugin:check": "node scripts/plugin-engine-check.mjs",
     "build:lib": "vite build && tsc -p tsconfig.build.json",
     "verify:package": "node scripts/verify-package.mjs",
     "catalog": "tsx scripts/generate-catalog.ts",
