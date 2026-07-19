@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 1328,
-    "cellsEqual": 1064,
-    "pctEqual": 80.12048192771084,
+    "cellsEqual": 1076,
+    "pctEqual": 81.02409638554217,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -16,17 +16,17 @@
     "pairs": 16,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 4.340311686197917,
-    "meanAA": 1.7289225260416663,
-    "maxAA": 2.2029622395833335
+    "meanExact": 4.227803548177084,
+    "meanAA": 1.891123453776042,
+    "maxAA": 2.4088541666666665
   },
   "fusion": {
-    "boundConfirmed": 6,
-    "boundCells": 8,
-    "contradictions": 2,
-    "mintedLeaves": 42,
-    "mintedLeavesUnfolded": 37,
-    "baseBindings": 39,
+    "boundConfirmed": 4,
+    "boundCells": 4,
+    "contradictions": 0,
+    "mintedLeaves": 46,
+    "mintedLeavesUnfolded": 41,
+    "baseBindings": 41,
     "stateBindings": 51,
     "codeOnlyChannels": 2,
     "overflowBindings": 47,
@@ -34,28 +34,34 @@
   },
   "worstRows": [
     {
+      "key": "checked.disabled__default",
+      "pctAA": 2.4088541666666665,
+      "pctExact": 4.434407552083333,
+      "channelsMismatched": 26
+    },
+    {
+      "key": "checked.disabled__hover",
+      "pctAA": 2.4088541666666665,
+      "pctExact": 4.434407552083333,
+      "channelsMismatched": 26
+    },
+    {
+      "key": "checked.disabled__focus-visible",
+      "pctAA": 2.4088541666666665,
+      "pctExact": 4.434407552083333,
+      "channelsMismatched": 26
+    },
+    {
+      "key": "checked.disabled__active",
+      "pctAA": 2.4088541666666665,
+      "pctExact": 4.434407552083333,
+      "channelsMismatched": 26
+    },
+    {
       "key": "checked.enabled__focus-visible",
-      "pctAA": 2.2029622395833335,
-      "pctExact": 4.703776041666667,
-      "channelsMismatched": 4
-    },
-    {
-      "key": "checked.enabled__active",
-      "pctAA": 1.9083658854166667,
-      "pctExact": 4.290364583333333,
-      "channelsMismatched": 7
-    },
-    {
-      "key": "checked.enabled__default",
-      "pctAA": 1.9083658854166667,
-      "pctExact": 4.290364583333333,
-      "channelsMismatched": 3
-    },
-    {
-      "key": "checked.enabled__hover",
-      "pctAA": 1.9083658854166667,
-      "pctExact": 4.290364583333333,
-      "channelsMismatched": 3
+      "pctAA": 2.03369140625,
+      "pctExact": 4.239095052083333,
+      "channelsMismatched": 2
     },
     {
       "key": "unchecked.enabled__focus-visible",
@@ -64,22 +70,16 @@
       "channelsMismatched": 2
     },
     {
-      "key": "unchecked.enabled__active",
-      "pctAA": 1.69189453125,
-      "pctExact": 4.322102864583333,
-      "channelsMismatched": 10
+      "key": "checked.enabled__active",
+      "pctAA": 1.7936197916666667,
+      "pctExact": 3.82568359375,
+      "channelsMismatched": 5
     },
     {
-      "key": "unchecked.disabled__default",
-      "pctAA": 1.6349283854166667,
-      "pctExact": 4.432779947916667,
-      "channelsMismatched": 30
-    },
-    {
-      "key": "unchecked.disabled__hover",
-      "pctAA": 1.6349283854166667,
-      "pctExact": 4.432779947916667,
-      "channelsMismatched": 30
+      "key": "checked.enabled__default",
+      "pctAA": 1.7936197916666667,
+      "pctExact": 3.82568359375,
+      "channelsMismatched": 1
     }
   ],
   "topMismatchedChannels": [
@@ -89,11 +89,7 @@
     ],
     [
       "backdrop.background-color",
-      14
-    ],
-    [
-      "backdrop.border-bottom-color",
-      14
+      10
     ],
     [
       "input.outline-color",
@@ -141,6 +137,10 @@
     ],
     [
       "input.border-top-color",
+      8
+    ],
+    [
+      "input.caret-color",
       8
     ]
   ],
@@ -1105,63 +1105,39 @@
     {
       "key": "checked.enabled__default",
       "channelsCompared": 83,
-      "channelsEqual": 80,
-      "pctExact": 4.290364583333333,
-      "pctAA": 1.9083658854166667,
+      "channelsEqual": 82,
+      "pctExact": 3.82568359375,
+      "pctAA": 1.7936197916666667,
       "mismatches": [
         {
           "part": "input",
           "channel": "clip-path",
           "ours": "none",
           "theirs": "inset(50%)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         }
       ]
     },
     {
       "key": "checked.enabled__hover",
       "channelsCompared": 83,
-      "channelsEqual": 80,
-      "pctExact": 4.290364583333333,
-      "pctAA": 1.9083658854166667,
+      "channelsEqual": 82,
+      "pctExact": 3.82568359375,
+      "pctAA": 1.7936197916666667,
       "mismatches": [
         {
           "part": "input",
           "channel": "clip-path",
           "ours": "none",
           "theirs": "inset(50%)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         }
       ]
     },
     {
       "key": "checked.enabled__focus-visible",
       "channelsCompared": 83,
-      "channelsEqual": 79,
-      "pctExact": 4.703776041666667,
-      "pctAA": 2.2029622395833335,
+      "channelsEqual": 81,
+      "pctExact": 4.239095052083333,
+      "pctAA": 2.03369140625,
       "mismatches": [
         {
           "part": "input",
@@ -1174,45 +1150,21 @@
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(0, 95, 204, 1)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         }
       ]
     },
     {
       "key": "checked.enabled__active",
       "channelsCompared": 83,
-      "channelsEqual": 76,
-      "pctExact": 4.290364583333333,
-      "pctAA": 1.9083658854166667,
+      "channelsEqual": 78,
+      "pctExact": 3.82568359375,
+      "pctAA": 1.7936197916666667,
       "mismatches": [
         {
           "part": "input",
           "channel": "clip-path",
           "ours": "none",
           "theirs": "inset(50%)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
@@ -1243,9 +1195,9 @@
     {
       "key": "checked.disabled__default",
       "channelsCompared": 83,
-      "channelsEqual": 56,
-      "pctExact": 4.419759114583333,
-      "pctAA": 1.6316731770833333,
+      "channelsEqual": 57,
+      "pctExact": 4.434407552083333,
+      "pctAA": 2.4088541666666665,
       "mismatches": [
         {
           "part": "root",
@@ -1334,14 +1286,8 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
+          "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
@@ -1414,9 +1360,9 @@
     {
       "key": "checked.disabled__hover",
       "channelsCompared": 83,
-      "channelsEqual": 56,
-      "pctExact": 4.419759114583333,
-      "pctAA": 1.6316731770833333,
+      "channelsEqual": 57,
+      "pctExact": 4.434407552083333,
+      "pctAA": 2.4088541666666665,
       "mismatches": [
         {
           "part": "root",
@@ -1505,14 +1451,8 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
+          "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
@@ -1585,9 +1525,9 @@
     {
       "key": "checked.disabled__focus-visible",
       "channelsCompared": 83,
-      "channelsEqual": 56,
-      "pctExact": 4.419759114583333,
-      "pctAA": 1.6316731770833333,
+      "channelsEqual": 57,
+      "pctExact": 4.434407552083333,
+      "pctAA": 2.4088541666666665,
       "mismatches": [
         {
           "part": "root",
@@ -1676,14 +1616,8 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
+          "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
@@ -1756,9 +1690,9 @@
     {
       "key": "checked.disabled__active",
       "channelsCompared": 83,
-      "channelsEqual": 56,
-      "pctExact": 4.419759114583333,
-      "pctAA": 1.6316731770833333,
+      "channelsEqual": 57,
+      "pctExact": 4.434407552083333,
+      "pctAA": 2.4088541666666665,
       "mismatches": [
         {
           "part": "root",
@@ -1847,14 +1781,8 @@
         {
           "part": "backdrop",
           "channel": "background-color",
-          "ours": "rgba(253, 253, 253, 1)",
+          "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0.08)"
-        },
-        {
-          "part": "backdrop",
-          "channel": "border-bottom-color",
-          "ours": "rgba(138, 138, 138, 1)",
-          "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",

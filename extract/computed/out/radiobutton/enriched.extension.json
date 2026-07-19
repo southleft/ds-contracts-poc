@@ -69,6 +69,26 @@
           }
         },
         "backdrop": {
+          "background-color": {
+            "unchecked": {
+              "$value": "#fdfdfd",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color": {
+            "unchecked": {
+              "$value": "#8a8a8a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
           "border-left-color": {
             "unchecked": {
               "$value": "#8a8a8a",
@@ -263,11 +283,6 @@
   ],
   "layout": {
     "enriched": [
-      {
-        "part": "root",
-        "field": "display",
-        "value": "flex"
-      },
       {
         "part": "root",
         "field": "align",
@@ -974,28 +989,7 @@
     ],
     "totalFindings": 12
   },
-  "bindingContradictions": [
-    {
-      "combo": "checked.enabled",
-      "part": "backdrop",
-      "channel": "background-color",
-      "ref": "{p.color-input-bg-surface}",
-      "computedProp": "background-color",
-      "expected": "rgba(253, 253, 253, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "checked.enabled",
-      "part": "backdrop",
-      "channel": "border-color",
-      "ref": "{p.color-input-border}",
-      "computedProp": "border-bottom-color",
-      "expected": "rgba(138, 138, 138, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    }
-  ],
+  "bindingContradictions": [],
   "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
@@ -1048,13 +1042,13 @@
     ],
     "svgAssets": [],
     "receipts": [
+      "root-display-carried: flex",
       "sr-only-carried-as-hidden: input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label = \"Accounts are disabled\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []
   },
   "enrichmentNotes": [
-    "layout enriched: root.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: choice__control.layout.align = stretch (uniform computed keyword — the schema's own vocabulary)",

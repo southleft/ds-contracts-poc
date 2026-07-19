@@ -17,7 +17,7 @@
     "perfectExact": 0,
     "perfectAA": 0,
     "meanExact": 4.452169438844088,
-    "meanAA": 2.021116851478495,
+    "meanAA": 2.020796580981183,
     "maxAA": 3.979334677419355
   },
   "fusion": {
@@ -690,7 +690,7 @@
       "channelsCompared": 248,
       "channelsEqual": 237,
       "pctExact": 4.493951612903226,
-      "pctAA": 2.6001344086021505,
+      "pctAA": 2.5796370967741935,
       "mismatches": [
         {
           "part": "title",

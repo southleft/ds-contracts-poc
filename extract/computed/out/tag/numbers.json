@@ -10,75 +10,21 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 24,
-    "link": 24,
-    "text": 7,
-    "label": 6,
-    "text-2": 10,
-    "label-2": 9,
+    "text": 10,
+    "label": 9,
     "part-1": 0,
     "button": 44,
     "icon": 19,
     "icon-2": 28,
-    "part-1-0-0-0": 20
+    "part-1-0-0-0": 20,
+    "link": 24,
+    "text-2": 7,
+    "label-2": 6
   },
   "folds": {
     "count": 45,
     "receipts": [
       {
-        "part": "link",
-        "channel": "border-bottom-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-left-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-right-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-top-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "caret-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "column-rule-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "outline-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "text-decoration-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "text-emphasis-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
         "part": "button",
         "channel": "border-bottom-color",
         "foldedInto": "color",
@@ -290,6 +236,60 @@
       },
       {
         "part": "part-1-0-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -299,17 +299,17 @@
     "mintedLeavesFolded": 51
   },
   "bound": {
-    "cellsChecked": 112,
-    "confirmed": 60,
-    "contradictions": 52,
-    "untriaged": 36
+    "cellsChecked": 48,
+    "confirmed": 48,
+    "contradictions": 0,
+    "untriaged": 0
   },
   "minted": {
     "leaves": 51,
-    "baseBindings": 62,
+    "baseBindings": 63,
     "stateBindings": 19,
     "byShape": {
-      "uniform": 61,
+      "uniform": 62,
       "perAxis": 13,
       "perPair": 1,
       "refused": 6
@@ -328,7 +328,7 @@
   "anatomyPromotion": {
     "partsCarried": 7,
     "svgAssets": 2,
-    "refusals": 1
+    "refusals": 2
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,

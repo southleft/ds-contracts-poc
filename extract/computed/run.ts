@@ -492,6 +492,15 @@ async function main() {
           part: aligned.partNames[i],
           delta: els[i] ? deltaVs(els[i]!, e.inBase ? baseStyleByIdx.get(i)! : e.rep.style) : null,
         }));
+        // per-part text-run overrides vs the template (sr-only labels vary)
+        const textOv: Record<string, string[]> = {};
+        unionEntries.forEach((e, i) => {
+          if (!els[i]) return;
+          const repTexts = e.rep.nodes.filter((n) => n.t === 'text').map((n) => (n as { v: string }).v);
+          const capTexts = els[i]!.node.nodes.filter((n) => n.t === 'text').map((n) => (n as { v: string }).v);
+          if (JSON.stringify(repTexts) !== JSON.stringify(capTexts)) textOv[aligned.partNames[i]] = capTexts;
+        });
+        if (Object.keys(textOv).length > 0) entry.text = textOv;
       }
       if (Object.keys(pseudoMap).length > 0) entry.pseudo = pseudoMap;
       // PER-CAPTURE verification: the encoding must reproduce the capture

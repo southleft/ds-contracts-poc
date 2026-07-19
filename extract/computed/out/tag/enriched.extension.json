@@ -112,27 +112,7 @@
             }
           }
         },
-        "link": {
-          "color": {
-            "$value": "#303030",
-            "$type": "color"
-          },
-          "grid-template-columns": {
-            "$value": "59.9219px",
-            "$type": "dimension"
-          },
-          "grid-template-rows": {
-            "$value": "20px",
-            "$type": "dimension"
-          }
-        },
         "text": {
-          "line-height": {
-            "$value": "16px",
-            "$type": "dimension"
-          }
-        },
-        "text-2": {
           "line-height": {
             "$value": "16px",
             "$type": "dimension"
@@ -255,66 +235,32 @@
             "$value": "400",
             "$type": "number"
           }
+        },
+        "link": {
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "grid-template-columns": {
+            "$value": "59.9219px",
+            "$type": "dimension"
+          },
+          "grid-template-rows": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "text-2": {
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
         }
       }
     }
   },
   "folds": [
     {
-      "part": "link",
-      "channel": "border-bottom-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-left-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-right-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-top-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
       "part": "button",
       "channel": "border-bottom-color",
       "foldedInto": "color",
@@ -526,6 +472,60 @@
     },
     {
       "part": "part-1-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -553,14 +553,7 @@
   ],
   "layout": {
     "enriched": [],
-    "contradictions": [
-      {
-        "part": "root",
-        "field": "display",
-        "carried": "inline-flex",
-        "observed": "flex"
-      }
-    ],
+    "contradictions": [],
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
@@ -576,51 +569,6 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
-      },
-      {
-        "part": "link",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "link",
-        "channel": "text-decoration-line",
-        "value": "none"
-      },
-      {
-        "part": "text",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "text",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "text",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "text",
-        "channel": "text-overflow",
-        "value": "ellipsis"
-      },
-      {
-        "part": "text",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "label",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
       },
       {
         "part": "button",
@@ -681,6 +629,51 @@
         "part": "icon",
         "channel": "text-rendering",
         "value": "auto"
+      },
+      {
+        "part": "link",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "link",
+        "channel": "text-decoration-line",
+        "value": "none"
+      },
+      {
+        "part": "text-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "text-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "text-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "text-2",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "text-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
       }
     ],
     "state": [
@@ -736,112 +729,98 @@
       "distinctValues": 2
     },
     {
-      "part": "link",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "link",
-      "channel": "text-decoration",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "text-2",
+      "part": "text",
       "channel": "cursor",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "auto",
       "distinctValues": 2
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "font-feature-settings",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "\"calt\" 0",
       "distinctValues": 2
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "overflow-x",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "overflow-y",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "text-align",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "start",
       "distinctValues": 2
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "text-overflow",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "ellipsis",
       "distinctValues": 1
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "text-rendering",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "optimizelegibility",
       "distinctValues": 2
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "text-wrap-mode",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
       "distinctValues": 1
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "cursor",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "auto",
       "distinctValues": 2
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "display",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "inline",
       "distinctValues": 1
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "font-feature-settings",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "\"calt\" 0",
       "distinctValues": 2
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "text-align",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "start",
       "distinctValues": 2
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "text-rendering",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "optimizelegibility",
       "distinctValues": 2
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "text-wrap-mode",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
@@ -867,6 +846,20 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "relative",
       "distinctValues": 2
+    },
+    {
+      "part": "link",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "link",
+      "channel": "text-decoration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
     }
   ],
   "stateOverflow": [
@@ -1012,84 +1005,84 @@
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "border-bottom-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "border-left-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "border-right-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "border-top-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "caret-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "column-rule-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "cursor",
       "sample": "default",
       "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "outline-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "pointer-events",
       "sample": "none",
       "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "text-decoration-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "label-2",
+      "part": "label",
       "channel": "text-emphasis-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
@@ -1180,84 +1173,84 @@
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "border-bottom-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "border-left-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "border-right-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "border-top-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "caret-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "column-rule-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "cursor",
       "sample": "default",
       "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "outline-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "pointer-events",
       "sample": "none",
       "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "text-decoration-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
-      "part": "text-2",
+      "part": "text",
       "channel": "text-emphasis-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
@@ -1447,31 +1440,31 @@
       "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "font-size",
       "ref": "{imported.shared.size-12}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "text-2",
+      "part": "text",
       "channel": "line-height",
-      "ref": "{imported.tag.text-2.line-height}",
+      "ref": "{imported.tag.text.line-height}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "font-size",
       "ref": "{imported.shared.size-12}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "min-height",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "min-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
@@ -1521,7 +1514,7 @@
       {
         "combo": "none.off.off.on.enabled",
         "interaction": "default",
-        "part": "link",
+        "part": "text",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1530,7 +1523,7 @@
       {
         "combo": "none.off.off.on.enabled",
         "interaction": "focus-visible",
-        "part": "link",
+        "part": "text",
         "pseudo": "::after",
         "deltaVsDefault": {
           "box-shadow": "rgba(0, 91, 211, 1) 0px 0px 0px 2px",
@@ -1602,7 +1595,7 @@
       {
         "combo": "none.on.off.off.enabled",
         "interaction": "default",
-        "part": "label",
+        "part": "part-1",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1611,7 +1604,7 @@
       {
         "combo": "none.on.off.off.enabled",
         "interaction": "focus-visible",
-        "part": "label",
+        "part": "part-1",
         "pseudo": "::after",
         "deltaVsDefault": {
           "-webkit-text-fill-color": "rgba(48, 48, 48, 1)",
@@ -1638,7 +1631,7 @@
       {
         "combo": "none.on.off.off.disabled",
         "interaction": "default",
-        "part": "label",
+        "part": "part-1",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1647,7 +1640,7 @@
       {
         "combo": "none.on.off.on.enabled",
         "interaction": "default",
-        "part": "link",
+        "part": "text",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1656,544 +1649,7 @@
     ],
     "totalFindings": 42
   },
-  "bindingContradictions": [
-    {
-      "combo": "none.off.off.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.off.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.off.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.off.off.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.off.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.off.on.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.on.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.on.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.off.on.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.on.on.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.on.on.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.off.on.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.off.on.on.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.off.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.off.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.off.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.on.off.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.off.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.on.on.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.on.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.on.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.on.on.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.on.on.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.on.on.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.on.on.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "none.on.on.on.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.off.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.off.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.off.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.off.off.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.off.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.off.on.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.on.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.on.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.off.on.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.on.on.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.on.on.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.off.on.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.off.on.on.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.off.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.off.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.off.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.on.off.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.off.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.on.on.off.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.on.off.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.on.off.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.on.on.off.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.on.on.enabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.on.on.enabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "large.on.on.on.enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    },
-    {
-      "combo": "large.on.on.on.enabled",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    }
-  ],
+  "bindingContradictions": [],
   "interactionOnDisabled": [
     "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.background-image",
     "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.bottom",
@@ -2289,14 +1745,14 @@
     "root-signature-varies: large.on.on.on.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
     "root-signature-varies: large.on.on.on.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
     "root-signature-varies: large.on.on.on.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
-    "part-missing: none.off.off.on.enabled__default text-2",
-    "part-missing: none.off.off.on.enabled__default label-2",
-    "part-missing: none.off.off.on.enabled__hover text-2",
-    "part-missing: none.off.off.on.enabled__hover label-2",
-    "part-missing: none.off.off.on.enabled__focus-visible text-2",
-    "part-missing: none.off.off.on.enabled__focus-visible label-2",
-    "part-missing: none.off.off.on.enabled__active text-2",
-    "part-missing: none.off.off.on.enabled__active label-2",
+    "part-missing: none.off.off.on.enabled__default text",
+    "part-missing: none.off.off.on.enabled__default label",
+    "part-missing: none.off.off.on.enabled__hover text",
+    "part-missing: none.off.off.on.enabled__hover label",
+    "part-missing: none.off.off.on.enabled__focus-visible text",
+    "part-missing: none.off.off.on.enabled__focus-visible label",
+    "part-missing: none.off.off.on.enabled__active text",
+    "part-missing: none.off.off.on.enabled__active label",
     "signature-drift: none.off.on.off.enabled__default root: span|Tag → button|Tag",
     "signature-drift: none.off.on.off.enabled__hover root: span|Tag → button|Tag",
     "signature-drift: none.off.on.off.enabled__focus-visible root: span|Tag → button|Tag",
@@ -2313,14 +1769,14 @@
     "signature-drift: none.off.on.on.disabled__hover root: span|Tag → button|Tag",
     "signature-drift: none.off.on.on.disabled__focus-visible root: span|Tag → button|Tag",
     "signature-drift: none.off.on.on.disabled__active root: span|Tag → button|Tag",
-    "part-missing: none.on.off.on.enabled__default text-2",
-    "part-missing: none.on.off.on.enabled__default label-2",
-    "part-missing: none.on.off.on.enabled__hover text-2",
-    "part-missing: none.on.off.on.enabled__hover label-2",
-    "part-missing: none.on.off.on.enabled__focus-visible text-2",
-    "part-missing: none.on.off.on.enabled__focus-visible label-2",
-    "part-missing: none.on.off.on.enabled__active text-2",
-    "part-missing: none.on.off.on.enabled__active label-2",
+    "part-missing: none.on.off.on.enabled__default text",
+    "part-missing: none.on.off.on.enabled__default label",
+    "part-missing: none.on.off.on.enabled__hover text",
+    "part-missing: none.on.off.on.enabled__hover label",
+    "part-missing: none.on.off.on.enabled__focus-visible text",
+    "part-missing: none.on.off.on.enabled__focus-visible label",
+    "part-missing: none.on.off.on.enabled__active text",
+    "part-missing: none.on.off.on.enabled__active label",
     "signature-drift: none.on.on.off.enabled__default root: span|Tag → button|Tag",
     "signature-drift: none.on.on.off.enabled__hover root: span|Tag → button|Tag",
     "signature-drift: none.on.on.off.enabled__focus-visible root: span|Tag → button|Tag",
@@ -2337,14 +1793,14 @@
     "signature-drift: none.on.on.on.disabled__hover root: span|Tag → button|Tag",
     "signature-drift: none.on.on.on.disabled__focus-visible root: span|Tag → button|Tag",
     "signature-drift: none.on.on.on.disabled__active root: span|Tag → button|Tag",
-    "part-missing: large.off.off.on.enabled__default text-2",
-    "part-missing: large.off.off.on.enabled__default label-2",
-    "part-missing: large.off.off.on.enabled__hover text-2",
-    "part-missing: large.off.off.on.enabled__hover label-2",
-    "part-missing: large.off.off.on.enabled__focus-visible text-2",
-    "part-missing: large.off.off.on.enabled__focus-visible label-2",
-    "part-missing: large.off.off.on.enabled__active text-2",
-    "part-missing: large.off.off.on.enabled__active label-2",
+    "part-missing: large.off.off.on.enabled__default text",
+    "part-missing: large.off.off.on.enabled__default label",
+    "part-missing: large.off.off.on.enabled__hover text",
+    "part-missing: large.off.off.on.enabled__hover label",
+    "part-missing: large.off.off.on.enabled__focus-visible text",
+    "part-missing: large.off.off.on.enabled__focus-visible label",
+    "part-missing: large.off.off.on.enabled__active text",
+    "part-missing: large.off.off.on.enabled__active label",
     "signature-drift: large.off.on.off.enabled__default root: span|Tag → button|Tag",
     "signature-drift: large.off.on.off.enabled__hover root: span|Tag → button|Tag",
     "signature-drift: large.off.on.off.enabled__focus-visible root: span|Tag → button|Tag",
@@ -2361,14 +1817,14 @@
     "signature-drift: large.off.on.on.disabled__hover root: span|Tag → button|Tag",
     "signature-drift: large.off.on.on.disabled__focus-visible root: span|Tag → button|Tag",
     "signature-drift: large.off.on.on.disabled__active root: span|Tag → button|Tag",
-    "part-missing: large.on.off.on.enabled__default text-2",
-    "part-missing: large.on.off.on.enabled__default label-2",
-    "part-missing: large.on.off.on.enabled__hover text-2",
-    "part-missing: large.on.off.on.enabled__hover label-2",
-    "part-missing: large.on.off.on.enabled__focus-visible text-2",
-    "part-missing: large.on.off.on.enabled__focus-visible label-2",
-    "part-missing: large.on.off.on.enabled__active text-2",
-    "part-missing: large.on.off.on.enabled__active label-2",
+    "part-missing: large.on.off.on.enabled__default text",
+    "part-missing: large.on.off.on.enabled__default label",
+    "part-missing: large.on.off.on.enabled__hover text",
+    "part-missing: large.on.off.on.enabled__hover label",
+    "part-missing: large.on.off.on.enabled__focus-visible text",
+    "part-missing: large.on.off.on.enabled__focus-visible label",
+    "part-missing: large.on.off.on.enabled__active text",
+    "part-missing: large.on.off.on.enabled__active label",
     "signature-drift: large.on.on.off.enabled__default root: span|Tag → button|Tag",
     "signature-drift: large.on.on.off.enabled__hover root: span|Tag → button|Tag",
     "signature-drift: large.on.on.off.enabled__focus-visible root: span|Tag → button|Tag",
@@ -2397,24 +1853,12 @@
         "join": "matched"
       },
       {
-        "part": "link",
-        "join": "computed-only"
-      },
-      {
         "part": "text",
         "join": "computed-only"
       },
       {
         "part": "label",
         "join": "matched"
-      },
-      {
-        "part": "text-2",
-        "join": "computed-only"
-      },
-      {
-        "part": "label-2",
-        "join": "computed-only"
       },
       {
         "part": "part-1",
@@ -2435,6 +1879,18 @@
       {
         "part": "part-1-0-0-0",
         "join": "computed-only"
+      },
+      {
+        "part": "link",
+        "join": "computed-only"
+      },
+      {
+        "part": "text-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
       }
     ],
     "staticOnly": []
@@ -2443,12 +1899,12 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "link",
-      "text",
-      "label",
       "part-1",
       "button",
-      "icon"
+      "icon",
+      "link",
+      "text-2",
+      "label-2"
     ],
     "svgAssets": [
       "tag-icon-large",
@@ -2462,30 +1918,26 @@
       "svg-viewbox-reconstructed: Tag.icon@none.on.off.on.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Tag.icon@large.on.off.off.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Tag.icon@large.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
+      "presence-carried: part-1 (4/16 combos) →  base-hidden, shown-when size=large hidden-when clickable, disabled",
+      "aspect-carried: button computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: button (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
+      "aspect-carried: icon computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: icon (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
       "display-outside-vocabulary: link = \"grid\" — carried by neither layout nor the declared registry (named residue)",
       "presence-carried: link (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
-      "presence-carried: text (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
-      "presence-carried: label (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
-      "presence-carried: part-1 (4/16 combos) →  base-hidden, shown-when size=large hidden-when clickable, disabled",
-      "presence-carried: button (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
-      "presence-carried: icon (4/16 combos) → visibleWhen removable hidden-when clickable, disabled"
+      "presence-carried: text-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
+      "literal-text-carried: label-2 = \"Wholesale\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled"
     ],
     "refusals": [
-      "part-presence-uncorrelated: text-2 present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)"
+      "part-presence-uncorrelated: text present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
+      "static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
     ]
   },
   "enrichmentNotes": [
     "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: link.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: link.text-decoration-line = none (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: text.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: text.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: text.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: text.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: text.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -2498,6 +1950,15 @@
     "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: link.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: link.text-decoration-line = none (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: text-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: text-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)"
   ]
 }

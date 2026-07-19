@@ -99,6 +99,11 @@
     "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 1
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
@@ -180,8 +185,8 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 76.74582233948989,
-    "rowsFullyEqual": 860,
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 1516,
     "rows": 1516,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,

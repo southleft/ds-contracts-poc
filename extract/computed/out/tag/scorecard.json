@@ -16,17 +16,17 @@
     "pairs": 128,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 5.259386698404949,
-    "meanAA": 2.2884877522786455,
+    "meanExact": 5.151246388753255,
+    "meanAA": 2.254346211751302,
     "maxAA": 6.371256510416667
   },
   "fusion": {
-    "boundConfirmed": 60,
-    "boundCells": 112,
-    "contradictions": 52,
+    "boundConfirmed": 48,
+    "boundCells": 48,
+    "contradictions": 0,
     "mintedLeaves": 51,
     "mintedLeavesUnfolded": 48,
-    "baseBindings": 62,
+    "baseBindings": 63,
     "stateBindings": 19,
     "codeOnlyChannels": 103,
     "overflowBindings": 16,
@@ -145,17 +145,18 @@
     ]
   ],
   "namedLosses": [
-    "promotion: part-presence-uncorrelated: text-2 present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
+    "promotion: part-presence-uncorrelated: text present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
+    "promotion: static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
     "overflow: root.font-weight — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
     "overflow: root.outline-color — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
     "overflow: root.outline-width — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
     "overflow: root.padding-left — resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually",
     "overflow: root.padding-right — resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually",
-    "overflow: text-2.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: text-2.line-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label-2.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: text.line-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
     "overflow: button.background-color — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
     "overflow: root.background-color [active] — resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually",
     "overflow: root.outline-color [disabled] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",
@@ -168,25 +169,25 @@
     "code-only: root.outline-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: root.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: root.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: link.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: link.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: text-2.cursor — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text-2.font-feature-settings — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text-2.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: text-2.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: text-2.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text-2.text-overflow — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: text-2.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text-2.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label-2.cursor — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: label-2.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label-2.font-feature-settings — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: label-2.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: label-2.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: label-2.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.cursor — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: text.font-feature-settings — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: text.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: text.text-overflow — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: text.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: label.cursor — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: label.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: label.font-feature-settings — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: label.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: label.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: label.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: button.min-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: button.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: button.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: link.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: link.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only[active]: button.background-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[active]: button.opacity — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[active]: link.background-color — default-state values not kind-compatible for padding — cannot correlate",
@@ -207,18 +208,18 @@
     "code-only[disabled]: button.pointer-events — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
     "code-only[disabled]: icon.cursor — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
     "code-only[disabled]: icon.pointer-events — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: label-2.border-bottom-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.border-left-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.border-right-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.border-top-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.caret-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.column-rule-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: label-2.outline-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: label-2.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: label-2.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.border-bottom-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.border-left-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.border-right-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.border-top-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.caret-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.column-rule-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
+    "code-only[disabled]: label.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
+    "code-only[disabled]: label.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: part-1.border-bottom-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: part-1.border-left-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: part-1.border-right-color — default-state values not kind-compatible for padding — cannot correlate",
@@ -231,18 +232,18 @@
     "code-only[disabled]: part-1.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: root.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
     "code-only[disabled]: root.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: text-2.border-bottom-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.border-left-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.border-right-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.border-top-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.caret-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.column-rule-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: text-2.outline-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: text-2.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
-    "code-only[disabled]: text-2.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.border-bottom-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.border-left-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.border-right-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.border-top-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.caret-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.column-rule-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
+    "code-only[disabled]: text.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
+    "code-only[disabled]: text.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: text.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[focus-visible]: button.background-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[focus-visible]: button.color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[focus-visible]: button.opacity — default-state values not kind-compatible for padding — cannot correlate",
@@ -587,8 +588,8 @@
       "key": "none.off.off.on.enabled__default",
       "channelsCompared": 61,
       "channelsEqual": 56,
-      "pctExact": 2.0133463541666665,
-      "pctAA": 1.1360677083333333,
+      "pctExact": 2.9541015625,
+      "pctAA": 1.9930013020833333,
       "mismatches": [
         {
           "part": "root",
@@ -626,8 +627,8 @@
       "key": "none.off.off.on.enabled__hover",
       "channelsCompared": 61,
       "channelsEqual": 53,
-      "pctExact": 4.44091796875,
-      "pctAA": 1.3069661458333333,
+      "pctExact": 4.471842447916667,
+      "pctAA": 2.1443684895833335,
       "mismatches": [
         {
           "part": "root",
@@ -683,8 +684,8 @@
       "key": "none.off.off.on.enabled__focus-visible",
       "channelsCompared": 61,
       "channelsEqual": 54,
-      "pctExact": 3.1111653645833335,
-      "pctAA": 2.0572916666666665,
+      "pctExact": 3.9754231770833335,
+      "pctAA": 2.8483072916666665,
       "mismatches": [
         {
           "part": "root",
@@ -734,8 +735,8 @@
       "key": "none.off.off.on.enabled__active",
       "channelsCompared": 61,
       "channelsEqual": 53,
-      "pctExact": 4.443359375,
-      "pctAA": 1.30859375,
+      "pctExact": 4.474283854166667,
+      "pctAA": 2.1500651041666665,
       "mismatches": [
         {
           "part": "root",
@@ -791,8 +792,8 @@
       "key": "none.off.off.on.disabled__default",
       "channelsCompared": 24,
       "channelsEqual": 18,
-      "pctExact": 4.541015625,
-      "pctAA": 0.5598958333333334,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.6404622395833334,
       "mismatches": [
         {
           "part": "root",
@@ -836,8 +837,8 @@
       "key": "none.off.off.on.disabled__hover",
       "channelsCompared": 24,
       "channelsEqual": 18,
-      "pctExact": 4.541015625,
-      "pctAA": 0.5598958333333334,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.6404622395833334,
       "mismatches": [
         {
           "part": "root",
@@ -881,8 +882,8 @@
       "key": "none.off.off.on.disabled__focus-visible",
       "channelsCompared": 24,
       "channelsEqual": 18,
-      "pctExact": 4.541015625,
-      "pctAA": 0.5598958333333334,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.6404622395833334,
       "mismatches": [
         {
           "part": "root",
@@ -926,8 +927,8 @@
       "key": "none.off.off.on.disabled__active",
       "channelsCompared": 24,
       "channelsEqual": 18,
-      "pctExact": 4.541015625,
-      "pctAA": 0.5598958333333334,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.6404622395833334,
       "mismatches": [
         {
           "part": "root",
@@ -1891,8 +1892,8 @@
       "key": "none.on.off.off.enabled__default",
       "channelsCompared": 87,
       "channelsEqual": 78,
-      "pctExact": 5.72998046875,
-      "pctAA": 3.99169921875,
+      "pctExact": 5.297037760416667,
+      "pctAA": 3.9363606770833335,
       "mismatches": [
         {
           "part": "root",
@@ -1954,8 +1955,8 @@
       "key": "none.on.off.off.enabled__hover",
       "channelsCompared": 87,
       "channelsEqual": 78,
-      "pctExact": 5.72998046875,
-      "pctAA": 3.99169921875,
+      "pctExact": 5.297037760416667,
+      "pctAA": 3.9363606770833335,
       "mismatches": [
         {
           "part": "root",
@@ -2017,8 +2018,8 @@
       "key": "none.on.off.off.enabled__focus-visible",
       "channelsCompared": 87,
       "channelsEqual": 62,
-      "pctExact": 6.18896484375,
-      "pctAA": 4.417317708333333,
+      "pctExact": 5.846354166666667,
+      "pctAA": 4.383951822916667,
       "mismatches": [
         {
           "part": "root",
@@ -2176,8 +2177,8 @@
       "key": "none.on.off.off.enabled__active",
       "channelsCompared": 87,
       "channelsEqual": 78,
-      "pctExact": 5.72998046875,
-      "pctAA": 3.99169921875,
+      "pctExact": 5.297037760416667,
+      "pctAA": 3.9363606770833335,
       "mismatches": [
         {
           "part": "root",
@@ -2239,8 +2240,8 @@
       "key": "none.on.off.off.disabled__default",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 5.8935546875,
-      "pctAA": 0.5428059895833334,
+      "pctExact": 5.519205729166667,
+      "pctAA": 0.4500325520833333,
       "mismatches": [
         {
           "part": "root",
@@ -2326,8 +2327,8 @@
       "key": "none.on.off.off.disabled__hover",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 5.8935546875,
-      "pctAA": 0.5428059895833334,
+      "pctExact": 5.519205729166667,
+      "pctAA": 0.4500325520833333,
       "mismatches": [
         {
           "part": "root",
@@ -2413,8 +2414,8 @@
       "key": "none.on.off.off.disabled__focus-visible",
       "channelsCompared": 87,
       "channelsEqual": 73,
-      "pctExact": 5.861002604166667,
-      "pctAA": 0.8072916666666666,
+      "pctExact": 5.517578125,
+      "pctAA": 0.7340494791666666,
       "mismatches": [
         {
           "part": "root",
@@ -2506,8 +2507,8 @@
       "key": "none.on.off.off.disabled__active",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 5.8935546875,
-      "pctAA": 0.5428059895833334,
+      "pctExact": 5.519205729166667,
+      "pctAA": 0.4500325520833333,
       "mismatches": [
         {
           "part": "root",
@@ -2593,8 +2594,8 @@
       "key": "none.on.off.on.enabled__default",
       "channelsCompared": 124,
       "channelsEqual": 114,
-      "pctExact": 4.449869791666667,
-      "pctAA": 2.31201171875,
+      "pctExact": 2.6302083333333335,
+      "pctAA": 0.99609375,
       "mismatches": [
         {
           "part": "root",
@@ -2613,12 +2614,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
         },
         {
           "part": "button",
@@ -2655,6 +2650,12 @@
           "channel": "position",
           "ours": "static",
           "theirs": "relative"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
         }
       ]
     },
@@ -2662,8 +2663,8 @@
       "key": "none.on.off.on.enabled__hover",
       "channelsCompared": 124,
       "channelsEqual": 111,
-      "pctExact": 6.931966145833333,
-      "pctAA": 3.0403645833333335,
+      "pctExact": 5.44677734375,
+      "pctAA": 1.7146809895833333,
       "mismatches": [
         {
           "part": "root",
@@ -2688,24 +2689,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration",
-          "ours": "none",
-          "theirs": "underline"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration-line",
-          "ours": "none",
-          "theirs": "underline"
         },
         {
           "part": "button",
@@ -2742,33 +2725,6 @@
           "channel": "position",
           "ours": "static",
           "theirs": "relative"
-        }
-      ]
-    },
-    {
-      "key": "none.on.off.on.enabled__focus-visible",
-      "channelsCompared": 124,
-      "channelsEqual": 111,
-      "pctExact": 5.139973958333333,
-      "pctAA": 3.0240885416666665,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "font-feature-settings",
-          "ours": "normal",
-          "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "0px",
-          "theirs": "6px"
-        },
-        {
-          "part": "root",
-          "channel": "text-rendering",
-          "ours": "auto",
-          "theirs": "optimizelegibility"
         },
         {
           "part": "link",
@@ -2787,6 +2743,33 @@
           "channel": "text-decoration-line",
           "ours": "none",
           "theirs": "underline"
+        }
+      ]
+    },
+    {
+      "key": "none.on.off.on.enabled__focus-visible",
+      "channelsCompared": 124,
+      "channelsEqual": 111,
+      "pctExact": 3.9778645833333335,
+      "pctAA": 2.30712890625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "root",
+          "channel": "padding-left",
+          "ours": "0px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
           "part": "button",
@@ -2829,6 +2812,24 @@
           "channel": "position",
           "ours": "static",
           "theirs": "relative"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration",
+          "ours": "none",
+          "theirs": "underline"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration-line",
+          "ours": "none",
+          "theirs": "underline"
         }
       ]
     },
@@ -2836,8 +2837,8 @@
       "key": "none.on.off.on.enabled__active",
       "channelsCompared": 124,
       "channelsEqual": 111,
-      "pctExact": 6.931966145833333,
-      "pctAA": 3.0403645833333335,
+      "pctExact": 5.44677734375,
+      "pctAA": 1.7146809895833333,
       "mismatches": [
         {
           "part": "root",
@@ -2862,24 +2863,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration",
-          "ours": "none",
-          "theirs": "underline"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration-line",
-          "ours": "none",
-          "theirs": "underline"
         },
         {
           "part": "button",
@@ -2916,6 +2899,24 @@
           "channel": "position",
           "ours": "static",
           "theirs": "relative"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration",
+          "ours": "none",
+          "theirs": "underline"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration-line",
+          "ours": "none",
+          "theirs": "underline"
         }
       ]
     },
@@ -2923,8 +2924,8 @@
       "key": "none.on.off.on.disabled__default",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 7.058919270833333,
-      "pctAA": 2.0499674479166665,
+      "pctExact": 5.51513671875,
+      "pctAA": 0.6624348958333334,
       "mismatches": [
         {
           "part": "root",
@@ -3010,8 +3011,8 @@
       "key": "none.on.off.on.disabled__hover",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 7.058919270833333,
-      "pctAA": 2.0499674479166665,
+      "pctExact": 5.51513671875,
+      "pctAA": 0.6624348958333334,
       "mismatches": [
         {
           "part": "root",
@@ -3097,8 +3098,8 @@
       "key": "none.on.off.on.disabled__focus-visible",
       "channelsCompared": 87,
       "channelsEqual": 73,
-      "pctExact": 7.0361328125,
-      "pctAA": 2.30224609375,
+      "pctExact": 5.51025390625,
+      "pctAA": 0.9529622395833334,
       "mismatches": [
         {
           "part": "root",
@@ -3190,8 +3191,8 @@
       "key": "none.on.off.on.disabled__active",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 7.058919270833333,
-      "pctAA": 2.0499674479166665,
+      "pctExact": 5.51513671875,
+      "pctAA": 0.6624348958333334,
       "mismatches": [
         {
           "part": "root",
@@ -4465,8 +4466,8 @@
       "key": "large.off.off.on.enabled__default",
       "channelsCompared": 61,
       "channelsEqual": 55,
-      "pctExact": 3.4285481770833335,
-      "pctAA": 2.4283854166666665,
+      "pctExact": 4.310709635416667,
+      "pctAA": 3.26904296875,
       "mismatches": [
         {
           "part": "root",
@@ -4510,8 +4511,8 @@
       "key": "large.off.off.on.enabled__hover",
       "channelsCompared": 61,
       "channelsEqual": 52,
-      "pctExact": 5.724283854166667,
-      "pctAA": 2.6220703125,
+      "pctExact": 5.75439453125,
+      "pctAA": 3.2828776041666665,
       "mismatches": [
         {
           "part": "root",
@@ -4573,8 +4574,8 @@
       "key": "large.off.off.on.enabled__focus-visible",
       "channelsCompared": 61,
       "channelsEqual": 53,
-      "pctExact": 4.205729166666667,
-      "pctAA": 3.0330403645833335,
+      "pctExact": 4.892578125,
+      "pctAA": 3.6800130208333335,
       "mismatches": [
         {
           "part": "root",
@@ -4630,8 +4631,8 @@
       "key": "large.off.off.on.enabled__active",
       "channelsCompared": 61,
       "channelsEqual": 52,
-      "pctExact": 5.734049479166667,
-      "pctAA": 2.60986328125,
+      "pctExact": 5.760091145833333,
+      "pctAA": 3.25927734375,
       "mismatches": [
         {
           "part": "root",
@@ -4693,8 +4694,8 @@
       "key": "large.off.off.on.disabled__default",
       "channelsCompared": 24,
       "channelsEqual": 17,
-      "pctExact": 5.789388020833333,
-      "pctAA": 0.62255859375,
+      "pctExact": 5.795084635416667,
+      "pctAA": 0.6949869791666666,
       "mismatches": [
         {
           "part": "root",
@@ -4744,8 +4745,8 @@
       "key": "large.off.off.on.disabled__hover",
       "channelsCompared": 24,
       "channelsEqual": 17,
-      "pctExact": 5.777180989583333,
-      "pctAA": 0.64208984375,
+      "pctExact": 5.787760416666667,
+      "pctAA": 0.7169596354166666,
       "mismatches": [
         {
           "part": "root",
@@ -4795,8 +4796,8 @@
       "key": "large.off.off.on.disabled__focus-visible",
       "channelsCompared": 24,
       "channelsEqual": 17,
-      "pctExact": 5.789388020833333,
-      "pctAA": 0.62255859375,
+      "pctExact": 5.795084635416667,
+      "pctAA": 0.6949869791666666,
       "mismatches": [
         {
           "part": "root",
@@ -4846,8 +4847,8 @@
       "key": "large.off.off.on.disabled__active",
       "channelsCompared": 24,
       "channelsEqual": 17,
-      "pctExact": 5.777180989583333,
-      "pctAA": 0.64208984375,
+      "pctExact": 5.787760416666667,
+      "pctAA": 0.7169596354166666,
       "mismatches": [
         {
           "part": "root",
@@ -5913,8 +5914,8 @@
       "key": "large.on.off.off.enabled__default",
       "channelsCompared": 87,
       "channelsEqual": 74,
-      "pctExact": 4.697265625,
-      "pctAA": 4.02099609375,
+      "pctExact": 4.884440104166667,
+      "pctAA": 4.207356770833333,
       "mismatches": [
         {
           "part": "root",
@@ -6000,8 +6001,8 @@
       "key": "large.on.off.off.enabled__hover",
       "channelsCompared": 87,
       "channelsEqual": 73,
-      "pctExact": 4.697265625,
-      "pctAA": 4.090983072916667,
+      "pctExact": 4.884440104166667,
+      "pctAA": 4.27734375,
       "mismatches": [
         {
           "part": "root",
@@ -6093,8 +6094,8 @@
       "key": "large.on.off.off.enabled__focus-visible",
       "channelsCompared": 87,
       "channelsEqual": 57,
-      "pctExact": 4.855143229166667,
-      "pctAA": 4.137369791666667,
+      "pctExact": 5.042317708333333,
+      "pctAA": 4.32373046875,
       "mismatches": [
         {
           "part": "root",
@@ -6282,8 +6283,8 @@
       "key": "large.on.off.off.enabled__active",
       "channelsCompared": 87,
       "channelsEqual": 73,
-      "pctExact": 4.697265625,
-      "pctAA": 4.090983072916667,
+      "pctExact": 4.884440104166667,
+      "pctAA": 4.27734375,
       "mismatches": [
         {
           "part": "root",
@@ -6375,8 +6376,8 @@
       "key": "large.on.off.off.disabled__default",
       "channelsCompared": 87,
       "channelsEqual": 70,
-      "pctExact": 5.8984375,
-      "pctAA": 0.4402669270833333,
+      "pctExact": 5.792643229166667,
+      "pctAA": 0.3605143229166667,
       "mismatches": [
         {
           "part": "root",
@@ -6486,8 +6487,8 @@
       "key": "large.on.off.off.disabled__hover",
       "channelsCompared": 87,
       "channelsEqual": 69,
-      "pctExact": 5.8984375,
-      "pctAA": 1.51123046875,
+      "pctExact": 5.792643229166667,
+      "pctAA": 1.4314778645833333,
       "mismatches": [
         {
           "part": "root",
@@ -6603,8 +6604,8 @@
       "key": "large.on.off.off.disabled__focus-visible",
       "channelsCompared": 87,
       "channelsEqual": 69,
-      "pctExact": 5.8984375,
-      "pctAA": 0.4402669270833333,
+      "pctExact": 5.792643229166667,
+      "pctAA": 0.3605143229166667,
       "mismatches": [
         {
           "part": "root",
@@ -6720,8 +6721,8 @@
       "key": "large.on.off.off.disabled__active",
       "channelsCompared": 87,
       "channelsEqual": 69,
-      "pctExact": 5.8984375,
-      "pctAA": 1.51123046875,
+      "pctExact": 5.792643229166667,
+      "pctAA": 1.4314778645833333,
       "mismatches": [
         {
           "part": "root",
@@ -6837,8 +6838,8 @@
       "key": "large.on.off.on.enabled__default",
       "channelsCompared": 124,
       "channelsEqual": 110,
-      "pctExact": 2.3347981770833335,
-      "pctAA": 1.3582356770833333,
+      "pctExact": 2.69775390625,
+      "pctAA": 1.7057291666666667,
       "mismatches": [
         {
           "part": "root",
@@ -6869,12 +6870,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
         },
         {
           "part": "button",
@@ -6923,6 +6918,12 @@
           "channel": "position",
           "ours": "static",
           "theirs": "absolute"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
         }
       ]
     },
@@ -6930,8 +6931,8 @@
       "key": "large.on.off.on.enabled__hover",
       "channelsCompared": 124,
       "channelsEqual": 106,
-      "pctExact": 6.5771484375,
-      "pctAA": 1.5071614583333333,
+      "pctExact": 5.98876953125,
+      "pctAA": 1.8277994791666667,
       "mismatches": [
         {
           "part": "root",
@@ -6968,24 +6969,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration",
-          "ours": "none",
-          "theirs": "underline"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration-line",
-          "ours": "none",
-          "theirs": "underline"
         },
         {
           "part": "button",
@@ -7040,6 +7023,24 @@
           "channel": "position",
           "ours": "static",
           "theirs": "absolute"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration",
+          "ours": "none",
+          "theirs": "underline"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration-line",
+          "ours": "none",
+          "theirs": "underline"
         }
       ]
     },
@@ -7047,8 +7048,8 @@
       "key": "large.on.off.on.enabled__focus-visible",
       "channelsCompared": 124,
       "channelsEqual": 107,
-      "pctExact": 3.4358723958333335,
-      "pctAA": 2.2843424479166665,
+      "pctExact": 3.7361653645833335,
+      "pctAA": 2.5699869791666665,
       "mismatches": [
         {
           "part": "root",
@@ -7079,24 +7080,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration",
-          "ours": "none",
-          "theirs": "underline"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration-line",
-          "ours": "none",
-          "theirs": "underline"
         },
         {
           "part": "button",
@@ -7151,6 +7134,24 @@
           "channel": "position",
           "ours": "static",
           "theirs": "absolute"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration",
+          "ours": "none",
+          "theirs": "underline"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration-line",
+          "ours": "none",
+          "theirs": "underline"
         }
       ]
     },
@@ -7158,8 +7159,8 @@
       "key": "large.on.off.on.enabled__active",
       "channelsCompared": 124,
       "channelsEqual": 106,
-      "pctExact": 6.5771484375,
-      "pctAA": 1.5071614583333333,
+      "pctExact": 5.98876953125,
+      "pctAA": 1.8277994791666667,
       "mismatches": [
         {
           "part": "root",
@@ -7196,24 +7197,6 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
-        },
-        {
-          "part": "link",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration",
-          "ours": "none",
-          "theirs": "underline"
-        },
-        {
-          "part": "link",
-          "channel": "text-decoration-line",
-          "ours": "none",
-          "theirs": "underline"
         },
         {
           "part": "button",
@@ -7268,6 +7251,24 @@
           "channel": "position",
           "ours": "static",
           "theirs": "absolute"
+        },
+        {
+          "part": "link",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration",
+          "ours": "none",
+          "theirs": "underline"
+        },
+        {
+          "part": "link",
+          "channel": "text-decoration-line",
+          "ours": "none",
+          "theirs": "underline"
         }
       ]
     },
@@ -7275,8 +7276,8 @@
       "key": "large.on.off.on.disabled__default",
       "channelsCompared": 87,
       "channelsEqual": 70,
-      "pctExact": 6.624348958333333,
-      "pctAA": 1.3907877604166667,
+      "pctExact": 6.014811197916667,
+      "pctAA": 0.8235677083333334,
       "mismatches": [
         {
           "part": "root",
@@ -7386,8 +7387,8 @@
       "key": "large.on.off.on.disabled__hover",
       "channelsCompared": 87,
       "channelsEqual": 69,
-      "pctExact": 5.706380208333333,
-      "pctAA": 1.337890625,
+      "pctExact": 5.328776041666667,
+      "pctAA": 0.8723958333333334,
       "mismatches": [
         {
           "part": "root",
@@ -7503,8 +7504,8 @@
       "key": "large.on.off.on.disabled__focus-visible",
       "channelsCompared": 87,
       "channelsEqual": 69,
-      "pctExact": 6.624348958333333,
-      "pctAA": 1.3907877604166667,
+      "pctExact": 6.014811197916667,
+      "pctAA": 0.8235677083333334,
       "mismatches": [
         {
           "part": "root",
@@ -7620,8 +7621,8 @@
       "key": "large.on.off.on.disabled__active",
       "channelsCompared": 87,
       "channelsEqual": 69,
-      "pctExact": 5.706380208333333,
-      "pctAA": 1.337890625,
+      "pctExact": 5.328776041666667,
+      "pctAA": 0.8723958333333334,
       "mismatches": [
         {
           "part": "root",

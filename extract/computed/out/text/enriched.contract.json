@@ -372,13 +372,7 @@
             }
           }
         }
-      ],
-      "parts": {
-        "label": {
-          "element": "span",
-          "text": "Online store dashboard"
-        }
-      }
+      ]
     }
   },
   "anchors": {

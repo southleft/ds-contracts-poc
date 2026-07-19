@@ -34,6 +34,14 @@ import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
 import { signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
 
+/** Visually-hidden (sr-only) style signature: clip-path inset(50%) or the
+ *  1px clip box. Part of the UNION signature — a toned Badge renders an
+ *  sr-only announcement span with the same tag+stems as the visible label,
+ *  and occurrence matching would otherwise swap their identities. */
+export const isSrOnlyStyle = (st: Record<string, string>): boolean =>
+  (st['clip-path'] ?? '').startsWith('inset(50%') ||
+  (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px');
+
 // ---------------------------------------------------------------------------
 // Union alignment
 // ---------------------------------------------------------------------------
@@ -67,9 +75,11 @@ export function buildUnion(
 ): UnionResult {
   const receipts: string[] = [];
   let nextId = 0;
+  const sigOf = (node: CapturedNode): string =>
+    `${signature(node, classPrefix)}${isSrOnlyStyle(node.style) ? '|sr-only' : ''}`;
   const mk = (node: CapturedNode, path: string, parent: UnionNode | null, inBase: boolean, repKey: string): UnionNode => ({
     id: nextId++,
-    sig: signature(node, classPrefix),
+    sig: sigOf(node),
     rep: node,
     repPath: path,
     repKey,
@@ -100,39 +110,44 @@ export function buildUnion(
     const key = `${cap.combo}__${cap.interaction}`;
     const out = new Map<number, FlatEl>();
     const align = (u: UnionNode, node: CapturedNode, path: string) => {
-      const sig = signature(node, classPrefix);
+      const sig = sigOf(node);
       if (sig !== u.sig && u.parent === null) {
         receipts.push(`root-signature-varies: ${key}: ${u.sig} → ${sig} (element-varies receipt; root always aligns)`);
       }
       out.set(u.id, { path, sig, partName: '', node });
-      // group current union children by sig (snapshot BEFORE inserts)
+      // TWO-PASS document-order merge: first match capture children to union
+      // children by (signature, nth occurrence); then walk in capture order,
+      // inserting NEW union nodes at the cursor — BEFORE the next matched
+      // sibling — so union order follows document order (the Badge pip sits
+      // LEFT of the label) while existing union nodes never reorder.
       const bySig = new Map<string, UnionNode[]>();
       for (const uc of u.children) (bySig.get(uc.sig) ?? bySig.set(uc.sig, []).get(uc.sig)!).push(uc);
       const used = new Map<string, number>();
-      let lastIdx = -1;
+      const pairs: Array<{ el: CapturedNode; path: string; match: UnionNode | null; sig: string }> = [];
       let i = 0;
       for (const c of node.nodes) {
         if (c.t !== 'el') continue;
         const childPath = path === '' ? String(i) : `${path}.${i}`;
         i++;
-        const csig = signature(c.el, classPrefix);
+        const csig = sigOf(c.el);
         const n = used.get(csig) ?? 0;
         used.set(csig, n + 1);
         const list = bySig.get(csig);
-        if (list && n < list.length) {
-          const uc = list[n];
-          lastIdx = u.children.indexOf(uc);
-          align(uc, c.el, childPath);
+        pairs.push({ el: c.el, path: childPath, match: list && n < list.length ? list[n] : null, sig: csig });
+      }
+      let cursor = 0;
+      for (const pr of pairs) {
+        if (pr.match) {
+          const at = u.children.indexOf(pr.match);
+          if (at >= cursor) cursor = at + 1;
+          else receipts.push(`union-order-drift: ${key} @${pr.path} (${pr.sig}) matched behind the cursor — document order varies across captures (named)`);
+          align(pr.match, pr.el, pr.path);
         } else {
-          // new union node — inserted right after the previously matched
-          // sibling (or at the END when nothing matched yet: base-tree order
-          // stays stable, so base elements keep first claim on names).
-          const uc = mk(c.el, childPath, u, false, key);
-          const at = lastIdx === -1 ? u.children.length : lastIdx + 1;
-          u.children.splice(at, 0, uc);
-          lastIdx = u.children.indexOf(uc);
-          receipts.push(`union-part-added: ${key} @${childPath} (${csig})`);
-          align(uc, c.el, childPath);
+          const uc = mk(pr.el, pr.path, u, false, key);
+          u.children.splice(cursor, 0, uc);
+          cursor++;
+          receipts.push(`union-part-added: ${key} @${pr.path} (${pr.sig})`);
+          align(uc, pr.el, pr.path);
         }
       }
     };
@@ -164,7 +179,11 @@ export function nameUnion(
   classPrefix: string,
 ): void {
   const seen = new Map<string, number>();
-  for (const e of entries) {
+  // BASE-capture entries claim names first (DFS order), then off-base
+  // entries — an off-base subtree inserted before a base element (linked
+  // Tag's inner text) must never steal the base element's name.
+  const ordered = [...entries.filter((e) => e.inBase), ...entries.filter((e) => !e.inBase)];
+  for (const e of ordered) {
     let name: string;
     if (e.parent === null) name = 'root';
     else if (e.rep.tag === 'svg') name = 'icon';
@@ -350,6 +369,12 @@ export function reconstructSvg(
   receipts: string[],
   label: string,
 ): { markup: string; size: number } | null {
+  // A path fill equal to the svg's inherited `color` is CSS currentColor in
+  // spirit — emitting it AS currentColor separates glyph SHAPE from color
+  // (the Badge pip: shape = f(progress), color = f(tone); a baked fill made
+  // the markup two-axis and refused the asset).
+  const inheritedColor = svgEl.style['color'];
+  const inheritedFill = svgEl.style['fill'];
   const w = pxNum(svgEl.style['width']);
   const h = pxNum(svgEl.style['height']);
   if (w === null || h === null || w <= 0 || h <= 0) {
@@ -373,13 +398,22 @@ export function reconstructSvg(
         for (const num of d.match(/-?\d+(?:\.\d+)?/g) ?? []) {
           maxCoord = Math.max(maxCoord, Math.abs(Number(num)));
         }
-        const fill = el.style['fill'] ?? '';
+        const fillRaw = el.style['fill'] ?? '';
+        // fill equal to the svg's own computed fill is INHERITED (no
+        // attribute — the host part's minted fill channel cascades in CSS);
+        // fill equal to the inherited color is currentColor; else baked.
+        const fill = fillRaw && inheritedFill && fillRaw === inheritedFill
+          ? ''
+          : fillRaw && inheritedColor && fillRaw === inheritedColor
+            ? 'currentColor'
+            : fillRaw;
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
         // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED
         // path — fill-only reconstruction rendered it invisible). Computed
         // px lengths convert to user units 1:1 (viewBox == computed size).
-        const stroke = el.style['stroke'];
+        const strokeRaw = el.style['stroke'];
+        const stroke = strokeRaw && inheritedColor && strokeRaw === inheritedColor ? 'currentColor' : strokeRaw;
         const strokeAttrs: string[] = [];
         if (stroke && stroke !== 'none') {
           strokeAttrs.push(` stroke="${stroke}"`);
@@ -580,12 +614,18 @@ export function promoteAnatomy(
       }
       svgPlans.set(hostIdx, { hostIdx, perValue });
     }
-    // consume the svg subtree (svg element + descendants)
+    // consume the svg subtree. When the svg IS the host (no dedicated
+    // wrapper), its OWN channels stay mintable — the per-tone fill cascades
+    // to attribute-less paths in CSS; only descendants are consumed.
     const consume = (u: UnionNode) => {
       consumed.add(idxOf.get(u.id)!);
       for (const c of u.children) consume(c);
     };
-    consume(t.svg);
+    if (t.host === t.svg) {
+      for (const c of t.svg.children) consume(c);
+    } else {
+      consume(t.svg);
+    }
   }
 
   // 4. build the promoted anatomy tree in union order.
@@ -636,12 +676,7 @@ export function promoteAnatomy(
     // part carries declared display:none — visually identical; the a11y
     // surface of the GENERATED component is contract-owned (semantics/role),
     // NAMED as a downgrade receipt.
-    const srOnly = (() => {
-      const st = e.rep.style;
-      if ((st['clip-path'] ?? '').startsWith('inset(50%')) return true;
-      if (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px') return true;
-      return false;
-    })();
+    const srOnly = isSrOnlyStyle(e.rep.style);
     if (srOnly) {
       part.declared = { ...part.declared, display: 'none' };
       receipts.push(`sr-only-carried-as-hidden: ${e.partName} is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)`);

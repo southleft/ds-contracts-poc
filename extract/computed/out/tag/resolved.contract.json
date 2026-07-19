@@ -124,7 +124,7 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "inline-flex",
+        "display": "flex",
         "align": "center"
       },
       "tokens": {
@@ -140,115 +140,6 @@
         "top": "{imported.shared.size-0}"
       },
       "parts": {
-        "link": {
-          "element": "a",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy a|Tag__Link — this element exists in the real component's DOM; the static layer had no part for it.",
-          "visibleWhen": {
-            "prop": "linked"
-          },
-          "stylesWhen": [
-            {
-              "prop": "clickable",
-              "styles": {
-                "display": "none"
-              }
-            },
-            {
-              "prop": "disabled",
-              "styles": {
-                "display": "none"
-              }
-            }
-          ],
-          "parts": {
-            "text": {
-              "element": "span",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
-              "declared": {
-                "display": "block",
-                "cursor": "pointer",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden",
-                "text-overflow": "ellipsis",
-                "text-wrap-mode": "nowrap"
-              },
-              "visibleWhen": {
-                "prop": "linked"
-              },
-              "stylesWhen": [
-                {
-                  "prop": "clickable",
-                  "styles": {
-                    "display": "none"
-                  }
-                },
-                {
-                  "prop": "disabled",
-                  "styles": {
-                    "display": "none"
-                  }
-                }
-              ],
-              "parts": {
-                "label": {
-                  "element": "span",
-                  "tokens": {
-                    "font-size": "{p.text-body-sm-font-size}",
-                    "font-weight": "{p.text-body-sm-font-weight}",
-                    "line-height": "{p.font-line-height-500}",
-                    "letter-spacing": "{p.text-body-sm-font-letter-spacing}",
-                    "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}"
-                  },
-                  "text": "Wholesale",
-                  "declared": {
-                    "display": "inline",
-                    "cursor": "pointer",
-                    "text-wrap-mode": "nowrap"
-                  },
-                  "visibleWhen": {
-                    "prop": "linked"
-                  },
-                  "stylesWhen": [
-                    {
-                      "prop": "clickable",
-                      "styles": {
-                        "display": "none"
-                      }
-                    },
-                    {
-                      "prop": "disabled",
-                      "styles": {
-                        "display": "none"
-                      }
-                    }
-                  ]
-                }
-              },
-              "tokens": {
-                "font-size": "{imported.shared.size-12}",
-                "line-height": "{imported.tag.text.line-height}"
-              }
-            }
-          },
-          "declared": {
-            "position": "relative",
-            "text-decoration-line": "none"
-          },
-          "tokens": {
-            "border-bottom-left-radius": "{imported.shared.size-8}",
-            "border-bottom-right-radius": "{imported.shared.size-8}",
-            "border-top-left-radius": "{imported.shared.size-8}",
-            "border-top-right-radius": "{imported.shared.size-8}",
-            "bottom": "{imported.shared.size-0}",
-            "color": "{imported.tag.link.color}",
-            "grid-template-columns": "{imported.tag.link.grid-template-columns}",
-            "grid-template-rows": "{imported.tag.link.grid-template-rows}",
-            "left": "{imported.shared.size-0}",
-            "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
-          }
-        },
         "part-1": {
           "element": "span",
           "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -282,6 +173,7 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tag__Button — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "aspect-ratio": "1 / 1",
             "appearance": "none",
             "border-bottom-style": "none",
             "border-left-style": "none",
@@ -312,6 +204,7 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "aspect-ratio": "1 / 1",
                 "cursor": "pointer",
                 "font-feature-settings": "normal",
                 "max-height": "100%",
@@ -418,6 +311,112 @@
               }
             }
           ]
+        },
+        "link": {
+          "element": "a",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy a|Tag__Link — this element exists in the real component's DOM; the static layer had no part for it.",
+          "visibleWhen": {
+            "prop": "linked"
+          },
+          "stylesWhen": [
+            {
+              "prop": "clickable",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "text-2": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap"
+              },
+              "visibleWhen": {
+                "prop": "linked"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "clickable",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "label-2": {
+                  "text": "Wholesale",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tag__Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline",
+                    "cursor": "pointer",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "visibleWhen": {
+                    "prop": "linked"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "clickable",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "disabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "font-size": "{imported.shared.size-12}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  }
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-12}",
+                "line-height": "{imported.tag.text-2.line-height}"
+              }
+            }
+          },
+          "declared": {
+            "position": "relative",
+            "text-decoration-line": "none"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.tag.link.color}",
+            "grid-template-columns": "{imported.tag.link.grid-template-columns}",
+            "grid-template-rows": "{imported.tag.link.grid-template-rows}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          }
         }
       },
       "declared": {

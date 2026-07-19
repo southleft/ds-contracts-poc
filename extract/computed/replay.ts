@@ -56,6 +56,9 @@ export interface TruthCaptureEntry {
   /** v2: this capture's present-part set differs from the base tree — the
    *  tree is rebuilt from the anatomy templates (see TruthAnatomyEntry). */
   offBase?: boolean;
+  /** v2: per-part TEXT-RUN overrides (template order) — sr-only labels vary
+   *  per combo (Badge pip: "Incomplete" vs "Partially complete"). */
+  text?: Record<string, string[]>;
   /** `${part}${pseudo}` → full pseudo style map (present only when the
    *  pseudo element renders). */
   pseudo?: Record<string, StyleMap>;
@@ -95,9 +98,14 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
       const baseStyle = a.inBase === false ? (a.repStyle ?? {}) : (baseByPath.get(a.path)?.style ?? {});
       const style: StyleMap = { ...baseStyle, ...(deltaByPart.get(part) ?? {}) };
       const nodes: CapturedNode['nodes'] = [];
+      const textOverrides = cap.text?.[part];
+      let ti = 0;
       for (const n of a.nodes ?? []) {
-        if (n.t === 'text') nodes.push(n);
-        else if (present(n.part)) nodes.push({ t: 'el', el: build(n.part) });
+        if (n.t === 'text') {
+          const v = textOverrides?.[ti] ?? n.v;
+          ti++;
+          nodes.push({ t: 'text', v });
+        } else if (present(n.part)) nodes.push({ t: 'el', el: build(n.part) });
       }
       const node: CapturedNode = { tag: a.tag, classes: a.classes, nodes, style, pseudo: {} };
       return node;

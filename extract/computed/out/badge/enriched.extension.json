@@ -5,17 +5,209 @@
   "browser": "148.0.7778.96",
   "mintedTokens": {
     "imported": {
-      "shared": {
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        }
-      },
       "badge": {
+        "root": {
+          "background-color": {
+            "none": {
+              "$value": "#0000000f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#d5ebff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#affebf",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffd6a4",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#fed1d7",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#ffeb78",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#0000000f",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#e9e5ff",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#91d0ff",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#047b5d",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#ffb800",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#c70a24",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#ffe600",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#0000000f",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
+            }
+          }
+        },
+        "label-2": {
+          "bottom": {
+            "$value": "799px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "575px",
+            "$type": "dimension"
+          }
+        },
         "icon": {
           "color": {
             "none": {
@@ -280,7 +472,7 @@
             }
           }
         },
-        "label": {
+        "label-3": {
           "bottom": {
             "$value": "799px",
             "$type": "dimension"
@@ -345,6 +537,68 @@
             "enabled": {
               "$value": "#303030",
               "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
             }
           },
           "left": {
@@ -544,7 +798,7 @@
             }
           }
         },
-        "part-0-0-1-0": {
+        "label": {
           "color": {
             "none": {
               "$value": "#616161",
@@ -607,204 +861,86 @@
               "$type": "color"
             }
           },
-          "fill": {
-            "none": {
-              "$value": "#616161",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#0094d5",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#047b5d",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#b28400",
-              "$type": "color"
-            },
-            "critical": {
-              "$value": "#e22c38",
-              "$type": "color"
-            },
-            "attention": {
-              "$value": "#998a00",
-              "$type": "color"
-            },
-            "new": {
-              "$value": "#616161",
-              "$type": "color"
-            },
-            "magic": {
-              "$value": "#5700d1",
-              "$type": "color"
-            },
-            "info-strong": {
-              "$value": "#002133",
-              "$type": "color"
-            },
-            "success-strong": {
-              "$value": "#fafffb",
-              "$type": "color"
-            },
-            "warning-strong": {
-              "$value": "#251a00",
-              "$type": "color"
-            },
-            "critical-strong": {
-              "$value": "#fffafb",
-              "$type": "color"
-            },
-            "attention-strong": {
-              "$value": "#332e00",
-              "$type": "color"
-            },
-            "read-only": {
-              "$value": "#8a8a8a",
-              "$type": "color"
-            },
-            "enabled": {
-              "$value": "#047b5d",
-              "$type": "color"
-            }
-          },
-          "font-weight": {
-            "none": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "info": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "success": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "warning": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "critical": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "attention": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "new": {
-              "$value": "700",
-              "$type": "number"
-            },
-            "magic": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "info-strong": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "success-strong": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "warning-strong": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "critical-strong": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "attention-strong": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "read-only": {
-              "$value": "550",
-              "$type": "number"
-            },
-            "enabled": {
-              "$value": "550",
-              "$type": "number"
-            }
-          }
-        },
-        "label-2": {
-          "color": {
-            "none": {
-              "$value": "#616161",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#003a5a",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#014b40",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#5e4200",
-              "$type": "color"
-            },
-            "critical": {
-              "$value": "#8e0b21",
-              "$type": "color"
-            },
-            "attention": {
-              "$value": "#4f4700",
-              "$type": "color"
-            },
-            "new": {
-              "$value": "#616161",
-              "$type": "color"
-            },
-            "magic": {
-              "$value": "#5700d1",
-              "$type": "color"
-            },
-            "info-strong": {
-              "$value": "#002133",
-              "$type": "color"
-            },
-            "success-strong": {
-              "$value": "#fafffb",
-              "$type": "color"
-            },
-            "warning-strong": {
-              "$value": "#251a00",
-              "$type": "color"
-            },
-            "critical-strong": {
-              "$value": "#fffafb",
-              "$type": "color"
-            },
-            "attention-strong": {
-              "$value": "#332e00",
-              "$type": "color"
-            },
-            "read-only": {
-              "$value": "#616161",
-              "$type": "color"
-            },
-            "enabled": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          }
-        },
-        "label-3": {
           "font-size": {
             "$value": "12px",
             "$type": "dimension"
+          },
+          "font-weight": {
+            "none": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "450",
+              "$type": "number"
+            }
           },
           "line-height": {
             "$value": "16px",
             "$type": "dimension"
           }
+        }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
         }
       }
     }
@@ -865,6 +1001,60 @@
       "class": "currentColor"
     },
     {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
       "part": "icon",
       "channel": "border-bottom-color",
       "foldedInto": "color",
@@ -973,55 +1163,55 @@
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "label-3",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1135,109 +1325,55 @@
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-bottom-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-left-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-right-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-top-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
+      "part": "label",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1246,20 +1382,33 @@
   "foldedStateSkips": [],
   "layout": {
     "enriched": [],
-    "contradictions": [
-      {
-        "part": "root",
-        "field": "display",
-        "carried": "inline-flex",
-        "observed": "flex"
-      }
-    ],
+    "contradictions": [],
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
     "base": [
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
       {
         "part": "icon-2",
         "channel": "max-height",
@@ -1271,22 +1420,22 @@
         "value": "100%"
       },
       {
-        "part": "label",
+        "part": "label-3",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "label",
+        "part": "label-3",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "label",
+        "part": "label-3",
         "channel": "position",
         "value": "absolute"
       },
       {
-        "part": "label",
+        "part": "label-3",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
@@ -1305,7 +1454,14 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "label",
+      "part": "label-2",
+      "channel": "clip-path",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inset(50%)",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
       "channel": "clip-path",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "inset(50%)",
@@ -1324,123 +1480,17 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "top",
       "distinctValues": 1
-    },
-    {
-      "part": "part-0-0-1-0",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 8.547 12.69 C 8.73 12.74 8.99 12.75 10 12.75 S 11.27 12.74 11.453 12.69 A 1.75 1.75 0 0 0 12.69 11.453 C 12.74 11.271 12.75 11.01 12.75 10 S 12.74 8.73 12.69 8.547 A 1.75 1.75 0 0 0 11.453 7.31 C 11.271 7.26 11.01 7.25 10 7.25 S 8.73 7.26 8.547 7.31 A 1.75 1.75 0 0 0 7.31 8.547 C 7.26 8.73 7.25 8.99 7.25 10 S 7.26 11.27 7.31 11.453 A 1.75 1.75 0 0 0 8.547 12.69 Z M 6.102 8.224 C 6 8.605 6 9.07 6 10 S 6 11.395 6.102 11.777 A 3 3 0 0 0 8.224 13.897 C 8.605 14 9.07 14 10 14 S 11.395 14 11.777 13.898 A 3 3 0 0 0 13.897 11.777 C 14 11.395 14 10.93 14 10 C 14 9.07 14 8.605 13.898 8.224 A 3 3 0 0 0 11.777 6.102 C 11.395 6 10.93 6 10 6 C 9.07 6 8.605 6 8.224 6.102 A 3 3 0 0 0 6.102 8.224 Z\")",
-      "distinctValues": 3
-    },
-    {
-      "part": "part-0-0-1-0",
-      "channel": "fill-rule",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "evenodd",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "bottom",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "clip-path",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "left",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "min-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "min-width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "overflow-x",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "visible",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "overflow-y",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "visible",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "position",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "static",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "right",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "text-wrap-mode",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "wrap",
-      "distinctValues": 2
-    },
-    {
-      "part": "label-2",
-      "channel": "top",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
     }
   ],
   "stateOverflow": [],
   "overflowBindings": [
     {
       "part": "label-2",
-      "channel": "font-size",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "label-2",
-      "channel": "font-weight",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "label-2",
-      "channel": "line-height",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "label-3",
       "channel": "color",
       "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "font-weight",
       "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
     }
@@ -1451,2966 +1501,15 @@
     "findings": [],
     "totalFindings": 0
   },
-  "bindingContradictions": [
-    {
-      "combo": "none.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "none.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "none.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(213, 235, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 58, 90, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(213, 235, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 58, 90, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(213, 235, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 58, 90, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(213, 235, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 58, 90, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(175, 254, 191, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(1, 75, 64, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(175, 254, 191, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(1, 75, 64, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(175, 254, 191, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(1, 75, 64, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(175, 254, 191, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(1, 75, 64, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 214, 164, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(94, 66, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 214, 164, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(94, 66, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 214, 164, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(94, 66, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 214, 164, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(94, 66, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(254, 209, 215, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(142, 11, 33, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(254, 209, 215, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(142, 11, 33, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(254, 209, 215, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(142, 11, 33, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(254, 209, 215, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(142, 11, 33, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 235, 120, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(79, 71, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 235, 120, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(79, 71, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 235, 120, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(79, 71, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 235, 120, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(79, 71, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.none",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-medium}",
-      "computedProp": "font-weight",
-      "expected": "550",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "new.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "new.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "new.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "new.incomplete",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-medium}",
-      "computedProp": "font-weight",
-      "expected": "550",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.partiallyComplete",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-medium}",
-      "computedProp": "font-weight",
-      "expected": "550",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.complete",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-medium}",
-      "computedProp": "font-weight",
-      "expected": "550",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "700",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "new.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(233, 229, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(87, 0, 209, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "magic.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "magic.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "magic.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "magic.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(233, 229, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(87, 0, 209, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(233, 229, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(87, 0, 209, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(233, 229, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(87, 0, 209, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "magic.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(145, 208, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 33, 51, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info-strong.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info-strong.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info-strong.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "info-strong.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(145, 208, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 33, 51, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(145, 208, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 33, 51, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(145, 208, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(0, 33, 51, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info-strong.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(4, 123, 93, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(250, 255, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success-strong.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success-strong.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success-strong.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "success-strong.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(4, 123, 93, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(250, 255, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(4, 123, 93, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(250, 255, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(4, 123, 93, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(250, 255, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success-strong.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 184, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(37, 26, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning-strong.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning-strong.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning-strong.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "warning-strong.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 184, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(37, 26, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 184, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(37, 26, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 184, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(37, 26, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning-strong.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(199, 10, 36, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(255, 250, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical-strong.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical-strong.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical-strong.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "critical-strong.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(199, 10, 36, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(255, 250, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(199, 10, 36, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(255, 250, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(199, 10, 36, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(255, 250, 251, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "critical-strong.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 230, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(51, 46, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention-strong.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention-strong.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention-strong.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "attention-strong.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 230, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(51, 46, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 230, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(51, 46, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(255, 230, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(51, 46, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "attention-strong.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.none",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(0, 0, 0, 0)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "read-only.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "read-only.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "read-only.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "read-only.incomplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(0, 0, 0, 0)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.partiallyComplete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(0, 0, 0, 0)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.complete",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{p.color-bg-fill-transparent-secondary}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0.06)",
-      "observed": "rgba(0, 0, 0, 0)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "read-only.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.none",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.none",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "enabled.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "enabled.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "enabled.none",
-      "part": "label",
-      "channel": "letter-spacing",
-      "ref": "{p.text-body-sm-font-letter-spacing}",
-      "computedProp": "letter-spacing",
-      "expected": "",
-      "observed": "",
-      "verdict": "part-missing"
-    },
-    {
-      "combo": "enabled.incomplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.incomplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.incomplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.incomplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.partiallyComplete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.partiallyComplete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.partiallyComplete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.partiallyComplete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.complete",
-      "part": "root",
-      "channel": "color",
-      "ref": "{p.color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(97, 97, 97, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.complete",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{p.text-body-sm-font-size}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "13px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.complete",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
-      "computedProp": "font-weight",
-      "expected": "450",
-      "observed": "550",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "enabled.complete",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction"
-    }
-  ],
+  "bindingContradictions": [],
   "interactionOnDisabled": [],
   "structureReceipts": [
     "union-part-added: none.incomplete__default @0 (span|Badge__Icon)",
     "union-part-added: none.incomplete__default @0.0 (span|Icon)",
-    "union-part-added: none.incomplete__default @0.0.0 (span|Text)",
+    "union-part-added: none.incomplete__default @0.0.0 (span|Text|sr-only)",
     "union-part-added: none.incomplete__default @0.0.1 (svg|)",
     "union-part-added: none.incomplete__default @0.0.1.0 (path|)",
-    "union-part-added: info.none__default @1 (span|Text)"
+    "union-part-added: info.none__default @0 (span|Text|sr-only)"
   ],
   "styledChannelReceipts": [
     "control-fallback: no control for <svg> — span control used (part icon-3)",
@@ -4423,6 +1522,10 @@
         "join": "matched"
       },
       {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
         "part": "icon",
         "join": "computed-only"
       },
@@ -4431,8 +1534,8 @@
         "join": "computed-only"
       },
       {
-        "part": "label",
-        "join": "matched"
+        "part": "label-3",
+        "join": "computed-only"
       },
       {
         "part": "icon-3",
@@ -4443,12 +1546,8 @@
         "join": "computed-only"
       },
       {
-        "part": "label-2",
-        "join": "computed-only"
-      },
-      {
-        "part": "label-3",
-        "join": "computed-only"
+        "part": "label",
+        "join": "matched"
       }
     ],
     "staticOnly": []
@@ -4457,15 +1556,18 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
+      "label-2",
       "icon",
       "icon-2",
-      "label",
+      "label-3",
       "icon-3",
-      "part-0-0-1-0",
-      "label-2",
-      "label-3"
+      "label"
     ],
-    "svgAssets": [],
+    "svgAssets": [
+      "badge-icon-3-complete",
+      "badge-icon-3-incomplete",
+      "badge-icon-3-partiallycomplete"
+    ],
     "receipts": [
       "svg-viewbox-reconstructed: Badge.icon-3@none.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Badge.icon-3@none.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
@@ -4512,27 +1614,28 @@
       "svg-viewbox-reconstructed: Badge.icon-3@enabled.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Badge.icon-3@enabled.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Badge.icon-3@enabled.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
+      "literal-text-carried: label-2 = \"Info\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label-2 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "presence-carried: icon (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
       "presence-carried: icon-2 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
-      "sr-only-carried-as-hidden: label is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
-      "presence-carried: icon-3 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
-      "presence-carried: part-0-0-1-0 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
-      "literal-text-carried: label-2 = \"Fulfilled\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "literal-text-carried: label-3 = \"Fulfilled\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "full-width-carried: label-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
-      "presence-carried: label-3 (13/60 combos) →  base-hidden, shown-when tone=info, tone=success, tone=warning, tone=critical, tone=attention, tone=new, tone=info-strong, tone=success-strong, tone=warning-strong, tone=critical-strong, tone=attention-strong, tone=read-only, tone=enabled hidden-when progress=incomplete, progress=partiallyComplete, progress=complete"
+      "literal-text-carried: label-3 = \"Incomplete\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label-3 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "presence-carried: icon-3 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete"
     ],
-    "refusals": [
-      "svg-content-multi-axis: Badge.icon-3 — markup varies over more than one axis; asset refused (part still promoted as a box)"
-    ]
+    "refusals": []
   },
   "enrichmentNotes": [
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]
