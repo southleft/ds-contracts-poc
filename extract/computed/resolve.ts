@@ -26,7 +26,7 @@
  * Playground receipts for contradictions are NAMED FUTURE UI — this workflow
  * is CLI-only today (the queue file is machine-readable for that UI).
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, tokensByPropEntries, walkAnatomy, type Contract, type Part } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
@@ -220,7 +220,13 @@ for (const g of groups.values()) {
 // the resolved contract must still be a REAL contract
 ContractSchema.parse(resolved);
 const errors: string[] = [];
-validateContract(resolved, new Map([[resolved.id, resolved]]), errors, new Map());
+const iconAssets = new Map<string, string>();
+if (cfg.icons) {
+  for (const f of readdirSync(path.join(REPO, cfg.icons)).sort()) {
+    if (f.endsWith('.svg')) iconAssets.set(f.slice(0, -4), readFileSync(path.join(REPO, cfg.icons, f), 'utf8').trim());
+  }
+}
+validateContract(resolved, new Map([[resolved.id, resolved]]), errors, iconAssets);
 if (errors.length > 0) fail(`resolved contract fails generator validation:\n${errors.map((e) => `  - ${e}`).join('\n')}`);
 
 const decisions = [...priorDecisions, ...newDecisions];
