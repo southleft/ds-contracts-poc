@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- **Schema v15 — the S4 channel lifts (north-star round 1).** `Part.declared` / `Part.declaredStates` carry keyword/literal channels with no token vocabulary (cursor, user-select, appearance, text-rendering, font-feature-settings, transitions, touch-action, the position:relative class, the A22 text channels, font-family stacks, background sub-channels) as first-class facts, bounded by the `DECLARED_CHANNELS` registry (per-channel value grammars; canvas verdict + annotation copy from `docs/FIGMA-CAPABILITY-MATRIX.md`). `layout.wrap` (flex-wrap ⇄ native `layoutWrap`). Literal channels gain per-corner radii and per-side border widths. `contract.schema.json` regenerated.
+- **Canvas carriage for the ranked capability-matrix additions** — per-corner radius and per-side width variable BINDINGS, linear-gradient → native `GRADIENT_LINEAR` paints (paint-order inversion documented; radial/conic are named description limits), full box-shadow stacks incl. inset → native effect lists, the A22 text channels drawn natively (`textCase`/`textDecoration`/`textAlignHorizontal`/pixel letter-spacing/first font-family stack entry/`textTruncation`), `layoutWrap`. Declared-not-drawn channels land the matrix §b annotation copy in component descriptions.
+- **Computed-floor fusion promotes declared facts** — uniform registry-channel values (and full-coverage uniform state deltas) carry as `declared`/`declaredStates` instead of extension residue; `box-shadow: none` and gradient values are mintable kinds. New offline instrument `npm run extract:computed:regate` re-scores the contract-mediated gate over the COMMITTED captures: baseline reproduced exactly (Button 79.578%, Tag 77.500%), post-lift **Button 90.617%** (192/480 rows fully equal) and **Tag 92.500%**.
+
+### Fixed
+
+- **#60 — the four canvas-emitter defects, each eval-pinned** (`figma-60-canvas-emitter-fixes` executes the emitted runtime): (1) `fillClear` can no longer trample a spec-carried fill (compile + runtime precedence); (2) per-component sync scripts are AMEND-CAPABLE (shared sync runtime — re-running a committed script reconciles in place instead of `{ skipped }`); (3) standalone COMPONENTs amend in place (`amendComponent` — the "variant sets in v1" skip is retired); (4) empty runtime-sized children default to FILL height, never Figma's 100×100 `createFrame` artifact. `figma-sync/` and `examples/polaris/figma/` re-emitted; golden regenerated (flagged — the emitted-script shape change IS the fix).
+
 ## [0.6.0] - 2026-07-12
 
 The July field-test arc: the contract schema advanced v9 → v12, the plugin dump format v1.0 → v1.6, the eval suite 60 → 99, and three standing instruments joined the suite — the whole-kit census, the visual-parity pixel gate, and the enterprise code gauntlet. The dated narrative with receipts is [MILESTONES.md](MILESTONES.md).
