@@ -8,8 +8,29 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  background: var(--p-color-avatar-bg-fill);
-  color: var(--p-color-avatar-text-on-bg-fill);
+  background: var(--p-color-avatar-one-bg-fill);
+  color: var(--p-color-avatar-one-text-on-bg-fill);
+  min-width: 20px;
+}
+
+.size-xs {
+  width: 20px;
+}
+
+.size-sm {
+  width: 24px;
+}
+
+.size-md {
+  width: 28px;
+}
+
+.size-lg {
+  width: 32px;
+}
+
+.size-xl {
+  width: 40px;
 }
 
 .initials {

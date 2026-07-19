@@ -114,9 +114,34 @@
   "anatomy": {
     "root": {
       "tokens": {
-        "background": "{p.color-avatar-bg-fill}",
-        "color": "{p.color-avatar-text-on-bg-fill}"
+        "background": "{p.color-avatar-one-bg-fill}",
+        "color": "{p.color-avatar-one-text-on-bg-fill}"
       },
+      "literals": {
+        "min-width": "20px"
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "xs": {
+              "width": "20px"
+            },
+            "sm": {
+              "width": "24px"
+            },
+            "md": {
+              "width": "28px"
+            },
+            "lg": {
+              "width": "32px"
+            },
+            "xl": {
+              "width": "40px"
+            }
+          }
+        }
+      ],
       "parts": {
         "initials": {
           "element": "span",

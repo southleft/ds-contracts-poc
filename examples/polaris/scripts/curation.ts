@@ -42,6 +42,28 @@ export interface AxisCuration {
   classOf: Record<string, string>;
 }
 
+/** COVERAGE ROUND (workstream 2): composition-owned typography. A parent's
+ *  text node renders through another EXTRACTED component (Polaris's Text
+ *  primitive) with LITERAL prop values readable in the parent's TSX. The
+ *  curation restates that mapping (with a REQUIRED citation of the TSX
+ *  lines); the promotion then resolves every typography channel MECHANICALLY
+ *  from the child component's own module.css under the child's reviewed
+ *  class map — nothing here is a value, only a pointer. Branches that need
+ *  runtime logic (media hooks) or condition on two parent axes are listed in
+ *  `refusals` and become named ledger lines, never carries. */
+export interface CompositionTypographyCuration {
+  /** Child curation name whose CSS owns the typography (e.g. 'Text'). */
+  child: string;
+  /** Child prop values applied in the parent's BASE state (from the cite). */
+  base: Record<string, string>;
+  /** Parent-axis-driven child-prop changes — SINGLE-axis branches only. */
+  byParentProp?: Array<{ prop: string; map: Record<string, Record<string, string>> }>;
+  /** Runtime/multi-axis branches refused by name (ledger lines). */
+  refusals?: string[];
+  /** REQUIRED provenance: the parent TSX lines the mapping restates. */
+  cite: string;
+}
+
 export interface PartCuration {
   name: string;
   /** '.Class' part selector in the module.css (match target). */
@@ -49,6 +71,9 @@ export interface PartCuration {
   /** Bare descendant selector under the root ('svg') when the styled node
    *  is not a classed element. */
   nestedSelector?: string;
+  /** COVERAGE ROUND: typography channels resolved through the composition
+   *  chain from another extracted component's CSS (see the interface doc). */
+  typographyFrom?: CompositionTypographyCuration;
   element?: string;
   attrs?: Record<string, string>;
   content?: { prop: string };
@@ -156,10 +181,29 @@ export const CURATION: ComponentCuration[] = [
         classOf: { left: 'textAlignLeft', right: 'textAlignRight', center: 'textAlignCenter', start: 'textAlignStart', end: 'textAlignEnd' },
       },
     ],
-    parts: [],
-    sampleText: 'Button',
+    parts: [
+      {
+        name: 'label',
+        element: 'span',
+        text: 'Button',
+        polarisSelector: '.Polaris-Text--root',
+        typographyFrom: {
+          child: 'Text',
+          base: { variant: 'bodySm', fontWeight: 'medium' },
+          byParentProp: [
+            { prop: 'size', map: { large: { variant: 'bodyMd' } } },
+            { prop: 'variant', map: { plain: { fontWeight: 'regular' }, monochromePlain: { fontWeight: 'regular' } } },
+          ],
+          refusals: [
+            "label fontWeight for variant=primary is `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177, useBreakpoints) — a media-dependent RUNTIME branch; refused by name (the carried base 'medium' renders, and the sub-md verification shows the divergence as a named triaged row)",
+            "label variant becomes bodyMd for plain/monochromePlain only when size !== 'micro' (Button.tsx 179-182) — conditioned on BOTH variant and size; a value conditioned on more than one axis is refused by name (the mint-code discipline), so plain keeps the carried bodySm base and the divergence is a named triaged row",
+          ],
+          cite: 'Button.tsx 184-193: children render through `<Text as="span" variant={textVariant} fontWeight={textFontWeight}>`; textVariant/textFontWeight computed at Button.tsx 171-182',
+        },
+      },
+    ],
     notes: [
-      'label: Polaris renders children through the Text primitive (variant bodySm, fontWeight medium) — children is platform API (named skip in extraction), so the showcase renders a static sample label and typography channels are NOT carried (they live in Text.module.css, another component\'s file)',
+      'label typography IS now carried (coverage round, workstream 2): Button renders children through the Text primitive with literal prop values readable in Button.tsx — the composition chain is deterministic, so bodySm/medium (and the single-axis branches) resolve mechanically from Text.module.css under Text\'s own class map; the two runtime/multi-axis branches are named refusals on the label part',
       'tone styling is conditioned on BOTH tone and variant classes (`.toneCritical:is(.variantPrimary)`) — a value conditioned on more than one axis is refused by name (the mint-code discipline), so tone carries no bindings',
       'primary/tertiary background pairs a gradient layer with the fill token (`var(--pc-button-bg-gradient), var(--p-color-bg-fill-brand)`) — a two-layer background is not a single binding; refused by name where it occurs',
       'icon/disclosure props are named extraction skips (composed types); the icon anatomy is not promoted',
@@ -172,6 +216,32 @@ export const CURATION: ComponentCuration[] = [
       { id: 'size-micro', props: { size: 'micro' } },
       { id: 'size-large', props: { size: 'large' } },
     ],
+    triage: [
+      {
+        part: 'label',
+        channel: 'font-weight',
+        cause:
+          "Polaris computes the primary label's fontWeight as `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177) — a media-dependent runtime branch, refused by name in PROMOTION.md; the carried base 'medium' renders on our side while sub-md Polaris renders semibold",
+      },
+      {
+        part: 'label',
+        channel: 'font-size',
+        cause:
+          "Polaris upgrades plain/monochromePlain labels to bodyMd when size !== 'micro' (Button.tsx 179-182) — a two-axis condition, refused by name (mint-code discipline); the carried bodySm base renders on our side",
+      },
+      {
+        part: 'label',
+        channel: 'line-height',
+        cause:
+          'same two-axis plain/monochromePlain bodyMd branch as the font-size row — refused by name, carried base renders',
+      },
+      {
+        part: 'label',
+        channel: 'letter-spacing',
+        cause:
+          'same two-axis plain/monochromePlain bodyMd branch as the font-size row — refused by name, carried base renders',
+      },
+    ],
     polaris: { component: 'Button', rootSelector: 'button.Polaris-Button', childrenText: 'Button' },
   },
   {
@@ -181,11 +251,25 @@ export const CURATION: ComponentCuration[] = [
     rootClass: 'Badge',
     element: 'span',
     axes: [],
-    parts: [],
-    sampleText: 'Fulfilled',
+    parts: [
+      {
+        name: 'label',
+        element: 'span',
+        text: 'Fulfilled',
+        polarisSelector: '.Polaris-Text--root',
+        typographyFrom: {
+          child: 'Text',
+          base: { variant: 'bodySm' },
+          refusals: [
+            "label fontWeight becomes 'medium' when tone === 'new' (Badge.tsx 114) — `tone` is a NAMED extraction drop (sibling-file union type), so a branch conditioned on it cannot carry; refused by name",
+          ],
+          cite: 'Badge.tsx 111-116: children render through `<Text as="span" variant="bodySm" fontWeight={tone === \'new\' ? \'medium\' : undefined}>`',
+        },
+      },
+    ],
     notes: [
       'tone / progress / icon / size props are NAMED extraction drops: BadgeProps is an intersection with a union of interfaces in the sibling types.ts — outside single-file scope. The committed contract carries the extracted API verbatim (1 prop), so only the DEFAULT badge is comparable; the tone axis is the showcase\'s clearest architecture-gap exhibit',
-      'label typography rides the Text primitive (bodySm) inside the badge — not carried (another file); root-level font-weight IS carried (declared on .Badge itself)',
+      'label typography IS now carried (coverage round, workstream 2): the bodySm chain through the Text primitive is deterministic (literal prop in Badge.tsx); the tone-conditional fontWeight branch stays a named refusal (tone is a dropped prop)',
     ],
     combos: [{ id: 'default', props: {} }],
     polaris: { component: 'Badge', rootSelector: '.Polaris-Badge', childrenText: 'Fulfilled' },
@@ -210,11 +294,22 @@ export const CURATION: ComponentCuration[] = [
         content: { prop: 'title' },
         optional: false,
         polarisSelector: '.Polaris-Text--headingSm',
+        typographyFrom: {
+          child: 'Text',
+          base: { variant: 'headingSm' },
+          cite: 'Banner.tsx 125-127: the title renders through `<Text as="h2" variant="headingSm" breakWord>` (breakWord is an overflow behavior, not a typography channel)',
+        },
       },
       {
         name: 'body',
         element: 'span',
         text: 'Your order has shipped.',
+        polarisSelector: '.Polaris-Text--bodyMd',
+        typographyFrom: {
+          child: 'Text',
+          base: { variant: 'bodyMd' },
+          cite: 'Banner.tsx 167-171: children render through `<Text as="span" variant="bodyMd">`',
+        },
       },
     ],
     extraBindings: [
@@ -381,13 +476,24 @@ export const CURATION: ComponentCuration[] = [
     rootClass: 'Tag',
     element: 'span',
     axes: [],
-    parts: [],
-    sampleText: 'Wholesale',
+    parts: [
+      {
+        name: 'label',
+        element: 'span',
+        text: 'Wholesale',
+        polarisSelector: '.Polaris-Text--root',
+        typographyFrom: {
+          child: 'Text',
+          base: { variant: 'bodySm' },
+          cite: 'Tag.tsx 64: children render through `<Text as="span" variant="bodySm" truncate>` (truncate is an overflow behavior, not a typography channel)',
+        },
+      },
+    ],
     notes: [
       'disabled styling is a boolean-driven CLASS on a span (`&.disabled`), not a :disabled pseudo-state — boolean-conditional token bindings have no contract channel (stylesWhen is literal-only by design); named gap',
       'the size prop and onClick/onRemove/url interplay are named extraction notes (union-typed props); the default (non-interactive span) rendering is the comparable state',
-      'padding-inline is `calc(var(--p-space-100) + var(--p-space-050))` — calc() over two tokens is not a single binding; named refusal',
-      'label typography rides the Text primitive (bodySm, truncate) — not carried',
+      'padding-inline is `calc(var(--p-space-100) + var(--p-space-050))` — calc() over two TOKENS is a derived value, not a single binding; named refusal (literal-only calc chains DO carry — see ProgressBar)',
+      'label typography IS now carried (coverage round, workstream 2): the bodySm chain through the Text primitive is deterministic (literal prop in Tag.tsx)',
     ],
     combos: [{ id: 'default', props: {} }],
     polaris: { component: 'Tag', rootSelector: 'span.Polaris-Tag', childrenText: 'Wholesale' },
@@ -413,26 +519,40 @@ export const CURATION: ComponentCuration[] = [
         polarisSelector: '.Polaris-Avatar text',
       },
     ],
+    extraBindings: [
+      {
+        part: 'root',
+        tokens: {
+          background: '{p.color-avatar-one-bg-fill}',
+          color: '{p.color-avatar-one-text-on-bg-fill}',
+        },
+        cite:
+          "Avatar.tsx 50-53: `styleClass(name)` returns STYLE_CLASSES[0] ('One' → .styleOne) when name is undefined — Polaris's OWN documented default; the seven palette VALUES are enumerable literals (.styleOne…styleSeven in Avatar.module.css, each a single-token binding), so the DEFAULT palette entry is carried (default-to-first, per the source) and the hash SELECTION over a provided name stays a named refusal (value-derived styling has no contract channel). These replace the base .Avatar avatar-bg-fill/avatar-text-on-bg-fill pair, which Polaris itself always overrides with a style class on initials avatars (Avatar.tsx 126-129)",
+      },
+    ],
     notes: [
-      'per-size widths are component-private literals (--pc-avatar-*-size: 20…40px) — named refusals; the size axis carries no bindings and the receipts show the geometry gap',
+      'per-size widths NOW carry (coverage round, workstream 1): --pc-avatar-*-size chains resolve to their literal definitions on .Avatar (20…40px) — carried as per-size literals with provenance; the per-size border-radius values are RAW literals (never behind a var chain), which stay named refusals by the raw-value discipline',
+      'the avatar\'s square aspect rides an ::after { padding-bottom: 100% } pseudo-element — a named refusal, so no height channel carries (width does)',
       'Polaris renders initials as SVG <text> inside the avatar circle; this surface renders a styled span — the initials part\'s font bindings (.Text rule) carry, the SVG projection does not',
-      'the name-hash background variations (styleOne…styleSeven) are driven by a hash of the name prop — value-derived styling has no contract channel; named gap (base avatar-bg-fill carries)',
+      'the name-hash palette SELECTION (styleOne…styleSeven by xorHash of the name) is value-derived styling with no contract channel — named gap; the carried default is Polaris\'s own name-less default (STYLE_CLASSES[0] → styleOne), cited in the promotion, so initials are never invisible on any surface',
     ],
     combos: [
       { id: 'default', props: { initials: 'TP' } },
+      { id: 'size-xs', props: { initials: 'TP', size: 'xs' } },
+      { id: 'size-xl', props: { initials: 'TP', size: 'xl' } },
     ],
     triage: [
       {
         part: 'root',
         channel: 'background',
         cause:
-          'Polaris hashes the name/initials into one of seven palette classes (styleOne…styleSeven) that override the base avatar tokens — value-derived styling has no contract channel (named in PROMOTION.md), so the carried BASE binding renders the base palette while Polaris renders the hashed one',
+          "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one",
       },
       {
         part: 'root',
         channel: 'color',
         cause:
-          'same name-hash palette override as background — the base color token is carried, the hashed one is not derivable from a prop',
+          'same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop',
       },
     ],
     polaris: { component: 'Avatar', rootSelector: 'span.Polaris-Avatar', fixedProps: { initials: 'TP' } },
@@ -494,7 +614,8 @@ export const CURATION: ComponentCuration[] = [
       },
     ],
     notes: [
-      'the bar heights are component-private literals with calc() scaling (--pc-progress-bar-height-base: 16px; small/large are calc() over it) — named refusals; the receipts show the missing height honestly',
+      'the bar heights NOW carry (coverage round, workstream 1): --pc-progress-bar-height-* chains resolve to their literal definitions on .ProgressBar — 16px base, and the small/large calc() scalings evaluate deterministically over that resolved literal (8px / 32px) — carried as per-size literals with provenance',
+      'the indicator\'s `height: inherit` is an inheritance keyword — it carries no standalone fact; named refusal (the track height carries, the indicator\'s own height channel does not)',
       'the fill fraction is runtime behavior (CSSTransition + scaleX(progress/100)) — the schema\'s meter channel needs a max prop and Polaris\'s API has none (max is hard-coded 100), so the indicator is carried as a plain part and the verify combos pass animated={false} on the Polaris side (fill at 0 both sides)',
     ],
     combos: [
@@ -502,6 +623,8 @@ export const CURATION: ComponentCuration[] = [
       { id: 'tone-primary', props: { tone: 'primary' } },
       { id: 'tone-success', props: { tone: 'success' } },
       { id: 'tone-critical', props: { tone: 'critical' } },
+      { id: 'size-small', props: { size: 'small' } },
+      { id: 'size-large', props: { size: 'large' } },
     ],
     polaris: {
       component: 'ProgressBar',
@@ -540,6 +663,8 @@ export const CURATION: ComponentCuration[] = [
     notes: [
       "the `as` axis maps values to HTML elements — three of Polaris's values (dt, dd, legend) are outside the contract element vocabulary, so elementByProp is NOT promoted (its coverage rule refuses partial maps); the root element is fixed to `p` and the gap is named",
       "tone values 'base' and 'inherit' have no styling class in the module.css — absent from the promoted map by construction",
+      'the fontWeight and tone maps NOW carry (coverage round, workstream 3): schema v14 lifts the one-tokensByProp-per-part limit — entries ride in CSS source order, so the fontWeight map overrides the variant scale exactly as Polaris\'s own cascade comment demands ("font-weight must be below variant styles so it can override")',
+      'fontWeight/tone/alignment have NO extracted default — an unset axis applies no class on any surface (the React runtime\'s own semantics), so the carried maps never invent a default value',
       'the responsive variant classes step font-size at breakpoints via custom-media @media rules — named refusals; the carried bindings are the base (sub-md) values and verification renders sub-md',
     ],
     combos: [
@@ -547,14 +672,6 @@ export const CURATION: ComponentCuration[] = [
       { id: 'heading-lg', props: { variant: 'headingLg' } },
       { id: 'body-sm-bold', props: { variant: 'bodySm', fontWeight: 'bold' } },
       { id: 'tone-critical', props: { variant: 'bodyMd', tone: 'critical' } },
-    ],
-    triage: [
-      {
-        part: 'root',
-        channel: 'font-weight',
-        cause:
-          "the fontWeight axis mechanically resolves per-value bindings (.bold → {p.font-weight-bold}) but the schema carries ONE tokensByProp per part and the variant axis won by curation order — the named schema limit in PROMOTION.md; the combo shows Polaris's bold (700) against the variant's weight (450)",
-      },
     ],
     polaris: {
       component: 'Text',
@@ -578,7 +695,7 @@ export const CURATION: ComponentCuration[] = [
     ],
     parts: [],
     notes: [
-      'per-size widths are component-private literals (--pc-thumbnail-*-size: 24…80px) — named refusals; the size axis still carries the extraSmall border-radius override (border-radius-150), the showcase\'s cleanest tokensByProp exhibit',
+      'per-size widths NOW carry (coverage round, workstream 1): --pc-thumbnail-*-size chains resolve to their literal definitions (24…80px) — per-size literals with provenance; the extraSmall border-radius override (border-radius-150) still rides tokensByProp, the showcase\'s cleanest per-axis exhibit',
       'the inset bevel rides an ::after pseudo-element (shadow-border-inset) — named refusal',
       'the image itself is the source prop (URL) — media content, not a styling channel',
     ],

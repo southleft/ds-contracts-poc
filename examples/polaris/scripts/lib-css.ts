@@ -318,38 +318,156 @@ export interface TokenLookup {
   pathOfVar: (varName: string) => string | undefined;
 }
 
+/** A custom-property definition with its defining selector (provenance). */
+export interface PropDef {
+  value: string;
+  selector: string;
+}
+
 export type Resolution =
   | { kind: 'ref'; ref: string; via: string[] }
+  /** COVERAGE ROUND: a var() chain that lands on a same-package LITERAL
+   *  definition (Polaris `--pc-*` pixel geometry, `transparent` bases) —
+   *  the resolved value is deterministic and carried WITH provenance:
+   *  the chain (`via`) and the selector that defined the final value.
+   *  Only chain-resolved literals surface this way; a RAW literal
+   *  declaration still refuses (a raw value is reported, never invented
+   *  into a carry). */
+  | { kind: 'literal'; value: string; via: string[]; defSelector: string }
   | { kind: 'layers'; layers: string[]; via: string[] }
   | { kind: 'refused'; reason: string };
 
-/** Resolve a CSS value to a single token ref through the given custom-prop
- *  definitions. Chains are followed; anything that is not exactly one
- *  var(--p-*) at the end is refused with the reason. */
+/** Depth cap for var() chains — beyond this, refuse by name. */
+const CHAIN_DEPTH_CAP = 12;
+
+/** Evaluate a bounded calc() expression AFTER every inner var() resolved to
+ *  a px/number literal: + - * / with parentheses, px units and unitless
+ *  factors (ProgressBar: `calc(var(--pc-progress-bar-height-base) * 0.5)`
+ *  → 8px). Anything else returns undefined (the caller refuses by name).
+ *  Deterministic arithmetic — never a guess. */
+export function evalCalcExpr(expr: string): string | undefined {
+  type Val = { n: number; px: boolean };
+  const tokens = expr.match(/-?\d*\.?\d+(px)?|[()+\-*/]/g);
+  if (!tokens || tokens.join('').replace(/\s+/g, '') !== expr.replace(/\s+/g, '')) return undefined;
+  let i = 0;
+  const peek = () => tokens[i];
+  const next = () => tokens[i++];
+  const parsePrimary = (): Val | undefined => {
+    const t = next();
+    if (t === '(') {
+      const v = parseAdd();
+      if (next() !== ')') return undefined;
+      return v;
+    }
+    if (t === undefined || /[()+\-*/]/.test(t)) return undefined;
+    return { n: parseFloat(t), px: t.endsWith('px') };
+  };
+  const parseMul = (): Val | undefined => {
+    let left = parsePrimary();
+    while (left && (peek() === '*' || peek() === '/')) {
+      const op = next();
+      const right = parsePrimary();
+      if (!right) return undefined;
+      if (left.px && right.px) return undefined; // px·px has no CSS meaning
+      left = {
+        n: op === '*' ? left.n * right.n : left.n / right.n,
+        px: left.px || right.px,
+      };
+    }
+    return left;
+  };
+  const parseAdd = (): Val | undefined => {
+    let left = parseMul();
+    while (left && (peek() === '+' || peek() === '-')) {
+      const op = next();
+      const right = parseMul();
+      if (!right) return undefined;
+      if (left.px !== right.px) return undefined; // px ± number is invalid CSS
+      left = { n: op === '+' ? left.n + right.n : left.n - right.n, px: left.px };
+    }
+    return left;
+  };
+  const v = parseAdd();
+  if (!v || i !== tokens.length) return undefined;
+  const n = Math.round(v.n * 10000) / 10000;
+  return `${n}${v.px ? 'px' : ''}`;
+}
+
+/** Resolve a CSS value to a single token ref — or, through a var() chain, to
+ *  a same-package literal definition — via the given custom-prop
+ *  definitions. Chains are followed depth-capped; CYCLES refuse by name;
+ *  calc() over chain-resolved px literals evaluates deterministically.
+ *  Anything else is refused with the reason. */
 export function resolveToRef(
   value: string,
-  defs: Map<string, string>,
+  defs: Map<string, PropDef>,
   tokens: TokenLookup,
   via: string[] = [],
+  defSelector = '',
 ): Resolution {
   const v = value.trim();
   const m = v.match(/^var\(\s*(--[A-Za-z0-9_-]+)\s*(?:,\s*([\s\S]+))?\)$/);
   if (!m) {
+    // calc() — evaluable ONLY when every inner var() chain-resolves to a
+    // px/number literal (never across token refs: a token-valued calc is a
+    // derived value, not a binding — stays a named refusal).
+    const calc = v.match(/^calc\(([\s\S]+)\)$/);
+    if (calc) {
+      let inner = calc[1];
+      let innerVia: string[] = [...via];
+      let innerSel = defSelector;
+      let failed: string | null = null;
+      inner = inner.replace(/var\(\s*(--[A-Za-z0-9_-]+)\s*(?:,\s*[^)]*)?\)/g, (whole) => {
+        const res = resolveToRef(whole, defs, tokens, via, defSelector);
+        if (res.kind === 'literal' && /^-?\d*\.?\d+(px)?$/.test(res.value)) {
+          innerVia = [...innerVia, ...res.via.filter((x) => !innerVia.includes(x))];
+          innerSel = res.defSelector || innerSel;
+          return res.value;
+        }
+        failed =
+          res.kind === 'ref'
+            ? `calc() over token \`${res.ref}\` is a derived value, not a single binding`
+            : res.kind === 'refused'
+              ? res.reason
+              : `calc() operand "${whole}" did not resolve to a px literal`;
+        return whole;
+      });
+      if (failed) return { kind: 'refused', reason: failed };
+      const evaluated = evalCalcExpr(inner);
+      if (evaluated !== undefined) {
+        return { kind: 'literal', value: evaluated, via: innerVia, defSelector: innerSel };
+      }
+      return { kind: 'refused', reason: `calc() expression "${v}" is outside the bounded arithmetic grammar` };
+    }
     // Multi-layer value (comma at paren depth 0) — surfaced so the caller
     // can apply CSS's own shorthand semantics (background: image, color).
     const layers = splitTopLevel(v, ',').map((l) => l.trim());
     if (layers.length > 1) return { kind: 'layers', layers, via };
     if (v.includes('var(')) return { kind: 'refused', reason: `value "${v}" mixes var() with other content — not a single binding` };
+    if (via.length > 0) {
+      // The chain landed on a literal DEFINED in this package's CSS —
+      // deterministic; carried by the caller with this provenance.
+      return { kind: 'literal', value: v, via, defSelector };
+    }
     return { kind: 'refused', reason: `literal value "${v}" — a raw value is reported, never turned into an invented token` };
   }
   const varName = m[1].slice(2);
   const fallback = m[2];
-  if (via.length > 12) return { kind: 'refused', reason: `var() chain deeper than 12 (${via.join(' → ')})` };
+  if (via.includes(`--${varName}`)) {
+    return { kind: 'refused', reason: `var() cycle: ${[...via, `--${varName}`].join(' → ')} — refused by name` };
+  }
+  if (via.length > CHAIN_DEPTH_CAP) {
+    return { kind: 'refused', reason: `var() chain deeper than ${CHAIN_DEPTH_CAP} (${via.join(' → ')})` };
+  }
   const def = defs.get(varName);
-  if (def !== undefined) return resolveToRef(def, defs, tokens, [...via, `--${varName}`]);
+  if (def !== undefined) {
+    return resolveToRef(def.value, defs, tokens, [...via, `--${varName}`], def.selector);
+  }
   const path = tokens.pathOfVar(varName);
   if (path) return { kind: 'ref', ref: `{${path}}`, via };
-  if (fallback !== undefined) return resolveToRef(fallback, defs, tokens, [...via, `--${varName} (undefined → fallback)`]);
+  if (fallback !== undefined) {
+    return resolveToRef(fallback, defs, tokens, [...via, `--${varName} (undefined → fallback)`], defSelector);
+  }
   return { kind: 'refused', reason: `var(--${varName}) resolves to NO token and has no reachable definition in this class context` };
 }
 
@@ -373,9 +491,10 @@ export interface QueryOutcome {
 }
 
 /** All custom-property definitions visible to a class context (base state),
- *  cascade-ordered so later/more specific definitions win. */
-export function customPropDefs(rules: FlatRule[], rootClasses: Set<string>): Map<string, string> {
-  const defs = new Map<string, string>();
+ *  cascade-ordered so later/more specific definitions win. Each definition
+ *  records its defining selector (literal-carry provenance). */
+export function customPropDefs(rules: FlatRule[], rootClasses: Set<string>): Map<string, PropDef> {
+  const defs = new Map<string, PropDef>();
   const applicable: { rule: FlatRule; spec: number }[] = [];
   for (const rule of rules) {
     if (rule.atRules.length > 0) continue; // @media-scoped defs never promote
@@ -389,9 +508,31 @@ export function customPropDefs(rules: FlatRule[], rootClasses: Set<string>): Map
   }
   applicable.sort((a, b) => a.spec - b.spec || a.rule.order - b.rule.order);
   for (const { rule } of applicable) {
-    for (const d of rule.decls) if (d.prop.startsWith('--')) defs.set(d.prop.slice(2), d.value);
+    for (const d of rule.decls) {
+      if (d.prop.startsWith('--')) defs.set(d.prop.slice(2), { value: d.value, selector: rule.selector });
+    }
   }
   return defs;
+}
+
+/** NARROWED refusal evidence for an unresolvable var: where (if anywhere)
+ *  the file defines it — @media-only, other-class-context-only, or nowhere
+ *  (runtime-set). The refusal message names the class, not just the miss. */
+export function varDefinitionContexts(
+  rules: FlatRule[],
+  varName: string,
+): { media: string[]; selectors: string[] } {
+  const media = new Set<string>();
+  const selectors = new Set<string>();
+  for (const rule of rules) {
+    for (const d of rule.decls) {
+      if (d.prop === `--${varName}`) {
+        if (rule.atRules.length > 0) media.add(rule.atRules.join(' '));
+        else selectors.add(rule.selector);
+      }
+    }
+  }
+  return { media: [...media].sort(), selectors: [...selectors].sort() };
 }
 
 /** Mechanical shorthand split: `padding: A` / `padding: A B` where every

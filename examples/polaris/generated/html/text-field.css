@@ -26,6 +26,10 @@
   min-height: var(--p-space-800);
 }
 
+.text-field--size-slim .text-field__input {
+  padding-block: var(--p-space-050);
+}
+
 .text-field:disabled .text-field__input {
   color: var(--p-color-text-disabled);
 }
@@ -40,6 +44,10 @@
 
 .text-field--variant-borderless .text-field__backdrop {
   min-height: var(--p-space-800);
+}
+
+.text-field--size-slim .text-field__backdrop {
+  padding-block: var(--p-space-050);
 }
 
 /* showcase chrome */

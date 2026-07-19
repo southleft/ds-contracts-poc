@@ -5,24 +5,49 @@
     {
       "id": "polaris.button",
       "combos": 6,
-      "rowsCompared": 26,
-      "rowsMatched": 26,
-      "namedNotCarried": 333,
-      "mismatches": []
+      "rowsCompared": 77,
+      "rowsMatched": 74,
+      "namedNotCarried": 316,
+      "mismatches": [
+        {
+          "combo": "variant-primary",
+          "part": "label",
+          "channel": "font-weight",
+          "ours": "font-weight: 550",
+          "theirs": "font-weight: 650",
+          "cause": "Polaris computes the primary label's fontWeight as `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177) — a media-dependent runtime branch, refused by name in PROMOTION.md; the carried base 'medium' renders on our side while sub-md Polaris renders semibold"
+        },
+        {
+          "combo": "variant-plain",
+          "part": "label",
+          "channel": "font-size",
+          "ours": "font-size: 12px",
+          "theirs": "font-size: 13px",
+          "cause": "Polaris upgrades plain/monochromePlain labels to bodyMd when size !== 'micro' (Button.tsx 179-182) — a two-axis condition, refused by name (mint-code discipline); the carried bodySm base renders on our side"
+        },
+        {
+          "combo": "variant-plain",
+          "part": "label",
+          "channel": "line-height",
+          "ours": "line-height: 16px",
+          "theirs": "line-height: 20px",
+          "cause": "same two-axis plain/monochromePlain bodyMd branch as the font-size row — refused by name, carried base renders"
+        }
+      ]
     },
     {
       "id": "polaris.badge",
       "combos": 1,
-      "rowsCompared": 6,
-      "rowsMatched": 6,
-      "namedNotCarried": 37,
+      "rowsCompared": 10,
+      "rowsMatched": 10,
+      "namedNotCarried": 38,
       "mismatches": []
     },
     {
       "id": "polaris.banner",
       "combos": 4,
-      "rowsCompared": 8,
-      "rowsMatched": 8,
+      "rowsCompared": 40,
+      "rowsMatched": 40,
       "namedNotCarried": 27,
       "mismatches": []
     },
@@ -56,39 +81,71 @@
       "combos": 1,
       "rowsCompared": 11,
       "rowsMatched": 11,
-      "namedNotCarried": 907,
+      "namedNotCarried": 905,
       "mismatches": []
     },
     {
       "id": "polaris.tag",
       "combos": 1,
-      "rowsCompared": 3,
-      "rowsMatched": 3,
+      "rowsCompared": 7,
+      "rowsMatched": 7,
       "namedNotCarried": 43,
       "mismatches": []
     },
     {
       "id": "polaris.avatar",
-      "combos": 1,
-      "rowsCompared": 4,
-      "rowsMatched": 2,
-      "namedNotCarried": 57,
+      "combos": 3,
+      "rowsCompared": 18,
+      "rowsMatched": 12,
+      "namedNotCarried": 46,
       "mismatches": [
         {
           "combo": "default",
           "part": "root",
           "channel": "background",
-          "ours": "background-color: rgb(181, 181, 181)",
+          "ours": "background-color: rgb(197, 48, 197)",
           "theirs": "background-color: rgb(253, 75, 146)",
-          "cause": "Polaris hashes the name/initials into one of seven palette classes (styleOne…styleSeven) that override the base avatar tokens — value-derived styling has no contract channel (named in PROMOTION.md), so the carried BASE binding renders the base palette while Polaris renders the hashed one"
+          "cause": "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one"
         },
         {
           "combo": "default",
           "part": "root",
           "channel": "color",
-          "ours": "color: rgb(255, 255, 255)",
+          "ours": "color: rgb(253, 239, 253)",
           "theirs": "color: rgb(255, 246, 248)",
-          "cause": "same name-hash palette override as background — the base color token is carried, the hashed one is not derivable from a prop"
+          "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
+        },
+        {
+          "combo": "size-xs",
+          "part": "root",
+          "channel": "background",
+          "ours": "background-color: rgb(197, 48, 197)",
+          "theirs": "background-color: rgb(253, 75, 146)",
+          "cause": "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one"
+        },
+        {
+          "combo": "size-xs",
+          "part": "root",
+          "channel": "color",
+          "ours": "color: rgb(253, 239, 253)",
+          "theirs": "color: rgb(255, 246, 248)",
+          "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
+        },
+        {
+          "combo": "size-xl",
+          "part": "root",
+          "channel": "background",
+          "ours": "background-color: rgb(197, 48, 197)",
+          "theirs": "background-color: rgb(253, 75, 146)",
+          "cause": "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one"
+        },
+        {
+          "combo": "size-xl",
+          "part": "root",
+          "channel": "color",
+          "ours": "color: rgb(253, 239, 253)",
+          "theirs": "color: rgb(255, 246, 248)",
+          "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
         }
       ]
     },
@@ -102,35 +159,26 @@
     },
     {
       "id": "polaris.progress-bar",
-      "combos": 4,
-      "rowsCompared": 12,
-      "rowsMatched": 12,
-      "namedNotCarried": 32,
+      "combos": 6,
+      "rowsCompared": 24,
+      "rowsMatched": 24,
+      "namedNotCarried": 29,
       "mismatches": []
     },
     {
       "id": "polaris.text",
       "combos": 4,
-      "rowsCompared": 16,
-      "rowsMatched": 15,
-      "namedNotCarried": 17,
-      "mismatches": [
-        {
-          "combo": "body-sm-bold",
-          "part": "root",
-          "channel": "font-weight",
-          "ours": "font-weight: 450",
-          "theirs": "font-weight: 700",
-          "cause": "the fontWeight axis mechanically resolves per-value bindings (.bold → {p.font-weight-bold}) but the schema carries ONE tokensByProp per part and the variant axis won by curation order — the named schema limit in PROMOTION.md; the combo shows Polaris's bold (700) against the variant's weight (450)"
-        }
-      ]
+      "rowsCompared": 17,
+      "rowsMatched": 17,
+      "namedNotCarried": 15,
+      "mismatches": []
     },
     {
       "id": "polaris.thumbnail",
       "combos": 2,
-      "rowsCompared": 4,
-      "rowsMatched": 4,
-      "namedNotCarried": 58,
+      "rowsCompared": 8,
+      "rowsMatched": 8,
+      "namedNotCarried": 49,
       "mismatches": []
     }
   ],
@@ -209,6 +257,122 @@
     },
     {
       "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{p.space-150}",
+      "ours": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "theirs": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "ours": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "theirs": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{p.height-800}",
+      "ours": {
+        "min-height": "32px"
+      },
+      "theirs": {
+        "min-height": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "{p.width-800}",
+      "ours": {
+        "min-width": "32px"
+      },
+      "theirs": {
+        "min-width": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "ours": {
+        "font-weight": "550"
+      },
+      "theirs": {
+        "font-weight": "550"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
       "combo": "variant-primary",
       "part": "root",
       "channel": "border-radius",
@@ -234,6 +398,20 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "background",
+      "ref": "literal transparent",
+      "ours": {
+        "background-color": "rgb(48, 48, 48)"
+      },
+      "theirs": {
+        "background-color": "rgb(48, 48, 48)"
       },
       "match": true
     },
@@ -281,6 +459,123 @@
     },
     {
       "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{p.space-150}",
+      "ours": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "theirs": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "ours": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "theirs": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{p.height-800}",
+      "ours": {
+        "min-height": "32px"
+      },
+      "theirs": {
+        "min-height": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "{p.width-800}",
+      "ours": {
+        "min-width": "32px"
+      },
+      "theirs": {
+        "min-width": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "ours": {
+        "font-weight": "550"
+      },
+      "theirs": {
+        "font-weight": "650"
+      },
+      "match": false,
+      "cause": "Polaris computes the primary label's fontWeight as `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177) — a media-dependent runtime branch, refused by name in PROMOTION.md; the carried base 'medium' renders on our side while sub-md Polaris renders semibold"
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
       "combo": "variant-tertiary",
       "part": "root",
       "channel": "border-radius",
@@ -306,6 +601,20 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "background",
+      "ref": "literal transparent",
+      "ours": {
+        "background-color": "rgba(0, 0, 0, 0)"
+      },
+      "theirs": {
+        "background-color": "rgba(0, 0, 0, 0)"
       },
       "match": true
     },
@@ -325,6 +634,122 @@
     },
     {
       "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{p.space-150}",
+      "ours": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "theirs": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "ours": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "theirs": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{p.height-800}",
+      "ours": {
+        "min-height": "32px"
+      },
+      "theirs": {
+        "min-height": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "{p.width-800}",
+      "ours": {
+        "min-width": "32px"
+      },
+      "theirs": {
+        "min-width": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "ours": {
+        "font-weight": "550"
+      },
+      "theirs": {
+        "font-weight": "550"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
       "combo": "variant-plain",
       "part": "root",
       "channel": "border-radius",
@@ -350,6 +775,20 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "background",
+      "ref": "literal transparent",
+      "ours": {
+        "background-color": "rgba(0, 0, 0, 0)"
+      },
+      "theirs": {
+        "background-color": "rgba(0, 0, 0, 0)"
       },
       "match": true
     },
@@ -369,6 +808,124 @@
     },
     {
       "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{p.space-150}",
+      "ours": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "theirs": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "ours": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "theirs": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{p.height-800}",
+      "ours": {
+        "min-height": "32px"
+      },
+      "theirs": {
+        "min-height": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "{p.width-800}",
+      "ours": {
+        "min-width": "32px"
+      },
+      "theirs": {
+        "min-width": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": false,
+      "cause": "Polaris upgrades plain/monochromePlain labels to bodyMd when size !== 'micro' (Button.tsx 179-182) — a two-axis condition, refused by name (mint-code discipline); the carried bodySm base renders on our side"
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-regular}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": false,
+      "cause": "same two-axis plain/monochromePlain bodyMd branch as the font-size row — refused by name, carried base renders"
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
       "combo": "size-micro",
       "part": "root",
       "channel": "border-radius",
@@ -441,6 +998,122 @@
     },
     {
       "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{p.space-100}",
+      "ours": {
+        "padding-top": "4px",
+        "padding-bottom": "4px"
+      },
+      "theirs": {
+        "padding-top": "4px",
+        "padding-bottom": "4px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "ours": {
+        "padding-left": "8px",
+        "padding-right": "8px"
+      },
+      "theirs": {
+        "padding-left": "8px",
+        "padding-right": "8px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{p.height-700}",
+      "ours": {
+        "min-height": "28px"
+      },
+      "theirs": {
+        "min-height": "28px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "{p.width-700}",
+      "ours": {
+        "min-width": "28px"
+      },
+      "theirs": {
+        "min-width": "28px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "ours": {
+        "font-weight": "550"
+      },
+      "theirs": {
+        "font-weight": "550"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
       "combo": "size-large",
       "part": "root",
       "channel": "border-radius",
@@ -508,6 +1181,122 @@
       },
       "theirs": {
         "box-shadow": "rgb(181, 181, 181) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgb(255, 255, 255) 0px 0.5px 0px 1.5px inset"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{p.space-150}",
+      "ours": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "theirs": {
+        "padding-top": "6px",
+        "padding-bottom": "6px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "ours": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "theirs": {
+        "padding-left": "12px",
+        "padding-right": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{p.height-900}",
+      "ours": {
+        "min-height": "36px"
+      },
+      "theirs": {
+        "min-height": "36px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "{p.height-900}",
+      "ours": {
+        "min-width": "36px"
+      },
+      "theirs": {
+        "min-width": "36px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-md-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "ours": {
+        "font-weight": "550"
+      },
+      "theirs": {
+        "font-weight": "550"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-md-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-md-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
       },
       "match": true
     },
@@ -602,6 +1391,62 @@
       "match": true
     },
     {
+      "component": "polaris.badge",
+      "combo": "default",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.badge",
+      "combo": "default",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.badge",
+      "combo": "default",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.badge",
+      "combo": "default",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
       "component": "polaris.banner",
       "combo": "tone-info",
       "part": "root",
@@ -626,6 +1471,118 @@
       },
       "theirs": {
         "color": "rgb(0, 33, 51)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "title",
+      "channel": "font-size",
+      "ref": "{p.text-heading-sm-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "title",
+      "channel": "font-weight",
+      "ref": "{p.text-heading-sm-font-weight}",
+      "ours": {
+        "font-weight": "650"
+      },
+      "theirs": {
+        "font-weight": "650"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "title",
+      "channel": "line-height",
+      "ref": "{p.text-heading-sm-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "title",
+      "channel": "letter-spacing",
+      "ref": "{p.text-heading-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "body",
+      "channel": "font-size",
+      "ref": "{p.text-body-md-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "body",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "body",
+      "channel": "line-height",
+      "ref": "{p.text-body-md-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "body",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-md-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
       },
       "match": true
     },
@@ -659,6 +1616,118 @@
     },
     {
       "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "title",
+      "channel": "font-size",
+      "ref": "{p.text-heading-sm-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "title",
+      "channel": "font-weight",
+      "ref": "{p.text-heading-sm-font-weight}",
+      "ours": {
+        "font-weight": "650"
+      },
+      "theirs": {
+        "font-weight": "650"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "title",
+      "channel": "line-height",
+      "ref": "{p.text-heading-sm-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "title",
+      "channel": "letter-spacing",
+      "ref": "{p.text-heading-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "body",
+      "channel": "font-size",
+      "ref": "{p.text-body-md-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "body",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "body",
+      "channel": "line-height",
+      "ref": "{p.text-body-md-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "body",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-md-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
       "combo": "tone-warning",
       "part": "root",
       "channel": "background-color",
@@ -687,6 +1756,118 @@
     },
     {
       "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "title",
+      "channel": "font-size",
+      "ref": "{p.text-heading-sm-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "title",
+      "channel": "font-weight",
+      "ref": "{p.text-heading-sm-font-weight}",
+      "ours": {
+        "font-weight": "650"
+      },
+      "theirs": {
+        "font-weight": "650"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "title",
+      "channel": "line-height",
+      "ref": "{p.text-heading-sm-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "title",
+      "channel": "letter-spacing",
+      "ref": "{p.text-heading-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "body",
+      "channel": "font-size",
+      "ref": "{p.text-body-md-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "body",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "body",
+      "channel": "line-height",
+      "ref": "{p.text-body-md-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "body",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-md-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
       "combo": "tone-critical",
       "part": "root",
       "channel": "background-color",
@@ -710,6 +1891,118 @@
       },
       "theirs": {
         "color": "rgb(255, 250, 251)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "title",
+      "channel": "font-size",
+      "ref": "{p.text-heading-sm-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "title",
+      "channel": "font-weight",
+      "ref": "{p.text-heading-sm-font-weight}",
+      "ours": {
+        "font-weight": "650"
+      },
+      "theirs": {
+        "font-weight": "650"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "title",
+      "channel": "line-height",
+      "ref": "{p.text-heading-sm-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "title",
+      "channel": "letter-spacing",
+      "ref": "{p.text-heading-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "body",
+      "channel": "font-size",
+      "ref": "{p.text-body-md-font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "body",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "body",
+      "channel": "line-height",
+      "ref": "{p.text-body-md-font-line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "body",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-md-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
       },
       "match": true
     },
@@ -1005,34 +2298,118 @@
       "match": true
     },
     {
+      "component": "polaris.tag",
+      "combo": "default",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "ours": {
+        "font-size": "12px"
+      },
+      "theirs": {
+        "font-size": "12px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.tag",
+      "combo": "default",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.tag",
+      "combo": "default",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "ours": {
+        "line-height": "16px"
+      },
+      "theirs": {
+        "line-height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.tag",
+      "combo": "default",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "ours": {
+        "letter-spacing": "normal"
+      },
+      "theirs": {
+        "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
       "component": "polaris.avatar",
       "combo": "default",
       "part": "root",
       "channel": "background",
-      "ref": "{p.color-avatar-bg-fill}",
+      "ref": "{p.color-avatar-one-bg-fill}",
       "ours": {
-        "background-color": "rgb(181, 181, 181)"
+        "background-color": "rgb(197, 48, 197)"
       },
       "theirs": {
         "background-color": "rgb(253, 75, 146)"
       },
       "match": false,
-      "cause": "Polaris hashes the name/initials into one of seven palette classes (styleOne…styleSeven) that override the base avatar tokens — value-derived styling has no contract channel (named in PROMOTION.md), so the carried BASE binding renders the base palette while Polaris renders the hashed one"
+      "cause": "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one"
     },
     {
       "component": "polaris.avatar",
       "combo": "default",
       "part": "root",
       "channel": "color",
-      "ref": "{p.color-avatar-text-on-bg-fill}",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
       "ours": {
-        "color": "rgb(255, 255, 255)"
+        "color": "rgb(253, 239, 253)"
       },
       "theirs": {
         "color": "rgb(255, 246, 248)"
       },
       "match": false,
-      "cause": "same name-hash palette override as background — the base color token is carried, the hashed one is not derivable from a prop"
+      "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "default",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "literal 20px",
+      "ours": {
+        "min-width": "20px"
+      },
+      "theirs": {
+        "min-width": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "default",
+      "part": "root",
+      "channel": "width",
+      "ref": "literal 28px",
+      "ours": {
+        "width": "28px"
+      },
+      "theirs": {
+        "width": "28px"
+      },
+      "match": true
     },
     {
       "component": "polaris.avatar",
@@ -1051,6 +2428,178 @@
     {
       "component": "polaris.avatar",
       "combo": "default",
+      "part": "initials",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-regular}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "ours": {
+        "background-color": "rgb(197, 48, 197)"
+      },
+      "theirs": {
+        "background-color": "rgb(253, 75, 146)"
+      },
+      "match": false,
+      "cause": "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "ours": {
+        "color": "rgb(253, 239, 253)"
+      },
+      "theirs": {
+        "color": "rgb(255, 246, 248)"
+      },
+      "match": false,
+      "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "literal 20px",
+      "ours": {
+        "min-width": "20px"
+      },
+      "theirs": {
+        "min-width": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "root",
+      "channel": "width",
+      "ref": "literal 20px",
+      "ours": {
+        "width": "20px"
+      },
+      "theirs": {
+        "width": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "ours": {
+        "font-size": "16px"
+      },
+      "theirs": {
+        "font-size": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "initials",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-regular}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "ours": {
+        "background-color": "rgb(197, 48, 197)"
+      },
+      "theirs": {
+        "background-color": "rgb(253, 75, 146)"
+      },
+      "match": false,
+      "cause": "Polaris hashes the provided name/initials ('TP' → styleFive) into one of seven palette classes that override the default — value-derived styling has no contract channel (named in PROMOTION.md); the carried binding is Polaris's own name-less default (styleOne, cited from Avatar.tsx styleClass), so ours renders the styleOne palette while Polaris renders the hashed styleFive one"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "ours": {
+        "color": "rgb(253, 239, 253)"
+      },
+      "theirs": {
+        "color": "rgb(255, 246, 248)"
+      },
+      "match": false,
+      "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "literal 20px",
+      "ours": {
+        "min-width": "20px"
+      },
+      "theirs": {
+        "min-width": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "root",
+      "channel": "width",
+      "ref": "literal 40px",
+      "ours": {
+        "width": "40px"
+      },
+      "theirs": {
+        "width": "40px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "ours": {
+        "font-size": "16px"
+      },
+      "theirs": {
+        "font-size": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
       "part": "initials",
       "channel": "font-weight",
       "ref": "{p.font-weight-regular}",
@@ -1151,6 +2700,20 @@
     {
       "component": "polaris.progress-bar",
       "combo": "default",
+      "part": "root",
+      "channel": "height",
+      "ref": "literal 16px",
+      "ours": {
+        "height": "16px"
+      },
+      "theirs": {
+        "height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "default",
       "part": "indicator",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-info}",
@@ -1189,6 +2752,20 @@
       },
       "theirs": {
         "background-color": "rgb(227, 227, 227)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-primary",
+      "part": "root",
+      "channel": "height",
+      "ref": "literal 16px",
+      "ours": {
+        "height": "16px"
+      },
+      "theirs": {
+        "height": "16px"
       },
       "match": true
     },
@@ -1239,6 +2816,20 @@
     {
       "component": "polaris.progress-bar",
       "combo": "tone-success",
+      "part": "root",
+      "channel": "height",
+      "ref": "literal 16px",
+      "ours": {
+        "height": "16px"
+      },
+      "theirs": {
+        "height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-success",
       "part": "indicator",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-success}",
@@ -1283,6 +2874,20 @@
     {
       "component": "polaris.progress-bar",
       "combo": "tone-critical",
+      "part": "root",
+      "channel": "height",
+      "ref": "literal 16px",
+      "ours": {
+        "height": "16px"
+      },
+      "theirs": {
+        "height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-critical",
       "part": "indicator",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-critical}",
@@ -1291,6 +2896,122 @@
       },
       "theirs": {
         "background-color": "rgb(199, 10, 36)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-small",
+      "part": "root",
+      "channel": "border-radius",
+      "ref": "{p.border-radius-100}",
+      "ours": {
+        "border-top-left-radius": "4px",
+        "border-bottom-right-radius": "4px"
+      },
+      "theirs": {
+        "border-top-left-radius": "4px",
+        "border-bottom-right-radius": "4px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-small",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-tertiary}",
+      "ours": {
+        "background-color": "rgb(227, 227, 227)"
+      },
+      "theirs": {
+        "background-color": "rgb(227, 227, 227)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-small",
+      "part": "root",
+      "channel": "height",
+      "ref": "literal 8px",
+      "ours": {
+        "height": "8px"
+      },
+      "theirs": {
+        "height": "8px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-small",
+      "part": "indicator",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "ours": {
+        "background-color": "rgb(145, 208, 255)"
+      },
+      "theirs": {
+        "background-color": "rgb(145, 208, 255)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "border-radius",
+      "ref": "{p.border-radius-100}",
+      "ours": {
+        "border-top-left-radius": "4px",
+        "border-bottom-right-radius": "4px"
+      },
+      "theirs": {
+        "border-top-left-radius": "4px",
+        "border-bottom-right-radius": "4px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-tertiary}",
+      "ours": {
+        "background-color": "rgb(227, 227, 227)"
+      },
+      "theirs": {
+        "background-color": "rgb(227, 227, 227)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "height",
+      "ref": "literal 32px",
+      "ours": {
+        "height": "32px"
+      },
+      "theirs": {
+        "height": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-large",
+      "part": "indicator",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "ours": {
+        "background-color": "rgb(145, 208, 255)"
+      },
+      "theirs": {
+        "background-color": "rgb(145, 208, 255)"
       },
       "match": true
     },
@@ -1425,15 +3146,14 @@
       "combo": "body-sm-bold",
       "part": "root",
       "channel": "font-weight",
-      "ref": "{p.text-body-sm-font-weight}",
+      "ref": "{p.font-weight-bold}",
       "ours": {
-        "font-weight": "450"
+        "font-weight": "700"
       },
       "theirs": {
         "font-weight": "700"
       },
-      "match": false,
-      "cause": "the fontWeight axis mechanically resolves per-value bindings (.bold → {p.font-weight-bold}) but the schema carries ONE tokensByProp per part and the variant axis won by curation order — the named schema limit in PROMOTION.md; the combo shows Polaris's bold (700) against the variant's weight (450)"
+      "match": true
     },
     {
       "component": "polaris.text",
@@ -1460,6 +3180,20 @@
       },
       "theirs": {
         "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.text",
+      "combo": "tone-critical",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical}",
+      "ours": {
+        "color": "rgb(142, 11, 33)"
+      },
+      "theirs": {
+        "color": "rgb(142, 11, 33)"
       },
       "match": true
     },
@@ -1551,6 +3285,34 @@
     },
     {
       "component": "polaris.thumbnail",
+      "combo": "default",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "literal 24px",
+      "ours": {
+        "min-width": "24px"
+      },
+      "theirs": {
+        "min-width": "24px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.thumbnail",
+      "combo": "default",
+      "part": "root",
+      "channel": "width",
+      "ref": "literal 60px",
+      "ours": {
+        "width": "60px"
+      },
+      "theirs": {
+        "width": "60px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.thumbnail",
       "combo": "size-extra-small",
       "part": "root",
       "channel": "background",
@@ -1576,6 +3338,34 @@
       "theirs": {
         "border-top-left-radius": "6px",
         "border-bottom-right-radius": "6px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.thumbnail",
+      "combo": "size-extra-small",
+      "part": "root",
+      "channel": "min-width",
+      "ref": "literal 24px",
+      "ours": {
+        "min-width": "24px"
+      },
+      "theirs": {
+        "min-width": "24px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.thumbnail",
+      "combo": "size-extra-small",
+      "part": "root",
+      "channel": "width",
+      "ref": "literal 24px",
+      "ours": {
+        "width": "24px"
+      },
+      "theirs": {
+        "width": "24px"
       },
       "match": true
     }

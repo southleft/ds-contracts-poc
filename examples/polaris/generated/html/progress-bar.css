@@ -28,6 +28,18 @@
   background-color: var(--p-color-bg-fill-tertiary);
 }
 
+.progress-bar--size-small {
+  height: 8px;
+}
+
+.progress-bar--size-medium {
+  height: 16px;
+}
+
+.progress-bar--size-large {
+  height: 32px;
+}
+
 .progress-bar--tone-highlight .progress-bar__indicator {
   background-color: var(--p-color-bg-fill-info);
 }

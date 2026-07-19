@@ -82,7 +82,29 @@
             "border-radius": "{p.border-radius-150}"
           }
         }
-      }
+      },
+      "literals": {
+        "min-width": "24px"
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "extraSmall": {
+              "width": "24px"
+            },
+            "small": {
+              "width": "40px"
+            },
+            "medium": {
+              "width": "60px"
+            },
+            "large": {
+              "width": "80px"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

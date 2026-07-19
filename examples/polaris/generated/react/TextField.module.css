@@ -25,6 +25,10 @@
   min-height: var(--p-space-800);
 }
 
+.size-slim .input {
+  padding-block: var(--p-space-050);
+}
+
 .root:disabled .input {
   color: var(--p-color-text-disabled);
 }
@@ -39,4 +43,8 @@
 
 .variant-borderless .backdrop {
   min-height: var(--p-space-800);
+}
+
+.size-slim .backdrop {
+  padding-block: var(--p-space-050);
 }

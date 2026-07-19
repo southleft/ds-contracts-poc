@@ -9,9 +9,9 @@ props, its structure, and which design token styles each part), generated workin
 plain-HTML implementations from those contracts, and then rendered our generated HTML
 **side by side with Shopify's own published package in the same browser**. On the styled
 properties the contracts carry, the computed styles match Shopify's rendering exactly in
-**96 of 100 measured comparisons — and all 4 mismatches have committed, named causes**
+**212 of 222 measured comparisons — and all 10 mismatches have committed, named causes**
 (no tolerance was applied anywhere; a mismatch without a named cause would fail the report).
-Everything the pipeline could NOT carry — a private-variable trick here, a gradient there, a
+Everything the pipeline could NOT carry — a runtime-set variable here, a gradient there, a
 breakpoint rule, a prop typed in a sibling file — is refused **by name** in a committed
 ledger, not silently dropped. The receipts (a receipt is a committed artifact you can
 re-derive and check — a screenshot pair, a numbers table, a decision ledger) are all in this
@@ -33,7 +33,8 @@ or number drifts from what this document claims.
 ## What came out (the 12-component showcase)
 
 **12 committed contracts** (version 0.1.0, status draft) carrying **88 extracted props,
-1 extracted event, and 114 token bindings** promoted from Polaris's own CSS: Button, Badge,
+1 extracted event, and 185 carried styling facts** (token bindings plus provenance-cited
+literals — see the coverage round below) promoted from Polaris's own CSS: Button, Badge,
 Banner, Checkbox, RadioButton, TextField, Tag, Avatar, Spinner, ProgressBar, Text, Thumbnail.
 (The owner's list named Card and Divider; both extract 0 props — their APIs are typed from
 token aliases in another package, every prop a named skip — so Text and Thumbnail, two of the
@@ -45,11 +46,15 @@ re-added — Badge ships with 1 prop because that is what single-file extraction
 yields against a sibling-file type union), plus a **promotion step** for styling: Polaris
 routes styles through `classNames()` helpers and `--pc-*` private variables the extractor
 refuses by name, so a reviewed class map ([scripts/curation.ts](./scripts/curation.ts)) lets a
-mechanical inverter re-read the same CSS and carry every single-token binding it can prove.
-The promotion wrote **114 carried-binding ledger lines — one per binding in the committed
-contracts, each citing its exact CSS rule — and 2,360 named refusal lines** —
-[extraction/PROMOTION.md](./extraction/PROMOTION.md) is the complete record. Nothing was valued by hand; the two non-CSS promotions (Banner's tone
-palette, the checkable-control geometry) cite the Polaris source lines they came from.
+mechanical inverter re-read the same CSS and carry every single-token binding — and, since the
+coverage round, every var()-chain-resolved same-package literal and every deterministic
+composition-typography chain — it can prove.
+The promotion wrote **185 carried ledger lines — one per carried fact in the committed
+contracts, each citing its exact CSS rule (literals additionally cite their var() chain and
+defining selector) — and 2,317 named refusal lines** —
+[extraction/PROMOTION.md](./extraction/PROMOTION.md) is the complete record. Nothing was valued by hand; the non-CSS promotions (Banner's tone
+palette, the checkable-control geometry, Avatar's cited default palette, the composition
+typography maps) cite the Polaris source lines they came from.
 
 From those contracts, with no further reference to the Polaris clone:
 
@@ -71,28 +76,77 @@ under [receipts/](./receipts/).
 
 | component | prop combos | rows compared | rows matched exactly | named refusal lines |
 |---|---|---|---|---|
-| `polaris.button` | 6 | 26 | 26 | 333 |
-| `polaris.badge` | 1 | 6 | 6 | 37 |
-| `polaris.banner` | 4 | 8 | 8 | 27 |
+| `polaris.button` | 6 | 77 | 74 | 316 |
+| `polaris.badge` | 1 | 10 | 10 | 38 |
+| `polaris.banner` | 4 | 40 | 40 | 27 |
 | `polaris.checkbox` | 1 | 2 | 1 | 502 |
 | `polaris.radio-button` | 1 | 4 | 4 | 339 |
-| `polaris.text-field` | 1 | 11 | 11 | 907 |
-| `polaris.tag` | 1 | 3 | 3 | 43 |
-| `polaris.avatar` | 1 | 4 | 2 | 57 |
+| `polaris.text-field` | 1 | 11 | 11 | 905 |
+| `polaris.tag` | 1 | 7 | 7 | 43 |
+| `polaris.avatar` | 3 | 18 | 12 | 46 |
 | `polaris.spinner` | 2 | 4 | 4 | 8 |
-| `polaris.progress-bar` | 4 | 12 | 12 | 32 |
-| `polaris.text` | 4 | 16 | 15 | 17 |
-| `polaris.thumbnail` | 2 | 4 | 4 | 58 |
+| `polaris.progress-bar` | 6 | 24 | 24 | 29 |
+| `polaris.text` | 4 | 17 | 17 | 15 |
+| `polaris.thumbnail` | 2 | 8 | 8 | 49 |
 
-**Total: 96/100 rows matched exactly across 28 prop combinations.** The 4 mismatches each
+**Total: 212/222 rows matched exactly across 32 prop combinations.** The 10 mismatches each
 carry a committed named cause in [receipts/RECEIPTS.md](./receipts/RECEIPTS.md): Avatar's
-name-hash palette (2 rows — Polaris derives avatar colors from a hash of the initials;
-value-derived styling has no contract channel), Text's bold combo (1 row — the schema carries
-ONE per-value token map per part and the variant axis won; a named schema limit this showcase
-surfaced), and Checkbox's border width (1 row — Polaris's Choice wrapper zeroes the border and
-repaints it as an inset shadow, a cross-component rule outside the promoted scope). "Named
+name-hash palette (6 rows over 3 combos — Polaris hashes the initials into one of seven
+palette classes; the contract carries Polaris's own name-less default, `styleOne`, cited from
+`Avatar.tsx`, and the hash SELECTION stays a named refusal), Button's label typography
+branches (3 rows — the primary label's weight is a media-dependent runtime branch and the
+plain label's bodyMd upgrade is conditioned on two axes; both refused by name, the carried
+base renders), and Checkbox's border width (1 row — Polaris's Choice wrapper zeroes the border
+and repaints it as an inset shadow, a cross-component rule outside the promoted scope). "Named
 refusal lines" counts the promotion ledger's refusals for that component (one styling fact can
 refuse in several contexts, so lines ≥ declarations; every line is in PROMOTION.md).
+
+## The coverage round (before → after)
+
+The first Phase B canvas rebuild faithfully rendered only what the contracts then carried —
+and the visually dominant channels were refusals, so buttons rendered label-less and
+white-on-white, avatars invisible, progress bars heightless. The owner's verdict on that
+canvas ("none of this is acceptable, at least from a stylistic point of view") triggered a
+coverage round: convert refusal CLASSES into deterministically carried facts — chain-following,
+never guessing — then re-prove everything. Before → after, same pinned SHA, same
+zero-tolerance discipline:
+
+| measure | before | after |
+|---|---|---|
+| carried ledger lines | 114 | 185 |
+| named refusal lines | 2,360 | 2,317 |
+| truth-table rows compared | 100 | 222 |
+| rows matched exactly | 96 | 212 |
+| mismatches (every one with a committed named cause) | 4 | 10 |
+
+What converted, by class (each with engine/schema work, eval-pinned):
+
+1. **var() → same-package literal resolution** (`literals`/`literalsByProp`, schema v14): a
+   `--pc-*` chain that lands on a literal DEFINED in the same module.css now carries the
+   resolved value with provenance (chain + defining selector + file), including deterministic
+   `calc()` over resolved px literals. Carries ProgressBar's per-size track heights
+   (8/16/32px), Avatar's per-size widths (20…40px), Thumbnail's per-size widths (24…80px),
+   Button's `transparent` base background. Cycles refuse by name; unresolvable vars now
+   refuse with a NARROWED message naming whether they are runtime-set, media-dependent, or
+   defined only in other class contexts. Raw literals (never behind a var chain) still refuse
+   — a raw value is reported, never invented into a carry.
+2. **Composition-owned typography**: where a text node's styling flows through Polaris's Text
+   primitive with LITERAL prop values readable in the parent's TSX (cited), the typography
+   channels resolve mechanically from Text's own module.css under Text's reviewed class map —
+   Button/Badge/Tag labels and Banner's title/body now carry font-size/weight/line-height/
+   letter-spacing. Branches needing runtime logic (Button primary's `mdUp` weight) or two
+   axes (plain+size → bodyMd) are refused by name and appear as named mismatch rows.
+3. **Multiple `tokensByProp` per part** (schema v14): the one-map-per-part limit is lifted —
+   ordered entries, later entries win per channel (mirroring the CSS source order the values
+   came from; Polaris's own Text.module.css comment demands exactly this), conflicting
+   channel+prop pairs refused by name. Button now carries variant colors AND size
+   paddings/heights; Text carries the variant scale AND the fontWeight/tone maps (the old
+   bold-combo mismatch now matches); TextField regains its slim padding.
+4. **Figma emitter fixes at the source** (the Phase B in-flight shims are dead): the token
+   script's color parser accepts `rgb()`/`rgba()` verbatim values (alpha preserved); the
+   emitted shape branch applies `spec.stroke`/`spec.bindings` and clears the default gray
+   paint when no fill channel is carried; the `background` channel now binds on the canvas
+   exactly as it renders on the HTML surface (Avatar's fill was the cross-generator gap).
 
 ## The honest gaps, by name
 
@@ -101,20 +155,25 @@ The styled channels their architecture does NOT expose to this pipeline, and wha
 - **Sibling-file prop types**: Badge's `tone`/`progress`/`icon`/`size` (union in
   `Badge/types.ts`), Tag's `size`, Icon-typed props everywhere — dropped by name; Badge ships
   a 1-prop contract as the exhibit.
-- **Component-private literal geometry**: Button/Avatar/Thumbnail/ProgressBar sizes are
-  `--pc-*` pixel literals, not tokens — refused; the receipts show the geometry gap (checkable
-  controls carry their 20px box through the schema's literal-shape channel, cited).
-- **Multi-axis conditions**: Button tone styling is conditioned on tone AND variant classes —
-  refused (the mint-code discipline: never guess across axes).
-- **One `tokensByProp` per part** (schema limit, surfaced here): Button carries the variant
-  axis (colors/shadows) and NAMES the lost size paddings; Text carries the variant scale and
-  names the lost fontWeight/tone maps. Filed as engine work.
+- **Value-derived styling**: Avatar's palette SELECTION hashes the name/initials into one of
+  seven classes — no contract channel can be a function of a text prop's value; the carried
+  default is Polaris's own name-less default (`styleOne`, cited), so the mismatch is named and
+  initials are never invisible.
+- **Multi-axis conditions**: Button tone styling is conditioned on tone AND variant classes,
+  and the plain label's bodyMd upgrade on variant AND size — refused (the mint-code
+  discipline: never guess across axes).
+- **Runtime-set and media-dependent values**: `--pc-progress-bar-percent` (inline style),
+  `--pg-control-height` (global stylesheet), Button primary's `mdUp` label weight — refused
+  with narrowed messages naming the class of unresolvability.
 - **Breakpoint-conditional styling** (`@media (--p-breakpoints-*)`): no contract channel;
   verification renders sub-breakpoint where the carried base values apply.
 - **Postcss mixins, pseudo-elements, sibling combinators**: focus rings, checked-state dots,
-  inset bevels — refused by name.
-- **Composition-owned typography**: labels render through Polaris's Text primitive; a
-  component's contract does not carry another component's file.
+  inset bevels, Avatar's `::after` square-aspect trick — refused by name.
+- **Raw literals outside a var() chain**: Avatar's per-size `border-radius: 4px/6px/8px` —
+  a raw value is reported, never invented into a carry (the literal channel carries only
+  chain-resolved definitions).
+- **Inheritance keywords**: `color: inherit`, `height: inherit` — deterministic but carrying
+  no standalone fact; refused by name.
 - **Gradient overlays**: the primary button's gradient layer is named-not-carried; its color
   layer carries (CSS's own shorthand semantics) and matches exactly.
 

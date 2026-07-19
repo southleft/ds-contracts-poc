@@ -11,3 +11,10 @@
   color: var(--p-color-text);
   border-radius: var(--p-border-radius-200);
 }
+
+.label {
+  font-size: var(--p-text-body-sm-font-size);
+  font-weight: var(--p-text-body-sm-font-weight);
+  line-height: var(--p-text-body-sm-font-line-height);
+  letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+}
