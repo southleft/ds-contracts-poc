@@ -15,43 +15,101 @@
     "wrapperClose": "</AppProvider>"
   },
   "tokens": {
-    "dtcg": ["examples/polaris/tokens/polaris-light.dtcg.json"],
+    "dtcg": [
+      "examples/polaris/tokens/polaris-light.dtcg.json"
+    ],
     "css": "examples/polaris/generated/html/polaris-tokens.css"
   },
   "icons": "examples/polaris/assets/icons",
   "browser": {
-    "viewport": { "width": 600, "height": 800 },
+    "viewport": {
+      "width": 600,
+      "height": 800
+    },
     "deviceScaleFactor": 2,
     "colorScheme": "light"
   },
-  "stage": { "width": 320, "height": 96, "padding": 16 },
-  "enumeration": { "cartesianLimit": 512, "unsetLabel": "none" },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "none"
+  },
   "components": [
     {
       "name": "Button",
       "importName": "Button",
       "contract": "examples/polaris/extraction/static-contracts/button.contract.json",
       "sampleText": "Save changes",
-      "axes": ["variant", "tone", "size"],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "axes": [
+        "variant",
+        "tone",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
       "triage": [
         {
           "part": "root",
-          "channels": ["color", "background-color", "box-shadow"],
-          "when": { "tone": { "notIn": ["none"] } },
-          "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+          "channels": [
+            "color",
+            "background-color",
+            "box-shadow"
+          ],
+          "when": {
+            "tone": {
+              "notIn": [
+                "none"
+              ]
+            }
+          },
+          "cause": "tone\u00d7variant multi-axis condition (.tone*:is(.variant*)) \u2014 refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
         },
         {
           "part": "label",
-          "channels": ["font-size", "line-height"],
-          "when": { "variant": { "in": ["plain", "monochromePlain"] } },
-          "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+          "channels": [
+            "font-size",
+            "line-height"
+          ],
+          "when": {
+            "variant": {
+              "in": [
+                "plain",
+                "monochromePlain"
+              ]
+            }
+          },
+          "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default \u2014 child-component props conditioned on the parent variant, invisible to single-file static promotion"
         },
         {
           "part": "label",
-          "channels": ["font-weight"],
-          "when": { "variant": { "in": ["primary"] } },
-          "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+          "channels": [
+            "font-weight"
+          ],
+          "when": {
+            "variant": {
+              "in": [
+                "primary"
+              ]
+            }
+          },
+          "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) \u2014 same composition-owned class"
+        }
+      ],
+      "presenceProps": [
+        {
+          "prop": "withIcon",
+          "libraryProp": "icon",
+          "value": {
+            "$import": "@shopify/polaris-icons#PlusCircleIcon"
+          }
         }
       ]
     },
@@ -60,13 +118,43 @@
       "importName": "Tag",
       "contract": "examples/polaris/extraction/static-contracts/tag.contract.json",
       "sampleText": "Wholesale",
-      "axes": [],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "axes": [
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
       "triage": [
         {
           "part": "label",
-          "channels": ["line-height"],
-          "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
+          "channels": [
+            "line-height"
+          ],
+          "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` \u2014 resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
+        }
+      ],
+      "presenceProps": [
+        {
+          "prop": "removable",
+          "libraryProp": "onRemove",
+          "value": {
+            "$callback": true
+          }
+        },
+        {
+          "prop": "clickable",
+          "libraryProp": "onClick",
+          "value": {
+            "$callback": true
+          }
+        },
+        {
+          "prop": "linked",
+          "libraryProp": "url",
+          "value": "https://example.com"
         }
       ]
     },
@@ -75,61 +163,140 @@
       "importName": "Badge",
       "contract": "examples/polaris/extraction/static-contracts/badge.contract.json",
       "sampleText": "Fulfilled",
-      "axes": []
+      "axes": [
+        "tone",
+        "progress"
+      ]
     },
     {
       "name": "Banner",
       "importName": "Banner",
       "contract": "examples/polaris/extraction/static-contracts/banner.contract.json",
       "sampleText": "Use your finance report to get detailed insights.",
-      "axes": ["tone"],
-      "fixedProps": { "title": "Order archived" },
+      "axes": [
+        "tone"
+      ],
+      "fixedProps": {
+        "title": "Order archived"
+      },
       "triage": [
         {
           "part": "root",
-          "channels": ["background-color", "color"],
-          "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+          "channels": [
+            "background-color",
+            "color"
+          ],
+          "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill \u2014 Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} \u2014 mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
         }
-      ]
+      ],
+      "presenceProps": [
+        {
+          "prop": "dismissible",
+          "libraryProp": "onDismiss",
+          "value": {
+            "$callback": true
+          }
+        },
+        {
+          "prop": "withAction",
+          "libraryProp": "action",
+          "value": {
+            "content": "Print label"
+          }
+        }
+      ],
+      "stage": {
+        "width": 620,
+        "height": 240,
+        "padding": 16
+      }
     },
     {
       "name": "Checkbox",
       "importName": "Checkbox",
       "contract": "examples/polaris/extraction/static-contracts/checkbox.contract.json",
       "sampleText": "",
-      "axes": [],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
-      "fixedProps": { "label": "Save this product" },
-      "callbackProps": ["onChange"],
+      "axes": [
+        "checked"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Save this product"
+      },
+      "callbackProps": [
+        "onChange"
+      ],
       "triage": [
         {
           "part": "backdrop",
-          "channels": ["border-width"],
-          "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+          "channels": [
+            "border-width"
+          ],
+          "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade \u2014 computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
         }
-      ]
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true,
+          "indeterminate": "indeterminate"
+        }
+      }
     },
     {
       "name": "RadioButton",
       "importName": "RadioButton",
       "contract": "examples/polaris/extraction/static-contracts/radio-button.contract.json",
       "sampleText": "",
-      "axes": [],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
-      "fixedProps": { "label": "Accounts are disabled" },
-      "callbackProps": ["onChange"]
+      "axes": [
+        "checked"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Accounts are disabled"
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      }
     },
     {
       "name": "Avatar",
       "importName": "Avatar",
       "contract": "examples/polaris/extraction/static-contracts/avatar.contract.json",
       "sampleText": "",
-      "axes": ["size"],
+      "axes": [
+        "size"
+      ],
       "triage": [
         {
           "part": "initials",
-          "channels": ["font-size"],
-          "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+          "channels": [
+            "font-size"
+          ],
+          "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value \u2014 the standing Avatar refusal class)."
+        }
+      ],
+      "presenceProps": [
+        {
+          "prop": "withInitials",
+          "libraryProp": "initials",
+          "value": "TP"
         }
       ]
     },
@@ -138,22 +305,31 @@
       "importName": "Spinner",
       "contract": "examples/polaris/extraction/static-contracts/spinner.contract.json",
       "sampleText": "",
-      "axes": ["size"]
+      "axes": [
+        "size"
+      ]
     },
     {
       "name": "ProgressBar",
       "importName": "ProgressBar",
       "contract": "examples/polaris/extraction/static-contracts/progress-bar.contract.json",
       "sampleText": "",
-      "axes": ["size", "tone"],
-      "fixedProps": { "progress": 25 }
+      "axes": [
+        "size",
+        "tone"
+      ],
+      "fixedProps": {
+        "progress": 25
+      }
     },
     {
       "name": "Thumbnail",
       "importName": "Thumbnail",
       "contract": "examples/polaris/extraction/static-contracts/thumbnail.contract.json",
       "sampleText": "",
-      "axes": ["size"],
+      "axes": [
+        "size"
+      ],
       "fixedProps": {
         "alt": "Black choker necklace",
         "source": "data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3Crect%20width='1'%20height='1'%20fill='%23d8d8d8'/%3E%3C/svg%3E"
@@ -164,41 +340,118 @@
       "importName": "Text",
       "contract": "examples/polaris/extraction/static-contracts/text.contract.json",
       "sampleText": "Online store dashboard",
-      "axes": ["variant", "tone", "fontWeight"]
+      "axes": [
+        "variant",
+        "tone",
+        "fontWeight"
+      ]
     },
     {
       "name": "TextField",
       "importName": "TextField",
       "contract": "examples/polaris/extraction/static-contracts/text-field.contract.json",
       "sampleText": "",
-      "axes": ["variant", "size"],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
-      "fixedProps": { "label": "Store name", "autoComplete": "off", "value": "Jaded Pixel" },
-      "callbackProps": ["onChange"],
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel"
+      },
+      "callbackProps": [
+        "onChange"
+      ],
       "triage": [
         {
           "part": "backdrop",
-          "channels": ["border-color"],
-          "when": { "variant": { "in": ["borderless"] } },
-          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+          "channels": [
+            "border-color"
+          ],
+          "when": {
+            "variant": {
+              "in": [
+                "borderless"
+              ]
+            }
+          },
+          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop \u2014 computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding \u2014 named residue (the border-width channel resolves to {p.border-width-0} instead)"
         },
         {
           "part": "backdrop",
-          "channels": ["border-width"],
-          "when": { "variant": { "in": ["borderless"] } },
-          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+          "channels": [
+            "border-width"
+          ],
+          "when": {
+            "variant": {
+              "in": [
+                "borderless"
+              ]
+            }
+          },
+          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop \u2014 computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) \u2014 resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
         },
         {
           "part": "backdrop",
-          "channels": ["min-height"],
-          "when": { "variant": { "in": ["borderless"] }, "size": { "in": ["slim"] } },
-          "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+          "channels": [
+            "min-height"
+          ],
+          "when": {
+            "variant": {
+              "in": [
+                "borderless"
+              ]
+            },
+            "size": {
+              "in": [
+                "slim"
+              ]
+            }
+          },
+          "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px \u2014 a variant\u00d7size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
         },
         {
           "part": "input",
-          "channels": ["min-height"],
-          "when": { "variant": { "in": ["borderless"] }, "size": { "in": ["slim"] } },
-          "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+          "channels": [
+            "min-height"
+          ],
+          "when": {
+            "variant": {
+              "in": [
+                "borderless"
+              ]
+            },
+            "size": {
+              "in": [
+                "slim"
+              ]
+            }
+          },
+          "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px \u2014 a variant\u00d7size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+        }
+      ],
+      "presenceProps": [
+        {
+          "prop": "withPrefix",
+          "libraryProp": "prefix",
+          "value": "$"
+        },
+        {
+          "prop": "withSuffix",
+          "libraryProp": "suffix",
+          "value": "USD"
+        },
+        {
+          "prop": "clearButton",
+          "libraryProp": "clearButton",
+          "value": true
         }
       ]
     }

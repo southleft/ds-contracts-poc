@@ -39,6 +39,25 @@ export interface TriageRule {
   cause: string;
 }
 
+/** Round 4 (owner directive): a STRUCTURE-CREATING optional prop — a prop
+ *  whose PRESENCE creates DOM subtrees (Banner onDismiss → dismiss button,
+ *  Tag onRemove → the ×, TextField prefix). Participates as a 2-value axis
+ *  ('off' | 'on'); the fusion promotes it into the enriched contract as a
+ *  BOOLEAN prop and the created subtree as parts gated by visibleWhen /
+ *  stylesWhen display:none. */
+export interface PresenceProp {
+  /** Canonical (contract-side) boolean prop name, e.g. "dismissible". Added
+   *  to the enriched contract by the fusion when absent. */
+  prop: string;
+  /** The library prop that carries the value when ON (e.g. "onDismiss"). */
+  libraryProp: string;
+  /** Value mounted when ON. Marker grammar (resolved in the harness entry):
+   *    {"$callback": true}          → () => {}
+   *    {"$import": "pkg#Export"}    → the named import (icon sources)
+   *    anything else                → the JSON value verbatim */
+  value: unknown;
+}
+
 export interface ComponentConfig {
   /** Display name; also the CSS-module stem prefix stripped in part naming. */
   name: string;
@@ -53,6 +72,12 @@ export interface ComponentConfig {
    *  default and receipted (axes-held-fixed). A defaultless enum axis gets
    *  the `unsetLabel` pseudo-value prepended (S2). */
   axes: string[];
+  /** Round 4: contract-side enum axis value → LIBRARY value mounted for it
+   *  (Checkbox checked: unchecked→false, checked→true,
+   *  indeterminate→"indeterminate"). Unlisted values mount verbatim. */
+  axisValueMap?: Record<string, Record<string, unknown>>;
+  /** Round 4: structure-creating optional props (see PresenceProp). */
+  presenceProps?: PresenceProp[];
   /** Boolean props driven as states (Button `disabled`): 2-value axes AND
    *  state guards (§2). May name props absent from the contract when the
    *  contract declares the STATE instead (Button declares states:[disabled]
@@ -60,6 +85,10 @@ export interface ComponentConfig {
   stateProps?: StateAxisSpec[];
   /** Props pinned to fixed values on every mount (recorded). */
   fixedProps?: Record<string, string | number | boolean>;
+  /** Round 4: per-component stage override (Banner's promoted anatomy —
+   *  dismiss + action row — needs a taller stage than the global default;
+   *  the same stage is used by capture, replay, and the gate). */
+  stage?: { width: number; height: number; padding: number };
   /** Function-typed required props stubbed to () => {} (verify.ts
    *  needsOnChange, generalized). */
   callbackProps?: string[];
@@ -117,7 +146,11 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
 // ---------------------------------------------------------------------------
 export interface PropSpace {
   contract: Contract;
+  /** ALL enumerated axes: contract enum axes first, then presence axes
+   *  (values ['off','on']) in config order. */
   axes: EnumAxisSpec[];
+  /** Presence-prop specs by contract prop name (subset of `axes`). */
+  presence: Map<string, PresenceProp>;
   stateProps: StateAxisSpec[];
   enumeration: EnumerationResult;
   baseComboKey: string;
@@ -126,6 +159,11 @@ export interface PropSpace {
   /** Enum props held at defaults (receipted, not enumerated). */
   heldFixed: string[];
 }
+
+/** Presence axes enumerate 'off' | 'on' (off = prop absent — the mount's
+ *  default; the fusion turns the axis into a boolean contract prop). */
+export const PRESENCE_OFF = 'off';
+export const PRESENCE_ON = 'on';
 
 export function propSpaceFor(repoRoot: string, cfg: CaptureConfig, comp: ComponentConfig): PropSpace {
   const contract = ContractSchema.parse(
@@ -146,6 +184,16 @@ export function propSpaceFor(repoRoot: string, cfg: CaptureConfig, comp: Compone
     const defaultless = prop.default === undefined;
     axes.push({ prop: name, values: defaultless ? [unset, ...values] : [...values], ...(defaultless ? { unset } : {}) });
   }
+  // Round 4: presence axes (structure-creating optional props) — 2-value
+  // axes 'off'/'on'; 'off' mounts the prop ABSENT (never a false value).
+  const presence = new Map<string, PresenceProp>();
+  for (const pp of comp.presenceProps ?? []) {
+    if (axes.some((a) => a.prop === pp.prop)) {
+      throw new Error(`${comp.name}: presence prop "${pp.prop}" collides with an enum axis`);
+    }
+    presence.set(pp.prop, pp);
+    axes.push({ prop: pp.prop, values: [PRESENCE_OFF, PRESENCE_ON] });
+  }
   const stateProps = comp.stateProps ?? [];
   const heldFixed = contract.props
     .filter((p) => typeof p.type === 'object' && 'enum' in p.type && !comp.axes.includes(p.name))
@@ -153,6 +201,10 @@ export function propSpaceFor(repoRoot: string, cfg: CaptureConfig, comp: Compone
 
   const baseAxisValues: Record<string, string> = {};
   for (const a of axes) {
+    if (presence.has(a.prop)) {
+      baseAxisValues[a.prop] = PRESENCE_OFF;
+      continue;
+    }
     const prop = contract.props.find((p) => p.name === a.prop)!;
     baseAxisValues[a.prop] = comp.baseCombo?.[a.prop] ?? (prop.default !== undefined ? String(prop.default) : unset);
   }
@@ -163,7 +215,7 @@ export function propSpaceFor(repoRoot: string, cfg: CaptureConfig, comp: Compone
       stateProps.every((s) => c.stateFlags[s.prop] === false),
   );
   if (!base) throw new Error(`${comp.name}: base combo not in enumeration`);
-  return { contract, axes, stateProps, enumeration, baseComboKey: base.key, baseAxisValues, heldFixed };
+  return { contract, axes, presence, stateProps, enumeration, baseComboKey: base.key, baseAxisValues, heldFixed };
 }
 
 /** React props for one combo: axis values (unset pseudo-values OMITTED — the
@@ -173,8 +225,18 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
   const props: Record<string, unknown> = { ...(comp.fixedProps ?? {}) };
   for (const a of space.axes) {
     const v = combo.axisValues[a.prop];
+    const pp = space.presence.get(a.prop);
+    if (pp) {
+      // presence axis: 'off' mounts the LIBRARY prop absent; 'on' mounts the
+      // configured value (marker grammar resolved in the harness entry).
+      if (v === PRESENCE_ON) props[pp.libraryProp] = pp.value;
+      continue;
+    }
     if (a.unset !== undefined && v === a.unset) continue;
-    props[a.prop] = v;
+    // Round 4 axisValueMap: contract axis value → library value (Checkbox
+    // checked enum → boolean|'indeterminate').
+    const mapped = comp.axisValueMap?.[a.prop];
+    props[a.prop] = mapped && v in mapped ? mapped[v] : v;
   }
   for (const s of space.stateProps) if (combo.stateFlags[s.prop]) props[s.prop] = true;
   return props;
@@ -187,6 +249,9 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
  *  baseline (§ "styled channels"): a captured tag without a control falls
  *  back to the span control, receipted by the fuser. */
 export const CONTROL_TAGS = ['button', 'span', 'a', 'div'] as const;
+
+export const stageFor = (cfg: CaptureConfig, comp: ComponentConfig): { width: number; height: number; padding: number } =>
+  comp.stage ?? cfg.stage;
 
 export function buildHarnessPage(
   harness: string,
@@ -201,31 +266,68 @@ export function buildHarnessPage(
       props: comboProps(comp, space, combo),
       callbacks: comp.callbackProps ?? [],
       text: comp.sampleText,
+      stage: stageFor(cfg, comp),
     })),
   );
+  // Round 4 presence-value marker grammar: collect $import values into real
+  // import statements; markers resolve at mount time (resolveMarkers below).
+  const extraImports = new Map<string, Set<string>>(); // pkg → exports
+  const collectImports = (v: unknown): void => {
+    if (v && typeof v === 'object') {
+      const imp = (v as Record<string, unknown>)['$import'];
+      if (typeof imp === 'string') {
+        const [pkg, name] = imp.split('#');
+        (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
+        return;
+      }
+      for (const x of Object.values(v)) collectImports(x);
+    }
+  };
+  for (const s of specs) collectImports(s.props);
+  const extraImportLines = [...extraImports.entries()]
+    .sort()
+    .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
+  const extraNames = [...extraImports.values()].flatMap((s) => [...s]).sort();
   // display:flex + align-items:flex-start: the component is a flex item, so
   // its position never depends on the stage's own line-box strut (inherited
   // font metrics) — the mount-context receipt (spike finding; DESIGN §1.1/§4).
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ${importNames.join(', ')} } from '${cfg.library.package}';
+${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
 const COMPONENTS = { ${importNames.join(', ')} };
+const EXTRA = { ${extraNames.join(', ')} };
 const SPECS = ${JSON.stringify(specs)};
-const stage = { display: 'flex', alignItems: 'flex-start', width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding}, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' };
+const stageStyle = (st) => ({ display: 'flex', alignItems: 'flex-start', width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
+const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding} });
+
+// presence-value marker grammar: {"$callback":true} → () => {};
+// {"$import":"pkg#Name"} → the imported binding (resolved recursively).
+function resolveMarkers(v) {
+  if (v && typeof v === 'object') {
+    if (v.$callback === true) return () => {};
+    if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
+    if (Array.isArray(v)) return v.map(resolveMarkers);
+    const out = {};
+    for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
+    return out;
+  }
+  return v;
+}
 
 function App() {
   return (
     ${cfg.mount.wrapperOpen}
       {SPECS.map((s) => {
         const C = COMPONENTS[s.component];
-        const props = { ...s.props };
+        const props = resolveMarkers({ ...s.props });
         for (const cb of s.callbacks) props[cb] = () => {};
         return (
           <React.Fragment key={s.key}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
-            <div data-combo={s.key} style={stage}><C {...props}>{s.text}</C></div>
+            <div data-combo={s.key} style={stageStyle(s.stage)}><C {...props}>{s.text}</C></div>
           </React.Fragment>
         );
       })}

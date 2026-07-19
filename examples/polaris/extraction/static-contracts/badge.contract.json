@@ -4,11 +4,62 @@
   "name": "Badge",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) \u2014 API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT \u00a9 Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts \u2014 every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
   "semantics": {
     "element": "span"
   },
   "props": [
+    {
+      "name": "tone",
+      "description": "Colors and labels the badge with the given tone (round 4: enumerated from the real @shopify/polaris@13.9.5 Badge API \u2014 the static extraction had missed the styling axes entirely).",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "critical",
+          "attention",
+          "new",
+          "magic",
+          "info-strong",
+          "success-strong",
+          "warning-strong",
+          "critical-strong",
+          "attention-strong",
+          "read-only",
+          "enabled"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone"
+        },
+        "code": {
+          "prop": "tone"
+        }
+      }
+    },
+    {
+      "name": "progress",
+      "description": "Render a pip showing the progress of a given task (round 4: real Badge API axis).",
+      "type": {
+        "enum": [
+          "incomplete",
+          "partiallyComplete",
+          "complete"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Progress"
+        },
+        "code": {
+          "prop": "progress"
+        }
+      }
+    },
     {
       "name": "toneAndProgressLabelOverride",
       "description": "Pass a custom accessibilityLabel",

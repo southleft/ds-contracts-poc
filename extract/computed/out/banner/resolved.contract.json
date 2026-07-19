@@ -88,6 +88,36 @@
           "prop": "stopAnnouncements"
         }
       }
+    },
+    {
+      "name": "dismissible",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `onDismiss` ({\"$callback\":true}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Dismissible"
+        },
+        "code": {
+          "prop": "dismissible"
+        }
+      }
+    },
+    {
+      "name": "withAction",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `action` ({\"content\":\"Print label\"}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithAction"
+        },
+        "code": {
+          "prop": "withAction"
+        }
+      }
     }
   ],
   "states": [
@@ -112,27 +142,568 @@
         "color": "{p.color-text}"
       },
       "parts": {
-        "title": {
-          "element": "h2",
-          "tokens": {
-            "font-size": "{p.text-heading-sm-font-size}",
-            "font-weight": "{p.text-heading-sm-font-weight}",
-            "line-height": "{p.text-heading-sm-font-line-height}",
-            "letter-spacing": "{p.text-heading-sm-font-letter-spacing}"
+        "box": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "grow": true
           },
-          "content": {
-            "prop": "title"
+          "parts": {
+            "blockstack": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|BlockStack — this element exists in the real component's DOM; the static layer had no part for it.",
+              "parts": {
+                "box-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "parts": {
+                    "inlinestack": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "parts": {
+                        "inlinestack-2": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "parts": {
+                            "part-0-0-0-0-0-0": {
+                              "element": "span",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "parts": {
+                                "icon": {
+                                  "element": "span",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "parts": {
+                                    "icon-success": {
+                                      "icon": {
+                                        "asset": "banner-icon-success",
+                                        "size": 20
+                                      },
+                                      "visibleWhen": {
+                                        "prop": "tone",
+                                        "equals": "success"
+                                      },
+                                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=success."
+                                    },
+                                    "icon-info": {
+                                      "icon": {
+                                        "asset": "banner-icon-info",
+                                        "size": 20
+                                      },
+                                      "visibleWhen": {
+                                        "prop": "tone",
+                                        "equals": "info"
+                                      },
+                                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=info."
+                                    },
+                                    "icon-warning": {
+                                      "icon": {
+                                        "asset": "banner-icon-warning",
+                                        "size": 20
+                                      },
+                                      "visibleWhen": {
+                                        "prop": "tone",
+                                        "equals": "warning"
+                                      },
+                                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=warning."
+                                    },
+                                    "icon-critical": {
+                                      "icon": {
+                                        "asset": "banner-icon-critical",
+                                        "size": 20
+                                      },
+                                      "visibleWhen": {
+                                        "prop": "tone",
+                                        "equals": "critical"
+                                      },
+                                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=critical."
+                                    }
+                                  },
+                                  "declared": {
+                                    "max-height": "100%",
+                                    "max-width": "100%"
+                                  },
+                                  "tokens": {
+                                    "min-height": "{imported.shared.size-0}",
+                                    "min-width": "{imported.shared.size-0}"
+                                  },
+                                  "tokensByProp": [
+                                    {
+                                      "prop": "tone",
+                                      "map": {
+                                        "critical": {
+                                          "color": "{imported.banner.icon.color.critical}"
+                                        },
+                                        "info": {
+                                          "color": "{imported.banner.icon.color.info}"
+                                        },
+                                        "success": {
+                                          "color": "{imported.banner.icon.color.success}"
+                                        },
+                                        "warning": {
+                                          "color": "{imported.banner.icon.color.warning}"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "tokensByProp": [
+                                {
+                                  "prop": "tone",
+                                  "map": {
+                                    "critical": {
+                                      "color": "{imported.banner.part-0-0-0-0-0-0.color.critical}"
+                                    },
+                                    "info": {
+                                      "color": "{imported.banner.part-0-0-0-0-0-0.color.info}"
+                                    },
+                                    "success": {
+                                      "color": "{imported.banner.part-0-0-0-0-0-0.color.success}"
+                                    },
+                                    "warning": {
+                                      "color": "{imported.banner.part-0-0-0-0-0-0.color.warning}"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "title": {
+                              "element": "h2",
+                              "tokens": {
+                                "font-size": "{p.text-heading-sm-font-size}",
+                                "font-weight": "{p.text-heading-sm-font-weight}",
+                                "line-height": "{p.text-heading-sm-font-line-height}",
+                                "letter-spacing": "{p.text-heading-sm-font-letter-spacing}"
+                              },
+                              "content": {
+                                "prop": "title"
+                              },
+                              "tokensByProp": [
+                                {
+                                  "prop": "tone",
+                                  "map": {
+                                    "critical": {
+                                      "color": "{imported.banner.title.color.critical}"
+                                    },
+                                    "info": {
+                                      "color": "{imported.banner.title.color.info}"
+                                    },
+                                    "success": {
+                                      "color": "{imported.banner.title.color.success}"
+                                    },
+                                    "warning": {
+                                      "color": "{imported.banner.title.color.warning}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "layout": {
+                            "display": "flex",
+                            "align": "center",
+                            "justify": "space-between"
+                          },
+                          "tokens": {
+                            "column-gap": "{imported.shared.size-4}",
+                            "row-gap": "{imported.shared.size-4}"
+                          },
+                          "tokensByProp": [
+                            {
+                              "prop": "tone",
+                              "map": {
+                                "critical": {
+                                  "color": "{imported.banner.inlinestack-2.color.critical}"
+                                },
+                                "info": {
+                                  "color": "{imported.banner.inlinestack-2.color.info}"
+                                },
+                                "success": {
+                                  "color": "{imported.banner.inlinestack-2.color.success}"
+                                },
+                                "warning": {
+                                  "color": "{imported.banner.inlinestack-2.color.warning}"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "button": {
+                          "element": "button",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "visibleWhen": {
+                            "prop": "dismissible"
+                          },
+                          "parts": {
+                            "button__icon": {
+                              "element": "span",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "visibleWhen": {
+                                "prop": "dismissible"
+                              },
+                              "parts": {
+                                "part-0-0-0-0-1-0-0": {
+                                  "element": "span",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "visibleWhen": {
+                                    "prop": "dismissible"
+                                  },
+                                  "parts": {
+                                    "icon-3": {
+                                      "element": "span",
+                                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                                      "visibleWhen": {
+                                        "prop": "dismissible"
+                                      },
+                                      "parts": {
+                                        "icon-3-success": {
+                                          "icon": {
+                                            "asset": "banner-icon-3-success",
+                                            "size": 20
+                                          },
+                                          "visibleWhen": {
+                                            "prop": "tone",
+                                            "equals": "success"
+                                          },
+                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=success."
+                                        },
+                                        "icon-3-info": {
+                                          "icon": {
+                                            "asset": "banner-icon-3-info",
+                                            "size": 20
+                                          },
+                                          "visibleWhen": {
+                                            "prop": "tone",
+                                            "equals": "info"
+                                          },
+                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=info."
+                                        },
+                                        "icon-3-warning": {
+                                          "icon": {
+                                            "asset": "banner-icon-3-warning",
+                                            "size": 20
+                                          },
+                                          "visibleWhen": {
+                                            "prop": "tone",
+                                            "equals": "warning"
+                                          },
+                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=warning."
+                                        },
+                                        "icon-3-critical": {
+                                          "icon": {
+                                            "asset": "banner-icon-3-critical",
+                                            "size": 20
+                                          },
+                                          "visibleWhen": {
+                                            "prop": "tone",
+                                            "equals": "critical"
+                                          },
+                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=critical."
+                                        }
+                                      },
+                                      "declared": {
+                                        "cursor": "pointer",
+                                        "max-height": "100%",
+                                        "max-width": "100%",
+                                        "text-align": "center",
+                                        "user-select": "none"
+                                      },
+                                      "tokens": {
+                                        "min-height": "{imported.shared.size-0}",
+                                        "min-width": "{imported.shared.size-0}"
+                                      }
+                                    }
+                                  },
+                                  "declared": {
+                                    "cursor": "pointer",
+                                    "display": "inline",
+                                    "text-align": "center",
+                                    "user-select": "none"
+                                  },
+                                  "tokens": {
+                                    "min-height": "{imported.shared.size-0}",
+                                    "min-width": "{imported.shared.size-0}"
+                                  }
+                                }
+                              },
+                              "declared": {
+                                "cursor": "pointer",
+                                "text-align": "center",
+                                "user-select": "none"
+                              },
+                              "tokens": {
+                                "margin-bottom": "{imported.banner.button-icon.margin-bottom}",
+                                "margin-top": "{imported.banner.button-icon.margin-top}"
+                              }
+                            }
+                          },
+                          "layout": {
+                            "display": "flex",
+                            "align": "center",
+                            "justify": "center"
+                          },
+                          "declared": {
+                            "appearance": "none",
+                            "border-bottom-style": "none",
+                            "border-left-style": "none",
+                            "border-right-style": "none",
+                            "border-top-style": "none",
+                            "cursor": "pointer",
+                            "font-feature-settings": "\"calt\" 0",
+                            "position": "relative",
+                            "text-rendering": "optimizelegibility",
+                            "touch-action": "manipulation",
+                            "user-select": "none"
+                          },
+                          "tokens": {
+                            "background-color": "{imported.banner.button.background-color}",
+                            "border-bottom-left-radius": "{imported.shared.size-8}",
+                            "border-bottom-right-radius": "{imported.shared.size-8}",
+                            "border-bottom-width": "{imported.shared.size-0}",
+                            "border-left-width": "{imported.shared.size-0}",
+                            "border-right-width": "{imported.shared.size-0}",
+                            "border-top-left-radius": "{imported.shared.size-8}",
+                            "border-top-right-radius": "{imported.shared.size-8}",
+                            "border-top-width": "{imported.shared.size-0}",
+                            "bottom": "{imported.shared.size-0}",
+                            "color": "{imported.banner.button.color}",
+                            "column-gap": "{imported.shared.size-2}",
+                            "font-size": "{imported.banner.button.font-size}",
+                            "font-weight": "{imported.banner.button.font-weight}",
+                            "left": "{imported.shared.size-0}",
+                            "line-height": "{imported.banner.button.line-height}",
+                            "margin-bottom": "{imported.shared.size-neg-4}",
+                            "margin-left": "{imported.shared.size-neg-4}",
+                            "margin-right": "{imported.shared.size-neg-4}",
+                            "margin-top": "{imported.shared.size-neg-4}",
+                            "min-height": "{imported.shared.size-32}",
+                            "min-width": "{imported.shared.size-32}",
+                            "padding-bottom": "{imported.shared.size-4}",
+                            "padding-left": "{imported.shared.size-4}",
+                            "padding-right": "{imported.shared.size-4}",
+                            "padding-top": "{imported.shared.size-4}",
+                            "right": "{imported.shared.size-0}",
+                            "row-gap": "{imported.shared.size-2}",
+                            "top": "{imported.shared.size-0}"
+                          }
+                        }
+                      },
+                      "layout": {
+                        "display": "flex",
+                        "align": "center",
+                        "justify": "space-between"
+                      },
+                      "tokens": {
+                        "column-gap": "{imported.shared.size-8}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "row-gap": "{imported.shared.size-8}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "tone",
+                          "map": {
+                            "critical": {
+                              "color": "{imported.banner.inlinestack.color.critical}"
+                            },
+                            "info": {
+                              "color": "{imported.banner.inlinestack.color.info}"
+                            },
+                            "success": {
+                              "color": "{imported.banner.inlinestack.color.success}"
+                            },
+                            "warning": {
+                              "color": "{imported.banner.inlinestack.color.warning}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "tokens": {
+                    "border-top-left-radius": "{imported.shared.size-12}",
+                    "border-top-right-radius": "{imported.shared.size-12}",
+                    "padding-bottom": "{imported.shared.size-12}",
+                    "padding-left": "{imported.shared.size-12}",
+                    "padding-right": "{imported.shared.size-12}",
+                    "padding-top": "{imported.shared.size-12}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "tone",
+                      "map": {
+                        "critical": {
+                          "background-color": "{imported.banner.box-2.background-color.critical}",
+                          "color": "{imported.banner.box-2.color.critical}"
+                        },
+                        "info": {
+                          "background-color": "{imported.banner.box-2.background-color.info}",
+                          "color": "{imported.banner.box-2.color.info}"
+                        },
+                        "success": {
+                          "background-color": "{imported.banner.box-2.background-color.success}",
+                          "color": "{imported.banner.box-2.color.success}"
+                        },
+                        "warning": {
+                          "background-color": "{imported.banner.box-2.background-color.warning}",
+                          "color": "{imported.banner.box-2.color.warning}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "box-3": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "parts": {
+                    "blockstack-2": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|BlockStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "parts": {
+                        "part-0-0-1-0-0": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "parts": {
+                            "label-2": {
+                              "text": "Use your finance report to get detailed insights.",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "inline"
+                              },
+                              "tokens": {
+                                "min-height": "{imported.shared.size-0}",
+                                "min-width": "{imported.shared.size-0}"
+                              }
+                            }
+                          }
+                        },
+                        "buttongroup": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|ButtonGroup — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "visibleWhen": {
+                            "prop": "withAction"
+                          },
+                          "parts": {
+                            "buttongroup__item": {
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy div|ButtonGroup__Item — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "visibleWhen": {
+                                "prop": "withAction"
+                              },
+                              "parts": {
+                                "button-2": {
+                                  "element": "button",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "visibleWhen": {
+                                    "prop": "withAction"
+                                  },
+                                  "parts": {
+                                    "label-3": {
+                                      "text": "Print label",
+                                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                                      "layout": {
+                                        "grow": true
+                                      },
+                                      "visibleWhen": {
+                                        "prop": "withAction"
+                                      },
+                                      "declared": {
+                                        "cursor": "pointer",
+                                        "text-align": "center",
+                                        "user-select": "none"
+                                      },
+                                      "tokens": {
+                                        "font-size": "{imported.shared.size-12}",
+                                        "font-weight": "{imported.banner.label-3.font-weight}",
+                                        "line-height": "{imported.banner.label-3.line-height}"
+                                      }
+                                    }
+                                  },
+                                  "layout": {
+                                    "display": "inline-flex",
+                                    "align": "center",
+                                    "justify": "center"
+                                  },
+                                  "declared": {
+                                    "appearance": "none",
+                                    "border-bottom-style": "none",
+                                    "border-left-style": "none",
+                                    "border-right-style": "none",
+                                    "border-top-style": "none",
+                                    "cursor": "pointer",
+                                    "font-feature-settings": "\"calt\" 0",
+                                    "position": "relative",
+                                    "text-rendering": "optimizelegibility",
+                                    "touch-action": "manipulation",
+                                    "user-select": "none"
+                                  },
+                                  "tokens": {
+                                    "background-color": "{imported.banner.button-2.background-color}",
+                                    "border-bottom-left-radius": "{imported.shared.size-8}",
+                                    "border-bottom-right-radius": "{imported.shared.size-8}",
+                                    "border-bottom-width": "{imported.shared.size-0}",
+                                    "border-left-width": "{imported.shared.size-0}",
+                                    "border-right-width": "{imported.shared.size-0}",
+                                    "border-top-left-radius": "{imported.shared.size-8}",
+                                    "border-top-right-radius": "{imported.shared.size-8}",
+                                    "border-top-width": "{imported.shared.size-0}",
+                                    "bottom": "{imported.shared.size-0}",
+                                    "box-shadow": "{imported.banner.button-2.box-shadow}",
+                                    "color": "{imported.banner.button-2.color}",
+                                    "column-gap": "{imported.shared.size-2}",
+                                    "font-size": "{imported.banner.button-2.font-size}",
+                                    "font-weight": "{imported.banner.button-2.font-weight}",
+                                    "left": "{imported.shared.size-0}",
+                                    "line-height": "{imported.banner.button-2.line-height}",
+                                    "min-height": "{imported.shared.size-32}",
+                                    "min-width": "{imported.shared.size-32}",
+                                    "padding-bottom": "{imported.banner.button-2.padding-bottom}",
+                                    "padding-left": "{imported.shared.size-12}",
+                                    "padding-right": "{imported.shared.size-12}",
+                                    "padding-top": "{imported.banner.button-2.padding-top}",
+                                    "right": "{imported.shared.size-0}",
+                                    "row-gap": "{imported.shared.size-2}",
+                                    "top": "{imported.shared.size-0}"
+                                  }
+                                }
+                              },
+                              "tokens": {
+                                "margin-left": "{imported.shared.size-8}",
+                                "margin-top": "{imported.shared.size-8}"
+                              }
+                            }
+                          },
+                          "layout": {
+                            "display": "flex",
+                            "align": "center"
+                          },
+                          "tokens": {
+                            "margin-left": "{imported.banner.buttongroup.margin-left}",
+                            "margin-top": "{imported.banner.buttongroup.margin-top}"
+                          }
+                        }
+                      },
+                      "layout": {
+                        "display": "flex",
+                        "direction": "column"
+                      },
+                      "tokens": {
+                        "column-gap": "{imported.shared.size-8}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "row-gap": "{imported.shared.size-8}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "padding-bottom": "{imported.shared.size-12}",
+                    "padding-left": "{imported.shared.size-12}",
+                    "padding-right": "{imported.shared.size-12}",
+                    "padding-top": "{imported.shared.size-12}"
+                  }
+                }
+              },
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "justify": "space-between"
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
           }
-        },
-        "body": {
-          "element": "span",
-          "tokens": {
-            "font-size": "{p.text-body-md-font-size}",
-            "font-weight": "{p.text-body-sm-font-weight}",
-            "line-height": "{p.text-body-md-font-line-height}",
-            "letter-spacing": "{p.text-body-md-font-letter-spacing}"
-          },
-          "text": "Your order has shipped."
         }
       },
       "declared": {

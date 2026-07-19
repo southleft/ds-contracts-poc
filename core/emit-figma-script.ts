@@ -127,6 +127,20 @@ export interface NodeSpec {
    *  named description limit by compileComponentData and STRIPPED before the
    *  spec JSON is emitted — never a silent drop, never emitted noise. */
   gradientMiss?: string;
+  /** COMPILE-INTERNAL (B-3 finding 6 companion): a box-shadow whose resolved
+   *  value parsed NEITHER as the single-drop dump grammar NOR as a full
+   *  effect stack — genuinely inexpressible / foreign grammar. Collected by
+   *  compileComponentData into the code-only-fact footnote (†) and STRIPPED
+   *  before the spec JSON is emitted — never a silent drop. */
+  shadowMiss?: string;
+  /** B-3 finding 5: inset-0 overlay lowering. Compiled when a part carries
+   *  ALL FOUR inset channels (top/right/bottom/left) resolving to 0 and does
+   *  not itself declare position:relative (TextField's backdrop). The
+   *  runtime pulls the node out of flow — layoutPositioning ABSOLUTE, x/y 0,
+   *  STRETCH/STRETCH constraints, sized to the parent — and places it BEHIND
+   *  the in-flow siblings (insert index 0), matching the declared anatomy
+   *  and the paired HTML render. */
+  insetOverlay?: boolean;
   /** PIXEL line height (dump v1.3) — the runtime sets
    *  node.lineHeight = { unit: 'PIXELS', value }. */
   lineHeight?: number;
@@ -658,8 +672,12 @@ function parseCssColor(v: string): { r: number; g: number; b: number; a?: number
  *  inset, hex OR rgb()/rgba() colors (browser-serialized values put the
  *  color first; authored values may put it last — both accepted). Layers the
  *  single-drop dump grammar already carries never reach here (parseBoxShadow
- *  runs first, keeping existing emissions byte-identical). Unparseable
- *  layers refuse the WHOLE stack (undefined) — a partial shadow would lie. */
+ *  runs first, keeping existing emissions byte-identical). Lengths accept
+ *  px/rem/em (rem/em at the documented 1rem = 16px base) — B-3 finding 6:
+ *  Polaris spells its shadow tokens in rem (`0rem -0.0625rem … inset`), and
+ *  the px-only grammar refused the whole stack, silently dropping the
+ *  secondary/tertiary Button border ring. Unparseable layers refuse the
+ *  WHOLE stack (undefined) — a partial shadow would lie. */
 function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
   if (value.trim() === 'none') return [];
   const layers = splitTopLevel(value.trim());
@@ -679,8 +697,12 @@ function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
     const lengths = rest.split(/\s+/).filter(Boolean);
     if (lengths.length < 2 || lengths.length > 4) return undefined;
     const px4 = lengths.map((l) => {
-      const m = l.match(/^(-?[\d.]+)px$/);
-      return m ? parseFloat(m[1]) : NaN;
+      const m = l.match(/^(-?[\d.]+)(px|rem|em)?$/);
+      if (!m) return NaN;
+      const n = parseFloat(m[1]);
+      if (m[2] === 'rem' || m[2] === 'em') return n * 16;
+      // A bare number is only valid CSS as 0 — anything else is foreign.
+      return m[2] === 'px' || n === 0 ? n : NaN;
     });
     if (px4.some(Number.isNaN)) return undefined;
     const e: NonNullable<NodeSpec['effectStack']>[number] = {
@@ -928,6 +950,10 @@ function applyTokens(
         else {
           const stack = parseShadowStack(value);
           if (stack) spec.effectStack = stack;
+          // B-3 finding 6: a token-referenced shadow the stack grammar still
+          // cannot express is a NAMED code-only fact (the † footnote), never
+          // a silent drop.
+          else spec.shadowMiss = value.slice(0, 60);
         }
         break;
       }
@@ -1227,7 +1253,14 @@ function formControlSpec(
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
       ...textExtras(childCtx),
       textStyle: matchTextStyle(childCtx),
-      textFill: 'color/input/placeholder',
+      // B-3 finding 1: the placeholder paint comes from the CONTRACT — the
+      // control part's own carried `color` channel (childCtx.textFill), the
+      // same paint the coded input's text renders. The previous hardcoded
+      // repo vocabulary name (`color/input/placeholder`) is a variable no
+      // foreign token set mints: Polaris text-field.figma.js threw `Missing
+      // variable` at run time. When the contract carries no color channel,
+      // NO placeholder-specific variable reference is emitted at all.
+      textFill: childCtx.textFill,
       contentProp: prop?.bindings.figma.property,
     },
   ];
@@ -1349,6 +1382,36 @@ function shapePlacement(
     if (rot) out.rotation = parseFloat(rot[1]);
   }
   return out;
+}
+
+/** B-3 finding 5: overlay-anatomy detection. A part whose FOUR inset
+ *  channels (top/right/bottom/left) are ALL carried (tokens or literals) and
+ *  ALL resolve to ~0 is an inset-0 overlay (`position: absolute; inset: 0`
+ *  anatomy — TextField's backdrop): it must NOT flow as an auto-layout
+ *  sibling. A part that itself declares `position: relative` (the in-flow
+ *  element the overlay sits behind — TextField's input) is excluded: its
+ *  inset channels are inert in CSS too. */
+function isInsetOverlay(part: Part, subst: Record<string, string>): boolean {
+  if (part.declared?.['position'] === 'relative') return false;
+  const tokens = resolveTokens(part, subst);
+  const lits = resolveLiterals(part, subst);
+  for (const ch of ['top', 'right', 'bottom', 'left']) {
+    let value: string | undefined;
+    const ref = tokens[ch];
+    if (ref) {
+      let tokenPath = ref.slice(1, -1);
+      for (const [propName, v] of Object.entries(subst)) {
+        tokenPath = tokenPath.replaceAll(`{${propName}}`, v);
+      }
+      value = String(resolveLiteral(tokenPath));
+    } else if (lits[ch] !== undefined) {
+      value = String(lits[ch]);
+    }
+    if (value === undefined) return false;
+    const n = parseLitPx(value);
+    if (n === undefined || Math.abs(n) > 0.5) return false;
+  }
+  return true;
 }
 
 function variantParts(
@@ -1557,6 +1620,9 @@ function partToSpecInner(
     layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
+  // B-3 finding 5: inset-0 overlay parts lower to ABSOLUTE + STRETCH behind
+  // the in-flow siblings instead of flowing as one.
+  if (isInsetOverlay(part, subst)) spec.insetOverlay = true;
   const childCtx = applyStyling(spec, part, subst, ctx);
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
@@ -1827,53 +1893,59 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       const drawn =
         reg.canvas === 'draw' && !state && !(channel === 'text-decoration-line' && value === 'overline');
       if (drawn) return;
-      declaredNoteLines.add(
-        `\nDeclared (code): ${partName}.${channel}: ${value}${state ? ` [${state}]` : ''} — ${reg.note}`,
-      );
+      // Part D (owner directive, 2026-07-19): the annotation COPY no longer
+      // lands on the canvas (it lives in repo receipts) — the set only feeds
+      // the code-only-fact footnote (†) below.
+      declaredNoteLines.add(`${partName}.${channel}: ${value}${state ? ` [${state}]` : ''}`);
     };
     for (const [ch, v] of Object.entries(part.declared ?? {})) note(ch, v);
     for (const [state, m] of Object.entries(part.declaredStates ?? {})) {
       for (const [ch, v] of Object.entries(m)) note(ch, v, state);
     }
   }
-  // Gradient misses (radial/conic/unparsed): collected off the compiled
-  // specs, named in the description, and STRIPPED from the emitted JSON.
+  // Gradient / shadow misses: collected off the compiled specs (they feed
+  // the code-only-fact footnote) and STRIPPED from the emitted JSON — never
+  // a silent drop, never emitted noise.
   const gradientMissLines = new Set<string>();
+  const shadowMissLines = new Set<string>();
   const stripMisses = (spec: NodeSpec) => {
     if (spec.gradientMiss !== undefined) {
-      gradientMissLines.add(
-        `\nGradient (code): ${spec.name}.background-image — "${spec.gradientMiss}…" has no linear-gradient projection; it renders only in the coded component.`,
-      );
+      gradientMissLines.add(`${spec.name}.background-image: ${spec.gradientMiss}`);
       delete spec.gradientMiss;
+    }
+    if (spec.shadowMiss !== undefined) {
+      shadowMissLines.add(`${spec.name}.box-shadow: ${spec.shadowMiss}`);
+      delete spec.shadowMiss;
     }
     (spec.children ?? []).forEach(stripMisses);
   };
   for (const v of variants) stripMisses(v.spec);
   for (const v of stateVariants) stripMisses(v.spec);
-  // #60 fix 4 companion note: meter parts are runtime-sized — the canvas
-  // shows the defaults' fraction; height follows the track (FILL).
+  // Meter parts are runtime-sized (the canvas shows the defaults' fraction;
+  // height follows the track) — a code-only fact like the rest.
   const hasMeter = walkAnatomy(contract).some((w) => w.part.meter);
+  // Part D (owner directive): every code-only fact — events, declared-not-
+  // drawn channels, gradient/shadow misses, runtime-sized meters — leaves
+  // exactly ONE canvas trace: a single trailing † on the caption line.
+  const hasCodeOnlyFacts =
+    (contract.events ?? []).length > 0 ||
+    declaredNoteLines.size > 0 ||
+    gradientMissLines.size > 0 ||
+    shadowMissLines.size > 0 ||
+    hasMeter;
 
   return {
     setName: contract.name,
     contractId: contract.id,
     anchorKey: contract.anchors.figma.componentSetKey ?? null,
-    // Events are code-only by declared fidelity limit (the canvas cannot run
-    // behavior) — surfaced here as description text so designers see the
-    // interaction surface in the properties panel.
-    description:
-      `${contract.description} — governed by contract ${contract.id} v${contract.version}` +
-      (contract.events ?? [])
-        .map((e) => {
-          const t = e.toggles ? ` Toggles ${e.toggles.prop}: ${e.toggles.between.join(' ⇄ ')}.` : '';
-          return `\nEvent (code): ${e.bindings.code.prop} — fires on ${e.trigger} activation.${t}`;
-        })
-        .join('') +
-      [...declaredNoteLines].sort().join('') +
-      [...gradientMissLines].sort().join('') +
-      (hasMeter
-        ? '\nRuntime-sized geometry: the meter fill renders the defaults\u2019 fraction; its height follows the track (FILL) — live sizing exists only in code.'
-        : ''),
+    // Part D (owner directive, 2026-07-19): the component description is ONE
+    // short caption line — a name and a provenance pointer, nothing else.
+    // The old paragraphs of capability-matrix copy (events, declared facts,
+    // gradient misses, meter sizing) were meaningless to designers on the
+    // canvas; the detailed docs stay in repo receipts. The single trailing
+    // dagger marks that code-only facts exist. Plugin-data identity markers
+    // (ds_contracts/*) are machine identity and remain untouched.
+    description: `${contract.name} — generated from contract ${contract.id} v${contract.version}${hasCodeOnlyFacts ? ' †' : ''}`,
     isSet: variants.length + stateVariants.length > 1,
     boolProps: boolPropsData,
     textProps: textOnlyProps,
@@ -1968,8 +2040,13 @@ const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
   [...d.variants, ...(d.stateVariants ?? [])].some((v) => specSome(v.spec, pred));
 
 /** v9 shape: node-creation branch — a REAL RegularPolygon/Ellipse/Rectangle
- *  with native rotation (contract CSS-clockwise degrees → plugin CCW). */
-const shapeRuntime = (has: boolean): string =>
+ *  with native rotation (contract CSS-clockwise degrees → plugin CCW).
+ *  B-3 finding 3: `effects` receives the SAME compiled shadow application as
+ *  the frame branch (the shape branch silently dropped the Checkbox
+ *  backdrop's inset ring) — the caller passes the shadow/effect-stack
+ *  runtime snippets so conditional emission stays aligned with the frame
+ *  path. */
+const shapeRuntime = (has: boolean, effects: string): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // v9 shape (#42): a REAL parametric node with native rotation.
@@ -1991,7 +2068,7 @@ const shapeRuntime = (has: boolean): string =>
     for (const [field, varName] of Object.entries(spec.bindings || {})) {
       node.setBoundVariable(field, need(varName));
     }
-    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;${effects}
   }`
     : '';
 
@@ -2133,6 +2210,35 @@ const absoluteCall = (has: boolean, args: string): string =>
   has ? `
     applyShapeAbsolute(${args});` : '';
 
+/** B-3 finding 5: inset-0 overlay lowering — layoutPositioning ABSOLUTE,
+ *  x/y 0, STRETCH/STRETCH constraints, sized to the parent, inserted BEHIND
+ *  the in-flow siblings (index 0). Runs at the END of the per-child block so
+ *  the empty-frame FILL default (which an out-of-flow node must not keep)
+ *  is overridden, and only after appendChild (ABSOLUTE requires an
+ *  auto-layout parent). Conditional emission — the golden discipline. */
+const insetOverlayRuntime = (has: boolean): string =>
+  has
+    ? `
+// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
+// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
+// in-flow siblings — matching the declared anatomy and the HTML render.
+function applyInsetOverlay(parent, childNode, childSpec) {
+  if (!childSpec.insetOverlay) return;
+  try {
+    parent.insertChild(0, childNode);
+    childNode.layoutPositioning = 'ABSOLUTE';
+    childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
+    childNode.x = 0;
+    childNode.y = 0;
+    childNode.resize(Math.max(1, parent.width), Math.max(1, parent.height));
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+`
+    : '';
+const insetOverlayCall = (has: boolean, args: string): string =>
+  has ? `
+    applyInsetOverlay(${args});` : '';
+
 /** v14 literals: literal-fidelity channel application (applyFrameSpec tail).
  *  Emitted ONLY when a compiled spec carries lits — contracts without
  *  literals emit byte-identical scripts (the golden discipline, same as
@@ -2252,6 +2358,7 @@ function buildSyncScript(
   const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
   const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
   const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
+  const hasInsetOverlay = datas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
   const hasTextExtras = datas.some((d) =>
     dataSome(
       d,
@@ -2284,15 +2391,22 @@ const boundPaint = (varName, consumer) => {
   // Figma keeps rendering a reassigned bound paint's BASE color on
   // pre-existing nodes (fresh nodes normalize at assignment) — without the
   // seed, amended variants render black. The binding itself is unchanged.
+  // B-3 finding 2: the resolved ALPHA rides the seed too (paint opacity) —
+  // discarding it rendered Badge's rgba(0,0,0,.06) pill as opaque black on
+  // amended nodes.
   const v = need(varName);
   let base = { r: 0, g: 0, b: 0 };
+  let alpha = 1;
   if (consumer) {
     try {
       const r = v.resolveForConsumer(consumer);
-      if (r && r.value && r.value.r !== undefined) base = { r: r.value.r, g: r.value.g, b: r.value.b };
+      if (r && r.value && r.value.r !== undefined) {
+        base = { r: r.value.r, g: r.value.g, b: r.value.b };
+        if (typeof r.value.a === 'number') alpha = r.value.a;
+      }
     } catch (e) { /* fall back to black base */ }
   }
-  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base }, 'color', v);
+  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
 
 // Named text styles (synced by 01-tokens.js): consumers look up OUR styles
@@ -2436,7 +2550,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
-${absoluteRuntime(hasAbsolute)}
+${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -2513,7 +2627,7 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
-  }${shapeRuntime(hasShape)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }
@@ -2551,7 +2665,7 @@ async function buildNode(spec, registry) {
       'layoutSizingHorizontal' in childNode
     ) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
-    }
+    }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}
   }
   return node;
 }
@@ -2652,7 +2766,7 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
-        }
+        }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
       }
       report.rebuiltVariants++;
     }
@@ -2718,6 +2832,21 @@ async function amendSet(set, C) {
     for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
     child.x = x; child.y = y;
   }
+  // B-3 finding 4: after re-gridding, the SET CONTAINER refits to the
+  // children's extent + grid padding (the create path's exact math) —
+  // without this, added variants/columns stayed clipped by stale bounds
+  // (Banner's Focus column, Button's 220-cell grid, ProgressBar's height).
+  // Extra (human-owned) variants may sit beyond the grid; never shrink
+  // below their extent.
+  {
+    let totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
+    let totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    for (const child of set.children) {
+      totalW = Math.max(totalW, child.x + child.width + PAD);
+      totalH = Math.max(totalH, child.y + child.height + PAD);
+    }
+    set.resizeWithoutConstraints(totalW, totalH);
+  }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   return report;
@@ -2772,7 +2901,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
-    }
+    }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

@@ -3,415 +3,3679 @@
   "generatedBy": "extract/computed/gate.ts",
   "browser": "148.0.7778.96",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
-  "combos": 4,
+  "combos": 16,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 192,
-    "cellsEqual": 176,
-    "pctEqual": 91.66666666666667,
+    "cellsCompared": 11648,
+    "cellsEqual": 11156,
+    "pctEqual": 95.7760989010989,
     "rowsFullyEqual": 0,
-    "rows": 16
+    "rows": 64
   },
   "pixel": {
-    "pairs": 16,
+    "pairs": 64,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 39.20710245768229,
-    "meanAA": 32.764078776041664,
-    "maxAA": 37.838541666666664
+    "meanExact": 10.96786269321236,
+    "meanAA": 7.939846900201618,
+    "maxAA": 9.505880376344086
   },
   "fusion": {
-    "boundConfirmed": 0,
-    "boundCells": 8,
-    "contradictions": 8,
-    "mintedLeaves": 53,
-    "mintedLeavesUnfolded": 341,
-    "baseBindings": 63,
+    "boundConfirmed": 64,
+    "boundCells": 96,
+    "contradictions": 32,
+    "mintedLeaves": 57,
+    "mintedLeavesUnfolded": 271,
+    "baseBindings": 110,
     "stateBindings": 2,
-    "codeOnlyChannels": 30,
-    "overflowBindings": 54,
-    "folds": 90
+    "codeOnlyChannels": 3,
+    "overflowBindings": 0,
+    "folds": 108
   },
   "worstRows": [
     {
-      "key": "critical__focus-visible",
-      "pctAA": 37.838541666666664,
-      "pctExact": 44.564615885416664,
-      "channelsMismatched": 1
+      "key": "critical.off.on__focus-visible",
+      "pctAA": 9.505880376344086,
+      "pctExact": 12.332157258064516,
+      "channelsMismatched": 9
     },
     {
-      "key": "warning__focus-visible",
-      "pctAA": 37.82958984375,
-      "pctExact": 44.554850260416664,
-      "channelsMismatched": 1
+      "key": "success.off.on__focus-visible",
+      "pctAA": 9.461693548387096,
+      "pctExact": 12.26008064516129,
+      "channelsMismatched": 9
     },
     {
-      "key": "info__focus-visible",
-      "pctAA": 37.803548177083336,
-      "pctExact": 44.5458984375,
-      "channelsMismatched": 1
+      "key": "info.off.on__focus-visible",
+      "pctAA": 9.302755376344086,
+      "pctExact": 12.33450940860215,
+      "channelsMismatched": 9
     },
     {
-      "key": "success__focus-visible",
-      "pctAA": 37.720540364583336,
-      "pctExact": 44.357096354166664,
-      "channelsMismatched": 1
+      "key": "warning.off.on__focus-visible",
+      "pctAA": 9.274529569892474,
+      "pctExact": 12.283770161290322,
+      "channelsMismatched": 9
     },
     {
-      "key": "warning__hover",
-      "pctAA": 36.607259114583336,
-      "pctExact": 43.265787760416664,
-      "channelsMismatched": 1
+      "key": "critical.on.on__focus-visible",
+      "pctAA": 8.934307795698924,
+      "pctExact": 11.878192204301076,
+      "channelsMismatched": 14
     },
     {
-      "key": "warning__active",
-      "pctAA": 36.607259114583336,
-      "pctExact": 43.265787760416664,
-      "channelsMismatched": 1
+      "key": "success.on.on__focus-visible",
+      "pctAA": 8.893985215053764,
+      "pctExact": 11.810147849462366,
+      "channelsMismatched": 14
     },
     {
-      "key": "info__hover",
-      "pctAA": 36.586100260416664,
-      "pctExact": 43.2568359375,
-      "channelsMismatched": 1
+      "key": "info.on.on__focus-visible",
+      "pctAA": 8.731854838709678,
+      "pctExact": 11.88138440860215,
+      "channelsMismatched": 14
     },
     {
-      "key": "info__active",
-      "pctAA": 36.586100260416664,
-      "pctExact": 43.2568359375,
-      "channelsMismatched": 1
+      "key": "warning.on.on__focus-visible",
+      "pctAA": 8.70682123655914,
+      "pctExact": 11.834173387096774,
+      "channelsMismatched": 14
     }
   ],
   "topMismatchedChannels": [
     [
-      "root.background-color",
-      16
+      "title.overflow-wrap",
+      64
+    ],
+    [
+      "label-2.display",
+      64
+    ],
+    [
+      "buttongroup.flex-wrap",
+      32
+    ],
+    [
+      "button-2.border-bottom-color",
+      32
+    ],
+    [
+      "button-2.border-left-color",
+      32
+    ],
+    [
+      "button-2.border-right-color",
+      32
+    ],
+    [
+      "button-2.border-top-color",
+      32
+    ],
+    [
+      "button-2.display",
+      32
+    ],
+    [
+      "button.border-bottom-color",
+      32
+    ],
+    [
+      "button.border-left-color",
+      32
+    ],
+    [
+      "button.border-right-color",
+      32
+    ],
+    [
+      "button.border-top-color",
+      32
+    ],
+    [
+      "part-0-0-0-0-1-0-0.display",
+      32
+    ],
+    [
+      "button.outline-color",
+      8
+    ],
+    [
+      "button-2.outline-color",
+      4
     ]
   ],
   "namedLosses": [
-    "overflow: blockstack.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: blockstack.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.background-color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.border-top-left-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.border-top-right-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.padding-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.padding-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.padding-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-2.padding-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack.column-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack.row-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack-2.column-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: inlinestack-2.row-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.fill — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: icon-2.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.0.fill — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.0.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.0.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.1.color — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
-    "overflow: part-0.0.0.0.0.0.0.0.1.fill — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
-    "overflow: part-0.0.0.0.0.0.0.0.1.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.1.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.2.color — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
-    "overflow: part-0.0.0.0.0.0.0.0.2.fill — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
-    "overflow: part-0.0.0.0.0.0.0.0.2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.0.0.0.0.0.0.0.2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.font-weight — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-3.padding-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-3.padding-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-3.padding-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: box-3.padding-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: blockstack-2.column-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: blockstack-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: blockstack-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: blockstack-2.row-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "code-only: blockstack.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: blockstack.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: blockstack.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: inlinestack.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: inlinestack.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: inlinestack.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: inlinestack-2.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: inlinestack-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: inlinestack-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon.max-height — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon.max-width — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.max-height — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.max-width — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-2.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: icon-2.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.0.0.0.0.0.0.0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.0.0.0.0.0.0.0.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.0.0.0.0.0.0.0.fill-rule — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.0.0.0.0.0.0.1.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.0.0.0.0.0.0.1.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.0.0.0.0.0.0.2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.0.0.0.0.0.0.0.2.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.0.0.0.0.0.0.0.2.fill-rule — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: blockstack-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: blockstack-2.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+    "promotion: static-part-unrendered: reviewed static part \"body\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+    "code-only: title.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: title.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: buttongroup.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "rows": [
     {
-      "key": "success__default",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 25.762532552083332,
-      "pctAA": 20.336100260416668,
+      "key": "success.off.off__default",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.379032258064516,
+      "pctAA": 7.807459677419355,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(4, 123, 93, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "success__hover",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.068033854166664,
-      "pctAA": 36.451009114583336,
+      "key": "success.off.off__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.379032258064516,
+      "pctAA": 7.807459677419355,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(4, 123, 93, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "success__focus-visible",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 44.357096354166664,
-      "pctAA": 37.720540364583336,
+      "key": "success.off.off__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.930443548387096,
+      "pctAA": 8.52200940860215,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(4, 123, 93, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "success__active",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.068033854166664,
-      "pctAA": 36.451009114583336,
+      "key": "success.off.off__active",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.379032258064516,
+      "pctAA": 7.807459677419355,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(4, 123, 93, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "info__default",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 25.952962239583332,
-      "pctAA": 19.94384765625,
+      "key": "success.off.on__default",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.491263440860216,
+      "pctAA": 8.232022849462366,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(145, 208, 255, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     },
     {
-      "key": "info__hover",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.2568359375,
-      "pctAA": 36.586100260416664,
+      "key": "success.off.on__hover",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.491263440860216,
+      "pctAA": 8.232022849462366,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(145, 208, 255, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     },
     {
-      "key": "info__focus-visible",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 44.5458984375,
-      "pctAA": 37.803548177083336,
+      "key": "success.off.on__focus-visible",
+      "channelsCompared": 178,
+      "channelsEqual": 169,
+      "pctExact": 12.26008064516129,
+      "pctAA": 9.461693548387096,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(145, 208, 255, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "button-2",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
         }
       ]
     },
     {
-      "key": "info__active",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.2568359375,
-      "pctAA": 36.586100260416664,
+      "key": "success.off.on__active",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.491263440860216,
+      "pctAA": 8.232022849462366,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(145, 208, 255, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     },
     {
-      "key": "warning__default",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 25.91796875,
-      "pctAA": 19.915364583333332,
+      "key": "success.on.off__default",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.143649193548388,
+      "pctAA": 7.275369623655914,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(255, 184, 0, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "warning__hover",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.265787760416664,
-      "pctAA": 36.607259114583336,
+      "key": "success.on.off__hover",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.143649193548388,
+      "pctAA": 7.275369623655914,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(255, 184, 0, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "warning__focus-visible",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 44.554850260416664,
-      "pctAA": 37.82958984375,
+      "key": "success.on.off__focus-visible",
+      "channelsCompared": 186,
+      "channelsEqual": 178,
+      "pctExact": 10.886424731182796,
+      "pctAA": 8.323252688172044,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(255, 184, 0, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "warning__active",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.265787760416664,
-      "pctAA": 36.607259114583336,
+      "key": "success.on.off__active",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.143649193548388,
+      "pctAA": 7.275369623655914,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(255, 184, 0, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
         }
       ]
     },
     {
-      "key": "critical__default",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 25.92529296875,
-      "pctAA": 20.430501302083332,
+      "key": "success.on.on__default",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 10.96236559139785,
+      "pctAA": 7.701444892473118,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(199, 10, 36, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     },
     {
-      "key": "critical__hover",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.275553385416664,
-      "pctAA": 36.559244791666664,
+      "key": "success.on.on__hover",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 10.96236559139785,
+      "pctAA": 7.701444892473118,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(199, 10, 36, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     },
     {
-      "key": "critical__focus-visible",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 44.564615885416664,
-      "pctAA": 37.838541666666664,
+      "key": "success.on.on__focus-visible",
+      "channelsCompared": 248,
+      "channelsEqual": 234,
+      "pctExact": 11.810147849462366,
+      "pctAA": 8.893985215053764,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(199, 10, 36, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     },
     {
-      "key": "critical__active",
-      "channelsCompared": 12,
-      "channelsEqual": 11,
-      "pctExact": 43.275553385416664,
-      "pctAA": 36.559244791666664,
+      "key": "success.on.on__active",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 10.96236559139785,
+      "pctAA": 7.701444892473118,
       "mismatches": [
         {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(199, 10, 36, 1)",
-          "theirs": "rgba(255, 255, 255, 1)"
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.off.off__default",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.45396505376344,
+      "pctAA": 7.651041666666667,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.off.off__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.45396505376344,
+      "pctAA": 7.651041666666667,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.off.off__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 11.005208333333334,
+      "pctAA": 8.36307123655914,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.off.off__active",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.45396505376344,
+      "pctAA": 7.651041666666667,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.off.on__default",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.56619623655914,
+      "pctAA": 8.075604838709678,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.off.on__hover",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.56619623655914,
+      "pctAA": 8.075604838709678,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.off.on__focus-visible",
+      "channelsCompared": 178,
+      "channelsEqual": 169,
+      "pctExact": 12.33450940860215,
+      "pctAA": 9.302755376344086,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "button-2",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        }
+      ]
+    },
+    {
+      "key": "info.off.on__active",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.56619623655914,
+      "pctAA": 8.075604838709678,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.on.off__default",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.21505376344086,
+      "pctAA": 7.115759408602151,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.on.off__hover",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.21505376344086,
+      "pctAA": 7.115759408602151,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.on.off__focus-visible",
+      "channelsCompared": 186,
+      "channelsEqual": 178,
+      "pctExact": 10.95766129032258,
+      "pctAA": 8.161122311827956,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.on.off__active",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.21505376344086,
+      "pctAA": 7.115759408602151,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "info.on.on__default",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 11.033770161290322,
+      "pctAA": 7.541834677419355,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.on.on__hover",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 11.033770161290322,
+      "pctAA": 7.541834677419355,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.on.on__focus-visible",
+      "channelsCompared": 248,
+      "channelsEqual": 234,
+      "pctExact": 11.88138440860215,
+      "pctAA": 8.731854838709678,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.on.on__active",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 11.033770161290322,
+      "pctAA": 7.541834677419355,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.off__default",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.403225806451612,
+      "pctAA": 7.622647849462366,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.off__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.403225806451612,
+      "pctAA": 7.622647849462366,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.off__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.954469086021506,
+      "pctAA": 8.33450940860215,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.off__active",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.403225806451612,
+      "pctAA": 7.622647849462366,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.on__default",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.515456989247312,
+      "pctAA": 8.047211021505376,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.on__hover",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.515456989247312,
+      "pctAA": 8.047211021505376,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.on__focus-visible",
+      "channelsCompared": 178,
+      "channelsEqual": 169,
+      "pctExact": 12.283770161290322,
+      "pctAA": 9.274529569892474,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "button-2",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        }
+      ]
+    },
+    {
+      "key": "warning.off.on__active",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.515456989247312,
+      "pctAA": 8.047211021505376,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.off__default",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.167842741935484,
+      "pctAA": 7.090557795698925,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.off__hover",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.167842741935484,
+      "pctAA": 7.090557795698925,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.off__focus-visible",
+      "channelsCompared": 186,
+      "channelsEqual": 178,
+      "pctExact": 10.910450268817204,
+      "pctAA": 8.13608870967742,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.off__active",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.167842741935484,
+      "pctAA": 7.090557795698925,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.on__default",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 10.986559139784946,
+      "pctAA": 7.516633064516129,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.on__hover",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 10.986559139784946,
+      "pctAA": 7.516633064516129,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.on__focus-visible",
+      "channelsCompared": 248,
+      "channelsEqual": 234,
+      "pctExact": 11.834173387096774,
+      "pctAA": 8.70682123655914,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.on.on__active",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 10.986559139784946,
+      "pctAA": 7.516633064516129,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.off__default",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.451444892473118,
+      "pctAA": 7.849966397849462,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.off__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.451444892473118,
+      "pctAA": 7.849966397849462,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.off__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 11.002856182795698,
+      "pctAA": 8.56619623655914,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.off__active",
+      "channelsCompared": 116,
+      "channelsEqual": 114,
+      "pctExact": 10.451444892473118,
+      "pctAA": 7.849966397849462,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.on__default",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.563676075268818,
+      "pctAA": 8.274529569892474,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.on__hover",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.563676075268818,
+      "pctAA": 8.274529569892474,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.on__focus-visible",
+      "channelsCompared": 178,
+      "channelsEqual": 169,
+      "pctExact": 12.332157258064516,
+      "pctAA": 9.505880376344086,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "button-2",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        }
+      ]
+    },
+    {
+      "key": "critical.off.on__active",
+      "channelsCompared": 178,
+      "channelsEqual": 170,
+      "pctExact": 11.563676075268818,
+      "pctAA": 8.274529569892474,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.off__default",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.211693548387096,
+      "pctAA": 7.314012096774194,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.off__hover",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.211693548387096,
+      "pctAA": 7.314012096774194,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.off__focus-visible",
+      "channelsCompared": 186,
+      "channelsEqual": 178,
+      "pctExact": 10.954469086021506,
+      "pctAA": 8.363575268817204,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.off__active",
+      "channelsCompared": 186,
+      "channelsEqual": 179,
+      "pctExact": 10.211693548387096,
+      "pctAA": 7.314012096774194,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.on__default",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 11.03040994623656,
+      "pctAA": 7.740087365591398,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.on__hover",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 11.03040994623656,
+      "pctAA": 7.740087365591398,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.on__focus-visible",
+      "channelsCompared": 248,
+      "channelsEqual": 234,
+      "pctExact": 11.878192204301076,
+      "pctAA": 8.934307795698924,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "critical.on.on__active",
+      "channelsCompared": 248,
+      "channelsEqual": 235,
+      "pctExact": 11.03040994623656,
+      "pctAA": 7.740087365591398,
+      "mismatches": [
+        {
+          "part": "title",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "anywhere"
+        },
+        {
+          "part": "button",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "part-0-0-0-0-1-0-0",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "label-2",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline"
+        },
+        {
+          "part": "buttongroup",
+          "channel": "flex-wrap",
+          "ours": "nowrap",
+          "theirs": "wrap"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(48, 48, 48, 1)"
+        },
+        {
+          "part": "button-2",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
         }
       ]
     }

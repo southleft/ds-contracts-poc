@@ -22,12 +22,13 @@ import type { Page } from 'playwright-core';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { emitHtml } from '../../core/emit-html.js';
+import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { mintedTokenCss } from '../../core/mint-tokens.js';
 import { tokenInventoryFromJson } from '../../core/tokens.js';
 import { kebab } from '../types.js';
 import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
-import { INTERACTIONS } from './capture.js';
+import { INTERACTIONS, stageFor } from './capture.js';
 import { isFusable, type Capture, type Combo, type FlatEl } from './lib.js';
 import type { AlignedSweep } from './fuse.js';
 
@@ -85,12 +86,27 @@ export interface Scorecard {
 /** Combo prop values written in as defaults (the verify.ts trick): axis
  *  values (unset pseudo-values leave the prop defaultless — no override
  *  renders, the schema's own rule). */
-function withComboAsDefaults(contract: Contract, space: PropSpace, combo: Combo): Contract {
+function withComboAsDefaults(contract: Contract, space: PropSpace, combo: Combo, comp?: ComponentConfig): Contract {
   const clone = structuredClone(contract);
+  // Round 4: the gate renders the CAPTURE-MOUNTED text samples (fixedProps /
+  // sampleText) — comparing against the real render with different strings
+  // would score the strings, not the styling.
+  if (comp) {
+    for (const prop of clone.props) {
+      if (prop.type !== 'text') continue;
+      const fixed = comp.fixedProps?.[prop.name];
+      if (typeof fixed === 'string') prop.default = fixed;
+      else if (prop.bindings.code.prop === 'children') prop.default = comp.sampleText;
+    }
+  }
   for (const a of space.axes) {
     const v = combo.axisValues[a.prop];
     const prop = clone.props.find((p) => p.name === a.prop);
     if (!prop) continue;
+    // Round 4 presence axes: the enriched contract carries a BOOLEAN prop —
+    // 'on'/'off' axis values become boolean defaults (the emitted static
+    // HTML renders visibleWhen/stylesWhen off the boolean).
+    if (prop.type === 'boolean') { prop.default = v === 'on'; continue; }
     if (a.unset !== undefined && v === a.unset) delete prop.default;
     else prop.default = v;
   }
@@ -126,7 +142,7 @@ export async function runGate(opts: {
 
   // CSS is combo-independent (defaults only affect HTML) — emit once.
   const contracts = new Map<string, Contract>([[enriched.id, enriched]]);
-  const first = emitHtml(withComboAsDefaults(enriched, space, space.enumeration.combos[0]), {
+  const first = emitHtml(withComboAsDefaults(enriched, space, space.enumeration.combos[0], comp), {
     tokens: inventory,
     icons: iconAssets,
     contracts,
@@ -136,7 +152,7 @@ export async function runGate(opts: {
     const emitted =
       combo === space.enumeration.combos[0]
         ? first
-        : emitHtml(withComboAsDefaults(enriched, space, combo), { tokens: inventory, icons: iconAssets, contracts });
+        : emitHtml(withComboAsDefaults(enriched, space, combo, comp), { tokens: inventory, icons: iconAssets, contracts });
     stages.push(
       `<button data-sentinel="${combo.key}" style="width:8px;height:8px;padding:0;border:0;margin:2px;background:#eee" aria-label="sentinel"></button>
 <div data-combo="${combo.key}" class="gate-stage">${emitted.html}</div>`,
@@ -151,7 +167,7 @@ ${first.css}
    display:contents so the component root is the stage's flex item. */
 html { color-scheme: ${cfg.browser.colorScheme}; font-family: var(--p-font-family-sans); }
 body { margin: 0; background: #ddd; }
-.gate-stage { display: flex; align-items: flex-start; width: ${cfg.stage.width}px; height: ${cfg.stage.height}px; padding: ${cfg.stage.padding}px; box-sizing: border-box; background: #fff; overflow: hidden; }
+.gate-stage { display: flex; align-items: flex-start; width: ${stageFor(cfg, comp).width}px; height: ${stageFor(cfg, comp).height}px; padding: ${stageFor(cfg, comp).padding}px; box-sizing: border-box; background: #fff; overflow: hidden; }
 .gate-stage .showcase, .gate-stage .showcase__item:first-of-type { display: contents; }
 .gate-stage .showcase__item:not(:first-of-type) { display: none; }
 .gate-stage .showcase__label { display: none; }
@@ -179,12 +195,19 @@ ${stages.join('\n')}
     }
   }
 
-  // matched parts → selectors on our side, aligned element index on theirs
+  // Round 4: EVERY part the enriched contract carries (matched AND promoted)
+  // scores — selectors on our side, aligned union index on theirs. Parts the
+  // contract does not carry (promotion refusals, svg internals) stay out.
+  const carriedParts = new Set(walkAnatomy(enriched).map((w) => w.name));
+  const iconParts = new Set(walkAnatomy(enriched).filter((w) => w.part.icon).map((w) => w.name));
   const partSel = new Map<string, string>();
   const partIndex = new Map<string, number>();
   aligned.partNames.forEach((p, i) => {
-    const join = aligned.anatomyJoin.find((j) => j.part === p);
-    if (join?.join !== 'matched') return;
+    if (!carriedParts.has(p)) return;
+    // icon parts render emitted svg markup — computed comparison against the
+    // real <svg> element is not like-for-like (our wrapper is the part);
+    // pixels judge glyphs.
+    if (iconParts.has(p)) return;
     partSel.set(p, p === 'root' ? `.${k}` : `.${k}__${p}`);
     partIndex.set(p, i);
   });

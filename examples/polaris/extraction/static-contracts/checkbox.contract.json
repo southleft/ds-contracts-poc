@@ -4,11 +4,32 @@
   "name": "Checkbox",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) \u2014 API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT \u00a9 Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts \u2014 every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
   "semantics": {
     "element": "span"
   },
   "props": [
+    {
+      "name": "checked",
+      "description": "Checked state (round 4: enumerated as a contract enum \u2014 the real API is boolean | 'indeterminate'; the capture maps unchecked\u2192false, checked\u2192true, indeterminate\u2192'indeterminate'). The check/indeterminate glyphs and the checked backdrop ride this axis.",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked"
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
     {
       "name": "ariaControls",
       "description": "Indicates the ID of the element that is controlled by the checkbox",
