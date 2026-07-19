@@ -60,7 +60,14 @@
       "contract": "examples/polaris/contracts/tag.contract.json",
       "sampleText": "Wholesale",
       "axes": [],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }]
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "triage": [
+        {
+          "part": "label",
+          "channels": ["line-height"],
+          "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
+        }
+      ]
     }
   ]
 }

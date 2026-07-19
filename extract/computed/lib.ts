@@ -147,9 +147,12 @@ export const CHANNEL_TO_COMPUTED: Record<string, string[]> = {
 // DOM → anatomy (§4)
 // ---------------------------------------------------------------------------
 /** Class stems: drop modifier classes (contain '--'), strip the library's
- *  class prefix. Signature = tag + stems (presence/absence discipline). */
+ *  class prefix. A BEM block-root class spelled `Block--root` (Polaris Text)
+ *  keeps its block name as the stem — it identifies the element, unlike
+ *  value modifiers. Signature = tag + stems (presence/absence discipline). */
 export const stems = (classes: string[], classPrefix: string): string[] =>
   classes
+    .map((c) => (c.endsWith('--root') ? c.slice(0, -'--root'.length) : c))
     .filter((c) => !c.includes('--'))
     .map((c) => (classPrefix && c.startsWith(classPrefix) ? c.slice(classPrefix.length) : c))
     .sort();

@@ -15,7 +15,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -28,7 +30,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -41,7 +50,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -54,7 +65,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -103,7 +121,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -116,7 +136,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -147,7 +174,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -160,7 +189,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -225,7 +261,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -238,7 +276,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -268,7 +313,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -281,7 +328,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -1007,7 +1061,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -1020,7 +1076,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -1033,7 +1096,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -1046,7 +1111,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -1059,7 +1131,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -1072,7 +1146,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -1085,7 +1166,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -1098,7 +1181,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -1111,7 +1201,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -1124,7 +1216,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     },
     {
@@ -1137,7 +1236,9 @@
       "expected": "12px",
       "observed": "13px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.font-size-325"
+      ],
       "status": "open"
     },
     {
@@ -1150,7 +1251,14 @@
       "expected": "16px",
       "observed": "20px",
       "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion",
-      "candidates": [],
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
       "status": "open"
     }
   ]
