@@ -117,10 +117,13 @@ export {
   type FigmaScriptCtx,
 } from './emit-figma-script.js';
 
-// The emitter registry — pluggability as a type.
+// The emitter registry — pluggability as a type. registerEmitter() opens it
+// to plugin emitters (CLI --emitter, @ds-contracts/emitter-* packages).
 export {
   emitterByName,
   emitters,
+  getEmitters,
+  registerEmitter,
   figmaScriptEmitter,
   htmlEmitter,
   reactEmitter,

@@ -121,5 +121,42 @@ export const figmaScriptEmitter: Emitter = {
   },
 };
 
+/** The LIVE registry. `emitters` keeps its exported name and identity (the
+ *  four built-ins, in their load-bearing order) — registerEmitter() appends
+ *  to the SAME array, so every consumer that iterates `emitters` generically
+ *  (playground tabs, emitters-check, browser-check) sees plugin emitters
+ *  without edits. */
 export const emitters: Emitter[] = [reactEmitter, htmlEmitter, reactInlineEmitter, figmaScriptEmitter];
 export const emitterByName = new Map(emitters.map((e) => [e.name, e]));
+
+/** Registry snapshot — same live contents as `emitters`, copied so callers
+ *  cannot mutate the registry by accident. */
+export const getEmitters = (): Emitter[] => [...emitters];
+
+/** Register a plugin emitter (CLI `--emitter <module>`, future
+ *  @ds-contracts/emitter-* packages). Refuses by name: a missing/invalid
+ *  shape or a name collision (including the four built-ins) never silently
+ *  shadows an existing projection. */
+export function registerEmitter(emitter: Emitter): Emitter {
+  if (!emitter || typeof emitter !== 'object') {
+    throw new Error('registerEmitter: not an Emitter object');
+  }
+  const { name, label, emit } = emitter;
+  if (typeof name !== 'string' || name.trim() === '') {
+    throw new Error('registerEmitter: emitter.name must be a non-empty string');
+  }
+  if (typeof label !== 'string' || label.trim() === '') {
+    throw new Error(`registerEmitter: emitter "${name}" needs a human-readable label`);
+  }
+  if (typeof emit !== 'function') {
+    throw new Error(`registerEmitter: emitter "${name}" has no emit(contract, ctx) function`);
+  }
+  if (emitterByName.has(name)) {
+    throw new Error(
+      `registerEmitter: an emitter named "${name}" is already registered — names are identities, pick another`,
+    );
+  }
+  emitters.push(emitter);
+  emitterByName.set(name, emitter);
+  return emitter;
+}

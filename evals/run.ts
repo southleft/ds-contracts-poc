@@ -55,7 +55,10 @@ function resetScratch() {
   // vite-only at runtime — import.meta.glob — so the receipt reads, never runs).
   // workers rides along for the AI-fix guardrail eval (the worker test suite
   // runs in scratch via the root tsx — workers/assist has no own node_modules).
-  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers']) {
+  // packages rides along because scripts/contract-schema.ts is a re-export
+  // shim over packages/schema/src (the @ds-contracts/schema source) and the
+  // CLI evals run packages/cli from scratch.
+  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers', 'packages']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
