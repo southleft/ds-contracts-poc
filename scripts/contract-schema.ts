@@ -102,6 +102,11 @@ export const LayoutSchema = z.strictObject({
   /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
    *  child margin in CSS and as negative itemSpacing on the canvas. */
   overlap: z.boolean().optional(),
+  /** v15 (S4/matrix a.8): flex-wrap: wrap — natively CARRY-BOTH (Figma
+   *  layoutWrap: 'WRAP'). Chip rows and tag groups wrap in every target
+   *  system; the counter-axis gap rides the same `gap` token (Figma
+   *  counterAxisSpacing follows itemSpacing unless a row-gap fact lands). */
+  wrap: z.boolean().optional(),
 });
 
 /** v7: per-enum-value layout overrides (chat sender flip, toolbar density).
@@ -177,6 +182,13 @@ export const LITERAL_CHANNELS = new Set([
   'height', 'width', 'min-width', 'min-height',
   'padding-block', 'padding-inline', 'gap', 'border-radius', 'border-width',
   'font-size', 'line-height', 'letter-spacing',
+  // v15 (S4/matrix a.4–a.5): per-corner radii and per-side border widths are
+  // natively CARRY-BOTH (each corner/side field is independently
+  // variable-bindable) — the literal grammar carries them like their
+  // uniform shorthands.
+  'border-top-left-radius', 'border-top-right-radius',
+  'border-bottom-left-radius', 'border-bottom-right-radius',
+  'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
 ]);
 
 /** v14: per-enum-value literal overrides — the literals sibling of
@@ -186,6 +198,257 @@ export const LiteralsByPropSchema = z.strictObject({
   prop: z.string(),
   map: z.record(z.string(), z.record(z.string(), LiteralValueSchema)),
 });
+
+/** v15 (S4 channel lifts — round 1 of the north-star push): a DECLARED FACT
+ *  is a keyword/literal styling channel observed as computed truth that has
+ *  no token vocabulary (cursor, user-select, text-rendering,
+ *  font-feature-settings, …). Declared facts are FIRST-CLASS carried facts:
+ *  every code emitter renders them verbatim; the canvas either DRAWS them
+ *  natively (verdict 'draw' — textCase, textDecoration, textAlignHorizontal,
+ *  fontName per docs/FIGMA-CAPABILITY-MATRIX.md) or DECLARES them without
+ *  drawing (verdict 'annotate' — the matrix §b annotation copy lands in the
+ *  component description). Channels outside this registry, and values
+ *  outside each channel's bounded grammar, refuse by name
+ *  (validateContract). */
+export interface DeclaredChannelSpec {
+  /** Bounded value grammar — anything else refuses by name. */
+  value: RegExp;
+  /** Canvas verdict per the capability matrix: 'draw' = a native node field
+   *  expresses it; 'annotate' = declared-not-drawn (CARRY-CODE-ONLY). */
+  canvas: 'draw' | 'annotate';
+  /** Plain-language annotation copy (matrix §b) for the canvas description. */
+  note: string;
+}
+
+const kw = (...words: string[]) => new RegExp(`^(${words.join('|')})$`);
+
+export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
+  // -- interaction-only channels (matrix §9: no canvas concept) -------------
+  cursor: {
+    value: /^[a-z-]+$/,
+    canvas: 'annotate',
+    note: 'Cursor changes (pointer on hover) exist only in the coded component.',
+  },
+  'user-select': {
+    value: kw('none', 'auto', 'text', 'all', 'contain'),
+    canvas: 'annotate',
+    note: 'Text-selection behavior (user-select) exists only in the coded component.',
+  },
+  'pointer-events': {
+    value: kw('none', 'auto'),
+    canvas: 'annotate',
+    note: 'Pointer-event gating exists only in the coded component.',
+  },
+  'touch-action': {
+    value: /^(auto|none|manipulation|(pan-(x|y|left|right|up|down)|pinch-zoom)( (pan-(x|y|left|right|up|down)|pinch-zoom))*)$/,
+    canvas: 'annotate',
+    note: 'Touch gesture handling (touch-action) exists only in the coded component.',
+  },
+  // -- form-control / rendering hints ---------------------------------------
+  appearance: {
+    value: kw('none', 'auto'),
+    canvas: 'annotate',
+    note: 'Native form-control appearance is reset only in the coded component.',
+  },
+  'text-rendering': {
+    value: kw('auto', 'optimizespeed', 'optimizelegibility', 'geometricprecision'),
+    canvas: 'annotate',
+    note: 'Text rasterization hints (text-rendering) apply only in code.',
+  },
+  'font-feature-settings': {
+    value: /^(normal|"[a-z0-9]{4}"( (on|off|\d+))?(, "[a-z0-9]{4}"( (on|off|\d+))?)*)$/i,
+    canvas: 'annotate',
+    note: "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
+  },
+  // -- motion (standing CODE-ONLY class, now a declared fact) ---------------
+  transition: {
+    value: /^[a-z0-9 .,()%-]+$/i,
+    canvas: 'annotate',
+    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+  },
+  'transition-property': {
+    value: /^(none|all|[a-z-]+(, [a-z-]+)*)$/,
+    canvas: 'annotate',
+    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+  },
+  'transition-duration': {
+    value: /^-?[\d.]+m?s(, -?[\d.]+m?s)*$/,
+    canvas: 'annotate',
+    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+  },
+  'transition-timing-function': {
+    value: /^[a-z0-9 .,()-]+$/i,
+    canvas: 'annotate',
+    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+  },
+  'transition-delay': {
+    value: /^-?[\d.]+m?s(, -?[\d.]+m?s)*$/,
+    canvas: 'annotate',
+    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+  },
+  // -- positioning context (the position:relative class ONLY — absolute/
+  //    fixed/sticky belong to overlay/stylesWhen and refuse here) -----------
+  position: {
+    value: kw('relative', 'static'),
+    canvas: 'annotate',
+    note: 'This element is a positioning context (position: relative) in code; Figma frames need no equivalent.',
+  },
+  // -- box constraints outside the token grammar ----------------------------
+  'max-width': {
+    value: /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,
+    canvas: 'annotate',
+    note: 'Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).',
+  },
+  'max-height': {
+    value: /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,
+    canvas: 'annotate',
+    note: 'Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).',
+  },
+  // -- display keywords outside the flex layout vocabulary ------------------
+  display: {
+    value: kw('inline', 'inline-block', 'block', 'contents', 'none'),
+    canvas: 'annotate',
+    note: 'CSS display modes outside auto-layout flex (inline, block) have no direct Figma equivalent; the canvas approximates with frame nesting.',
+  },
+  // -- wrapping & overflow --------------------------------------------------
+  'text-wrap-mode': {
+    value: kw('wrap', 'nowrap'),
+    canvas: 'annotate',
+    note: 'Line-breaking rules differ: Figma wraps by box width only.',
+  },
+  'white-space': {
+    value: kw('normal', 'nowrap', 'pre', 'pre-wrap', 'pre-line', 'break-spaces'),
+    canvas: 'annotate',
+    note: 'Line-breaking rules differ: Figma wraps by box width only.',
+  },
+  'overflow-x': {
+    value: kw('visible', 'hidden', 'clip', 'auto', 'scroll'),
+    canvas: 'annotate',
+    note: 'Scrolling behavior and overflow clipping on this axis exist only in code.',
+  },
+  'overflow-y': {
+    value: kw('visible', 'hidden', 'clip', 'auto', 'scroll'),
+    canvas: 'annotate',
+    note: 'Scrolling behavior and overflow clipping on this axis exist only in code.',
+  },
+  'text-overflow': {
+    value: kw('clip', 'ellipsis'),
+    canvas: 'draw', // textTruncation: 'ENDING' on text nodes (matrix a.9)
+    note: 'Text truncation renders natively on the canvas (textTruncation).',
+  },
+  // -- the A22 text channels (matrix a.2 — natively drawable) ---------------
+  'text-transform': {
+    value: kw('none', 'uppercase', 'lowercase', 'capitalize'),
+    canvas: 'draw', // textCase: UPPER | LOWER | TITLE
+    note: 'Text case renders natively on the canvas (textCase).',
+  },
+  'text-decoration-line': {
+    value: kw('none', 'underline', 'line-through', 'overline'),
+    canvas: 'draw', // textDecoration: UNDERLINE | STRIKETHROUGH; overline has no enum value — annotated when observed
+    note: 'Underline/strikethrough render natively (textDecoration); overline exists only in code.',
+  },
+  'text-decoration-style': {
+    value: kw('solid', 'dashed', 'dotted', 'wavy', 'double'),
+    canvas: 'annotate', // granular textDecorationStyle exists (SOLID|WAVY|DOTTED); carried in code, canvas upgrade deferred by name
+    note: 'This decoration style variant exists only in code (canvas draws a solid decoration).',
+  },
+  'text-decoration-thickness': {
+    value: /^(auto|from-font|-?\d+(\.\d+)?(px|rem|em|%))$/,
+    canvas: 'annotate',
+    note: 'Decoration thickness exists only in code (canvas draws the default thickness).',
+  },
+  'text-align': {
+    value: kw('left', 'right', 'center', 'justify', 'start', 'end'),
+    canvas: 'draw', // textAlignHorizontal (start/end map LTR — named limit)
+    note: 'Text alignment renders natively on the canvas (textAlignHorizontal).',
+  },
+  'font-family': {
+    value: /^[^;{}]+$/,
+    canvas: 'draw', // fontName.family = first stack entry (named limit: no fallback chain on canvas)
+    note: 'The first font-family stack entry renders on the canvas; fallback chains exist only in code.',
+  },
+  // -- border styles --------------------------------------------------------
+  'border-style': {
+    value: kw('none', 'solid', 'dashed', 'dotted'),
+    canvas: 'annotate', // solid is the emitter's standing stroke; dashed/dotted dashPattern upgrade deferred by name
+    note: 'Non-solid border styles exist only in code; the canvas shows a solid stroke of the same width.',
+  },
+  'border-top-style': {
+    value: kw('none', 'solid', 'dashed', 'dotted'),
+    canvas: 'annotate',
+    note: "This part's borders use different styles per side in code; Figma strokes share one style.",
+  },
+  'border-right-style': {
+    value: kw('none', 'solid', 'dashed', 'dotted'),
+    canvas: 'annotate',
+    note: "This part's borders use different styles per side in code; Figma strokes share one style.",
+  },
+  'border-bottom-style': {
+    value: kw('none', 'solid', 'dashed', 'dotted'),
+    canvas: 'annotate',
+    note: "This part's borders use different styles per side in code; Figma strokes share one style.",
+  },
+  'border-left-style': {
+    value: kw('none', 'solid', 'dashed', 'dotted'),
+    canvas: 'annotate',
+    note: "This part's borders use different styles per side in code; Figma strokes share one style.",
+  },
+  // -- background sub-channels beyond the color+gradient carriage -----------
+  'background-attachment': {
+    value: /^(scroll|fixed|local)(, (scroll|fixed|local))*$/,
+    canvas: 'annotate',
+    note: 'Background attachment exists only in code.',
+  },
+  'background-blend-mode': {
+    value: /^[a-z-]+(, [a-z-]+)*$/,
+    canvas: 'annotate',
+    note: 'Background blend modes exist only in code (per-paint blendMode upgrade deferred by name).',
+  },
+  'background-clip': {
+    value: /^(border-box|padding-box|content-box|text)(, (border-box|padding-box|content-box|text))*$/,
+    canvas: 'annotate',
+    note: 'Background clipping exists only in code.',
+  },
+  'background-origin': {
+    value: /^(border-box|padding-box|content-box)(, (border-box|padding-box|content-box))*$/,
+    canvas: 'annotate',
+    note: 'Background origin exists only in code.',
+  },
+  'background-position': {
+    value: /^[a-z0-9.% -]+(, [a-z0-9.% -]+)*$/,
+    canvas: 'annotate',
+    note: 'Background positioning exists only in code.',
+  },
+  'background-repeat': {
+    value: /^[a-z-]+( [a-z-]+)?(, [a-z-]+( [a-z-]+)?)*$/,
+    canvas: 'annotate',
+    note: 'Background repetition exists only in code (uniform TILE approximation deferred by name).',
+  },
+  'background-size': {
+    value: /^[a-z0-9.% -]+(, [a-z0-9.% -]+)*$/,
+    canvas: 'annotate',
+    note: 'Background sizing exists only in code.',
+  },
+  // -- compositing ----------------------------------------------------------
+  isolation: {
+    value: kw('auto', 'isolate'),
+    canvas: 'annotate',
+    note: 'Stacking-context isolation exists only in code.',
+  },
+  // -- focus-ring styling (the C5 stroke approximation stands on canvas) ----
+  'outline-style': {
+    value: kw('none', 'solid', 'dashed', 'dotted', 'auto'),
+    canvas: 'annotate',
+    note: 'Focus outlines render as a bound stroke approximation on canvas state previews (standing C5 approximation).',
+  },
+};
+
+/** Schema-level value guard for declared facts: never a token ref, never a
+ *  CSS injection vector. The per-channel grammar refusal lives in
+ *  validateContract (generator level) where messages can name the channel. */
+export const DeclaredValueSchema = z
+  .string()
+  .regex(/^[^;{}!]+$/, 'Declared value must be a plain CSS value (no token refs, no "!important", no rule injection)');
 
 /** v7 stylesWhen: the tight whitelist of literal CSS properties a
  *  conditional style may set. Deliberately NOT tokens — these are
@@ -390,6 +653,18 @@ export interface Part {
   /** v14: per-enum-value literal overrides merged over `literals` — the
    *  literals sibling of tokensByProp (ordered entries, same refusal rules). */
   literalsByProp?: Array<z.infer<typeof LiteralsByPropSchema>>;
+  /** v15 (S4): DECLARED FACTS — keyword/literal channels with no token
+   *  vocabulary (cursor, user-select, text-rendering, …), carried verbatim
+   *  by every code emitter; the canvas draws the 'draw'-verdict channels
+   *  natively and annotates the rest (DECLARED_CHANNELS registry — channel
+   *  and value grammar refusals live in validateContract). */
+  declared?: Record<string, string>;
+  /** v15 (S4): per-state declared facts (cursor stays pointer on :disabled,
+   *  text-decoration-line: underline on :hover, outline-style on
+   *  :focus-visible). Same channel registry as `declared`; states must be
+   *  drawn from the contract's declared `states`. Rendered as state-selector
+   *  rules by the CSS emitters; declared-not-drawn on the canvas. */
+  declaredStates?: Record<string, Record<string, string>>;
   /** interaction state → (CSS property → token reference). On the ROOT:
    *  the full state vocabulary (background-color, outline-*, opacity, …).
    *  v13 (P18 second half): on a NON-ref part (text/icon/box — never a
@@ -450,6 +725,10 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     literals: z.record(z.string(), LiteralValueSchema).optional(),
     /** v14: ordered per-enum-value literal overrides. */
     literalsByProp: z.array(LiteralsByPropSchema).min(1).optional(),
+    /** v15 (S4): declared facts — DECLARED_CHANNELS registry channels. */
+    declared: z.record(z.string(), DeclaredValueSchema).optional(),
+    /** v15 (S4): per-state declared facts (state → channel → value). */
+    declaredStates: z.record(z.string(), z.record(z.string(), DeclaredValueSchema)).optional(),
     /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
      *  only — see the Part interface doc + emit-react validateContract. */
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
@@ -615,6 +894,8 @@ export interface ResolvedLayout {
   justify?: 'start' | 'center' | 'end' | 'space-between';
   grow?: boolean;
   overlap?: boolean;
+  /** v15: flex-wrap: wrap (Figma layoutWrap 'WRAP'). */
+  wrap?: boolean;
 }
 
 export function resolveLayout(
