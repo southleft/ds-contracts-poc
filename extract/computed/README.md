@@ -8,6 +8,33 @@ prototype-with-receipts). Spike gate numbers it was promoted on: 99.947%
 replay computed equality, 480/480 pixel pairs at the AA point, on the full
 Polaris Button variant×state space.
 
+## Round 4 — DOM-anatomy promotion (the one-to-one round)
+
+Round 4 makes computed-only DOM elements REAL contract parts
+(`anatomy.ts`):
+
+- **Union alignment** — every capture joins ONE union tree by hierarchical
+  signature matching; structure-creating optional props (`presenceProps`
+  config: Banner `onDismiss`/`action`, Tag `onRemove`, TextField
+  `prefix`/`suffix`, …) add parts the base combo never renders. Presence
+  carries as `visibleWhen` / `stylesWhen display:none` products (defaultless
+  axes via the base-hidden strategy); non-factoring presence refuses by name.
+- **SVG content** — an `<svg>` subtree reconstructs into a committed icon
+  asset from the captured CSS `d`/`fill`/`fill-rule`/`stroke-*` channels
+  (viewBox reconstruction is NAMED — it is not a computed style); markup
+  varying over one axis lands as per-value glyph parts. Assets are written
+  to `out/<comp>/assets/` and promoted to `examples/polaris/assets/icons/`.
+- **Geometry facts** — evidence-based: per-part display (flex via
+  `layout`, block/inline via `declared`), full-width (`layout.grow`),
+  squares (`declared aspect-ratio`), inset overlays (`declared
+  position: absolute`), sr-only parts carried hidden.
+- **Human-acked decisions re-apply** — `decisions.json` (resolve.ts ledger)
+  re-applies onto every fresh fusion (`decisions.ts`); the gate scores
+  `resolved.contract.json`, never contradictions a human already resolved.
+- **`captured-truth.json` v2** — off-base captures ride a per-part template
+  encoding (anatomy child templates + `repStyle`), verified byte-equal per
+  capture at write time with a `fullRoot` fallback.
+
 ## What a run produces (per component, in `out/<component>/`)
 
 | artifact | what it is |
@@ -18,7 +45,8 @@ Polaris Button variant×state space.
 | `review-queue.json` | **binding contradictions** (computed truth vs static binding) with evidence + DTCG candidates — the input to the resolution workflow below. |
 | `scorecard.json` | the fidelity gate: enriched contract → `emit-html` → same-browser **pixel + computed-equality vs the ORIGINAL npm package** per variant×state — % computed-equal, % pixel-perfect at threshold 0 AND the AA point, bound/minted/code-only counts, contradictions, named losses. |
 | `numbers.json`, `pixel-rows.json`, `LEDGER.md` | the measured numbers (spike-comparable), per-pair pixel rows, and the human-readable delta ledger. |
-| `receipts/*.png` | paired original-vs-replay screenshots (base, hover, focus, worst row). |
+| `receipts/*.png` | LABELED pairs — left `REAL POLARIS (NPM PACKAGE)`, right `CONTRACT RENDER (EMIT-HTML)` (base, all-presence-on, hover, focus, worst gate row). |
+| `assets/*.svg` | round 4: svg glyph content reconstructed from captured computed truth (promoted to `examples/polaris/assets/icons/` by promote-floor). |
 
 ## Running
 

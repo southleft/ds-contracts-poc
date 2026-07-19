@@ -375,6 +375,14 @@ function componentCss(contract: Contract): string[] {
         'font: inherit', 'color: inherit', 'text-align: inherit', 'cursor: pointer',
       );
     }
+    // Round 4: a promoted TEXT-entry control (input/textarea/select part
+    // that is not the checkable pattern) neutralizes UA chrome — the real
+    // component resets it and the capture cannot see agreement-with-UA
+    // channels (control-baseline blind spot); carried facts then apply.
+    if (!isNativeCheckablePart(part) && (part.element === 'input' || part.element === 'textarea' || part.element === 'select')) {
+      decls.push('appearance: none', 'border: none', 'background: transparent',
+        'font: inherit', 'color: inherit', 'letter-spacing: inherit', 'margin: 0', 'padding: 0', 'outline: none');
+    }
     // Native checkable inputs: the real control covers its presentational
     // box invisibly — mirrors core/emit-react.ts generateCss.
     if (isNativeCheckablePart(part)) {

@@ -1309,6 +1309,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         'cursor: pointer',
       );
     }
+    // Round 4: a promoted TEXT-entry control (input/textarea/select part
+    // that is not the checkable pattern) neutralizes UA chrome — mirrors
+    // core/emit-html.ts.
+    if (!isNativeCheckablePart(part) && (part.element === 'input' || part.element === 'textarea' || part.element === 'select')) {
+      decls.push('appearance: none', 'border: none', 'background: transparent',
+        'font: inherit', 'color: inherit', 'letter-spacing: inherit', 'margin: 0', 'padding: 0', 'outline: none');
+    }
     // Native checkable inputs (input[type=checkbox|radio]): the REAL control
     // covers its presentational box invisibly — it stays the focusable,
     // checkable element while the box and glyphs draw the visual.
