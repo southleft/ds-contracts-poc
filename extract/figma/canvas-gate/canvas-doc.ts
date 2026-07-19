@@ -11,11 +11,11 @@
  *
  * KNOWN RENDERER LIMITS mirrored on purpose (this harness measures the
  * canvas render AS THE PLAYGROUND DRAWS IT, defects included):
- *   · spec.effectStack is NOT rendered (canvas-preview.ts has no branch for
- *     it — only single dropShadow). Checkbox/RadioButton control edges and
- *     the Banner card shadow ride effectStack and are absent on this side.
- *   · spec.gradient is NOT rendered (same gap).
- * Both are named in the scorecards where they change a number.
+ *   · spec.gradient is NOT rendered (canvas-preview.ts has no branch; the
+ *     sync runtime applies it natively — named where it changes a number).
+ * Round 5: effectStack/dropShadow now render on frames AND shapes,
+ * insetOverlay parts lower to absolute inset-0, and per-side stroke-weight
+ * bindings map to CSS — kept in lockstep with canvas-preview.ts.
  */
 import type { Contract } from '../../../core/index.js';
 import type { ComponentData, NodeSpec } from '../../../core/emit-figma-script.js';
@@ -52,9 +52,58 @@ const BINDING_CSS: Record<string, string> = {
   bottomLeftRadius: 'border-bottom-left-radius',
   bottomRightRadius: 'border-bottom-right-radius',
   strokeWeight: 'border-width',
+  // Round 5 (canvas-gate finding): per-side stroke weights (v15 matrix a.5)
+  // bind natively in the sync runtime (setBoundVariable) but this renderer
+  // had no CSS mapping — a Button whose four side weights bind size-0 drew
+  // the 1px default ring instead of no ring at all.
+  strokeTopWeight: 'border-top-width',
+  strokeRightWeight: 'border-right-width',
+  strokeBottomWeight: 'border-bottom-width',
+  strokeLeftWeight: 'border-left-width',
   minWidth: 'min-width',
   opacity: 'opacity',
 };
+
+/** True when the spec carries ANY stroke-width source of its own (a bound
+ *  strokeWeight, a bound per-side weight, or a literal weight). Only a spec
+ *  with NO width source gets the renderer's 1px default — mirroring the sync
+ *  runtime, where a bound side weight always applies (Round 5 canvas-gate
+ *  finding: the 1px default overrode bound size-0 side weights). */
+const hasStrokeWidthSource = (spec: NodeSpec): boolean =>
+  spec.bindings?.strokeWeight !== undefined ||
+  spec.bindings?.strokeTopWeight !== undefined ||
+  spec.bindings?.strokeRightWeight !== undefined ||
+  spec.bindings?.strokeBottomWeight !== undefined ||
+  spec.bindings?.strokeLeftWeight !== undefined ||
+  spec.lits?.strokeWeight !== undefined ||
+  spec.lits?.strokeSides !== undefined;
+
+/** Effect stack / single drop shadow → the equivalent CSS box-shadow list —
+ *  the runtime applies these as NATIVE effects on frames AND shapes; the
+ *  preview draws the same values (Round 5: shapes lost their inset rings —
+ *  the Checkbox/RadioButton control edge — because only nodeStyle had this
+ *  branch). */
+function effectCss(spec: NodeSpec, ctx: RenderCtx): string[] {
+  const d: string[] = [];
+  if (spec.effectStack && spec.effectStack.length > 0) {
+    ctx.used.add('shadow');
+    const css = spec.effectStack
+      .map((e) => {
+        const c = e.color;
+        const a = c.a === undefined ? 1 : c.a;
+        const col = `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${a})`;
+        return `${e.inner ? 'inset ' : ''}${e.x}px ${e.y}px ${e.radius}px${e.spread ? ` ${e.spread}px` : ''} ${col}`;
+      })
+      .join(', ');
+    d.push(`box-shadow: ${css}`);
+  }
+  if (spec.dropShadow) {
+    const sh = spec.dropShadow;
+    ctx.used.add('shadow');
+    d.push(`box-shadow: ${sh.x}px ${sh.y}px ${sh.radius}px${sh.spread ? ` ${sh.spread}px` : ''} ${sh.color}`);
+  }
+  return d;
+}
 
 const PRIMARY_CSS: Record<string, string> = {
   MIN: 'flex-start',
@@ -90,29 +139,13 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     d.push(`align-items: ${spec.layout.stretchChildren ? 'stretch' : COUNTER_CSS[spec.layout.counter]}`);
   }
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
-  if (spec.effectStack && spec.effectStack.length > 0) {
-    // Round 4 (canvas-gate finding): effect STACKS render — the runtime
-    // applies them as native effects; this preview renders the equivalent
-    // CSS box-shadow list (inset for INNER_SHADOW), like the code surfaces.
-    ctx.used.add('shadow');
-    const css = spec.effectStack
-      .map((e) => {
-        const c = e.color;
-        const a = c.a === undefined ? 1 : c.a;
-        const col = `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${a})`;
-        return `${e.inner ? 'inset ' : ''}${e.x}px ${e.y}px ${e.radius}px${e.spread ? ` ${e.spread}px` : ''} ${col}`;
-      })
-      .join(', ');
-    d.push(`box-shadow: ${css}`);
-  }
-  if (spec.dropShadow) {
-    const sh = spec.dropShadow;
-    ctx.used.add('shadow');
-    d.push(`box-shadow: ${sh.x}px ${sh.y}px ${sh.radius}px${sh.spread ? ` ${sh.spread}px` : ''} ${sh.color}`);
-  }
+  // Round 4 (canvas-gate finding): effect STACKS render — the runtime
+  // applies them as native effects; this preview renders the equivalent
+  // CSS box-shadow list (inset for INNER_SHADOW), like the code surfaces.
+  d.push(...effectCss(spec, ctx));
   if (spec.stroke) {
     d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
-    if (!spec.bindings?.strokeWeight) d.push('border-width: 1px');
+    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
   }
   for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
     const cssProp = BINDING_CSS[field];
@@ -128,6 +161,15 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   if (spec.overlay) {
     ctx.used.add('overlay');
     d.push('position: absolute', OVERLAY_CSS[spec.overlay.placement].replace(/;$/, ''));
+  }
+  if (spec.insetOverlay) {
+    // B-3 finding 5 companion (Round 5 canvas-gate finding): the sync
+    // runtime lowers inset-0 overlay parts out of flow (applyInsetOverlay —
+    // ABSOLUTE, stretched to the parent); this renderer flowed them as
+    // auto-layout siblings, so the Checkbox glyph overlay drew BESIDE its
+    // backdrop instead of over it. Plain CSS semantics: absolute + inset 0.
+    ctx.used.add('overlay');
+    d.push('position: absolute', 'top: 0', 'right: 0', 'bottom: 0', 'left: 0');
   }
   if (typeof spec.opacity === 'number') d.push(`opacity: ${spec.opacity}`);
   d.push(...litStyles(spec));
@@ -156,6 +198,23 @@ function litStyles(spec: NodeSpec): string[] {
   if (li.itemSpacing !== undefined) d.push(`gap: ${li.itemSpacing}px`);
   if (li.radius !== undefined) d.push(`border-radius: ${li.radius}px`);
   if (li.strokeWeight !== undefined) d.push(`border-width: ${li.strokeWeight}px`, 'border-style: solid');
+  // v15 per-corner radii / per-side widths (Round 5: the runtime applies
+  // these in litsRuntime; the renderer silently dropped them).
+  if (li.radiusCorners) {
+    const rc = li.radiusCorners;
+    if (rc.tl !== undefined) d.push(`border-top-left-radius: ${rc.tl}px`);
+    if (rc.tr !== undefined) d.push(`border-top-right-radius: ${rc.tr}px`);
+    if (rc.bl !== undefined) d.push(`border-bottom-left-radius: ${rc.bl}px`);
+    if (rc.br !== undefined) d.push(`border-bottom-right-radius: ${rc.br}px`);
+  }
+  if (li.strokeSides) {
+    const sw = li.strokeSides;
+    d.push('border-style: solid');
+    if (sw.top !== undefined) d.push(`border-top-width: ${sw.top}px`);
+    if (sw.right !== undefined) d.push(`border-right-width: ${sw.right}px`);
+    if (sw.bottom !== undefined) d.push(`border-bottom-width: ${sw.bottom}px`);
+    if (sw.left !== undefined) d.push(`border-left-width: ${sw.left}px`);
+  }
   return d;
 }
 
@@ -213,8 +272,13 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
   if (spec.stroke) {
     d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
-    if (!spec.bindings?.strokeWeight) d.push('border-width: 1px');
+    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
   }
+  // B-3 finding 3 companion (Round 5 canvas-gate finding): the sync runtime
+  // applies dropShadow/effectStack on SHAPES too (shapeRuntime receives the
+  // same effects tail as frames) — this renderer only had the frame branch,
+  // so the Checkbox/RadioButton backdrop's inset control edge never drew.
+  d.push(...effectCss(spec, ctx));
   for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
     const cssProp = BINDING_CSS[field];
     if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
@@ -317,7 +381,7 @@ function renderNode(
     return `<div class="cv-slot" style="${style}">${inner}</div>`;
   }
 
-  const hasOverlayChild = (spec.children ?? []).some((c) => c.overlay || c.absolute);
+  const hasOverlayChild = (spec.children ?? []).some((c) => c.overlay || c.absolute || c.insetOverlay);
   const style = [nodeStyle(spec, ctx), hasOverlayChild ? 'position: relative' : '', extraStyle]
     .filter(Boolean)
     .join('; ');

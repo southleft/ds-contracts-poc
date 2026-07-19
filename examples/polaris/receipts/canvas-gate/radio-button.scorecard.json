@@ -21,14 +21,14 @@
     {
       "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 44.58,
-      "pctAAUnmasked": 16.3,
-      "pctAAMasked": 55.63,
+      "pctExactUnmasked": 45.66,
+      "pctAAUnmasked": 13.94,
+      "pctAAMasked": 12.19,
       "maskCoveragePct": 96.92,
       "canvasPx": "296x23",
       "realPx": "325x32",
       "inkCanvasPct": 28.76,
-      "inkRealPct": 29.52,
+      "inkRealPct": 25.71,
       "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
     },
     {
@@ -47,15 +47,15 @@
   ],
   "summary": {
     "cells": 2,
-    "meanExactUnmasked": 39.97,
-    "meanAAUnmasked": 15.04,
-    "meanAAMasked": 44.62,
-    "maxAAMasked": 55.63,
-    "worstCell": "Checked=unchecked",
+    "meanExactUnmasked": 40.5,
+    "meanAAUnmasked": 13.86,
+    "meanAAMasked": 22.9,
+    "maxAAMasked": 33.61,
+    "worstCell": "Checked=checked",
     "cellsOver10Masked": [
       {
         "cell": "Checked=unchecked",
-        "pctAAMasked": 55.63,
+        "pctAAMasked": 12.19,
         "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
       },
       {

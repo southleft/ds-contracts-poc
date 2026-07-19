@@ -21,27 +21,27 @@
     {
       "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 51.06,
-      "pctAAUnmasked": 25.25,
-      "pctAAMasked": 90.1,
-      "maskCoveragePct": 95.49,
-      "canvasPx": "232x28",
+      "pctExactUnmasked": 33.05,
+      "pctAAUnmasked": 10.9,
+      "pctAAMasked": 12.29,
+      "maskCoveragePct": 86.81,
+      "canvasPx": "273x40",
       "realPx": "266x32",
-      "inkCanvasPct": 27.07,
-      "inkRealPct": 33.22,
+      "inkCanvasPct": 23.74,
+      "inkRealPct": 18.94,
       "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
     },
     {
       "cell": "Checked=checked",
       "kind": "base",
-      "pctExactUnmasked": 36.2,
-      "pctAAUnmasked": 18.18,
-      "pctAAMasked": 42.22,
-      "maskCoveragePct": 79.07,
-      "canvasPx": "301x40",
+      "pctExactUnmasked": 32.11,
+      "pctAAUnmasked": 13.04,
+      "pctAAMasked": 28.75,
+      "maskCoveragePct": 86.81,
+      "canvasPx": "273x40",
       "realPx": "266x32",
-      "inkCanvasPct": 32.09,
-      "inkRealPct": 23.49,
+      "inkCanvasPct": 33.34,
+      "inkRealPct": 25.9,
       "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
     },
     {
@@ -60,20 +60,20 @@
   ],
   "summary": {
     "cells": 3,
-    "meanExactUnmasked": 42.37,
-    "meanAAUnmasked": 21.93,
-    "meanAAMasked": 62.42,
-    "maxAAMasked": 90.1,
-    "worstCell": "Checked=unchecked",
+    "meanExactUnmasked": 35.01,
+    "meanAAUnmasked": 15.44,
+    "meanAAMasked": 31.99,
+    "maxAAMasked": 54.93,
+    "worstCell": "Checked=indeterminate",
     "cellsOver10Masked": [
       {
         "cell": "Checked=unchecked",
-        "pctAAMasked": 90.1,
+        "pctAAMasked": 12.29,
         "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
       },
       {
         "cell": "Checked=checked",
-        "pctAAMasked": 42.22,
+        "pctAAMasked": 28.75,
         "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
       },
       {

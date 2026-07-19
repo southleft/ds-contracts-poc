@@ -111,7 +111,18 @@ const MOUNT_PLAN: Record<string, MountPlanExt> = {
  *  against (sampleText + fixedProps per component). */
 const FLOOR_CONFIG = JSON.parse(
   readFileSync(path.join(EXAMPLE, '..', '..', 'extract', 'computed', 'configs', 'polaris.json'), 'utf8'),
-) as { components: Array<{ name: string; sampleText: string; fixedProps?: Record<string, unknown> }> };
+) as {
+  components: Array<{
+    name: string;
+    sampleText: string;
+    fixedProps?: Record<string, unknown>;
+    /** Contract enum value → LIBRARY value (Checkbox checked: unchecked→false…) —
+     *  the SAME mapping the capture harness mounts (Round 5 gate fix: without
+     *  it the real side mounted checked="unchecked", a truthy string, so every
+     *  Checkbox/RadioButton cell rendered CHECKED). */
+    axisValueMap?: Record<string, Record<string, unknown>>;
+  }>;
+};
 const floorComp = (name: string) => FLOOR_CONFIG.components.find((c) => c.name === name);
 
 /** Named causes attached to cells AFTER measurement — every rule quotes a
@@ -291,7 +302,12 @@ async function main(): Promise<void> {
         const codeProp = p.bindings.code.prop;
         if (codeProp === 'children' || codeProp in props) continue;
         if (typeof p.type === 'object' && 'enum' in p.type) {
-          props[codeProp] = cell.subst[p.name];
+          // Round 5: contract enum values map through the floor's
+          // axisValueMap to the LIBRARY's real value (the capture harness's
+          // own mounting rule); unlisted values mount verbatim.
+          const map = floor?.axisValueMap?.[p.name];
+          const raw = cell.subst[p.name];
+          props[codeProp] = map && raw in map ? map[raw] : raw;
         } else if (p.type === 'boolean') {
           if (p.default === true) props[codeProp] = true;
         } else if (p.default !== undefined && p.default !== null && p.default !== '') {
