@@ -36,6 +36,15 @@ export const BRIDGE_MAX_DUMP_BYTES = 4 * 1024 * 1024; // 4 MB of JSON text
 export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 export const CODE_LENGTH = 6;
 
+/** Payload types the bridge carries. Dumps (plugin → playground, the
+ *  original direction) are untagged JSON; a CONTRACTS-BUNDLE (CLI/CI →
+ *  plugin, the reverse direction: `ds-contracts figma push`) is tagged with
+ *  this envelope type so the receiver can branch WITHOUT the bridge ever
+ *  inspecting contract contents — the transport stays a dumb pipe, it only
+ *  checks the envelope is well-formed and remembers which kind it carried. */
+export const CONTRACTS_BUNDLE_TYPE = 'CONTRACTS-BUNDLE';
+export type BridgePayloadKind = 'dump' | 'contracts-bundle';
+
 export const BRIDGE_MESSAGES = {
   disabled: 'the plugin bridge is switched off — the owner has not enabled it yet',
   forbiddenOrigin:
@@ -51,10 +60,13 @@ export const BRIDGE_MESSAGES = {
     'the bridge only carries JSON — this usually means a truncated send; try Send again',
   expired:
     'this code has expired or its dump was already delivered — press “Receive from plugin” for a fresh code',
+  badBundle:
+    'that is tagged CONTRACTS-BUNDLE but is not a well-formed bundle — it needs a non-empty "contracts" array of contract documents (ds-contracts figma push builds one for you)',
 } as const;
 
 const sessKey = (code: string) => `bridge:sess:${code}`;
 const dumpKey = (code: string) => `bridge:dump:${code}`;
+const kindKey = (code: string) => `bridge:kind:${code}`;
 
 const json = (
   status: number,
@@ -126,12 +138,16 @@ export async function handleBridge(
     if (!CODE_RE.test(code)) return json(400, { error: BRIDGE_MESSAGES.badCode }, cors);
     const dump = await env.ASSIST_KV.get(dumpKey(code));
     if (dump !== null) {
+      // Payload kind, recorded at upload ('dump' when absent — pre-bundle
+      // uploads and the original direction). Old receivers ignore the field.
+      const kind = ((await env.ASSIST_KV.get(kindKey(code))) ?? 'dump') as BridgePayloadKind;
       // One-time read: delete BEFORE answering; the dump exists nowhere
       // after this response (TTL is the backstop for KV consistency lag).
       await env.ASSIST_KV.delete(dumpKey(code));
+      await env.ASSIST_KV.delete(kindKey(code));
       await env.ASSIST_KV.delete(sessKey(code));
       // `dump` was validated as JSON at upload — splice it in verbatim.
-      return new Response(`{"status":"delivered","dump":${dump}}`, {
+      return new Response(`{"status":"delivered","kind":${JSON.stringify(kind)},"dump":${dump}}`, {
         status: 200,
         headers: { 'content-type': 'application/json', ...cors },
       });
@@ -157,10 +173,33 @@ export async function handleBridge(
 
   const raw = await request.text();
   if (raw.length > BRIDGE_MAX_DUMP_BYTES) return json(413, { error: BRIDGE_MESSAGES.tooLarge }, uploadCors);
+  let parsed: unknown;
   try {
-    JSON.parse(raw); // shape is the playground's referee's problem; transport only checks "is JSON"
+    parsed = JSON.parse(raw); // shape is the receiver's referee's problem; transport only checks "is JSON"
   } catch {
     return json(400, { error: BRIDGE_MESSAGES.notJson }, uploadCors);
+  }
+
+  // Envelope kind: a payload tagged CONTRACTS-BUNDLE gets its envelope (and
+  // ONLY its envelope) checked — a non-empty contracts array of objects.
+  // Contract contents are never inspected here; the plugin's schema referee
+  // owns that. Everything untagged is a dump, exactly as before.
+  let kind: BridgePayloadKind = 'dump';
+  if (
+    parsed !== null &&
+    typeof parsed === 'object' &&
+    !Array.isArray(parsed) &&
+    (parsed as { type?: unknown }).type === CONTRACTS_BUNDLE_TYPE
+  ) {
+    const contracts = (parsed as { contracts?: unknown }).contracts;
+    if (
+      !Array.isArray(contracts) ||
+      contracts.length === 0 ||
+      contracts.some((c) => c === null || typeof c !== 'object' || Array.isArray(c))
+    ) {
+      return json(400, { error: BRIDGE_MESSAGES.badBundle }, uploadCors);
+    }
+    kind = 'contracts-bundle';
   }
 
   // Session must be open. Wrong code and expired code take the identical
@@ -172,5 +211,6 @@ export async function handleBridge(
   // Last write wins while the session is open (re-sending with corrected
   // target sets is a feature); delivery or TTL ends the session.
   await env.ASSIST_KV.put(dumpKey(code), raw, { expirationTtl: BRIDGE_TTL_SECONDS });
+  await env.ASSIST_KV.put(kindKey(code), kind, { expirationTtl: BRIDGE_TTL_SECONDS });
   return json(200, { ok: true, bytes: raw.length }, uploadCors);
 }

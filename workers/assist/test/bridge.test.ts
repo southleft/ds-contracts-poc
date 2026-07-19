@@ -13,6 +13,7 @@ import {
   BRIDGE_TTL_SECONDS,
   CODE_ALPHABET,
   CODE_LENGTH,
+  CONTRACTS_BUNDLE_TYPE,
   randomCode,
 } from '../src/bridge';
 import type { Env, KVNamespaceLite, Deps } from '../src/env';
@@ -169,6 +170,81 @@ test('lifecycle: re-sending while the session is open overwrites (last write win
   await handleRequest(req(`/bridge/${code}`, { origin: 'null', body: DUMP }), env, deps);
   const delivered = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
   assert.deepEqual(((await delivered.json()) as { dump: unknown }).dump, JSON.parse(DUMP));
+});
+
+// ---------------------------------------------------------------------------
+// CONTRACTS-BUNDLE payloads (ds-contracts figma push — the reverse direction)
+// ---------------------------------------------------------------------------
+
+const BUNDLE = JSON.stringify({
+  type: CONTRACTS_BUNDLE_TYPE,
+  version: 1,
+  contracts: [{ id: 'acme.pill', name: 'Pill', version: '1.0.0', props: [] }],
+});
+
+test('bundle: CLI push (no origin) → delivered once with kind "contracts-bundle", byte-identical, all keys gone', async () => {
+  const env = makeEnv();
+  const code = await createSession(env);
+  // `ds-contracts figma push` is a plain fetch — no Origin header at all.
+  const sent = await handleRequest(req(`/bridge/${code}`, { origin: null, body: BUNDLE }), env, deps);
+  assert.equal(sent.status, 200);
+  assert.deepEqual(await sent.json(), { ok: true, bytes: BUNDLE.length });
+  assert.equal(env.ASSIST_KV.store.get(`bridge:kind:${code}`), 'contracts-bundle');
+  assert.equal(env.ASSIST_KV.ttls.get(`bridge:kind:${code}`), BRIDGE_TTL_SECONDS);
+
+  const delivered = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  assert.equal(delivered.status, 200);
+  const body = (await delivered.json()) as { status: string; kind: string; dump: unknown };
+  assert.equal(body.status, 'delivered');
+  assert.equal(body.kind, 'contracts-bundle');
+  assert.deepEqual(body.dump, JSON.parse(BUNDLE));
+
+  // One-time read deletes the kind marker along with dump + session.
+  for (const k of [`bridge:dump:${code}`, `bridge:kind:${code}`, `bridge:sess:${code}`]) {
+    assert.ok(!env.ASSIST_KV.store.has(k), k);
+  }
+  const again = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  assert.equal(again.status, 410);
+});
+
+test('bundle: a dump delivery carries kind "dump" (receivers can branch; old receivers ignore it)', async () => {
+  const env = makeEnv();
+  const code = await createSession(env);
+  await handleRequest(req(`/bridge/${code}`, { origin: 'null', body: DUMP }), env, deps);
+  const delivered = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  const body = (await delivered.json()) as { status: string; kind: string; dump: unknown };
+  assert.equal(body.kind, 'dump');
+  assert.deepEqual(body.dump, JSON.parse(DUMP));
+});
+
+test('bundle: a malformed CONTRACTS-BUNDLE envelope is refused 400 by name, nothing stored, session stays open', async () => {
+  const env = makeEnv();
+  const code = await createSession(env);
+  for (const bad of [
+    JSON.stringify({ type: CONTRACTS_BUNDLE_TYPE }), // no contracts
+    JSON.stringify({ type: CONTRACTS_BUNDLE_TYPE, contracts: [] }), // empty
+    JSON.stringify({ type: CONTRACTS_BUNDLE_TYPE, contracts: ['not-an-object'] }),
+    JSON.stringify({ type: CONTRACTS_BUNDLE_TYPE, contracts: [null] }),
+  ]) {
+    const res = await handleRequest(req(`/bridge/${code}`, { origin: null, body: bad }), env, deps);
+    assert.equal(res.status, 400, bad);
+    assert.equal(((await res.json()) as { error: string }).error, BRIDGE_MESSAGES.badBundle);
+  }
+  assert.ok(!env.ASSIST_KV.store.has(`bridge:dump:${code}`));
+  assert.ok(!env.ASSIST_KV.store.has(`bridge:kind:${code}`));
+  const waiting = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  assert.deepEqual(await waiting.json(), { status: 'waiting' });
+});
+
+test('bundle: last write wins across kinds — a dump then a bundle delivers the bundle with its kind', async () => {
+  const env = makeEnv();
+  const code = await createSession(env);
+  await handleRequest(req(`/bridge/${code}`, { origin: 'null', body: DUMP }), env, deps);
+  await handleRequest(req(`/bridge/${code}`, { origin: null, body: BUNDLE }), env, deps);
+  const delivered = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  const body = (await delivered.json()) as { kind: string; dump: unknown };
+  assert.equal(body.kind, 'contracts-bundle');
+  assert.deepEqual(body.dump, JSON.parse(BUNDLE));
 });
 
 // ---------------------------------------------------------------------------
