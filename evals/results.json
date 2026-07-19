@@ -1,6 +1,6 @@
 {
-  "passed": 103,
-  "total": 103,
+  "passed": 107,
+  "total": 107,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -510,6 +510,26 @@
     {
       "id": "negative-spacing-overlap",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "var-chain-resolution",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "composition-typography-carry",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "multi-tokensbyprop-refusals",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "rgba-stroke-emitter-fixes",
+      "claim": "C1-determinism",
       "pass": true
     },
     {

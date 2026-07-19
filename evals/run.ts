@@ -21,6 +21,20 @@ import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statS
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
+// COVERAGE ROUND pins (pure modules — no side effects at import):
+import {
+  customPropDefs,
+  parseModuleCss,
+  resolveToRef,
+  type TokenLookup,
+} from '../examples/polaris/scripts/lib-css.js';
+import {
+  ContractSchema,
+  resolveTokens as schemaResolveTokens,
+  type Contract as SchemaContract,
+  type Part as SchemaPart,
+} from '../scripts/contract-schema.js';
+import { validateContract as coreValidateContract } from '../core/emit-react.js';
 
 const ROOT = process.cwd();
 const SCRATCH = path.join(ROOT, 'evals', '.scratch');
@@ -2480,6 +2494,263 @@ const cases: Case[] = [
   // -------------------------------------------------------------------------
   // POLARIS SHOWCASE (examples/polaris) — the Phase A end-to-end artifact.
   // -------------------------------------------------------------------------
+  {
+    // COVERAGE ROUND workstream 1: var() chains resolve to SAME-PACKAGE
+    // literal definitions (depth-capped, cycles refused BY NAME, bounded
+    // calc() evaluated deterministically) — and the committed contracts
+    // carry the resulting facts (ProgressBar per-size heights, Avatar
+    // per-size widths) as schema-v14 literals with provenance.
+    id: 'var-chain-resolution',
+    claim: 'C5-extraction',
+    run: () => {
+      const rules = parseModuleCss(`
+        .Root {
+          --base: 16px;
+          --alias: var(--base);
+          --half: calc(var(--base) * 0.5);
+          --loop-a: var(--loop-b);
+          --loop-b: var(--loop-a);
+          --tok: var(--p-space-100);
+        }
+      `);
+      const defs = customPropDefs(rules, new Set(['Root']));
+      const lookup: TokenLookup = {
+        pathOfVar: (v) => (v === 'p-space-100' ? 'p.space-100' : undefined),
+      };
+      const chain = resolveToRef('var(--alias)', defs, lookup);
+      if (chain.kind !== 'literal' || chain.value !== '16px') {
+        throw new Error(`chain literal: expected 16px literal, got ${JSON.stringify(chain)}`);
+      }
+      if (!chain.via.includes('--alias') || !chain.via.includes('--base') || chain.defSelector !== '.Root') {
+        throw new Error(`chain literal provenance missing: ${JSON.stringify(chain)}`);
+      }
+      const calc = resolveToRef('var(--half)', defs, lookup);
+      if (calc.kind !== 'literal' || calc.value !== '8px') {
+        throw new Error(`calc over resolved literal: expected 8px, got ${JSON.stringify(calc)}`);
+      }
+      const cyc = resolveToRef('var(--loop-a)', defs, lookup);
+      if (cyc.kind !== 'refused' || !cyc.reason.includes('var() cycle') || !cyc.reason.includes('--loop-a')) {
+        throw new Error(`cycle must refuse BY NAME, got ${JSON.stringify(cyc)}`);
+      }
+      const tok = resolveToRef('var(--tok)', defs, lookup);
+      if (tok.kind !== 'ref' || tok.ref !== '{p.space-100}') {
+        throw new Error(`token chains must still resolve to refs, got ${JSON.stringify(tok)}`);
+      }
+      const raw = resolveToRef('4px', defs, lookup);
+      if (raw.kind !== 'refused' || !raw.reason.includes('never turned into an invented token')) {
+        throw new Error(`a RAW literal (no chain) must still refuse, got ${JSON.stringify(raw)}`);
+      }
+      // The committed contracts carry the resolved facts.
+      const pb = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/progress-bar.contract.json'), 'utf8'));
+      const pbMap = pb.anatomy.root.literalsByProp?.[0];
+      if (pbMap?.prop !== 'size' || pbMap.map.small?.height !== '8px' || pbMap.map.medium?.height !== '16px' || pbMap.map.large?.height !== '32px') {
+        throw new Error(`progress-bar per-size literal heights not carried: ${JSON.stringify(pb.anatomy.root.literalsByProp)}`);
+      }
+      const av = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/avatar.contract.json'), 'utf8'));
+      const avMap = av.anatomy.root.literalsByProp?.[0];
+      if (avMap?.prop !== 'size' || avMap.map.xs?.width !== '20px' || avMap.map.xl?.width !== '40px') {
+        throw new Error(`avatar per-size literal widths not carried: ${JSON.stringify(av.anatomy.root.literalsByProp)}`);
+      }
+      // NARROWED refusals: unresolvable vars name their class.
+      const ledger = readFileSync(path.join(ROOT, 'examples/polaris/extraction/PROMOTION.md'), 'utf8');
+      if (!ledger.includes('is RUNTIME-SET')) throw new Error('no RUNTIME-SET narrowed refusal in PROMOTION.md');
+      if (!/MEDIA-DEPENDENT|defined only in other class contexts/.test(ledger)) {
+        throw new Error('no narrowed media/class-context refusal in PROMOTION.md');
+      }
+    },
+  },
+  {
+    // COVERAGE ROUND workstream 2: composition-owned typography — Button's
+    // label typography flows through Polaris's Text primitive; the chain is
+    // deterministic (literal props in Button.tsx), so the committed contract
+    // carries it, resolved from Text's OWN CSS; runtime/multi-axis branches
+    // are refused by name in the ledger.
+    id: 'composition-typography-carry',
+    claim: 'C5-extraction',
+    run: () => {
+      const btn = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/button.contract.json'), 'utf8'));
+      const label = btn.anatomy.root.parts?.label;
+      if (!label) throw new Error('button contract has no label part');
+      if (label.tokens?.['font-size'] !== '{p.text-body-sm-font-size}') {
+        throw new Error(`label font-size not carried through Text: ${JSON.stringify(label.tokens)}`);
+      }
+      if (label.tokens?.['font-weight'] !== '{p.font-weight-medium}') {
+        throw new Error(`label font-weight not carried through Text: ${JSON.stringify(label.tokens)}`);
+      }
+      const entries = Array.isArray(label.tokensByProp) ? label.tokensByProp : [label.tokensByProp].filter(Boolean);
+      const sizeEntry = entries.find((e: { prop: string }) => e.prop === 'size');
+      if (sizeEntry?.map?.large?.['font-size'] !== '{p.text-body-md-font-size}') {
+        throw new Error(`size=large bodyMd upgrade not carried: ${JSON.stringify(entries)}`);
+      }
+      const variantEntry = entries.find((e: { prop: string }) => e.prop === 'variant');
+      if (variantEntry?.map?.plain?.['font-weight'] !== '{p.font-weight-regular}') {
+        throw new Error(`variant=plain regular weight not carried: ${JSON.stringify(entries)}`);
+      }
+      const ledger = readFileSync(path.join(ROOT, 'examples/polaris/extraction/PROMOTION.md'), 'utf8');
+      if (!ledger.includes('media-dependent RUNTIME branch')) {
+        throw new Error('the mdUp fontWeight branch must be a named refusal');
+      }
+      if (!ledger.includes('conditioned on BOTH variant and size')) {
+        throw new Error('the plain+size bodyMd branch must be a named two-axis refusal');
+      }
+      // Banner title rides Text headingSm the same way.
+      const banner = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/banner.contract.json'), 'utf8'));
+      if (banner.anatomy.root.parts?.title?.tokens?.['font-size'] !== '{p.text-heading-sm-font-size}') {
+        throw new Error('banner title headingSm typography not carried');
+      }
+    },
+  },
+  {
+    // COVERAGE ROUND workstream 3: multiple tokensByProp entries per part —
+    // ordered later-wins semantics, and the refusal rules: a conflicting
+    // channel+prop pair (same prop AND same channel in two entries, within
+    // tokensByProp or across tokensByProp/literalsByProp) refuses BY NAME.
+    id: 'multi-tokensbyprop-refusals',
+    claim: 'C2-refusal',
+    run: () => {
+      const mk = (rootExtra: Record<string, unknown>): SchemaContract =>
+        ContractSchema.parse({
+          id: 'ds.evalfixture',
+          name: 'EvalFixture',
+          version: '1.0.0',
+          description: 'Eval fixture.',
+          semantics: { element: 'div' },
+          props: [
+            {
+              name: 'size',
+              type: { enum: ['sm', 'lg'] },
+              default: 'sm',
+              bindings: { figma: { kind: 'VARIANT', property: 'Size' }, code: { prop: 'size' } },
+            },
+            {
+              name: 'variant',
+              type: { enum: ['a', 'b'] },
+              default: 'a',
+              bindings: { figma: { kind: 'VARIANT', property: 'Variant' }, code: { prop: 'variant' } },
+            },
+          ],
+          anatomy: { root: rootExtra },
+          anchors: {
+            figma: { fileKey: null, componentSetKey: null },
+            code: { importPath: 'src/components/EvalFixture', export: 'EvalFixture' },
+          },
+        });
+      // Ordered later-wins: two entries on DIFFERENT props overriding the
+      // same channel — the later entry wins for a combo carrying both.
+      const ok = mk({
+        tokens: { color: '{color.text.primary}' },
+        tokensByProp: [
+          { prop: 'variant', map: { b: { color: '{color.text.secondary}' } } },
+          { prop: 'size', map: { lg: { color: '{color.text.tertiary}' } } },
+        ],
+      });
+      const errs: string[] = [];
+      coreValidateContract(ok, new Map([[ok.id, ok]]), errs, new Map());
+      if (errs.length > 0) throw new Error(`clean multi-entry contract must validate: ${errs.join('; ')}`);
+      const resolved = schemaResolveTokens(ok.anatomy.root as SchemaPart, { variant: 'b', size: 'lg' });
+      if (resolved.color !== '{color.text.tertiary}') {
+        throw new Error(`later entry must win per channel, got ${resolved.color}`);
+      }
+      const resolvedFirst = schemaResolveTokens(ok.anatomy.root as SchemaPart, { variant: 'b', size: 'sm' });
+      if (resolvedFirst.color !== '{color.text.secondary}') {
+        throw new Error(`non-overridden combo must keep the earlier entry, got ${resolvedFirst.color}`);
+      }
+      // Conflicting channel+prop pair — refused by name.
+      const conflict = mk({
+        tokensByProp: [
+          { prop: 'size', map: { sm: { color: '{color.text.primary}' } } },
+          { prop: 'size', map: { lg: { color: '{color.text.secondary}' } } },
+        ],
+      });
+      const errs2: string[] = [];
+      coreValidateContract(conflict, new Map([[conflict.id, conflict]]), errs2, new Map());
+      if (!errs2.some((e) => e.includes('conflicting channel+prop pair'))) {
+        throw new Error(`same prop+channel in two entries must refuse by name; got: ${errs2.join('; ') || '(none)'}`);
+      }
+      // Cross-kind conflict (tokensByProp vs literalsByProp) — refused too.
+      const crossKind = mk({
+        tokensByProp: { prop: 'size', map: { sm: { height: '{size.control.sm}' } } },
+        literalsByProp: [{ prop: 'size', map: { lg: { height: '32px' } } }],
+      });
+      const errs3: string[] = [];
+      coreValidateContract(crossKind, new Map([[crossKind.id, crossKind]]), errs3, new Map());
+      if (!errs3.some((e) => e.includes('conflicting channel+prop pair'))) {
+        throw new Error(`token/literal same prop+channel must refuse by name; got: ${errs3.join('; ') || '(none)'}`);
+      }
+      // Literal channel whitelist — box-shadow is not a literal channel.
+      const badChannel = mk({ literals: { 'box-shadow': '0px' } });
+      const errs4: string[] = [];
+      coreValidateContract(badChannel, new Map([[badChannel.id, badChannel]]), errs4, new Map());
+      if (!errs4.some((e) => e.includes('not a literal channel'))) {
+        throw new Error(`non-whitelisted literal channel must refuse by name; got: ${errs4.join('; ') || '(none)'}`);
+      }
+      // Token + literal on the SAME base channel — ambiguous, refused.
+      const dupBase = mk({
+        tokens: { height: '{size.control.sm}' },
+        literals: { height: '16px' },
+      });
+      const errs5: string[] = [];
+      coreValidateContract(dupBase, new Map([[dupBase.id, dupBase]]), errs5, new Map());
+      if (!errs5.some((e) => e.includes('BOTH a token binding and a literal'))) {
+        throw new Error(`token+literal same base channel must refuse by name; got: ${errs5.join('; ') || '(none)'}`);
+      }
+      // The committed Text contract exercises the lift: variant AND
+      // fontWeight maps, in CSS source order (fontWeight later — Polaris's
+      // own cascade comment).
+      const text = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/text.contract.json'), 'utf8'));
+      const tEntries = text.anatomy.root.tokensByProp;
+      if (!Array.isArray(tEntries)) throw new Error('text contract must carry MULTIPLE tokensByProp entries');
+      const props = tEntries.map((e: { prop: string }) => e.prop);
+      if (!(props.includes('variant') && props.includes('fontWeight') && props.includes('tone'))) {
+        throw new Error(`text must carry variant+fontWeight+tone maps, got ${props.join(',')}`);
+      }
+      if (props.indexOf('fontWeight') < props.indexOf('variant')) {
+        throw new Error('fontWeight entry must come AFTER variant (CSS source order — later wins)');
+      }
+    },
+  },
+  {
+    // COVERAGE ROUND workstream 4: the filed Phase B emitter bugs are dead
+    // at the source — the emitted token script parses rgb()/rgba() verbatim
+    // values (alpha preserved), the emitted shape branch carries stroke +
+    // bindings and clears the default paint, and the Figma emitter binds the
+    // `background` channel the HTML surface always carried (Avatar).
+    id: 'rgba-stroke-emitter-fixes',
+    claim: 'C1-determinism',
+    run: () => {
+      const tokensScript = readFileSync(path.join(ROOT, 'examples/polaris/figma/00-tokens.figma.js'), 'utf8');
+      const m = tokensScript.match(/function hexToRgb[\s\S]*?\n\}/);
+      if (!m) throw new Error('00-tokens.figma.js has no hexToRgb');
+      const hexToRgb = new Function(`${m[0].replace('function hexToRgb', 'function __f')}; return __f;`)() as (
+        v: string,
+      ) => { r: number; g: number; b: number; a?: number };
+      const rgba = hexToRgb('rgba(0, 0, 0, 0.71)');
+      if (rgba.r !== 0 || rgba.a !== 0.71) throw new Error(`emitted parser must accept rgba(): ${JSON.stringify(rgba)}`);
+      const rgb = hexToRgb('rgb(145, 208, 255)');
+      if (Math.abs(rgb.g - 208 / 255) > 1e-9) throw new Error(`emitted parser must accept rgb(): ${JSON.stringify(rgb)}`);
+      const hex = hexToRgb('#ff0000');
+      if (hex.r !== 1 || hex.g !== 0) throw new Error(`emitted parser must still accept hex: ${JSON.stringify(hex)}`);
+      // NaN channels (the Phase B live failure) are impossible for either spelling.
+      for (const v of ['rgba(255, 255, 255, 1)', '#00000012']) {
+        const c = hexToRgb(v);
+        if ([c.r, c.g, c.b].some(Number.isNaN)) throw new Error(`NaN channel for ${v}`);
+      }
+      // Shape branch: stroke + bindings + default-paint clear (checkbox).
+      const checkbox = readFileSync(path.join(ROOT, 'examples/polaris/figma/checkbox.figma.js'), 'utf8');
+      const shapeBranch = checkbox.slice(checkbox.indexOf("spec.type === 'shape'"));
+      const shapeBody = shapeBranch.slice(0, shapeBranch.indexOf('} else {'));
+      if (!shapeBody.includes('spec.stroke')) throw new Error('shape branch must apply spec.stroke');
+      if (!shapeBody.includes('spec.bindings')) throw new Error('shape branch must apply spec.bindings');
+      if (!shapeBody.includes("node.fills = spec.fill ? [boundPaint(spec.fill, node)] : []")) {
+        throw new Error('shape branch must clear the default paint when no fill channel is carried');
+      }
+      // Cross-generator carry: Avatar's background binds on the canvas too.
+      const avatarScript = readFileSync(path.join(ROOT, 'examples/polaris/figma/avatar.figma.js'), 'utf8');
+      if (!avatarScript.includes('"fill": "p/color-avatar-one-bg-fill"')) {
+        throw new Error('avatar figma script must bind the background fill the HTML surface carries');
+      }
+    },
+  },
   {
     // Re-running the showcase generation from the COMMITTED contracts +
     // token wrap is byte-stable (every generated/react, generated/html and
