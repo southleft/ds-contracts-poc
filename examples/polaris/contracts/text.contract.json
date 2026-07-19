@@ -1,0 +1,343 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.text",
+  "name": "Text",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Text/Text.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "semantics": {
+    "element": "p"
+  },
+  "props": [
+    {
+      "name": "alignment",
+      "description": "Adjust horizontal alignment of text",
+      "type": {
+        "enum": [
+          "start",
+          "center",
+          "end",
+          "justify"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Alignment",
+          "values": {
+            "start": "Start",
+            "center": "Center",
+            "end": "End",
+            "justify": "Justify"
+          }
+        },
+        "code": {
+          "prop": "alignment"
+        }
+      }
+    },
+    {
+      "name": "as",
+      "description": "The element type",
+      "type": {
+        "enum": [
+          "dt",
+          "dd",
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "p",
+          "span",
+          "strong",
+          "legend"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "As",
+          "values": {
+            "dt": "Dt",
+            "dd": "Dd",
+            "h1": "H1",
+            "h2": "H2",
+            "h3": "H3",
+            "h4": "H4",
+            "h5": "H5",
+            "h6": "H6",
+            "p": "P",
+            "span": "Span",
+            "strong": "Strong",
+            "legend": "Legend"
+          }
+        },
+        "code": {
+          "prop": "as"
+        }
+      }
+    },
+    {
+      "name": "breakWord",
+      "description": "Prevent text from overflowing",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Break Word"
+        },
+        "code": {
+          "prop": "breakWord"
+        }
+      }
+    },
+    {
+      "name": "tone",
+      "description": "Adjust tone of text",
+      "type": {
+        "enum": [
+          "base",
+          "disabled",
+          "inherit",
+          "success",
+          "critical",
+          "caution",
+          "subdued",
+          "text-inverse",
+          "text-inverse-secondary",
+          "magic",
+          "magic-subdued"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone",
+          "values": {
+            "base": "Base",
+            "disabled": "Disabled",
+            "inherit": "Inherit",
+            "success": "Success",
+            "critical": "Critical",
+            "caution": "Caution",
+            "subdued": "Subdued",
+            "text-inverse": "Text Inverse",
+            "text-inverse-secondary": "Text Inverse Secondary",
+            "magic": "Magic",
+            "magic-subdued": "Magic Subdued"
+          }
+        },
+        "code": {
+          "prop": "tone"
+        }
+      }
+    },
+    {
+      "name": "fontWeight",
+      "description": "Adjust weight of text",
+      "type": {
+        "enum": [
+          "regular",
+          "medium",
+          "semibold",
+          "bold"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Font Weight",
+          "values": {
+            "regular": "Regular",
+            "medium": "Medium",
+            "semibold": "Semibold",
+            "bold": "Bold"
+          }
+        },
+        "code": {
+          "prop": "fontWeight"
+        }
+      }
+    },
+    {
+      "name": "numeric",
+      "description": "Use a numeric font variant with monospace appearance",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Numeric"
+        },
+        "code": {
+          "prop": "numeric"
+        }
+      }
+    },
+    {
+      "name": "truncate",
+      "description": "Truncate text overflow with ellipsis",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Truncate"
+        },
+        "code": {
+          "prop": "truncate"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "description": "Typographic style of text",
+      "type": {
+        "enum": [
+          "headingXs",
+          "headingSm",
+          "headingMd",
+          "headingLg",
+          "headingXl",
+          "heading2xl",
+          "heading3xl",
+          "bodyXs",
+          "bodySm",
+          "bodyMd",
+          "bodyLg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "headingXs": "Heading Xs",
+            "headingSm": "Heading Sm",
+            "headingMd": "Heading Md",
+            "headingLg": "Heading Lg",
+            "headingXl": "Heading Xl",
+            "heading2xl": "Heading2xl",
+            "heading3xl": "Heading3xl",
+            "bodyXs": "Body Xs",
+            "bodySm": "Body Sm",
+            "bodyMd": "Body Md",
+            "bodyLg": "Body Lg"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "visuallyHidden",
+      "description": "Visually hide the text",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Visually Hidden"
+        },
+        "code": {
+          "prop": "visuallyHidden"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokensByProp": {
+        "prop": "variant",
+        "map": {
+          "headingXs": {
+            "font-size": "{p.text-heading-xs-font-size}",
+            "font-weight": "{p.text-heading-xs-font-weight}",
+            "line-height": "{p.text-heading-xs-font-line-height}",
+            "letter-spacing": "{p.text-heading-xs-font-letter-spacing}"
+          },
+          "headingSm": {
+            "font-size": "{p.text-heading-sm-font-size}",
+            "font-weight": "{p.text-heading-sm-font-weight}",
+            "line-height": "{p.text-heading-sm-font-line-height}",
+            "letter-spacing": "{p.text-heading-sm-font-letter-spacing}"
+          },
+          "headingMd": {
+            "font-size": "{p.text-heading-md-font-size}",
+            "font-weight": "{p.text-heading-md-font-weight}",
+            "line-height": "{p.text-heading-md-font-line-height}",
+            "letter-spacing": "{p.text-heading-md-font-letter-spacing}"
+          },
+          "headingLg": {
+            "font-size": "{p.text-heading-lg-font-size}",
+            "font-weight": "{p.text-heading-lg-font-weight}",
+            "line-height": "{p.text-heading-lg-font-line-height}",
+            "letter-spacing": "{p.text-heading-lg-font-letter-spacing}"
+          },
+          "headingXl": {
+            "font-size": "{p.font-size-500}",
+            "font-weight": "{p.font-weight-semibold}",
+            "line-height": "{p.font-line-height-600}",
+            "letter-spacing": "{p.font-letter-spacing-dense}"
+          },
+          "heading2xl": {
+            "font-size": "{p.font-size-600}",
+            "font-weight": "{p.font-weight-bold}",
+            "line-height": "{p.font-line-height-800}",
+            "letter-spacing": "{p.font-letter-spacing-dense}"
+          },
+          "heading3xl": {
+            "font-size": "{p.font-size-750}",
+            "font-weight": "{p.font-weight-bold}",
+            "line-height": "{p.font-line-height-1000}",
+            "letter-spacing": "{p.font-letter-spacing-denser}"
+          },
+          "bodyXs": {
+            "font-size": "{p.text-body-xs-font-size}",
+            "font-weight": "{p.text-body-xs-font-weight}",
+            "line-height": "{p.text-body-xs-font-line-height}",
+            "letter-spacing": "{p.text-body-xs-font-letter-spacing}"
+          },
+          "bodySm": {
+            "font-size": "{p.text-body-sm-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-sm-font-line-height}",
+            "letter-spacing": "{p.text-body-sm-font-letter-spacing}"
+          },
+          "bodyMd": {
+            "font-size": "{p.text-body-md-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-md-font-line-height}",
+            "letter-spacing": "{p.text-body-md-font-letter-spacing}"
+          },
+          "bodyLg": {
+            "font-size": "{p.text-body-lg-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-lg-font-line-height}",
+            "letter-spacing": "{p.text-body-lg-font-letter-spacing}"
+          }
+        }
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "text": "Online store dashboard"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Text/Text",
+      "export": "Text"
+    }
+  }
+}

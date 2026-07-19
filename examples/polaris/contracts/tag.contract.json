@@ -1,0 +1,86 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.tag",
+  "name": "Tag",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "disabled",
+      "description": "Disables the tag",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "accessibilityLabel",
+      "description": "A string to use when tag has more than textual content",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Accessibility Label"
+        },
+        "code": {
+          "prop": "accessibilityLabel"
+        }
+      }
+    },
+    {
+      "name": "url",
+      "description": "Url to navigate to when tag is clicked or keypressed.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Url"
+        },
+        "code": {
+          "prop": "url"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center"
+      },
+      "tokens": {
+        "background-color": "{p.color-bg-fill-tertiary}",
+        "color": "{p.color-text}",
+        "border-radius": "{p.border-radius-200}"
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "text": "Wholesale"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Tag/Tag",
+      "export": "Tag"
+    }
+  }
+}
