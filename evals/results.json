@@ -1,6 +1,6 @@
 {
-  "passed": 116,
-  "total": 116,
+  "passed": 118,
+  "total": 118,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -580,6 +580,16 @@
     {
       "id": "canvas-gate-standing-pin",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "journey-engineer",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "journey-designer",
+      "claim": "C8-journey",
       "pass": true
     }
   ]

@@ -1,0 +1,11 @@
+/* Placeholder — replaced by the consumer's token build.
+ * Generated components reference design tokens as CSS custom properties
+ * (var(--token-path-with-hyphens)); define them here, e.g.:
+ *
+ *   :root {
+ *     --bg-brand-default: #0e61ba;
+ *   }
+ *
+ * The journey-engineer eval overwrites this file with the values captured
+ * from the Figma dump, so computed styles are checked against design truth.
+ */
