@@ -664,6 +664,9 @@
                         "cursor": "default"
                       },
                       "tokens": {
+                        "font-size": "{imported.shared.size-13}",
+                        "font-weight": "{imported.shared.num-450}",
+                        "line-height": "{imported.shared.size-20}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}"
                       },
@@ -769,6 +772,9 @@
                           ],
                           "tokens": {
                             "color": "{imported.shared.color-616161}",
+                            "font-size": "{imported.shared.size-13}",
+                            "font-weight": "{imported.shared.num-450}",
+                            "line-height": "{imported.shared.size-20}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}"
                           }
@@ -890,6 +896,9 @@
                           ],
                           "tokens": {
                             "color": "{imported.shared.color-616161}",
+                            "font-size": "{imported.shared.size-13}",
+                            "font-weight": "{imported.shared.num-450}",
+                            "line-height": "{imported.shared.size-20}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}"
                           }
@@ -1001,8 +1010,8 @@
                         "border-right-width": "{imported.shared.size-0}",
                         "border-top-width": "{imported.shared.size-0}",
                         "color": "{imported.text-field.clearbutton.color}",
-                        "font-size": "{imported.text-field.clearbutton.font-size}",
-                        "line-height": "{imported.text-field.clearbutton.line-height}",
+                        "font-size": "{imported.shared.size-13}",
+                        "line-height": "{imported.shared.size-20}",
                         "margin-left": "{imported.shared.size-4}",
                         "margin-right": "{imported.shared.size-12}",
                         "min-height": "{imported.shared.size-0}",

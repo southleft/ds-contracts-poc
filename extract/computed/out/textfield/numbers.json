@@ -13,15 +13,15 @@
     "labelled__labelwrapper": 9,
     "label": 2,
     "label__text": 6,
-    "label-2": 6,
+    "label-2": 9,
     "connected": 9,
     "connected__item": 7,
     "textfield": 10,
     "prefix": 21,
-    "label-3": 15,
+    "label-3": 18,
     "input": 23,
     "suffix": 21,
-    "label-4": 15,
+    "label-4": 18,
     "clearbutton": 44,
     "label-5": 17,
     "icon": 10,
@@ -466,8 +466,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 47,
-    "mintedLeavesFolded": 49
+    "mintedLeavesUnfolded": 48,
+    "mintedLeavesFolded": 50
   },
   "bound": {
     "cellsChecked": 480,
@@ -476,11 +476,11 @@
     "untriaged": 32
   },
   "minted": {
-    "leaves": 49,
-    "baseBindings": 104,
+    "leaves": 50,
+    "baseBindings": 113,
     "stateBindings": 97,
     "byShape": {
-      "uniform": 190,
+      "uniform": 199,
       "perAxis": 8,
       "perPair": 0,
       "refused": 3
@@ -582,7 +582,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 81.36194029850746,
+    "computedPctEqual": 82.00648414985591,
     "rowsFullyEqual": 0,
     "rows": 256,
     "pixelPerfectExact": 0,
