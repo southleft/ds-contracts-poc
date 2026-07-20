@@ -113,6 +113,9 @@ function mergeTrees(docs: Record<string, unknown>[]): Record<string, unknown> {
 }
 
 const captured = capturedTokensFromDump(dump);
+// Full captured-value index (path → resolved value) for the class-①
+// mint routing in SESSION proposals (stage A's batch builds its own).
+const sessionCapturedValues = new Map((captured?.entries ?? []).map((e) => [e.path, e.value] as const));
 const capturedRegistered = (captured?.entries ?? []).filter((e) => !repoInventory.has(e.path));
 const capturedTree: Record<string, unknown> = {};
 for (const e of capturedRegistered) {
@@ -621,6 +624,11 @@ function importSet(session: Session, setName: string): ImportResult {
   try {
     const proposal = proposeFromDump(set as never, {
       corpus,
+      // Captured-variable resolved values (class ① mint routing) — sessions
+      // call proposeFromDump directly, so the index the batch entry builds
+      // automatically must be threaded here too (without it a session
+      // proposal drops the very fills stage A carries).
+      capturedValues: sessionCapturedValues,
       contractIdByName: new Map([...loaded.byName, ...session.idByName]),
       contractIdByKey: new Map([...loaded.byKey, ...session.idByKey]),
       // Stubs at LOWER precedence (spread first — a real contract with the

@@ -166,6 +166,11 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     receipts.capturedShadowed.push(...withCaptured.shadowed);
 
     const result = proposeFromDump(set, {
+      // Captured-variable resolved values (class ① mint routing): a bound
+      // paint whose refs refuse unification survives as per-variant minted
+      // literals instead of dropping — the same index proposeBatchFromDump
+      // builds automatically; direct proposeFromDump callers thread it.
+      capturedValues: new Map((captured?.entries ?? []).map((e) => [e.path, e.value] as const)),
       corpus: d.corpus,
       // The SESSION registries — repo + every previously registered proposal:
       // nested instances LINK (componentSetKey first, drawn-name fallback)

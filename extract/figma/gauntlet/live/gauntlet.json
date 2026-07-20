@@ -5138,7 +5138,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 5,
-    "geometrySkipNotes": 4,
+    "geometrySkipNotes": 6,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
@@ -5367,7 +5367,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 5,
-    "geometrySkipNotes": 1,
+    "geometrySkipNotes": 2,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Badge Notification"
@@ -5399,7 +5399,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 5,
-    "geometrySkipNotes": 1,
+    "geometrySkipNotes": 2,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Badge Notification"
@@ -5431,7 +5431,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 5,
-    "geometrySkipNotes": 1,
+    "geometrySkipNotes": 2,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Badge Notification"
@@ -5463,7 +5463,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 5,
-    "geometrySkipNotes": 1,
+    "geometrySkipNotes": 2,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Badge Notification"
@@ -5801,7 +5801,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 6,
-    "geometrySkipNotes": 2,
+    "geometrySkipNotes": 3,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Checkbox-icon"
@@ -5869,7 +5869,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 6,
-    "geometrySkipNotes": 4,
+    "geometrySkipNotes": 5,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
@@ -6083,7 +6083,7 @@
    "adversarial": {
     "parentFirstStubs": 4,
     "stubGeometryMints": 10,
-    "geometrySkipNotes": 1,
+    "geometrySkipNotes": 2,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
@@ -6127,7 +6127,7 @@
    "adversarial": {
     "parentFirstStubs": 6,
     "stubGeometryMints": 17,
-    "geometrySkipNotes": 3,
+    "geometrySkipNotes": 5,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
@@ -6163,7 +6163,7 @@
    "adversarial": {
     "parentFirstStubs": 4,
     "stubGeometryMints": 10,
-    "geometrySkipNotes": 1,
+    "geometrySkipNotes": 2,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
@@ -6478,7 +6478,7 @@
    "adversarial": {
     "parentFirstStubs": 2,
     "stubGeometryMints": 6,
-    "geometrySkipNotes": 2,
+    "geometrySkipNotes": 3,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
@@ -6811,7 +6811,7 @@
    "adversarial": {
     "parentFirstStubs": 5,
     "stubGeometryMints": 12,
-    "geometrySkipNotes": 3,
+    "geometrySkipNotes": 4,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
     "firstChild": "Icon"
