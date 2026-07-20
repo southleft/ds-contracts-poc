@@ -1018,7 +1018,21 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // genuinely fixed shapes like Avatar). min-width: fit-content keeps the
   // component from collapsing below its content's floor (e.g. table cells'
   // min-widths); containers narrower than that should scroll.
-  if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
+  // Live-gauntlet class ⑤ (linked-icon-wrapper-collapses): a SLOT-ONLY root
+  // carrying BOTH height and max-width is a drawn FIXED wrapper (CBDS Icon).
+  // Its content floor is the DRAWN box — every max-width declaration mirrors
+  // onto min-width (the stub discipline's observed-geometry floor) instead of
+  // fit-content, which is 0 for an empty slot. Fluid slot containers (no
+  // height binding) keep the fit-content floor. Mirrors core/emit-html.ts.
+  const slotWrapperFloor =
+    'max-width' in rootTokens &&
+    'height' in rootTokens &&
+    Object.keys(root.parts ?? {}).length > 0 &&
+    Object.values(root.parts ?? {}).every((p) => p.slot !== undefined);
+  if ('max-width' in rootTokens) {
+    rootDecls.push('width: 100%');
+    if (!slotWrapperFloor) rootDecls.push('min-width: fit-content');
+  }
   // v15: a declared cursor fact is authoritative — the emitter's own button
   // chrome (cursor: pointer, and the :disabled not-allowed rule below) yields
   // to it. The declared fact is captured truth; the chrome was a convention.
@@ -1042,6 +1056,8 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
 
   for (const [cssProp, ref] of Object.entries(rootTokens)) {
     const refPath = stripBraces(ref);
+    // slot-wrapper floor (class ⑤): root max-width mirrors onto min-width.
+    const floorMirror = slotWrapperFloor && cssProp === 'max-width';
     // overlap on the ROOT (P21, proposed avatar-group shape): the gap token
     // becomes a negative child margin (CSS gap cannot be negative); the
     // canvas side uses negative itemSpacing — same projection as nested
@@ -1063,6 +1079,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     if (phs.length === 0) {
       if (checkToken(refPath, `anatomy.root.tokens.${cssProp}`)) {
         rootDecls.push(`${cssProp}: ${cssVar(refPath)}`);
+        if (floorMirror) rootDecls.push(`min-width: ${cssVar(refPath)}`);
       }
     } else if (phs.length === 1) {
       const values = enums.get(phs[0]);
@@ -1076,6 +1093,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         const cls = `${phs[0]}-${value}`;
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+        if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(resolved));
       }
     } else if (phs.length === 2) {
       // Two-axis root token (e.g. a minted background = f(variant, state)):
@@ -1153,6 +1171,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const refPath = stripBraces(ref);
+        const floorMirror = slotWrapperFloor && cssProp === 'max-width';
         // S2 capability lift: a map ref carrying ONE placeholder (validated
         // as a different declared enum prop) expands as compound enum-class
         // rules — the two-placeholder root-token projection with one axis
@@ -1169,6 +1188,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
             const cls = `${tbpProp}-${value}.${phs[0]}-${phValue}`;
             if (!enumRules.has(cls)) enumRules.set(cls, new Map());
             enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+            if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(resolved));
           }
           continue;
         }
@@ -1176,6 +1196,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         const cls = `${tbpProp}-${value}`;
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, cssVar(refPath));
+        if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(refPath));
       }
     }
   }

@@ -947,6 +947,25 @@ const cases: Case[] = [
     },
   },
   {
+    // HEAL ROUND, live-gauntlet class ⑤ (linked-icon-wrapper-collapses):
+    // linking must never render worse than stubbing. The CBDS Icon wrapper
+    // (slot-only root, drawn FIXED box: height + max-width bindings)
+    // rendered ZERO-SIZE when its slot was empty — min-width: fit-content
+    // is 0 without content — and Icon Button collapsed to a 16×48 pill
+    // (54.7–63.4% masked, 180 rows). Every root max-width now mirrors onto
+    // min-width for such wrappers (the stub discipline's observed-geometry
+    // floor); fluid slot containers (no height binding — List/Toast/
+    // Toolbar) keep fit-content, so repo output is untouched.
+    id: 'slot-wrapper-floor',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/slot-wrapper-floor-check.ts']);
+      if (r.status !== 0 || !r.out.includes('slot-wrapper-floor ok:')) {
+        throw new Error(`slot-wrapper-floor check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,

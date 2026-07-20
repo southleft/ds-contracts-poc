@@ -152,7 +152,25 @@ function componentCss(contract: Contract): string[] {
   }
   if ('border-width' in rootTokens || 'border-color' in rootTokens) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
-  if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
+  // Live-gauntlet class ⑤ (linked-icon-wrapper-collapses): a SLOT-ONLY root
+  // that carries BOTH height and max-width is a drawn FIXED wrapper (CBDS
+  // Icon — an INSTANCE_SWAP shell whose bound width the fluid convention
+  // demoted to max-width). Its content floor is the DRAWN box, not
+  // fit-content: with the slot empty (or its default a geometry-less stub),
+  // fit-content is 0 and a LINKED child renders worse than a stub —
+  // Icon Button collapsed to a 16×48 pill. Every max-width declaration
+  // (base + per-value) mirrors onto min-width instead — the stub
+  // discipline's observed-geometry floor, named here. Fluid slot containers
+  // (List, Toast, Toolbar — no height binding) keep the fit-content floor.
+  const slotWrapperFloor =
+    'max-width' in rootTokens &&
+    'height' in rootTokens &&
+    Object.keys(root.parts ?? {}).length > 0 &&
+    Object.values(root.parts ?? {}).every((p) => p.slot !== undefined);
+  if ('max-width' in rootTokens) {
+    rootDecls.push('width: 100%');
+    if (!slotWrapperFloor) rootDecls.push('min-width: fit-content');
+  }
   // v15: a declared cursor fact is authoritative — the emitter's own button
   // chrome (cursor: pointer, :disabled not-allowed) yields to it (mirrors
   // core/emit-react.ts generateCss).
@@ -190,14 +208,19 @@ function componentCss(contract: Contract): string[] {
       continue;
     }
     const phs = placeholdersIn(refPath);
+    // slot-wrapper floor (class ⑤): every root max-width mirrors onto
+    // min-width — the drawn fixed box is the empty slot's content floor.
+    const floorMirror = slotWrapperFloor && cssProp === 'max-width';
     if (phs.length === 0) {
       rootDecls.push(`${cssProp}: ${cssVar(refPath)}`);
+      if (floorMirror) rootDecls.push(`min-width: ${cssVar(refPath)}`);
     } else if (phs.length === 1) {
       for (const value of enums.get(phs[0]) ?? []) {
         const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
         const key = `${phs[0]} ${value}`;
         const entry = enumRules.get(key) ?? { prop: phs[0], value, decls: [] };
         entry.decls.push(`${cssProp}: ${cssVar(resolved)}`);
+        if (floorMirror) entry.decls.push(`min-width: ${cssVar(resolved)}`);
         enumRules.set(key, entry);
       }
     } else if (phs.length === 2) {
@@ -247,12 +270,15 @@ function componentCss(contract: Contract): string[] {
         // the two-placeholder root-token projection with one axis pinned by
         // the map. Compound rules land with pairRules (after enum rules).
         const phs = placeholdersIn(refPath);
+        const floorMirror = slotWrapperFloor && cssProp === 'max-width';
         if (phs.length === 1) {
           for (const phValue of enums.get(phs[0]) ?? []) {
             const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
             pairRules.push({
               selector: `${enumCls(tbpProp, value)}${enumCls(phs[0], phValue)}`,
-              decls: [`${cssProp}: ${cssVar(resolved)}`],
+              decls: floorMirror
+                ? [`${cssProp}: ${cssVar(resolved)}`, `min-width: ${cssVar(resolved)}`]
+                : [`${cssProp}: ${cssVar(resolved)}`],
             });
           }
           continue;
@@ -260,6 +286,7 @@ function componentCss(contract: Contract): string[] {
         const key = `${tbpProp} ${value}`;
         const entry = enumRules.get(key) ?? { prop: tbpProp, value, decls: [] };
         entry.decls.push(`${cssProp}: ${cssVar(refPath)}`);
+        if (floorMirror) entry.decls.push(`min-width: ${cssVar(refPath)}`);
         enumRules.set(key, entry);
       }
     }

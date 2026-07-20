@@ -151,6 +151,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const enumsByName = new Map(enums.map((p) => [p.name, p.type.enum]));
   const usedAnimations = new Set<string>();
 
+  /** Slot-wrapper floor predicate (live-gauntlet class ⑤) — see the root
+   *  max-width handling below; shared with the tokensByProp per-value pass. */
+  const slotWrapperFloorOf = (part: Part): boolean =>
+    'max-width' in (part.tokens ?? {}) &&
+    'height' in (part.tokens ?? {}) &&
+    Object.keys(part.parts ?? {}).length > 0 &&
+    Object.values(part.parts ?? {}).every((pp) => pp.slot !== undefined);
+
   const compilePart = (partName: string, part: Part, isRoot: boolean) => {
     const s: StyleRecord = {};
     if (isRoot) {
@@ -172,7 +180,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) s.margin = 0;
       if ('border-width' in rootTokens || 'border-color' in rootTokens) s.borderStyle = 'solid';
       else s.border = 0;
-      if ('max-width' in rootTokens) { s.width = '100%'; s.minWidth = 'fit-content'; }
+      // Slot-wrapper floor (live-gauntlet class ⑤): a SLOT-ONLY root with
+      // BOTH height and max-width is a drawn FIXED wrapper — an empty slot's
+      // fit-content floor is 0, so the drawn box (the max-width value) is
+      // the floor instead. Mirrors emit-html/emit-react generateCss; the
+      // per-value maxWidth overrides mirror below in the tokensByProp pass.
+      const slotWrapperFloor = slotWrapperFloorOf(part);
+      if ('max-width' in rootTokens) {
+        s.width = '100%';
+        if (slotWrapperFloor) {
+          const base = stripBraces(rootTokens['max-width']);
+          if (placeholdersIn(base).length === 0) s.minWidth = resolveValue(base);
+        } else {
+          s.minWidth = 'fit-content';
+        }
+      }
       if (contract.semantics.element === 'button') s.cursor = 'pointer';
       if (
         walkAnatomy(contract).some(
@@ -282,6 +304,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         const decls: StyleRecord = {};
         for (const [cssProp, ref] of Object.entries(overrides)) {
           decls[camel(cssProp)] = resolveValue(stripBraces(ref));
+          if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
+            decls.minWidth = resolveValue(stripBraces(ref));
+          }
         }
         addVariant(entry.prop, value, partName, decls);
       }
