@@ -1,0 +1,112 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Tooltip/Tooltip.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "delay",
+      "description": "Delay before showing on hover (ms)",
+      "type": "number",
+      "default": 200,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Delay"
+        },
+        "code": {
+          "prop": "delay"
+        }
+      }
+    },
+    {
+      "name": "hideDelay",
+      "description": "Delay before hiding after mouse/focus leave (ms)",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Hide Delay"
+        },
+        "code": {
+          "prop": "hideDelay"
+        }
+      }
+    },
+    {
+      "name": "isEnabled",
+      "description": "Whether the tooltip is enabled.\nWhen false, hover/focus triggers are disabled.",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Enabled"
+        },
+        "code": {
+          "prop": "isEnabled"
+        }
+      }
+    },
+    {
+      "name": "isOpen",
+      "description": "Controlled open state. When provided, overrides hover/focus triggers:\n- `true`: force-show the tooltip (hover/focus hide is suppressed)\n- `false`: force-hide the tooltip\n- `undefined`: uncontrolled — hover/focus triggers manage visibility",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Open"
+        },
+        "code": {
+          "prop": "isOpen"
+        }
+      }
+    },
+    {
+      "name": "isDefaultOpen",
+      "description": "Whether the tooltip should be shown on mount.\nThe tooltip is still dismissible — this just opens it initially.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Default Open"
+        },
+        "code": {
+          "prop": "isDefaultOpen"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "openChange",
+      "description": "Callback fired when tooltip visibility changes.\nCalled with `true` when shown and `false` when hidden.",
+      "bindings": {
+        "code": {
+          "prop": "onOpenChange"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Tooltip/Tooltip",
+      "export": "Tooltip"
+    }
+  }
+}

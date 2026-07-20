@@ -1,0 +1,83 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Avatar/Avatar.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "alt",
+      "description": "The alt text shown on hover and made accessible to screen readers.\nFalls back to `name` if not provided.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Alt"
+        },
+        "code": {
+          "prop": "alt"
+        }
+      }
+    },
+    {
+      "name": "fallbackSrc",
+      "description": "Fallback image source when primary `src` fails to load.\nIf this also fails, shows initials derived from `name`.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Fallback Src"
+        },
+        "code": {
+          "prop": "fallbackSrc"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "The user's name. Used for:\n- Generating initials when no image is available\n- Default alt text if `alt` is not provided",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "src",
+      "description": "The primary image source for the avatar.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Src"
+        },
+        "code": {
+          "prop": "src"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Avatar/Avatar",
+      "export": "Avatar"
+    }
+  }
+}

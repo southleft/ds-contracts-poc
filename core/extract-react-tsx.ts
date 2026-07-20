@@ -37,6 +37,56 @@ import type { ExtractedComponent, ExtractedProp } from '../extract/types.js';
 interface TypeTable {
   interfaces: Map<string, ts.InterfaceDeclaration>;
   aliases: Map<string, ts.TypeAliasDeclaration>;
+  /** Const object values reachable in module scope, pre-read to their key
+   *  sets — the `keyof typeof X` resolution table (KEYOF-ENUM RULE). */
+  valueObjects: Map<string, ValueObjectInfo>;
+}
+
+/** A `const X = {…}` (or `const X = factory({…})`) the module declares —
+ *  everything `keyof typeof X` needs, read once at collect time. */
+interface ValueObjectInfo {
+  /** The enumerable key set, or null when it cannot be enumerated. */
+  keys: string[] | null;
+  /** Callee name when the object literal sits inside a single-argument call
+   *  (`stylex.create({…})`, `StyleSheet.create({…})`) — the key-preserving-
+   *  factory heuristic; receipted so a human reviews the assumption. */
+  viaCall?: string;
+  /** Why keys is null — named, never silent. */
+  refusal?: string;
+}
+
+/** Enumerable keys of an object literal — or a named refusal. Spreads and
+ *  computed names make the key set non-enumerable syntactically. */
+function objectLiteralKeys(obj: ts.ObjectLiteralExpression): { keys: string[] | null; refusal?: string } {
+  const keys: string[] = [];
+  for (const prop of obj.properties) {
+    if (ts.isSpreadAssignment(prop)) {
+      return { keys: null, refusal: 'object literal contains a spread — key set not enumerable syntactically' };
+    }
+    const name = prop.name;
+    if (!name || !(ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name))) {
+      return { keys: null, refusal: 'object literal has a computed/non-literal key — key set not enumerable syntactically' };
+    }
+    keys.push(name.text);
+  }
+  return keys.length > 0 ? { keys } : { keys: null, refusal: 'object literal has no keys' };
+}
+
+/** Enumerable keys of an interface/type-literal member list. Index
+ *  signatures make the key set open — a named refusal. */
+function memberKeys(members: readonly ts.TypeElement[], subject: string): { keys: string[] | null; refusal?: string } {
+  const keys: string[] = [];
+  for (const m of members) {
+    if (ts.isIndexSignatureDeclaration(m)) {
+      return { keys: null, refusal: `${subject} has an index signature — key set is open, not enumerable` };
+    }
+    const name = (m as { name?: ts.PropertyName }).name;
+    if (!name || !(ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name))) {
+      return { keys: null, refusal: `${subject} has a computed/non-literal member name — key set not enumerable` };
+    }
+    keys.push(name.text);
+  }
+  return keys.length > 0 ? { keys } : { keys: null, refusal: `${subject} declares no members — keyof is empty` };
 }
 
 /** Merge one or more source files' type declarations into a single table.
@@ -49,15 +99,95 @@ interface TypeTable {
 function collectTypes(sfs: ts.SourceFile | ts.SourceFile[]): TypeTable {
   const interfaces = new Map<string, ts.InterfaceDeclaration>();
   const aliases = new Map<string, ts.TypeAliasDeclaration>();
+  const valueObjects = new Map<string, ValueObjectInfo>();
   for (const sf of Array.isArray(sfs) ? sfs : [sfs]) {
     const visit = (node: ts.Node) => {
       if (ts.isInterfaceDeclaration(node) && !interfaces.has(node.name.text)) interfaces.set(node.name.text, node);
       if (ts.isTypeAliasDeclaration(node) && !aliases.has(node.name.text)) aliases.set(node.name.text, node);
+      // KEYOF-ENUM RULE, value side: `const X = {…}` and `const X =
+      // factory({…})` register their key sets so `keyof typeof X` resolves.
+      if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer && !valueObjects.has(node.name.text)) {
+        let init: ts.Expression = node.initializer;
+        while (ts.isAsExpression(init) || ts.isSatisfiesExpression(init) || ts.isParenthesizedExpression(init)) {
+          init = init.expression;
+        }
+        if (ts.isObjectLiteralExpression(init)) {
+          valueObjects.set(node.name.text, objectLiteralKeys(init));
+        } else if (
+          ts.isCallExpression(init) &&
+          init.arguments.length === 1 &&
+          ts.isObjectLiteralExpression(init.arguments[0])
+        ) {
+          const read = objectLiteralKeys(init.arguments[0]);
+          valueObjects.set(node.name.text, { ...read, viaCall: init.expression.getText() });
+        }
+      }
       ts.forEachChild(node, visit);
     };
     visit(sf);
   }
-  return { interfaces, aliases };
+  return { interfaces, aliases, valueObjects };
+}
+
+/** KEYOF-ENUM RULE (Astryx round; the `(typeof X)[number]` analog): a prop
+ *  typed `keyof T` — directly, or behind a one-hop alias like `type
+ *  ButtonVariant = keyof ButtonVariantMap` / `keyof typeof sizeStyles` —
+ *  resolves to its concrete value set when the keyed subject is reachable in
+ *  module scope: an in-file interface/type literal (its member names) or an
+ *  in-file const object (its literal keys, incl. behind a single-argument
+ *  factory call — receipted as an assumption). Unresolvable targets return a
+ *  NAMED refusal, never a silent 'other'. */
+interface KeyofEnum {
+  values?: string[];
+  /** How the values were read — carried into the review receipt. */
+  via?: string;
+  /** Why they could not be — the named refusal. */
+  refusal?: string;
+}
+function keyofEnum(t: ts.TypeNode, table: TypeTable, hop = 0): KeyofEnum | null {
+  // One alias hop: `variant?: ButtonVariant` where `type ButtonVariant = keyof …`.
+  if (ts.isTypeReferenceNode(t) && ts.isIdentifier(t.typeName) && !t.typeArguments?.length && hop < 1) {
+    const alias = table.aliases.get(t.typeName.text);
+    return alias ? keyofEnum(alias.type, table, hop + 1) : null;
+  }
+  if (!ts.isTypeOperatorNode(t) || t.operator !== ts.SyntaxKind.KeyOfKeyword) return null;
+  const target = t.type;
+  if (ts.isTypeQueryNode(target) && ts.isIdentifier(target.exprName)) {
+    const name = target.exprName.text;
+    const vo = table.valueObjects.get(name);
+    if (!vo) {
+      return { refusal: `keyof typeof ${name}: "${name}" is not a const object readable in module scope` };
+    }
+    if (!vo.keys) return { refusal: `keyof typeof ${name}: ${vo.refusal}` };
+    return {
+      values: vo.keys,
+      via: vo.viaCall
+        ? `keys of the object literal passed to ${vo.viaCall}(…) — key-preserving factory ASSUMED`
+        : `keys of the in-file const object ${name}`,
+    };
+  }
+  if (ts.isTypeReferenceNode(target) && ts.isIdentifier(target.typeName) && !target.typeArguments?.length) {
+    const name = target.typeName.text;
+    const iface = table.interfaces.get(name);
+    if (iface) {
+      const read = memberKeys(iface.members, `interface ${name}`);
+      if (!read.keys) return { refusal: `keyof ${name}: ${read.refusal}` };
+      return { values: read.keys, via: `member names of the in-file interface ${name} (module augmentation may extend it)` };
+    }
+    const alias = table.aliases.get(name);
+    if (alias && ts.isTypeLiteralNode(alias.type)) {
+      const read = memberKeys(alias.type.members, `type ${name}`);
+      if (!read.keys) return { refusal: `keyof ${name}: ${read.refusal}` };
+      return { values: read.keys, via: `member names of the in-file type literal ${name}` };
+    }
+    return { refusal: `keyof ${name}: "${name}" does not resolve to an enumerable key set in module scope` };
+  }
+  if (ts.isTypeLiteralNode(target)) {
+    const read = memberKeys(target.members, 'type literal');
+    if (!read.keys) return { refusal: `keyof: ${read.refusal}` };
+    return { values: read.keys, via: 'member names of the inline type literal' };
+  }
+  return { refusal: `keyof ${target.getText()}: target shape is not syntactically enumerable` };
 }
 
 /** String-literal-union members of a type node, resolving local aliases one hop. */
@@ -81,12 +211,26 @@ function literalUnion(type: ts.TypeNode, table: TypeTable, hop = 0): string[] | 
 function classifyMember(
   member: ts.PropertySignature,
   table: TypeTable,
+  /** Per-member extraction receipts (keyof resolution assumptions and NAMED
+   *  refusals) — the caller prefixes the prop name and carries them into the
+   *  component notes so every heuristic and every refusal is reviewable. */
+  receipt?: (note: string) => void,
 ): Omit<ExtractedProp, 'name' | 'optional'> | null {
   if (!member.type) return { kind: 'other', confidence: 'declared' };
   const t = member.type;
   const viaAlias = ts.isTypeReferenceNode(t);
   const union = literalUnion(t, table);
   if (union) return { kind: 'enum', values: union, confidence: viaAlias ? 'inferred' : 'declared' };
+  // KEYOF-ENUM RULE: `keyof X` / `keyof typeof X` (directly or one alias hop).
+  const viaKeyof = keyofEnum(t, table);
+  if (viaKeyof) {
+    if (viaKeyof.values) {
+      receipt?.(`enum values resolved as ${viaKeyof.via} — review`);
+      return { kind: 'enum', values: viaKeyof.values, confidence: 'inferred' };
+    }
+    receipt?.(`keyof value set NOT carried — ${viaKeyof.refusal}; kind left 'other'`);
+    return { kind: 'other', confidence: 'declared' };
+  }
   if (t.kind === ts.SyntaxKind.BooleanKeyword) return { kind: 'boolean', confidence: 'declared' };
   if (t.kind === ts.SyntaxKind.StringKeyword) return { kind: 'string', confidence: 'declared' };
   if (t.kind === ts.SyntaxKind.NumberKeyword) return { kind: 'number', confidence: 'declared' };
@@ -213,10 +357,43 @@ interface MembersResult {
    *  hollow-extraction receipt names them (parent members are outside
    *  single-file extraction by design). */
   heritage: string[];
+  /** UNION-OF-REFS RULE: members that appear in only SOME branches of a
+   *  union props type — forced optional in the merged surface. */
+  forceOptional?: Set<string>;
+  /** The union-merge receipt, when the props type was a union of readable
+   *  alternatives — carried into component notes for review. */
+  unionNote?: string;
 }
 
 const heritageNames = (iface: ts.InterfaceDeclaration): string[] =>
   (iface.heritageClauses ?? []).flatMap((h) => h.types.map((t) => t.getText()));
+
+/** An interface's own members PLUS its same-table heritage chain (used by
+ *  the UNION-OF-REFS RULE, where branch interfaces conventionally extend a
+ *  shared same-file base — `SliderSingleProps extends SliderBaseProps`).
+ *  Heritage the table cannot read (generic parents like `BaseProps<T>`,
+ *  imported parents) is returned by NAME as unresolved — receipted, never
+ *  silently dropped. */
+function interfaceMembersDeep(
+  iface: ts.InterfaceDeclaration,
+  table: TypeTable,
+  hop: number,
+): { members: ts.PropertySignature[]; unresolved: string[] } {
+  const members = [...iface.members.filter(ts.isPropertySignature)];
+  const unresolved: string[] = [];
+  for (const h of (iface.heritageClauses ?? []).flatMap((c) => c.types)) {
+    const parent =
+      !h.typeArguments?.length && ts.isIdentifier(h.expression) ? table.interfaces.get(h.expression.text) : undefined;
+    if (parent && hop < 3) {
+      const r = interfaceMembersDeep(parent, table, hop + 1);
+      members.push(...r.members);
+      unresolved.push(...r.unresolved);
+    } else {
+      unresolved.push(h.getText());
+    }
+  }
+  return { members, unresolved };
+}
 
 /** Expand a type node to its property signatures. INTERSECTION-NAMED-REF
  *  RULE: a named reference inside an intersection (or behind an alias)
@@ -226,23 +403,83 @@ const heritageNames = (iface: ts.InterfaceDeclaration): string[] =>
  *  hands off: `ComponentProps<Slots>` / `Omit<X, 'y'>` TRANSFORM their
  *  target's members, so expanding the target would claim more than the type
  *  says — they are returned by name as unresolved, never guessed. */
-function expandMembers(
-  t: ts.TypeNode,
-  table: TypeTable,
-  hop: number,
-): { members: ts.PropertySignature[]; unresolved: string[] } {
+interface ExpandResult {
+  members: ts.PropertySignature[];
+  unresolved: string[];
+  forceOptional?: Set<string>;
+  unionNote?: string;
+}
+
+function expandMembers(t: ts.TypeNode, table: TypeTable, hop: number): ExpandResult {
   if (ts.isTypeLiteralNode(t)) return { members: t.members.filter(ts.isPropertySignature), unresolved: [] };
   if (ts.isIntersectionTypeNode(t)) {
     const members: ts.PropertySignature[] = [];
     const unresolved: string[] = [];
+    let forceOptional: Set<string> | undefined;
+    let unionNote: string | undefined;
     for (const part of t.types) {
       const r = expandMembers(part, table, hop);
       members.push(...r.members);
       unresolved.push(...r.unresolved);
+      if (r.forceOptional) forceOptional = new Set([...(forceOptional ?? []), ...r.forceOptional]);
+      unionNote ??= r.unionNote;
     }
-    return { members, unresolved };
+    return { members, unresolved, ...(forceOptional ? { forceOptional } : {}), ...(unionNote ? { unionNote } : {}) };
   }
   if (ts.isParenthesizedTypeNode(t)) return expandMembers(t.type, table, hop);
+  // UNION-OF-REFS RULE (Astryx round; the mutually-exclusive-API sibling of
+  // the intersection rule): `type SliderProps = SliderSingleProps |
+  // SliderRangeProps` merges the members of every READABLE branch (branch
+  // interfaces expand THROUGH their same-table heritage chain — the shared-
+  // base convention). Members missing from some readable branch are forced
+  // optional; every reference the table cannot read (imported branches,
+  // generic heritage) lands in `unresolved` — receipted, never guessed.
+  // Non-object branches (literals, primitives) keep the old behavior: the
+  // union is returned whole as one unresolved reference.
+  if (ts.isUnionTypeNode(t) && hop < 3) {
+    const branches = t.types.filter(
+      (b) => b.kind !== ts.SyntaxKind.UndefinedKeyword && !(ts.isLiteralTypeNode(b) && b.literal.kind === ts.SyntaxKind.NullKeyword),
+    );
+    const objectish = branches.every(
+      (b) =>
+        ts.isTypeLiteralNode(b) ||
+        ts.isIntersectionTypeNode(b) ||
+        ts.isParenthesizedTypeNode(b) ||
+        (ts.isTypeReferenceNode(b) && ts.isIdentifier(b.typeName)),
+    );
+    if (branches.length < 2 || !objectish) return { members: [], unresolved: [t.getText()] };
+    const perBranch: { name: string; members: ts.PropertySignature[] }[] = [];
+    const unresolved: string[] = [];
+    for (const b of branches) {
+      const iface =
+        ts.isTypeReferenceNode(b) && ts.isIdentifier(b.typeName) && !b.typeArguments?.length
+          ? table.interfaces.get(b.typeName.text)
+          : undefined;
+      const r = iface ? interfaceMembersDeep(iface, table, hop + 1) : expandMembers(b, table, hop + 1);
+      unresolved.push(...r.unresolved);
+      if (r.members.length > 0) perBranch.push({ name: b.getText(), members: r.members });
+    }
+    if (perBranch.length === 0) return { members: [], unresolved: unresolved.length > 0 ? unresolved : [t.getText()] };
+    const seen = new Map<string, ts.PropertySignature>();
+    const counts = new Map<string, number>();
+    for (const branch of perBranch) {
+      const inBranch = new Set<string>();
+      for (const m of branch.members) {
+        if (!m.name || !ts.isIdentifier(m.name)) continue;
+        if (inBranch.has(m.name.text)) continue; // heritage overrides within one branch
+        inBranch.add(m.name.text);
+        if (!seen.has(m.name.text)) seen.set(m.name.text, m);
+        counts.set(m.name.text, (counts.get(m.name.text) ?? 0) + 1);
+      }
+    }
+    const forceOptional = new Set([...counts].filter(([, n]) => n < perBranch.length).map(([name]) => name));
+    return {
+      members: [...seen.values()],
+      unresolved,
+      ...(forceOptional.size > 0 ? { forceOptional } : {}),
+      unionNote: `props type is a UNION of alternatives [${branches.map((b) => b.getText()).join(' | ')}] — members merged across readable branches; branch-specific members are forced optional (the mutually-exclusive alternative structure is NOT encoded in the contract; review)`,
+    };
+  }
   if (ts.isTypeReferenceNode(t) && ts.isIdentifier(t.typeName)) {
     if (!t.typeArguments?.length && hop < 3) {
       const iface = table.interfaces.get(t.typeName.text);
@@ -467,7 +704,7 @@ export function extractFromSource(
   const cvaTables = collectCvaTables(sf);
   for (const [componentName, propsType] of findComponents(sf)) {
     if (seen.has(componentName)) continue;
-    const { resolved, members, unresolved, heritage } = membersOf(propsType, table);
+    const { resolved, members, unresolved, heritage, forceOptional, unionNote } = membersOf(propsType, table);
     const typeNode = typeNodeOf(propsType, table);
     const cvaProps = typeNode ? cvaPropsFrom(typeNode, cvaTables) : [];
     // `VariantProps<typeof x>` reads through the cva table, not the type
@@ -518,6 +755,18 @@ export function extractFromSource(
         `props type composes named reference(s) [${unresolvedRefs.join(', ')}] whose members are outside module scope — those props are NOT carried (single-file extraction)`,
       );
     }
+    if (unionNote) componentNotes.push(unionNote);
+    // HERITAGE RECEIPT (Astryx round — found by the .doc.mjs referee): an
+    // interface WITH own members used to name its `extends` parents only in
+    // the zero-own-members receipt; a partially-read surface (`MoreMenuProps
+    // extends Pick<BaseProps, 'xstyle' | …>`) dropped them silently. Parent
+    // members are outside single-file extraction BY DESIGN — but the
+    // omission must be receipted, never silent.
+    if (heritage.length > 0 && (members.length > 0 || cvaProps.length > 0)) {
+      componentNotes.push(
+        `props type extends ${heritage.join(', ')} — parent members are outside single-file extraction and are NOT carried`,
+      );
+    }
     const defaults = collectDefaults(sf, componentName);
     const props: ExtractedProp[] = [...cvaProps];
     for (const [i, p] of cvaProps.entries()) {
@@ -528,11 +777,12 @@ export function extractFromSource(
     for (const m of members) {
       if (!m.name || !ts.isIdentifier(m.name)) continue;
       if (props.some((x) => x.name === (m.name as ts.Identifier).text)) continue;
-      const cls = classifyMember(m, table);
+      const propName = m.name.text;
+      const cls = classifyMember(m, table, (note) => componentNotes.push(`prop \`${propName}\`: ${note}`));
       if (!cls) continue;
       props.push({
         name: m.name.text,
-        optional: !!m.questionToken,
+        optional: !!m.questionToken || (forceOptional?.has(m.name.text) ?? false),
         ...(jsDocText(m) ? { description: jsDocText(m) } : {}),
         ...cls,
         ...(defaults.has(m.name.text) ? { default: defaults.get(m.name.text) } : {}),

@@ -737,6 +737,87 @@ const cases: Case[] = [
     },
   },
   {
+    // ASTRYX ROUND fix #1 (KEYOF-ENUM RULE — the 57%-median cause on the
+    // Astryx census, direct analog of Carbon's `(typeof X)[number]`): a
+    // prop typed `keyof X` — behind a one-hop alias, keying an in-file
+    // interface (`type ButtonVariant = keyof ButtonVariantMap`), a plain
+    // const table, or a `create({…})`-style factory call — must resolve to
+    // its concrete value set (confidence 'inferred', assumption receipted),
+    // and an UNRESOLVABLE keyof target must land as a NAMED refusal.
+    id: 'keyof-enum-resolution',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-keyof.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      const toggle = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-keyof/contracts/toggle.contract.json'), 'utf8'),
+      );
+      const tone = toggle.props.find((p: any) => p.name === 'tone');
+      if (tone?.type?.enum?.join('|') !== 'neutral|accent|danger' || tone.default !== 'neutral') {
+        throw new Error('Toggle.tone: keyof-interface enum (or its destructure default) not extracted');
+      }
+      if (toggle.props.find((p: any) => p.name === 'pace')?.type?.enum?.join('|') !== 'slow|fast') {
+        throw new Error('Toggle.pace: keyof typeof factory-call object not resolved');
+      }
+      if (toggle.props.find((p: any) => p.name === 'density')?.type?.enum?.join('|') !== 'compact|cozy') {
+        throw new Error('Toggle.density: keyof typeof as-const object not resolved');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-keyof/proposals.md'), 'utf8');
+      if (!notes.includes('key-preserving factory ASSUMED')) {
+        throw new Error('Factory-call key read not receipted as an assumption');
+      }
+      if (!notes.includes('`flavor`: keyof value set NOT carried') || !notes.includes('importedFlavors')) {
+        throw new Error('Unresolvable keyof target not refused BY NAME');
+      }
+      // HERITAGE RECEIPT (found by the Astryx .doc.mjs referee): an
+      // interface WITH own members must still name its unread parents.
+      if (!notes.includes('extends BasePropsLike<HTMLButtonElement>') || !notes.includes('NOT carried')) {
+        throw new Error('Heritage of an interface WITH own members not receipted');
+      }
+    },
+  },
+  {
+    // ASTRYX ROUND fix #2 (UNION-OF-REFS RULE — recovers 7 of Astryx's 21
+    // named skips incl. Slider; the mutually-exclusive-API sibling of
+    // gauntlet fix #3): same-file `A | B` props types merge the members of
+    // every readable branch (heritage chased through the same-file chain),
+    // force branch-specific members optional, receipt the merge — and a
+    // union with an IMPORTED branch carries the readable branch while
+    // receipting the dark one by name.
+    id: 'union-of-refs-composition',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-keyof.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      const range = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-keyof/contracts/range.contract.json'), 'utf8'),
+      );
+      if (range.props.find((p: any) => p.name === 'tone')?.type?.enum?.join('|') !== 'quiet|loud') {
+        throw new Error('Range.tone: shared-base member not carried through union branch heritage');
+      }
+      if (range.props.find((p: any) => p.name === 'min')?.type !== 'number') {
+        throw new Error('Range.min: base member missing from the merged union surface');
+      }
+      const legend = range.props.find((p: any) => p.name === 'legend');
+      if (!legend || legend.required === true) {
+        throw new Error('Range.legend: branch-specific required member must merge as OPTIONAL');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-keyof/proposals.md'), 'utf8');
+      if (!notes.includes('UNION of alternatives [RangeSingleProps | RangeDualProps]')) {
+        throw new Error('Union merge not receipted');
+      }
+      const fork = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-keyof/contracts/fork.contract.json'), 'utf8'),
+      );
+      if (fork.props.find((p: any) => p.name === 'prong')?.type?.enum?.join('|') !== 'left|right') {
+        throw new Error('Fork.prong: readable union branch not carried alongside a dark branch');
+      }
+      if (!notes.includes('[ImportedForkProps]') || !notes.includes('NOT carried')) {
+        throw new Error('Dark union branch not receipted BY NAME');
+      }
+    },
+  },
+  {
     // Enterprise gauntlet fix #4: published CEM manifests ship events
     // WITHOUT a name (SWC ships 7) — extract/adapters/cem.ts:82 used to
     // crash with a TypeError. A nameless event must become a NAMED per-event
@@ -772,6 +853,23 @@ const cases: Case[] = [
       const r = run(TSX, ['evals/fixtures/plain-token-wrap-check.ts']);
       if (r.status !== 0 || !r.out.includes('all shapes load, all refusals named')) {
         throw new Error(`plain-token-wrap check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // ASTRYX ROUND, token side: StyleX systems publish tokens as
+    // `stylex.defineVars({…})` TypeScript source with dual-mode values
+    // ENCODED IN THE VALUE as CSS `light-dark(a, b)` — a third mode
+    // architecture (vs Carbon's parallel themes / Nord's parallel files).
+    // core/stylex-tokens.ts must read the tables syntactically, split
+    // light-dark() paren-aware into the v1.6 modes shape, and skip
+    // everything unreadable BY NAME.
+    id: 'stylex-token-wrap',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/stylex-tokens-check.ts']);
+      if (r.status !== 0 || !r.out.includes('stylex-token-wrap ok:')) {
+        throw new Error(`stylex-token-wrap check failed:\n${r.out}`);
       }
     },
   },

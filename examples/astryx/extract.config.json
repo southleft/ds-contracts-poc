@@ -1,0 +1,8 @@
+{
+  "code": {
+    "adapter": "react-tsx",
+    "root": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src"
+  },
+  "idPrefix": "astryx",
+  "out": "examples/astryx/out"
+}

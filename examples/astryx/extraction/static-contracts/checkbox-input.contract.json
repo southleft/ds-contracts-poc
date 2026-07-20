@@ -1,0 +1,230 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.checkbox-input",
+  "name": "CheckboxInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/CheckboxInput/CheckboxInput.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Label text for the checkbox (always rendered for accessibility).",
+      "type": "text",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "isLabelHidden",
+      "description": "Whether to visually hide the label (still accessible to screen readers).",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Label Hidden"
+        },
+        "code": {
+          "prop": "isLabelHidden"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Description text displayed below the label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    },
+    {
+      "name": "isLoading",
+      "description": "Whether the checkbox is in a loading state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Loading"
+        },
+        "code": {
+          "prop": "isLoading"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the checkbox is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "htmlName",
+      "description": "The HTML name attribute for the underlying checkbox input.\nUseful for form submissions.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Html Name"
+        },
+        "code": {
+          "prop": "htmlName"
+        }
+      }
+    },
+    {
+      "name": "disabledMessage",
+      "description": "Explains why the checkbox is disabled. When set together with\n`isDisabled`, the checkbox shows a tooltip with this text on hover and\nkeyboard focus, and the control stays focusable (via `aria-disabled`) so\nthe reason is discoverable by keyboard and assistive technology.\nActivation stays blocked.\n\nUse this instead of wrapping a disabled checkbox in `Tooltip` — disabled\ncontrols don't emit the pointer events an external tooltip needs.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Disabled Message"
+        },
+        "code": {
+          "prop": "disabledMessage"
+        }
+      }
+    },
+    {
+      "name": "isReadOnly",
+      "description": "Whether the checkbox is read-only.\nDisplays the current state at full opacity but prevents interaction.\nUnlike `isDisabled`, read-only checkboxes are not visually dimmed.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Read Only"
+        },
+        "code": {
+          "prop": "isReadOnly"
+        }
+      }
+    },
+    {
+      "name": "isOptional",
+      "description": "Whether the field is optional. Mutually exclusive with isRequired.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Optional"
+        },
+        "code": {
+          "prop": "isOptional"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the checkbox is required. Mutually exclusive with isOptional.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The size of the checkbox.\n- 'sm': Compact size (28px row height)\n- 'md': Default size (36px row height)",
+      "type": {
+        "enum": [
+          "sm",
+          "md"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Callback fired when the checkbox state changes.",
+      "bindings": {
+        "code": {
+          "prop": "onChange"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "focus",
+      "description": "Callback fired when the checkbox receives focus.",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "blur",
+      "description": "Callback fired when the checkbox loses focus.",
+      "bindings": {
+        "code": {
+          "prop": "onBlur"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/CheckboxInput/CheckboxInput",
+      "export": "CheckboxInput"
+    }
+  }
+}

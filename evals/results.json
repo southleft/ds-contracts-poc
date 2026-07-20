@@ -1,6 +1,6 @@
 {
-  "passed": 124,
-  "total": 124,
+  "passed": 127,
+  "total": 127,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -143,12 +143,27 @@
       "pass": true
     },
     {
+      "id": "keyof-enum-resolution",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "union-of-refs-composition",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
       "id": "cem-nameless-event-skip",
       "claim": "C5-extraction",
       "pass": true
     },
     {
       "id": "plain-token-wrap",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "stylex-token-wrap",
       "claim": "C5-extraction",
       "pass": true
     },

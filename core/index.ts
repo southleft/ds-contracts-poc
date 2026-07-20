@@ -58,6 +58,14 @@ export {
 } from './tokens.js';
 export { tokenCorpusFromJson, type TokenCorpus, type TokenCorpusInput, type DerivedTextStyle } from './token-corpus.js';
 export { inferDtcgType, wrapPlainTokensAsDtcg, type PlainWrapResult, type PlainWrapSkip } from './wrap-plain-tokens.js';
+// StyleX defineVars + light-dark() reader (Astryx round — BYO-token layer).
+export {
+  splitLightDark,
+  stylexTokensFromSource,
+  type StylexTokenEntry,
+  type StylexTokenLayer,
+  type StylexTokenSkip,
+} from './stylex-tokens.js';
 
 // Provisional token minting (unresolvable variable names → imported.* tree).
 export {
