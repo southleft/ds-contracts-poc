@@ -1,5 +1,5 @@
 {
-  "passed": 118,
+  "passed": 121,
   "total": 121,
   "results": [
     {
@@ -595,20 +595,17 @@
     {
       "id": "plugin-engine-bundle",
       "claim": "C1-determinism",
-      "pass": false,
-      "error": "Error: plugin-engine-check failed:\nfile:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/build-plugin-zip.mjs:241\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 77cd23e846a1… (432799 bytes) but the committed receipt records 361008789a67… (429235 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/build-plugin-zip.mjs:241:11)\n    at async file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:47:1\n\nNode.js v20.19.4\n"
+      "pass": true
     },
     {
       "id": "plugin-update-report",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: plugin-engine-check failed:\nfile:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/build-plugin-zip.mjs:241\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 77cd23e846a1… (432799 bytes) but the committed receipt records 361008789a67… (429235 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/build-plugin-zip.mjs:241:11)\n    at async file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:47:1\n\nNode.js v20.19.4\n"
+      "pass": true
     },
     {
       "id": "plugin-propose-dry-run",
       "claim": "C4-convergence",
-      "pass": false,
-      "error": "Error: plugin-engine-check failed:\nfile:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/build-plugin-zip.mjs:241\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 77cd23e846a1… (432799 bytes) but the committed receipt records 361008789a67… (429235 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/build-plugin-zip.mjs:241:11)\n    at async file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:47:1\n\nNode.js v20.19.4\n"
+      "pass": true
     }
   ]
 }
