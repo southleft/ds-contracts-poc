@@ -664,6 +664,19 @@ export function promoteAnatomy(
   const enabled = space.enumeration.combos.filter(isEnabledCombo);
   const presenceProps = new Set(space.presence.keys());
   const stateProps = space.stateProps.map((s) => s.prop);
+  // Round 5f — OPTIONAL-ADORNMENT (defaultless structure-gating enum): any
+  // defaultless enum axis that gates a part PRESENT-ONLY-WHEN-SET (a
+  // factorPresence base-hidden `shownWhen` fact — the adornment is ABSENT at
+  // unset and appears per SET value: Badge `progress` → the status pip) is
+  // collected here. After the anatomy is built, each such axis materializes
+  // its UNSET pseudo-value into the contract enum AS THE DEFAULT, so the emit
+  // enumerates a PLAIN (adornment-absent) variant and the base-hidden part
+  // renders nothing there. This extends the S2 unset-axis machinery from
+  // STYLING to STRUCTURE (the round's spine). Booleans are NOT touched —
+  // presence booleans already default OFF and expose a toggle; a defaultless
+  // enum that only drives STYLING (Badge `tone`) is NOT collected (it gates
+  // no part), so its unset stays the S2 styling base plane, not a variant.
+  const structureGatingUnsetAxes = new Set<string>();
 
   // 1. presence boolean props (structure-creating optional props) join the
   //    contract's prop list.
@@ -1267,6 +1280,11 @@ export function promoteAnatomy(
       } else {
         if (fact.visibleWhen) part.visibleWhen = { prop: fact.visibleWhen.prop };
         if (fact.shownWhen.length > 0) {
+          // Round 5f: this part is ABSENT at unset and appears per SET value —
+          // its gating axis is a defaultless STRUCTURE-creating enum. Record
+          // it so the unset value materializes into the enum as the default
+          // (the plain, adornment-absent variant).
+          for (const sw of fact.shownWhen) structureGatingUnsetAxes.add(sw.prop);
           // base-hidden: declared display none; each SET value restores the
           // part's own uniform display (captured; flex default for containers)
           const restore =
@@ -1398,6 +1416,40 @@ export function promoteAnatomy(
   entries.forEach((e, i) => {
     if (promotedNames.has(e.partName)) partIndex.set(e.partName, i);
   });
+
+  // Round 5f — materialize the UNSET pseudo-value of every defaultless
+  // structure-gating enum into the contract enum AS THE DEFAULT. Only axes
+  // whose gated part actually survived promotion count (a part refused
+  // upstream leaves no plain variant to enumerate). This is the ONE place the
+  // API surface gains the unset value; downstream (emit variants, gate
+  // deriveCells, real-page mount) all read the enum uniformly, and the
+  // gate/real-page omit the unset value on mount exactly as the capture's own
+  // comboProps does (prop absent === adornment absent).
+  const survivingGateProps = new Set<string>();
+  const collectGates = (p: Part) => {
+    if (p.declared?.['display'] === 'none') {
+      for (const sw of p.stylesWhen ?? []) {
+        if (sw.equals !== undefined && sw.styles['display'] !== undefined && sw.styles['display'] !== 'none') {
+          survivingGateProps.add(sw.prop);
+        }
+      }
+    }
+    for (const c of Object.values(p.parts ?? {})) collectGates(c);
+  };
+  collectGates(newRoot);
+  for (const axProp of structureGatingUnsetAxes) {
+    if (!survivingGateProps.has(axProp)) continue;
+    const ax = space.axes.find((a) => a.prop === axProp);
+    if (!ax || ax.unset === undefined) continue;
+    const prop = contract.props.find((p) => p.name === axProp);
+    if (!prop || typeof prop.type !== 'object' || !('enum' in prop.type)) continue;
+    if (prop.type.enum.includes(ax.unset) || prop.default !== undefined) continue;
+    prop.type.enum = [ax.unset, ...prop.type.enum];
+    (prop as { default?: unknown }).default = ax.unset;
+    receipts.push(
+      `optional-adornment-unset-materialized: ${axProp} — defaultless enum gates a present-only-when-set part; unset value "${ax.unset}" added to the enum as the DEFAULT so a PLAIN (adornment-absent) variant is enumerated and the base-hidden part renders nothing there (round 5f — S2 unset extended from styling to STRUCTURE)`,
+    );
+  }
 
   return { contract, assets, consumed, partIndex, receipts, refusals };
 }

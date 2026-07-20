@@ -57,6 +57,7 @@
       "description": "Tag size (round 4: real Tag API — only 'large' exists; unset renders the default compact size).",
       "type": {
         "enum": [
+          "none",
           "large"
         ]
       },
@@ -68,7 +69,8 @@
         "code": {
           "prop": "size"
         }
-      }
+      },
+      "default": "none"
     },
     {
       "name": "removable",

@@ -112,6 +112,13 @@ const MOUNT_PLAN: Record<string, MountPlanExt> = {
 const FLOOR_CONFIG = JSON.parse(
   readFileSync(path.join(EXAMPLE, '..', '..', 'extract', 'computed', 'configs', 'polaris.json'), 'utf8'),
 ) as {
+  /** Round 5f: the capture's unset pseudo-value label (`none`) — a
+   *  materialized defaultless enum's unset value maps to "prop ABSENT" on
+   *  mount, exactly as the capture's own comboProps omits it (capture.ts:
+   *  `if (a.unset !== undefined && v === a.unset) continue`). Without this the
+   *  real side mounts progress="none" — a TRUTHY string Polaris draws a pip
+   *  for — so the plain (adornment-absent) cell would never render plain. */
+  enumeration: { unsetLabel: string };
   components: Array<{
     name: string;
     sampleText: string;
@@ -290,6 +297,10 @@ async function main(): Promise<void> {
           // own mounting rule); unlisted values mount verbatim.
           const map = floor?.axisValueMap?.[p.name];
           const raw = cell.subst[p.name];
+          // Round 5f: a materialized defaultless-enum unset value mounts the
+          // prop ABSENT (adornment absent), mirroring capture comboProps — a
+          // truthy "none" string would make Polaris draw the pip/adornment.
+          if (raw === FLOOR_CONFIG.enumeration.unsetLabel) continue;
           props[codeProp] = map && raw in map ? map[raw] : raw;
         } else if (p.type === 'boolean') {
           if (p.default === true) props[codeProp] = true;

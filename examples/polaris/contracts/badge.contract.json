@@ -45,6 +45,7 @@
       "description": "Render a pip showing the progress of a given task (round 4: real Badge API axis).",
       "type": {
         "enum": [
+          "none",
           "incomplete",
           "partiallyComplete",
           "complete"
@@ -58,7 +59,8 @@
         "code": {
           "prop": "progress"
         }
-      }
+      },
+      "default": "none"
     },
     {
       "name": "toneAndProgressLabelOverride",

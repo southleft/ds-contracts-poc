@@ -5,7 +5,7 @@
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
-    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+    "real": "@shopify/polaris@13.9.5 in 149.0.7827.55 (playwright-core, headless), deviceScaleFactor 2"
   },
   "scoring": {
     "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
@@ -17,6 +17,18 @@
     "interAvailableInBrowser": true
   },
   "cells": [
+    {
+      "cell": "Tone=info, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.68,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.23,
+      "inkRealPct": 96.23
+    },
     {
       "cell": "Tone=info, Progress=incomplete",
       "kind": "base",
@@ -44,7 +56,7 @@
     {
       "cell": "Tone=info, Progress=complete",
       "kind": "base",
-      "pctExactUnmasked": 9.74,
+      "pctExactUnmasked": 9.76,
       "pctAAUnmasked": 0.09,
       "pctAAMasked": 0,
       "maskCoveragePct": 64.42,
@@ -52,6 +64,18 @@
       "realPx": "146x40",
       "inkCanvasPct": 96.85,
       "inkRealPct": 96.85
+    },
+    {
+      "cell": "Tone=success, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.66,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.23,
+      "inkRealPct": 96.23
     },
     {
       "cell": "Tone=success, Progress=incomplete",
@@ -90,6 +114,18 @@
       "inkRealPct": 96.85
     },
     {
+      "cell": "Tone=warning, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.66,
+      "pctAAUnmasked": 0.12,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.23,
+      "inkRealPct": 96.23
+    },
+    {
       "cell": "Tone=warning, Progress=incomplete",
       "kind": "base",
       "pctExactUnmasked": 9.74,
@@ -124,6 +160,18 @@
       "realPx": "146x40",
       "inkCanvasPct": 96.85,
       "inkRealPct": 96.85
+    },
+    {
+      "cell": "Tone=critical, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.66,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.23,
+      "inkRealPct": 96.23
     },
     {
       "cell": "Tone=critical, Progress=incomplete",
@@ -162,6 +210,18 @@
       "inkRealPct": 96.85
     },
     {
+      "cell": "Tone=attention, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.68,
+      "pctAAUnmasked": 0.12,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.39,
+      "inkRealPct": 96.39
+    },
+    {
       "cell": "Tone=attention, Progress=incomplete",
       "kind": "base",
       "pctExactUnmasked": 9.76,
@@ -196,6 +256,18 @@
       "realPx": "146x40",
       "inkCanvasPct": 96.99,
       "inkRealPct": 96.99
+    },
+    {
+      "cell": "Tone=new, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 18.39,
+      "pctAAUnmasked": 0.46,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 76.61,
+      "canvasPx": "122x40",
+      "realPx": "124x40",
+      "inkCanvasPct": 94.11,
+      "inkRealPct": 95.73
     },
     {
       "cell": "Tone=new, Progress=incomplete",
@@ -234,6 +306,18 @@
       "inkRealPct": 96.42
     },
     {
+      "cell": "Tone=magic, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.66,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 95.9,
+      "inkRealPct": 95.9
+    },
+    {
       "cell": "Tone=magic, Progress=incomplete",
       "kind": "base",
       "pctExactUnmasked": 9.74,
@@ -268,6 +352,18 @@
       "realPx": "146x40",
       "inkCanvasPct": 96.58,
       "inkRealPct": 96.58
+    },
+    {
+      "cell": "Tone=info-strong, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.66,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.39,
+      "inkRealPct": 96.39
     },
     {
       "cell": "Tone=info-strong, Progress=incomplete",
@@ -306,6 +402,18 @@
       "inkRealPct": 96.99
     },
     {
+      "cell": "Tone=success-strong, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.68,
+      "pctAAUnmasked": 0.25,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 87.3,
+      "inkRealPct": 88.67
+    },
+    {
       "cell": "Tone=success-strong, Progress=incomplete",
       "kind": "base",
       "pctExactUnmasked": 9.76,
@@ -342,9 +450,21 @@
       "inkRealPct": 86.97
     },
     {
+      "cell": "Tone=warning-strong, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.74,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.39,
+      "inkRealPct": 96.39
+    },
+    {
       "cell": "Tone=warning-strong, Progress=incomplete",
       "kind": "base",
-      "pctExactUnmasked": 9.74,
+      "pctExactUnmasked": 9.9,
       "pctAAUnmasked": 0.09,
       "pctAAMasked": 0,
       "maskCoveragePct": 64.42,
@@ -356,7 +476,7 @@
     {
       "cell": "Tone=warning-strong, Progress=partiallyComplete",
       "kind": "base",
-      "pctExactUnmasked": 9.74,
+      "pctExactUnmasked": 9.9,
       "pctAAUnmasked": 0.09,
       "pctAAMasked": 0,
       "maskCoveragePct": 64.42,
@@ -368,7 +488,7 @@
     {
       "cell": "Tone=warning-strong, Progress=complete",
       "kind": "base",
-      "pctExactUnmasked": 9.74,
+      "pctExactUnmasked": 9.9,
       "pctAAUnmasked": 0.09,
       "pctAAMasked": 0,
       "maskCoveragePct": 64.42,
@@ -378,9 +498,21 @@
       "inkRealPct": 96.99
     },
     {
+      "cell": "Tone=critical-strong, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.99,
+      "pctAAUnmasked": 0.27,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 87.3,
+      "inkRealPct": 88.67
+    },
+    {
       "cell": "Tone=critical-strong, Progress=incomplete",
       "kind": "base",
-      "pctExactUnmasked": 9.76,
+      "pctExactUnmasked": 9.95,
       "pctAAUnmasked": 0.22,
       "pctAAMasked": 0,
       "maskCoveragePct": 64.42,
@@ -412,6 +544,18 @@
       "realPx": "146x40",
       "inkCanvasPct": 85.82,
       "inkRealPct": 86.97
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.86,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 96.39,
+      "inkRealPct": 96.39
     },
     {
       "cell": "Tone=attention-strong, Progress=incomplete",
@@ -450,6 +594,18 @@
       "inkRealPct": 96.99
     },
     {
+      "cell": "Tone=read-only, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 32.27,
+      "pctAAUnmasked": 1.42,
+      "pctAAMasked": null,
+      "maskCoveragePct": 100,
+      "canvasPx": "88x20",
+      "realPx": "88x20",
+      "inkCanvasPct": 52.61,
+      "inkRealPct": 49.15
+    },
+    {
       "cell": "Tone=read-only, Progress=incomplete",
       "kind": "base",
       "pctExactUnmasked": 24.27,
@@ -484,6 +640,18 @@
       "realPx": "117x20",
       "inkCanvasPct": 49.49,
       "inkRealPct": 46.88
+    },
+    {
+      "cell": "Tone=enabled, Progress=none",
+      "kind": "base",
+      "pctExactUnmasked": 11.66,
+      "pctAAUnmasked": 0.1,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 77.09,
+      "canvasPx": "122x40",
+      "realPx": "122x40",
+      "inkCanvasPct": 95.66,
+      "inkRealPct": 95.66
     },
     {
       "cell": "Tone=enabled, Progress=incomplete",
@@ -523,12 +691,12 @@
     }
   ],
   "summary": {
-    "cells": 42,
-    "meanExactUnmasked": 11.32,
-    "meanAAUnmasked": 0.22,
-    "meanAAMasked": 0.07,
+    "cells": 56,
+    "meanExactUnmasked": 11.92,
+    "meanAAUnmasked": 0.23,
+    "meanAAMasked": 0.05,
     "maxAAMasked": 1.42,
-    "worstCell": "Tone=new, Progress=partiallyComplete",
+    "worstCell": "Tone=read-only, Progress=none",
     "cellsOver10Masked": [],
     "blankCanvasCells": []
   },

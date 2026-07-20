@@ -2834,6 +2834,7 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }

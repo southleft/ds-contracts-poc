@@ -1,6 +1,6 @@
 {
-  "passed": 134,
-  "total": 134,
+  "passed": 136,
+  "total": 136,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -669,6 +669,16 @@
     },
     {
       "id": "canvas-margin-gap-pin",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "amend-margin-box",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "optional-adornment-gating-general-fixture",
       "claim": "C3-detection",
       "pass": true
     }

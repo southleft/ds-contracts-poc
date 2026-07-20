@@ -3877,6 +3877,7 @@ async function amendSet(set, C) {
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
+    applyMarginBox(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }
