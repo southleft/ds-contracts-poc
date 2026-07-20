@@ -5,6 +5,8 @@
  * from docs/*.md. Prose is reused from the repo docs where it was already
  * right; numbers link to their committed receipts.
  */
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { layout, codeBlock, esc, themedImage, REPO_URL, PLAYGROUND_URL } from '../html.js';
 import { dependencyGraphSize } from '../diagrams.js';
 import type { SiteStats } from '../stats.js';
@@ -25,12 +27,21 @@ const QUESTION_PAGES: HowPage[] = [
 
 const FOUNDATION_PAGES: HowPage[] = [
   { id: 'model', route: '/how-it-works/model/', title: 'The model — truth between surfaces', nav: 'The model' },
+  { id: 'protocol', route: '/how-it-works/protocol/', title: 'The protocol', nav: 'The protocol' },
+  { id: 'styles', route: '/how-it-works/styles/', title: 'How styles are applied', nav: 'How styles are applied' },
   { id: 'determinism', route: '/how-it-works/determinism/', title: 'Determinism & receipts', nav: 'Determinism & receipts' },
   { id: 'instruments', route: '/how-it-works/instruments/', title: 'The instruments', nav: 'The instruments' },
   { id: 'round-trips', route: '/how-it-works/round-trips/', title: 'Round-trips', nav: 'Round-trips' },
 ];
 
 const HOW_PAGES: HowPage[] = [...QUESTION_PAGES, ...FOUNDATION_PAGES];
+
+/** Look a foundation page up by id — refuses by name so a reordered list cannot silently misfile a page. */
+function foundation(id: string): HowPage {
+  const page = FOUNDATION_PAGES.find((p) => p.id === id);
+  if (!page) throw new Error(`FOUNDATION_PAGES: no page with id "${id}"`);
+  return page;
+}
 
 function sideNav(activePath: string): string {
   const link = (href: string, label: string): string =>
@@ -156,6 +167,8 @@ function indexPage(): { route: string; html: string } {
       `<a class="card" href="${p.route}"><h3>${p.nav}</h3><p>${
         {
           model: 'Why the truth is neither surface, and the arbitration rule that keeps both honest.',
+          protocol: 'Contracts-in-git are canon, CI is the enforcement point, and authority belongs to the layer that can mechanically refuse.',
+          styles: 'Names, not values: two-stage application on the code side, bound variables on the canvas — the same statement in two dialects.',
           determinism: 'Golden manifests, refusal by name, and degradation codes — how “generated” stays checkable.',
           instruments: 'The census, the visual-parity instrument, and the enterprise gauntlet — with their real numbers.',
           'round-trips': 'Code→contract→canvas and back: the executed promotion loop, with receipts.',
@@ -168,7 +181,7 @@ function indexPage(): { route: string; html: string } {
 <p class="lede">Every page in this section that shows a number, a diff, or a finding produced it by running the real machinery at build time — over committed contracts and committed captures. Start with the question you came here with.</p>
 <div class="qcards">${qcards}</div>
 <h2>Foundations</h2>
-<p>The positions and machinery under those answers, in four short pages.</p>
+<p>The positions and machinery under those answers, in six short pages.</p>
 <div class="cards">${fcards}</div>`;
   return howShell(
     undefined,
@@ -372,7 +385,7 @@ ${diagram('contract-flow', 'Workflow diagram: the contract sits between the desi
 <p>The bridge would be worthless if it only policed. Real teams evolve their systems from both ends — an engineer adds a <code>loading</code> prop because the product needed it; a designer adjusts a surface color because the old one failed in context. Both of those are <em>good</em> changes that started on the "wrong" side. So the loop is built around <strong>promotion</strong>: when a surface runs ahead of the contract, that difference becomes a reviewable proposal <em>to the contract</em>. Accept it, and the contract version bumps and regenerates the other side. Reject it, and the surface is flagged as drift to be reverted. Either way there is exactly one arbiter, and it's a diffable, reviewable, version-controlled file. (<a href="/how-it-works/adding-a-prop/">The full lifecycle, replayed step by step →</a>)</p>
 
 <h2>Why the style mapping lives in the contract</h2>
-<p>A subtle failure mode in contract-first proposals: if the contract declares <code>variant: primary | secondary</code> but a handwritten "resolver" maps those values to styles, drift hasn't been eliminated — it's moved into the resolver. So here, the contract's <a href="/spec/anatomy/">anatomy</a> binds each named part directly to <a href="/spec/tokens/">design token references</a>, and the CSS Module is <em>generated</em> from those bindings. There is no handwritten style layer to drift. The generator fails the build if a binding references a token that doesn't exist — contract and tokens cannot silently disagree.</p>
+<p>A subtle failure mode in contract-first proposals: if the contract declares <code>variant: primary | secondary</code> but a handwritten "resolver" maps those values to styles, drift hasn't been eliminated — it's moved into the resolver. So here, the contract's <a href="/spec/anatomy/">anatomy</a> binds each named part directly to <a href="/spec/tokens/">design token references</a>, and the CSS Module is <em>generated</em> from those bindings. There is no handwritten style layer to drift. The generator fails the build if a binding references a token that doesn't exist — contract and tokens cannot silently disagree. (When those token names actually turn into pixels — at generate time on the code side, as bound variables on the canvas — is its own page: <a href="/how-it-works/styles/">How styles are applied →</a>)</p>
 
 <h2>And the reason that's growing: AI generation</h2>
 <p>In the reference repo's A/B evaluation, an ungoverned agent building screens scored <strong>69/100 adherence with 90 violations</strong> — invented props, hard-coded colors, restyled components. The same model constrained by the compiled contract catalog scored <strong>100/100 with zero violations</strong>, and when it hit a real gap in the system, it <em>reported the gap</em> instead of faking around it. The gap became a contract proposal, the proposal became a version bump, and the score went back to 100. The contract isn't just how design and code stay aligned — it's how generation stays honest. (Full write-up with the judge internals: <a href="${REPO_URL}/blob/main/docs/10-honest-generation.md">docs/10 — Honest Generation</a>.)</p>
@@ -380,12 +393,126 @@ ${diagram('contract-flow', 'Workflow diagram: the contract sits between the desi
 <h2>A proven playbook, one level up</h2>
 <p>At the token layer, the <a href="https://www.designtokens.org/">DTCG</a> format — which this spec consumes for every token reference — proved that a neutral, Git-versioned, machine-readable artifact can govern both a design tool and a codebase at once. This spec runs that playbook one level up, at the component-API layer: the same properties (diffable, reviewable, tool-agnostic), applied to props, anatomy, and composition instead of color and spacing.</p>
 `;
-  return howShell(FOUNDATION_PAGES[0], 'The model', 'Why the source of truth is neither the design file nor the code, and the arbitration rule — surfaces never sync side-to-side — that keeps both honest.', body);
+  return howShell(foundation('model'), 'The model', 'Why the source of truth is neither the design file nor the code, and the arbitration rule — surfaces never sync side-to-side — that keeps both honest.', body);
+}
+
+function protocolPage(): { route: string; html: string } {
+  const body = `
+<p class="eyebrow">How it works · foundations 2</p>
+<h1>The protocol</h1>
+<p class="lede">The model says the truth is a contract between the surfaces. The protocol says how that truth changes hands: contracts-in-git are the canon, CI is the enforcement point, and every change — in either direction — becomes a reviewable diff before it becomes real.</p>
+
+<h2 id="canon">Contracts-in-git are the canon</h2>
+<p>There is no registry, no proprietary store, no sync service holding the truth. The canonical state of a design system is a directory of <code>*.contract.json</code> files in a Git repository — diffable, blameable, revertable, reviewable with the tools every engineering organization already trusts. Per-version history <em>is</em> the changelog; a contract's <code>version</code> field is the unit of change management. Everything else — the generated React library, the canvas component sets, the Storybook stories — is a derived surface that can be regenerated from the canon at any time.</p>
+
+<h2 id="enforcement">CI is the enforcement point</h2>
+<p>A rule nobody runs is a suggestion. The referee is <code>ds-contracts diff</code>, and its exit codes are the whole enforcement interface: <strong>0</strong> clean · <strong>1</strong> drift, findings named on stderr · <strong>2</strong> configuration error. Wire it into CI (the <a href="${REPO_URL}/tree/main/examples/ci">committed recipes</a> do) and the protocol stops depending on anyone's diligence: a pull request that would leave code and contracts disagreeing <em>cannot merge</em>. The code-led recipe keeps contracts current from the components on every push; the design-led recipe regenerates code from changed contracts and gates the PR on parity. Every step in both recipes has been executed verbatim against the published CLI (<a href="${REPO_URL}/blob/main/examples/ci/VALIDATION.md">VALIDATION.md</a>).</p>
+
+<h2 id="reviewable-diff">Every change is a reviewable diff</h2>
+<p>Both directions, one door. An engineer's hand-added prop is flagged by the differ with a complete proposed contract patch (<a href="/how-it-works/adding-a-prop/">replayed step by step</a>). A designer's canvas edit becomes a proposed contract change through the plugin's Propose tab or <code>ds-contracts propose-pr</code> — a pull request carrying one JSON diff. Nothing takes effect because someone had write access to a surface; it takes effect because a human reviewed a diff and merged it. The merge <em>is</em> the adoption decision, and the regeneration that follows is mechanical.</p>
+
+<h2 id="authority">Authority is the power to refuse</h2>
+<p>In most design-system processes, "authority" means a person with final say — which fails the moment that person is busy. Here authority is structural: <strong>a layer is authoritative precisely because it can mechanically refuse</strong>, by name, before anything downstream happens.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Layer</th><th>What it refuses</th><th>How</th></tr></thead>
+<tbody>
+<tr><td>The schema</td><td>a malformed contract</td><td><code>validateContract</code> — parse failure with the exact violation named; nothing emits</td></tr>
+<tr><td>The token gate</td><td>a binding to a token that doesn't exist</td><td>the build itself fails, naming the contract path and the missing token</td></tr>
+<tr><td>The generator</td><td>an illegal contract — defaults outside enums, composition cycles, duplicate bindings</td><td>refusal by name on every surface; no "best effort" mode</td></tr>
+<tr><td>The differ</td><td>surfaces that disagree with the contract</td><td><code>diff</code> exit 1 — CI blocks the merge until the disagreement is promoted or regenerated away</td></tr>
+<tr><td>The canvas sync</td><td>running against the wrong file, or a foreign component</td><td>anchors and identity markers — a set without our marker is never touched</td></tr>
+</tbody></table></div>
+<p>Notice what is <em>not</em> on the list: no committee, no sync meeting, no reconciliation human. The protocol replaces standing arbitration with standing refusal.</p>
+
+<h2 id="no-unilateral">The no-unilateral-changes rule</h2>
+<p>Surfaces never sync side-to-side, and nobody — human, CI job, or AI — writes both surfaces in one motion. Even the code-led CI job that adopts freshly extracted contracts lands its adoption as a <em>commit</em> in the repo's history, not a silent overwrite; even the plugin's in-place library update applies only received, schema-valid contracts and shows what it will change before it changes it. A change that skipped review is drift by definition, and the differ will name it on the next run. This is the same discipline Git brought to code and DTCG brought to tokens: unilateral edits don't become truth; proposed diffs do.</p>
+
+<h2 id="ai">Where AI is allowed to sit</h2>
+<p><strong>Propose, never decide.</strong> AI is welcome at exactly one position in the loop: upstream of the referees, as a proposer. The playground's prompt-to-contract assistant drafts contracts the schema is free to refuse; an agent generating screens is constrained by the compiled catalog and judged deterministically (the A/B result: governed <strong>100/100</strong> vs ungoverned <strong>69/100</strong> — <a href="/how-it-works/model/">the model page</a> tells that story). Nothing an AI produces skips a single gate: the schema still parses it, the token gate still resolves it, the generator can still refuse it, the differ still checks the result, and a human still merges the diff. The referee re-checks everything — which is exactly why AI assistance is safe to accept.</p>
+
+${receiptLine(`Standing receipts: the CI recipes' executed-verbatim validation (<a href="${REPO_URL}/blob/main/examples/ci/VALIDATION.md">examples/ci/VALIDATION.md</a>), the journey evals that execute the documented commands (<code>journey-engineer</code>, <code>journey-designer</code>), and the C2 refusal family behind every row of the authority table.`)}
+`;
+  return howShell(
+    foundation('protocol'),
+    'The protocol',
+    'Contracts-in-git are canon, CI is the enforcement point, every change becomes a reviewable diff, authority belongs to the layer that can mechanically refuse — and AI proposes, never decides.',
+    body,
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Foundations · How styles are applied
+// ---------------------------------------------------------------------------
+
+/** Slice a labeled excerpt out of a real repo file — refuses by name when the
+ *  pattern stops matching, so an excerpt can never silently go stale. */
+function fileExcerpt(relPath: string, pattern: RegExp): string {
+  const text = readFileSync(path.join(process.cwd(), relPath), 'utf8');
+  const m = text.match(pattern);
+  if (!m) throw new Error(`how-styles excerpt: ${relPath} no longer matches ${pattern} — update the page`);
+  return m[0].trimEnd();
+}
+
+function stylesPage(): { route: string; html: string } {
+  // Every artifact on this page is loaded from the repository at build time.
+  const badge = JSON.parse(readFileSync(path.join(process.cwd(), 'contracts/badge.contract.json'), 'utf8')) as {
+    id: string;
+    version: string;
+    anatomy: { root: { tokens: Record<string, string> } };
+  };
+  const contractExcerpt = JSON.stringify({ anatomy: { root: { tokens: badge.anatomy.root.tokens } } }, null, 2);
+
+  const cssRoot = fileExcerpt('src/components/Badge/Badge.module.css', /\.root \{[\s\S]*?\}/);
+  const cssVariant = fileExcerpt('src/components/Badge/Badge.module.css', /\.variant-success \{[\s\S]*?\}/);
+  const tokenLight = fileExcerpt('src/styles/tokens.css', /^\s*--color-feedback-success-background:.*$/m).trim();
+  const tokenDark = fileExcerpt('src/styles/tokens.dark.css', /^\s*--color-feedback-success-background:.*$/m).trim();
+  const figmaFill = fileExcerpt('figma-sync/05-badge.js', /"name": "Variant=Success",[\s\S]*?"fill": "[^"]+",/);
+  const figmaBind = fileExcerpt('figma-sync/05-badge.js', /return figma\.variables\.setBoundVariableForPaint\(.*$/m).trim();
+
+  const body = `
+<p class="eyebrow">How it works · foundations 3</p>
+<h1>How styles are applied</h1>
+<p class="lede">A contract never contains a color. It contains <strong>token names</strong>, and each surface has its own moment for turning a name into pixels — CSS rules baked at generate time with values bound at runtime on the code side; native variables bound through the Plugin API on the canvas. Same names, two dialects. Every artifact below is loaded from the repository at build time; the worked example is Badge's background.</p>
+
+<h2 id="names">Names, not values</h2>
+<p>Badge's contract (<code>${esc(badge.id)}</code> v${esc(badge.version)}) binds its root part to token <em>references</em> — including a <code>{variant}</code> placeholder that expands per enum value of the <code>variant</code> prop:</p>
+${codeBlock(contractExcerpt, 'json', `contracts/badge.contract.json (v${esc(badge.version)}) — anatomy.root.tokens, loaded at build time`)}
+<p>No hex codes, no pixel values. The <a href="/how-it-works/determinism/">integrity gate</a> guarantees every expanded reference resolves to a real token — <code>{color.feedback.success.background}</code> must exist in <code>tokens/</code> or the build fails by name. What the tokens are <em>worth</em> is the token layer's business, and that separation is the entire trick.</p>
+
+<h2 id="code-side">The code surface: two stages</h2>
+<h3>Stage 1 — rules, baked at generate time</h3>
+<p>The generator compiles the anatomy to a CSS Module: one class per variant value, states as pseudo-classes. The React component never computes a style — it only <em>selects classes</em>:</p>
+${codeBlock(`${cssRoot}\n\n${cssVariant}`, 'text', 'src/components/Badge/Badge.module.css — generated from the contract; loaded at build time. The {variant} placeholder became .variant-info, .variant-success, … — one class per enum value.')}
+<h3>Stage 2 — values, bound at runtime</h3>
+<p>Notice the generated rules still contain no colors — they reference <code>var(--…)</code> custom properties. The values arrive at runtime, from the token pipeline's own CSS:</p>
+${codeBlock(`/* src/styles/tokens.css (light) */\n${tokenLight}\n\n/* src/styles/tokens.dark.css */\n${tokenDark}`, 'text', 'the same custom property, defined per mode — loaded at build time from the compiled token CSS')}
+<p>This is why <strong>themes and modes work without regeneration</strong>: switching to dark mode swaps which custom-property definitions apply; every generated component re-resolves instantly, untouched. And it is why a token <em>value</em> change (the designer retargets <code>color.feedback.success.background</code>) regenerates only the token CSS — the component CSS references names, and the names didn't change.</p>
+
+<h2 id="canvas-side">The canvas surface: the same names, bound</h2>
+<p>The token pipeline that emits the CSS custom properties also syncs the same tree as native design-tool <strong>variables</strong> — collections carrying the pipeline's identity markers, upserted in place. The canvas emitter then compiles the contract to a sync script whose fills are <em>bound</em> to those variables through the Plugin API — never painted as literal colors:</p>
+${codeBlock(figmaFill, 'text', 'figma-sync/05-badge.js (generated; excerpt loaded at build time) — the Variant=Success spec names the variable, not a color')}
+${codeBlock(figmaBind, 'text', 'the binding call — figma.variables.setBoundVariableForPaint: the fill points at the variable; the design tool resolves the value per mode')}
+<p>Variant substitution happens at compile time, exactly mirroring the CSS side: where the code surface got <code>.variant-success</code>, the canvas gets a <code>Variant=Success</code> component whose fill is bound to <code>color/feedback/success/background</code>. One placeholder in the contract, expanded once per surface dialect.</p>
+
+<h2 id="two-dialects">One statement, two dialects</h2>
+<p><code>background-color: var(--color-feedback-success-background)</code> in a stylesheet and a Figma fill bound to <code>color/feedback/success/background</code> are <strong>the same statement</strong> — "this part's background is whatever that token says" — spelled in two dialects. Because both surfaces defer to one token source, mode switching behaves identically on both: neither surface owns a color; both re-resolve. And this is what makes drift <em>checkable</em>: the <a href="/how-it-works/round-trips/">differ</a> compares <strong>name bindings</strong>, not rendered colors — a mechanical, exact comparison. Pixels are the downstream receipt, verified separately by the <a href="/how-it-works/instruments/">visual-parity instrument</a> against the design tool's own renders.</p>
+
+<h2 id="asterisk">The honest asterisk: minted tokens</h2>
+<p>All of the above assumes the style facts arrive as names. Imports don't always oblige: a captured component may carry a literal <code>#16a34a</code> nowhere in any token set. The pipeline never invents a name and never silently drops the fact — it <strong>mints a provisional token</strong> under the <code>imported.*</code> namespace, binds to it, and marks it as minted in the proposal notes (the rename-later workflow: promote <code>imported.color.3</code> to a real semantic name when a human decides what it means). The plugin route does better: a full-fidelity dump carries the <em>real</em> variable names the designer already bound, so captured names bind directly and minting is reserved for values that were truly raw. Either way the receipt is explicit — a minted token is a named question, not a papered-over answer.</p>
+
+${receiptLine(`Standing receipts: the token integrity gate fails the build on any unresolvable reference; <code>brand-added-token-layer-only</code> proves a new brand leaves every component byte-identical (values changed, names didn't); the census counts minted tokens per imported set; and the visual-parity instrument keeps the pixel receipt honest.`)}
+`;
+  return howShell(
+    foundation('styles'),
+    'How styles are applied',
+    'Contracts hold token names, never values. Generate-time CSS rules plus runtime var() binding on the code side; identity-markered variables bound via the Plugin API on the canvas — the same statement in two dialects, walked through Badge’s background.',
+    body,
+  );
 }
 
 function determinismPage(): { route: string; html: string } {
   const body = `
-<p class="eyebrow">How it works · foundations 2</p>
+<p class="eyebrow">How it works · foundations 4</p>
 <h1>Determinism &amp; receipts</h1>
 <p class="lede">"Generate from your design system" can be an architecture property or a model behavior you hope for. This spec chooses the property — and backs every honesty claim with a named mechanism.</p>
 ${diagram('receipts-flow', 'Receipts flow: the contract feeds four emitters behind one interface; emitted surfaces are pinned by a golden manifest of SHA-256 hashes; illegal contracts are refused by name before anything emits; every token reference must resolve through the integrity gate; imports name every loss as a degradation code. Each gate writes a committed receipt.')}
@@ -410,7 +537,7 @@ npm run build   # regenerate everything — a clean tree stays byte-identical`, 
 <h2>The claims rule</h2>
 <p>The reference implementation's contribution norm, and this site's too: <strong>no capability claim without an eval behind it</strong> (<a href="${REPO_URL}/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>). Fixture first, eval second, claim last. This page's claims each name their mechanism; the dated log of what has been proven, in order, is <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a>.</p>
 `;
-  return howShell(FOUNDATION_PAGES[1], 'Determinism & receipts', 'Golden-output manifests, refusal by name, the token integrity gate, and degradation codes — the mechanisms that keep generation checkable and loss visible.', body);
+  return howShell(foundation('determinism'), 'Determinism & receipts', 'Golden-output manifests, refusal by name, the token integrity gate, and degradation codes — the mechanisms that keep generation checkable and loss visible.', body);
 }
 
 function instrumentsPage(stats: SiteStats): { route: string; html: string } {
@@ -419,7 +546,7 @@ function instrumentsPage(stats: SiteStats): { route: string; html: string } {
       ? `${stats.censusClean!.toLocaleString('en-US')}/${stats.censusSets.toLocaleString('en-US')}`
       : '1,618/1,618';
   const body = `
-<p class="eyebrow">How it works · foundations 3</p>
+<p class="eyebrow">How it works · foundations 5</p>
 <h1>The instruments</h1>
 <p class="lede">Beyond the eval suite (${stats.evalsPassed}/${stats.evalsTotal} deterministic checks), three standing instruments measure the pipeline against material this project doesn't own — and publish their numbers as committed reports.</p>
 ${diagram('instruments', 'Instrument relationships: the eval suite gates the engine on every change; the whole-kit census, the visual-parity instrument, and the enterprise gauntlet each measure the same engine against outside material and publish committed reports.')}
@@ -438,12 +565,12 @@ ${diagram('instruments', 'Instrument relationships: the eval suite gates the eng
 <h2>Certification, today and tomorrow</h2>
 <p>Today, "certified" means: every capability claim in the reference implementation is backed by an executable check or a committed receipt — the eval suite gates the machinery, the census and visual instruments gate the imports, and the golden manifests gate the generators. The end state is a <strong>conformance kit</strong> a second, independent implementation can run — the roadmap's final, falsifiable exit criterion: <em>an implementation this repo's authors didn't write passes the conformance kit</em> (<a href="${REPO_URL}/blob/main/ROADMAP.md">ROADMAP.md</a>).</p>
 `;
-  return howShell(FOUNDATION_PAGES[2], 'The instruments', 'The whole-kit census, the visual-parity instrument, and the enterprise gauntlet — standing measurements with committed reports and real numbers.', body);
+  return howShell(foundation('instruments'), 'The instruments', 'The whole-kit census, the visual-parity instrument, and the enterprise gauntlet — standing measurements with committed reports and real numbers.', body);
 }
 
 function roundTripsPage(): { route: string; html: string } {
   const body = `
-<p class="eyebrow">How it works · foundations 4</p>
+<p class="eyebrow">How it works · foundations 6</p>
 <h1>Round-trips</h1>
 <p class="lede">The piece that settles the source-of-truth argument: every change on either surface becomes a reviewable proposal to the contract, and the contract regenerates the other side. Executed end-to-end, in both directions, with receipts committed.</p>
 ${diagram('prop-lifecycle', 'The promotion loop: a hand edit on one surface is flagged by the differ with a complete proposed contract patch, promoted by a human into the contract with a version bump, regenerated onto both surfaces, and verified — a surface that lags is named until it catches up.')}
@@ -470,7 +597,7 @@ ${diagram('prop-lifecycle', 'The promotion loop: a hand edit on one surface is f
 <h2>What "parity clean" does and doesn't mean</h2>
 <p>The differ verifies the contracted API surface: props with types <em>and kinds</em>, variant axes and option sets, defaults on both surfaces, slot properties and their accepts, nested instances, and every token variable. It does <strong>not</strong> continuously inspect anatomy internals below the API surface — those are enforced at generation time and re-verified visually by <a href="/how-it-works/instruments/">the visual-parity instrument</a>, and the docs say so rather than rounding up.</p>
 `;
-  return howShell(FOUNDATION_PAGES[3], 'Round-trips', 'The promotion loop executed in both directions — engineer’s prop and designer’s token change through the same door — plus zero-mismatch re-extraction receipts.', body);
+  return howShell(foundation('round-trips'), 'Round-trips', 'The promotion loop executed in both directions — engineer’s prop and designer’s token change through the same door — plus zero-mismatch re-extraction receipts.', body);
 }
 
 export function buildHowPages(stats: SiteStats, replays: HowReplays): Array<{ route: string; html: string }> {
@@ -480,6 +607,8 @@ export function buildHowPages(stats: SiteStats, replays: HowReplays): Array<{ ro
     nestedComponentsPage(replays),
     atScalePage(replays, stats),
     modelPage(),
+    protocolPage(),
+    stylesPage(),
     determinismPage(),
     instrumentsPage(stats),
     roundTripsPage(),

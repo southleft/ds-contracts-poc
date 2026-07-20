@@ -18,6 +18,9 @@ import { homePage } from './src/pages/home.js';
 import { buildHowPages } from './src/pages/how.js';
 import { getStartedPage } from './src/pages/get-started.js';
 import { contributePage } from './src/pages/contribute.js';
+import { cliPage } from './src/pages/cli.js';
+import { emittersPage } from './src/pages/emitters.js';
+import { assertJourneyCommands, MANIFEST_REL } from './src/journeys.js';
 import { layout } from './src/html.js';
 import { loadHowReplays } from './src/how-replays.js';
 import {
@@ -62,8 +65,20 @@ const pages: Array<{ route: string; html: string }> = [
   ...(await buildSpecPages(receipt)),
   ...buildHowPages(stats, replays),
   getStartedPage(),
+  cliPage(),
+  emittersPage(),
   contributePage(),
 ];
+
+// Journey-command drift guard: every rendered `npx @ds-contracts/cli …` line
+// must be byte-equal to a command in evals/fixtures/journey-commands.json —
+// the same manifest the journey evals execute — and every manifest command
+// must be rendered. Docs and tests cannot diverge; throws (build fails) on
+// either direction.
+const journeyReceipt = assertJourneyCommands(pages);
+console.log(
+  `✔ journey-commands: ${journeyReceipt.checked} rendered command line(s) verified against ${MANIFEST_REL} (${journeyReceipt.commands}/${journeyReceipt.commands} manifest commands rendered)`,
+);
 
 // 404 — served by Cloudflare Pages for unknown routes.
 const notFound = layout(

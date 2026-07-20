@@ -37,6 +37,12 @@ import { layout, codeBlock, badge, esc, REPO_URL, type Provenance } from '../htm
 import { fieldsOf, resolveLazy, unwrap, typeText } from '../introspect.js';
 import { SPEC_PAGES, pageMeta, type PageId, type CoverageReceipt } from '../coverage.js';
 import { shippingExample, illustrativeExample, loadReplays, replayedBlock } from '../examples.js';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
+/** The schema's current major, read from the published package at build time
+ *  (@ds-contracts/schema semver major === spec version) — never transcribed. */
+const SCHEMA_V = `v${(JSON.parse(readFileSync(path.join(process.cwd(), 'packages/schema/package.json'), 'utf8')) as { version: string }).version.split('.')[0]}`;
 
 type AnySchema = z.ZodType;
 
@@ -875,7 +881,7 @@ ${section(
     <li>${badge('curated')} — prose and constraint summaries, distilled from the schema’s own commentary and the refusal rules in <code>core/emit-react.ts</code> — hand-written, and kept honest by the coverage guard and review.</li>
     <li>${badge('example')} — real excerpts: shipping contracts from <code>contracts/</code>, or output of the actual import engine replayed over committed capture fixtures, at build time. Illustrative snippets (used only where no shipping contract exercises a branch yet) are schema-validated at build time and say so in their captions.</li>
   </ul>
-  <p>Two version lines are in play and the pages name both: the <em>contract</em> carries its own semver (<code>version</code>); the <em>schema</em> has a single current version (v13) — see <a href="${VERSIONING_ROUTE}">versioning</a>.</p>`,
+  <p>Two version lines are in play and the pages name both: the <em>contract</em> carries its own semver (<code>version</code>); the <em>schema</em> has a single current version (${SCHEMA_V}) — see <a href="${VERSIONING_ROUTE}">versioning</a>.</p>`,
 )}
 
 <section id="pages"><h2>Reference pages</h2><div class="cards">${cards}</div></section>
@@ -905,7 +911,7 @@ ${section(
   'current',
   'Current version',
   ['curated'],
-  `<p>The schema is at <strong>v13</strong> — one live document, <code>scripts/contract-schema.ts</code>, reflected by <code>npm run schema</code> into the published JSON Schema (<code>contracts/contract.schema.json</code>). Every reference page on this site is generated from it at build time, so this site always documents the current version. What changed, when, and why is the repository’s history: see the <a href="${REPO_URL}/blob/main/CHANGELOG.md">CHANGELOG</a> and <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a> on GitHub.</p>`,
+  `<p>The schema is at <strong>${SCHEMA_V}</strong> — one live document, <code>scripts/contract-schema.ts</code>, reflected by <code>npm run schema</code> into the generated JSON Schema (<code>contracts/contract.schema.json</code>) and published as <code>@ds-contracts/schema</code> (its semver major <em>is</em> the spec version; the JSON Schema ships in the package at <code>@ds-contracts/schema/contract.schema.json</code> — point your editor's <code>$schema</code> at it). Every reference page on this site is generated from the same source at build time, so this site always documents the current version. What changed, when, and why is the repository’s history: see the <a href="${REPO_URL}/blob/main/CHANGELOG.md">CHANGELOG</a> and <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a> on GitHub.</p>`,
 )}
 
 ${section(
@@ -926,7 +932,7 @@ ${section(
     {
       path: VERSIONING_ROUTE,
       title: 'Spec versioning — Design System Contracts',
-      description: 'How contract versions (semver) and schema rounds (v13 current) advance — fixture first, refusals named, eval-locked.',
+      description: `How contract versions (semver) and schema rounds (${SCHEMA_V} current) advance — fixture first, refusals named, eval-locked.`,
       sidebar: sideNav(VERSIONING_ROUTE),
       mainClass: 'spec-page',
       schemaStamp: true,

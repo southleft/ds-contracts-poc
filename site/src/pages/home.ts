@@ -78,7 +78,7 @@ export function homePage(stats: SiteStats, receipt: CoverageReceipt): { route: s
   <div class="cards">
     <a class="card" href="/spec/"><h3>Read the Spec</h3><p>Every schema branch, with constraints, refusal rules, and real shipping contracts as examples.</p><span class="card__meta">generated from the schema</span></a>
     <a class="card" href="${PLAYGROUND_URL}"><h3>Try the Playground</h3><p>The actual engine in your browser: import from Figma or code, edit under governance, watch refusals by name.</p><span class="card__meta">no accounts, no backend</span></a>
-    <a class="card" href="/get-started/"><h3>Get started</h3><p>Three short paths: play, import your own component, or adopt the schema in your project.</p><span class="card__meta">honest about what's packaged</span></a>
+    <a class="card" href="/get-started/"><h3>Get started</h3><p>Two first-person journeys on the published CLI — a designer on a code-led team, an engineer on a design-led team — plus the zero-install playground.</p><span class="card__meta">commands rendered from the tested manifest</span></a>
   </div>
 </section>
 `;
