@@ -1,0 +1,85 @@
+[
+  {
+    "name": "button",
+    "sig": "button|Button",
+    "role": null,
+    "text": "",
+    "parts": [
+      {
+        "name": "label",
+        "sig": "span|",
+        "role": null,
+        "text": "More actions",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "name": "popover",
+    "sig": "div|Popover",
+    "role": null,
+    "text": "",
+    "parts": [
+      {
+        "name": "popoverfocustracker",
+        "sig": "div|Popover__FocusTracker",
+        "role": null,
+        "text": "",
+        "parts": []
+      },
+      {
+        "name": "popovercontentcontainer",
+        "sig": "div|Popover__ContentContainer",
+        "role": null,
+        "text": "",
+        "parts": [
+          {
+            "name": "list",
+            "sig": "ul|BlockStack",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "actionList",
+                "sig": "button|ActionList__Item",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "label",
+                    "sig": "span|",
+                    "role": null,
+                    "text": "Import",
+                    "parts": []
+                  }
+                ]
+              },
+              {
+                "name": "actionList-2",
+                "sig": "button|ActionList__Item",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "label-2",
+                    "sig": "span|",
+                    "role": null,
+                    "text": "Export",
+                    "parts": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "popoverfocustracker-2",
+        "sig": "div|Popover__FocusTracker",
+        "role": null,
+        "text": "",
+        "parts": []
+      }
+    ]
+  }
+]

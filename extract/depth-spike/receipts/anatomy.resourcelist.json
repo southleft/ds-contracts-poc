@@ -1,0 +1,83 @@
+[
+  {
+    "name": "listWrapper",
+    "sig": "ul|ResourceList",
+    "role": null,
+    "text": "",
+    "parts": [
+      {
+        "name": "resourceitemlistitem",
+        "sig": "li|ResourceItem__ListItem",
+        "role": null,
+        "text": "",
+        "parts": [
+          {
+            "name": "resourceitem",
+            "sig": "div|ResourceItem",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "resourceitemlink",
+                "sig": "a|ResourceItem__Link",
+                "role": null,
+                "text": "",
+                "parts": []
+              },
+              {
+                "name": "inlinegrid",
+                "sig": "div|InlineGrid",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "avatar",
+                    "sig": "span|Avatar",
+                    "role": "img",
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "icon",
+                        "sig": "svg|Avatar__Svg",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "path",
+                            "sig": "path|",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          },
+                          {
+                            "name": "path-2",
+                            "sig": "path|",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "title",
+                    "sig": "h3|",
+                    "role": null,
+                    "text": "Ada Grace",
+                    "parts": []
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "repeat": {
+          "count": 3,
+          "sig": "li|ResourceItem__ListItem",
+          "componentRef": "ds.resource-item"
+        }
+      }
+    ]
+  }
+]

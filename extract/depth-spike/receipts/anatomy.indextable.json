@@ -1,0 +1,544 @@
+[
+  {
+    "name": "indextableindextablewrapper",
+    "sig": "div|IndexTable__IndexTableWrapper",
+    "role": null,
+    "text": "",
+    "parts": [
+      {
+        "name": "indextableloadingpanel",
+        "sig": "div|IndexTable__LoadingPanel",
+        "role": null,
+        "text": "",
+        "parts": [
+          {
+            "name": "indextableloadingpanelrow",
+            "sig": "div|IndexTable__LoadingPanelRow",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "path",
+                "sig": "path|",
+                "role": null,
+                "text": "",
+                "parts": []
+              },
+              {
+                "name": "span",
+                "sig": "span|",
+                "role": "status",
+                "text": "",
+                "parts": [
+                  {
+                    "name": "span-2",
+                    "sig": "span|",
+                    "role": null,
+                    "text": "",
+                    "parts": []
+                  }
+                ]
+              },
+              {
+                "name": "label",
+                "sig": "span|IndexTable__LoadingPanelText",
+                "role": null,
+                "text": "Loading orders…",
+                "parts": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "indextablestickytable",
+        "sig": "div|IndexTable__StickyTable",
+        "role": "presentation",
+        "text": "",
+        "parts": [
+          {
+            "name": "div",
+            "sig": "div|",
+            "role": null,
+            "text": "",
+            "parts": []
+          },
+          {
+            "name": "indextablestickytableheader",
+            "sig": "div|IndexTable__StickyTableHeader",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "indextableloadingpanel-2",
+                "sig": "div|IndexTable__LoadingPanel",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "indextableloadingpanelrow-2",
+                    "sig": "div|IndexTable__LoadingPanelRow",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "path-2",
+                        "sig": "path|",
+                        "role": null,
+                        "text": "",
+                        "parts": []
+                      },
+                      {
+                        "name": "span-3",
+                        "sig": "span|",
+                        "role": "status",
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "span-4",
+                            "sig": "span|",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "label-2",
+                        "sig": "span|IndexTable__LoadingPanelText",
+                        "role": null,
+                        "text": "Loading orders…",
+                        "parts": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "indextablestickytableheadings",
+                "sig": "div|IndexTable__StickyTableHeadings",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "indextabletableheading",
+                    "sig": "div|IndexTable__TableHeading",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "checkboxchoicelabel",
+                        "sig": "label|Checkbox__ChoiceLabel.Choice",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "checkbox",
+                            "sig": "span|Checkbox",
+                            "role": null,
+                            "text": "",
+                            "parts": [
+                              {
+                                "name": "checkboxinput",
+                                "sig": "input|Checkbox__Input",
+                                "role": "checkbox",
+                                "text": "",
+                                "parts": []
+                              },
+                              {
+                                "name": "backdrop",
+                                "sig": "span|Checkbox__Backdrop",
+                                "role": null,
+                                "text": "",
+                                "parts": []
+                              },
+                              {
+                                "name": "path-3",
+                                "sig": "path|",
+                                "role": null,
+                                "text": "",
+                                "parts": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "label-3",
+                            "sig": "span|",
+                            "role": null,
+                            "text": "Select all orders",
+                            "parts": []
+                          }
+                        ]
+                      }
+                    ],
+                    "repeat": {
+                      "count": 3,
+                      "sig": "div|IndexTable__TableHeading"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "indextablebulkactionswrapper",
+            "sig": "div|IndexTable__BulkActionsWrapper.IndexTable__BulkActionsWrapperVisible",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "inlinestack",
+                "sig": "div|InlineStack",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "checkablebutton",
+                    "sig": "div|CheckableButton",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "checkboxchoicelabel-2",
+                        "sig": "label|Checkbox__ChoiceLabel.Choice",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "checkbox-2",
+                            "sig": "span|Checkbox",
+                            "role": null,
+                            "text": "",
+                            "parts": [
+                              {
+                                "name": "checkboxinput-2",
+                                "sig": "input|Checkbox__Input",
+                                "role": "checkbox",
+                                "text": "",
+                                "parts": []
+                              },
+                              {
+                                "name": "backdrop-2",
+                                "sig": "span|Checkbox__Backdrop",
+                                "role": null,
+                                "text": "",
+                                "parts": []
+                              },
+                              {
+                                "name": "path-4",
+                                "sig": "path|",
+                                "role": null,
+                                "text": "",
+                                "parts": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "label-4",
+                            "sig": "span|",
+                            "role": null,
+                            "text": "Select all 2 orders",
+                            "parts": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "label-5",
+                        "sig": "span|",
+                        "role": null,
+                        "text": "1 selected",
+                        "parts": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "bulkactionsbulkactionsouterlayout",
+                    "sig": "div|BulkActions__BulkActionsOuterLayout",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "button",
+                        "sig": "button|Button",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "icon",
+                            "sig": "svg|Icon__Svg",
+                            "role": null,
+                            "text": "",
+                            "parts": [
+                              {
+                                "name": "path-5",
+                                "sig": "path|",
+                                "role": null,
+                                "text": "",
+                                "parts": [],
+                                "repeat": {
+                                  "count": 3,
+                                  "sig": "path|"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "bulkactionsbulkactionslayout",
+                        "sig": "div|BulkActions__BulkActionsLayout",
+                        "role": null,
+                        "text": "",
+                        "parts": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "indextabletable",
+        "sig": "table|IndexTable__Table",
+        "role": null,
+        "text": "",
+        "parts": [
+          {
+            "name": "indextabletableheading-2",
+            "sig": "th|IndexTable__TableHeading",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "checkboxchoicelabel-3",
+                "sig": "label|Checkbox__ChoiceLabel.Choice",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "checkbox-3",
+                    "sig": "span|Checkbox",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "checkboxinput-3",
+                        "sig": "input|Checkbox__Input",
+                        "role": "checkbox",
+                        "text": "",
+                        "parts": []
+                      },
+                      {
+                        "name": "backdrop-3",
+                        "sig": "span|Checkbox__Backdrop",
+                        "role": null,
+                        "text": "",
+                        "parts": []
+                      },
+                      {
+                        "name": "path-6",
+                        "sig": "path|",
+                        "role": null,
+                        "text": "",
+                        "parts": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "label-6",
+                    "sig": "span|",
+                    "role": null,
+                    "text": "Select all orders",
+                    "parts": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "indextabletableheading-3",
+            "sig": "th|IndexTable__TableHeading",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "label-7",
+                "sig": "span|",
+                "role": null,
+                "text": "Order",
+                "parts": []
+              }
+            ]
+          },
+          {
+            "name": "indextabletableheading-4",
+            "sig": "th|IndexTable__TableHeading",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "label-8",
+                "sig": "span|",
+                "role": null,
+                "text": "Total",
+                "parts": []
+              }
+            ]
+          },
+          {
+            "name": "indextabletablerow",
+            "sig": "tr|IndexTable__TableRow",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "indextabletablecell",
+                "sig": "td|IndexTable__TableCell",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "checkboxchoicelabel-4",
+                    "sig": "label|Checkbox__ChoiceLabel.Choice",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "checkbox-4",
+                        "sig": "span|Checkbox",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "checkboxinput-4",
+                            "sig": "input|Checkbox__Input",
+                            "role": "checkbox",
+                            "text": "",
+                            "parts": []
+                          },
+                          {
+                            "name": "backdrop-4",
+                            "sig": "span|Checkbox__Backdrop",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          },
+                          {
+                            "name": "path-7",
+                            "sig": "path|",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "label-9",
+                        "sig": "span|",
+                        "role": null,
+                        "text": "Select order",
+                        "parts": []
+                      }
+                    ]
+                  }
+                ],
+                "repeat": {
+                  "count": 3,
+                  "sig": "td|IndexTable__TableCell"
+                }
+              }
+            ]
+          },
+          {
+            "name": "indextabletablerow-2",
+            "sig": "tr|IndexTable__TableRow",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "indextabletablecell-2",
+                "sig": "td|IndexTable__TableCell",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "checkboxchoicelabel-5",
+                    "sig": "label|Checkbox__ChoiceLabel.Choice",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "checkbox-5",
+                        "sig": "span|Checkbox",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "checkboxinput-5",
+                            "sig": "input|Checkbox__Input",
+                            "role": "checkbox",
+                            "text": "",
+                            "parts": []
+                          },
+                          {
+                            "name": "backdrop-5",
+                            "sig": "span|Checkbox__Backdrop",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          },
+                          {
+                            "name": "path-8",
+                            "sig": "path|",
+                            "role": null,
+                            "text": "",
+                            "parts": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "label-10",
+                        "sig": "span|",
+                        "role": null,
+                        "text": "Select order",
+                        "parts": []
+                      }
+                    ]
+                  }
+                ],
+                "repeat": {
+                  "count": 3,
+                  "sig": "td|IndexTable__TableCell"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "indextablescrollbarcontainer",
+        "sig": "div|IndexTable__ScrollBarContainer",
+        "role": null,
+        "text": "",
+        "parts": [
+          {
+            "name": "indextablescrollbarcontent",
+            "sig": "div|IndexTable__ScrollBarContent",
+            "role": null,
+            "text": "",
+            "parts": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "themelight",
+    "sig": "div|p-theme-light",
+    "role": null,
+    "text": "",
+    "parts": []
+  }
+]
