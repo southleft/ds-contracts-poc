@@ -15,7 +15,7 @@
     "input": 29,
     "backdrop": 28,
     "choice__label": 1,
-    "label": 4
+    "label": 7
   },
   "folds": {
     "count": 8,
@@ -69,8 +69,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 41,
-    "mintedLeavesFolded": 46
+    "mintedLeavesUnfolded": 44,
+    "mintedLeavesFolded": 49
   },
   "bound": {
     "cellsChecked": 4,
@@ -79,11 +79,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 46,
-    "baseBindings": 41,
+    "leaves": 49,
+    "baseBindings": 44,
     "stateBindings": 51,
     "byShape": {
-      "uniform": 81,
+      "uniform": 84,
       "perAxis": 11,
       "perPair": 0,
       "refused": 0
@@ -201,7 +201,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 81.02409638554217,
+    "computedPctEqual": 81.68604651162791,
     "rowsFullyEqual": 0,
     "rows": 16,
     "pixelPerfectExact": 0,

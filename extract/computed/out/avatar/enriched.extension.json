@@ -873,6 +873,7 @@
   "styledChannelReceipts": [
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <text> — span control used (part label)",
+    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "control-fallback: no control for <path> — span control used (part part-0-0-0)",
     "control-fallback: no control for <path> — span control used (part part-0-0-1)"
   ],
@@ -930,6 +931,10 @@
       "svg-child-outside-grammar: Avatar.initials@lg.on — <text> (v1 carries path/g only); asset refused",
       "svg-viewbox-reconstructed: Avatar.initials@xl.off — 0 0 40 40 from computed size 40×40 (path extent 33.0; viewBox is not a computed style — named reconstruction)",
       "svg-child-outside-grammar: Avatar.initials@xl.on — <text> (v1 carries path/g only); asset refused",
+      "svg-viewbox-unified: Avatar.initials@xs.off — bumped 0 0 33 33 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
+      "svg-viewbox-unified: Avatar.initials@sm.off — bumped 0 0 33 33 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
+      "svg-viewbox-unified: Avatar.initials@md.off — bumped 0 0 33 33 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
+      "svg-viewbox-unified: Avatar.initials@lg.off — bumped 0 0 33 33 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
       "aspect-carried: initials computed width == height in every enabled combo (20/24/28/32/40px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)"
     ],
     "refusals": []

@@ -64,7 +64,8 @@
     ],
     "receipts": [
       "svg-viewbox-reconstructed: Spinner.root@small — 0 0 20 20 from computed size 20×20 (path extent 18.9; viewBox is not a computed style — named reconstruction)",
-      "svg-viewbox-reconstructed: Spinner.root@large — 0 0 44 44 from computed size 44×44 (path extent 43.5; viewBox is not a computed style — named reconstruction)"
+      "svg-viewbox-reconstructed: Spinner.root@large — 0 0 44 44 from computed size 44×44 (path extent 43.5; viewBox is not a computed style — named reconstruction)",
+      "root-svg-plan-carried: Spinner root hosts 2 per-value glyph part(s) (spinner-root-small, spinner-root-large) — round 5c root-hosted svg plan (the round-5a named promotion drop)"
     ],
     "refusals": [
       "static-part-unrendered: reviewed static part \"glyphLarge\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",

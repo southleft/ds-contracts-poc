@@ -848,7 +848,12 @@ export function promoteAnatomy(
    *      needs an enum condition to ride stylesWhen — the v9 shape grammar
    *      the canvas already compiles (position/top/left per combo).
    */
-  const pseudoDecorParts = (e: UnionNode, i: number): Array<[string, Part]> => {
+  /** When the host part is a SHAPE LEAF (curated backdrop), the decor cannot
+   *  nest inside it (shape parts refuse children) — it BUBBLES to the host's
+   *  parent, offsets folded with the host's border widths, guarded by a
+   *  geometry assertion: the parent's content box must equal the host's
+   *  border box (else named refusal). */
+  const pseudoDecorParts = (e: UnionNode, i: number, hostIsShapeLeaf: boolean): Array<[string, Part]> => {
     const out: Array<[string, Part]> = [];
     const px = (v: string | undefined): number | null => {
       const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
@@ -859,8 +864,12 @@ export function promoteAnatomy(
       return m ? Number(m[1]) : 0;
     };
     for (const pe of ['::before', '::after'] as const) {
+      // Domain: ALL default-interaction combos where the host renders (state
+      // planes included — a disabled checked Radio keeps its dot; an
+      // enabled-only domain would fabricate a hidden-when-disabled fact).
+      const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
       const drawnRows: Array<{ combo: Combo; st: Record<string, string> }> = [];
-      for (const combo of presentBy.get(i) ?? []) {
+      for (const combo of domain) {
         const el = union.alignedByKey.get(`${combo.key}__default`)![i];
         const st = el?.node.pseudo[pe];
         if (!st) continue;
@@ -883,16 +892,47 @@ export function promoteAnatomy(
       }
       if (drawnRows.length === 0) continue;
       // uniform geometry + fill over the drawn combos (translate folded)
-      const fold = (row: { st: Record<string, string> }) => {
+      // Bubbled decor: offsets are parent-relative — fold the HOST's border
+      // widths in (absolute children position against the PADDING box) and
+      // assert the parent's content box equals the host's border box.
+      if (hostIsShapeLeaf) {
+        let geometryOk = e.parent !== null;
+        for (const { combo } of drawnRows) {
+          const els = union.alignedByKey.get(`${combo.key}__default`)!;
+          const host = els[i];
+          const parent = e.parent ? els[idxOf.get(e.parent.id)!] : null;
+          if (!host || !parent) { geometryOk = false; break; }
+          const hs = host.node.style;
+          const pst = parent.node.style;
+          const num = (v: string | undefined) => px(v) ?? 0;
+          const parentContentW = num(pst['width']) - num(pst['padding-left']) - num(pst['padding-right']) - num(pst['border-left-width']) - num(pst['border-right-width']);
+          const parentContentH = num(pst['height']) - num(pst['padding-top']) - num(pst['padding-bottom']) - num(pst['border-top-width']) - num(pst['border-bottom-width']);
+          if (
+            Math.abs(parentContentW - num(hs['width'])) > 0.6 ||
+            Math.abs(parentContentH - num(hs['height'])) > 0.6 ||
+            num(hs['margin-top']) !== 0 || num(hs['margin-left']) !== 0
+          ) { geometryOk = false; break; }
+        }
+        if (!geometryOk) {
+          refusals.push(`pseudo-decor-bubble-geometry: ${e.partName}${pe} — the host is a shape leaf (cannot nest children) and the parent's content box does not equal the host's border box; decor NOT promoted (named refusal, v1 bounded)`);
+          continue;
+        }
+      }
+      const fold = (row: { combo: Combo; st: Record<string, string> }) => {
         const t = row.st['transform'] ?? 'none';
         const mtx = /^matrix\((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)$/.exec(t);
         const tx = mtx ? Number(mtx[5]) : 0;
         const ty = mtx ? Number(mtx[6]) : 0;
+        // Bubbled: absolute children position against the host's PADDING box
+        // — the host's border widths join the parent-relative offsets.
+        const hostSt = hostIsShapeLeaf ? union.alignedByKey.get(`${row.combo.key}__default`)![i]!.node.style : null;
+        const bT = hostSt ? (px(hostSt['border-top-width']) ?? 0) : 0;
+        const bL = hostSt ? (px(hostSt['border-left-width']) ?? 0) : 0;
         return {
           w: px(row.st['width'])!,
           h: px(row.st['height'])!,
-          top: (px(row.st['top']) ?? 0) + ty,
-          left: (px(row.st['left']) ?? 0) + tx,
+          top: (px(row.st['top']) ?? 0) + ty + bT,
+          left: (px(row.st['left']) ?? 0) + tx + bL,
           bg: row.st['background-color'],
           radius: px(row.st['border-top-left-radius']) ?? 0,
         };
@@ -907,7 +947,7 @@ export function promoteAnatomy(
       // presence over the enabled domain: drawn combos only
       const fact = factorPresence(
         drawnRows.map((r) => r.combo),
-        enabled,
+        domain,
         space.axes,
         presenceProps,
         stateProps,
@@ -915,7 +955,7 @@ export function promoteAnatomy(
         new Set(contract.props.map((p) => p.name)),
       );
       if (!fact) {
-        refusals.push(`pseudo-decor-presence-uncorrelated: ${e.partName}${pe} drawn in ${drawnRows.length}/${enabled.length} enabled combos and the drawn set does not factor per-axis — decor NOT promoted (named refusal)`);
+        refusals.push(`pseudo-decor-presence-uncorrelated: ${e.partName}${pe} drawn in ${drawnRows.length}/${domain.length} default-interaction combos and the drawn set does not factor per-axis — decor NOT promoted (named refusal)`);
         continue;
       }
       if (fact.shownWhen.length > 0) {
@@ -952,7 +992,7 @@ export function promoteAnatomy(
         description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a ${f.w}×${f.h} ${kind} at ${f.left},${f.top} inside ${e.partName}, fill ${f.bg} — background+box+radius only, no content text; translate folded into top/left (receipted).`,
       };
       receipts.push(
-        `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${f.w}×${f.h} at ${f.left},${f.top}, fill ${f.bg}; drawn in ${drawnRows.length}/${enabled.length} enabled combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; translate folded into top/left — round 5c S5)`,
+        `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${f.w}×${f.h} at ${f.left},${f.top}, fill ${f.bg}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; translate${hostIsShapeLeaf ? ' + host border' : ''} folded into top/left${hostIsShapeLeaf ? '; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted)' : ''} — round 5c S5)`,
       );
       out.push([partName, decor]);
     }
@@ -1226,9 +1266,16 @@ export function promoteAnatomy(
     for (const c of e.children) {
       const cp = buildPart(c);
       if (cp) childParts[c.partName] = cp;
+      // Round 5c — S5 bubbling: a shape-leaf child's drawn pseudo decor
+      // cannot nest inside it — it joins THIS part's children instead.
+      if (cp?.shape) {
+        for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true)) childParts[decorName] = decor;
+      }
     }
     // Round 5c — S5: drawn pseudo-element decor boxes join as child parts.
-    for (const [decorName, decor] of pseudoDecorParts(e, i)) childParts[decorName] = decor;
+    if (!part.shape) {
+      for (const [decorName, decor] of pseudoDecorParts(e, i, false)) childParts[decorName] = decor;
+    }
     if (Object.keys(childParts).length > 0) part.parts = childParts;
     return part;
   };
@@ -1269,8 +1316,14 @@ export function promoteAnatomy(
     const cp = buildPart(c);
     if (cp) rootChildren[c.partName] = cp;
   }
-  // Round 5c — S5 on the root itself (drawn root pseudo decor).
-  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!)) rootChildren[decorName] = decor;
+  // Round 5c — S5 on the root itself (drawn root pseudo decor) + bubbling
+  // for the root's own shape-leaf children.
+  for (const c of rootEntry.children) {
+    if (rootChildren[c.partName]?.shape) {
+      for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true)) rootChildren[decorName] = decor;
+    }
+  }
+  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false)) rootChildren[decorName] = decor;
   if (Object.keys(rootChildren).length > 0) newRoot.parts = rootChildren;
   // Round 5c — ROOT-HOSTED svg plan: buildPart never runs on the root, so a
   // plan whose host IS the root (Spinner: the glyph is the root's only
