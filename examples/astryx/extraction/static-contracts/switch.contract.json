@@ -1,0 +1,269 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Switch/Switch.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Label text for the switch (always rendered for accessibility).",
+      "type": "text",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "isLabelHidden",
+      "description": "Whether to visually hide the label (still accessible to screen readers).",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Label Hidden"
+        },
+        "code": {
+          "prop": "isLabelHidden"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Description text displayed below the label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    },
+    {
+      "name": "isLoading",
+      "description": "Whether the switch is in a loading state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Loading"
+        },
+        "code": {
+          "prop": "isLoading"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Whether the switch is on or off.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the switch is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "htmlName",
+      "description": "The HTML name attribute for the underlying checkbox input.\nUseful for form submissions.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Html Name"
+        },
+        "code": {
+          "prop": "htmlName"
+        }
+      }
+    },
+    {
+      "name": "disabledMessage",
+      "description": "Explains why the switch is disabled. When set together with `isDisabled`,\nthe switch shows a tooltip with this text on hover and keyboard focus, and\nthe control stays focusable (via `aria-disabled`) so the reason is\ndiscoverable by keyboard and assistive technology. Activation stays\nblocked.\n\nUse this instead of wrapping a disabled switch in `Tooltip` — disabled\ncontrols don't emit the pointer events an external tooltip needs.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Disabled Message"
+        },
+        "code": {
+          "prop": "disabledMessage"
+        }
+      }
+    },
+    {
+      "name": "isOptional",
+      "description": "Whether the field is optional. Mutually exclusive with isRequired.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Optional"
+        },
+        "code": {
+          "prop": "isOptional"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the switch is required. Mutually exclusive with isOptional.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    },
+    {
+      "name": "labelTooltip",
+      "description": "Tooltip text to display in an info icon at the end of the label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label Tooltip"
+        },
+        "code": {
+          "prop": "labelTooltip"
+        }
+      }
+    },
+    {
+      "name": "labelPosition",
+      "description": "Which side of the switch the label appears on.\n- 'start': Label appears before the switch\n- 'end': Label appears after the switch",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "default": "end",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Position",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "labelPosition"
+        }
+      }
+    },
+    {
+      "name": "labelSpacing",
+      "description": "Spacing behavior between label and switch.\n- 'hug': Label and switch are positioned next to each other\n- 'spread': Label and switch are pushed to opposite ends\n\n'default' is a deprecated alias for 'hug'.",
+      "type": {
+        "enum": [
+          "hug",
+          "spread",
+          "default"
+        ]
+      },
+      "default": "hug",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Spacing",
+          "values": {
+            "hug": "Hug",
+            "spread": "Spread",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "labelSpacing"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Callback fired when the switch state changes.",
+      "bindings": {
+        "code": {
+          "prop": "onChange"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "focus",
+      "description": "Callback fired when the switch receives focus.",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "blur",
+      "description": "Callback fired when the switch loses focus.",
+      "bindings": {
+        "code": {
+          "prop": "onBlur"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Switch/Switch",
+      "export": "Switch"
+    }
+  }
+}

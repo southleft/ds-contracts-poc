@@ -1,0 +1,187 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.link",
+  "name": "Link",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Link/Link.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Accessible label for the link.\nUsed as aria-label when content is not self-descriptive\n(e.g. icon-only links). When children are text, this is\nunnecessary — the link text itself serves as the label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "href",
+      "description": "Link destination URL.\nWhen undefined, renders as a `<button>` with link styling\nfor semantic correctness and accessibility.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Href"
+        },
+        "code": {
+          "prop": "href"
+        }
+      }
+    },
+    {
+      "name": "hasUnderline",
+      "description": "Whether the link should always display an underline.\nWhen false, underline only appears on hover.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Underline"
+        },
+        "code": {
+          "prop": "hasUnderline"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the link is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isExternalLink",
+      "description": "Whether the link opens in a new tab with an external link icon.\nWhen true, sets target=\"_blank\" and rel=\"noopener noreferrer\".",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is External Link"
+        },
+        "code": {
+          "prop": "isExternalLink"
+        }
+      }
+    },
+    {
+      "name": "newTabLabel",
+      "description": "Screen-reader text appended to an external link to announce that it opens\nin a new tab (the visual icon is decorative). Override for localization.",
+      "type": "text",
+      "default": "(opens in new tab)",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "New Tab Label"
+        },
+        "code": {
+          "prop": "newTabLabel"
+        }
+      }
+    },
+    {
+      "name": "target",
+      "description": "Where to open the linked document.\nOverridden to \"_blank\" when isExternalLink is true.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Target"
+        },
+        "code": {
+          "prop": "target"
+        }
+      }
+    },
+    {
+      "name": "rel",
+      "description": "Link relationship (e.g. \"noopener noreferrer\").\nAutomatically includes \"noopener noreferrer\" when isExternalLink is true.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Rel"
+        },
+        "code": {
+          "prop": "rel"
+        }
+      }
+    },
+    {
+      "name": "tooltip",
+      "description": "Tooltip text to display on hover.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Tooltip"
+        },
+        "code": {
+          "prop": "tooltip"
+        }
+      }
+    },
+    {
+      "name": "isStandalone",
+      "description": "Whether the link is standalone (not inline within text).\nApplies base font sizing when true.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Standalone"
+        },
+        "code": {
+          "prop": "isStandalone"
+        }
+      }
+    },
+    {
+      "name": "maxLines",
+      "description": "Maximum lines before truncation. Forwarded to Text.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max Lines"
+        },
+        "code": {
+          "prop": "maxLines"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Link/Link",
+      "export": "Link"
+    }
+  }
+}
