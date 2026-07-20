@@ -1,6 +1,6 @@
 # Banner — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.banner` v0.3.1. Canvas-drawn values are read directly off the
+Contract: `polaris.banner` v0.3.2. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/banner/captured-truth.json` — the computed styles of the REAL

@@ -153,3 +153,38 @@ Button.
 - `npx tsc --noEmit`: green.
 - `git status`: only `examples/polaris/` touched (this receipt + `receipts/canvas/*`).
   Committed scripts and engine untouched. Nothing deployed.
+
+## Round 5d addendum (2026-07-20) — what the NEXT re-amend will change on this file
+
+The owner's live review of the 5b canvas named four visual defects; all four are
+fixed at source (contracts v0.3.2 + emitter/runtime), verified by the re-earned
+headless canvas gate (`receipts/canvas-gate/`, before→after in the round-5d
+commits). **The live canvas has NOT been touched** — the fixes land at the next
+bridge session by re-running the committed scripts. What that re-amend changes:
+
+1. **Checkbox** (4:773 amends in place): the check glyph re-imports as ONE
+   continuous round-cap stroke (the segmented capsules were the computed
+   `stroke-dasharray` of Polaris's pathLength-normalized draw-on animation,
+   now dropped by name); the root cells gain `itemSpacing` BOUND to
+   `imported/checkbox/choice-control/margin-right` (the missing control↔label
+   gap), and the inner control picks up its ±1px margin boxes.
+2. **RadioButton** (8:543 amends in place): same bound `itemSpacing` gap
+   (`imported/radio-button/choice-control/margin-right`).
+3. **Banner** (1:461 amends in place): focus-visible cells re-stroke with
+   `strokeAlign: OUTSIDE` — the ring wraps the whole banner including the tone
+   ribbon (it was inside-aligned and the opaque ribbon painted over the top
+   arc). outline-offset is still not carried (named).
+4. **Badge** (8:1330 amends in place): all four corners bind
+   `{p.border-radius-200}` (the v0.3.1 emit bound three corners to minted
+   `imported/shared/size-8` siblings — the single-longhand shorthand-coverage
+   bug, retired); the pip icons shrink to their real boxes (the −2/−2/−8
+   margins now apply as margin-box wrapper frames, so the pill stays 20px
+   tall); each pip's vector paint re-binds to its
+   `imported/badge/icon-3/fill/<tone>` variable instead of a baked hex.
+   Honesty note for the owner's currentColor question: the captured truth
+   shows the pip is NOT text-colored in Polaris 13.9.5 — 6 of 13 icon-bearing
+   tones paint it a brighter icon-scale color (info pip #0094d5 vs text
+   #003a5a), so it rides its own minted variable, not the text token.
+5. Button/Tag also change (margins/gap/radius carriage + OUTSIDE focus rings);
+   the note columns for Checkbox/RadioButton/Banner/Badge should be rewritten
+   to round-5d truth at the same session.

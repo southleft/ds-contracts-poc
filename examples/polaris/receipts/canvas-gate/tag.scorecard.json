@@ -1,7 +1,7 @@
 {
   "component": "Tag",
   "contractId": "polaris.tag",
-  "contractVersion": "0.3.1",
+  "contractVersion": "0.3.2",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -46,48 +46,48 @@
       "cell": "Size=large, State=Active",
       "kind": "state",
       "state": "active",
-      "pctExactUnmasked": 38.26,
-      "pctAAUnmasked": 26.95,
-      "pctAAMasked": 59.93,
-      "maskCoveragePct": 57.04,
-      "canvasPx": "164x52",
+      "pctExactUnmasked": 33.73,
+      "pctAAUnmasked": 23.84,
+      "pctAAMasked": 45.1,
+      "maskCoveragePct": 49.43,
+      "canvasPx": "164x60",
       "realPx": "152x48",
-      "inkCanvasPct": 97.94,
-      "inkRealPct": 83.21,
+      "inkCanvasPct": 96.34,
+      "inkRealPct": 72.11,
       "note": "state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
     },
     {
       "cell": "Size=large, State=Focus Visible",
       "kind": "state",
       "state": "focus-visible",
-      "pctExactUnmasked": 37.52,
-      "pctAAUnmasked": 25.89,
-      "pctAAMasked": 59.93,
-      "maskCoveragePct": 57.04,
-      "canvasPx": "164x52",
+      "pctExactUnmasked": 33.09,
+      "pctAAUnmasked": 22.93,
+      "pctAAMasked": 45.1,
+      "maskCoveragePct": 49.43,
+      "canvasPx": "164x60",
       "realPx": "152x48",
-      "inkCanvasPct": 97.94,
-      "inkRealPct": 83.21,
-      "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
+      "inkCanvasPct": 96.34,
+      "inkRealPct": 72.11,
+      "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (round 5d: the lowered stroke now aligns OUTSIDE, so the ring wraps the full root bounds and children cannot cover it — the Banner top-arc loss is retired); outline-offset is still not carried, so the ring hugs the box edge where the web offsets it; state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
     }
   ],
   "summary": {
     "cells": 4,
-    "meanExactUnmasked": 24.53,
-    "meanAAUnmasked": 13.26,
-    "meanAAMasked": 29.97,
-    "maxAAMasked": 59.93,
+    "meanExactUnmasked": 22.29,
+    "meanAAUnmasked": 11.75,
+    "meanAAMasked": 22.55,
+    "maxAAMasked": 45.1,
     "worstCell": "Size=large, State=Active",
     "cellsOver10Masked": [
       {
         "cell": "Size=large, State=Active",
-        "pctAAMasked": 59.93,
+        "pctAAMasked": 45.1,
         "note": "state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
       },
       {
         "cell": "Size=large, State=Focus Visible",
-        "pctAAMasked": 59.93,
-        "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
+        "pctAAMasked": 45.1,
+        "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (round 5d: the lowered stroke now aligns OUTSIDE, so the ring wraps the full root bounds and children cannot cover it — the Banner top-arc loss is retired); outline-offset is still not carried, so the ring hugs the box edge where the web offsets it; state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
       }
     ],
     "blankCanvasCells": []

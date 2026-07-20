@@ -1020,17 +1020,20 @@ function applyTokens(
         break;
       }
       // Round 5d (owner finding: the Banner focus ring drew bottom-only): a
-      // CSS OUTLINE lowers to an OUTSIDE-aligned stroke, never an inside
-      // border — outlines sit outside the border box and paint over
+      // STATE-PREVIEW outline lowers to an OUTSIDE-aligned stroke, never an
+      // inside border — outlines sit outside the border box and paint over
       // children, so the inside approximation let the opaque tone ribbon
-      // cover the top arc. Reaches this switch via the state-preview
-      // pass-through (translateStateOverrides no longer respells outline-*
-      // as border-*).
-      case 'outline-color':
+      // cover the top arc. ONLY the ':outline-preview' spellings (stamped by
+      // translateStateOverrides) reach these cases: a BASE-plane
+      // outline-color/outline-width carried at rest must keep falling
+      // through, because the real resting outline-style is none and CSS
+      // draws nothing (the Button tone maps carry resting outline channels —
+      // drawing them inflated every critical/success base cell by the ring).
+      case 'outline-color:outline-preview':
         spec.stroke = varName;
         spec.strokeOutside = true;
         break;
-      case 'outline-width':
+      case 'outline-width:outline-preview':
         spec.bindings = { ...spec.bindings, strokeWeight: varName };
         break;
       case 'border-radius':
@@ -1385,15 +1388,33 @@ function applyChildAspect(spec: NodeSpec, part: Part): void {
   }
 }
 
-/** State-preview overrides pass through applyTokens unchanged. Round 5d:
- *  outline-color/outline-width used to be respelled as border-* here, which
- *  drew the focus ring as an INSIDE stroke that opaque children painted
- *  over (the Banner ribbon covered the top arc). applyTokens now carries
- *  outline-* natively as an OUTSIDE-aligned stroke (spec.strokeOutside) —
- *  still an approximation of a CSS outline (no outline-offset carriage),
- *  documented as such. */
+/** State-preview overrides pass through applyTokens with one honest
+ *  translation. Round 5d: outline-color/outline-width used to be respelled
+ *  as border-* here, which drew the focus ring as an INSIDE stroke that
+ *  opaque children painted over (the Banner ribbon covered the top arc).
+ *  They are now stamped ':outline-preview' so applyTokens lowers them to an
+ *  OUTSIDE-aligned stroke (spec.strokeOutside) — the stamp exists because
+ *  the lowering is a STATE-PREVIEW approximation only: a base-plane resting
+ *  outline channel draws nothing in CSS (resting outline-style is none) and
+ *  must keep falling through applyTokens untranslated. Still an
+ *  approximation of a CSS outline (no outline-offset carriage), documented
+ *  as such. */
 function translateStateOverrides(overrides: Record<string, string>): Record<string, string> {
-  return overrides;
+  // The ring preview needs the FULL pair: an outline-color override alone
+  // (the Button hover/active/disabled recolors) is INERT in CSS — the
+  // resting outline-style/width still suppress the ring — so lowering it
+  // would draw a default-width ring the web never shows (caught by the 5d
+  // gate re-run: five critical secondary/tertiary state cells inflated by a
+  // phantom ring).
+  const ring = overrides['outline-color'] !== undefined && overrides['outline-width'] !== undefined;
+  const out: Record<string, string> = {};
+  for (const [cssProp, ref] of Object.entries(overrides)) {
+    if (cssProp === 'outline-color' || cssProp === 'outline-width') {
+      if (ring) out[`${cssProp}:outline-preview`] = ref;
+      // lone outline channel: fall through untranslated (inert, like base)
+    } else out[cssProp] = ref;
+  }
+  return out;
 }
 
 /** v13 part-level states (P18 second half): inside a State-axis PREVIEW

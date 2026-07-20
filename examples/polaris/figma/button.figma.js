@@ -108,8 +108,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -188,8 +186,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -308,8 +304,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -388,8 +382,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -468,8 +460,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -587,8 +577,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -667,8 +655,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -787,8 +773,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -867,8 +851,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -947,8 +929,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1066,8 +1046,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1146,8 +1124,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1266,8 +1242,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1346,8 +1320,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1426,8 +1398,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1545,8 +1515,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1625,8 +1593,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1745,8 +1711,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1825,8 +1789,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -1905,8 +1867,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2024,8 +1984,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2104,8 +2062,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2224,8 +2180,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2304,8 +2258,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2384,8 +2336,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2503,8 +2453,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2583,8 +2531,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2703,8 +2649,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2783,8 +2727,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2863,8 +2805,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -2982,8 +2922,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3062,8 +3000,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3182,8 +3118,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3262,8 +3196,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3342,8 +3274,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3461,8 +3391,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3541,8 +3469,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3661,8 +3587,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3741,8 +3665,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3821,8 +3743,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -3940,8 +3860,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4020,8 +3938,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4140,8 +4056,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4220,8 +4134,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4300,8 +4212,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4419,8 +4329,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4499,8 +4407,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4619,8 +4525,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4699,8 +4603,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4779,8 +4681,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4898,8 +4798,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -4978,8 +4876,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5098,8 +4994,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5178,8 +5072,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5258,8 +5150,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5377,8 +5267,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5457,8 +5345,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5577,8 +5463,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5657,8 +5541,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5737,8 +5619,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5856,8 +5736,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -5936,8 +5814,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6056,8 +5932,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6136,8 +6010,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6216,8 +6088,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6335,8 +6205,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6415,8 +6283,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6535,8 +6401,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6615,8 +6479,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6695,8 +6557,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6814,8 +6674,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -6894,8 +6752,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7014,8 +6870,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7094,8 +6948,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7174,8 +7026,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7293,8 +7143,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7373,8 +7221,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7493,8 +7339,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7573,8 +7417,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7653,8 +7495,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7772,8 +7612,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7852,8 +7690,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -7972,8 +7808,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8052,8 +7886,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8132,8 +7964,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8251,8 +8081,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8331,8 +8159,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8451,8 +8277,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8531,8 +8355,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8611,8 +8433,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8730,8 +8550,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8810,8 +8628,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -8930,8 +8746,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9010,8 +8824,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9090,8 +8902,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9209,8 +9019,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9289,8 +9097,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9409,8 +9215,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9489,8 +9293,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9569,8 +9371,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9688,8 +9488,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9768,8 +9566,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9888,8 +9684,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -9968,8 +9762,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10048,8 +9840,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10167,8 +9957,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10247,8 +10035,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10367,8 +10153,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10447,8 +10231,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10527,8 +10309,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10646,8 +10426,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10726,8 +10504,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10846,8 +10622,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -10926,8 +10700,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11006,8 +10778,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11125,8 +10895,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11205,8 +10973,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11325,8 +11091,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11405,8 +11169,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11485,8 +11247,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11604,8 +11364,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11684,8 +11442,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11804,8 +11560,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11884,8 +11638,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -11964,8 +11716,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12083,8 +11833,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12163,8 +11911,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12283,8 +12029,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12363,8 +12107,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12443,8 +12185,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12562,8 +12302,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12642,8 +12380,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12762,8 +12498,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12842,8 +12576,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -12922,8 +12654,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13041,8 +12771,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13121,8 +12849,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13241,8 +12967,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13321,8 +13045,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13401,8 +13123,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13520,8 +13240,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13600,8 +13318,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13720,8 +13436,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13800,8 +13514,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13880,8 +13592,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -13999,8 +13709,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14079,8 +13787,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14199,8 +13905,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14279,8 +13983,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14359,8 +14061,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14478,8 +14178,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14558,8 +14256,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14678,8 +14374,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14758,8 +14452,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14838,8 +14530,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -14957,8 +14647,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15037,8 +14725,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15157,8 +14843,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15237,8 +14921,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15317,8 +14999,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15436,8 +15116,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15516,8 +15194,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15636,8 +15312,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15716,8 +15390,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15796,8 +15468,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15915,8 +15585,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -15995,8 +15663,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16115,8 +15781,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16195,8 +15859,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16275,8 +15937,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16394,8 +16054,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16474,8 +16132,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16594,8 +16250,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16674,8 +16328,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16754,8 +16406,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16873,8 +16523,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -16953,8 +16601,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17073,8 +16719,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17153,8 +16797,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17233,8 +16875,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17352,8 +16992,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17432,8 +17070,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17552,8 +17188,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17632,8 +17266,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17712,8 +17344,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17831,8 +17461,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -17911,8 +17539,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18031,8 +17657,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18111,8 +17735,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18191,8 +17813,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18310,8 +17930,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18390,8 +18008,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18510,8 +18126,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18590,8 +18204,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18670,8 +18282,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18789,8 +18399,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18869,8 +18477,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -18989,8 +18595,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19069,8 +18673,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/tertiary/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19149,8 +18751,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19231,8 +18831,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-disabled/secondary",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-disabled/secondary",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19311,8 +18909,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-disabled/plain",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-disabled/plain",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19391,8 +18987,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-disabled/primary",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-disabled/primary",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19471,8 +19065,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-disabled/tertiary",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-disabled/tertiary",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -19551,8 +19143,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-disabled/monochromePlain",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-disabled/monochromePlain",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20152,8 +19742,6 @@ const COMPONENTS = [
               }
             }
           ],
-          "stroke": "imported/button/root/outline-color-state-active/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20232,8 +19820,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/plain/none",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-active/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20325,8 +19911,6 @@ const COMPONENTS = [
               }
             }
           ],
-          "stroke": "imported/button/root/outline-color-state-active/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20405,8 +19989,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/tertiary/none",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-active/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20485,8 +20067,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/monochromePlain/none",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-active/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20604,8 +20184,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color-state-hover/secondary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20684,8 +20262,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/plain/none",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-hover/plain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20804,8 +20380,6 @@ const COMPONENTS = [
               "spread": 1.5
             }
           ],
-          "stroke": "imported/button/root/outline-color-state-hover/primary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20884,8 +20458,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/tertiary/none",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-hover/tertiary/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",
@@ -20964,8 +20536,6 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/monochromePlain/none",
           "effectStack": [],
-          "stroke": "imported/button/root/outline-color-state-hover/monochromePlain/none",
-          "strokeOutside": true,
           "children": [
             {
               "type": "frame",

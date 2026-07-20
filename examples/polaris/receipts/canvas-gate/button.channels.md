@@ -1,6 +1,6 @@
 # Button — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.button` v0.3.1. Canvas-drawn values are read directly off the
+Contract: `polaris.button` v0.3.2. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/button/captured-truth.json` — the computed styles of the REAL
@@ -33,8 +33,7 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | border-top-left-radius | 58 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `8px` | `8px` | 0 |  |
 | root | border-top-right-radius | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible` | `12px` | `12px` | 0 |  |
 | root | border-top-right-radius | 58 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `8px` | `8px` | 0 |  |
-| root | border-width | 40 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
-| root | border-width | 15 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled`) | `1px` | `0px` | +1px | EMITTER-DEFECT? (contract binds 0px) |
+| root | border-width | 55 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
 | root | border-width | 5 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible`) | `2px` | `0px` | +2px | EMITTER-DEFECT? (contract binds 0px) |
 | root | gap | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `2px` | `2px` | 0 |  |
 | root | padding-bottom | 10 cells (e.g. `Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary`) | `4px` | `4px` | 0 |  |

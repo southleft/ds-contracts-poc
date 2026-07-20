@@ -3447,11 +3447,18 @@ const cases: Case[] = [
     },
   },
   {
-    // ROUND 5c — CANVAS GATE STANDING PIN: the committed scorecards carry
-    // the round-5c numbers (the six 5a promotion-level causes fixed; the
-    // v0.3.1 contracts carry the Tag label, the Spinner glyph+color, the
-    // Button tone paint maps, captured 18×18 backdrops, authored Avatar
-    // viewBoxes, and the Radio dot). SEVEN components PASS the ≤5%
+    // ROUND 5d — CANVAS GATE STANDING PIN (pin move RE-EARNED by the 5d
+    // harnessed gate run, 2026-07-20, Chromium 148.0.7778.96 pin): the
+    // owner's four visual defects are fixed at source — continuous check
+    // glyph (dash animation vehicles dropped), control↔label gap as bound
+    // itemSpacing + margin-box runtime, focus outline as an OUTSIDE-aligned
+    // stroke (full-pair rule: a lone outline-color state recolor stays
+    // inert, like CSS), all four Badge corners on {p.border-radius-200}.
+    // Banner 4.60→3.17 (ring wraps the ribbon), Button 7.02→6.46 (5 focus
+    // cells improved; SAME 53-cell named >10% membership as 5c), Tag
+    // 29.97→22.55 (OUTSIDE ring on the two named preview cells), Checkbox
+    // 3.06→3.22 (checked-cell raster of the continuous 2px stroke — the
+    // capsule class is retired, named). SEVEN components PASS the ≤5%
     // masked-mean acceptance; every other component's mean is pinned, its
     // >10% cells all carry named causes (font raster / runtime-% /
     // outline→stroke previews / S3 state×tone residue), and a silent
@@ -3463,22 +3470,22 @@ const cases: Case[] = [
     claim: 'C3-detection',
     run: () => {
       const dir = path.join(ROOT, 'examples/polaris/receipts/canvas-gate');
-      // meanAAMasked pinned per component (round-5c final run, 2026-07-19,
+      // meanAAMasked pinned per component (round-5d final run, 2026-07-20,
       // Chromium 148.0.7778.96).
       const PIN: Record<string, { mean: number; accept: boolean }> = {
         avatar: { mean: 0, accept: true },
         badge: { mean: 0.07, accept: true },
-        banner: { mean: 4.6, accept: true },
+        banner: { mean: 3.17, accept: true },
         // Button's mean is dominated by the 46 fully-masked text-only cells
         // (named font-raster class) + 5 focus-ring + 2 state×tone S3 cells.
-        button: { mean: 7.02, accept: false },
-        checkbox: { mean: 3.06, accept: true },
+        button: { mean: 6.46, accept: false },
+        checkbox: { mean: 3.22, accept: true },
         'progress-bar': { mean: 26.22, accept: false },
         'radio-button': { mean: 0, accept: true },
         spinner: { mean: 0, accept: true },
         // Tag base + disabled are EXACT (0.00); the mean is the two named
         // active/focus state-preview cells (C5 outline approximation).
-        tag: { mean: 29.97, accept: false },
+        tag: { mean: 22.55, accept: false },
         thumbnail: { mean: 2.16, accept: true },
       };
       // Pixel-scoring nondeterminism headroom (AA classifier at 2x DSF):
@@ -3499,7 +3506,7 @@ const cases: Case[] = [
           throw new Error(`${comp}: round-5 PASSING component no longer passes (mean≤5 ∧ noBlank)`);
         }
       }
-      console.log('canvas-gate-standing-pin: 7/10 PASS pinned (Avatar, Badge, Banner, Checkbox, RadioButton, Spinner, Thumbnail); 10/10 means at or under their round-5c pins, all >10% cells named');
+      console.log('canvas-gate-standing-pin: 7/10 PASS pinned (Avatar, Badge, Banner, Checkbox, RadioButton, Spinner, Thumbnail); 10/10 means at or under their round-5d pins, all >10% cells named');
     },
   },
   {

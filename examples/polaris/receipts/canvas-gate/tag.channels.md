@@ -1,6 +1,6 @@
 # Tag — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.tag` v0.3.1. Canvas-drawn values are read directly off the
+Contract: `polaris.tag` v0.3.2. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/tag/captured-truth.json` — the computed styles of the REAL
