@@ -824,6 +824,15 @@ interface Ctx {
    *  minted literals instead of dropping entirely. */
   capturedValues?: Map<string, string>;
   prefix: string;
+  /** The contract id THIS proposal claims — the name-derived slug, suffixed
+   *  past session-claimed holders whose componentSetKey CONTRADICTS this
+   *  set's key (live-gauntlet class ③, session-id-collision-false-cycle:
+   *  "RadioButton" the COMPONENT and "Radio button" the set both sanitize
+   *  to ds.radio-button; without the suffix the session's newest-wins
+   *  registry rebinds the earlier import's child ref onto this proposal and
+   *  the referee reports a cycle that is not drawn). Same-key holders keep
+   *  the base id — that is the legitimate re-import/heal path. */
+  selfId: string;
   notes: string[];
   unbound: UnboundValue[];
   textProps: Array<{ name: string; property: string; default: string }>;
@@ -2046,8 +2055,10 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
 // Part construction
 // ---------------------------------------------------------------------------
 
-/** The contract id this proposal will claim for itself. */
-const selfContractId = (ctx: Ctx): string => `${ctx.prefix}.${componentIdSlug(ctx.setName)}`;
+/** The contract id this proposal will claim for itself — resolved once at
+ *  context build (ctx.selfId; session cross-population collisions suffix,
+ *  see the Ctx field doc). */
+const selfContractId = (ctx: Ctx): string => ctx.selfId;
 
 /** True when a nested instance resolves to the set's own contract — either
  *  through the contract index (name → id lands on the proposal's own id) or
@@ -2155,7 +2166,12 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
   const isNew = !ctx.stubs.has(stubId);
   const capture = ctx.stubs.get(stubId) ?? { id: stubId, instanceOf, applied: [], observed: [] };
   if (capture.setKey === undefined) {
-    const setKey = first(m.occ, (n) => n.instanceSetKey);
+    // Setless components carry only instanceKey — the component key IS the
+    // identity for a plain COMPONENT, exactly the fallback the session-
+    // linking index uses ("componentSetKey (or setless component key)").
+    // Without it the stub's anchors carry null and a session cross-
+    // population collision (class ③) is invisible to the key discipline.
+    const setKey = first(m.occ, (n) => n.instanceSetKey) ?? first(m.occ, (n) => n.instanceKey);
     if (setKey !== undefined) capture.setKey = setKey;
   }
   for (const o of m.occ) {
@@ -3888,6 +3904,16 @@ export function proposeFromDump(
      *  per-variant minted literals (live-gauntlet class ①) instead of
      *  dropping the channel. Absent → the classic drift note stands. */
     capturedValues?: Map<string, string>;
+    /** Contract ids claimed by THIS session's earlier imports — real
+     *  contracts AND their child stubs (live-gauntlet class ③). When the
+     *  name-derived self id lands on one of these whose componentSetKey
+     *  CONTRADICTS this set's key (both non-null), the proposal takes a
+     *  deterministic numeric suffix (arrival order) and the collision is
+     *  NAMED — the stubIdFor contradicting-key discipline applied at
+     *  proposal-registration time. Same-key holders keep the base id (the
+     *  legitimate re-import / stub-heal path). Repo contracts NEVER join
+     *  this set: a repo-name landing stays the workspace re-import rule. */
+    sessionClaimedIds?: ReadonlySet<string>;
   },
 ): FigmaProposalResult {
   const prefix = opts.prefix ?? 'ds';
@@ -3953,6 +3979,28 @@ export function proposeFromDump(
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = parseAxes(variantNames);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
+
+  // Self contract id — the name-derived slug, suffixed past SESSION-claimed
+  // holders with contradicting key evidence (class ③; see the Ctx field and
+  // opts.sessionClaimedIds docs). Resolved BEFORE part construction so
+  // stubIdFor's self-guard protects the id actually claimed.
+  const baseSelfId = `${prefix}.${componentIdSlug(set.setName)}`;
+  let selfId = baseSelfId;
+  const ownKey = set.key ?? null;
+  if (opts.sessionClaimedIds && ownKey !== null) {
+    const contradicts = (id: string): boolean => {
+      if (!opts.sessionClaimedIds!.has(id)) return false;
+      const holderKey = opts.contractsById?.get(id)?.anchors?.figma?.componentSetKey ?? null;
+      return holderKey !== null && holderKey !== ownKey;
+    };
+    for (let n = 2; contradicts(selfId); n += 1) selfId = `${baseSelfId}-${n}`;
+    if (selfId !== baseSelfId) {
+      preNotes.push(
+        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (its componentSetKey contradicts this set's key ${ownKey}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
+      );
+    }
+  }
+
   const ctx: Ctx = {
     setName: set.setName,
     axes,
@@ -3966,6 +4014,7 @@ export function proposeFromDump(
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
     prefix,
+    selfId,
     notes: [],
     unbound: [],
     textProps: [],
@@ -4246,7 +4295,6 @@ export function proposeFromDump(
       `contract name: drawn set name "${set.setName}" is not a PascalCase component name — proposed as "${componentName}" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)`,
     );
   }
-  const selfId = `${prefix}.${componentIdSlug(set.setName)}`;
   if (idSlugSanitized(set.setName)) {
     // Field case (CBDS kit, first live plugin send): "_variable-list-item",
     // "Button / Primary / Medium", "Type=Text, Variant=Error" all derive ids

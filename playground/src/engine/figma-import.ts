@@ -80,7 +80,16 @@ export function proposalsFromDump(dump: FigmaImportResult['dump']): DumpProposal
     corpus: activeTokens().corpus,
     contractIdByName: new Map([...contractIdByName, ...session.idByName]),
     contractIdByKey: new Map([...contractIdByKey, ...session.idByKey]),
-    contractsById: new Map([...contractsById, ...session.contracts]),
+    // Session stubs at LOWEST precedence (repo, then real session contracts
+    // win the id) — visible so the class-③ cross-population id-collision
+    // guard can read a stub claim's key evidence.
+    contractsById: new Map([...session.stubs, ...contractsById, ...session.contracts]),
+    // Ids claimed by THIS workspace's imports (contracts AND stubs; never
+    // the repo): a proposal whose name-derived id lands on one of these
+    // with a CONTRADICTING componentSetKey takes a deterministic suffix —
+    // the RadioButton / "Radio button" false-cycle fix (live-gauntlet ③).
+    // Same-key landings keep the base id: the re-import/heal path.
+    sessionClaimedIds: new Set([...session.stubs.keys(), ...session.contracts.keys()]),
     fileKey: dump._provenance?.fileKey ?? null,
     mintUnbound: true,
     // Visible-in-default-variant boolean defaults are evidence only when the

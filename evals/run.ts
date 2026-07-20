@@ -927,6 +927,26 @@ const cases: Case[] = [
     },
   },
   {
+    // HEAL ROUND, live-gauntlet class ③ (session-id-collision-false-cycle):
+    // "RadioButton" the COMPONENT vs "Radio button" the set — both sanitize
+    // to ds.radio-button; the session's newest-wins registry rebound the
+    // icon's stub ref onto the later-imported parent and the referee
+    // reported a cycle that is not drawn (all 12 variants refused). Fix:
+    // proposal-time id claiming applies the stubIdFor contradicting-key
+    // suffix discipline against SESSION-claimed ids (keys first — v1.5/v1.6
+    // identity; setless stubs now carry the component key). Pins the suffix
+    // + named note + zero-violation referee + same-key heal + unchanged
+    // batch scope, over the committed trio fixture.
+    id: 'session-id-collision-suffix',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/session-id-collision-check.ts']);
+      if (r.status !== 0 || !r.out.includes('session-id-collision ok:')) {
+        throw new Error(`session-id-collision check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,

@@ -6473,10 +6473,7 @@
     "stubbed": 0,
     "unresolved": 0,
     "stubbedDespiteImported": [],
-    "violations": [
-     "ds.radio-button: part \"radioButtonIcon\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself",
-     "ds.radio-button: part \"radioButtonIcon2\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself"
-    ]
+    "violations": []
    },
    "adversarial": {
     "parentFirstStubs": 2,
@@ -6514,7 +6511,10 @@
     "geometrySkipNotes": 4,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
-    "firstChild": "Circle"
+    "firstChild": "Circle",
+    "honestStubsKept": [
+     "ds.circle"
+    ]
    }
   },
   {
@@ -6662,7 +6662,21 @@
     "geometrySkipNotes": 0,
     "healedAfterReimport": true,
     "stillStubbedAfterHeal": [],
-    "firstChild": "_Tab-item"
+    "firstChild": "_Tab-item",
+    "honestStubsKept": [
+     "ds.tab-item-vertical-left",
+     "ds.tab-item-vertical-left",
+     "ds.tab-item-vertical-left",
+     "ds.tab-item-vertical-left",
+     "ds.tab-item-vertical-left",
+     "ds.tab-item-vertical-left",
+     "ds.tab-item-vertical-right",
+     "ds.tab-item-vertical-right",
+     "ds.tab-item-vertical-right",
+     "ds.tab-item-vertical-right",
+     "ds.tab-item-vertical-right",
+     "ds.tab-item-vertical-right"
+    ]
    }
   },
   {
@@ -7000,18 +7014,6 @@
    "known": "named-limit"
   },
   {
-   "cls": "session-id-collision-false-cycle",
-   "set": "Radio button",
-   "evidence": "ds.radio-button: part \"radioButtonIcon\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself",
-   "where": "core/propose-figma.ts stubIdFor/selfContractId — cross-population id collision (RadioButton the COMPONENT vs \"Radio button\" the set claim ds.radio-button; the session newest-wins registry rebinds the child's ref onto the parent)"
-  },
-  {
-   "cls": "session-id-collision-false-cycle",
-   "set": "Radio button",
-   "evidence": "ds.radio-button: part \"radioButtonIcon2\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself",
-   "where": "core/propose-figma.ts stubIdFor/selfContractId — cross-population id collision (RadioButton the COMPONENT vs \"Radio button\" the set claim ds.radio-button; the session newest-wins registry rebinds the child's ref onto the parent)"
-  },
-  {
    "cls": "stub-geometry-not-minted",
    "set": "Radio button-icon",
    "evidence": "2 stub(s) mint ZERO observed-geometry tokens; 4 note(s) say values differ \"without correlating to any variant axis\" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)",
@@ -7038,16 +7040,6 @@
    "cls": "duplicate-name-key-contradiction",
    "setName": "Checkbox-icon",
    "file": "duplicate-name-key-contradiction-checkbox-icon.dump.json"
-  },
-  {
-   "cls": "session-id-collision-false-cycle",
-   "setName": "Radio button",
-   "file": "session-id-collision-false-cycle-radio-button.dump.json"
-  },
-  {
-   "cls": "session-id-collision-false-cycle",
-   "setName": "Radio button + Radio button-icon + RadioButton + Circle",
-   "file": "session-id-collision-false-cycle-radio-button.dump.json"
   }
  ],
  "capturedLayer": {
