@@ -777,9 +777,9 @@ border that opaque children paint over); and Badge's radius and pip
 **inspected as bare literals** instead of their tokens (shorthand coverage
 minting sibling longhands over the semantic binding; svg import baking
 paints). A gate that passes while the owner's inspector disagrees is a gap
-in the gate's coverage, and it is recorded as such. **Round 5d — two
-extraction-layer and four emitter/runtime-layer root-cause fixes — is in
-flight on a branch; nothing here claims it landed.**
+in the gate's coverage, and it is recorded as such. Round 5d — two
+extraction-layer and four emitter/runtime-layer root-cause fixes — answered
+same day, below.
 
 
 ## 2026-07-20 — Astryx Phase A: the second system, refereed by its vendor's own docs
@@ -822,6 +822,32 @@ contract-governed Figma library** for a system Meta actually ships — genesis,
 not reconciliation. This is the Two Journeys developer path demonstrated at
 full length: npm-shipped source in, contracts refereed by the vendor's own
 docs, and a design surface that exists *because* the contracts do.
+
+
+## 2026-07-20 — Round 5d: the owner's four classes, fixed at the source
+
+All four live-review classes root-caused and retired — two at the extraction
+layer (svg **dash channels drop with a named receipt** — pathLength-relative
+animation vehicles are not resting truth, so the check glyph is one
+continuous round-cap stroke again; **shorthand coverage** maps every
+constituent longhand, so the reviewed `border-radius` binding rules all four
+corners and the `imported.*` sibling mints are retired) and four at the
+emitter/runtime layer (**margins now apply on canvas** — uniform sibling
+gaps bind itemSpacing to the margin variable, residual margins become a real
+margin-box wrapper, so the Badge pip keeps the 20px pill; **outline lowers
+to an OUTSIDE-aligned stroke** — the Banner focus ring wraps the full
+banner including the tone ribbon's top arc; **single-paint glyphs ride
+their contract variable** after svg import, so the inspector shows the
+token, with the honesty note that Polaris's pip is genuinely NOT
+text-colored on 6 of 13 tones). Promotion **v0.3.2**; the gate re-earned
+with pins moved — Banner 4.60→3.17, Tag 29.97→22.55, everything else
+holding, still 7/10 PASS with zero unnamed >10% cells — and the gate earned
+its keep AGAIN mid-round: the ring-pair rule (outline previews require the
+full color+width pair; a lone resting outline-color is inert in CSS) was
+caught by the gate before pinning, twice. Two new eval pins; **129/129.**
+Residue named: the live canvas was NOT touched this round — the margin-box
+and svgPaintVar fixes become visible at the next bridge re-amend, and
+`PHASE-B5-RECEIPT.md` records exactly what that re-amend will change.
 
 ---
 

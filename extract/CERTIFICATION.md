@@ -1,6 +1,6 @@
 # Fresh-clone certification — the "it is solid" receipt
 
-> **Point-in-time note (2026-07-20):** this certification binds to commit `85b50d4` and describes THAT tree — every number below (99/99 evals, pre-packages, pre-computed-floor) is the certified commit's, not HEAD's. The suite has since grown to 127 evals and the repo now publishes `@ds-contracts/schema` / `@ds-contracts/cli`; a fresh-clone re-certification at the v0.7.0 boundary has not been run.
+> **Point-in-time note (2026-07-20):** this certification binds to commit `85b50d4` and describes THAT tree — every number below (99/99 evals, pre-packages, pre-computed-floor) is the certified commit's, not HEAD's. The suite has since grown to 129 evals and the repo now publishes `@ds-contracts/schema` / `@ds-contracts/cli`; a fresh-clone re-certification at the v0.7.0 boundary has not been run.
 
 **Date:** 2026-07-12
 **Certified commit:** `85b50d4` (the #53b cleanup batch HEAD; three fixes this certification itself demanded landed immediately after as `331275e` — see "What the certification caught," below)
