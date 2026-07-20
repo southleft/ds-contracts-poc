@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.3.0)
+ * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.3.1)
  * Regenerate with: npm run generate
  */
 
@@ -98,8 +98,8 @@
 }
 
 .backdrop {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   border-width: var(--p-border-width-0);
   border-bottom-left-radius: var(--imported-shared-size-4);
@@ -421,6 +421,9 @@
 }
 
 .label {
+  font-size: var(--imported-checkbox-label-font-size);
+  font-weight: var(--imported-checkbox-label-font-weight);
+  line-height: var(--imported-checkbox-label-line-height);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;

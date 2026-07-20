@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text.contract.json (polaris.text v0.3.0)
+ * Source of truth: contracts/text.contract.json (polaris.text v0.3.1)
  * Regenerate with: npm run generate
  */
 
@@ -9,6 +9,9 @@
   justify-content: center;
   margin: 0;
   border: 0;
+  color: var(--imported-text-root-color-none);
+  font-size: var(--imported-text-root-font-size-none);
+  line-height: var(--imported-text-root-line-height-none);
   display: block;
 }
 

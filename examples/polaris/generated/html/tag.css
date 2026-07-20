@@ -1,4 +1,4 @@
-/* Tag — from polaris.tag v0.3.0 (core/emit-html.ts) */
+/* Tag — from polaris.tag v0.3.1 (core/emit-html.ts) */
 
 .tag, .tag *, .tag *::before, .tag *::after {
   box-sizing: border-box;
@@ -98,7 +98,7 @@
   bottom: var(--imported-shared-size-0);
   color: var(--imported-tag-link-color);
   grid-template-columns: var(--imported-tag-link-grid-template-columns);
-  grid-template-rows: var(--imported-tag-link-grid-template-rows);
+  grid-template-rows: var(--imported-shared-size-20);
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
@@ -136,6 +136,8 @@
 
 .tag__label-2 {
   font-size: var(--imported-shared-size-12);
+  font-weight: var(--imported-tag-label-2-font-weight);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
@@ -149,6 +151,52 @@
 
 .tag[data-disabled] .tag__label-2 {
   display: none;
+}
+
+.tag__text {
+  display: flex;
+  font-size: var(--imported-shared-size-12);
+  line-height: var(--imported-tag-text-line-height);
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  text-wrap-mode: nowrap;
+}
+
+.tag[data-linked] .tag__text {
+  display: none;
+}
+
+.tag[data-clickable] .tag__text {
+  display: block;
+}
+
+.tag[data-disabled] .tag__text {
+  display: block;
+}
+
+.tag__label {
+  font-size: var(--p-text-body-sm-font-size);
+  font-weight: var(--p-text-body-sm-font-weight);
+  line-height: var(--p-font-line-height-500);
+  letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: inline;
+  text-wrap-mode: nowrap;
+}
+
+.tag[data-linked] .tag__label {
+  display: none;
+}
+
+.tag[data-clickable] .tag__label {
+  display: inline;
+}
+
+.tag[data-disabled] .tag__label {
+  display: inline;
 }
 
 .tag__part-1 {
@@ -182,7 +230,7 @@
   flex-shrink: var(--imported-tag-button-flex-shrink);
   font-size: var(--imported-tag-button-font-size);
   left: var(--imported-tag-button-left-none);
-  line-height: var(--imported-tag-button-line-height);
+  line-height: var(--imported-shared-size-20);
   margin-bottom: var(--imported-tag-button-margin-bottom-none);
   margin-left: var(--imported-tag-button-margin-left-none);
   margin-right: var(--imported-tag-button-margin-right-none);
