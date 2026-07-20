@@ -893,6 +893,25 @@ const cases: Case[] = [
     },
   },
   {
+    // HEAL ROUND, live-gauntlet class ④ (linked-child-html-escaped-as-text):
+    // CBDS Text Area showed literal '<div class="input-label">' INSIDE the
+    // field — corrected diagnosis: the parent's inferred root element is
+    // <textarea> (raw-text content model), so the BROWSER renders every
+    // child tag as text; void roots hoist children out (input family
+    // 48–66%), <select> drops them (Dropdown = caret only). emit-html now
+    // projects such boxes to a neutral <div> with a NAMED comment. Pins the
+    // projection AND the XSS invariants (child markup stays structure, leaf
+    // text stays escaped, part-less native roots untouched).
+    id: 'raw-text-root-projection',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/raw-text-root-projection-check.ts']);
+      if (r.status !== 0 || !r.out.includes('raw-text-root-projection ok:')) {
+        throw new Error(`raw-text-root-projection check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,
