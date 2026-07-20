@@ -114,10 +114,17 @@ export async function handleBridge(
   const rawCode = isSessionRoute ? null : decodeURIComponent(url.pathname.slice('/bridge/'.length));
 
   if (isSessionRoute || request.method === 'GET') {
-    // Playground-only side: same origin gate as assist.
+    // Origin policy, refined for the reverse direction (plugin receives):
+    //   - DESIGN DUMPS remain playground-only reads (the sensitive payload).
+    //   - CONTRACTS BUNDLES deliver to ANY origin — the pusher explicitly
+    //     sent them to this code, and a Figma plugin's fetch arrives with
+    //     `Origin: null`; the pairing code is the auth (same reasoning as
+    //     the upload route).
+    //   - Session minting is allowed from any origin: "the code is minted
+    //     where the human is looking" now includes the plugin's human.
+    //     Per-IP daily limits already bound abuse; sessions are cheap.
     const origin = resolveOrigin(request, env);
-    if (!origin) return json(403, { error: BRIDGE_MESSAGES.forbiddenOrigin });
-    const cors = corsHeaders(origin);
+    const cors = origin ? corsHeaders(origin) : uploadCors;
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
     if (env.BRIDGE_ENABLED !== 'true') return json(503, { error: BRIDGE_MESSAGES.disabled }, cors);
 
@@ -141,6 +148,12 @@ export async function handleBridge(
       // Payload kind, recorded at upload ('dump' when absent — pre-bundle
       // uploads and the original direction). Old receivers ignore the field.
       const kind = ((await env.ASSIST_KV.get(kindKey(code))) ?? 'dump') as BridgePayloadKind;
+      // The dump direction stays playground-gated: a design dump never
+      // delivers to a foreign origin. Bundles deliver anywhere — the code
+      // is the auth. The payload is NOT consumed by a refused read.
+      if (kind === 'dump' && !origin) {
+        return json(403, { error: BRIDGE_MESSAGES.forbiddenOrigin }, cors);
+      }
       // One-time read: delete BEFORE answering; the dump exists nowhere
       // after this response (TTL is the backstop for KV consistency lag).
       await env.ASSIST_KV.delete(dumpKey(code));

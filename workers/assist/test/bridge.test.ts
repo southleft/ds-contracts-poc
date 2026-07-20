@@ -346,17 +346,31 @@ test('rate limit: polling is uncounted — a long wait never trips the cap', asy
 // Origins (asymmetric by design) + kill switch
 // ---------------------------------------------------------------------------
 
-test('origins: session and read answer the playground only; upload answers anyone with the code', async () => {
+test('origins: DUMP reads answer the playground only; sessions + bundle reads answer anyone (code is auth)', async () => {
   const env = makeEnv();
-  // Session from an unlisted origin / no origin: refused.
-  assert.equal((await handleRequest(req('/bridge/session', { origin: 'https://evil.example' }), env, deps)).status, 403);
-  assert.equal((await handleRequest(req('/bridge/session', { origin: null }), env, deps)).status, 403);
-  // Read from the plugin's null origin: refused (the code renders in the playground).
+  // Session minting is open to any origin now (the plugin's human mints
+  // receive codes too) — per-IP limits bound abuse.
+  assert.equal((await handleRequest(req('/bridge/session', { origin: 'https://evil.example' }), env, deps)).status, 200);
+  assert.equal((await handleRequest(req('/bridge/session', { origin: null }), env, deps)).status, 200);
+  // A DESIGN DUMP still never delivers to a foreign origin — and the refused
+  // read does NOT consume it: the playground read afterward still delivers.
   const code = await createSession(env);
-  assert.equal((await handleRequest(req(`/bridge/${code}`, { method: 'GET', origin: 'null' }), env, deps)).status, 403);
-  // Upload with NO origin header at all (curl-shaped) still lands: the code is the auth.
   const sent = await handleRequest(req(`/bridge/${code}`, { origin: null, body: DUMP }), env, deps);
   assert.equal(sent.status, 200);
+  assert.equal((await handleRequest(req(`/bridge/${code}`, { method: 'GET', origin: 'null' }), env, deps)).status, 403);
+  const delivered = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  assert.equal(delivered.status, 200);
+  assert.equal(((await delivered.json()) as { status: string }).status, 'delivered');
+  // A CONTRACTS BUNDLE delivers to the plugin's null origin — the pairing
+  // code is the auth; the pusher explicitly targeted this code.
+  const code2 = await createSession(env);
+  const bundle = JSON.stringify({ type: 'CONTRACTS-BUNDLE', version: 1, contracts: [{ id: 'x.y' }] });
+  assert.equal((await handleRequest(req(`/bridge/${code2}`, { origin: null, body: bundle }), env, deps)).status, 200);
+  const pluginRead = await handleRequest(req(`/bridge/${code2}`, { method: 'GET', origin: 'null' }), env, deps);
+  assert.equal(pluginRead.status, 200);
+  const body = (await pluginRead.json()) as { status: string; kind: string };
+  assert.equal(body.status, 'delivered');
+  assert.equal(body.kind, 'contracts-bundle');
 });
 
 test('origins: preview subdomains create sessions; upload preflight answers 204 with *', async () => {
