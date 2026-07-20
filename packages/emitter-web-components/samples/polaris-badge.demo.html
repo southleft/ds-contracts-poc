@@ -1,0 +1,89 @@
+<!--
+  Badge — Custom Element showcase emitted from contract polaris.badge v0.3.0
+  by @ds-contracts/emitter-web-components. The story-equivalent grid: the all-defaults rendering,
+  one rendering per enum value of every axis (other axes at their defaults), and one per boolean
+  prop set true — the exact enumeration core/emit-html.ts showcases, spelled with <polaris-badge>.
+  Token values arrive via CSS custom properties (they inherit through the shadow boundary) —
+  include the token stylesheet on the page or nothing resolves. Text content is the default-slot
+  fallback; pass light DOM children to replace it.
+  Serve next to the COMPILED element module (polaris-badge.ts → polaris-badge.js).
+-->
+<script type="module" src="./polaris-badge.js"></script>
+<style>
+  .showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+  .showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
+</style>
+<section class="showcase showcase--polaris-badge">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <polaris-badge></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=info</p>
+    <polaris-badge tone="info"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=success</p>
+    <polaris-badge tone="success"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=warning</p>
+    <polaris-badge tone="warning"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=critical</p>
+    <polaris-badge tone="critical"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=attention</p>
+    <polaris-badge tone="attention"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=new</p>
+    <polaris-badge tone="new"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=magic</p>
+    <polaris-badge tone="magic"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=info-strong</p>
+    <polaris-badge tone="info-strong"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=success-strong</p>
+    <polaris-badge tone="success-strong"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=warning-strong</p>
+    <polaris-badge tone="warning-strong"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=critical-strong</p>
+    <polaris-badge tone="critical-strong"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=attention-strong</p>
+    <polaris-badge tone="attention-strong"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=read-only</p>
+    <polaris-badge tone="read-only"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=enabled</p>
+    <polaris-badge tone="enabled"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">progress=incomplete</p>
+    <polaris-badge progress="incomplete"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">progress=partiallyComplete</p>
+    <polaris-badge progress="partiallyComplete"></polaris-badge>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">progress=complete</p>
+    <polaris-badge progress="complete"></polaris-badge>
+  </div>
+</section>

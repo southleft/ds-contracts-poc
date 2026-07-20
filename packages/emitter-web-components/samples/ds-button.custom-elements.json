@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "ds-button.ts",
+      "description": "Generated from contract ds.button v1.5.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "ButtonElement",
+          "tagName": "ds-button",
+          "description": "Triggers an action or event. Use one primary button per context.",
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "'primary' | 'secondary' | 'danger' | 'ghost'"
+              },
+              "default": "'primary'",
+              "description": "Visual prominence of the action."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "description": "Control density."
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prevents interaction and communicates unavailability."
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows a spinning busy indicator beside the label while an async action resolves."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Button label."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "loadingSpinner"
+            },
+            {
+              "name": "label"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ButtonElement",
+          "declaration": {
+            "name": "ButtonElement",
+            "module": "ds-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-button",
+          "declaration": {
+            "name": "ButtonElement",
+            "module": "ds-button.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

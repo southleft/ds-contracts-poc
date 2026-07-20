@@ -1,6 +1,6 @@
 {
-  "passed": 121,
-  "total": 121,
+  "passed": 123,
+  "total": 123,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -605,6 +605,16 @@
     {
       "id": "plugin-propose-dry-run",
       "claim": "C4-convergence",
+      "pass": true
+    },
+    {
+      "id": "wc-emitter-roundtrip",
+      "claim": "C7-cli",
+      "pass": true
+    },
+    {
+      "id": "wc-emitter-css-parity",
+      "claim": "C1-determinism",
       "pass": true
     }
   ]

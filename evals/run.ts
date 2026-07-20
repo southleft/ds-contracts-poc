@@ -3866,6 +3866,123 @@ const cases: Case[] = [
       console.log('plugin-propose-dry-run: dump→proposal→bounded diff round-trip + exact PR dry-run plan');
     },
   },
+  {
+    // PHASE 6 CLOSURE RECEIPT — @ds-contracts/emitter-web-components proves
+    // the emitter plugin interface PRESERVES TRUTH: emit Web Components for
+    // five contracts (repo Badge/Button/Switch/Card + the Polaris badge
+    // pilot), generate custom-elements.json FROM the contracts, run the
+    // REPO'S OWN CEM extraction adapter over the emitted package, and diff
+    // the round-tripped proposal against each source contract — props/
+    // enums/defaults/events must survive; every non-survivor is NAMED with
+    // its mechanism (anatomy doesn't ride CEM — expected, named). Plus the
+    // registry/CLI integration: the package's default export registers as
+    // "web-components" (live array + getEmitters + byName, collision
+    // refused by name) and the BUILT dist bundle loads through
+    // `generate --target web-components --emitter <dist>`.
+    id: 'wc-emitter-roundtrip',
+    claim: 'C7-cli',
+    run: () => {
+      // 1) The closure receipt itself (examples/ is not copied into scratch —
+      //    the Polaris pilot rides in read-only from the repo root).
+      const receipt = run(TSX, [
+        'packages/emitter-web-components/scripts/roundtrip-check.ts',
+        '--examples-root', path.join(ROOT, 'examples'),
+        '--out', 'wc-samples',
+      ]);
+      if (receipt.status !== 0) throw new Error(`roundtrip receipt failed:\n${receipt.out}`);
+      for (const line of [
+        'cem: every emitted component extracted (no silent drops)',
+        'cem: zero skips (the emitted manifest is fully legible)',
+        '✔ prop variant: enum values survive [primary, secondary, danger, ghost]',
+        '✔ prop variant: default "primary" survives',
+        '✔ prop disabled: boolean kind survives',
+        '✔ event toggle: survives as event prop onToggle',
+        "✔ proposal: event 'toggle' back with bindings.code.prop onToggle",
+        "✔ proposal: variant back as enum with the full value set + default 'primary'",
+        '✔ prop toneAndProgressLabelOverride: attribute "tone-and-progress-label-override" maps back to canonical "toneAndProgressLabelOverride"',
+        '✔ prop tone: enum values survive [info, success, warning, critical, attention, new, magic, info-strong, success-strong, warning-strong, critical-strong, attention-strong, read-only, enabled]',
+        '✔ NAMED non-survivor — anatomy (parts/tokens/layout/…): CEM describes an API, never an implementation — the proposal returns a stub anatomy',
+        '✔ NAMED non-survivor — slot constraints (accepts/min/max/required): CEM slots carry name + description only — the constraint set does not ride',
+        '✔ wc-emitter-roundtrip: 5 contracts emitted, CEM-extracted, and diffed — props/enums/defaults/events survive; every non-survivor named',
+      ]) {
+        if (!receipt.out.includes(line)) throw new Error(`missing receipt line: ${line}\n${receipt.out}`);
+      }
+
+      // 2) Registry integration: the package default export IS an Emitter;
+      //    registration lands in the live array, getEmitters, and byName;
+      //    a name collision refuses by name.
+      const probe = run(TSX, ['-e', `
+        import { emitters, emitterByName, getEmitters, registerEmitter } from './core/emitter.ts';
+        import wc from './packages/emitter-web-components/src/index.ts';
+        registerEmitter(wc);
+        if (!getEmitters().some((e) => e.name === 'web-components')) throw new Error('not in getEmitters()');
+        if (!emitters.some((e) => e.name === 'web-components')) throw new Error('registry array is not live');
+        if (emitterByName.get('web-components') !== wc) throw new Error('not in emitterByName');
+        let threw = '';
+        try { registerEmitter({ name: 'web-components', label: 'x', emit: () => [] }); } catch (e) { threw = String(e); }
+        if (!threw.includes('already registered')) throw new Error('collision not refused by name: ' + (threw || '(registered!)'));
+        console.log('wc registry probe ok: ' + getEmitters().map((e) => e.name).join(','));
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('wc registry probe ok: react,html,react-inline,figma-script,web-components')) {
+        throw new Error(`wc registry probe failed:\n${probe.out}`);
+      }
+
+      // 3) CLI integration with the BUILT artifact (the publishable shape):
+      //    build the plugin bundle + the CLI in scratch, then generate.
+      const builtWc = run(process.execPath, ['packages/emitter-web-components/build.mjs']);
+      if (builtWc.status !== 0) throw new Error(`plugin build failed:\n${builtWc.out}`);
+      const builtCli = run(process.execPath, ['packages/cli/build.mjs']);
+      if (builtCli.status !== 0) throw new Error(`CLI build failed:\n${builtCli.out}`);
+      const cli = path.join(SCRATCH, 'packages', 'cli', 'dist', 'cli.js');
+      const r = spawnSync(
+        process.execPath,
+        [cli, 'generate', 'contracts/badge.contract.json', 'contracts/button.contract.json',
+          '--out', 'wc-out', '--target', 'web-components',
+          '--emitter', 'packages/emitter-web-components/dist/index.js',
+          '--tokens', 'tokens/primitives.tokens.json', '--icons', 'assets/icons'],
+        { cwd: SCRATCH, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if (r.status !== 0 || !out.includes('Registered emitter "web-components"')) {
+        throw new Error(`CLI --emitter web-components failed:\n${out}`);
+      }
+      for (const f of ['ds-badge.ts', 'ds-badge.css.ts', 'ds-badge.demo.html', 'ds-badge.custom-elements.json', 'ds-button.ts']) {
+        if (!existsSync(path.join(SCRATCH, 'wc-out', f))) throw new Error(`CLI did not write wc-out/${f}`);
+      }
+      const badgeTs = readFileSync(path.join(SCRATCH, 'wc-out', 'ds-badge.ts'), 'utf8');
+      if (!badgeTs.includes("customElements.define('ds-badge', BadgeElement)") ||
+          !badgeTs.includes('static observedAttributes = ["variant"]')) {
+        throw new Error(`emitted ds-badge.ts missing definition/observedAttributes:\n${badgeTs.slice(0, 400)}`);
+      }
+      console.log('wc-emitter-roundtrip: 5-contract CEM round trip survived (props/enums/defaults/events; non-survivors named), registry + CLI --target web-components proven on the built dist bundle');
+    },
+  },
+  {
+    // PHASE 6 CROSS-EMITTER CONSISTENCY RECEIPT — the emitted Web Component
+    // demo renders in REAL Chromium next to core/emit-html.ts's render of
+    // the SAME contracts, and the component root computed-compares across
+    // every showcase item: 9 computed channels + bounding width/height per
+    // item, 165 comparisons over Badge/Button/Switch (enum × boolean ×
+    // state chrome included — disabled opacity, loading spinner geometry,
+    // switch checked layout). The shadow-scoped selector translation must
+    // resolve the cascade EXACTLY like emit-html's class rules: one
+    // contract, one computed truth across emitters.
+    id: 'wc-emitter-css-parity',
+    claim: 'C1-determinism',
+    run: () => {
+      const r = run(TSX, ['packages/emitter-web-components/scripts/css-parity-check.ts']);
+      if (r.status !== 0) throw new Error(`css-parity receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ [disabled=true] 11/11 channels match (9 computed + width/height)',
+        '✔ [loading=true] 11/11 channels match (9 computed + width/height)',
+        '✔ [value=on] 11/11 channels match (9 computed + width/height)',
+        '✔ wc-emitter-css-parity: 3 subjects, 15 showcase items, 165 channel comparisons, 0 mismatches — one contract, one computed truth across emitters',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing parity line: ${line}\n${r.out}`);
+      }
+      console.log('wc-emitter-css-parity: 165/165 computed channels equal across emitters (real Chromium)');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

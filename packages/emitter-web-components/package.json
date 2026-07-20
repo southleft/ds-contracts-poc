@@ -1,0 +1,33 @@
+{
+  "name": "@ds-contracts/emitter-web-components",
+  "version": "0.1.0",
+  "description": "ds-contracts emitter plugin — contract → vanilla Custom Elements (shadow DOM, constructable stylesheets, zero runtime dependencies), with a deterministic custom-elements.json manifest emitted from the same contract.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southleft/ds-contracts-poc.git",
+    "directory": "packages/emitter-web-components"
+  },
+  "homepage": "https://ds-contracts-spec.pages.dev",
+  "bugs": "https://github.com/southleft/ds-contracts-poc/issues"
+}

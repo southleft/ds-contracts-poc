@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "ds-badge.ts",
+      "description": "Generated from contract ds.badge v1.1.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "BadgeElement",
+          "tagName": "ds-badge",
+          "description": "Communicates status or categorization at a glance. Non-interactive.",
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "'info' | 'success' | 'warning' | 'danger' | 'error'"
+              },
+              "default": "'info'",
+              "description": "The feedback tone being communicated."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Badge label."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BadgeElement",
+          "declaration": {
+            "name": "BadgeElement",
+            "module": "ds-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-badge",
+          "declaration": {
+            "name": "BadgeElement",
+            "module": "ds-badge.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
