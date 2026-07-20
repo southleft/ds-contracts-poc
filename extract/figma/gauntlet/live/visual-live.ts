@@ -17,8 +17,7 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import type { RenderablePackage } from '../../visual-parity/compose.js';
-import { composeSubjectLive } from './visual-compose.js';
+import { composeSubject, type RenderablePackage } from '../../visual-parity/compose.js';
 import { fetchNodePngs, fetchSetInfos, type SetInfo } from '../../visual-parity/figma-api.js';
 import { alignPair, diffPair, readPng, writeTriptych } from '../../visual-parity/img.js';
 import { planVariant, variantSlug } from '../../visual-parity/match.js';
@@ -115,7 +114,7 @@ async function main(): Promise<void> {
     }
     let pkg: RenderablePackage;
     try {
-      pkg = composeSubjectLive(subject);
+      pkg = composeSubject(subject);
     } catch (e) {
       const msg = e instanceof Error ? e.message.split('\n')[0] : String(e);
       console.log(`✗ ${subject.id}: compose/propose REFUSED — ${msg}`);

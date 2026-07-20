@@ -912,6 +912,21 @@ const cases: Case[] = [
     },
   },
   {
+    // HEAL ROUND, live-gauntlet harness class ⑦ (underscore pickSet): a
+    // name-prefix convention is not a type test — visual-parity compose now
+    // excludes the dump meta channels BY NAME and addresses the owner's 30
+    // underscore-NAMED sets ("_Input label", "_Tab-item", …) exactly like
+    // the playground receive path; the live-gauntlet clone is deleted.
+    id: 'underscore-set-compose',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/underscore-set-compose-check.ts']);
+      if (r.status !== 0 || !r.out.includes('underscore-set-compose ok:')) {
+        throw new Error(`underscore-set-compose check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,

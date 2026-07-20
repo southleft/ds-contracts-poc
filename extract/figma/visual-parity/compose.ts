@@ -85,9 +85,17 @@ function composeCaptured(
   };
 }
 
+/** The dump's meta channels, excluded from set addressing BY NAME — a
+ *  name-prefix convention is not a type test (live-gauntlet harness class ⑦:
+ *  the owner legitimately names 30 sets "_Input label", "_Slot-Dialog",
+ *  "_Tab-item", … and the old startsWith('_') guard made them unaddressable
+ *  — 20 live composites' session scopes refused. The playground's own
+ *  receive path checks the parsed shape; this now matches it). */
+const META_CHANNELS = new Set(['_provenance', '_variables', '_degradations']);
+
 function pickSet(dump: DumpFile, dumpPath: string, wanted: string | undefined, who: string): [string, DumpSet] {
   const sets = Object.entries(dump).filter(
-    (e): e is [string, DumpSet] => !e[0].startsWith('_') && isDumpSet(e[1]),
+    (e): e is [string, DumpSet] => !META_CHANNELS.has(e[0]) && isDumpSet(e[1]),
   );
   const picked = wanted ? sets.find(([name]) => name === wanted) : sets.length === 1 ? sets[0] : undefined;
   if (!picked) {
