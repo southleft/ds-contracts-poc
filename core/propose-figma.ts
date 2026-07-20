@@ -24,6 +24,7 @@ import { ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } fro
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
+import { capturedTokensFromDump } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
 // ---------------------------------------------------------------------------
@@ -814,7 +815,24 @@ interface Ctx {
   /** The dump's producer captures `hidden` (dump v1.1+) — see
    *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
   hiddenCaptured?: boolean;
+  /** Captured-variable resolved values (dump v1.4 `_variables`), dot-path →
+   *  CSS value ("bg.brand.default" → "#0e61ba") — the default/consuming
+   *  mode's values, exactly the captured-token layer's entries. Used ONLY to
+   *  route bound-paint drift refusals into the mint pass (live-gauntlet
+   *  class ①): when the bound refs cannot be carried as one binding, every
+   *  variant's ref still resolves here, so the paint survives as per-variant
+   *  minted literals instead of dropping entirely. */
+  capturedValues?: Map<string, string>;
   prefix: string;
+  /** The contract id THIS proposal claims — the name-derived slug, suffixed
+   *  past session-claimed holders whose componentSetKey CONTRADICTS this
+   *  set's key (live-gauntlet class ③, session-id-collision-false-cycle:
+   *  "RadioButton" the COMPONENT and "Radio button" the set both sanitize
+   *  to ds.radio-button; without the suffix the session's newest-wins
+   *  registry rebinds the earlier import's child ref onto this proposal and
+   *  the referee reports a cycle that is not drawn). Same-key holders keep
+   *  the base id — that is the legitimate re-import/heal path. */
+  selfId: string;
   notes: string[];
   unbound: UnboundValue[];
   textProps: Array<{ name: string; property: string; default: string }>;
@@ -1045,7 +1063,38 @@ function unifyPaint(
     }
     return u.kind === 'ref' ? u.ref : u.perValue;
   }
-  if (u.kind === 'drift') ctx.notes.push(`${where} ${paintName}: ${u.detail}`);
+  if (u.kind === 'drift') {
+    // Live-gauntlet class ① (fill-matrix-depth-drop): a BOUND paint whose
+    // refs refuse unification (mixed segment depth, or a function of more
+    // than one axis) used to drop entirely — honest in prose, catastrophic
+    // in pixels (Badge/Chip rendered as bare text). When every variant's
+    // paint is bound AND resolves through the captured-variable layer, the
+    // observation routes into the mint pass instead: single-axis functions
+    // mint per-value leaves, axis pairs/triples mint per-combination leaves
+    // with substituted root refs (core/mint-tokens.ts). The observed refs
+    // stay NAMED in the note for the rename/remap pass; a paint that still
+    // fails mint classification lands as the mint pass's own named refusal.
+    // Never a silent paint drop.
+    if (
+      ctx.mint &&
+      mint &&
+      paints.every((p) => p.paint?.var !== undefined)
+    ) {
+      const values = paints.map((p) => ctx.capturedValues?.get(dotPath(p.paint!.var!)));
+      if (values.every((v): v is string => v !== undefined)) {
+        mintObservation(
+          ctx, mint.target, where, mint.cssProperty, 'color',
+          paints.map((p, i) => ({ variant: p.variant, value: values[i] as string })),
+          `${where}|${paintName}`,
+        );
+        ctx.notes.push(
+          `${where} ${paintName}: ${u.detail} — routed to the mint pass at captured-value literal fidelity (per-variant leaves when it classifies: any single axis, or an axis pair/triple on the root; otherwise the mint pass refuses BY NAME below); the observed refs here are the rename targets`,
+        );
+        return undefined;
+      }
+    }
+    ctx.notes.push(`${where} ${paintName}: ${u.detail}`);
+  }
   return undefined;
 }
 
@@ -2006,8 +2055,10 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
 // Part construction
 // ---------------------------------------------------------------------------
 
-/** The contract id this proposal will claim for itself. */
-const selfContractId = (ctx: Ctx): string => `${ctx.prefix}.${componentIdSlug(ctx.setName)}`;
+/** The contract id this proposal will claim for itself — resolved once at
+ *  context build (ctx.selfId; session cross-population collisions suffix,
+ *  see the Ctx field doc). */
+const selfContractId = (ctx: Ctx): string => ctx.selfId;
 
 /** True when a nested instance resolves to the set's own contract — either
  *  through the contract index (name → id lands on the proposal's own id) or
@@ -2115,7 +2166,12 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
   const isNew = !ctx.stubs.has(stubId);
   const capture = ctx.stubs.get(stubId) ?? { id: stubId, instanceOf, applied: [], observed: [] };
   if (capture.setKey === undefined) {
-    const setKey = first(m.occ, (n) => n.instanceSetKey);
+    // Setless components carry only instanceKey — the component key IS the
+    // identity for a plain COMPONENT, exactly the fallback the session-
+    // linking index uses ("componentSetKey (or setless component key)").
+    // Without it the stub's anchors carry null and a session cross-
+    // population collision (class ③) is invisible to the key discipline.
+    const setKey = first(m.occ, (n) => n.instanceSetKey) ?? first(m.occ, (n) => n.instanceKey);
     if (setKey !== undefined) capture.setKey = setKey;
   }
   for (const o of m.occ) {
@@ -3841,6 +3897,23 @@ export function proposeFromDump(
      *  default-variant → boolean default TRUE inference; default false
      *  (absence stays "not captured", nothing invented). */
     hiddenCaptured?: boolean;
+    /** Captured-variable resolved values, dot-path → CSS value — build from
+     *  the dump's `_variables` via capturedTokensFromDump (the batch entry
+     *  does this automatically). Only consumed with `mintUnbound: true`: it
+     *  lets a bound paint whose refs refuse unification survive as
+     *  per-variant minted literals (live-gauntlet class ①) instead of
+     *  dropping the channel. Absent → the classic drift note stands. */
+    capturedValues?: Map<string, string>;
+    /** Contract ids claimed by THIS session's earlier imports — real
+     *  contracts AND their child stubs (live-gauntlet class ③). When the
+     *  name-derived self id lands on one of these whose componentSetKey
+     *  CONTRADICTS this set's key (both non-null), the proposal takes a
+     *  deterministic numeric suffix (arrival order) and the collision is
+     *  NAMED — the stubIdFor contradicting-key discipline applied at
+     *  proposal-registration time. Same-key holders keep the base id (the
+     *  legitimate re-import / stub-heal path). Repo contracts NEVER join
+     *  this set: a repo-name landing stays the workspace re-import rule. */
+    sessionClaimedIds?: ReadonlySet<string>;
   },
 ): FigmaProposalResult {
   const prefix = opts.prefix ?? 'ds';
@@ -3906,6 +3979,28 @@ export function proposeFromDump(
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = parseAxes(variantNames);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
+
+  // Self contract id — the name-derived slug, suffixed past SESSION-claimed
+  // holders with contradicting key evidence (class ③; see the Ctx field and
+  // opts.sessionClaimedIds docs). Resolved BEFORE part construction so
+  // stubIdFor's self-guard protects the id actually claimed.
+  const baseSelfId = `${prefix}.${componentIdSlug(set.setName)}`;
+  let selfId = baseSelfId;
+  const ownKey = set.key ?? null;
+  if (opts.sessionClaimedIds && ownKey !== null) {
+    const contradicts = (id: string): boolean => {
+      if (!opts.sessionClaimedIds!.has(id)) return false;
+      const holderKey = opts.contractsById?.get(id)?.anchors?.figma?.componentSetKey ?? null;
+      return holderKey !== null && holderKey !== ownKey;
+    };
+    for (let n = 2; contradicts(selfId); n += 1) selfId = `${baseSelfId}-${n}`;
+    if (selfId !== baseSelfId) {
+      preNotes.push(
+        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (its componentSetKey contradicts this set's key ${ownKey}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
+      );
+    }
+  }
+
   const ctx: Ctx = {
     setName: set.setName,
     axes,
@@ -3917,7 +4012,9 @@ export function proposeFromDump(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     hiddenCaptured: opts.hiddenCaptured,
+    capturedValues: opts.capturedValues,
     prefix,
+    selfId,
     notes: [],
     unbound: [],
     textProps: [],
@@ -4198,7 +4295,6 @@ export function proposeFromDump(
       `contract name: drawn set name "${set.setName}" is not a PascalCase component name — proposed as "${componentName}" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)`,
     );
   }
-  const selfId = `${prefix}.${componentIdSlug(set.setName)}`;
   if (idSlugSanitized(set.setName)) {
     // Field case (CBDS kit, first live plugin send): "_variable-list-item",
     // "Button / Primary / Medium", "Type=Text, Variant=Error" all derive ids
@@ -4512,10 +4608,17 @@ export function proposeBatchFromDump(
   const skipped: SkippedSet[] = [];
   const notes: string[] = [];
   const claimedIds = new Map<string, string>(); // contract id → set name
+  // The batch has the whole dump, so the captured-variable value index
+  // (dump v1.4 `_variables` — the class-① mint-routing input) is built here
+  // once unless the caller supplied its own.
+  const capturedValues =
+    opts.capturedValues ??
+    new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
+  const setOpts = { ...opts, capturedValues };
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
-      const proposal = { setName: name, ...proposeFromDump(value, opts) };
+      const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
       const id = (proposal.contract as { id?: unknown }).id;
       if (typeof id === 'string') {
         const holder = claimedIds.get(id);

@@ -17,8 +17,7 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import type { RenderablePackage } from '../../visual-parity/compose.js';
-import { composeSubjectLive } from './visual-compose.js';
+import { composeSubject, type RenderablePackage } from '../../visual-parity/compose.js';
 import { fetchNodePngs, fetchSetInfos, type SetInfo } from '../../visual-parity/figma-api.js';
 import { alignPair, diffPair, readPng, writeTriptych } from '../../visual-parity/img.js';
 import { planVariant, variantSlug } from '../../visual-parity/match.js';
@@ -103,11 +102,20 @@ async function main(): Promise<void> {
   }
 
   const browser = await launchBrowser();
-  const page = await browser.newPage({ viewport: { width: 1600, height: 1200 }, deviceScaleFactor: 2 });
+  // Page RECYCLED per subject — a single page accumulating ~1,100 setContent
+  // cycles degrades Chromium into an indefinite hang around render ~500
+  // (observed twice on the heal-round replay, different subjects each time);
+  // a fresh page per subject keeps the run bounded with identical pixels.
+  let page = await browser.newPage({ viewport: { width: 1600, height: 1200 }, deviceScaleFactor: 2 });
+  let pageSubjects = 0;
   const rows: Row[] = [];
   const triptychCandidates: Array<{ row: Row; ours: Buffer; figmaPath: string; textRects: never }> = [];
 
   for (const { subject, tier } of run) {
+    if (pageSubjects++ > 0) {
+      await page.close();
+      page = await browser.newPage({ viewport: { width: 1600, height: 1200 }, deviceScaleFactor: 2 });
+    }
     const info = infos.get(subject.setNodeId);
     if (!info) {
       rows.push({ subject: subject.id, tier, variant: '(all)', status: 'refused', diagnosis: 'no set info' });
@@ -115,7 +123,7 @@ async function main(): Promise<void> {
     }
     let pkg: RenderablePackage;
     try {
-      pkg = composeSubjectLive(subject);
+      pkg = composeSubject(subject);
     } catch (e) {
       const msg = e instanceof Error ? e.message.split('\n')[0] : String(e);
       console.log(`✗ ${subject.id}: compose/propose REFUSED — ${msg}`);

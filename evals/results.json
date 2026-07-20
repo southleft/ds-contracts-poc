@@ -1,6 +1,6 @@
 {
-  "passed": 129,
-  "total": 129,
+  "passed": 134,
+  "total": 134,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -165,6 +165,31 @@
     {
       "id": "stylex-token-wrap",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "fill-matrix-depth-mint",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "raw-text-root-projection",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "underscore-set-compose",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "session-id-collision-suffix",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "slot-wrapper-floor",
+      "claim": "C3-detection",
       "pass": true
     },
     {

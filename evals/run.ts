@@ -874,6 +874,98 @@ const cases: Case[] = [
     },
   },
   {
+    // HEAL ROUND, live-gauntlet class ① (fill-matrix-depth-drop): a bound
+    // fill that is a function of TWO OR THREE variant axes with mixed-depth
+    // token paths (CBDS Badge f(type,style), Chip f(type,style,state)) used
+    // to DROP the root paint entirely — Badge diffed 96.85% masked, Chip
+    // 98.58%, the kit's most-drawn primitives rendering as bare text. The
+    // fix routes the named drift into the mint pass (captured-value literal
+    // fidelity, per-variant leaves, axis pair/triple substituted root refs);
+    // the eval replays the committed fixture slice through propose→referee→
+    // all four emitters and pins the never-silent-drop invariant.
+    id: 'fill-matrix-depth-mint',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/fill-matrix-mint-check.ts']);
+      if (r.status !== 0 || !r.out.includes('fill-matrix-mint ok:')) {
+        throw new Error(`fill-matrix-mint check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // HEAL ROUND, live-gauntlet class ④ (linked-child-html-escaped-as-text):
+    // CBDS Text Area showed literal '<div class="input-label">' INSIDE the
+    // field — corrected diagnosis: the parent's inferred root element is
+    // <textarea> (raw-text content model), so the BROWSER renders every
+    // child tag as text; void roots hoist children out (input family
+    // 48–66%), <select> drops them (Dropdown = caret only). emit-html now
+    // projects such boxes to a neutral <div> with a NAMED comment. Pins the
+    // projection AND the XSS invariants (child markup stays structure, leaf
+    // text stays escaped, part-less native roots untouched).
+    id: 'raw-text-root-projection',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/raw-text-root-projection-check.ts']);
+      if (r.status !== 0 || !r.out.includes('raw-text-root-projection ok:')) {
+        throw new Error(`raw-text-root-projection check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // HEAL ROUND, live-gauntlet harness class ⑦ (underscore pickSet): a
+    // name-prefix convention is not a type test — visual-parity compose now
+    // excludes the dump meta channels BY NAME and addresses the owner's 30
+    // underscore-NAMED sets ("_Input label", "_Tab-item", …) exactly like
+    // the playground receive path; the live-gauntlet clone is deleted.
+    id: 'underscore-set-compose',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/underscore-set-compose-check.ts']);
+      if (r.status !== 0 || !r.out.includes('underscore-set-compose ok:')) {
+        throw new Error(`underscore-set-compose check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // HEAL ROUND, live-gauntlet class ③ (session-id-collision-false-cycle):
+    // "RadioButton" the COMPONENT vs "Radio button" the set — both sanitize
+    // to ds.radio-button; the session's newest-wins registry rebound the
+    // icon's stub ref onto the later-imported parent and the referee
+    // reported a cycle that is not drawn (all 12 variants refused). Fix:
+    // proposal-time id claiming applies the stubIdFor contradicting-key
+    // suffix discipline against SESSION-claimed ids (keys first — v1.5/v1.6
+    // identity; setless stubs now carry the component key). Pins the suffix
+    // + named note + zero-violation referee + same-key heal + unchanged
+    // batch scope, over the committed trio fixture.
+    id: 'session-id-collision-suffix',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/session-id-collision-check.ts']);
+      if (r.status !== 0 || !r.out.includes('session-id-collision ok:')) {
+        throw new Error(`session-id-collision check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // HEAL ROUND, live-gauntlet class ⑤ (linked-icon-wrapper-collapses):
+    // linking must never render worse than stubbing. The CBDS Icon wrapper
+    // (slot-only root, drawn FIXED box: height + max-width bindings)
+    // rendered ZERO-SIZE when its slot was empty — min-width: fit-content
+    // is 0 without content — and Icon Button collapsed to a 16×48 pill
+    // (54.7–63.4% masked, 180 rows). Every root max-width now mirrors onto
+    // min-width for such wrappers (the stub discipline's observed-geometry
+    // floor); fluid slot containers (no height binding — List/Toast/
+    // Toolbar) keep fit-content, so repo output is untouched.
+    id: 'slot-wrapper-floor',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/slot-wrapper-floor-check.ts']);
+      if (r.status !== 0 || !r.out.includes('slot-wrapper-floor ok:')) {
+        throw new Error(`slot-wrapper-floor check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,

@@ -113,6 +113,9 @@ function mergeTrees(docs: Record<string, unknown>[]): Record<string, unknown> {
 }
 
 const captured = capturedTokensFromDump(dump);
+// Full captured-value index (path → resolved value) for the class-①
+// mint routing in SESSION proposals (stage A's batch builds its own).
+const sessionCapturedValues = new Map((captured?.entries ?? []).map((e) => [e.path, e.value] as const));
 const capturedRegistered = (captured?.entries ?? []).filter((e) => !repoInventory.has(e.path));
 const capturedTree: Record<string, unknown> = {};
 for (const e of capturedRegistered) {
@@ -576,6 +579,14 @@ interface Session {
   idByKey: Map<string, string>;
   mintedTrees: Record<string, unknown>[];
   contractSetByName: Map<string, string>; // contract id → drawn set name
+  /** Ids claimed by THIS session's imports — contracts AND child stubs
+   *  (class ③ cross-population id-collision guard; repo ids never join). */
+  claimedIds: Set<string>;
+  /** Stubs that rode earlier imports, registered where no real contract
+   *  holds the id (playground stub precedence) — the referee scope must
+   *  resolve an earlier import's stub refs even after a LATER proposal
+   *  claims a suffixed sibling id. */
+  stubs: Map<string, Contract>;
 }
 const newSession = (): Session => ({
   contracts: new Map(),
@@ -584,6 +595,8 @@ const newSession = (): Session => ({
   idByKey: new Map(),
   mintedTrees: [],
   contractSetByName: new Map(),
+  claimedIds: new Set(),
+  stubs: new Map(),
 });
 
 interface ImportResult {
@@ -611,9 +624,22 @@ function importSet(session: Session, setName: string): ImportResult {
   try {
     const proposal = proposeFromDump(set as never, {
       corpus,
+      // Captured-variable resolved values (class ① mint routing) — sessions
+      // call proposeFromDump directly, so the index the batch entry builds
+      // automatically must be threaded here too (without it a session
+      // proposal drops the very fills stage A carries).
+      capturedValues: sessionCapturedValues,
       contractIdByName: new Map([...loaded.byName, ...session.idByName]),
       contractIdByKey: new Map([...loaded.byKey, ...session.idByKey]),
-      contractsById: new Map([...loaded.byId, ...session.byIdMinimal]),
+      // Stubs at LOWER precedence (spread first — a real contract with the
+      // same id wins), so the class-③ key-contradiction guard can SEE an
+      // earlier import's stub claim.
+      contractsById: new Map([
+        ...session.stubs as unknown as Map<string, MinimalChildContract>,
+        ...loaded.byId,
+        ...session.byIdMinimal,
+      ]),
+      sessionClaimedIds: session.claimedIds,
       fileKey: provenance?.fileKey ?? null,
       mintUnbound: true,
       hiddenCaptured,
@@ -651,7 +677,7 @@ function importSet(session: Session, setName: string): ImportResult {
     // Referee in session scope (playground validate semantics: session
     // contracts + stubs at lower precedence; session minted trees resolve
     // linked children's imported.* bindings).
-    const scope = new Map<string, Contract>(session.contracts);
+    const scope = new Map<string, Contract>([...session.stubs, ...session.contracts]);
     const r = refereeAndEmit(
       { ...proposal, setName } as never,
       scope,
@@ -664,10 +690,22 @@ function importSet(session: Session, setName: string): ImportResult {
     session.byIdMinimal.set(contract.id, contract as unknown as MinimalChildContract);
     session.idByName.set(contract.name, contract.id);
     session.idByName.set(setName, contract.id);
+    session.claimedIds.add(contract.id);
     const key = contract.anchors.figma.componentSetKey;
     if (key) session.idByKey.set(key, contract.id);
     if (mintedTree && Object.keys(mintedTree).length > 0) session.mintedTrees.push(mintedTree);
     session.contractSetByName.set(contract.id, setName);
+    // Child stubs register at playground precedence — only ids no real
+    // contract (repo or session) holds — so later imports' referees resolve
+    // earlier stub refs, and the class-③ guard sees the stub claims.
+    for (const raw of proposal.childStubs ?? []) {
+      const stub = ContractSchema.safeParse(raw);
+      if (!stub.success) continue;
+      session.claimedIds.add(stub.data.id);
+      if (!session.contracts.has(stub.data.id) && !repoContracts.has(stub.data.id) && !session.stubs.has(stub.data.id)) {
+        session.stubs.set(stub.data.id, stub.data);
+      }
+    }
     out.ok = true;
   } catch (e) {
     out.error = e instanceof Error ? e.message.split('\n').slice(0, 2).join(' ') : String(e);
@@ -716,6 +754,9 @@ interface SessionRecord {
     geometrySkipNotes: number;
     healedAfterReimport: boolean | null;
     stillStubbedAfterHeal: string[];
+    /** Class-② duplicate-name stubs whose key evidence CONTRADICTS the
+     *  imported dep — kept stubbed HONESTLY (the truthful non-heal). */
+    honestStubsKept?: string[];
     firstChild?: string;
     error?: string;
   };
@@ -848,16 +889,38 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
       rec.adversarial.firstChild = stubbedDep;
       importSet(adv, stubbedDep);
       const p2 = importSet(adv, t.setName);
+      // KEY-AWARE heal expectation (class ③ follow-through): a stub whose
+      // key evidence CONTRADICTS the imported dep's key is the class-②
+      // duplicate-name shape — its true parent is NOT in the dump, and
+      // linking it to the same-NAMED other component would be exactly the
+      // name-coincidence link the resolver refuses. Such a stub staying a
+      // stub after the dep import IS the heal contract holding (the
+      // pre-class-③ "heal" onto the wrong component was masked by setless
+      // stubs carrying null keys). Only a same-key (or keyless) stub that
+      // stays stubbed is a heal failure.
+      const depId = adv.idByName.get(stubbedDep) ?? idForSet(stubbedDep);
+      const depKey = adv.contracts.get(depId)?.anchors.figma.componentSetKey ?? null;
+      const stubKeyOf = (refId: string): string | null =>
+        adv.stubs.get(refId)?.anchors.figma.componentSetKey ?? null;
+      const depBase = idForSet(stubbedDep);
       const stillStubbed = p2.refs.filter(
-        (r) => r.resolution === 'stubbed' && r.refId === idForSet(stubbedDep),
+        (r) => r.resolution === 'stubbed' && (r.refId === depBase || r.refId.startsWith(`${depBase}-`)),
       );
-      rec.adversarial.healedAfterReimport = p2.ok && stillStubbed.length === 0;
-      rec.adversarial.stillStubbedAfterHeal = stillStubbed.map((r) => r.refId);
+      const honestlyKept = stillStubbed.filter((r) => {
+        const sk = stubKeyOf(r.refId);
+        return sk !== null && depKey !== null && sk !== depKey;
+      });
+      const healFailures = stillStubbed.filter((r) => !honestlyKept.includes(r));
+      rec.adversarial.healedAfterReimport = p2.ok && healFailures.length === 0;
+      rec.adversarial.stillStubbedAfterHeal = healFailures.map((r) => r.refId);
+      if (honestlyKept.length > 0) {
+        rec.adversarial.honestStubsKept = honestlyKept.map((r) => r.refId);
+      }
       if (!rec.adversarial.healedAfterReimport) {
         addFinding(
           't4-self-heal-failed',
           t.setName,
-          `after importing "${stubbedDep}" and re-importing, refs still stubbed: ${stillStubbed.map((r) => r.refId).join(', ') || `(parent re-import ${p2.ok ? 'ok' : `failed: ${p2.error}`})`}`,
+          `after importing "${stubbedDep}" and re-importing, refs still stubbed: ${healFailures.map((r) => r.refId).join(', ') || `(parent re-import ${p2.ok ? 'ok' : `failed: ${p2.error}`})`}`,
           'core/propose-figma.ts resolveChildContract (key-first, name fallback)',
         );
       }

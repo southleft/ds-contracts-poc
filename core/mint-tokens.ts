@@ -36,9 +36,13 @@
  *              `….<css-property>.<axisAValue>.<axisBValue>` — and the binding
  *              substitutes both axes:
  *              `{….<css-property>.{<axisA>}.{<axisB>}}` (root tokens only in
- *              the emitters; two placeholders max). A difference that does
- *              NOT correlate with an axis or axis pair mints nothing: the
- *              binding stays null with a named reason.
+ *              the emitters). When no pair fits but a TRIPLE of enum axes
+ *              does (live-gauntlet class ① field case: CBDS Chip's root fill
+ *              = f(type, style, state)), a leaf is minted per combination and
+ *              the binding substitutes all three axes (root tokens only;
+ *              three placeholders max). A difference that does NOT correlate
+ *              with an axis, pair, or triple mints nothing: the binding
+ *              stays null with a named reason.
  *
  *   UNITS      colors are '#rrggbb' — or 8-digit '#rrggbbaa' when the paint
  *              carried alpha (dump v1.1; a legal DTCG color $value AND a CSS
@@ -185,11 +189,13 @@ type Classified =
   | { kind: 'uniform'; value: string | number }
   | { kind: 'variant'; axis: MintAxis; byValue: Map<string, string | number> }
   | { kind: 'variant2'; axes: [MintAxis, MintAxis]; byValue: Map<string, string | number> }
+  | { kind: 'variant3'; axes: [MintAxis, MintAxis, MintAxis]; byValue: Map<string, string | number> }
   | { kind: 'none'; reason: string };
 
-/** Key for a two-axis value combination — '.'-joined because the leaf path
+/** Key for a multi-axis value combination — '.'-joined because the leaf path
  *  appends it verbatim ('primary.hover' under the group base). */
 const pairKey = (a: string, b: string) => `${a}.${b}`;
+const comboKey = (values: string[]) => values.join('.');
 
 function classify(obs: MintObservation, axes: MintAxis[]): Classified {
   if (obs.occurrences.length === 0) return { kind: 'none', reason: 'no occurrences observed — nothing minted' };
@@ -243,9 +249,45 @@ function classify(obs: MintObservation, axes: MintAxis[]): Classified {
       }
     }
   }
+  // Three-axis correlation (live-gauntlet class ① — CBDS Chip's root fill is
+  // f(type, style, state), irreducible to any pair): same rules as the pair
+  // case — ROOT tokens only, discovery order, full cartesian coverage with a
+  // single value per combination. The emitters expand a three-placeholder
+  // root ref as compound enum classes (.type-brand.style-fill.state-hover);
+  // the cartesian is bounded by the drawn variant count (every combination
+  // must be OBSERVED), so no cap is invented. A contradiction on any third
+  // axis fails the fit — an irrelevant axis can never ride along, because
+  // its combinations would carry contradicting values.
+  for (let i = 0; i < axes.length; i++) {
+    for (let j = i + 1; j < axes.length; j++) {
+      for (let k = j + 1; k < axes.length; k++) {
+        const triple = [axes[i], axes[j], axes[k]] as [MintAxis, MintAxis, MintAxis];
+        const byValue = new Map<string, string | number>();
+        let fits = true;
+        for (const o of obs.occurrences) {
+          const vals = triple.map((a) => o.axisValues[a.propName]);
+          if (vals.some((v) => v === undefined)) { fits = false; break; }
+          const key = comboKey(vals as string[]);
+          const seen = byValue.get(key);
+          if (seen !== undefined && seen !== o.value) { fits = false; break; }
+          byValue.set(key, o.value);
+        }
+        if (
+          fits &&
+          triple[0].values.every((va) =>
+            triple[1].values.every((vb) =>
+              triple[2].values.every((vc) => byValue.has(comboKey([va, vb, vc]))),
+            ),
+          )
+        ) {
+          return { kind: 'variant3', axes: triple, byValue };
+        }
+      }
+    }
+  }
   return {
     kind: 'none',
-    reason: 'resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually',
+    reason: 'resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually',
   };
 }
 
@@ -314,9 +356,9 @@ export function mintTokens(
       const path = claim(wanted, obs.kind, c.value, site);
       return { nodePath: obs.nodePath, cssProperty: obs.cssProperty, ref: `{${path}}` };
     }
-    // Per-variant (one or two axes): one leaf per axis value (or value
-    // combination) under a common base. The base must be free (or value-
-    // compatible) for EVERY key — probe suffixes as a group so the
+    // Per-variant (one, two, or three axes): one leaf per axis value (or
+    // value combination) under a common base. The base must be free (or
+    // value-compatible) for EVERY key — probe suffixes as a group so the
     // substituted ref stays a real tree prefix.
     const axisProps = c.kind === 'variant' ? [c.axis.propName] : c.axes.map((a) => a.propName);
     const siteSuffix = (key: string) =>

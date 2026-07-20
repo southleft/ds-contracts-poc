@@ -152,7 +152,25 @@ function componentCss(contract: Contract): string[] {
   }
   if ('border-width' in rootTokens || 'border-color' in rootTokens) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
-  if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
+  // Live-gauntlet class ⑤ (linked-icon-wrapper-collapses): a SLOT-ONLY root
+  // that carries BOTH height and max-width is a drawn FIXED wrapper (CBDS
+  // Icon — an INSTANCE_SWAP shell whose bound width the fluid convention
+  // demoted to max-width). Its content floor is the DRAWN box, not
+  // fit-content: with the slot empty (or its default a geometry-less stub),
+  // fit-content is 0 and a LINKED child renders worse than a stub —
+  // Icon Button collapsed to a 16×48 pill. Every max-width declaration
+  // (base + per-value) mirrors onto min-width instead — the stub
+  // discipline's observed-geometry floor, named here. Fluid slot containers
+  // (List, Toast, Toolbar — no height binding) keep the fit-content floor.
+  const slotWrapperFloor =
+    'max-width' in rootTokens &&
+    'height' in rootTokens &&
+    Object.keys(root.parts ?? {}).length > 0 &&
+    Object.values(root.parts ?? {}).every((p) => p.slot !== undefined);
+  if ('max-width' in rootTokens) {
+    rootDecls.push('width: 100%');
+    if (!slotWrapperFloor) rootDecls.push('min-width: fit-content');
+  }
   // v15: a declared cursor fact is authoritative — the emitter's own button
   // chrome (cursor: pointer, :disabled not-allowed) yields to it (mirrors
   // core/emit-react.ts generateCss).
@@ -190,14 +208,19 @@ function componentCss(contract: Contract): string[] {
       continue;
     }
     const phs = placeholdersIn(refPath);
+    // slot-wrapper floor (class ⑤): every root max-width mirrors onto
+    // min-width — the drawn fixed box is the empty slot's content floor.
+    const floorMirror = slotWrapperFloor && cssProp === 'max-width';
     if (phs.length === 0) {
       rootDecls.push(`${cssProp}: ${cssVar(refPath)}`);
+      if (floorMirror) rootDecls.push(`min-width: ${cssVar(refPath)}`);
     } else if (phs.length === 1) {
       for (const value of enums.get(phs[0]) ?? []) {
         const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
         const key = `${phs[0]} ${value}`;
         const entry = enumRules.get(key) ?? { prop: phs[0], value, decls: [] };
         entry.decls.push(`${cssProp}: ${cssVar(resolved)}`);
+        if (floorMirror) entry.decls.push(`min-width: ${cssVar(resolved)}`);
         enumRules.set(key, entry);
       }
     } else if (phs.length === 2) {
@@ -209,6 +232,25 @@ function componentCss(contract: Contract): string[] {
             selector: `${enumCls(pa, a)}${enumCls(pb, b)}`,
             decls: [`${cssProp}: ${cssVar(resolved)}`],
           });
+        }
+      }
+    } else if (phs.length === 3) {
+      // Three-axis root token (live-gauntlet class ①: a minted background =
+      // f(type, style, state) — CBDS Chip's root fill): one triple-compound
+      // rule per value combination — mirrors emit-react generateCss.
+      const [pa, pb, pc] = phs;
+      for (const a of enums.get(pa) ?? []) {
+        for (const b of enums.get(pb) ?? []) {
+          for (const c of enums.get(pc) ?? []) {
+            const resolved = refPath
+              .replaceAll(`{${pa}}`, a)
+              .replaceAll(`{${pb}}`, b)
+              .replaceAll(`{${pc}}`, c);
+            pairRules.push({
+              selector: `${enumCls(pa, a)}${enumCls(pb, b)}${enumCls(pc, c)}`,
+              decls: [`${cssProp}: ${cssVar(resolved)}`],
+            });
+          }
         }
       }
     }
@@ -228,12 +270,15 @@ function componentCss(contract: Contract): string[] {
         // the two-placeholder root-token projection with one axis pinned by
         // the map. Compound rules land with pairRules (after enum rules).
         const phs = placeholdersIn(refPath);
+        const floorMirror = slotWrapperFloor && cssProp === 'max-width';
         if (phs.length === 1) {
           for (const phValue of enums.get(phs[0]) ?? []) {
             const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
             pairRules.push({
               selector: `${enumCls(tbpProp, value)}${enumCls(phs[0], phValue)}`,
-              decls: [`${cssProp}: ${cssVar(resolved)}`],
+              decls: floorMirror
+                ? [`${cssProp}: ${cssVar(resolved)}`, `min-width: ${cssVar(resolved)}`]
+                : [`${cssProp}: ${cssVar(resolved)}`],
             });
           }
           continue;
@@ -241,6 +286,7 @@ function componentCss(contract: Contract): string[] {
         const key = `${tbpProp} ${value}`;
         const entry = enumRules.get(key) ?? { prop: tbpProp, value, decls: [] };
         entry.decls.push(`${cssProp}: ${cssVar(refPath)}`);
+        if (floorMirror) entry.decls.push(`min-width: ${cssVar(refPath)}`);
         enumRules.set(key, entry);
       }
     }
@@ -733,9 +779,47 @@ function renderComponentHtml(
 
   // Root element + classes
   const elementByProp = contract.semantics.elementByProp;
-  const el = elementByProp
+  const inferredEl = elementByProp
     ? (elementByProp.map[propValue(elementByProp.prop) ?? ''] ?? contract.semantics.element)
     : contract.semantics.element;
+  // Content-model honesty at the ROOT (live-gauntlet class ④,
+  // linked-child-html-escaped-as-text): a drawn COMPOSITE whose inferred
+  // host element cannot host its drawn anatomy must not swallow it —
+  //   · <textarea> is a RAW-TEXT element: every child tag renders as
+  //     LITERAL VISIBLE TEXT (the field failure — CBDS Text Area showed
+  //     '<div class="input-label">' inside the field; the markup was never
+  //     escaped by us, the parser makes it text),
+  //   · void elements (<input>…) auto-close: children are hoisted out as
+  //     siblings and the drawn box collapses (the input-family 48–66% rows),
+  //   · <select> DROPS structural children (Dropdown rendered only the
+  //     caret) — though option/optgroup content parts stay faithful.
+  // The BOX projects as a neutral <div> carrying the same classes (the
+  // pixels are the drawn anatomy's business); the element inference stays
+  // on the contract — the React surface owns live semantics — and the
+  // projection is NAMED in an emitted comment. Leaf text still renders
+  // through escapeHtml everywhere: markup reaches the page ONLY as
+  // renderPart-built structure, never from contract text values.
+  const VOID_ELEMENTS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
+  const hostsStructure = (p: Part): boolean =>
+    p.parts !== undefined ||
+    p.component !== undefined ||
+    p.icon !== undefined ||
+    p.slot !== undefined ||
+    p.repeat !== undefined ||
+    p.meter !== undefined ||
+    (p.element !== undefined && p.element !== 'option' && p.element !== 'optgroup');
+  const rootParts = Object.entries(root.parts ?? {});
+  const projected =
+    rootParts.length > 0 &&
+    (inferredEl === 'textarea' ||
+      VOID_ELEMENTS.has(inferredEl) ||
+      (inferredEl === 'select' && rootParts.some(([, p]) => hostsStructure(p))));
+  const el = projected ? 'div' : inferredEl;
+  const projectionComment = projected
+    ? `${indent}<!-- root element "${inferredEl}" cannot host the drawn anatomy (${
+        inferredEl === 'textarea' ? 'raw-text content model — child markup would render as literal text' : VOID_ELEMENTS.has(inferredEl) ? 'void element — children would hoist out of the box' : 'select drops non-option children'
+      }); box projected as <div>, element inference stays on the contract -->\n`
+    : '';
   // A defaultless enum prop left unset applies NO modifier class — exactly
   // what the React surface renders at runtime (styles[`prop-undefined`] is
   // undefined and cx skips it). Polaris's optional styling axes (Text
@@ -776,7 +860,7 @@ function renderComponentHtml(
     : el === 'select'
       ? `${indent}  <option>${rootText}</option>`
       : `${indent}  ${rootText}`;
-  return `${indent}<${el} ${attrs.join(' ')}>\n${rootInner}\n${indent}</${el}>`;
+  return `${projectionComment}${indent}<${el} ${attrs.join(' ')}>\n${rootInner}\n${indent}</${el}>`;
 }
 
 // ---------------------------------------------------------------------------

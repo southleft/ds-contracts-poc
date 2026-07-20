@@ -36,11 +36,11 @@
    "stroke-weights-nonuniform": 29
   },
   "factsCarried": {
-   "tokenRefsTotal": 3319,
+   "tokenRefsTotal": 3323,
    "tokenRefsMedian": 1,
    "tokenRefsMedianComponentSets": 15,
-   "mintedTotal": 863,
-   "notesTotal": 5479,
+   "mintedTotal": 916,
+   "notesTotal": 5548,
    "unboundTotal": 23,
    "degradationsTotal": 3316
   }
@@ -62508,9 +62508,9 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 54,
    "unboundCount": 0,
-   "mintedCount": 4,
+   "mintedCount": 22,
    "tokenRefsCarried": 8,
    "degradationsByCode": {},
    "stubCount": 1,
@@ -62554,7 +62554,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 19,
+   "noteCount": 20,
    "unboundCount": 3,
    "mintedCount": 2,
    "tokenRefsCarried": 6,
@@ -62599,9 +62599,9 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 43,
+   "noteCount": 60,
    "unboundCount": 0,
-   "mintedCount": 3,
+   "mintedCount": 19,
    "tokenRefsCarried": 8,
    "degradationsByCode": {},
    "stubCount": 1,
@@ -62738,9 +62738,9 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 37,
+   "noteCount": 52,
    "unboundCount": 0,
-   "mintedCount": 5,
+   "mintedCount": 20,
    "tokenRefsCarried": 15,
    "degradationsByCode": {},
    "stubCount": 2,
@@ -62961,7 +62961,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 59,
+   "noteCount": 61,
    "unboundCount": 1,
    "mintedCount": 5,
    "tokenRefsCarried": 31,
@@ -64360,10 +64360,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 60,
+   "noteCount": 61,
    "unboundCount": 0,
-   "mintedCount": 17,
-   "tokenRefsCarried": 17,
+   "mintedCount": 18,
+   "tokenRefsCarried": 18,
    "degradationsByCode": {},
    "stubCount": 5,
    "stubRefusals": [],
@@ -64406,10 +64406,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 98,
+   "noteCount": 99,
    "unboundCount": 0,
-   "mintedCount": 16,
-   "tokenRefsCarried": 18,
+   "mintedCount": 17,
+   "tokenRefsCarried": 19,
    "degradationsByCode": {},
    "stubCount": 6,
    "stubRefusals": [],
@@ -64452,7 +64452,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 57,
+   "noteCount": 58,
    "unboundCount": 0,
    "mintedCount": 17,
    "tokenRefsCarried": 18,
@@ -64498,7 +64498,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 93,
+   "noteCount": 95,
    "unboundCount": 0,
    "mintedCount": 28,
    "tokenRefsCarried": 28,
@@ -64749,7 +64749,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 62,
+   "noteCount": 63,
    "unboundCount": 0,
    "mintedCount": 20,
    "tokenRefsCarried": 20,
@@ -65358,10 +65358,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 53,
+   "noteCount": 54,
    "unboundCount": 0,
-   "mintedCount": 17,
-   "tokenRefsCarried": 17,
+   "mintedCount": 18,
+   "tokenRefsCarried": 18,
    "degradationsByCode": {},
    "stubCount": 4,
    "stubRefusals": [],
@@ -65404,10 +65404,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 89,
+   "noteCount": 90,
    "unboundCount": 0,
-   "mintedCount": 18,
-   "tokenRefsCarried": 17,
+   "mintedCount": 19,
+   "tokenRefsCarried": 18,
    "degradationsByCode": {},
    "stubCount": 5,
    "stubRefusals": [],
@@ -65450,7 +65450,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 41,
+   "noteCount": 42,
    "unboundCount": 0,
    "mintedCount": 12,
    "tokenRefsCarried": 14,
@@ -65497,7 +65497,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 42,
+   "noteCount": 43,
    "unboundCount": 0,
    "mintedCount": 12,
    "tokenRefsCarried": 14,
@@ -65734,7 +65734,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 33,
+   "noteCount": 34,
    "unboundCount": 0,
    "mintedCount": 6,
    "tokenRefsCarried": 11,
@@ -65783,7 +65783,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 43,
+   "noteCount": 44,
    "unboundCount": 0,
    "mintedCount": 6,
    "tokenRefsCarried": 9,
@@ -65830,7 +65830,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 36,
    "unboundCount": 0,
    "mintedCount": 6,
    "tokenRefsCarried": 11,
@@ -65879,7 +65879,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 36,
    "unboundCount": 0,
    "mintedCount": 6,
    "tokenRefsCarried": 11,
@@ -66065,7 +66065,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 65,
+   "noteCount": 66,
    "unboundCount": 2,
    "mintedCount": 16,
    "tokenRefsCarried": 18,

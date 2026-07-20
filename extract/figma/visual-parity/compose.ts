@@ -85,9 +85,17 @@ function composeCaptured(
   };
 }
 
+/** The dump's meta channels, excluded from set addressing BY NAME — a
+ *  name-prefix convention is not a type test (live-gauntlet harness class ⑦:
+ *  the owner legitimately names 30 sets "_Input label", "_Slot-Dialog",
+ *  "_Tab-item", … and the old startsWith('_') guard made them unaddressable
+ *  — 20 live composites' session scopes refused. The playground's own
+ *  receive path checks the parsed shape; this now matches it). */
+const META_CHANNELS = new Set(['_provenance', '_variables', '_degradations']);
+
 function pickSet(dump: DumpFile, dumpPath: string, wanted: string | undefined, who: string): [string, DumpSet] {
   const sets = Object.entries(dump).filter(
-    (e): e is [string, DumpSet] => !e[0].startsWith('_') && isDumpSet(e[1]),
+    (e): e is [string, DumpSet] => !META_CHANNELS.has(e[0]) && isDumpSet(e[1]),
   );
   const picked = wanted ? sets.find(([name]) => name === wanted) : sets.length === 1 ? sets[0] : undefined;
   if (!picked) {
@@ -121,6 +129,13 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
   const contracts = new Map(d.contracts);
   const contractIdByName = new Map(d.contractIdByName);
   const contractIdByKey = new Map(d.contractIdByKey);
+  /** Ids claimed by THIS session's proposals and their stubs (never the
+   *  repo base) — the class-③ cross-population id-collision guard: a later
+   *  proposal whose name-derived id lands on one of these with a
+   *  CONTRADICTING componentSetKey takes a deterministic suffix instead of
+   *  letting the newest-wins registry rebind the earlier import's child
+   *  refs onto it (the RadioButton / "Radio button" false cycle). */
+  const sessionClaimedIds = new Set<string>();
   let inventory = d.inventory;
   const cssBlocks: string[] = [baseCss];
   const receipts: RenderablePackage['receipts'] = {
@@ -151,6 +166,11 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     receipts.capturedShadowed.push(...withCaptured.shadowed);
 
     const result = proposeFromDump(set, {
+      // Captured-variable resolved values (class ① mint routing): a bound
+      // paint whose refs refuse unification survives as per-variant minted
+      // literals instead of dropping — the same index proposeBatchFromDump
+      // builds automatically; direct proposeFromDump callers thread it.
+      capturedValues: new Map((captured?.entries ?? []).map((e) => [e.path, e.value] as const)),
       corpus: d.corpus,
       // The SESSION registries — repo + every previously registered proposal:
       // nested instances LINK (componentSetKey first, drawn-name fallback)
@@ -160,6 +180,7 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
       contractIdByName,
       contractIdByKey,
       contractsById: contracts,
+      sessionClaimedIds,
       fileKey: dump._provenance?.fileKey ?? subject.fileKey,
       mintUnbound: true,
       // Visible-in-default-variant boolean defaults are evidence only when
@@ -183,11 +204,13 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     contracts.set(contract.id, contract);
     contractIdByName.set(contract.name, contract.id);
     contractIdByName.set(setName, contract.id);
+    sessionClaimedIds.add(contract.id);
     const setKey = contract.anchors.figma.componentSetKey;
     if (setKey) contractIdByKey.set(setKey, contract.id);
     // Stubs never override a registered contract (playground precedence).
     for (const stub of stubs) {
       if (!contracts.has(stub.id)) contracts.set(stub.id, stub);
+      sessionClaimedIds.add(stub.id);
     }
     return { contract, stubs, notes: result.notes.length };
   };
