@@ -69,6 +69,14 @@ export interface NodeSpec {
   bindings?: Record<string, string>;
   fill?: string;
   stroke?: string;
+  /** Round 5d (owner finding: the Banner focus ring drew on the bottom
+   *  portion only): a stroke lowered from a CSS OUTLINE. CSS outlines sit
+   *  OUTSIDE the border box and paint over everything — an INSIDE-aligned
+   *  Figma stroke is painted over by opaque children (the Banner tone
+   *  ribbon covered the top arc). The runtime aligns these strokes OUTSIDE
+   *  so the ring wraps the full root bounds; the preview renders a CSS
+   *  outline. */
+  strokeOutside?: boolean;
   fixedWidth?: { px: number; varName: string };
   fixedHeight?: { px: number; varName?: string };
   /** CSS grow → layoutSizingHorizontal FILL after append. */
@@ -154,11 +162,20 @@ export interface NodeSpec {
   insetOffsets?: { top: number; right: number; bottom: number; left: number };
   /** Round 5 (canvas-gate): margin channels the floor-promoted contracts
    *  carry (Badge pip -2/-2/-8, Checkbox control spacing), resolved to
-   *  literal px at compile. The CANVAS PREVIEW renders them as CSS margins;
-   *  auto-layout has no per-child margin field, so the sync runtime does NOT
-   *  apply them — a code-only fact (†), named in the preview fidelity notes,
-   *  never a silent drop. */
+   *  literal px at compile. Round 5d (owner findings: the Checkbox/Radio
+   *  control↔label gap was missing on canvas; the Badge pip drew oversized):
+   *  margins now APPLY on canvas — a uniform positive sibling gap lowers to
+   *  the parent's itemSpacing at compile (variable-bound when the margin
+   *  rode one token), and every residual margin becomes the child's CSS
+   *  margin box at runtime (a fixed wrapper frame, clipsContent false, child
+   *  placed at (left, top) — negative margins shrink the flow box and let
+   *  the glyph overhang, the exact CSS geometry). The canvas preview keeps
+   *  rendering residual margins as CSS margins. */
   margins?: { top?: number; right?: number; bottom?: number; left?: number };
+  /** Round 5d: variable names for token-carried margin channels — consumed
+   *  by the sibling-gap → itemSpacing lowering (the gap then BINDS the
+   *  margin's own variable), stripped before serialization. */
+  marginVars?: { top?: string; right?: string; bottom?: string; left?: string };
   /** Round 5: an `img` element part — raster content is runtime data with no
    *  canvas projection; the part draws the standard image-placeholder wash
    *  (compiled into lits.fillColor) and this flag names it in the preview
@@ -214,6 +231,12 @@ export interface NodeSpec {
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
+  /** Round 5d (owner finding: the Badge pip fill inspected as a bare hex):
+   *  when the whole glyph rides ONE contract paint (every explicit fill/
+   *  stroke in the baked markup is the same resolved literal), this is that
+   *  paint's variable name — the sync runtime re-binds the imported vectors'
+   *  paints to it after createNodeFromSvg, so the inspector shows the token. */
+  svgPaintVar?: string;
   // text
   characters?: string;
   fontSize?: number;
@@ -960,28 +983,56 @@ function applyTokens(
       // Round 5 (canvas-gate finding): margin channels — the floor-promoted
       // contracts carry them (Badge pip margin -2/-2/-8 is what keeps the
       // real pill 20px tall) and this switch silently dropped them. Resolved
-      // to literal px (auto-layout has no margin field to bind); the canvas
-      // preview draws them, the sync runtime names the limit (†).
+      // to literal px; round 5d records the variable name too, so the
+      // sibling-gap → itemSpacing lowering can BIND the margin's own token
+      // (the Checkbox/Radio control↔label gap rides
+      // imported.*.choice-control.margin-right).
       case 'margin-top': {
         const v = px(resolveLiteral(tokenPath));
-        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, top: v };
+        if (!Number.isNaN(v)) {
+          spec.margins = { ...spec.margins, top: v };
+          spec.marginVars = { ...spec.marginVars, top: varName };
+        }
         break;
       }
       case 'margin-right': {
         const v = px(resolveLiteral(tokenPath));
-        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, right: v };
+        if (!Number.isNaN(v)) {
+          spec.margins = { ...spec.margins, right: v };
+          spec.marginVars = { ...spec.marginVars, right: varName };
+        }
         break;
       }
       case 'margin-bottom': {
         const v = px(resolveLiteral(tokenPath));
-        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, bottom: v };
+        if (!Number.isNaN(v)) {
+          spec.margins = { ...spec.margins, bottom: v };
+          spec.marginVars = { ...spec.marginVars, bottom: varName };
+        }
         break;
       }
       case 'margin-left': {
         const v = px(resolveLiteral(tokenPath));
-        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, left: v };
+        if (!Number.isNaN(v)) {
+          spec.margins = { ...spec.margins, left: v };
+          spec.marginVars = { ...spec.marginVars, left: varName };
+        }
         break;
       }
+      // Round 5d (owner finding: the Banner focus ring drew bottom-only): a
+      // CSS OUTLINE lowers to an OUTSIDE-aligned stroke, never an inside
+      // border — outlines sit outside the border box and paint over
+      // children, so the inside approximation let the opaque tone ribbon
+      // cover the top arc. Reaches this switch via the state-preview
+      // pass-through (translateStateOverrides no longer respells outline-*
+      // as border-*).
+      case 'outline-color':
+        spec.stroke = varName;
+        spec.strokeOutside = true;
+        break;
+      case 'outline-width':
+        spec.bindings = { ...spec.bindings, strokeWeight: varName };
+        break;
       case 'border-radius':
         spec.bindings = {
           ...spec.bindings,
@@ -1334,19 +1385,15 @@ function applyChildAspect(spec: NodeSpec, part: Part): void {
   }
 }
 
-/** State-preview overrides pass through applyTokens with one honest
- *  translation: the focus outline has no canvas equivalent (outline sits
- *  outside the border box, with offset), so it renders as a bound stroke —
- *  an approximation, documented as such. Everything else (background-color,
- *  color, opacity) maps exactly like base tokens. */
+/** State-preview overrides pass through applyTokens unchanged. Round 5d:
+ *  outline-color/outline-width used to be respelled as border-* here, which
+ *  drew the focus ring as an INSIDE stroke that opaque children painted
+ *  over (the Banner ribbon covered the top arc). applyTokens now carries
+ *  outline-* natively as an OUTSIDE-aligned stroke (spec.strokeOutside) —
+ *  still an approximation of a CSS outline (no outline-offset carriage),
+ *  documented as such. */
 function translateStateOverrides(overrides: Record<string, string>): Record<string, string> {
-  const out: Record<string, string> = {};
-  for (const [cssProp, ref] of Object.entries(overrides)) {
-    if (cssProp === 'outline-color') out['border-color'] = ref;
-    else if (cssProp === 'outline-width') out['border-width'] = ref;
-    else out[cssProp] = ref;
-  }
-  return out;
+  return overrides;
 }
 
 /** v13 part-level states (P18 second half): inside a State-axis PREVIEW
@@ -1396,6 +1443,22 @@ const iconAssets = input.icons;
  *  `{prop}` asset reference through subst, and bake currentColor to the
  *  inherited foreground color's literal value (SVG paint is not
  *  variable-bindable on import — documented fidelity scope). */
+/** Round 5d (owner finding: the Badge pip fill inspected as a bare hex, no
+ *  variable): when the baked markup's explicit paints (fill/stroke attrs,
+ *  'none' excluded) collapse to the ONE resolved literal of the part's
+ *  paint token, the glyph is single-painted and the sync runtime can
+ *  re-bind the imported vectors to that token's variable. Multi-paint
+ *  glyphs (distinct per-path fills) keep their baked literals — one
+ *  variable cannot honestly serve two paints. */
+function svgSinglePaintVar(markup: string, hex: string, paintPath: string | undefined): string | undefined {
+  if (!paintPath) return undefined;
+  const paints = new Set<string>();
+  for (const m of markup.matchAll(/\s(?:fill|stroke)="([^"]+)"/g)) {
+    if (m[1] !== 'none') paints.add(m[1]);
+  }
+  return paints.size === 1 && paints.has(hex) ? figmaName(paintPath) : undefined;
+}
+
 function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): string {
   let asset = part.icon!.asset;
   const ref = asset.match(PARENT_PROP_REF);
@@ -1766,10 +1829,15 @@ function partToSpecInner(
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
     const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
+    const markup = iconSvg(part, subst, iconCtx);
+    const paintPath = iconCtx.glyphFillPath ?? iconCtx.textFillPath;
+    const paintHex = paintPath ? String(resolveLiteral(paintPath)) : '#000000';
+    const paintVar = svgSinglePaintVar(markup, paintHex, paintPath);
     const spec: NodeSpec = {
       type: 'svg',
       name,
-      svg: iconSvg(part, subst, iconCtx),
+      svg: markup,
+      ...(paintVar ? { svgPaintVar: paintVar } : {}),
       grow: part.layout?.grow || undefined,
       // Round 4 (canvas-gate finding): a viewBox-only svg has no intrinsic
       // size — the icon draws 0×0 in shrink-to-fit contexts. The contract's
@@ -2228,15 +2296,26 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
   for (const v of variants) stripMisses(v.spec);
   for (const v of stateVariants) stripMisses(v.spec);
+  // Round 5d: sibling-margin → itemSpacing lowering (then marginVars strip —
+  // compile-side only, never serialized).
+  for (const v of variants) lowerMarginGaps(v.spec);
+  for (const v of stateVariants) lowerMarginGaps(v.spec);
+  const stripMarginVars = (s: NodeSpec) => {
+    delete s.marginVars;
+    (s.children ?? []).forEach(stripMarginVars);
+  };
+  for (const v of variants) stripMarginVars(v.spec);
+  for (const v of stateVariants) stripMarginVars(v.spec);
   // Meter parts are runtime-sized (the canvas shows the defaults' fraction;
   // height follows the track) — a code-only fact like the rest.
   const hasMeter = walkAnatomy(contract).some((w) => w.part.meter);
-  // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — margin
-  // channels (no auto-layout margin field), the image-placeholder wash
-  // (raster content is runtime data), the block-root width fact (no
-  // intrinsic width) — join the code-only footnote, never a silent drop.
+  // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — the
+  // image-placeholder wash (raster content is runtime data), the block-root
+  // width fact (no intrinsic width) — join the code-only footnote, never a
+  // silent drop. (Round 5d: margin channels left this list — they now apply
+  // on canvas as itemSpacing or the margin-box wrapper.)
   const hasPreviewOnlyFacts = [...variants, ...stateVariants].some((v) =>
-    specSome(v.spec, (x) => x.margins !== undefined || x.imgPlaceholder === true || x.blockRoot === true),
+    specSome(v.spec, (x) => x.imgPlaceholder === true || x.blockRoot === true),
   );
   // Part D (owner directive): every code-only fact — events, declared-not-
   // drawn channels, gradient/shadow misses, runtime-sized meters — leaves
@@ -2349,6 +2428,59 @@ const opacityRuntime = (has: boolean): string =>
 
 // Conditional runtimes (same golden discipline as opacityRuntime: contracts
 // without the channel emit byte-identical scripts).
+/** Round 5d (owner finding: the Checkbox/Radio control↔label gap was
+ *  missing on canvas): a UNIFORM positive main-axis margin between in-flow
+ *  siblings is the CSS spelling of the parent's itemSpacing — lower it
+ *  there. When every gap comes from exactly ONE token-carried margin
+ *  channel resolving to one variable, the itemSpacing BINDS that variable
+ *  (the gap fact stays inspectable as a token); mixed sources lower as a
+ *  literal. Non-uniform gaps, edge margins (leading margin of the first
+ *  child / trailing margin of the last), cross-axis and negative margins
+ *  stay on the child spec — the runtime renders those as the CSS margin
+ *  box (wrapper frame), the preview as CSS margins. */
+function lowerMarginGaps(spec: NodeSpec): void {
+  for (const child of spec.children ?? []) lowerMarginGaps(child);
+  if (!spec.layout) return;
+  if (spec.bindings?.itemSpacing !== undefined || spec.lits?.itemSpacing !== undefined) return;
+  const kids = (spec.children ?? []).filter(
+    (c) => !c.overlay && !c.insetOverlay && !c.absolute,
+  );
+  if (kids.length < 2) return;
+  const horiz = (spec.layout.mode ?? 'HORIZONTAL') === 'HORIZONTAL';
+  const lead = horiz ? ('left' as const) : ('top' as const);
+  const trail = horiz ? ('right' as const) : ('bottom' as const);
+  const gaps: Array<{ px: number; vars: Array<string | null> }> = [];
+  for (let i = 0; i < kids.length - 1; i++) {
+    const t = kids[i].margins?.[trail] ?? 0;
+    const l = kids[i + 1].margins?.[lead] ?? 0;
+    const vars: Array<string | null> = [];
+    if (t !== 0) vars.push(kids[i].marginVars?.[trail] ?? null);
+    if (l !== 0) vars.push(kids[i + 1].marginVars?.[lead] ?? null);
+    gaps.push({ px: t + l, vars });
+  }
+  const px = gaps[0].px;
+  if (px <= 0 || !gaps.every((g) => g.px === px)) return;
+  const sources = new Set(gaps.flatMap((g) => g.vars));
+  if (sources.size === 1 && gaps.every((g) => g.vars.length === 1) && !sources.has(null)) {
+    spec.bindings = { ...spec.bindings, itemSpacing: [...sources][0] as string };
+  } else {
+    (spec.lits ??= {}).itemSpacing = px;
+  }
+  for (let i = 0; i < kids.length; i++) {
+    const m = kids[i].margins;
+    if (!m) continue;
+    if (i < kids.length - 1) {
+      delete m[trail];
+      if (kids[i].marginVars) delete kids[i].marginVars![trail];
+    }
+    if (i > 0) {
+      delete m[lead];
+      if (kids[i].marginVars) delete kids[i].marginVars![lead];
+    }
+    if (Object.values(m).every((v) => v === undefined)) delete kids[i].margins;
+  }
+}
+
 const specSome = (s: NodeSpec, pred: (x: NodeSpec) => boolean): boolean =>
   pred(s) || (s.children ?? []).some((c) => specSome(c, pred));
 const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
@@ -2361,7 +2493,73 @@ const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
  *  backdrop's inset ring) — the caller passes the shadow/effect-stack
  *  runtime snippets so conditional emission stays aligned with the frame
  *  path. */
-const shapeRuntime = (has: boolean, effects: string): string =>
+/** Round 5d: stroke alignment expression — outline-lowered strokes align
+ *  OUTSIDE (CSS outlines sit outside the border box and are never painted
+ *  over by children; the Banner focus ring's top arc was covered by the
+ *  opaque tone ribbon under the old INSIDE constant). Feature-gated: the
+ *  constant is emitted verbatim when no spec carries strokeOutside. */
+const strokeAlignJs = (hasOutside: boolean): string =>
+  hasOutside ? `spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'` : `'INSIDE'`;
+
+/** Round 5d: the CSS margin box as a fixed wrapper frame (see
+ *  NodeSpec.margins). Emitted only when a spec carries residual margins. */
+const marginBoxRuntime = (has: boolean): string =>
+  has
+    ? `
+// Round 5d: auto-layout has no per-child margin — a child carrying residual
+// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
+// false), the child placed at (left, top). Negative margins shrink the flow
+// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
+// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
+// (overlay / inset / absolute) and FILL-sized children keep their own
+// lowering.
+function applyMarginBox(parent, childNode, childSpec) {
+  const m = childSpec.margins;
+  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
+  try {
+    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
+  } catch (e) { /* nodes without layout sizing */ }
+  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
+  if (!t && !r && !b && !l) return;
+  const w = Math.max(childNode.width + l + r, 0.01);
+  const h = Math.max(childNode.height + t + b, 0.01);
+  const box = figma.createFrame();
+  box.name = childSpec.name + ' (margin box)';
+  box.fills = [];
+  box.clipsContent = false;
+  parent.insertChild(parent.children.indexOf(childNode), box);
+  box.resize(w, h);
+  box.appendChild(childNode);
+  childNode.x = l;
+  childNode.y = t;
+}
+`
+    : '';
+const marginBoxCall = (has: boolean, args: string): string =>
+  has
+    ? `
+    applyMarginBox(${args});`
+    : '';
+
+/** Round 5d: single-paint glyphs ride their contract variable — svg import
+ *  bakes literal paints (SVG paint is not bindable at import), so the
+ *  imported vectors re-bind to the SAME variable the contract carries and
+ *  the inspector shows the token, not a bare hex (the Badge pip). */
+const svgPaintRuntime = (has: boolean): string =>
+  has
+    ? `
+    if (spec.svgPaintVar) {
+      const glyphPaint = boundPaint(spec.svgPaintVar, node);
+      const rebind = (n) => {
+        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
+        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
+        if (n.children) for (const c of n.children) rebind(c);
+      };
+      for (const c of node.children) rebind(c);
+    }`
+    : '';
+
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // v9 shape (#42): a REAL parametric node with native rotation.
@@ -2378,7 +2576,7 @@ const shapeRuntime = (has: boolean, effects: string): string =>
     // radio backdrop strokes and radii — the shim now lives at the source).
     if (spec.stroke) {
       node.strokes = [boundPaint(spec.stroke, node)];
-      node.strokeAlign = 'INSIDE';
+      node.strokeAlign = ${alignExpr};
     }
     for (const [field, varName] of Object.entries(spec.bindings || {})) {
       node.setBoundVariable(field, need(varName));
@@ -2678,6 +2876,12 @@ function buildSyncScript(
   const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
   const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
   const hasInsetOverlay = datas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
+  // Round 5d: margin-box wrapper / outline-lowered OUTSIDE strokes /
+  // single-paint glyph variable re-binding — all feature-gated so contracts
+  // without these facts emit byte-identical scripts (the golden discipline).
+  const hasMargins = datas.some((d) => dataSome(d, (x) => x.margins !== undefined));
+  const hasStrokeOutside = datas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
+  const hasSvgPaint = datas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
   const hasTextExtras = datas.some((d) =>
     dataSome(
       d,
@@ -2832,7 +3036,7 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
+    node.strokeAlign = ${strokeAlignJs(hasStrokeOutside)};
   }${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -2869,14 +3073,14 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
-${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}
+${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${marginBoxRuntime(hasMargins)}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
     node = figma.createNodeFromSvg(spec.svg);
     node.fills = [];
     node.clipsContent = false;
-    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);${svgPaintRuntime(hasSvgPaint)}
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
@@ -2906,7 +3110,7 @@ async function buildNode(spec, registry) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = ${strokeAlignJs(hasStrokeOutside)}; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
@@ -2947,7 +3151,7 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside))} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }
@@ -2985,7 +3189,7 @@ async function buildNode(spec, registry) {
       'layoutSizingHorizontal' in childNode
     ) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
-    }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}
+    }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child')}
   }
   return node;
 }

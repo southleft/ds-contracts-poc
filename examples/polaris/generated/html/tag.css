@@ -1,4 +1,4 @@
-/* Tag — from polaris.tag v0.3.1 (core/emit-html.ts) */
+/* Tag — from polaris.tag v0.3.2 (core/emit-html.ts) */
 
 .tag, .tag *, .tag *::before, .tag *::after {
   box-sizing: border-box;
@@ -11,9 +11,6 @@
   background-color: var(--p-color-bg-fill-tertiary);
   color: var(--p-color-text);
   border-radius: var(--p-border-radius-200);
-  border-bottom-left-radius: var(--imported-shared-size-8);
-  border-bottom-right-radius: var(--imported-shared-size-8);
-  border-top-right-radius: var(--imported-shared-size-8);
   bottom: var(--imported-shared-size-0);
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);

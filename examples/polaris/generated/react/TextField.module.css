@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.3.1)
+ * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.3.2)
  * Regenerate with: npm run generate
  */
 
@@ -345,9 +345,6 @@
   border-radius: var(--p-border-radius-200);
   border-width: var(--p-border-width-0165);
   border-color: var(--p-color-input-border);
-  border-bottom-left-radius: var(--imported-shared-size-8);
-  border-bottom-right-radius: var(--imported-shared-size-8);
-  border-top-right-radius: var(--imported-shared-size-8);
   bottom: var(--imported-shared-size-0);
   left: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
@@ -365,60 +362,12 @@
   min-height: var(--p-space-800);
 }
 
-.size-slim .backdrop {
-  padding-block: var(--p-space-050);
-}
-
-.variant-borderless .backdrop {
-  border-left-color: var(--imported-text-field-backdrop-border-left-color-borderless);
-}
-
-.variant-borderless .backdrop {
-  border-left-width: var(--imported-text-field-backdrop-border-left-width-borderless);
-}
-
-.variant-borderless .backdrop {
-  border-right-color: var(--imported-text-field-backdrop-border-right-color-borderless);
-}
-
-.variant-borderless .backdrop {
-  border-right-width: var(--imported-text-field-backdrop-border-right-width-borderless);
-}
-
-.variant-borderless .backdrop {
-  border-top-color: var(--imported-text-field-backdrop-border-top-color-borderless);
-}
-
-.variant-borderless .backdrop {
-  border-top-width: var(--imported-text-field-backdrop-border-top-width-borderless);
-}
-
-.variant-inherit .backdrop {
-  border-left-color: var(--imported-text-field-backdrop-border-left-color-inherit);
-}
-
-.variant-inherit .backdrop {
-  border-left-width: var(--imported-text-field-backdrop-border-left-width-inherit);
-}
-
-.variant-inherit .backdrop {
-  border-right-color: var(--imported-text-field-backdrop-border-right-color-inherit);
-}
-
-.variant-inherit .backdrop {
-  border-right-width: var(--imported-text-field-backdrop-border-right-width-inherit);
-}
-
-.variant-inherit .backdrop {
-  border-top-color: var(--imported-text-field-backdrop-border-top-color-inherit);
-}
-
-.variant-inherit .backdrop {
-  border-top-width: var(--imported-text-field-backdrop-border-top-width-inherit);
-}
-
 .variant-borderless .backdrop {
   border-width: var(--p-border-width-0);
+}
+
+.size-slim .backdrop {
+  padding-block: var(--p-space-050);
 }
 
 .root:active:not(:disabled) .backdrop {

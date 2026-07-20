@@ -5,74 +5,18 @@
   "browser": "148.0.7778.96",
   "mintedTokens": {
     "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      },
       "thumbnail": {
-        "root": {
-          "border-bottom-left-radius": {
-            "extraSmall": {
-              "$value": "6px",
-              "$type": "dimension"
-            },
-            "small": {
-              "$value": "8px",
-              "$type": "dimension"
-            },
-            "medium": {
-              "$value": "8px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "8px",
-              "$type": "dimension"
-            }
-          },
-          "border-bottom-right-radius": {
-            "extraSmall": {
-              "$value": "6px",
-              "$type": "dimension"
-            },
-            "small": {
-              "$value": "8px",
-              "$type": "dimension"
-            },
-            "medium": {
-              "$value": "8px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "8px",
-              "$type": "dimension"
-            }
-          },
-          "border-top-right-radius": {
-            "extraSmall": {
-              "$value": "6px",
-              "$type": "dimension"
-            },
-            "small": {
-              "$value": "8px",
-              "$type": "dimension"
-            },
-            "medium": {
-              "$value": "8px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "8px",
-              "$type": "dimension"
-            }
-          }
-        },
         "part-0": {
           "color": {
             "$value": "#8a8a8a",
             "$type": "color"
           }
-        }
-      },
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
         }
       }
     }

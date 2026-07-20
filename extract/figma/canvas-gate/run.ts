@@ -137,7 +137,7 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
   {
     test: (cell) =>
       cell.state === 'focus-visible'
-        ? 'outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width'
+        ? 'outline→stroke approximation (round 5d: the lowered stroke now aligns OUTSIDE, so the ring wraps the full root bounds and children cannot cover it — the Banner top-arc loss is retired); outline-offset is still not carried, so the ring hugs the box edge where the web offsets it'
         : null,
   },
   // ROUND 5c: the six named round-5a promotion causes are FIXED — Tag label
@@ -150,7 +150,7 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
     component: 'Checkbox',
     test: (cell) =>
       cell.subst['checked'] !== 'unchecked'
-        ? 'floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)'
+        ? 'check glyph carries as the CONTINUOUS settled stroke (round 5d: stroke-dasharray/dashoffset are pathLength-relative draw-on animation vehicles — pathLength is not a computed style — dropped by name; the segmented-capsule rendering is retired); residual raster of the 2px round-cap stroke (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)'
         : null,
   },
   {

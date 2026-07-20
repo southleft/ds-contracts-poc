@@ -934,10 +934,6 @@
         }
       },
       "shared": {
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
         "size-0": {
           "$value": "0px",
           "$type": "dimension"

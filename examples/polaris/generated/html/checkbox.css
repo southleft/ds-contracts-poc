@@ -1,4 +1,4 @@
-/* Checkbox — from polaris.checkbox v0.3.1 (core/emit-html.ts) */
+/* Checkbox — from polaris.checkbox v0.3.2 (core/emit-html.ts) */
 
 .checkbox, .checkbox *, .checkbox *::before, .checkbox *::after {
   box-sizing: border-box;
@@ -137,25 +137,16 @@
 
 .checkbox--checked-checked .checkbox__backdrop {
   background-color: var(--imported-checkbox-backdrop-background-color-checked);
-  border-left-color: var(--imported-checkbox-backdrop-border-left-color-checked);
-  border-right-color: var(--imported-checkbox-backdrop-border-right-color-checked);
-  border-top-color: var(--imported-checkbox-backdrop-border-top-color-checked);
   box-shadow: var(--imported-checkbox-backdrop-box-shadow-checked);
 }
 
 .checkbox--checked-indeterminate .checkbox__backdrop {
   background-color: var(--imported-checkbox-backdrop-background-color-indeterminate);
-  border-left-color: var(--imported-checkbox-backdrop-border-left-color-indeterminate);
-  border-right-color: var(--imported-checkbox-backdrop-border-right-color-indeterminate);
-  border-top-color: var(--imported-checkbox-backdrop-border-top-color-indeterminate);
   box-shadow: var(--imported-checkbox-backdrop-box-shadow-indeterminate);
 }
 
 .checkbox--checked-unchecked .checkbox__backdrop {
   background-color: var(--imported-checkbox-backdrop-background-color-unchecked);
-  border-left-color: var(--imported-checkbox-backdrop-border-left-color-unchecked);
-  border-right-color: var(--imported-checkbox-backdrop-border-right-color-unchecked);
-  border-top-color: var(--imported-checkbox-backdrop-border-top-color-unchecked);
   box-shadow: var(--imported-checkbox-backdrop-box-shadow-unchecked);
 }
 

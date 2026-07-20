@@ -5,16 +5,6 @@
   "browser": "148.0.7778.96",
   "mintedTokens": {
     "imported": {
-      "shared": {
-        "size-4": {
-          "$value": "4px",
-          "$type": "dimension"
-        },
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        }
-      },
       "progress-bar": {
         "progress": {
           "bottom": {
@@ -53,6 +43,12 @@
             "$value": "287px",
             "$type": "dimension"
           }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
         }
       }
     }

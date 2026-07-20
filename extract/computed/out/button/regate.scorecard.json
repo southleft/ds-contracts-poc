@@ -160,12 +160,12 @@
       "maxAA": 0
     },
     "fusion": {
-      "boundConfirmed": 1444,
-      "boundCells": 1632,
+      "boundConfirmed": 1924,
+      "boundCells": 2112,
       "contradictions": 188,
-      "mintedLeaves": 377,
-      "mintedLeavesUnfolded": 942,
-      "baseBindings": 31,
+      "mintedLeaves": 375,
+      "mintedLeavesUnfolded": 940,
+      "baseBindings": 27,
       "stateBindings": 27,
       "codeOnlyChannels": 34,
       "overflowBindings": 19,

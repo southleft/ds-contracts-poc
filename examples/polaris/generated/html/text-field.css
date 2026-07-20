@@ -1,4 +1,4 @@
-/* TextField — from polaris.text-field v0.3.1 (core/emit-html.ts) */
+/* TextField — from polaris.text-field v0.3.2 (core/emit-html.ts) */
 
 .text-field, .text-field *, .text-field *::before, .text-field *::after {
   box-sizing: border-box;
@@ -341,9 +341,6 @@
   border-radius: var(--p-border-radius-200);
   border-width: var(--p-border-width-0165);
   border-color: var(--p-color-input-border);
-  border-bottom-left-radius: var(--imported-shared-size-8);
-  border-bottom-right-radius: var(--imported-shared-size-8);
-  border-top-right-radius: var(--imported-shared-size-8);
   bottom: var(--imported-shared-size-0);
   left: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
@@ -371,32 +368,11 @@
 
 .text-field--variant-borderless .text-field__backdrop {
   min-height: var(--p-space-800);
+  border-width: var(--p-border-width-0);
 }
 
 .text-field--size-slim .text-field__backdrop {
   padding-block: var(--p-space-050);
-}
-
-.text-field--variant-borderless .text-field__backdrop {
-  border-left-color: var(--imported-text-field-backdrop-border-left-color-borderless);
-  border-left-width: var(--imported-text-field-backdrop-border-left-width-borderless);
-  border-right-color: var(--imported-text-field-backdrop-border-right-color-borderless);
-  border-right-width: var(--imported-text-field-backdrop-border-right-width-borderless);
-  border-top-color: var(--imported-text-field-backdrop-border-top-color-borderless);
-  border-top-width: var(--imported-text-field-backdrop-border-top-width-borderless);
-}
-
-.text-field--variant-inherit .text-field__backdrop {
-  border-left-color: var(--imported-text-field-backdrop-border-left-color-inherit);
-  border-left-width: var(--imported-text-field-backdrop-border-left-width-inherit);
-  border-right-color: var(--imported-text-field-backdrop-border-right-color-inherit);
-  border-right-width: var(--imported-text-field-backdrop-border-right-width-inherit);
-  border-top-color: var(--imported-text-field-backdrop-border-top-color-inherit);
-  border-top-width: var(--imported-text-field-backdrop-border-top-width-inherit);
-}
-
-.text-field--variant-borderless .text-field__backdrop {
-  border-width: var(--p-border-width-0);
 }
 
 .text-field:active:not(:disabled) .text-field__backdrop {
