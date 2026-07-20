@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "polaris.banner",
   "name": "Banner",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Banner/Banner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/banner/decisions.md, human-acked; source resolved.contract.json). Everything the vocabulary cannot carry is named in contracts/banner.extension.json. Delta ledger: extract/computed/out/banner/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Banner/Banner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.1 (extract/computed rounds 4 + 5c): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/banner/decisions.md, human-acked; source resolved.contract.json). Round 5c promotion lifts: complement-of-product presence (a default subtree an alternative replaces carries an ordered hide/restore stylesWhen cascade, verified per combo), root-hosted svg plans, authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). Everything the vocabulary cannot carry is named in contracts/banner.extension.json. Delta ledger: extract/computed/out/banner/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
   "semantics": {
     "element": "div",
     "role": "status",
@@ -403,6 +403,7 @@
                                         "size": 20
                                       },
                                       "tokens": {
+                                        "color": "{imported.shared.color-303030}",
                                         "min-height": "{imported.shared.size-0}",
                                         "min-width": "{imported.shared.size-0}"
                                       }
@@ -444,12 +445,12 @@
                             "border-top-right-radius": "{imported.shared.size-8}",
                             "border-top-width": "{imported.shared.size-0}",
                             "bottom": "{imported.shared.size-0}",
-                            "color": "{imported.banner.button.color}",
+                            "color": "{imported.shared.color-303030}",
                             "column-gap": "{imported.shared.size-2}",
-                            "font-size": "{imported.banner.button.font-size}",
-                            "font-weight": "{imported.banner.button.font-weight}",
+                            "font-size": "{imported.shared.size-13}",
+                            "font-weight": "{imported.shared.num-450}",
                             "left": "{imported.shared.size-0}",
-                            "line-height": "{imported.banner.button.line-height}",
+                            "line-height": "{imported.shared.size-20}",
                             "margin-bottom": "{imported.shared.size-neg-4}",
                             "margin-left": "{imported.shared.size-neg-4}",
                             "margin-right": "{imported.shared.size-neg-4}",
@@ -551,6 +552,9 @@
                                 "display": "inline"
                               },
                               "tokens": {
+                                "font-size": "{imported.shared.size-13}",
+                                "font-weight": "{imported.shared.num-450}",
+                                "line-height": "{imported.shared.size-20}",
                                 "min-height": "{imported.shared.size-0}",
                                 "min-width": "{imported.shared.size-0}"
                               }
@@ -635,12 +639,12 @@
                                     "border-top-width": "{imported.shared.size-0}",
                                     "bottom": "{imported.shared.size-0}",
                                     "box-shadow": "{imported.banner.button-2.box-shadow}",
-                                    "color": "{imported.banner.button-2.color}",
+                                    "color": "{imported.shared.color-303030}",
                                     "column-gap": "{imported.shared.size-2}",
-                                    "font-size": "{imported.banner.button-2.font-size}",
-                                    "font-weight": "{imported.banner.button-2.font-weight}",
+                                    "font-size": "{imported.shared.size-13}",
+                                    "font-weight": "{imported.shared.num-450}",
                                     "left": "{imported.shared.size-0}",
-                                    "line-height": "{imported.banner.button-2.line-height}",
+                                    "line-height": "{imported.shared.size-20}",
                                     "min-height": "{imported.shared.size-32}",
                                     "min-width": "{imported.shared.size-32}",
                                     "padding-bottom": "{imported.banner.button-2.padding-bottom}",

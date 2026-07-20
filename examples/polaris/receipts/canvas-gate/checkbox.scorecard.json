@@ -1,7 +1,7 @@
 {
   "component": "Checkbox",
   "contractId": "polaris.checkbox",
-  "contractVersion": "0.3.0",
+  "contractVersion": "0.3.1",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -21,71 +21,54 @@
     {
       "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 31.13,
-      "pctAAUnmasked": 10.45,
-      "pctAAMasked": 10.6,
-      "maskCoveragePct": 81.44,
-      "canvasPx": "291x40",
+      "pctExactUnmasked": 22.29,
+      "pctAAUnmasked": 0.98,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 81.55,
+      "canvasPx": "271x36",
       "realPx": "270x36",
-      "inkCanvasPct": 22.27,
-      "inkRealPct": 18.04,
-      "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
+      "inkCanvasPct": 23.53,
+      "inkRealPct": 21.53
     },
     {
       "cell": "Checked=checked",
       "kind": "base",
-      "pctExactUnmasked": 34.59,
-      "pctAAUnmasked": 15.05,
-      "pctAAMasked": 35.42,
-      "maskCoveragePct": 81.44,
-      "canvasPx": "291x40",
+      "pctExactUnmasked": 24.27,
+      "pctAAUnmasked": 2.18,
+      "pctAAMasked": 6.5,
+      "maskCoveragePct": 81.55,
+      "canvasPx": "271x36",
       "realPx": "270x36",
-      "inkCanvasPct": 32.53,
-      "inkRealPct": 26.02,
-      "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
+      "inkCanvasPct": 33,
+      "inkRealPct": 31.05,
+      "note": "floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
     },
     {
       "cell": "Checked=indeterminate",
       "kind": "base",
-      "pctExactUnmasked": 34.24,
-      "pctAAUnmasked": 14.78,
-      "pctAAMasked": 33.94,
-      "maskCoveragePct": 81.44,
-      "canvasPx": "291x40",
+      "pctExactUnmasked": 23.2,
+      "pctAAUnmasked": 1.48,
+      "pctAAMasked": 2.67,
+      "maskCoveragePct": 81.55,
+      "canvasPx": "271x36",
       "realPx": "270x36",
-      "inkCanvasPct": 33.2,
-      "inkRealPct": 26.22,
-      "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
+      "inkCanvasPct": 33.78,
+      "inkRealPct": 31.28,
+      "note": "floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
     }
   ],
   "summary": {
     "cells": 3,
-    "meanExactUnmasked": 33.32,
-    "meanAAUnmasked": 13.43,
-    "meanAAMasked": 26.65,
-    "maxAAMasked": 35.42,
+    "meanExactUnmasked": 23.25,
+    "meanAAUnmasked": 1.55,
+    "meanAAMasked": 3.06,
+    "maxAAMasked": 6.5,
     "worstCell": "Checked=checked",
-    "cellsOver10Masked": [
-      {
-        "cell": "Checked=unchecked",
-        "pctAAMasked": 10.6,
-        "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
-      },
-      {
-        "cell": "Checked=checked",
-        "pctAAMasked": 35.42,
-        "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
-      },
-      {
-        "cell": "Checked=indeterminate",
-        "pctAAMasked": 33.94,
-        "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
-      }
-    ],
+    "cellsOver10Masked": [],
     "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": true
   }

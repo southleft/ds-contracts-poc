@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "polaris.tag",
   "name": "Tag",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/tag/decisions.md, human-acked; source resolved.contract.json). Everything the vocabulary cannot carry is named in contracts/tag.extension.json. Delta ledger: extract/computed/out/tag/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.1 (extract/computed rounds 4 + 5c): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/tag/decisions.md, human-acked; source resolved.contract.json). Round 5c promotion lifts: complement-of-product presence (a default subtree an alternative replaces carries an ordered hide/restore stylesWhen cascade, verified per combo), root-hosted svg plans, authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). Everything the vocabulary cannot carry is named in contracts/tag.extension.json. Delta ledger: extract/computed/out/tag/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
   "semantics": {
     "element": "span"
   },
@@ -217,6 +217,8 @@
                   ],
                   "tokens": {
                     "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.tag.label-2.font-weight}",
+                    "line-height": "{imported.shared.size-20}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}"
                   }
@@ -240,10 +242,83 @@
             "bottom": "{imported.shared.size-0}",
             "color": "{imported.tag.link.color}",
             "grid-template-columns": "{imported.tag.link.grid-template-columns}",
-            "grid-template-rows": "{imported.tag.link.grid-template-rows}",
+            "grid-template-rows": "{imported.shared.size-20}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}"
+          }
+        },
+        "text": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap"
+          },
+          "stylesWhen": [
+            {
+              "prop": "linked",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "clickable",
+              "styles": {
+                "display": "block"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "block"
+              }
+            }
+          ],
+          "parts": {
+            "label": {
+              "element": "span",
+              "tokens": {
+                "font-size": "{p.text-body-sm-font-size}",
+                "font-weight": "{p.text-body-sm-font-weight}",
+                "line-height": "{p.font-line-height-500}",
+                "letter-spacing": "{p.text-body-sm-font-letter-spacing}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "text": "Wholesale",
+              "declared": {
+                "display": "inline",
+                "text-wrap-mode": "nowrap"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "linked",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "clickable",
+                  "styles": {
+                    "display": "inline"
+                  }
+                },
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "inline"
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-12}",
+            "line-height": "{imported.tag.text.line-height}"
           }
         },
         "part-1": {
@@ -386,7 +461,7 @@
             "flex-shrink": "{imported.tag.button.flex-shrink}",
             "font-size": "{imported.tag.button.font-size}",
             "left": "{imported.tag.button.left.none}",
-            "line-height": "{imported.tag.button.line-height}",
+            "line-height": "{imported.shared.size-20}",
             "margin-bottom": "{imported.tag.button.margin-bottom.none}",
             "margin-left": "{imported.tag.button.margin-left.none}",
             "margin-right": "{imported.tag.button.margin-right.none}",
@@ -453,7 +528,19 @@
           "outline-color": "{imported.tag.root.outline-color-state-focus-visible}",
           "outline-width": "{imported.tag.root.outline-width-state-focus-visible}"
         }
-      }
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "min-height": "24px",
+              "padding-left": "8px",
+              "padding-right": "8px"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

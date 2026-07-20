@@ -1,4 +1,4 @@
-/* Text — from polaris.text v0.3.0 (core/emit-html.ts) */
+/* Text — from polaris.text v0.3.1 (core/emit-html.ts) */
 
 .text, .text *, .text *::before, .text *::after {
   box-sizing: border-box;
@@ -10,6 +10,9 @@
   justify-content: center;
   margin: 0;
   border: 0;
+  color: var(--imported-text-root-color-none);
+  font-size: var(--imported-text-root-font-size-none);
+  line-height: var(--imported-text-root-line-height-none);
   display: block;
 }
 

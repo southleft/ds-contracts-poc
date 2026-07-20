@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.3.0)
+ * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.3.1)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
@@ -88,7 +88,7 @@ export interface TextFieldProps extends HTMLAttributes<HTMLDivElement> {
   onFocus?: () => void;
 }
 
-/** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/textfield/decisions.md, human-acked; source resolved.contract.json). Everything the vocabulary cannot carry is named in contracts/text-field.extension.json. Delta ledger: extract/computed/out/textfield/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md). */
+/** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.1 (extract/computed rounds 4 + 5c): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/textfield/decisions.md, human-acked; source resolved.contract.json). Round 5c promotion lifts: complement-of-product presence (a default subtree an alternative replaces carries an ordered hide/restore stylesWhen cascade, verified per combo), root-hosted svg plans, authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). Everything the vocabulary cannot carry is named in contracts/text-field.extension.json. Delta ledger: extract/computed/out/textfield/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md). */
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
   { type = 'text', inputMode = 'undefined', align = 'undefined', variant = 'inherit', size = 'medium', labelHidden = false, disabled = false, clearButton = false, selectTextOnFocus = false, readOnly = false, autoFocus = false, focused = false, spellCheck = false, ariaExpanded = false, showCharacterCount = false, requiredIndicator = false, monospaced = false, autoSize = false, loading = false, withPrefix = false, withSuffix = false, step = 0, largeStep = 0, maxLength = 0, minLength = 0, placeholder, value = '', suggestion, name, role, autoComplete, pattern, ariaOwns, ariaControls, ariaActiveDescendant, ariaAutocomplete, onFocus, className, children, ...rest },
   ref,
@@ -100,7 +100,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Tex
       <div className={styles.labelled__labelwrapper}>
 <div className={styles.label}>
 <label className={styles.label__text}>
-<span className={styles.label-2}>Store name</span>
+<span className={styles["label-2"]}>Store name</span>
 </label>
 </div>
 </div>
@@ -108,16 +108,16 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Tex
 <div className={styles.connected__item}>
 <div className={styles.textfield}>
 {withPrefix ? (<div className={styles.prefix}>
-{withPrefix ? (<span className={styles.label-3}>$</span>) : null}
+{withPrefix ? (<span className={styles["label-3"]}>$</span>) : null}
 </div>) : null}
 <input className={styles.input} name={String(name)} value={String(value)} placeholder={String(placeholder)}>
 
 </input>
 {withSuffix ? (<div className={styles.suffix}>
-{withSuffix ? (<span className={styles.label-4}>USD</span>) : null}
+{withSuffix ? (<span className={styles["label-4"]}>USD</span>) : null}
 </div>) : null}
 {clearButton ? (<button className={styles.clearbutton}>
-<span className={styles.label-5}>Clear</span>
+<span className={styles["label-5"]}>Clear</span>
 {clearButton ? (<span className={styles.icon}><span aria-hidden="true" className={styles.iconGlyph} dangerouslySetInnerHTML={{ __html: ICONS["text-field-icon"] }} /></span>) : null}
 </button>) : null}
 <div className={styles.backdrop}>

@@ -14,14 +14,14 @@
     "checkbox": 10,
     "input": 27,
     "backdrop": 28,
-    "icon": 19,
-    "icon-3": 8,
+    "icon": 20,
+    "icon-3": 9,
     "icon-4": 25,
     "part-0-0-2-0-0-0": 18,
     "icon-2": 25,
     "part-0-0-2-0-0": 31,
     "choice__label": 1,
-    "label": 4
+    "label": 7
   },
   "folds": {
     "count": 44,
@@ -291,8 +291,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 90,
-    "mintedLeavesFolded": 94
+    "mintedLeavesUnfolded": 93,
+    "mintedLeavesFolded": 99
   },
   "bound": {
     "cellsChecked": 3,
@@ -301,11 +301,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 94,
-    "baseBindings": 64,
+    "leaves": 99,
+    "baseBindings": 69,
     "stateBindings": 47,
     "byShape": {
-      "uniform": 87,
+      "uniform": 92,
       "perAxis": 23,
       "perPair": 0,
       "refused": 1
@@ -419,7 +419,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 83.67857142857143,
+    "computedPctEqual": 84.2196132596685,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 0,

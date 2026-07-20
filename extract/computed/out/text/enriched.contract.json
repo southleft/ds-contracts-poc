@@ -375,6 +375,11 @@
       ],
       "declared": {
         "display": "block"
+      },
+      "tokens": {
+        "color": "{imported.text.root.color.none}",
+        "font-size": "{imported.text.root.font-size.none}",
+        "line-height": "{imported.text.root.line-height.none}"
       }
     }
   },

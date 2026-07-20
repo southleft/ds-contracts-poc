@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/radio-button.contract.json (polaris.radio-button v0.3.0)
+ * Source of truth: contracts/radio-button.contract.json (polaris.radio-button v0.3.1)
  * Regenerate with: npm run generate
  */
 
@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: flex-start;
   border: 0;
+  position: relative;
   padding-bottom: var(--imported-radio-button-root-padding-bottom);
   padding-top: var(--imported-radio-button-root-padding-top);
   cursor: pointer;
@@ -99,8 +100,8 @@
 }
 
 .backdrop {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   border-radius: var(--p-border-radius-full);
   border-width: var(--p-border-width-0165);
@@ -185,6 +186,24 @@
   background-color: var(--imported-radio-button-backdrop-background-color-state-disabled);
 }
 
+.backdrop-before {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.checked-unchecked .backdrop-before {
+  display: none;
+}
+
+.checked-checked .backdrop-before {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
 .choice__label {
   display: flex;
   display: block;
@@ -200,6 +219,9 @@
 }
 
 .label {
+  font-size: var(--imported-radio-button-label-font-size);
+  font-weight: var(--imported-radio-button-label-font-weight);
+  line-height: var(--imported-radio-button-label-line-height);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;

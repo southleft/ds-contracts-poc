@@ -69,8 +69,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 108,
-    "mintedLeavesFolded": 0
+    "mintedLeavesUnfolded": 204,
+    "mintedLeavesFolded": 96
   },
   "bound": {
     "cellsChecked": 1584,
@@ -79,13 +79,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 0,
-    "baseBindings": 0,
+    "leaves": 96,
+    "baseBindings": 4,
     "stateBindings": 0,
     "byShape": {
       "uniform": 0,
-      "perAxis": 0,
-      "perPair": 0,
+      "perAxis": 3,
+      "perPair": 1,
       "refused": 0
     }
   },
@@ -94,9 +94,9 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 1,
+    "base": 2,
     "state": 0,
-    "overflowBindings": 0
+    "overflowBindings": 1
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {

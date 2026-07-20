@@ -353,6 +353,107 @@ export function factorPresence(
   return fact;
 }
 
+/** Round 5c — COMPLEMENT-OF-PRODUCT presence (the Tag default-label class).
+ *  A default subtree that an ALTERNATIVE subtree replaces (Tag's label moves
+ *  inside the link when `linked` is set and `clickable` is not) has a
+ *  presence set that is the COMPLEMENT of a product — the product test
+ *  refuses it, and round 5a showed that refusal blanks the whole component.
+ *  When the ABSENCE set factors as a product of per-axis sets, the part is
+ *  spellable as an ORDERED stylesWhen cascade: hide entries on ONE trigger
+ *  axis's absence values, then RESTORE entries on every other constraining
+ *  axis's complement values — later rules win at equal specificity, so
+ *  hidden(c) = trigger-matches(c) ∧ ¬restore-matches(c) = the absence
+ *  product, exactly. The chain is VERIFIED against every captured combo
+ *  before it is carried; anything unverifiable refuses by name.
+ *
+ *  Domain note: this runs over ALL default-interaction combos (state planes
+ *  included — a disabled Tag renders the plain label even when linked), so
+ *  the disabled restore is part of the carried truth. */
+export interface ComplementFact {
+  hide: Array<{ prop: string; equals?: string }>;
+  restore: Array<{ prop: string; equals?: string }>;
+  receipts: string[];
+}
+
+export function factorComplement(
+  presentKeys: Set<string>,
+  allCombos: Combo[],
+  axes: PropSpace['axes'],
+  presenceProps: Set<string>,
+  stateProps: string[],
+  partName: string,
+  contractProps: Set<string>,
+): ComplementFact | null {
+  const absent = allCombos.filter((c) => !presentKeys.has(c.key));
+  if (absent.length === 0 || absent.length === allCombos.length) return null;
+  const axisNames = [...axes.map((a) => a.prop), ...stateProps];
+  const valueOf = (c: Combo, ax: string): string =>
+    ax in c.axisValues ? c.axisValues[ax] : String(c.stateFlags[ax]);
+  const valuesFor = (ax: string): string[] => {
+    const a = axes.find((x) => x.prop === ax);
+    return a ? a.values : ['false', 'true'];
+  };
+  const sets = new Map(axisNames.map((ax) => [ax, new Set(absent.map((c) => valueOf(c, ax)))] as const));
+  const absentKeys = new Set(absent.map((c) => c.key));
+  for (const c of allCombos) {
+    const inProduct = axisNames.every((ax) => sets.get(ax)!.has(valueOf(c, ax)));
+    if (inProduct !== absentKeys.has(c.key)) return null; // absence is not a product either
+  }
+  const constraining = axisNames.filter((ax) => sets.get(ax)!.size < valuesFor(ax).length);
+  if (constraining.length === 0) return null;
+  /** stylesWhen conditions selecting exactly `values` of axis `ax`, or null
+   *  when the vocabulary has no spelling (truthy-only booleans; the unset
+   *  pseudo-value is not a contract enum value; a state axis needs a real
+   *  contract prop). */
+  const spell = (ax: string, values: string[]): Array<{ prop: string; equals?: string }> | null => {
+    if (values.length === 0) return null;
+    if (presenceProps.has(ax)) {
+      return values.length === 1 && values[0] === PRESENCE_ON ? [{ prop: ax }] : null;
+    }
+    if (stateProps.includes(ax)) {
+      return values.length === 1 && values[0] === 'true' && contractProps.has(ax) ? [{ prop: ax }] : null;
+    }
+    const spec = axes.find((x) => x.prop === ax);
+    if (!spec || !contractProps.has(ax)) return null;
+    if (values.some((v) => v === spec.unset)) return null; // unset pseudo-value has no condition spelling
+    return values.map((v) => ({ prop: ax, equals: v }));
+  };
+  const matches = (cond: { prop: string; equals?: string }, c: Combo): boolean => {
+    const v = valueOf(c, cond.prop);
+    if (cond.equals !== undefined) return v === cond.equals;
+    return presenceProps.has(cond.prop) ? v === PRESENCE_ON : v === 'true';
+  };
+  for (const trigger of constraining) {
+    const hide = spell(trigger, [...sets.get(trigger)!]);
+    if (!hide) continue;
+    const restore: Array<{ prop: string; equals?: string }> = [];
+    let ok = true;
+    for (const other of constraining) {
+      if (other === trigger) continue;
+      const complement = valuesFor(other).filter((v) => !sets.get(other)!.has(v));
+      const r = spell(other, complement);
+      if (!r) { ok = false; break; }
+      restore.push(...r);
+    }
+    if (!ok) continue;
+    // VERIFY the cascade against every captured combo before carrying it.
+    const verified = allCombos.every((c) => {
+      const hidden = hide.some((h) => matches(h, c)) && !restore.some((r) => matches(r, c));
+      return hidden === absentKeys.has(c.key);
+    });
+    if (!verified) continue;
+    const fmt = (e: { prop: string; equals?: string }) => (e.equals !== undefined ? `${e.prop}=${e.equals}` : e.prop);
+    return {
+      hide,
+      restore,
+      receipts: [
+        `presence-complement-carried: ${partName} absent in ${absent.length}/${allCombos.length} default-interaction combos — absence factors as a product; carried as ORDERED stylesWhen (hide on ${hide.map(fmt).join(', ')}${restore.length ? `; cascade-restored on ${restore.map(fmt).join(', ')}` : ''}) — verified against every captured combo (round 5c complement-of-product spelling)`,
+      ],
+    };
+  }
+  return null;
+}
+
 // ---------------------------------------------------------------------------
 // SVG reconstruction from captured computed truth
 // ---------------------------------------------------------------------------
@@ -363,12 +464,22 @@ const pxNum = (v: string | undefined): number | null => {
 };
 
 /** Reconstruct inline SVG markup for one captured <svg> subtree. Returns
- *  null with a receipt when a child is not a <path> (bounded v1 grammar). */
+ *  null with a receipt when a child is not a <path> (bounded v1 grammar).
+ *  Round 5c: the result also carries the reconstructed viewBox number, the
+ *  path-coordinate extent, and whether the viewBox was BUMPED past the
+ *  computed size — the authored-viewBox unification pass (promoteAnatomy)
+ *  needs all three to recognize one authored glyph captured at many sizes. */
 export function reconstructSvg(
   svgEl: CapturedNode,
   receipts: string[],
   label: string,
-): { markup: string; size: number } | null {
+  /** Round 5c: prefer the currentColor spelling for fills equal to the
+   *  inherited color — set ONLY when the fill==color identity holds in
+   *  EVERY captured combo of this svg (a per-svg decision; a per-combo one
+   *  splits one authored asset into per-variant markups — the Button icon
+   *  regression this flag exists to prevent). */
+  preferCurrentColor = false,
+): { markup: string; size: number; vb: number; extent: number; bumped: boolean } | null {
   // A path fill equal to the svg's inherited `color` is CSS currentColor in
   // spirit — emitting it AS currentColor separates glyph SHAPE from color
   // (the Badge pip: shape = f(progress), color = f(tone); a baked fill made
@@ -402,11 +513,19 @@ export function reconstructSvg(
         // fill equal to the svg's own computed fill is INHERITED (no
         // attribute — the host part's minted fill channel cascades in CSS);
         // fill equal to the inherited color is currentColor; else baked.
-        const fill = fillRaw && inheritedFill && fillRaw === inheritedFill
-          ? ''
-          : fillRaw && inheritedColor && fillRaw === inheritedColor
-            ? 'currentColor'
-            : fillRaw;
+        // Round 5c: when the fill==color identity holds across EVERY combo
+        // (preferCurrentColor — Spinner's `svg { fill: currentcolor }`), the
+        // glyph rides the color chain on every surface. Otherwise the round-4
+        // precedence stands: fill equal to the svg's own fill is INHERITED
+        // (host fill channel cascades); fill equal to the color is
+        // currentColor (Badge pip).
+        const fill = preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
+          ? 'currentColor'
+          : fillRaw && inheritedFill && fillRaw === inheritedFill
+            ? ''
+            : fillRaw && inheritedColor && fillRaw === inheritedColor
+              ? 'currentColor'
+              : fillRaw;
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
         // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED
@@ -459,16 +578,21 @@ export function reconstructSvg(
   // checked against the path data's coordinate extent (a glyph drawn in a
   // larger user space than its box would silently crop).
   let vb = Math.round(Math.max(w, h));
+  let bumped = false;
   if (maxCoord > vb * 1.02) {
-    const bumped = Math.ceil(maxCoord);
-    receipts.push(`svg-viewbox-bumped: ${label} — computed size ${vb} < path extent ${maxCoord}; viewBox reconstructed as 0 0 ${bumped} ${bumped} (named reconstruction)`);
-    vb = bumped;
+    const bumpedVb = Math.ceil(maxCoord);
+    receipts.push(`svg-viewbox-bumped: ${label} — computed size ${vb} < path extent ${maxCoord}; viewBox reconstructed as 0 0 ${bumpedVb} ${bumpedVb} (named reconstruction)`);
+    vb = bumpedVb;
+    bumped = true;
   } else {
     receipts.push(`svg-viewbox-reconstructed: ${label} — 0 0 ${vb} ${vb} from computed size ${w}×${h} (path extent ${maxCoord.toFixed(1)}; viewBox is not a computed style — named reconstruction)`);
   }
   return {
     markup: `<svg viewBox="0 0 ${vb} ${vb}" xmlns="http://www.w3.org/2000/svg">${paths.join('')}</svg>`,
     size: Math.round(Math.max(w, h)),
+    vb,
+    extent: maxCoord,
+    bumped,
   };
 }
 
@@ -553,6 +677,17 @@ export function promoteAnatomy(
       if (els[i]) (presentBy.get(i) ?? presentBy.set(i, []).get(i)!).push(combo);
     });
   }
+  // Round 5c: presence over ALL default-interaction combos (state planes
+  // included) — the complement-of-product spelling needs the full domain
+  // (a disabled Tag renders the plain label even when linked).
+  const allDefaultCombos = space.enumeration.combos.filter((c) => union.alignedByKey.has(`${c.key}__default`));
+  const presentAllBy = new Map<number, Set<string>>();
+  for (const combo of allDefaultCombos) {
+    const els = union.alignedByKey.get(`${combo.key}__default`)!;
+    entries.forEach((e, i) => {
+      if (els[i]) (presentAllBy.get(i) ?? presentAllBy.set(i, new Set()).get(i)!).add(combo.key);
+    });
+  }
 
   // 3. svg targets: map host union index → per-combo markup.
   interface SvgPlan {
@@ -570,15 +705,56 @@ export function promoteAnatomy(
     if (svgPlans.has(hostIdx)) continue;
     svgHostOf.set(svgIdx, hostIdx);
     // per-combo markup over combos where the svg is present
-    const markups = new Map<string, { markup: string; size: number }>(); // comboKey → markup
+    // Round 5c: the currentColor preference is a PER-SVG decision — the
+    // fill==color identity must hold in EVERY present combo (see
+    // reconstructSvg's preferCurrentColor doc).
+    let identityEverywhere = true;
+    for (const combo of presentBy.get(svgIdx) ?? []) {
+      const el = union.alignedByKey.get(`${combo.key}__default`)![svgIdx];
+      if (!el) continue;
+      const st = el.node.style;
+      if (!st['fill'] || !st['color'] || st['fill'] !== st['color']) { identityEverywhere = false; break; }
+    }
+    const markups = new Map<string, { markup: string; size: number; vb: number; extent: number; bumped: boolean }>(); // comboKey → markup
     for (const combo of presentBy.get(svgIdx) ?? []) {
       const els = union.alignedByKey.get(`${combo.key}__default`)!;
       const el = els[svgIdx];
       if (!el) continue;
-      const r = reconstructSvg(el.node, receipts, `${comp.name}.${t.host.partName}@${combo.key}`);
-      if (r) markups.set(combo.key, { markup: r.markup, size: r.size });
+      const r = reconstructSvg(el.node, receipts, `${comp.name}.${t.host.partName}@${combo.key}`, identityEverywhere);
+      if (r) markups.set(combo.key, r);
     }
     if (markups.size === 0) continue;
+    // Round 5c — AUTHORED-VIEWBOX unification: one authored glyph captured
+    // at several sizes carries IDENTICAL path data; the reconstruction can
+    // only see the authored user space at the size whose computed box bounds
+    // the path extent (Avatar Xl: 40 ≥ 38.6 — exact on the canvas gate).
+    // Smaller captures were BUMPED to ceil(extent) — a guess the package
+    // contradicts. Group by path data; when a group has an UNBUMPED member
+    // whose viewBox bounds every member's extent, bumped members adopt that
+    // authored space (receipted; per-size stroke widths stay captured truth).
+    {
+      const dOf = (m: string) => (m.match(/ d="[^"]*"/g) ?? []).join('|');
+      const byPath = new Map<string, Array<{ key: string; r: { markup: string; size: number; vb: number; extent: number; bumped: boolean } }>>();
+      for (const [k, r] of markups) {
+        const sig = dOf(r.markup);
+        (byPath.get(sig) ?? byPath.set(sig, []).get(sig)!).push({ key: k, r });
+      }
+      for (const group of byPath.values()) {
+        if (group.length < 2) continue;
+        const anchors = group.filter((g) => !g.r.bumped);
+        if (anchors.length === 0) continue;
+        const cand = Math.max(...anchors.map((g) => g.r.vb));
+        for (const g of group) {
+          if (!g.r.bumped || g.r.vb === cand) continue;
+          if (cand < g.r.extent) continue; // the authored space must bound the paths
+          receipts.push(
+            `svg-viewbox-unified: ${comp.name}.${t.host.partName}@${g.key} — bumped 0 0 ${g.r.vb} ${g.r.vb} adopts the sibling capture's authored space 0 0 ${cand} ${cand} (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)`,
+          );
+          g.r.markup = g.r.markup.replace(/viewBox="0 0 [\d.]+ [\d.]+"/, `viewBox="0 0 ${cand} ${cand}"`);
+          g.r.vb = cand;
+        }
+      }
+    }
     // correlate: uniform | single-axis | refuse
     const distinct = new Map<string, string[]>(); // markup → combo keys
     for (const [k, m] of markups) (distinct.get(m.markup) ?? distinct.set(m.markup, []).get(m.markup)!).push(k);
@@ -646,6 +822,207 @@ export function promoteAnatomy(
     }
   }
 
+  /** Apply a compiled svg plan onto a HOST part: single asset → Part.icon;
+   *  per-value assets → per-value icon child parts. Round 5c: extracted so
+   *  the ROOT can host a plan too (Spinner's glyph is the root's only child
+   *  — buildPart never runs on the root, and the plan silently dropped). */
+  const applySvgPlan = (part: Part, e: UnionNode, plan: SvgPlan): void => {
+    if (e.rep.tag === 'svg') delete part.element; // icon parts render their own <svg> from the asset
+    if (plan.perValue.length === 1 && plan.perValue[0].value === undefined) {
+      part.icon = { asset: plan.perValue[0].asset, size: plan.perValue[0].size };
+      // the host element wraps the glyph; its own element stays
+      return;
+    }
+    // per-value icon parts nested under the host box part (names prefixed
+    // by the host part — part names are contract-global). A glyph keyed by
+    // the UNSET pseudo-value of a defaultless axis is the DEFAULT glyph:
+    // visible unless a set value applies (stylesWhen display:none per set
+    // value — the pseudo-value is not a contract enum value).
+    part.parts = { ...part.parts };
+    for (const pv of plan.perValue) {
+      const axisSpec = space.axes.find((ax) => ax.prop === pv.prop);
+      const isUnsetValue = axisSpec?.unset !== undefined && pv.value === axisSpec.unset;
+      const child: Part = {
+        icon: { asset: pv.asset, size: pv.size },
+        ...(isUnsetValue
+          ? {
+              stylesWhen: axisSpec!.values
+                .filter((v) => v !== axisSpec!.unset)
+                .map((v) => ({ prop: pv.prop!, equals: v, styles: { display: 'none' } })),
+            }
+          : { visibleWhen: { prop: pv.prop!, equals: pv.value } }),
+        description: `Per-value svg content promoted from the computed floor: the glyph drawn when ${pv.prop}=${isUnsetValue ? `unset (default)` : pv.value}.`,
+      };
+      part.parts[`${e.partName}-${pv.value!.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase()}`] = child;
+    }
+  };
+
+  /** Round 5c — S5 first real slice: DRAWN pseudo-element DECOR BOXES
+   *  promote as shape parts (the RadioButton ::before selected dot). The
+   *  floor's read includes ::before/::after; until now every finding was
+   *  extension residue. Bounded v1 grammar, everything else refuses by name:
+   *    · content must be the empty string (a decor box, never text ink);
+   *    · the box must be DRAWN: opaque-ish background (alpha > 0), opacity
+   *      > 0.05, positive px box, position:absolute, and any transform a
+   *      pure translate at scale ≈ 1 (a scale-0/opacity-0 pseudo is the
+   *      component's own hidden state — that combo counts as NOT drawn);
+   *    · geometry + fill must be UNIFORM across every drawn enabled combo
+   *      (translate folds into top/left, receipted);
+   *    · visibility must factor per-axis (factorPresence), and placement
+   *      needs an enum condition to ride stylesWhen — the v9 shape grammar
+   *      the canvas already compiles (position/top/left per combo).
+   */
+  /** When the host part is a SHAPE LEAF (curated backdrop), the decor cannot
+   *  nest inside it (shape parts refuse children) — it BUBBLES to the host's
+   *  parent, offsets folded with the host's border widths, guarded by a
+   *  geometry assertion: the parent's content box must equal the host's
+   *  border box (else named refusal). */
+  const pseudoDecorParts = (e: UnionNode, i: number, hostIsShapeLeaf: boolean): Array<[string, Part]> => {
+    const out: Array<[string, Part]> = [];
+    const px = (v: string | undefined): number | null => {
+      const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
+      return m ? Number(m[1]) : null;
+    };
+    const alphaOf = (v: string | undefined): number => {
+      const m = /^rgba\(\d+, \d+, \d+, ([\d.]+)\)$/.exec(v ?? '');
+      return m ? Number(m[1]) : 0;
+    };
+    for (const pe of ['::before', '::after'] as const) {
+      // Domain: ALL default-interaction combos where the host renders (state
+      // planes included — a disabled checked Radio keeps its dot; an
+      // enabled-only domain would fabricate a hidden-when-disabled fact).
+      const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
+      const drawnRows: Array<{ combo: Combo; st: Record<string, string> }> = [];
+      for (const combo of domain) {
+        const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+        const st = el?.node.pseudo[pe];
+        if (!st) continue;
+        if (st['content'] !== '""') continue; // text-bearing pseudo: named residue (extension findings)
+        const w = px(st['width']);
+        const h = px(st['height']);
+        const opacity = Number(st['opacity'] ?? '1');
+        const alpha = alphaOf(st['background-color']);
+        const t = st['transform'] ?? 'none';
+        const mtx = /^matrix\((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)$/.exec(t);
+        const scaleOk = t === 'none' || (mtx !== null && Number(mtx[2]) === 0 && Number(mtx[3]) === 0 && Math.abs(Number(mtx[1]) - 1) < 0.01 && Math.abs(Number(mtx[4]) - 1) < 0.01);
+        const drawn = alpha > 0 && opacity > 0.05 && w !== null && h !== null && w > 0 && h > 0 && st['position'] === 'absolute';
+        if (!drawn) continue; // hidden state of the pseudo — not drawn in this combo
+        if (!scaleOk) {
+          refusals.push(`pseudo-decor-outside-grammar: ${e.partName}${pe} drawn with a non-identity scale transform (${t}) — the bounded v1 decor grammar carries translate-only; named refusal`);
+          drawnRows.length = 0;
+          break;
+        }
+        drawnRows.push({ combo, st });
+      }
+      if (drawnRows.length === 0) continue;
+      // uniform geometry + fill over the drawn combos (translate folded)
+      // Bubbled decor: offsets are parent-relative — fold the HOST's border
+      // widths in (absolute children position against the PADDING box) and
+      // assert the parent's content box equals the host's border box.
+      if (hostIsShapeLeaf) {
+        let geometryOk = e.parent !== null;
+        for (const { combo } of drawnRows) {
+          const els = union.alignedByKey.get(`${combo.key}__default`)!;
+          const host = els[i];
+          const parent = e.parent ? els[idxOf.get(e.parent.id)!] : null;
+          if (!host || !parent) { geometryOk = false; break; }
+          const hs = host.node.style;
+          const pst = parent.node.style;
+          const num = (v: string | undefined) => px(v) ?? 0;
+          const parentContentW = num(pst['width']) - num(pst['padding-left']) - num(pst['padding-right']) - num(pst['border-left-width']) - num(pst['border-right-width']);
+          const parentContentH = num(pst['height']) - num(pst['padding-top']) - num(pst['padding-bottom']) - num(pst['border-top-width']) - num(pst['border-bottom-width']);
+          if (
+            Math.abs(parentContentW - num(hs['width'])) > 0.6 ||
+            Math.abs(parentContentH - num(hs['height'])) > 0.6 ||
+            num(hs['margin-top']) !== 0 || num(hs['margin-left']) !== 0
+          ) { geometryOk = false; break; }
+        }
+        if (!geometryOk) {
+          refusals.push(`pseudo-decor-bubble-geometry: ${e.partName}${pe} — the host is a shape leaf (cannot nest children) and the parent's content box does not equal the host's border box; decor NOT promoted (named refusal, v1 bounded)`);
+          continue;
+        }
+      }
+      const fold = (row: { combo: Combo; st: Record<string, string> }) => {
+        const t = row.st['transform'] ?? 'none';
+        const mtx = /^matrix\((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)$/.exec(t);
+        const tx = mtx ? Number(mtx[5]) : 0;
+        const ty = mtx ? Number(mtx[6]) : 0;
+        // Bubbled: absolute children position against the host's PADDING box
+        // — the host's border widths join the parent-relative offsets.
+        const hostSt = hostIsShapeLeaf ? union.alignedByKey.get(`${row.combo.key}__default`)![i]!.node.style : null;
+        const bT = hostSt ? (px(hostSt['border-top-width']) ?? 0) : 0;
+        const bL = hostSt ? (px(hostSt['border-left-width']) ?? 0) : 0;
+        return {
+          w: px(row.st['width'])!,
+          h: px(row.st['height'])!,
+          top: (px(row.st['top']) ?? 0) + ty + bT,
+          left: (px(row.st['left']) ?? 0) + tx + bL,
+          bg: row.st['background-color'],
+          radius: px(row.st['border-top-left-radius']) ?? 0,
+        };
+      };
+      const folded = drawnRows.map(fold);
+      const uniq = new Set(folded.map((f) => JSON.stringify(f)));
+      if (uniq.size !== 1) {
+        refusals.push(`pseudo-decor-nonuniform: ${e.partName}${pe} drawn geometry/fill varies across the drawn combos (${[...uniq].join(' vs ')}) — the bounded v1 decor grammar carries one box; named refusal`);
+        continue;
+      }
+      const f = folded[0];
+      // presence over the enabled domain: drawn combos only
+      const fact = factorPresence(
+        drawnRows.map((r) => r.combo),
+        domain,
+        space.axes,
+        presenceProps,
+        stateProps,
+        `${e.partName}${pe}`,
+        new Set(contract.props.map((p) => p.name)),
+      );
+      if (!fact) {
+        refusals.push(`pseudo-decor-presence-uncorrelated: ${e.partName}${pe} drawn in ${drawnRows.length}/${domain.length} default-interaction combos and the drawn set does not factor per-axis — decor NOT promoted (named refusal)`);
+        continue;
+      }
+      if (fact.shownWhen.length > 0) {
+        refusals.push(`pseudo-decor-unset-axis-gate: ${e.partName}${pe} is gated by a defaultless axis (base-hidden spelling) — outside the bounded v1 decor grammar; named refusal`);
+        continue;
+      }
+      // placement rides stylesWhen (the v9 shape grammar) — it needs enum
+      // conditions to hang on; the shown values of the constraining enum
+      // axis provide them. Drawn-everywhere boxes have no condition slot.
+      const placementConds: Array<{ prop: string; equals: string }> = [];
+      const hiddenEnum = fact.hiddenWhen.filter((hw) => hw.equals !== undefined);
+      if (hiddenEnum.length > 0) {
+        const ax = space.axes.find((a) => a.prop === hiddenEnum[0].prop)!;
+        const hiddenVals = new Set(hiddenEnum.filter((hw) => hw.prop === ax.prop).map((hw) => hw.equals!));
+        for (const v of ax.values) {
+          if (v === ax.unset || hiddenVals.has(v)) continue;
+          placementConds.push({ prop: ax.prop, equals: v });
+        }
+      }
+      if (placementConds.length === 0) {
+        refusals.push(`pseudo-decor-unconditional-placement: ${e.partName}${pe} is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)`);
+        continue;
+      }
+      const partName = `${e.partName}-${pe.slice(2)}`;
+      const kind: 'ellipse' | 'rect' = f.radius >= Math.min(f.w, f.h) / 2 - 0.5 ? 'ellipse' : 'rect';
+      const decor: Part = {
+        shape: { kind, width: f.w, height: f.h },
+        literals: { 'background-color': f.bg },
+        ...(fact.visibleWhen ? { visibleWhen: { prop: fact.visibleWhen.prop } } : {}),
+        stylesWhen: [
+          ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
+          ...placementConds.map((pc) => ({ prop: pc.prop, equals: pc.equals, styles: { position: 'absolute', top: `${f.top}px`, left: `${f.left}px` } })),
+        ],
+        description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a ${f.w}×${f.h} ${kind} at ${f.left},${f.top} inside ${e.partName}, fill ${f.bg} — background+box+radius only, no content text; translate folded into top/left (receipted).`,
+      };
+      receipts.push(
+        `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${f.w}×${f.h} at ${f.left},${f.top}, fill ${f.bg}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; translate${hostIsShapeLeaf ? ' + host border' : ''} folded into top/left${hostIsShapeLeaf ? '; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted)' : ''} — round 5c S5)`,
+      );
+      out.push([partName, decor]);
+    }
+    return out;
+  };
+
   /** Build a Part for a union entry (recursing into children). Returns null
    *  when the entry (and subtree) refuses promotion. */
   const buildPart = (e: UnionNode): Part | null => {
@@ -654,7 +1031,42 @@ export function promoteAnatomy(
     const existing = staticByName.get(e.partName);
     const part: Part = existing ? structuredClone(existing) : {};
     if (existing) delete part.parts; // children re-derived from the captured tree
-    else {
+    // Round 5c — SHAPE GEOMETRY RECARRIED: a reviewed static shape (curated
+    // decor geometry, round 2) whose numbers contradict the captured
+    // computed box retires its numbers — geometry channels are excluded from
+    // fusion (environment-dependent in general), but a decor box UNIFORM
+    // across every enabled combo is measured truth the curation got wrong
+    // (Checkbox/Radio backdrop: curated 20×20 vs the package's 18×18). The
+    // curated KIND (rect/ellipse) stays the reviewed call.
+    if (part.shape && (part.shape.kind === 'rect' || part.shape.kind === 'ellipse')) {
+      const px = (v: string | undefined): number | null => {
+        const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
+        return m ? Number(m[1]) : null;
+      };
+      const ws = new Set<number>();
+      const hs = new Set<number>();
+      let readable = true;
+      for (const combo of presentBy.get(i) ?? []) {
+        const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+        if (!el) continue;
+        const w = px(el.node.style['width']);
+        const h = px(el.node.style['height']);
+        if (w === null || h === null || w <= 0 || h <= 0) { readable = false; break; }
+        ws.add(Math.round(w * 100) / 100);
+        hs.add(Math.round(h * 100) / 100);
+      }
+      if (readable && ws.size === 1 && hs.size === 1) {
+        const [w] = ws;
+        const [h] = hs;
+        if (w !== part.shape.width || h !== part.shape.height) {
+          receipts.push(
+            `shape-geometry-recarried: ${e.partName} — reviewed shape ${part.shape.width}×${part.shape.height} contradicts the captured computed box ${w}×${h} (uniform across every enabled combo); computed truth wins geometry, the curated numbers retire (round 5c; kind "${part.shape.kind}" stays the reviewed call)`,
+          );
+          part.shape = { ...part.shape, width: w, height: h };
+        }
+      }
+    }
+    if (!existing) {
       // element: captured tag (span/div default conventions preserved)
       const hasText = e.rep.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
       if (e.rep.tag !== 'div' && !(hasText && e.rep.tag === 'span')) part.element = e.rep.tag;
@@ -808,68 +1220,68 @@ export function promoteAnatomy(
     // presence facts
     const present = presentBy.get(i) ?? [];
     if (present.length < enabled.length) {
-      const fact = factorPresence(present, enabled, space.axes, presenceProps, stateProps, e.partName, new Set(contract.props.map((p) => p.name)));
+      const contractPropNames = new Set(contract.props.map((p) => p.name));
+      const fact = factorPresence(present, enabled, space.axes, presenceProps, stateProps, e.partName, contractPropNames);
       if (!fact) {
-        refusals.push(`part-presence-uncorrelated: ${e.partName} present in ${present.length}/${enabled.length} enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)`);
-        return null;
+        // Round 5c: complement-of-product fallback — a default subtree an
+        // alternative replaces (Tag's label under `linked`) is spellable as
+        // an ordered hide→restore stylesWhen cascade, verified per combo.
+        const comp5c = factorComplement(
+          presentAllBy.get(i) ?? new Set(),
+          allDefaultCombos,
+          space.axes,
+          presenceProps,
+          stateProps,
+          e.partName,
+          contractPropNames,
+        );
+        if (comp5c) {
+          const restore =
+            part.layout?.display ??
+            (part.declared?.['display'] && part.declared['display'] !== 'none' ? part.declared['display'] : undefined) ??
+            (e.children.length > 0 ? 'flex' : 'inline');
+          part.stylesWhen = [
+            ...(part.stylesWhen ?? []),
+            ...comp5c.hide.map((h) => ({ prop: h.prop, ...(h.equals !== undefined ? { equals: h.equals } : {}), styles: { display: 'none' } })),
+            ...comp5c.restore.map((r) => ({ prop: r.prop, ...(r.equals !== undefined ? { equals: r.equals } : {}), styles: { display: String(restore) } })),
+          ];
+          receipts.push(...comp5c.receipts);
+        } else {
+          refusals.push(`part-presence-uncorrelated: ${e.partName} present in ${present.length}/${enabled.length} enabled combos and the presence set does not factor per-axis (nor does its ABSENCE — the round-5c complement spelling was tried) — part NOT promoted (named refusal; a phantom always-drawn part would be worse)`);
+          return null;
+        }
+      } else {
+        if (fact.visibleWhen) part.visibleWhen = { prop: fact.visibleWhen.prop };
+        if (fact.shownWhen.length > 0) {
+          // base-hidden: declared display none; each SET value restores the
+          // part's own uniform display (captured; flex default for containers)
+          const restore =
+            part.layout?.display ??
+            (part.declared?.['display'] && part.declared['display'] !== 'none' ? part.declared['display'] : undefined) ??
+            (Object.keys(e.children).length > 0 ? 'flex' : 'inline');
+          part.declared = { ...part.declared, display: 'none' };
+          part.stylesWhen = [
+            ...(part.stylesWhen ?? []),
+            ...fact.shownWhen.map((sw) => ({ prop: sw.prop, equals: sw.equals, styles: { display: String(restore) } })),
+          ];
+        }
+        if (fact.hiddenWhen.length > 0) {
+          part.stylesWhen = [
+            ...(part.stylesWhen ?? []),
+            ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
+          ];
+        }
+        receipts.push(...fact.receipts);
+        receipts.push(
+          `presence-carried: ${e.partName} (${present.length}/${enabled.length} combos) → ${part.visibleWhen ? `visibleWhen ${part.visibleWhen.prop}` : ''}${fact.shownWhen.length ? ` base-hidden, shown-when ${fact.shownWhen.map((h) => `${h.prop}=${h.equals}`).join(', ')}` : ''}${fact.hiddenWhen.length ? ` hidden-when ${fact.hiddenWhen.map((h) => h.equals ? `${h.prop}=${h.equals}` : h.prop).join(', ')}` : ''}`,
+        );
       }
-      if (fact.visibleWhen) part.visibleWhen = { prop: fact.visibleWhen.prop };
-      if (fact.shownWhen.length > 0) {
-        // base-hidden: declared display none; each SET value restores the
-        // part's own uniform display (captured; flex default for containers)
-        const restore =
-          part.layout?.display ??
-          (part.declared?.['display'] && part.declared['display'] !== 'none' ? part.declared['display'] : undefined) ??
-          (Object.keys(e.children).length > 0 ? 'flex' : 'inline');
-        part.declared = { ...part.declared, display: 'none' };
-        part.stylesWhen = [
-          ...(part.stylesWhen ?? []),
-          ...fact.shownWhen.map((sw) => ({ prop: sw.prop, equals: sw.equals, styles: { display: String(restore) } })),
-        ];
-      }
-      if (fact.hiddenWhen.length > 0) {
-        part.stylesWhen = [
-          ...(part.stylesWhen ?? []),
-          ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
-        ];
-      }
-      receipts.push(...fact.receipts);
-      receipts.push(
-        `presence-carried: ${e.partName} (${present.length}/${enabled.length} combos) → ${part.visibleWhen ? `visibleWhen ${part.visibleWhen.prop}` : ''}${fact.shownWhen.length ? ` base-hidden, shown-when ${fact.shownWhen.map((h) => `${h.prop}=${h.equals}`).join(', ')}` : ''}${fact.hiddenWhen.length ? ` hidden-when ${fact.hiddenWhen.map((h) => h.equals ? `${h.prop}=${h.equals}` : h.prop).join(', ')}` : ''}`,
-      );
     }
 
     // svg host → icon part(s)
     const plan = svgPlans.get(i);
     if (plan) {
-      if (e.rep.tag === 'svg') delete part.element; // icon parts render their own <svg> from the asset
-      if (plan.perValue.length === 1 && plan.perValue[0].value === undefined) {
-        part.icon = { asset: plan.perValue[0].asset, size: plan.perValue[0].size };
-        // the host element wraps the glyph; its own element stays
-        return part;
-      }
-      // per-value icon parts nested under the host box part (names prefixed
-      // by the host part — part names are contract-global). A glyph keyed by
-      // the UNSET pseudo-value of a defaultless axis is the DEFAULT glyph:
-      // visible unless a set value applies (stylesWhen display:none per set
-      // value — the pseudo-value is not a contract enum value).
-      part.parts = {};
-      for (const pv of plan.perValue) {
-        const axisSpec = space.axes.find((ax) => ax.prop === pv.prop);
-        const isUnsetValue = axisSpec?.unset !== undefined && pv.value === axisSpec.unset;
-        const child: Part = {
-          icon: { asset: pv.asset, size: pv.size },
-          ...(isUnsetValue
-            ? {
-                stylesWhen: axisSpec!.values
-                  .filter((v) => v !== axisSpec!.unset)
-                  .map((v) => ({ prop: pv.prop!, equals: v, styles: { display: 'none' } })),
-              }
-            : { visibleWhen: { prop: pv.prop!, equals: pv.value } }),
-          description: `Per-value svg content promoted from the computed floor: the glyph drawn when ${pv.prop}=${isUnsetValue ? `unset (default)` : pv.value}.`,
-        };
-        part.parts[`${e.partName}-${pv.value!.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase()}`] = child;
-      }
+      applySvgPlan(part, e, plan);
       return part;
     }
 
@@ -878,6 +1290,15 @@ export function promoteAnatomy(
     for (const c of e.children) {
       const cp = buildPart(c);
       if (cp) childParts[c.partName] = cp;
+      // Round 5c — S5 bubbling: a shape-leaf child's drawn pseudo decor
+      // cannot nest inside it — it joins THIS part's children instead.
+      if (cp?.shape) {
+        for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true)) childParts[decorName] = decor;
+      }
+    }
+    // Round 5c — S5: drawn pseudo-element decor boxes join as child parts.
+    if (!part.shape) {
+      for (const [decorName, decor] of pseudoDecorParts(e, i, false)) childParts[decorName] = decor;
     }
     if (Object.keys(childParts).length > 0) part.parts = childParts;
     return part;
@@ -919,7 +1340,29 @@ export function promoteAnatomy(
     const cp = buildPart(c);
     if (cp) rootChildren[c.partName] = cp;
   }
+  // Round 5c — S5 on the root itself (drawn root pseudo decor) + bubbling
+  // for the root's own shape-leaf children.
+  for (const c of rootEntry.children) {
+    if (rootChildren[c.partName]?.shape) {
+      for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true)) rootChildren[decorName] = decor;
+    }
+  }
+  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false)) rootChildren[decorName] = decor;
   if (Object.keys(rootChildren).length > 0) newRoot.parts = rootChildren;
+  // Round 5c — ROOT-HOSTED svg plan: buildPart never runs on the root, so a
+  // plan whose host IS the root (Spinner: the glyph is the root's only
+  // child) was silently dropped — the assets existed, the contract carried
+  // no glyph. Apply it here exactly as buildPart applies it to nested hosts.
+  {
+    const rootPlan = svgPlans.get(idxOf.get(rootEntry.id)!);
+    if (rootPlan) {
+      newRoot.parts = rootChildren; // per-value children merge into the same map
+      applySvgPlan(newRoot, rootEntry, rootPlan);
+      receipts.push(
+        `root-svg-plan-carried: ${comp.name} root hosts ${rootPlan.perValue.length === 1 && rootPlan.perValue[0].value === undefined ? `icon asset ${rootPlan.perValue[0].asset}` : `${rootPlan.perValue.length} per-value glyph part(s) (${rootPlan.perValue.map((pv) => pv.asset).join(', ')})`} — round 5c root-hosted svg plan (the round-5a named promotion drop)`,
+      );
+    }
+  }
 
   // static parts that neither matched nor re-joined: kept OUT (they never
   // rendered in any captured combo — drawing them would be phantom ink), a

@@ -1,4 +1,4 @@
-/* Banner — from polaris.banner v0.3.0 (core/emit-html.ts) */
+/* Banner — from polaris.banner v0.3.1 (core/emit-html.ts) */
 
 .banner, .banner *, .banner *::before, .banner *::after {
   box-sizing: border-box;
@@ -263,12 +263,12 @@
   border-top-right-radius: var(--imported-shared-size-8);
   border-top-width: var(--imported-shared-size-0);
   bottom: var(--imported-shared-size-0);
-  color: var(--imported-banner-button-color);
+  color: var(--imported-shared-color-303030);
   column-gap: var(--imported-shared-size-2);
-  font-size: var(--imported-banner-button-font-size);
-  font-weight: var(--imported-banner-button-font-weight);
+  font-size: var(--imported-shared-size-13);
+  font-weight: var(--imported-shared-num-450);
   left: var(--imported-shared-size-0);
-  line-height: var(--imported-banner-button-line-height);
+  line-height: var(--imported-shared-size-20);
   margin-bottom: var(--imported-shared-size-neg-4);
   margin-left: var(--imported-shared-size-neg-4);
   margin-right: var(--imported-shared-size-neg-4);
@@ -324,6 +324,7 @@
 .banner__icon-3 {
   display: inline-flex;
   flex-shrink: 0;
+  color: var(--imported-shared-color-303030);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;
@@ -362,6 +363,9 @@
 }
 
 .banner__label-2 {
+  font-size: var(--imported-shared-size-13);
+  font-weight: var(--imported-shared-num-450);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
@@ -396,12 +400,12 @@
   border-top-width: var(--imported-shared-size-0);
   bottom: var(--imported-shared-size-0);
   box-shadow: var(--imported-banner-button-2-box-shadow);
-  color: var(--imported-banner-button-2-color);
+  color: var(--imported-shared-color-303030);
   column-gap: var(--imported-shared-size-2);
-  font-size: var(--imported-banner-button-2-font-size);
-  font-weight: var(--imported-banner-button-2-font-weight);
+  font-size: var(--imported-shared-size-13);
+  font-weight: var(--imported-shared-num-450);
   left: var(--imported-shared-size-0);
-  line-height: var(--imported-banner-button-2-line-height);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-32);
   min-width: var(--imported-shared-size-32);
   padding-bottom: var(--imported-banner-button-2-padding-bottom);

@@ -12,9 +12,9 @@
     "root": 24,
     "link": 24,
     "text-2": 7,
-    "label-2": 6,
+    "label-2": 8,
     "text": 10,
-    "label": 9,
+    "label": 11,
     "part-1": 0,
     "button": 44,
     "icon": 19,
@@ -299,36 +299,36 @@
     "mintedLeavesFolded": 51
   },
   "bound": {
-    "cellsChecked": 48,
-    "confirmed": 48,
-    "contradictions": 0,
+    "cellsChecked": 112,
+    "confirmed": 84,
+    "contradictions": 12,
     "untriaged": 0
   },
   "minted": {
     "leaves": 51,
-    "baseBindings": 63,
+    "baseBindings": 64,
     "stateBindings": 19,
     "byShape": {
-      "uniform": 62,
+      "uniform": 63,
       "perAxis": 13,
       "perPair": 1,
       "refused": 6
     }
   },
   "declared": {
-    "base": 23,
+    "base": 28,
     "state": 1
   },
   "codeOnly": {
-    "base": 25,
+    "base": 19,
     "state": 78,
-    "overflowBindings": 16
+    "overflowBindings": 11
   },
   "pseudoElementFindings": 42,
   "anatomyPromotion": {
-    "partsCarried": 7,
+    "partsCarried": 9,
     "svgAssets": 2,
-    "refusals": 2
+    "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -403,7 +403,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 80.15845070422536,
+    "computedPctEqual": 82.05605158730158,
     "rowsFullyEqual": 0,
     "rows": 128,
     "pixelPerfectExact": 0,

@@ -1,7 +1,7 @@
 {
   "component": "Spinner",
   "contractId": "polaris.spinner",
-  "contractVersion": "0.3.0",
+  "contractVersion": "0.3.1",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -20,46 +20,41 @@
     {
       "cell": "Size=Large",
       "kind": "base",
-      "pctExactUnmasked": 12.39,
-      "pctAAUnmasked": 9.75,
-      "pctAAMasked": 9.75,
+      "pctExactUnmasked": 1.58,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
-      "canvasPx": "96x96",
+      "canvasPx": "85x84",
       "realPx": "85x84",
-      "inkCanvasPct": 0,
-      "inkRealPct": 12.39,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 12.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
+      "inkCanvasPct": 15.99,
+      "inkRealPct": 15.99
     },
     {
       "cell": "Size=Small",
       "kind": "base",
-      "pctExactUnmasked": 4.39,
-      "pctAAUnmasked": 3.14,
-      "pctAAMasked": 3.14,
+      "pctExactUnmasked": 4.02,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
-      "canvasPx": "96x96",
+      "canvasPx": "37x37",
       "realPx": "37x37",
-      "inkCanvasPct": 0,
-      "inkRealPct": 4.39,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 4.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
+      "inkCanvasPct": 29.58,
+      "inkRealPct": 29.58
     }
   ],
   "summary": {
     "cells": 2,
-    "meanExactUnmasked": 8.39,
-    "meanAAUnmasked": 6.45,
-    "meanAAMasked": 6.45,
-    "maxAAMasked": 9.75,
+    "meanExactUnmasked": 2.8,
+    "meanAAUnmasked": 0,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
     "worstCell": "Size=Large",
     "cellsOver10Masked": [],
-    "blankCanvasCells": [
-      "Size=Large",
-      "Size=Small"
-    ]
+    "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
-    "noBlankCanvasCells": false
+    "noBlankCanvasCells": true
   }
 }

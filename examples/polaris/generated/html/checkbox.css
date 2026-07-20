@@ -1,4 +1,4 @@
-/* Checkbox — from polaris.checkbox v0.3.0 (core/emit-html.ts) */
+/* Checkbox — from polaris.checkbox v0.3.1 (core/emit-html.ts) */
 
 .checkbox, .checkbox *, .checkbox *::before, .checkbox *::after {
   box-sizing: border-box;
@@ -99,8 +99,8 @@
 }
 
 .checkbox__backdrop {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   border-width: var(--p-border-width-0);
   border-bottom-left-radius: var(--imported-shared-size-4);
@@ -169,6 +169,7 @@
 
 .checkbox__icon {
   display: flex;
+  color: var(--imported-checkbox-icon-color);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;
@@ -227,6 +228,7 @@
 .checkbox__icon-3 {
   display: inline-flex;
   flex-shrink: 0;
+  color: var(--imported-checkbox-icon-3-color);
   margin-left: var(--imported-shared-size-1);
   margin-right: var(--imported-shared-size-1);
   min-height: var(--imported-shared-size-0);
@@ -317,6 +319,9 @@
 }
 
 .checkbox__label {
+  font-size: var(--imported-checkbox-label-font-size);
+  font-weight: var(--imported-checkbox-label-font-weight);
+  line-height: var(--imported-checkbox-label-line-height);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;

@@ -1,7 +1,7 @@
 {
   "component": "RadioButton",
   "contractId": "polaris.radio-button",
-  "contractVersion": "0.3.0",
+  "contractVersion": "0.3.1",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -21,53 +21,42 @@
     {
       "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 42.22,
-      "pctAAUnmasked": 13.53,
-      "pctAAMasked": 10.88,
-      "maskCoveragePct": 96.35,
-      "canvasPx": "296x23",
+      "pctExactUnmasked": 22.94,
+      "pctAAUnmasked": 0.63,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 84.8,
+      "canvasPx": "329x36",
       "realPx": "329x36",
-      "inkCanvasPct": 25.25,
+      "inkCanvasPct": 24.44,
       "inkRealPct": 22.85,
-      "note": "CURATED CONTRACT GEOMETRY: hand-curated 20×20 backdrop vs the package's 18×18 (--pc-choice-size — see Checkbox); label typography is composition-owned (Text at bodyMd)"
+      "note": "1px ring raster: the unchecked ring rides per-side border-color leaves lowered to ONE bound stroke (round 5c — value-uniform sides, width source required); residual antialiasing of a 1px circle"
     },
     {
       "cell": "Checked=checked",
       "kind": "base",
-      "pctExactUnmasked": 36.92,
-      "pctAAUnmasked": 16.25,
-      "pctAAMasked": 43.75,
-      "maskCoveragePct": 84.75,
-      "canvasPx": "354x40",
+      "pctExactUnmasked": 22.94,
+      "pctAAUnmasked": 0.63,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 84.8,
+      "canvasPx": "329x36",
       "realPx": "329x36",
-      "inkCanvasPct": 30.33,
-      "inkRealPct": 22.44,
-      "note": "NAMED ROUND-4 LOSS (::before pseudo decor): the real selected dot is a ::before pseudo-element the promotion cannot carry — the canvas draws the backdrop's captured checked fill as a solid disc while the real control renders ring + dot; plus the curated 20×20 backdrop vs the package's 18×18 (see Checkbox)"
+      "inkCanvasPct": 28.43,
+      "inkRealPct": 26.83,
+      "note": "S5 dot carried (round 5c): 10×10 ellipse at the captured 4,4 offsets (translate + host border folded); residual sub-pixel raster of dot + 1px ring"
     }
   ],
   "summary": {
     "cells": 2,
-    "meanExactUnmasked": 39.57,
-    "meanAAUnmasked": 14.89,
-    "meanAAMasked": 27.32,
-    "maxAAMasked": 43.75,
-    "worstCell": "Checked=checked",
-    "cellsOver10Masked": [
-      {
-        "cell": "Checked=unchecked",
-        "pctAAMasked": 10.88,
-        "note": "CURATED CONTRACT GEOMETRY: hand-curated 20×20 backdrop vs the package's 18×18 (--pc-choice-size — see Checkbox); label typography is composition-owned (Text at bodyMd)"
-      },
-      {
-        "cell": "Checked=checked",
-        "pctAAMasked": 43.75,
-        "note": "NAMED ROUND-4 LOSS (::before pseudo decor): the real selected dot is a ::before pseudo-element the promotion cannot carry — the canvas draws the backdrop's captured checked fill as a solid disc while the real control renders ring + dot; plus the curated 20×20 backdrop vs the package's 18×18 (see Checkbox)"
-      }
-    ],
+    "meanExactUnmasked": 22.94,
+    "meanAAUnmasked": 0.63,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
+    "worstCell": "Checked=unchecked",
+    "cellsOver10Masked": [],
     "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": true
   }

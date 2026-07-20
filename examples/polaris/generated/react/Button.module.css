@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (polaris.button v0.3.0)
+ * Source of truth: contracts/button.contract.json (polaris.button v0.3.1)
  * Regenerate with: npm run generate
  */
 
@@ -249,27 +249,42 @@
 }
 
 .tone-critical.variant-plain {
+  background-color: var(--imported-button-root-background-color-plain-critical);
   background-image: var(--imported-button-root-background-image-plain-critical);
+  box-shadow: var(--imported-button-root-box-shadow-plain-critical);
+  color: var(--imported-button-root-color-plain-critical);
   outline-color: var(--imported-button-root-outline-color-plain-critical);
 }
 
 .tone-critical.variant-primary {
+  background-color: var(--imported-button-root-background-color-primary-critical);
   background-image: var(--imported-button-root-background-image-primary-critical);
+  box-shadow: var(--imported-button-root-box-shadow-primary-critical);
+  color: var(--imported-button-root-color-primary-critical);
   outline-color: var(--imported-button-root-outline-color-primary-critical);
 }
 
 .tone-critical.variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary-critical);
   background-image: var(--imported-button-root-background-image-secondary-critical);
+  box-shadow: var(--imported-button-root-box-shadow-secondary-critical);
+  color: var(--imported-button-root-color-secondary-critical);
   outline-color: var(--imported-button-root-outline-color-secondary-critical);
 }
 
 .tone-critical.variant-tertiary {
+  background-color: var(--imported-button-root-background-color-tertiary-critical);
   background-image: var(--imported-button-root-background-image-tertiary-critical);
+  box-shadow: var(--imported-button-root-box-shadow-tertiary-critical);
+  color: var(--imported-button-root-color-tertiary-critical);
   outline-color: var(--imported-button-root-outline-color-tertiary-critical);
 }
 
 .tone-critical.variant-monochromePlain {
+  background-color: var(--imported-button-root-background-color-monochromePlain-critical);
   background-image: var(--imported-button-root-background-image-monochromePlain-critical);
+  box-shadow: var(--imported-button-root-box-shadow-monochromePlain-critical);
+  color: var(--imported-button-root-color-monochromePlain-critical);
   outline-color: var(--imported-button-root-outline-color-monochromePlain-critical);
 }
 
@@ -277,27 +292,42 @@
 }
 
 .tone-success.variant-plain {
+  background-color: var(--imported-button-root-background-color-plain-success);
   background-image: var(--imported-button-root-background-image-plain-success);
+  box-shadow: var(--imported-button-root-box-shadow-plain-success);
+  color: var(--imported-button-root-color-plain-success);
   outline-color: var(--imported-button-root-outline-color-plain-success);
 }
 
 .tone-success.variant-primary {
+  background-color: var(--imported-button-root-background-color-primary-success);
   background-image: var(--imported-button-root-background-image-primary-success);
+  box-shadow: var(--imported-button-root-box-shadow-primary-success);
+  color: var(--imported-button-root-color-primary-success);
   outline-color: var(--imported-button-root-outline-color-primary-success);
 }
 
 .tone-success.variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary-success);
   background-image: var(--imported-button-root-background-image-secondary-success);
+  box-shadow: var(--imported-button-root-box-shadow-secondary-success);
+  color: var(--imported-button-root-color-secondary-success);
   outline-color: var(--imported-button-root-outline-color-secondary-success);
 }
 
 .tone-success.variant-tertiary {
+  background-color: var(--imported-button-root-background-color-tertiary-success);
   background-image: var(--imported-button-root-background-image-tertiary-success);
+  box-shadow: var(--imported-button-root-box-shadow-tertiary-success);
+  color: var(--imported-button-root-color-tertiary-success);
   outline-color: var(--imported-button-root-outline-color-tertiary-success);
 }
 
 .tone-success.variant-monochromePlain {
+  background-color: var(--imported-button-root-background-color-monochromePlain-success);
   background-image: var(--imported-button-root-background-image-monochromePlain-success);
+  box-shadow: var(--imported-button-root-box-shadow-monochromePlain-success);
+  color: var(--imported-button-root-color-monochromePlain-success);
   outline-color: var(--imported-button-root-outline-color-monochromePlain-success);
 }
 

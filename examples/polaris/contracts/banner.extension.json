@@ -22,8 +22,24 @@
           "$value": "4px",
           "$type": "dimension"
         },
+        "color-303030": {
+          "$value": "#303030",
+          "$type": "color"
+        },
         "size-2": {
           "$value": "2px",
+          "$type": "dimension"
+        },
+        "size-13": {
+          "$value": "13px",
+          "$type": "dimension"
+        },
+        "num-450": {
+          "$value": "450",
+          "$type": "number"
+        },
+        "size-20": {
+          "$value": "20px",
           "$type": "dimension"
         },
         "size-neg-4": {
@@ -192,22 +208,6 @@
           "background-color": {
             "$value": "#00000000",
             "$type": "color"
-          },
-          "color": {
-            "$value": "#303030",
-            "$type": "color"
-          },
-          "font-size": {
-            "$value": "13px",
-            "$type": "dimension"
-          },
-          "font-weight": {
-            "$value": "450",
-            "$type": "number"
-          },
-          "line-height": {
-            "$value": "20px",
-            "$type": "dimension"
           }
         },
         "button-icon": {
@@ -238,22 +238,6 @@
           "box-shadow": {
             "$value": "rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset",
             "$type": "shadow"
-          },
-          "color": {
-            "$value": "#303030",
-            "$type": "color"
-          },
-          "font-size": {
-            "$value": "13px",
-            "$type": "dimension"
-          },
-          "font-weight": {
-            "$value": "450",
-            "$type": "number"
-          },
-          "line-height": {
-            "$value": "20px",
-            "$type": "dimension"
           },
           "padding-bottom": {
             "$value": "6px",
@@ -1749,8 +1733,11 @@
     "control-fallback: no control for <path> — span control used (part part-0-0-0-0-0-0-0-0-1)",
     "control-fallback: no control for <path> — span control used (part part-0-0-0-0-0-0-0-0-2)",
     "control-fallback: no control for <h2> — span control used (part title)",
+    "text-part-typography-carried: title — font-size/line-height carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "svg-host-color-carried: icon-3 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-4)",
-    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-1-0-0-0-0-0)"
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-1-0-0-0-0-0)",
+    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
   ],
   "anatomyJoin": {
     "computed": [

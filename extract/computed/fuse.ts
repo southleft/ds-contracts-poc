@@ -36,6 +36,7 @@ import {
   type Contract,
   type Part,
 } from '../../scripts/contract-schema.js';
+import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
@@ -165,6 +166,35 @@ export function styledChannels(
       for (const p of allProps) {
         if (!isFusable(p)) continue;
         if (el.node.style[p] !== a.baseFlat[pi].node.style[p]) set.add(p);
+      }
+    }
+    // Round 5c — TEXT-PART TYPOGRAPHY IS ALWAYS A FACT: a text-bearing
+    // part whose typography equals the mount context (the provider's 13px/
+    // 20px/450 body) looked "unstyled" against the span control and was
+    // never carried — but the GENERATED surfaces have no Polaris body to
+    // inherit from, so the canvas drew its own 14px/500 defaults (the
+    // named 13px-vs-14px config-triage class on Checkbox/Radio/Banner
+    // labels). Context-inherited or not, the rendered typography of a text
+    // part is captured truth; carry the three box-driving channels
+    // explicitly (sr-only parts excluded — they draw nothing).
+    // Round 5c — SVG-HOST COLOR IS ALWAYS A FACT: a part directly hosting
+    // an <svg> child whose glyph rides currentColor (Spinner's context-gray
+    // arc) draws BLACK on the generated surfaces when the color chain is
+    // context-inherited and therefore looked unstyled. Carry `color` on
+    // svg hosts unconditionally (same rationale as text-part typography).
+    if (a.baseFlat[pi].node.nodes.some((n) => n.t === 'el' && n.el.tag === 'svg') && !set.has('color')) {
+      set.add('color');
+      receipts.push(`svg-host-color-carried: ${a.partNames[pi]} — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)`);
+    }
+    const hasText = a.baseFlat[pi].node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
+    const srOnly = (a.baseFlat[pi].node.style['clip-path'] ?? '').startsWith('inset(50%');
+    if (hasText && !srOnly) {
+      const added: string[] = [];
+      for (const ch of ['font-size', 'line-height', 'font-weight']) {
+        if (!set.has(ch)) { set.add(ch); added.push(ch); }
+      }
+      if (added.length > 0) {
+        receipts.push(`text-part-typography-carried: ${a.partNames[pi]} — ${added.join('/')} carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)`);
       }
     }
     out.set(a.partNames[pi], set);
@@ -475,6 +505,65 @@ export interface MintPrep {
   /** leaf-count comparison: mint run WITHOUT the folding pass. */
   unfoldedLeafCount: number;
   foldedStateSkips: string[];
+  /** Round 5c: carried channels re-minted because a DEFAULTLESS axis
+   *  contests their values (the Button tone×variant paint class). */
+  remintReceipts: string[];
+  /** Round 5c: set-plane literals for UNMINTABLE-KIND geometry channels
+   *  (min-height auto→24px) — the refused-mint set planes are computed in
+   *  applyMintToContract from the observations themselves. */
+  setPlaneLiterals: SetPlaneLiteral[];
+}
+
+/** Box-geometry channels with no inheritance to lean on — the base-plane
+ *  literal fallback set (round 4), module-scoped in round 5c so the
+ *  SET-PLANE literal carriage shares it. */
+export const BASE_FALLBACK_CHANNELS = new Set([
+  'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
+  'padding-block', 'padding-inline', 'gap',
+  'height', 'width', 'min-width', 'min-height',
+  'border-radius', 'border-width',
+  'border-top-left-radius', 'border-top-right-radius',
+  'border-bottom-left-radius', 'border-bottom-right-radius',
+  'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+]);
+
+/** Round 5c — SET-PLANE LITERALS: a geometry channel the mint refuses (or
+ *  cannot kind — min-height auto→24px) still has EXACT per-plane truth on a
+ *  DEFAULTLESS axis when, within one set value's presence-off slice, the
+ *  captured value is uniform (Tag size=large: padding 8px, min-height 24px;
+ *  the refusal came from presence-axis entanglement the boolean vocabulary
+ *  cannot spell — those planes stay named residue). Carried as
+ *  literalsByProp entries; the base plane keeps the round-4 base literal. */
+export interface SetPlaneLiteral {
+  part: string;
+  channel: string;
+  cands: Array<{ prop: string; value: string; lit: string }>;
+}
+
+export function setPlaneCandidates(
+  rows: Array<{ axisValues: Record<string, string>; value: string }>,
+  space: PropSpace,
+): Array<{ prop: string; value: string; lit: string }> {
+  const out: Array<{ prop: string; value: string; lit: string }> = [];
+  const presenceOff = (r: { axisValues: Record<string, string> }) =>
+    [...space.presence.keys()].every((pp) => (r.axisValues[pp] ?? PRESENCE_OFF) === PRESENCE_OFF);
+  for (const ax of space.axes.filter((a) => a.unset !== undefined)) {
+    const baseVals = new Set(
+      rows.filter((r) => presenceOff(r) && r.axisValues[ax.prop] === ax.unset).map((r) => r.value),
+    );
+    for (const v of ax.values) {
+      if (v === ax.unset) continue;
+      const slice = rows.filter((r) => presenceOff(r) && r.axisValues[ax.prop] === v);
+      if (slice.length === 0) continue;
+      const vals = new Set(slice.map((r) => r.value));
+      if (vals.size !== 1) continue;
+      const lit = [...vals][0];
+      if (!LITERAL_VALUE_RE.test(lit)) continue;
+      if (baseVals.size === 1 && [...baseVals][0] === lit) continue; // redundant with the base plane
+      out.push({ prop: ax.prop, value: v, lit });
+    }
+  }
+  return out;
 }
 
 const STATE_SUFFIXES = ['hover', 'active', 'focus-visible', 'disabled'] as const;
@@ -508,6 +597,33 @@ export function prepareMint(
     return p;
   };
 
+  // Round 5c — CARRIED-CHANNEL RE-MINT on a defaultless-axis contest (the
+  // Button tone×variant paint refusal): a channel the reviewed static layer
+  // carries (per-variant tokensByProp) is BOUND territory, so the mint pass
+  // skipped it — but when the observed values ALSO vary along a DEFAULTLESS
+  // axis (tone), the reviewed carriage explains only the unset plane; the
+  // set planes were silently absent (40 Primary cells at ~91% on the canvas
+  // gate). Such channels re-mint: the S2 pair-with-unset carriage lands the
+  // tone maps as tokensByProp entries with the unset plane as base, and the
+  // applyMintToContract conflict rule keeps every reviewed binding (reviewed
+  // same-prop channels are never re-added). Receipted by name.
+  const unsetAxisNames = space.axes.filter((ax) => ax.unset !== undefined).map((ax) => ax.prop);
+  const remintReceipts: string[] = [];
+  const setPlaneLiterals: SetPlaneLiteral[] = [];
+  const contestedByUnsetAxis = (pi: number, channel: string): string | null => {
+    for (const axName of unsetAxisNames) {
+      const groups = new Map<string, Set<string>>();
+      for (const combo of enabledCombos) {
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (!el) continue;
+        const ctx = JSON.stringify({ ...combo.axisValues, [axName]: '' });
+        (groups.get(ctx) ?? groups.set(ctx, new Set()).get(ctx)!).add(el.node.style[channel]);
+      }
+      if ([...groups.values()].some((s) => s.size > 1)) return axName;
+    }
+    return null;
+  };
+
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
     const obs: MintObservation[] = [];
     const codeOnly: CodeOnlyEntry[] = [];
@@ -518,7 +634,15 @@ export function prepareMint(
       if (svgConsumedParts?.has(partName)) continue; // svg internals: carried by the promoted icon asset (round 4)
       const carried = carriedChannels(partByName.get(partName));
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
-        if (carried.has(channel)) continue;
+        if (carried.has(channel)) {
+          const contestingAxis = contestedByUnsetAxis(pi, channel);
+          if (contestingAxis === null) continue;
+          if (skipFolds) {
+            remintReceipts.push(
+              `carried-channel-reminted: ${partName}.${channel} — observed values vary along the defaultless axis "${contestingAxis}" while the reviewed carriage has no ${contestingAxis} plane; re-minted so the set planes carry (round 5c — S2 ${contestingAxis} maps with the unset base; reviewed bindings win every collision)`,
+            );
+          }
+        }
         if (layoutHandled?.get(partName)?.has(channel)) continue; // carried by Part.layout (enrichLayout)
         if (skipFolds && foldedSet.has(`${partName}|${channel}`)) continue;
         const occurrences: MintObservation['occurrences'] = [];
@@ -536,6 +660,17 @@ export function prepareMint(
           occurrences.push({ variant: combo.key, axisValues: combo.axisValues, value: k.value });
         }
         if (unk !== null) {
+          // Round 5c — set-plane literals for unmintable-kind geometry
+          // channels (min-height 'auto' at base, '24px' on the set plane).
+          if (skipFolds && BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)) {
+            const cands = setPlaneCandidates(rows, space);
+            if (cands.length > 0) {
+              setPlaneLiterals.push({ part: partName, channel, cands });
+              remintReceipts.push(
+                `set-plane-literal-carried: ${partName}.${channel} — unmintable at base (${rows.find((r) => true)?.value ?? '?'} …) but uniform per defaultless-axis plane over the presence-off slice: ${cands.map((c) => `${c.prop}=${c.value} → ${c.lit}`).join(', ')} (presence planes stay named residue — round 5c)`,
+              );
+            }
+          }
           // v15 declared facts: a registry channel whose observed value is
           // UNIFORM across combos and inside the channel's bounded grammar is
           // carried (Part.declared), not extension residue. Everything else
@@ -718,6 +853,8 @@ export function prepareMint(
     pairwiseRefusals: folded.pairwiseRefusals,
     unfoldedLeafCount: unfoldedMint.count,
     foldedStateSkips: [...new Set(foldedStateSkips)],
+    remintReceipts: [...new Set(remintReceipts)],
+    setPlaneLiterals,
   };
 }
 
@@ -750,6 +887,7 @@ export function applyMintToContract(
   layoutEnrichments: LayoutEnrichment['enriched'] = [],
   declaredEnrichments: DeclaredEnrichment[] = [],
   declaredStateEnrichments: DeclaredStateEnrichment[] = [],
+  setPlaneLiterals: SetPlaneLiteral[] = [],
 ): ApplyResult {
   const enriched = structuredClone(contract) as Contract & Record<string, unknown>;
   const overflowBindings: OverflowBinding[] = [];
@@ -786,6 +924,7 @@ export function applyMintToContract(
     }
   }
   const unsetAxes = new Map(space.axes.filter((ax) => ax.unset !== undefined).map((ax) => [ax.prop, ax.unset!] as const));
+  const refusedSetPlaneLits: SetPlaneLiteral[] = [];
 
   const perAxisAdditions = new Map<string, Map<string, Record<string, Record<string, string>>>>(); // part → prop → value → channel → ref
 
@@ -815,15 +954,6 @@ export function applyMintToContract(
           // a base literal would break that (Button's primary label went
           // dark). Paddings/sizes/radii/borders have no inheritance to lean
           // on; absence there is a raw UA default.
-          const BASE_FALLBACK_CHANNELS = new Set([
-            'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
-            'padding-block', 'padding-inline', 'gap',
-            'height', 'width', 'min-width', 'min-height',
-            'border-radius', 'border-width',
-            'border-top-left-radius', 'border-top-right-radius',
-            'border-bottom-left-radius', 'border-bottom-right-radius',
-            'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
-          ]);
           const target0 = partByName.get(partName);
           const baseOcc = obs.occurrences.find((o) => o.variant === space.baseComboKey);
           if (target0 && baseOcc !== undefined && BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)) {
@@ -835,6 +965,17 @@ export function applyMintToContract(
                 enrichmentNotes.push(`base-plane literal carried: ${partName}.${channel} = ${lit} (uncorrelated across planes — the base combo's exact value; set planes remain named residue)`);
               }
             }
+            // Round 5c — SET-PLANE literals: the refused channel's exact
+            // per-plane truth on defaultless axes (presence-off slice
+            // uniform), carried as literalsByProp (Tag size=large 8px).
+            const rows = obs.occurrences
+              .map((o) => ({
+                axisValues: o.axisValues,
+                value: obs.kind === 'px' ? `${o.value}px` : obs.kind === 'number' ? String(o.value) : '',
+              }))
+              .filter((r) => r.value !== '');
+            const cands = setPlaneCandidates(rows, space);
+            if (cands.length > 0) refusedSetPlaneLits.push({ part: partName, channel, cands });
           }
         }
         overflowBindings.push({ part: partName, channel, ...(state ? { state } : {}), refusal: b.reason ?? 'uncorrelated' });
@@ -994,6 +1135,54 @@ export function applyMintToContract(
 
   apply(mintBase, baseObs, false);
   apply(mintStates, stateObs, true);
+
+  // Round 5c — attach SET-PLANE literals (refused-mint geometry planes +
+  // prepareMint's unmintable-kind planes) as literalsByProp entries; a
+  // reviewed same-prop entry's channels are never re-added (the v14 rule,
+  // mirrored from the tokensByProp merge below).
+  {
+    const byPart = new Map<string, Map<string, Record<string, Record<string, string>>>>();
+    for (const spl of [...refusedSetPlaneLits, ...setPlaneLiterals]) {
+      const target = partByName.get(spl.part);
+      if (!target) continue;
+      if (BASE_FALLBACK_CHANNELS.has(spl.channel) === false) continue;
+      const byProp = byPart.get(spl.part) ?? new Map<string, Record<string, Record<string, string>>>();
+      byPart.set(spl.part, byProp);
+      for (const c of spl.cands) {
+        const map = byProp.get(c.prop) ?? {};
+        byProp.set(c.prop, map);
+        (map[c.value] ??= {})[spl.channel] = c.lit;
+      }
+    }
+    for (const [partName, byProp] of byPart) {
+      const target = partByName.get(partName)!;
+      const existing = (target.literalsByProp ?? []).map((e) => structuredClone(e));
+      for (const [prop, map] of [...byProp.entries()].sort((x, y) => x[0].localeCompare(y[0]))) {
+        for (const e of existing) {
+          if (e.prop !== prop) continue;
+          const reviewedChannels = new Set(Object.values(e.map).flatMap((m) => Object.keys(m)));
+          for (const val of Object.keys(map)) {
+            for (const chn of Object.keys(map[val])) {
+              if (reviewedChannels.has(chn)) {
+                delete map[val][chn];
+                enrichmentNotes.push(`literalsByProp conflict avoided: ${partName}.${chn} on prop ${prop} already reviewed — set-plane literal not re-added`);
+              }
+            }
+            if (Object.keys(map[val]).length === 0) delete map[val];
+          }
+        }
+        if (Object.keys(map).length > 0) {
+          const ordered: Record<string, Record<string, string>> = {};
+          for (const k of Object.keys(map).sort()) {
+            ordered[k] = Object.fromEntries(Object.entries(map[k]).sort(([x], [y]) => x.localeCompare(y)));
+          }
+          existing.push({ prop, map: ordered });
+          enrichmentNotes.push(`set-plane literals carried: ${partName} per ${prop} → ${Object.entries(ordered).map(([v, m]) => `${v}:{${Object.entries(m).map(([chn, lv]) => `${chn}=${lv}`).join(', ')}}`).join(' ')} (round 5c — refused/unmintable geometry planes; presence planes stay named residue)`);
+        }
+      }
+      if (existing.length > 0) target.literalsByProp = existing as never;
+    }
+  }
 
   // merge per-axis additions as v14 multi-entry tokensByProp — appended AFTER
   // existing entries (computed enrichment must not shadow reviewed bindings);

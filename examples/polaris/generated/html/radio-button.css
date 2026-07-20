@@ -1,4 +1,4 @@
-/* RadioButton — from polaris.radio-button v0.3.0 (core/emit-html.ts) */
+/* RadioButton — from polaris.radio-button v0.3.1 (core/emit-html.ts) */
 
 .radio-button, .radio-button *, .radio-button *::before, .radio-button *::after {
   box-sizing: border-box;
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: flex-start;
   border: 0;
+  position: relative;
   padding-bottom: var(--imported-radio-button-root-padding-bottom);
   padding-top: var(--imported-radio-button-root-padding-top);
   cursor: pointer;
@@ -100,8 +101,8 @@
 }
 
 .radio-button__backdrop {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   border-radius: var(--p-border-radius-full);
   border-width: var(--p-border-width-0165);
@@ -162,6 +163,24 @@
   background-color: var(--imported-radio-button-backdrop-background-color-state-disabled);
 }
 
+.radio-button__backdrop-before {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.radio-button--checked-unchecked .radio-button__backdrop-before {
+  display: none;
+}
+
+.radio-button--checked-checked .radio-button__backdrop-before {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
 .radio-button__choice__label {
   display: flex;
   display: block;
@@ -177,6 +196,9 @@
 }
 
 .radio-button__label {
+  font-size: var(--imported-radio-button-label-font-size);
+  font-weight: var(--imported-radio-button-label-font-weight);
+  line-height: var(--imported-radio-button-label-line-height);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;

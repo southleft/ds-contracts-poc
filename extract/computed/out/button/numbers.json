@@ -393,8 +393,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 897,
-    "mintedLeavesFolded": 332
+    "mintedLeavesUnfolded": 942,
+    "mintedLeavesFolded": 377
   },
   "bound": {
     "cellsChecked": 1632,
@@ -403,13 +403,13 @@
     "untriaged": 36
   },
   "minted": {
-    "leaves": 332,
-    "baseBindings": 28,
+    "leaves": 377,
+    "baseBindings": 31,
     "stateBindings": 27,
     "byShape": {
       "uniform": 23,
       "perAxis": 8,
-      "perPair": 17,
+      "perPair": 20,
       "refused": 7
     }
   },
@@ -513,8 +513,8 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 89.35897435897436,
-    "rowsFullyEqual": 280,
+    "computedPctEqual": 91.33136094674556,
+    "rowsFullyEqual": 320,
     "rows": 960,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,

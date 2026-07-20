@@ -7,6 +7,78 @@
     "imported": {
       "button": {
         "root": {
+          "background-color": {
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#c70a24",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#047b5d",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
           "background-image": {
             "plain": {
               "none": {
@@ -76,6 +148,150 @@
               "success": {
                 "$value": "none",
                 "$type": "gradient"
+              }
+            }
+          },
+          "box-shadow": {
+            "plain": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+                "$type": "shadow"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset",
+                "$type": "shadow"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            }
+          },
+          "color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
               }
             }
           },
@@ -4646,7 +4862,10 @@
   "styledChannelReceipts": [
     "control-fallback: no control for <svg> — span control used (part icon-3)",
     "control-fallback: no control for <path> — span control used (part part-0-0-0-0)",
-    "control-fallback: no control for <path> — span control used (part part-0-0-0-1)"
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-1)",
+    "carried-channel-reminted: root.background-color — observed values vary along the defaultless axis \"tone\" while the reviewed carriage has no tone plane; re-minted so the set planes carry (round 5c — S2 tone maps with the unset base; reviewed bindings win every collision)",
+    "carried-channel-reminted: root.box-shadow — observed values vary along the defaultless axis \"tone\" while the reviewed carriage has no tone plane; re-minted so the set planes carry (round 5c — S2 tone maps with the unset base; reviewed bindings win every collision)",
+    "carried-channel-reminted: root.color — observed values vary along the defaultless axis \"tone\" while the reviewed carriage has no tone plane; re-minted so the set planes carry (round 5c — S2 tone maps with the unset base; reviewed bindings win every collision)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -4789,7 +5008,25 @@
     "declared state fact carried: [disabled] label.pointer-events = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] root.pointer-events = none (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] root.outline-style = solid (v15 declared vocabulary)",
+    "pair-with-unset carried: root.background-color = base plane per variant + placeholder maps per tone (emitter capability lift)",
     "pair-with-unset carried: root.background-image = base plane per variant + placeholder maps per tone (emitter capability lift)",
-    "pair-with-unset carried: root.outline-color = base plane per variant + placeholder maps per tone (emitter capability lift)"
+    "pair-with-unset carried: root.box-shadow = base plane per variant + placeholder maps per tone (emitter capability lift)",
+    "pair-with-unset carried: root.color = base plane per variant + placeholder maps per tone (emitter capability lift)",
+    "pair-with-unset carried: root.outline-color = base plane per variant + placeholder maps per tone (emitter capability lift)",
+    "tokensByProp conflict avoided: root.background-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.box-shadow on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.background-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.box-shadow on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.background-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.box-shadow on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.background-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.box-shadow on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.background-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.box-shadow on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.color on prop variant already reviewed — computed value not re-added"
   ]
 }

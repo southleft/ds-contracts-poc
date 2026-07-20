@@ -3002,8 +3002,13 @@ const cases: Case[] = [
       if (!badge.includes('amendComponent')) throw new Error('committed badge script must be standalone-amend-capable');
       const pbar = readFileSync(path.join(ROOT, 'examples/polaris/figma/progress-bar.figma.js'), 'utf8');
       if (!pbar.includes("layoutSizingVertical = 'FILL'")) throw new Error('committed progress-bar script must carry the empty-child default');
-      const button = readFileSync(path.join(ROOT, 'examples/polaris/figma/button.figma.js'), 'utf8');
-      if (!button.includes('li.fillClear && !spec.fill')) throw new Error('committed button script must carry the runtime fillClear guard');
+      // Round 5c: Button's tone×variant re-mint gave EVERY variant a fill
+      // binding, so its script no longer carries fillClear lits and the
+      // feature-gated runtime drops that chunk (byte-stable by design). Tag
+      // still carries transparent planes — its committed script carries the
+      // runtime guard.
+      const tagScript = readFileSync(path.join(ROOT, 'examples/polaris/figma/tag.figma.js'), 'utf8');
+      if (!tagScript.includes('li.fillClear && !spec.fill')) throw new Error('committed tag script must carry the runtime fillClear guard');
     },
   },
   {
@@ -3220,7 +3225,11 @@ const cases: Case[] = [
         walk(base.root);
         if (!svgNode) throw new Error('no svg element in the committed banner base capture');
         const receipts = [];
-        const r = reconstructSvg(svgNode, receipts, 'eval');
+        // Round 5c: the pipeline prefers the currentColor spelling when the
+        // svg's fill==color identity holds in EVERY combo (per-svg decision,
+        // promoteAnatomy) — mirror it here from the base capture's styles.
+        const identity = !!(svgNode.style && svgNode.style['fill'] && svgNode.style['fill'] === svgNode.style['color']);
+        const r = reconstructSvg(svgNode, receipts, 'eval', identity);
         if (!r) throw new Error('reconstructSvg refused the committed banner glyph: ' + receipts.join('; '));
         if (!/^<svg viewBox="0 0 \\d+ \\d+"/.test(r.markup)) throw new Error('markup missing viewBox: ' + r.markup.slice(0, 60));
         if (!r.markup.includes('<path d="M')) throw new Error('markup missing path data');
@@ -3438,31 +3447,38 @@ const cases: Case[] = [
     },
   },
   {
-    // ROUND 5a — CANVAS GATE STANDING PIN: the committed scorecards carry
-    // the round-5 numbers (the engine draws everything the v0.3.0 contracts
-    // carry). Badge + Thumbnail PASS the ≤5% masked-mean acceptance; every
-    // other component's mean is pinned exactly, its >10% cells all carry
-    // named causes, and a silent regression (any mean drifting UP past its
-    // pin) fails this eval by name. Re-earning the numbers needs the
-    // harnessed gate run (extract/figma/canvas-gate/run.ts); this pin
-    // guards the committed receipts between runs.
+    // ROUND 5c — CANVAS GATE STANDING PIN: the committed scorecards carry
+    // the round-5c numbers (the six 5a promotion-level causes fixed; the
+    // v0.3.1 contracts carry the Tag label, the Spinner glyph+color, the
+    // Button tone paint maps, captured 18×18 backdrops, authored Avatar
+    // viewBoxes, and the Radio dot). SEVEN components PASS the ≤5%
+    // masked-mean acceptance; every other component's mean is pinned, its
+    // >10% cells all carry named causes (font raster / runtime-% /
+    // outline→stroke previews / S3 state×tone residue), and a silent
+    // regression (any mean drifting UP past its pin) fails this eval by
+    // name. Re-earning the numbers needs the harnessed gate run
+    // (extract/figma/canvas-gate/run.ts); this pin guards the committed
+    // receipts between runs.
     id: 'canvas-gate-standing-pin',
     claim: 'C3-detection',
     run: () => {
       const dir = path.join(ROOT, 'examples/polaris/receipts/canvas-gate');
-      // meanAAMasked pinned per component (round-5 final run, 2026-07-19).
+      // meanAAMasked pinned per component (round-5c final run, 2026-07-19,
+      // Chromium 148.0.7778.96).
       const PIN: Record<string, { mean: number; accept: boolean }> = {
-        avatar: { mean: 14.58, accept: false },
+        avatar: { mean: 0, accept: true },
         badge: { mean: 0.07, accept: true },
-        banner: { mean: 12.1, accept: false },
-        // Button's mean is dominated by the 40 Primary cells at ~91% — the
-        // NAMED tone×variant promotion refusal (defaultless tone axis).
-        button: { mean: 44.06, accept: false },
-        checkbox: { mean: 26.65, accept: false },
+        banner: { mean: 4.6, accept: true },
+        // Button's mean is dominated by the 46 fully-masked text-only cells
+        // (named font-raster class) + 5 focus-ring + 2 state×tone S3 cells.
+        button: { mean: 7.02, accept: false },
+        checkbox: { mean: 3.06, accept: true },
         'progress-bar': { mean: 26.22, accept: false },
-        'radio-button': { mean: 27.32, accept: false },
-        spinner: { mean: 6.45, accept: false },
-        tag: { mean: 50.05, accept: false },
+        'radio-button': { mean: 0, accept: true },
+        spinner: { mean: 0, accept: true },
+        // Tag base + disabled are EXACT (0.00); the mean is the two named
+        // active/focus state-preview cells (C5 outline approximation).
+        tag: { mean: 29.97, accept: false },
         thumbnail: { mean: 2.16, accept: true },
       };
       // Pixel-scoring nondeterminism headroom (AA classifier at 2x DSF):
@@ -3483,7 +3499,7 @@ const cases: Case[] = [
           throw new Error(`${comp}: round-5 PASSING component no longer passes (mean≤5 ∧ noBlank)`);
         }
       }
-      console.log('canvas-gate-standing-pin: Badge+Thumbnail PASS pinned; 10/10 means at or under their round-5 pins, all >10% cells named');
+      console.log('canvas-gate-standing-pin: 7/10 PASS pinned (Avatar, Badge, Banner, Checkbox, RadioButton, Spinner, Thumbnail); 10/10 means at or under their round-5c pins, all >10% cells named');
     },
   },
   {
@@ -3981,6 +3997,116 @@ const cases: Case[] = [
         if (!r.out.includes(line)) throw new Error(`missing parity line: ${line}\n${r.out}`);
       }
       console.log('wc-emitter-css-parity: 165/165 computed channels equal across emitters (real Chromium)');
+    },
+  },
+  {
+    // ROUND 5c — REACT EMITTERS: hyphenated part names must emit VALID,
+    // EXECUTABLE JavaScript. Found by the CI journey validation
+    // (examples/ci/VALIDATION.md): round-4 promoted anatomies carry part
+    // names like "label-2" / "icon-3-incomplete", and `styles.label-2`
+    // PARSES — as subtraction (NaN class names); `styles.icon - 3 -
+    // incomplete` throws ReferenceError the moment the part renders. A grep
+    // or a parse pass cannot catch this class, so this eval EXECUTES both
+    // emitted modules: the CSS-module emitter's output is esbuild-bundled
+    // (local-css) and rendered with react-dom/server; the inline emitter's
+    // output likewise. Every hyphen-named part is unconditionally visible in
+    // the fixture, so the defective member accesses would evaluate.
+    id: 'react-hyphenated-part-names-execute',
+    claim: 'C3-detection',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { pathToFileURL } from 'node:url';
+        import { build } from 'esbuild';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { emitReact } from './core/emit-react.ts';
+        import { emitReactInline } from './core/emit-react-inline.ts';
+        (async () => {
+          const read = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+          const fixture = ContractSchema.parse({
+            id: 'eval.hyphenparts',
+            name: 'HyphenParts',
+            version: '1.0.0',
+            description: 'Eval fixture: round-4-style hyphenated part names.',
+            semantics: { element: 'div' },
+            props: [{
+              name: 'children', description: 'text', type: 'text', required: true, default: 'hello-eval',
+              bindings: { figma: { kind: 'TEXT', property: 'Label' }, code: { prop: 'children' } },
+            }],
+            states: [],
+            anatomy: { root: { layout: { display: 'flex' }, parts: {
+              'label-2': { content: { prop: 'children' }, literals: { 'padding-left': '2px' } },
+              'note-3-static': { text: 'static run', literals: { 'padding-left': '2px' } },
+              'icon-3-incomplete': { icon: { asset: 'eval-check' }, element: 'span' },
+              'box-4': { layout: { display: 'flex' }, parts: { 'part-0-1': { text: 'leaf', literals: { 'padding-left': '2px' } } } },
+            } } },
+            anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/HyphenParts', export: 'HyphenParts' } },
+          });
+          const icons = new Map([['eval-check', '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h20v20H0z"/></svg>']]);
+          const contracts = new Map([[fixture.id, fixture]]);
+
+          // ---- CSS-module emitter: emit → bundle (local-css) → EXECUTE ----
+          const { tsx, css } = emitReact(fixture, { tokens: new Set(), icons, contracts });
+          if (/styles\\.[A-Za-z0-9_$]+\\s*-\\s*\\d/.test(tsx)) throw new Error('emitted tsx still contains a subtraction-parsed styles access');
+          fs.mkdirSync('hyphen-eval', { recursive: true });
+          fs.writeFileSync('hyphen-eval/HyphenParts.tsx', tsx);
+          fs.writeFileSync('hyphen-eval/HyphenParts.module.css', css);
+          fs.writeFileSync('hyphen-eval/entry.tsx', [
+            "import { createElement } from 'react';",
+            "import { renderToStaticMarkup } from 'react-dom/server';",
+            "import { HyphenParts } from './HyphenParts';",
+            "import styles from './HyphenParts.module.css';",
+            "export const markup = renderToStaticMarkup(createElement(HyphenParts, null, 'hello-eval'));",
+            "export const classMap = styles;",
+          ].join('\\n'));
+          await build({
+            entryPoints: ['hyphen-eval/entry.tsx'], bundle: true, outfile: 'hyphen-eval/entry.cjs',
+            format: 'cjs', platform: 'node', jsx: 'automatic', logLevel: 'silent',
+            loader: { '.css': 'local-css' }, external: ['react', 'react-dom'],
+          });
+          const mod = await import(pathToFileURL(path.resolve('hyphen-eval/entry.cjs')).href);
+          const { markup, classMap } = mod.default ?? mod;
+          for (const part of ['label-2', 'note-3-static', 'icon-3-incomplete', 'icon-3-incompleteGlyph', 'box-4', 'part-0-1']) {
+            const cls = classMap[part];
+            if (typeof cls !== 'string' || cls.length === 0) throw new Error('css-module class missing for part ' + part);
+            if (!markup.includes(cls)) throw new Error('rendered markup missing the class for part ' + part + ' (' + cls + ')');
+          }
+          if (markup.includes('NaN')) throw new Error('rendered markup contains NaN class names (the subtraction defect): ' + markup);
+          if (!markup.includes('hello-eval') || !markup.includes('static run') || !markup.includes('leaf')) {
+            throw new Error('fixture content missing from the render: ' + markup);
+          }
+
+          // ---- inline emitter: emit → bundle → EXECUTE (S['label-2']) ----
+          const brands = Object.fromEntries(fs.readdirSync('tokens/modes').filter((f) => /^brand\\./.test(f)).map((f) => [f.replace(/^brand\\.|\\.tokens\\.json$/g, ''), read('tokens/modes/' + f)]));
+          const tokens = { primitives: read('tokens/primitives.tokens.json'), semantic: read('tokens/semantic.tokens.json'), light: read('tokens/modes/semantic.light.tokens.json'), dark: read('tokens/modes/semantic.dark.tokens.json'), brands };
+          const inline = emitReactInline(fixture, { tokens, icons, contracts, mode: 'light' });
+          if (/S\\.[A-Za-z0-9_$]+\\s*-\\s*\\d/.test(inline.tsx)) throw new Error('inline emitter still contains a subtraction-parsed S access');
+          fs.writeFileSync('hyphen-eval/Inline.tsx', inline.tsx);
+          fs.writeFileSync('hyphen-eval/inline-entry.tsx', [
+            "import { createElement } from 'react';",
+            "import { renderToStaticMarkup } from 'react-dom/server';",
+            "import { HyphenParts } from './Inline';",
+            "export const markup = renderToStaticMarkup(createElement(HyphenParts, null, 'hello-inline'));",
+          ].join('\\n'));
+          await build({
+            entryPoints: ['hyphen-eval/inline-entry.tsx'], bundle: true, outfile: 'hyphen-eval/inline-entry.cjs',
+            format: 'cjs', platform: 'node', jsx: 'automatic', logLevel: 'silent',
+            external: ['react', 'react-dom'],
+          });
+          const imod = await import(pathToFileURL(path.resolve('hyphen-eval/inline-entry.cjs')).href);
+          const inlineMarkup = (imod.default ?? imod).markup;
+          if (inlineMarkup.includes('NaN')) throw new Error('inline render contains NaN (the subtraction defect)');
+          if (!inlineMarkup.includes('hello-inline') || !inlineMarkup.includes('static run')) {
+            throw new Error('inline fixture content missing: ' + inlineMarkup);
+          }
+          console.log('hyphen-parts ok: both emitted modules EXECUTED — 5 hyphen-named classes rendered, no NaN, no ReferenceError');
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('hyphen-parts ok:')) {
+        throw new Error(`hyphenated-part execution probe failed:\n${probe.out}`);
+      }
+      console.log('react-hyphenated-part-names-execute: emitReact + emitReactInline outputs bundled and EXECUTED with react-dom/server — hyphen-named parts render real classes (the styles.label-2 subtraction defect stays fixed)');
     },
   },
 ];

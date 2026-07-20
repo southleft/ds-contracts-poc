@@ -1,4 +1,4 @@
-/* TextField — from polaris.text-field v0.3.0 (core/emit-html.ts) */
+/* TextField — from polaris.text-field v0.3.1 (core/emit-html.ts) */
 
 .text-field, .text-field *, .text-field *::before, .text-field *::after {
   box-sizing: border-box;
@@ -52,6 +52,9 @@
 }
 
 .text-field__label-2 {
+  font-size: var(--imported-shared-size-13);
+  font-weight: var(--imported-shared-num-450);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
@@ -132,6 +135,9 @@
 
 .text-field__label-3 {
   color: var(--imported-shared-color-616161);
+  font-size: var(--imported-shared-size-13);
+  font-weight: var(--imported-shared-num-450);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
@@ -215,6 +221,9 @@
 
 .text-field__label-4 {
   color: var(--imported-shared-color-616161);
+  font-size: var(--imported-shared-size-13);
+  font-weight: var(--imported-shared-num-450);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
@@ -234,8 +243,8 @@
   border-right-width: var(--imported-shared-size-0);
   border-top-width: var(--imported-shared-size-0);
   color: var(--imported-text-field-clearbutton-color);
-  font-size: var(--imported-text-field-clearbutton-font-size);
-  line-height: var(--imported-text-field-clearbutton-line-height);
+  font-size: var(--imported-shared-size-13);
+  line-height: var(--imported-shared-size-20);
   margin-left: var(--imported-shared-size-4);
   margin-right: var(--imported-shared-size-12);
   min-height: var(--imported-shared-size-0);
@@ -303,6 +312,7 @@
 .text-field__icon {
   display: inline-flex;
   flex-shrink: 0;
+  color: var(--imported-text-field-icon-color);
   font-weight: var(--imported-text-field-icon-font-weight);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);

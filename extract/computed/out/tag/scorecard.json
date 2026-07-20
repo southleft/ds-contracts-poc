@@ -6,9 +6,9 @@
   "combos": 32,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 5680,
-    "cellsEqual": 4553,
-    "pctEqual": 80.15845070422536,
+    "cellsCompared": 8064,
+    "cellsEqual": 6617,
+    "pctEqual": 82.05605158730158,
     "rowsFullyEqual": 0,
     "rows": 128
   },
@@ -16,80 +16,76 @@
     "pairs": 128,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 5.145874023437503,
-    "meanAA": 2.224082946777344,
-    "maxAA": 6.371256510416667
+    "meanExact": 4.201749165852865,
+    "meanAA": 0.7042694091796879,
+    "maxAA": 2.685546875
   },
   "fusion": {
-    "boundConfirmed": 48,
-    "boundCells": 48,
-    "contradictions": 0,
+    "boundConfirmed": 84,
+    "boundCells": 112,
+    "contradictions": 12,
     "mintedLeaves": 51,
     "mintedLeavesUnfolded": 48,
-    "baseBindings": 63,
+    "baseBindings": 64,
     "stateBindings": 19,
-    "codeOnlyChannels": 103,
-    "overflowBindings": 16,
+    "codeOnlyChannels": 97,
+    "overflowBindings": 11,
     "folds": 45
   },
   "worstRows": [
     {
-      "key": "large.off.on.on.enabled__focus-visible",
-      "pctAA": 6.371256510416667,
-      "pctExact": 7.190755208333333,
-      "channelsMismatched": 6
+      "key": "large.on.off.on.enabled__focus-visible",
+      "pctAA": 2.685546875,
+      "pctExact": 3.5856119791666665,
+      "channelsMismatched": 14
     },
     {
-      "key": "large.on.on.off.enabled__focus-visible",
-      "pctAA": 6.371256510416667,
-      "pctExact": 7.190755208333333,
-      "channelsMismatched": 6
+      "key": "large.on.off.off.enabled__focus-visible",
+      "pctAA": 2.001953125,
+      "pctExact": 2.8776041666666665,
+      "channelsMismatched": 31
     },
     {
-      "key": "large.on.on.on.enabled__focus-visible",
-      "pctAA": 6.371256510416667,
-      "pctExact": 7.190755208333333,
-      "channelsMismatched": 6
+      "key": "large.on.off.on.disabled__hover",
+      "pctAA": 1.9742838541666667,
+      "pctExact": 6.507975260416667,
+      "channelsMismatched": 20
     },
     {
-      "key": "large.off.on.off.enabled__focus-visible",
-      "pctAA": 6.006673177083333,
-      "pctExact": 6.826171875,
-      "channelsMismatched": 4
+      "key": "large.on.off.on.disabled__active",
+      "pctAA": 1.9742838541666667,
+      "pctExact": 6.507975260416667,
+      "channelsMismatched": 20
     },
     {
-      "key": "large.off.on.on.enabled__hover",
-      "pctAA": 5.15380859375,
-      "pctExact": 5.794270833333333,
-      "channelsMismatched": 10
+      "key": "large.on.off.off.disabled__hover",
+      "pctAA": 1.9734700520833333,
+      "pctExact": 6.507975260416667,
+      "channelsMismatched": 19
     },
     {
-      "key": "large.on.on.off.enabled__hover",
-      "pctAA": 5.15380859375,
-      "pctExact": 5.794270833333333,
-      "channelsMismatched": 10
+      "key": "large.on.off.off.disabled__active",
+      "pctAA": 1.9734700520833333,
+      "pctExact": 6.507975260416667,
+      "channelsMismatched": 19
     },
     {
-      "key": "large.on.on.on.enabled__hover",
-      "pctAA": 5.15380859375,
-      "pctExact": 5.794270833333333,
-      "channelsMismatched": 10
+      "key": "large.on.off.on.disabled__focus-visible",
+      "pctAA": 1.9173177083333333,
+      "pctExact": 7.356770833333333,
+      "channelsMismatched": 20
     },
     {
-      "key": "large.off.on.on.enabled__default",
-      "pctAA": 5.15380859375,
-      "pctExact": 5.794270833333333,
-      "channelsMismatched": 9
+      "key": "large.on.off.off.disabled__focus-visible",
+      "pctAA": 1.9173177083333333,
+      "pctExact": 7.356770833333333,
+      "channelsMismatched": 19
     }
   ],
   "topMismatchedChannels": [
     [
       "root.background-color",
       88
-    ],
-    [
-      "root.padding-right",
-      84
     ],
     [
       "root.outline-color",
@@ -116,47 +112,44 @@
       64
     ],
     [
-      "root.min-height",
+      "text.cursor",
       64
     ],
     [
-      "root.padding-left",
-      52
+      "text.text-align",
+      64
     ],
     [
-      "root.outline-style",
+      "label.cursor",
+      64
+    ],
+    [
+      "label.text-align",
+      64
+    ],
+    [
+      "text.font-feature-settings",
       48
     ],
     [
-      "root.outline-width",
+      "text.text-rendering",
       48
     ],
     [
-      "button.background-color",
-      32
+      "label.font-feature-settings",
+      48
     ],
     [
-      "button.border-bottom-color",
-      32
-    ],
-    [
-      "button.border-left-color",
-      32
+      "label.text-rendering",
+      48
     ]
   ],
   "namedLosses": [
-    "promotion: part-presence-uncorrelated: text present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
-    "promotion: static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
     "overflow: root.font-weight — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
     "overflow: root.outline-color — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
     "overflow: root.outline-width — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
     "overflow: root.padding-left — resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually",
     "overflow: root.padding-right — resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually",
-    "overflow: text.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: text.line-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
     "overflow: button.background-color — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
     "overflow: root.background-color [active] — resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually",
     "overflow: root.outline-color [disabled] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",
@@ -173,18 +166,12 @@
     "code-only: link.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: text.cursor — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: text.font-feature-settings — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: text.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: text.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text.text-overflow — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: text.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: text.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: label.cursor — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: label.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: label.font-feature-settings — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: label.text-align — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: label.text-rendering — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: label.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: button.min-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: button.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: button.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -270,10 +257,10 @@
   "rows": [
     {
       "key": "none.off.off.off.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 22,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -283,6 +270,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -291,10 +302,10 @@
     },
     {
       "key": "none.off.off.off.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 22,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -307,16 +318,39 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.off.off.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 22,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -326,6 +360,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -334,10 +392,10 @@
     },
     {
       "key": "none.off.off.off.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 22,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -350,16 +408,39 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.off.off.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -381,6 +462,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -389,10 +494,10 @@
     },
     {
       "key": "none.off.off.off.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -417,16 +522,39 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.off.off.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -448,6 +576,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -456,10 +608,10 @@
     },
     {
       "key": "none.off.off.off.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -484,16 +636,39 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.off.on.enabled__default",
-      "channelsCompared": 61,
-      "channelsEqual": 58,
-      "pctExact": 2.2086588541666665,
-      "pctAA": 1.3313802083333333,
+      "channelsCompared": 63,
+      "channelsEqual": 60,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -517,10 +692,10 @@
     },
     {
       "key": "none.off.off.on.enabled__hover",
-      "channelsCompared": 61,
-      "channelsEqual": 55,
-      "pctExact": 4.397786458333333,
-      "pctAA": 1.5218098958333333,
+      "channelsCompared": 63,
+      "channelsEqual": 57,
+      "pctExact": 4.200846354166667,
+      "pctAA": 0.20100911458333334,
       "mismatches": [
         {
           "part": "root",
@@ -562,10 +737,10 @@
     },
     {
       "key": "none.off.off.on.enabled__focus-visible",
-      "channelsCompared": 61,
-      "channelsEqual": 56,
-      "pctExact": 3.4326171875,
-      "pctAA": 2.3819986979166665,
+      "channelsCompared": 63,
+      "channelsEqual": 58,
+      "pctExact": 1.9856770833333333,
+      "pctAA": 1.1507161458333333,
       "mismatches": [
         {
           "part": "root",
@@ -601,10 +776,10 @@
     },
     {
       "key": "none.off.off.on.enabled__active",
-      "channelsCompared": 61,
-      "channelsEqual": 55,
-      "pctExact": 4.388834635416667,
-      "pctAA": 1.5250651041666667,
+      "channelsCompared": 63,
+      "channelsEqual": 57,
+      "pctExact": 4.18212890625,
+      "pctAA": 0.20100911458333334,
       "mismatches": [
         {
           "part": "root",
@@ -646,10 +821,10 @@
     },
     {
       "key": "none.off.off.on.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 4.540201822916667,
-      "pctAA": 0.5517578125,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -671,6 +846,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -679,10 +884,10 @@
     },
     {
       "key": "none.off.off.on.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 4.540201822916667,
-      "pctAA": 0.5517578125,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -704,6 +909,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -712,10 +947,10 @@
     },
     {
       "key": "none.off.off.on.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 4.540201822916667,
-      "pctAA": 0.5517578125,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -737,6 +972,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -745,10 +1010,10 @@
     },
     {
       "key": "none.off.off.on.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 4.540201822916667,
-      "pctAA": 0.5517578125,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -773,15 +1038,45 @@
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
       ]
     },
     {
       "key": "none.off.on.off.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 18,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 35,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -815,6 +1110,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -823,10 +1142,10 @@
     },
     {
       "key": "none.off.on.off.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 4.200846354166667,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -869,16 +1188,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.off.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 21,
-      "pctExact": 5.836588541666667,
-      "pctAA": 5.01708984375,
+      "channelsCompared": 45,
+      "channelsEqual": 38,
+      "pctExact": 1.9466145833333333,
+      "pctAA": 1.123046875,
       "mismatches": [
         {
           "part": "root",
@@ -894,6 +1236,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -902,10 +1268,10 @@
     },
     {
       "key": "none.off.on.off.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 4.18212890625,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -930,16 +1296,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.off.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -979,6 +1368,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -987,10 +1400,10 @@
     },
     {
       "key": "none.off.on.off.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1033,16 +1446,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.off.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1082,6 +1518,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -1090,10 +1550,10 @@
     },
     {
       "key": "none.off.on.off.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1136,16 +1596,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.on.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 18,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 35,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -1182,15 +1665,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
       ]
     },
     {
       "key": "none.off.on.on.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 4.200846354166667,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -1233,16 +1740,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.on.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 21,
-      "pctExact": 5.836588541666667,
-      "pctAA": 5.01708984375,
+      "channelsCompared": 45,
+      "channelsEqual": 38,
+      "pctExact": 1.9466145833333333,
+      "pctAA": 1.123046875,
       "mismatches": [
         {
           "part": "root",
@@ -1261,15 +1791,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
       ]
     },
     {
       "key": "none.off.on.on.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 4.544270833333333,
-      "pctAA": 3.90380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 4.18212890625,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -1294,16 +1848,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.on.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1343,6 +1920,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -1351,10 +1952,10 @@
     },
     {
       "key": "none.off.on.on.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1397,16 +1998,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.off.on.on.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1446,6 +2070,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -1454,10 +2102,10 @@
     },
     {
       "key": "none.off.on.on.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 4.544270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -1500,16 +2148,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.off.off.enabled__default",
-      "channelsCompared": 87,
-      "channelsEqual": 78,
-      "pctExact": 4.61669921875,
-      "pctAA": 3.2926432291666665,
+      "channelsCompared": 108,
+      "channelsEqual": 95,
+      "pctExact": 1.9954427083333333,
+      "pctAA": 0.4296875,
       "mismatches": [
         {
           "part": "root",
@@ -1525,6 +2196,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -1569,10 +2264,10 @@
     },
     {
       "key": "none.on.off.off.enabled__hover",
-      "channelsCompared": 87,
-      "channelsEqual": 78,
-      "pctExact": 4.61669921875,
-      "pctAA": 3.2926432291666665,
+      "channelsCompared": 108,
+      "channelsEqual": 95,
+      "pctExact": 1.9954427083333333,
+      "pctAA": 0.4296875,
       "mismatches": [
         {
           "part": "root",
@@ -1588,6 +2283,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -1632,10 +2351,10 @@
     },
     {
       "key": "none.on.off.off.enabled__focus-visible",
-      "channelsCompared": 87,
-      "channelsEqual": 62,
-      "pctExact": 5.287272135416667,
-      "pctAA": 3.818359375,
+      "channelsCompared": 108,
+      "channelsEqual": 79,
+      "pctExact": 2.5236002604166665,
+      "pctAA": 1.4493815104166667,
       "mismatches": [
         {
           "part": "root",
@@ -1651,6 +2370,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -1791,10 +2534,10 @@
     },
     {
       "key": "none.on.off.off.enabled__active",
-      "channelsCompared": 87,
-      "channelsEqual": 78,
-      "pctExact": 4.61669921875,
-      "pctAA": 3.2926432291666665,
+      "channelsCompared": 108,
+      "channelsEqual": 95,
+      "pctExact": 1.9954427083333333,
+      "pctAA": 0.4296875,
       "mismatches": [
         {
           "part": "root",
@@ -1810,6 +2553,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -1854,10 +2621,10 @@
     },
     {
       "key": "none.on.off.off.disabled__default",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
-      "pctExact": 5.518391927083333,
-      "pctAA": 0.45166015625,
+      "channelsCompared": 108,
+      "channelsEqual": 91,
+      "pctExact": 5.911458333333333,
+      "pctAA": 0.8430989583333334,
       "mismatches": [
         {
           "part": "root",
@@ -1885,6 +2652,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -1941,10 +2732,10 @@
     },
     {
       "key": "none.on.off.off.disabled__hover",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
-      "pctExact": 5.518391927083333,
-      "pctAA": 0.45166015625,
+      "channelsCompared": 108,
+      "channelsEqual": 91,
+      "pctExact": 5.911458333333333,
+      "pctAA": 0.8430989583333334,
       "mismatches": [
         {
           "part": "root",
@@ -1972,6 +2763,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2028,10 +2843,10 @@
     },
     {
       "key": "none.on.off.off.disabled__focus-visible",
-      "channelsCompared": 87,
-      "channelsEqual": 73,
-      "pctExact": 5.513509114583333,
-      "pctAA": 0.7267252604166666,
+      "channelsCompared": 108,
+      "channelsEqual": 90,
+      "pctExact": 5.83984375,
+      "pctAA": 1.07421875,
       "mismatches": [
         {
           "part": "root",
@@ -2059,6 +2874,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2121,10 +2960,10 @@
     },
     {
       "key": "none.on.off.off.disabled__active",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
-      "pctExact": 5.518391927083333,
-      "pctAA": 0.45166015625,
+      "channelsCompared": 108,
+      "channelsEqual": 91,
+      "pctExact": 5.911458333333333,
+      "pctAA": 0.8430989583333334,
       "mismatches": [
         {
           "part": "root",
@@ -2152,6 +2991,30 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2208,10 +3071,10 @@
     },
     {
       "key": "none.on.off.on.enabled__default",
-      "channelsCompared": 124,
-      "channelsEqual": 114,
-      "pctExact": 2.0263671875,
-      "pctAA": 0.4606119791666667,
+      "channelsCompared": 126,
+      "channelsEqual": 116,
+      "pctExact": 1.9954427083333333,
+      "pctAA": 0.4296875,
       "mismatches": [
         {
           "part": "root",
@@ -2277,10 +3140,10 @@
     },
     {
       "key": "none.on.off.on.enabled__hover",
-      "channelsCompared": 124,
-      "channelsEqual": 111,
-      "pctExact": 5.568033854166667,
-      "pctAA": 1.3777669270833333,
+      "channelsCompared": 126,
+      "channelsEqual": 113,
+      "pctExact": 5.537109375,
+      "pctAA": 1.3468424479166667,
       "mismatches": [
         {
           "part": "root",
@@ -2364,10 +3227,10 @@
     },
     {
       "key": "none.on.off.on.enabled__focus-visible",
-      "channelsCompared": 124,
-      "channelsEqual": 111,
-      "pctExact": 3.47412109375,
-      "pctAA": 1.8302408854166667,
+      "channelsCompared": 126,
+      "channelsEqual": 113,
+      "pctExact": 3.4431966145833335,
+      "pctAA": 1.79931640625,
       "mismatches": [
         {
           "part": "root",
@@ -2451,10 +3314,10 @@
     },
     {
       "key": "none.on.off.on.enabled__active",
-      "channelsCompared": 124,
-      "channelsEqual": 111,
-      "pctExact": 5.568033854166667,
-      "pctAA": 1.3777669270833333,
+      "channelsCompared": 126,
+      "channelsEqual": 113,
+      "pctExact": 5.537109375,
+      "pctAA": 1.3468424479166667,
       "mismatches": [
         {
           "part": "root",
@@ -2538,8 +3401,8 @@
     },
     {
       "key": "none.on.off.on.disabled__default",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
+      "channelsCompared": 108,
+      "channelsEqual": 90,
       "pctExact": 5.911458333333333,
       "pctAA": 0.8430989583333334,
       "mismatches": [
@@ -2569,6 +3432,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2625,8 +3518,8 @@
     },
     {
       "key": "none.on.off.on.disabled__hover",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
+      "channelsCompared": 108,
+      "channelsEqual": 90,
       "pctExact": 5.911458333333333,
       "pctAA": 0.8430989583333334,
       "mismatches": [
@@ -2656,6 +3549,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2712,8 +3635,8 @@
     },
     {
       "key": "none.on.off.on.disabled__focus-visible",
-      "channelsCompared": 87,
-      "channelsEqual": 73,
+      "channelsCompared": 108,
+      "channelsEqual": 89,
       "pctExact": 5.83984375,
       "pctAA": 1.07421875,
       "mismatches": [
@@ -2743,6 +3666,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2805,8 +3758,8 @@
     },
     {
       "key": "none.on.off.on.disabled__active",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
+      "channelsCompared": 108,
+      "channelsEqual": 90,
       "pctExact": 5.911458333333333,
       "pctAA": 0.8430989583333334,
       "mismatches": [
@@ -2836,6 +3789,36 @@
         },
         {
           "part": "root",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -2892,10 +3875,10 @@
     },
     {
       "key": "none.on.on.off.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 4.153645833333333,
-      "pctAA": 3.5107421875,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 1.0823567708333333,
+      "pctAA": 0.3629557291666667,
       "mismatches": [
         {
           "part": "root",
@@ -2938,15 +3921,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
       ]
     },
     {
       "key": "none.on.on.off.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 3.5107421875,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.200846354166667,
+      "pctAA": 0.3605143229166667,
       "mismatches": [
         {
           "part": "root",
@@ -2995,16 +4002,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.off.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 5.367838541666667,
-      "pctAA": 4.5458984375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 2.1256510416666665,
+      "pctAA": 1.2288411458333333,
       "mismatches": [
         {
           "part": "root",
@@ -3029,15 +4059,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
       ]
     },
     {
       "key": "none.on.on.off.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 4.153645833333333,
-      "pctAA": 3.5107421875,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 4.178873697916667,
+      "pctAA": 0.3605143229166667,
       "mismatches": [
         {
           "part": "root",
@@ -3068,16 +4122,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.off.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3123,6 +4200,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -3131,10 +4232,10 @@
     },
     {
       "key": "none.on.on.off.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3183,16 +4284,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.off.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3238,6 +4362,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -3246,10 +4394,10 @@
     },
     {
       "key": "none.on.on.off.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3298,16 +4446,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.on.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 4.153645833333333,
-      "pctAA": 3.5107421875,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 1.0823567708333333,
+      "pctAA": 0.3629557291666667,
       "mismatches": [
         {
           "part": "root",
@@ -3347,6 +4518,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -3355,10 +4550,10 @@
     },
     {
       "key": "none.on.on.on.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 3.5107421875,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.200846354166667,
+      "pctAA": 0.3605143229166667,
       "mismatches": [
         {
           "part": "root",
@@ -3407,16 +4602,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.on.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 5.367838541666667,
-      "pctAA": 4.5458984375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 2.1256510416666665,
+      "pctAA": 1.2288411458333333,
       "mismatches": [
         {
           "part": "root",
@@ -3438,6 +4656,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -3446,10 +4688,10 @@
     },
     {
       "key": "none.on.on.on.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 4.153645833333333,
-      "pctAA": 3.5107421875,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 4.200846354166667,
+      "pctAA": 0.3605143229166667,
       "mismatches": [
         {
           "part": "root",
@@ -3480,16 +4722,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.on.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3535,6 +4800,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -3543,10 +4832,10 @@
     },
     {
       "key": "none.on.on.on.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3595,16 +4884,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "none.on.on.on.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3650,6 +4962,30 @@
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -3658,10 +4994,10 @@
     },
     {
       "key": "none.on.on.on.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 4.153645833333333,
-      "pctAA": 0.3629557291666667,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 4.544270833333333,
+      "pctAA": 0.7470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3710,16 +5046,39 @@
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.off.off.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -3729,24 +5088,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -3755,50 +5120,55 @@
     },
     {
       "key": "large.off.off.off.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.149739583333333,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.70556640625,
+      "pctAA": 0.08382161458333333,
       "mismatches": [
         {
           "part": "root",
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.off.off.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -3808,24 +5178,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -3834,10 +5210,10 @@
     },
     {
       "key": "large.off.off.off.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.149739583333333,
+      "channelsCompared": 45,
+      "channelsEqual": 39,
+      "pctExact": 0.70556640625,
+      "pctAA": 0.08382161458333333,
       "mismatches": [
         {
           "part": "root",
@@ -3847,37 +5223,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.off.off.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -3893,30 +5274,36 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -3925,10 +5312,10 @@
     },
     {
       "key": "large.off.off.off.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.794270833333333,
-      "pctAA": 0.4842122395833333,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 5.780436197916667,
+      "pctAA": 0.44921875,
       "mismatches": [
         {
           "part": "root",
@@ -3944,43 +5331,48 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
+        },
+        {
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.off.off.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -3996,30 +5388,36 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -4028,10 +5426,10 @@
     },
     {
       "key": "large.off.off.off.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.794270833333333,
-      "pctAA": 0.4842122395833333,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 5.780436197916667,
+      "pctAA": 0.44921875,
       "mismatches": [
         {
           "part": "root",
@@ -4047,67 +5445,54 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.off.on.enabled__default",
-      "channelsCompared": 61,
-      "channelsEqual": 55,
-      "pctExact": 3.837890625,
-      "pctAA": 2.81005859375,
+      "channelsCompared": 63,
+      "channelsEqual": 60,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -4125,10 +5510,10 @@
     },
     {
       "key": "large.off.off.on.enabled__hover",
-      "channelsCompared": 61,
-      "channelsEqual": 52,
-      "pctExact": 5.747884114583333,
-      "pctAA": 2.8165690104166665,
+      "channelsCompared": 63,
+      "channelsEqual": 57,
+      "pctExact": 5.474446614583333,
+      "pctAA": 0.3011067708333333,
       "mismatches": [
         {
           "part": "root",
@@ -4141,24 +5526,6 @@
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -4188,34 +5555,16 @@
     },
     {
       "key": "large.off.off.on.enabled__focus-visible",
-      "channelsCompared": 61,
-      "channelsEqual": 53,
-      "pctExact": 4.58251953125,
-      "pctAA": 3.3846028645833335,
+      "channelsCompared": 63,
+      "channelsEqual": 58,
+      "pctExact": 1.9856770833333333,
+      "pctAA": 1.1604817708333333,
       "mismatches": [
         {
           "part": "root",
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -4245,10 +5594,10 @@
     },
     {
       "key": "large.off.off.on.enabled__active",
-      "channelsCompared": 61,
-      "channelsEqual": 52,
-      "pctExact": 5.7568359375,
-      "pctAA": 2.79541015625,
+      "channelsCompared": 63,
+      "channelsEqual": 57,
+      "pctExact": 5.46630859375,
+      "pctAA": 0.31982421875,
       "mismatches": [
         {
           "part": "root",
@@ -4261,24 +5610,6 @@
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -4308,10 +5639,10 @@
     },
     {
       "key": "large.off.off.on.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.791015625,
-      "pctAA": 0.712890625,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 5.794270833333333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -4327,30 +5658,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -4359,10 +5702,10 @@
     },
     {
       "key": "large.off.off.on.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.775553385416667,
-      "pctAA": 0.7405598958333334,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 5.780436197916667,
+      "pctAA": 0.4500325520833333,
       "mismatches": [
         {
           "part": "root",
@@ -4378,30 +5721,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -4410,10 +5765,10 @@
     },
     {
       "key": "large.off.off.on.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.791015625,
-      "pctAA": 0.712890625,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 5.794270833333333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -4429,30 +5784,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -4461,10 +5828,10 @@
     },
     {
       "key": "large.off.off.on.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.775553385416667,
-      "pctAA": 0.7405598958333334,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 5.780436197916667,
+      "pctAA": 0.4500325520833333,
       "mismatches": [
         {
           "part": "root",
@@ -4477,12 +5844,6 @@
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
         },
         {
           "part": "root",
@@ -4492,18 +5853,36 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -4512,10 +5891,10 @@
     },
     {
       "key": "large.off.on.off.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.481770833333333,
-      "pctAA": 4.84130859375,
+      "channelsCompared": 45,
+      "channelsEqual": 33,
+      "pctExact": 1.76513671875,
+      "pctAA": 0.87646484375,
       "mismatches": [
         {
           "part": "root",
@@ -4528,12 +5907,6 @@
           "channel": "font-weight",
           "ours": "450",
           "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
         },
         {
           "part": "root",
@@ -4555,6 +5928,42 @@
         },
         {
           "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -4563,10 +5972,10 @@
     },
     {
       "key": "large.off.on.off.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 4.84130859375,
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.731608072916667,
+      "pctAA": 0.87890625,
       "mismatches": [
         {
           "part": "root",
@@ -4588,12 +5997,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -4612,19 +6015,54 @@
         },
         {
           "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.on.off.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 20,
-      "pctExact": 6.826171875,
-      "pctAA": 6.006673177083333,
+      "channelsCompared": 45,
+      "channelsEqual": 36,
+      "pctExact": 2.9256184895833335,
+      "pctAA": 1.8660481770833333,
       "mismatches": [
         {
           "part": "root",
@@ -4640,12 +6078,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
         },
         {
           "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -4654,10 +6122,10 @@
     },
     {
       "key": "large.off.on.off.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 19,
-      "pctExact": 5.481770833333333,
-      "pctAA": 4.84130859375,
+      "channelsCompared": 45,
+      "channelsEqual": 35,
+      "pctExact": 5.72998046875,
+      "pctAA": 0.88134765625,
       "mismatches": [
         {
           "part": "root",
@@ -4679,273 +6147,72 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
         },
         {
           "part": "root",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
-        }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
-    },
-    {
-      "key": "large.off.on.off.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(227, 227, 227, 1)",
-          "theirs": "rgba(0, 0, 0, 0.05)"
         },
         {
-          "part": "root",
-          "channel": "cursor",
-          "ours": "auto",
-          "theirs": "default"
-        },
-        {
-          "part": "root",
-          "channel": "font-weight",
-          "ours": "450",
-          "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(48, 48, 48, 1)",
-          "theirs": "rgba(0, 0, 0, 0)"
-        },
-        {
-          "part": "root",
-          "channel": "outline-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "outline-width",
-          "ours": "3px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "text-align",
-          "ours": "start",
-          "theirs": "center"
-        }
-      ]
-    },
-    {
-      "key": "large.off.on.off.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(227, 227, 227, 1)",
-          "theirs": "rgba(0, 0, 0, 0.05)"
-        },
-        {
-          "part": "root",
-          "channel": "cursor",
-          "ours": "auto",
-          "theirs": "default"
-        },
-        {
-          "part": "root",
-          "channel": "font-weight",
-          "ours": "450",
-          "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(48, 48, 48, 1)",
-          "theirs": "rgba(0, 0, 0, 0)"
-        },
-        {
-          "part": "root",
-          "channel": "outline-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "outline-width",
-          "ours": "3px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "text-align",
-          "ours": "start",
-          "theirs": "center"
-        }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
-    },
-    {
-      "key": "large.off.on.off.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(227, 227, 227, 1)",
-          "theirs": "rgba(0, 0, 0, 0.05)"
-        },
-        {
-          "part": "root",
-          "channel": "cursor",
-          "ours": "auto",
-          "theirs": "default"
-        },
-        {
-          "part": "root",
-          "channel": "font-weight",
-          "ours": "450",
-          "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(48, 48, 48, 1)",
-          "theirs": "rgba(0, 0, 0, 0)"
-        },
-        {
-          "part": "root",
-          "channel": "outline-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "outline-width",
-          "ours": "3px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "text-align",
-          "ours": "start",
-          "theirs": "center"
-        }
-      ]
-    },
-    {
-      "key": "large.off.on.off.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "background-color",
-          "ours": "rgba(227, 227, 227, 1)",
-          "theirs": "rgba(0, 0, 0, 0.05)"
-        },
-        {
-          "part": "root",
-          "channel": "cursor",
-          "ours": "auto",
-          "theirs": "default"
-        },
-        {
-          "part": "root",
-          "channel": "font-weight",
-          "ours": "450",
-          "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(48, 48, 48, 1)",
-          "theirs": "rgba(0, 0, 0, 0)"
-        },
-        {
-          "part": "root",
-          "channel": "outline-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "outline-width",
-          "ours": "3px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "text-align",
-          "ours": "start",
-          "theirs": "center"
-        }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
-    },
-    {
-      "key": "large.off.on.on.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 15,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
-      "mismatches": [
-        {
-          "part": "root",
+          "part": "text",
           "channel": "cursor",
           "ours": "auto",
           "theirs": "pointer"
         },
         {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        }
+      ]
+    },
+    {
+      "key": "large.off.on.off.disabled__default",
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
           "part": "root",
           "channel": "font-weight",
           "ours": "450",
           "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
         },
         {
           "part": "root",
@@ -4968,17 +6235,371 @@
         {
           "part": "root",
           "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "ours": "8px",
+          "theirs": "6px"
         },
         {
           "part": "root",
           "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "ours": "8px",
+          "theirs": "6px"
         },
         {
           "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        }
+      ]
+    },
+    {
+      "key": "large.off.on.off.disabled__hover",
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "root",
+          "channel": "font-weight",
+          "ours": "450",
+          "theirs": "400"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "root",
+          "channel": "outline-width",
+          "ours": "3px",
+          "theirs": "1px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        }
+      ]
+    },
+    {
+      "key": "large.off.on.off.disabled__focus-visible",
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "root",
+          "channel": "font-weight",
+          "ours": "450",
+          "theirs": "400"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "root",
+          "channel": "outline-width",
+          "ours": "3px",
+          "theirs": "1px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        }
+      ]
+    },
+    {
+      "key": "large.off.on.off.disabled__active",
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 227, 227, 1)",
+          "theirs": "rgba(0, 0, 0, 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "root",
+          "channel": "font-weight",
+          "ours": "450",
+          "theirs": "400"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "root",
+          "channel": "outline-width",
+          "ours": "3px",
+          "theirs": "1px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        }
+      ]
+    },
+    {
+      "key": "large.off.on.on.enabled__default",
+      "channelsCompared": 45,
+      "channelsEqual": 35,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "root",
+          "channel": "font-weight",
+          "ours": "450",
+          "theirs": "400"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(48, 48, 48, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "root",
+          "channel": "outline-width",
+          "ours": "3px",
+          "theirs": "1px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -4987,10 +6608,10 @@
     },
     {
       "key": "large.off.on.on.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 5.450846354166667,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -5012,12 +6633,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -5036,31 +6651,42 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.on.on.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 18,
-      "pctExact": 7.190755208333333,
-      "pctAA": 6.371256510416667,
+      "channelsCompared": 45,
+      "channelsEqual": 38,
+      "pctExact": 2.05078125,
+      "pctAA": 1.2272135416666667,
       "mismatches": [
         {
           "part": "root",
@@ -5076,24 +6702,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "pointer"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -5102,10 +6734,10 @@
     },
     {
       "key": "large.off.on.on.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 5.43212890625,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -5127,37 +6759,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "pointer"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.on.on.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
       "mismatches": [
         {
           "part": "root",
@@ -5179,12 +6816,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -5203,6 +6834,42 @@
         },
         {
           "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -5211,10 +6878,10 @@
     },
     {
       "key": "large.off.on.on.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
       "mismatches": [
         {
           "part": "root",
@@ -5236,12 +6903,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -5257,22 +6918,57 @@
           "channel": "outline-width",
           "ours": "3px",
           "theirs": "1px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
         },
         {
           "part": "root",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.off.on.on.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
       "mismatches": [
         {
           "part": "root",
@@ -5294,12 +6990,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -5318,6 +7008,42 @@
         },
         {
           "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -5326,10 +7052,10 @@
     },
     {
       "key": "large.off.on.on.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 16,
-      "pctExact": 5.481770833333333,
-      "pctAA": 0.3621419270833333,
+      "channelsCompared": 45,
+      "channelsEqual": 32,
+      "pctExact": 5.791015625,
+      "pctAA": 0.9114583333333334,
       "mismatches": [
         {
           "part": "root",
@@ -5351,12 +7077,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -5375,19 +7095,54 @@
         },
         {
           "part": "root",
+          "channel": "padding-left",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "padding-right",
+          "ours": "8px",
+          "theirs": "6px"
+        },
+        {
+          "part": "root",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.off.off.enabled__default",
-      "channelsCompared": 87,
-      "channelsEqual": 74,
-      "pctExact": 4.268391927083333,
-      "pctAA": 3.5929361979166665,
+      "channelsCompared": 108,
+      "channelsEqual": 94,
+      "pctExact": 2.2542317708333335,
+      "pctAA": 1.5348307291666667,
       "mismatches": [
         {
           "part": "root",
@@ -5397,24 +7152,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -5471,10 +7232,10 @@
     },
     {
       "key": "large.on.off.off.enabled__hover",
-      "channelsCompared": 87,
-      "channelsEqual": 73,
-      "pctExact": 4.268391927083333,
-      "pctAA": 3.6629231770833335,
+      "channelsCompared": 108,
+      "channelsEqual": 93,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 1.7277018229166667,
       "mismatches": [
         {
           "part": "root",
@@ -5484,24 +7245,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -5564,10 +7331,10 @@
     },
     {
       "key": "large.on.off.off.enabled__focus-visible",
-      "channelsCompared": 87,
-      "channelsEqual": 57,
-      "pctExact": 4.42626953125,
-      "pctAA": 3.7093098958333335,
+      "channelsCompared": 108,
+      "channelsEqual": 77,
+      "pctExact": 2.8776041666666665,
+      "pctAA": 2.001953125,
       "mismatches": [
         {
           "part": "root",
@@ -5577,24 +7344,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -5753,10 +7526,10 @@
     },
     {
       "key": "large.on.off.off.enabled__active",
-      "channelsCompared": 87,
-      "channelsEqual": 73,
-      "pctExact": 4.268391927083333,
-      "pctAA": 3.6629231770833335,
+      "channelsCompared": 108,
+      "channelsEqual": 93,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 1.7277018229166667,
       "mismatches": [
         {
           "part": "root",
@@ -5766,24 +7539,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-rendering",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -5846,10 +7625,10 @@
     },
     {
       "key": "large.on.off.off.disabled__default",
-      "channelsCompared": 87,
-      "channelsEqual": 70,
-      "pctExact": 5.791015625,
-      "pctAA": 0.35888671875,
+      "channelsCompared": 108,
+      "channelsEqual": 90,
+      "pctExact": 7.356770833333333,
+      "pctAA": 1.9173177083333333,
       "mismatches": [
         {
           "part": "root",
@@ -5865,30 +7644,36 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -5957,10 +7742,10 @@
     },
     {
       "key": "large.on.off.off.disabled__hover",
-      "channelsCompared": 87,
-      "channelsEqual": 69,
-      "pctExact": 5.791015625,
-      "pctAA": 1.4298502604166667,
+      "channelsCompared": 108,
+      "channelsEqual": 89,
+      "pctExact": 6.507975260416667,
+      "pctAA": 1.9734700520833333,
       "mismatches": [
         {
           "part": "root",
@@ -5976,30 +7761,36 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -6074,10 +7865,10 @@
     },
     {
       "key": "large.on.off.off.disabled__focus-visible",
-      "channelsCompared": 87,
-      "channelsEqual": 69,
-      "pctExact": 5.791015625,
-      "pctAA": 0.35888671875,
+      "channelsCompared": 108,
+      "channelsEqual": 89,
+      "pctExact": 7.356770833333333,
+      "pctAA": 1.9173177083333333,
       "mismatches": [
         {
           "part": "root",
@@ -6093,30 +7884,36 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -6191,10 +7988,10 @@
     },
     {
       "key": "large.on.off.off.disabled__active",
-      "channelsCompared": 87,
-      "channelsEqual": 69,
-      "pctExact": 5.791015625,
-      "pctAA": 1.4298502604166667,
+      "channelsCompared": 108,
+      "channelsEqual": 89,
+      "pctExact": 6.507975260416667,
+      "pctAA": 1.9734700520833333,
       "mismatches": [
         {
           "part": "root",
@@ -6210,30 +8007,36 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -6308,34 +8111,16 @@
     },
     {
       "key": "large.on.off.on.enabled__default",
-      "channelsCompared": 124,
-      "channelsEqual": 110,
-      "pctExact": 3.4724934895833335,
-      "pctAA": 2.5065104166666665,
+      "channelsCompared": 126,
+      "channelsEqual": 115,
+      "pctExact": 2.2542317708333335,
+      "pctAA": 1.5348307291666667,
       "mismatches": [
         {
           "part": "root",
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -6401,10 +8186,10 @@
     },
     {
       "key": "large.on.off.on.enabled__hover",
-      "channelsCompared": 124,
-      "channelsEqual": 106,
-      "pctExact": 6.765950520833333,
-      "pctAA": 2.6350911458333335,
+      "channelsCompared": 126,
+      "channelsEqual": 111,
+      "pctExact": 7.1337890625,
+      "pctAA": 1.8465169270833333,
       "mismatches": [
         {
           "part": "root",
@@ -6417,24 +8202,6 @@
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -6518,34 +8285,16 @@
     },
     {
       "key": "large.on.off.on.enabled__focus-visible",
-      "channelsCompared": 124,
-      "channelsEqual": 107,
-      "pctExact": 4.515787760416667,
-      "pctAA": 3.3732096354166665,
+      "channelsCompared": 126,
+      "channelsEqual": 112,
+      "pctExact": 3.5856119791666665,
+      "pctAA": 2.685546875,
       "mismatches": [
         {
           "part": "root",
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -6629,10 +8378,10 @@
     },
     {
       "key": "large.on.off.on.enabled__active",
-      "channelsCompared": 124,
-      "channelsEqual": 106,
-      "pctExact": 6.765950520833333,
-      "pctAA": 2.6350911458333335,
+      "channelsCompared": 126,
+      "channelsEqual": 111,
+      "pctExact": 7.1337890625,
+      "pctAA": 1.8465169270833333,
       "mismatches": [
         {
           "part": "root",
@@ -6645,24 +8394,6 @@
           "channel": "font-feature-settings",
           "ours": "normal",
           "theirs": "\"calt\" 0"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
@@ -6746,10 +8477,10 @@
     },
     {
       "key": "large.on.off.on.disabled__default",
-      "channelsCompared": 87,
-      "channelsEqual": 70,
-      "pctExact": 6.797688802083333,
-      "pctAA": 1.6251627604166667,
+      "channelsCompared": 108,
+      "channelsEqual": 89,
+      "pctExact": 7.356770833333333,
+      "pctAA": 1.9173177083333333,
       "mismatches": [
         {
           "part": "root",
@@ -6765,30 +8496,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -6857,10 +8600,10 @@
     },
     {
       "key": "large.on.off.on.disabled__hover",
-      "channelsCompared": 87,
-      "channelsEqual": 69,
-      "pctExact": 6.004231770833333,
-      "pctAA": 1.6837565104166667,
+      "channelsCompared": 108,
+      "channelsEqual": 88,
+      "pctExact": 6.507975260416667,
+      "pctAA": 1.9742838541666667,
       "mismatches": [
         {
           "part": "root",
@@ -6876,30 +8619,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -6974,10 +8729,10 @@
     },
     {
       "key": "large.on.off.on.disabled__focus-visible",
-      "channelsCompared": 87,
-      "channelsEqual": 69,
-      "pctExact": 6.797688802083333,
-      "pctAA": 1.6251627604166667,
+      "channelsCompared": 108,
+      "channelsEqual": 88,
+      "pctExact": 7.356770833333333,
+      "pctAA": 1.9173177083333333,
       "mismatches": [
         {
           "part": "root",
@@ -6993,30 +8748,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -7091,10 +8858,10 @@
     },
     {
       "key": "large.on.off.on.disabled__active",
-      "channelsCompared": 87,
-      "channelsEqual": 69,
-      "pctExact": 6.004231770833333,
-      "pctAA": 1.6837565104166667,
+      "channelsCompared": 108,
+      "channelsEqual": 88,
+      "pctExact": 6.507975260416667,
+      "pctAA": 1.9742838541666667,
       "mismatches": [
         {
           "part": "root",
@@ -7110,30 +8877,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(181, 181, 181, 1)"
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-rendering",
+          "ours": "auto",
+          "theirs": "optimizelegibility"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "none",
+          "theirs": "inline"
+        },
+        {
+          "part": "label",
+          "channel": "font-feature-settings",
+          "ours": "normal",
+          "theirs": "\"calt\" 0"
+        },
+        {
+          "part": "label",
           "channel": "text-rendering",
           "ours": "auto",
           "theirs": "optimizelegibility"
@@ -7208,10 +8987,10 @@
     },
     {
       "key": "large.on.on.off.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 15,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 35,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -7224,12 +9003,6 @@
           "channel": "font-weight",
           "ours": "450",
           "theirs": "400"
-        },
-        {
-          "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
         },
         {
           "part": "root",
@@ -7251,18 +9024,30 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -7271,10 +9056,10 @@
     },
     {
       "key": "large.on.on.off.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 5.450846354166667,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -7296,12 +9081,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7320,31 +9099,42 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.off.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 18,
-      "pctExact": 7.190755208333333,
-      "pctAA": 6.371256510416667,
+      "channelsCompared": 45,
+      "channelsEqual": 38,
+      "pctExact": 2.05078125,
+      "pctAA": 1.2272135416666667,
       "mismatches": [
         {
           "part": "root",
@@ -7360,24 +9150,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "pointer"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -7386,10 +9182,10 @@
     },
     {
       "key": "large.on.on.off.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 5.43212890625,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -7411,37 +9207,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "pointer"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.off.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -7463,12 +9264,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7487,18 +9282,30 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -7507,10 +9314,10 @@
     },
     {
       "key": "large.on.on.off.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -7532,12 +9339,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7553,34 +9354,45 @@
           "channel": "outline-width",
           "ours": "3px",
           "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.off.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -7602,12 +9414,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7626,18 +9432,30 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -7646,10 +9464,10 @@
     },
     {
       "key": "large.on.on.off.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -7671,12 +9489,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7695,31 +9507,42 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.on.enabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 15,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 35,
+      "pctExact": 0.654296875,
+      "pctAA": 0.009765625,
       "mismatches": [
         {
           "part": "root",
@@ -7735,12 +9558,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7759,18 +9576,30 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -7779,10 +9608,10 @@
     },
     {
       "key": "large.on.on.on.enabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
+      "pctExact": 5.450846354166667,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -7804,12 +9633,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7828,31 +9651,42 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.on.enabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 18,
-      "pctExact": 7.190755208333333,
-      "pctAA": 6.371256510416667,
+      "channelsCompared": 45,
+      "channelsEqual": 38,
+      "pctExact": 2.05078125,
+      "pctAA": 1.2272135416666667,
       "mismatches": [
         {
           "part": "root",
@@ -7868,24 +9702,30 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "pointer"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -7894,10 +9734,10 @@
     },
     {
       "key": "large.on.on.on.enabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 17,
-      "pctExact": 5.794270833333333,
-      "pctAA": 5.15380859375,
+      "channelsCompared": 45,
+      "channelsEqual": 37,
+      "pctExact": 5.450846354166667,
+      "pctAA": 0.00732421875,
       "mismatches": [
         {
           "part": "root",
@@ -7919,37 +9759,42 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
           "ours": "auto",
-          "theirs": "24px"
+          "theirs": "pointer"
         },
         {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "pointer"
         },
         {
-          "part": "root",
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.on.disabled__default",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -7971,12 +9816,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -7995,18 +9834,30 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -8015,10 +9866,10 @@
     },
     {
       "key": "large.on.on.on.disabled__hover",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -8040,12 +9891,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -8061,34 +9906,45 @@
           "channel": "outline-width",
           "ours": "3px",
           "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
         },
         {
           "part": "root",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
+        },
+        {
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.on.on.on.disabled__focus-visible",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -8110,12 +9966,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -8134,18 +9984,30 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
@@ -8154,10 +10016,10 @@
     },
     {
       "key": "large.on.on.on.disabled__active",
-      "channelsCompared": 24,
-      "channelsEqual": 14,
+      "channelsCompared": 45,
+      "channelsEqual": 34,
       "pctExact": 5.794270833333333,
-      "pctAA": 0.3621419270833333,
+      "pctAA": 0.3922526041666667,
       "mismatches": [
         {
           "part": "root",
@@ -8179,12 +10041,6 @@
         },
         {
           "part": "root",
-          "channel": "min-height",
-          "ours": "auto",
-          "theirs": "24px"
-        },
-        {
-          "part": "root",
           "channel": "outline-color",
           "ours": "rgba(48, 48, 48, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
@@ -8203,24 +10059,35 @@
         },
         {
           "part": "root",
-          "channel": "padding-left",
-          "ours": "6px",
-          "theirs": "8px"
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
         },
         {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "6px",
-          "theirs": "8px"
+          "part": "text",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
         },
         {
-          "part": "root",
+          "part": "text",
+          "channel": "text-align",
+          "ours": "start",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "auto",
+          "theirs": "default"
+        },
+        {
+          "part": "label",
           "channel": "text-align",
           "ours": "start",
           "theirs": "center"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     }
   ]
 }

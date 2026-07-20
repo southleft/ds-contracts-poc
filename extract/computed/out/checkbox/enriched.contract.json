@@ -203,8 +203,8 @@
                 "backdrop": {
                   "shape": {
                     "kind": "rect",
-                    "width": 20,
-                    "height": 20
+                    "width": 18,
+                    "height": 18
                   },
                   "tokens": {
                     "border-width": "{p.border-width-0165}",
@@ -325,6 +325,7 @@
                         "size": 22
                       },
                       "tokens": {
+                        "color": "{imported.checkbox.icon-3.color}",
                         "margin-left": "{imported.shared.size-1}",
                         "margin-right": "{imported.shared.size-1}",
                         "min-height": "{imported.shared.size-0}",
@@ -398,6 +399,7 @@
                     }
                   },
                   "tokens": {
+                    "color": "{imported.checkbox.icon.color}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}"
                   },
@@ -494,6 +496,9 @@
                 }
               },
               "tokens": {
+                "font-size": "{imported.checkbox.label.font-size}",
+                "font-weight": "{imported.checkbox.label.font-weight}",
+                "line-height": "{imported.checkbox.label.line-height}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               },

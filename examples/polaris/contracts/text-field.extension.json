@@ -18,6 +18,18 @@
           "$value": "1",
           "$type": "number"
         },
+        "size-13": {
+          "$value": "13px",
+          "$type": "dimension"
+        },
+        "num-450": {
+          "$value": "450",
+          "$type": "number"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
         "num-20": {
           "$value": "20",
           "$type": "number"
@@ -73,14 +85,6 @@
             "$value": "#303030",
             "$type": "color"
           },
-          "font-size": {
-            "$value": "13px",
-            "$type": "dimension"
-          },
-          "line-height": {
-            "$value": "20px",
-            "$type": "dimension"
-          },
           "top": {
             "slim": {
               "$value": "4px",
@@ -111,6 +115,10 @@
           }
         },
         "icon": {
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
           "font-weight": {
             "$value": "400",
             "$type": "number"
@@ -3068,7 +3076,11 @@
   ],
   "styledChannelReceipts": [
     "control-fallback: no control for <label> — span control used (part label__text)",
+    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-3 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "control-fallback: no control for <input> — span control used (part input)",
+    "text-part-typography-carried: label-4 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "svg-host-color-carried: icon — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0-1-1-0-0)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0-1-1-0-1)"

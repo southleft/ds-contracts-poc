@@ -1,6 +1,6 @@
 # TextField — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.text-field` v0.3.0. Canvas-drawn values are read directly off the
+Contract: `polaris.text-field` v0.3.1. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/textfield/captured-truth.json` — the computed styles of the REAL
@@ -119,9 +119,9 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | label-2 | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | label-2 | color | `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Disabled` | `rgba(181, 181, 181, 1)` | `rgba(181, 181, 181, 1)` | match |  |
 | label-2 | color | 7 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(48, 48, 48, 1)` | `rgba(48, 48, 48, 1)` | match |  |
-| label-2 | font-size | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `14px` | `13px` | +1px |  |
+| label-2 | font-size | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `13px` | `13px` | 0 |  |
 | label-2 | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
-| label-2 | line-height | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `(ratio 1.2)` | `20px` | DIFFERS |  |
+| label-2 | line-height | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `20px` | `20px` | 0 |  |
 | label-2 | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | label-2 | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | label-2 | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |

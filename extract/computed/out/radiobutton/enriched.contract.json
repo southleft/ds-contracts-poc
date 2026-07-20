@@ -174,8 +174,8 @@
                 "backdrop": {
                   "shape": {
                     "kind": "rect",
-                    "width": 20,
-                    "height": 20
+                    "width": 18,
+                    "height": 18
                   },
                   "tokens": {
                     "border-radius": "{p.border-radius-full}",
@@ -243,6 +243,35 @@
                       }
                     }
                   ]
+                },
+                "backdrop-before": {
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 10,
+                    "height": 10
+                  },
+                  "literals": {
+                    "background-color": "rgba(255, 255, 255, 1)"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "checked",
+                      "equals": "unchecked",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "checked",
+                      "equals": "checked",
+                      "styles": {
+                        "position": "absolute",
+                        "top": "4px",
+                        "left": "4px"
+                      }
+                    }
+                  ],
+                  "description": "Drawn ::before pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a 10×10 ellipse at 4,4 inside backdrop, fill rgba(255, 255, 255, 1) — background+box+radius only, no content text; translate folded into top/left (receipted)."
                 }
               },
               "declaredStates": {
@@ -296,6 +325,9 @@
                 }
               },
               "tokens": {
+                "font-size": "{imported.radio-button.label.font-size}",
+                "font-weight": "{imported.radio-button.label.font-weight}",
+                "line-height": "{imported.radio-button.label.line-height}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               },

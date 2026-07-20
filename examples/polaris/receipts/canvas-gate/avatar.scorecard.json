@@ -1,7 +1,7 @@
 {
   "component": "Avatar",
   "contractId": "polaris.avatar",
-  "contractVersion": "0.3.0",
+  "contractVersion": "0.3.1",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -20,54 +20,50 @@
     {
       "cell": "Size=Md",
       "kind": "base",
-      "pctExactUnmasked": 28.76,
-      "pctAAUnmasked": 18.85,
-      "pctAAMasked": 18.85,
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "56x56",
       "realPx": "56x56",
-      "inkCanvasPct": 97.42,
-      "inkRealPct": 97.07,
-      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 97.07,
+      "inkRealPct": 97.07
     },
     {
       "cell": "Size=Xs",
       "kind": "base",
-      "pctExactUnmasked": 33.38,
-      "pctAAUnmasked": 18.31,
-      "pctAAMasked": 18.31,
+      "pctExactUnmasked": 0.25,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "40x40",
       "realPx": "40x40",
-      "inkCanvasPct": 97.88,
-      "inkRealPct": 97.5,
-      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 97.5,
+      "inkRealPct": 97.5
     },
     {
       "cell": "Size=Sm",
       "kind": "base",
-      "pctExactUnmasked": 28.47,
-      "pctAAUnmasked": 17.45,
-      "pctAAMasked": 17.45,
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "48x48",
       "realPx": "48x48",
-      "inkCanvasPct": 96.48,
-      "inkRealPct": 96.01,
-      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 96.01,
+      "inkRealPct": 96.01
     },
     {
       "cell": "Size=Lg",
       "kind": "base",
-      "pctExactUnmasked": 28.81,
-      "pctAAUnmasked": 18.31,
-      "pctAAMasked": 18.31,
+      "pctExactUnmasked": 0.02,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "64x64",
       "realPx": "64x64",
-      "inkCanvasPct": 96.26,
-      "inkRealPct": 95.7,
-      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 95.7,
+      "inkRealPct": 95.7
     },
     {
       "cell": "Size=Xl",
@@ -79,43 +75,21 @@
       "canvasPx": "80x80",
       "realPx": "80x80",
       "inkCanvasPct": 97.25,
-      "inkRealPct": 97.25,
-      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkRealPct": 97.25
     }
   ],
   "summary": {
     "cells": 5,
-    "meanExactUnmasked": 23.88,
-    "meanAAUnmasked": 14.58,
-    "meanAAMasked": 14.58,
-    "maxAAMasked": 18.85,
+    "meanExactUnmasked": 0.05,
+    "meanAAUnmasked": 0,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
     "worstCell": "Size=Md",
-    "cellsOver10Masked": [
-      {
-        "cell": "Size=Md",
-        "pctAAMasked": 18.85,
-        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
-      },
-      {
-        "cell": "Size=Xs",
-        "pctAAMasked": 18.31,
-        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
-      },
-      {
-        "cell": "Size=Sm",
-        "pctAAMasked": 17.45,
-        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
-      },
-      {
-        "cell": "Size=Lg",
-        "pctAAMasked": 18.31,
-        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
-      }
-    ],
+    "cellsOver10Masked": [],
     "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": true
   }

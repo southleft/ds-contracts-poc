@@ -67,6 +67,33 @@
     "root": {
       "declared": {
         "display": "block"
+      },
+      "parts": {
+        "root-small": {
+          "icon": {
+            "asset": "spinner-root-small",
+            "size": 20
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "small"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=small."
+        },
+        "root-large": {
+          "icon": {
+            "asset": "spinner-root-large",
+            "size": 44
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "large"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large."
+        }
+      },
+      "tokens": {
+        "color": "{imported.spinner.root.color}"
       }
     }
   },

@@ -1842,6 +1842,16 @@ export function generateTsx(
           .join('\n')}\n};\n\n`
       : '';
 
+  // CSS-module class access for a part name. Promoted anatomies carry
+  // hyphenated part names (round 4: "label-2", "icon-3-incomplete") — dot
+  // access on those parses as SUBTRACTION (styles.label-2 → styles.label - 2,
+  // NaN class names / ReferenceErrors at runtime; found by the CI journey
+  // validation, examples/ci/VALIDATION.md). Non-identifier names use bracket
+  // access; identifier names keep the dot spelling byte-for-byte.
+  const JS_IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
+  const stylesRef = (cls: string): string =>
+    JS_IDENT_RE.test(cls) ? `styles.${cls}` : `styles[${JSON.stringify(cls)}]`;
+
   const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
   const partAttrString = (part: Part): string =>
     Object.entries(part.attrs ?? {})
@@ -1872,8 +1882,8 @@ export function generateTsx(
       // accessible name comes from attrs (e.g. aria-label) — and only the
       // glyph itself is hidden.
       const node = part.element
-        ? `<${part.element} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" className={styles.${partName}Glyph} ${glyph} /></${part.element}>`
-        : `<span className={styles.${partName}} aria-hidden="true" ${glyph} />`;
+        ? `<${part.element} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" className={${stylesRef(`${partName}Glyph`)}} ${glyph} /></${part.element}>`
+        : `<span className={${stylesRef(partName)}} aria-hidden="true" ${glyph} />`;
       return wrapVisibleWhen(part, node);
     }
     if (part.repeat && part.component) {
@@ -1915,7 +1925,7 @@ export function generateTsx(
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
-      const node = `<${el} className={styles.${partName}}${partAttrString(part)}>{${expr}}</${el}>`;
+      const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>{${expr}}</${el}>`;
       return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
@@ -1925,14 +1935,14 @@ export function generateTsx(
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
       );
     }
     if (part.text !== undefined) {
       const el = part.element ?? 'span';
       return wrapVisibleWhen(
         part,
-        `<${el} className={styles.${partName}}${partAttrString(part)}>${part.text}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>${part.text}</${el}>`,
       );
     }
     if (part.meter) {
@@ -1940,7 +1950,7 @@ export function generateTsx(
       const m = codePropOf(part.meter.maxProp);
       return wrapVisibleWhen(
         part,
-        `<div className={styles.${partName}} style={{ width: \`\${Math.min(100, Math.max(0, (${v} / ${m}) * 100))}%\` }} />`,
+        `<div className={${stylesRef(partName)}} style={{ width: \`\${Math.min(100, Math.max(0, (${v} / ${m}) * 100))}%\` }} />`,
       );
     }
     const el = part.element ?? 'div';
@@ -1949,7 +1959,7 @@ export function generateTsx(
       .join('\n');
     return wrapVisibleWhen(
       part,
-      `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
+      `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
     );
   };
 

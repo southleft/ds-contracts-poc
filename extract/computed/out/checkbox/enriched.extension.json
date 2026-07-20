@@ -321,6 +321,10 @@
               "$type": "dimension"
             }
           },
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
           "left": {
             "unchecked": {
               "$value": "0px",
@@ -434,10 +438,30 @@
             }
           }
         },
+        "icon-3": {
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          }
+        },
         "icon-2": {
           "color": {
             "$value": "#ffffff",
             "$type": "color"
+          }
+        },
+        "label": {
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "450",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
           }
         }
       }
@@ -1424,10 +1448,13 @@
   "styledChannelReceipts": [
     "control-fallback: no control for <label> — span control used (part root)",
     "control-fallback: no control for <input> — span control used (part input)",
+    "svg-host-color-carried: icon — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "svg-host-color-carried: icon-3 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-4)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-0)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
-    "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0)"
+    "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0)",
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1510,6 +1537,7 @@
       "svg-viewbox-reconstructed: Checkbox.icon-2@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon-2@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex",
+      "shape-geometry-recarried: backdrop — reviewed shape 20×20 contradicts the captured computed box 18×18 (uniform across every enabled combo); computed truth wins geometry, the curated numbers retire (round 5c; kind \"rect\" stays the reviewed call)",
       "aspect-carried: icon computed width == height in every enabled combo (14/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
       "presence-carried: icon-3 (1/3 combos) →  hidden-when checked=unchecked, checked=checked, disabled",
       "presence-carried: icon-2 (2/3 combos) →  hidden-when checked=indeterminate, disabled",

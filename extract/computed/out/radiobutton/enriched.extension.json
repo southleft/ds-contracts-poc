@@ -191,6 +191,20 @@
               "$type": "color"
             }
           }
+        },
+        "label": {
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "450",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
         }
       },
       "shared": {
@@ -994,7 +1008,8 @@
   "structureReceipts": [],
   "styledChannelReceipts": [
     "control-fallback: no control for <label> — span control used (part root)",
-    "control-fallback: no control for <input> — span control used (part input)"
+    "control-fallback: no control for <input> — span control used (part input)",
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1044,6 +1059,8 @@
     "receipts": [
       "root-display-carried: flex",
       "sr-only-carried-as-hidden: input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "shape-geometry-recarried: backdrop — reviewed shape 20×20 contradicts the captured computed box 18×18 (uniform across every enabled combo); computed truth wins geometry, the curated numbers retire (round 5c; kind \"rect\" stays the reviewed call)",
+      "pseudo-decor-carried: backdrop::before → shape part \"backdrop-before\" (ellipse 10×10 at 4,4, fill rgba(255, 255, 255, 1); drawn in 2/4 default-interaction combos, hidden-when checked=unchecked; translate + host border folded into top/left; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted) — round 5c S5)",
       "literal-text-carried: label = \"Accounts are disabled\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []

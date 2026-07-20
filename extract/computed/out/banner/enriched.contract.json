@@ -423,6 +423,7 @@
                                         "size": 20
                                       },
                                       "tokens": {
+                                        "color": "{imported.shared.color-303030}",
                                         "min-height": "{imported.shared.size-0}",
                                         "min-width": "{imported.shared.size-0}"
                                       }
@@ -464,12 +465,12 @@
                             "border-top-right-radius": "{imported.shared.size-8}",
                             "border-top-width": "{imported.shared.size-0}",
                             "bottom": "{imported.shared.size-0}",
-                            "color": "{imported.banner.button.color}",
+                            "color": "{imported.shared.color-303030}",
                             "column-gap": "{imported.shared.size-2}",
-                            "font-size": "{imported.banner.button.font-size}",
-                            "font-weight": "{imported.banner.button.font-weight}",
+                            "font-size": "{imported.shared.size-13}",
+                            "font-weight": "{imported.shared.num-450}",
                             "left": "{imported.shared.size-0}",
-                            "line-height": "{imported.banner.button.line-height}",
+                            "line-height": "{imported.shared.size-20}",
                             "margin-bottom": "{imported.shared.size-neg-4}",
                             "margin-left": "{imported.shared.size-neg-4}",
                             "margin-right": "{imported.shared.size-neg-4}",
@@ -571,6 +572,9 @@
                                 "display": "inline"
                               },
                               "tokens": {
+                                "font-size": "{imported.shared.size-13}",
+                                "font-weight": "{imported.shared.num-450}",
+                                "line-height": "{imported.shared.size-20}",
                                 "min-height": "{imported.shared.size-0}",
                                 "min-width": "{imported.shared.size-0}"
                               }
@@ -655,12 +659,12 @@
                                     "border-top-width": "{imported.shared.size-0}",
                                     "bottom": "{imported.shared.size-0}",
                                     "box-shadow": "{imported.banner.button-2.box-shadow}",
-                                    "color": "{imported.banner.button-2.color}",
+                                    "color": "{imported.shared.color-303030}",
                                     "column-gap": "{imported.shared.size-2}",
-                                    "font-size": "{imported.banner.button-2.font-size}",
-                                    "font-weight": "{imported.banner.button-2.font-weight}",
+                                    "font-size": "{imported.shared.size-13}",
+                                    "font-weight": "{imported.shared.num-450}",
                                     "left": "{imported.shared.size-0}",
-                                    "line-height": "{imported.banner.button-2.line-height}",
+                                    "line-height": "{imported.shared.size-20}",
                                     "min-height": "{imported.shared.size-32}",
                                     "min-width": "{imported.shared.size-32}",
                                     "padding-bottom": "{imported.banner.button-2.padding-bottom}",

@@ -24,6 +24,26 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "part-0",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "part-0",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "part-0",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "part-0",
+        "channel": "overflow-y",
+        "value": "clip"
       }
     ],
     "state": []
@@ -36,19 +56,19 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 224,
-      "cellsEqual": 224,
+      "cellsCompared": 576,
+      "cellsEqual": 576,
       "pctEqual": 100,
       "rowsFullyEqual": 16,
       "rows": 16
     },
     "pixel": {
-      "pairs": 0,
+      "pairs": 8,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "meanExact": 100,
+      "meanAA": 100,
+      "maxAA": 100
     },
     "fusion": {
       "boundConfirmed": 8,
@@ -58,8 +78,8 @@
       "mintedLeavesUnfolded": 14,
       "baseBindings": 14,
       "stateBindings": 0,
-      "codeOnlyChannels": 6,
-      "overflowBindings": 7,
+      "codeOnlyChannels": 1,
+      "overflowBindings": 0,
       "folds": 9
     },
     "worstRows": [
@@ -114,25 +134,13 @@
     ],
     "topMismatchedChannels": [],
     "namedLosses": [
-      "overflow: part-0.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: part-0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: part-0.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: part-0.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: part-0.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: part-0.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: part-0.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "code-only: part-0.max-height — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: part-0.max-width — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: part-0.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: part-0.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: part-0.position — declared-channel value outside the bounded grammar — named residue (v15)"
+      "code-only: part-0.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "rows": [
       {
         "key": "extraSmall__default",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -140,17 +148,17 @@
       },
       {
         "key": "extraSmall__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "extraSmall__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -158,17 +166,17 @@
       },
       {
         "key": "extraSmall__active",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__default",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -176,17 +184,17 @@
       },
       {
         "key": "small__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -194,17 +202,17 @@
       },
       {
         "key": "small__active",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__default",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -212,17 +220,17 @@
       },
       {
         "key": "medium__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -230,17 +238,17 @@
       },
       {
         "key": "medium__active",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__default",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -248,17 +256,17 @@
       },
       {
         "key": "large__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
@@ -266,12 +274,12 @@
       },
       {
         "key": "large__active",
-        "channelsCompared": 14,
-        "channelsEqual": 14,
+        "channelsCompared": 36,
+        "channelsEqual": 36,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       }
     ]
   }

@@ -1,4 +1,4 @@
-/* Spinner — from polaris.spinner v0.3.0 (core/emit-html.ts) */
+/* Spinner — from polaris.spinner v0.3.1 (core/emit-html.ts) */
 
 .spinner, .spinner *, .spinner *::before, .spinner *::after {
   box-sizing: border-box;
@@ -9,7 +9,30 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  color: var(--imported-spinner-root-color);
   display: block;
+}
+
+.spinner__root-small svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.spinner__root-small {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.spinner__root-large svg {
+  display: block;
+  width: 44px;
+  height: 44px;
+}
+
+.spinner__root-large {
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 /* showcase chrome */

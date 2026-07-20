@@ -269,11 +269,17 @@
           "prop": "tone",
           "map": {
             "critical": {
+              "background-color": "{imported.button.root.background-color.{variant}.critical}",
               "background-image": "{imported.button.root.background-image.{variant}.critical}",
+              "box-shadow": "{imported.button.root.box-shadow.{variant}.critical}",
+              "color": "{imported.button.root.color.{variant}.critical}",
               "outline-color": "{imported.button.root.outline-color.{variant}.critical}"
             },
             "success": {
+              "background-color": "{imported.button.root.background-color.{variant}.success}",
               "background-image": "{imported.button.root.background-image.{variant}.success}",
+              "box-shadow": "{imported.button.root.box-shadow.{variant}.success}",
+              "color": "{imported.button.root.color.{variant}.success}",
               "outline-color": "{imported.button.root.outline-color.{variant}.success}"
             }
           }

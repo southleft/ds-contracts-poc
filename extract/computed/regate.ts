@@ -157,7 +157,7 @@ async function main() {
     const declaredState = prep.declaredStates ?? [];
     const { enriched, overflowBindings } = applyMintToContract(
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
-      declaredBase, declaredState,
+      declaredBase, declaredState, prep.setPlaneLiterals ?? [],
     );
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
     const mergeInto = (dst: Record<string, unknown>, src: Record<string, unknown>) => {

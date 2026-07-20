@@ -217,6 +217,8 @@
                   ],
                   "tokens": {
                     "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.tag.label-2.font-weight}",
+                    "line-height": "{imported.shared.size-20}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}"
                   }
@@ -240,10 +242,83 @@
             "bottom": "{imported.shared.size-0}",
             "color": "{imported.tag.link.color}",
             "grid-template-columns": "{imported.tag.link.grid-template-columns}",
-            "grid-template-rows": "{imported.tag.link.grid-template-rows}",
+            "grid-template-rows": "{imported.shared.size-20}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}"
+          }
+        },
+        "text": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap"
+          },
+          "stylesWhen": [
+            {
+              "prop": "linked",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "clickable",
+              "styles": {
+                "display": "block"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "block"
+              }
+            }
+          ],
+          "parts": {
+            "label": {
+              "element": "span",
+              "tokens": {
+                "font-size": "{p.text-body-sm-font-size}",
+                "font-weight": "{p.text-body-sm-font-weight}",
+                "line-height": "{p.text-body-sm-font-line-height}",
+                "letter-spacing": "{p.text-body-sm-font-letter-spacing}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "text": "Wholesale",
+              "declared": {
+                "display": "inline",
+                "text-wrap-mode": "nowrap"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "linked",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "clickable",
+                  "styles": {
+                    "display": "inline"
+                  }
+                },
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "inline"
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-12}",
+            "line-height": "{imported.tag.text.line-height}"
           }
         },
         "part-1": {
@@ -386,7 +461,7 @@
             "flex-shrink": "{imported.tag.button.flex-shrink}",
             "font-size": "{imported.tag.button.font-size}",
             "left": "{imported.tag.button.left.none}",
-            "line-height": "{imported.tag.button.line-height}",
+            "line-height": "{imported.shared.size-20}",
             "margin-bottom": "{imported.tag.button.margin-bottom.none}",
             "margin-left": "{imported.tag.button.margin-left.none}",
             "margin-right": "{imported.tag.button.margin-right.none}",
@@ -453,7 +528,19 @@
           "outline-color": "{imported.tag.root.outline-color-state-focus-visible}",
           "outline-width": "{imported.tag.root.outline-width-state-focus-visible}"
         }
-      }
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "min-height": "24px",
+              "padding-left": "8px",
+              "padding-right": "8px"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

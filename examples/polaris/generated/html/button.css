@@ -1,4 +1,4 @@
-/* Button — from polaris.button v0.3.0 (core/emit-html.ts) */
+/* Button — from polaris.button v0.3.1 (core/emit-html.ts) */
 
 .button, .button *, .button *::before, .button *::after {
   box-sizing: border-box;
@@ -427,6 +427,26 @@
 }
 
 .button--tone-critical.button--variant-plain {
+  background-color: var(--imported-button-root-background-color-plain-critical);
+}
+
+.button--tone-critical.button--variant-primary {
+  background-color: var(--imported-button-root-background-color-primary-critical);
+}
+
+.button--tone-critical.button--variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary-critical);
+}
+
+.button--tone-critical.button--variant-tertiary {
+  background-color: var(--imported-button-root-background-color-tertiary-critical);
+}
+
+.button--tone-critical.button--variant-monochromePlain {
+  background-color: var(--imported-button-root-background-color-monochromePlain-critical);
+}
+
+.button--tone-critical.button--variant-plain {
   background-image: var(--imported-button-root-background-image-plain-critical);
 }
 
@@ -444,6 +464,46 @@
 
 .button--tone-critical.button--variant-monochromePlain {
   background-image: var(--imported-button-root-background-image-monochromePlain-critical);
+}
+
+.button--tone-critical.button--variant-plain {
+  box-shadow: var(--imported-button-root-box-shadow-plain-critical);
+}
+
+.button--tone-critical.button--variant-primary {
+  box-shadow: var(--imported-button-root-box-shadow-primary-critical);
+}
+
+.button--tone-critical.button--variant-secondary {
+  box-shadow: var(--imported-button-root-box-shadow-secondary-critical);
+}
+
+.button--tone-critical.button--variant-tertiary {
+  box-shadow: var(--imported-button-root-box-shadow-tertiary-critical);
+}
+
+.button--tone-critical.button--variant-monochromePlain {
+  box-shadow: var(--imported-button-root-box-shadow-monochromePlain-critical);
+}
+
+.button--tone-critical.button--variant-plain {
+  color: var(--imported-button-root-color-plain-critical);
+}
+
+.button--tone-critical.button--variant-primary {
+  color: var(--imported-button-root-color-primary-critical);
+}
+
+.button--tone-critical.button--variant-secondary {
+  color: var(--imported-button-root-color-secondary-critical);
+}
+
+.button--tone-critical.button--variant-tertiary {
+  color: var(--imported-button-root-color-tertiary-critical);
+}
+
+.button--tone-critical.button--variant-monochromePlain {
+  color: var(--imported-button-root-color-monochromePlain-critical);
 }
 
 .button--tone-critical.button--variant-plain {
@@ -467,6 +527,26 @@
 }
 
 .button--tone-success.button--variant-plain {
+  background-color: var(--imported-button-root-background-color-plain-success);
+}
+
+.button--tone-success.button--variant-primary {
+  background-color: var(--imported-button-root-background-color-primary-success);
+}
+
+.button--tone-success.button--variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary-success);
+}
+
+.button--tone-success.button--variant-tertiary {
+  background-color: var(--imported-button-root-background-color-tertiary-success);
+}
+
+.button--tone-success.button--variant-monochromePlain {
+  background-color: var(--imported-button-root-background-color-monochromePlain-success);
+}
+
+.button--tone-success.button--variant-plain {
   background-image: var(--imported-button-root-background-image-plain-success);
 }
 
@@ -484,6 +564,46 @@
 
 .button--tone-success.button--variant-monochromePlain {
   background-image: var(--imported-button-root-background-image-monochromePlain-success);
+}
+
+.button--tone-success.button--variant-plain {
+  box-shadow: var(--imported-button-root-box-shadow-plain-success);
+}
+
+.button--tone-success.button--variant-primary {
+  box-shadow: var(--imported-button-root-box-shadow-primary-success);
+}
+
+.button--tone-success.button--variant-secondary {
+  box-shadow: var(--imported-button-root-box-shadow-secondary-success);
+}
+
+.button--tone-success.button--variant-tertiary {
+  box-shadow: var(--imported-button-root-box-shadow-tertiary-success);
+}
+
+.button--tone-success.button--variant-monochromePlain {
+  box-shadow: var(--imported-button-root-box-shadow-monochromePlain-success);
+}
+
+.button--tone-success.button--variant-plain {
+  color: var(--imported-button-root-color-plain-success);
+}
+
+.button--tone-success.button--variant-primary {
+  color: var(--imported-button-root-color-primary-success);
+}
+
+.button--tone-success.button--variant-secondary {
+  color: var(--imported-button-root-color-secondary-success);
+}
+
+.button--tone-success.button--variant-tertiary {
+  color: var(--imported-button-root-color-tertiary-success);
+}
+
+.button--tone-success.button--variant-monochromePlain {
+  color: var(--imported-button-root-color-monochromePlain-success);
 }
 
 .button--tone-success.button--variant-plain {

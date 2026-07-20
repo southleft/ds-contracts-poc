@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/tag.contract.json (polaris.tag v0.3.0)
+ * Source of truth: contracts/tag.contract.json (polaris.tag v0.3.1)
  * Regenerate with: npm run generate
  */
 
@@ -26,6 +26,12 @@
 .root:focus-visible {
   outline-style: solid;
   outline-offset: 2px;
+}
+
+.size-large {
+  min-height: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .root:active:not(:disabled) {
@@ -97,7 +103,7 @@
   bottom: var(--imported-shared-size-0);
   color: var(--imported-tag-link-color);
   grid-template-columns: var(--imported-tag-link-grid-template-columns);
-  grid-template-rows: var(--imported-tag-link-grid-template-rows);
+  grid-template-rows: var(--imported-shared-size-20);
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
@@ -135,6 +141,8 @@
 
 .label-2 {
   font-size: var(--imported-shared-size-12);
+  font-weight: var(--imported-tag-label-2-font-weight);
+  line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
@@ -148,6 +156,52 @@
 
 .root[data-disabled] .label-2 {
   display: none;
+}
+
+.text {
+  display: flex;
+  font-size: var(--imported-shared-size-12);
+  line-height: var(--imported-tag-text-line-height);
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  text-wrap-mode: nowrap;
+}
+
+.root[data-linked] .text {
+  display: none;
+}
+
+.root[data-clickable] .text {
+  display: block;
+}
+
+.root[data-disabled] .text {
+  display: block;
+}
+
+.label {
+  font-size: var(--p-text-body-sm-font-size);
+  font-weight: var(--p-text-body-sm-font-weight);
+  line-height: var(--p-font-line-height-500);
+  letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: inline;
+  text-wrap-mode: nowrap;
+}
+
+.root[data-linked] .label {
+  display: none;
+}
+
+.root[data-clickable] .label {
+  display: inline;
+}
+
+.root[data-disabled] .label {
+  display: inline;
 }
 
 .part-1 {
@@ -181,7 +235,7 @@
   flex-shrink: var(--imported-tag-button-flex-shrink);
   font-size: var(--imported-tag-button-font-size);
   left: var(--imported-tag-button-left-none);
-  line-height: var(--imported-tag-button-line-height);
+  line-height: var(--imported-shared-size-20);
   margin-bottom: var(--imported-tag-button-margin-bottom-none);
   margin-left: var(--imported-tag-button-margin-left-none);
   margin-right: var(--imported-tag-button-margin-right-none);

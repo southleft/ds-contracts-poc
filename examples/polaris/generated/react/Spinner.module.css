@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/spinner.contract.json (polaris.spinner v0.3.0)
+ * Source of truth: contracts/spinner.contract.json (polaris.spinner v0.3.1)
  * Regenerate with: npm run generate
  */
 
@@ -8,5 +8,26 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  color: var(--imported-spinner-root-color);
   display: block;
+}
+
+.root-small svg {
+  width: 20px;
+  height: 20px;
+}
+
+.root-small {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.root-large svg {
+  width: 44px;
+  height: 44px;
+}
+
+.root-large {
+  display: inline-flex;
+  flex-shrink: 0;
 }

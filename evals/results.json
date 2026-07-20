@@ -1,6 +1,6 @@
 {
-  "passed": 123,
-  "total": 123,
+  "passed": 124,
+  "total": 124,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -615,6 +615,11 @@
     {
       "id": "wc-emitter-css-parity",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "react-hyphenated-part-names-execute",
+      "claim": "C3-detection",
       "pass": true
     }
   ]
