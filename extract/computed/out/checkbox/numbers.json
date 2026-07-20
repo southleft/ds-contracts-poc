@@ -14,8 +14,8 @@
     "checkbox": 10,
     "input": 27,
     "backdrop": 28,
-    "icon": 19,
-    "icon-3": 8,
+    "icon": 20,
+    "icon-3": 9,
     "icon-4": 25,
     "part-0-0-2-0-0-0": 18,
     "icon-2": 25,
@@ -292,7 +292,7 @@
       }
     ],
     "mintedLeavesUnfolded": 93,
-    "mintedLeavesFolded": 97
+    "mintedLeavesFolded": 99
   },
   "bound": {
     "cellsChecked": 3,
@@ -301,11 +301,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 97,
-    "baseBindings": 67,
+    "leaves": 99,
+    "baseBindings": 69,
     "stateBindings": 47,
     "byShape": {
-      "uniform": 90,
+      "uniform": 92,
       "perAxis": 23,
       "perPair": 0,
       "refused": 1
@@ -419,7 +419,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 84.08774373259052,
+    "computedPctEqual": 84.2196132596685,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 0,

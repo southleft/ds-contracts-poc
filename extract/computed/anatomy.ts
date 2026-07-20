@@ -473,6 +473,12 @@ export function reconstructSvg(
   svgEl: CapturedNode,
   receipts: string[],
   label: string,
+  /** Round 5c: prefer the currentColor spelling for fills equal to the
+   *  inherited color — set ONLY when the fill==color identity holds in
+   *  EVERY captured combo of this svg (a per-svg decision; a per-combo one
+   *  splits one authored asset into per-variant markups — the Button icon
+   *  regression this flag exists to prevent). */
+  preferCurrentColor = false,
 ): { markup: string; size: number; vb: number; extent: number; bumped: boolean } | null {
   // A path fill equal to the svg's inherited `color` is CSS currentColor in
   // spirit — emitting it AS currentColor separates glyph SHAPE from color
@@ -507,11 +513,19 @@ export function reconstructSvg(
         // fill equal to the svg's own computed fill is INHERITED (no
         // attribute — the host part's minted fill channel cascades in CSS);
         // fill equal to the inherited color is currentColor; else baked.
-        const fill = fillRaw && inheritedFill && fillRaw === inheritedFill
-          ? ''
-          : fillRaw && inheritedColor && fillRaw === inheritedColor
-            ? 'currentColor'
-            : fillRaw;
+        // Round 5c: when the fill==color identity holds across EVERY combo
+        // (preferCurrentColor — Spinner's `svg { fill: currentcolor }`), the
+        // glyph rides the color chain on every surface. Otherwise the round-4
+        // precedence stands: fill equal to the svg's own fill is INHERITED
+        // (host fill channel cascades); fill equal to the color is
+        // currentColor (Badge pip).
+        const fill = preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
+          ? 'currentColor'
+          : fillRaw && inheritedFill && fillRaw === inheritedFill
+            ? ''
+            : fillRaw && inheritedColor && fillRaw === inheritedColor
+              ? 'currentColor'
+              : fillRaw;
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
         // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED
@@ -691,12 +705,22 @@ export function promoteAnatomy(
     if (svgPlans.has(hostIdx)) continue;
     svgHostOf.set(svgIdx, hostIdx);
     // per-combo markup over combos where the svg is present
+    // Round 5c: the currentColor preference is a PER-SVG decision — the
+    // fill==color identity must hold in EVERY present combo (see
+    // reconstructSvg's preferCurrentColor doc).
+    let identityEverywhere = true;
+    for (const combo of presentBy.get(svgIdx) ?? []) {
+      const el = union.alignedByKey.get(`${combo.key}__default`)![svgIdx];
+      if (!el) continue;
+      const st = el.node.style;
+      if (!st['fill'] || !st['color'] || st['fill'] !== st['color']) { identityEverywhere = false; break; }
+    }
     const markups = new Map<string, { markup: string; size: number; vb: number; extent: number; bumped: boolean }>(); // comboKey → markup
     for (const combo of presentBy.get(svgIdx) ?? []) {
       const els = union.alignedByKey.get(`${combo.key}__default`)!;
       const el = els[svgIdx];
       if (!el) continue;
-      const r = reconstructSvg(el.node, receipts, `${comp.name}.${t.host.partName}@${combo.key}`);
+      const r = reconstructSvg(el.node, receipts, `${comp.name}.${t.host.partName}@${combo.key}`, identityEverywhere);
       if (r) markups.set(combo.key, r);
     }
     if (markups.size === 0) continue;

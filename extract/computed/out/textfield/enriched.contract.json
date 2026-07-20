@@ -997,6 +997,7 @@
                             "size": 20
                           },
                           "tokens": {
+                            "color": "{imported.text-field.icon.color}",
                             "font-weight": "{imported.text-field.icon.font-weight}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}"

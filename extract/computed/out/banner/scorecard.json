@@ -16,17 +16,17 @@
     "pairs": 64,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 4.462040070564517,
-    "meanAA": 2.0303574428763445,
-    "maxAA": 4.000840053763441
+    "meanExact": 4.452925487231184,
+    "meanAA": 2.0217888944892475,
+    "maxAA": 3.979334677419355
   },
   "fusion": {
     "boundConfirmed": 64,
     "boundCells": 96,
     "contradictions": 32,
-    "mintedLeaves": 54,
+    "mintedLeaves": 53,
     "mintedLeavesUnfolded": 268,
-    "baseBindings": 113,
+    "baseBindings": 114,
     "stateBindings": 2,
     "codeOnlyChannels": 3,
     "overflowBindings": 0,
@@ -35,14 +35,14 @@
   "worstRows": [
     {
       "key": "critical.off.on__focus-visible",
-      "pctAA": 4.000840053763441,
-      "pctExact": 6.468918010752688,
+      "pctAA": 3.979334677419355,
+      "pctExact": 6.446740591397849,
       "channelsMismatched": 7
     },
     {
       "key": "success.off.on__focus-visible",
-      "pctAA": 3.9769825268817205,
-      "pctExact": 6.414314516129032,
+      "pctAA": 3.966733870967742,
+      "pctExact": 6.404065860215054,
       "channelsMismatched": 7
     },
     {
@@ -53,20 +53,20 @@
     },
     {
       "key": "info.off.on__focus-visible",
-      "pctAA": 3.8049395161290325,
-      "pctExact": 6.47429435483871,
+      "pctAA": 3.7867943548387095,
+      "pctExact": 6.455477150537634,
       "channelsMismatched": 7
     },
     {
       "key": "critical.off.off__focus-visible",
-      "pctAA": 3.379872311827957,
-      "pctExact": 5.562163978494624,
+      "pctAA": 3.358366935483871,
+      "pctExact": 5.539986559139785,
       "channelsMismatched": 1
     },
     {
       "key": "success.off.off__focus-visible",
-      "pctAA": 3.3560147849462365,
-      "pctExact": 5.507224462365591,
+      "pctAA": 3.345766129032258,
+      "pctExact": 5.496975806451613,
       "channelsMismatched": 1
     },
     {
@@ -77,8 +77,8 @@
     },
     {
       "key": "info.off.off__focus-visible",
-      "pctAA": 3.1839717741935485,
-      "pctExact": 5.567540322580645,
+      "pctAA": 3.165826612903226,
+      "pctExact": 5.54872311827957,
       "channelsMismatched": 1
     }
   ],
@@ -143,8 +143,8 @@
       "key": "success.off.off__default",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.863407258064516,
-      "pctAA": 2.317372311827957,
+      "pctExact": 4.853158602150538,
+      "pctAA": 2.3071236559139785,
       "mismatches": [
         {
           "part": "title",
@@ -158,8 +158,8 @@
       "key": "success.off.off__hover",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.863407258064516,
-      "pctAA": 2.317372311827957,
+      "pctExact": 4.853158602150538,
+      "pctAA": 2.3071236559139785,
       "mismatches": [
         {
           "part": "title",
@@ -173,8 +173,8 @@
       "key": "success.off.off__focus-visible",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 5.507224462365591,
-      "pctAA": 3.3560147849462365,
+      "pctExact": 5.496975806451613,
+      "pctAA": 3.345766129032258,
       "mismatches": [
         {
           "part": "title",
@@ -188,8 +188,8 @@
       "key": "success.off.off__active",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.863407258064516,
-      "pctAA": 2.317372311827957,
+      "pctExact": 4.853158602150538,
+      "pctAA": 2.3071236559139785,
       "mismatches": [
         {
           "part": "title",
@@ -203,8 +203,8 @@
       "key": "success.off.on__default",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.501680107526882,
-      "pctAA": 2.6117271505376345,
+      "pctExact": 5.491431451612903,
+      "pctAA": 2.601478494623656,
       "mismatches": [
         {
           "part": "title",
@@ -248,8 +248,8 @@
       "key": "success.off.on__hover",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.501680107526882,
-      "pctAA": 2.6117271505376345,
+      "pctExact": 5.491431451612903,
+      "pctAA": 2.601478494623656,
       "mismatches": [
         {
           "part": "title",
@@ -293,8 +293,8 @@
       "key": "success.off.on__focus-visible",
       "channelsCompared": 183,
       "channelsEqual": 176,
-      "pctExact": 6.414314516129032,
-      "pctAA": 3.9769825268817205,
+      "pctExact": 6.404065860215054,
+      "pctAA": 3.966733870967742,
       "mismatches": [
         {
           "part": "title",
@@ -344,8 +344,8 @@
       "key": "success.off.on__active",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.501680107526882,
-      "pctAA": 2.6117271505376345,
+      "pctExact": 5.491431451612903,
+      "pctAA": 2.601478494623656,
       "mismatches": [
         {
           "part": "title",
@@ -389,7 +389,7 @@
       "key": "success.on.off__default",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 2.98252688172043,
+      "pctExact": 2.982358870967742,
       "pctAA": 1.0231854838709677,
       "mismatches": [
         {
@@ -428,7 +428,7 @@
       "key": "success.on.off__hover",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 2.98252688172043,
+      "pctExact": 2.982358870967742,
       "pctAA": 1.0231854838709677,
       "mismatches": [
         {
@@ -467,7 +467,7 @@
       "key": "success.on.off__focus-visible",
       "channelsCompared": 184,
       "channelsEqual": 178,
-      "pctExact": 3.897513440860215,
+      "pctExact": 3.897345430107527,
       "pctAA": 2.287130376344086,
       "mismatches": [
         {
@@ -512,7 +512,7 @@
       "key": "success.on.off__active",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 2.98252688172043,
+      "pctExact": 2.982358870967742,
       "pctAA": 1.0231854838709677,
       "mismatches": [
         {
@@ -551,7 +551,7 @@
       "key": "success.on.on__default",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.4731182795698925,
+      "pctExact": 3.4729502688172045,
       "pctAA": 1.2300067204301075,
       "mismatches": [
         {
@@ -620,7 +620,7 @@
       "key": "success.on.on__hover",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.4731182795698925,
+      "pctExact": 3.4729502688172045,
       "pctAA": 1.2300067204301075,
       "mismatches": [
         {
@@ -689,7 +689,7 @@
       "key": "success.on.on__focus-visible",
       "channelsCompared": 246,
       "channelsEqual": 235,
-      "pctExact": 4.495631720430108,
+      "pctExact": 4.495463709677419,
       "pctAA": 2.601478494623656,
       "mismatches": [
         {
@@ -764,7 +764,7 @@
       "key": "success.on.on__active",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.4731182795698925,
+      "pctExact": 3.4729502688172045,
       "pctAA": 1.2300067204301075,
       "mismatches": [
         {
@@ -833,8 +833,8 @@
       "key": "info.off.off__default",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.924059139784946,
-      "pctAA": 2.1461693548387095,
+      "pctExact": 4.905241935483871,
+      "pctAA": 2.128024193548387,
       "mismatches": [
         {
           "part": "title",
@@ -848,8 +848,8 @@
       "key": "info.off.off__hover",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.924059139784946,
-      "pctAA": 2.1461693548387095,
+      "pctExact": 4.905241935483871,
+      "pctAA": 2.128024193548387,
       "mismatches": [
         {
           "part": "title",
@@ -863,8 +863,8 @@
       "key": "info.off.off__focus-visible",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 5.567540322580645,
-      "pctAA": 3.1839717741935485,
+      "pctExact": 5.54872311827957,
+      "pctAA": 3.165826612903226,
       "mismatches": [
         {
           "part": "title",
@@ -878,8 +878,8 @@
       "key": "info.off.off__active",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.924059139784946,
-      "pctAA": 2.1461693548387095,
+      "pctExact": 4.905241935483871,
+      "pctAA": 2.128024193548387,
       "mismatches": [
         {
           "part": "title",
@@ -893,8 +893,8 @@
       "key": "info.off.on__default",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.562331989247312,
-      "pctAA": 2.440524193548387,
+      "pctExact": 5.543514784946237,
+      "pctAA": 2.4223790322580645,
       "mismatches": [
         {
           "part": "title",
@@ -938,8 +938,8 @@
       "key": "info.off.on__hover",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.562331989247312,
-      "pctAA": 2.440524193548387,
+      "pctExact": 5.543514784946237,
+      "pctAA": 2.4223790322580645,
       "mismatches": [
         {
           "part": "title",
@@ -983,8 +983,8 @@
       "key": "info.off.on__focus-visible",
       "channelsCompared": 183,
       "channelsEqual": 176,
-      "pctExact": 6.47429435483871,
-      "pctAA": 3.8049395161290325,
+      "pctExact": 6.455477150537634,
+      "pctAA": 3.7867943548387095,
       "mismatches": [
         {
           "part": "title",
@@ -1034,8 +1034,8 @@
       "key": "info.off.on__active",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.562331989247312,
-      "pctAA": 2.440524193548387,
+      "pctExact": 5.543514784946237,
+      "pctAA": 2.4223790322580645,
       "mismatches": [
         {
           "part": "title",
@@ -1079,8 +1079,8 @@
       "key": "info.on.off__default",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 3.0436827956989245,
-      "pctAA": 0.853494623655914,
+      "pctExact": 3.0315860215053765,
+      "pctAA": 0.8432459677419355,
       "mismatches": [
         {
           "part": "title",
@@ -1118,8 +1118,8 @@
       "key": "info.on.off__hover",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 3.0436827956989245,
-      "pctAA": 0.853494623655914,
+      "pctExact": 3.0315860215053765,
+      "pctAA": 0.8432459677419355,
       "mismatches": [
         {
           "part": "title",
@@ -1157,8 +1157,8 @@
       "key": "info.on.off__focus-visible",
       "channelsCompared": 184,
       "channelsEqual": 178,
-      "pctExact": 3.9583333333333335,
-      "pctAA": 2.1165994623655915,
+      "pctExact": 3.946236559139785,
+      "pctAA": 2.106350806451613,
       "mismatches": [
         {
           "part": "title",
@@ -1202,8 +1202,8 @@
       "key": "info.on.off__active",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 3.0436827956989245,
-      "pctAA": 0.853494623655914,
+      "pctExact": 3.0315860215053765,
+      "pctAA": 0.8432459677419355,
       "mismatches": [
         {
           "part": "title",
@@ -1241,8 +1241,8 @@
       "key": "info.on.on__default",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.534274193548387,
-      "pctAA": 1.0603158602150538,
+      "pctExact": 3.5221774193548385,
+      "pctAA": 1.0500672043010753,
       "mismatches": [
         {
           "part": "title",
@@ -1310,8 +1310,8 @@
       "key": "info.on.on__hover",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.534274193548387,
-      "pctAA": 1.0603158602150538,
+      "pctExact": 3.5221774193548385,
+      "pctAA": 1.0500672043010753,
       "mismatches": [
         {
           "part": "title",
@@ -1379,8 +1379,8 @@
       "key": "info.on.on__focus-visible",
       "channelsCompared": 246,
       "channelsEqual": 235,
-      "pctExact": 4.556451612903226,
-      "pctAA": 2.4309475806451615,
+      "pctExact": 4.544354838709677,
+      "pctAA": 2.420698924731183,
       "mismatches": [
         {
           "part": "title",
@@ -1454,8 +1454,8 @@
       "key": "info.on.on__active",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.534274193548387,
-      "pctAA": 1.0603158602150538,
+      "pctExact": 3.5221774193548385,
+      "pctAA": 1.0500672043010753,
       "mismatches": [
         {
           "part": "title",
@@ -2213,8 +2213,8 @@
       "key": "critical.off.off__default",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.918346774193548,
-      "pctAA": 2.34005376344086,
+      "pctExact": 4.89616935483871,
+      "pctAA": 2.318548387096774,
       "mismatches": [
         {
           "part": "title",
@@ -2228,8 +2228,8 @@
       "key": "critical.off.off__hover",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.918346774193548,
-      "pctAA": 2.34005376344086,
+      "pctExact": 4.89616935483871,
+      "pctAA": 2.318548387096774,
       "mismatches": [
         {
           "part": "title",
@@ -2243,8 +2243,8 @@
       "key": "critical.off.off__focus-visible",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 5.562163978494624,
-      "pctAA": 3.379872311827957,
+      "pctExact": 5.539986559139785,
+      "pctAA": 3.358366935483871,
       "mismatches": [
         {
           "part": "title",
@@ -2258,8 +2258,8 @@
       "key": "critical.off.off__active",
       "channelsCompared": 121,
       "channelsEqual": 120,
-      "pctExact": 4.918346774193548,
-      "pctAA": 2.34005376344086,
+      "pctExact": 4.89616935483871,
+      "pctAA": 2.318548387096774,
       "mismatches": [
         {
           "part": "title",
@@ -2273,8 +2273,8 @@
       "key": "critical.off.on__default",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.556619623655914,
-      "pctAA": 2.6344086021505375,
+      "pctExact": 5.534442204301075,
+      "pctAA": 2.6129032258064515,
       "mismatches": [
         {
           "part": "title",
@@ -2318,8 +2318,8 @@
       "key": "critical.off.on__hover",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.556619623655914,
-      "pctAA": 2.6344086021505375,
+      "pctExact": 5.534442204301075,
+      "pctAA": 2.6129032258064515,
       "mismatches": [
         {
           "part": "title",
@@ -2363,8 +2363,8 @@
       "key": "critical.off.on__focus-visible",
       "channelsCompared": 183,
       "channelsEqual": 176,
-      "pctExact": 6.468918010752688,
-      "pctAA": 4.000840053763441,
+      "pctExact": 6.446740591397849,
+      "pctAA": 3.979334677419355,
       "mismatches": [
         {
           "part": "title",
@@ -2414,8 +2414,8 @@
       "key": "critical.off.on__active",
       "channelsCompared": 183,
       "channelsEqual": 177,
-      "pctExact": 5.556619623655914,
-      "pctAA": 2.6344086021505375,
+      "pctExact": 5.534442204301075,
+      "pctAA": 2.6129032258064515,
       "mismatches": [
         {
           "part": "title",
@@ -2459,8 +2459,8 @@
       "key": "critical.on.off__default",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 3.0443548387096775,
-      "pctAA": 1.0529233870967742,
+      "pctExact": 3.03494623655914,
+      "pctAA": 1.0445228494623655,
       "mismatches": [
         {
           "part": "title",
@@ -2498,8 +2498,8 @@
       "key": "critical.on.off__hover",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 3.0443548387096775,
-      "pctAA": 1.0529233870967742,
+      "pctExact": 3.03494623655914,
+      "pctAA": 1.0445228494623655,
       "mismatches": [
         {
           "part": "title",
@@ -2537,8 +2537,8 @@
       "key": "critical.on.off__focus-visible",
       "channelsCompared": 184,
       "channelsEqual": 178,
-      "pctExact": 3.9593413978494625,
-      "pctAA": 2.3180443548387095,
+      "pctExact": 3.9499327956989245,
+      "pctAA": 2.309643817204301,
       "mismatches": [
         {
           "part": "title",
@@ -2582,8 +2582,8 @@
       "key": "critical.on.off__active",
       "channelsCompared": 184,
       "channelsEqual": 179,
-      "pctExact": 3.0443548387096775,
-      "pctAA": 1.0529233870967742,
+      "pctExact": 3.03494623655914,
+      "pctAA": 1.0445228494623655,
       "mismatches": [
         {
           "part": "title",
@@ -2621,8 +2621,8 @@
       "key": "critical.on.on__default",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.53494623655914,
-      "pctAA": 1.259744623655914,
+      "pctExact": 3.525537634408602,
+      "pctAA": 1.2513440860215055,
       "mismatches": [
         {
           "part": "title",
@@ -2690,8 +2690,8 @@
       "key": "critical.on.on__hover",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.53494623655914,
-      "pctAA": 1.259744623655914,
+      "pctExact": 3.525537634408602,
+      "pctAA": 1.2513440860215055,
       "mismatches": [
         {
           "part": "title",
@@ -2759,8 +2759,8 @@
       "key": "critical.on.on__focus-visible",
       "channelsCompared": 246,
       "channelsEqual": 235,
-      "pctExact": 4.557459677419355,
-      "pctAA": 2.6323924731182795,
+      "pctExact": 4.548051075268817,
+      "pctAA": 2.623991935483871,
       "mismatches": [
         {
           "part": "title",
@@ -2834,8 +2834,8 @@
       "key": "critical.on.on__active",
       "channelsCompared": 246,
       "channelsEqual": 236,
-      "pctExact": 3.53494623655914,
-      "pctAA": 1.259744623655914,
+      "pctExact": 3.525537634408602,
+      "pctAA": 1.2513440860215055,
       "mismatches": [
         {
           "part": "title",

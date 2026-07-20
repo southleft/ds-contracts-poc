@@ -528,7 +528,19 @@
           "outline-color": "{imported.tag.root.outline-color-state-focus-visible}",
           "outline-width": "{imported.tag.root.outline-width-state-focus-visible}"
         }
-      }
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "min-height": "24px",
+              "padding-left": "8px",
+              "padding-right": "8px"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

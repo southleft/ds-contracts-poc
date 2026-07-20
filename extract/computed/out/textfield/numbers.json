@@ -24,7 +24,7 @@
     "label-4": 18,
     "clearbutton": 44,
     "label-5": 17,
-    "icon": 10,
+    "icon": 11,
     "icon-2": 29,
     "part-1-0-0-1-1-0-0": 21,
     "part-1-0-0-1-1-0-1": 22,
@@ -467,7 +467,7 @@
       }
     ],
     "mintedLeavesUnfolded": 48,
-    "mintedLeavesFolded": 50
+    "mintedLeavesFolded": 51
   },
   "bound": {
     "cellsChecked": 480,
@@ -476,11 +476,11 @@
     "untriaged": 32
   },
   "minted": {
-    "leaves": 50,
-    "baseBindings": 113,
+    "leaves": 51,
+    "baseBindings": 114,
     "stateBindings": 97,
     "byShape": {
-      "uniform": 199,
+      "uniform": 200,
       "perAxis": 8,
       "perPair": 0,
       "refused": 3

@@ -842,6 +842,21 @@ function applyTokens(
   ctx: TextCtx,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
+  // Round 5c (canvas-gate finding): the floor promotes border-COLOR
+  // longhands (border-top/right/bottom/left-color — the RadioButton ring
+  // rode them and silently dropped, so the unchecked circle never drew).
+  // Figma strokes carry ONE paint: lower to the stroke when every carried
+  // side resolves to the same variable; disagreeing sides keep the CSS-side
+  // truth (the same one-paint limit the per-side width fields do not have).
+  const SIDE_COLOR_CHANNELS = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'];
+  const sideStrokeVars = new Set(
+    SIDE_COLOR_CHANNELS.filter((chn) => tokens[chn] !== undefined).map((chn) => {
+      let p = tokens[chn].slice(1, -1);
+      for (const [propName, value] of Object.entries(subst)) p = p.replaceAll(`{${propName}}`, value);
+      return figmaName(p);
+    }),
+  );
+  const uniformSideStroke = sideStrokeVars.size === 1 ? [...sideStrokeVars][0] : null;
   for (const [cssProp, ref] of Object.entries(tokens)) {
     let tokenPath = ref.slice(1, -1);
     for (const [propName, value] of Object.entries(subst)) {
@@ -860,6 +875,12 @@ function applyTokens(
         break;
       case 'border-color':
         spec.stroke = varName;
+        break;
+      case 'border-top-color':
+      case 'border-right-color':
+      case 'border-bottom-color':
+      case 'border-left-color':
+        if (uniformSideStroke !== null && spec.stroke === undefined) spec.stroke = uniformSideStroke;
         break;
       case 'border-width':
         spec.bindings = { ...spec.bindings, strokeWeight: varName };

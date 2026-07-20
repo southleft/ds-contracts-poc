@@ -272,7 +272,7 @@ async function main() {
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
-      prep.declared, prep.declaredStates,
+      prep.declared, prep.declaredStates, prep.setPlaneLiterals,
     );
 
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;

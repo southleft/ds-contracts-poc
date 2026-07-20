@@ -91,6 +91,9 @@
           },
           "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large."
         }
+      },
+      "tokens": {
+        "color": "{imported.spinner.root.color}"
       }
     }
   },

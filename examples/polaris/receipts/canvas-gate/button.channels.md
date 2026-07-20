@@ -1,6 +1,6 @@
 # Button — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.button` v0.3.0. Canvas-drawn values are read directly off the
+Contract: `polaris.button` v0.3.1. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/button/captured-truth.json` — the computed styles of the REAL
@@ -18,13 +18,13 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active` | `rgba(0, 0, 0, 0.08)` | `rgba(0, 0, 0, 0.08)` | match |  |
 | root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Disabled` | `rgba(0, 0, 0, 0.17)` | `rgba(0, 0, 0, 0.17)` | match |  |
 | root | background-color | 33 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| root | background-color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary`) | `rgba(199, 10, 36, 1)` | `rgba(199, 10, 36, 1)` | match |  |
 | root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active` | `rgba(247, 247, 247, 1)` | `rgba(247, 247, 247, 1)` | match |  |
 | root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover` | `rgba(250, 250, 250, 1)` | `rgba(250, 250, 250, 1)` | match |  |
 | root | background-color | 8 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `rgba(255, 255, 255, 1)` | `rgba(255, 255, 255, 1)` | match |  |
-| root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover` | `rgba(26, 26, 26, 1)` | `rgba(163, 10, 36, 1)` | DIFFERS | contract binds rgba(48, 48, 48, 1) |
-| root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active` | `rgba(26, 26, 26, 1)` | `rgba(142, 11, 33, 1)` | DIFFERS | contract binds rgba(48, 48, 48, 1) |
-| root | background-color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary`) | `rgba(48, 48, 48, 1)` | `rgba(199, 10, 36, 1)` | DIFFERS | contract binds rgba(48, 48, 48, 1) |
-| root | background-color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Success, Variant=Primary`) | `rgba(48, 48, 48, 1)` | `rgba(4, 123, 93, 1)` | DIFFERS | contract binds rgba(48, 48, 48, 1) |
+| root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover` | `rgba(26, 26, 26, 1)` | `rgba(163, 10, 36, 1)` | DIFFERS | contract binds #c70a24 |
+| root | background-color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active` | `rgba(26, 26, 26, 1)` | `rgba(142, 11, 33, 1)` | DIFFERS | contract binds #c70a24 |
+| root | background-color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Success, Variant=Primary`) | `rgba(4, 123, 93, 1)` | `rgba(4, 123, 93, 1)` | match |  |
 | root | border-bottom-left-radius | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible` | `12px` | `12px` | 0 |  |
 | root | border-bottom-left-radius | 58 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `8px` | `8px` | 0 |  |
 | root | border-bottom-right-radius | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible` | `12px` | `12px` | 0 |  |
@@ -64,15 +64,13 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | label | border-width | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
 | label | color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active` | `rgba(0, 46, 106, 1)` | `rgba(47, 4, 11, 1)` | DIFFERS |  |
 | label | color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover` | `rgba(0, 66, 153, 1)` | `rgba(95, 7, 22, 1)` | DIFFERS |  |
-| label | color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain`) | `rgba(0, 91, 211, 1)` | `rgba(142, 11, 33, 1)` | DIFFERS |  |
-| label | color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Success, Variant=Plain`) | `rgba(0, 91, 211, 1)` | `rgba(1, 75, 64, 1)` | DIFFERS |  |
+| label | color | 12 cells (e.g. `Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary`) | `rgba(1, 75, 64, 1)` | `rgba(1, 75, 64, 1)` | match |  |
+| label | color | 12 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `rgba(142, 11, 33, 1)` | `rgba(142, 11, 33, 1)` | match |  |
 | label | color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled`) | `rgba(181, 181, 181, 1)` | `rgba(181, 181, 181, 1)` | match |  |
 | label | color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Disabled` | `rgba(181, 181, 181, 1)` | `rgba(255, 255, 255, 1)` | DIFFERS |  |
 | label | color | 11 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary`) | `rgba(255, 255, 255, 1)` | `rgba(255, 255, 255, 1)` | match |  |
-| label | color | 8 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `rgba(48, 48, 48, 1)` | `rgba(142, 11, 33, 1)` | DIFFERS |  |
-| label | color | 8 cells (e.g. `Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary`) | `rgba(48, 48, 48, 1)` | `rgba(1, 75, 64, 1)` | DIFFERS |  |
+| label | color | 11 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain`) | `rgba(48, 48, 48, 1)` | `rgba(48, 48, 48, 1)` | match |  |
 | label | color | 4 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible`) | `rgba(48, 48, 48, 1)` | `rgba(95, 7, 22, 1)` | DIFFERS |  |
-| label | color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover` | `rgba(48, 48, 48, 1)` | `rgba(48, 48, 48, 1)` | match |  |
 | label | color | `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active`, `Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active` | `rgba(48, 48, 48, 1)` | `rgba(47, 4, 11, 1)` | DIFFERS |  |
 | label | font-size | 34 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `12px` | `12px` | 0 |  |
 | label | font-size | 16 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain`) | `12px` | `13px` | -1px | contract binds 12px |

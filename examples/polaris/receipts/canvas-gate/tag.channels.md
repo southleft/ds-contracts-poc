@@ -1,6 +1,6 @@
 # Tag — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.tag` v0.3.0. Canvas-drawn values are read directly off the
+Contract: `polaris.tag` v0.3.1. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/tag/captured-truth.json` — the computed styles of the REAL
@@ -27,6 +27,21 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | padding-left | 4 cells (e.g. `Size=large`) | `6px` | `8px` | -2px | contract binds 6px |
 | root | padding-right | 4 cells (e.g. `Size=large`) | `6px` | `8px` | -2px | contract binds 6px |
 | root | padding-top | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | background-color | 4 cells (e.g. `Size=large`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| label | border-bottom-left-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | border-bottom-right-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | border-top-left-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | border-top-right-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | border-width | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | color | `Size=large, State=Disabled` | `rgba(181, 181, 181, 1)` | `rgba(181, 181, 181, 1)` | match |  |
+| label | color | `Size=large`, `Size=large, State=Active`, `Size=large, State=Focus Visible` | `rgba(48, 48, 48, 1)` | `rgba(48, 48, 48, 1)` | match |  |
+| label | font-size | 4 cells (e.g. `Size=large`) | `12px` | `12px` | 0 |  |
+| label | gap | 4 cells (e.g. `Size=large`) | `0px` | `normal` | 0 |  |
+| label | line-height | 4 cells (e.g. `Size=large`) | `20px` | `20px` | 0 |  |
+| label | padding-bottom | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | padding-left | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | padding-right | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| label | padding-top | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
 | link | background-color | 4 cells (e.g. `Size=large`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
 | link | border-bottom-left-radius | 4 cells (e.g. `Size=large`) | `8px` | `0px` | +8px | contract binds 8px |
 | link | border-bottom-right-radius | 4 cells (e.g. `Size=large`) | `8px` | `0px` | +8px | contract binds 8px |
@@ -38,6 +53,17 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | link | padding-left | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
 | link | padding-right | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
 | link | padding-top | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | background-color | 4 cells (e.g. `Size=large`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| text | border-bottom-left-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | border-bottom-right-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | border-top-left-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | border-top-right-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | border-width | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | gap | 4 cells (e.g. `Size=large`) | `0px` | `normal` | 0 |  |
+| text | padding-bottom | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | padding-left | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | padding-right | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
+| text | padding-top | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
 | text-2 | background-color | 4 cells (e.g. `Size=large`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
 | text-2 | border-bottom-left-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
 | text-2 | border-bottom-right-radius | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |

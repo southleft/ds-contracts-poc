@@ -115,6 +115,10 @@
           }
         },
         "icon": {
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
           "font-weight": {
             "$value": "400",
             "$type": "number"
@@ -3076,6 +3080,7 @@
     "text-part-typography-carried: label-3 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "control-fallback: no control for <input> — span control used (part input)",
     "text-part-typography-carried: label-4 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "svg-host-color-carried: icon — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0-1-1-0-0)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0-1-1-0-1)"

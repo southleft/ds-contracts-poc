@@ -141,6 +141,7 @@ Minted leaves WITHOUT folding: **48** → WITH folding: **51** (45 folded channe
 
 - leaves: **51** · bindings: 64 base + 19 state
 - shape: 63 uniform · 13 per-axis · 1 per-axis-pair · 6 refused (uncorrelated — nothing minted, named)
+- set-plane-literal-carried: root.min-height — unmintable at base (auto …) but uniform per defaultless-axis plane over the presence-off slice: size=large → 24px (presence planes stay named residue — round 5c)
 
 ## Declared facts (v15 — carried, first-class)
 
@@ -292,6 +293,6 @@ Minted leaves WITHOUT folding: **48** → WITH folding: **51** (45 folded channe
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **80.270%** (6473/8064 cells; 0/128 combo×state rows fully equal)
-- pixel: 0/128 pairs perfect at threshold 0 · 0/128 at the AA point (mean AA 1.040%, max 3.373%)
+- computed-equality (styled channels, contract-mediated): **82.056%** (6617/8064 cells; 0/128 combo×state rows fully equal)
+- pixel: 0/128 pairs perfect at threshold 0 · 0/128 at the AA point (mean AA 0.704%, max 2.686%)
 

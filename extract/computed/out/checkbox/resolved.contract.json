@@ -325,6 +325,7 @@
                         "size": 22
                       },
                       "tokens": {
+                        "color": "{imported.checkbox.icon-3.color}",
                         "margin-left": "{imported.shared.size-1}",
                         "margin-right": "{imported.shared.size-1}",
                         "min-height": "{imported.shared.size-0}",
@@ -398,6 +399,7 @@
                     }
                   },
                   "tokens": {
+                    "color": "{imported.checkbox.icon.color}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}"
                   },

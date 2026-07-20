@@ -9,15 +9,15 @@
   "elementsPerCapture": 3,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 0,
+    "root": 1,
     "icon": 12,
     "part-0-0": 5
   },
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 0,
-    "mintedLeavesFolded": 0
+    "mintedLeavesUnfolded": 1,
+    "mintedLeavesFolded": 1
   },
   "bound": {
     "cellsChecked": 0,
@@ -26,11 +26,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 0,
-    "baseBindings": 0,
+    "leaves": 1,
+    "baseBindings": 1,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 0,
+      "uniform": 1,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -120,10 +120,10 @@
   },
   "gate": {
     "computedPctEqual": 100,
-    "rowsFullyEqual": 0,
+    "rowsFullyEqual": 8,
     "rows": 8,
     "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectAA": 8,
     "pairs": 8
   },
   "focusVisibleDriverMatched": 0,

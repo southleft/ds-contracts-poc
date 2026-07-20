@@ -25,7 +25,7 @@
     "button": 52,
     "button__icon": 5,
     "part-0-0-0-0-1-0-0": 6,
-    "icon-3": 7,
+    "icon-3": 8,
     "icon-4": 16,
     "part-0-0-0-0-1-0-0-0-0-0": 8,
     "box-3": 4,
@@ -690,7 +690,7 @@
       }
     ],
     "mintedLeavesUnfolded": 268,
-    "mintedLeavesFolded": 54
+    "mintedLeavesFolded": 53
   },
   "bound": {
     "cellsChecked": 96,
@@ -699,11 +699,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 54,
-    "baseBindings": 113,
+    "leaves": 53,
+    "baseBindings": 114,
     "stateBindings": 2,
     "byShape": {
-      "uniform": 108,
+      "uniform": 109,
       "perAxis": 7,
       "perPair": 0,
       "refused": 0

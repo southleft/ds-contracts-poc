@@ -1,6 +1,6 @@
 # Checkbox — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.checkbox` v0.3.0. Canvas-drawn values are read directly off the
+Contract: `polaris.checkbox` v0.3.1. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/checkbox/captured-truth.json` — the computed styles of the REAL
@@ -101,9 +101,9 @@ Notes:
 | label | border-top-left-radius | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `0px` | 0 |  |
 | label | border-top-right-radius | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `0px` | 0 |  |
 | label | border-width | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `0px` | 0 |  |
-| label | font-size | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `14px` | `13px` | +1px |  |
+| label | font-size | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `13px` | `13px` | 0 |  |
 | label | gap | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `normal` | 0 |  |
-| label | line-height | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `(ratio 1.2)` | `20px` | DIFFERS |  |
+| label | line-height | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `20px` | `20px` | 0 |  |
 | label | padding-bottom | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `0px` | 0 |  |
 | label | padding-left | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `0px` | 0 |  |
 | label | padding-right | `Checked=unchecked`, `Checked=checked`, `Checked=indeterminate` | `0px` | `0px` | 0 |  |
