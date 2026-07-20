@@ -403,6 +403,7 @@
                                         "size": 20
                                       },
                                       "tokens": {
+                                        "color": "{imported.shared.color-303030}",
                                         "min-height": "{imported.shared.size-0}",
                                         "min-width": "{imported.shared.size-0}"
                                       }
@@ -444,7 +445,7 @@
                             "border-top-right-radius": "{imported.shared.size-8}",
                             "border-top-width": "{imported.shared.size-0}",
                             "bottom": "{imported.shared.size-0}",
-                            "color": "{imported.banner.button.color}",
+                            "color": "{imported.shared.color-303030}",
                             "column-gap": "{imported.shared.size-2}",
                             "font-size": "{imported.shared.size-13}",
                             "font-weight": "{imported.shared.num-450}",
@@ -638,7 +639,7 @@
                                     "border-top-width": "{imported.shared.size-0}",
                                     "bottom": "{imported.shared.size-0}",
                                     "box-shadow": "{imported.banner.button-2.box-shadow}",
-                                    "color": "{imported.banner.button-2.color}",
+                                    "color": "{imported.shared.color-303030}",
                                     "column-gap": "{imported.shared.size-2}",
                                     "font-size": "{imported.shared.size-13}",
                                     "font-weight": "{imported.shared.num-450}",

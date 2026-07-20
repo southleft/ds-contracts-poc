@@ -169,6 +169,7 @@
 
 .checkbox__icon {
   display: flex;
+  color: var(--imported-checkbox-icon-color);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;
@@ -227,6 +228,7 @@
 .checkbox__icon-3 {
   display: inline-flex;
   flex-shrink: 0;
+  color: var(--imported-checkbox-icon-3-color);
   margin-left: var(--imported-shared-size-1);
   margin-right: var(--imported-shared-size-1);
   min-height: var(--imported-shared-size-0);

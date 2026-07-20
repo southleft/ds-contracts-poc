@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  color: var(--imported-spinner-root-color);
   display: block;
 }
 

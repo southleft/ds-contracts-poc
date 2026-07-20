@@ -385,13 +385,13 @@
   --imported-shared-size-7: 7px;
   --imported-shared-color-b5b5b5: #b5b5b5;
   --imported-shared-size-4: 4px;
+  --imported-shared-color-303030: #303030;
   --imported-shared-size-2: 2px;
   --imported-shared-size-13: 13px;
   --imported-shared-num-450: 450;
   --imported-shared-size-neg-4: -4px;
   --imported-shared-size-32: 32px;
   --imported-shared-size-1: 1px;
-  --imported-shared-color-303030: #303030;
   --imported-shared-color-00000000: #00000000;
   --imported-shared-size-9999: 9999px;
   --imported-shared-num-1: 1;
@@ -697,14 +697,12 @@
   --imported-banner-title-color-warning: #251a00;
   --imported-banner-title-color-critical: #fffafb;
   --imported-banner-button-background-color: #00000000;
-  --imported-banner-button-color: #303030;
   --imported-banner-button-icon-margin-bottom: -2px;
   --imported-banner-button-icon-margin-top: -2px;
   --imported-banner-buttongroup-margin-left: -8px;
   --imported-banner-buttongroup-margin-top: -8px;
   --imported-banner-button-2-background-color: #ffffff;
   --imported-banner-button-2-box-shadow: rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset;
-  --imported-banner-button-2-color: #303030;
   --imported-banner-button-2-padding-bottom: 6px;
   --imported-banner-button-2-padding-top: 6px;
   --imported-banner-label-3-font-weight: 550;
@@ -772,6 +770,7 @@
   --imported-checkbox-icon-bottom-unchecked: 0px;
   --imported-checkbox-icon-bottom-checked: 0px;
   --imported-checkbox-icon-bottom-indeterminate: -2px;
+  --imported-checkbox-icon-color: #303030;
   --imported-checkbox-icon-left-unchecked: 0px;
   --imported-checkbox-icon-left-checked: 0px;
   --imported-checkbox-icon-left-indeterminate: -2px;
@@ -796,6 +795,7 @@
   --imported-checkbox-icon-top-unchecked: 0px;
   --imported-checkbox-icon-top-checked: 0px;
   --imported-checkbox-icon-top-indeterminate: -2px;
+  --imported-checkbox-icon-3-color: #303030;
   --imported-checkbox-icon-2-color: #ffffff;
   --imported-checkbox-label-font-size: 13px;
   --imported-checkbox-label-font-weight: 450;
@@ -864,6 +864,7 @@
   --imported-avatar-root-border-top-right-radius-xl: 8px;
   --imported-avatar-initials-color-off: #fdeffd;
   --imported-avatar-initials-color-on: #fff6f8;
+  --imported-spinner-root-color: #303030;
   --imported-progress-bar-progress-bottom: 799px;
   --imported-progress-bar-progress-left: 16px;
   --imported-progress-bar-progress-right: 583px;
@@ -992,6 +993,7 @@
   --imported-text-field-label-5-font-weight: 400;
   --imported-text-field-label-5-left: 10px;
   --imported-text-field-label-5-right: 9px;
+  --imported-text-field-icon-color: #303030;
   --imported-text-field-icon-font-weight: 400;
   --imported-text-field-backdrop-border-left-color-inherit: #8a8a8a;
   --imported-text-field-backdrop-border-left-color-borderless: #303030;

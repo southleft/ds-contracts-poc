@@ -28,6 +28,12 @@
   outline-offset: 2px;
 }
 
+.size-large {
+  min-height: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .root:active:not(:disabled) {
   outline-color: var(--imported-tag-root-outline-color-state-active);
 }

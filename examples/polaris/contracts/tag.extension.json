@@ -1934,7 +1934,8 @@
     "text-part-typography-carried: label-2 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
-    "control-fallback: no control for <path> — span control used (part part-1-0-0-0)"
+    "control-fallback: no control for <path> — span control used (part part-1-0-0-0)",
+    "set-plane-literal-carried: root.min-height — unmintable at base (auto …) but uniform per defaultless-axis plane over the presence-off slice: size=large → 24px (presence planes stay named residue — round 5c)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -2057,6 +2058,7 @@
     "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)",
     "base-plane literal carried: root.padding-left = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)",
-    "base-plane literal carried: root.padding-right = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)"
+    "base-plane literal carried: root.padding-right = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)",
+    "set-plane literals carried: root per size → large:{min-height=24px, padding-left=8px, padding-right=8px} (round 5c — refused/unmintable geometry planes; presence planes stay named residue)"
   ]
 }

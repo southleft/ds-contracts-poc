@@ -312,6 +312,7 @@
 .text-field__icon {
   display: inline-flex;
   flex-shrink: 0;
+  color: var(--imported-text-field-icon-color);
   font-weight: var(--imported-text-field-icon-font-weight);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);

@@ -270,7 +270,7 @@
   border-top-right-radius: var(--imported-shared-size-8);
   border-top-width: var(--imported-shared-size-0);
   bottom: var(--imported-shared-size-0);
-  color: var(--imported-banner-button-color);
+  color: var(--imported-shared-color-303030);
   column-gap: var(--imported-shared-size-2);
   font-size: var(--imported-shared-size-13);
   font-weight: var(--imported-shared-num-450);
@@ -330,6 +330,7 @@
 .icon-3 {
   display: inline-flex;
   flex-shrink: 0;
+  color: var(--imported-shared-color-303030);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;
@@ -405,7 +406,7 @@
   border-top-width: var(--imported-shared-size-0);
   bottom: var(--imported-shared-size-0);
   box-shadow: var(--imported-banner-button-2-box-shadow);
-  color: var(--imported-banner-button-2-color);
+  color: var(--imported-shared-color-303030);
   column-gap: var(--imported-shared-size-2);
   font-size: var(--imported-shared-size-13);
   font-weight: var(--imported-shared-num-450);

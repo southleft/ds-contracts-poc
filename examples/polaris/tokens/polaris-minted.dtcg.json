@@ -1793,6 +1793,10 @@
         "$value": "4px",
         "$type": "dimension"
       },
+      "color-303030": {
+        "$value": "#303030",
+        "$type": "color"
+      },
       "size-2": {
         "$value": "2px",
         "$type": "dimension"
@@ -1816,10 +1820,6 @@
       "size-1": {
         "$value": "1px",
         "$type": "dimension"
-      },
-      "color-303030": {
-        "$value": "#303030",
-        "$type": "color"
       },
       "color-00000000": {
         "$value": "#00000000",
@@ -3163,10 +3163,6 @@
         "background-color": {
           "$value": "#00000000",
           "$type": "color"
-        },
-        "color": {
-          "$value": "#303030",
-          "$type": "color"
         }
       },
       "button-icon": {
@@ -3197,10 +3193,6 @@
         "box-shadow": {
           "$value": "rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset",
           "$type": "shadow"
-        },
-        "color": {
-          "$value": "#303030",
-          "$type": "color"
         },
         "padding-bottom": {
           "$value": "6px",
@@ -3512,6 +3504,10 @@
             "$type": "dimension"
           }
         },
+        "color": {
+          "$value": "#303030",
+          "$type": "color"
+        },
         "left": {
           "unchecked": {
             "$value": "0px",
@@ -3623,6 +3619,12 @@
             "$value": "-2px",
             "$type": "dimension"
           }
+        }
+      },
+      "icon-3": {
+        "color": {
+          "$value": "#303030",
+          "$type": "color"
         }
       },
       "icon-2": {
@@ -3949,6 +3951,14 @@
             "$value": "#fff6f8",
             "$type": "color"
           }
+        }
+      }
+    },
+    "spinner": {
+      "root": {
+        "color": {
+          "$value": "#303030",
+          "$type": "color"
         }
       }
     },
@@ -4532,6 +4542,10 @@
         }
       },
       "icon": {
+        "color": {
+          "$value": "#303030",
+          "$type": "color"
+        },
         "font-weight": {
           "$value": "400",
           "$type": "number"

@@ -29,6 +29,12 @@
   outline-offset: 2px;
 }
 
+.tag--size-large {
+  min-height: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .tag:active:not(:disabled) {
   outline-color: var(--imported-tag-root-outline-color-state-active);
 }
