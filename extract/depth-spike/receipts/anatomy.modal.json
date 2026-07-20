@@ -1,0 +1,130 @@
+[
+  {
+    "name": "dialog",
+    "sig": "div|Modal-Dialog",
+    "role": "dialog",
+    "text": "",
+    "parts": [
+      {
+        "name": "dialog-2",
+        "sig": "div|Modal-Dialog__Modal",
+        "role": null,
+        "text": "",
+        "parts": [
+          {
+            "name": "box",
+            "sig": "div|Box",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "inlinegrid",
+                "sig": "div|InlineGrid",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "title",
+                    "sig": "h2|",
+                    "role": null,
+                    "text": "Order details",
+                    "parts": []
+                  },
+                  {
+                    "name": "path",
+                    "sig": "path|",
+                    "role": null,
+                    "text": "",
+                    "parts": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "label",
+            "sig": "p|",
+            "role": null,
+            "text": "Body copy inside a sectioned modal.",
+            "parts": []
+          },
+          {
+            "name": "box-2",
+            "sig": "div|Box",
+            "role": null,
+            "text": "",
+            "parts": [
+              {
+                "name": "inlinestack",
+                "sig": "div|InlineStack",
+                "role": null,
+                "text": "",
+                "parts": [
+                  {
+                    "name": "box-3",
+                    "sig": "div|Box",
+                    "role": null,
+                    "text": "",
+                    "parts": []
+                  },
+                  {
+                    "name": "inlinestack-2",
+                    "sig": "div|InlineStack",
+                    "role": null,
+                    "text": "",
+                    "parts": [
+                      {
+                        "name": "button",
+                        "sig": "button|Button",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "label-2",
+                            "sig": "span|",
+                            "role": null,
+                            "text": "Cancel",
+                            "parts": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "button-2",
+                        "sig": "button|Button",
+                        "role": null,
+                        "text": "",
+                        "parts": [
+                          {
+                            "name": "label-3",
+                            "sig": "span|",
+                            "role": null,
+                            "text": "Save",
+                            "parts": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "div",
+        "sig": "div|",
+        "role": null,
+        "text": "",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "name": "backdrop",
+    "sig": "div|Backdrop",
+    "role": null,
+    "text": "",
+    "parts": []
+  }
+]

@@ -1,0 +1,1247 @@
+{
+  "preBytes": 374,
+  "postBytes": 7395,
+  "currentReader": {
+    "present": true,
+    "sig": "div|ResourceList__ResourceListWrapper",
+    "descendantEls": 49
+  },
+  "roots": [
+    {
+      "location": "in-stage",
+      "bytes": 7021,
+      "node": {
+        "tag": "div",
+        "classes": [
+          "Polaris-ResourceList__ResourceListWrapper"
+        ],
+        "role": null,
+        "ariaModal": null,
+        "text": "",
+        "style": {
+          "display": "block",
+          "position": "relative",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-top-width": "0px",
+          "border-bottom-width": "0px",
+          "box-shadow": "none",
+          "color": "rgb(48, 48, 48)",
+          "z-index": "auto",
+          "opacity": "1",
+          "width": "152.016px",
+          "height": "158px",
+          "padding-top": "0px"
+        },
+        "children": [
+          {
+            "tag": "ul",
+            "classes": [
+              "Polaris-ResourceList"
+            ],
+            "role": null,
+            "ariaModal": null,
+            "text": "",
+            "style": {
+              "display": "block",
+              "position": "relative",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "border-top-width": "0px",
+              "border-bottom-width": "0px",
+              "box-shadow": "none",
+              "color": "rgb(48, 48, 48)",
+              "z-index": "1",
+              "opacity": "1",
+              "width": "152.016px",
+              "height": "158px",
+              "padding-top": "0px"
+            },
+            "children": [
+              {
+                "tag": "li",
+                "classes": [
+                  "Polaris-ResourceItem__ListItem"
+                ],
+                "role": null,
+                "ariaModal": null,
+                "text": "",
+                "style": {
+                  "display": "list-item",
+                  "position": "relative",
+                  "background-color": "rgba(0, 0, 0, 0)",
+                  "border-top-width": "0px",
+                  "border-bottom-width": "0px",
+                  "box-shadow": "none",
+                  "color": "rgb(48, 48, 48)",
+                  "z-index": "auto",
+                  "opacity": "1",
+                  "width": "152.016px",
+                  "height": "52px",
+                  "padding-top": "0px"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "classes": [
+                      "Polaris-ResourceItem__ItemWrapper"
+                    ],
+                    "role": null,
+                    "ariaModal": null,
+                    "text": "",
+                    "style": {
+                      "display": "block",
+                      "position": "static",
+                      "background-color": "rgba(0, 0, 0, 0)",
+                      "border-top-width": "0px",
+                      "border-bottom-width": "0px",
+                      "box-shadow": "none",
+                      "color": "rgb(48, 48, 48)",
+                      "z-index": "auto",
+                      "opacity": "1",
+                      "width": "152.016px",
+                      "height": "52px",
+                      "padding-top": "0px"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "classes": [
+                          "Polaris-ResourceItem"
+                        ],
+                        "role": null,
+                        "ariaModal": null,
+                        "text": "",
+                        "style": {
+                          "display": "block",
+                          "position": "static",
+                          "background-color": "rgba(0, 0, 0, 0)",
+                          "border-top-width": "0px",
+                          "border-bottom-width": "0px",
+                          "box-shadow": "none",
+                          "color": "rgb(48, 48, 48)",
+                          "z-index": "auto",
+                          "opacity": "1",
+                          "width": "152.016px",
+                          "height": "52px",
+                          "padding-top": "0px"
+                        },
+                        "children": [
+                          {
+                            "tag": "a",
+                            "classes": [
+                              "Polaris-ResourceItem__Link"
+                            ],
+                            "role": null,
+                            "ariaModal": null,
+                            "text": "",
+                            "style": {
+                              "display": "block",
+                              "position": "absolute",
+                              "background-color": "rgba(0, 0, 0, 0)",
+                              "border-top-width": "0px",
+                              "border-bottom-width": "0px",
+                              "box-shadow": "none",
+                              "color": "rgb(0, 0, 238)",
+                              "z-index": "1",
+                              "opacity": "0",
+                              "width": "152.016px",
+                              "height": "52px",
+                              "padding-top": "0px"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "classes": [
+                              "Polaris-Box"
+                            ],
+                            "role": null,
+                            "ariaModal": null,
+                            "text": "",
+                            "style": {
+                              "display": "block",
+                              "position": "relative",
+                              "background-color": "rgba(0, 0, 0, 0)",
+                              "border-top-width": "0px",
+                              "border-bottom-width": "0px",
+                              "box-shadow": "none",
+                              "color": "rgb(48, 48, 48)",
+                              "z-index": "2",
+                              "opacity": "1",
+                              "width": "152.016px",
+                              "height": "52px",
+                              "padding-top": "12px"
+                            },
+                            "children": [
+                              {
+                                "tag": "div",
+                                "classes": [
+                                  "Polaris-InlineGrid"
+                                ],
+                                "role": null,
+                                "ariaModal": null,
+                                "text": "",
+                                "style": {
+                                  "display": "grid",
+                                  "position": "static",
+                                  "background-color": "rgba(0, 0, 0, 0)",
+                                  "border-top-width": "0px",
+                                  "border-bottom-width": "0px",
+                                  "box-shadow": "none",
+                                  "color": "rgb(48, 48, 48)",
+                                  "z-index": "auto",
+                                  "opacity": "1",
+                                  "width": "128.016px",
+                                  "height": "28px",
+                                  "padding-top": "0px"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "div",
+                                    "classes": [
+                                      "Polaris-InlineGrid"
+                                    ],
+                                    "role": null,
+                                    "ariaModal": null,
+                                    "text": "",
+                                    "style": {
+                                      "display": "grid",
+                                      "position": "static",
+                                      "background-color": "rgba(0, 0, 0, 0)",
+                                      "border-top-width": "0px",
+                                      "border-bottom-width": "0px",
+                                      "box-shadow": "none",
+                                      "color": "rgb(48, 48, 48)",
+                                      "z-index": "auto",
+                                      "opacity": "1",
+                                      "width": "128.016px",
+                                      "height": "28px",
+                                      "padding-top": "0px"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "div",
+                                        "classes": [
+                                          "Polaris-InlineStack"
+                                        ],
+                                        "role": null,
+                                        "ariaModal": null,
+                                        "text": "",
+                                        "style": {
+                                          "display": "flex",
+                                          "position": "static",
+                                          "background-color": "rgba(0, 0, 0, 0)",
+                                          "border-top-width": "0px",
+                                          "border-bottom-width": "0px",
+                                          "box-shadow": "none",
+                                          "color": "rgb(48, 48, 48)",
+                                          "z-index": "auto",
+                                          "opacity": "1",
+                                          "width": "28px",
+                                          "height": "28px",
+                                          "padding-top": "0px"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "span",
+                                            "classes": [
+                                              "Polaris-Avatar",
+                                              "Polaris-Avatar--sizeMd"
+                                            ],
+                                            "role": "img",
+                                            "ariaModal": null,
+                                            "text": "",
+                                            "style": {
+                                              "display": "block",
+                                              "position": "relative",
+                                              "background-color": "rgb(181, 181, 181)",
+                                              "border-top-width": "0px",
+                                              "border-bottom-width": "0px",
+                                              "box-shadow": "none",
+                                              "color": "rgb(255, 255, 255)",
+                                              "z-index": "auto",
+                                              "opacity": "1",
+                                              "width": "28px",
+                                              "height": "28px",
+                                              "padding-top": "0px"
+                                            },
+                                            "children": [
+                                              {
+                                                "tag": "span",
+                                                "classes": [
+                                                  "Polaris-Avatar__Initials"
+                                                ],
+                                                "role": null,
+                                                "ariaModal": null,
+                                                "text": "",
+                                                "style": {
+                                                  "display": "flex",
+                                                  "position": "absolute",
+                                                  "background-color": "rgba(0, 0, 0, 0)",
+                                                  "border-top-width": "0px",
+                                                  "border-bottom-width": "0px",
+                                                  "box-shadow": "none",
+                                                  "color": "rgb(255, 255, 255)",
+                                                  "z-index": "auto",
+                                                  "opacity": "1",
+                                                  "width": "28px",
+                                                  "height": "28px",
+                                                  "padding-top": "0px"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "tag": "svg",
+                                                    "classes": [
+                                                      "Polaris-Avatar__Svg"
+                                                    ],
+                                                    "role": null,
+                                                    "ariaModal": null,
+                                                    "text": "",
+                                                    "style": {
+                                                      "display": "block",
+                                                      "position": "static",
+                                                      "background-color": "rgba(0, 0, 0, 0)",
+                                                      "border-top-width": "0px",
+                                                      "border-bottom-width": "0px",
+                                                      "box-shadow": "none",
+                                                      "color": "rgb(255, 255, 255)",
+                                                      "z-index": "auto",
+                                                      "opacity": "1",
+                                                      "width": "28px",
+                                                      "height": "28px",
+                                                      "padding-top": "0px"
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "tag": "path",
+                                                        "classes": [],
+                                                        "role": null,
+                                                        "ariaModal": null,
+                                                        "text": "",
+                                                        "style": {
+                                                          "display": "inline",
+                                                          "position": "static",
+                                                          "background-color": "rgba(0, 0, 0, 0)",
+                                                          "border-top-width": "0px",
+                                                          "border-bottom-width": "0px",
+                                                          "box-shadow": "none",
+                                                          "color": "rgb(255, 255, 255)",
+                                                          "z-index": "auto",
+                                                          "opacity": "1",
+                                                          "width": "auto",
+                                                          "height": "auto",
+                                                          "padding-top": "0px"
+                                                        },
+                                                        "children": []
+                                                      },
+                                                      {
+                                                        "tag": "path",
+                                                        "classes": [],
+                                                        "role": null,
+                                                        "ariaModal": null,
+                                                        "text": "",
+                                                        "style": {
+                                                          "display": "inline",
+                                                          "position": "static",
+                                                          "background-color": "rgba(0, 0, 0, 0)",
+                                                          "border-top-width": "0px",
+                                                          "border-bottom-width": "0px",
+                                                          "box-shadow": "none",
+                                                          "color": "rgb(255, 255, 255)",
+                                                          "z-index": "auto",
+                                                          "opacity": "1",
+                                                          "width": "auto",
+                                                          "height": "auto",
+                                                          "padding-top": "0px"
+                                                        },
+                                                        "children": []
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "classes": [
+                                          "Polaris-InlineStack"
+                                        ],
+                                        "role": null,
+                                        "ariaModal": null,
+                                        "text": "",
+                                        "style": {
+                                          "display": "flex",
+                                          "position": "static",
+                                          "background-color": "rgba(0, 0, 0, 0)",
+                                          "border-top-width": "0px",
+                                          "border-bottom-width": "0px",
+                                          "box-shadow": "none",
+                                          "color": "rgb(48, 48, 48)",
+                                          "z-index": "auto",
+                                          "opacity": "1",
+                                          "width": "88.0156px",
+                                          "height": "28px",
+                                          "padding-top": "0px"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "div",
+                                            "classes": [
+                                              "Polaris-Box"
+                                            ],
+                                            "role": null,
+                                            "ariaModal": null,
+                                            "text": "",
+                                            "style": {
+                                              "display": "block",
+                                              "position": "static",
+                                              "background-color": "rgba(0, 0, 0, 0)",
+                                              "border-top-width": "0px",
+                                              "border-bottom-width": "0px",
+                                              "box-shadow": "none",
+                                              "color": "rgb(48, 48, 48)",
+                                              "z-index": "auto",
+                                              "opacity": "1",
+                                              "width": "88.0156px",
+                                              "height": "20px",
+                                              "padding-top": "0px"
+                                            },
+                                            "children": [
+                                              {
+                                                "tag": "h3",
+                                                "classes": [
+                                                  "Polaris-Text--root",
+                                                  "Polaris-Text--bold"
+                                                ],
+                                                "role": null,
+                                                "ariaModal": null,
+                                                "text": "Ada Grace",
+                                                "style": {
+                                                  "display": "block",
+                                                  "position": "static",
+                                                  "background-color": "rgba(0, 0, 0, 0)",
+                                                  "border-top-width": "0px",
+                                                  "border-bottom-width": "0px",
+                                                  "box-shadow": "none",
+                                                  "color": "rgb(48, 48, 48)",
+                                                  "z-index": "auto",
+                                                  "opacity": "1",
+                                                  "width": "88.0156px",
+                                                  "height": "20px",
+                                                  "padding-top": "0px"
+                                                },
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "li",
+                "classes": [
+                  "Polaris-ResourceItem__ListItem"
+                ],
+                "role": null,
+                "ariaModal": null,
+                "text": "",
+                "style": {
+                  "display": "list-item",
+                  "position": "relative",
+                  "background-color": "rgba(0, 0, 0, 0)",
+                  "border-top-width": "1px",
+                  "border-bottom-width": "0px",
+                  "box-shadow": "none",
+                  "color": "rgb(48, 48, 48)",
+                  "z-index": "auto",
+                  "opacity": "1",
+                  "width": "152.016px",
+                  "height": "53px",
+                  "padding-top": "0px"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "classes": [
+                      "Polaris-ResourceItem__ItemWrapper"
+                    ],
+                    "role": null,
+                    "ariaModal": null,
+                    "text": "",
+                    "style": {
+                      "display": "block",
+                      "position": "static",
+                      "background-color": "rgba(0, 0, 0, 0)",
+                      "border-top-width": "0px",
+                      "border-bottom-width": "0px",
+                      "box-shadow": "none",
+                      "color": "rgb(48, 48, 48)",
+                      "z-index": "auto",
+                      "opacity": "1",
+                      "width": "152.016px",
+                      "height": "52px",
+                      "padding-top": "0px"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "classes": [
+                          "Polaris-ResourceItem"
+                        ],
+                        "role": null,
+                        "ariaModal": null,
+                        "text": "",
+                        "style": {
+                          "display": "block",
+                          "position": "static",
+                          "background-color": "rgba(0, 0, 0, 0)",
+                          "border-top-width": "0px",
+                          "border-bottom-width": "0px",
+                          "box-shadow": "none",
+                          "color": "rgb(48, 48, 48)",
+                          "z-index": "auto",
+                          "opacity": "1",
+                          "width": "152.016px",
+                          "height": "52px",
+                          "padding-top": "0px"
+                        },
+                        "children": [
+                          {
+                            "tag": "a",
+                            "classes": [
+                              "Polaris-ResourceItem__Link"
+                            ],
+                            "role": null,
+                            "ariaModal": null,
+                            "text": "",
+                            "style": {
+                              "display": "block",
+                              "position": "absolute",
+                              "background-color": "rgba(0, 0, 0, 0)",
+                              "border-top-width": "0px",
+                              "border-bottom-width": "0px",
+                              "box-shadow": "none",
+                              "color": "rgb(0, 0, 238)",
+                              "z-index": "1",
+                              "opacity": "0",
+                              "width": "152.016px",
+                              "height": "52px",
+                              "padding-top": "0px"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "classes": [
+                              "Polaris-Box"
+                            ],
+                            "role": null,
+                            "ariaModal": null,
+                            "text": "",
+                            "style": {
+                              "display": "block",
+                              "position": "relative",
+                              "background-color": "rgba(0, 0, 0, 0)",
+                              "border-top-width": "0px",
+                              "border-bottom-width": "0px",
+                              "box-shadow": "none",
+                              "color": "rgb(48, 48, 48)",
+                              "z-index": "2",
+                              "opacity": "1",
+                              "width": "152.016px",
+                              "height": "52px",
+                              "padding-top": "12px"
+                            },
+                            "children": [
+                              {
+                                "tag": "div",
+                                "classes": [
+                                  "Polaris-InlineGrid"
+                                ],
+                                "role": null,
+                                "ariaModal": null,
+                                "text": "",
+                                "style": {
+                                  "display": "grid",
+                                  "position": "static",
+                                  "background-color": "rgba(0, 0, 0, 0)",
+                                  "border-top-width": "0px",
+                                  "border-bottom-width": "0px",
+                                  "box-shadow": "none",
+                                  "color": "rgb(48, 48, 48)",
+                                  "z-index": "auto",
+                                  "opacity": "1",
+                                  "width": "128.016px",
+                                  "height": "28px",
+                                  "padding-top": "0px"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "div",
+                                    "classes": [
+                                      "Polaris-InlineGrid"
+                                    ],
+                                    "role": null,
+                                    "ariaModal": null,
+                                    "text": "",
+                                    "style": {
+                                      "display": "grid",
+                                      "position": "static",
+                                      "background-color": "rgba(0, 0, 0, 0)",
+                                      "border-top-width": "0px",
+                                      "border-bottom-width": "0px",
+                                      "box-shadow": "none",
+                                      "color": "rgb(48, 48, 48)",
+                                      "z-index": "auto",
+                                      "opacity": "1",
+                                      "width": "128.016px",
+                                      "height": "28px",
+                                      "padding-top": "0px"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "div",
+                                        "classes": [
+                                          "Polaris-InlineStack"
+                                        ],
+                                        "role": null,
+                                        "ariaModal": null,
+                                        "text": "",
+                                        "style": {
+                                          "display": "flex",
+                                          "position": "static",
+                                          "background-color": "rgba(0, 0, 0, 0)",
+                                          "border-top-width": "0px",
+                                          "border-bottom-width": "0px",
+                                          "box-shadow": "none",
+                                          "color": "rgb(48, 48, 48)",
+                                          "z-index": "auto",
+                                          "opacity": "1",
+                                          "width": "28px",
+                                          "height": "28px",
+                                          "padding-top": "0px"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "span",
+                                            "classes": [
+                                              "Polaris-Avatar",
+                                              "Polaris-Avatar--sizeMd"
+                                            ],
+                                            "role": "img",
+                                            "ariaModal": null,
+                                            "text": "",
+                                            "style": {
+                                              "display": "block",
+                                              "position": "relative",
+                                              "background-color": "rgb(181, 181, 181)",
+                                              "border-top-width": "0px",
+                                              "border-bottom-width": "0px",
+                                              "box-shadow": "none",
+                                              "color": "rgb(255, 255, 255)",
+                                              "z-index": "auto",
+                                              "opacity": "1",
+                                              "width": "28px",
+                                              "height": "28px",
+                                              "padding-top": "0px"
+                                            },
+                                            "children": [
+                                              {
+                                                "tag": "span",
+                                                "classes": [
+                                                  "Polaris-Avatar__Initials"
+                                                ],
+                                                "role": null,
+                                                "ariaModal": null,
+                                                "text": "",
+                                                "style": {
+                                                  "display": "flex",
+                                                  "position": "absolute",
+                                                  "background-color": "rgba(0, 0, 0, 0)",
+                                                  "border-top-width": "0px",
+                                                  "border-bottom-width": "0px",
+                                                  "box-shadow": "none",
+                                                  "color": "rgb(255, 255, 255)",
+                                                  "z-index": "auto",
+                                                  "opacity": "1",
+                                                  "width": "28px",
+                                                  "height": "28px",
+                                                  "padding-top": "0px"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "tag": "svg",
+                                                    "classes": [
+                                                      "Polaris-Avatar__Svg"
+                                                    ],
+                                                    "role": null,
+                                                    "ariaModal": null,
+                                                    "text": "",
+                                                    "style": {
+                                                      "display": "block",
+                                                      "position": "static",
+                                                      "background-color": "rgba(0, 0, 0, 0)",
+                                                      "border-top-width": "0px",
+                                                      "border-bottom-width": "0px",
+                                                      "box-shadow": "none",
+                                                      "color": "rgb(255, 255, 255)",
+                                                      "z-index": "auto",
+                                                      "opacity": "1",
+                                                      "width": "28px",
+                                                      "height": "28px",
+                                                      "padding-top": "0px"
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "tag": "path",
+                                                        "classes": [],
+                                                        "role": null,
+                                                        "ariaModal": null,
+                                                        "text": "",
+                                                        "style": {
+                                                          "display": "inline",
+                                                          "position": "static",
+                                                          "background-color": "rgba(0, 0, 0, 0)",
+                                                          "border-top-width": "0px",
+                                                          "border-bottom-width": "0px",
+                                                          "box-shadow": "none",
+                                                          "color": "rgb(255, 255, 255)",
+                                                          "z-index": "auto",
+                                                          "opacity": "1",
+                                                          "width": "auto",
+                                                          "height": "auto",
+                                                          "padding-top": "0px"
+                                                        },
+                                                        "children": []
+                                                      },
+                                                      {
+                                                        "tag": "path",
+                                                        "classes": [],
+                                                        "role": null,
+                                                        "ariaModal": null,
+                                                        "text": "",
+                                                        "style": {
+                                                          "display": "inline",
+                                                          "position": "static",
+                                                          "background-color": "rgba(0, 0, 0, 0)",
+                                                          "border-top-width": "0px",
+                                                          "border-bottom-width": "0px",
+                                                          "box-shadow": "none",
+                                                          "color": "rgb(255, 255, 255)",
+                                                          "z-index": "auto",
+                                                          "opacity": "1",
+                                                          "width": "auto",
+                                                          "height": "auto",
+                                                          "padding-top": "0px"
+                                                        },
+                                                        "children": []
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "classes": [
+                                          "Polaris-InlineStack"
+                                        ],
+                                        "role": null,
+                                        "ariaModal": null,
+                                        "text": "",
+                                        "style": {
+                                          "display": "flex",
+                                          "position": "static",
+                                          "background-color": "rgba(0, 0, 0, 0)",
+                                          "border-top-width": "0px",
+                                          "border-bottom-width": "0px",
+                                          "box-shadow": "none",
+                                          "color": "rgb(48, 48, 48)",
+                                          "z-index": "auto",
+                                          "opacity": "1",
+                                          "width": "88.0156px",
+                                          "height": "28px",
+                                          "padding-top": "0px"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "div",
+                                            "classes": [
+                                              "Polaris-Box"
+                                            ],
+                                            "role": null,
+                                            "ariaModal": null,
+                                            "text": "",
+                                            "style": {
+                                              "display": "block",
+                                              "position": "static",
+                                              "background-color": "rgba(0, 0, 0, 0)",
+                                              "border-top-width": "0px",
+                                              "border-bottom-width": "0px",
+                                              "box-shadow": "none",
+                                              "color": "rgb(48, 48, 48)",
+                                              "z-index": "auto",
+                                              "opacity": "1",
+                                              "width": "88.0156px",
+                                              "height": "20px",
+                                              "padding-top": "0px"
+                                            },
+                                            "children": [
+                                              {
+                                                "tag": "h3",
+                                                "classes": [
+                                                  "Polaris-Text--root",
+                                                  "Polaris-Text--bold"
+                                                ],
+                                                "role": null,
+                                                "ariaModal": null,
+                                                "text": "Grace Hopper",
+                                                "style": {
+                                                  "display": "block",
+                                                  "position": "static",
+                                                  "background-color": "rgba(0, 0, 0, 0)",
+                                                  "border-top-width": "0px",
+                                                  "border-bottom-width": "0px",
+                                                  "box-shadow": "none",
+                                                  "color": "rgb(48, 48, 48)",
+                                                  "z-index": "auto",
+                                                  "opacity": "1",
+                                                  "width": "88.0156px",
+                                                  "height": "20px",
+                                                  "padding-top": "0px"
+                                                },
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "li",
+                "classes": [
+                  "Polaris-ResourceItem__ListItem"
+                ],
+                "role": null,
+                "ariaModal": null,
+                "text": "",
+                "style": {
+                  "display": "list-item",
+                  "position": "relative",
+                  "background-color": "rgba(0, 0, 0, 0)",
+                  "border-top-width": "1px",
+                  "border-bottom-width": "0px",
+                  "box-shadow": "none",
+                  "color": "rgb(48, 48, 48)",
+                  "z-index": "auto",
+                  "opacity": "1",
+                  "width": "152.016px",
+                  "height": "53px",
+                  "padding-top": "0px"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "classes": [
+                      "Polaris-ResourceItem__ItemWrapper"
+                    ],
+                    "role": null,
+                    "ariaModal": null,
+                    "text": "",
+                    "style": {
+                      "display": "block",
+                      "position": "static",
+                      "background-color": "rgba(0, 0, 0, 0)",
+                      "border-top-width": "0px",
+                      "border-bottom-width": "0px",
+                      "box-shadow": "none",
+                      "color": "rgb(48, 48, 48)",
+                      "z-index": "auto",
+                      "opacity": "1",
+                      "width": "152.016px",
+                      "height": "52px",
+                      "padding-top": "0px"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "classes": [
+                          "Polaris-ResourceItem"
+                        ],
+                        "role": null,
+                        "ariaModal": null,
+                        "text": "",
+                        "style": {
+                          "display": "block",
+                          "position": "static",
+                          "background-color": "rgba(0, 0, 0, 0)",
+                          "border-top-width": "0px",
+                          "border-bottom-width": "0px",
+                          "box-shadow": "none",
+                          "color": "rgb(48, 48, 48)",
+                          "z-index": "auto",
+                          "opacity": "1",
+                          "width": "152.016px",
+                          "height": "52px",
+                          "padding-top": "0px"
+                        },
+                        "children": [
+                          {
+                            "tag": "a",
+                            "classes": [
+                              "Polaris-ResourceItem__Link"
+                            ],
+                            "role": null,
+                            "ariaModal": null,
+                            "text": "",
+                            "style": {
+                              "display": "block",
+                              "position": "absolute",
+                              "background-color": "rgba(0, 0, 0, 0)",
+                              "border-top-width": "0px",
+                              "border-bottom-width": "0px",
+                              "box-shadow": "none",
+                              "color": "rgb(0, 0, 238)",
+                              "z-index": "1",
+                              "opacity": "0",
+                              "width": "152.016px",
+                              "height": "52px",
+                              "padding-top": "0px"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "classes": [
+                              "Polaris-Box"
+                            ],
+                            "role": null,
+                            "ariaModal": null,
+                            "text": "",
+                            "style": {
+                              "display": "block",
+                              "position": "relative",
+                              "background-color": "rgba(0, 0, 0, 0)",
+                              "border-top-width": "0px",
+                              "border-bottom-width": "0px",
+                              "box-shadow": "none",
+                              "color": "rgb(48, 48, 48)",
+                              "z-index": "2",
+                              "opacity": "1",
+                              "width": "152.016px",
+                              "height": "52px",
+                              "padding-top": "12px"
+                            },
+                            "children": [
+                              {
+                                "tag": "div",
+                                "classes": [
+                                  "Polaris-InlineGrid"
+                                ],
+                                "role": null,
+                                "ariaModal": null,
+                                "text": "",
+                                "style": {
+                                  "display": "grid",
+                                  "position": "static",
+                                  "background-color": "rgba(0, 0, 0, 0)",
+                                  "border-top-width": "0px",
+                                  "border-bottom-width": "0px",
+                                  "box-shadow": "none",
+                                  "color": "rgb(48, 48, 48)",
+                                  "z-index": "auto",
+                                  "opacity": "1",
+                                  "width": "128.016px",
+                                  "height": "28px",
+                                  "padding-top": "0px"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "div",
+                                    "classes": [
+                                      "Polaris-InlineGrid"
+                                    ],
+                                    "role": null,
+                                    "ariaModal": null,
+                                    "text": "",
+                                    "style": {
+                                      "display": "grid",
+                                      "position": "static",
+                                      "background-color": "rgba(0, 0, 0, 0)",
+                                      "border-top-width": "0px",
+                                      "border-bottom-width": "0px",
+                                      "box-shadow": "none",
+                                      "color": "rgb(48, 48, 48)",
+                                      "z-index": "auto",
+                                      "opacity": "1",
+                                      "width": "128.016px",
+                                      "height": "28px",
+                                      "padding-top": "0px"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "div",
+                                        "classes": [
+                                          "Polaris-InlineStack"
+                                        ],
+                                        "role": null,
+                                        "ariaModal": null,
+                                        "text": "",
+                                        "style": {
+                                          "display": "flex",
+                                          "position": "static",
+                                          "background-color": "rgba(0, 0, 0, 0)",
+                                          "border-top-width": "0px",
+                                          "border-bottom-width": "0px",
+                                          "box-shadow": "none",
+                                          "color": "rgb(48, 48, 48)",
+                                          "z-index": "auto",
+                                          "opacity": "1",
+                                          "width": "28px",
+                                          "height": "28px",
+                                          "padding-top": "0px"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "span",
+                                            "classes": [
+                                              "Polaris-Avatar",
+                                              "Polaris-Avatar--sizeMd"
+                                            ],
+                                            "role": "img",
+                                            "ariaModal": null,
+                                            "text": "",
+                                            "style": {
+                                              "display": "block",
+                                              "position": "relative",
+                                              "background-color": "rgb(181, 181, 181)",
+                                              "border-top-width": "0px",
+                                              "border-bottom-width": "0px",
+                                              "box-shadow": "none",
+                                              "color": "rgb(255, 255, 255)",
+                                              "z-index": "auto",
+                                              "opacity": "1",
+                                              "width": "28px",
+                                              "height": "28px",
+                                              "padding-top": "0px"
+                                            },
+                                            "children": [
+                                              {
+                                                "tag": "span",
+                                                "classes": [
+                                                  "Polaris-Avatar__Initials"
+                                                ],
+                                                "role": null,
+                                                "ariaModal": null,
+                                                "text": "",
+                                                "style": {
+                                                  "display": "flex",
+                                                  "position": "absolute",
+                                                  "background-color": "rgba(0, 0, 0, 0)",
+                                                  "border-top-width": "0px",
+                                                  "border-bottom-width": "0px",
+                                                  "box-shadow": "none",
+                                                  "color": "rgb(255, 255, 255)",
+                                                  "z-index": "auto",
+                                                  "opacity": "1",
+                                                  "width": "28px",
+                                                  "height": "28px",
+                                                  "padding-top": "0px"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "tag": "svg",
+                                                    "classes": [
+                                                      "Polaris-Avatar__Svg"
+                                                    ],
+                                                    "role": null,
+                                                    "ariaModal": null,
+                                                    "text": "",
+                                                    "style": {
+                                                      "display": "block",
+                                                      "position": "static",
+                                                      "background-color": "rgba(0, 0, 0, 0)",
+                                                      "border-top-width": "0px",
+                                                      "border-bottom-width": "0px",
+                                                      "box-shadow": "none",
+                                                      "color": "rgb(255, 255, 255)",
+                                                      "z-index": "auto",
+                                                      "opacity": "1",
+                                                      "width": "28px",
+                                                      "height": "28px",
+                                                      "padding-top": "0px"
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "tag": "path",
+                                                        "classes": [],
+                                                        "role": null,
+                                                        "ariaModal": null,
+                                                        "text": "",
+                                                        "style": {
+                                                          "display": "inline",
+                                                          "position": "static",
+                                                          "background-color": "rgba(0, 0, 0, 0)",
+                                                          "border-top-width": "0px",
+                                                          "border-bottom-width": "0px",
+                                                          "box-shadow": "none",
+                                                          "color": "rgb(255, 255, 255)",
+                                                          "z-index": "auto",
+                                                          "opacity": "1",
+                                                          "width": "auto",
+                                                          "height": "auto",
+                                                          "padding-top": "0px"
+                                                        },
+                                                        "children": []
+                                                      },
+                                                      {
+                                                        "tag": "path",
+                                                        "classes": [],
+                                                        "role": null,
+                                                        "ariaModal": null,
+                                                        "text": "",
+                                                        "style": {
+                                                          "display": "inline",
+                                                          "position": "static",
+                                                          "background-color": "rgba(0, 0, 0, 0)",
+                                                          "border-top-width": "0px",
+                                                          "border-bottom-width": "0px",
+                                                          "box-shadow": "none",
+                                                          "color": "rgb(255, 255, 255)",
+                                                          "z-index": "auto",
+                                                          "opacity": "1",
+                                                          "width": "auto",
+                                                          "height": "auto",
+                                                          "padding-top": "0px"
+                                                        },
+                                                        "children": []
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "classes": [
+                                          "Polaris-InlineStack"
+                                        ],
+                                        "role": null,
+                                        "ariaModal": null,
+                                        "text": "",
+                                        "style": {
+                                          "display": "flex",
+                                          "position": "static",
+                                          "background-color": "rgba(0, 0, 0, 0)",
+                                          "border-top-width": "0px",
+                                          "border-bottom-width": "0px",
+                                          "box-shadow": "none",
+                                          "color": "rgb(48, 48, 48)",
+                                          "z-index": "auto",
+                                          "opacity": "1",
+                                          "width": "88.0156px",
+                                          "height": "28px",
+                                          "padding-top": "0px"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "div",
+                                            "classes": [
+                                              "Polaris-Box"
+                                            ],
+                                            "role": null,
+                                            "ariaModal": null,
+                                            "text": "",
+                                            "style": {
+                                              "display": "block",
+                                              "position": "static",
+                                              "background-color": "rgba(0, 0, 0, 0)",
+                                              "border-top-width": "0px",
+                                              "border-bottom-width": "0px",
+                                              "box-shadow": "none",
+                                              "color": "rgb(48, 48, 48)",
+                                              "z-index": "auto",
+                                              "opacity": "1",
+                                              "width": "88.0156px",
+                                              "height": "20px",
+                                              "padding-top": "0px"
+                                            },
+                                            "children": [
+                                              {
+                                                "tag": "h3",
+                                                "classes": [
+                                                  "Polaris-Text--root",
+                                                  "Polaris-Text--bold"
+                                                ],
+                                                "role": null,
+                                                "ariaModal": null,
+                                                "text": "Edith Clarke",
+                                                "style": {
+                                                  "display": "block",
+                                                  "position": "static",
+                                                  "background-color": "rgba(0, 0, 0, 0)",
+                                                  "border-top-width": "0px",
+                                                  "border-bottom-width": "0px",
+                                                  "box-shadow": "none",
+                                                  "color": "rgb(48, 48, 48)",
+                                                  "z-index": "auto",
+                                                  "opacity": "1",
+                                                  "width": "88.0156px",
+                                                  "height": "20px",
+                                                  "padding-top": "0px"
+                                                },
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

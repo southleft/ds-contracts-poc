@@ -1,0 +1,111 @@
+{
+  "generatedBy": "extract/depth-spike/run.ts",
+  "browser": "149.0.7827.55",
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "specs": {
+    "modal": {
+      "m1": {
+        "newRoots": 1,
+        "inStage": 0,
+        "portaled": 1,
+        "portalBytes": 4097,
+        "currentReader": {
+          "present": false,
+          "sig": "",
+          "descendantEls": 0
+        }
+      },
+      "m2": {
+        "realRoots": 2,
+        "realRootSignatures": [
+          "div|Modal-Dialog",
+          "div|Backdrop"
+        ],
+        "parts": 17,
+        "maxDepth": 7
+      },
+      "m3": null
+    },
+    "popover": {
+      "m1": {
+        "newRoots": 2,
+        "inStage": 1,
+        "portaled": 1,
+        "portalBytes": 2671,
+        "currentReader": {
+          "present": true,
+          "sig": "div|",
+          "descendantEls": 2
+        }
+      },
+      "m2": {
+        "realRoots": 2,
+        "realRootSignatures": [
+          "button|Button",
+          "div|Popover"
+        ],
+        "parts": 11,
+        "maxDepth": 5
+      },
+      "m3": null
+    },
+    "resourcelist": {
+      "m1": {
+        "newRoots": 1,
+        "inStage": 1,
+        "portaled": 0,
+        "portalBytes": 0,
+        "currentReader": {
+          "present": true,
+          "sig": "div|ResourceList__ResourceListWrapper",
+          "descendantEls": 49
+        }
+      },
+      "m2": {
+        "realRoots": 1,
+        "realRootSignatures": [
+          "ul|ResourceList"
+        ],
+        "parts": 10,
+        "maxDepth": 7
+      },
+      "m3": {
+        "count": 3,
+        "sig": "li|ResourceItem__ListItem",
+        "componentRef": "ds.resource-item"
+      }
+    },
+    "indextable": {
+      "m1": {
+        "newRoots": 2,
+        "inStage": 1,
+        "portaled": 1,
+        "portalBytes": 101,
+        "currentReader": {
+          "present": true,
+          "sig": "div|IndexTable",
+          "descendantEls": 134
+        }
+      },
+      "m2": {
+        "realRoots": 2,
+        "realRootSignatures": [
+          "div|IndexTable__IndexTableWrapper",
+          "div|p-theme-light"
+        ],
+        "parts": 70,
+        "maxDepth": 8
+      },
+      "m3": {
+        "count": 3,
+        "sig": "div|IndexTable__TableHeading",
+        "componentRef": null
+      }
+    }
+  },
+  "consoleErrors": []
+}
