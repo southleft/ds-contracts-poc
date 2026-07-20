@@ -171,7 +171,14 @@ export async function renderVariant(
   // NOTE: in-page callbacks are STRINGS, not closures — tsx/esbuild injects a
   // `__name` keep-names helper into serialized functions that does not exist
   // in the page context (ReferenceError on every evaluate).
-  await page.evaluate('document.fonts.ready');
+  // BOUNDED font settle (heal-round harness fix): page.evaluate has NO
+  // default timeout, and document.fonts.ready occasionally never resolves in
+  // headless Chromium — the run hung INDEFINITELY mid-suite (observed three
+  // times on the 1,106-render live replay, different subjects each time).
+  // 5s covers every local-font settle; a hung ready-promise now proceeds
+  // after the bound instead of stalling the whole harness. Pixels are
+  // unchanged whenever fonts settle (they settle in milliseconds locally).
+  await page.evaluate('Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 5000))])');
 
   // Neutralize residual pointer state: the page's virtual mouse KEEPS its
   // position across setContent, so a prior hover/active row leaves :hover
@@ -184,7 +191,23 @@ export async function renderVariant(
   // Interaction BEFORE measuring (a hover style could move descendants).
   const root = page.locator(ROOT_SELECTOR);
   if ((await root.count()) === 0) return { ok: false, error: `preview markup has no ${ROOT_SELECTOR}` };
-  if (interaction === 'hover') await root.hover();
+  if (interaction === 'hover') {
+    // POINTER hover, not locator.hover: the locator's actionability check
+    // refuses a zero-size target with a 30s timeout — a root projected off
+    // its void/raw-text element (content-model honesty) can carry no
+    // intrinsic box when its children's geometry lives in zero-mint stubs
+    // (the 197dd02 limit; heal-round field case: Checkbox-icon/Toggle-icon
+    // hover rows). CSS :hover matches every ancestor of the hovered point,
+    // so moving the mouse to the box center (or just inside the origin when
+    // the box is empty — flex children paint from there) applies the same
+    // hover styling locator.hover would; bounded, never a 30s stall.
+    const box = await root.boundingBox();
+    if (!box) return { ok: false, error: 'hover target has no layout box' };
+    await page.mouse.move(
+      box.x + (box.width > 0 ? box.width / 2 : 2),
+      box.y + (box.height > 0 ? box.height / 2 : 2),
+    );
+  }
   if (interaction === 'focus-visible') await page.keyboard.press('Tab');
   if (interaction === 'active') {
     const box = await root.boundingBox();

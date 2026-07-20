@@ -1,5 +1,51 @@
 # THE LIVE GAUNTLET — CBDS UI Kit Demo, easy → extremely difficult, autonomous run
 
+> **HEAL ROUND (2026-07-20) — the round below is the BEFORE record; the fix
+> classes it names are now closed or renamed.** Full visual replay after the
+> fixes (PNGs RE-BANKED at file version `2376868785213219294` — the live file
+> moved since the banked `2374568486037958769`, so per-row deltas fold in any
+> owner edits; 1,106/1,106 banked, 0 declined):
+>
+> **1,106/1,106 diffed / 0 refused / 0 skipped** (was 1,094 / 12 / 0) —
+> masked median **11.55% → 7.03%**, p90 **61.72% → 27.04%**, max
+> **98.58% → 97.39%** (the max is now _Tab-item-pill's pre-existing
+> state-fill row, unchanged before→after). Per-class:
+>
+> - **① fill-matrix-depth-drop → FIXED** (bound-paint drift routes to the
+>   mint pass; pair/triple substituted root refs): Badge **67.38 → 17.25**,
+>   Chip **77.00 → 17.74**, Alert 9.44 → 8.93 medians. Remaining Badge/Chip
+>   rows are the OUTLINE variants' partial stroke ('bound in 19/60 —
+>   inconsistent') — a different, named, pre-existing limit.
+> - **④ linked-child-html-escaped-as-text → FIXED** (corrected diagnosis:
+>   raw-text/void/select root content models, not an escape path; the box
+>   projects to a named `<div>`): Input Text **14.44 → 7.07**, Input Date
+>   **14.49 → 7.79**, Input Number 15.68 → 11.37; Text Area's literal-markup
+>   ink gone (5.25 → 5.17 median — text was masked). Dropdown family trades
+>   rows (5.10 → 6.73, MutliSelect 8.71 → 16.26): the projected div renders
+>   the DRAWN anatomy where the native select painted its own chrome — the
+>   66% caret-only worst rows are gone; the residue is real structural drift,
+>   not dropped children.
+> - **③ session-id-collision-false-cycle → FIXED** (proposal-time
+>   key-identity suffix): Radio button **12 refused → 12 diffed, 9.60%**
+>   median — zero refused rows remain in the whole run.
+> - **⑤ linked-icon-wrapper-collapses → FIXED** (slot-only fixed wrappers
+>   floor at the drawn box): Icon Button primaries **55.25 → 9.79**,
+>   secondaries **27.5 → 11.9**, tertiaries **6.96 → 2.60**;
+>   Checkbox-icon 8.3 → **1.48**, Toggle-icon 5.6 → **1.74**.
+> - **⑦ underscore pickSet → folded upstream**, clone deleted.
+> - **② duplicate-name-key-contradiction — NOT fixed here** (capture-level:
+>   dump format decision, out of this round's scope); its 4 stubs render
+>   honest geometry, and the heal checker is now KEY-AWARE (a wrong-key
+>   'heal' refuses honestly instead of linking the name-coincidence).
+> - Unchanged and still named: _Button single-card 77.87 (instance-level
+>   FILL on refs, 197dd02), Link-* 21.98 (instance-internal glyph ink),
+>   Radio button-icon 27.04 (instance internals never recursed).
+>
+> Machine record: `live-baseline.json` (rewritten by this replay). Harness
+> hardening that rode along: bounded fonts-settle + pointer hover in
+> visual-parity/render.ts (a flaky unbounded CDP await hung 1,100-render
+> runs), per-subject page recycling in visual-live.ts.
+
 Every tier replayed OFFLINE from the banked v1.6 capture through the exact playground
 receive semantics. Reproduce: `npm run extract:figma:gauntlet:live` (harness) and
 `npm run extract:figma:gauntlet:live:visual` (pixel stage — replays from the banked

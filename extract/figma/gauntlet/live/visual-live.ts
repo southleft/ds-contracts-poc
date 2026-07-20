@@ -102,11 +102,20 @@ async function main(): Promise<void> {
   }
 
   const browser = await launchBrowser();
-  const page = await browser.newPage({ viewport: { width: 1600, height: 1200 }, deviceScaleFactor: 2 });
+  // Page RECYCLED per subject — a single page accumulating ~1,100 setContent
+  // cycles degrades Chromium into an indefinite hang around render ~500
+  // (observed twice on the heal-round replay, different subjects each time);
+  // a fresh page per subject keeps the run bounded with identical pixels.
+  let page = await browser.newPage({ viewport: { width: 1600, height: 1200 }, deviceScaleFactor: 2 });
+  let pageSubjects = 0;
   const rows: Row[] = [];
   const triptychCandidates: Array<{ row: Row; ours: Buffer; figmaPath: string; textRects: never }> = [];
 
   for (const { subject, tier } of run) {
+    if (pageSubjects++ > 0) {
+      await page.close();
+      page = await browser.newPage({ viewport: { width: 1600, height: 1200 }, deviceScaleFactor: 2 });
+    }
     const info = infos.get(subject.setNodeId);
     if (!info) {
       rows.push({ subject: subject.id, tier, variant: '(all)', status: 'refused', diagnosis: 'no set info' });
