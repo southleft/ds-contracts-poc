@@ -21,7 +21,7 @@
     "part-0-0-0-0-0-0-0-0-0": 16,
     "part-0-0-0-0-0-0-0-0-1": 15,
     "part-0-0-0-0-0-0-0-0-2": 16,
-    "title": 13,
+    "title": 15,
     "button": 52,
     "button__icon": 5,
     "part-0-0-0-0-1-0-0": 6,
@@ -31,7 +31,7 @@
     "box-3": 4,
     "blockstack-2": 6,
     "part-0-0-1-0-0": 0,
-    "label-2": 3,
+    "label-2": 6,
     "buttongroup": 5,
     "buttongroup__item": 2,
     "button-2": 49,
@@ -689,8 +689,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 271,
-    "mintedLeavesFolded": 57
+    "mintedLeavesUnfolded": 268,
+    "mintedLeavesFolded": 54
   },
   "bound": {
     "cellsChecked": 96,
@@ -699,11 +699,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 57,
-    "baseBindings": 110,
+    "leaves": 54,
+    "baseBindings": 113,
     "stateBindings": 2,
     "byShape": {
-      "uniform": 105,
+      "uniform": 108,
       "perAxis": 7,
       "perPair": 0,
       "refused": 0
@@ -805,7 +805,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 96.81372549019608,
+    "computedPctEqual": 96.90054495912807,
     "rowsFullyEqual": 0,
     "rows": 64,
     "pixelPerfectExact": 0,
