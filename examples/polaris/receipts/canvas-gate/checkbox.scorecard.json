@@ -28,8 +28,7 @@
       "canvasPx": "271x36",
       "realPx": "270x36",
       "inkCanvasPct": 23.53,
-      "inkRealPct": 21.53,
-      "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
+      "inkRealPct": 21.53
     },
     {
       "cell": "Checked=checked",
@@ -42,12 +41,12 @@
       "realPx": "270x36",
       "inkCanvasPct": 33,
       "inkRealPct": 31.05,
-      "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
+      "note": "floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
     },
     {
       "cell": "Checked=indeterminate",
       "kind": "base",
-      "pctExactUnmasked": 23.6,
+      "pctExactUnmasked": 23.2,
       "pctAAUnmasked": 1.48,
       "pctAAMasked": 2.67,
       "maskCoveragePct": 81.55,
@@ -55,12 +54,12 @@
       "realPx": "270x36",
       "inkCanvasPct": 33.78,
       "inkRealPct": 31.28,
-      "note": "CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in"
+      "note": "floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
     }
   ],
   "summary": {
     "cells": 3,
-    "meanExactUnmasked": 23.39,
+    "meanExactUnmasked": 23.25,
     "meanAAUnmasked": 1.55,
     "meanAAMasked": 3.06,
     "maxAAMasked": 6.5,

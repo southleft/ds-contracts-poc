@@ -21,15 +21,15 @@
     {
       "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 42.58,
-      "pctAAUnmasked": 14.63,
-      "pctAAMasked": 10.27,
-      "maskCoveragePct": 93.01,
-      "canvasPx": "275x21",
+      "pctExactUnmasked": 22.94,
+      "pctAAUnmasked": 0.63,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 84.8,
+      "canvasPx": "329x36",
       "realPx": "329x36",
-      "inkCanvasPct": 21.88,
+      "inkCanvasPct": 24.44,
       "inkRealPct": 22.85,
-      "note": "CURATED CONTRACT GEOMETRY: hand-curated 20×20 backdrop vs the package's 18×18 (--pc-choice-size — see Checkbox); label typography is composition-owned (Text at bodyMd)"
+      "note": "1px ring raster: the unchecked ring rides per-side border-color leaves lowered to ONE bound stroke (round 5c — value-uniform sides, width source required); residual antialiasing of a 1px circle"
     },
     {
       "cell": "Checked=checked",
@@ -42,27 +42,21 @@
       "realPx": "329x36",
       "inkCanvasPct": 28.43,
       "inkRealPct": 26.83,
-      "note": "NAMED ROUND-4 LOSS (::before pseudo decor): the real selected dot is a ::before pseudo-element the promotion cannot carry — the canvas draws the backdrop's captured checked fill as a solid disc while the real control renders ring + dot; plus the curated 20×20 backdrop vs the package's 18×18 (see Checkbox)"
+      "note": "S5 dot carried (round 5c): 10×10 ellipse at the captured 4,4 offsets (translate + host border folded); residual sub-pixel raster of dot + 1px ring"
     }
   ],
   "summary": {
     "cells": 2,
-    "meanExactUnmasked": 32.76,
-    "meanAAUnmasked": 7.63,
-    "meanAAMasked": 5.14,
-    "maxAAMasked": 10.27,
+    "meanExactUnmasked": 22.94,
+    "meanAAUnmasked": 0.63,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
     "worstCell": "Checked=unchecked",
-    "cellsOver10Masked": [
-      {
-        "cell": "Checked=unchecked",
-        "pctAAMasked": 10.27,
-        "note": "CURATED CONTRACT GEOMETRY: hand-curated 20×20 backdrop vs the package's 18×18 (--pc-choice-size — see Checkbox); label typography is composition-owned (Text at bodyMd)"
-      }
-    ],
+    "cellsOver10Masked": [],
     "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": true
   }

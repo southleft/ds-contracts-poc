@@ -140,27 +140,32 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
         ? 'outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width'
         : null,
   },
+  // ROUND 5c: the six named round-5a promotion causes are FIXED — Tag label
+  // (complement-of-product presence), Spinner root-hosted glyph plan +
+  // context-color carry, Button tone×variant paint re-mint, Checkbox/Radio
+  // curated 20×20 → captured 18×18, Avatar authored-viewBox unification,
+  // RadioButton ::before dot (S5 shape part). The remaining causes below are
+  // the standing designer-facing classes.
   {
     component: 'Checkbox',
-    test: () =>
-      'CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in',
+    test: (cell) =>
+      cell.subst['checked'] !== 'unchecked'
+        ? 'floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)'
+        : null,
   },
   {
     component: 'RadioButton',
     test: (cell) =>
       cell.subst['checked'] === 'checked'
-        ? 'NAMED ROUND-4 LOSS (::before pseudo decor): the real selected dot is a ::before pseudo-element the promotion cannot carry — the canvas draws the backdrop\'s captured checked fill as a solid disc while the real control renders ring + dot; plus the curated 20×20 backdrop vs the package\'s 18×18 (see Checkbox)'
-        : 'CURATED CONTRACT GEOMETRY: hand-curated 20×20 backdrop vs the package\'s 18×18 (--pc-choice-size — see Checkbox); label typography is composition-owned (Text at bodyMd)',
+        ? 'S5 dot carried (round 5c): 10×10 ellipse at the captured 4,4 offsets (translate + host border folded); residual sub-pixel raster of dot + 1px ring'
+        : '1px ring raster: the unchecked ring rides per-side border-color leaves lowered to ONE bound stroke (round 5c — value-uniform sides, width source required); residual antialiasing of a 1px circle',
   },
   {
-    component: 'Banner',
-    test: () =>
-      'CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)',
-  },
-  {
-    component: 'Avatar',
-    test: () =>
-      'RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)',
+    component: 'Tag',
+    test: (cell) =>
+      cell.state === 'active' || cell.state === 'focus-visible'
+        ? 'state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)'
+        : null,
   },
   {
     component: 'ProgressBar',
@@ -170,29 +175,16 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
   {
     component: 'Button',
     test: (cell) =>
-      cell.subst['tone']
-        ? 'NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all'
+      cell.subst['tone'] && cell.state
+        ? 'state×tone set planes are S3 residue (named overflow: root states carry ≤1 substitution — background-color-state-hover.{variant}.{tone} has two): the BASE tone planes now carry (round 5c re-mint), but the critical/success hover/active/focus repaints remain named residue — the canvas draws the carried unset-tone state plane'
         : null,
   },
-  // (Round 5: the disabled border-width EMITTER-DEFECT note is retired —
-  // per-side size-0 stroke weights now render and the 1px default only
-  // fires with no width source; State=Disabled cells sit under 10%.)
   {
     component: 'Button',
     test: (cell) =>
       cell.subst['variant'] === 'plain' || cell.subst['variant'] === 'monochromePlain'
         ? 'composition-owned typography (named in the config triage; channel table: label 12px/16px vs real 13px/20px): plain/monochromePlain render their label through the Text primitive at bodyMd — invisible to single-file static promotion'
         : null,
-  },
-  {
-    component: 'Spinner',
-    test: () =>
-      'CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing',
-  },
-  {
-    component: 'Tag',
-    test: () =>
-      'NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders "Wholesale". The engine draws everything the contract carries',
   },
 ];
 

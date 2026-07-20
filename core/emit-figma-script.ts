@@ -849,14 +849,21 @@ function applyTokens(
   // side resolves to the same variable; disagreeing sides keep the CSS-side
   // truth (the same one-paint limit the per-side width fields do not have).
   const SIDE_COLOR_CHANNELS = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'];
-  const sideStrokeVars = new Set(
-    SIDE_COLOR_CHANNELS.filter((chn) => tokens[chn] !== undefined).map((chn) => {
-      let p = tokens[chn].slice(1, -1);
-      for (const [propName, value] of Object.entries(subst)) p = p.replaceAll(`{${propName}}`, value);
-      return figmaName(p);
-    }),
-  );
-  const uniformSideStroke = sideStrokeVars.size === 1 ? [...sideStrokeVars][0] : null;
+  const sidePaths = SIDE_COLOR_CHANNELS.filter((chn) => tokens[chn] !== undefined).map((chn) => {
+    let p = tokens[chn].slice(1, -1);
+    for (const [propName, value] of Object.entries(subst)) p = p.replaceAll(`{${propName}}`, value);
+    return p;
+  });
+  // Uniformity is a VALUE question (the floor mints one leaf PER SIDE —
+  // four different names, one color); the bound paint uses the first side's
+  // variable. A width source must exist: a border-color with border-width 0
+  // is INVISIBLE in CSS, and lowering it without a width would let the
+  // renderer's 1px default manufacture a ring the real component never
+  // draws (the Tag disabled state carries recolored 0-width borders).
+  const sideValues = new Set(sidePaths.map((p) => String(resolveLiteral(p))));
+  const hasWidthSource = ['border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
+    .some((chn) => tokens[chn] !== undefined);
+  const uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
   for (const [cssProp, ref] of Object.entries(tokens)) {
     let tokenPath = ref.slice(1, -1);
     for (const [propName, value] of Object.entries(subst)) {

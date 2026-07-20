@@ -20,81 +20,74 @@
     {
       "cell": "Size=large",
       "kind": "base",
-      "pctExactUnmasked": 33.33,
-      "pctAAUnmasked": 19.96,
-      "pctAAMasked": 59.21,
+      "pctExactUnmasked": 11.47,
+      "pctAAUnmasked": 0.16,
+      "pctAAMasked": 0,
       "maskCoveragePct": 66.67,
-      "canvasPx": "144x40",
+      "canvasPx": "152x48",
       "realPx": "152x48",
-      "inkCanvasPct": 76.21,
-      "inkRealPct": 97.26,
-      "note": "NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
+      "inkCanvasPct": 97.26,
+      "inkRealPct": 97.26
     },
     {
       "cell": "Size=large, State=Disabled",
       "kind": "state",
       "state": "disabled",
-      "pctExactUnmasked": 33.17,
+      "pctExactUnmasked": 10.86,
       "pctAAUnmasked": 0.05,
       "pctAAMasked": 0,
       "maskCoveragePct": 66.67,
-      "canvasPx": "144x40",
+      "canvasPx": "152x48",
       "realPx": "152x48",
-      "inkCanvasPct": 76.04,
-      "inkRealPct": 97.09,
-      "note": "NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
+      "inkCanvasPct": 97.09,
+      "inkRealPct": 97.09
     },
     {
       "cell": "Size=large, State=Active",
       "kind": "state",
       "state": "active",
-      "pctExactUnmasked": 38.94,
-      "pctAAUnmasked": 26.65,
-      "pctAAMasked": 63.42,
-      "maskCoveragePct": 59.96,
-      "canvasPx": "156x52",
+      "pctExactUnmasked": 38.26,
+      "pctAAUnmasked": 26.95,
+      "pctAAMasked": 59.93,
+      "maskCoveragePct": 57.04,
+      "canvasPx": "164x52",
       "realPx": "152x48",
-      "inkCanvasPct": 97.83,
-      "inkRealPct": 87.48,
-      "note": "NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
+      "inkCanvasPct": 97.94,
+      "inkRealPct": 83.21,
+      "note": "state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
     },
     {
       "cell": "Size=large, State=Focus Visible",
       "kind": "state",
       "state": "focus-visible",
-      "pctExactUnmasked": 38.17,
-      "pctAAUnmasked": 25.54,
-      "pctAAMasked": 63.42,
-      "maskCoveragePct": 59.96,
-      "canvasPx": "156x52",
+      "pctExactUnmasked": 37.52,
+      "pctAAUnmasked": 25.89,
+      "pctAAMasked": 59.93,
+      "maskCoveragePct": 57.04,
+      "canvasPx": "164x52",
       "realPx": "152x48",
-      "inkCanvasPct": 97.83,
-      "inkRealPct": 87.48,
-      "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
+      "inkCanvasPct": 97.94,
+      "inkRealPct": 83.21,
+      "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
     }
   ],
   "summary": {
     "cells": 4,
-    "meanExactUnmasked": 35.9,
-    "meanAAUnmasked": 18.05,
-    "meanAAMasked": 46.51,
-    "maxAAMasked": 63.42,
+    "meanExactUnmasked": 24.53,
+    "meanAAUnmasked": 13.26,
+    "meanAAMasked": 29.97,
+    "maxAAMasked": 59.93,
     "worstCell": "Size=large, State=Active",
     "cellsOver10Masked": [
       {
-        "cell": "Size=large",
-        "pctAAMasked": 59.21,
-        "note": "NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
-      },
-      {
         "cell": "Size=large, State=Active",
-        "pctAAMasked": 63.42,
-        "note": "NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
+        "pctAAMasked": 59.93,
+        "note": "state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
       },
       {
         "cell": "Size=large, State=Focus Visible",
-        "pctAAMasked": 63.42,
-        "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
+        "pctAAMasked": 59.93,
+        "note": "real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; state-preview vs resting paint: the carried active/focus channels are outline-color/outline-width whose REAL resting outline-style is none (outline-style is declared-not-drawn vocabulary) — the canvas state preview draws the C5 stroke approximation while the real span shows resting paint; the base and disabled planes are exact (round 5c: complement-of-product label + set-plane literals)"
       }
     ],
     "blankCanvasCells": []

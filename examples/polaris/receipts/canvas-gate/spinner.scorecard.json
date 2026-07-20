@@ -20,53 +20,40 @@
     {
       "cell": "Size=Large",
       "kind": "base",
-      "pctExactUnmasked": 15.99,
-      "pctAAUnmasked": 12.7,
-      "pctAAMasked": 12.7,
+      "pctExactUnmasked": 1.58,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "85x84",
       "realPx": "85x84",
       "inkCanvasPct": 15.99,
-      "inkRealPct": 15.99,
-      "note": "CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
+      "inkRealPct": 15.99
     },
     {
       "cell": "Size=Small",
       "kind": "base",
-      "pctExactUnmasked": 29.58,
-      "pctAAUnmasked": 21.11,
-      "pctAAMasked": 21.11,
+      "pctExactUnmasked": 4.02,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "37x37",
       "realPx": "37x37",
       "inkCanvasPct": 29.58,
-      "inkRealPct": 29.58,
-      "note": "CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
+      "inkRealPct": 29.58
     }
   ],
   "summary": {
     "cells": 2,
-    "meanExactUnmasked": 22.79,
-    "meanAAUnmasked": 16.91,
-    "meanAAMasked": 16.91,
-    "maxAAMasked": 21.11,
-    "worstCell": "Size=Small",
-    "cellsOver10Masked": [
-      {
-        "cell": "Size=Large",
-        "pctAAMasked": 12.7,
-        "note": "CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
-      },
-      {
-        "cell": "Size=Small",
-        "pctAAMasked": 21.11,
-        "note": "CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
-      }
-    ],
+    "meanExactUnmasked": 2.8,
+    "meanAAUnmasked": 0,
+    "meanAAMasked": 0,
+    "maxAAMasked": 0,
+    "worstCell": "Size=Large",
+    "cellsOver10Masked": [],
     "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": true
   }

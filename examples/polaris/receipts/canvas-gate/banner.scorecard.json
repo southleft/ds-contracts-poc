@@ -27,8 +27,7 @@
       "canvasPx": "638x180",
       "realPx": "638x180",
       "inkCanvasPct": 55.7,
-      "inkRealPct": 56.66,
-      "note": "CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "inkRealPct": 56.66
     },
     {
       "cell": "Tone=Success",
@@ -40,8 +39,7 @@
       "canvasPx": "638x180",
       "realPx": "638x180",
       "inkCanvasPct": 55.23,
-      "inkRealPct": 56.16,
-      "note": "CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "inkRealPct": 56.16
     },
     {
       "cell": "Tone=Warning",
@@ -53,8 +51,7 @@
       "canvasPx": "638x180",
       "realPx": "638x180",
       "inkCanvasPct": 55.7,
-      "inkRealPct": 56.66,
-      "note": "CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "inkRealPct": 56.66
     },
     {
       "cell": "Tone=Critical",
@@ -66,8 +63,7 @@
       "canvasPx": "638x180",
       "realPx": "638x180",
       "inkCanvasPct": 55.14,
-      "inkRealPct": 55.99,
-      "note": "CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "inkRealPct": 55.99
     },
     {
       "cell": "Tone=Info, State=Focus Visible",
@@ -81,7 +77,7 @@
       "realPx": "646x184",
       "inkCanvasPct": 58.06,
       "inkRealPct": 56.79,
-      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width"
     },
     {
       "cell": "Tone=Success, State=Focus Visible",
@@ -95,7 +91,7 @@
       "realPx": "646x184",
       "inkCanvasPct": 56.79,
       "inkRealPct": 57.54,
-      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width"
     },
     {
       "cell": "Tone=Warning, State=Focus Visible",
@@ -109,7 +105,7 @@
       "realPx": "646x184",
       "inkCanvasPct": 58.06,
       "inkRealPct": 56.79,
-      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width"
     },
     {
       "cell": "Tone=Critical, State=Focus Visible",
@@ -123,7 +119,7 @@
       "realPx": "646x184",
       "inkCanvasPct": 57.53,
       "inkRealPct": 56.16,
-      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; CONTRACT ANATOMY GAP (channel table: root bg/radius match): the compiled Banner draws title+body text in a horizontal row only — no tone icon ribbon, no inner Box padding, no vertical stack; the real Banner renders the full card. The tone surface rides an inner Box the promotion refused by name (config triage)"
+      "note": "outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width"
     }
   ],
   "summary": {
