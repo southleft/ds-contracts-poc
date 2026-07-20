@@ -3779,6 +3779,116 @@ const cases: Case[] = [
       console.log('journey-designer: manifest figma-emit (local CLI build) → 42-variant compiled set (14×3, tone-substituted fills, slash-bound tokens, icon+label anatomy) → push DRY through the real worker pipeline (zero network)');
     },
   },
+  {
+    // ROUND 5c — REACT EMITTERS: hyphenated part names must emit VALID,
+    // EXECUTABLE JavaScript. Found by the CI journey validation
+    // (examples/ci/VALIDATION.md): round-4 promoted anatomies carry part
+    // names like "label-2" / "icon-3-incomplete", and `styles.label-2`
+    // PARSES — as subtraction (NaN class names); `styles.icon - 3 -
+    // incomplete` throws ReferenceError the moment the part renders. A grep
+    // or a parse pass cannot catch this class, so this eval EXECUTES both
+    // emitted modules: the CSS-module emitter's output is esbuild-bundled
+    // (local-css) and rendered with react-dom/server; the inline emitter's
+    // output likewise. Every hyphen-named part is unconditionally visible in
+    // the fixture, so the defective member accesses would evaluate.
+    id: 'react-hyphenated-part-names-execute',
+    claim: 'C3-detection',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { pathToFileURL } from 'node:url';
+        import { build } from 'esbuild';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { emitReact } from './core/emit-react.ts';
+        import { emitReactInline } from './core/emit-react-inline.ts';
+        (async () => {
+          const read = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+          const fixture = ContractSchema.parse({
+            id: 'eval.hyphenparts',
+            name: 'HyphenParts',
+            version: '1.0.0',
+            description: 'Eval fixture: round-4-style hyphenated part names.',
+            semantics: { element: 'div' },
+            props: [{
+              name: 'children', description: 'text', type: 'text', required: true, default: 'hello-eval',
+              bindings: { figma: { kind: 'TEXT', property: 'Label' }, code: { prop: 'children' } },
+            }],
+            states: [],
+            anatomy: { root: { layout: { display: 'flex' }, parts: {
+              'label-2': { content: { prop: 'children' }, literals: { 'padding-left': '2px' } },
+              'note-3-static': { text: 'static run', literals: { 'padding-left': '2px' } },
+              'icon-3-incomplete': { icon: { asset: 'eval-check' }, element: 'span' },
+              'box-4': { layout: { display: 'flex' }, parts: { 'part-0-1': { text: 'leaf', literals: { 'padding-left': '2px' } } } },
+            } } },
+            anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/HyphenParts', export: 'HyphenParts' } },
+          });
+          const icons = new Map([['eval-check', '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h20v20H0z"/></svg>']]);
+          const contracts = new Map([[fixture.id, fixture]]);
+
+          // ---- CSS-module emitter: emit → bundle (local-css) → EXECUTE ----
+          const { tsx, css } = emitReact(fixture, { tokens: new Set(), icons, contracts });
+          if (/styles\\.[A-Za-z0-9_$]+\\s*-\\s*\\d/.test(tsx)) throw new Error('emitted tsx still contains a subtraction-parsed styles access');
+          fs.mkdirSync('hyphen-eval', { recursive: true });
+          fs.writeFileSync('hyphen-eval/HyphenParts.tsx', tsx);
+          fs.writeFileSync('hyphen-eval/HyphenParts.module.css', css);
+          fs.writeFileSync('hyphen-eval/entry.tsx', [
+            "import { createElement } from 'react';",
+            "import { renderToStaticMarkup } from 'react-dom/server';",
+            "import { HyphenParts } from './HyphenParts';",
+            "import styles from './HyphenParts.module.css';",
+            "export const markup = renderToStaticMarkup(createElement(HyphenParts, null, 'hello-eval'));",
+            "export const classMap = styles;",
+          ].join('\\n'));
+          await build({
+            entryPoints: ['hyphen-eval/entry.tsx'], bundle: true, outfile: 'hyphen-eval/entry.cjs',
+            format: 'cjs', platform: 'node', jsx: 'automatic', logLevel: 'silent',
+            loader: { '.css': 'local-css' }, external: ['react', 'react-dom'],
+          });
+          const mod = await import(pathToFileURL(path.resolve('hyphen-eval/entry.cjs')).href);
+          const { markup, classMap } = mod.default ?? mod;
+          for (const part of ['label-2', 'note-3-static', 'icon-3-incomplete', 'icon-3-incompleteGlyph', 'box-4', 'part-0-1']) {
+            const cls = classMap[part];
+            if (typeof cls !== 'string' || cls.length === 0) throw new Error('css-module class missing for part ' + part);
+            if (!markup.includes(cls)) throw new Error('rendered markup missing the class for part ' + part + ' (' + cls + ')');
+          }
+          if (markup.includes('NaN')) throw new Error('rendered markup contains NaN class names (the subtraction defect): ' + markup);
+          if (!markup.includes('hello-eval') || !markup.includes('static run') || !markup.includes('leaf')) {
+            throw new Error('fixture content missing from the render: ' + markup);
+          }
+
+          // ---- inline emitter: emit → bundle → EXECUTE (S['label-2']) ----
+          const brands = Object.fromEntries(fs.readdirSync('tokens/modes').filter((f) => /^brand\\./.test(f)).map((f) => [f.replace(/^brand\\.|\\.tokens\\.json$/g, ''), read('tokens/modes/' + f)]));
+          const tokens = { primitives: read('tokens/primitives.tokens.json'), semantic: read('tokens/semantic.tokens.json'), light: read('tokens/modes/semantic.light.tokens.json'), dark: read('tokens/modes/semantic.dark.tokens.json'), brands };
+          const inline = emitReactInline(fixture, { tokens, icons, contracts, mode: 'light' });
+          if (/S\\.[A-Za-z0-9_$]+\\s*-\\s*\\d/.test(inline.tsx)) throw new Error('inline emitter still contains a subtraction-parsed S access');
+          fs.writeFileSync('hyphen-eval/Inline.tsx', inline.tsx);
+          fs.writeFileSync('hyphen-eval/inline-entry.tsx', [
+            "import { createElement } from 'react';",
+            "import { renderToStaticMarkup } from 'react-dom/server';",
+            "import { HyphenParts } from './Inline';",
+            "export const markup = renderToStaticMarkup(createElement(HyphenParts, null, 'hello-inline'));",
+          ].join('\\n'));
+          await build({
+            entryPoints: ['hyphen-eval/inline-entry.tsx'], bundle: true, outfile: 'hyphen-eval/inline-entry.cjs',
+            format: 'cjs', platform: 'node', jsx: 'automatic', logLevel: 'silent',
+            external: ['react', 'react-dom'],
+          });
+          const imod = await import(pathToFileURL(path.resolve('hyphen-eval/inline-entry.cjs')).href);
+          const inlineMarkup = (imod.default ?? imod).markup;
+          if (inlineMarkup.includes('NaN')) throw new Error('inline render contains NaN (the subtraction defect)');
+          if (!inlineMarkup.includes('hello-inline') || !inlineMarkup.includes('static run')) {
+            throw new Error('inline fixture content missing: ' + inlineMarkup);
+          }
+          console.log('hyphen-parts ok: both emitted modules EXECUTED — 5 hyphen-named classes rendered, no NaN, no ReferenceError');
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('hyphen-parts ok:')) {
+        throw new Error(`hyphenated-part execution probe failed:\n${probe.out}`);
+      }
+      console.log('react-hyphenated-part-names-execute: emitReact + emitReactInline outputs bundled and EXECUTED with react-dom/server — hyphen-named parts render real classes (the styles.label-2 subtraction defect stays fixed)');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

@@ -24,7 +24,7 @@ export const Thumbnail = forwardRef<HTMLSpanElement, ThumbnailProps>(function Th
   const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} data-transparent={transparent || undefined} {...rest}>
-      <img className={styles.part-0} alt={String(alt)}>
+      <img className={styles["part-0"]} alt={String(alt)}>
 
 </img>
     </span>

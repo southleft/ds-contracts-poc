@@ -38,17 +38,17 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
   return (
     <span ref={ref} className={classes} data-disabled={disabled || undefined} data-removable={removable || undefined} data-clickable={clickable || undefined} data-linked={linked || undefined} {...rest}>
       {linked ? (<a className={styles.link}>
-{linked ? (<span className={styles.text-2}>
-{linked ? (<span className={styles.label-2}>Wholesale</span>) : null}
+{linked ? (<span className={styles["text-2"]}>
+{linked ? (<span className={styles["label-2"]}>Wholesale</span>) : null}
 </span>) : null}
 </a>) : null}
-<span className={styles.part-1}>
+<span className={styles["part-1"]}>
 
 </span>
 {removable ? (<button className={styles.button}>
 {removable ? (<span className={styles.icon}>
-<span className={styles.icon-none} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["tag-icon-none"] }} />
-{size === 'large' ? (<span className={styles.icon-large} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["tag-icon-large"] }} />) : null}
+<span className={styles["icon-none"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["tag-icon-none"] }} />
+{size === 'large' ? (<span className={styles["icon-large"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["tag-icon-large"] }} />) : null}
 </span>) : null}
 </button>) : null}
     </span>

@@ -42,37 +42,37 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
     <div ref={ref} className={classes} data-hide-icon={hideIcon || undefined} data-stop-announcements={stopAnnouncements || undefined} data-dismissible={dismissible || undefined} data-with-action={withAction || undefined} role={ROLE_MAP[tone]} {...rest}>
       <div className={styles.box}>
 <div className={styles.blockstack}>
-<div className={styles.box-2}>
+<div className={styles["box-2"]}>
 <div className={styles.inlinestack}>
-<div className={styles.inlinestack-2}>
-<span className={styles.part-0-0-0-0-0-0}>
+<div className={styles["inlinestack-2"]}>
+<span className={styles["part-0-0-0-0-0-0"]}>
 <span className={styles.icon}>
-{tone === 'success' ? (<span className={styles.icon-success} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-success"] }} />) : null}
-{tone === 'info' ? (<span className={styles.icon-info} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-info"] }} />) : null}
-{tone === 'warning' ? (<span className={styles.icon-warning} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-warning"] }} />) : null}
-{tone === 'critical' ? (<span className={styles.icon-critical} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-critical"] }} />) : null}
+{tone === 'success' ? (<span className={styles["icon-success"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-success"] }} />) : null}
+{tone === 'info' ? (<span className={styles["icon-info"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-info"] }} />) : null}
+{tone === 'warning' ? (<span className={styles["icon-warning"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-warning"] }} />) : null}
+{tone === 'critical' ? (<span className={styles["icon-critical"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-critical"] }} />) : null}
 </span>
 </span>
 <h2 className={styles.title}>{title}</h2>
 </div>
 {dismissible ? (<button className={styles.button}>
 {dismissible ? (<span className={styles.button__icon}>
-{dismissible ? (<span className={styles.part-0-0-0-0-1-0-0}>
-{dismissible ? (<span className={styles.icon-3}><span aria-hidden="true" className={styles.icon-3Glyph} dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-3"] }} /></span>) : null}
+{dismissible ? (<span className={styles["part-0-0-0-0-1-0-0"]}>
+{dismissible ? (<span className={styles["icon-3"]}><span aria-hidden="true" className={styles["icon-3Glyph"]} dangerouslySetInnerHTML={{ __html: ICONS["banner-icon-3"] }} /></span>) : null}
 </span>) : null}
 </span>) : null}
 </button>) : null}
 </div>
 </div>
-<div className={styles.box-3}>
-<div className={styles.blockstack-2}>
-<div className={styles.part-0-0-1-0-0}>
-<span className={styles.label-2}>Use your finance report to get detailed insights.</span>
+<div className={styles["box-3"]}>
+<div className={styles["blockstack-2"]}>
+<div className={styles["part-0-0-1-0-0"]}>
+<span className={styles["label-2"]}>Use your finance report to get detailed insights.</span>
 </div>
 {withAction ? (<div className={styles.buttongroup}>
 {withAction ? (<div className={styles.buttongroup__item}>
-{withAction ? (<button className={styles.button-2}>
-{withAction ? (<span className={styles.label-3}>Print label</span>) : null}
+{withAction ? (<button className={styles["button-2"]}>
+{withAction ? (<span className={styles["label-3"]}>Print label</span>) : null}
 </button>) : null}
 </div>) : null}
 </div>) : null}

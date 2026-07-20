@@ -39,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   return (
     <button ref={ref} className={classes} data-full-width={fullWidth || undefined} data-remove-underline={removeUnderline || undefined} data-data-primary-link={dataPrimaryLink || undefined} data-with-icon={withIcon || undefined} {...rest}>
       {withIcon ? (<span className={styles.icon}>
-{withIcon ? (<span className={styles.icon-2}><span aria-hidden="true" className={styles.icon-2Glyph} dangerouslySetInnerHTML={{ __html: ICONS["button-icon-2"] }} /></span>) : null}
+{withIcon ? (<span className={styles["icon-2"]}><span aria-hidden="true" className={styles["icon-2Glyph"]} dangerouslySetInnerHTML={{ __html: ICONS["button-icon-2"] }} /></span>) : null}
 </span>) : null}
 <span className={styles.label}>Button</span>
     </button>

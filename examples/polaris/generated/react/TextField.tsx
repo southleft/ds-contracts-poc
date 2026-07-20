@@ -100,7 +100,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Tex
       <div className={styles.labelled__labelwrapper}>
 <div className={styles.label}>
 <label className={styles.label__text}>
-<span className={styles.label-2}>Store name</span>
+<span className={styles["label-2"]}>Store name</span>
 </label>
 </div>
 </div>
@@ -108,16 +108,16 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Tex
 <div className={styles.connected__item}>
 <div className={styles.textfield}>
 {withPrefix ? (<div className={styles.prefix}>
-{withPrefix ? (<span className={styles.label-3}>$</span>) : null}
+{withPrefix ? (<span className={styles["label-3"]}>$</span>) : null}
 </div>) : null}
 <input className={styles.input} name={String(name)} value={String(value)} placeholder={String(placeholder)}>
 
 </input>
 {withSuffix ? (<div className={styles.suffix}>
-{withSuffix ? (<span className={styles.label-4}>USD</span>) : null}
+{withSuffix ? (<span className={styles["label-4"]}>USD</span>) : null}
 </div>) : null}
 {clearButton ? (<button className={styles.clearbutton}>
-<span className={styles.label-5}>Clear</span>
+<span className={styles["label-5"]}>Clear</span>
 {clearButton ? (<span className={styles.icon}><span aria-hidden="true" className={styles.iconGlyph} dangerouslySetInnerHTML={{ __html: ICONS["text-field-icon"] }} /></span>) : null}
 </button>) : null}
 <div className={styles.backdrop}>

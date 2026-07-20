@@ -30,14 +30,14 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
   const classes = [styles.root, styles[`tone-${tone}`], styles[`progress-${progress}`], className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
-      <span className={styles.label-2}>Info</span>
+      <span className={styles["label-2"]}>Info</span>
 <span className={styles.icon}>
-<span className={styles.icon-2}>
-<span className={styles.label-3}>Incomplete</span>
-<div className={styles.icon-3}>
-{progress === 'incomplete' ? (<span className={styles.icon-3-incomplete} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["badge-icon-3-incomplete"] }} />) : null}
-{progress === 'partiallyComplete' ? (<span className={styles.icon-3-partiallycomplete} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["badge-icon-3-partiallycomplete"] }} />) : null}
-{progress === 'complete' ? (<span className={styles.icon-3-complete} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["badge-icon-3-complete"] }} />) : null}
+<span className={styles["icon-2"]}>
+<span className={styles["label-3"]}>Incomplete</span>
+<div className={styles["icon-3"]}>
+{progress === 'incomplete' ? (<span className={styles["icon-3-incomplete"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["badge-icon-3-incomplete"] }} />) : null}
+{progress === 'partiallyComplete' ? (<span className={styles["icon-3-partiallycomplete"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["badge-icon-3-partiallycomplete"] }} />) : null}
+{progress === 'complete' ? (<span className={styles["icon-3-complete"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["badge-icon-3-complete"] }} />) : null}
 </div>
 </span>
 </span>

@@ -460,7 +460,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const variantPropsFor = (partName: string): string[] => [...(partVariantProps.get(partName) ?? [])];
 
   const styleExpr = (partName: string, isRoot: boolean, extra: string[] = []): string => {
-    const pieces = [`...S.${partName}`];
+    // Promoted anatomies carry hyphenated part names ("label-2") — dot access
+    // parses as subtraction (the emit-react hyphenated-part-name defect,
+    // examples/ci/VALIDATION.md). Non-identifier names use bracket access;
+    // the S object's keys are JSON.stringify-quoted either way.
+    const sRef = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(partName)
+      ? `S.${partName}`
+      : `S[${JSON.stringify(partName)}]`;
+    const pieces = [`...${sRef}`];
     for (const propName of variantPropsFor(partName)) {
       pieces.push(`...(V[\`${propName}-\${${codePropOf(propName)}}:${partName}\`] ?? {})`);
     }

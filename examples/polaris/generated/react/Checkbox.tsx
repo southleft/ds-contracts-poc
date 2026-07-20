@@ -49,10 +49,10 @@ export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Chec
 
 </div>
 <span className={styles.icon}>
-<span className={styles.icon-3}><span aria-hidden="true" className={styles.icon-3Glyph} dangerouslySetInnerHTML={{ __html: ICONS["checkbox-icon-3"] }} /></span>
-<div className={styles.icon-2}>
-{checked === 'unchecked' ? (<span className={styles.icon-2-unchecked} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["checkbox-icon-2-unchecked"] }} />) : null}
-{checked === 'checked' ? (<span className={styles.icon-2-checked} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["checkbox-icon-2-checked"] }} />) : null}
+<span className={styles["icon-3"]}><span aria-hidden="true" className={styles["icon-3Glyph"]} dangerouslySetInnerHTML={{ __html: ICONS["checkbox-icon-3"] }} /></span>
+<div className={styles["icon-2"]}>
+{checked === 'unchecked' ? (<span className={styles["icon-2-unchecked"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["checkbox-icon-2-unchecked"] }} />) : null}
+{checked === 'checked' ? (<span className={styles["icon-2-checked"]} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["checkbox-icon-2-checked"] }} />) : null}
 </div>
 </span>
 </span>
