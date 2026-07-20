@@ -1,0 +1,5 @@
+{
+  "code": { "adapter": "react-tsx", "root": "extract/fixtures/foreign-keyof" },
+  "idPrefix": "acme",
+  "out": "extract/fixtures/.out-keyof"
+}
