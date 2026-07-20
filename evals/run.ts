@@ -2999,8 +2999,13 @@ const cases: Case[] = [
       if (!badge.includes('amendComponent')) throw new Error('committed badge script must be standalone-amend-capable');
       const pbar = readFileSync(path.join(ROOT, 'examples/polaris/figma/progress-bar.figma.js'), 'utf8');
       if (!pbar.includes("layoutSizingVertical = 'FILL'")) throw new Error('committed progress-bar script must carry the empty-child default');
-      const button = readFileSync(path.join(ROOT, 'examples/polaris/figma/button.figma.js'), 'utf8');
-      if (!button.includes('li.fillClear && !spec.fill')) throw new Error('committed button script must carry the runtime fillClear guard');
+      // Round 5c: Button's tone×variant re-mint gave EVERY variant a fill
+      // binding, so its script no longer carries fillClear lits and the
+      // feature-gated runtime drops that chunk (byte-stable by design). Tag
+      // still carries transparent planes — its committed script carries the
+      // runtime guard.
+      const tagScript = readFileSync(path.join(ROOT, 'examples/polaris/figma/tag.figma.js'), 'utf8');
+      if (!tagScript.includes('li.fillClear && !spec.fill')) throw new Error('committed tag script must carry the runtime fillClear guard');
     },
   },
   {
@@ -3217,7 +3222,11 @@ const cases: Case[] = [
         walk(base.root);
         if (!svgNode) throw new Error('no svg element in the committed banner base capture');
         const receipts = [];
-        const r = reconstructSvg(svgNode, receipts, 'eval');
+        // Round 5c: the pipeline prefers the currentColor spelling when the
+        // svg's fill==color identity holds in EVERY combo (per-svg decision,
+        // promoteAnatomy) — mirror it here from the base capture's styles.
+        const identity = !!(svgNode.style && svgNode.style['fill'] && svgNode.style['fill'] === svgNode.style['color']);
+        const r = reconstructSvg(svgNode, receipts, 'eval', identity);
         if (!r) throw new Error('reconstructSvg refused the committed banner glyph: ' + receipts.join('; '));
         if (!/^<svg viewBox="0 0 \\d+ \\d+"/.test(r.markup)) throw new Error('markup missing viewBox: ' + r.markup.slice(0, 60));
         if (!r.markup.includes('<path d="M')) throw new Error('markup missing path data');
@@ -3435,31 +3444,38 @@ const cases: Case[] = [
     },
   },
   {
-    // ROUND 5a — CANVAS GATE STANDING PIN: the committed scorecards carry
-    // the round-5 numbers (the engine draws everything the v0.3.0 contracts
-    // carry). Badge + Thumbnail PASS the ≤5% masked-mean acceptance; every
-    // other component's mean is pinned exactly, its >10% cells all carry
-    // named causes, and a silent regression (any mean drifting UP past its
-    // pin) fails this eval by name. Re-earning the numbers needs the
-    // harnessed gate run (extract/figma/canvas-gate/run.ts); this pin
-    // guards the committed receipts between runs.
+    // ROUND 5c — CANVAS GATE STANDING PIN: the committed scorecards carry
+    // the round-5c numbers (the six 5a promotion-level causes fixed; the
+    // v0.3.1 contracts carry the Tag label, the Spinner glyph+color, the
+    // Button tone paint maps, captured 18×18 backdrops, authored Avatar
+    // viewBoxes, and the Radio dot). SEVEN components PASS the ≤5%
+    // masked-mean acceptance; every other component's mean is pinned, its
+    // >10% cells all carry named causes (font raster / runtime-% /
+    // outline→stroke previews / S3 state×tone residue), and a silent
+    // regression (any mean drifting UP past its pin) fails this eval by
+    // name. Re-earning the numbers needs the harnessed gate run
+    // (extract/figma/canvas-gate/run.ts); this pin guards the committed
+    // receipts between runs.
     id: 'canvas-gate-standing-pin',
     claim: 'C3-detection',
     run: () => {
       const dir = path.join(ROOT, 'examples/polaris/receipts/canvas-gate');
-      // meanAAMasked pinned per component (round-5 final run, 2026-07-19).
+      // meanAAMasked pinned per component (round-5c final run, 2026-07-19,
+      // Chromium 148.0.7778.96).
       const PIN: Record<string, { mean: number; accept: boolean }> = {
-        avatar: { mean: 14.58, accept: false },
+        avatar: { mean: 0, accept: true },
         badge: { mean: 0.07, accept: true },
-        banner: { mean: 12.1, accept: false },
-        // Button's mean is dominated by the 40 Primary cells at ~91% — the
-        // NAMED tone×variant promotion refusal (defaultless tone axis).
-        button: { mean: 44.06, accept: false },
-        checkbox: { mean: 26.65, accept: false },
+        banner: { mean: 4.6, accept: true },
+        // Button's mean is dominated by the 46 fully-masked text-only cells
+        // (named font-raster class) + 5 focus-ring + 2 state×tone S3 cells.
+        button: { mean: 7.02, accept: false },
+        checkbox: { mean: 3.06, accept: true },
         'progress-bar': { mean: 26.22, accept: false },
-        'radio-button': { mean: 27.32, accept: false },
-        spinner: { mean: 6.45, accept: false },
-        tag: { mean: 50.05, accept: false },
+        'radio-button': { mean: 0, accept: true },
+        spinner: { mean: 0, accept: true },
+        // Tag base + disabled are EXACT (0.00); the mean is the two named
+        // active/focus state-preview cells (C5 outline approximation).
+        tag: { mean: 29.97, accept: false },
         thumbnail: { mean: 2.16, accept: true },
       };
       // Pixel-scoring nondeterminism headroom (AA classifier at 2x DSF):
@@ -3480,7 +3496,7 @@ const cases: Case[] = [
           throw new Error(`${comp}: round-5 PASSING component no longer passes (mean≤5 ∧ noBlank)`);
         }
       }
-      console.log('canvas-gate-standing-pin: Badge+Thumbnail PASS pinned; 10/10 means at or under their round-5 pins, all >10% cells named');
+      console.log('canvas-gate-standing-pin: 7/10 PASS pinned (Avatar, Badge, Banner, Checkbox, RadioButton, Spinner, Thumbnail); 10/10 means at or under their round-5c pins, all >10% cells named');
     },
   },
   {

@@ -217,7 +217,7 @@
   "figma-sync/05-badge.js": "9435429415e8be973ad77571a7e38803368e099be24d2fcbb2f848fb1e82a57d",
   "figma-sync/06-button.js": "a10646948a0cbf2f96146aeafd1478a4e539f3c30240fe1caf84c0b11f682eed",
   "figma-sync/07-banner.js": "653fb1563de50426e8a4d3aea9f8d0f3184175746ed7706c2f3a025ef4d0aa0e",
-  "figma-sync/08-blockquote.js": "905a25c31939f409c5dc87cd4d9fb48e68cb03e434d01c594be912156d2b8754",
+  "figma-sync/08-blockquote.js": "6448723effb5881a266ea97f4f4a7b3535d28ca50052a92088a45961d2bd7a23",
   "figma-sync/09-breadcrumbitem.js": "165012e5e9bdf398fff9fb4d7a3d5f194a1d3ae7ceeeecc87709f78b2af0d89b",
   "figma-sync/10-breadcrumbs.js": "09928c904cecb30a5d8e566ac3a6f9abd2eef1a0208ff2349dd58d5dfbabb179",
   "figma-sync/11-card.js": "c15cf58fb3dd457d2a9238eadbba0bf75578e02f495765a3afc01277332c76fc",
@@ -260,8 +260,8 @@
   "figma-sync/48-topnavitem.js": "e20e1c69c55acf7a5974c308eda2af0c0715bf41747c88efff5832f70c35cd44",
   "figma-sync/49-topnav.js": "2a4f3bb5fed04615ad51a241d6a0439e51926c46124f7f710370df1fcee9f584",
   "figma-sync/50-typeaheaditem.js": "4bf87512a8c2dca4fe134998447a1321268aa80b9feb5a39351e7c14b0076ead",
-  "figma-sync/batch-01.js": "7811849bcbebd3e89f955685670f317ad4007321ccdb21fe42930f799ebe3c40",
-  "figma-sync/batch-02.js": "fbf278e0d38885aa35424ae14cdb20fff7cff256288f1238e2c64e76a83d65d0",
+  "figma-sync/batch-01.js": "18326c3e0b535ee5797c015ce9735d1ff142d2f6dc8e88b67e4377da61cba15e",
+  "figma-sync/batch-02.js": "5c4e3180d7fc3e9b99b7c7fd16bd6bb094d85f7c1b0729ccec5adfff397300f4",
   "figma-sync/batch-03.js": "712224f6101abf484b62121f159c0689461588d15758799b24473d12a497738c",
   "figma-sync/batch-04.js": "31c813e23208e5452a28fbeecb88a316680eb6e81b1b796057f6116623ec88c0"
 }

@@ -36,6 +36,7 @@ const COMPONENTS = [
             "paddingBottom": "space/inset-y/md",
             "itemSpacing": "space/gap/sm"
           },
+          "stroke": "color/divider/strong",
           "children": [
             {
               "type": "slot",

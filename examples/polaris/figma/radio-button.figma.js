@@ -102,7 +102,8 @@ const COMPONENTS = [
                         "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
-                      "fill": "imported/radio-button/backdrop/background-color/unchecked"
+                      "fill": "imported/radio-button/backdrop/background-color/unchecked",
+                      "stroke": "imported/radio-button/backdrop/border-top-color/unchecked"
                     }
                   ]
                 }
@@ -199,7 +200,8 @@ const COMPONENTS = [
                         "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
-                      "fill": "imported/radio-button/backdrop/background-color/checked"
+                      "fill": "imported/radio-button/backdrop/background-color/checked",
+                      "stroke": "imported/radio-button/backdrop/border-top-color/checked"
                     },
                     {
                       "type": "shape",

@@ -108,6 +108,7 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/checkbox/backdrop/background-color/unchecked",
+                      "stroke": "imported/checkbox/backdrop/border-top-color/unchecked",
                       "effectStack": [
                         {
                           "inner": true,
@@ -262,6 +263,7 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/checkbox/backdrop/background-color/checked",
+                      "stroke": "imported/checkbox/backdrop/border-top-color/checked",
                       "effectStack": [
                         {
                           "inner": true,
@@ -416,6 +418,7 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/checkbox/backdrop/background-color/indeterminate",
+                      "stroke": "imported/checkbox/backdrop/border-top-color/indeterminate",
                       "effectStack": [
                         {
                           "inner": true,

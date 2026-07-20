@@ -244,7 +244,6 @@ const COMPONENTS = [
             "paddingRight": 8,
             "minHeight": 24
           },
-          "stroke": "imported/shared/color-b5b5b5",
           "children": [
             {
               "type": "frame",

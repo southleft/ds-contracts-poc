@@ -16,6 +16,31 @@
         "value": "hidden"
       },
       {
+        "part": "progress",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "progress",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "progress",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "progress",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "progress",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
         "part": "indicator",
         "channel": "transition-duration",
         "value": "0.5s"
@@ -29,6 +54,26 @@
         "part": "indicator",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
       }
     ],
     "state": []
@@ -41,9 +86,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 672,
-      "cellsEqual": 624,
-      "pctEqual": 92.85714285714286,
+      "cellsCompared": 1824,
+      "cellsEqual": 1680,
+      "pctEqual": 92.10526315789474,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -63,8 +108,8 @@
       "mintedLeavesUnfolded": 10,
       "baseBindings": 18,
       "stateBindings": 0,
-      "codeOnlyChannels": 12,
-      "overflowBindings": 13,
+      "codeOnlyChannels": 3,
+      "overflowBindings": 0,
       "folds": 0
     },
     "worstRows": [
@@ -72,849 +117,1411 @@
         "key": "small.highlight__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.highlight__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.highlight__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.highlight__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.primary__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.primary__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.primary__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       },
       {
         "key": "small.primary__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 3
       }
     ],
     "topMismatchedChannels": [
       [
+        "progress.clip-path",
+        48
+      ],
+      [
         "indicator.transform",
+        48
+      ],
+      [
+        "label.clip-path",
         48
       ]
     ],
     "namedLosses": [
-      "overflow: progress.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: progress.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: progress.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: progress.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: progress.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: progress.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: progress.vertical-align — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: label.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: label.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: label.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: label.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: label.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "overflow: label.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-      "code-only: progress.appearance — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "code-only: progress.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: progress.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: progress.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: progress.position — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: progress.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "code-only: indicator.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: label.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: label.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+      "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "rows": [
       {
         "key": "small.highlight__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.highlight__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.highlight__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.highlight__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__default",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__hover",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__focus-visible",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__active",
-        "channelsCompared": 14,
-        "channelsEqual": 13,
+        "channelsCompared": 38,
+        "channelsEqual": 35,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "progress",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
+          },
           {
             "part": "indicator",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "clip-path",
+            "ours": "none",
+            "theirs": "inset(50%)"
           }
         ],
         "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"

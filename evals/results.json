@@ -1,6 +1,6 @@
 {
-  "passed": 118,
-  "total": 118,
+  "passed": 119,
+  "total": 119,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -590,6 +590,11 @@
     {
       "id": "journey-designer",
       "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "react-hyphenated-part-names-execute",
+      "claim": "C3-detection",
       "pass": true
     }
   ]
