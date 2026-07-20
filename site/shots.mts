@@ -41,11 +41,32 @@ const shots: Array<[string, string, 'light' | 'dark', number]> = args.length
       return [route, name, dark ? 'dark' : 'light', name.includes('mobile') ? 360 : 1280] as [string, string, 'light' | 'dark', number];
     })
   : [
+      // The canonical review set — rerunning with no args REPLACES it wholesale.
       ['/', 'home-light.png', 'light', 1280],
       ['/', 'home-dark.png', 'dark', 1280],
-      ['/spec/composition/', 'spec-composition-light.png', 'light', 1280],
-      ['/spec/', 'spec-index-dark.png', 'dark', 1280],
       ['/', 'home-mobile-light.png', 'light', 360],
+      ['/get-started/', 'get-started-light.png', 'light', 1280],
+      ['/get-started/', 'get-started-dark.png', 'dark', 1280],
+      ['/cli/', 'cli-light.png', 'light', 1280],
+      ['/cli/', 'cli-dark.png', 'dark', 1280],
+      ['/emitters/', 'emitters-light.png', 'light', 1280],
+      ['/emitters/', 'emitters-dark.png', 'dark', 1280],
+      ['/how-it-works/protocol/', 'how-protocol-light.png', 'light', 1280],
+      ['/how-it-works/protocol/', 'how-protocol-dark.png', 'dark', 1280],
+      ['/how-it-works/styles/', 'how-styles-light.png', 'light', 1280],
+      ['/how-it-works/styles/', 'how-styles-dark.png', 'dark', 1280],
+      ['/how-it-works/', 'how-index-light.png', 'light', 1280],
+      ['/how-it-works/model/', 'how-model-light.png', 'light', 1280],
+      ['/how-it-works/adding-a-prop/', 'how-adding-a-prop-light.png', 'light', 1280],
+      ['/how-it-works/nested-components/', 'how-nested-components-dark.png', 'dark', 1280],
+      ['/how-it-works/at-scale/', 'how-at-scale-light.png', 'light', 1280],
+      ['/how-it-works/instruments/', 'how-instruments-light.png', 'light', 1280],
+      ['/spec/', 'spec-index-dark.png', 'dark', 1280],
+      ['/spec/props/', 'spec-props-light.png', 'light', 1280],
+      ['/spec/composition/', 'spec-composition-light.png', 'light', 1280],
+      ['/spec/versioning/', 'spec-versioning-dark.png', 'dark', 1280],
+      ['/spec/states/', 'spec-states-mobile-light.png', 'light', 360],
+      ['/contribute/', 'contribute-light.png', 'light', 1280],
     ];
 
 const browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
