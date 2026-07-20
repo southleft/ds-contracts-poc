@@ -35,6 +35,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "statusIcon",
               "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"4.6,10.4 8.2,14 15.4,6.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "color/text/secondary",
               "iconSize": 12
             },
             {
@@ -86,6 +87,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "statusIcon",
               "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"10,5.8 10,10 13,12\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "color/text/secondary",
               "iconSize": 12
             },
             {
@@ -137,6 +139,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "statusIcon",
               "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"2.6,10.6 5.8,13.8 12,6.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"9.4,12.6 10.6,13.8 17.4,6.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "color/text/secondary",
               "iconSize": 12
             },
             {
@@ -188,6 +191,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "statusIcon",
               "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"2.6,10.6 5.8,13.8 12,6.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"9.4,12.6 10.6,13.8 17.4,6.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "color/text/secondary",
               "iconSize": 12
             },
             {
@@ -239,6 +243,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "statusIcon",
               "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/text/secondary",
               "iconSize": 12
             },
             {
@@ -463,6 +468,15 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    if (spec.svgPaintVar) {
+      const glyphPaint = boundPaint(spec.svgPaintVar, node);
+      const rebind = (n) => {
+        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
+        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
+        if (n.children) for (const c of n.children) rebind(c);
+      };
+      for (const c of node.children) rebind(c);
+    }
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };

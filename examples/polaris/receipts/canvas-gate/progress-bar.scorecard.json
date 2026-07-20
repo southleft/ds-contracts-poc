@@ -1,7 +1,7 @@
 {
   "component": "ProgressBar",
   "contractId": "polaris.progress-bar",
-  "contractVersion": "0.3.1",
+  "contractVersion": "0.3.2",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",

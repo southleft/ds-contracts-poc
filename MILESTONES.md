@@ -666,6 +666,163 @@ byte-identical to the repo's, and the publish was stranger-verified: a clean
 directory, `npm exec @ds-contracts/cli`, a working config in one command.
 **115/115.**
 
+
+## 2026-07-19 — Phases 3+4: CI recipes execute verbatim — and catch a real emitter defect
+
+The CI recipes (`examples/ci/`) are code-led and design-led GitHub Actions
+workflows over the **published** `@ds-contracts/cli@0.1.0` — and their
+validator executes every `run:` step locally, verbatim, in scratch consumers
+built from committed fixtures. That discipline paid immediately, defect
+first: **the react emitter emitted invalid JavaScript for hyphenated part
+names** — `styles.label-2` parses as subtraction, a runtime ReferenceError —
+and the committed Polaris showcase output already carried it. Grep-level
+checks cannot catch this class (the defect parses); execution did. The fix
+(bracket access for non-identifier part names, identifier names byte-stable)
+landed with an eval that **executes** both emitted modules through esbuild +
+react-dom/server. Alongside: the two journeys became standing E2E gates —
+`journey-engineer` (committed CBDS dump → real propose path → the local CLI
+build runs the manifest command → emitted story rendered in a real browser,
+11 computed-style checks against the bridge-receipt Figma ground truth) and
+`journey-designer` (committed Polaris Badge → figma-emit → headless canvas
+compile → dry-run push through the real worker pipeline, zero network) —
+both reading their command lines ONLY from
+`evals/fixtures/journey-commands.json`, the docs-drift seam. **117/117 at
+merge.**
+
+
+## 2026-07-19 — Phase 6: a third code surface (the WC emitter)
+
+`emitter-web-components` 0.1.0: contract → vanilla Custom Elements, zero
+runtime dependencies, through the same open registry any consumer already
+loads. The closure receipts are the point: `wc-emitter-roundtrip` re-extracts
+the emitted elements through the existing CEM adapter and lands back on the
+contract, and `wc-emitter-css-parity` renders the react, html, and WC
+emissions of the same contracts in a real Chromium — **165/165 computed
+channels equal across emitters** (3 subjects, 15 showcase items, 0
+mismatches). One contract, one computed truth, three code surfaces.
+**123/123 at merge.**
+
+
+## 2026-07-19 — Phase 2: the plugin becomes an engine host (plugin v2)
+
+The Figma plugin grew from a dump/bridge conduit into six tabs — Generate,
+Update library (with a mandatory plain-words report before any apply), and
+Propose with a PR dry-run, beside the original send paths. The engine ships
+INTO the plugin as a 0.41 MB bundle (core barrel + baked tokens/contracts/
+icons, vs ~5 MB of full core) guarded by a committed input-hash receipt: the
+zip build **refuses a stale engine by name** — and the guard fired correctly
+on its first post-merge re-record, exactly as designed. A 407-line
+mocked-figma harness executes the REAL bundle in a VM: generate runs the
+tokens/component/version scripts (stored specHash equals the engine mirror),
+the update report and amend-in-place apply are pinned verbatim, the embedded
+dump script round-trips to a proposal diff, duplicate-contract-id bundles
+refuse by name. Three eval pins. Residue named at merge: the worker's
+receive path for plugin reads — closed days later by the **bridge origin
+policy** (DUMP reads stay playground-only and refused reads never consume
+the one-time payload; CONTRACTS-BUNDLE reads deliver to any origin because
+the pairing code IS the auth; session minting open with per-IP limits;
+53/53 worker tests). **121/121 at merge.**
+
+
+## 2026-07-19 — Round 5c: the canvas gate goes 2/10 → 7/10, three at EXACT 0.00
+
+Round 5a had taught the canvas engine to draw what the v0.3.0 contracts
+carry (thirteen renderer/compile classes plus gate-harness truth fixes,
+including a checked-mount bug that had every real Checkbox cell rendering
+checked) — Badge 0.07% and Thumbnail 2.16% PASS, and the honest diagnosis
+that the remaining eight causes were **promotion-level**, not rendering.
+Round 5c fixed those six causes at the source — complement-of-product
+presence (Tag's label subtree), root-hosted svg plans (Spinner's glyphs),
+carried-channel re-mint when a defaultless axis contests the reviewed
+carriage (Button's tone×variant paints), shape geometry recarried from
+captured truth, authored-viewBox unification (Avatar), drawn pseudo-element
+decor as shape parts (the RadioButton dot) — plus text-part typography
+always carried (the 13px-vs-14px class). Contracts promoted **v0.3.1**; the
+gate re-earned in a harnessed run: **7/10 acceptance PASS (was 2/10), with
+Avatar, RadioButton, and Spinner at EXACT 0.00**, zero blank-deceptive
+passes, zero unnamed >10% cells. The residue is named, not hidden: Button's
+fully-masked font-raster cells, ProgressBar's runtime-% indicator, Tag's two
+state-preview-vs-resting cells. The standing pin moved to the 5c numbers —
+a legitimate pin move, re-earned by the run it quotes. **124/124.**
+
+
+## 2026-07-19 — Round 5b: the verdict build
+
+The owner's Polaris Contracts file rebuilt **live** from the v0.3.1
+contracts: 10/12 sets amended IN PLACE — node id and key stable, including
+the 220-variant Button — and the 2 exceptions were named promotions
+recreated by the script's own policy, operator-retired. The Round-5c wins
+render on the real canvas: Avatar initials + palette + square, the
+RadioButton ring and dot, Spinner's #303030 arcs, the Checkbox check glyph,
+Tag's Wholesale label, Button tone×variant fills with native shadow-button
+effects (the B-3 ring loss retired), the Banner tone ribbon (the loudest B-3
+gap retired). Two engine findings were named and canvas-corrected to the
+compiled spec (a shape-literal fill drop — exactly one node repo-wide — and
+checkbox glyph z-order). All 12 canvas notes rewritten to round-5b truth, 12
+fresh surface composites committed. **The owner's first positive verdict on
+a live canvas build.** Evals 124/124, `results.json` byte-unchanged.
+
+
+## 2026-07-20 — The owner's live review: four visual classes → Round 5d
+
+Defect-first, because the finding was a defect — four of them. Reviewing the
+verdict build live in Figma, the owner found four visual classes the
+CSS-rendering gate had scored past: the Checkbox check drew as **segmented
+capsules** (Polaris's pathLength-relative dash animation channels, rebased by
+computed-style capture onto the real path length); control-to-label gaps sat
+**flush** and the Badge pip drew **oversized** (spec margins were a
+preview-only fact the sync runtime never applied on canvas); the Banner
+focus ring drew **bottom-only** (outline respelled as an inside-aligned
+border that opaque children paint over); and Badge's radius and pip
+**inspected as bare literals** instead of their tokens (shorthand coverage
+minting sibling longhands over the semantic binding; svg import baking
+paints). A gate that passes while the owner's inspector disagrees is a gap
+in the gate's coverage, and it is recorded as such. **Round 5d — two
+extraction-layer and four emitter/runtime-layer root-cause fixes — is in
+flight on a branch; nothing here claims it landed.**
+
+
+## 2026-07-20 — Astryx Phase A: the second system, refereed by its vendor's own docs
+
+The second-system assessment ran four candidates hands-on and picked
+**Astryx** (facebook/astryx — Meta's MIT-licensed React + StyleX system,
+shipped with per-component `.doc.mjs` prop/anatomy tables). One finding
+recorded rather than shaded: **Nord posted the best numbers ever measured
+here (22/22 @ 100% median) but its license is proprietary — disqualified for
+a public exhibit.** Phase A, all proposals-only, nothing promoted:
+
+- **Census 23/24 @ 57% median → 24/24 @ 65%**, library-wide 216 proposals /
+  21 skips → 222 / 15 (all named), via two adapter rules with eval pins on
+  synthesized fixtures: keyof-enum resolution (+29 enum props, 25 keyof
+  receipts, 0 refusals) and union-of-refs composition (Slider recovered at
+  82% — was a named skip). Selector still correctly refuses (generic
+  branches).
+- **StyleX token reader** (`core/stylex-tokens.ts`): 186/186 tokens from 13
+  `defineVars` tables, `light-dark()` split into the v1.6 modes shape, 79
+  mode-varying, 0 skips, drift-refusing regeneration script.
+- **The `.doc.mjs` referee** — Meta's own shipped docs diffed against our
+  proposals, neither side winning automatically: 246 vendor props across 24
+  components — 136 agree, 53 not-carried CONFIRMED real by our own receipts,
+  93 named disagreements **including 35 the vendor doc itself misses**
+  (Button `href`/`target`/`rel`: undocumented but shipped), 0 silent. And
+  the referee earned its keep against us too: it **caught a real adapter
+  gap** — heritage of interfaces with their own members was dropped silently
+  — now receipted and pinned.
+- 9 docs-site screenshot fixtures banked for the Phase A-2 visual gates
+  (politely captured, nothing diffed yet). **124 → 127 evals.**
+
+
+## 2026-07-20 — The genesis reframe: there is no kit to reconcile against
+
+The assessment recorded it plainly (`examples/astryx/PROVENANCE.md`): Astryx
+has **no official Figma library** — only an unofficial community kit at
+v0.14. So the exhibit's design-side leg is not parity against an existing
+kit, and cannot be. The reframe: the pipeline will **generate the first
+contract-governed Figma library** for a system Meta actually ships — genesis,
+not reconciliation. This is the Two Journeys developer path demonstrated at
+full length: npm-shipped source in, contracts refereed by the vendor's own
+docs, and a design surface that exists *because* the contracts do.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
@@ -682,3 +839,9 @@ directory, `npm exec @ds-contracts/cli`, a working config in one command.
 | Enterprise scale (code) | Carbon/Fluent 2/Spectrum/Polaris at pinned SHAs, pipeline unmodified | `extract/pilots/ENTERPRISE-GAUNTLET.md` |
 | Whole-kit census | 1,618/1,618 sets clean, facts/degradations counted | `npm run extract:figma:gauntlet` → `CENSUS.md` |
 | Visual parity | pixel diff vs Figma's own renders, worst-first queue | `npm run extract:figma:visual` → `REPORT.md` |
+| Published spec + CLI | `@ds-contracts/schema` 15.0.0 · `@ds-contracts/cli` 0.1.0 on public npm, stranger-verified | `cli-smoke` eval (byte-stable double run from scratch) |
+| Journey E2E | both product journeys as standing gates, commands read only from the docs seam | `journey-engineer` / `journey-designer` evals · `evals/fixtures/journey-commands.json` |
+| CI executes verbatim | every recipe `run:` step executed locally against the published CLI | `examples/ci/VALIDATION.md` |
+| Plugin engine freshness | zip build refuses a stale engine by committed input-hash receipt | `plugin-engine-bundle` eval (guard fires on a real core mutation) |
+| Canvas fidelity | headless canvas renders vs the real npm package, 7/10 PASS (3 at exact 0.00), every >10% cell named | `canvas-gate-standing-pin` eval · `examples/polaris/receipts/canvas-gate/` |
+| Vendor-doc referee | extraction proposals diffed against the vendor's own shipped docs, 0 silent rows | `examples/astryx/extraction/DOC-REFEREE.md` |

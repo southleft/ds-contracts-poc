@@ -254,23 +254,14 @@
                       "map": {
                         "checked": {
                           "background-color": "{imported.checkbox.backdrop.background-color.checked}",
-                          "border-left-color": "{imported.checkbox.backdrop.border-left-color.checked}",
-                          "border-right-color": "{imported.checkbox.backdrop.border-right-color.checked}",
-                          "border-top-color": "{imported.checkbox.backdrop.border-top-color.checked}",
                           "box-shadow": "{imported.checkbox.backdrop.box-shadow.checked}"
                         },
                         "indeterminate": {
                           "background-color": "{imported.checkbox.backdrop.background-color.indeterminate}",
-                          "border-left-color": "{imported.checkbox.backdrop.border-left-color.indeterminate}",
-                          "border-right-color": "{imported.checkbox.backdrop.border-right-color.indeterminate}",
-                          "border-top-color": "{imported.checkbox.backdrop.border-top-color.indeterminate}",
                           "box-shadow": "{imported.checkbox.backdrop.box-shadow.indeterminate}"
                         },
                         "unchecked": {
                           "background-color": "{imported.checkbox.backdrop.background-color.unchecked}",
-                          "border-left-color": "{imported.checkbox.backdrop.border-left-color.unchecked}",
-                          "border-right-color": "{imported.checkbox.backdrop.border-right-color.unchecked}",
-                          "border-top-color": "{imported.checkbox.backdrop.border-top-color.unchecked}",
                           "box-shadow": "{imported.checkbox.backdrop.box-shadow.unchecked}"
                         }
                       }

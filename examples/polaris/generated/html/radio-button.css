@@ -1,4 +1,4 @@
-/* RadioButton — from polaris.radio-button v0.3.1 (core/emit-html.ts) */
+/* RadioButton — from polaris.radio-button v0.3.2 (core/emit-html.ts) */
 
 .radio-button, .radio-button *, .radio-button *::before, .radio-button *::after {
   box-sizing: border-box;
@@ -106,12 +106,6 @@
   flex-shrink: 0;
   border-radius: var(--p-border-radius-full);
   border-width: var(--p-border-width-0165);
-  border-bottom-left-radius: var(--imported-shared-size-9999);
-  border-bottom-right-radius: var(--imported-shared-size-9999);
-  border-left-width: var(--imported-shared-size-1);
-  border-right-width: var(--imported-shared-size-1);
-  border-top-right-radius: var(--imported-shared-size-9999);
-  border-top-width: var(--imported-shared-size-1);
   bottom: var(--imported-shared-size-0);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);

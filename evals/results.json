@@ -1,6 +1,6 @@
 {
-  "passed": 127,
-  "total": 127,
+  "passed": 129,
+  "total": 129,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -634,6 +634,16 @@
     },
     {
       "id": "react-hyphenated-part-names-execute",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "svg-dash-animation-vehicle-pin",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "canvas-margin-gap-pin",
       "claim": "C3-detection",
       "pass": true
     }

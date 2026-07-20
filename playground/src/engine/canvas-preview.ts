@@ -101,6 +101,40 @@ const hasStrokeWidthSource = (spec: NodeSpec): boolean =>
   spec.lits?.strokeWeight !== undefined ||
   spec.lits?.strokeSides !== undefined;
 
+/** Round 5d: stroke CSS. Outline-lowered strokes (spec.strokeOutside — the
+ *  focus-preview outline channels) render as a CSS OUTLINE: outlines sit
+ *  OUTSIDE the border box and paint over children, and the sync runtime
+ *  aligns those strokes OUTSIDE for the same geometry (the Banner focus
+ *  ring's top arc was covered by the opaque tone ribbon under the old
+ *  inside-border approximation). Plain strokes stay inside borders. */
+function strokeCss(spec: NodeSpec): string[] {
+  const d: string[] = [];
+  if (!spec.stroke) return d;
+  if (spec.strokeOutside) {
+    d.push(`outline-color: ${cssVarOf(spec.stroke)}`, 'outline-style: solid');
+    if (!hasStrokeWidthSource(spec)) d.push('outline-width: 1px');
+  } else {
+    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
+    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
+  }
+  return d;
+}
+
+/** Bound-variable fields → CSS. Round 5d: a strokeWeight binding on an
+ *  outline-lowered stroke renders as outline-width, not border-width. */
+function bindingCss(spec: NodeSpec): string[] {
+  const d: string[] = [];
+  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
+    if (field === 'strokeWeight' && spec.strokeOutside) {
+      d.push(`outline-width: ${cssVarOf(varName)}`);
+      continue;
+    }
+    const cssProp = BINDING_CSS[field];
+    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
+  }
+  return d;
+}
+
 /** Effect stack / single drop shadow → the equivalent CSS box-shadow list —
  *  the runtime applies these as NATIVE effects on frames AND shapes; the
  *  preview draws the same values (Round 5: shapes lost their inset rings —
@@ -176,14 +210,8 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   // applies them as native effects; this preview renders the equivalent
   // CSS box-shadow list (inset for INNER_SHADOW), like the code surfaces.
   d.push(...effectCss(spec, ctx));
-  if (spec.stroke) {
-    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
-    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
-  }
-  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
-    const cssProp = BINDING_CSS[field];
-    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
-  }
+  d.push(...strokeCss(spec));
+  d.push(...bindingCss(spec));
   if (spec.fixedWidth) d.push(`width: ${cssVarWithFallback(spec.fixedWidth.varName, spec.fixedWidth.px)}`);
   if (spec.fixedHeight) d.push(`height: ${spec.fixedHeight.varName ? cssVarWithFallback(spec.fixedHeight.varName, spec.fixedHeight.px) : `${spec.fixedHeight.px}px`}`);
   if (spec.grow) d.push('flex: 1 1 auto', 'min-width: 0');
@@ -221,8 +249,10 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
 }
 
 /** Round 5: margin channels the floor-promoted contracts carry, compiled to
- *  literal px. CSS-true here; auto-layout has NO per-child margin field, so
- *  the sync runtime does not apply them — a named fidelity note. */
+ *  literal px. CSS-true here; round 5d — the sync runtime now applies the
+ *  same geometry (compile-time itemSpacing lowering for uniform sibling
+ *  gaps, margin-box wrapper frames for the residual margins this renderer
+ *  still receives). */
 function marginStyles(spec: NodeSpec, ctx: RenderCtx): string[] {
   const m = spec.margins;
   if (!m) return [];
@@ -345,19 +375,13 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   // Shape specs carry stroke + bindings exactly like frames (the emitted
   // sync runtime's shape branch applies them too — the Phase B deviation-2
   // gap, fixed at the source on BOTH surfaces).
-  if (spec.stroke) {
-    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
-    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
-  }
+  d.push(...strokeCss(spec));
   // B-3 finding 3 companion (Round 5 canvas-gate finding): the sync runtime
   // applies dropShadow/effectStack on SHAPES too (shapeRuntime receives the
   // same effects tail as frames) — this renderer only had the frame branch,
   // so the Checkbox/RadioButton backdrop's inset control edge never drew.
   d.push(...effectCss(spec, ctx));
-  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
-    const cssProp = BINDING_CSS[field];
-    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
-  }
+  d.push(...bindingCss(spec));
   d.push(...marginStyles(spec, ctx));
   d.push(...litStyles(spec));
   const transform: string[] = [];
@@ -512,12 +536,12 @@ function fidelityNotes(contract: Contract, data: ComponentData, used: Set<string
   }
   if (used.has('svg')) {
     notes.push(
-      'icon color — SVG paint is not variable-bindable on import, so glyph color is baked to the variant’s resolved foreground literal.',
+      'icon color — SVG paint is not variable-bindable on import, so glyph color is baked to the variant’s resolved foreground literal; single-paint glyphs are re-bound to their contract variable by the sync runtime (round 5d).',
     );
   }
   if ((data.stateVariants ?? []).length > 0) {
     notes.push(
-      'State axis — canvas-only interaction previews; the focus outline renders as a bound stroke (outline sits outside the border box on the web — approximation, documented).',
+      'State axis — canvas-only interaction previews; the focus outline renders as an OUTSIDE-aligned bound stroke (round 5d — a CSS outline paints outside the border box, over children; outline-offset is not carried).',
     );
   }
   if ((contract.events ?? []).length > 0) {
@@ -541,7 +565,7 @@ function fidelityNotes(contract: Contract, data: ComponentData, used: Set<string
   }
   if (used.has('margin')) {
     notes.push(
-      'margin channels — drawn as CSS margins (contract-carried); auto-layout has no per-child margin field, so the synced Figma nodes flow without them (code-only fact, †).',
+      'margin channels — drawn as CSS margins here; the sync runtime applies the same geometry natively (round 5d: uniform sibling gaps lower to itemSpacing at compile, residual margins become the child’s margin-box wrapper frame).',
     );
   }
   if (used.has('img')) {

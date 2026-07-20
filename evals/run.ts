@@ -3545,11 +3545,18 @@ const cases: Case[] = [
     },
   },
   {
-    // ROUND 5c — CANVAS GATE STANDING PIN: the committed scorecards carry
-    // the round-5c numbers (the six 5a promotion-level causes fixed; the
-    // v0.3.1 contracts carry the Tag label, the Spinner glyph+color, the
-    // Button tone paint maps, captured 18×18 backdrops, authored Avatar
-    // viewBoxes, and the Radio dot). SEVEN components PASS the ≤5%
+    // ROUND 5d — CANVAS GATE STANDING PIN (pin move RE-EARNED by the 5d
+    // harnessed gate run, 2026-07-20, Chromium 148.0.7778.96 pin): the
+    // owner's four visual defects are fixed at source — continuous check
+    // glyph (dash animation vehicles dropped), control↔label gap as bound
+    // itemSpacing + margin-box runtime, focus outline as an OUTSIDE-aligned
+    // stroke (full-pair rule: a lone outline-color state recolor stays
+    // inert, like CSS), all four Badge corners on {p.border-radius-200}.
+    // Banner 4.60→3.17 (ring wraps the ribbon), Button 7.02→6.46 (5 focus
+    // cells improved; SAME 53-cell named >10% membership as 5c), Tag
+    // 29.97→22.55 (OUTSIDE ring on the two named preview cells), Checkbox
+    // 3.06→3.22 (checked-cell raster of the continuous 2px stroke — the
+    // capsule class is retired, named). SEVEN components PASS the ≤5%
     // masked-mean acceptance; every other component's mean is pinned, its
     // >10% cells all carry named causes (font raster / runtime-% /
     // outline→stroke previews / S3 state×tone residue), and a silent
@@ -3561,22 +3568,22 @@ const cases: Case[] = [
     claim: 'C3-detection',
     run: () => {
       const dir = path.join(ROOT, 'examples/polaris/receipts/canvas-gate');
-      // meanAAMasked pinned per component (round-5c final run, 2026-07-19,
+      // meanAAMasked pinned per component (round-5d final run, 2026-07-20,
       // Chromium 148.0.7778.96).
       const PIN: Record<string, { mean: number; accept: boolean }> = {
         avatar: { mean: 0, accept: true },
         badge: { mean: 0.07, accept: true },
-        banner: { mean: 4.6, accept: true },
+        banner: { mean: 3.17, accept: true },
         // Button's mean is dominated by the 46 fully-masked text-only cells
         // (named font-raster class) + 5 focus-ring + 2 state×tone S3 cells.
-        button: { mean: 7.02, accept: false },
-        checkbox: { mean: 3.06, accept: true },
+        button: { mean: 6.46, accept: false },
+        checkbox: { mean: 3.22, accept: true },
         'progress-bar': { mean: 26.22, accept: false },
         'radio-button': { mean: 0, accept: true },
         spinner: { mean: 0, accept: true },
         // Tag base + disabled are EXACT (0.00); the mean is the two named
         // active/focus state-preview cells (C5 outline approximation).
-        tag: { mean: 29.97, accept: false },
+        tag: { mean: 22.55, accept: false },
         thumbnail: { mean: 2.16, accept: true },
       };
       // Pixel-scoring nondeterminism headroom (AA classifier at 2x DSF):
@@ -3597,7 +3604,7 @@ const cases: Case[] = [
           throw new Error(`${comp}: round-5 PASSING component no longer passes (mean≤5 ∧ noBlank)`);
         }
       }
-      console.log('canvas-gate-standing-pin: 7/10 PASS pinned (Avatar, Badge, Banner, Checkbox, RadioButton, Spinner, Thumbnail); 10/10 means at or under their round-5c pins, all >10% cells named');
+      console.log('canvas-gate-standing-pin: 7/10 PASS pinned (Avatar, Badge, Banner, Checkbox, RadioButton, Spinner, Thumbnail); 10/10 means at or under their round-5d pins, all >10% cells named');
     },
   },
   {
@@ -4205,6 +4212,125 @@ const cases: Case[] = [
         throw new Error(`hyphenated-part execution probe failed:\n${probe.out}`);
       }
       console.log('react-hyphenated-part-names-execute: emitReact + emitReactInline outputs bundled and EXECUTED with react-dom/server — hyphen-named parts render real classes (the styles.label-2 subtraction defect stays fixed)');
+    },
+  },
+  {
+    // ROUND 5d — GLYPH-RECONSTRUCTION CLASS PIN (owner defect: the Checkbox
+    // check drew as SEGMENTED CAPSULES). Dash channels are pathLength-
+    // RELATIVE and pathLength is an ATTRIBUTE, not a computed style (the
+    // viewBox class) — Polaris normalizes the check path to pathLength=1 and
+    // drives stroke-dashoffset as a draw-on animation, so the computed 2px
+    // dasharray is an animation VEHICLE, not resting geometry. This pin
+    // (a) re-runs reconstructSvg over the COMMITTED checkbox capture (whose
+    // path style carries dasharray 2px) and asserts the emitted markup is a
+    // dash-free continuous stroke with the named receipt, byte-equal to the
+    // committed asset; (b) sweeps EVERY committed icon asset for the
+    // signature — a dash channel reappearing in any asset fails by name.
+    id: 'svg-dash-animation-vehicle-pin',
+    claim: 'C3-detection',
+    run: () => {
+      const iconsDir = path.join(ROOT, 'examples/polaris/assets/icons');
+      for (const f of readdirSync(iconsDir).filter((f) => f.endsWith('.svg'))) {
+        const body = readFileSync(path.join(iconsDir, f), 'utf8');
+        if (/stroke-dash(array|offset)/.test(body)) {
+          throw new Error(`committed asset ${f} carries a dash channel — the animation-vehicle class is back`);
+        }
+      }
+      // the PROMOTED check glyphs are the floor reconstruction verbatim
+      // (promote-floor copies byte-for-byte; a divergence means a stale
+      // promotion).
+      for (const f of ['checkbox-icon-2-checked.svg', 'checkbox-icon-2-unchecked.svg']) {
+        const promoted = readFileSync(path.join(iconsDir, f), 'utf8');
+        const floor = readFileSync(path.join(ROOT, 'extract/computed/out/checkbox/assets', f), 'utf8');
+        if (promoted !== floor) throw new Error(`${f}: promoted asset diverges from the floor reconstruction`);
+      }
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { reconstructCaptures } from './extract/computed/replay.ts';
+        import { reconstructSvg } from './extract/computed/anatomy.ts';
+        const truth = JSON.parse(fs.readFileSync('extract/computed/out/checkbox/captured-truth.json', 'utf8'));
+        const base = reconstructCaptures(truth)[0];
+        let svgNode = null;
+        const walk = (n) => {
+          if (n.tag === 'svg' && !svgNode) { svgNode = n; return; }
+          for (const c of n.nodes) if (c.t === 'el') walk(c.el);
+        };
+        walk(base.root);
+        if (!svgNode) throw new Error('no svg element in the committed checkbox base capture');
+        // the committed capture DOES carry the dash channels on the path —
+        // the pin is meaningless if the fixture no longer has them.
+        let pathNode = null;
+        const walkP = (n) => { for (const c of n.nodes) if (c.t === 'el') { if (c.el.tag === 'path' && !pathNode) pathNode = c.el; walkP(c.el); } };
+        walkP(svgNode);
+        if (!pathNode || pathNode.style['stroke-dasharray'] !== '2px') {
+          throw new Error('fixture drift: committed checkbox capture no longer carries stroke-dasharray 2px on the check path');
+        }
+        const receipts = [];
+        const r = reconstructSvg(svgNode, receipts, 'eval', false);
+        if (!r) throw new Error('reconstructSvg refused the committed checkbox glyph: ' + receipts.join('; '));
+        if (/stroke-dash/.test(r.markup)) throw new Error('reconstruction still carries dash channels: ' + r.markup);
+        if (!/stroke-linecap="round"/.test(r.markup)) throw new Error('reconstruction lost the round linecap: ' + r.markup);
+        if ((r.markup.match(/<path /g) || []).length !== 1) throw new Error('check glyph is not a single path: ' + r.markup);
+        if (!receipts.some((x) => x.startsWith('svg-dash-channels-dropped:'))) {
+          throw new Error('dash drop is not receipted by name: ' + receipts.join('; '));
+        }
+        // (the eval scratch carries extract/ but not examples/ — the floor's
+        // own asset is the byte-source promote-floor copies verbatim)
+        const asset = fs.readFileSync('extract/computed/out/checkbox/assets/checkbox-icon-2-unchecked.svg', 'utf8').trim();
+        if (asset !== r.markup) throw new Error('committed asset differs from a fresh reconstruction:\\n' + asset + '\\nvs\\n' + r.markup);
+        console.log('dash pin ok: continuous single-path stroke, named receipt, byte-equal committed asset');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('dash pin ok:')) {
+        throw new Error(`dash reconstruction probe failed:\n${probe.out}`);
+      }
+      console.log('svg-dash-animation-vehicle-pin: 22 committed assets dash-free; committed checkbox capture (dasharray 2px in style) reconstructs to the continuous stroke with the svg-dash-channels-dropped receipt, byte-equal to the committed asset');
+    },
+  },
+  {
+    // ROUND 5d — MARGIN/GAP CLASS PIN (owner defect: the Checkbox and
+    // RadioButton control↔label gap was missing on the live canvas; the
+    // Badge pip drew oversized). The contracts carry the gap as a
+    // choice-control margin-right token; margins used to be a preview-only
+    // fact the sync runtime never applied. The compile now lowers a uniform
+    // positive sibling margin to the parent's itemSpacing BOUND TO THE
+    // MARGIN'S OWN VARIABLE, and the runtime applies every residual margin
+    // as the child's CSS margin box (wrapper frame). This pin reads the
+    // COMMITTED emitted scripts (generate.ts --check guards contract↔script
+    // drift), so a regression in either the compile or the emit fails here
+    // by name.
+    id: 'canvas-margin-gap-pin',
+    claim: 'C3-detection',
+    run: () => {
+      const fig = (f: string) => readFileSync(path.join(ROOT, 'examples/polaris/figma', f), 'utf8');
+      const cb = fig('checkbox.figma.js');
+      if (!cb.includes('"itemSpacing": "imported/checkbox/choice-control/margin-right"')) {
+        throw new Error('checkbox root gap no longer binds imported/checkbox/choice-control/margin-right as itemSpacing');
+      }
+      const rb = fig('radio-button.figma.js');
+      if (!rb.includes('"itemSpacing": "imported/radio-button/choice-control/margin-right"')) {
+        throw new Error('radio-button root gap no longer binds imported/radio-button/choice-control/margin-right as itemSpacing');
+      }
+      const badge = fig('badge.figma.js');
+      if (!badge.includes('"margins"')) {
+        throw new Error('badge icon lost its residual margin facts (the -2/-2/-8 pip box)');
+      }
+      if (!badge.includes('function applyMarginBox(')) {
+        throw new Error('badge script lost the margin-box runtime — residual margins would silently not apply on canvas again');
+      }
+      // the radius half of the owner question: every corner rides the
+      // semantic token, no minted sibling leaves.
+      for (const corner of ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']) {
+        if (!badge.includes(`"${corner}": "p/border-radius-200"`)) {
+          throw new Error(`badge ${corner} no longer binds p/border-radius-200`);
+        }
+      }
+      // (imported/shared/size-8 may legitimately appear in the shared minted
+      // preamble for OTHER components' channels — only a radius BINDING to
+      // it is the regression.)
+      if (/"(topLeft|topRight|bottomLeft|bottomRight)Radius": "imported\/shared\/size-8"/.test(badge)) {
+        throw new Error('badge script binds a corner to imported/shared/size-8 — the shorthand-coverage class is back');
+      }
+      console.log('canvas-margin-gap-pin: checkbox/radio itemSpacing binds the margin-right variable; badge keeps residual pip margins + applyMarginBox runtime; all four badge corners bind p/border-radius-200 (no size-8 siblings)');
     },
   },
 ];

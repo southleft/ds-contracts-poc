@@ -53,6 +53,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/primary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -100,6 +101,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/primary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -147,6 +149,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/primary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -194,6 +197,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/secondary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -241,6 +245,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/secondary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -288,6 +293,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/secondary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -335,6 +341,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/danger/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -382,6 +389,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/danger/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -429,6 +437,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/danger/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -476,6 +485,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/ghost/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -523,6 +533,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/ghost/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -570,6 +581,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/ghost/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -619,6 +631,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/primary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -666,6 +679,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/secondary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -713,6 +727,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/danger/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -760,6 +775,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/ghost/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -804,11 +820,13 @@ const COMPONENTS = [
             "strokeWeight": "border/width/focus"
           },
           "stroke": "color/border/focus",
+          "strokeOutside": true,
           "children": [
             {
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/primary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -853,11 +871,13 @@ const COMPONENTS = [
             "strokeWeight": "border/width/focus"
           },
           "stroke": "color/border/focus",
+          "strokeOutside": true,
           "children": [
             {
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/secondary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -902,11 +922,13 @@ const COMPONENTS = [
             "strokeWeight": "border/width/focus"
           },
           "stroke": "color/border/focus",
+          "strokeOutside": true,
           "children": [
             {
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/danger/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -951,11 +973,13 @@ const COMPONENTS = [
             "strokeWeight": "border/width/focus"
           },
           "stroke": "color/border/focus",
+          "strokeOutside": true,
           "children": [
             {
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/ghost/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1004,6 +1028,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/primary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1052,6 +1077,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/secondary/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1100,6 +1126,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/danger/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1148,6 +1175,7 @@ const COMPONENTS = [
               "type": "svg",
               "name": "loadingSpinner",
               "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svgPaintVar": "color/action/ghost/foreground",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1314,7 +1342,7 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
+    node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -1359,6 +1387,15 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    if (spec.svgPaintVar) {
+      const glyphPaint = boundPaint(spec.svgPaintVar, node);
+      const rebind = (n) => {
+        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
+        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
+        if (n.children) for (const c of n.children) rebind(c);
+      };
+      for (const c of node.children) rebind(c);
+    }
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
@@ -1399,7 +1436,7 @@ async function buildNode(spec, registry) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);

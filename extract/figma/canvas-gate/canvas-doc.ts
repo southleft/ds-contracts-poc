@@ -145,14 +145,8 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   // applies them as native effects; this preview renders the equivalent
   // CSS box-shadow list (inset for INNER_SHADOW), like the code surfaces.
   d.push(...effectCss(spec, ctx));
-  if (spec.stroke) {
-    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
-    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
-  }
-  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
-    const cssProp = BINDING_CSS[field];
-    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
-  }
+  d.push(...strokeCss(spec));
+  d.push(...bindingCss(spec));
   if (spec.fixedWidth) d.push(`width: ${cssVarWithFallback(spec.fixedWidth.varName, spec.fixedWidth.px)}`);
   if (spec.fixedHeight) d.push(`height: ${spec.fixedHeight.varName ? cssVarWithFallback(spec.fixedHeight.varName, spec.fixedHeight.px) : `${spec.fixedHeight.px}px`}`);
   if (spec.grow) d.push('flex: 1 1 auto', 'min-width: 0');
@@ -186,9 +180,44 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   return d.join('; ');
 }
 
+/** Round 5d: stroke CSS — kept in lockstep with canvas-preview.ts.
+ *  Outline-lowered strokes (spec.strokeOutside) render as a CSS OUTLINE
+ *  (outside the border box, painted over children — the sync runtime aligns
+ *  those strokes OUTSIDE for the same geometry); plain strokes stay inside
+ *  borders. */
+function strokeCss(spec: NodeSpec): string[] {
+  const d: string[] = [];
+  if (!spec.stroke) return d;
+  if (spec.strokeOutside) {
+    d.push(`outline-color: ${cssVarOf(spec.stroke)}`, 'outline-style: solid');
+    if (!hasStrokeWidthSource(spec)) d.push('outline-width: 1px');
+  } else {
+    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
+    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
+  }
+  return d;
+}
+
+/** Bound-variable fields → CSS. Round 5d: a strokeWeight binding on an
+ *  outline-lowered stroke renders as outline-width, not border-width. */
+function bindingCss(spec: NodeSpec): string[] {
+  const d: string[] = [];
+  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
+    if (field === 'strokeWeight' && spec.strokeOutside) {
+      d.push(`outline-width: ${cssVarOf(varName)}`);
+      continue;
+    }
+    const cssProp = BINDING_CSS[field];
+    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
+  }
+  return d;
+}
+
 /** Round 5: margin channels the floor-promoted contracts carry, compiled to
- *  literal px. CSS-true here; auto-layout has NO per-child margin field, so
- *  the sync runtime does not apply them — a named fidelity note. */
+ *  literal px. CSS-true here; round 5d — the sync runtime now applies the
+ *  same geometry (compile-time itemSpacing lowering for uniform sibling
+ *  gaps, margin-box wrapper frames for the residual margins this renderer
+ *  still receives). */
 function marginStyles(spec: NodeSpec, ctx: RenderCtx): string[] {
   const m = spec.margins;
   if (!m) return [];
@@ -295,19 +324,13 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   if (sh.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(sh.sides ?? 3)}`);
   if (sh.kind === 'ellipse') d.push('border-radius: 50%');
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
-  if (spec.stroke) {
-    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
-    if (!hasStrokeWidthSource(spec)) d.push('border-width: 1px');
-  }
+  d.push(...strokeCss(spec));
   // B-3 finding 3 companion (Round 5 canvas-gate finding): the sync runtime
   // applies dropShadow/effectStack on SHAPES too (shapeRuntime receives the
   // same effects tail as frames) — this renderer only had the frame branch,
   // so the Checkbox/RadioButton backdrop's inset control edge never drew.
   d.push(...effectCss(spec, ctx));
-  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
-    const cssProp = BINDING_CSS[field];
-    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
-  }
+  d.push(...bindingCss(spec));
   d.push(...marginStyles(spec, ctx));
   d.push(...litStyles(spec));
   const transform: string[] = [];

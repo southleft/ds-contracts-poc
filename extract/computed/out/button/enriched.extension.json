@@ -747,10 +747,6 @@
               }
             }
           },
-          "row-gap": {
-            "$value": "2px",
-            "$type": "dimension"
-          },
           "background-color-state-active": {
             "primary": {
               "none": {
@@ -1770,10 +1766,6 @@
         }
       },
       "shared": {
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
         "size-0": {
           "$value": "0px",
           "$type": "dimension"

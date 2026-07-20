@@ -299,17 +299,17 @@
     "mintedLeavesFolded": 51
   },
   "bound": {
-    "cellsChecked": 112,
-    "confirmed": 84,
+    "cellsChecked": 160,
+    "confirmed": 132,
     "contradictions": 12,
     "untriaged": 0
   },
   "minted": {
     "leaves": 51,
-    "baseBindings": 64,
+    "baseBindings": 61,
     "stateBindings": 19,
     "byShape": {
-      "uniform": 63,
+      "uniform": 60,
       "perAxis": 13,
       "perPair": 1,
       "refused": 6

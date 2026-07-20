@@ -1048,9 +1048,6 @@
                         "border-radius": "{p.border-radius-200}",
                         "border-width": "{p.border-width-0165}",
                         "border-color": "{p.color-input-border}",
-                        "border-bottom-left-radius": "{imported.shared.size-8}",
-                        "border-bottom-right-radius": "{imported.shared.size-8}",
-                        "border-top-right-radius": "{imported.shared.size-8}",
                         "bottom": "{imported.shared.size-0}",
                         "left": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
@@ -1063,7 +1060,8 @@
                           "prop": "variant",
                           "map": {
                             "borderless": {
-                              "min-height": "{p.space-800}"
+                              "min-height": "{p.space-800}",
+                              "border-width": "{p.border-width-0}"
                             }
                           }
                         },
@@ -1072,35 +1070,6 @@
                           "map": {
                             "slim": {
                               "padding-block": "{p.space-050}"
-                            }
-                          }
-                        },
-                        {
-                          "prop": "variant",
-                          "map": {
-                            "borderless": {
-                              "border-left-color": "{imported.text-field.backdrop.border-left-color.borderless}",
-                              "border-left-width": "{imported.text-field.backdrop.border-left-width.borderless}",
-                              "border-right-color": "{imported.text-field.backdrop.border-right-color.borderless}",
-                              "border-right-width": "{imported.text-field.backdrop.border-right-width.borderless}",
-                              "border-top-color": "{imported.text-field.backdrop.border-top-color.borderless}",
-                              "border-top-width": "{imported.text-field.backdrop.border-top-width.borderless}"
-                            },
-                            "inherit": {
-                              "border-left-color": "{imported.text-field.backdrop.border-left-color.inherit}",
-                              "border-left-width": "{imported.text-field.backdrop.border-left-width.inherit}",
-                              "border-right-color": "{imported.text-field.backdrop.border-right-color.inherit}",
-                              "border-right-width": "{imported.text-field.backdrop.border-right-width.inherit}",
-                              "border-top-color": "{imported.text-field.backdrop.border-top-color.inherit}",
-                              "border-top-width": "{imported.text-field.backdrop.border-top-width.inherit}"
-                            }
-                          }
-                        },
-                        {
-                          "prop": "variant",
-                          "map": {
-                            "borderless": {
-                              "border-width": "{p.border-width-0}"
                             }
                           }
                         }

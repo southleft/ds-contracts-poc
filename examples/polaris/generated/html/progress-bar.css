@@ -1,4 +1,4 @@
-/* ProgressBar — from polaris.progress-bar v0.3.1 (core/emit-html.ts) */
+/* ProgressBar — from polaris.progress-bar v0.3.2 (core/emit-html.ts) */
 
 .progress-bar, .progress-bar *, .progress-bar *::before, .progress-bar *::after {
   box-sizing: border-box;
@@ -10,9 +10,6 @@
   justify-content: center;
   border: 0;
   border-radius: var(--p-border-radius-100);
-  border-bottom-left-radius: var(--imported-shared-size-4);
-  border-bottom-right-radius: var(--imported-shared-size-4);
-  border-top-right-radius: var(--imported-shared-size-4);
   display: block;
   overflow-x: hidden;
   overflow-y: hidden;

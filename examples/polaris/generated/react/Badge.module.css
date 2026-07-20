@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/badge.contract.json (polaris.badge v0.3.1)
+ * Source of truth: contracts/badge.contract.json (polaris.badge v0.3.2)
  * Regenerate with: npm run generate
  */
 
@@ -11,9 +11,6 @@
   padding-block: var(--p-space-050);
   padding-inline: var(--p-space-200);
   background-color: var(--imported-badge-root-background-color-none);
-  border-bottom-left-radius: var(--imported-shared-size-8);
-  border-bottom-right-radius: var(--imported-shared-size-8);
-  border-top-right-radius: var(--imported-shared-size-8);
   color: var(--imported-badge-root-color-none);
   font-weight: var(--imported-badge-root-font-weight-none);
 }

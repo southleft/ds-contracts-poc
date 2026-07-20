@@ -108,7 +108,7 @@ Minted leaves WITHOUT folding: **48** → WITH folding: **51** (45 folded channe
 
 ## Bound (static layer confirmed by computed truth)
 
-84/112 carried-binding cells string-equal to the browser-probed token value (no tolerance).
+132/160 carried-binding cells string-equal to the browser-probed token value (no tolerance).
 
 ### Binding contradictions (12 — the review queue, see review-queue.json; 0 untriaged)
 
@@ -139,8 +139,8 @@ Minted leaves WITHOUT folding: **48** → WITH folding: **51** (45 folded channe
 
 ## Minted (no name recoverable — core/mint-tokens.ts, unchanged)
 
-- leaves: **51** · bindings: 64 base + 19 state
-- shape: 63 uniform · 13 per-axis · 1 per-axis-pair · 6 refused (uncorrelated — nothing minted, named)
+- leaves: **51** · bindings: 61 base + 19 state
+- shape: 60 uniform · 13 per-axis · 1 per-axis-pair · 6 refused (uncorrelated — nothing minted, named)
 - set-plane-literal-carried: root.min-height — unmintable at base (auto …) but uniform per defaultless-axis plane over the presence-off slice: size=large → 24px (presence planes stay named residue — round 5c)
 
 ## Declared facts (v15 — carried, first-class)

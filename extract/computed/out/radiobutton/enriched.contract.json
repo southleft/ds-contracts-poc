@@ -180,12 +180,6 @@
                   "tokens": {
                     "border-radius": "{p.border-radius-full}",
                     "border-width": "{p.border-width-0165}",
-                    "border-bottom-left-radius": "{imported.shared.size-9999}",
-                    "border-bottom-right-radius": "{imported.shared.size-9999}",
-                    "border-left-width": "{imported.shared.size-1}",
-                    "border-right-width": "{imported.shared.size-1}",
-                    "border-top-right-radius": "{imported.shared.size-9999}",
-                    "border-top-width": "{imported.shared.size-1}",
                     "bottom": "{imported.shared.size-0}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",

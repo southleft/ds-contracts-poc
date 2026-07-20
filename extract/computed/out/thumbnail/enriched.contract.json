@@ -79,41 +79,14 @@
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"
       },
-      "tokensByProp": [
-        {
-          "prop": "size",
-          "map": {
-            "extraSmall": {
-              "border-radius": "{p.border-radius-150}"
-            }
-          }
-        },
-        {
-          "prop": "size",
-          "map": {
-            "extraSmall": {
-              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.extraSmall}",
-              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.extraSmall}",
-              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.extraSmall}"
-            },
-            "large": {
-              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.large}",
-              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.large}",
-              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.large}"
-            },
-            "medium": {
-              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.medium}",
-              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.medium}",
-              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.medium}"
-            },
-            "small": {
-              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.small}",
-              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.small}",
-              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.small}"
-            }
+      "tokensByProp": {
+        "prop": "size",
+        "map": {
+          "extraSmall": {
+            "border-radius": "{p.border-radius-150}"
           }
         }
-      ],
+      },
       "literals": {
         "min-width": "24px"
       },

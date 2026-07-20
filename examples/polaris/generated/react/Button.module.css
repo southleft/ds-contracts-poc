@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (polaris.button v0.3.1)
+ * Source of truth: contracts/button.contract.json (polaris.button v0.3.2)
  * Regenerate with: npm run generate
  */
 
@@ -10,12 +10,9 @@
   border: 0;
   border-radius: var(--p-border-radius-200);
   gap: var(--p-space-050);
-  border-bottom-left-radius: var(--imported-shared-size-8);
-  border-bottom-right-radius: var(--imported-shared-size-8);
   border-bottom-width: var(--imported-shared-size-0);
   border-left-width: var(--imported-shared-size-0);
   border-right-width: var(--imported-shared-size-0);
-  border-top-right-radius: var(--imported-shared-size-8);
   border-top-width: var(--imported-shared-size-0);
   bottom: var(--imported-shared-size-0);
   font-size: var(--imported-button-root-font-size);
@@ -23,7 +20,6 @@
   left: var(--imported-shared-size-0);
   line-height: var(--imported-button-root-line-height);
   right: var(--imported-shared-size-0);
-  row-gap: var(--imported-button-root-row-gap);
   top: var(--imported-shared-size-0);
   background: transparent;
   appearance: none;

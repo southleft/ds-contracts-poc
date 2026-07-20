@@ -118,12 +118,12 @@ for (const { dir, kebab } of PROMOTED) {
 
   const browser = String(extension.browser ?? 'unknown');
   const library = String(extension.library ?? 'unknown');
-  contract.version = '0.3.1';
+  contract.version = '0.3.2';
   const resolvedNote = src === resolvedPath
     ? `contradictions resolved computed-wins per the decisions ledger (extract/computed/out/${dir}/decisions.md, human-acked; source resolved.contract.json)`
     : `zero binding contradictions in the review queue (source enriched.contract.json)`;
   contract.description =
-    `${contract.description} FLOOR-PROMOTED v0.3.1 (extract/computed rounds 4 + 5c): this contract is the computed-floor ` +
+    `${contract.description} FLOOR-PROMOTED v0.3.2 (extract/computed rounds 4 + 5c + 5d): this contract is the computed-floor ` +
     `rebuild — complete browser truth captured from the real ${library} npm package rendered in headless Chromium ` +
     `${browser} (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run ` +
     `byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels ` +
@@ -135,6 +135,12 @@ for (const { dir, kebab } of PROMOTED) {
     `authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless `+
     `axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from `+
     `the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). `+
+    `Round 5d lifts (owner visual review): svg dash channels are DROPPED with a named receipt — they are `+
+    `pathLength-relative and pathLength is not a computed style, so the settled draw-on stroke carries as the `+
+    `continuous resting glyph (the Checkbox check); and a carried CSS SHORTHAND covers every constituent longhand `+
+    `in fusion coverage (border-radius all four corners, border-width/-color all four sides, gap both gaps) — the `+
+    `minted sibling longhands that overrode semantic bindings (Badge radius corners as imported.shared.size-8 over `+
+    `{p.border-radius-200}) are retired. `+
     `Everything the vocabulary cannot carry is named in ` +
     `contracts/${kebab}.extension.json. Delta ledger: extract/computed/out/${dir}/LEDGER.md (supersedes this ` +
     `component's section of extraction/PROMOTION.md).`;

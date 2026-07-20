@@ -194,12 +194,9 @@
       "tokens": {
         "border-radius": "{p.border-radius-200}",
         "gap": "{p.space-050}",
-        "border-bottom-left-radius": "{imported.shared.size-8}",
-        "border-bottom-right-radius": "{imported.shared.size-8}",
         "border-bottom-width": "{imported.shared.size-0}",
         "border-left-width": "{imported.shared.size-0}",
         "border-right-width": "{imported.shared.size-0}",
-        "border-top-right-radius": "{imported.shared.size-8}",
         "border-top-width": "{imported.shared.size-0}",
         "bottom": "{imported.shared.size-0}",
         "font-size": "{imported.button.root.font-size}",
@@ -211,7 +208,6 @@
         "margin-right": "{imported.button.root.margin-right.{variant}.{size}}",
         "margin-top": "{imported.button.root.margin-top.{variant}.{size}}",
         "right": "{imported.shared.size-0}",
-        "row-gap": "{imported.button.root.row-gap}",
         "top": "{imported.shared.size-0}"
       },
       "tokensByProp": [

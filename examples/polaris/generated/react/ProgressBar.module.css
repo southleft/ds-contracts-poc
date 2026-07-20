@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/progress-bar.contract.json (polaris.progress-bar v0.3.1)
+ * Source of truth: contracts/progress-bar.contract.json (polaris.progress-bar v0.3.2)
  * Regenerate with: npm run generate
  */
 
@@ -9,9 +9,6 @@
   justify-content: center;
   border: 0;
   border-radius: var(--p-border-radius-100);
-  border-bottom-left-radius: var(--imported-shared-size-4);
-  border-bottom-right-radius: var(--imported-shared-size-4);
-  border-top-right-radius: var(--imported-shared-size-4);
   display: block;
   overflow-x: hidden;
   overflow-y: hidden;

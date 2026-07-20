@@ -103,48 +103,6 @@
               "$type": "color"
             }
           },
-          "border-left-color": {
-            "unchecked": {
-              "$value": "#8a8a8a",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#303030",
-              "$type": "color"
-            },
-            "indeterminate": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          },
-          "border-right-color": {
-            "unchecked": {
-              "$value": "#8a8a8a",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#303030",
-              "$type": "color"
-            },
-            "indeterminate": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          },
-          "border-top-color": {
-            "unchecked": {
-              "$value": "#8a8a8a",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#303030",
-              "$type": "color"
-            },
-            "indeterminate": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          },
           "box-shadow": {
             "unchecked": {
               "$value": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
@@ -1394,7 +1352,62 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "unchecked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "unchecked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "unchecked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -1412,11 +1425,55 @@
       "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
     },
     {
+      "combo": "checked.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "indeterminate.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "indeterminate.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
       "combo": "indeterminate.enabled",
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+    },
+    {
+      "combo": "indeterminate.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -1534,7 +1591,9 @@
     ],
     "receipts": [
       "svg-viewbox-reconstructed: Checkbox.icon-3@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-dash-channels-dropped: Checkbox.icon-2@unchecked.enabled — stroke-dasharray 2px / stroke-dashoffset 2px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon-2@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "svg-dash-channels-dropped: Checkbox.icon-2@checked.enabled — stroke-dasharray 2px / stroke-dashoffset 0px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon-2@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex",
       "shape-geometry-recarried: backdrop — reviewed shape 20×20 contradicts the captured computed box 18×18 (uniform across every enabled combo); computed truth wins geometry, the curated numbers retire (round 5c; kind \"rect\" stays the reviewed call)",

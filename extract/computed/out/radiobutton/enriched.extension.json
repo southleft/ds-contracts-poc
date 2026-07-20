@@ -216,10 +216,6 @@
           "$value": "1px",
           "$type": "dimension"
         },
-        "size-9999": {
-          "$value": "9999px",
-          "$type": "dimension"
-        },
         "color-303030": {
           "$value": "#303030",
           "$type": "color"

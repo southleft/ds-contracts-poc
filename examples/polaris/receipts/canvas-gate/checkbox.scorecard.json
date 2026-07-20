@@ -1,7 +1,7 @@
 {
   "component": "Checkbox",
   "contractId": "polaris.checkbox",
-  "contractVersion": "0.3.1",
+  "contractVersion": "0.3.2",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -33,15 +33,15 @@
     {
       "cell": "Checked=checked",
       "kind": "base",
-      "pctExactUnmasked": 24.27,
-      "pctAAUnmasked": 2.18,
-      "pctAAMasked": 6.5,
+      "pctExactUnmasked": 24.26,
+      "pctAAUnmasked": 2.28,
+      "pctAAMasked": 7,
       "maskCoveragePct": 81.55,
       "canvasPx": "271x36",
       "realPx": "270x36",
-      "inkCanvasPct": 33,
+      "inkCanvasPct": 32.85,
       "inkRealPct": 31.05,
-      "note": "floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
+      "note": "check glyph carries as the CONTINUOUS settled stroke (round 5d: stroke-dasharray/dashoffset are pathLength-relative draw-on animation vehicles — pathLength is not a computed style — dropped by name; the segmented-capsule rendering is retired); residual raster of the 2px round-cap stroke (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
     },
     {
       "cell": "Checked=indeterminate",
@@ -54,15 +54,15 @@
       "realPx": "270x36",
       "inkCanvasPct": 33.78,
       "inkRealPct": 31.28,
-      "note": "floor-reconstructed check/indeterminate glyph assets carry the at-rest animation attrs (stroke-dasharray) baked in — the settled real glyph and the asset agree at rest; residual raster only (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
+      "note": "check glyph carries as the CONTINUOUS settled stroke (round 5d: stroke-dasharray/dashoffset are pathLength-relative draw-on animation vehicles — pathLength is not a computed style — dropped by name; the segmented-capsule rendering is retired); residual raster of the 2px round-cap stroke (backdrop geometry recarried from capture 18×18, label typography carried 13px/20px — round 5c)"
     }
   ],
   "summary": {
     "cells": 3,
     "meanExactUnmasked": 23.25,
-    "meanAAUnmasked": 1.55,
-    "meanAAMasked": 3.06,
-    "maxAAMasked": 6.5,
+    "meanAAUnmasked": 1.58,
+    "meanAAMasked": 3.22,
+    "maxAAMasked": 7,
     "worstCell": "Checked=checked",
     "cellsOver10Masked": [],
     "blankCanvasCells": []

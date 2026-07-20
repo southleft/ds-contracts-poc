@@ -68,6 +68,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "requiredMark",
                   "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
@@ -171,6 +172,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "requiredMark",
                   "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
@@ -274,6 +276,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "requiredMark",
                   "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
@@ -522,6 +525,15 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    if (spec.svgPaintVar) {
+      const glyphPaint = boundPaint(spec.svgPaintVar, node);
+      const rebind = (n) => {
+        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
+        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
+        if (n.children) for (const c of n.children) rebind(c);
+      };
+      for (const c of node.children) rebind(c);
+    }
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };

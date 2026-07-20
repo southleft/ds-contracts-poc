@@ -46,10 +46,6 @@
           "$value": "12px",
           "$type": "dimension"
         },
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
         "color-1a1a1a": {
           "$value": "#1a1a1a",
           "$type": "color"
@@ -125,66 +121,6 @@
           }
         },
         "backdrop": {
-          "border-left-color": {
-            "inherit": {
-              "$value": "#8a8a8a",
-              "$type": "color"
-            },
-            "borderless": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          },
-          "border-left-width": {
-            "inherit": {
-              "$value": "1px",
-              "$type": "dimension"
-            },
-            "borderless": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "border-right-color": {
-            "inherit": {
-              "$value": "#8a8a8a",
-              "$type": "color"
-            },
-            "borderless": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          },
-          "border-right-width": {
-            "inherit": {
-              "$value": "1px",
-              "$type": "dimension"
-            },
-            "borderless": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "border-top-color": {
-            "inherit": {
-              "$value": "#898f94",
-              "$type": "color"
-            },
-            "borderless": {
-              "$value": "#303030",
-              "$type": "color"
-            }
-          },
-          "border-top-width": {
-            "inherit": {
-              "$value": "1px",
-              "$type": "dimension"
-            },
-            "borderless": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
           "z-index": {
             "$value": "10",
             "$type": "number"
@@ -2213,6 +2149,26 @@
   },
   "bindingContradictions": [
     {
+      "combo": "inherit.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.slim.off.on.off.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2220,6 +2176,16 @@
       "computedProp": "padding-right",
       "expected": "12px",
       "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
       "verdict": "contradiction"
     },
     {
@@ -2233,6 +2199,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.slim.on.off.off.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2240,6 +2216,16 @@
       "computedProp": "padding-left",
       "expected": "12px",
       "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
       "verdict": "contradiction"
     },
     {
@@ -2253,6 +2239,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.slim.on.on.off.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2273,6 +2269,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.slim.on.on.on.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2290,6 +2296,36 @@
       "computedProp": "padding-right",
       "expected": "12px",
       "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
       "verdict": "contradiction"
     },
     {
@@ -2303,6 +2339,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.medium.off.on.on.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2310,6 +2356,16 @@
       "computedProp": "padding-right",
       "expected": "12px",
       "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
       "verdict": "contradiction"
     },
     {
@@ -2323,6 +2379,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.medium.on.off.on.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2333,6 +2399,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "inherit.medium.on.on.off.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2350,6 +2426,16 @@
       "computedProp": "padding-right",
       "expected": "12px",
       "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
       "verdict": "contradiction"
     },
     {
@@ -2373,6 +2459,16 @@
       "verdict": "contradiction"
     },
     {
+      "combo": "inherit.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(137, 143, 148, 1)",
+      "verdict": "contradiction"
+    },
+    {
       "combo": "borderless.slim.off.off.off.enabled",
       "part": "input",
       "channel": "min-height",
@@ -2388,7 +2484,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2399,7 +2528,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2432,7 +2594,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2443,7 +2638,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2486,11 +2714,66 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
       "combo": "borderless.slim.off.on.off.enabled",
@@ -2506,6 +2789,17 @@
     {
       "combo": "borderless.slim.off.on.off.enabled",
       "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
       "channel": "min-height",
       "ref": "{p.space-800}",
       "computedProp": "min-height",
@@ -2540,7 +2834,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2551,7 +2878,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2594,7 +2954,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2605,7 +2998,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2648,7 +3074,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2659,7 +3118,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2712,7 +3204,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2723,7 +3248,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2776,7 +3334,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -2787,7 +3378,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2809,11 +3433,66 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
       "combo": "borderless.medium.off.off.off.enabled",
@@ -2827,6 +3506,39 @@
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
       "combo": "borderless.medium.off.off.on.enabled",
       "part": "backdrop",
       "channel": "border-width",
@@ -2840,9 +3552,53 @@
     {
       "combo": "borderless.medium.off.off.on.enabled",
       "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2863,11 +3619,66 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
       "combo": "borderless.medium.off.on.off.enabled",
@@ -2881,6 +3692,17 @@
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
       "combo": "borderless.medium.off.on.on.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2889,6 +3711,28 @@
       "expected": "12px",
       "observed": "0px",
       "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
     },
     {
       "combo": "borderless.medium.off.on.on.enabled",
@@ -2904,9 +3748,53 @@
     {
       "combo": "borderless.medium.off.on.on.enabled",
       "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -2927,11 +3815,66 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
       "combo": "borderless.medium.on.off.off.enabled",
@@ -2945,6 +3888,17 @@
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
       "combo": "borderless.medium.on.off.on.enabled",
       "part": "input",
       "channel": "padding-inline",
@@ -2953,6 +3907,28 @@
       "expected": "12px",
       "observed": "0px",
       "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
     },
     {
       "combo": "borderless.medium.on.off.on.enabled",
@@ -2968,9 +3944,53 @@
     {
       "combo": "borderless.medium.on.off.on.enabled",
       "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -3001,7 +4021,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -3012,7 +4065,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",
@@ -3043,7 +4129,40 @@
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
+      "computedProp": "border-top-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-right-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
       "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-left-width",
       "expected": "1px",
       "observed": "0px",
       "verdict": "contradiction",
@@ -3054,7 +4173,40 @@
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
+      "computedProp": "border-top-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-right-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
       "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-left-color",
       "expected": "rgba(138, 138, 138, 1)",
       "observed": "rgba(48, 48, 48, 1)",
       "verdict": "contradiction",

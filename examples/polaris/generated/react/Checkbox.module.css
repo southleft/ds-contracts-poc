@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.3.1)
+ * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.3.2)
  * Regenerate with: npm run generate
  */
 
@@ -131,18 +131,6 @@
 }
 
 .checked-checked .backdrop {
-  border-left-color: var(--imported-checkbox-backdrop-border-left-color-checked);
-}
-
-.checked-checked .backdrop {
-  border-right-color: var(--imported-checkbox-backdrop-border-right-color-checked);
-}
-
-.checked-checked .backdrop {
-  border-top-color: var(--imported-checkbox-backdrop-border-top-color-checked);
-}
-
-.checked-checked .backdrop {
   box-shadow: var(--imported-checkbox-backdrop-box-shadow-checked);
 }
 
@@ -151,35 +139,11 @@
 }
 
 .checked-indeterminate .backdrop {
-  border-left-color: var(--imported-checkbox-backdrop-border-left-color-indeterminate);
-}
-
-.checked-indeterminate .backdrop {
-  border-right-color: var(--imported-checkbox-backdrop-border-right-color-indeterminate);
-}
-
-.checked-indeterminate .backdrop {
-  border-top-color: var(--imported-checkbox-backdrop-border-top-color-indeterminate);
-}
-
-.checked-indeterminate .backdrop {
   box-shadow: var(--imported-checkbox-backdrop-box-shadow-indeterminate);
 }
 
 .checked-unchecked .backdrop {
   background-color: var(--imported-checkbox-backdrop-background-color-unchecked);
-}
-
-.checked-unchecked .backdrop {
-  border-left-color: var(--imported-checkbox-backdrop-border-left-color-unchecked);
-}
-
-.checked-unchecked .backdrop {
-  border-right-color: var(--imported-checkbox-backdrop-border-right-color-unchecked);
-}
-
-.checked-unchecked .backdrop {
-  border-top-color: var(--imported-checkbox-backdrop-border-top-color-unchecked);
 }
 
 .checked-unchecked .backdrop {

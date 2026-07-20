@@ -393,21 +393,21 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 942,
-    "mintedLeavesFolded": 377
+    "mintedLeavesUnfolded": 940,
+    "mintedLeavesFolded": 375
   },
   "bound": {
-    "cellsChecked": 1632,
-    "confirmed": 1444,
+    "cellsChecked": 2112,
+    "confirmed": 1924,
     "contradictions": 188,
     "untriaged": 36
   },
   "minted": {
-    "leaves": 377,
-    "baseBindings": 31,
+    "leaves": 375,
+    "baseBindings": 27,
     "stateBindings": 27,
     "byShape": {
-      "uniform": 23,
+      "uniform": 19,
       "perAxis": 8,
       "perPair": 20,
       "refused": 7
