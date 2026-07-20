@@ -265,6 +265,9 @@ async function main() {
 
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
     const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
+    // Round 5c: carried-channel re-mints (defaultless-axis contest) ride the
+    // styled-channel receipts into the extension block + the ledger.
+    styledReceipts.push(...prep.remintReceipts);
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes);
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
@@ -815,6 +818,7 @@ async function main() {
       '',
       `- leaves: **${numbers.minted.leaves}** · bindings: ${numbers.minted.baseBindings} base + ${numbers.minted.stateBindings} state`,
       `- shape: ${mintKinds.uniform} uniform · ${mintKinds.perAxis} per-axis · ${mintKinds.perPair} per-axis-pair · ${mintKinds.refused} refused (uncorrelated — nothing minted, named)`,
+      ...prep.remintReceipts.map((r) => `- ${r}`),
       '',
       '## Declared facts (v15 — carried, first-class)',
       '',

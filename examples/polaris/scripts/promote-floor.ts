@@ -118,19 +118,24 @@ for (const { dir, kebab } of PROMOTED) {
 
   const browser = String(extension.browser ?? 'unknown');
   const library = String(extension.library ?? 'unknown');
-  contract.version = '0.3.0';
+  contract.version = '0.3.1';
   const resolvedNote = src === resolvedPath
     ? `contradictions resolved computed-wins per the decisions ledger (extract/computed/out/${dir}/decisions.md, human-acked; source resolved.contract.json)`
     : `zero binding contradictions in the review queue (source enriched.contract.json)`;
   contract.description =
-    `${contract.description} FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor ` +
+    `${contract.description} FLOOR-PROMOTED v0.3.1 (extract/computed rounds 4 + 5c): this contract is the computed-floor ` +
     `rebuild — complete browser truth captured from the real ${library} npm package rendered in headless Chromium ` +
     `${browser} (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run ` +
     `byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels ` +
     `MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the ` +
     `round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed ` +
     `icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, ` +
-    `${resolvedNote}. Everything the vocabulary cannot carry is named in ` +
+    `${resolvedNote}. Round 5c promotion lifts: complement-of-product presence (a default subtree an alternative `+
+    `replaces carries an ordered hide/restore stylesWhen cascade, verified per combo), root-hosted svg plans, `+
+    `authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless `+
+    `axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from `+
+    `the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). `+
+    `Everything the vocabulary cannot carry is named in ` +
     `contracts/${kebab}.extension.json. Delta ledger: extract/computed/out/${dir}/LEDGER.md (supersedes this ` +
     `component's section of extraction/PROMOTION.md).`;
 

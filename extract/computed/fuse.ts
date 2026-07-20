@@ -167,6 +167,26 @@ export function styledChannels(
         if (el.node.style[p] !== a.baseFlat[pi].node.style[p]) set.add(p);
       }
     }
+    // Round 5c — TEXT-PART TYPOGRAPHY IS ALWAYS A FACT: a text-bearing
+    // part whose typography equals the mount context (the provider's 13px/
+    // 20px/450 body) looked "unstyled" against the span control and was
+    // never carried — but the GENERATED surfaces have no Polaris body to
+    // inherit from, so the canvas drew its own 14px/500 defaults (the
+    // named 13px-vs-14px config-triage class on Checkbox/Radio/Banner
+    // labels). Context-inherited or not, the rendered typography of a text
+    // part is captured truth; carry the three box-driving channels
+    // explicitly (sr-only parts excluded — they draw nothing).
+    const hasText = a.baseFlat[pi].node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
+    const srOnly = (a.baseFlat[pi].node.style['clip-path'] ?? '').startsWith('inset(50%');
+    if (hasText && !srOnly) {
+      const added: string[] = [];
+      for (const ch of ['font-size', 'line-height', 'font-weight']) {
+        if (!set.has(ch)) { set.add(ch); added.push(ch); }
+      }
+      if (added.length > 0) {
+        receipts.push(`text-part-typography-carried: ${a.partNames[pi]} — ${added.join('/')} carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)`);
+      }
+    }
     out.set(a.partNames[pi], set);
   }
   return out;
@@ -475,6 +495,9 @@ export interface MintPrep {
   /** leaf-count comparison: mint run WITHOUT the folding pass. */
   unfoldedLeafCount: number;
   foldedStateSkips: string[];
+  /** Round 5c: carried channels re-minted because a DEFAULTLESS axis
+   *  contests their values (the Button tone×variant paint class). */
+  remintReceipts: string[];
 }
 
 const STATE_SUFFIXES = ['hover', 'active', 'focus-visible', 'disabled'] as const;
@@ -508,6 +531,32 @@ export function prepareMint(
     return p;
   };
 
+  // Round 5c — CARRIED-CHANNEL RE-MINT on a defaultless-axis contest (the
+  // Button tone×variant paint refusal): a channel the reviewed static layer
+  // carries (per-variant tokensByProp) is BOUND territory, so the mint pass
+  // skipped it — but when the observed values ALSO vary along a DEFAULTLESS
+  // axis (tone), the reviewed carriage explains only the unset plane; the
+  // set planes were silently absent (40 Primary cells at ~91% on the canvas
+  // gate). Such channels re-mint: the S2 pair-with-unset carriage lands the
+  // tone maps as tokensByProp entries with the unset plane as base, and the
+  // applyMintToContract conflict rule keeps every reviewed binding (reviewed
+  // same-prop channels are never re-added). Receipted by name.
+  const unsetAxisNames = space.axes.filter((ax) => ax.unset !== undefined).map((ax) => ax.prop);
+  const remintReceipts: string[] = [];
+  const contestedByUnsetAxis = (pi: number, channel: string): string | null => {
+    for (const axName of unsetAxisNames) {
+      const groups = new Map<string, Set<string>>();
+      for (const combo of enabledCombos) {
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (!el) continue;
+        const ctx = JSON.stringify({ ...combo.axisValues, [axName]: '' });
+        (groups.get(ctx) ?? groups.set(ctx, new Set()).get(ctx)!).add(el.node.style[channel]);
+      }
+      if ([...groups.values()].some((s) => s.size > 1)) return axName;
+    }
+    return null;
+  };
+
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
     const obs: MintObservation[] = [];
     const codeOnly: CodeOnlyEntry[] = [];
@@ -518,7 +567,15 @@ export function prepareMint(
       if (svgConsumedParts?.has(partName)) continue; // svg internals: carried by the promoted icon asset (round 4)
       const carried = carriedChannels(partByName.get(partName));
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
-        if (carried.has(channel)) continue;
+        if (carried.has(channel)) {
+          const contestingAxis = contestedByUnsetAxis(pi, channel);
+          if (contestingAxis === null) continue;
+          if (skipFolds) {
+            remintReceipts.push(
+              `carried-channel-reminted: ${partName}.${channel} — observed values vary along the defaultless axis "${contestingAxis}" while the reviewed carriage has no ${contestingAxis} plane; re-minted so the set planes carry (round 5c — S2 ${contestingAxis} maps with the unset base; reviewed bindings win every collision)`,
+            );
+          }
+        }
         if (layoutHandled?.get(partName)?.has(channel)) continue; // carried by Part.layout (enrichLayout)
         if (skipFolds && foldedSet.has(`${partName}|${channel}`)) continue;
         const occurrences: MintObservation['occurrences'] = [];
@@ -718,6 +775,7 @@ export function prepareMint(
     pairwiseRefusals: folded.pairwiseRefusals,
     unfoldedLeafCount: unfoldedMint.count,
     foldedStateSkips: [...new Set(foldedStateSkips)],
+    remintReceipts: [...new Set(remintReceipts)],
   };
 }
 

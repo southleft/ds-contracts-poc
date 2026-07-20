@@ -527,7 +527,9 @@ async function main(): Promise<void> {
   const captureCfg = loadCaptureConfig();
   const PART_MAP: Record<string, Record<string, string>> = {
     Banner: { title: 'label', body: 'label-2' },
-    Spinner: { glyphLarge: 'icon', glyphSmall: 'icon' },
+    // Round 5c: the root-hosted svg plan carries per-size glyph parts named
+    // root-small/root-large; the captured truth's svg part is 'icon'.
+    Spinner: { glyphLarge: 'icon', glyphSmall: 'icon', 'root-small': 'icon', 'root-large': 'icon' },
     // Text's captured anatomy is the single text element itself — the
     // compiled label node's typography channels verify against that root.
     Text: { label: 'root' },
