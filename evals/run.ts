@@ -769,6 +769,11 @@ const cases: Case[] = [
       if (!notes.includes('`flavor`: keyof value set NOT carried') || !notes.includes('importedFlavors')) {
         throw new Error('Unresolvable keyof target not refused BY NAME');
       }
+      // HERITAGE RECEIPT (found by the Astryx .doc.mjs referee): an
+      // interface WITH own members must still name its unread parents.
+      if (!notes.includes('extends BasePropsLike<HTMLButtonElement>') || !notes.includes('NOT carried')) {
+        throw new Error('Heritage of an interface WITH own members not receipted');
+      }
     },
   },
   {

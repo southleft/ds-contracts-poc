@@ -8,6 +8,7 @@
 - proposed: 7 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDialogElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onOpenChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `actionVariant`: unclassified type — not proposed, review manually
@@ -20,6 +21,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface AppShellVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -47,6 +49,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `shape`: type resolved heuristically — review
 - prop `shape`: figma binding INFERRED as VARIANT "Shape" — confirm against the design library (reconcile step)
@@ -60,6 +63,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `size`: unclassified type — not proposed, review manually
 - prop `status`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -70,6 +74,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `size`: unclassified type — not proposed, review manually
@@ -80,6 +85,10 @@
 - proposed: 1 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onClick'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onClick`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `children`: platform prop — not contract API, skipped
@@ -90,6 +99,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface AvatarStatusDotVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -102,6 +112,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface BadgeVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -115,6 +126,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `status`: enum values resolved as member names of the in-file interface BannerStatusMap (module augmentation may extend it) — review
 - prop `container`: enum values resolved as member names of the in-file interface BannerContainerMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
@@ -153,6 +165,10 @@
 - proposed: 12 props, 4 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `searchSource`: unclassified type — not proposed, review manually
 - prop `value`: unclassified type — not proposed, review manually
@@ -171,6 +187,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLQuoteElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `cite`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -181,6 +198,10 @@
 - proposed: 2 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLLIElement>,
+  'onClick'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `as`: unclassified type — not proposed, review manually
 - prop `children`: platform prop — not contract API, skipped
@@ -193,6 +214,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface BreadcrumbsVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
@@ -206,6 +228,7 @@
 - proposed: 14 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface ButtonVariantMap (module augmentation may extend it) — review
 - prop `size`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
@@ -228,6 +251,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `orientation`: unclassified type — not proposed, review manually
@@ -272,6 +296,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `className`: platform prop — not contract API, skipped
 - prop `style`: platform prop — not contract API, skipped
@@ -290,6 +315,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `gap`: unclassified type — not proposed, review manually
@@ -301,6 +327,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `axis`: type resolved heuristically — review
 - prop `axis`: figma binding INFERRED as VARIANT "Axis" — confirm against the design library (reconcile step)
@@ -316,6 +343,10 @@
 - proposed: 6 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange' | 'onSubmit'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onSubmit`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - event `onStop`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -338,6 +369,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - event `onCollapsedChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -351,6 +383,10 @@
 - proposed: 7 props, 4 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange' | 'onPaste' | 'onSubmit'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `handleRef`: unclassified type — not proposed, review manually
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -374,6 +410,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `dictation`: unclassified type — not proposed, review manually
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
@@ -384,6 +421,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `composer`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -399,6 +437,10 @@
 - proposed: 2 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onClick'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onClick`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 
@@ -408,6 +450,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `sender`: unclassified type — not proposed, review manually
 - prop `children`: platform prop — not contract API, skipped
@@ -422,6 +465,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -436,6 +480,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `emptyState`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -449,6 +494,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `timestamp`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `footer`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -469,6 +515,7 @@
 - proposed: 3 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onSend`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - event `onStop`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -482,6 +529,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -494,6 +542,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `tokens`: unclassified type — not proposed, review manually
@@ -504,6 +553,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `calls`: unclassified type — not proposed, review manually
 - event `onExpandedChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -514,6 +564,7 @@
 - proposed: 11 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'onChange'> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -533,6 +584,10 @@
 - proposed: 7 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `status`: unclassified type — not proposed, review manually
 - prop `value`: unclassified type — not proposed, review manually
@@ -548,6 +603,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLLIElement> — parent members are outside single-file extraction and are NOT carried
 - prop `label`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `endContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `isChecked`: unclassified type — not proposed, review manually
@@ -560,6 +616,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `source`: unclassified type — not proposed, review manually
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
@@ -570,6 +627,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onClick`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `children`: platform prop — not contract API, skipped
@@ -585,6 +643,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `color`: type resolved heuristically — review
 - prop `color`: figma binding INFERRED as VARIANT "Color" — confirm against the design library (reconcile step)
@@ -597,6 +656,7 @@
 - proposed: 13 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLPreElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `highlightLines`: unclassified type — not proposed, review manually
 - event `onCopy`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -623,6 +683,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `trigger`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `children`: platform prop — not contract API, skipped
@@ -634,6 +695,10 @@
 - proposed: 2 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `type`: figma binding INFERRED as VARIANT "Type" — confirm against the design library (reconcile step)
 - prop `defaultValue`: unclassified type — not proposed, review manually
@@ -648,6 +713,7 @@
 - proposed: 4 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps<HTMLDialogElement>, 'onChange'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onOpenChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `searchSource`: unclassified type — not proposed, review manually
@@ -666,6 +732,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -675,6 +742,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -684,6 +752,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -693,6 +762,10 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLInputElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onValueChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `endContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -704,6 +777,10 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange' | 'onSelect'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onSelect`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `children`: platform prop — not contract API, skipped
@@ -714,6 +791,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -768,6 +846,10 @@
 - proposed: 12 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `value`: unclassified type — not proposed, review manually
@@ -798,6 +880,10 @@
 - proposed: 12 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `value`: unclassified type — not proposed, review manually
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -828,6 +914,10 @@
 - proposed: 16 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `value`: unclassified type — not proposed, review manually
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -875,6 +965,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `items`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `featured`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -894,6 +985,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDialogElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface DialogVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - event `onOpenChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -913,6 +1005,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onOpenChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `startContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -924,6 +1017,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface DividerVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `orientation`: figma binding INFERRED as VARIANT "Orientation" — confirm against the design library (reconcile step)
@@ -953,6 +1047,10 @@
 - proposed: 1 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `icon`: unclassified type — not proposed, review manually
 - prop `label`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `description`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -965,6 +1063,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `actions`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1014,6 +1113,10 @@
 - proposed: 12 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'children'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `labelIcon`: unclassified type — not proposed, review manually
 - prop `status`: unclassified type — not proposed, review manually
@@ -1027,6 +1130,7 @@
 - proposed: 10 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `labelIcon`: unclassified type — not proposed, review manually
 - prop `description`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1037,6 +1141,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface FieldStatusVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `type`: unclassified type — not proposed, review manually
@@ -1049,6 +1154,10 @@
 - proposed: 15 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue' | 'value'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `value`: unclassified type — not proposed, review manually
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -1090,6 +1199,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `direction`: unclassified type — not proposed, review manually
@@ -1100,6 +1210,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `columns`: unclassified type — not proposed, review manually
 - prop `width`: unclassified type — not proposed, review manually
@@ -1121,6 +1232,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `columns`: unclassified type — not proposed, review manually
 - prop `children`: platform prop — not contract API, skipped
@@ -1131,6 +1243,10 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLHeadingElement>,
+  'children'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `level`: unclassified type — not proposed, review manually
 - prop `type`: type resolved heuristically — review
@@ -1150,6 +1266,10 @@
 - proposed: 5 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `children`: platform prop — not contract API, skipped
 - prop `content`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `placement`: unclassified type — not proposed, review manually
@@ -1164,6 +1284,10 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  StackProps,
+  'direction' | 'hAlign' | 'vAlign'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `hAlign`: unclassified type — not proposed, review manually
 - prop `vAlign`: unclassified type — not proposed, review manually
@@ -1176,6 +1300,10 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  SVGProps<SVGSVGElement>,
+  'ref' | 'color'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `color`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `size`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
@@ -1191,6 +1319,10 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  ButtonProps,
+  'isIconOnly' | 'children' | 'endContent'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 
 ## IconFromRegistry
@@ -1231,6 +1363,10 @@
 - proposed: 8 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'children'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `size`: type resolved heuristically — review
@@ -1243,6 +1379,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -1262,6 +1399,7 @@
 - proposed: 11 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `as`: figma binding INFERRED as VARIANT "As" — confirm against the design library (reconcile step)
 - prop `marker`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1291,6 +1429,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 
 ## LayerProvider
@@ -1308,6 +1447,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'content'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `content`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `contentWidth`: unclassified type — not proposed, review manually
@@ -1326,6 +1466,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `padding`: unclassified type — not proposed, review manually
@@ -1337,6 +1478,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `height`: unclassified type — not proposed, review manually
@@ -1349,6 +1491,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `height`: unclassified type — not proposed, review manually
@@ -1361,6 +1504,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `padding`: unclassified type — not proposed, review manually
@@ -1384,6 +1528,7 @@
 - proposed: 5 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDialogElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onOpenChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `media`: unclassified type — not proposed, review manually
@@ -1395,6 +1540,9 @@
 - proposed: 11 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<
+  HTMLAnchorElement | HTMLButtonElement
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `as`: unclassified type — not proposed, review manually
 - prop `download`: unclassified type — not proposed, review manually
@@ -1430,6 +1578,9 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<
+  HTMLUListElement | HTMLOListElement
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `density`: unclassified type — not proposed, review manually
@@ -1442,6 +1593,7 @@
 - proposed: 5 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLLIElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `label`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `description`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1455,6 +1607,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `display`: unclassified type — not proposed, review manually
@@ -1484,6 +1637,10 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'title'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `columns`: unclassified type — not proposed, review manually
@@ -1497,6 +1654,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1507,6 +1665,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'title'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onOpenChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `children`: platform prop — not contract API, skipped
@@ -1519,6 +1678,10 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -1551,6 +1714,10 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `items`: unclassified type — not proposed, review manually
 - prop `variant`: unclassified type — not proposed, review manually
@@ -1564,6 +1731,7 @@
 - proposed: 20 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'onChange' | 'defaultValue'> — parent members are outside single-file extraction and are NOT carried
 - prop `options`: unclassified type — not proposed, review manually
 - prop `value`: unclassified type — not proposed, review manually
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -1591,6 +1759,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `size`: unclassified type — not proposed, review manually
@@ -1602,6 +1771,10 @@
 - proposed: 2 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onClick'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: unclassified type — not proposed, review manually
 - prop `label`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1614,6 +1787,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 
@@ -1676,6 +1850,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `items`: unclassified type — not proposed, review manually
 - event `onActiveIdChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -1687,6 +1862,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `gap`: unclassified type — not proposed, review manually
@@ -1700,6 +1876,10 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps<HTMLDivElement>,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `content`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1730,6 +1910,10 @@
 - proposed: 10 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface PaginationVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -1747,6 +1931,10 @@
 - proposed: 8 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `children`: platform prop — not contract API, skipped
 - prop `anchorRef`: unclassified type — not proposed, review manually
 - prop `content`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1769,6 +1957,10 @@
 - proposed: 14 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `config`: unclassified type — not proposed, review manually
 - prop `filters`: unclassified type — not proposed, review manually
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -1824,6 +2016,7 @@
 - proposed: 8 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface ProgressBarVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `formatValueLabel`: function-typed but not on* — skipped, review manually
@@ -1836,6 +2029,10 @@
 - proposed: 12 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `orientation`: figma binding INFERRED as VARIANT "Orientation" — confirm against the design library (reconcile step)
@@ -1851,6 +2048,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `startContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `endContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -1872,6 +2070,10 @@
 - proposed: 8 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `direction`: figma binding INFERRED as VARIANT "Direction" — confirm against the design library (reconcile step)
 - prop `position`: figma binding INFERRED as VARIANT "Position" — confirm against the design library (reconcile step)
@@ -1886,6 +2088,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface SectionVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -1905,6 +2108,10 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `size`: unclassified type — not proposed, review manually
@@ -1917,6 +2124,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 
@@ -1926,6 +2134,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'onChange'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `children`: platform prop — not contract API, skipped
@@ -1989,6 +2198,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `handleRef`: unclassified type — not proposed, review manually
 - prop `header`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2008,6 +2218,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `handleRef`: unclassified type — not proposed, review manually
 - prop `children`: platform prop — not contract API, skipped
@@ -2018,6 +2229,7 @@
 - proposed: 6 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `as`: unclassified type — not proposed, review manually
@@ -2030,6 +2242,7 @@
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `as`: unclassified type — not proposed, review manually
 - prop `icon`: unclassified type — not proposed, review manually
@@ -2046,6 +2259,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `endContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2056,6 +2270,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `radius`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `width`: unclassified type — not proposed, review manually
@@ -2111,6 +2326,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: enum values resolved as keys of the in-file const object SIZES — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `size`: type resolved heuristically — review
@@ -2125,6 +2341,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `direction`: unclassified type — not proposed, review manually
 - prop `hAlign`: unclassified type — not proposed, review manually
@@ -2149,6 +2366,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `crossAlignSelf`: unclassified type — not proposed, review manually
 - prop `size`: unclassified type — not proposed, review manually
@@ -2161,6 +2379,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: enum values resolved as member names of the in-file interface StatusDotVariantMap (module augmentation may extend it) — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `variant`: type resolved heuristically — review
@@ -2202,6 +2421,7 @@
 - proposed: 13 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'onChange'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `changeAction`: function-typed but not on* — skipped, review manually
@@ -2230,6 +2450,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `as`: unclassified type — not proposed, review manually
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2251,6 +2472,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTableSectionElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -2260,6 +2482,7 @@
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTableCellElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `scope`: figma binding INFERRED as VARIANT "Scope" — confirm against the design library (reconcile step)
 - prop `children`: platform prop — not contract API, skipped
@@ -2272,6 +2495,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTableSectionElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -2281,6 +2505,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTableSectionElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -2290,6 +2515,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTableCellElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `scope`: figma binding INFERRED as VARIANT "Scope" — confirm against the design library (reconcile step)
 - prop `children`: platform prop — not contract API, skipped
@@ -2311,6 +2537,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTableRowElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `xstyle`: unclassified type — not proposed, review manually
@@ -2347,6 +2574,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps<HTMLElement>, 'onChange'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `size`: unclassified type — not proposed, review manually
@@ -2360,6 +2588,10 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Pick<
+  BaseProps<HTMLButtonElement>,
+  'xstyle' | 'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `options`: unclassified type — not proposed, review manually
 
@@ -2369,6 +2601,7 @@
 - proposed: 5 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<BaseProps, 'children'> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `type`: unclassified type — not proposed, review manually
 - prop `size`: unclassified type — not proposed, review manually
@@ -2388,6 +2621,10 @@
 - proposed: 17 props, 4 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `changeAction`: function-typed but not on* — skipped, review manually
@@ -2414,6 +2651,10 @@
 - proposed: 16 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `type`: type resolved heuristically — review
@@ -2444,6 +2685,7 @@
 - proposed: 5 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onRemove`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - event `onClick`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -2472,6 +2714,10 @@
 - proposed: 16 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps,
+  'onChange' | 'defaultValue'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: enum values resolved as keys of the object literal passed to stylex.create(…) — key-preserving factory ASSUMED — review
 - prop `ref`: platform prop — not contract API, skipped
 - prop `value`: unclassified type — not proposed, review manually
@@ -2492,6 +2738,7 @@
 - proposed: 5 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLTimeElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `value`: unclassified type — not proposed, review manually
 - prop `format`: type resolved heuristically — review
@@ -2528,6 +2775,7 @@
 - proposed: 7 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - event `onPressedChange`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
 - prop `pressedChangeAction`: function-typed but not on* — skipped, review manually
@@ -2557,6 +2805,7 @@
 - proposed: 7 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `size`: type resolved heuristically — review
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
@@ -2573,6 +2822,10 @@
 - proposed: 20 props, 4 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `status`: unclassified type — not proposed, review manually
 - prop `startIcon`: unclassified type — not proposed, review manually
 - prop `width`: unclassified type — not proposed, review manually
@@ -2598,6 +2851,7 @@
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `startContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `centerContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2629,6 +2883,7 @@
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `heading`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `startContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2642,6 +2897,7 @@
 - proposed: 8 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `logo`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `headerEndContent`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2654,6 +2910,7 @@
 - proposed: 7 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `download`: unclassified type — not proposed, review manually
 - prop `referrerPolicy`: unclassified type — not proposed, review manually
@@ -2668,6 +2925,7 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `items`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - prop `featured`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2679,6 +2937,7 @@
 - proposed: 6 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 
@@ -2688,6 +2947,10 @@
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'onClick'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
 - event `onClick`: declared with trigger 'root' — assign the real trigger part once anatomy is authored
@@ -2699,6 +2962,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `items`: unclassified type — not proposed, review manually
 
@@ -2708,6 +2972,7 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `items`: unclassified type — not proposed, review manually
 - prop `density`: unclassified type — not proposed, review manually
@@ -2743,6 +3008,10 @@
 - proposed: 16 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLDivElement>,
+  'onChange'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `status`: unclassified type — not proposed, review manually
 - prop `startIcon`: unclassified type — not proposed, review manually
@@ -2762,6 +3031,7 @@
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends BaseProps<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `item`: unclassified type — not proposed, review manually
 - prop `icon`: ReactNode — SLOT CANDIDATE, author as anatomy slot manually
@@ -2772,6 +3042,10 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  BaseProps<HTMLElement>,
+  'className' | 'style'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `children`: platform prop — not contract API, skipped
 - prop `as`: unclassified type — not proposed, review manually
@@ -2782,6 +3056,10 @@
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
+- props type extends Omit<
+  StackProps,
+  'direction' | 'hAlign' | 'vAlign'
+> — parent members are outside single-file extraction and are NOT carried
 - prop `ref`: platform prop — not contract API, skipped
 - prop `hAlign`: unclassified type — not proposed, review manually
 - prop `vAlign`: unclassified type — not proposed, review manually

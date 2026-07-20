@@ -11,6 +11,7 @@
 import * as React from 'react';
 import {createSheet} from 'atomic-styling-lib';
 import {importedFlavors} from 'flavor-pack';
+import type {BasePropsLike} from 'base-pack';
 
 export interface ToggleToneMap {
   neutral: true;
@@ -31,7 +32,10 @@ const densityTable = {
 } as const;
 export type ToggleDensity = keyof typeof densityTable;
 
-export interface ToggleProps {
+// The HERITAGE RECEIPT: an interface WITH own members must still name its
+// parents (found by the Astryx .doc.mjs referee — MoreMenu's Pick<BaseProps>
+// heritage was dropped silently before).
+export interface ToggleProps extends BasePropsLike<HTMLButtonElement> {
   /** Tone of the toggle. */
   tone?: ToggleTone;
   /** Animation pace. */

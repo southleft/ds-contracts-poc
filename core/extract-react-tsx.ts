@@ -756,6 +756,17 @@ export function extractFromSource(
       );
     }
     if (unionNote) componentNotes.push(unionNote);
+    // HERITAGE RECEIPT (Astryx round — found by the .doc.mjs referee): an
+    // interface WITH own members used to name its `extends` parents only in
+    // the zero-own-members receipt; a partially-read surface (`MoreMenuProps
+    // extends Pick<BaseProps, 'xstyle' | …>`) dropped them silently. Parent
+    // members are outside single-file extraction BY DESIGN — but the
+    // omission must be receipted, never silent.
+    if (heritage.length > 0 && (members.length > 0 || cvaProps.length > 0)) {
+      componentNotes.push(
+        `props type extends ${heritage.join(', ')} — parent members are outside single-file extraction and are NOT carried`,
+      );
+    }
     const defaults = collectDefaults(sf, componentName);
     const props: ExtractedProp[] = [...cvaProps];
     for (const [i, p] of cvaProps.entries()) {
