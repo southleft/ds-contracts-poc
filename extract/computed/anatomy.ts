@@ -546,9 +546,23 @@ export function reconstructSvg(
             const v = el.style[ch];
             if (v && v !== 'butt' && v !== 'miter') strokeAttrs.push(` ${attr}="${v}"`);
           }
-          for (const ch of ['stroke-dasharray', 'stroke-dashoffset'] as const) {
-            const v = el.style[ch];
-            if (v && v !== 'none' && v !== '0px') strokeAttrs.push(` ${ch}="${v.replace(/px/g, '')}"`);
+          // Round 5d (owner finding: the check glyph drew as SEGMENTED
+          // CAPSULES, not a continuous check): dash channels are
+          // pathLength-RELATIVE, and `pathLength` is an ATTRIBUTE — not a
+          // computed style (the viewBox class). Polaris normalizes the
+          // check path to pathLength=1 and drives stroke-dashoffset as a
+          // draw-on animation; the computed 2px dasharray is the ANIMATION
+          // VEHICLE, not resting geometry. Re-basing that pattern onto the
+          // real ~14-user-unit path drew 2px capsules with joints. The
+          // resting truth of a settled draw-on stroke is the CONTINUOUS
+          // stroke — dash channels are dropped with a named receipt
+          // (visibility still rides the captured opacity channel).
+          const dash = el.style['stroke-dasharray'];
+          const dashOffset = el.style['stroke-dashoffset'];
+          if ((dash && dash !== 'none') || (dashOffset && dashOffset !== '0px')) {
+            receipts.push(
+              `svg-dash-channels-dropped: ${label} — stroke-dasharray ${dash || 'none'} / stroke-dashoffset ${dashOffset || '0px'} are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)`,
+            );
           }
         }
         paths.push(

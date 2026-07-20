@@ -138,16 +138,26 @@ export const CHANNEL_TO_COMPUTED: Record<string, string[]> = {
   'background-color': ['background-color'],
   color: ['color'],
   fill: ['fill'],
-  'border-radius': ['border-top-left-radius'],
-  'border-color': ['border-bottom-color'],
-  'border-width': ['border-bottom-width'],
+  // Round 5d (owner finding: the canvas Badge radius inspected as a bare 8,
+  // no variable): a carried SHORTHAND must cover EVERY constituent longhand.
+  // The old single-longhand coverage ('border-radius' → top-left only) left
+  // the other three corners UNLABELED, so the mint created sibling leaves
+  // (imported.shared.size-8) that overrode the semantic token
+  // ({p.border-radius-200}) on three of four corners — same class for
+  // border-width, border-color and gap.
+  'border-radius': [
+    'border-top-left-radius', 'border-top-right-radius',
+    'border-bottom-left-radius', 'border-bottom-right-radius',
+  ],
+  'border-color': ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'],
+  'border-width': ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'],
   'padding-block': ['padding-top', 'padding-bottom'],
   'padding-inline': ['padding-left', 'padding-right'],
   'font-size': ['font-size'],
   'font-weight': ['font-weight'],
   'line-height': ['line-height'],
   'letter-spacing': ['letter-spacing'],
-  gap: ['column-gap'],
+  gap: ['column-gap', 'row-gap'],
   'min-height': ['min-height'],
   'min-width': ['min-width'],
   'box-shadow': ['box-shadow'],

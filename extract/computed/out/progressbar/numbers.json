@@ -17,21 +17,21 @@
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 10,
-    "mintedLeavesFolded": 10
+    "mintedLeavesUnfolded": 9,
+    "mintedLeavesFolded": 9
   },
   "bound": {
-    "cellsChecked": 36,
-    "confirmed": 36,
+    "cellsChecked": 72,
+    "confirmed": 72,
     "contradictions": 0,
     "untriaged": 0
   },
   "minted": {
-    "leaves": 10,
-    "baseBindings": 18,
+    "leaves": 9,
+    "baseBindings": 15,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 17,
+      "uniform": 14,
       "perAxis": 1,
       "perPair": 0,
       "refused": 0

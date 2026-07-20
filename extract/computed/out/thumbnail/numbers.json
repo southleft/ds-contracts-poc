@@ -70,22 +70,22 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 14,
-    "mintedLeavesFolded": 14
+    "mintedLeavesUnfolded": 2,
+    "mintedLeavesFolded": 2
   },
   "bound": {
-    "cellsChecked": 8,
-    "confirmed": 8,
+    "cellsChecked": 20,
+    "confirmed": 20,
     "contradictions": 0,
     "untriaged": 0
   },
   "minted": {
-    "leaves": 14,
-    "baseBindings": 14,
+    "leaves": 2,
+    "baseBindings": 11,
     "stateBindings": 0,
     "byShape": {
       "uniform": 11,
-      "perAxis": 3,
+      "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }

@@ -111,10 +111,7 @@
   "anatomy": {
     "root": {
       "tokens": {
-        "border-radius": "{p.border-radius-100}",
-        "border-bottom-left-radius": "{imported.shared.size-4}",
-        "border-bottom-right-radius": "{imported.shared.size-4}",
-        "border-top-right-radius": "{imported.shared.size-4}"
+        "border-radius": "{p.border-radius-100}"
       },
       "tokensByProp": {
         "prop": "tone",

@@ -87,9 +87,6 @@
         "padding-block": "{p.space-050}",
         "padding-inline": "{p.space-200}",
         "background-color": "{imported.badge.root.background-color.none}",
-        "border-bottom-left-radius": "{imported.shared.size-8}",
-        "border-bottom-right-radius": "{imported.shared.size-8}",
-        "border-top-right-radius": "{imported.shared.size-8}",
         "color": "{imported.badge.root.color.none}",
         "font-weight": "{imported.badge.root.font-weight.none}"
       },
