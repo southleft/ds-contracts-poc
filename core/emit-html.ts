@@ -211,6 +211,25 @@ function componentCss(contract: Contract): string[] {
           });
         }
       }
+    } else if (phs.length === 3) {
+      // Three-axis root token (live-gauntlet class ①: a minted background =
+      // f(type, style, state) — CBDS Chip's root fill): one triple-compound
+      // rule per value combination — mirrors emit-react generateCss.
+      const [pa, pb, pc] = phs;
+      for (const a of enums.get(pa) ?? []) {
+        for (const b of enums.get(pb) ?? []) {
+          for (const c of enums.get(pc) ?? []) {
+            const resolved = refPath
+              .replaceAll(`{${pa}}`, a)
+              .replaceAll(`{${pb}}`, b)
+              .replaceAll(`{${pc}}`, c);
+            pairRules.push({
+              selector: `${enumCls(pa, a)}${enumCls(pb, b)}${enumCls(pc, c)}`,
+              decls: [`${cssProp}: ${cssVar(resolved)}`],
+            });
+          }
+        }
+      }
     }
   }
 

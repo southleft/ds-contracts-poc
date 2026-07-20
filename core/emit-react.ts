@@ -1107,8 +1107,39 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           enumRules.get(cls)!.set(cssProp, cssVar(resolved));
         }
       }
+    } else if (phs.length === 3) {
+      // Three-axis root token (live-gauntlet class ①: a minted background =
+      // f(type, style, state) — CBDS Chip's root fill): one compound-class
+      // rule per value combination, the two-axis projection extended one
+      // axis. The triple compound (.type-brand.style-fill.state-hover)
+      // outranks pair and single classes — deterministic; all three classes
+      // always ride the root.
+      const [pa, pb, pc] = phs;
+      const vsets = phs.map((p) => enums.get(p));
+      if (vsets.some((v) => !v)) {
+        const missing = phs[vsets.findIndex((v) => !v)];
+        errors.push(`${contract.id}: root token "${cssProp}" substitutes unknown enum prop "${missing}"`);
+        continue;
+      }
+      for (const a of vsets[0]!) {
+        for (const b of vsets[1]!) {
+          for (const c of vsets[2]!) {
+            const resolved = refPath
+              .replaceAll(`{${pa}}`, a)
+              .replaceAll(`{${pb}}`, b)
+              .replaceAll(`{${pc}}`, c);
+            if (!checkToken(resolved, `anatomy.root.tokens.${cssProp}`)) continue;
+            for (const single of [`${pa}-${a}`, `${pb}-${b}`, `${pc}-${c}`]) {
+              if (!enumRules.has(single)) enumRules.set(single, new Map());
+            }
+            const cls = `${pa}-${a}.${pb}-${b}.${pc}-${c}`;
+            if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+            enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+          }
+        }
+      }
     } else {
-      errors.push(`${contract.id}: root token "${cssProp}" uses ${phs.length} substitutions (max 2)`);
+      errors.push(`${contract.id}: root token "${cssProp}" uses ${phs.length} substitutions (max 3)`);
     }
   }
 

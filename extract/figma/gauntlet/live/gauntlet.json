@@ -3,7 +3,7 @@
   "generatedBy": "extract/figma/gauntlet/live/gauntlet.ts",
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v16.dump.json",
   "dumpFileVersion": "2374568486037958769",
-  "generatedAt": "2026-07-13"
+  "generatedAt": "2026-07-20"
  },
  "tierTotals": {
   "T2": {
@@ -900,7 +900,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 67,
+   "notes": 69,
    "unbound": 1,
    "minted": 10,
    "tokenRefs": 31,
@@ -1116,7 +1116,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 42,
+   "notes": 43,
    "unbound": 0,
    "minted": 11,
    "tokenRefs": 11,
@@ -1140,7 +1140,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 52,
+   "notes": 53,
    "unbound": 0,
    "minted": 11,
    "tokenRefs": 9,
@@ -1164,7 +1164,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 44,
+   "notes": 45,
    "unbound": 0,
    "minted": 11,
    "tokenRefs": 11,
@@ -1188,7 +1188,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 44,
+   "notes": 45,
    "unbound": 0,
    "minted": 11,
    "tokenRefs": 11,
@@ -1260,9 +1260,9 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 46,
+   "notes": 61,
    "unbound": 0,
-   "minted": 10,
+   "minted": 25,
    "tokenRefs": 16,
    "factsCarriedPct": 100,
    "degradations": 0,
@@ -1332,9 +1332,9 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 40,
+   "notes": 59,
    "unbound": 0,
-   "minted": 8,
+   "minted": 26,
    "tokenRefs": 8,
    "factsCarriedPct": 100,
    "degradations": 0,
@@ -1404,7 +1404,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 19,
+   "notes": 20,
    "unbound": 3,
    "minted": 2,
    "tokenRefs": 6,
@@ -1716,7 +1716,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 49,
+   "notes": 50,
    "unbound": 0,
    "minted": 18,
    "tokenRefs": 14,
@@ -1764,9 +1764,9 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 48,
+   "notes": 65,
    "unbound": 0,
-   "minted": 9,
+   "minted": 25,
    "tokenRefs": 8,
    "factsCarriedPct": 100,
    "degradations": 0,
@@ -1812,10 +1812,10 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 82,
+   "notes": 83,
    "unbound": 0,
-   "minted": 32,
-   "tokenRefs": 18,
+   "minted": 33,
+   "tokenRefs": 19,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 5,
@@ -1836,10 +1836,10 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 99,
+   "notes": 100,
    "unbound": 0,
-   "minted": 33,
-   "tokenRefs": 19,
+   "minted": 34,
+   "tokenRefs": 20,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 6,
@@ -2100,7 +2100,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 73,
+   "notes": 74,
    "unbound": 0,
    "minted": 28,
    "tokenRefs": 19,
@@ -2124,7 +2124,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 119,
+   "notes": 121,
    "unbound": 0,
    "minted": 46,
    "tokenRefs": 29,
@@ -2148,7 +2148,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 78,
+   "notes": 79,
    "unbound": 0,
    "minted": 31,
    "tokenRefs": 21,
@@ -2412,7 +2412,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 50,
+   "notes": 51,
    "unbound": 0,
    "minted": 18,
    "tokenRefs": 14,
@@ -2460,10 +2460,10 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 70,
+   "notes": 71,
    "unbound": 0,
-   "minted": 29,
-   "tokenRefs": 17,
+   "minted": 30,
+   "tokenRefs": 18,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 4,
@@ -2484,10 +2484,10 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 90,
+   "notes": 91,
    "unbound": 0,
-   "minted": 32,
-   "tokenRefs": 17,
+   "minted": 33,
+   "tokenRefs": 18,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 5,
@@ -2580,7 +2580,7 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 82,
+   "notes": 83,
    "unbound": 2,
    "minted": 28,
    "tokenRefs": 18,

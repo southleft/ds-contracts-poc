@@ -1,6 +1,6 @@
 {
-  "passed": 127,
-  "total": 127,
+  "passed": 125,
+  "total": 128,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -164,6 +164,11 @@
     },
     {
       "id": "stylex-token-wrap",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "fill-matrix-depth-mint",
       "claim": "C5-extraction",
       "pass": true
     },
@@ -610,17 +615,20 @@
     {
       "id": "plugin-engine-bundle",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/build-plugin-zip.mjs:241\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes b771be7e1891… (436925 bytes) but the committed receipt records 3cc6e0947dd4… (433399 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/build-plugin-zip.mjs:241:11)\n    at async file:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/plugin-engine-check.mjs:47:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "plugin-update-report",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/build-plugin-zip.mjs:241\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes b771be7e1891… (436925 bytes) but the committed receipt records 3cc6e0947dd4… (433399 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/build-plugin-zip.mjs:241:11)\n    at async file:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/plugin-engine-check.mjs:47:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "plugin-propose-dry-run",
       "claim": "C4-convergence",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/build-plugin-zip.mjs:241\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes b771be7e1891… (436925 bytes) but the committed receipt records 3cc6e0947dd4… (433399 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/build-plugin-zip.mjs:241:11)\n    at async file:///Users/tjpitre/Sites/ds-contracts-poc/.claude/worktrees/agent-a5f25b73fb5d41053/evals/.scratch/scripts/plugin-engine-check.mjs:47:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "wc-emitter-roundtrip",

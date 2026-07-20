@@ -132,19 +132,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (!partVariantProps.has(partName)) partVariantProps.set(partName, new Set());
     partVariantProps.get(partName)!.add(prop);
   };
-  /** Two-axis root tokens: overrides keyed by BOTH enum values (the runtime
-   *  lookup consults `pa-va+pb-vb:part` after the single-axis keys, so the
-   *  pair binding wins). */
+  /** Multi-axis root tokens (two OR three placeholders — the three-axis
+   *  form is live-gauntlet class ①'s minted f(type, style, state) root
+   *  fill): overrides keyed by EVERY participating enum value (the runtime
+   *  lookup consults `pa-va+pb-vb[+pc-vc]:part` after the single-axis keys,
+   *  so the compound binding wins). */
   const variantPairStyles: Record<string, Record<string, StyleRecord>> = {};
   const partVariantPairProps = new Map<string, Set<string>>();
-  const addVariantPair = (
-    pa: string, va: string, pb: string, vb: string, partName: string, decls: StyleRecord,
+  const addVariantCompound = (
+    pairs: Array<[prop: string, value: string]>, partName: string, decls: StyleRecord,
   ) => {
-    const key = `${pa}-${va}+${pb}-${vb}`;
+    const key = pairs.map(([p, v]) => `${p}-${v}`).join('+');
     variantPairStyles[key] ??= {};
     variantPairStyles[key][partName] = { ...(variantPairStyles[key][partName] ?? {}), ...decls };
     if (!partVariantPairProps.has(partName)) partVariantPairProps.set(partName, new Set());
-    partVariantPairProps.get(partName)!.add(`${pa}+${pb}`);
+    partVariantPairProps.get(partName)!.add(pairs.map(([p]) => p).join('+'));
   };
   const enumsByName = new Map(enums.map((p) => [p.name, p.type.enum]));
   const usedAnimations = new Set<string>();
@@ -251,7 +253,22 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         for (const a of enumsByName.get(pa) ?? []) {
           for (const b of enumsByName.get(pb) ?? []) {
             const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
-            addVariantPair(pa, a, pb, b, partName, { [camel(cssProp)]: resolveValue(resolved) });
+            addVariantCompound([[pa, a], [pb, b]], partName, { [camel(cssProp)]: resolveValue(resolved) });
+          }
+        }
+      } else if (phs.length === 3) {
+        // Three-axis root token — mirrors the emit-react/emit-html triple
+        // compound (live-gauntlet class ①).
+        const [pa, pb, pc] = phs;
+        for (const a of enumsByName.get(pa) ?? []) {
+          for (const b of enumsByName.get(pb) ?? []) {
+            for (const c of enumsByName.get(pc) ?? []) {
+              const resolved = refPath
+                .replaceAll(`{${pa}}`, a)
+                .replaceAll(`{${pb}}`, b)
+                .replaceAll(`{${pc}}`, c);
+              addVariantCompound([[pa, a], [pb, b], [pc, c]], partName, { [camel(cssProp)]: resolveValue(resolved) });
+            }
           }
         }
       }
@@ -472,10 +489,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       pieces.push(`...(V[\`${propName}-\${${codePropOf(propName)}}:${partName}\`] ?? {})`);
     }
     for (const pair of partVariantPairProps.get(partName) ?? []) {
-      const [pa, pb] = pair.split('+');
-      pieces.push(
-        `...(V[\`${pa}-\${${codePropOf(pa)}}+${pb}-\${${codePropOf(pb)}}:${partName}\`] ?? {})`,
-      );
+      const props = pair.split('+');
+      const key = props.map((p) => `${p}-\${${codePropOf(p)}}`).join('+');
+      pieces.push(`...(V[\`${key}:${partName}\`] ?? {})`);
     }
     pieces.push(...extra);
     if (isRoot && Object.keys(disabledStyle).length > 0) {

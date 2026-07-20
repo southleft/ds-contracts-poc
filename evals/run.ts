@@ -874,6 +874,25 @@ const cases: Case[] = [
     },
   },
   {
+    // HEAL ROUND, live-gauntlet class ① (fill-matrix-depth-drop): a bound
+    // fill that is a function of TWO OR THREE variant axes with mixed-depth
+    // token paths (CBDS Badge f(type,style), Chip f(type,style,state)) used
+    // to DROP the root paint entirely — Badge diffed 96.85% masked, Chip
+    // 98.58%, the kit's most-drawn primitives rendering as bare text. The
+    // fix routes the named drift into the mint pass (captured-value literal
+    // fidelity, per-variant leaves, axis pair/triple substituted root refs);
+    // the eval replays the committed fixture slice through propose→referee→
+    // all four emitters and pins the never-silent-drop invariant.
+    id: 'fill-matrix-depth-mint',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/fill-matrix-mint-check.ts']);
+      if (r.status !== 0 || !r.out.includes('fill-matrix-mint ok:')) {
+        throw new Error(`fill-matrix-mint check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,

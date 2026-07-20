@@ -24,6 +24,7 @@ import { ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } fro
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
+import { capturedTokensFromDump } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
 // ---------------------------------------------------------------------------
@@ -814,6 +815,14 @@ interface Ctx {
   /** The dump's producer captures `hidden` (dump v1.1+) — see
    *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
   hiddenCaptured?: boolean;
+  /** Captured-variable resolved values (dump v1.4 `_variables`), dot-path →
+   *  CSS value ("bg.brand.default" → "#0e61ba") — the default/consuming
+   *  mode's values, exactly the captured-token layer's entries. Used ONLY to
+   *  route bound-paint drift refusals into the mint pass (live-gauntlet
+   *  class ①): when the bound refs cannot be carried as one binding, every
+   *  variant's ref still resolves here, so the paint survives as per-variant
+   *  minted literals instead of dropping entirely. */
+  capturedValues?: Map<string, string>;
   prefix: string;
   notes: string[];
   unbound: UnboundValue[];
@@ -1045,7 +1054,38 @@ function unifyPaint(
     }
     return u.kind === 'ref' ? u.ref : u.perValue;
   }
-  if (u.kind === 'drift') ctx.notes.push(`${where} ${paintName}: ${u.detail}`);
+  if (u.kind === 'drift') {
+    // Live-gauntlet class ① (fill-matrix-depth-drop): a BOUND paint whose
+    // refs refuse unification (mixed segment depth, or a function of more
+    // than one axis) used to drop entirely — honest in prose, catastrophic
+    // in pixels (Badge/Chip rendered as bare text). When every variant's
+    // paint is bound AND resolves through the captured-variable layer, the
+    // observation routes into the mint pass instead: single-axis functions
+    // mint per-value leaves, axis pairs/triples mint per-combination leaves
+    // with substituted root refs (core/mint-tokens.ts). The observed refs
+    // stay NAMED in the note for the rename/remap pass; a paint that still
+    // fails mint classification lands as the mint pass's own named refusal.
+    // Never a silent paint drop.
+    if (
+      ctx.mint &&
+      mint &&
+      paints.every((p) => p.paint?.var !== undefined)
+    ) {
+      const values = paints.map((p) => ctx.capturedValues?.get(dotPath(p.paint!.var!)));
+      if (values.every((v): v is string => v !== undefined)) {
+        mintObservation(
+          ctx, mint.target, where, mint.cssProperty, 'color',
+          paints.map((p, i) => ({ variant: p.variant, value: values[i] as string })),
+          `${where}|${paintName}`,
+        );
+        ctx.notes.push(
+          `${where} ${paintName}: ${u.detail} — routed to the mint pass at captured-value literal fidelity (per-variant leaves when it classifies: any single axis, or an axis pair/triple on the root; otherwise the mint pass refuses BY NAME below); the observed refs here are the rename targets`,
+        );
+        return undefined;
+      }
+    }
+    ctx.notes.push(`${where} ${paintName}: ${u.detail}`);
+  }
   return undefined;
 }
 
@@ -3841,6 +3881,13 @@ export function proposeFromDump(
      *  default-variant → boolean default TRUE inference; default false
      *  (absence stays "not captured", nothing invented). */
     hiddenCaptured?: boolean;
+    /** Captured-variable resolved values, dot-path → CSS value — build from
+     *  the dump's `_variables` via capturedTokensFromDump (the batch entry
+     *  does this automatically). Only consumed with `mintUnbound: true`: it
+     *  lets a bound paint whose refs refuse unification survive as
+     *  per-variant minted literals (live-gauntlet class ①) instead of
+     *  dropping the channel. Absent → the classic drift note stands. */
+    capturedValues?: Map<string, string>;
   },
 ): FigmaProposalResult {
   const prefix = opts.prefix ?? 'ds';
@@ -3917,6 +3964,7 @@ export function proposeFromDump(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     hiddenCaptured: opts.hiddenCaptured,
+    capturedValues: opts.capturedValues,
     prefix,
     notes: [],
     unbound: [],
@@ -4512,10 +4560,17 @@ export function proposeBatchFromDump(
   const skipped: SkippedSet[] = [];
   const notes: string[] = [];
   const claimedIds = new Map<string, string>(); // contract id → set name
+  // The batch has the whole dump, so the captured-variable value index
+  // (dump v1.4 `_variables` — the class-① mint-routing input) is built here
+  // once unless the caller supplied its own.
+  const capturedValues =
+    opts.capturedValues ??
+    new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
+  const setOpts = { ...opts, capturedValues };
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
-      const proposal = { setName: name, ...proposeFromDump(value, opts) };
+      const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
       const id = (proposal.contract as { id?: unknown }).id;
       if (typeof id === 'string') {
         const holder = claimedIds.get(id);
