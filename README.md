@@ -11,6 +11,8 @@ This repository is the working proof, and the candidate reference implementation
 
 A growing category of tools speaks this vocabulary; this project holds four positions that, together, none of them do. **Bidirectional:** the contract generates *both* the code and the design canvas, and imports from both — round-trips are proven, not promised. **Deterministic:** every artifact is computed from file data and byte-pinned; no LLM guesses in the pipeline (AI is available as an assistant, never as an authority). **Receipted:** anything the pipeline cannot carry is named on screen — a gap is reported, never papered over with a plausible value. **Open:** the schema, the engine, and every instrument that verifies them are in this repository under one permissive license, with no gated tier — because a spec the community can't fully use isn't a spec.
 
+**→ The spec site: [ds-contracts-spec.pages.dev](https://ds-contracts-spec.pages.dev)** — the reference generated from the schema itself, the [two get-started journeys](https://ds-contracts-spec.pages.dev/get-started/) on the published `@ds-contracts/cli`, the [CLI reference](https://ds-contracts-spec.pages.dev/cli/), the [emitter authoring guide](https://ds-contracts-spec.pages.dev/emitters/), and [how it works](https://ds-contracts-spec.pages.dev/how-it-works/) with the engine replayed at build time.
+
 ## Try it without cloning
 
 **→ [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)**
@@ -109,7 +111,7 @@ That honest red state in step ③ is the product. Most design-system tooling sho
 
 ## Try it with your own design system
 
-The model isn't specific to these components, React, or any tool — and you can test that claim on **your** library:
+The model isn't specific to these components, React, or any tool — and you can test that claim on **your** library. No clone required: the published CLI runs the same extraction in your own repo (`npx @ds-contracts/cli init`, then `npx @ds-contracts/cli extract`) — the [two journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/) walk both directions, and [`examples/ci/`](examples/ci/) carries the executed-verbatim CI recipes. From this repository, the same code path is:
 
 ```bash
 npm run extract:code   # your components → schema-valid PROPOSED contracts (API, anatomy, token bindings)

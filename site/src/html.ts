@@ -147,6 +147,7 @@ export function layout(opts: PageOpts, body: string): string {
         <p class="footer__label">Project</p>
         <a href="${REPO_URL}">Repository</a>
         <a href="${PLAYGROUND_URL}">Playground</a>
+        <a href="/contribute/">Contribute</a>
         <a href="${REPO_URL}/blob/main/MILESTONES.md">Milestones</a>
         <a href="${REPO_URL}/blob/main/CHANGELOG.md">Changelog</a>
       </div>
@@ -154,8 +155,15 @@ export function layout(opts: PageOpts, body: string): string {
         <p class="footer__label">Specification</p>
         <a href="/spec/">Reference</a>
         <a href="/how-it-works/">How it works</a>
-        <a href="/contribute/">Contribute</a>
+        <a href="/how-it-works/protocol/">The protocol</a>
         <a href="/spec/versioning/">Versioning</a>
+      </div>
+      <div>
+        <p class="footer__label">Toolchain</p>
+        <a href="/get-started/">Get started — the two journeys</a>
+        <a href="/cli/">CLI reference</a>
+        <a href="/emitters/">Writing an emitter</a>
+        <a href="${REPO_URL}/tree/main/examples/ci">CI recipes</a>
       </div>
       <div>
         <p class="footer__label">License</p>
