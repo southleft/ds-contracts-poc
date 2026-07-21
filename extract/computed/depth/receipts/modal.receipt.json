@@ -1,0 +1,69 @@
+{
+  "generatedBy": "extract/computed/depth/depth-receipt.ts",
+  "browser": "149.0.7827.55",
+  "note": "Modal captured END-TO-END through the PRODUCTION capture + anatomy modules (portalCapture path). Numbers quoted against the spike (extract/depth-spike/receipts/numbers.json).",
+  "stageA_portalCapture": {
+    "production": {
+      "newRoots": 1,
+      "inStage": 0,
+      "portaled": 1,
+      "portalBytes": 3765,
+      "currentReader": {
+        "present": false,
+        "sig": "",
+        "descendantEls": 0
+      },
+      "doubleRunByteIdentical": true
+    },
+    "spike": {
+      "newRoots": 1,
+      "inStage": 0,
+      "portaled": 1,
+      "portalBytes": 4097,
+      "currentReader": {
+        "present": false,
+        "sig": "",
+        "descendantEls": 0
+      }
+    }
+  },
+  "stageB_multiRootAnatomy": {
+    "production": {
+      "realRoots": 2,
+      "rootNames": [
+        "dialog",
+        "backdrop"
+      ],
+      "parts": 21,
+      "depth": 8,
+      "refusals": []
+    },
+    "spike": {
+      "realRoots": 2,
+      "realRootSignatures": [
+        "div|Modal-Dialog",
+        "div|Backdrop"
+      ],
+      "parts": 17,
+      "maxDepth": 7
+    }
+  },
+  "regressionGuard": [
+    {
+      "comp": "Badge",
+      "realRootsIsRoot": true,
+      "anatomyIdentical": true
+    },
+    {
+      "comp": "Button",
+      "realRootsIsRoot": true,
+      "anatomyIdentical": true
+    },
+    {
+      "comp": "Checkbox",
+      "realRootsIsRoot": true,
+      "anatomyIdentical": true
+    }
+  ],
+  "pageErrors": []
+}

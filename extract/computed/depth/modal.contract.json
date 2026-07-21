@@ -1,0 +1,13 @@
+{
+  "id": "ds.modal",
+  "name": "Modal",
+  "version": "1.0.0",
+  "description": "DEPTH BUILD Stage A/B fixture — a minimal, axis-free Modal contract used only to drive portal-aware capture + multi-root anatomy over the real @shopify/polaris Modal. It carries no styling of its own (an empty root); the promoted multi-root anatomy is produced entirely from the computed-floor capture. NOT a census component and NOT wired into extract/computed/configs/polaris.json.",
+  "semantics": { "element": "div" },
+  "props": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@shopify/polaris", "export": "Modal" }
+  }
+}

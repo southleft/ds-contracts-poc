@@ -1,0 +1,41 @@
+{
+  "library": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "framework": "react",
+    "classPrefix": "Polaris-"
+  },
+  "mount": {
+    "imports": [
+      "import { AppProvider } from '@shopify/polaris';",
+      "import en from '@shopify/polaris/locales/en.json';",
+      "import '@shopify/polaris/build/esm/styles.css';"
+    ],
+    "wrapperOpen": "<AppProvider i18n={en}>",
+    "wrapperClose": "</AppProvider>"
+  },
+  "tokens": {
+    "dtcg": ["examples/polaris/tokens/polaris-light.dtcg.json"],
+    "css": "examples/polaris/generated/html/polaris-tokens.css"
+  },
+  "browser": { "viewport": { "width": 900, "height": 1000 }, "deviceScaleFactor": 1, "colorScheme": "light" },
+  "stage": { "width": 320, "height": 96, "padding": 16 },
+  "enumeration": { "cartesianLimit": 512, "unsetLabel": "none" },
+  "components": [
+    {
+      "name": "Modal",
+      "importName": "Modal",
+      "contract": "extract/computed/depth/modal.contract.json",
+      "sampleText": "Body copy inside a sectioned modal.",
+      "axes": [],
+      "portalCapture": true,
+      "callbackProps": ["onClose"],
+      "openDriver": {
+        "open": true,
+        "title": "Order details",
+        "primaryAction": { "content": "Save", "onAction": { "$callback": true } },
+        "secondaryActions": [ { "content": "Cancel", "onAction": { "$callback": true } } ]
+      }
+    }
+  ]
+}

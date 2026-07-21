@@ -98,6 +98,23 @@ export interface ComponentConfig {
   /** Named-cause triage for binding contradictions (the verify.ts curation
    *  discipline: a mismatch without a committed named cause is a defect). */
   triage?: TriageRule[];
+  /** DEPTH BUILD — Stage A (portal-aware capture). When true, the component is
+   *  captured by the whole-document BASELINE-DIFF reader (capturePortalRoots)
+   *  instead of the in-stage `stage.firstElementChild` read: the component's
+   *  DOM contribution is found wherever React put it (portals to document.body
+   *  included). Overlay components (Modal, Popover) require this — their real
+   *  surface renders in a portal the in-stage reader never sees (ADVANCED-PROBE
+   *  N1). Absent/false on the committed 12 → their capture path is unchanged. */
+  portalCapture?: boolean;
+  /** DEPTH BUILD — Stage A (open-driver channel). The props that drive the
+   *  component into its RENDERED / overlay state so its portaled content EXISTS
+   *  at mount: Modal `open`, Popover `active`, plus the JSON content props that
+   *  populate the overlay (title, primaryAction, secondaryActions). Values use
+   *  the same marker grammar as presence props (`{"$callback":true}` → () => {},
+   *  `{"$import":"pkg#Export"}` → the named import); driven on every mount of a
+   *  portalCapture component. This is NOT a slot / render-prop channel (that is
+   *  Stage C `renderChildren`) — only JSON-expressible open/content props. */
+  openDriver?: Record<string, unknown>;
 }
 
 export interface CaptureConfig {
@@ -551,5 +568,239 @@ export async function sweep(
     browserVersion: page.context().browser()!.version(),
     fontChecks,
     pinnedAnimations: [...pinnedAnimations].sort(),
+  };
+}
+
+// ===========================================================================
+// DEPTH BUILD — Stage A: portal-aware, whole-document baseline-diff capture.
+//
+// Ports the PROVEN reader from extract/depth-spike/run.ts into the production
+// module. A portalCapture component is mounted in TWO PHASES on a driver page:
+//   1. baseline — the stage is EMPTY (the provider chrome + stage div exist);
+//      snapshot every element then present.
+//   2. spec — mount the component with its open-driver props; every element
+//      NOT in the baseline whose parent IS in the baseline is a NEW ROOT the
+//      component added, captured wherever React put it (in-stage OR portaled to
+//      document.body), classified by `stage.contains(el)`.
+// The stage is reset to empty BETWEEN combos (R1 mitigation: portaled overlays
+// never stack). This is a SEPARATE path — `sweep()` and the committed 12 are
+// untouched, so their captures stay byte-identical.
+// ===========================================================================
+
+/** A new root the component added, read as a full production CapturedNode
+ *  (same longhand read as the census, plus role/aria-modal for root descent). */
+export interface CapturedRoot {
+  /** 'in-stage' = React rendered it inside the mount stage; 'portaled' = React
+   *  sent it elsewhere in document.body (a portal escape — Modal, Popover). */
+  location: 'in-stage' | 'portaled';
+  /** outerHTML byte length (the portal-DOM-bytes receipt, vs the spike). */
+  bytes: number;
+  node: CapturedNode;
+}
+
+/** What one portalCapture combo yields: the new roots + what the CURRENT
+ *  in-stage floor reader (`stage.firstElementChild`) sees today (the
+ *  absent/wrong-element evidence quoted against the spike). */
+export interface PortalCapture {
+  combo: string;
+  preBytes: number;
+  postBytes: number;
+  currentReader: { present: boolean; sig: string; descendantEls: number };
+  roots: CapturedRoot[];
+}
+
+/** Settle budget after mounting an overlay combo: portal insertion + a
+ *  measure/positioning pass (the spike's 700ms; bounded, deterministic). */
+export const PORTAL_SETTLE_MS = 700;
+const PORTAL_STAGE_ID = 'depth-stage';
+
+/** Build the two-phase driver page for ONE portalCapture component. The page
+ *  exposes `window.__setSpec(bool)`: true mounts the component (open-driver +
+ *  fixed/axis props + callbacks + sampleText children) inside the stage; false
+ *  empties it (baseline / reset-per-combo). Mirrors buildHarnessPage's marker
+ *  grammar ($callback / $import) and provider wrapping. */
+export function buildPortalHarnessPage(
+  harness: string,
+  cfg: CaptureConfig,
+  mount: { comp: ComponentConfig; space: PropSpace },
+): string {
+  const { comp, space } = mount;
+  const st = stageFor(cfg, comp);
+  // props for the (single) base combo + the open-driver props on top.
+  const baseCombo = space.enumeration.combos.find((c) => c.key === space.baseComboKey)!;
+  const props: Record<string, unknown> = { ...comboProps(comp, space, baseCombo), ...(comp.openDriver ?? {}) };
+
+  // $import markers anywhere in the props become real import statements
+  // (resolved at mount by resolveMarkers), exactly as buildHarnessPage does.
+  const extraImports = new Map<string, Set<string>>();
+  const collectImports = (v: unknown): void => {
+    if (v && typeof v === 'object') {
+      const imp = (v as Record<string, unknown>)['$import'];
+      if (typeof imp === 'string') {
+        const [pkg, name] = imp.split('#');
+        (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
+        return;
+      }
+      for (const x of Object.values(v)) collectImports(x);
+    }
+  };
+  collectImports(props);
+  const extraImportLines = [...extraImports.entries()]
+    .sort()
+    .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
+  const extraNames = [...extraImports.values()].flatMap((s) => [...s]).sort();
+
+  const stageJs = `{ display:'flex', alignItems:'flex-start', width:${st.width}, height:${st.height}, padding:${st.padding}, boxSizing:'border-box', background:'#fff', overflow:'hidden' }`;
+  const entry = `import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { ${comp.importName} } from '${cfg.library.package}';
+${extraImportLines.join('\n')}
+${cfg.mount.imports.join('\n')}
+
+const C = ${comp.importName};
+const EXTRA = { ${extraNames.join(', ')} };
+const PROPS = ${JSON.stringify(props)};
+const CALLBACKS = ${JSON.stringify(comp.callbackProps ?? [])};
+const TEXT = ${JSON.stringify(comp.sampleText)};
+function resolveMarkers(v) {
+  if (v && typeof v === 'object') {
+    if (v.$callback === true) return () => {};
+    if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
+    if (Array.isArray(v)) return v.map(resolveMarkers);
+    const out = {};
+    for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
+    return out;
+  }
+  return v;
+}
+const stageStyle = ${stageJs};
+let open = false;
+let root = null;
+function render() {
+  const props = resolveMarkers({ ...PROPS });
+  for (const cb of CALLBACKS) props[cb] = () => {};
+  root.render(
+    ${cfg.mount.wrapperOpen}
+      <div id="${PORTAL_STAGE_ID}" style={stageStyle}>{open ? <C {...props}>{TEXT}</C> : null}</div>
+    ${cfg.mount.wrapperClose}
+  );
+}
+window.__setSpec = (v) => { open = !!v; render(); };
+root = createRoot(document.getElementById('root'));
+window.__setSpec(false);
+`;
+  const pageDir = path.join(harness, 'computed-portal-page');
+  mkdirSync(pageDir, { recursive: true });
+  writeFileSync(path.join(pageDir, 'entry.jsx'), entry);
+  execFileSync(
+    path.join(harness, 'node_modules', '.bin', 'esbuild'),
+    [
+      'computed-portal-page/entry.jsx',
+      '--bundle',
+      '--outfile=computed-portal-page/bundle.js',
+      '--jsx=automatic',
+      '--loader:.json=json',
+      '--loader:.svg=dataurl',
+      '--loader:.png=dataurl',
+      '--log-level=error',
+    ],
+    { cwd: harness },
+  );
+  writeFileSync(
+    path.join(pageDir, 'index.html'),
+    `<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="bundle.css">
+<style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
+</head><body><div id="root"></div>
+<script>document.addEventListener('click', (e) => e.preventDefault(), true);</script>
+<script src="bundle.js"></script></body></html>`,
+  );
+  return path.join(pageDir, 'index.html');
+}
+
+/** Mark the empty-stage baseline: the element set present before the component
+ *  mounts + the pre-mount body byte length. */
+const markBaselineJs = `(() => {
+  window.__depthBaseline = new Set(document.querySelectorAll('*'));
+  window.__preBytes = document.body.innerHTML.length;
+  return window.__depthBaseline.size;
+})()`;
+
+/** The whole-document baseline-diff read (STRING evaluate — the tsx __name
+ *  serialization trap). Reads every new root as a full CapturedNode using the
+ *  SAME longhand set (window.__ALL_PROPS) and ::before/::after rule as the
+ *  census captureJs, plus role/aria-modal for root descent. */
+const capturePortalJs = `(() => {
+  const baseline = window.__depthBaseline;
+  const stage = document.getElementById(${JSON.stringify(PORTAL_STAGE_ID)});
+  const props = window.__ALL_PROPS;
+  const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
+  const readEl = (el) => {
+    const out = {
+      tag: el.tagName.toLowerCase(),
+      classes: [...el.classList],
+      role: el.getAttribute('role'),
+      ariaModal: el.getAttribute('aria-modal'),
+      nodes: [],
+      style: read(getComputedStyle(el)),
+      pseudo: {},
+    };
+    for (const pe of ['::before', '::after']) {
+      const pcs = getComputedStyle(el, pe);
+      const content = pcs.getPropertyValue('content');
+      if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
+    }
+    for (const child of el.childNodes) {
+      if (child.nodeType === 3 && child.textContent.length > 0) out.nodes.push({ t: 'text', v: child.textContent });
+      else if (child.nodeType === 1) out.nodes.push({ t: 'el', el: readEl(child) });
+    }
+    return out;
+  };
+  const all = [...document.querySelectorAll('*')];
+  const newRoots = all.filter((el) => !baseline.has(el) && (!el.parentElement || baseline.has(el.parentElement)));
+  const cur = stage && stage.firstElementChild;
+  const currentReader = cur
+    ? { present: true, sig: cur.tagName.toLowerCase() + '|' + [...cur.classList].filter((c) => !c.includes('--')).map((c) => c.replace(/^Polaris-/, '')).join('.'), descendantEls: cur.querySelectorAll('*').length }
+    : { present: false, sig: '', descendantEls: 0 };
+  return {
+    preBytes: window.__preBytes,
+    postBytes: document.body.innerHTML.length,
+    currentReader,
+    roots: newRoots.map((el) => ({
+      location: stage && stage.contains(el) ? 'in-stage' : 'portaled',
+      bytes: el.outerHTML.length,
+      node: readEl(el),
+    })),
+  };
+})()`;
+
+/** Capture one portalCapture combo end-to-end: reset → baseline → mount →
+ *  settle → whole-document diff → reset (clean state for the next combo). The
+ *  page must already be loaded (buildPortalHarnessPage) and `window.__ALL_PROPS`
+ *  set. Nodes are normalized like the census (styles sorted/rgba-canonical),
+ *  role/aria-modal preserved. */
+export async function capturePortalRoots(
+  page: Page,
+  comboKey: string,
+): Promise<PortalCapture> {
+  await page.evaluate(`window.__setSpec(false)`);
+  await page.waitForTimeout(150);
+  await page.evaluate(markBaselineJs);
+  await page.evaluate(`window.__setSpec(true)`);
+  await page.waitForTimeout(PORTAL_SETTLE_MS);
+  const raw = (await page.evaluate(capturePortalJs)) as {
+    preBytes: number;
+    postBytes: number;
+    currentReader: PortalCapture['currentReader'];
+    roots: Array<{ location: 'in-stage' | 'portaled'; bytes: number; node: CapturedNode }>;
+  };
+  await page.evaluate(`window.__setSpec(false)`); // reset-per-combo (R1)
+  await page.waitForTimeout(120);
+  return {
+    combo: comboKey,
+    preBytes: raw.preBytes,
+    postBytes: raw.postBytes,
+    currentReader: raw.currentReader,
+    roots: raw.roots.map((r) => ({ location: r.location, bytes: r.bytes, node: normalizeNode(r.node) })),
   };
 }
