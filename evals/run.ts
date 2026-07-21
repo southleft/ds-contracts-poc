@@ -4136,6 +4136,31 @@ const cases: Case[] = [
     },
   },
   {
+    // DETERMINISTIC ROUND-TRIP — the whole point: the journey is a chain of
+    // PURE FUNCTIONS with no AI in the conversion. contract → canvas (the
+    // plugin engine) is run TWICE and the built node trees must be
+    // byte-identical (an AI in the loop could not guarantee that); then
+    // canvas → contract (dump + propose) recovers the composite anatomy and the
+    // loop closes; then contract → code (emit-react) emits from the same
+    // contract. The AI only ever BUILDS this tooling — never runs the
+    // conversion. Runs scripts/deterministic-roundtrip.mjs under tsx.
+    id: 'deterministic-roundtrip',
+    claim: 'C1-determinism',
+    run: () => {
+      const r = run(TSX, ['scripts/deterministic-roundtrip.mjs']);
+      if (r.status !== 0) throw new Error(`deterministic-roundtrip failed:\n${r.out.slice(0, 1600)}`);
+      for (const want of [
+        'byte-identical', // contract→canvas run twice, identical → deterministic
+        'round-trip closes: the anatomy that went to canvas came back',
+        'emitted', // contract→code
+        'THE FULL LOOP RAN WITH ZERO AI',
+      ]) {
+        if (!r.out.includes(want)) throw new Error(`deterministic-roundtrip missing "${want}":\n${r.out.slice(0, 1600)}`);
+      }
+      console.log('deterministic-roundtrip: contract→canvas byte-identical across two runs (deterministic), canvas→contract recovers the anatomy, contract→code emits — the full journey is pure functions, no AI in the conversion');
+    },
+  },
+  {
     // PLUGIN UPDATE REPORT (Phase 2, plugin v2) — the Update-library tab's
     // mandatory report+confirm: the EXACT plain-words change report renders
     // BEFORE anything applies (version → version with +prop, new-with-

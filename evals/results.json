@@ -1,6 +1,6 @@
 {
-  "passed": 145,
-  "total": 145,
+  "passed": 146,
+  "total": 146,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -639,6 +639,11 @@
     },
     {
       "id": "plugin-engine-bundle",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "deterministic-roundtrip",
       "claim": "C1-determinism",
       "pass": true
     },
