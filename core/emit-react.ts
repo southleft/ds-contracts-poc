@@ -1035,6 +1035,55 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     return true;
   };
 
+  // MULTI-ROOT composite: there is no single ".root" — each top-level root
+  // and every descendant part compiles to its OWN class (.dialog, .backdrop,
+  // .header …), rendered as siblings by the JSX. Layout is contract-governed
+  // (`layout`); token refs become var(--…); literals/declared facts verbatim.
+  // (Single-root falls through to the untouched N=1 path below.)
+  if (isMultiRoot(contract)) {
+    for (const { name, part } of walkAnatomy(contract)) {
+      if (part.component) continue; // instances style themselves via their own contract
+      const decls: string[] = [];
+      if (isStructural(part)) {
+        decls.push(`display: ${part.layout?.display ?? 'flex'}`);
+        if (part.layout?.direction) decls.push(`flex-direction: ${part.layout.direction}`);
+        if (part.layout?.wrap) decls.push('flex-wrap: wrap');
+        if (part.layout?.align) decls.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
+        if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
+      }
+      if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+      if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
+      if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
+      if (part.shape) decls.push(...shapeCssDecls(part.shape));
+      if (part.element === 'button') {
+        decls.push('appearance: none', 'background: none', 'border: none', 'font: inherit',
+          'color: inherit', 'cursor: pointer');
+      }
+      if (part.icon) {
+        decls.push('display: inline-flex', 'flex-shrink: 0');
+        if (part.icon.size) {
+          lines.push('', `.${name} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
+        }
+      }
+      // Non-substituted token refs → var(--…); single-placeholder refs are a
+      // per-enum descendant idiom that only exists under a single root and do
+      // not occur in captured composites (documented scope).
+      for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
+        const refPath = stripBraces(ref);
+        if (placeholdersIn(refPath).length > 0) continue;
+        if (checkToken(refPath, `anatomy.${name}.tokens.${cssProp}`)) {
+          decls.push(`${cssProp}: ${cssVar(refPath)}`);
+        }
+      }
+      for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
+      for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
+      if (decls.length > 0) {
+        lines.push('', `.${name} {`, ...decls.map((d) => `  ${d};`), '}');
+      }
+    }
+    return lines.join('\n') + '\n';
+  }
+
   // Root: static/layout base + non-substituted tokens, then enum classes,
   // then state rules — same model as v1, layout now contract-governed.
   const root = contract.anatomy.root;
@@ -2059,6 +2108,46 @@ export function generateTsx(
       `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
     );
   };
+
+  // MULTI-ROOT composite (advanced composition). A captured composite (Modal =
+  // {dialog, backdrop}) has >1 top-level root. Per-surface decision (see the
+  // module header of generate-components): the roots render as SIBLINGS inside
+  // a Fragment — NO synthetic wrapper (a Modal's backdrop and dialog are
+  // position-driven siblings, exactly as the real component portals them). The
+  // single-root path below is the N=1 case and is left byte-for-byte untouched.
+  if (isMultiRoot(contract)) {
+    const rootsJsx = topRoots(contract)
+      .map(([n, p]) => renderPart(n, p))
+      .join('\n      ');
+    const mrTypeImports = [meta.attrs, ...(slots.length > 0 ? ['ReactNode'] : [])].join(', ');
+    const mrDepImports = deps.map((depName) => `import { ${depName} } from '../${depName}';`).join('\n');
+    return `/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
+ * Regenerate with: npm run generate
+ *
+ * MULTI-ROOT composite — the anatomy declares ${topRoots(contract).length} top-level roots
+ * (${topRoots(contract).map(([n]) => n).join(', ')}). They render as SIBLINGS in a
+ * Fragment; there is no single wrapping element (a Modal's backdrop + dialog
+ * are position-driven siblings). Each root's class is styles.<rootName>.
+ */
+import type { ${mrTypeImports} } from 'react';
+${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
+
+${iconsConst}export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+${propLines.join('\n')}
+}
+
+/** ${contract.description} */
+export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
+  return (
+    <>
+      ${rootsJsx}
+    </>
+  );
+}
+`;
+  }
 
   const root = contract.anatomy.root;
   const rootInner = root.parts
