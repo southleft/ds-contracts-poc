@@ -32,6 +32,31 @@ interface PrPlan {
   contentBytes: number;
 }
 
+/**
+ * Plain-words change summary for the PR body. If the payload looks like a
+ * contract (has id/name/version), name it and surface its version + any
+ * `changelog` line so a reviewer reads WHAT changed without opening the diff.
+ * Falls back to nothing for non-contract diff reports.
+ */
+export function summarize(parsed: unknown): string {
+  if (!parsed || typeof parsed !== 'object') return '';
+  const c = parsed as Record<string, unknown>;
+  const id = typeof c.id === 'string' ? c.id : undefined;
+  const name = typeof c.name === 'string' ? c.name : undefined;
+  const version = typeof c.version === 'string' ? c.version : undefined;
+  const status = typeof c.status === 'string' ? c.status : undefined;
+  const changelog = typeof c.changelog === 'string' ? c.changelog : undefined;
+  if (!id && !name && !version) return '';
+  const lines: string[] = ['**What changed**', ''];
+  const head = [name ?? id, version ? `v${version}` : undefined, status ? `(${status})` : undefined]
+    .filter(Boolean)
+    .join(' ');
+  if (head) lines.push(`- Contract: ${head}${id && name ? ` — \`${id}\`` : ''}`);
+  if (changelog) lines.push(`- ${changelog}`);
+  lines.push('', '');
+  return lines.join('\n');
+}
+
 export function buildPlan(file: string, repo: string, opts: { base?: string; dir?: string; title?: string }): {
   plan: PrPlan;
   content: string;
@@ -40,9 +65,10 @@ export function buildPlan(file: string, repo: string, opts: { base?: string; dir
     throw new CliUsageError(`--repo must be owner/name, got "${repo}"`);
   }
   let content: string;
+  let parsed: unknown;
   try {
     content = readFileSync(file, 'utf8');
-    JSON.parse(content);
+    parsed = JSON.parse(content);
   } catch (err) {
     throw new CliUsageError(`${file}: not readable JSON — ${String(err instanceof Error ? err.message : err)}`);
   }
@@ -58,7 +84,8 @@ export function buildPlan(file: string, repo: string, opts: { base?: string; dir
     title: opts.title ?? `ds-contracts proposal: ${basename}`,
     body:
       `This PR was opened by \`ds-contracts propose-pr\`.\n\n` +
-      `It carries a proposed contract change as a reviewable diff: \`${destDir}/${basename}\`.\n` +
+      `It carries a proposed contract change as a reviewable diff: \`${destDir}/${basename}\`.\n\n` +
+      summarize(parsed) +
       `Review it like any code change — the contract is the single source of truth; ` +
       `merging it is the adoption decision. Nothing else in the repository is touched.`,
     contentBytes: Buffer.byteLength(content),
@@ -82,6 +109,45 @@ async function gh<T>(token: string, method: string, url: string, body?: unknown)
     throw new Error(`GitHub ${method} ${url} → ${res.status}${detail ? ` (${detail})` : ''}`);
   }
   return (await res.json()) as T;
+}
+
+// GET that treats 404 as "absent" (null) rather than an error — used to look
+// up whether the destination contract already exists on the branch.
+async function ghMaybe<T>(token: string, url: string): Promise<T | null> {
+  const res = await fetch(`${API}${url}`, {
+    method: 'GET',
+    headers: {
+      authorization: `Bearer ${token}`,
+      accept: 'application/vnd.github+json',
+      'user-agent': 'ds-contracts-cli',
+    },
+  });
+  if (res.status === 404) return null;
+  if (!res.ok) {
+    const detail = ((await res.json().catch(() => ({}))) as { message?: string }).message ?? '';
+    throw new Error(`GitHub GET ${url} → ${res.status}${detail ? ` (${detail})` : ''}`);
+  }
+  return (await res.json()) as T;
+}
+
+/**
+ * The PUT /contents body. A promotion usually UPDATES a contract that already
+ * lives in the target repo, and GitHub's contents API refuses to overwrite an
+ * existing blob unless its current `sha` is supplied — so include it whenever
+ * the destination file already exists on the branch, and omit it for a create.
+ * Pure + exported so the create/update shape is pinnable offline.
+ */
+export function contentsPutBody(
+  plan: PrPlan,
+  content: string,
+  existingSha: string | null,
+): { message: string; content: string; branch: string; sha?: string } {
+  return {
+    message: plan.title,
+    content: Buffer.from(content).toString('base64'),
+    branch: plan.branch,
+    ...(existingSha ? { sha: existingSha } : {}),
+  };
 }
 
 export async function proposePrCommand(argv: string[]): Promise<number> {
@@ -128,11 +194,19 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
     ref: `refs/heads/${plan.branch}`,
     sha: ref.object.sha,
   });
-  await gh(token, 'PUT', `/repos/${plan.repo}/contents/${plan.destPath}`, {
-    message: plan.title,
-    content: Buffer.from(content).toString('base64'),
-    branch: plan.branch,
-  });
+  // Upsert: if the contract already exists at destPath on the new branch
+  // (the common promotion case — the repo already carries this contract),
+  // GitHub's contents API requires its current sha to replace it.
+  const existing = await ghMaybe<{ sha: string }>(
+    token,
+    `/repos/${plan.repo}/contents/${plan.destPath}?ref=${encodeURIComponent(plan.branch)}`,
+  );
+  await gh(
+    token,
+    'PUT',
+    `/repos/${plan.repo}/contents/${plan.destPath}`,
+    contentsPutBody(plan, content, existing?.sha ?? null),
+  );
   const pr = await gh<{ html_url: string; number: number }>(token, 'POST', `/repos/${plan.repo}/pulls`, {
     title: plan.title,
     head: plan.branch,
