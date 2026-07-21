@@ -1,0 +1,197 @@
+{
+  "id": "ds.modal",
+  "name": "Modal",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "DEPTH BUILD Stage A/B fixture — a minimal, axis-free Modal contract used only to drive portal-aware capture + multi-root anatomy over the real @shopify/polaris Modal. It carries no styling of its own (an empty root); the promoted multi-root anatomy is produced entirely from the computed-floor capture. NOT a census component and NOT wired into extract/computed/configs/polaris.json.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "dialog": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {
+        "modal-dialog__modal": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Modal-Dialog__Modal — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "box": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "parts": {
+                "inlinegrid": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineGrid — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "parts": {
+                    "inlinestack": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex"
+                      },
+                      "parts": {
+                        "label": {
+                          "element": "h2",
+                          "text": "Order details",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy h2|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block"
+                          }
+                        }
+                      }
+                    },
+                    "button": {
+                      "element": "button",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex"
+                      },
+                      "parts": {
+                        "button__icon": {
+                          "element": "span",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block"
+                          },
+                          "layout": {
+                            "grow": true
+                          },
+                          "parts": {
+                            "icon": {
+                              "element": "span",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "block"
+                              },
+                              "icon": {
+                                "asset": "modal-icon",
+                                "size": 20
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "label-2": {
+              "text": "Body copy inside a sectioned modal.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Modal__Body.Scrollable — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              }
+            },
+            "inlinestack-2": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "box-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "layout": {
+                    "grow": true
+                  },
+                  "parts": {
+                    "inlinestack-3": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex"
+                      },
+                      "parts": {
+                        "box-3": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block"
+                          }
+                        },
+                        "inlinestack-4": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "layout": {
+                            "display": "flex"
+                          },
+                          "parts": {
+                            "button-2": {
+                              "element": "button",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "layout": {
+                                "display": "flex"
+                              },
+                              "parts": {
+                                "label-3": {
+                                  "text": "Cancel",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "declared": {
+                                    "display": "block"
+                                  },
+                                  "layout": {
+                                    "grow": true
+                                  }
+                                }
+                              }
+                            },
+                            "button-3": {
+                              "element": "button",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "layout": {
+                                "display": "flex"
+                              },
+                              "parts": {
+                                "label-4": {
+                                  "text": "Save",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "declared": {
+                                    "display": "block"
+                                  },
+                                  "layout": {
+                                    "grow": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          }
+        }
+      }
+    },
+    "backdrop": {
+      "declared": {
+        "display": "block"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shopify/polaris",
+      "export": "Modal"
+    }
+  }
+}

@@ -29,6 +29,15 @@ export interface CapturedNode {
   nodes: Array<{ t: 'text'; v: string } | { t: 'el'; el: CapturedNode }>;
   style: StyleMap;
   pseudo: Partial<Record<'::before' | '::after', StyleMap>>;
+  /** DEPTH BUILD (Stage A/B, portal-aware capture only): the element's ARIA
+   *  `role` / `aria-modal` attribute, read only on the portal-capture path so
+   *  the root-descent (anatomy.realRootsOf) and multi-root naming can treat a
+   *  `role="dialog"` node as a real root. The census sweep never sets these
+   *  (its read carries no attributes), so they are undefined on every one of
+   *  the committed 12 components — normalizeNode omits undefined keys, keeping
+   *  the census captures byte-identical. */
+  role?: string | null;
+  ariaModal?: string | null;
 }
 
 export interface Capture {
@@ -57,6 +66,10 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     pseudo: Object.fromEntries(
       Object.entries(n.pseudo).map(([k, v]) => [k, norm(v as StyleMap)]),
     ) as CapturedNode['pseudo'],
+    // Portal-capture-only attributes: preserved when present, OMITTED when
+    // undefined (the census case) so committed captures stay byte-identical.
+    ...(n.role !== undefined ? { role: n.role } : {}),
+    ...(n.ariaModal !== undefined ? { ariaModal: n.ariaModal } : {}),
   };
 }
 

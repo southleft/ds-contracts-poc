@@ -42,6 +42,90 @@ export const isSrOnlyStyle = (st: Record<string, string>): boolean =>
   (st['clip-path'] ?? '').startsWith('inset(50%') ||
   (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px');
 
+// ===========================================================================
+// DEPTH BUILD — Stage B: root descent through transparent wrappers (N3 fix).
+//
+// Ported VERBATIM from extract/depth-spike/run.ts (the proven prototype). A
+// portaled new root (Modal's ThemeProvider container) is normalized THROUGH
+// transparent wrappers — display:contents (Fragment idiom), box-less theme /
+// anonymous containers, single-child box-less passthroughs — to the real
+// styled root(s), supporting MULTI-ROOT (a container with several kept
+// children is several real roots: Modal = {dialog, backdrop}).
+//
+// CRITICAL (regression safety): descent is applied ONLY at the seed — to the
+// portaled new root, ONCE — to find the real root(s). It is NEVER run over a
+// census capture: `buildUnion`/`alignSweep`/`sweep` are unchanged, so the 12
+// committed components stay byte-identical. For an HTML-rooted component whose
+// root carries a box (Badge span, Button button, Checkbox label), realRootsOf
+// returns [root] unchanged (the additive/passthrough-only guarantee) — the
+// regression guard (simple-component-anatomy-unchanged) pins exactly that.
+// ---------------------------------------------------------------------------
+/** Direct text runs of a node, concatenated and trimmed. */
+const directText = (n: CapturedNode): string =>
+  n.nodes.filter((c) => c.t === 'text').map((c) => (c as { v: string }).v).join('').trim();
+/** Element children of a node (drops interleaved text runs). */
+const childEls = (n: CapturedNode): CapturedNode[] =>
+  n.nodes.filter((c) => c.t === 'el').map((c) => (c as { el: CapturedNode }).el);
+
+/** A node draws NO box of its own: transparent background, no border, no
+ *  shadow. (Geometry/padding are ignored — a box-less positioning div still
+ *  reserves space but carries no anatomy.) */
+export function isBoxlessNode(n: CapturedNode): boolean {
+  const s = n.style;
+  const bg = s['background-color'];
+  const bgTransparent = !bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent';
+  const noBorder = (s['border-top-width'] === '0px' || !s['border-top-width']) && (s['border-bottom-width'] === '0px' || !s['border-bottom-width']);
+  const noShadow = !s['box-shadow'] || s['box-shadow'] === 'none';
+  return bgTransparent && noBorder && noShadow;
+}
+const isThemeContainerNode = (n: CapturedNode): boolean => n.classes.some((c) => /theme/i.test(c));
+
+/** Normalize a node THROUGH transparent wrappers to its real root(s), WITHOUT
+ *  recursing into KEPT nodes' descendants (their raw children are preserved so
+ *  the census union sees the full styled tree below the real root). Unwraps, in
+ *  order: display:contents (Fragment / passthrough) → its children (multi-root);
+ *  box-less theme/anon container with children → its children (multi-root: the
+ *  Modal portal renders {dialog, backdrop} under one ThemeProvider div);
+ *  single-child box-less passthrough → its child. A node with its own box,
+ *  ARIA role, direct text, or a real class-stem is KEPT with raw children
+ *  intact (the dialog, the backdrop, the list, the activator, the overlay). */
+export function realRootsOf(n: CapturedNode): CapturedNode[] {
+  if (n.style['display'] === 'contents') return childEls(n).flatMap(realRootsOf);
+  if (directText(n).length > 0 || (n.role != null && n.role !== '')) return [n];
+  const boxless = isBoxlessNode(n);
+  const kids = childEls(n);
+  if (boxless && kids.length >= 1 && (stems(n.classes, PORTAL_PREFIX).length === 0 || isThemeContainerNode(n))) {
+    return kids.flatMap(realRootsOf); // anon/theme wrapper → unwrap (multi-root)
+  }
+  if (boxless && kids.length === 1) return realRootsOf(kids[0]); // single-child passthrough
+  return [n];
+}
+/** The library class prefix stripped for the stem test in realRootsOf. The
+ *  descent only needs to know whether a wrapper has ANY own class-stem, so the
+ *  Polaris prefix is used directly (the census carries the real prefix on the
+ *  spike-verified path; a wrong prefix would only over-keep, never over-strip). */
+const PORTAL_PREFIX = 'Polaris-';
+
+/** Descend a captured new-root to its real root(s) (the Stage-B seed). */
+export const descendToRealRoots = (n: CapturedNode): CapturedNode[] => realRootsOf(n);
+
+/** A real root's part-name for a MULTI-root anatomy: role=dialog → 'dialog';
+ *  aria-modal → 'dialog'; else the class-stem's last BEM segment lowercased
+ *  (Polaris-Modal-Dialog → 'dialog', Polaris-Backdrop → 'backdrop'); fallback
+ *  root-<index>. A SINGLE real root always keys as 'root' (byte-identical to
+ *  the single-root promotion — the regression guard depends on this). */
+export function rootPartName(n: CapturedNode, classPrefix: string, index: number, total: number): string {
+  if (total <= 1) return 'root';
+  if (n.role === 'dialog' || n.ariaModal === 'true') return 'dialog';
+  const stem = stems(n.classes, classPrefix)[0];
+  if (stem) {
+    const seg = stem.split('-').filter(Boolean).pop() ?? stem;
+    const name = seg.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+    if (name) return name;
+  }
+  return `root-${index + 1}`;
+}
+
 // ---------------------------------------------------------------------------
 // Union alignment
 // ---------------------------------------------------------------------------
@@ -1452,4 +1536,123 @@ export function promoteAnatomy(
   }
 
   return { contract, assets, consumed, partIndex, receipts, refusals };
+}
+
+// ===========================================================================
+// DEPTH BUILD — Stage B: multi-root union + promotion.
+//
+// The census single-root machinery (buildUnion / nameUnion / promoteAnatomy)
+// is REUSED per real-root index — nothing in those functions changes. A
+// portalCapture component's new roots are descended (descendToRealRoots) to
+// the real root set, then each root gets its own union and its own promoted
+// Part subtree; the subtrees are assembled into a multi-root
+// `anatomy: Record<string, Part>` (already legal in the schema — walkAnatomy
+// iterates every top-level entry). For a SINGLE real root the top-level key is
+// 'root' and the output is byte-identical to promoteAnatomy alone.
+// ===========================================================================
+
+/** Count Part nodes in a promoted subtree (the part-count receipt). */
+export function countParts(p: Part): number {
+  return 1 + Object.values(p.parts ?? {}).reduce((n, c) => n + countParts(c), 0);
+}
+/** Tree depth of a promoted subtree (the depth receipt). */
+export function treeDepthPart(p: Part): number {
+  const kids = Object.values(p.parts ?? {});
+  return kids.length === 0 ? 1 : 1 + Math.max(...kids.map(treeDepthPart));
+}
+
+export interface MultiRootUnion {
+  /** One entry per real root (index-aligned to the base combo's real roots). */
+  roots: Array<{ name: string; union: UnionResult; baseRoot: CapturedNode }>;
+  receipts: string[];
+}
+
+/** Build a per-real-root union set from portal captures. Each combo's new
+ *  roots are descended to their real root(s); root index r gets a single-root
+ *  union built by the census `buildUnion` (+ `nameUnion`). Combos whose real-
+ *  root COUNT differs from the base are excluded with a named receipt (overlay
+ *  multi-combo root alignment is Stage C+; the Stage-B receipt is single-combo). */
+export function buildMultiRootUnion(
+  combos: Array<{ combo: string; interaction: string; newRoots: CapturedNode[] }>,
+  baseKey: string,
+  componentName: string,
+  classPrefix: string,
+): MultiRootUnion {
+  const perCombo = combos.map((c) => ({
+    combo: c.combo,
+    interaction: c.interaction,
+    real: c.newRoots.flatMap(descendToRealRoots),
+  }));
+  const base = perCombo.find((c) => `${c.combo}__${c.interaction}` === baseKey);
+  if (!base) throw new Error(`multi-root union: base ${baseKey} not among combos`);
+  const rootCount = base.real.length;
+  const receipts: string[] = [];
+  const roots: MultiRootUnion['roots'] = [];
+  for (let r = 0; r < rootCount; r++) {
+    const perRootCaptures: Capture[] = perCombo
+      .filter((c) => c.real.length === rootCount)
+      .map((c) => ({ combo: c.combo, interaction: c.interaction, root: c.real[r] }));
+    const baseCap = perRootCaptures.find((c) => `${c.combo}__${c.interaction}` === baseKey)!;
+    const union = buildUnion(perRootCaptures, baseCap, classPrefix);
+    nameUnion(union.entries, componentName, classPrefix);
+    roots.push({ name: rootPartName(base.real[r], classPrefix, r, rootCount), union, baseRoot: base.real[r] });
+    receipts.push(...union.receipts);
+  }
+  for (const c of perCombo) {
+    if (c.real.length !== rootCount) {
+      receipts.push(
+        `multi-root-count-varies: ${c.combo}__${c.interaction} descended to ${c.real.length} real root(s) ≠ base ${rootCount} — combo excluded from the union (named; overlay multi-combo root alignment is Stage C+)`,
+      );
+    }
+  }
+  return { roots, receipts: [...new Set(receipts)] };
+}
+
+export interface MultiRootPromotion {
+  /** Static contract clone with a MULTI-ROOT promoted anatomy. */
+  contract: Contract;
+  assets: Map<string, string>;
+  receipts: string[];
+  refusals: string[];
+  /** Top-level anatomy keys in order (Modal → ['dialog','backdrop']). */
+  rootNames: string[];
+  /** Total promoted parts across every root. */
+  partCount: number;
+  /** Max tree depth across roots. */
+  depth: number;
+}
+
+/** Promote a multi-root union into one contract whose `anatomy` carries one
+ *  top-level Part per real root. Each root reuses the census `promoteAnatomy`
+ *  verbatim; the promoted `root` part is re-keyed by its real-root name
+ *  (dialog / backdrop). A single real root keys as 'root' → byte-identical to
+ *  `promoteAnatomy` alone (the regression-guard invariant). */
+export function promoteMultiRootAnatomy(
+  space: PropSpace,
+  comp: ComponentConfig,
+  multi: MultiRootUnion,
+  componentKebab: string,
+): MultiRootPromotion {
+  const anatomy: Record<string, Part> = {};
+  const assets = new Map<string, string>();
+  const receipts = [...multi.receipts];
+  const refusals: string[] = [];
+  let contract: Contract | null = null;
+  const usedNames = new Map<string, number>();
+  for (const { name, union } of multi.roots) {
+    const p = promoteAnatomy(space, comp, union, componentKebab);
+    if (!contract) contract = p.contract;
+    for (const [k, v] of p.assets) assets.set(k, v);
+    receipts.push(...p.receipts);
+    refusals.push(...p.refusals);
+    const n = usedNames.get(name) ?? 0;
+    usedNames.set(name, n + 1);
+    anatomy[n > 0 ? `${name}-${n + 1}` : name] = p.contract.anatomy['root'];
+  }
+  contract = contract ?? (structuredClone(space.contract) as Contract);
+  contract.anatomy = anatomy;
+  const rootNames = Object.keys(anatomy);
+  const partCount = Object.values(anatomy).reduce((s, part) => s + countParts(part), 0);
+  const depth = rootNames.length ? Math.max(...Object.values(anatomy).map(treeDepthPart)) : 0;
+  return { contract, assets, receipts: [...new Set(receipts)], refusals, rootNames, partCount, depth };
 }
