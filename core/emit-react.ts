@@ -94,6 +94,32 @@ export function rootElementsOf(contract: Contract): string[] {
   return [contract.semantics.element, ...(ebp ? Object.values(ebp.map) : [])];
 }
 
+// ---------------------------------------------------------------------------
+// Multi-root anatomy (advanced composition). The schema has ALWAYS modeled
+// anatomy as Record<string, Part> (a map of top-level roots); the single-root
+// case — one entry named "root" — is the N=1 special case, not a different
+// shape. A captured composite (a Modal = {dialog, backdrop}) carries >1
+// top-level entry. These helpers name the general case so the emitters and
+// validator stop hardcoding `contract.anatomy.root`.
+//
+// INVARIANT: for every single-root contract these are byte-for-byte the old
+// behavior — `topRoots` yields exactly [["root", root]] and `isMultiRoot`
+// is false, so the untouched single-root code paths run verbatim.
+// ---------------------------------------------------------------------------
+
+/** Every top-level anatomy entry (root), in declaration order. */
+export const topRoots = (contract: Contract): Array<[string, Part]> =>
+  Object.entries(contract.anatomy);
+
+/** The names of the top-level roots — the set a single-root contract reduces
+ *  to `{ "root" }`. */
+export const topRootNames = (contract: Contract): Set<string> =>
+  new Set(topRoots(contract).map(([n]) => n));
+
+/** True when the contract declares MORE THAN ONE top-level root (a captured
+ *  composite). A single-root contract is false. */
+export const isMultiRoot = (contract: Contract): boolean => topRoots(contract).length > 1;
+
 /** v7 overlay: placement → inset declarations. The overlay part is
  *  position:absolute against the root (which becomes position:relative). */
 const OVERLAY_CSS: Record<string, string[]> = {
@@ -274,8 +300,9 @@ export function validateContract(
         );
       }
     }
-    if (p[0] !== 'root' || p.length > 1) {
-      // Nested parts support single-placeholder substitutions (v4) — emitted
+    if (p.length > 1) {
+      // Nested parts (path.length > 1 — NOT a top-level root, single- or
+      // multi-root) support single-placeholder substitutions (v4) — emitted
       // as descendant rules under the root's enum class. Two placeholders on
       // one nested token stays unsupported.
       for (const ref of Object.values(part.tokens ?? {})) {
@@ -500,7 +527,7 @@ export function validateContract(
     // slot content is the consumer's), and channels outside the color-kind
     // whitelist refuse by name. The ROOT's states keep their own path (full
     // vocabulary, validated in generateCss).
-    if (part.states && !(p[0] === 'root' && p.length === 1)) {
+    if (part.states && p.length > 1) {
       if (part.component) {
         errors.push(`${contract.id}: part "${name}" is a component instance — states cannot restyle it (the child contract owns its styling)`);
       }
@@ -528,7 +555,7 @@ export function validateContract(
     // grow/overlap are in-flow sizing semantics, and the root cannot attach
     // to its own edge. Minimal, named refusals.
     if (part.overlay) {
-      if (p[0] === 'root' && p.length === 1) {
+      if (p.length === 1) {
         errors.push(`${contract.id}: the root part cannot be an overlay — overlays attach to the root`);
       }
       if (part.layout?.grow) {
@@ -664,7 +691,15 @@ export function validateContract(
       }
     }
   }
-  if (!contract.anatomy.root) errors.push(`${contract.id}: anatomy must have a "root" part`);
+  // Multi-root: an anatomy is ≥1 top-level root. A single-root contract's one
+  // entry is named "root"; a captured composite (Modal = {dialog, backdrop})
+  // carries several. Each root's subtree is validated by the SAME rules above
+  // (this walk already visits every root via walkAnatomy). Only an EMPTY
+  // anatomy is refused. (A single-root `{root}` still validates exactly as
+  // before: it has one top-level entry, so this passes identically.)
+  if (topRoots(contract).length === 0) {
+    errors.push(`${contract.id}: anatomy must have at least one top-level (root) part`);
+  }
 
   // Identity + consistency gates (added after an adversarial refusal sweep
   // found these invalid states passing silently — C2 means NAMED refusal).
@@ -780,7 +815,7 @@ export function validateContract(
     const trigger = partByName.get(ev.trigger);
     if (!trigger) {
       errors.push(`${contract.id}: event "${ev.name}" trigger references unknown part "${ev.trigger}"`);
-    } else if (ev.trigger !== 'root' && trigger.element !== 'button' && !isNativeCheckablePart(trigger)) {
+    } else if (!topRootNames(contract).has(ev.trigger) && trigger.element !== 'button' && !isNativeCheckablePart(trigger)) {
       // Interactivity must be honest: a clickable part is a <button> — or a
       // native checkable input (input[type=checkbox|radio]) — so keyboard
       // activation comes from the platform, not a bolted-on handler.
@@ -821,14 +856,19 @@ export function validateContract(
         `${contract.id}: figmaStatePreviews is set but the contract declares no interaction states — nothing to preview`,
       );
     }
-    const rootStates = contract.anatomy.root?.states ?? {};
     for (const state of contract.states) {
-      // v13: a state carried ONLY by part-level overrides still previews —
-      // the compile applies part states inside the State-axis variants.
-      const partCarries = walkAnatomy(contract).some(
-        (w) => !(w.path[0] === 'root' && w.path.length === 1) && Object.keys(w.part.states?.[state] ?? {}).length > 0,
+      // A state override may sit on ANY top-level root (single-root: the sole
+      // "root"; multi-root: e.g. dialog/backdrop) …
+      const rootCarries = topRoots(contract).some(
+        ([, rp]) => Object.keys(rp.states?.[state] ?? {}).length > 0,
       );
-      if (Object.keys(rootStates[state] ?? {}).length === 0 && !partCarries) {
+      // v13: … or a state carried ONLY by part-level overrides (path.length >
+      // 1) still previews — the compile applies part states inside the
+      // State-axis variants.
+      const partCarries = walkAnatomy(contract).some(
+        (w) => w.path.length > 1 && Object.keys(w.part.states?.[state] ?? {}).length > 0,
+      );
+      if (!rootCarries && !partCarries) {
         errors.push(
           `${contract.id}: figmaStatePreviews — state "${state}" declares no token overrides on anatomy.root.states (or any part's states), so its preview variant would render identically to Default`,
         );
@@ -910,9 +950,14 @@ export function validateContract(
     for (const [k, role] of Object.entries(contract.semantics.roleByProp?.map ?? {})) {
       if (violates(role, rootEl)) rootClaims.push({ role, site: `semantics.roleByProp["${k}"]` });
     }
-    const rootAttrsRole = contract.anatomy.root?.attrs?.role;
-    if (violates(rootAttrsRole, rootEl)) {
-      rootClaims.push({ role: rootAttrsRole!, site: 'anatomy.root attrs.role' });
+    // attrs.role on EACH top-level root (single-root: the sole "root", site
+    // "anatomy.root attrs.role" — byte-identical; multi-root: one claim per
+    // root, site "anatomy.<name> attrs.role").
+    for (const [rname, rpart] of topRoots(contract)) {
+      const rAttrsRole = rpart.attrs?.role;
+      if (violates(rAttrsRole, rootEl)) {
+        rootClaims.push({ role: rAttrsRole!, site: `anatomy.${rname} attrs.role` });
+      }
     }
     if (!declared(contract.semantics.roleException)) {
       for (const c of rootClaims) refuse(c.role, rootEl, c.site, 'semantics.roleException');
@@ -926,7 +971,7 @@ export function validateContract(
     // part's own roleException. Element default mirrors the emitters:
     // span for content/text leaves, div otherwise.
     for (const { name, part, path: p } of walkAnatomy(contract)) {
-      if (p[0] === 'root' && p.length === 1) continue;
+      if (p.length === 1) continue; // top-level roots handled above
       const el = part.element ?? (part.content || part.text !== undefined ? 'span' : 'div');
       const partRole = part.attrs?.role;
       const isViolation = violates(partRole, el);
