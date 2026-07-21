@@ -40,6 +40,13 @@
   flex-direction: column;
 }
 
+.tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .footer {
   display: flex;
   flex-direction: row;

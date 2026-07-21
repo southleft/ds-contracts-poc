@@ -33,7 +33,9 @@ export function CompositeModal({ items, className, children, ...rest }: Composit
 </div>
 <div className={styles.body}>
 <Card title="Order summary" />
+<div className={styles.tags}>
 {items?.map((item, index) => (<Badge key={index}>{item.children}</Badge>))}
+</div>
 </div>
 <div className={styles.footer}>
 <button className={styles.cancel} type="button">

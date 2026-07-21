@@ -42,16 +42,22 @@
               "component": { "id": "ds.card", "props": { "title": "Order summary" } }
             },
             "tags": {
-              "description": "The dynamic child-collection channel — a ds.badge template repeated over the arrayOf `items` prop.",
-              "repeat": {
-                "itemsProp": "items",
-                "sample": [
-                  { "children": "Shipping" },
-                  { "children": "Gift wrap" },
-                  { "children": "Priority" }
-                ]
-              },
-              "component": { "id": "ds.badge" }
+              "description": "A row container for the dynamic child-collection — badges hug and wrap as a horizontal pill row (a designer would never stack them full-width).",
+              "layout": { "display": "flex", "direction": "row", "wrap": true, "align": "center" },
+              "parts": {
+                "tag": {
+                  "description": "The dynamic child-collection channel — a ds.badge template repeated over the arrayOf `items` prop.",
+                  "repeat": {
+                    "itemsProp": "items",
+                    "sample": [
+                      { "children": "Shipping" },
+                      { "children": "Gift wrap" },
+                      { "children": "Priority" }
+                    ]
+                  },
+                  "component": { "id": "ds.badge" }
+                }
+              }
             }
           }
         },

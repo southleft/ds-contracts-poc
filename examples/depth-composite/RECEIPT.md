@@ -34,10 +34,10 @@ untouched path — golden output is byte-for-byte unchanged.
 |---|---|---|
 | emit-react | ✓ | rendered a real modal whose body holds a composed <Card> + the live items array mapped to 3 <Badge> children (order preserved), sibling backdrop, both root classes, no NaN |
 | emit-react-inline | ✓ | resolved-literal variant renders the composed card + the observed sample as 3 fixed Badge instances, no NaN |
-| emit-html | ✓ | static markup carries the composed card + 3 sampled badges inside the dialog body, backdrop sibling, no React syntax |
-| emit-figma-script (referee) | ✓ | COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + 3 repeated tag instances [summary, tags, tags 2, tags 3] |
+| emit-html | ✓ | static markup carries the composed card + a composite-modal__tags row of 3 sampled badges inside the dialog body, backdrop sibling, no React syntax |
+| emit-figma-script (referee) | ✓ | COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + a tags row of 3 repeated tag instances [summary, tags] |
 | emit-figma-script (headless) | ✓ | seeded token variables (buildTokensScript) then synced deps [Avatar → Button → Badge → Card] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built |
-| anatomy-parity (code ≡ canvas) | ✓ | built COMPONENT anatomy lines up with the contract PART-FOR-PART (13 parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is 3 repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots |
+| anatomy-parity (code ≡ canvas) | ✓ | built COMPONENT anatomy lines up with the contract PART-FOR-PART (14 parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is a row FRAME holding 3 repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots |
 
 ## Emitted artifacts (committed as receipts)
 

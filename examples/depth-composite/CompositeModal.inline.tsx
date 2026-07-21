@@ -42,6 +42,12 @@ const S: Record<string, CSSProperties> = {
     "display": "flex",
     "flexDirection": "column"
   },
+  "tags": {
+    "display": "flex",
+    "flexDirection": "row",
+    "flexWrap": "wrap",
+    "alignItems": "center"
+  },
   "footer": {
     "display": "flex",
     "flexDirection": "row",
@@ -84,9 +90,11 @@ export function CompositeModal({ items, style, children, ...rest }: CompositeMod
 </div>
 <div style={{ ...S.body }}>
 <Card title="Order summary" />
+<div style={{ ...S.tags }}>
 <Badge>Shipping</Badge>
 <Badge>Gift wrap</Badge>
 <Badge>Priority</Badge>
+</div>
 </div>
 <div style={{ ...S.footer }}>
 <button style={{ ...S.cancel }} type="button">

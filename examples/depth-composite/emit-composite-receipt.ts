@@ -216,10 +216,12 @@ writeFileSync(path.join(HERE, `${name}.html.css`), htmlCss);
     html.includes(`class="${k}__backdrop"`) &&
     html.includes('class="card"') &&
     html.includes('Order summary') &&
-    SAMPLE.every((t) => html.includes(`role="status">\n          ${t}`)) &&
+    html.includes(`class="${k}__tags"`) && // the badges live in a row wrapper
+    // whitespace-tolerant: each sampled badge renders as a role="status" span
+    SAMPLE.every((t) => new RegExp(`role="status">\\s*${t.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}\\s*</span>`).test(html)) &&
     !/className=|forwardRef|\{children\}/.test(html);
   check('emit-html', ok,
-    `static markup carries the composed card + ${SAMPLE.length} sampled badges inside the dialog body, backdrop sibling, no React syntax`);
+    `static markup carries the composed card + a ${k}__tags row of ${SAMPLE.length} sampled badges inside the dialog body, backdrop sibling, no React syntax`);
 }
 
 // ---------------------------------------------------------------------------
@@ -237,10 +239,14 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
     const roots = (spec?.children ?? []) as Array<{ name: string; children?: Array<{ name: string }> }>;
     const dialog = roots.find((r) => r.name === 'dialog');
     const body = (dialog?.children ?? []).find((c: { name: string }) => c.name === 'body') as
-      | { children?: Array<{ name: string; type?: string }> }
+      | { children?: Array<{ name: string; type?: string; children?: Array<{ name: string }> }> }
       | undefined;
     bodyKids = (body?.children ?? []).map((c) => c.name);
-    const tagInstances = bodyKids.filter((n) => n === 'tags' || /^tags \d+$/.test(n));
+    // body now holds [summary, tags(row)]; the repeated tag instances live INSIDE
+    // the tags row (a designer's pill row), not directly in body.
+    const tagsRow = (body?.children ?? []).find((c) => c.name === 'tags');
+    const tagKids = ((tagsRow as { children?: Array<{ name: string }> } | undefined)?.children ?? []).map((c) => c.name);
+    const tagInstances = tagKids.filter((n) => n === 'tag' || /^tag \d+$/.test(n));
     refereeOk =
       comp.setName === name &&
       comp.contractId === contract.id &&
@@ -248,10 +254,11 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
       roots.some((r) => r.name === 'dialog') &&
       roots.some((r) => r.name === 'backdrop') &&
       bodyKids.includes('summary') &&
+      !!tagsRow &&
       tagInstances.length === SAMPLE.length;
   }
   check('emit-figma-script (referee)', refereeOk,
-    `COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + ${SAMPLE.length} repeated tag instances [${bodyKids.join(', ')}]`);
+    `COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + a tags row of ${SAMPLE.length} repeated tag instances [${bodyKids.join(', ')}]`);
 
   // A composite that EMBEDS child instances (ds.card, ds.badge, and ds.card's
   // own ds.avatar) needs those component sets to already exist in the file when
@@ -360,16 +367,20 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
     }
     const body = childNamed(childNamed(built, 'dialog'), 'body');
     const summary = childNamed(body, 'summary');
-    const tagInstances = (body?.children ?? []).filter((c) => base(c.name) === 'tags' && c.type === 'INSTANCE');
+    // body.tags is a ROW container (FRAME); the repeated ds.badge instances are
+    // its `tag` children (a designer's pill row, not stacked full-width bars).
+    const tagsRow = childNamed(body, 'tags');
+    const tagInstances = (tagsRow?.children ?? []).filter((c) => base(c.name) === 'tag' && c.type === 'INSTANCE');
     const topRootNames = (built?.children ?? []).map((c) => c.name ?? '');
     parityOk =
       !!built && missing.length === 0 &&
       summary?.type === 'INSTANCE' &&
+      tagsRow?.type === 'FRAME' &&
       tagInstances.length === SAMPLE.length &&
       topRootNames.includes('dialog') && topRootNames.includes('backdrop');
     parityNote = parityOk
-      ? `built COMPONENT anatomy lines up with the contract PART-FOR-PART (${partPaths.length} parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is ${tagInstances.length} repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots`
-      : `MISMATCH — built=${!!built}; missing [${missing.join('; ')}]; summary=${summary?.type ?? 'absent'}; tagInstances=${tagInstances.length}/${SAMPLE.length}; roots=[${topRootNames.join(', ')}]`;
+      ? `built COMPONENT anatomy lines up with the contract PART-FOR-PART (${partPaths.length} parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is a row FRAME holding ${tagInstances.length} repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots`
+      : `MISMATCH — built=${!!built}; missing [${missing.join('; ')}]; summary=${summary?.type ?? 'absent'}; tagsRow=${tagsRow?.type ?? 'absent'}; tagInstances=${tagInstances.length}/${SAMPLE.length}; roots=[${topRootNames.join(', ')}]`;
   } catch (e) {
     runNote = String(e instanceof Error ? e.message : e);
   }

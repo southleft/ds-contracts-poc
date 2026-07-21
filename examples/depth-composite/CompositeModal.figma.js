@@ -82,28 +82,40 @@ const COMPONENTS = [
                       }
                     },
                     {
-                      "type": "instance",
+                      "type": "frame",
                       "name": "tags",
-                      "dep": "Badge",
-                      "depProps": {
-                        "Label": "Shipping"
-                      }
-                    },
-                    {
-                      "type": "instance",
-                      "name": "tags 2",
-                      "dep": "Badge",
-                      "depProps": {
-                        "Label": "Gift wrap"
-                      }
-                    },
-                    {
-                      "type": "instance",
-                      "name": "tags 3",
-                      "dep": "Badge",
-                      "depProps": {
-                        "Label": "Priority"
-                      }
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "CENTER",
+                        "wrap": true
+                      },
+                      "children": [
+                        {
+                          "type": "instance",
+                          "name": "tag",
+                          "dep": "Badge",
+                          "depProps": {
+                            "Label": "Shipping"
+                          }
+                        },
+                        {
+                          "type": "instance",
+                          "name": "tag 2",
+                          "dep": "Badge",
+                          "depProps": {
+                            "Label": "Gift wrap"
+                          }
+                        },
+                        {
+                          "type": "instance",
+                          "name": "tag 3",
+                          "dep": "Badge",
+                          "depProps": {
+                            "Label": "Priority"
+                          }
+                        }
+                      ]
                     }
                   ]
                 },
@@ -308,6 +320,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap) node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   if (node.type === 'FRAME') node.fills = [];
