@@ -1,6 +1,6 @@
 {
-  "passed": 140,
-  "total": 140,
+  "passed": 141,
+  "total": 141,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -609,6 +609,11 @@
     },
     {
       "id": "cli-smoke",
+      "claim": "C7-cli",
+      "pass": true
+    },
+    {
+      "id": "propose-pr-live-shape",
       "claim": "C7-cli",
       "pass": true
     },

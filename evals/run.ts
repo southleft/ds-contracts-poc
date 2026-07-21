@@ -34,6 +34,7 @@ import {
   type Contract as SchemaContract,
   type Part as SchemaPart,
 } from '../scripts/contract-schema.js';
+import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
 import { validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
@@ -3603,6 +3604,56 @@ const cases: Case[] = [
       }
 
       console.log('cli-smoke: init → extract(5+2 named) → generate/figma byte-stable ×2 → diff 0/1 → propose-pr dry-run plan → lazy computed seam intact');
+    },
+  },
+  {
+    // PHASE 1 (@ds-contracts/cli) — propose-pr LIVE-PATH shape pin. The
+    // dry-run plan is pinned above; this pins the two request shapes the live
+    // GitHub path builds, which dry-run never exercised. A promotion normally
+    // UPDATES a contract the target repo already carries, and PUT /contents
+    // REFUSES to overwrite an existing blob without its current sha — the
+    // first live run 422'd on exactly this ("\"sha\" wasn't supplied"). So
+    // contentsPutBody must carry sha when the file exists (update) and omit it
+    // when it doesn't (create); and the PR body must summarize the change in
+    // plain words. All pure + offline — the actual PR open is a network+auth
+    // receipt (examples/ci/PROPOSE-PR-LIVE.md), not an eval.
+    id: 'propose-pr-live-shape',
+    claim: 'C7-cli',
+    run: () => {
+      const { plan, content } = proposePrBuildPlan(
+        path.join(ROOT, 'examples', 'polaris', 'contracts', 'badge.contract.json'),
+        'tpitre/ds-contracts-pr-test',
+        {},
+      );
+
+      // UPDATE: existing blob sha present → PUT body carries it verbatim.
+      const upd = contentsPutBody(plan, content, 'abc123def456');
+      if (upd.sha !== 'abc123def456') {
+        throw new Error('contentsPutBody(update) must include the existing blob sha (else PUT /contents 422s on an existing contract)');
+      }
+      if (upd.branch !== plan.branch || upd.message !== plan.title) {
+        throw new Error('contentsPutBody must commit to the proposal branch with the plan title');
+      }
+      if (Buffer.from(upd.content, 'base64').toString('utf8') !== content) {
+        throw new Error('contentsPutBody must base64-encode the contract verbatim');
+      }
+
+      // CREATE: no existing sha → PUT body omits sha entirely (create path).
+      const cre = contentsPutBody(plan, content, null);
+      if ('sha' in cre) {
+        throw new Error('contentsPutBody(create) must omit sha — sending an empty/absent sha on a fresh path is rejected');
+      }
+
+      // PR body carries a plain-words change summary read from the contract.
+      const summary = proposePrSummarize(JSON.parse(content));
+      if (!summary.includes('What changed') || !summary.includes('Badge')) {
+        throw new Error(`propose-pr body must summarize the change in plain words:\n${summary}`);
+      }
+      if (!plan.body.includes('What changed')) {
+        throw new Error('buildPlan body must embed the plain-words summary');
+      }
+
+      console.log('propose-pr-live-shape: PUT body carries sha on update, omits it on create, base64 verbatim; PR body summarizes the change (live open is a network receipt)');
     },
   },
   {
