@@ -48,7 +48,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { validateContract } from './emit-react.js';
+import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
 
 export interface LayoutSpec {
@@ -2122,6 +2122,34 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       if (a >= 1) col = col * values.length + combo[a];
     }
     const row = combo[0] ?? 0;
+
+    // MULTI-ROOT composite: a Figma component/variant is ONE frame, so the N
+    // anatomy roots (Modal = {dialog, backdrop}) become CHILDREN of a SYNTHETIC
+    // container frame — the only place a wrapper is introduced, and ONLY for
+    // multi-root. A single-root contract NEVER enters this branch, so its
+    // variant frame IS the root (byte-identical — no synthetic wrapper).
+    if (isMultiRoot(contract)) {
+      // The container is a plain vertical auto-layout frame with no styling of
+      // its own; each top-level root compiles through the same partToSpecs
+      // path as any child part and is appended as a sibling child.
+      const container: Part = { layout: { display: 'flex', direction: 'column' } } as Part;
+      const rootSpec: NodeSpec = {
+        type: 'root',
+        name: nameParts.join(', ') || contract.name,
+        layout: layoutSpec(container, true, subst),
+      };
+      const ctx = applyStyling(rootSpec, container, subst, {});
+      rootSpec.children = topRoots(contract).flatMap(([childName, child]) =>
+        partToSpecs(childName, child, contract, byId, ctx, subst),
+      );
+      const collectStylesMR = (s: NodeSpec) => {
+        if (s.fontStyle) fontStyles.add(s.fontStyle);
+        (s.children ?? []).forEach(collectStylesMR);
+      };
+      collectStylesMR(rootSpec);
+      variants.push({ name: rootSpec.name, row, col, spec: rootSpec });
+      continue;
+    }
 
     const rootSpec: NodeSpec = {
       type: 'root',
