@@ -1,6 +1,6 @@
 {
-  "passed": 137,
-  "total": 137,
+  "passed": 140,
+  "total": 140,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -685,6 +685,21 @@
     {
       "id": "optional-adornment-gating-general-fixture",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "portal-capture-modal",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "multi-root-anatomy",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "simple-component-anatomy-unchanged",
+      "claim": "C1-determinism",
       "pass": true
     }
   ]
