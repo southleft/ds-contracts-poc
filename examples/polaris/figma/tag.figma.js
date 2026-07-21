@@ -145,8 +145,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "bindings": {
@@ -317,8 +317,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -486,8 +486,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "bindings": {
@@ -658,8 +658,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -828,8 +828,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "bindings": {
@@ -1003,8 +1003,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -1173,8 +1173,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "bindings": {
@@ -1348,8 +1348,8 @@ const COMPONENTS = [
               "name": "button",
               "layout": {
                 "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "primary": "CENTER",
+                "counter": "CENTER"
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -1685,7 +1685,16 @@ function applyOverlay(parent, childNode, childSpec) {
 function applyInsetOverlay(parent, childNode, childSpec) {
   if (!childSpec.insetOverlay) return;
   try {
-    parent.insertChild(0, childNode);
+    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
+    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
+    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
+    // check, the RadioButton dot, a remove button) must stay ON TOP at its
+    // natural post-backdrop index — else the opaque backdrop sibling paints
+    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
+    // previously hand-corrected on canvas each re-amend).
+    if (!childNode.children || childNode.children.length === 0) {
+      parent.insertChild(0, childNode);
+    }
     childNode.layoutPositioning = 'ABSOLUTE';
     childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
     const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };

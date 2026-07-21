@@ -2006,6 +2006,15 @@ function partToSpecInner(
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
   if (isReversed(part, subst)) spec.children.reverse();
+  // Round 5f (CLASS 3): an inset-0 overlay that CONTAINS content — the
+  // Checkbox check glyph, the RadioButton dot — must CENTER it in the control
+  // box. The captured display:block carried no centering, so the glyph pinned
+  // top-left (owner: the check glyph is not centered vertically/horizontally).
+  // An empty backdrop overlay (TextField backdrop) has no children and is
+  // unaffected — byte-neutral for those.
+  if (spec.insetOverlay && spec.layout && spec.children.length > 0) {
+    spec.layout = { ...spec.layout, primary: 'CENTER', counter: 'CENTER' };
+  }
   applyVisibleWhen(spec, part, contract);
   return spec;
 }
@@ -2769,7 +2778,16 @@ const insetOverlayRuntime = (has: boolean): string =>
 function applyInsetOverlay(parent, childNode, childSpec) {
   if (!childSpec.insetOverlay) return;
   try {
-    parent.insertChild(0, childNode);
+    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
+    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
+    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
+    // check, the RadioButton dot, a remove button) must stay ON TOP at its
+    // natural post-backdrop index — else the opaque backdrop sibling paints
+    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
+    // previously hand-corrected on canvas each re-amend).
+    if (!childNode.children || childNode.children.length === 0) {
+      parent.insertChild(0, childNode);
+    }
     childNode.layoutPositioning = 'ABSOLUTE';
     childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
     const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };

@@ -1,6 +1,6 @@
 {
-  "passed": 136,
-  "total": 136,
+  "passed": 137,
+  "total": 137,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -674,6 +674,11 @@
     },
     {
       "id": "amend-margin-box",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "checkbox-center",
       "claim": "C3-detection",
       "pass": true
     },

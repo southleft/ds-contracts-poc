@@ -2970,6 +2970,17 @@ const cases: Case[] = [
       if (!shapeBody.includes('[boundPaint(spec.fill, node)]') || !/:\s*\[\]/.test(shapeBody)) {
         throw new Error('shape branch must bind spec.fill and clear ([]) the default paint when no fill/literal is carried');
       }
+      // Round 5f (B5E finding 3): applyInsetOverlay lowers ONLY childless
+      // BACKDROP overlays to index 0; a CONTENT overlay (the check glyph) stays
+      // ON TOP — else the opaque backdrop paints over the glyph (z-order fix at
+      // source, not a per-session canvas correction).
+      if (checkbox.includes('function applyInsetOverlay(')) {
+        const io = checkbox.slice(checkbox.indexOf('function applyInsetOverlay('));
+        const ioBody = io.slice(0, io.indexOf('\n}'));
+        if (!/childNode\.children[\s\S]*length === 0[\s\S]*insertChild\(0/.test(ioBody)) {
+          throw new Error('applyInsetOverlay must guard the index-0 lowering to CHILDLESS backdrops — a content overlay (check glyph) would be painted over by the backdrop (B5E finding 3)');
+        }
+      }
       // Cross-generator carry: Avatar's background binds on the canvas too.
       const avatarScript = readFileSync(path.join(ROOT, 'examples/polaris/figma/avatar.figma.js'), 'utf8');
       if (!avatarScript.includes('"fill": "p/color-avatar-one-bg-fill"')) {
@@ -4473,6 +4484,54 @@ const cases: Case[] = [
         }
       }
       console.log('amend-margin-box: badge script carries applyMarginBox on BOTH the create (buildNode) and re-amend (amendSet) top-level child loops — margins now survive a re-amend at source, not a canvas correction');
+    },
+  },
+  {
+    // Round 5f — CLASS 3: the Checkbox check glyph (and RadioButton dot) must
+    // be CENTERED in the control box. The captured display:block carried no
+    // centering, so a glyph inside an inset-0 absolute overlay pinned
+    // top-left (owner: not centered vertically/horizontally). The emit now
+    // centers an inset-overlay container that HAS content; an empty backdrop
+    // overlay stays untouched. Verified through the REAL compile on a
+    // synthesized fixture (an 18-box with an absolute inset overlay wrapping a
+    // 14-box glyph).
+    id: 'checkbox-center',
+    claim: 'C3-detection',
+    run: () => {
+      const emptyTokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+      const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
+      const fixture: any = {
+        id: 'fixture.control', name: 'Control', version: '0.0.0', status: 'draft',
+        description: 'synthesized inset-overlay centering fixture', semantics: { element: 'span' },
+        props: [{ name: 'variant', type: { enum: ['a'] }, default: 'a',
+          bindings: { figma: { kind: 'VARIANT', property: 'V' }, code: { prop: 'variant' } } }],
+        states: [],
+        anatomy: { root: { layout: { display: 'flex' }, parts: {
+          box: { element: 'span', declared: { position: 'relative', width: '18px', height: '18px' }, parts: {
+            backdrop: { shape: { kind: 'rect', width: 18, height: 18 } },
+            // absolute inset overlay WITH content — must center the glyph
+            glyph: { element: 'span', declared: { position: 'absolute', 'aspect-ratio': '1 / 1' }, parts: {
+              inner: { element: 'span', declared: { width: '14px', height: '14px' } },
+            } },
+          } },
+        } } },
+        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Control' } },
+      };
+      ContractSchema.parse(fixture);
+      const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+      const find = (s: any, name: string): any => s.name === name ? s : (s.children ?? []).map((c: any) => find(c, name)).find(Boolean);
+      const glyph = find(data.variants[0].spec, 'glyph');
+      if (!glyph) throw new Error('inset-overlay glyph part not compiled');
+      if (!glyph.insetOverlay) throw new Error('glyph part is not an inset overlay (position:absolute inset:0)');
+      if (glyph.layout?.primary !== 'CENTER' || glyph.layout?.counter !== 'CENTER') {
+        throw new Error(`inset-overlay content is NOT centered: layout=${JSON.stringify(glyph.layout)} — the check glyph would pin top-left`);
+      }
+      // an empty backdrop overlay must NOT be force-centered (byte-neutral guard):
+      const backdrop = find(data.variants[0].spec, 'backdrop');
+      if (backdrop?.insetOverlay && (backdrop.children?.length ?? 0) === 0 && backdrop.layout?.primary === 'CENTER') {
+        throw new Error('empty backdrop overlay was force-centered — should be untouched');
+      }
+      console.log('checkbox-center: an inset-overlay container WITH content compiles to CENTER/CENTER (glyph centered in the control box); empty backdrop overlays untouched');
     },
   },
   {
