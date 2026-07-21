@@ -1,0 +1,25 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox-input.contract.json (astryx.checkbox-input v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  color: var(--color-text-primary);
+  gap: var(--spacing-2);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.control {
+  background-color: var(--color-background-surface);
+  border-color: var(--color-border-emphasized);
+  border-width: var(--border-width);
+  border-radius: var(--radius-inner);
+  width: var(--size-element-sm);
+  height: var(--size-element-sm);
+  border-style: solid;
+}

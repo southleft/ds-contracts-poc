@@ -1,0 +1,24 @@
+{
+  "name": "astryx-dev-journey-storybook",
+  "$comment": "Runnable Storybook fixture for the Astryx developer-journey exhibit. A designer/dev can `npm i && npm run storybook` and SEE the Astryx flagship components — the React+CSS+stories the ds-contracts CLI emits from examples/astryx/contracts. Layout mirrors evals/fixtures/storybook-skeleton (the journey-engineer eval fixture); versions pinned to the reference repo devDependencies.",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "generate": "node ../../../packages/cli/dist/cli.js generate ../contracts --out src/generated --target react --tokens ../tokens/astryx.dtcg.json --stories",
+    "tokens": "tsx ../scripts/build-storybook-tokens.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/react-vite": "^10.4.6",
+    "@types/react": "^19.2.7",
+    "@vitejs/plugin-react": "^6.0.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "storybook": "^10.4.6",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.3"
+  }
+}

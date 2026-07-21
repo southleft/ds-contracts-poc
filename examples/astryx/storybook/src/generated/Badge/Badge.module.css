@@ -1,0 +1,91 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (astryx.badge v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--color-background-gray);
+  color: var(--color-text-gray);
+  padding-inline: var(--spacing-2);
+  padding-block: var(--spacing-0-5);
+  border-radius: var(--radius-full);
+  gap: var(--spacing-1);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.variant-neutral {
+  background-color: var(--color-background-gray);
+  color: var(--color-text-gray);
+}
+
+.variant-info {
+  background-color: var(--color-background-blue);
+  color: var(--color-text-blue);
+}
+
+.variant-success {
+  background-color: var(--color-background-green);
+  color: var(--color-text-green);
+}
+
+.variant-warning {
+  background-color: var(--color-background-orange);
+  color: var(--color-text-orange);
+}
+
+.variant-error {
+  background-color: var(--color-background-red);
+  color: var(--color-text-red);
+}
+
+.variant-blue {
+  background-color: var(--color-background-blue);
+  color: var(--color-text-blue);
+}
+
+.variant-cyan {
+  background-color: var(--color-background-cyan);
+  color: var(--color-text-cyan);
+}
+
+.variant-green {
+  background-color: var(--color-background-green);
+  color: var(--color-text-green);
+}
+
+.variant-orange {
+  background-color: var(--color-background-orange);
+  color: var(--color-text-orange);
+}
+
+.variant-pink {
+  background-color: var(--color-background-pink);
+  color: var(--color-text-pink);
+}
+
+.variant-purple {
+  background-color: var(--color-background-purple);
+  color: var(--color-text-purple);
+}
+
+.variant-red {
+  background-color: var(--color-background-red);
+  color: var(--color-text-red);
+}
+
+.variant-teal {
+  background-color: var(--color-background-teal);
+  color: var(--color-text-teal);
+}
+
+.variant-yellow {
+  background-color: var(--color-background-yellow);
+  color: var(--color-text-yellow);
+}

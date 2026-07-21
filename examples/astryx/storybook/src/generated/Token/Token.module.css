@@ -1,0 +1,91 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/token.contract.json (astryx.token v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--color-background-gray);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-full);
+  gap: var(--spacing-1);
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-medium);
+}
+
+.color-default {
+  background-color: var(--color-background-muted);
+  color: var(--color-text-primary);
+}
+
+.color-red {
+  background-color: var(--color-background-red);
+  color: var(--color-text-red);
+}
+
+.color-orange {
+  background-color: var(--color-background-orange);
+  color: var(--color-text-orange);
+}
+
+.color-yellow {
+  background-color: var(--color-background-yellow);
+  color: var(--color-text-yellow);
+}
+
+.color-green {
+  background-color: var(--color-background-green);
+  color: var(--color-text-green);
+}
+
+.color-teal {
+  background-color: var(--color-background-teal);
+  color: var(--color-text-teal);
+}
+
+.color-cyan {
+  background-color: var(--color-background-cyan);
+  color: var(--color-text-cyan);
+}
+
+.color-blue {
+  background-color: var(--color-background-blue);
+  color: var(--color-text-blue);
+}
+
+.color-purple {
+  background-color: var(--color-background-purple);
+  color: var(--color-text-purple);
+}
+
+.color-pink {
+  background-color: var(--color-background-pink);
+  color: var(--color-text-pink);
+}
+
+.color-gray {
+  background-color: var(--color-background-gray);
+  color: var(--color-text-gray);
+}
+
+.size-sm {
+  padding-block: var(--spacing-0-5);
+  padding-inline: var(--spacing-1-5);
+  font-size: var(--font-size-2xs);
+}
+
+.size-md {
+  padding-block: var(--spacing-0-5);
+  padding-inline: var(--spacing-2);
+  font-size: var(--font-size-xs);
+}
+
+.size-lg {
+  padding-block: var(--spacing-1);
+  padding-inline: var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
