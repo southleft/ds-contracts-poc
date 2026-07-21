@@ -42,8 +42,10 @@ import {
   boolProps,
   enumProps,
   isEnum,
+  isMultiRoot,
   rootElementsOf,
   textProps,
+  topRoots,
   UA_MARGIN_ELEMENTS,
   validateContract,
   type EmitCtx,
@@ -132,6 +134,44 @@ function componentCss(contract: Contract): string[] {
     '  box-sizing: border-box;',
     '}',
   ];
+
+  // MULTI-ROOT composite (advanced composition): no single ".${k}" root box —
+  // each top-level root and descendant compiles to its OWN BEM part class
+  // (.${k}__dialog, .${k}__backdrop …), rendered as siblings. componentCss
+  // emits var(--…) refs unconditionally (no token inventory here); layout is
+  // contract-governed. Single-root falls through to the untouched path below.
+  if (isMultiRoot(contract)) {
+    const pushRule = (selector: string, decls: string[]) => {
+      if (decls.length === 0) return;
+      lines.push('', `${selector} {`, ...decls.map((d) => `  ${d};`), '}');
+    };
+    for (const { name, part } of walkAnatomy(contract)) {
+      if (part.component) continue; // instances style themselves via their own contract
+      const decls: string[] = layoutDecls(part);
+      if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
+      if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
+      if (part.shape) decls.push(...shapeCssDecls(part.shape));
+      if (part.element === 'button') {
+        decls.push('appearance: none', 'background: none', 'border: none', 'font: inherit',
+          'color: inherit', 'cursor: pointer');
+      }
+      if (part.icon) {
+        decls.push('display: inline-flex', 'flex-shrink: 0');
+        if (part.icon.size) {
+          lines.push('', `${partCls(name)} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
+        }
+      }
+      for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
+        const refPath = stripBraces(ref);
+        if (placeholdersIn(refPath).length > 0) continue;
+        decls.push(`${cssProp}: ${cssVar(refPath)}`);
+      }
+      for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
+      for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
+      pushRule(partCls(name), decls);
+    }
+    return lines;
+  }
 
   const root = contract.anatomy.root;
   const rootDecls: string[] = [];
@@ -776,6 +816,16 @@ function renderComponentHtml(
       ? `${pad}<${el} class="${cls}"${attrString(part)}>\n${inner}\n${pad}</${el}>`
       : `${pad}<${el} class="${cls}"${attrString(part)}></${el}>`;
   };
+
+  // MULTI-ROOT composite: render each top-level root as a SIBLING via the same
+  // renderPart machinery — no wrapping element (a Modal's backdrop + dialog are
+  // position-driven siblings). Single-root falls through to the one-root path.
+  if (isMultiRoot(contract)) {
+    return topRoots(contract)
+      .map(([n, p]) => renderPart(n, p, indent))
+      .filter(Boolean)
+      .join('\n');
+  }
 
   // Root element + classes
   const elementByProp = contract.semantics.elementByProp;
