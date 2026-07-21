@@ -1,5 +1,5 @@
 {
-  "passed": 142,
+  "passed": 145,
   "total": 145,
   "results": [
     {
@@ -640,20 +640,17 @@
     {
       "id": "plugin-engine-bundle",
       "claim": "C1-determinism",
-      "pass": false,
-      "error": "Error: plugin-engine-check failed:\n✔ engine bundle fresh vs committed receipt: 443720 bytes minified, 108 inputs, hash daa5e883f674…\n✔ headless generate: Badge v1.1.0 synced into the mock file (COMPONENT_SET, node 306:307); stored specHash equals the engine mirror (3744470041)\n✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)\n✔ update report (before anything applies):\n    • Badge 1.1.0 → 9.9.9: +prop Experimental.\n    • Switch 2.0.0: new — will be created (2 variants).\n    1 to update · 1 new · 0 unchanged.\n    Nothing has been applied — review the list, then Apply.\n    • Badge 1.1.0: unchanged — will be skipped.\n✔ apply: Badge amended in place (same node 306:307), +prop Experimental, markers updated to v9.9.9\n✔ propose: mock canvas dumped through the embedded dump script → proposal + bounded diff; a base missing \"variant\" surfaces \"+prop variant\" by name\n✔ PR dry-run plan: 4 named REST steps, deterministic branch, session-only token note — zero network\nnode:fs:449\n    return binding.readFileUtf8(path, stringToFlags(options.flag));\n                   ^\n\nError: ENOENT: no such file or directory, open '/Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/examples/depth-composite/composite-modal.contract.json'\n    at readFileSync (node:fs:449:20)\n    at read (file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:36:21)\n    at file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:279:32 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/examples/depth-composite/composite-modal.contract.json'\n}\n\nNode.js v20.19.4\n"
+      "pass": true
     },
     {
       "id": "plugin-update-report",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: plugin-engine-check failed:\n✔ engine bundle fresh vs committed receipt: 443720 bytes minified, 108 inputs, hash daa5e883f674…\n✔ headless generate: Badge v1.1.0 synced into the mock file (COMPONENT_SET, node 306:307); stored specHash equals the engine mirror (3744470041)\n✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)\n✔ update report (before anything applies):\n    • Badge 1.1.0 → 9.9.9: +prop Experimental.\n    • Switch 2.0.0: new — will be created (2 variants).\n    1 to update · 1 new · 0 unchanged.\n    Nothing has been applied — review the list, then Apply.\n    • Badge 1.1.0: unchanged — will be skipped.\n✔ apply: Badge amended in place (same node 306:307), +prop Experimental, markers updated to v9.9.9\n✔ propose: mock canvas dumped through the embedded dump script → proposal + bounded diff; a base missing \"variant\" surfaces \"+prop variant\" by name\n✔ PR dry-run plan: 4 named REST steps, deterministic branch, session-only token note — zero network\nnode:fs:449\n    return binding.readFileUtf8(path, stringToFlags(options.flag));\n                   ^\n\nError: ENOENT: no such file or directory, open '/Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/examples/depth-composite/composite-modal.contract.json'\n    at readFileSync (node:fs:449:20)\n    at read (file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:36:21)\n    at file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:279:32 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/examples/depth-composite/composite-modal.contract.json'\n}\n\nNode.js v20.19.4\n"
+      "pass": true
     },
     {
       "id": "plugin-propose-dry-run",
       "claim": "C4-convergence",
-      "pass": false,
-      "error": "Error: plugin-engine-check failed:\n✔ engine bundle fresh vs committed receipt: 443720 bytes minified, 108 inputs, hash daa5e883f674…\n✔ headless generate: Badge v1.1.0 synced into the mock file (COMPONENT_SET, node 306:307); stored specHash equals the engine mirror (3744470041)\n✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)\n✔ update report (before anything applies):\n    • Badge 1.1.0 → 9.9.9: +prop Experimental.\n    • Switch 2.0.0: new — will be created (2 variants).\n    1 to update · 1 new · 0 unchanged.\n    Nothing has been applied — review the list, then Apply.\n    • Badge 1.1.0: unchanged — will be skipped.\n✔ apply: Badge amended in place (same node 306:307), +prop Experimental, markers updated to v9.9.9\n✔ propose: mock canvas dumped through the embedded dump script → proposal + bounded diff; a base missing \"variant\" surfaces \"+prop variant\" by name\n✔ PR dry-run plan: 4 named REST steps, deterministic branch, session-only token note — zero network\nnode:fs:449\n    return binding.readFileUtf8(path, stringToFlags(options.flag));\n                   ^\n\nError: ENOENT: no such file or directory, open '/Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/examples/depth-composite/composite-modal.contract.json'\n    at readFileSync (node:fs:449:20)\n    at read (file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:36:21)\n    at file:///Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/scripts/plugin-engine-check.mjs:279:32 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/Users/tjpitre/Sites/ds-contracts-poc/evals/.scratch/examples/depth-composite/composite-modal.contract.json'\n}\n\nNode.js v20.19.4\n"
+      "pass": true
     },
     {
       "id": "wc-emitter-roundtrip",

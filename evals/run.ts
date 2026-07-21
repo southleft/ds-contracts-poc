@@ -86,6 +86,12 @@ function resetScratch() {
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
     recursive: true,
   });
+  // examples/ is otherwise NOT copied (kept out of scratch — see astryx pins,
+  // which stage what they need); plugin-engine-check reads the depth-composite
+  // contract for its composite-plugin-path flow, so stage that one directory.
+  cpSync(path.join(ROOT, 'examples', 'depth-composite'), path.join(SCRATCH, 'examples', 'depth-composite'), {
+    recursive: true,
+  });
   for (const file of ['package.json', 'tsconfig.json']) {
     cpSync(path.join(ROOT, file), path.join(SCRATCH, file));
   }
