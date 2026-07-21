@@ -304,4 +304,40 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path)');
+// --- N+1. REVERSE JOURNEY (design→code) for the advanced composite ----------
+// The composite built above (composite-plugin-path) is on the mock canvas.
+// Dump it exactly as the Propose tab does and run design→contract: the
+// proposed anatomy must RECOVER the advanced composition — both roots
+// (dialog+backdrop), the composed ds.card INSTANCE, and the repeated ds.badge
+// collection. Proves the design→code direction handles multi-root composites,
+// the mirror of the emit-side multi-root work (extraction wraps in a single
+// `root` — the COMPONENT-as-root convention — with dialog/backdrop as parts).
+{
+  const compositeC = JSON.parse(read('examples/depth-composite/composite-modal.contract.json'));
+  const ui2 = read('figma-sync/plugin/ui.html');
+  const openTag2 = '<script type="text/plain" id="dump-source">';
+  const s2 = ui2.indexOf(openTag2);
+  const src2 = ui2.slice(s2 + openTag2.length, ui2.indexOf('</script>', s2)).replace(/^\n/, '');
+  const scoped2 = src2.replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['CompositeModal'])};`);
+  const dump2 = await runScript(scoped2);
+  assert(dump2 && dump2.CompositeModal, 'the dump captures the multi-root CompositeModal set');
+  const diff2 = DSC.proposeDiff(dump2, 'CompositeModal', compositeC);
+  assert(diff2.ok, `proposeDiff recovers a contract from the drawn composite (${diff2.ok ? '' : diff2.issue?.headline})`);
+  const proposed = JSON.parse(diff2.exportJson).proposedContract;
+  // walk the recovered anatomy (COMPONENT-as-root wrapper)
+  const rootPart = proposed.anatomy?.root ?? Object.values(proposed.anatomy ?? {})[0];
+  const rp = rootPart?.parts ?? {};
+  const dialog = rp.dialog, backdrop = rp.backdrop;
+  const body = dialog?.parts?.body;
+  const summary = body?.parts?.summary;
+  const tagsWrap = body?.parts?.tags;
+  const tag = tagsWrap?.parts?.tag;
+  assert(dialog && backdrop, 'design→code recovers BOTH roots (dialog + backdrop) of the multi-root composite');
+  assert(summary?.component, 'design→code recovers the composed ds.card summary as an INSTANCE');
+  assert(tag?.component && tag?.repeat, 'design→code recovers the repeated ds.badge collection (tags > tag, repeat + component)');
+  console.log(
+    `✔ reverse journey (design→code): the drawn composite dumps and proposes back a contract that recovers dialog+backdrop, a composed ${summary.component.id} INSTANCE, and a repeated ${tag.component.id} collection — advanced composition round-trips in BOTH directions`,
+  );
+}
+
+console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey)');
