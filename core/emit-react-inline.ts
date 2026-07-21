@@ -700,8 +700,11 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     );
   };
 
+  // `root` is undefined for a multi-root composite; the single-root tail below
+  // is unused in that case (the isMultiRoot branch returns before the template
+  // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
-  const rootInner = root.parts
+  const rootInner = root?.parts
     ? Object.entries(root.parts)
         .map(([childName, child]) => renderPart(childName, child))
         .join('\n')
@@ -715,7 +718,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   }
 
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
-  const elementAttrs: string[] = ['ref={ref}', `style=${styleExpr('root', true, stylesWhenExprs(root))}`];
+  const elementAttrs: string[] = ['ref={ref}', `style=${styleExpr('root', true, root ? stylesWhenExprs(root) : [])}`];
   if (nativeDisabled) elementAttrs.push('disabled={disabled}');
   for (const p of bools) {
     if (p.name === 'disabled' && nativeDisabled) continue;

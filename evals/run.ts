@@ -35,7 +35,7 @@ import {
   type Part as SchemaPart,
 } from '../scripts/contract-schema.js';
 import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
-import { validateContract as coreValidateContract } from '../core/emit-react.js';
+import { emitReact as coreEmitReact, isMultiRoot as coreIsMultiRoot, validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
@@ -4777,6 +4777,98 @@ const cases: Case[] = [
         }
       }
       console.log('simple-component-anatomy-unchanged: Badge/Button/Checkbox descend zero wrappers; multi-root anatomy == single-root anatomy (byte-identical)');
+    },
+  },
+  {
+    // ADVANCED-COMPOSITION GATE — the multi-root Modal emits on all four
+    // surfaces. The depth north star (both journeys) needed the emitters +
+    // validator to consume MULTI-ROOT anatomy (a captured composite = several
+    // top-level roots). This pin runs the committed receipt harness
+    // (examples/depth-modal/emit-modal-receipt.ts) which drives the assembled
+    // schema-valid composite `ds.modal-composite` ({dialog, backdrop}) through
+    // every emitter and PROVES each by EXECUTION (not grep): emit-react +
+    // emit-react-inline are esbuild-bundled and rendered with react-dom/server
+    // (real modal markup — role="dialog" header→(title,close), body,
+    // footer→(Cancel,Save), sibling backdrop); emit-html carries the same
+    // static markup; emit-figma-script's COMPONENTS payload referees to ONE
+    // variant frame whose children are both roots AND the whole script
+    // headless-executes in a VM against the mocked figma global.
+    // examples/ is not copied into scratch (see astryx-dev-journey), so the
+    // harness + contract are staged in first; it writes into the staged scratch
+    // copy (never the committed ROOT artifacts).
+    id: 'emitter-multi-root-modal',
+    claim: 'C8-journey',
+    run: () => {
+      cpSync(
+        path.join(ROOT, 'examples', 'depth-modal'),
+        path.join(SCRATCH, 'examples', 'depth-modal'),
+        { recursive: true },
+      );
+      const r = run(TSX, ['examples/depth-modal/emit-modal-receipt.ts']);
+      if (r.status !== 0 || !r.out.includes('all 5 surfaces emitted + EXECUTED')) {
+        throw new Error(`multi-root Modal receipt failed:\n${r.out.slice(0, 1600)}`);
+      }
+      // The harness prints one ✔ line per surface; require all five.
+      for (const surface of [
+        'emit-react —',
+        'emit-react-inline —',
+        'emit-html —',
+        'emit-figma-script (referee)',
+        'emit-figma-script (headless)',
+      ]) {
+        if (!r.out.includes(`✔ ${surface}`)) {
+          throw new Error(`multi-root Modal: surface "${surface}" did not pass:\n${r.out.slice(0, 1600)}`);
+        }
+      }
+      console.log('emitter-multi-root-modal: {dialog, backdrop} emits valid React (bundles+renders headless) + HTML markup + figma-script (referee frame carries both roots, headless-executes) — dialog+backdrop present, Cancel/Save actions render');
+    },
+  },
+  {
+    // SINGLE-ROOT GOLDEN INVARIANT — the multi-root generalization is ADDITIVE.
+    // Every repo contract is single-root (one top-level "root"), so each takes
+    // the UNTOUCHED N=1 emitter path: a forwardRef component around one root
+    // element, a `.root` CSS rule, and NEVER the multi-root Fragment branch.
+    // The BYTE authority is `golden-generated-output` (it re-hashes every
+    // src/ + figma-sync file against evals/golden.json); this pin names that
+    // dependency and proves the branch SELECTION directly — a single-root
+    // contract must not carry one byte of the multi-root marker.
+    id: 'single-root-golden-invariant',
+    claim: 'C1-determinism',
+    run: () => {
+      const byId = new Map(
+        readdirSync(path.join(ROOT, 'contracts'))
+          .filter((f) => f.endsWith('.contract.json'))
+          .map((f) => ContractSchema.parse(JSON.parse(readFileSync(path.join(ROOT, 'contracts', f), 'utf8'))))
+          .map((c) => [c.id, c]),
+      );
+      const icons = new Map(
+        readdirSync(path.join(ROOT, 'assets', 'icons'))
+          .filter((f) => f.endsWith('.svg'))
+          .map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ROOT, 'assets', 'icons', f), 'utf8').trim()]),
+      );
+      const read = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8'));
+      const tokenInv = tokenInventoryFromJson([
+        read('tokens/primitives.tokens.json'),
+        read('tokens/semantic.tokens.json'),
+        read('tokens/modes/semantic.light.tokens.json'),
+        read('tokens/modes/semantic.dark.tokens.json'),
+      ]);
+      let multiRootCount = 0;
+      for (const c of byId.values()) if (coreIsMultiRoot(c)) multiRootCount++;
+      if (multiRootCount !== 0) {
+        throw new Error(`${multiRootCount} repo contract(s) are multi-root — the golden set must be all single-root`);
+      }
+      for (const id of ['ds.badge', 'ds.button', 'ds.card']) {
+        const c = byId.get(id)!;
+        const { tsx, css } = coreEmitReact(c, { tokens: tokenInv, icons, contracts: byId });
+        if (coreIsMultiRoot(c)) throw new Error(`${id}: isMultiRoot true — expected single-root`);
+        if (tsx.includes('MULTI-ROOT composite')) {
+          throw new Error(`${id}: single-root emit carries the multi-root marker — the branch guard leaked`);
+        }
+        if (!tsx.includes('forwardRef<')) throw new Error(`${id}: single-root React is not the forwardRef component`);
+        if (!/\.root\s*\{/.test(css)) throw new Error(`${id}: single-root CSS lost its .root rule`);
+      }
+      console.log(`single-root-golden-invariant: all ${byId.size} repo contracts are single-root (0 multi-root); Badge/Button/Card take the untouched forwardRef+.root path, zero multi-root marker — byte authority is golden-generated-output`);
     },
   },
   {

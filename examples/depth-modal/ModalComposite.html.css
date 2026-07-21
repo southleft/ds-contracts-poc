@@ -1,0 +1,76 @@
+/* ModalComposite — from ds.modal-composite v1.0.0 (core/emit-html.ts) */
+
+.modal-composite, .modal-composite *, .modal-composite *::before, .modal-composite *::after {
+  box-sizing: border-box;
+}
+
+.modal-composite__dialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-composite__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-composite__title {
+  margin: 0;
+}
+
+.modal-composite__close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.modal-composite__close {
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.modal-composite__body {
+  margin: 0;
+}
+
+.modal-composite__footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.modal-composite__cancel {
+  display: flex;
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.modal-composite__save {
+  display: flex;
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.modal-composite__backdrop {
+  position: absolute;
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
