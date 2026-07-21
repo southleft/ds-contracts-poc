@@ -15,11 +15,11 @@ const meta = {
   },
   argTypes: {
     tone: { control: 'select', options: ['info', 'success', 'warning', 'critical', 'attention', 'new', 'magic', 'info-strong', 'success-strong', 'warning-strong', 'critical-strong', 'attention-strong', 'read-only', 'enabled'], description: 'Colors and labels the badge with the given tone (round 4: enumerated from the real @shopify/polaris@13.9.5 Badge API — the static extraction had missed the styling axes entirely).' },
-    progress: { control: 'select', options: ['incomplete', 'partiallyComplete', 'complete'], description: 'Render a pip showing the progress of a given task (round 4: real Badge API axis).' },
+    progress: { control: 'select', options: ['none', 'incomplete', 'partiallyComplete', 'complete'], description: 'Render a pip showing the progress of a given task (round 4: real Badge API axis).' },
     toneAndProgressLabelOverride: { control: 'text', description: 'Pass a custom accessibilityLabel' },
   },
   args: {
-
+    progress: 'none',
   },
 } satisfies Meta<typeof Badge>;
 
@@ -91,50 +91,64 @@ export const Matrix: Story = {
       style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(3, max-content)',
+        gridTemplateColumns: 'repeat(4, max-content)',
         alignItems: 'center',
         justifyItems: 'start',
       }}
     >
+        <Badge tone="info" progress="none" />
         <Badge tone="info" progress="incomplete" />
         <Badge tone="info" progress="partiallyComplete" />
         <Badge tone="info" progress="complete" />
+        <Badge tone="success" progress="none" />
         <Badge tone="success" progress="incomplete" />
         <Badge tone="success" progress="partiallyComplete" />
         <Badge tone="success" progress="complete" />
+        <Badge tone="warning" progress="none" />
         <Badge tone="warning" progress="incomplete" />
         <Badge tone="warning" progress="partiallyComplete" />
         <Badge tone="warning" progress="complete" />
+        <Badge tone="critical" progress="none" />
         <Badge tone="critical" progress="incomplete" />
         <Badge tone="critical" progress="partiallyComplete" />
         <Badge tone="critical" progress="complete" />
+        <Badge tone="attention" progress="none" />
         <Badge tone="attention" progress="incomplete" />
         <Badge tone="attention" progress="partiallyComplete" />
         <Badge tone="attention" progress="complete" />
+        <Badge tone="new" progress="none" />
         <Badge tone="new" progress="incomplete" />
         <Badge tone="new" progress="partiallyComplete" />
         <Badge tone="new" progress="complete" />
+        <Badge tone="magic" progress="none" />
         <Badge tone="magic" progress="incomplete" />
         <Badge tone="magic" progress="partiallyComplete" />
         <Badge tone="magic" progress="complete" />
+        <Badge tone="info-strong" progress="none" />
         <Badge tone="info-strong" progress="incomplete" />
         <Badge tone="info-strong" progress="partiallyComplete" />
         <Badge tone="info-strong" progress="complete" />
+        <Badge tone="success-strong" progress="none" />
         <Badge tone="success-strong" progress="incomplete" />
         <Badge tone="success-strong" progress="partiallyComplete" />
         <Badge tone="success-strong" progress="complete" />
+        <Badge tone="warning-strong" progress="none" />
         <Badge tone="warning-strong" progress="incomplete" />
         <Badge tone="warning-strong" progress="partiallyComplete" />
         <Badge tone="warning-strong" progress="complete" />
+        <Badge tone="critical-strong" progress="none" />
         <Badge tone="critical-strong" progress="incomplete" />
         <Badge tone="critical-strong" progress="partiallyComplete" />
         <Badge tone="critical-strong" progress="complete" />
+        <Badge tone="attention-strong" progress="none" />
         <Badge tone="attention-strong" progress="incomplete" />
         <Badge tone="attention-strong" progress="partiallyComplete" />
         <Badge tone="attention-strong" progress="complete" />
+        <Badge tone="read-only" progress="none" />
         <Badge tone="read-only" progress="incomplete" />
         <Badge tone="read-only" progress="partiallyComplete" />
         <Badge tone="read-only" progress="complete" />
+        <Badge tone="enabled" progress="none" />
         <Badge tone="enabled" progress="incomplete" />
         <Badge tone="enabled" progress="partiallyComplete" />
         <Badge tone="enabled" progress="complete" />

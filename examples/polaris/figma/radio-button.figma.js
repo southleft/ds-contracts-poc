@@ -658,7 +658,17 @@ async function buildNode(spec, registry) {
     node.resize(spec.shape.width, spec.shape.height);
     // Shape nodes ship a default gray paint — a spec with NO fill channel
     // clears it (a canvas artifact is not contract data; Phase B deviation 3).
-    node.fills = spec.fill ? [boundPaint(spec.fill, node)] : [];
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
     // spec.stroke + spec.bindings apply exactly as on frames (Phase B
     // deviation 2: the emitted shape branch silently dropped the checkbox /
     // radio backdrop strokes and radii — the shim now lives at the source).
@@ -813,6 +823,7 @@ async function amendSet(set, C) {
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
+    applyMarginBox(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }

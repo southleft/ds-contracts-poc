@@ -2960,8 +2960,26 @@ const cases: Case[] = [
       const shapeBody = shapeBranch.slice(0, shapeBranch.indexOf('} else {'));
       if (!shapeBody.includes('spec.stroke')) throw new Error('shape branch must apply spec.stroke');
       if (!shapeBody.includes('spec.bindings')) throw new Error('shape branch must apply spec.bindings');
-      if (!shapeBody.includes("node.fills = spec.fill ? [boundPaint(spec.fill, node)] : []")) {
-        throw new Error('shape branch must clear the default paint when no fill channel is carried');
+      // Round 5f (B5E finding 2): the shape branch applies a LITERAL fill
+      // (spec.lits.fillColor — the RadioButton dot white) at source, and still
+      // CLEARS the default gray paint when neither a bound fill nor a literal
+      // fill is carried (the checkbox backdrop with only a stroke).
+      if (!shapeBody.includes('spec.lits.fillColor')) {
+        throw new Error('shape branch must apply the literal fill (lits.fillColor) — B5E finding 2 (radio dot white)');
+      }
+      if (!shapeBody.includes('[boundPaint(spec.fill, node)]') || !/:\s*\[\]/.test(shapeBody)) {
+        throw new Error('shape branch must bind spec.fill and clear ([]) the default paint when no fill/literal is carried');
+      }
+      // Round 5f (B5E finding 3): applyInsetOverlay lowers ONLY childless
+      // BACKDROP overlays to index 0; a CONTENT overlay (the check glyph) stays
+      // ON TOP — else the opaque backdrop paints over the glyph (z-order fix at
+      // source, not a per-session canvas correction).
+      if (checkbox.includes('function applyInsetOverlay(')) {
+        const io = checkbox.slice(checkbox.indexOf('function applyInsetOverlay('));
+        const ioBody = io.slice(0, io.indexOf('\n}'));
+        if (!/childNode\.children[\s\S]*length === 0[\s\S]*insertChild\(0/.test(ioBody)) {
+          throw new Error('applyInsetOverlay must guard the index-0 lowering to CHILDLESS backdrops — a content overlay (check glyph) would be painted over by the backdrop (B5E finding 3)');
+        }
       }
       // Cross-generator carry: Avatar's background binds on the canvas too.
       const avatarScript = readFileSync(path.join(ROOT, 'examples/polaris/figma/avatar.figma.js'), 'utf8');
@@ -3673,9 +3691,16 @@ const cases: Case[] = [
         'progress-bar': { mean: 26.22, accept: false },
         'radio-button': { mean: 0, accept: true },
         spinner: { mean: 0, accept: true },
-        // Tag base + disabled are EXACT (0.00); the mean is the two named
-        // active/focus state-preview cells (C5 outline approximation).
-        tag: { mean: 22.55, accept: false },
+        // Tag base + disabled are EXACT (0.00) on BOTH sizes; the mean is the
+        // FOUR named active/focus state-preview cells (C5 outline
+        // approximation). Round 5f: the defaultless `size` enum only carried
+        // its 'large' set-value, so every Tag was forced large — materializing
+        // the unset value added the PLAIN medium tag (Size=none base + disabled
+        // both EXACT 0.00) and, with it, the medium size's two state-preview
+        // cells of the SAME named class. Pin lifted 22.55→27.04 for the added
+        // (smaller-box, so higher-%) medium state-preview cells; the set
+        // changed shape (4→8 cells) — documented, same named residue.
+        tag: { mean: 27.04, accept: false },
         thumbnail: { mean: 2.16, accept: true },
       };
       // Pixel-scoring nondeterminism headroom (AA classifier at 2x DSF):
@@ -3913,7 +3938,12 @@ const cases: Case[] = [
       if (comp.setName !== 'Badge' || comp.contractId !== 'polaris.badge' || comp.isSet !== true) {
         throw new Error(`compiled set identity wrong: ${JSON.stringify({ setName: comp.setName, contractId: comp.contractId, isSet: comp.isSet })}`);
       }
-      if (comp.variants.length !== 42) throw new Error(`Badge must compile 14 tones × 3 progress = 42 variants, got ${comp.variants.length}`);
+      // Round 5f — OPTIONAL-ADORNMENT: `progress` is a defaultless enum that
+      // gates the status pip; its unset value 'none' is materialized as the
+      // DEFAULT, so the set is 14 tones × 4 progress (none|incomplete|
+      // partiallyComplete|complete) = 56, and the DEFAULT variant is the PLAIN
+      // (no-pip) badge.
+      if (comp.variants.length !== 56) throw new Error(`Badge must compile 14 tones × 4 progress (incl. the plain 'none') = 56 variants, got ${comp.variants.length}`);
       const tones = new Set<string>();
       const progresses = new Set<string>();
       for (const v of comp.variants) {
@@ -3922,13 +3952,13 @@ const cases: Case[] = [
         tones.add(m[1]);
         progresses.add(m[2]);
       }
-      if (tones.size !== 14 || progresses.size !== 3) {
-        throw new Error(`variant grid wrong: ${tones.size} tones × ${progresses.size} progress values`);
+      if (tones.size !== 14 || progresses.size !== 4 || !progresses.has('none')) {
+        throw new Error(`variant grid wrong: ${tones.size} tones × ${progresses.size} progress values (must include 'none')`);
       }
       // Spot checks: per-tone fill substitution + literal token bindings
       // (variable names use SLASHES on the canvas — the emitter's mapping).
       const v0 = comp.variants[0];
-      if (v0.name !== 'Tone=info, Progress=incomplete') throw new Error(`default combo must compile first, got ${v0.name}`);
+      if (v0.name !== 'Tone=info, Progress=none') throw new Error(`default combo must be the PLAIN Progress=none badge and compile first, got ${v0.name}`);
       if (v0.spec.fill !== 'imported/badge/root/background-color/info') {
         throw new Error(`tone-substituted fill binding wrong on v0: ${v0.spec.fill}`);
       }
@@ -3939,10 +3969,14 @@ const cases: Case[] = [
       if (v0.spec.bindings?.topLeftRadius !== 'p/border-radius-200' || v0.spec.bindings?.paddingLeft !== 'p/space-200') {
         throw new Error(`literal token bindings wrong: ${JSON.stringify(v0.spec.bindings)}`);
       }
-      const childKinds = (v0.spec.children ?? []).map((ch: { type: string; name: string }) => `${ch.type}:${ch.name}`);
-      if (!childKinds.includes('frame:icon') || !childKinds.includes('text:label')) {
-        throw new Error(`compiled anatomy children wrong: ${childKinds.join(', ')}`);
-      }
+      // The PLAIN default variant draws NO pip (adornment absent); a
+      // Progress=set variant DOES (the optional-adornment gate).
+      const v0Kinds = (v0.spec.children ?? []).map((ch: { type: string; name: string }) => `${ch.type}:${ch.name}`);
+      if (v0Kinds.some((k: string) => k.endsWith(':icon'))) throw new Error(`plain default variant DREW the pip: ${v0Kinds.join(', ')}`);
+      if (!v0Kinds.includes('text:label')) throw new Error(`compiled anatomy children wrong: ${v0Kinds.join(', ')}`);
+      const withPip = comp.variants.find((v: { name: string }) => v.name === 'Tone=info, Progress=incomplete')!;
+      const pipKinds = (withPip.spec.children ?? []).map((ch: { type: string; name: string }) => `${ch.type}:${ch.name}`);
+      if (!pipKinds.includes('frame:icon')) throw new Error(`Progress=incomplete variant lost the pip: ${pipKinds.join(', ')}`);
 
       // 3. figma push, DRY: the code-led CI artifact shape, the CLI's own
       //    toBundle, the REAL worker pipeline in-process — no network.
@@ -4423,6 +4457,154 @@ const cases: Case[] = [
         throw new Error('badge script binds a corner to imported/shared/size-8 — the shorthand-coverage class is back');
       }
       console.log('canvas-margin-gap-pin: checkbox/radio itemSpacing binds the margin-right variable; badge keeps residual pip margins + applyMarginBox runtime; all four badge corners bind p/border-radius-200 (no size-8 siblings)');
+    },
+  },
+  {
+    // Round 5f — CLASS 4a: amendSet must run applyMarginBox on TOP-LEVEL
+    // variant children. buildNode applied margin boxes only to NESTED children
+    // (its own loop); the AMEND path's variant-child loop called buildNode +
+    // applyOverlay only, so every margins-carrying DIRECT child of a variant
+    // root lost its margin box on re-amend (B5E finding 1: Badge pip 24→20,
+    // Button icon, TextField label gap). This pin reads the COMMITTED emitted
+    // scripts: the margin-box runtime AND both call sites (create=buildNode,
+    // amend=amendSet) must be present so a re-amend carries margins at source.
+    id: 'amend-margin-box',
+    claim: 'C3-detection',
+    run: () => {
+      const fig = (f: string) => readFileSync(path.join(ROOT, 'examples/polaris/figma', f), 'utf8');
+      for (const f of ['badge.figma.js']) {
+        const s = fig(f);
+        if (!s.includes('function applyMarginBox(')) throw new Error(`${f}: no margin-box runtime`);
+        // create path (buildNode): applyMarginBox(node, childNode, child)
+        if (!s.includes('applyMarginBox(node, childNode, child)')) throw new Error(`${f}: buildNode create path lost applyMarginBox`);
+        // amend path (amendSet): applyMarginBox(comp, childNode, childSpec) —
+        // the B5E-finding-1 fix; without it top-level margins vanish on re-amend
+        if (!s.includes('applyMarginBox(comp, childNode, childSpec)')) {
+          throw new Error(`${f}: amendSet top-level child loop is MISSING applyMarginBox — B5E finding 1 regressed (Badge pip would measure 24px on re-amend, spec/gate say 20px)`);
+        }
+      }
+      console.log('amend-margin-box: badge script carries applyMarginBox on BOTH the create (buildNode) and re-amend (amendSet) top-level child loops — margins now survive a re-amend at source, not a canvas correction');
+    },
+  },
+  {
+    // Round 5f — CLASS 3: the Checkbox check glyph (and RadioButton dot) must
+    // be CENTERED in the control box. The captured display:block carried no
+    // centering, so a glyph inside an inset-0 absolute overlay pinned
+    // top-left (owner: not centered vertically/horizontally). The emit now
+    // centers an inset-overlay container that HAS content; an empty backdrop
+    // overlay stays untouched. Verified through the REAL compile on a
+    // synthesized fixture (an 18-box with an absolute inset overlay wrapping a
+    // 14-box glyph).
+    id: 'checkbox-center',
+    claim: 'C3-detection',
+    run: () => {
+      const emptyTokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+      const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
+      const fixture: any = {
+        id: 'fixture.control', name: 'Control', version: '0.0.0', status: 'draft',
+        description: 'synthesized inset-overlay centering fixture', semantics: { element: 'span' },
+        props: [{ name: 'variant', type: { enum: ['a'] }, default: 'a',
+          bindings: { figma: { kind: 'VARIANT', property: 'V' }, code: { prop: 'variant' } } }],
+        states: [],
+        anatomy: { root: { layout: { display: 'flex' }, parts: {
+          box: { element: 'span', declared: { position: 'relative', width: '18px', height: '18px' }, parts: {
+            backdrop: { shape: { kind: 'rect', width: 18, height: 18 } },
+            // absolute inset overlay WITH content — must center the glyph
+            glyph: { element: 'span', declared: { position: 'absolute', 'aspect-ratio': '1 / 1' }, parts: {
+              inner: { element: 'span', declared: { width: '14px', height: '14px' } },
+            } },
+          } },
+        } } },
+        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Control' } },
+      };
+      ContractSchema.parse(fixture);
+      const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+      const find = (s: any, name: string): any => s.name === name ? s : (s.children ?? []).map((c: any) => find(c, name)).find(Boolean);
+      const glyph = find(data.variants[0].spec, 'glyph');
+      if (!glyph) throw new Error('inset-overlay glyph part not compiled');
+      if (!glyph.insetOverlay) throw new Error('glyph part is not an inset overlay (position:absolute inset:0)');
+      if (glyph.layout?.primary !== 'CENTER' || glyph.layout?.counter !== 'CENTER') {
+        throw new Error(`inset-overlay content is NOT centered: layout=${JSON.stringify(glyph.layout)} — the check glyph would pin top-left`);
+      }
+      // an empty backdrop overlay must NOT be force-centered (byte-neutral guard):
+      const backdrop = find(data.variants[0].spec, 'backdrop');
+      if (backdrop?.insetOverlay && (backdrop.children?.length ?? 0) === 0 && backdrop.layout?.primary === 'CENTER') {
+        throw new Error('empty backdrop overlay was force-centered — should be untouched');
+      }
+      console.log('checkbox-center: an inset-overlay container WITH content compiles to CENTER/CENTER (glyph centered in the control box); empty backdrop overlays untouched');
+    },
+  },
+  {
+    // Round 5f — OPTIONAL-ADORNMENT-FORCED-PRESENT, the general rule as a
+    // SYNTHESIZED minimal fixture (independent of Polaris): a component with
+    // BOTH adornment shapes — an optional-ICON boolean (withIcon) and an
+    // optional-PIP defaultless enum whose unset value the promotion
+    // materialized as the default (pip: none|a|b, default none, base-hidden
+    // shownWhen). Proves, through the REAL canvas compile (createFigmaEngine
+    // .compileComponentData):
+    //   · the DEFAULT variant (first) carries NO pip part (adornment absent);
+    //   · a pip=set variant DOES carry it (adornment present);
+    //   · the boolean toggle is EXPOSED as a Figma BOOLEAN property (a
+    //     designer can turn the icon ON), default OFF → the icon node renders
+    //     EMPTY (visibleDefault false), never a drawn box;
+    //   · the unset value IS enumerated as a real variant (the plain cell).
+    id: 'optional-adornment-gating-general-fixture',
+    claim: 'C3-detection',
+    run: () => {
+      const emptyTokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+      const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
+      const fixture: any = {
+        id: 'fixture.adorned', name: 'Adorned', version: '0.0.0', status: 'draft',
+        description: 'synthesized optional-adornment fixture', semantics: { element: 'span' },
+        props: [
+          { name: 'label', type: 'text', default: 'Hi',
+            bindings: { figma: { kind: 'TEXT', property: 'Label' }, code: { prop: 'children' } } },
+          { name: 'withIcon', type: 'boolean', default: false,
+            bindings: { figma: { kind: 'BOOLEAN', property: 'Show Icon' }, code: { prop: 'withIcon' } } },
+          // defaultless-origin enum, unset value 'none' materialized as default
+          { name: 'pip', type: { enum: ['none', 'a', 'b'] }, default: 'none',
+            bindings: { figma: { kind: 'VARIANT', property: 'Pip' }, code: { prop: 'pip' } } },
+        ],
+        states: [],
+        anatomy: {
+          root: {
+            layout: { display: 'flex', align: 'center' },
+            parts: {
+              icon: { element: 'span', declared: { width: '20px', height: '16px' },
+                visibleWhen: { prop: 'withIcon' },
+                description: 'optional icon, boolean-gated' },
+              pip: { element: 'span', declared: { display: 'none' },
+                stylesWhen: [
+                  { prop: 'pip', equals: 'a', styles: { display: 'block' } },
+                  { prop: 'pip', equals: 'b', styles: { display: 'block' } },
+                ],
+                description: 'optional pip, base-hidden defaultless enum' },
+              label: { element: 'span', text: 'Hi' },
+            },
+          },
+        },
+        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Adorned' } },
+      };
+      ContractSchema.parse(fixture);
+      const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+      const childNames = (v: any) => (v.spec.children ?? []).map((c: any) => c.name);
+      // default variant is first; it is the plain (Pip=none) cell
+      const def = data.variants[0];
+      if (!/Pip=none/.test(def.name)) throw new Error(`default variant is not the plain Pip=none cell: "${def.name}"`);
+      if (childNames(def).includes('pip')) throw new Error('default (Pip=none) variant DREW the pip — adornment forced present');
+      // the unset value is a real enumerated variant, AND set values remain
+      const names = data.variants.map((v: any) => v.name);
+      if (!names.some((n: string) => /Pip=a/.test(n))) throw new Error('pip=a variant not enumerated (set values lost)');
+      const pipA = data.variants.find((v: any) => /Pip=a/.test(v.name))!;
+      if (!childNames(pipA).includes('pip')) throw new Error('pip=a variant did NOT draw the pip (adornment gate broken)');
+      // the boolean toggle is exposed, default OFF, icon renders empty
+      const bp = data.boolProps.find((b: any) => b.property === 'Show Icon');
+      if (!bp) throw new Error('withIcon boolean toggle "Show Icon" not exposed as a Figma property');
+      if (bp.default !== false) throw new Error('withIcon default is not OFF — the default variant would draw the icon');
+      const iconNode = (def.spec.children ?? []).find((c: any) => c.name === 'icon');
+      if (!iconNode) throw new Error('icon node missing entirely');
+      if (iconNode.visibleDefault !== false) throw new Error('icon visibleDefault is not false — the empty icon box would draw by default');
+      console.log('optional-adornment-gating-general-fixture: default variant plain (no pip), pip=a variant has it, "Show Icon" boolean exposed default OFF (icon node visibleDefault false), unset value enumerated as a real variant');
     },
   },
 ];

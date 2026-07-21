@@ -21,9 +21,45 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Tone=info, Progress=incomplete",
+        "name": "Tone=info, Progress=none",
         "row": 0,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=info, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/info",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/info",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=info, Progress=incomplete",
+        "row": 0,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=info, Progress=incomplete",
@@ -112,7 +148,7 @@ const COMPONENTS = [
       {
         "name": "Tone=info, Progress=partiallyComplete",
         "row": 0,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=info, Progress=partiallyComplete",
@@ -201,7 +237,7 @@ const COMPONENTS = [
       {
         "name": "Tone=info, Progress=complete",
         "row": 0,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=info, Progress=complete",
@@ -288,9 +324,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=success, Progress=incomplete",
+        "name": "Tone=success, Progress=none",
         "row": 1,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=success, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/success",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/success",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=success, Progress=incomplete",
+        "row": 1,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=success, Progress=incomplete",
@@ -379,7 +451,7 @@ const COMPONENTS = [
       {
         "name": "Tone=success, Progress=partiallyComplete",
         "row": 1,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=success, Progress=partiallyComplete",
@@ -468,7 +540,7 @@ const COMPONENTS = [
       {
         "name": "Tone=success, Progress=complete",
         "row": 1,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=success, Progress=complete",
@@ -555,9 +627,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=warning, Progress=incomplete",
+        "name": "Tone=warning, Progress=none",
         "row": 2,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=warning, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/warning",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/warning",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=warning, Progress=incomplete",
+        "row": 2,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=warning, Progress=incomplete",
@@ -646,7 +754,7 @@ const COMPONENTS = [
       {
         "name": "Tone=warning, Progress=partiallyComplete",
         "row": 2,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=warning, Progress=partiallyComplete",
@@ -735,7 +843,7 @@ const COMPONENTS = [
       {
         "name": "Tone=warning, Progress=complete",
         "row": 2,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=warning, Progress=complete",
@@ -822,9 +930,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=critical, Progress=incomplete",
+        "name": "Tone=critical, Progress=none",
         "row": 3,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=critical, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/critical",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/critical",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=critical, Progress=incomplete",
+        "row": 3,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=critical, Progress=incomplete",
@@ -913,7 +1057,7 @@ const COMPONENTS = [
       {
         "name": "Tone=critical, Progress=partiallyComplete",
         "row": 3,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=critical, Progress=partiallyComplete",
@@ -1002,7 +1146,7 @@ const COMPONENTS = [
       {
         "name": "Tone=critical, Progress=complete",
         "row": 3,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=critical, Progress=complete",
@@ -1089,9 +1233,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=attention, Progress=incomplete",
+        "name": "Tone=attention, Progress=none",
         "row": 4,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=attention, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/attention",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/attention",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=attention, Progress=incomplete",
+        "row": 4,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=attention, Progress=incomplete",
@@ -1180,7 +1360,7 @@ const COMPONENTS = [
       {
         "name": "Tone=attention, Progress=partiallyComplete",
         "row": 4,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=attention, Progress=partiallyComplete",
@@ -1269,7 +1449,7 @@ const COMPONENTS = [
       {
         "name": "Tone=attention, Progress=complete",
         "row": 4,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=attention, Progress=complete",
@@ -1356,9 +1536,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=new, Progress=incomplete",
+        "name": "Tone=new, Progress=none",
         "row": 5,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=new, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/new",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/new",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=new, Progress=incomplete",
+        "row": 5,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=new, Progress=incomplete",
@@ -1447,7 +1663,7 @@ const COMPONENTS = [
       {
         "name": "Tone=new, Progress=partiallyComplete",
         "row": 5,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=new, Progress=partiallyComplete",
@@ -1536,7 +1752,7 @@ const COMPONENTS = [
       {
         "name": "Tone=new, Progress=complete",
         "row": 5,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=new, Progress=complete",
@@ -1623,9 +1839,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=magic, Progress=incomplete",
+        "name": "Tone=magic, Progress=none",
         "row": 6,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=magic, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/magic",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/magic",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=magic, Progress=incomplete",
+        "row": 6,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=magic, Progress=incomplete",
@@ -1714,7 +1966,7 @@ const COMPONENTS = [
       {
         "name": "Tone=magic, Progress=partiallyComplete",
         "row": 6,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=magic, Progress=partiallyComplete",
@@ -1803,7 +2055,7 @@ const COMPONENTS = [
       {
         "name": "Tone=magic, Progress=complete",
         "row": 6,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=magic, Progress=complete",
@@ -1890,9 +2142,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=info-strong, Progress=incomplete",
+        "name": "Tone=info-strong, Progress=none",
         "row": 7,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=info-strong, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/info-strong",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/info-strong",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=info-strong, Progress=incomplete",
+        "row": 7,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=info-strong, Progress=incomplete",
@@ -1981,7 +2269,7 @@ const COMPONENTS = [
       {
         "name": "Tone=info-strong, Progress=partiallyComplete",
         "row": 7,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=info-strong, Progress=partiallyComplete",
@@ -2070,7 +2358,7 @@ const COMPONENTS = [
       {
         "name": "Tone=info-strong, Progress=complete",
         "row": 7,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=info-strong, Progress=complete",
@@ -2157,9 +2445,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=success-strong, Progress=incomplete",
+        "name": "Tone=success-strong, Progress=none",
         "row": 8,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=success-strong, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/success-strong",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/success-strong",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=success-strong, Progress=incomplete",
+        "row": 8,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=success-strong, Progress=incomplete",
@@ -2248,7 +2572,7 @@ const COMPONENTS = [
       {
         "name": "Tone=success-strong, Progress=partiallyComplete",
         "row": 8,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=success-strong, Progress=partiallyComplete",
@@ -2337,7 +2661,7 @@ const COMPONENTS = [
       {
         "name": "Tone=success-strong, Progress=complete",
         "row": 8,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=success-strong, Progress=complete",
@@ -2424,9 +2748,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=warning-strong, Progress=incomplete",
+        "name": "Tone=warning-strong, Progress=none",
         "row": 9,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=warning-strong, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/warning-strong",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/warning-strong",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=warning-strong, Progress=incomplete",
+        "row": 9,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=warning-strong, Progress=incomplete",
@@ -2515,7 +2875,7 @@ const COMPONENTS = [
       {
         "name": "Tone=warning-strong, Progress=partiallyComplete",
         "row": 9,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=warning-strong, Progress=partiallyComplete",
@@ -2604,7 +2964,7 @@ const COMPONENTS = [
       {
         "name": "Tone=warning-strong, Progress=complete",
         "row": 9,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=warning-strong, Progress=complete",
@@ -2691,9 +3051,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=critical-strong, Progress=incomplete",
+        "name": "Tone=critical-strong, Progress=none",
         "row": 10,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=critical-strong, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/critical-strong",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/critical-strong",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=critical-strong, Progress=incomplete",
+        "row": 10,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=critical-strong, Progress=incomplete",
@@ -2782,7 +3178,7 @@ const COMPONENTS = [
       {
         "name": "Tone=critical-strong, Progress=partiallyComplete",
         "row": 10,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=critical-strong, Progress=partiallyComplete",
@@ -2871,7 +3267,7 @@ const COMPONENTS = [
       {
         "name": "Tone=critical-strong, Progress=complete",
         "row": 10,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=critical-strong, Progress=complete",
@@ -2958,9 +3354,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=attention-strong, Progress=incomplete",
+        "name": "Tone=attention-strong, Progress=none",
         "row": 11,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=attention-strong, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/attention-strong",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/attention-strong",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=attention-strong, Progress=incomplete",
+        "row": 11,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=attention-strong, Progress=incomplete",
@@ -3049,7 +3481,7 @@ const COMPONENTS = [
       {
         "name": "Tone=attention-strong, Progress=partiallyComplete",
         "row": 11,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=attention-strong, Progress=partiallyComplete",
@@ -3138,7 +3570,7 @@ const COMPONENTS = [
       {
         "name": "Tone=attention-strong, Progress=complete",
         "row": 11,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=attention-strong, Progress=complete",
@@ -3225,9 +3657,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=read-only, Progress=incomplete",
+        "name": "Tone=read-only, Progress=none",
         "row": 12,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=read-only, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/read-only",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/read-only",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=read-only, Progress=incomplete",
+        "row": 12,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=read-only, Progress=incomplete",
@@ -3316,7 +3784,7 @@ const COMPONENTS = [
       {
         "name": "Tone=read-only, Progress=partiallyComplete",
         "row": 12,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=read-only, Progress=partiallyComplete",
@@ -3405,7 +3873,7 @@ const COMPONENTS = [
       {
         "name": "Tone=read-only, Progress=complete",
         "row": 12,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=read-only, Progress=complete",
@@ -3492,9 +3960,45 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Tone=enabled, Progress=incomplete",
+        "name": "Tone=enabled, Progress=none",
         "row": 13,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Tone=enabled, Progress=none",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "paddingTop": "p/space-050",
+            "paddingBottom": "p/space-050",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200"
+          },
+          "fill": "imported/badge/root/background-color/enabled",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Fulfilled",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "textFill": "imported/badge/label/color/enabled",
+              "lineHeight": 16
+            }
+          ]
+        }
+      },
+      {
+        "name": "Tone=enabled, Progress=incomplete",
+        "row": 13,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Tone=enabled, Progress=incomplete",
@@ -3583,7 +4087,7 @@ const COMPONENTS = [
       {
         "name": "Tone=enabled, Progress=partiallyComplete",
         "row": 13,
-        "col": 1,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Tone=enabled, Progress=partiallyComplete",
@@ -3672,7 +4176,7 @@ const COMPONENTS = [
       {
         "name": "Tone=enabled, Progress=complete",
         "row": 13,
-        "col": 2,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Tone=enabled, Progress=complete",
@@ -4238,6 +4742,7 @@ async function amendSet(set, C) {
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
+    applyMarginBox(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }

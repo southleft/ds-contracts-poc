@@ -17,13 +17,14 @@ const meta = {
     disabled: { control: 'boolean', description: 'Disables the tag' },
     accessibilityLabel: { control: 'text', description: 'A string to use when tag has more than textual content' },
     url: { control: 'text', description: 'Url to navigate to when tag is clicked or keypressed.' },
-    size: { control: 'select', options: ['large'], description: 'Tag size (round 4: real Tag API — only \'large\' exists; unset renders the default compact size).' },
+    size: { control: 'select', options: ['none', 'large'], description: 'Tag size (round 4: real Tag API — only \'large\' exists; unset renders the default compact size).' },
     removable: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `onRemove` ({"$callback":true}); the created subtree is carried as parts gated on this prop.' },
     clickable: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `onClick` ({"$callback":true}); the created subtree is carried as parts gated on this prop.' },
     linked: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `url` ("https://example.com"); the created subtree is carried as parts gated on this prop.' },
   },
   args: {
     disabled: false,
+    size: 'none',
     removable: false,
     clickable: false,
     linked: false,
@@ -34,6 +35,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
+
+export const None: Story = {
+  args: { size: 'none' },
+};
 
 export const Large: Story = {
   args: { size: 'large' },
@@ -54,6 +59,7 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
+        <Tag size="none" />
         <Tag size="large" />
     </div>
   ),
