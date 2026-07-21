@@ -1,0 +1,210 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.text-input",
+  "name": "TextInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx TextInput \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the optional/required/disabled/clear/autofocus flags are verbatim (83% facts-carried); description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "description": "The input type.",
+      "type": {
+        "enum": [
+          "text",
+          "password",
+          "email"
+        ]
+      },
+      "default": "text",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "text": "Text",
+            "password": "Password",
+            "email": "Email"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The field label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Email"
+    },
+    {
+      "name": "size",
+      "description": "The field size.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "description": "Placeholder text.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      },
+      "default": "you@example.com"
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the field is required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the field is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "hasClear",
+      "description": "Whether the field shows a clear button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Clear"
+        },
+        "code": {
+          "prop": "hasClear"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "tokens": {
+        "color": "{color-text-primary}",
+        "gap": "{spacing-1}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}"
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          },
+          "tokens": {
+            "color": "{color-text-secondary}",
+            "font-size": "{font-size-xs}"
+          }
+        },
+        "field": {
+          "element": "div",
+          "tokens": {
+            "background-color": "{color-background-surface}",
+            "border-color": "{color-border}",
+            "border-width": "{border-width}",
+            "border-radius": "{radius-element}",
+            "color": "{color-text-secondary}",
+            "padding-block": "{spacing-2}",
+            "padding-inline": "{spacing-3}"
+          },
+          "tokensByProp": {
+            "prop": "size",
+            "map": {
+              "sm": {
+                "padding-block": "{spacing-1}",
+                "padding-inline": "{spacing-2}"
+              },
+              "md": {
+                "padding-block": "{spacing-2}",
+                "padding-inline": "{spacing-3}"
+              },
+              "lg": {
+                "padding-block": "{spacing-3}",
+                "padding-inline": "{spacing-4}"
+              }
+            }
+          },
+          "content": {
+            "prop": "placeholder"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "TextInput"
+    }
+  }
+}

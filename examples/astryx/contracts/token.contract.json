@@ -1,0 +1,220 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.token",
+  "name": "Token",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Token (Tag/Chip) \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Token/Token.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). size + color axes and the disabled/optional flags are verbatim; href link-mode and the description/isLabelHidden a11y text are dropped (documented). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Tag label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Tag"
+    },
+    {
+      "name": "size",
+      "description": "The size of the tag.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "description": "The tag color.",
+      "type": {
+        "enum": [
+          "default",
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "teal",
+          "cyan",
+          "blue",
+          "purple",
+          "pink",
+          "gray"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "red": "Red",
+            "orange": "Orange",
+            "yellow": "Yellow",
+            "green": "Green",
+            "teal": "Teal",
+            "cyan": "Cyan",
+            "blue": "Blue",
+            "purple": "Purple",
+            "pink": "Pink",
+            "gray": "Gray"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the tag is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "background-color": "{color-background-gray}",
+        "color": "{color-text-primary}",
+        "border-radius": "{radius-full}",
+        "gap": "{spacing-1}",
+        "font-family": "{font-family-body}",
+        "font-weight": "{font-weight-medium}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "default": {
+              "background-color": "{color-background-muted}",
+              "color": "{color-text-primary}"
+            },
+            "red": {
+              "background-color": "{color-background-red}",
+              "color": "{color-text-red}"
+            },
+            "orange": {
+              "background-color": "{color-background-orange}",
+              "color": "{color-text-orange}"
+            },
+            "yellow": {
+              "background-color": "{color-background-yellow}",
+              "color": "{color-text-yellow}"
+            },
+            "green": {
+              "background-color": "{color-background-green}",
+              "color": "{color-text-green}"
+            },
+            "teal": {
+              "background-color": "{color-background-teal}",
+              "color": "{color-text-teal}"
+            },
+            "cyan": {
+              "background-color": "{color-background-cyan}",
+              "color": "{color-text-cyan}"
+            },
+            "blue": {
+              "background-color": "{color-background-blue}",
+              "color": "{color-text-blue}"
+            },
+            "purple": {
+              "background-color": "{color-background-purple}",
+              "color": "{color-text-purple}"
+            },
+            "pink": {
+              "background-color": "{color-background-pink}",
+              "color": "{color-text-pink}"
+            },
+            "gray": {
+              "background-color": "{color-background-gray}",
+              "color": "{color-text-gray}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "sm": {
+              "padding-block": "{spacing-0-5}",
+              "padding-inline": "{spacing-1-5}",
+              "font-size": "{font-size-2xs}"
+            },
+            "md": {
+              "padding-block": "{spacing-0-5}",
+              "padding-inline": "{spacing-2}",
+              "font-size": "{font-size-xs}"
+            },
+            "lg": {
+              "padding-block": "{spacing-1}",
+              "padding-inline": "{spacing-3}",
+              "font-size": "{font-size-sm}"
+            }
+          }
+        }
+      ],
+      "parts": {
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Token"
+    }
+  }
+}

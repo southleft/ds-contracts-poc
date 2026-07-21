@@ -1,0 +1,191 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.progress-bar",
+  "name": "ProgressBar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx ProgressBar \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/ProgressBar/ProgressBar.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). value/max/label/variant and the value-label/indeterminate/disabled flags are verbatim (89% facts-carried, the richest census extraction). STRUCTURAL: the track/fill render as styled boxes, not a native <progress>. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "description": "Current progress value.",
+      "type": "number",
+      "default": 40,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "max",
+      "description": "Maximum progress value.",
+      "type": "number",
+      "default": 100,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max"
+        },
+        "code": {
+          "prop": "max"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible label for the progress bar.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Uploading"
+    },
+    {
+      "name": "variant",
+      "description": "The fill tone.",
+      "type": {
+        "enum": [
+          "accent",
+          "success",
+          "warning",
+          "neutral",
+          "error"
+        ]
+      },
+      "default": "accent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "accent": "Accent",
+            "success": "Success",
+            "warning": "Warning",
+            "neutral": "Neutral",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "isIndeterminate",
+      "description": "Whether progress is indeterminate.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Indeterminate"
+        },
+        "code": {
+          "prop": "isIndeterminate"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the progress bar is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "tokens": {
+        "color": "{color-text-secondary}",
+        "gap": "{spacing-1}",
+        "width": "{spacing-12}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-xs}"
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        },
+        "track": {
+          "element": "div",
+          "tokens": {
+            "background-color": "{color-track}",
+            "border-radius": "{radius-full}",
+            "height": "{spacing-1}"
+          },
+          "parts": {
+            "fill": {
+              "element": "div",
+              "tokens": {
+                "background-color": "{color-accent}",
+                "border-radius": "{radius-full}",
+                "height": "{spacing-1}"
+              },
+              "tokensByProp": {
+                "prop": "variant",
+                "map": {
+                  "accent": {
+                    "background-color": "{color-accent}"
+                  },
+                  "success": {
+                    "background-color": "{color-success}"
+                  },
+                  "warning": {
+                    "background-color": "{color-warning}"
+                  },
+                  "neutral": {
+                    "background-color": "{color-neutral}"
+                  },
+                  "error": {
+                    "background-color": "{color-error}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "ProgressBar"
+    }
+  }
+}

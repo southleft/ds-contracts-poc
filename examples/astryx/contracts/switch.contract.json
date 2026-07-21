@@ -1,0 +1,126 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Switch \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; value, description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The switch label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Enable notifications"
+    },
+    {
+      "name": "labelPosition",
+      "description": "Where the label sits relative to the track.",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "default": "end",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Position",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "labelPosition"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the switch is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the switch is required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "color": "{color-text-primary}",
+        "gap": "{spacing-2}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}"
+      },
+      "parts": {
+        "track": {
+          "element": "span",
+          "tokens": {
+            "background-color": "{color-background-muted}",
+            "border-radius": "{radius-full}",
+            "width": "{spacing-8}",
+            "height": "{spacing-5}"
+          }
+        },
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Switch"
+    }
+  }
+}
