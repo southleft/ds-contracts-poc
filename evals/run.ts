@@ -4889,8 +4889,14 @@ const cases: Case[] = [
     // instances) AND headless-executes in a VM — seeding token variables
     // (buildTokensScript) then syncing the transitive deps in order
     // (Avatar→Button→Badge→Card, incl. slot.accepts INSTANCE_SWAP targets)
-    // before the composite builds its nested instance composition. examples/
-    // is not copied into scratch (see astryx-dev-journey) — stage it in first.
+    // before the composite builds its nested instance composition. THE NORTH
+    // STAR is the 6th check: the built canvas COMPONENT node tree is walked and
+    // asserted to line up with the CONTRACT anatomy PART-FOR-PART (every part at
+    // its declared nesting path; body.summary a nested ds.card INSTANCE;
+    // body.tags N repeated ds.badge INSTANCEs; dialog+backdrop sibling roots) —
+    // "the anatomy of a coded component lines up with the anatomy of a canvas-
+    // based Figma component." examples/ is not copied into scratch (see
+    // astryx-dev-journey) — stage it in first.
     id: 'depth-composite-child-collection',
     claim: 'C8-journey',
     run: () => {
@@ -4900,7 +4906,7 @@ const cases: Case[] = [
         { recursive: true },
       );
       const r = run(TSX, ['examples/depth-composite/emit-composite-receipt.ts']);
-      if (r.status !== 0 || !r.out.includes('all 5 surfaces emitted + EXECUTED')) {
+      if (r.status !== 0 || !r.out.includes('5 surfaces emitted + EXECUTED, canvas anatomy ≡ code anatomy')) {
         throw new Error(`Stage C composite receipt failed:\n${r.out.slice(0, 1600)}`);
       }
       for (const surface of [
@@ -4909,12 +4915,13 @@ const cases: Case[] = [
         'emit-html —',
         'emit-figma-script (referee)',
         'emit-figma-script (headless)',
+        'anatomy-parity (code ≡ canvas)',
       ]) {
         if (!r.out.includes(`✔ ${surface}`)) {
-          throw new Error(`Stage C composite: surface "${surface}" did not pass:\n${r.out.slice(0, 1600)}`);
+          throw new Error(`Stage C composite: check "${surface}" did not pass:\n${r.out.slice(0, 1600)}`);
         }
       }
-      console.log('depth-composite-child-collection: multi-root Modal body holds a composed ds.card + a ds.badge collection REPEATED over items — renders on React/inline/HTML and headless-executes as figma-script (token vars seeded, deps Avatar→Button→Badge→Card synced, nested instance composition built); ZERO core/emit-*.ts changes — composition was latent in the multi-root channels');
+      console.log('depth-composite-child-collection: multi-root Modal body holds a composed ds.card + a ds.badge collection REPEATED over items — renders on React/inline/HTML and headless-executes as figma-script; NORTH STAR: the built canvas COMPONENT anatomy lines up with the contract PART-FOR-PART (body.summary a nested ds.card INSTANCE, body.tags 3 repeated ds.badge INSTANCEs, dialog+backdrop sibling roots); ZERO core/emit-*.ts changes — composition was latent in the multi-root channels');
     },
   },
   {

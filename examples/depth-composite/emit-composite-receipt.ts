@@ -293,8 +293,10 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   let ranHeadless = false;
   let runNote = '';
   let syncedDeps: string[] = [];
+  let parityOk = false;
+  let parityNote = '';
   try {
-    const { figma } = createFigmaMock();
+    const { figma, root } = createFigmaMock();
     const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
     // Component sync scripts BIND token variables (need('radius/avatar')) but do
     // not CREATE them — the real designer flow runs the token-setup script
@@ -317,6 +319,57 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
     }
     await vm.runInContext(`(async () => {\n${figmaScript}\n})()`, ctx, { timeout: 120_000 });
     ranHeadless = true;
+
+    // NORTH STAR — the CANVAS anatomy lines up with the CONTRACT (code) anatomy
+    // PART-FOR-PART. The composite builds as a real node tree in the mocked
+    // Figma document; walk it and assert every contract part exists at its
+    // DECLARED nesting path, and that the composed child + repeated collection
+    // are REAL nested INSTANCE nodes (a ds.card instance + N ds.badge instances)
+    // — not flattened leaves. This is the claim the whole depth build exists to
+    // prove: "the anatomy of a coded component lines up with the anatomy of a
+    // canvas-based Figma component." (Single-variant components build as a bare
+    // COMPONENT, not a COMPONENT_SET.)
+    type TNode = { name?: string; type?: string; children?: TNode[] };
+    const findNode = (n: TNode, pred: (x: TNode) => boolean): TNode | null => {
+      if (pred(n)) return n;
+      for (const c of n.children ?? []) { const r = findNode(c, pred); if (r) return r; }
+      return null;
+    };
+    const built = findNode(root as TNode, (n) => n.type === 'COMPONENT' && n.name === name);
+    const base = (s?: string) => (s ?? '').replace(/ \d+$/, ''); // "tags 2" -> "tags"
+    const childNamed = (node: TNode | null, nm: string): TNode | null =>
+      (node?.children ?? []).find((c) => base(c.name) === nm) ?? null;
+    // Every named part in the contract anatomy, as a nesting path.
+    const partPaths: string[][] = [];
+    const walkAnatomy = (
+      parts: Record<string, { parts?: Record<string, unknown> }> | undefined,
+      prefix: string[],
+    ): void => {
+      for (const [k, v] of Object.entries(parts ?? {})) {
+        const p = [...prefix, k];
+        partPaths.push(p);
+        walkAnatomy(v.parts as Parameters<typeof walkAnatomy>[0], p);
+      }
+    };
+    walkAnatomy(contract.anatomy as Parameters<typeof walkAnatomy>[0], []);
+    const missing: string[] = [];
+    for (const p of partPaths) {
+      let cur: TNode | null = built;
+      for (const seg of p) { cur = childNamed(cur, seg); if (!cur) break; }
+      if (!cur) missing.push(p.join(' > '));
+    }
+    const body = childNamed(childNamed(built, 'dialog'), 'body');
+    const summary = childNamed(body, 'summary');
+    const tagInstances = (body?.children ?? []).filter((c) => base(c.name) === 'tags' && c.type === 'INSTANCE');
+    const topRootNames = (built?.children ?? []).map((c) => c.name ?? '');
+    parityOk =
+      !!built && missing.length === 0 &&
+      summary?.type === 'INSTANCE' &&
+      tagInstances.length === SAMPLE.length &&
+      topRootNames.includes('dialog') && topRootNames.includes('backdrop');
+    parityNote = parityOk
+      ? `built COMPONENT anatomy lines up with the contract PART-FOR-PART (${partPaths.length} parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is ${tagInstances.length} repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots`
+      : `MISMATCH — built=${!!built}; missing [${missing.join('; ')}]; summary=${summary?.type ?? 'absent'}; tagInstances=${tagInstances.length}/${SAMPLE.length}; roots=[${topRootNames.join(', ')}]`;
   } catch (e) {
     runNote = String(e instanceof Error ? e.message : e);
   }
@@ -324,6 +377,8 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
     ranHeadless
       ? `seeded token variables (buildTokensScript) then synced deps [${syncedDeps.join(' → ')}] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built`
       : `threw — ${runNote}`);
+  check('anatomy-parity (code ≡ canvas)', parityOk,
+    ranHeadless ? parityNote : 'skipped — headless run did not complete');
 }
 
 // ---------------------------------------------------------------------------
@@ -360,9 +415,9 @@ instances on every static surface (the sample), never a single placeholder.
 A genuinely single-root contract, and every existing \`repeat\` user, takes the
 untouched path — golden output is byte-for-byte unchanged.
 
-## Proof (${results.filter((r) => r.ok).length}/${results.length} surfaces)
+## Proof (${results.filter((r) => r.ok).length}/${results.length} checks — 5 surfaces + canvas≡code anatomy parity)
 
-| surface | pass | what executed |
+| check | pass | what executed |
 |---|---|---|
 ${rows}
 
@@ -386,4 +441,4 @@ if (failures.length > 0) {
   console.error(`\n✘ Stage C composite receipt FAILED:\n${failures.map((f) => `  - ${f}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`\n✔ Stage C composite: all ${results.length} surfaces emitted + EXECUTED → examples/depth-composite/RECEIPT.md`);
+console.log(`\n✔ Stage C composite: 5 surfaces emitted + EXECUTED, canvas anatomy ≡ code anatomy (${results.length} checks) → examples/depth-composite/RECEIPT.md`);

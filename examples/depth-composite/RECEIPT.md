@@ -28,15 +28,16 @@ instances on every static surface (the sample), never a single placeholder.
 A genuinely single-root contract, and every existing `repeat` user, takes the
 untouched path — golden output is byte-for-byte unchanged.
 
-## Proof (5/5 surfaces)
+## Proof (6/6 checks — 5 surfaces + canvas≡code anatomy parity)
 
-| surface | pass | what executed |
+| check | pass | what executed |
 |---|---|---|
 | emit-react | ✓ | rendered a real modal whose body holds a composed <Card> + the live items array mapped to 3 <Badge> children (order preserved), sibling backdrop, both root classes, no NaN |
 | emit-react-inline | ✓ | resolved-literal variant renders the composed card + the observed sample as 3 fixed Badge instances, no NaN |
 | emit-html | ✓ | static markup carries the composed card + 3 sampled badges inside the dialog body, backdrop sibling, no React syntax |
 | emit-figma-script (referee) | ✓ | COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + 3 repeated tag instances [summary, tags, tags 2, tags 3] |
 | emit-figma-script (headless) | ✓ | seeded token variables (buildTokensScript) then synced deps [Avatar → Button → Badge → Card] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built |
+| anatomy-parity (code ≡ canvas) | ✓ | built COMPONENT anatomy lines up with the contract PART-FOR-PART (13 parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is 3 repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots |
 
 ## Emitted artifacts (committed as receipts)
 
