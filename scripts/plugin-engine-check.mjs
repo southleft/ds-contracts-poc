@@ -268,4 +268,40 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log('✔ PR dry-run plan: 4 named REST steps, deterministic branch, session-only token note — zero network');
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run)');
+// --- N. multi-root composite (depth Stage C) builds via the LIVE plugin path
+// The exact path `ds-contracts figma push` + the plugin's Receive-by-code
+// trigger: parse a CONTRACTS-BUNDLE, planGenerate (tokens first, deps ordered),
+// execute in the mock, and confirm the advanced composite's anatomy — a
+// multi-root Modal whose body holds a nested ds.card INSTANCE and a tags ROW of
+// N ds.badge INSTANCEs. Proves the packaged engine (window.DSC) — not just the
+// raw emitter — reproduces code≡canvas for advanced composition.
+{
+  const composite = JSON.parse(read('examples/depth-composite/composite-modal.contract.json'));
+  const deps = ['card', 'badge', 'avatar', 'button'].map((n) =>
+    JSON.parse(read(`contracts/${n}.contract.json`)),
+  );
+  const bundleText = JSON.stringify({ type: 'CONTRACTS-BUNDLE', version: 1, contracts: [composite, ...deps] });
+  const parsed = DSC.parseIncomingText(bundleText);
+  assert(parsed.ok && parsed.kind === 'bundle', 'composite CONTRACTS-BUNDLE parses');
+  const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '' });
+  assert(plan.ok, `composite plan accepted (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
+  assert(plan.steps[0].kind === 'tokens', 'composite plan runs tokens first');
+  for (const step of plan.steps) await runScript(step.code);
+  const built = root.findOne((n) => n.type === 'COMPONENT' && n.name === 'CompositeModal');
+  assert(built, 'the plugin engine built the CompositeModal COMPONENT');
+  const b = (s) => (s ?? '').replace(/ \d+$/, '');
+  const kid = (n, nm) => (n?.children ?? []).find((c) => b(c.name) === nm) ?? null;
+  const dialog = kid(built, 'dialog'), body = kid(dialog, 'body');
+  const summary = kid(body, 'summary'), tagsRow = kid(body, 'tags');
+  const tags = (tagsRow?.children ?? []).filter((c) => b(c.name) === 'tag' && c.type === 'INSTANCE');
+  const roots = (built.children ?? []).map((c) => c.name);
+  assert(roots.includes('dialog') && roots.includes('backdrop'), 'composite has dialog+backdrop sibling roots');
+  assert(summary?.type === 'INSTANCE', 'body.summary is a nested ds.card INSTANCE');
+  assert(tagsRow?.type === 'FRAME' && tags.length === 3, 'body.tags is a row FRAME of 3 ds.badge INSTANCEs');
+  assert(built.getSharedPluginData('ds_contracts', 'contractId') === 'ds.composite-modal', 'composite identity marker recorded');
+  console.log(
+    `✔ plugin path — multi-root composite: window.DSC parsed the pushed bundle, planned ${plan.steps.length} steps (tokens → deps → composite), executed in the mock, built CompositeModal {dialog, backdrop} with a nested ds.card summary INSTANCE + a tags row of ${tags.length} ds.badge INSTANCEs (code≡canvas, the live Receive result)`,
+  );
+}
+
+console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path)');
