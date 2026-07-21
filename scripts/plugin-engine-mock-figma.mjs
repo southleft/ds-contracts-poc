@@ -341,7 +341,24 @@ export function createFigmaMock() {
       n.pointCount = 3;
       return n;
     },
-    createNodeFromSvg: () => {
+    createNodeFromSvg: (svg) => {
+      // Real Figma refuses malformed SVG with "Failed to convert SVG file".
+      // The old no-op mock accepted anything, which let an emitter bug (an
+      // <svg> with two `fill` attributes) pass every headless gate and only
+      // fail on a live canvas. Validate the way the real API would: non-empty,
+      // and NO duplicate attributes on any tag (invalid XML).
+      if (typeof svg !== 'string' || svg.trim() === '') {
+        throw new Error('in createNodeFromSvg: Failed to convert SVG file (empty)');
+      }
+      for (const tag of svg.match(/<[a-zA-Z][^>]*>/g) ?? []) {
+        const seen = new Set();
+        for (const m of tag.matchAll(/[\s"']([a-zA-Z_:][\w:.-]*)\s*=/g)) {
+          if (seen.has(m[1])) {
+            throw new Error(`in createNodeFromSvg: Failed to convert SVG file (duplicate attribute "${m[1]}")`);
+          }
+          seen.add(m[1]);
+        }
+      }
       const n = new MockNode('FRAME');
       n.resize(16, 16);
       return n;

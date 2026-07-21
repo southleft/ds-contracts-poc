@@ -122,7 +122,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#1D4ED8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/info/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -233,7 +233,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#1D4ED8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/info/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -275,7 +275,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/feedback/success/foreground"
             },
             {
@@ -344,7 +344,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/success/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -386,7 +386,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/feedback/success/foreground"
             },
             {
@@ -455,7 +455,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/success/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -566,7 +566,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#B45309\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/warning/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -677,7 +677,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#B45309\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/warning/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -719,7 +719,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
               "svgPaintVar": "color/feedback/error/foreground"
             },
             {
@@ -788,7 +788,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/error/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
@@ -830,7 +830,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
               "svgPaintVar": "color/feedback/error/foreground"
             },
             {
@@ -899,7 +899,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/feedback/error/foreground",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false

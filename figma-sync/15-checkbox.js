@@ -228,7 +228,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "checkGlyph",
-                  "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><polyline points=\"4.6,10.4 8.2,14 15.4,6.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><polyline points=\"4.6,10.4 8.2,14 15.4,6.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                   "svgPaintVar": "color/checkbox/icon",
                   "iconSize": 12
                 }
@@ -320,7 +320,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "checkGlyph",
-                  "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><polyline points=\"4.6,10.4 8.2,14 15.4,6.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><polyline points=\"4.6,10.4 8.2,14 15.4,6.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                   "svgPaintVar": "color/checkbox/icon",
                   "iconSize": 12
                 }
@@ -412,7 +412,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "dashGlyph",
-                  "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><line x1=\"5.5\" y1=\"10\" x2=\"14.5\" y2=\"10\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><line x1=\"5.5\" y1=\"10\" x2=\"14.5\" y2=\"10\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/checkbox/icon",
                   "iconSize": 12
                 }
@@ -504,7 +504,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "dashGlyph",
-                  "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><line x1=\"5.5\" y1=\"10\" x2=\"14.5\" y2=\"10\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"><line x1=\"5.5\" y1=\"10\" x2=\"14.5\" y2=\"10\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/checkbox/icon",
                   "iconSize": 12
                 }

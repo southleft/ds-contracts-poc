@@ -44,7 +44,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "separatorIcon",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 12,
               "visibleProp": "Separator",

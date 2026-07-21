@@ -38,7 +38,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "prevButton",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 14
             },
@@ -149,7 +149,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "nextButton",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 14
             }
@@ -175,7 +175,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "prevButton",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 14
             },
@@ -193,7 +193,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "nextButton",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 14
             }
@@ -219,7 +219,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "prevButton",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 14
             },
@@ -315,7 +315,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "nextButton",
-              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "color/text/secondary",
               "iconSize": 14
             }
@@ -1281,7 +1281,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "arc",
-              "svg": "<svg fill=\"#2563EB\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "svgPaintVar": "color/action/primary/background"
             }
           ]
@@ -2496,7 +2496,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
@@ -2600,7 +2600,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
@@ -2704,7 +2704,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
@@ -2832,7 +2832,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
@@ -2936,7 +2936,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",
@@ -3040,7 +3040,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
                   "svgPaintVar": "color/action/danger/background",
                   "iconSize": 10,
                   "visibleProp": "Required",

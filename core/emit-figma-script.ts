@@ -1497,7 +1497,16 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   const paintPath = ctx.glyphFillPath ?? ctx.textFillPath;
   const hex = paintPath ? String(resolveLiteral(paintPath)) : '#000000';
   let out = svg.replaceAll('currentColor', hex);
-  if (paintPath && !/<(path|circle|rect|polygon|ellipse|g)[^>]*\sfill=/.test(out)) {
+  // Bake the resolved paint as a `fill` ONLY for icons that declare no fill
+  // anywhere — pure CSS-inherited glyphs. If the <svg> tag itself already sets
+  // fill (e.g. stroke-based icons carry `fill="none"`, coloured via the
+  // currentColor→hex pass above) or a child does, injecting a second `fill`
+  // produces an <svg> with two `fill` attributes — invalid XML that the REAL
+  // Figma createNodeFromSvg refuses ("Failed to convert SVG file"). The mock
+  // parsed it leniently, so this only surfaced on a live canvas.
+  const svgTagHasFill = /<svg\b[^>]*\sfill=/.test(out);
+  const childHasFill = /<(path|circle|rect|polygon|ellipse|g)[^>]*\sfill=/.test(out);
+  if (paintPath && !svgTagHasFill && !childHasFill) {
     out = out.replace(/^<svg /, `<svg fill="${hex}" `);
   }
   if (part.icon!.size) {
