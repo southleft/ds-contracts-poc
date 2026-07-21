@@ -34,7 +34,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
-import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import { ContractSchema, componentRefsOf, type Contract } from '../../scripts/contract-schema.js';
 import { emitFigmaScript } from '../../core/emit-figma-script.js';
 import { emitHtml } from '../../core/emit-html.js';
 import { emitReact } from '../../core/emit-react.js';
@@ -253,11 +253,42 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   check('emit-figma-script (referee)', refereeOk,
     `COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + ${SAMPLE.length} repeated tag instances [${bodyKids.join(', ')}]`);
 
+  // A composite that EMBEDS child instances (ds.card, ds.badge, and ds.card's
+  // own ds.avatar) needs those component sets to already exist in the file when
+  // the composite's sync runs — findComponentByName('Card'/'Badge') resolves
+  // against previously-synced sets (real dependency ordering; the plugin syncs
+  // leaves before composites). cross-import-check only COMPILES; modal-receipt
+  // had no instances — so headless-executing a composite with dependencies is
+  // this receipt's novel proof. Collect the transitive component deps in
+  // dependency order (deps before dependents) and sync each into the SAME VM.
+  const depOrder: Contract[] = [];
+  const seen = new Set<string>();
+  const visit = (c: Contract): void => {
+    for (const { ref } of componentRefsOf(c)) {
+      const dep = contracts.get(ref.id);
+      if (!dep || seen.has(dep.id)) continue;
+      seen.add(dep.id);
+      visit(dep); // dep's own deps first (ds.card → ds.avatar)
+      depOrder.push(dep);
+    }
+  };
+  visit(contract);
+
   let ranHeadless = false;
   let runNote = '';
+  let syncedDeps: string[] = [];
   try {
     const { figma } = createFigmaMock();
     const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    // Each emitFigmaScript is a full standalone script (re-declares COMPONENTS,
+    // findComponentByName, …), so wrap each in its OWN async IIFE scope — the
+    // declarations are isolated but the mocked `figma` file state is shared, so
+    // each synced set persists for the next script to find.
+    for (const dep of depOrder) {
+      const depScript = emitFigmaScript(dep, { tokens, icons, contracts });
+      await vm.runInContext(`(async () => {\n${depScript}\n})()`, ctx, { timeout: 120_000 });
+      syncedDeps.push(dep.name);
+    }
     await vm.runInContext(`(async () => {\n${figmaScript}\n})()`, ctx, { timeout: 120_000 });
     ranHeadless = true;
   } catch (e) {
@@ -265,7 +296,7 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   }
   check('emit-figma-script (headless)', ranHeadless,
     ranHeadless
-      ? 'the whole script ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built'
+      ? `synced deps [${syncedDeps.join(' → ')}] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built`
       : `threw — ${runNote}`);
 }
 

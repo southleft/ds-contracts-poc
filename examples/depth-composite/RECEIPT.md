@@ -36,7 +36,7 @@ untouched path — golden output is byte-for-byte unchanged.
 | emit-react-inline | ✓ | resolved-literal variant renders the composed card + the observed sample as 3 fixed Badge instances, no NaN |
 | emit-html | ✓ | static markup carries the composed card + 3 sampled badges inside the dialog body, backdrop sibling, no React syntax |
 | emit-figma-script (referee) | ✓ | COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + 3 repeated tag instances [summary, tags, tags 2, tags 3] |
-| emit-figma-script (headless) | ✘ | threw — Error: Dependency component not found in file: Card (sync it first) |
+| emit-figma-script (headless) | ✘ | threw — Error: Missing variable: radius/avatar |
 
 ## Emitted artifacts (committed as receipts)
 
