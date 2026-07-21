@@ -1,6 +1,6 @@
 {
-  "passed": 141,
-  "total": 141,
+  "passed": 142,
+  "total": 142,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -705,6 +705,11 @@
     {
       "id": "simple-component-anatomy-unchanged",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "astryx-dev-journey",
+      "claim": "C8-journey",
       "pass": true
     }
   ]

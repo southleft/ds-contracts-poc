@@ -1,0 +1,155 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.card",
+  "name": "Card",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Card \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Card/Card.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). The single extracted structural axis (variant, 13 values) is verbatim; children is a materialized content slot (Astryx types Card body as ReactNode, dropped as a node prop). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "The surface tone of the card.",
+      "type": {
+        "enum": [
+          "default",
+          "transparent",
+          "muted",
+          "blue",
+          "cyan",
+          "gray",
+          "green",
+          "orange",
+          "pink",
+          "purple",
+          "red",
+          "teal",
+          "yellow"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "transparent": "Transparent",
+            "muted": "Muted",
+            "blue": "Blue",
+            "cyan": "Cyan",
+            "gray": "Gray",
+            "green": "Green",
+            "orange": "Orange",
+            "pink": "Pink",
+            "purple": "Purple",
+            "red": "Red",
+            "teal": "Teal",
+            "yellow": "Yellow"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Card body (materialized slot).",
+      "type": "text",
+      "default": "Card content",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Body"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "tokens": {
+        "background-color": "{color-background-card}",
+        "color": "{color-text-primary}",
+        "padding-block": "{spacing-4}",
+        "padding-inline": "{spacing-4}",
+        "border-radius": "{radius-container}",
+        "gap": "{spacing-3}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-base}"
+      },
+      "tokensByProp": {
+        "prop": "variant",
+        "map": {
+          "default": {
+            "background-color": "{color-background-card}"
+          },
+          "transparent": {
+            "background-color": "{color-background-body}"
+          },
+          "muted": {
+            "background-color": "{color-background-muted}"
+          },
+          "blue": {
+            "background-color": "{color-background-blue}"
+          },
+          "cyan": {
+            "background-color": "{color-background-cyan}"
+          },
+          "gray": {
+            "background-color": "{color-background-gray}"
+          },
+          "green": {
+            "background-color": "{color-background-green}"
+          },
+          "orange": {
+            "background-color": "{color-background-orange}"
+          },
+          "pink": {
+            "background-color": "{color-background-pink}"
+          },
+          "purple": {
+            "background-color": "{color-background-purple}"
+          },
+          "red": {
+            "background-color": "{color-background-red}"
+          },
+          "teal": {
+            "background-color": "{color-background-teal}"
+          },
+          "yellow": {
+            "background-color": "{color-background-yellow}"
+          }
+        }
+      },
+      "parts": {
+        "body": {
+          "element": "div",
+          "content": {
+            "prop": "children"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Card"
+    }
+  }
+}

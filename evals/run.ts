@@ -4779,6 +4779,60 @@ const cases: Case[] = [
       console.log('simple-component-anatomy-unchanged: Badge/Button/Checkbox descend zero wrappers; multi-root anatomy == single-root anatomy (byte-identical)');
     },
   },
+  {
+    // ASTRYX DEV-JOURNEY pin — the second-system exhibit's runnable tail.
+    // The 10 promoted flagship contracts (examples/astryx/contracts, code-side
+    // extraction of @astryxdesign/core@0.1.6) are the developer-journey input;
+    // this pin asserts the two load-bearing invariants self-contained (no
+    // network, no sandbox): (1) the LOCAL generator turns them into React +
+    // CSS + stories BYTE-STABLE (two runs, identical tree hash), and (2) a
+    // committed Figma sync script COMPILES (the referee: its COMPONENTS
+    // payload parses to the Badge set with the full 14-tone variant grid).
+    // examples/ is not copied into scratch by resetScratch, so the fixture is
+    // staged in first; generation runs through the SAME generateComponents the
+    // ds-contracts CLI's `generate` verb calls.
+    id: 'astryx-dev-journey',
+    claim: 'C8-journey',
+    run: () => {
+      cpSync(path.join(ROOT, 'examples', 'astryx'), path.join(SCRATCH, 'examples', 'astryx'), {
+        recursive: true,
+      });
+      // 1. generate byte-stable — the SAME CLI shell `npm run generate` runs
+      //    (scripts/generate-components.ts), twice, over the 10 flagship
+      //    contracts; the two output trees must hash identical.
+      const genArgs = (out: string) => [
+        'scripts/generate-components.ts',
+        '--contracts', 'examples/astryx/contracts',
+        '--tokens', 'examples/astryx/tokens/astryx.dtcg.json',
+        '--out', out,
+        '--stories',
+      ];
+      const a = run(TSX, genArgs('examples/astryx/.pin-a'));
+      if (a.status !== 0 || !a.out.includes('Generated 10 component(s)')) {
+        throw new Error(`astryx generate (run A) did not emit 10 components:\n${a.out}`);
+      }
+      const b = run(TSX, genArgs('examples/astryx/.pin-b'));
+      if (b.status !== 0) throw new Error(`astryx generate (run B) failed:\n${b.out}`);
+      const hA = hashTree('examples/astryx/.pin-a');
+      const hB = hashTree('examples/astryx/.pin-b');
+      if (hA !== hB) throw new Error(`astryx generate is NOT byte-stable: ${hA} != ${hB}`);
+      // 2. a committed Figma sync script compiles (referee): its COMPONENTS
+      //    payload parses to the Badge set with the full 14-tone variant grid.
+      const comp = parseSyncComponent(
+        readFileSync(path.join(SCRATCH, 'examples', 'astryx', 'figma', 'badge.figma.js'), 'utf8'),
+      );
+      if (comp.setName !== 'Badge' || comp.contractId !== 'astryx.badge' || comp.isSet !== true) {
+        throw new Error(`badge figma set identity wrong: ${JSON.stringify({ s: comp.setName, c: comp.contractId, i: comp.isSet })}`);
+      }
+      if ((comp.variants ?? []).length !== 14) {
+        throw new Error(`badge figma compiled ${(comp.variants ?? []).length} variants, expected 14`);
+      }
+      console.log(
+        `astryx-dev-journey: 10 flagship contracts → generator byte-stable × 2 runs (${hA.slice(0, 12)}…); ` +
+          `committed badge.figma.js compiles to the 14-variant Badge set (referee)`,
+      );
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

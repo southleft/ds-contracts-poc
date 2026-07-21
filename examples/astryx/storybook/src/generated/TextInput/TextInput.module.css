@@ -1,0 +1,54 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/text-input.contract.json (astryx.text-input v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  color: var(--color-text-primary);
+  gap: var(--spacing-1);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.field {
+  background-color: var(--color-background-surface);
+  border-color: var(--color-border);
+  border-width: var(--border-width);
+  border-radius: var(--radius-element);
+  color: var(--color-text-secondary);
+  padding-block: var(--spacing-2);
+  padding-inline: var(--spacing-3);
+  border-style: solid;
+}
+
+.size-sm .field {
+  padding-block: var(--spacing-1);
+}
+
+.size-sm .field {
+  padding-inline: var(--spacing-2);
+}
+
+.size-md .field {
+  padding-block: var(--spacing-2);
+}
+
+.size-md .field {
+  padding-inline: var(--spacing-3);
+}
+
+.size-lg .field {
+  padding-block: var(--spacing-3);
+}
+
+.size-lg .field {
+  padding-inline: var(--spacing-4);
+}

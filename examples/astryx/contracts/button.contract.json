@@ -1,0 +1,215 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Button \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "The visual style variant of the button.",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "ghost",
+          "destructive"
+        ]
+      },
+      "default": "secondary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "ghost": "Ghost",
+            "destructive": "Destructive"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The size of the button.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the button is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isLoading",
+      "description": "Whether the button is in a loading state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Loading"
+        },
+        "code": {
+          "prop": "isLoading"
+        }
+      }
+    },
+    {
+      "name": "isIconOnly",
+      "description": "Renders as a square icon-only button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Icon Only"
+        },
+        "code": {
+          "prop": "isIconOnly"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible, visible button label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Button"
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "color": "{color-text-primary}",
+        "border-radius": "{radius-element}",
+        "gap": "{spacing-1}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}",
+        "font-weight": "{font-weight-semibold}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "primary": {
+              "background-color": "{color-accent}",
+              "color": "{color-on-accent}"
+            },
+            "secondary": {
+              "background-color": "{color-background-muted}",
+              "color": "{color-text-primary}"
+            },
+            "ghost": {
+              "color": "{color-text-primary}"
+            },
+            "destructive": {
+              "background-color": "{color-error}",
+              "color": "{color-on-error}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "sm": {
+              "padding-block": "{spacing-1}",
+              "padding-inline": "{spacing-2}",
+              "min-height": "{size-element-sm}"
+            },
+            "md": {
+              "padding-block": "{spacing-2}",
+              "padding-inline": "{spacing-3}",
+              "min-height": "{size-element-md}"
+            },
+            "lg": {
+              "padding-block": "{spacing-3}",
+              "padding-inline": "{spacing-4}",
+              "min-height": "{size-element-lg}"
+            }
+          }
+        }
+      ],
+      "states": {
+        "focus-visible": {
+          "outline-color": "{color-accent}",
+          "outline-width": "{border-width}"
+        }
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Button"
+    }
+  }
+}

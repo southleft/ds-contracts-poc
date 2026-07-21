@@ -1,0 +1,143 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.checkbox-input",
+  "name": "CheckboxInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx CheckboxInput \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). label + size + the disabled/readonly/optional/required flags are verbatim; description, disabledMessage, htmlName and isLoading are dropped. STRUCTURAL: the control renders as a styled box (div), not a native <input> \u2014 a11y semantics are a Phase A-2 concern. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The checkbox label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Accept terms"
+    },
+    {
+      "name": "size",
+      "description": "The control size.",
+      "type": {
+        "enum": [
+          "sm",
+          "md"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the checkbox is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isReadOnly",
+      "description": "Whether the checkbox is read-only.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Read Only"
+        },
+        "code": {
+          "prop": "isReadOnly"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the checkbox is required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "color": "{color-text-primary}",
+        "gap": "{spacing-2}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}"
+      },
+      "parts": {
+        "control": {
+          "element": "span",
+          "tokens": {
+            "background-color": "{color-background-surface}",
+            "border-color": "{color-border-emphasized}",
+            "border-width": "{border-width}",
+            "border-radius": "{radius-inner}",
+            "width": "{size-element-sm}",
+            "height": "{size-element-sm}"
+          }
+        },
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "CheckboxInput"
+    }
+  }
+}

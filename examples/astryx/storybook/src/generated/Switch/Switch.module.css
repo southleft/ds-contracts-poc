@@ -1,0 +1,22 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/switch.contract.json (astryx.switch v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  color: var(--color-text-primary);
+  gap: var(--spacing-2);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.track {
+  background-color: var(--color-background-muted);
+  border-radius: var(--radius-full);
+  width: var(--spacing-8);
+  height: var(--spacing-5);
+}

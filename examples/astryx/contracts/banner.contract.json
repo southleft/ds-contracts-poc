@@ -1,0 +1,153 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.banner",
+  "name": "Banner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Banner \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). status + container axes and the dismissable/expanded flags are verbatim; the banner message is a materialized text slot (Astryx types it as ReactNode children). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "description": "The banner tone.",
+      "type": {
+        "enum": [
+          "info",
+          "warning",
+          "error",
+          "success"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "info": "Info",
+            "warning": "Warning",
+            "error": "Error",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    },
+    {
+      "name": "container",
+      "description": "How the banner is contained.",
+      "type": {
+        "enum": [
+          "card",
+          "section"
+        ]
+      },
+      "default": "card",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Container",
+          "values": {
+            "card": "Card",
+            "section": "Section"
+          }
+        },
+        "code": {
+          "prop": "container"
+        }
+      }
+    },
+    {
+      "name": "isDismissable",
+      "description": "Whether the banner can be dismissed.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Dismissable"
+        },
+        "code": {
+          "prop": "isDismissable"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Banner message (materialized slot).",
+      "type": "text",
+      "default": "Banner message",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Message"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "color": "{color-text-primary}",
+        "gap": "{spacing-2}",
+        "padding-block": "{spacing-3}",
+        "padding-inline": "{spacing-4}",
+        "border-radius": "{radius-container}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}"
+      },
+      "tokensByProp": {
+        "prop": "status",
+        "map": {
+          "info": {
+            "background-color": "{color-background-blue}",
+            "color": "{color-text-blue}"
+          },
+          "warning": {
+            "background-color": "{color-warning-muted}",
+            "color": "{color-text-primary}"
+          },
+          "error": {
+            "background-color": "{color-error-muted}",
+            "color": "{color-text-primary}"
+          },
+          "success": {
+            "background-color": "{color-success-muted}",
+            "color": "{color-text-primary}"
+          }
+        }
+      },
+      "parts": {
+        "message": {
+          "element": "div",
+          "content": {
+            "prop": "children"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Banner"
+    }
+  }
+}

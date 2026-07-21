@@ -1,0 +1,162 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.slider",
+  "name": "Slider",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Slider \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The slider label.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      },
+      "required": true,
+      "default": "Volume"
+    },
+    {
+      "name": "orientation",
+      "description": "Slider orientation.",
+      "type": {
+        "enum": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "default": "horizontal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Orientation",
+          "values": {
+            "horizontal": "Horizontal",
+            "vertical": "Vertical"
+          }
+        },
+        "code": {
+          "prop": "orientation"
+        }
+      }
+    },
+    {
+      "name": "valueDisplay",
+      "description": "How the current value is shown.",
+      "type": {
+        "enum": [
+          "tooltip",
+          "text",
+          "none"
+        ]
+      },
+      "default": "tooltip",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value Display",
+          "values": {
+            "tooltip": "Tooltip",
+            "text": "Text",
+            "none": "None"
+          }
+        },
+        "code": {
+          "prop": "valueDisplay"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the slider is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the slider is required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "tokens": {
+        "color": "{color-text-secondary}",
+        "gap": "{spacing-2}",
+        "width": "{spacing-12}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-xs}"
+      },
+      "parts": {
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        },
+        "track": {
+          "element": "div",
+          "tokens": {
+            "background-color": "{color-track}",
+            "border-radius": "{radius-full}",
+            "height": "{spacing-1}"
+          },
+          "parts": {
+            "thumb": {
+              "element": "span",
+              "tokens": {
+                "background-color": "{color-accent}",
+                "border-radius": "{radius-full}",
+                "width": "{spacing-4}",
+                "height": "{spacing-4}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Slider"
+    }
+  }
+}

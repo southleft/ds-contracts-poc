@@ -1,0 +1,70 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/card.contract.json (astryx.card v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  background-color: var(--color-background-card);
+  color: var(--color-text-primary);
+  padding-block: var(--spacing-4);
+  padding-inline: var(--spacing-4);
+  border-radius: var(--radius-container);
+  gap: var(--spacing-3);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+}
+
+.variant-default {
+  background-color: var(--color-background-card);
+}
+
+.variant-transparent {
+  background-color: var(--color-background-body);
+}
+
+.variant-muted {
+  background-color: var(--color-background-muted);
+}
+
+.variant-blue {
+  background-color: var(--color-background-blue);
+}
+
+.variant-cyan {
+  background-color: var(--color-background-cyan);
+}
+
+.variant-gray {
+  background-color: var(--color-background-gray);
+}
+
+.variant-green {
+  background-color: var(--color-background-green);
+}
+
+.variant-orange {
+  background-color: var(--color-background-orange);
+}
+
+.variant-pink {
+  background-color: var(--color-background-pink);
+}
+
+.variant-purple {
+  background-color: var(--color-background-purple);
+}
+
+.variant-red {
+  background-color: var(--color-background-red);
+}
+
+.variant-teal {
+  background-color: var(--color-background-teal);
+}
+
+.variant-yellow {
+  background-color: var(--color-background-yellow);
+}

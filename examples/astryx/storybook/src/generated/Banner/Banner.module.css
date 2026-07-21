@@ -1,0 +1,38 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/banner.contract.json (astryx.banner v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  color: var(--color-text-primary);
+  gap: var(--spacing-2);
+  padding-block: var(--spacing-3);
+  padding-inline: var(--spacing-4);
+  border-radius: var(--radius-container);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.status-info {
+  background-color: var(--color-background-blue);
+  color: var(--color-text-blue);
+}
+
+.status-warning {
+  background-color: var(--color-warning-muted);
+  color: var(--color-text-primary);
+}
+
+.status-error {
+  background-color: var(--color-error-muted);
+  color: var(--color-text-primary);
+}
+
+.status-success {
+  background-color: var(--color-success-muted);
+  color: var(--color-text-primary);
+}
