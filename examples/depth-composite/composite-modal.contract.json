@@ -1,0 +1,81 @@
+{
+  "id": "ds.composite-modal",
+  "name": "CompositeModal",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Depth Stage C receipt — a MULTI-ROOT Modal ({dialog, backdrop}) whose BODY holds composed children rather than only static leaf parts: (1) a single composed child (a ds.card component-ref) and (2) a DYNAMIC child-collection — a ds.badge item template repeated over the arrayOf `items` prop (the repeat-over-collection channel). Exercises the dynamic child-collection channel on all four surfaces on top of the multi-root emitter path. NOT a census component and NOT wired into npm run generate / figma:plan — emitted on demand by examples/depth-composite/emit-composite-receipt.ts.",
+  "semantics": { "element": "div" },
+  "props": [
+    {
+      "name": "items",
+      "description": "The dynamic child collection rendered inside the modal body — one ds.badge per record.",
+      "type": { "arrayOf": { "children": "text" } },
+      "bindings": {
+        "figma": { "kind": "NONE" },
+        "code": { "prop": "items" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "dialog": {
+      "attrs": { "role": "dialog", "aria-modal": "true" },
+      "layout": { "display": "flex", "direction": "column" },
+      "parts": {
+        "header": {
+          "layout": { "display": "flex", "direction": "row", "justify": "space-between", "align": "center" },
+          "parts": {
+            "title": { "element": "h2", "text": "Order details" },
+            "close": {
+              "element": "button",
+              "attrs": { "type": "button", "aria-label": "Close" },
+              "icon": { "asset": "close", "size": 20 }
+            }
+          }
+        },
+        "body": {
+          "description": "Stage C: the modal body holds composed children — a single ds.card plus a repeated ds.badge collection.",
+          "layout": { "display": "flex", "direction": "column" },
+          "parts": {
+            "summary": {
+              "description": "A single composed child — a fixed instance of ds.card.",
+              "component": { "id": "ds.card", "props": { "title": "Order summary" } }
+            },
+            "tags": {
+              "description": "The dynamic child-collection channel — a ds.badge template repeated over the arrayOf `items` prop.",
+              "repeat": {
+                "itemsProp": "items",
+                "sample": [
+                  { "children": "Shipping" },
+                  { "children": "Gift wrap" },
+                  { "children": "Priority" }
+                ]
+              },
+              "component": { "id": "ds.badge" }
+            }
+          }
+        },
+        "footer": {
+          "layout": { "display": "flex", "direction": "row", "justify": "end", "align": "center" },
+          "parts": {
+            "cancel": {
+              "element": "button",
+              "attrs": { "type": "button" },
+              "parts": { "cancel-label": { "text": "Cancel" } }
+            },
+            "save": {
+              "element": "button",
+              "attrs": { "type": "button" },
+              "parts": { "save-label": { "text": "Save" } }
+            }
+          }
+        }
+      }
+    },
+    "backdrop": { "declared": { "position": "absolute" } }
+  },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@shopify/polaris", "export": "Modal" }
+  }
+}

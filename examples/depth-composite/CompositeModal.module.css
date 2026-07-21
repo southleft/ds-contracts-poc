@@ -1,0 +1,72 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/composite-modal.contract.json (ds.composite-modal v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+}
+
+.close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.close {
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cancel {
+  display: flex;
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.save {
+  display: flex;
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.backdrop {
+  position: absolute;
+}
