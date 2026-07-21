@@ -4872,6 +4872,52 @@ const cases: Case[] = [
     },
   },
   {
+    // DEPTH STAGE C — the DYNAMIC CHILD-COLLECTION composite. The advanced-
+    // composition frontier on top of the multi-root path: a multi-root Modal
+    // (ds.composite-modal = {dialog, backdrop}) whose BODY holds composed
+    // children rather than only static leaf parts — a single composed ds.card
+    // instance AND a ds.badge template REPEATED over the arrayOf `items` prop.
+    // KEY FINDING this pin locks in: Stage C required ZERO core/emit-*.ts
+    // changes — the `component` + `repeat` channels already lived in every
+    // emitter, so composition was latent in the multi-root gate. This runs the
+    // committed receipt (examples/depth-composite/emit-composite-receipt.ts),
+    // proving each of the four surfaces by EXECUTION: emit-react +
+    // emit-react-inline esbuild-bundle and render (role="dialog" body holds
+    // <Card> + the live items array mapped to N <Badge> children, sibling
+    // backdrop); emit-html the same static markup; emit-figma-script referees
+    // to one variant frame (body = composed summary instance + N repeated tag
+    // instances) AND headless-executes in a VM — seeding token variables
+    // (buildTokensScript) then syncing the transitive deps in order
+    // (Avatar→Button→Badge→Card, incl. slot.accepts INSTANCE_SWAP targets)
+    // before the composite builds its nested instance composition. examples/
+    // is not copied into scratch (see astryx-dev-journey) — stage it in first.
+    id: 'depth-composite-child-collection',
+    claim: 'C8-journey',
+    run: () => {
+      cpSync(
+        path.join(ROOT, 'examples', 'depth-composite'),
+        path.join(SCRATCH, 'examples', 'depth-composite'),
+        { recursive: true },
+      );
+      const r = run(TSX, ['examples/depth-composite/emit-composite-receipt.ts']);
+      if (r.status !== 0 || !r.out.includes('all 5 surfaces emitted + EXECUTED')) {
+        throw new Error(`Stage C composite receipt failed:\n${r.out.slice(0, 1600)}`);
+      }
+      for (const surface of [
+        'emit-react —',
+        'emit-react-inline —',
+        'emit-html —',
+        'emit-figma-script (referee)',
+        'emit-figma-script (headless)',
+      ]) {
+        if (!r.out.includes(`✔ ${surface}`)) {
+          throw new Error(`Stage C composite: surface "${surface}" did not pass:\n${r.out.slice(0, 1600)}`);
+        }
+      }
+      console.log('depth-composite-child-collection: multi-root Modal body holds a composed ds.card + a ds.badge collection REPEATED over items — renders on React/inline/HTML and headless-executes as figma-script (token vars seeded, deps Avatar→Button→Badge→Card synced, nested instance composition built); ZERO core/emit-*.ts changes — composition was latent in the multi-root channels');
+    },
+  },
+  {
     // ASTRYX DEV-JOURNEY pin — the second-system exhibit's runnable tail.
     // The 10 promoted flagship contracts (examples/astryx/contracts, code-side
     // extraction of @astryxdesign/core@0.1.6) are the developer-journey input;

@@ -1,6 +1,6 @@
 {
-  "passed": 144,
-  "total": 144,
+  "passed": 145,
+  "total": 145,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -715,6 +715,11 @@
     {
       "id": "single-root-golden-invariant",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "depth-composite-child-collection",
+      "claim": "C8-journey",
       "pass": true
     },
     {
