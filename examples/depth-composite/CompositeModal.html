@@ -1,0 +1,49 @@
+<!--
+  CompositeModal — static HTML+CSS emitted from contract ds.composite-modal v1.0.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
+-->
+<section class="showcase showcase--composite-modal">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <div class="composite-modal__dialog" role="dialog" aria-modal="true">
+      <div class="composite-modal__header">
+        <h2 class="composite-modal__title">Order details</h2>
+        <button class="composite-modal__close" type="button" aria-label="Close"><span class="composite-modal__close-glyph" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="5" x2="15" y2="15" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke-linecap="round"/></svg></span></button>
+      </div>
+      <div class="composite-modal__body">
+        <article class="card">
+          <header class="card__header">
+            <span class="avatar avatar--size-sm" role="img">
+              AB
+            </span>
+            <span class="card__title">Order summary</span>
+          </header>
+          <div class="card__body"><!-- children slot: no content --></div>
+          <footer class="card__footer"><!-- actions slot: no content --></footer>
+        </article>
+        <span class="badge badge--variant-info" role="status">
+          Shipping
+        </span>
+        <span class="badge badge--variant-info" role="status">
+          Gift wrap
+        </span>
+        <span class="badge badge--variant-info" role="status">
+          Priority
+        </span>
+      </div>
+      <div class="composite-modal__footer">
+        <button class="composite-modal__cancel" type="button">
+          <span class="composite-modal__cancel-label">Cancel</span>
+        </button>
+        <button class="composite-modal__save" type="button">
+          <span class="composite-modal__save-label">Save</span>
+        </button>
+      </div>
+    </div>
+    <div class="composite-modal__backdrop"></div>
+  </div>
+</section>
