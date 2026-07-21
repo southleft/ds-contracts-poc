@@ -28,7 +28,7 @@ instances on every static surface (the sample), never a single placeholder.
 A genuinely single-root contract, and every existing `repeat` user, takes the
 untouched path — golden output is byte-for-byte unchanged.
 
-## Proof (4/5 surfaces)
+## Proof (5/5 surfaces)
 
 | surface | pass | what executed |
 |---|---|---|
@@ -36,7 +36,7 @@ untouched path — golden output is byte-for-byte unchanged.
 | emit-react-inline | ✓ | resolved-literal variant renders the composed card + the observed sample as 3 fixed Badge instances, no NaN |
 | emit-html | ✓ | static markup carries the composed card + 3 sampled badges inside the dialog body, backdrop sibling, no React syntax |
 | emit-figma-script (referee) | ✓ | COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + 3 repeated tag instances [summary, tags, tags 2, tags 3] |
-| emit-figma-script (headless) | ✘ | threw — Error: Missing variable: radius/avatar |
+| emit-figma-script (headless) | ✓ | seeded token variables (buildTokensScript) then synced deps [Avatar → Button → Badge → Card] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built |
 
 ## Emitted artifacts (committed as receipts)
 

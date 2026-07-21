@@ -35,7 +35,7 @@ import vm from 'node:vm';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { ContractSchema, componentRefsOf, type Contract } from '../../scripts/contract-schema.js';
-import { emitFigmaScript } from '../../core/emit-figma-script.js';
+import { createFigmaEngine, emitFigmaScript } from '../../core/emit-figma-script.js';
 import { emitHtml } from '../../core/emit-html.js';
 import { emitReact } from '../../core/emit-react.js';
 import { emitReactInline } from '../../core/emit-react-inline.js';
@@ -261,14 +261,30 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   // had no instances — so headless-executing a composite with dependencies is
   // this receipt's novel proof. Collect the transitive component deps in
   // dependency order (deps before dependents) and sync each into the SAME VM.
+  // A component's transitive deps are BOTH channels the figma emitter turns into
+  // findComponentByName() calls: hard `component` instances (componentRefsOf) AND
+  // slot `accepts` targets — a slot's accepts list becomes an INSTANCE_SWAP whose
+  // preferredValues resolve each accepted set by name (emit-figma-script.ts ~3389),
+  // so those sets must exist in the file too. ds.card's footer accepts
+  // [ds.button, ds.badge] → Button/Badge must be synced before Card, exactly as
+  // the plugin syncs leaves before composites.
+  const refIdsOf = (c: Contract): Set<string> => {
+    const ids = new Set<string>(componentRefsOf(c).map(({ ref }) => ref.id));
+    const walk = (part: { slot?: { accepts?: string[] }; parts?: Record<string, unknown> }): void => {
+      for (const id of part.slot?.accepts ?? []) ids.add(id);
+      for (const child of Object.values(part.parts ?? {})) walk(child as typeof part);
+    };
+    for (const part of Object.values(c.anatomy ?? {})) walk(part as Parameters<typeof walk>[0]);
+    return ids;
+  };
   const depOrder: Contract[] = [];
   const seen = new Set<string>();
   const visit = (c: Contract): void => {
-    for (const { ref } of componentRefsOf(c)) {
-      const dep = contracts.get(ref.id);
+    for (const id of refIdsOf(c)) {
+      const dep = contracts.get(id);
       if (!dep || seen.has(dep.id)) continue;
       seen.add(dep.id);
-      visit(dep); // dep's own deps first (ds.card → ds.avatar)
+      visit(dep); // dep's own deps first (ds.card → ds.avatar, ds.button, ds.badge)
       depOrder.push(dep);
     }
   };
@@ -280,6 +296,16 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   try {
     const { figma } = createFigmaMock();
     const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    // Component sync scripts BIND token variables (need('radius/avatar')) but do
+    // not CREATE them — the real designer flow runs the token-setup script
+    // (figma-sync/01-tokens.js = buildTokensScript) FIRST, seeding the
+    // Primitives/Semantic/Brand collections, THEN syncs components. Replicate
+    // that ordering exactly: seed the variables into the mock before any set,
+    // else a token-bound descendant (ds.avatar → border-radius {radius.avatar})
+    // throws 'Missing variable'. The multi-root Modal alone never hit this — its
+    // dialog/backdrop use literal styles and bind nothing.
+    const tokensSetup = createFigmaEngine({ tokens, icons, contracts }).buildTokensScript(null);
+    await vm.runInContext(`(async () => {\n${tokensSetup}\n})()`, ctx, { timeout: 120_000 });
     // Each emitFigmaScript is a full standalone script (re-declares COMPONENTS,
     // findComponentByName, …), so wrap each in its OWN async IIFE scope — the
     // declarations are isolated but the mocked `figma` file state is shared, so
@@ -296,7 +322,7 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   }
   check('emit-figma-script (headless)', ranHeadless,
     ranHeadless
-      ? `synced deps [${syncedDeps.join(' → ')}] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built`
+      ? `seeded token variables (buildTokensScript) then synced deps [${syncedDeps.join(' → ')}] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built`
       : `threw — ${runNote}`);
 }
 
