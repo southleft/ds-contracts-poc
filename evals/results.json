@@ -1,6 +1,6 @@
 {
-  "passed": 142,
-  "total": 142,
+  "passed": 144,
+  "total": 144,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -704,6 +704,16 @@
     },
     {
       "id": "simple-component-anatomy-unchanged",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "emitter-multi-root-modal",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "single-root-golden-invariant",
       "claim": "C1-determinism",
       "pass": true
     },

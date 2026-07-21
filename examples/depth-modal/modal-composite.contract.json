@@ -1,0 +1,50 @@
+{
+  "id": "ds.modal-composite",
+  "name": "ModalComposite",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Advanced-composition receipt — a MULTI-ROOT Modal ({dialog, backdrop}) assembled into a schema-valid composite from the depth-capture promoted anatomy (extract/computed/depth/receipts/modal.anatomy.json). Two top-level roots exercise the multi-root emitter path in ALL FOUR surfaces: HTML/React render the roots as siblings; the Figma script maps them into ONE variant frame. NOT a census component and NOT wired into npm run generate / figma:plan — emitted on demand by examples/depth-modal/emit-modal-receipt.mjs.",
+  "semantics": { "element": "div" },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "dialog": {
+      "attrs": { "role": "dialog", "aria-modal": "true" },
+      "layout": { "display": "flex", "direction": "column" },
+      "parts": {
+        "header": {
+          "layout": { "display": "flex", "direction": "row", "justify": "space-between", "align": "center" },
+          "parts": {
+            "title": { "element": "h2", "text": "Order details" },
+            "close": {
+              "element": "button",
+              "attrs": { "type": "button", "aria-label": "Close" },
+              "icon": { "asset": "close", "size": 20 }
+            }
+          }
+        },
+        "body": { "element": "p", "text": "Body copy inside a sectioned modal." },
+        "footer": {
+          "layout": { "display": "flex", "direction": "row", "justify": "end", "align": "center" },
+          "parts": {
+            "cancel": {
+              "element": "button",
+              "attrs": { "type": "button" },
+              "parts": { "cancel-label": { "text": "Cancel" } }
+            },
+            "save": {
+              "element": "button",
+              "attrs": { "type": "button" },
+              "parts": { "save-label": { "text": "Save" } }
+            }
+          }
+        }
+      }
+    },
+    "backdrop": { "declared": { "position": "absolute" } }
+  },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@shopify/polaris", "export": "Modal" }
+  }
+}

@@ -42,11 +42,13 @@ import {
   enumProps,
   isArrayType,
   isEnum,
+  isMultiRoot,
   namedSlots,
   namedTextProps,
   numberProps,
   rootElementsOf,
   textProps,
+  topRoots,
   UA_MARGIN_ELEMENTS,
   validateContract,
   ELEMENT_META,
@@ -351,14 +353,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   for (const { name: partName, part, path: p } of walkAnatomy(contract)) {
     if (part.component) continue; // instances style themselves via their own contract
-    compilePart(partName, part, p[0] === 'root' && p.length === 1);
+    // A top-level root (path.length === 1) is compiled as a root — single-root:
+    // the sole "root"; multi-root: each of dialog/backdrop/… (each gets the
+    // root layout treatment). Byte-identical for single-root.
+    compilePart(partName, part, p.length === 1);
   }
 
   // Disabled-state tokens apply via the disabled prop (the one interaction
   // state a static style CAN honestly render). Non-substituted decls only.
   const disabledStyle: StyleRecord = {};
   if (bools.some((p) => p.name === 'disabled')) {
-    for (const [cssProp, ref] of Object.entries(contract.anatomy.root.states?.disabled ?? {})) {
+    for (const [cssProp, ref] of Object.entries(contract.anatomy.root?.states?.disabled ?? {})) {
       const refPath = stripBraces(ref);
       if (placeholdersIn(refPath).length === 0 && !cssProp.startsWith('outline')) {
         disabledStyle[camel(cssProp)] = resolveValue(refPath);
@@ -367,7 +372,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // v15: root disabled-plane declared facts render the same way (already
     // literal values — no resolution).
     for (const [cssProp, value] of Object.entries(
-      contract.anatomy.root.declaredStates?.disabled ?? {},
+      contract.anatomy.root?.declaredStates?.disabled ?? {},
     )) {
       if (!cssProp.startsWith('outline')) disabledStyle[camel(cssProp)] = value;
     }
@@ -695,8 +700,11 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     );
   };
 
+  // `root` is undefined for a multi-root composite; the single-root tail below
+  // is unused in that case (the isMultiRoot branch returns before the template
+  // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
-  const rootInner = root.parts
+  const rootInner = root?.parts
     ? Object.entries(root.parts)
         .map(([childName, child]) => renderPart(childName, child))
         .join('\n')
@@ -710,7 +718,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   }
 
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
-  const elementAttrs: string[] = ['ref={ref}', `style=${styleExpr('root', true, stylesWhenExprs(root))}`];
+  const elementAttrs: string[] = ['ref={ref}', `style=${styleExpr('root', true, root ? stylesWhenExprs(root) : [])}`];
   if (nativeDisabled) elementAttrs.push('disabled={disabled}');
   for (const p of bools) {
     if (p.name === 'disabled' && nativeDisabled) continue;
@@ -767,6 +775,45 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const repeatNote = walkAnatomy(contract).some((w) => w.part.repeat)
     ? `\n * Fidelity: repeat collections render the contract's OBSERVED sample as fixed\n * instances (the array prop is declared but not mapped on this surface) — the\n * full React surface maps the live array.`
     : '';
+
+  // MULTI-ROOT composite: the roots render as SIBLINGS in a Fragment (no
+  // wrapper element — a Modal's backdrop + dialog are position-driven
+  // siblings). Each root/descendant carries its resolved inline style via the
+  // same S/V lookup; single-root falls through to the untouched one-root path.
+  if (isMultiRoot(contract)) {
+    const rootsJsx = topRoots(contract)
+      .map(([n, p]) => renderPart(n, p))
+      .join('\n      ');
+    const mrTsx = `/**
+ * GENERATED FILE (inline-styles emitter) — DO NOT EDIT.
+ * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
+ * Emitted by core/emit-react-inline.ts — token references RESOLVED to literals.
+ * Resolution mode: ${mode} (brand: default).
+ * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
+ * render as SIBLINGS in a Fragment; there is no single wrapping element.
+ */
+import type { ${typeImports} } from 'react';
+${depImports}${depImports ? '\n' : ''}
+${iconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+
+/** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
+const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
+
+export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+${propLines.join('\n')}
+}
+
+/** ${contract.description} */
+export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
+  return (
+    <>
+      ${keyframesNode}${rootsJsx}
+    </>
+  );
+}
+`;
+    return { tsx: mrTsx };
+  }
 
   const tsx = `/**
  * GENERATED FILE (inline-styles emitter) — DO NOT EDIT.
