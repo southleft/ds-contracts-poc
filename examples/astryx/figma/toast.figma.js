@@ -58,7 +58,7 @@ const COMPONENTS = [
                   "type": "text",
                   "name": "bodyText",
                   "characters": "Saved successfully",
-                  "fontSize": 0.875,
+                  "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": 1.4286,
                   "fontFamily": "-apple-system",

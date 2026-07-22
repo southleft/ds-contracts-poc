@@ -64,8 +64,15 @@ export const aliasTarget = (v: unknown): string | null =>
 
 export const px = (v: unknown): number => {
   if (typeof v === 'number') return v;
-  const n = parseFloat(String(v));
+  const s = String(v).trim();
+  const n = parseFloat(s);
   if (Number.isNaN(n)) throw new Error(`Not a numeric token value: ${v}`);
+  // LIVE-CANVAS FINDING (2026-07-22, Astryx genesis): parseFloat silently
+  // dropped units — '0.875rem' became 0.875, and the real Figma canvas
+  // refused fontSize < 1 (the repo's own tokens are px/unitless, so this
+  // never fired before a rem-scaled foreign system). rem/em convert at the
+  // CSS root ratio; px and unitless pass through unchanged.
+  if (/^-?[\d.]+(rem|em)$/.test(s)) return n * 16;
   return n;
 };
 

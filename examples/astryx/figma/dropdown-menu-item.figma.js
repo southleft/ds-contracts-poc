@@ -47,7 +47,7 @@ const COMPONENTS = [
               "type": "text",
               "name": "label",
               "characters": "Menu item",
-              "fontSize": 0.875,
+              "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "color-text-primary",
               "fontFamily": "-apple-system",

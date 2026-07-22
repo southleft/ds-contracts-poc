@@ -86,7 +86,20 @@ export function createFigmaMock() {
       if (type !== 'TEXT') this.children = [];
       if (type === 'TEXT') {
         this.characters = '';
-        this.fontSize = 16;
+        // REAL-FIGMA VALIDATION (live finding 2026-07-22, Astryx genesis run):
+        // TextNode.fontSize refuses values < 1 — the lenient mock let a
+        // rem-parsed 0.875 through every headless gate and the real canvas
+        // threw 'Property "fontSize" failed validation'. Same message here.
+        this._fontSize = 16;
+        Object.defineProperty(this, 'fontSize', {
+          get() { return this._fontSize; },
+          set(v) {
+            if (!(typeof v === 'number' && v >= 1)) {
+              throw new Error('in set_fontSize: Property "fontSize" failed validation: Number must be greater than or equal to 1');
+            }
+            this._fontSize = v;
+          },
+        });
         this.fontName = { family: 'Inter', style: 'Regular' };
         this.letterSpacing = { unit: 'PERCENT', value: 0 };
         this.lineHeight = { unit: 'AUTO' };
