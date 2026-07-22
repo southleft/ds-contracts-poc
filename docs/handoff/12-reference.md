@@ -77,7 +77,7 @@ docs/DIFFICULTY-TIERS.md                  T0–T3 component difficulty tiers
 npm install
 npm run eval                              # 146/146
 npm run plugin:check                      # plugin engine green
-node scripts/deterministic-roundtrip.mjs  # determinism proof (no AI)
+npx tsx scripts/deterministic-roundtrip.mjs  # determinism proof (no AI)
 node scripts/core-browser-check.mjs       # core is browser-pure
 npx tsc --noEmit                          # types
 

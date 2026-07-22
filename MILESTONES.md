@@ -849,6 +849,57 @@ Residue named: the live canvas was NOT touched this round — the margin-box
 and svgPaintVar fixes become visible at the next bridge re-amend, and
 `PHASE-B5-RECEIPT.md` records exactly what that re-amend will change.
 
+## 2026-07-21/22 — The composite closes LIVE: advanced composition proven on a real canvas
+
+The flagship stress test — `ds.composite-modal`, a multi-root Modal whose body
+composes a Card instance and a repeated Badge collection — went from a
+documented live FAIL (collapsed ~3px dialog, set-instance labels not applied,
+crammed unstyled footer; handoff `08#1`) to a complete, correct LIVE build in
+two days, with every fix following the fix→teach-the-mock→gate→live pattern:
+
+- **Both morning root causes found headlessly, at line level** (no live
+  debugging needed): the dialog collapse was the auto-layout **hug↔fill
+  degenerate** (an align-unset flex container compiled `stretchChildren` and
+  the runtime force-FILLed every child while the parent hugged — no intrinsic
+  width anywhere). FILL is now a **compile-time decision** (`annotateFillW`)
+  gated on the parent's width being established; the Banner mixed pattern
+  survives by construction. The set-instance text failure was the create path
+  minting TEXT/BOOLEAN/INSTANCE_SWAP properties **per-variant before
+  `combineAsVariants`** — keys real set-instances never surface — while the
+  amend path had always minted set-level; the create path now matches it, and
+  an unmatched instance property is a **refusal by name**, never a silent skip.
+- **The mock got the two blind spots that hid all of it**: computed
+  auto-layout sizing (a FILL child contributes zero intrinsic size, so
+  collapse is measurable in Node) and real component-property semantics
+  (set-level definitions, variant-child refusals, instance subtree clones
+  with TEXT/BOOLEAN reflection). Both classes now fail headlessly, forever.
+- **Two real-Figma quirks were caught by the live runs and pinned by Desktop
+  Bridge forensics** — and one earlier inference was **corrected in public**:
+  the real quirk is that a freshly created instance's `componentProperties`
+  can LAG behind its set within a session, listing only VARIANT axes (the
+  named refusal read exactly `available: Variant, Size, State`); the set's
+  `componentPropertyDefinitions` are always complete and full-key
+  `setProperties` works during the lag (probe-verified). The runtime now
+  falls back to the owner's definitions; the mock simulates the lag and the
+  composite gate builds THROUGH it.
+- **The exhibit contract grew up** (v1.1.0): footer actions are real
+  `ds.button` instances with a control gap, the dialog carries a 480px width
+  + surface tokens, and the backdrop is an inset-0 scrim painted BEHIND the
+  dialog (anatomy order = paint order).
+- **The determinism proof got ~42× stronger**: the round-trip fingerprint
+  now serializes every tracked property (33.9KB byte-compared across two
+  runs, run-scoped ids normalized) instead of names/types/nesting (807B).
+- **Distribution stopped lying**: `npm run plugin:zip` now refreshes an
+  unpacked `figma-sync/plugin-dist/` dev-import folder in place and injects a
+  visible engine build stamp into the plugin header — after a live session
+  silently re-validated a stale engine, staleness is now diagnosable at a
+  glance. Generated components land on identity-marked background Sections
+  (owner request), create and amend re-fitting the same section.
+- **2026-07-22, the owner's live verdict: it did it.** 480px dialog, scrim
+  behind, composed Card with applied title, three badges carrying their item
+  text, Cancel/Save Button instances with a real gap — from one pasted
+  contract, deterministically, no AI in the conversion. Suite: **146/146**.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
@@ -871,3 +922,4 @@ and svgPaintVar fixes become visible at the next bridge re-amend, and
 | Plugin engine freshness | zip build refuses a stale engine by committed input-hash receipt | `plugin-engine-bundle` eval (guard fires on a real core mutation) |
 | Canvas fidelity | headless canvas renders vs the real npm package, 7/10 PASS (3 at exact 0.00), every >10% cell named | `canvas-gate-standing-pin` eval · `examples/polaris/receipts/canvas-gate/` |
 | Vendor-doc referee | extraction proposals diffed against the vendor's own shipped docs, 0 silent rows | `examples/astryx/extraction/DOC-REFEREE.md` |
+| Advanced composition, LIVE | the multi-root composite (composed instance + repeated collection + labeled set-instances + inset backdrop) builds correctly on a real canvas from one pasted contract; both real-Figma quirks found en route are mock-modeled | owner's live run 2026-07-22 · `npm run plugin:check` composite pins |

@@ -63,7 +63,7 @@ baked in, so you feed it a small contract and it emits + builds locally.
 | `npm run extract:code` / `roundtrip:code` | code → contract (+ round-trip) |
 | `npm run extract:figma` / `extract:figma:roundtrip` | Figma dump → contract |
 | `npm run extract:figma:gauntlet` | the 1,618-set census through the receive pipeline |
-| `node scripts/deterministic-roundtrip.mjs` | the determinism proof (run twice → byte-identical) |
+| `npx tsx scripts/deterministic-roundtrip.mjs` | the determinism proof (run twice → byte-identical) |
 | `node scripts/core-browser-check.mjs` | proves the core barrel is browser-pure/bundleable |
 
 There are many more `extract:figma:*:check` scripts — each is a receipt for a

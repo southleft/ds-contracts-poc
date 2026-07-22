@@ -14,6 +14,16 @@ related: [03-determinism, 09-testing-and-gates]
 Ordered by impact toward the North Star (`02`). Every item preserves determinism
 (`03`) — none introduces AI into the conversion.
 
+> **2026-07-21 (later the same day): P0 sub-tasks 1–3 are DONE headlessly and
+> gated** (see `08#1` for root causes and fixes; the proven fix→mock→gate
+> pattern was followed for each). P0.5 landed for the two named blind spots
+> (auto-layout sizing, instance-property reflection). **The remaining P0 step
+> is the owner's live re-validation run** — paste
+> `examples/depth-composite/composite-modal.contract.json` into the plugin's
+> Generate tab on a fresh file and confirm the modal renders (480px dialog,
+> scrim behind, "Shipping"/"Gift wrap"/"Priority" badges, Cancel/Save
+> buttons with a gap).
+
 ## P0 — Fix the composite Modal live rendering (the frontier)
 
 The advanced composite is the flagship stress test and it fails live (`08#1`).
@@ -50,7 +60,10 @@ instances, auto-layout sizing (enough to catch collapse), and SVG validity
 
 - **Publish to the Figma Community** (human-driven Figma flow; kit ready in
   `figma-sync/plugin/PUBLISHING.md` + icon). This turns dev-import into one-click.
-- **Wrap generated sets in a named Section** on canvas (owner nice-to-have).
+- ~~**Wrap generated sets in a named Section** on canvas~~ **DONE 2026-07-21**:
+  every generated component lands on an identity-marked SECTION with a light
+  background (`ensureHostSection` in the runtime; create + amend re-fit the
+  same section; gated in `plugin-engine-check`).
 - **CLI `figma push` → plugin auto-receive** for unattended CI → plugin sync.
 
 ## P1 — Complete the two-journey CI recipes

@@ -48,7 +48,7 @@ scratch dir, so it **cannot run inside a git worktree** (worktrees lack
 | eval suite | `npm run eval` | everything above (146/146) |
 | golden byte-hash | inside eval (`golden-generated-output`) | `src/` + `figma-sync/` are byte-stable; `npm run golden:update` on reviewed changes only |
 | plugin engine | `npm run plugin:check` | `window.DSC` builds correct anatomy from a bundle; specHash mirror; drift refusal |
-| determinism | `node scripts/deterministic-roundtrip.mjs` | contract→canvas byte-identical across two runs; loop closes |
+| determinism | `npx tsx scripts/deterministic-roundtrip.mjs` | contract→canvas byte-identical across two runs; loop closes |
 | census | `extract:figma:gauntlet` | 1,618 sets propose with zero skips |
 | browser purity | `node scripts/core-browser-check.mjs` | core barrel bundles for browser; 4 emitters run in a no-node VM |
 | emitters | `npm run emitters:check` | registry invariants |
@@ -74,7 +74,7 @@ git clone github.com/southleft/ds-contracts-poc && cd ds-contracts-poc
 npm install
 npm run eval            # expect: 146/146 evals passed
 npm run plugin:check    # expect: plugin-engine-check: all flows green
-node scripts/deterministic-roundtrip.mjs   # expect: THE FULL LOOP RAN WITH ZERO AI
+npx tsx scripts/deterministic-roundtrip.mjs   # expect: THE FULL LOOP RAN WITH ZERO AI
 npx tsc --noEmit        # expect: clean
 ```
 
