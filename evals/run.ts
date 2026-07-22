@@ -5030,6 +5030,31 @@ const cases: Case[] = [
       );
     },
   },
+  {
+    // ASTRYX GENESIS (Phase B, 2026-07-22) — the full foreign-system canvas
+    // gate: 13 committed Figma scripts referee-pass AND headless-execute
+    // (fresh-mock per primitive, shared dependency-ordered mock for the
+    // composed pair with built-tree assertions — repeated item labels,
+    // applied Button instance labels, multi-root split, non-collapse width
+    // floors), the genesis token upsert runs twice (re-run = update in
+    // place), and the ONE-PASTE GENESIS-BATCH executes start-to-finish in a
+    // single mock (13 components + >=180 variables + host sections). This is
+    // the code→design proof on a system this project does not own.
+    id: 'astryx-figma-genesis',
+    claim: 'C8-journey',
+    run: () => {
+      cpSync(path.join(ROOT, 'examples', 'astryx'), path.join(SCRATCH, 'examples', 'astryx'), {
+        recursive: true,
+        filter: (src) => !src.includes('.astryx-sandbox'),
+      });
+      const r = run(process.execPath, ['examples/astryx/scripts/figma-compile-receipt.mjs']);
+      if (r.status !== 0) throw new Error(`astryx figma compile receipt failed:\n${r.out.slice(0, 1600)}`);
+      if (!r.out.includes('13/13 scripts referee-pass + headless-run')) {
+        throw new Error(`astryx figma compile receipt missing the 13/13 line:\n${r.out.slice(0, 800)}`);
+      }
+      console.log('astryx-figma-genesis: 13/13 foreign-system scripts referee+execute headless; composition trees asserted (repeat labels, instance labels, multi-root); genesis batch runs start-to-finish in one mock');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

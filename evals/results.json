@@ -1,6 +1,6 @@
 {
-  "passed": 146,
-  "total": 146,
+  "passed": 147,
+  "total": 147,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -729,6 +729,11 @@
     },
     {
       "id": "astryx-dev-journey",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "astryx-figma-genesis",
       "claim": "C8-journey",
       "pass": true
     }

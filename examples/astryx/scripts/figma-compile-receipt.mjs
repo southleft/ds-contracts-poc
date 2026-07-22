@@ -64,42 +64,20 @@ const parseComponents = (script) =>
 // see COMPILE-RECEIPT.md / DEV-JOURNEY.md). Here we seed the mock file with
 // exactly those literal variables (the token-synced starting state) so the
 // component scripts' `need(name)` bindings resolve.
-const DTCG = JSON.parse(readFileSync(path.join(EX, 'tokens', 'astryx.dtcg.json'), 'utf8'));
-function hexToRgba(v) {
-  const s = String(v).trim();
-  let m = /^#([0-9a-f]{6})([0-9a-f]{2})?$/i.exec(s);
-  if (m) {
-    const n = parseInt(m[1], 16);
-    return { r: ((n >> 16) & 255) / 255, g: ((n >> 8) & 255) / 255, b: (n & 255) / 255, a: m[2] ? parseInt(m[2], 16) / 255 : 1 };
-  }
-  m = /^rgba?\(([^)]+)\)$/i.exec(s);
-  if (m) {
-    const p = m[1].split(',').map((x) => parseFloat(x.trim()));
-    return { r: (p[0] || 0) / 255, g: (p[1] || 0) / 255, b: (p[2] || 0) / 255, a: p[3] === undefined ? 1 : p[3] };
-  }
-  return { r: 0, g: 0, b: 0, a: 1 };
+// Phase B genesis: seeding now runs the EMITTED 00-tokens.figma.js — the
+// exact script the live plugin runs — instead of a receipt-local seeder.
+// The named limitation ("no token-sync vehicle for a literal token set") is
+// CLOSED; the receipt proves the real sequence end to end.
+const TOKENS_SCRIPT = readFileSync(path.join(FIGMA_DIR, '00-tokens.figma.js'), 'utf8');
+async function runTokensScript(figma) {
+  const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  return await vm.runInContext(`(async () => {\n${TOKENS_SCRIPT}\n})()`, ctx, { timeout: 120_000 });
 }
-function seedTokenVariables(figma) {
-  const col = figma.variables.createVariableCollection('Astryx');
-  const modeId = col.modes[0].modeId;
-  for (const [name, entry] of Object.entries(DTCG)) {
-    if (!entry || typeof entry !== 'object' || !('$value' in entry)) continue;
-    const type = entry.$type;
-    const figType = type === 'color' ? 'COLOR' : type === 'dimension' || type === 'number' ? 'FLOAT' : 'STRING';
-    const v = figma.variables.createVariable(name, col, figType);
-    const raw = entry.$value;
-    v.setValueForMode(
-      modeId,
-      figType === 'COLOR' ? hexToRgba(raw) : figType === 'FLOAT' ? parseFloat(String(raw)) || 0 : String(raw),
-    );
-  }
-}
-
 const failures = [];
 const rows = [];
 let totalVariants = 0;
 
-const scripts = readdirSync(FIGMA_DIR).filter((f) => f.endsWith('.figma.js')).sort();
+const scripts = readdirSync(FIGMA_DIR).filter((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js').sort();
 if (scripts.length !== Object.keys(EXPECT).length) {
   failures.push(`expected ${Object.keys(EXPECT).length} scripts, found ${scripts.length}`);
 }
@@ -140,7 +118,7 @@ for (const file of scripts) {
   } else {
     try {
       const { figma } = createFigmaMock();
-      seedTokenVariables(figma);
+      await runTokensScript(figma);
       const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
       await vm.runInContext(`(async () => {\n${script}\n})()`, ctx, { timeout: 120_000 });
       ran = true;
@@ -164,7 +142,15 @@ for (const file of scripts) {
 {
   const order = ['button.figma.js', 'dropdown-menu-item.figma.js', 'dropdown-menu.figma.js', 'toast.figma.js'];
   const { figma, root } = createFigmaMock();
-  seedTokenVariables(figma);
+  const tokenResult = await runTokensScript(figma);
+  if (!tokenResult || tokenResult.total < 180) {
+    failures.push(`genesis tokens: 00-tokens.figma.js upserted ${tokenResult && tokenResult.total} variables (expected >=180)`);
+  }
+  // Re-run = UPSERT, not duplicate (the plugin re-run path).
+  const rerun = await runTokensScript(figma);
+  if (!rerun || rerun.created !== 0 || rerun.updated < 180) {
+    failures.push(`genesis tokens: re-run should update-in-place (created ${rerun && rerun.created}, updated ${rerun && rerun.updated})`);
+  }
   const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
   try {
     for (const file of order) {
@@ -206,6 +192,34 @@ for (const file of scripts) {
     }
   } catch (e) {
     failures.push(`composition pass threw — ${String(e && e.message ? e.message : e)}`);
+  }
+}
+
+// --- 4. GENESIS BATCH (the one-paste live vehicle): the concatenated
+// GENESIS-BATCH.figma.js runs START TO FINISH in one fresh mock — tokens
+// upsert, 13 component sets, sections — and the same composition facts hold.
+// This is byte-for-byte the script the owner pastes; passing here means the
+// live run is confirmation, not debugging.
+{
+  try {
+    const batch = readFileSync(path.join(FIGMA_DIR, 'GENESIS-BATCH.figma.js'), 'utf8');
+    const { figma, root } = createFigmaMock();
+    const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    await vm.runInContext(`(async () => {\n${batch}\n})()`, ctx, { timeout: 240_000 });
+    const comps = root.findAll((n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.getSharedPluginData('ds_contracts', 'contractId').startsWith('astryx.'));
+    if (comps.length !== 13) failures.push(`genesis batch: built ${comps.length} astryx components (expected 13)`);
+    const vars = await new Promise((res) => figma.variables.getLocalVariablesAsync().then(res));
+    if (vars.length < 180) failures.push(`genesis batch: ${vars.length} variables (expected >=180)`);
+    const dd = root.findOne((n) => n.type === 'COMPONENT' && n.name === 'DropdownMenu');
+    const menu = dd?.children.find((c) => c.name === 'menu');
+    const labels = (menu?.children ?? []).filter((c) => c.type === 'INSTANCE').map((i) => i.findAll((x) => x.type === 'TEXT')[0]?.characters);
+    if (JSON.stringify(labels) !== JSON.stringify(['Edit', 'Duplicate', 'Delete'])) {
+      failures.push(`genesis batch: DropdownMenu item labels ${JSON.stringify(labels)}`);
+    }
+    const sections = root.findAll((n) => n.type === 'SECTION');
+    if (sections.length < 13) failures.push(`genesis batch: ${sections.length} host sections (expected >=13)`);
+  } catch (e) {
+    failures.push(`genesis batch threw — ${String(e && e.message ? e.message : e)}`);
   }
 }
 
