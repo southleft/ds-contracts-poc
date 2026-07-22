@@ -75,6 +75,14 @@ function convertPart(part: ExtractedPart, prefix: string, notes: string[]): Reco
     );
   }
   if (part.attrs && Object.keys(part.attrs).length > 0) out.attrs = part.attrs;
+  if (part.repeat) {
+    // The design-time sample is REQUIRED by RepeatSchema and is not
+    // decidable from code — synthesize a minimal placeholder and say so.
+    out.repeat = { itemsProp: part.repeat.itemsProp, sample: [{}, {}, {}] };
+    notes.push(
+      `anatomy: repeat over prop \`${part.repeat.itemsProp}\` — the design-time sample is a synthesized placeholder (3 empty records); populate observed values (and type \`${part.repeat.itemsProp}\` as arrayOf) before adoption`,
+    );
+  }
   if (part.visibleWhen) out.visibleWhen = part.visibleWhen;
   if (part.optional) out.optional = true;
   if (part.parts) {

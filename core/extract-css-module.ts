@@ -817,6 +817,119 @@ interface JsxContext {
   ariaOnPart: Map<string, string>;
   /** JSX → CSS class spelling (BEM-aware); shared with analyzeCss. */
   bem: ClassMap;
+  /** StyleX mode (Phase B): identifiers bound by `stylex.create({...})` in
+   *  this file — part identity reads `{...stylex.props(styles.x)}` spreads
+   *  instead of className. null = CSS-module mode. */
+  stylexTables: Set<string> | null;
+}
+
+/** StyleX (Phase B, Astryx composition tier): components style via
+ *  `{...stylex.props(styles.x, cond && styles.y, dynamicStyles.z(...))}`
+ *  SPREADS — there is no className attribute and no CSS Module. Part
+ *  identity comes from the FIRST plain rule reference off any identifier
+ *  bound by `stylex.create({...})` in the file. Astryx additionally wraps
+ *  the spread in `mergeProps(themeProps(...), stylex.props(...), ...)`;
+ *  the reader unwraps one mergeProps level. Conditional/dynamic rule
+ *  references are modifiers — reported, never guessed. */
+function collectStylexTables(sf: ts.SourceFile): Set<string> {
+  const tables = new Set<string>();
+  const visit = (node: ts.Node) => {
+    if (
+      ts.isVariableDeclaration(node) &&
+      ts.isIdentifier(node.name) &&
+      node.initializer &&
+      ts.isCallExpression(node.initializer)
+    ) {
+      const callee = node.initializer.expression;
+      if (
+        (ts.isPropertyAccessExpression(callee) &&
+          callee.expression.getText() === 'stylex' &&
+          (callee.name.text === 'create' || callee.name.text === 'keyframes')) ||
+        callee.getText() === 'stylex.create'
+      ) {
+        if (callee.getText().endsWith('.create')) tables.add(node.name.text);
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sf);
+  return tables;
+}
+
+/** A rule reference off a stylex.create table: `styles.x`, `styles["x"]`,
+ *  or a dynamic-rule call `dynamicStyles.x(...)`. Returns the rule name. */
+function stylexRuleOf(e: ts.Expression, tables: Set<string>): string | null {
+  const target = ts.isCallExpression(e) ? e.expression : e;
+  if (
+    ts.isPropertyAccessExpression(target) &&
+    ts.isIdentifier(target.expression) &&
+    tables.has(target.expression.text)
+  ) {
+    return target.name.text;
+  }
+  if (
+    ts.isElementAccessExpression(target) &&
+    ts.isIdentifier(target.expression) &&
+    tables.has(target.expression.text) &&
+    ts.isStringLiteralLike(target.argumentExpression)
+  ) {
+    return target.argumentExpression.text;
+  }
+  return null;
+}
+
+function stylexClassOf(
+  el: JsxEl,
+  ctx: JsxContext,
+): { kind: 'part'; name: string } | { kind: 'root' } | { kind: 'none' } {
+  const tables = ctx.stylexTables;
+  if (!tables || tables.size === 0) return { kind: 'none' };
+  const propsCalls: ts.CallExpression[] = [];
+  const collectPropsCalls = (e: ts.Expression) => {
+    const u = unparen(e);
+    if (ts.isCallExpression(u)) {
+      const callee = u.expression;
+      if (ts.isPropertyAccessExpression(callee) && callee.expression.getText() === 'stylex' && callee.name.text === 'props') {
+        propsCalls.push(u);
+        return;
+      }
+      // mergeProps(themeProps(...), stylex.props(...), className, style)
+      if (ts.isIdentifier(callee) && callee.text === 'mergeProps') {
+        for (const arg of u.arguments) collectPropsCalls(arg as ts.Expression);
+      }
+    }
+  };
+  for (const attr of attributesOf(el).properties) {
+    if (ts.isJsxSpreadAttribute(attr)) collectPropsCalls(attr.expression);
+  }
+  for (const call of propsCalls) {
+    const modifiers: string[] = [];
+    let name: string | null = null;
+    for (const rawArg of call.arguments) {
+      const arg = unparen(rawArg as ts.Expression);
+      // conditional modifier: `cond && styles.x` / spread of container(...) etc.
+      if (ts.isBinaryExpression(arg) && arg.operatorToken.kind === ts.SyntaxKind.AmpersandAmpersandToken) {
+        const rule = stylexRuleOf(unparen(arg.right), tables);
+        if (rule !== null) modifiers.push(rule);
+        continue;
+      }
+      const rule = stylexRuleOf(arg, tables);
+      if (rule !== null && name === null) {
+        name = rule;
+        continue;
+      }
+      if (rule !== null) modifiers.push(rule);
+    }
+    if (name !== null) {
+      if (modifiers.length > 0) {
+        ctx.notes.push(
+          `stylex: <${tagNameOf(el)}> rule "${name}" carries conditional/extra rule(s) [${modifiers.join(', ')}] — modifiers reported, not extracted`,
+        );
+      }
+      return name === 'root' || name === ctx.bem.rootClass ? { kind: 'root' } : { kind: 'part', name: partNameFromClass(name, ctx) };
+    }
+  }
+  return { kind: 'none' };
 }
 
 /** `styles.x` / `styles["x"]` → the class name; anything else null. */
@@ -902,6 +1015,9 @@ function classNameOf(el: JsxEl, ctx: JsxContext): { kind: 'part'; name: string }
     }
     return { kind: 'opaque', text: init.getText().slice(0, 60) };
   }
+  // No className attribute at all — in StyleX mode, part identity rides the
+  // {...stylex.props(styles.x)} spread instead.
+  if (ctx.stylexTables) return stylexClassOf(el, ctx);
   return { kind: 'none' };
 }
 
@@ -1245,6 +1361,45 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
         ctx.notes.push(`jsx: part "${partName}" conditional expression — not a \`cond ? <el/> : null\` shape, not extracted`);
         continue;
       }
+      // Phase B (composition tier): `items.map(item => <X/>)` is the CODE
+      // spelling of the contract's repeat channel — a template mapped over
+      // an array prop. Only a PROP receiver becomes a repeat part; a local/
+      // derived array (pageRange, visibleToasts) is reported by name, never
+      // guessed into the API surface.
+      if (ts.isCallExpression(e) && ts.isPropertyAccessExpression(e.expression) && e.expression.name.text === 'map') {
+        const recv = unparen(e.expression.expression);
+        const cb = e.arguments.length > 0 ? unparen(e.arguments[0] as ts.Expression) : undefined;
+        let tpl: JsxEl | null = null;
+        if (cb && (ts.isArrowFunction(cb) || ts.isFunctionExpression(cb))) {
+          let body: ts.Node = cb.body;
+          if (ts.isBlock(body)) {
+            const ret = body.statements.find(ts.isReturnStatement);
+            body = ret?.expression ? unparen(ret.expression) : body;
+          } else {
+            body = unparen(body as ts.Expression);
+          }
+          if (ts.isJsxElement(body as ts.Node) || ts.isJsxSelfClosingElement(body as ts.Node)) tpl = body as JsxEl;
+        }
+        if (tpl && ts.isIdentifier(recv) && ctx.propKind.has(recv.text)) {
+          const built = buildPart(tpl, ctx);
+          if (built) {
+            built.part.repeat = { itemsProp: recv.text };
+            addChild(built);
+            ctx.notes.push(
+              `jsx: part "${partName}" maps {${recv.text}.map(…)} to <${tagNameOf(tpl)}> — extracted as a REPEAT part "${built.name}" over prop "${recv.text}" (the design-time sample is not decidable from code; populate it before adoption)`,
+            );
+            continue;
+          }
+        }
+        if (tpl) {
+          ctx.notes.push(
+            `jsx: part "${partName}" maps {${recv.getText().slice(0, 40)}.map(…)} to <${tagNameOf(tpl)}> — receiver is not a component prop (local/derived array); repeated template reported, not extracted`,
+          );
+          continue;
+        }
+        ctx.notes.push(`jsx: part "${partName}" .map(…) whose callback does not return a JSX element — not extractable`);
+        continue;
+      }
       ctx.notes.push(`jsx: part "${partName}" expression \`${e.getText().slice(0, 60)}\` — not extractable, skipped by name`);
     }
   }
@@ -1374,6 +1529,11 @@ export interface AnatomyInput {
   props: ExtractedProp[];
   css: string;
   tokens: TokenIndex;
+  /** StyleX mode (Phase B, Astryx): no CSS Module exists — part identity
+   *  reads stylex.props spreads; `css` is '' and the CSS model is empty.
+   *  Structure (parts, component refs, slots, repeats) extracts; StyleX
+   *  rule styling is a named review item until the token round. */
+  stylex?: boolean;
 }
 
 export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
@@ -1402,7 +1562,17 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     clickHandlers: new Map(),
     ariaOnPart: new Map(),
     bem: emptyClassMap(),
+    stylexTables: input.stylex ? collectStylexTables(input.sf) : null,
   };
+  if (input.stylex) {
+    notes.push(
+      `stylex: component styles via stylex.create (${ctx.stylexTables!.size} table(s)) — structure extracted from stylex.props spreads; rule styling (tokens/layout) is a named review item this round`,
+    );
+    // Seed the root rule name BEFORE walking so nested references to the
+    // same rule resolve as 'root', mirroring the CSS-module rootClass.
+    const sx = stylexClassOf(rootEl, ctx);
+    if (sx.kind === 'part') ctx.bem.rootClass = sx.name;
+  }
 
   const rootTag = tagNameOf(rootEl);
   if (/^[A-Z]/.test(rootTag)) {

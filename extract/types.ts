@@ -83,6 +83,11 @@ export interface ExtractedPart {
   slot?: { name: string };
   /** Code component name (e.g. "Avatar") — id-mapped by propose.ts. */
   component?: { name: string; props?: Record<string, string | boolean>; text?: string };
+  /** Phase B (Astryx composition tier): the part is a template mapped over an
+   *  array prop (`items.map(item => <X/>)`) — the code-side spelling of the
+   *  contract's repeat channel. The design-time `sample` is NOT decidable
+   *  from code; propose.ts synthesizes a placeholder and says so. */
+  repeat?: { itemsProp: string };
   attrs?: Record<string, string>;
   visibleWhen?: { prop: string; equals?: string };
   optional?: boolean;

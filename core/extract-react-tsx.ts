@@ -797,6 +797,12 @@ export function extractFromSource(
       // propose anatomy from the JSX tree + the stylesheet (css-module
       // adapter). Extraction failures degrade to notes, never to a crash.
       anatomy = extractAnatomy({ sf, src, componentName, props, css, tokens: tokens() }) ?? undefined;
+    } else if (/from\s+['"]@stylexjs\/stylex['"]/.test(src)) {
+      // Phase B (Astryx composition tier): StyleX components have no CSS
+      // Module — structure is still legible from the JSX tree, with part
+      // identity read from stylex.props spreads. Rule styling (tokens,
+      // layout) is a named review item until the StyleX token round.
+      anatomy = extractAnatomy({ sf, src, componentName, props, css: '', tokens: tokens(), stylex: true }) ?? undefined;
     }
     out.push({
       name: componentName,
