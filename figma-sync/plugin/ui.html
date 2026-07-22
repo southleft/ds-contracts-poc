@@ -131,6 +131,10 @@
   <button class="tab" id="tab-paste" role="tab" aria-selected="false" aria-controls="panel-paste">Paste a script</button>
   <button class="tab" id="tab-send" role="tab" aria-selected="false" aria-controls="panel-send">Send to Playground</button>
   <button class="tab" id="tab-runner" role="tab" aria-selected="false" aria-controls="panel-runner">Local runner</button>
+  <!-- Engine build stamp (injected at package time as window.DSC_BUILD):
+       makes a STALE dev import diagnosable at a glance — compare against
+       `node scripts/build-plugin-zip.mjs` output / engine.receipt.json. -->
+  <span id="engine-stamp" style="margin-left:auto;align-self:center;font-size:10px;opacity:.55;white-space:nowrap"></span>
 </div>
 
 <div class="panel active" id="panel-generate" role="tabpanel">
@@ -315,6 +319,8 @@
 
 <script>
   var $ = function (id) { return document.getElementById(id); };
+  if (window.DSC_BUILD) { $('engine-stamp').textContent = window.DSC_BUILD; }
+  else { $('engine-stamp').textContent = 'engine: NOT INJECTED (dev stub — run npm run plugin:zip and import figma-sync/plugin-dist/)'; }
 
   // --- tabs -----------------------------------------------------------------
   var TAB_NAMES = ['generate', 'update', 'propose', 'paste', 'send', 'runner'];

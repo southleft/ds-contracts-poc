@@ -285,18 +285,34 @@ export async function buildPluginZip(outFile = DEFAULT_OUT, { updateEngineReceip
   await verifyEmbeddedDumpSource();
   const engine = await buildEngineBundle();
   await verifyEngineReceipt(engine, { update: updateEngineReceipt });
+  // The visible engine stamp (window.DSC_BUILD, shown in the plugin header):
+  // a STALE dev import is diagnosable at a glance. Content-derived only — no
+  // wall clock — so packaging stays deterministic for identical inputs.
+  const stamp = `engine ${engine.inputHash.slice(0, 12)} · ${engine.minifiedBytes}B`;
+  const stampJs = `\nwindow.DSC_BUILD = ${JSON.stringify(stamp)};`;
   const entries = [];
   for (const name of FILES) {
     let data = await readFile(join(PLUGIN_DIR, name));
     if (name === 'ui.html') {
-      data = Buffer.from(injectEngine(data.toString('utf8'), engine.code), 'utf8');
+      data = Buffer.from(injectEngine(data.toString('utf8'), engine.code + stampJs), 'utf8');
     }
     entries.push({ name: ZIP_PREFIX + name, data });
   }
   const zip = makeZip(entries);
   await mkdir(dirname(outFile), { recursive: true });
   await writeFile(outFile, zip);
-  return { outFile, bytes: zip.length, files: FILES.length, engineBytes: engine.minifiedBytes };
+  // ALSO write the unpacked dev folder (gitignored): the dev-import target
+  // that is ALWAYS fresh. Importing figma-sync/plugin/manifest.json gives a
+  // stub with NO engine, and importing a hand-unzipped copy goes stale the
+  // moment core changes — the 2026-07-21 live run silently re-validated a
+  // midday engine because of exactly that. `npm run plugin:zip` refreshes
+  // this folder in place, so a one-time manifest import stays current.
+  const distDir = join(PLUGIN_DIR, '..', 'plugin-dist');
+  await mkdir(distDir, { recursive: true });
+  for (const e of entries) {
+    await writeFile(join(distDir, e.name.slice(ZIP_PREFIX.length)), e.data);
+  }
+  return { outFile, distDir, bytes: zip.length, files: FILES.length, engineBytes: engine.minifiedBytes, stamp };
 }
 
 // CLI: node scripts/build-plugin-zip.mjs [outFile] [--update-engine-receipt]
@@ -304,8 +320,9 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const args = process.argv.slice(2);
   const updateEngineReceipt = args.includes('--update-engine-receipt');
   const outArg = args.find((a) => !a.startsWith('--'));
-  const { outFile, bytes, files, engineBytes } = await buildPluginZip(outArg ?? DEFAULT_OUT, { updateEngineReceipt });
+  const { outFile, distDir, bytes, files, engineBytes, stamp } = await buildPluginZip(outArg ?? DEFAULT_OUT, { updateEngineReceipt });
   console.log(
     `plugin-zip: wrote ${outFile} (${files} files, ${bytes} bytes; engine bundle ${(engineBytes / 1024 / 1024).toFixed(2)} MB minified) — dump script verified, engine receipt ${updateEngineReceipt ? 'RE-RECORDED' : 'verified'}`,
   );
+  console.log(`plugin-zip: refreshed dev-import folder ${distDir} — stamp "${stamp}" (shown in the plugin header)`);
 }

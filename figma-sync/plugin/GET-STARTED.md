@@ -14,11 +14,19 @@ Search "DS Contracts Sync Runner" in Community → **Install**. Normal one-click
 See [PUBLISHING.md](./PUBLISHING.md) to publish it.
 
 ### Option B — dev install (works today, no publishing needed)
-1. Download/clone the packaged build (the `ds-contracts-sync-runner/` folder, or unzip
-   `playground/public/ds-contracts-sync-runner-plugin.zip`).
+1. In the repo: `npm run plugin:zip`. This packages the zip **and** refreshes the
+   unpacked dev folder `figma-sync/plugin-dist/`.
 2. In Figma desktop: **Plugins → Development → Import plugin from manifest…**
-3. Select `ds-contracts-sync-runner/manifest.json`.
+3. Select `figma-sync/plugin-dist/manifest.json`. **Import from this folder — never
+   from `figma-sync/plugin/` directly** (that copy is a stub with no engine) and never
+   from a hand-unzipped copy (it goes stale the moment core changes).
 4. It now appears under **Plugins → Development → DS Contracts Sync Runner**.
+
+**After any repo update: re-run `npm run plugin:zip`.** The import stays pointed at
+`plugin-dist/`, so the refreshed engine is picked up the next time the plugin opens —
+no re-import needed. The plugin header shows the running engine's build stamp
+(`engine <hash> · <bytes>B`); it must match the `plugin:zip` output. If it reads
+"NOT INJECTED", you imported the stub.
 
 ---
 
