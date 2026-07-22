@@ -4,5 +4,8 @@
     "root": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src"
   },
   "idPrefix": "astryx",
-  "out": "examples/astryx/out"
+  "out": "examples/astryx/out",
+  "tokens": [
+    "examples/astryx/tokens/astryx.dtcg.json"
+  ]
 }

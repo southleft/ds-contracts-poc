@@ -826,7 +826,7 @@ interface JsxContext {
   /** StyleX mode (Phase B): identifiers bound by `stylex.create({...})` in
    *  this file — part identity reads `{...stylex.props(styles.x)}` spreads
    *  instead of className. null = CSS-module mode. */
-  stylexTables: Set<string> | null;
+  stylexTables: Map<string, Map<string, ts.ObjectLiteralExpression>> | null;
   /** Phase B: render-helper functions resolvable by name — same-file
    *  declarations plus co-located sibling sources the adapter supplies.
    *  A `{renderX(items)}` call inlines the helper's component JSX as a
@@ -891,8 +891,8 @@ function helperComponentJsx(fn: ts.FunctionLikeDeclaration): Map<string, { el: J
  *  the spread in `mergeProps(themeProps(...), stylex.props(...), ...)`;
  *  the reader unwraps one mergeProps level. Conditional/dynamic rule
  *  references are modifiers — reported, never guessed. */
-function collectStylexTables(sf: ts.SourceFile): Set<string> {
-  const tables = new Set<string>();
+function collectStylexTables(sf: ts.SourceFile): Map<string, Map<string, ts.ObjectLiteralExpression>> {
+  const tables = new Map<string, Map<string, ts.ObjectLiteralExpression>>();
   const visit = (node: ts.Node) => {
     if (
       ts.isVariableDeclaration(node) &&
@@ -902,12 +902,25 @@ function collectStylexTables(sf: ts.SourceFile): Set<string> {
     ) {
       const callee = node.initializer.expression;
       if (
-        (ts.isPropertyAccessExpression(callee) &&
-          callee.expression.getText() === 'stylex' &&
-          (callee.name.text === 'create' || callee.name.text === 'keyframes')) ||
-        callee.getText() === 'stylex.create'
+        ts.isPropertyAccessExpression(callee) &&
+        callee.expression.getText() === 'stylex' &&
+        callee.name.text === 'create'
       ) {
-        if (callee.getText().endsWith('.create')) tables.add(node.name.text);
+        const rules = new Map<string, ts.ObjectLiteralExpression>();
+        const arg = node.initializer.arguments[0];
+        if (arg && ts.isObjectLiteralExpression(arg)) {
+          for (const p of arg.properties) {
+            if (ts.isPropertyAssignment(p) && (ts.isIdentifier(p.name) || ts.isStringLiteralLike(p.name))) {
+              const ruleName = ts.isIdentifier(p.name) ? p.name.text : p.name.text;
+              const init = unparen(p.initializer);
+              if (ts.isObjectLiteralExpression(init)) rules.set(ruleName, init);
+              // dynamic rules ((w, h) => ({...})) stay name-only: identity
+              // works, styling is a review item.
+              else if ((ts.isArrowFunction(init) || ts.isFunctionExpression(init))) rules.set(ruleName, undefined as unknown as ts.ObjectLiteralExpression);
+            }
+          }
+        }
+        tables.set(node.name.text, rules);
       }
     }
     ts.forEachChild(node, visit);
@@ -916,9 +929,126 @@ function collectStylexTables(sf: ts.SourceFile): Set<string> {
   return tables;
 }
 
+/** Kebab-case a StyleX camelCase property. */
+const kebabProp = (s: string) => s.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+
+/** CSS props whose numeric values are unitless (everything else gets px —
+ *  the CSS-in-JS number convention StyleX follows). */
+const UNITLESS = new Set(['line-height', 'opacity', 'z-index', 'flex-grow', 'flex-shrink', 'order', 'font-weight', 'aspect-ratio', 'flex']);
+
+/** One StyleX rule object → CssDecl[] — the seam that makes invertDecls
+ *  (layout channels, resolveVar token refereeing, raw-value receipts,
+ *  shorthand expansion) reusable verbatim for StyleX. Token-var member
+ *  accesses (`colorVars['--color-accent']`) re-spell as `var(--color-accent)`
+ *  so the SAME TokenIndex referee decides every binding; `--_private` local
+ *  vars resolve one hop; pseudo/conditional value maps take their 'default'
+ *  branch and report the state branches by name (the state round's work). */
+function stylexRuleToDecls(
+  rule: ts.ObjectLiteralExpression,
+  selector: string,
+  notes: string[],
+): CssDecl[] {
+  const localVars = new Map<string, string>();
+  const decls: CssDecl[] = [];
+  const cssTextOf = (e0: ts.Expression, prop: string): string | null => {
+    const e = unparen(e0);
+    if (ts.isStringLiteralLike(e)) return e.text;
+    if (ts.isNumericLiteral(e)) return UNITLESS.has(prop) || e.text === '0' ? e.text : `${e.text}px`;
+    if (ts.isPrefixUnaryExpression(e) && ts.isNumericLiteral(e.operand)) return `-${e.operand.text}${UNITLESS.has(prop) ? '' : 'px'}`;
+    if (e.kind === ts.SyntaxKind.NullKeyword) return null;
+    if (ts.isElementAccessExpression(e) && ts.isStringLiteralLike(e.argumentExpression)) {
+      const key = e.argumentExpression.text;
+      if (key.startsWith('--')) return `var(${key})`;
+    }
+    if (ts.isTemplateExpression(e)) {
+      let out2 = e.head.text;
+      for (const span of e.templateSpans) {
+        const inner = cssTextOf(span.expression, prop);
+        if (inner === null) return null;
+        out2 += inner + span.literal.text;
+      }
+      return out2;
+    }
+    if (ts.isObjectLiteralExpression(e)) {
+      // pseudo/conditional map: { default: x, ':hover': y, '::backdrop': z }
+      let dflt: string | null = null;
+      const stateKeys: string[] = [];
+      for (const p of e.properties) {
+        if (!ts.isPropertyAssignment(p)) continue;
+        const key = ts.isIdentifier(p.name) ? p.name.text : ts.isStringLiteralLike(p.name) ? p.name.text : '';
+        if (key === 'default') dflt = cssTextOf(p.initializer, prop);
+        else if (key) stateKeys.push(key);
+      }
+      if (stateKeys.length > 0) {
+        notes.push(`stylex: ${selector} ${prop} carries state branch(es) [${stateKeys.join(', ')}] — default extracted; states are a named review item this round`);
+      }
+      return dflt;
+    }
+    return null;
+  };
+  for (const p of rule.properties) {
+    if (!ts.isPropertyAssignment(p)) continue;
+    const rawName = ts.isIdentifier(p.name) ? p.name.text : ts.isStringLiteralLike(p.name) ? p.name.text : null;
+    if (rawName === null) continue;
+    const prop = rawName.startsWith('--') ? rawName : kebabProp(rawName);
+    const text = cssTextOf(p.initializer, prop);
+    if (text === null) {
+      if (!rawName.startsWith(':') && !rawName.startsWith('::')) {
+        notes.push(`stylex: ${selector} ${prop} — value not extractable (${unparen(p.initializer).getText().slice(0, 50)}), reported not guessed`);
+      }
+      continue;
+    }
+    if (prop.startsWith('--')) {
+      localVars.set(prop, text);
+      continue;
+    }
+    decls.push({ prop, value: text });
+  }
+  // One-hop local var resolution: borderRadius: 'var(--_dialog-radius)'.
+  return decls.map((d) => {
+    const m = d.value.match(/^var\((--_[a-z0-9-]+)\)$/i);
+    const local = m ? localVars.get(m[1]) : undefined;
+    return local ? { prop: d.prop, value: local } : d;
+  });
+}
+
+/** The StyleX twin of analyzeCss: every stylex.create rule inverts through
+ *  the SAME invertDecls engine into the SAME CssModel shape, so the part
+ *  attachment path is shared verbatim. */
+function analyzeStylex(
+  tables: Map<string, Map<string, ts.ObjectLiteralExpression>>,
+  ctx: JsxContext,
+  index: TokenIndex,
+  notes: string[],
+  rawValues: RawValueFinding[],
+): CssModel {
+  const partStyles = new Map<string, PartStyle>();
+  const cssPartNames = new Set<string>();
+  const noMint: MintSink = () => {};
+  for (const [tableName, rules] of tables) {
+    for (const [ruleName, ruleObj] of rules) {
+      if (!ruleObj) continue; // dynamic rule — identity only
+      const partName = ruleName === 'root' || ruleName === ctx.bem.rootClass ? 'root' : partNameFromClass(ruleName, ctx);
+      const selector = `${tableName}.${ruleName}`;
+      const decls = stylexRuleToDecls(ruleObj, selector, notes);
+      if (decls.length === 0) continue;
+      const style = invertDecls(selector, decls, index, notes, rawValues, noMint);
+      const existing = partStyles.get(partName);
+      if (existing) {
+        existing.tokens = { ...style.tokens, ...existing.tokens };
+        existing.layout = { ...style.layout, ...existing.layout };
+      } else {
+        partStyles.set(partName, style);
+      }
+      cssPartNames.add(partName);
+    }
+  }
+  return { partStyles, rootStates: {}, statesSeen: new Set(), overlapGap: new Map(), cssPartNames };
+}
+
 /** A rule reference off a stylex.create table: `styles.x`, `styles["x"]`,
  *  or a dynamic-rule call `dynamicStyles.x(...)`. Returns the rule name. */
-function stylexRuleOf(e: ts.Expression, tables: Set<string>): string | null {
+function stylexRuleOf(e: ts.Expression, tables: Map<string, Map<string, ts.ObjectLiteralExpression>>): string | null {
   const target = ts.isCallExpression(e) ? e.expression : e;
   if (
     ts.isPropertyAccessExpression(target) &&
@@ -1811,8 +1941,10 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     notes.push('jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code');
   }
 
-  // CSS side
-  const model = analyzeCss(input.css, enumProps, input.tokens, notes, rawValues, ctx.bem, mintables);
+  // Style side — the CSS Module or its StyleX twin, same model shape.
+  const model = input.stylex
+    ? analyzeStylex(ctx.stylexTables!, ctx, input.tokens, notes, rawValues)
+    : analyzeCss(input.css, enumProps, input.tokens, notes, rawValues, ctx.bem, mintables);
 
   // Attach styles per part name across the JSX tree.
   const jsxPartNames = new Set<string>(['root']);
