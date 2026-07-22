@@ -44,6 +44,13 @@ const EXPECT = {
   'switch.figma.js':         { set: 'Switch',        id: 'astryx.switch',         variants: 2,  axes: 'labelPosition(2)' },
   'text-input.figma.js':     { set: 'TextInput',     id: 'astryx.text-input',     variants: 9,  axes: 'type(3)×size(3)' },
   'token.figma.js':          { set: 'Token',         id: 'astryx.token',          variants: 33, axes: 'size(3)×color(11)' },
+  // Phase B — the composition set (extracted round 1–2, promoted 2026-07-22).
+  // Standalone COMPONENTs (no enum axes); the composed two execute in the
+  // SHARED dependency-ordered mock pass below, not the per-file fresh mock
+  // (their instance refs need Button / DropdownMenuItem already synced).
+  'dropdown-menu-item.figma.js': { set: 'DropdownMenuItem', id: 'astryx.dropdown-menu-item', variants: 1, axes: 'standalone', standalone: true },
+  'dropdown-menu.figma.js':      { set: 'DropdownMenu',     id: 'astryx.dropdown-menu',      variants: 1, axes: 'standalone multi-root', standalone: true, composed: true },
+  'toast.figma.js':              { set: 'Toast',            id: 'astryx.toast',              variants: 1, axes: 'standalone', standalone: true, composed: true },
 };
 
 const parseComponents = (script) =>
@@ -115,7 +122,7 @@ for (const file of scripts) {
   }
   if (comp.setName !== exp.set) failures.push(`${file}: setName ${comp.setName} !== ${exp.set}`);
   if (comp.contractId !== exp.id) failures.push(`${file}: contractId ${comp.contractId} !== ${exp.id}`);
-  if (comp.isSet !== true) failures.push(`${file}: isSet !== true`);
+  if (comp.isSet !== !exp.standalone) failures.push(`${file}: isSet ${comp.isSet} !== ${!exp.standalone}`);
   const variants = comp.variants ?? comp.data?.variants ?? [];
   if (variants.length !== exp.variants) {
     failures.push(`${file}: compiled ${variants.length} variants, expected ${exp.variants} (${exp.axes})`);
@@ -127,20 +134,79 @@ for (const file of scripts) {
   //    token variables are already synced (seedTokenVariables).
   let ran = false;
   let runNote = '';
-  try {
-    const { figma } = createFigmaMock();
-    seedTokenVariables(figma);
-    const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
-    await vm.runInContext(`(async () => {\n${script}\n})()`, ctx, { timeout: 120_000 });
-    ran = true;
-  } catch (e) {
-    runNote = String(e && e.message ? e.message : e);
-    failures.push(`${file}: headless execute threw — ${runNote}`);
+  if (exp.composed) {
+    ran = true; // executed in the shared dependency-ordered pass below
+    runNote = 'composed pass';
+  } else {
+    try {
+      const { figma } = createFigmaMock();
+      seedTokenVariables(figma);
+      const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+      await vm.runInContext(`(async () => {\n${script}\n})()`, ctx, { timeout: 120_000 });
+      ran = true;
+    } catch (e) {
+      runNote = String(e && e.message ? e.message : e);
+      failures.push(`${file}: headless execute threw — ${runNote}`);
+    }
   }
 
   rows.push(
-    `| \`${file}\` | \`${comp.setName}\` | ${variants.length} | ${exp.axes} | ${ran ? '✓ ran' : '✘'} |`,
+    `| \`${file}\` | \`${comp.setName}\` | ${variants.length} | ${exp.axes} | ${ran ? (exp.composed ? '✓ composed pass' : '✓ ran') : '✘'} |`,
   );
+}
+
+// --- 3. COMPOSITION PASS (Phase B): the composed scripts run in ONE shared
+// mock file, dependency-ordered — exactly the plugin's Receive flow — and
+// the BUILT trees are asserted: repeated item instances carry their sample
+// labels, the trigger/dismiss Button instances carry their applied Label,
+// and the multi-root split survives. This is the composite-plugin-path
+// pattern applied to a foreign system's extracted contracts.
+{
+  const order = ['button.figma.js', 'dropdown-menu-item.figma.js', 'dropdown-menu.figma.js', 'toast.figma.js'];
+  const { figma, root } = createFigmaMock();
+  seedTokenVariables(figma);
+  const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  try {
+    for (const file of order) {
+      const script = readFileSync(path.join(FIGMA_DIR, file), 'utf8');
+      await vm.runInContext(`(async () => {\n${script}\n})()`, ctx, { timeout: 120_000 });
+    }
+    const find = (name) => root.findOne((n) => n.type === 'COMPONENT' && n.name === name);
+    const texts = (n) => (n ? n.findAll((x) => x.type === 'TEXT').map((t) => t.characters) : []);
+
+    const dd = find('DropdownMenu');
+    if (!dd) failures.push('composition: DropdownMenu COMPONENT not built');
+    else {
+      const rootNames = dd.children.map((c) => c.name);
+      if (!rootNames.includes('trigger') || !rootNames.includes('menu')) {
+        failures.push(`composition: DropdownMenu roots ${JSON.stringify(rootNames)} missing trigger/menu`);
+      }
+      const menu = dd.children.find((c) => c.name === 'menu');
+      const items = (menu?.children ?? []).filter((c) => c.type === 'INSTANCE');
+      const itemTexts = items.map((i) => texts(i)[0]);
+      if (JSON.stringify(itemTexts) !== JSON.stringify(['Edit', 'Duplicate', 'Delete'])) {
+        failures.push(`composition: DropdownMenu repeated item labels ${JSON.stringify(itemTexts)} !== [Edit, Duplicate, Delete]`);
+      }
+      const trigger = dd.children.find((c) => c.name === 'trigger');
+      if (trigger?.type !== 'INSTANCE' || !texts(trigger).includes('Options')) {
+        failures.push(`composition: DropdownMenu trigger is not a Button INSTANCE labeled "Options" (${trigger?.type}, texts ${JSON.stringify(texts(trigger))})`);
+      }
+      if (!(menu && menu.width >= 200)) {
+        failures.push(`composition: DropdownMenu menu width ${menu?.width} — collapse class (expected ≥200 from the 240px literal)`);
+      }
+    }
+
+    const toast = find('Toast');
+    if (!toast) failures.push('composition: Toast COMPONENT not built');
+    else {
+      const t = texts(toast);
+      if (!t.includes('Saved successfully')) failures.push(`composition: Toast body text missing (texts ${JSON.stringify(t)})`);
+      if (!t.includes('Dismiss')) failures.push(`composition: Toast dismiss Button label not applied (texts ${JSON.stringify(t)})`);
+      if (!(toast.width >= 300)) failures.push(`composition: Toast width ${toast.width} — collapse class (expected ≥300 from the 360px literal)`);
+    }
+  } catch (e) {
+    failures.push(`composition pass threw — ${String(e && e.message ? e.message : e)}`);
+  }
 }
 
 const receiptDir = path.join(EX, 'receipts', 'figma');

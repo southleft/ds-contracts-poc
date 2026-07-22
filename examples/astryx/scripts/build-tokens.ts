@@ -59,6 +59,39 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
+// ---- DTCG alias pass (Phase B, 2026-07-22): the StyleX source spells
+// intra-tree references as `var(--x)` strings; DTCG's spelling for the same
+// fact is the alias `{x}`. A literal var() string is opaque to every DTCG
+// consumer (the figma emitter refused `{text-body-size}` → 'var(--font-
+// size-base)' by name — that refusal is why this pass exists). Mechanical:
+// only var() values whose target EXISTS as a tree leaf convert; anything
+// else stays verbatim and is receipted. ----
+const leafPaths = new Set(layer.entries.map((e) => e.path));
+const unaliased: string[] = [];
+const aliasPass = (node: Record<string, unknown>) => {
+  for (const value of Object.values(node)) {
+    if (!value || typeof value !== 'object') continue;
+    const v = value as Record<string, unknown>;
+    if (typeof v.$value === 'string') {
+      const m = (v.$value as string).match(/^var\(--([a-z0-9-]+)\)$/i);
+      if (m) {
+        if (leafPaths.has(m[1])) v.$value = `{${m[1]}}`;
+        else unaliased.push(`${v.$value} — target not a tree leaf, kept verbatim`);
+      }
+    } else if (!('$value' in v)) {
+      aliasPass(v);
+    }
+  }
+};
+aliasPass(layer.tree as unknown as Record<string, unknown>);
+if (layer.modes) {
+  aliasPass(layer.modes.light.tree as unknown as Record<string, unknown>);
+  aliasPass(layer.modes.dark.tree as unknown as Record<string, unknown>);
+}
+if (unaliased.length > 0) {
+  console.log(`  var() values NOT aliased (target missing):\n${[...new Set(unaliased)].map((u) => `    - ${u}`).join('\n')}`);
+}
+
 // ---- write ----
 mkdirSync(path.join(EX, 'tokens/modes'), { recursive: true });
 const write = (rel: string, data: unknown) =>

@@ -5003,8 +5003,10 @@ const cases: Case[] = [
         '--stories',
       ];
       const a = run(TSX, genArgs('examples/astryx/.pin-a'));
-      if (a.status !== 0 || !a.out.includes('Generated 10 component(s)')) {
-        throw new Error(`astryx generate (run A) did not emit 10 components:\n${a.out}`);
+      // Phase B (2026-07-22): the 10 flagships + the 3 promoted composition
+      // contracts (DropdownMenu, DropdownMenuItem, Toast) — 13 components.
+      if (a.status !== 0 || !a.out.includes('Generated 13 component(s)')) {
+        throw new Error(`astryx generate (run A) did not emit 13 components:\n${a.out}`);
       }
       const b = run(TSX, genArgs('examples/astryx/.pin-b'));
       if (b.status !== 0) throw new Error(`astryx generate (run B) failed:\n${b.out}`);
@@ -5023,7 +5025,7 @@ const cases: Case[] = [
         throw new Error(`badge figma compiled ${(comp.variants ?? []).length} variants, expected 14`);
       }
       console.log(
-        `astryx-dev-journey: 10 flagship contracts → generator byte-stable × 2 runs (${hA.slice(0, 12)}…); ` +
+        `astryx-dev-journey: 13 contracts (10 flagships + 3 composition-tier) → generator byte-stable × 2 runs (${hA.slice(0, 12)}…); ` +
           `committed badge.figma.js compiles to the 14-variant Badge set (referee)`,
       );
     },

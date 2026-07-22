@@ -1,0 +1,68 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.toast",
+  "name": "Toast",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "PROMOTED from the Phase B composition-tier extraction (round 2, wrapper-ref descent) — the vendor-refereed exhibit: Astryx's own Toast.doc.mjs declares anatomy Body / End content / Dismiss button, and the extraction recovered exactly those three (body slot, endContent slot, ghost dismiss astryx.button with its real props) once the MediaTheme wrapper descended. Curation receipts: (1) the MediaTheme theme-provider ref was dropped and its interior lifted to the root (a theme boundary is a code mechanism, not anatomy); (2) the extracted behavioral props (isAutoHide/autoHideDuration/isExiting) are timing mechanics with no visual projection — dropped from the exhibit, receipted here; (3) root keeps the extracted StyleX token bindings verbatim (padding, radius, shadow, body typography).",
+  "semantics": { "element": "div", "role": "status" },
+  "props": [
+    {
+      "name": "body",
+      "description": "The toast's primary message content (vendor anatomy: Body, required).",
+      "type": "text",
+      "default": "Saved successfully",
+      "bindings": {
+        "figma": { "kind": "TEXT", "property": "Body" },
+        "code": { "prop": "body" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "attrs": { "aria-atomic": "true" },
+      "layout": { "display": "flex", "direction": "row", "align": "start" },
+      "tokens": {
+        "gap": "{spacing-3}",
+        "padding-block": "{spacing-4}",
+        "padding-inline": "{spacing-4}",
+        "background-color": "{color-background-surface}",
+        "border-radius": "{radius-container}",
+        "box-shadow": "{shadow-med}",
+        "font-family": "{font-family-body}",
+        "font-size": "{text-body-size}",
+        "line-height": "{text-body-leading}"
+      },
+      "literals": { "width": "360px" },
+      "parts": {
+        "content": {
+          "description": "Vendor anatomy: Body (required).",
+          "element": "div",
+          "layout": { "display": "flex", "direction": "column", "grow": true },
+          "parts": {
+            "bodyText": { "element": "span", "content": { "prop": "body" } }
+          }
+        },
+        "endContent": {
+          "description": "Vendor anatomy: End content (optional trailing action) — a slot accepting composed instances.",
+          "element": "div",
+          "layout": { "display": "flex", "direction": "row", "align": "center" },
+          "slot": { "name": "endContent", "accepts": ["astryx.button"] },
+          "optional": true
+        },
+        "dismiss": {
+          "description": "Vendor anatomy: Dismiss button (required) — the extracted ghost astryx.button with its real props.",
+          "component": {
+            "id": "astryx.button",
+            "props": { "variant": "ghost", "label": "Dismiss" }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@astryxdesign/core", "export": "Toast" }
+  }
+}

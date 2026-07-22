@@ -28,7 +28,7 @@ Each script is proven two ways, the repo's own patterns:
 > creates these; this receipt seeds them directly). Wiring a literal-token
 > `buildTokensScript` path is a follow-up, not this round.
 
-## 10 scripts · 104 component-set variants compiled
+## 13 scripts · 107 component-set variants compiled
 
 | script | set | variants | axes | headless run |
 |---|---|---|---|---|
@@ -37,10 +37,13 @@ Each script is proven two ways, the repo's own patterns:
 | `button.figma.js` | `Button` | 12 | variant(4)×size(3) | ✓ ran |
 | `card.figma.js` | `Card` | 13 | variant(13) | ✓ ran |
 | `checkbox-input.figma.js` | `CheckboxInput` | 2 | size(2) | ✓ ran |
+| `dropdown-menu-item.figma.js` | `DropdownMenuItem` | 1 | standalone | ✓ ran |
+| `dropdown-menu.figma.js` | `DropdownMenu` | 1 | standalone multi-root | ✓ composed pass |
 | `progress-bar.figma.js` | `ProgressBar` | 5 | variant(5) | ✓ ran |
 | `slider.figma.js` | `Slider` | 6 | orientation(2)×valueDisplay(3) | ✓ ran |
 | `switch.figma.js` | `Switch` | 2 | labelPosition(2) | ✓ ran |
 | `text-input.figma.js` | `TextInput` | 9 | type(3)×size(3) | ✓ ran |
+| `toast.figma.js` | `Toast` | 1 | standalone | ✓ composed pass |
 | `token.figma.js` | `Token` | 33 | size(3)×color(11) | ✓ ran |
 
-Total: **104 variants across 10 component sets.**
+Total: **107 variants across 13 component sets.**

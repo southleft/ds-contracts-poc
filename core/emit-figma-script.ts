@@ -2105,10 +2105,16 @@ function annotateFillW(rootSpec: NodeSpec): void {
   };
   const walk = (s: NodeSpec, established: boolean): void => {
     const kids = s.children ?? [];
+    // CSS truth (Phase B live-in-mock finding, 2026-07-22): an EXPLICIT
+    // width — token-bound OR literal — beats align-items:stretch. The first
+    // gate only excluded fixedWidth (token) children; a lits.width child
+    // (the Astryx DropdownMenu 240px menu) still got force-FILLed under its
+    // hug container and collapsed. Explicit-width children are never fill
+    // candidates on that axis.
     const isCandidate = (c: NodeSpec): boolean =>
       inFlow(c) &&
       (c.grow === true ||
-        (s.layout?.stretchChildren === true && !c.fixedWidth && c.type !== 'instance'));
+        (s.layout?.stretchChildren === true && !c.fixedWidth && c.lits?.width === undefined && c.type !== 'instance'));
     const intrinsic = kids.some((c) => inFlow(c) && !isCandidate(c) && canHug(c));
     const ready = established || intrinsic;
     for (const c of kids) {

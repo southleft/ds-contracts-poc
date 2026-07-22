@@ -1,0 +1,72 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "astryx.dropdown-menu",
+  "name": "DropdownMenu",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "PROMOTED from the Phase B composition-tier extraction (round 2) — the flagship composition exhibit: a MULTI-ROOT component (trigger + menu overlay) whose menu holds a REPEATED astryx.dropdown-menu-item collection over the `items` prop. The extraction recovered exactly this shape from Meta's source (fragment root → trigger Button ref + popover.render overlay carrying the items repeat AND the children slot). Curation receipts: (1) the DUAL MODE — items-array XOR compound children — is mutually exclusive in code; the contract carries the DATA mode (repeat), the canvas-projectable one; (2) the DropdownMenuContext provider ref was dropped (context is a code mechanism, not anatomy); (3) the popover overlay projects as a sibling root below the trigger — live placement/anchoring is a design-tool behavior outside the contract (same convention as the composite Modal's roots); (4) the repeat sample is authored (design-time values are not decidable from code — the extractor said so by name).",
+  "semantics": { "element": "div" },
+  "props": [
+    {
+      "name": "items",
+      "description": "The menu's item records — one astryx.dropdown-menu-item per record (the extracted repeat channel).",
+      "type": { "arrayOf": { "label": "text" } },
+      "bindings": {
+        "figma": { "kind": "NONE" },
+        "code": { "prop": "items" }
+      }
+    },
+    {
+      "name": "hasChevron",
+      "description": "Whether the trigger shows the dropdown chevron (extracted, default true).",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": { "kind": "BOOLEAN", "property": "Has Chevron" },
+        "code": { "prop": "hasChevron" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "trigger": {
+      "description": "The menu trigger — a real astryx.button instance (extracted ref, aria-haspopup=menu).",
+      "component": {
+        "id": "astryx.button",
+        "props": { "label": "Options" }
+      }
+    },
+    "menu": {
+      "description": "The overlay menu surface (extracted via the popover.render hook call; role=menu). Projects as a sibling root — live anchoring is design-tool behavior.",
+      "attrs": { "role": "menu" },
+      "layout": { "display": "flex", "direction": "column" },
+      "tokens": {
+        "gap": "{spacing-0-5}",
+        "padding-block": "{spacing-1}",
+        "padding-inline": "{spacing-1}",
+        "background-color": "{color-background-surface}",
+        "border-radius": "{radius-container}",
+        "box-shadow": "{shadow-med}"
+      },
+      "literals": { "width": "240px" },
+      "parts": {
+        "item": {
+          "description": "The dynamic child collection — one astryx.dropdown-menu-item per `items` record.",
+          "repeat": {
+            "itemsProp": "items",
+            "sample": [
+              { "label": "Edit" },
+              { "label": "Duplicate" },
+              { "label": "Delete" }
+            ]
+          },
+          "component": { "id": "astryx.dropdown-menu-item" }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@astryxdesign/core", "export": "DropdownMenu" }
+  }
+}

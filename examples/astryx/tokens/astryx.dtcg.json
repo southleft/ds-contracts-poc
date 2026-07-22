@@ -561,140 +561,140 @@
     "$type": "number"
   },
   "text-heading-1-size": {
-    "$value": "var(--font-size-2xl)"
+    "$value": "{font-size-2xl}"
   },
   "text-heading-1-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-heading-1-leading": {
     "$value": "1.3333",
     "$type": "number"
   },
   "text-heading-2-size": {
-    "$value": "var(--font-size-xl)"
+    "$value": "{font-size-xl}"
   },
   "text-heading-2-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-heading-2-leading": {
     "$value": "1.4",
     "$type": "number"
   },
   "text-heading-3-size": {
-    "$value": "var(--font-size-lg)"
+    "$value": "{font-size-lg}"
   },
   "text-heading-3-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-heading-3-leading": {
     "$value": "1.4118",
     "$type": "number"
   },
   "text-heading-4-size": {
-    "$value": "var(--font-size-base)"
+    "$value": "{font-size-base}"
   },
   "text-heading-4-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-heading-4-leading": {
     "$value": "1.4286",
     "$type": "number"
   },
   "text-heading-5-size": {
-    "$value": "var(--font-size-sm)"
+    "$value": "{font-size-sm}"
   },
   "text-heading-5-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-heading-5-leading": {
     "$value": "1.6667",
     "$type": "number"
   },
   "text-heading-6-size": {
-    "$value": "var(--font-size-xs)"
+    "$value": "{font-size-xs}"
   },
   "text-heading-6-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-heading-6-leading": {
     "$value": "1.6",
     "$type": "number"
   },
   "text-body-size": {
-    "$value": "var(--font-size-base)"
+    "$value": "{font-size-base}"
   },
   "text-body-weight": {
-    "$value": "var(--font-weight-normal)"
+    "$value": "{font-weight-normal}"
   },
   "text-body-leading": {
     "$value": "1.4286",
     "$type": "number"
   },
   "text-large-size": {
-    "$value": "var(--font-size-lg)"
+    "$value": "{font-size-lg}"
   },
   "text-large-weight": {
-    "$value": "var(--font-weight-semibold)"
+    "$value": "{font-weight-semibold}"
   },
   "text-large-leading": {
     "$value": "1.4118",
     "$type": "number"
   },
   "text-label-size": {
-    "$value": "var(--font-size-base)"
+    "$value": "{font-size-base}"
   },
   "text-label-weight": {
-    "$value": "var(--font-weight-medium)"
+    "$value": "{font-weight-medium}"
   },
   "text-label-leading": {
     "$value": "1.4286",
     "$type": "number"
   },
   "text-code-size": {
-    "$value": "var(--font-size-base)"
+    "$value": "{font-size-base}"
   },
   "text-code-weight": {
-    "$value": "var(--font-weight-normal)"
+    "$value": "{font-weight-normal}"
   },
   "text-code-leading": {
     "$value": "1.4286",
     "$type": "number"
   },
   "text-supporting-size": {
-    "$value": "var(--font-size-sm)"
+    "$value": "{font-size-sm}"
   },
   "text-supporting-weight": {
-    "$value": "var(--font-weight-normal)"
+    "$value": "{font-weight-normal}"
   },
   "text-supporting-leading": {
     "$value": "1.6667",
     "$type": "number"
   },
   "text-display-1-size": {
-    "$value": "var(--font-size-5xl)"
+    "$value": "{font-size-5xl}"
   },
   "text-display-1-weight": {
-    "$value": "var(--font-weight-normal)"
+    "$value": "{font-weight-normal}"
   },
   "text-display-1-leading": {
     "$value": "1.2381",
     "$type": "number"
   },
   "text-display-2-size": {
-    "$value": "var(--font-size-4xl)"
+    "$value": "{font-size-4xl}"
   },
   "text-display-2-weight": {
-    "$value": "var(--font-weight-normal)"
+    "$value": "{font-weight-normal}"
   },
   "text-display-2-leading": {
     "$value": "1.2571",
     "$type": "number"
   },
   "text-display-3-size": {
-    "$value": "var(--font-size-3xl)"
+    "$value": "{font-size-3xl}"
   },
   "text-display-3-weight": {
-    "$value": "var(--font-weight-normal)"
+    "$value": "{font-weight-normal}"
   },
   "text-display-3-leading": {
     "$value": "1.2414",
