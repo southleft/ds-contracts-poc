@@ -1,6 +1,6 @@
 {
   "note": "Engine-bundle drift guard — scripts/build-plugin-zip.mjs refuses to package when a fresh bundle of figma-sync/plugin/engine/entry.ts (core barrel + baked tokens/contracts/icons) no longer matches this receipt. Re-record deliberately: node scripts/build-plugin-zip.mjs --update-engine-receipt",
-  "inputHash": "4294381176f4dc12f6e4e76747c614cd8ff85d7a0b4ec6b869bbb18eaece1bc1",
+  "inputHash": "81f492bb74aa8ede96770f37f30b81e75aa8d7adb76f0473c212dd2dd77cf1ff",
   "minifiedBytes": 448751,
   "inputFiles": 108,
   "esbuild": "0.28.1"

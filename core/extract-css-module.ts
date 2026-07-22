@@ -793,13 +793,19 @@ function analyzeCss(
 // JSX → part tree
 // ---------------------------------------------------------------------------
 
-type JsxEl = ts.JsxElement | ts.JsxSelfClosingElement;
+/** Phase B: fragments joined the walkable set — a fragment root is the code
+ *  spelling of MULTI-ROOT anatomy (DropdownMenu returns <> trigger + overlay). */
+type JsxEl = ts.JsxElement | ts.JsxSelfClosingElement | ts.JsxFragment;
+
+const EMPTY_JSX_ATTRS = { properties: [] as unknown } as ts.JsxAttributes;
 
 function tagNameOf(el: JsxEl): string {
+  if (ts.isJsxFragment(el)) return '<>';
   const tag = ts.isJsxElement(el) ? el.openingElement.tagName : el.tagName;
   return tag.getText();
 }
 function attributesOf(el: JsxEl): ts.JsxAttributes {
+  if (ts.isJsxFragment(el)) return EMPTY_JSX_ATTRS;
   return ts.isJsxElement(el) ? el.openingElement.attributes : el.attributes;
 }
 
@@ -821,6 +827,60 @@ interface JsxContext {
    *  this file — part identity reads `{...stylex.props(styles.x)}` spreads
    *  instead of className. null = CSS-module mode. */
   stylexTables: Set<string> | null;
+  /** Phase B: render-helper functions resolvable by name — same-file
+   *  declarations plus co-located sibling sources the adapter supplies.
+   *  A `{renderX(items)}` call inlines the helper's component JSX as a
+   *  repeat template (union branches reported by name, never merged). */
+  helperFns: Map<string, ts.FunctionLikeDeclaration>;
+  /** Phase B: top-level `const x = …` initializers in the component body —
+   *  ONE resolution hop for render indirection (`const menuContent = items
+   *  ? renderItems(items) : children; … {menuContent}`). */
+  localInits: Map<string, ts.Expression>;
+}
+
+/** Collect named function declarations + arrow consts across source files —
+ *  the resolvable render-helper universe (same file + co-located siblings). */
+function collectHelperFns(sfs: ts.SourceFile[]): Map<string, ts.FunctionLikeDeclaration> {
+  const out = new Map<string, ts.FunctionLikeDeclaration>();
+  for (const sf of sfs) {
+    const visit = (node: ts.Node) => {
+      if (ts.isFunctionDeclaration(node) && node.name && !out.has(node.name.text)) {
+        out.set(node.name.text, node);
+      }
+      if (
+        ts.isVariableDeclaration(node) &&
+        ts.isIdentifier(node.name) &&
+        node.initializer &&
+        (ts.isArrowFunction(node.initializer) || ts.isFunctionExpression(node.initializer)) &&
+        !out.has(node.name.text)
+      ) {
+        out.set(node.name.text, node.initializer);
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(sf);
+  }
+  return out;
+}
+
+/** The distinct top-level component JSX elements inside a helper body —
+ *  occurrences counted without descending into a recorded element (a nested
+ *  <Icon> inside a recorded <DropdownMenuItem> belongs to the template, not
+ *  the union). */
+function helperComponentJsx(fn: ts.FunctionLikeDeclaration): Map<string, { el: JsxEl; count: number }> {
+  const found = new Map<string, { el: JsxEl; count: number }>();
+  const visit = (node: ts.Node) => {
+    if ((ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) && /^[A-Z]/.test(tagNameOf(node))) {
+      const tag = tagNameOf(node);
+      const cur = found.get(tag);
+      if (cur) cur.count++;
+      else found.set(tag, { el: node, count: 1 });
+      return; // don't descend — children belong to this template
+    }
+    ts.forEachChild(node, visit);
+  };
+  if (fn.body) visit(fn.body);
+  return found;
 }
 
 /** StyleX (Phase B, Astryx composition tier): components style via
@@ -1156,9 +1216,9 @@ function attrsOf(el: JsxEl, partName: string, isRoot: boolean, hasOnClick: boole
   return out;
 }
 
-/** Meaningful children of a JSX element. */
+/** Meaningful children of a JSX element (or fragment). */
 function jsxChildren(el: JsxEl): readonly ts.JsxChild[] {
-  return ts.isJsxElement(el) ? el.children : [];
+  return ts.isJsxElement(el) || ts.isJsxFragment(el) ? el.children : [];
 }
 
 const unparen = (e: ts.Expression): ts.Expression =>
@@ -1171,6 +1231,14 @@ interface BuiltPart {
 
 function buildPart(el: JsxEl, ctx: JsxContext, condition?: ExtractedPart['visibleWhen'] | 'optional'): BuiltPart | null {
   const tag = tagNameOf(el);
+  // Nested fragment → an element-less group part (rare; children walk on).
+  if (ts.isJsxFragment(el)) {
+    const part: ExtractedPart = {};
+    fillChildren(el, part, 'group', ctx);
+    applyCondition(part, condition);
+    ctx.notes.push('jsx: nested Fragment extracted as an element-less "group" part — review');
+    return { name: 'group', part };
+  }
   // Component instance (capitalized) → component ref part
   if (/^[A-Z]/.test(tag)) {
     const props: Record<string, string | boolean> = {};
@@ -1192,11 +1260,23 @@ function buildPart(el: JsxEl, ctx: JsxContext, condition?: ExtractedPart['visibl
     }
     let text: string | undefined;
     const kids = jsxChildren(el).filter((c) => !(ts.isJsxText(c) && c.text.trim() === ''));
-    if (kids.length === 1 && ts.isJsxText(kids[0])) text = kids[0].text.trim();
-    else if (kids.length > 0) ctx.notes.push(`jsx: <${tag}> has non-text children — component-ref content not extracted`);
     const part: ExtractedPart = {
-      component: { name: tag, ...(Object.keys(props).length > 0 ? { props } : {}), ...(text !== undefined ? { text } : {}) },
+      component: { name: tag, ...(Object.keys(props).length > 0 ? { props } : {}) },
     };
+    if (kids.length === 1 && ts.isJsxText(kids[0])) {
+      text = kids[0].text.trim();
+      part.component = { ...part.component!, text };
+    } else if (kids.length > 0) {
+      // Phase B (wrapper-ref descent — the Toast→MediaTheme class): element
+      // children of a component instance are its SLOT CONTENT — real
+      // structure, extracted as parts nested under the ref. How the wrapper
+      // maps to a contract (pass-through vs instance) is a review decision;
+      // the structure itself is not lost.
+      fillChildren(el, part, lowerFirst(tag), ctx);
+      ctx.notes.push(
+        `jsx: <${tag}> has element children — extracted as parts INSIDE the component-ref boundary (the ref's slot content); review whether <${tag}> is a pass-through wrapper before adoption`,
+      );
+    }
     applyCondition(part, condition);
     return { name: lowerFirst(tag), part };
   }
@@ -1296,6 +1376,54 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
     return undefined;
   };
 
+  /** Phase B: `popover.render(<jsx>, opts)` — a hook-rendered OVERLAY layer
+   *  (Astryx usePopover/useLayer); the first JSX argument is the content. */
+  const tryRenderCall = (e: ts.Expression): boolean => {
+    if (!ts.isCallExpression(e) || !ts.isPropertyAccessExpression(e.expression) || e.expression.name.text !== 'render' || e.arguments.length === 0) {
+      return false;
+    }
+    const layerArg = unparen(e.arguments[0] as ts.Expression);
+    if (!ts.isJsxElement(layerArg) && !ts.isJsxSelfClosingElement(layerArg) && !ts.isJsxFragment(layerArg)) return false;
+    const built = buildPart(layerArg, ctx);
+    if (!built) return false;
+    addChild(built);
+    ctx.notes.push(
+      `jsx: part "${partName}" renders {${e.expression.expression.getText().slice(0, 30)}.render(…)} — extracted as an OVERLAY-layer part "${built.name}" (popover/layer placement and dismissal are review items)`,
+    );
+    return true;
+  };
+
+  /** Phase B: `{renderX(items, …)}` — a render HELPER resolvable by name
+   *  (same file or a co-located sibling). Its dominant component JSX becomes
+   *  the template; an array-PROP first argument makes it a repeat part;
+   *  other union branches are reported by name, never merged. */
+  const tryHelperCall = (e: ts.Expression): boolean => {
+    if (!ts.isCallExpression(e) || !ts.isIdentifier(e.expression) || !ctx.helperFns.has(e.expression.text)) return false;
+    const helper = ctx.helperFns.get(e.expression.text)!;
+    const jsxByTag = helperComponentJsx(helper);
+    if (jsxByTag.size === 0) {
+      ctx.notes.push(
+        `jsx: part "${partName}" calls helper ${e.expression.text}(…) — helper resolved but renders no component JSX extraction can read`,
+      );
+      return true;
+    }
+    const ranked = [...jsxByTag.entries()].sort((a, b) => b[1].count - a[1].count);
+    const [domTag, dom] = ranked[0];
+    const firstArg = e.arguments.length > 0 ? unparen(e.arguments[0] as ts.Expression) : undefined;
+    const itemsProp = firstArg && ts.isIdentifier(firstArg) && ctx.propKind.has(firstArg.text) ? firstArg.text : null;
+    const built = buildPart(dom.el, ctx);
+    if (!built) return false;
+    if (itemsProp) built.part.repeat = { itemsProp };
+    addChild(built);
+    const others = ranked.slice(1).map(([t]) => `<${t}>`);
+    ctx.notes.push(
+      `jsx: part "${partName}" calls helper ${e.expression.text}(…) — ${
+        itemsProp ? `extracted as a REPEAT part "${built.name}" over prop "${itemsProp}"` : `extracted its dominant component <${domTag}> as part "${built.name}"`
+      }${others.length > 0 ? `; other branch(es) ${others.join(', ')} reported, NOT extracted (union rendering — review)` : ''}`,
+    );
+    return true;
+  };
+
   for (const kid of kids) {
     if (ts.isJsxText(kid)) {
       if (kid.text.trim() !== '') texts.push(kid.text.trim());
@@ -1325,6 +1453,41 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
             part.content = { prop: e.text };
           }
         } else {
+          // Phase B: ONE resolution hop through a local const — the render
+          // indirection Astryx uses (`const menuContent = items !== undefined
+          // ? renderDropdownItems(items) : children`). A dual-mode
+          // conditional extracts BOTH branches, mutual exclusivity noted.
+          const init = ctx.localInits.get(e.text);
+          const resolved = init ? unparen(init) : undefined;
+          if (resolved) {
+            const branches = ts.isConditionalExpression(resolved)
+              ? [unparen(resolved.whenTrue), unparen(resolved.whenFalse)]
+              : [resolved];
+            let handled = 0;
+            for (const b of branches) {
+              if (ts.isIdentifier(b) && (b.text === 'children' || ctx.propKind.get(b.text) === 'node')) {
+                addChild({ name: b.text, part: { slot: { name: b.text } } });
+                handled++;
+              } else if (tryHelperCall(b) || tryRenderCall(b)) {
+                handled++;
+              } else if (ts.isJsxElement(b) || ts.isJsxSelfClosingElement(b) || ts.isJsxFragment(b)) {
+                addChild(buildPart(b, ctx, 'optional'));
+                handled++;
+              } else if (b.kind !== ts.SyntaxKind.NullKeyword) {
+                ctx.notes.push(
+                  `jsx: part "${partName}" local "${e.text}" branch \`${b.getText().slice(0, 50)}\` — not extractable after one hop`,
+                );
+              }
+            }
+            if (handled > 0) {
+              if (branches.length > 1) {
+                ctx.notes.push(
+                  `jsx: part "${partName}" renders {${e.text}} — a DUAL-MODE conditional; both branches extracted, but they are mutually exclusive in code (review which mode the contract should carry)`,
+                );
+              }
+              continue;
+            }
+          }
           ctx.notes.push(`jsx: part "${partName}" renders {${e.text}} — not a known text/node prop, not extracted`);
         }
         continue;
@@ -1361,6 +1524,8 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
         ctx.notes.push(`jsx: part "${partName}" conditional expression — not a \`cond ? <el/> : null\` shape, not extracted`);
         continue;
       }
+      if (tryRenderCall(e)) continue;
+      if (tryHelperCall(e)) continue;
       // Phase B (composition tier): `items.map(item => <X/>)` is the CODE
       // spelling of the contract's repeat channel — a template mapped over
       // an array prop. Only a PROP receiver becomes a repeat part; a local/
@@ -1447,8 +1612,10 @@ function findReturnedJsx(fn: ts.FunctionLikeDeclaration, notes: string[]): JsxEl
     const u = unparen(e);
     if (ts.isJsxElement(u) || ts.isJsxSelfClosingElement(u)) return u;
     if (ts.isJsxFragment(u)) {
-      notes.push('jsx: component returns a Fragment — contract anatomy needs a single root element, anatomy not extracted');
-      return null;
+      // Phase B: a fragment root is MULTI-ROOT anatomy in code clothing —
+      // walk its children under a synthetic element-less root.
+      notes.push('jsx: component returns a Fragment — children extracted under a synthetic root (multi-root anatomy; review the root split before adoption)');
+      return u;
     }
     return null;
   };
@@ -1534,6 +1701,9 @@ export interface AnatomyInput {
    *  Structure (parts, component refs, slots, repeats) extracts; StyleX
    *  rule styling is a named review item until the token round. */
   stylex?: boolean;
+  /** Phase B: co-located sibling sources (same directory) — render helpers
+   *  imported from them (`renderDropdownItems`) become resolvable. */
+  helpers?: { sourcePath: string; source: string }[];
 }
 
 export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
@@ -1563,6 +1733,24 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     ariaOnPart: new Map(),
     bem: emptyClassMap(),
     stylexTables: input.stylex ? collectStylexTables(input.sf) : null,
+    helperFns: collectHelperFns([
+      input.sf,
+      ...(input.helpers ?? []).map((h) =>
+        ts.createSourceFile(h.sourcePath.split(/[\\/]/).pop() ?? h.sourcePath, h.source, ts.ScriptTarget.Latest, true),
+      ),
+    ]),
+    localInits: (() => {
+      const inits = new Map<string, ts.Expression>();
+      const visit = (node: ts.Node) => {
+        if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer) {
+          if (!inits.has(node.name.text)) inits.set(node.name.text, node.initializer);
+        }
+        if (ts.isArrowFunction(node) || ts.isFunctionExpression(node) || ts.isFunctionDeclaration(node)) return;
+        ts.forEachChild(node, visit);
+      };
+      if (fn.body) ts.forEachChild(fn.body, visit);
+      return inits;
+    })(),
   };
   if (input.stylex) {
     notes.push(
@@ -1575,34 +1763,47 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
   }
 
   const rootTag = tagNameOf(rootEl);
-  if (/^[A-Z]/.test(rootTag)) {
-    notes.push(`jsx: root element <${rootTag}> is a component — anatomy not extracted (wrapper components are review items)`);
-    return { root: {}, element: 'div', states: [], rawValues, notes };
+  let root: ExtractedPart = {};
+  let role: string | undefined;
+  if (ts.isJsxFragment(rootEl)) {
+    // Phase B: fragment root = MULTI-ROOT anatomy — the top-level children
+    // land under a synthetic element-less root (the COMPONENT-as-root
+    // convention the design-side proposer already uses).
+    fillChildren(rootEl, root, 'root', ctx);
+  } else if (/^[A-Z]/.test(rootTag)) {
+    // Phase B (the DialogHeader→<LayoutHeader> class): a component ROOT no
+    // longer bails anatomy — it extracts as a component-ref root whose slot
+    // content descends as parts. Whether the wrapper is a pass-through or a
+    // real instance is a review decision; the structure is not lost.
+    const built = buildPart(rootEl, ctx);
+    if (built) root = built.part;
+    notes.push(
+      `jsx: root element <${rootTag}> is a component — extracted as a component-ref ROOT with its slot content as parts (wrapper mapping is a review item)`,
+    );
+  } else {
+    // BEM/clsx legibility: read the root's class spelling FIRST so every later
+    // class lookup (JSX parts and CSS selectors alike) resolves through it.
+    readRootClasses(rootEl, ctx, enumProps);
+    const cn = classNameOf(rootEl, ctx);
+    if (cn.kind === 'opaque') {
+      notes.push(`jsx: root className ${cn.text} is not a CSS-module reference — parts under it are still read where legible`);
+    } else if (cn.kind === 'part') {
+      notes.push(`jsx: root class ".${cn.name}" extracted as the contract root part (contract roots are named "root")`);
+    } else if (cn.kind === 'root' && ctx.bem.rootClass !== null && ctx.bem.rootClass !== 'root') {
+      notes.push(`jsx: root class ".${ctx.bem.rootClass}" extracted as the contract root part (contract roots are named "root")`);
+    }
+
+    // Root attrs: role → semantics.role, the rest are root-part attrs.
+    const hasRootOnClick = attributesOf(rootEl).properties.some(
+      (a) => ts.isJsxAttribute(a) && a.name.getText() === 'onClick',
+    );
+    const rootAttrs = attrsOf(rootEl, 'root', true, hasRootOnClick, ctx);
+    role = rootAttrs.role;
+    delete rootAttrs.role;
+
+    if (Object.keys(rootAttrs).length > 0) root.attrs = rootAttrs;
+    fillChildren(rootEl, root, 'root', ctx);
   }
-
-  // BEM/clsx legibility: read the root's class spelling FIRST so every later
-  // class lookup (JSX parts and CSS selectors alike) resolves through it.
-  readRootClasses(rootEl, ctx, enumProps);
-  const cn = classNameOf(rootEl, ctx);
-  if (cn.kind === 'opaque') {
-    notes.push(`jsx: root className ${cn.text} is not a CSS-module reference — parts under it are still read where legible`);
-  } else if (cn.kind === 'part') {
-    notes.push(`jsx: root class ".${cn.name}" extracted as the contract root part (contract roots are named "root")`);
-  } else if (cn.kind === 'root' && ctx.bem.rootClass !== null && ctx.bem.rootClass !== 'root') {
-    notes.push(`jsx: root class ".${ctx.bem.rootClass}" extracted as the contract root part (contract roots are named "root")`);
-  }
-
-  // Root attrs: role → semantics.role, the rest are root-part attrs.
-  const hasRootOnClick = attributesOf(rootEl).properties.some(
-    (a) => ts.isJsxAttribute(a) && a.name.getText() === 'onClick',
-  );
-  const rootAttrs = attrsOf(rootEl, 'root', true, hasRootOnClick, ctx);
-  const role = rootAttrs.role;
-  delete rootAttrs.role;
-
-  const root: ExtractedPart = {};
-  if (Object.keys(rootAttrs).length > 0) root.attrs = rootAttrs;
-  fillChildren(rootEl, root, 'root', ctx);
   if (root.slot?.name === 'children' && !root.parts) {
     // A part-less root renders {children} unconditionally in generated code —
     // it carries no information about slot vs children-bound text prop.
@@ -1644,7 +1845,7 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
 
   return {
     root,
-    element: rootTag,
+    element: ts.isJsxFragment(rootEl) || /^[A-Z]/.test(rootTag) ? 'div' : rootTag,
     ...(role ? { role } : {}),
     states: STATE_ORDER.filter((s) => model.statesSeen.has(s)),
     ...(Object.keys(events).length > 0 ? { events } : {}),

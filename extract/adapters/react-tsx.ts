@@ -84,9 +84,25 @@ export function extractReactTsx(
     const types = typesPath
       ? [{ sourcePath: path.relative(process.cwd(), typesPath), source: readFileSync(typesPath, 'utf8') }]
       : undefined;
+    // Phase B: co-located same-directory sources join as render-helper
+    // context (`import {renderDropdownItems} from './renderDropdownItems'`)
+    // — anatomy can resolve helper calls one directory deep, nothing more.
+    const dir = path.dirname(file);
+    const helpers = readdirSync(dir)
+      .filter((n) => /\.tsx?$/.test(n) && !SKIP_FILE.test(n) && path.join(dir, n) !== file && path.join(dir, n) !== typesPath)
+      .map((n) => ({
+        sourcePath: path.relative(process.cwd(), path.join(dir, n)),
+        source: readFileSync(path.join(dir, n), 'utf8'),
+      }));
     out.push(
       ...extractFromSource(
-        { sourcePath: path.relative(process.cwd(), file), source: src, css, ...(types ? { types } : {}) },
+        {
+          sourcePath: path.relative(process.cwd(), file),
+          source: src,
+          css,
+          ...(types ? { types } : {}),
+          ...(helpers.length > 0 ? { helpers } : {}),
+        },
         tokens,
         seen,
         skipped,

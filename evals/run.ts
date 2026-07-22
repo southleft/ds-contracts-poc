@@ -104,7 +104,17 @@ interface RunResult {
   out: string;
 }
 function run(cmd: string, args: string[]): RunResult {
-  const r = spawnSync(cmd, args, { cwd: SCRATCH, encoding: 'utf8' });
+  // HERMETIC CLOCK (2026-07-22): the parity differ's snapshot-staleness guard
+  // (MAX_SNAPSHOT_AGE_DAYS, default 14) is a LIVE-CI freshness concern — in
+  // the eval suite it made four C3/C4 claims time-dependent: they went red by
+  // pure calendar (committed snapshots crossed 14.0 days between two runs
+  // with zero code change). An eval's claim is about differ LOGIC, never
+  // about today's date; the guard stays fully active outside the suite.
+  const r = spawnSync(cmd, args, {
+    cwd: SCRATCH,
+    encoding: 'utf8',
+    env: { ...process.env, MAX_SNAPSHOT_AGE_DAYS: process.env.MAX_SNAPSHOT_AGE_DAYS ?? '36500' },
+  });
   return { status: r.status ?? -1, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
 }
 const generate = () => run(TSX, ['scripts/generate-components.ts']);
@@ -1107,11 +1117,20 @@ const cases: Case[] = [
     id: 'detect-stale-snapshot',
     claim: 'C3-detection',
     run: () => {
+      // This case TESTS the staleness gate, so it pins the threshold back to
+      // 14 explicitly (the hermetic-clock default in run() disables the gate
+      // for every OTHER case — their claims are about differ logic, not
+      // today's date; this one's claim IS the clock).
       editJson(FIGMA_COMPONENTS, (s2) => { s2.extractedAt = Date.now() - 15 * 86_400_000; });
-      const r = parity();
-      if (r.status !== 1) throw new Error('15-day-old snapshot passed the 14-day staleness gate');
-      if (!readReport().some((x) => x.subject === 'snapshot-stale'))
-        throw new Error('Expected snapshot-stale finding');
+      process.env.MAX_SNAPSHOT_AGE_DAYS = '14';
+      try {
+        const r = parity();
+        if (r.status !== 1) throw new Error('15-day-old snapshot passed the 14-day staleness gate');
+        if (!readReport().some((x) => x.subject === 'snapshot-stale'))
+          throw new Error('Expected snapshot-stale finding');
+      } finally {
+        delete process.env.MAX_SNAPSHOT_AGE_DAYS;
+      }
     },
   },
   {

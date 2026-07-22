@@ -682,6 +682,10 @@ export interface SourceFileInput {
    *  alias declarations join the module's type table. Component discovery
    *  stays in `source`; on a name collision the component file wins. */
   types?: { sourcePath: string; source: string }[];
+  /** Phase B: co-located same-directory sources — render helpers imported
+   *  from them (`renderDropdownItems`) become resolvable during anatomy
+   *  extraction. Component discovery stays in `source`. */
+  helpers?: { sourcePath: string; source: string }[];
 }
 
 /** Extract every readable component from one source file. `seen` dedupes
@@ -796,13 +800,13 @@ export function extractFromSource(
       // A co-located CSS Module makes the component's structure legible —
       // propose anatomy from the JSX tree + the stylesheet (css-module
       // adapter). Extraction failures degrade to notes, never to a crash.
-      anatomy = extractAnatomy({ sf, src, componentName, props, css, tokens: tokens() }) ?? undefined;
+      anatomy = extractAnatomy({ sf, src, componentName, props, css, tokens: tokens(), helpers: input.helpers }) ?? undefined;
     } else if (/from\s+['"]@stylexjs\/stylex['"]/.test(src)) {
       // Phase B (Astryx composition tier): StyleX components have no CSS
       // Module — structure is still legible from the JSX tree, with part
       // identity read from stylex.props spreads. Rule styling (tokens,
       // layout) is a named review item until the StyleX token round.
-      anatomy = extractAnatomy({ sf, src, componentName, props, css: '', tokens: tokens(), stylex: true }) ?? undefined;
+      anatomy = extractAnatomy({ sf, src, componentName, props, css: '', tokens: tokens(), stylex: true, helpers: input.helpers }) ?? undefined;
     }
     out.push({
       name: componentName,
