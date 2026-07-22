@@ -101,7 +101,14 @@ function writeChildStub(file: string, comp: string, body: string): void {
 // ---------------------------------------------------------------------------
 // emit-react (CSS-module) -> esbuild bundle -> renderToStaticMarkup
 // ---------------------------------------------------------------------------
-const { tsx, css } = emitReact(contract, { tokens: new Set(), icons, contracts });
+// v1.1.0: the exhibit contract carries REAL token refs (dialog surface,
+// gaps) — feed the emitter the repo inventory so the refusal gate validates
+// them instead of refusing an empty set.
+const { tsx, css } = emitReact(contract, {
+  tokens: tokenInventoryFromJson([tokens.primitives, tokens.semantic, tokens.light, tokens.dark]),
+  icons,
+  contracts,
+});
 writeFileSync(path.join(HERE, `${name}.tsx`), tsx);
 writeFileSync(path.join(HERE, `${name}.module.css`), css);
 
@@ -115,12 +122,16 @@ writeFileSync(path.join(work, `${name}.module.css`), css);
 // structure (order, live mapping, both roots) is what the bundle proves.
 const CARD_STUB = "createElement('article', { 'data-card': props.title }, props.title, props.children)";
 const BADGE_STUB = "createElement('span', { 'data-badge': true }, props.children)";
+// v1.1.0: the footer actions are ds.button component refs — stub Button too.
+const BUTTON_STUB = "createElement('button', { 'data-button': props.variant }, props.children)";
 // full-React tsx imports '../Card' (from .work/ → HERE/Card.tsx);
 // inline tsx imports './Card' (from .work/ → .work/Card.tsx).
 writeChildStub(path.join(HERE, 'Card.tsx'), 'Card', CARD_STUB);
 writeChildStub(path.join(HERE, 'Badge.tsx'), 'Badge', BADGE_STUB);
+writeChildStub(path.join(HERE, 'Button.tsx'), 'Button', BUTTON_STUB);
 writeChildStub(path.join(work, 'Card.tsx'), 'Card', CARD_STUB);
 writeChildStub(path.join(work, 'Badge.tsx'), 'Badge', BADGE_STUB);
+writeChildStub(path.join(work, 'Button.tsx'), 'Button', BUTTON_STUB);
 writeFileSync(
   path.join(work, 'entry.tsx'),
   [

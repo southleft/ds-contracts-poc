@@ -1,5 +1,5 @@
 <!--
-  CompositeModal — static HTML+CSS emitted from contract ds.composite-modal v1.0.0 by core/emit-html.ts.
+  CompositeModal — static HTML+CSS emitted from contract ds.composite-modal v1.1.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
@@ -9,6 +9,7 @@
 <section class="showcase showcase--composite-modal">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
+    <div class="composite-modal__backdrop"></div>
     <div class="composite-modal__dialog" role="dialog" aria-modal="true">
       <div class="composite-modal__header">
         <h2 class="composite-modal__title">Order details</h2>
@@ -38,14 +39,13 @@
         </div>
       </div>
       <div class="composite-modal__footer">
-        <button class="composite-modal__cancel" type="button">
-          <span class="composite-modal__cancel-label">Cancel</span>
+        <button class="button button--variant-secondary button--size-md">
+          <span class="button__label">Cancel</span>
         </button>
-        <button class="composite-modal__save" type="button">
-          <span class="composite-modal__save-label">Save</span>
+        <button class="button button--variant-primary button--size-md">
+          <span class="button__label">Save</span>
         </button>
       </div>
     </div>
-    <div class="composite-modal__backdrop"></div>
   </div>
 </section>

@@ -37,7 +37,7 @@ untouched path — golden output is byte-for-byte unchanged.
 | emit-html | ✓ | static markup carries the composed card + a composite-modal__tags row of 3 sampled badges inside the dialog body, backdrop sibling, no React syntax |
 | emit-figma-script (referee) | ✓ | COMPONENTS payload parses — one variant frame; the dialog body holds the composed summary instance + a tags row of 3 repeated tag instances [summary, tags] |
 | emit-figma-script (headless) | ✓ | seeded token variables (buildTokensScript) then synced deps [Avatar → Button → Badge → Card] then the composite ran to completion in a VM against the mocked figma global (no Figma, no network) — composed + repeated instances built |
-| anatomy-parity (code ≡ canvas) | ✓ | built COMPONENT anatomy lines up with the contract PART-FOR-PART (14 parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is a row FRAME holding 3 repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots |
+| anatomy-parity (code ≡ canvas) | ✓ | built COMPONENT anatomy lines up with the contract PART-FOR-PART (12 parts, each at its declared nesting path); body.summary is a nested ds.card INSTANCE and body.tags is a row FRAME holding 3 repeated ds.badge INSTANCEs; dialog+backdrop are sibling roots |
 
 ## Emitted artifacts (committed as receipts)
 

@@ -1,9 +1,9 @@
 {
   "id": "ds.composite-modal",
   "name": "CompositeModal",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
-  "description": "Depth Stage C receipt — a MULTI-ROOT Modal ({dialog, backdrop}) whose BODY holds composed children rather than only static leaf parts: (1) a single composed child (a ds.card component-ref) and (2) a DYNAMIC child-collection — a ds.badge item template repeated over the arrayOf `items` prop (the repeat-over-collection channel). Exercises the dynamic child-collection channel on all four surfaces on top of the multi-root emitter path. NOT a census component and NOT wired into npm run generate / figma:plan — emitted on demand by examples/depth-composite/emit-composite-receipt.ts.",
+  "description": "Depth Stage C receipt — a MULTI-ROOT Modal ({backdrop, dialog}) whose BODY holds composed children rather than only static leaf parts: (1) a single composed child (a ds.card component-ref) and (2) a DYNAMIC child-collection — a ds.badge item template repeated over the arrayOf `items` prop (the repeat-over-collection channel). Exercises the dynamic child-collection channel on all four surfaces on top of the multi-root emitter path. v1.1.0 (2026-07-21, closes handoff 08#1.3): the dialog declares a real width + surface styling, the footer actions are ds.button instances with a gap, and the backdrop is an inset-0 scrim BEHIND the dialog (anatomy order = paint order) — the exhibit now renders like a modal a designer would ship. NOT a census component and NOT wired into npm run generate / figma:plan — emitted on demand by examples/depth-composite/emit-composite-receipt.ts.",
   "semantics": { "element": "div" },
   "props": [
     {
@@ -18,9 +18,24 @@
   ],
   "states": [],
   "anatomy": {
+    "backdrop": {
+      "description": "The modal scrim — a parent-bound inset-0 overlay (declared position:absolute + max dimensions 100%, the same lowering the Checkbox glyph host rides), painted BEFORE (behind) the dialog: anatomy order is paint order.",
+      "declared": { "position": "absolute", "max-width": "100%", "max-height": "100%" },
+      "literals": { "background-color": "rgba(0, 0, 0, 0.4)" }
+    },
     "dialog": {
       "attrs": { "role": "dialog", "aria-modal": "true" },
       "layout": { "display": "flex", "direction": "column" },
+      "tokens": {
+        "background-color": "{color.surface.raised}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.card}",
+        "padding-inline": "{space.inset-x.lg}",
+        "padding-block": "{space.inset-y.lg}",
+        "gap": "{space.gap.md}"
+      },
+      "literals": { "width": "480px" },
       "parts": {
         "header": {
           "layout": { "display": "flex", "direction": "row", "justify": "space-between", "align": "center" },
@@ -36,6 +51,7 @@
         "body": {
           "description": "Stage C: the modal body holds composed children — a single ds.card plus a repeated ds.badge collection.",
           "layout": { "display": "flex", "direction": "column" },
+          "tokens": { "gap": "{space.gap.sm}" },
           "parts": {
             "summary": {
               "description": "A single composed child — a fixed instance of ds.card.",
@@ -44,6 +60,7 @@
             "tags": {
               "description": "A row container for the dynamic child-collection — badges hug and wrap as a horizontal pill row (a designer would never stack them full-width).",
               "layout": { "display": "flex", "direction": "row", "wrap": true, "align": "center" },
+              "tokens": { "gap": "{space.gap.sm}" },
               "parts": {
                 "tag": {
                   "description": "The dynamic child-collection channel — a ds.badge template repeated over the arrayOf `items` prop.",
@@ -62,23 +79,20 @@
           }
         },
         "footer": {
+          "description": "Modal actions — real ds.button instances with a control gap (v1.1.0; the v1.0.0 bare <button>s with no gap were the handoff 08#1.3 defect).",
           "layout": { "display": "flex", "direction": "row", "justify": "end", "align": "center" },
+          "tokens": { "gap": "{space.gap.control}" },
           "parts": {
             "cancel": {
-              "element": "button",
-              "attrs": { "type": "button" },
-              "parts": { "cancel-label": { "text": "Cancel" } }
+              "component": { "id": "ds.button", "props": { "children": "Cancel", "variant": "secondary" } }
             },
             "save": {
-              "element": "button",
-              "attrs": { "type": "button" },
-              "parts": { "save-label": { "text": "Save" } }
+              "component": { "id": "ds.button", "props": { "children": "Save", "variant": "primary" } }
             }
           }
         }
       }
-    },
-    "backdrop": { "declared": { "position": "absolute" } }
+    }
   },
   "anchors": {
     "figma": { "fileKey": null, "componentSetKey": null },

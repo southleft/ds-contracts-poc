@@ -286,7 +286,22 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '' });
   assert(plan.ok, `composite plan accepted (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
   assert(plan.steps[0].kind === 'tokens', 'composite plan runs tokens first');
-  for (const step of plan.steps) await runScript(step.code);
+  for (const step of plan.steps) {
+    // LIVE FINDING 2026-07-22 (pinned by the named refusal + Desktop Bridge):
+    // a fresh instance's componentProperties can LAG behind its set within a
+    // session, listing only VARIANT axes. Simulate the lag on the Button set
+    // for the composite step — the runtime must still resolve + apply the
+    // footer Label via the set's componentPropertyDefinitions (the full-key
+    // setProperties path that probe-verified works during the lag).
+    if (step.kind === 'component' && step.contractId === 'ds.composite-modal') {
+      const buttonSet = root.findOne(
+        (n) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === 'ds.button',
+      );
+      assert(buttonSet, 'the Button set exists before the composite step (lag-simulation target)');
+      buttonSet._hideNonVariantOnInstances = true;
+    }
+    await runScript(step.code);
+  }
   const built = root.findOne((n) => n.type === 'COMPONENT' && n.name === 'CompositeModal');
   assert(built, 'the plugin engine built the CompositeModal COMPONENT');
   const b = (s) => (s ?? '').replace(/ \d+$/, '');
@@ -299,6 +314,56 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(summary?.type === 'INSTANCE', 'body.summary is a nested ds.card INSTANCE');
   assert(tagsRow?.type === 'FRAME' && tags.length === 3, 'body.tags is a row FRAME of 3 ds.badge INSTANCEs');
   assert(built.getSharedPluginData('ds_contracts', 'contractId') === 'ds.composite-modal', 'composite identity marker recorded');
+
+  // LIVE-CANVAS REGRESSIONS (2026-07-21, handoff 08#1) — the two composite
+  // defects the real canvas caught and 146 headless gates missed. The mock
+  // now models auto-layout sizing and instance-property reflection, so both
+  // classes fail HERE, forever, before any live run:
+  //   (1) the dialog must establish a real width — the hug↔fill degenerate
+  //       collapsed it to ~3px live;
+  //   (2) repeated set-instance TEXT properties must actually reflect on the
+  //       instance's text nodes — live they kept the default "Badge".
+  assert(
+    dialog && dialog.width >= 200,
+    `the dialog establishes a real width (got ${dialog?.width}px — the live collapse was ~3px)`,
+  );
+  const tagTexts = tags.map((t) => {
+    const textNode = t.findAll((n) => n.type === 'TEXT' && n.characters)[0];
+    return textNode ? textNode.characters : '(no text node)';
+  });
+  const wantTags = ['Shipping', 'Gift wrap', 'Priority'];
+  assert(
+    JSON.stringify(tagTexts) === JSON.stringify(wantTags),
+    `repeated ds.badge instances carry the item text from the contract sample (want ${JSON.stringify(wantTags)}, got ${JSON.stringify(tagTexts)})`,
+  );
+  const summaryTitle = (summary?.findAll((n) => n.type === 'TEXT' && n.characters === 'Order summary') ?? []).length;
+  assert(summaryTitle > 0, 'the composed ds.card instance reflects its Title ("Order summary") onto a text node');
+  // v1.1.0 contract: the footer actions are ds.button SET-instances (the same
+  // wiring class as the badges) with their Label text applied and a real gap.
+  const footer = kid(dialog, 'footer');
+  const footerTexts = (footer?.findAll((n) => n.type === 'TEXT') ?? []).map((n) => n.characters);
+  assert(
+    footerTexts.includes('Cancel') && footerTexts.includes('Save'),
+    `footer ds.button instances reflect Cancel/Save labels (got ${JSON.stringify(footerTexts)})`,
+  );
+  assert(
+    footer && (footer.itemSpacing > 0 || footer.boundVariables?.itemSpacing),
+    `footer carries a real gap (itemSpacing ${footer?.itemSpacing}, bound ${JSON.stringify(footer?.boundVariables?.itemSpacing ?? null)})`,
+  );
+  const backdrop = kid(built, 'backdrop');
+  assert(
+    backdrop && backdrop.layoutPositioning === 'ABSOLUTE' && built.children[0] === backdrop,
+    'the backdrop is an inset overlay painted BEHIND the dialog (first child, absolute)',
+  );
+  // Owner request (2026-07-21): every generated component is hosted on a
+  // named SECTION with a background fill — never floating on the canvas.
+  assert(
+    built.parent?.type === 'SECTION' &&
+      built.parent.getSharedPluginData('ds_contracts', 'hostFor') === 'ds.composite-modal' &&
+      (built.parent.fills ?? []).length > 0 &&
+      built.parent.width > built.width,
+    `the composite is hosted on a marked, filled SECTION (parent ${built.parent?.type})`,
+  );
   console.log(
     `✔ plugin path — multi-root composite: window.DSC parsed the pushed bundle, planned ${plan.steps.length} steps (tokens → deps → composite), executed in the mock, built CompositeModal {dialog, backdrop} with a nested ds.card summary INSTANCE + a tags row of ${tags.length} ds.badge INSTANCEs (code≡canvas, the live Receive result)`,
   );

@@ -78,7 +78,8 @@ const COMPONENTS = [
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "text",
@@ -89,7 +90,8 @@ const COMPONENTS = [
               "textStyle": "control/sm",
               "textFill": "color/text/secondary",
               "fontFamily": "Inter",
-              "contentProp": "Description"
+              "contentProp": "Description",
+              "fillW": true
             },
             {
               "type": "slot",
@@ -101,7 +103,8 @@ const COMPONENTS = [
                 "stretchChildren": true
               },
               "slotProperty": "Children",
-              "slotAccepts": []
+              "slotAccepts": [],
+              "fillW": true
             }
           ]
         }
@@ -195,14 +198,82 @@ function findComponentByName(name) {
   throw new Error('Dependency component not found in file: ' + name + ' (sync it first)');
 }
 
-function setInstanceProps(inst, props) {
-  const available = Object.keys(inst.componentProperties);
-  const resolved = {};
+function setInstanceProps(inst, props, owner) {
+  // REAL-FIGMA QUIRK (live finding 2026-07-22, pinned by the named refusal +
+  // Desktop Bridge probes; supersedes the 07-21 "mixed VARIANT+TEXT call"
+  // inference, which was wrong): a freshly created instance's
+  // componentProperties can LAG behind its component set within a session,
+  // listing only the VARIANT axes — the live composite refused with
+  // "available: Variant, Size, State" on a Button set that demonstrably
+  // carried Label/Disabled/Loading. The set's componentPropertyDefinitions
+  // are always complete, and setProperties with the FULL set-level key
+  // applies correctly even while the instance's view lags (probe-verified).
+  // So: resolve against the instance first, fall back to the OWNER's
+  // definitions, and refuse by name only when neither knows the property.
+  const instProps = inst.componentProperties;
+  const instKeys = Object.keys(instProps);
+  let ownerDefs = {};
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  const ownerKeys = Object.keys(ownerDefs);
+  const variantProps = {};
+  const otherProps = {};
+  const missing = [];
   for (const [wanted, value] of Object.entries(props)) {
-    const key = available.find((k) => k === wanted || k.startsWith(wanted + '#'));
-    if (key) resolved[key] = value;
+    const match = (k) => k === wanted || k.startsWith(wanted + '#');
+    const key = instKeys.find(match) || ownerKeys.find(match);
+    if (!key) { missing.push(wanted); continue; }
+    const def = instProps[key] || ownerDefs[key] || {};
+    if (def.type === 'VARIANT') variantProps[key] = value; else otherProps[key] = value;
   }
-  if (Object.keys(resolved).length > 0) inst.setProperties(resolved);
+  // 2026-07-21 (live-canvas finding, handoff 08#1): the old silent no-op is
+  // exactly how the repeated Badge instances kept their default text live —
+  // the contract said Label="Shipping", nothing matched, nothing was
+  // reported, the build claimed success. A contract binding the runtime
+  // cannot honor is a refusal, BY NAME, like every other refusal here.
+  if (missing.length > 0) {
+    const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
+    throw new Error(
+      'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
+    );
+  }
+  // Defensive two-phase apply (cheap): variant swap first, then non-variant
+  // values on the settled instance — set-level property ids are stable
+  // across the swap, so the resolved keys stay valid either way.
+  if (Object.keys(variantProps).length > 0) inst.setProperties(variantProps);
+  if (Object.keys(otherProps).length > 0) inst.setProperties(otherProps);
+}
+
+// Owner request (2026-07-21, roadmap P1): generated components land ON a
+// named SECTION with a light background — not floating on the canvas. The
+// section is identity-marked (ds_contracts/hostFor) so create and amend both
+// re-fit the SAME section instead of stacking new ones; a component already
+// hosted keeps its section.
+function ensureHostSection(page, target, displayName) {
+  const HOST_PAD = 60;
+  const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
+  let section = null;
+  for (const child of page.children) {
+    if (child.type === 'SECTION' && child.getSharedPluginData('ds_contracts', 'hostFor') === contractId) {
+      section = child;
+      break;
+    }
+  }
+  if (!section) {
+    section = figma.createSection();
+    page.appendChild(section);
+    section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
+  }
+  section.name = displayName;
+  section.fills = [{ type: 'SOLID', color: { r: 0.969, g: 0.973, b: 0.98 } }];
+  section.appendChild(target);
+  target.x = HOST_PAD;
+  target.y = HOST_PAD;
+  section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
+  section.x = 100;
+  section.y = 100;
+  return section;
 }
 
 let _slotUtil = null;
@@ -362,7 +433,7 @@ async function buildNode(spec, registry) {
     const target = findComponentByName(spec.dep);
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
-    if (spec.depProps) setInstanceProps(node, spec.depProps);
+    if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
     node = figma.createFrame();
     applyFrameSpec(node, spec);
@@ -378,7 +449,7 @@ async function buildNode(spec, registry) {
         const target = findComponentByName(item.dep);
         const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
         const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props);
+        if (item.props) setInstanceProps(inst, item.props, target);
         node.appendChild(inst);
         if (spec.layout && spec.layout.stretchChildren) {
           try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
@@ -419,13 +490,9 @@ async function buildNode(spec, registry) {
       // description.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (child.grow && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
-    } else if (
-      spec.layout && spec.layout.stretchChildren &&
-      !child.fixedWidth && child.type !== 'instance' &&
-      'layoutSizingHorizontal' in childNode
-    ) {
+    // FILL is compiled (annotateFillW): candidates only fill when the parent
+    // width is established — the hug↔fill collapse class stays impossible.
+    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -524,9 +591,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.grow && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
-        } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -611,6 +676,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
+  const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+  if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
   return report;
 }
 
@@ -659,9 +727,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.grow && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
-    } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -703,6 +769,9 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // Re-fit (or adopt into) the host section — mirrors amendSet.
+  const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+  if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
   return report;
 }
 
@@ -774,53 +843,69 @@ async function syncOne(C) {
     const comp = await buildNode(v.spec, registry);
     built.push({ v, comp, registry });
   }
-  for (const b of built) {
-    for (const t of b.registry.texts) {
-      const key = b.comp.addComponentProperty(t.prop, 'TEXT', t.default);
-      t.node.componentPropertyReferences = { characters: key };
-    }
-    for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      const preferred = [];
-      for (const depName of s.spec.slotAccepts || []) {
-        const target = findComponentByName(depName);
-        preferred.push({
-          type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-          key: target.key,
-        });
-      }
-      const key = b.comp.addComponentProperty(
-        s.spec.slotProperty,
-        'INSTANCE_SWAP',
-        s.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined,
-      );
-      s.instance.componentPropertyReferences = { mainComponent: key };
-      if (s.spec.slotOptional) {
-        const vkey = b.comp.addComponentProperty('Show ' + s.spec.slotProperty, 'BOOLEAN', true);
-        s.wrapper.componentPropertyReferences = { visible: vkey };
-      }
-    }
-    const boolKeys = {};
-    for (const bp of C.boolProps) {
-      boolKeys[bp.property] = b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
-    }
-    for (const tp of C.textProps || []) {
-      b.comp.addComponentProperty(tp.property, 'TEXT', tp.default);
-    }
-    for (const vis of b.registry.visibles) {
-      const key = boolKeys[vis.prop];
-      if (!key) continue;
-      vis.node.componentPropertyReferences = { visible: key };
-      vis.node.visible = vis.default;
-    }
-  }
 
   let target;
   if (C.isSet) {
     // combineAsVariants requires the nodes to already be ON the parent page.
     for (const b of built) compPage.appendChild(b.comp);
     target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
+  } else {
+    target = built[0].comp;
+    compPage.appendChild(target);
+  }
+
+  // Component properties are minted on the PROPERTY OWNER — the SET for a
+  // variant component, the component itself for a standalone — AFTER
+  // combineAsVariants, one key per property name, wired into every variant.
+  // (2026-07-21, live-canvas finding, handoff 08#1: the old per-variant
+  // pre-combine minting produced id-suffixed keys that real set-instances
+  // never surface, so an instance's TEXT property silently failed to apply —
+  // repeated Badge instances kept the default "Badge" live. The amend path
+  // (amendSet) always minted set-level; the create path now matches it.)
+  const keys = {};
+  const mintOnce = (name, type, def, opts) => {
+    if (!keys[name]) keys[name] = target.addComponentProperty(name, type, def, opts);
+    return keys[name];
+  };
+  for (const bp of C.boolProps) mintOnce(bp.property, 'BOOLEAN', bp.default);
+  for (const tp of C.textProps || []) mintOnce(tp.property, 'TEXT', tp.default);
+  for (const b of built) {
+    for (const t of b.registry.texts) {
+      t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
+    }
+    for (const s of b.registry.slots) {
+      const util = await ensureSlotUtility();
+      let key = keys[s.spec.slotProperty];
+      if (!key) {
+        const preferred = [];
+        for (const depName of s.spec.slotAccepts || []) {
+          const dep = findComponentByName(depName);
+          preferred.push({
+            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
+            key: dep.key,
+          });
+        }
+        key = mintOnce(
+          s.spec.slotProperty,
+          'INSTANCE_SWAP',
+          s.defaultId || util.id,
+          preferred.length > 0 ? { preferredValues: preferred } : undefined,
+        );
+      }
+      s.instance.componentPropertyReferences = { mainComponent: key };
+      if (s.spec.slotOptional) {
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+      }
+    }
+    for (const vis of b.registry.visibles) {
+      const key = keys[vis.prop];
+      if (!key) continue;
+      vis.node.componentPropertyReferences = { visible: key };
+      vis.node.visible = vis.default;
+    }
+  }
+
+  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
@@ -845,16 +930,12 @@ async function syncOne(C) {
     const totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
     const totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
     target.resizeWithoutConstraints(totalW, totalH);
-  } else {
-    target = built[0].comp;
-    compPage.appendChild(target);
   }
   target.name = displayName;
   target.description = C.description;
-  target.x = 100;
-  target.y = 100;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  ensureHostSection(compPage, target, displayName);
 
   return {
     name: C.setName,

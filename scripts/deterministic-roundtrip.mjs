@@ -1,5 +1,5 @@
 /**
- * DETERMINISTIC ROUND-TRIP — `node scripts/deterministic-roundtrip.mjs`
+ * DETERMINISTIC ROUND-TRIP — `npx tsx scripts/deterministic-roundtrip.mjs`
  *
  * Proves the full journey runs as PURE DETERMINISTIC FUNCTIONS — no AI, no
  * agent, no network — and is byte-reproducible, for the advanced composite:
@@ -30,28 +30,68 @@ const ok = (m) => console.log(`  ✔ ${m}`);
 // Load the plugin engine (window.DSC) — the exact bundle the plugin runs.
 const bundle = await buildEngineBundle();
 
-// A canonical, order-independent fingerprint of a built node subtree: names +
-// types + nesting, collapsing repeated-instance suffixes ("tags 2" -> "tags").
-function fingerprint(node) {
-  const base = (s) => (s ?? '').replace(/ \d+$/, '');
-  const walk = (n) => ({
-    name: base(n.name),
-    type: n.type,
-    children: (n.children ?? []).map(walk),
-  });
+// A canonical fingerprint of a built node subtree — the FULL tracked property
+// surface, not just names/types/nesting (2026-07-21 upgrade: the old
+// structural fingerprint was blind to exactly the property classes — sizing,
+// instance text, paints, bindings — where the live composite bugs lived).
+// Run-scoped ids (node ids, variable ids, style ids, `Prop#id` suffixes)
+// necessarily differ between two runs, so they are normalized to stable
+// NAMES via each run's own variable/style tables; everything else must be
+// byte-identical.
+const SKIP_FIELDS = new Set([
+  'parent', 'children', 'id', 'key', 'removed',
+  '_shared', '_mainComponent', '_propSeq', '_resized', '_w', '_h',
+  'setProperties', 'getMainComponentAsync',
+]);
+function fingerprint(node, varNameById, styleNameById) {
+  const stripKeyId = (k) => k.replace(/#\d+:\d+(?::\d+)?$/, '');
+  const canonValue = (v) => {
+    if (v === null || typeof v !== 'object') {
+      if (typeof v === 'string' && styleNameById.has(v)) return `style:${styleNameById.get(v)}`;
+      // Run-scoped identifiers are NOT nondeterminism: bare node ids
+      // (INSTANCE_SWAP values) and `Prop#id` suffixes differ across runs by
+      // construction; the identity they point at is covered by the rest of
+      // the tree. Everything else must match byte-for-byte.
+      if (typeof v === 'string' && /^\d+:\d+$/.test(v)) return '<node-ref>';
+      if (typeof v === 'string') return stripKeyId(v);
+      return v;
+    }
+    if (Array.isArray(v)) return v.map(canonValue);
+    if (v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { type: 'VARIABLE_ALIAS', variable: varNameById.get(v.id) ?? v.id };
+    }
+    const out = {};
+    for (const k of Object.keys(v).sort()) out[stripKeyId(k)] = canonValue(v[k]);
+    return out;
+  };
+  const walk = (n) => {
+    const out = {};
+    for (const k of Object.keys(n).sort()) {
+      if (SKIP_FIELDS.has(k) || typeof n[k] === 'function') continue;
+      out[k] = canonValue(n[k]);
+    }
+    // The COMPUTED box (auto-layout model) and the identity markers are part
+    // of the determinism claim too.
+    out.width = n.width;
+    out.height = n.height;
+    out.specHash = n.getSharedPluginData('ds_contracts', 'specHash');
+    out.contractId = n.getSharedPluginData('ds_contracts', 'contractId');
+    out.children = (n.children ?? []).map(walk);
+    return out;
+  };
   return JSON.stringify(walk(node));
 }
 
 // Run the plugin engine's contract→canvas once, in a fresh mocked Figma.
 function contractToCanvas(bundleText) {
-  const { figma, root } = createFigmaMock();
+  const { figma, root, variables, styles } = createFigmaMock();
   const sandbox = { window: {}, console: { log() {}, warn() {}, error() {} } };
   vm.createContext(sandbox);
   vm.runInContext(bundle.code, sandbox, { timeout: 120_000 });
   const DSC = sandbox.window.DSC;
   const scriptCtx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
   const runScript = (code) => vm.runInContext(`(async () => {\n${code}\n})()`, scriptCtx, { timeout: 120_000 });
-  return { DSC, figma, root, runScript };
+  return { DSC, figma, root, runScript, variables, styles };
 }
 
 const compositeText = JSON.stringify({
@@ -72,7 +112,7 @@ const findComposite = (root) => {
 };
 let fp1, fp2, firstDump;
 for (const pass of [1, 2]) {
-  const { DSC, root, runScript } = contractToCanvas(compositeText);
+  const { DSC, root, runScript, variables, styles } = contractToCanvas(compositeText);
   const parsed = DSC.parseIncomingText(compositeText);
   if (!parsed.ok) fail(`engine refused the contract bundle: ${JSON.stringify(parsed.issues ?? parsed)}`);
   const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '' });
@@ -80,11 +120,13 @@ for (const pass of [1, 2]) {
   for (const step of plan.steps) await runScript(step.code);
   const built = findComposite(root);
   if (!built) fail('CompositeModal was not built');
-  const fp = fingerprint(built);
+  const varNameById = new Map(variables.map((v) => [v.id, v.name]));
+  const styleNameById = new Map(styles.map((s) => [s.id, s.name]));
+  const fp = fingerprint(built, varNameById, styleNameById);
   if (pass === 1) { fp1 = fp; firstDump = { DSC, root, runScript }; } else { fp2 = fp; }
 }
 if (fp1 !== fp2) fail('contract→canvas was NOT byte-identical across two runs — non-deterministic!');
-ok(`built CompositeModal both times; node trees byte-identical (${fp1.length} bytes fingerprint) — DETERMINISTIC`);
+ok(`built CompositeModal both times; FULL node trees byte-identical (${fp1.length} bytes — every tracked property: layout, sizing, paints, text, bindings, markers) — DETERMINISTIC`);
 ok('anatomy: ' + JSON.parse(fp1).children.map((c) => c.name).join(' + ') + ' roots');
 
 // --- 2. canvas → contract  (dump + propose), deterministic ----------------
@@ -110,11 +152,21 @@ ok('round-trip closes: the anatomy that went to canvas came back');
 // --- 3. contract → code  (emit React), part of the same loop --------------
 console.log('\n3. contract → code  (emit React from the contract)');
 const { emitReact } = await import(path.join(ROOT, 'core', 'emit-react.js'));
+const { tokenInventoryFromJson } = await import(path.join(ROOT, 'core', 'tokens.js'));
 const { readdirSync } = await import('node:fs');
 const byId = new Map(['card', 'badge', 'avatar', 'button'].map((n) => { const c = JSON.parse(read(`contracts/${n}.contract.json`)); return [c.id, c]; }));
 byId.set(composite.id, composite);
 const icons = new Map(readdirSync(path.join(ROOT, 'assets', 'icons')).filter((f) => f.endsWith('.svg')).map((f) => [f.replace(/\.svg$/, ''), read(`assets/icons/${f}`).trim()]));
-const { tsx } = emitReact(composite, { tokens: new Set(), icons, contracts: byId });
+// v1.1.0 exhibit: the contract carries real token refs — validate them
+// against the repo inventory (the refusal gate would rightly refuse an
+// empty set).
+const tokenInventory = tokenInventoryFromJson([
+  JSON.parse(read('tokens/primitives.tokens.json')),
+  JSON.parse(read('tokens/semantic.tokens.json')),
+  JSON.parse(read('tokens/modes/semantic.light.tokens.json')),
+  JSON.parse(read('tokens/modes/semantic.dark.tokens.json')),
+]);
+const { tsx } = emitReact(composite, { tokens: tokenInventory, icons, contracts: byId });
 if (!/role="dialog"|role: ?'dialog'|"dialog"/.test(tsx)) fail('emitted React did not carry the dialog role');
 ok(`emitted ${tsx.length}B of React from the same contract`);
 

@@ -1,11 +1,26 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/composite-modal.contract.json (ds.composite-modal v1.0.0)
+ * Source of truth: contracts/composite-modal.contract.json (ds.composite-modal v1.1.0)
  * Regenerate with: npm run generate
  */
+
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+}
 
 .dialog {
   display: flex;
   flex-direction: column;
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-card);
+  padding-inline: var(--space-inset-x-lg);
+  padding-block: var(--space-inset-y-lg);
+  gap: var(--space-gap-md);
+  width: 480px;
 }
 
 .header {
@@ -38,6 +53,7 @@
 .body {
   display: flex;
   flex-direction: column;
+  gap: var(--space-gap-sm);
 }
 
 .tags {
@@ -45,6 +61,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-gap-sm);
 }
 
 .footer {
@@ -52,28 +69,5 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-}
-
-.cancel {
-  display: flex;
-  appearance: none;
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.save {
-  display: flex;
-  appearance: none;
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.backdrop {
-  position: absolute;
+  gap: var(--space-gap-control);
 }

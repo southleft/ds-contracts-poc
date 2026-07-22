@@ -131,15 +131,151 @@
   color: var(--color-feedback-error-foreground);
 }
 
-/* CompositeModal — from ds.composite-modal v1.0.0 (core/emit-html.ts) */
+/* Button — from ds.button v1.5.0 (core/emit-html.ts) */
+
+.button, .button *, .button *::before, .button *::after {
+  box-sizing: border-box;
+}
+
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  border-radius: var(--radius-control);
+  gap: var(--space-gap-control);
+  font-family: var(--font-control-family);
+  font-weight: var(--font-control-weight);
+  position: relative;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
+
+.button:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.button--variant-primary {
+  background-color: var(--color-action-primary-background);
+  color: var(--color-action-primary-foreground);
+}
+
+.button--variant-secondary {
+  background-color: var(--color-action-secondary-background);
+  color: var(--color-action-secondary-foreground);
+}
+
+.button--variant-danger {
+  background-color: var(--color-action-danger-background);
+  color: var(--color-action-danger-foreground);
+}
+
+.button--variant-ghost {
+  background-color: var(--color-action-ghost-background);
+  color: var(--color-action-ghost-foreground);
+}
+
+.button--size-sm {
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-sm);
+  font-size: var(--font-control-size-sm);
+}
+
+.button--size-md {
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+  font-size: var(--font-control-size-md);
+}
+
+.button--size-lg {
+  padding-inline: var(--space-inset-x-lg);
+  padding-block: var(--space-inset-y-lg);
+  font-size: var(--font-control-size-lg);
+}
+
+.button--variant-primary:hover:not(:disabled) {
+  background-color: var(--color-action-primary-background-hover);
+}
+
+.button--variant-secondary:hover:not(:disabled) {
+  background-color: var(--color-action-secondary-background-hover);
+}
+
+.button--variant-danger:hover:not(:disabled) {
+  background-color: var(--color-action-danger-background-hover);
+}
+
+.button--variant-ghost:hover:not(:disabled) {
+  background-color: var(--color-action-ghost-background-hover);
+}
+
+.button:focus-visible {
+  outline-color: var(--color-border-focus);
+}
+
+.button:focus-visible {
+  outline-width: var(--border-width-focus);
+}
+
+.button:disabled {
+  opacity: var(--opacity-disabled);
+}
+
+.button__loadingSpinner svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.button__loadingSpinner {
+  display: inline-flex;
+  flex-shrink: 0;
+  animation: button-spin 0.8s linear infinite;
+}
+
+@keyframes button-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* CompositeModal — from ds.composite-modal v1.1.0 (core/emit-html.ts) */
 
 .composite-modal, .composite-modal *, .composite-modal *::before, .composite-modal *::after {
   box-sizing: border-box;
 }
 
+.composite-modal__backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .composite-modal__dialog {
   display: flex;
   flex-direction: column;
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-card);
+  padding-inline: var(--space-inset-x-lg);
+  padding-block: var(--space-inset-y-lg);
+  gap: var(--space-gap-md);
+  width: 480px;
 }
 
 .composite-modal__header {
@@ -172,6 +308,7 @@
 .composite-modal__body {
   display: flex;
   flex-direction: column;
+  gap: var(--space-gap-sm);
 }
 
 .composite-modal__tags {
@@ -179,6 +316,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-gap-sm);
 }
 
 .composite-modal__footer {
@@ -186,30 +324,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-}
-
-.composite-modal__cancel {
-  display: flex;
-  appearance: none;
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.composite-modal__save {
-  display: flex;
-  appearance: none;
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.composite-modal__backdrop {
-  position: absolute;
+  gap: var(--space-gap-control);
 }
 
 /* showcase chrome */

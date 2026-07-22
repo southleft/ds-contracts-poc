@@ -8,10 +8,24 @@
  * resolveForConsumer), text styles, and page traversal.
  *
  * Fidelity notes (deliberate, harness-scoped):
- *   - Geometry is not laid out: width/height start at Figma's 100×100 frame
- *     default and change only via resize()/resizeWithoutConstraints().
- *   - createNodeFromSvg returns an empty 16×16 frame (vector internals are
- *     out of scope for the engine checks).
+ *   - Auto-layout sizing IS modeled (2026-07-21, closes handoff 08#2 blind
+ *     spot #1): width/height of an auto-layout frame with AUTO sizing are
+ *     computed from children + itemSpacing + padding, and a child set to
+ *     layoutSizing* FILL contributes ZERO intrinsic size — exactly real
+ *     Figma's degenerate hug↔fill cycle, so a collapsed frame (the live
+ *     composite dialog at ~3px) is now measurable headlessly. Text measures
+ *     by a deterministic estimate (chars × fontSize × 0.6); the model exists
+ *     to catch COLLAPSE, not to be pixel-accurate.
+ *   - Component properties follow the REAL API contract (2026-07-21, closes
+ *     blind spot #2): non-variant properties live on the COMPONENT_SET (or a
+ *     standalone COMPONENT) — variant children REFUSE addComponentProperty /
+ *     componentPropertyDefinitions like real Figma, and the set no longer
+ *     hoists variant-minted defs (the old lenient hoist is what hid the live
+ *     "Badge instance text not applied" bug). Instances deep-clone their
+ *     main's subtree and setProperties REFLECTS TEXT/BOOLEAN values onto the
+ *     cloned nodes via componentPropertyReferences; unknown keys THROW.
+ *   - createNodeFromSvg validates (non-empty, no duplicate attributes) and
+ *     returns an empty 16×16 frame (vector internals out of scope).
  *   - Fonts always "load"; text style application is exact (textStyleId).
  */
 
@@ -35,8 +49,8 @@ export function createFigmaMock() {
       this.visible = true;
       this.opacity = 1;
       this.rotation = 0;
-      this.width = 100;
-      this.height = 100;
+      this._w = 100;
+      this._h = 100;
       this.x = 0;
       this.y = 0;
       this.fills = [];
@@ -112,12 +126,71 @@ export function createFigmaMock() {
     }
 
     resize(w, h) {
-      this.width = w;
-      this.height = h;
+      this._w = w;
+      this._h = h;
+      this._resized = true;
     }
 
     resizeWithoutConstraints(w, h) {
       this.resize(w, h);
+    }
+
+    // --- computed auto-layout sizing (see the fidelity note above) ----------
+    // Real Figma derives an AUTO-sized auto-layout frame's box from its
+    // children; a FILL child contributes no intrinsic size on that axis. The
+    // old mock's constant 100×100 made a collapsed frame indistinguishable
+    // from a healthy one — the exact class the live composite dialog fell in.
+    _measureText(axis) {
+      if (this._resized) return axis === 'w' ? this._w : this._h;
+      const size = this.fontSize || 16;
+      return axis === 'w'
+        ? Math.round(String(this.characters ?? '').length * size * 0.6)
+        : Math.round(size * 1.4);
+    }
+
+    _intrinsicSize(axis, depth) {
+      if (depth > 32) return 0; // cycle guard — never expected, never fatal
+      if (this.type === 'TEXT') return this._measureText(axis);
+      const fillField = axis === 'w' ? 'layoutSizingHorizontal' : 'layoutSizingVertical';
+      if (this.layoutMode === 'NONE' || !this.children || this.children.length === 0) {
+        return axis === 'w' ? this._w : this._h;
+      }
+      const horizontalIsPrimary = this.layoutMode === 'HORIZONTAL';
+      const axisIsPrimary = (axis === 'w') === horizontalIsPrimary;
+      const sizingMode = axisIsPrimary ? this.primaryAxisSizingMode : this.counterAxisSizingMode;
+      if (sizingMode === 'FIXED') return axis === 'w' ? this._w : this._h;
+      const pad = axis === 'w' ? this.paddingLeft + this.paddingRight : this.paddingTop + this.paddingBottom;
+      const inFlow = this.children.filter((c) => c.visible !== false && c.layoutPositioning !== 'ABSOLUTE');
+      // The degenerate: a FILL child has no intrinsic contribution — a HUG
+      // parent whose every child FILLs resolves to padding alone (~collapse).
+      const contribs = inFlow.map((c) => (c[fillField] === 'FILL' ? 0 : c._intrinsicSize(axis, depth + 1)));
+      const content = axisIsPrimary
+        ? contribs.reduce((a, b) => a + b, 0) + this.itemSpacing * Math.max(0, inFlow.length - 1)
+        : contribs.reduce((a, b) => Math.max(a, b), 0);
+      const min = axis === 'w' ? this.minWidth : this.minHeight;
+      return Math.max(content + pad, min ?? 0);
+    }
+
+    get width() {
+      if (this.layoutSizingHorizontal === 'FILL' && this.parent?.layoutMode && this.parent.layoutMode !== 'NONE') {
+        return Math.max(0, this.parent.width - this.parent.paddingLeft - this.parent.paddingRight);
+      }
+      return this._intrinsicSize('w', 0);
+    }
+
+    set width(v) {
+      this._w = v;
+    }
+
+    get height() {
+      if (this.layoutSizingVertical === 'FILL' && this.parent?.layoutMode && this.parent.layoutMode !== 'NONE') {
+        return Math.max(0, this.parent.height - this.parent.paddingTop - this.parent.paddingBottom);
+      }
+      return this._intrinsicSize('h', 0);
+    }
+
+    set height(v) {
+      this._h = v;
     }
 
     setSharedPluginData(namespace, key, value) {
@@ -154,21 +227,20 @@ export function createFigmaMock() {
     }
 
     // --- component properties ---------------------------------------------
+    // REAL-API contract (2026-07-21): non-variant properties belong to the
+    // COMPONENT_SET (or a standalone COMPONENT). A variant child refuses both
+    // definition reads and property minting — real Figma throws here, and the
+    // old mock's lenient set-level hoist of variant-minted defs is exactly
+    // what let the live "set-instance text not applied" bug pass 146 gates.
     get componentPropertyDefinitions() {
+      if (this.type === 'COMPONENT' && this.parent?.type === 'COMPONENT_SET') {
+        throw new Error(
+          'Cannot get componentPropertyDefinitions on a variant — read them on the component set',
+        );
+      }
       if (this.type === 'COMPONENT_SET') {
         // Variant axes ride the children names, mirrored as VARIANT defs.
-        // Real Figma surfaces properties defined on variants at SET level
-        // after combineAsVariants — mirror that (dedupe by name prefix).
         const defs = { ...this._propDefs };
-        const have = new Set(Object.keys(defs).map((k) => k.split('#')[0]));
-        for (const ch of this.children ?? []) {
-          for (const [key, def] of Object.entries(ch._propDefs ?? {})) {
-            const name = key.split('#')[0];
-            if (have.has(name)) continue;
-            have.add(name);
-            defs[key] = def;
-          }
-        }
         const axes = new Map();
         for (const ch of this.children ?? []) {
           for (const seg of String(ch.name).split(',')) {
@@ -187,6 +259,11 @@ export function createFigmaMock() {
     }
 
     addComponentProperty(name, type, defaultValue, opts) {
+      if (this.type === 'COMPONENT' && this.parent?.type === 'COMPONENT_SET') {
+        throw new Error(
+          `Cannot add component property "${name}" on a variant — add it to the component set`,
+        );
+      }
       const key = type === 'VARIANT' ? name : `${name}#${this.id}:${this._propSeq++}`;
       this._propDefs[key] = { type, defaultValue, ...(opts?.preferredValues ? { preferredValues: opts.preferredValues } : {}) };
       return key;
@@ -212,27 +289,104 @@ export function createFigmaMock() {
       return this.children?.[0] ?? null;
     }
 
+    // Deep-clone the main component's subtree so an instance CARRIES its
+    // rendered content — real instances do, and reflecting a TEXT property
+    // onto the bound text node's characters is only observable if the nodes
+    // exist. The old `children: []` stub made every text-binding failure
+    // invisible headlessly.
+    _cloneForInstance() {
+      const clone = new MockNode(this.type === 'COMPONENT' || this.type === 'COMPONENT_SET' ? 'FRAME' : this.type);
+      for (const field of [
+        'name', 'visible', 'opacity', 'rotation', 'fills', 'strokes', 'strokeWeight', 'strokeAlign',
+        'effects', 'cornerRadius', 'layoutMode', 'primaryAxisAlignItems', 'counterAxisAlignItems',
+        'primaryAxisSizingMode', 'counterAxisSizingMode', 'itemSpacing',
+        'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
+        'layoutSizingHorizontal', 'layoutSizingVertical', 'layoutPositioning', 'constraints',
+        'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'clipsContent',
+        '_w', '_h', '_resized', 'x', 'y',
+      ]) {
+        if (this[field] !== undefined) clone[field] = this[field];
+      }
+      clone.componentPropertyReferences = { ...this.componentPropertyReferences };
+      if (this.type === 'TEXT') {
+        for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
+          clone[field] = this[field];
+        }
+      }
+      if (this.type === 'INSTANCE') clone.componentProperties = { ...(this.componentProperties ?? {}) };
+      for (const child of this.children ?? []) clone.appendChild(child._cloneForInstance());
+      return clone;
+    }
+
     createInstance() {
       const inst = new MockNode('INSTANCE');
       inst.name = this.name;
       inst._mainComponent = this;
       inst.children = [];
-      const source = this.parent?.type === 'COMPONENT_SET' ? this.parent : this;
-      inst.componentProperties = {};
-      for (const [key, def] of Object.entries(source.componentPropertyDefinitions ?? {})) {
-        inst.componentProperties[key] = { type: def.type, value: def.defaultValue };
+      for (const child of this.children ?? []) inst.appendChild(child._cloneForInstance());
+      for (const field of [
+        'layoutMode', 'primaryAxisAlignItems', 'counterAxisAlignItems',
+        'primaryAxisSizingMode', 'counterAxisSizingMode', 'itemSpacing',
+        'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'fills', 'strokes',
+        'cornerRadius', 'minWidth', 'minHeight', '_w', '_h', '_resized',
+      ]) {
+        if (this[field] !== undefined) inst[field] = this[field];
       }
+      const source = this.parent?.type === 'COMPONENT_SET' ? this.parent : this;
+      // REAL-FIGMA QUIRK (live finding 2026-07-22, Desktop Bridge inspection,
+      // supersedes the 07-21 "mixed VARIANT+TEXT call" inference — that was
+      // wrong): a freshly created instance's componentProperties can LAG,
+      // listing only the VARIANT axes and omitting set-level TEXT/BOOLEAN
+      // properties (observed live: `available: Variant, Size, State` on a
+      // Button instance whose set demonstrably carried Label/Disabled/
+      // Loading; a later probe of the SAME set exposed everything). But
+      // setProperties with the FULL set-level key WORKS even while the key
+      // is not listed (probe-verified). Model both halves: `_allProps` is
+      // the full truth (validation + reflection); `componentProperties`
+      // exposes the possibly-lagged view — the harness sets
+      // `_hideNonVariantOnInstances` on a set to simulate the lag.
+      inst._allProps = {};
+      for (const [key, def] of Object.entries(source.componentPropertyDefinitions ?? {})) {
+        inst._allProps[key] = { type: def.type, value: def.defaultValue };
+      }
+      const lagged = source._hideNonVariantOnInstances === true;
+      Object.defineProperty(inst, 'componentProperties', {
+        get() {
+          const out = {};
+          for (const [key, def] of Object.entries(inst._allProps)) {
+            if (lagged && def.type !== 'VARIANT') continue;
+            out[key] = { ...def };
+          }
+          return out;
+        },
+      });
+      // Real setProperties: keys unknown to the SET throw; TEXT/BOOLEAN
+      // values REFLECT onto the cloned nodes via componentPropertyReferences
+      // — so a wired-but-unapplied text property is a headless assertion
+      // away. Full set-level keys apply even during the exposure lag.
       inst.setProperties = (props) => {
         for (const [key, value] of Object.entries(props)) {
-          inst.componentProperties[key] = {
-            type: inst.componentProperties[key]?.type ?? 'TEXT',
-            value,
-          };
+          const def = inst._allProps[key];
+          if (!def) {
+            throw new Error(
+              `in setProperties: "${key}" is not a component property on this instance (available: ${Object.keys(inst._allProps).join(', ') || 'none'})`,
+            );
+          }
+          inst._allProps[key] = { type: def.type, value };
+          const targets = [inst, ...inst.findAll()];
+          if (def.type === 'TEXT') {
+            for (const n of targets) {
+              if (n.componentPropertyReferences?.characters === key) n.characters = value;
+            }
+          }
+          if (def.type === 'BOOLEAN') {
+            for (const n of targets) {
+              if (n.componentPropertyReferences?.visible === key) n.visible = value;
+            }
+          }
         }
       };
       inst.getMainComponentAsync = async () => inst._mainComponent;
-      inst.width = this.width;
-      inst.height = this.height;
       return inst;
     }
 
@@ -332,6 +486,7 @@ export function createFigmaMock() {
       return p;
     },
     createFrame: () => new MockNode('FRAME'),
+    createSection: () => new MockNode('SECTION'),
     createComponent: () => new MockNode('COMPONENT'),
     createText: () => new MockNode('TEXT'),
     createRectangle: () => new MockNode('RECTANGLE'),
