@@ -1,0 +1,147 @@
+{
+  "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
+  "component": "Switch",
+  "contract": "examples/astryx/contracts/switch.contract.json",
+  "generatedBy": "extract/computed/run.ts",
+  "browser": "149.0.7827.55",
+  "items": [
+    {
+      "id": "start.no-isDisabled|root|color",
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-on-light"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "start.no-isDisabled|root|gap",
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "start.no-isDisabled|root|gap",
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "start.no-isDisabled|root|font-family",
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "start.no-isDisabled|root|font-size",
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "16px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "spacing-4"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "end.no-isDisabled|root|color",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-on-light"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "end.no-isDisabled|root|gap",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "end.no-isDisabled|root|gap",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "end.no-isDisabled|root|font-family",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "end.no-isDisabled|root|font-size",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "16px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "spacing-4"
+      ],
+      "status": "open"
+    }
+  ]
+}

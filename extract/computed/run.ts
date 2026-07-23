@@ -148,11 +148,11 @@ async function main() {
 
   console.log('phase 1 — capture sweep…');
   const fontProbes = ['-apple-system', 'Segoe UI', 'Inter'];
-  const run1 = await sweep(page, mounts, { screenshots: scratchShots, fontProbes });
+  const run1 = await sweep(page, mounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow });
   console.log(`  ${run1.captures.length} captures, ${run1.allProps.length} channels enumerated, browser ${run1.browserVersion}`);
 
   console.log('phase 1 — determinism: second full sweep (no screenshots)…');
-  const run2 = await sweep(page, mounts, { fontProbes });
+  const run2 = await sweep(page, mounts, { fontProbes, classAllow: cfg.library.classAllow });
   const canon = (r: SweepResult) => JSON.stringify({ captures: r.captures, controls: r.controls });
   const deterministic = canon(run1) === canon(run2);
   let determinismDetail = 'byte-identical across two full sweeps in one session';

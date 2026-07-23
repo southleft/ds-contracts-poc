@@ -1,0 +1,113 @@
+{
+  "library": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "framework": "react",
+    "classPrefix": "astryx-",
+    "classAllow": "^astryx-"
+  },
+  "mount": {
+    "imports": [
+      "import '@astryxdesign/core/reset.css';",
+      "import '@astryxdesign/core/astryx.css';",
+      "import '@astryxdesign/theme-neutral/theme.css';"
+    ],
+    "wrapperOpen": "<>",
+    "wrapperClose": "</>"
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/astryx/tokens/astryx.dtcg.json"
+    ],
+    "css": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/theme-neutral/dist/theme.css"
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "__unset"
+  },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/astryx/contracts/button.contract.json",
+      "sampleText": "Save changes",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Save changes"
+      }
+    },
+    {
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/astryx/contracts/badge.contract.json",
+      "sampleText": "New",
+      "axes": [
+        "variant"
+      ]
+    },
+    {
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/astryx/contracts/card.contract.json",
+      "sampleText": "Card content",
+      "axes": [
+        "variant"
+      ]
+    },
+    {
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/astryx/contracts/switch.contract.json",
+      "sampleText": "Enable notifications",
+      "axes": [
+        "labelPosition"
+      ],
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Enable notifications"
+      }
+    },
+    {
+      "name": "Slider",
+      "importName": "Slider",
+      "contract": "examples/astryx/contracts/slider.contract.json",
+      "sampleText": "Volume",
+      "axes": [
+        "orientation",
+        "valueDisplay"
+      ],
+      "fixedProps": {
+        "label": "Volume",
+        "value": 40
+      }
+    }
+  ],
+  "_bannerReceipt": "Banner EXCLUDED this round: double-run determinism self-check refuses it by name (height/transform/radii unstable \u2014 an unsettled expand/collapse transition). Re-admit with a settle strategy in the triage round."
+}

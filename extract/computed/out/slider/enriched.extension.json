@@ -1,0 +1,1494 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "slider": {
+        "label": {
+          "color": {
+            "$value": "#4e606f",
+            "$type": "color"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "row-rule-color": {
+            "$value": "#4e606f",
+            "$type": "color"
+          }
+        },
+        "slider-track": {
+          "background-color": {
+            "$value": "#ccd3db",
+            "$type": "color"
+          },
+          "bottom": {
+            "horizontal": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0-1": {
+          "bottom": {
+            "horizontal": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "96px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-thumb-2": {
+          "bottom": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "76px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-thumb": {
+          "bottom": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "horizontal": {
+              "$value": "19.6562px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "24.5781px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "horizontal": {
+              "$value": "9.5px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "4.57812px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "76px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "tooltip": {
+          "margin-bottom": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "max-width": {
+            "$value": "300px",
+            "$type": "dimension"
+          }
+        },
+        "label-3": {
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-20-0004": {
+          "$value": "20.0004px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "size-9999": {
+          "$value": "9999px",
+          "$type": "dimension"
+        },
+        "color-0064e0": {
+          "$value": "#0064e0",
+          "$type": "color"
+        },
+        "color-0a1317": {
+          "$value": "#0a1317",
+          "$type": "color"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "color-ffffff": {
+          "$value": "#ffffff",
+          "$type": "color"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "slider",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0",
+        "field": "align",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [
+      "layout-not-uniform: part-1-0.flex-direction varies across combos — stays code-only",
+      "layout-not-uniform: part-1-0.justify-content varies across combos — stays code-only"
+    ],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "isolation",
+        "value": "isolate"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "touch-action",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-track",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "slider-track",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "cursor",
+        "value": "grab"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "cursor",
+        "value": "grab"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "tooltip",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tooltip",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "part-1-0",
+      "channel": "anchor-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_3_",
+      "distinctValues": 6
+    },
+    {
+      "part": "part-1-0",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "row",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-1-0",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, -2)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-1-0-1",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, -2)",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-thumb-2",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, -10, -10)",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "anchor-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_4_",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, -10, -10)",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0.23s",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-fill-mode",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "backwards",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "x1ahk7ht-B",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-timing-function",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "cubic-bezier(0.24, 1, 0.4, 1)",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "fixed",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "position-anchor",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_4_",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "position-area",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "self-block-start",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "position-try-fallbacks",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "flip-block, flip-inline, flip-block flip-inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "tooltip",
+      "channel": "display",
+      "sample": "block",
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "tooltip",
+      "channel": "overlay",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "tooltip",
+      "channel": "position-area",
+      "sample": "self-inline-end",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 4/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "tooltip",
+      "channel": "display",
+      "sample": "block",
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "tooltip",
+      "channel": "overlay",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "tooltip",
+      "channel": "position-area",
+      "sample": "self-inline-end",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "slider-track",
+      "channel": "left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "slider-track",
+      "channel": "right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "part-1-0-1",
+      "channel": "left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "part-1-0-1",
+      "channel": "right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "slider-thumb-2",
+      "channel": "left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "slider-thumb-2",
+      "channel": "right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "16px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "16px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "16px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "16px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "16px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "16px",
+      "verdict": "contradiction"
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [
+    "union-part-added: horizontal.text__default @1.0.2 (div|slider-thumb)",
+    "union-part-added: horizontal.text__default @1.1 (span|)",
+    "part-missing: horizontal.text__default part-1-0-2",
+    "part-missing: horizontal.text__default slider-thumb",
+    "part-missing: horizontal.text__default tooltip",
+    "part-missing: horizontal.text__default label-2",
+    "part-missing: horizontal.text__hover part-1-0-2",
+    "part-missing: horizontal.text__hover slider-thumb",
+    "part-missing: horizontal.text__hover tooltip",
+    "part-missing: horizontal.text__hover label-2",
+    "part-missing: horizontal.text__focus-visible part-1-0-2",
+    "part-missing: horizontal.text__focus-visible slider-thumb",
+    "part-missing: horizontal.text__focus-visible tooltip",
+    "part-missing: horizontal.text__focus-visible label-2",
+    "part-missing: horizontal.text__active part-1-0-2",
+    "part-missing: horizontal.text__active slider-thumb",
+    "part-missing: horizontal.text__active tooltip",
+    "part-missing: horizontal.text__active label-2",
+    "part-missing: horizontal.none__default part-1-0-2",
+    "part-missing: horizontal.none__default slider-thumb",
+    "part-missing: horizontal.none__default tooltip",
+    "part-missing: horizontal.none__default label-2",
+    "part-missing: horizontal.none__hover part-1-0-2",
+    "part-missing: horizontal.none__hover slider-thumb",
+    "part-missing: horizontal.none__hover tooltip",
+    "part-missing: horizontal.none__hover label-2",
+    "part-missing: horizontal.none__focus-visible part-1-0-2",
+    "part-missing: horizontal.none__focus-visible slider-thumb",
+    "part-missing: horizontal.none__focus-visible tooltip",
+    "part-missing: horizontal.none__focus-visible label-2",
+    "part-missing: horizontal.none__active part-1-0-2",
+    "part-missing: horizontal.none__active slider-thumb",
+    "part-missing: horizontal.none__active tooltip",
+    "part-missing: horizontal.none__active label-2",
+    "part-missing: vertical.text__default part-1-0-2",
+    "part-missing: vertical.text__default slider-thumb",
+    "part-missing: vertical.text__default tooltip",
+    "part-missing: vertical.text__default label-2",
+    "part-missing: vertical.text__hover part-1-0-2",
+    "part-missing: vertical.text__hover slider-thumb",
+    "part-missing: vertical.text__hover tooltip",
+    "part-missing: vertical.text__hover label-2",
+    "part-missing: vertical.text__focus-visible part-1-0-2",
+    "part-missing: vertical.text__focus-visible slider-thumb",
+    "part-missing: vertical.text__focus-visible tooltip",
+    "part-missing: vertical.text__focus-visible label-2",
+    "part-missing: vertical.text__active part-1-0-2",
+    "part-missing: vertical.text__active slider-thumb",
+    "part-missing: vertical.text__active tooltip",
+    "part-missing: vertical.text__active label-2",
+    "part-missing: vertical.none__default part-1-0-2",
+    "part-missing: vertical.none__default slider-thumb",
+    "part-missing: vertical.none__default tooltip",
+    "part-missing: vertical.none__default label-2",
+    "part-missing: vertical.none__hover part-1-0-2",
+    "part-missing: vertical.none__hover slider-thumb",
+    "part-missing: vertical.none__hover tooltip",
+    "part-missing: vertical.none__hover label-2",
+    "part-missing: vertical.none__focus-visible part-1-0-2",
+    "part-missing: vertical.none__focus-visible slider-thumb",
+    "part-missing: vertical.none__focus-visible tooltip",
+    "part-missing: vertical.none__focus-visible label-2",
+    "part-missing: vertical.none__active part-1-0-2",
+    "part-missing: vertical.none__active slider-thumb",
+    "part-missing: vertical.none__active tooltip",
+    "part-missing: vertical.none__active label-2"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <label> — span control used (part label)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "matched"
+      },
+      {
+        "part": "slider",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-track",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-thumb-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-thumb",
+        "join": "computed-only"
+      },
+      {
+        "part": "tooltip",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": [
+      "track",
+      "thumb"
+    ]
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label",
+      "slider",
+      "part-1-0",
+      "slider-track",
+      "part-1-0-1",
+      "slider-thumb-2",
+      "part-1-0-2",
+      "slider-thumb",
+      "tooltip",
+      "label-2",
+      "label-3"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "presence-carried: slider-thumb-2 (4/6 combos) →  hidden-when valueDisplay=tooltip",
+      "presence-carried: part-1-0-2 (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "presence-carried: slider-thumb (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "presence-carried: tooltip (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "literal-text-carried: label-2 = \"40\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "literal-text-carried: label-3 = \"40\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-3 (2/6 combos) →  hidden-when valueDisplay=tooltip, valueDisplay=none"
+    ],
+    "refusals": [
+      "static-part-unrendered: reviewed static part \"track\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+      "static-part-unrendered: reviewed static part \"thumb\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+    ]
+  },
+  "enrichmentNotes": [
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: slider.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.isolation = isolate (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.touch-action = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tooltip.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

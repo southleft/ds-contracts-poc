@@ -1,8 +1,1039 @@
 {
   "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
   "component": "Badge",
-  "contract": "examples/polaris/extraction/static-contracts/badge.contract.json",
+  "contract": "examples/astryx/contracts/badge.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "148.0.7778.96",
-  "items": []
+  "browser": "149.0.7827.55",
+  "items": [
+    {
+      "id": "neutral|root|background-color",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-gray}",
+      "computedProp": "background-color",
+      "expected": "rgba(10, 19, 23, 0.2)",
+      "observed": "rgba(5, 54, 89, 0.1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-neutral",
+        "color-shadow"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "neutral|root|padding-block",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "neutral|root|padding-block",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "neutral|root|font-family",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "neutral|root|font-size",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info|root|background-color",
+      "combo": "info",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-blue}",
+      "computedProp": "background-color",
+      "expected": "rgba(1, 113, 227, 0.2)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-accent",
+        "color-border-blue",
+        "color-icon-accent",
+        "color-icon-blue",
+        "color-text-accent"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info|root|color",
+      "combo": "info",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-blue}",
+      "computedProp": "color",
+      "expected": "rgba(4, 47, 151, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info|root|padding-block",
+      "combo": "info",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info|root|padding-block",
+      "combo": "info",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info|root|font-family",
+      "combo": "info",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info|root|font-size",
+      "combo": "info",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success|root|background-color",
+      "combo": "success",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-green}",
+      "computedProp": "background-color",
+      "expected": "rgba(36, 187, 94, 0.2)",
+      "observed": "rgba(13, 134, 38, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-border-green",
+        "color-icon-green",
+        "color-success"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success|root|color",
+      "combo": "success",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-green}",
+      "computedProp": "color",
+      "expected": "rgba(9, 68, 31, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success|root|padding-block",
+      "combo": "success",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success|root|padding-block",
+      "combo": "success",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success|root|font-family",
+      "combo": "success",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success|root|font-size",
+      "combo": "success",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|background-color",
+      "combo": "warning",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-orange}",
+      "computedProp": "background-color",
+      "expected": "rgba(242, 121, 2, 0.2)",
+      "observed": "rgba(233, 175, 8, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|color",
+      "combo": "warning",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-orange}",
+      "computedProp": "color",
+      "expected": "rgba(107, 34, 3, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|padding-block",
+      "combo": "warning",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|padding-block",
+      "combo": "warning",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|font-family",
+      "combo": "warning",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|font-size",
+      "combo": "warning",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "error|root|background-color",
+      "combo": "error",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-red}",
+      "computedProp": "background-color",
+      "expected": "rgba(227, 25, 59, 0.2)",
+      "observed": "rgba(227, 25, 59, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-border-red",
+        "color-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "error|root|color",
+      "combo": "error",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-red}",
+      "computedProp": "color",
+      "expected": "rgba(123, 2, 16, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "error|root|padding-block",
+      "combo": "error",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "error|root|padding-block",
+      "combo": "error",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "error|root|font-family",
+      "combo": "error",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "error|root|font-size",
+      "combo": "error",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "blue|root|padding-block",
+      "combo": "blue",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "blue|root|padding-block",
+      "combo": "blue",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "blue|root|font-family",
+      "combo": "blue",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "blue|root|font-size",
+      "combo": "blue",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "cyan|root|padding-block",
+      "combo": "cyan",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "cyan|root|padding-block",
+      "combo": "cyan",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "cyan|root|font-family",
+      "combo": "cyan",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "cyan|root|font-size",
+      "combo": "cyan",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "green|root|padding-block",
+      "combo": "green",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "green|root|padding-block",
+      "combo": "green",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "green|root|font-family",
+      "combo": "green",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "green|root|font-size",
+      "combo": "green",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "orange|root|padding-block",
+      "combo": "orange",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "orange|root|padding-block",
+      "combo": "orange",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "orange|root|font-family",
+      "combo": "orange",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "orange|root|font-size",
+      "combo": "orange",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "pink|root|padding-block",
+      "combo": "pink",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "pink|root|padding-block",
+      "combo": "pink",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "pink|root|font-family",
+      "combo": "pink",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "pink|root|font-size",
+      "combo": "pink",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "purple|root|padding-block",
+      "combo": "purple",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "purple|root|padding-block",
+      "combo": "purple",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "purple|root|font-family",
+      "combo": "purple",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "purple|root|font-size",
+      "combo": "purple",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "red|root|padding-block",
+      "combo": "red",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "red|root|padding-block",
+      "combo": "red",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "red|root|font-family",
+      "combo": "red",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "red|root|font-size",
+      "combo": "red",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "teal|root|padding-block",
+      "combo": "teal",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "teal|root|padding-block",
+      "combo": "teal",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "teal|root|font-family",
+      "combo": "teal",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "teal|root|font-size",
+      "combo": "teal",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "yellow|root|padding-block",
+      "combo": "yellow",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "yellow|root|padding-block",
+      "combo": "yellow",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "yellow|root|font-family",
+      "combo": "yellow",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "yellow|root|font-size",
+      "combo": "yellow",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    }
+  ]
 }

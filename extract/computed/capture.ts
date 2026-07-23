@@ -124,6 +124,12 @@ export interface CaptureConfig {
     framework: 'react';
     /** CSS-module class prefix stripped for signatures ("Polaris-"). */
     classPrefix: string;
+    /** Phase B (StyleX/atomic systems): keep ONLY classes matching this
+     *  regex when serializing captures. Hashed atomic classes (StyleX x1…)
+     *  and bare variant-value tokens otherwise pollute signatures — one
+     *  stable per-component class (astryx-*) is the identity that matters.
+     *  Absent = keep everything (Polaris behavior, byte-unchanged). */
+    classAllow?: string;
   };
   mount: {
     /** Raw import lines for providers/locale/stylesheet. */
@@ -398,15 +404,17 @@ document.addEventListener('click', (e) => e.preventDefault(), true);
 // ---------------------------------------------------------------------------
 /** In-page capture (STRING evaluate — the tsx __name serialization trap,
  *  see visual-parity/render.ts). */
-const captureJs = (selector: string) => `(() => {
+const captureJs = (selector: string, classAllow?: string) => `(() => {
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
   const props = window.__ALL_PROPS;
+  const allow = ${JSON.stringify(classAllow ?? null)};
+  const keepCls = (l) => (allow ? l.filter((c) => new RegExp(allow).test(c)) : l);
   const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
   const readEl = (el) => {
     const out = {
       tag: el.tagName.toLowerCase(),
-      classes: [...el.classList],
+      classes: keepCls([...el.classList]),
       nodes: [],
       style: read(getComputedStyle(el)),
       pseudo: {},
@@ -472,7 +480,7 @@ export interface SweepResult {
 export async function sweep(
   page: Page,
   mounts: Array<{ comp: ComponentConfig; space: PropSpace }>,
-  opts: { screenshots?: string; fontProbes: string[] },
+  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string },
 ): Promise<SweepResult> {
   const allProps = (await page.evaluate(
     `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`,
@@ -527,7 +535,7 @@ export async function sweep(
           prev = cur;
         }
 
-        const raw = (await page.evaluate(captureJs(stageSel))) as CapturedNode | null;
+        const raw = (await page.evaluate(captureJs(stageSel, opts.classAllow))) as CapturedNode | null;
         if (!raw) throw new Error(`capture failed: ${key} ${interaction}`);
         captures.push({
           combo: key,
@@ -556,7 +564,7 @@ export async function sweep(
 
   const controls: Record<string, CapturedNode> = {};
   for (const t of CONTROL_TAGS) {
-    const raw = (await page.evaluate(captureJs(`[data-combo="__control-${t}"]`))) as CapturedNode | null;
+    const raw = (await page.evaluate(captureJs(`[data-combo="__control-${t}"]`, opts.classAllow))) as CapturedNode | null;
     if (!raw) throw new Error(`control capture failed: ${t}`);
     controls[t] = normalizeNode(raw);
   }
@@ -730,15 +738,17 @@ const markBaselineJs = `(() => {
  *  serialization trap). Reads every new root as a full CapturedNode using the
  *  SAME longhand set (window.__ALL_PROPS) and ::before/::after rule as the
  *  census captureJs, plus role/aria-modal for root descent. */
-const capturePortalJs = `(() => {
+const capturePortalJs = (classAllow?: string) => `(() => {
   const baseline = window.__depthBaseline;
   const stage = document.getElementById(${JSON.stringify(PORTAL_STAGE_ID)});
   const props = window.__ALL_PROPS;
+  const allow = ${JSON.stringify(classAllow ?? null)};
+  const keepCls = (l) => (allow ? l.filter((c) => new RegExp(allow).test(c)) : l);
   const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
   const readEl = (el) => {
     const out = {
       tag: el.tagName.toLowerCase(),
-      classes: [...el.classList],
+      classes: keepCls([...el.classList]),
       role: el.getAttribute('role'),
       ariaModal: el.getAttribute('aria-modal'),
       nodes: [],
@@ -782,13 +792,14 @@ const capturePortalJs = `(() => {
 export async function capturePortalRoots(
   page: Page,
   comboKey: string,
+  classAllow?: string,
 ): Promise<PortalCapture> {
   await page.evaluate(`window.__setSpec(false)`);
   await page.waitForTimeout(150);
   await page.evaluate(markBaselineJs);
   await page.evaluate(`window.__setSpec(true)`);
   await page.waitForTimeout(PORTAL_SETTLE_MS);
-  const raw = (await page.evaluate(capturePortalJs)) as {
+  const raw = (await page.evaluate(capturePortalJs(classAllow))) as {
     preBytes: number;
     postBytes: number;
     currentReader: PortalCapture['currentReader'];
