@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 1144,
-    "cellsEqual": 1108,
-    "pctEqual": 96.85314685314685,
+    "cellsEqual": 1124,
+    "pctEqual": 98.25174825174825,
     "rowsFullyEqual": 44,
     "rows": 52
   },
@@ -16,17 +16,17 @@
     "pairs": 52,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 6.10927483974359,
-    "meanAA": 2.684044471153846,
+    "meanExact": 6.109024439102564,
+    "meanAA": 2.6845452724358974,
     "maxAA": 3.26171875
   },
   "fusion": {
-    "boundConfirmed": 164,
-    "boundCells": 260,
-    "contradictions": 96,
-    "mintedLeaves": 52,
-    "mintedLeavesUnfolded": 52,
-    "baseBindings": 4,
+    "boundConfirmed": 112,
+    "boundCells": 182,
+    "contradictions": 70,
+    "mintedLeaves": 106,
+    "mintedLeavesUnfolded": 106,
+    "baseBindings": 10,
     "stateBindings": 0,
     "codeOnlyChannels": 0,
     "overflowBindings": 0,
@@ -100,34 +100,20 @@
       4
     ],
     [
-      "root.padding-bottom",
-      4
-    ],
-    [
-      "root.padding-left",
-      4
-    ],
-    [
-      "root.padding-right",
-      4
-    ],
-    [
-      "root.padding-top",
-      4
-    ],
-    [
       "root.background-color",
       4
     ]
   ],
-  "namedLosses": [],
+  "namedLosses": [
+    "promotion: static-part-unrendered: reviewed static part \"body\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+  ],
   "rows": [
     {
       "key": "default__default",
       "channelsCompared": 22,
-      "channelsEqual": 14,
-      "pctExact": 3.76953125,
-      "pctAA": 2.05078125,
+      "channelsEqual": 18,
+      "pctExact": 3.7662760416666665,
+      "pctAA": 2.0572916666666665,
       "mismatches": [
         {
           "part": "root",
@@ -152,39 +138,15 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-bottom",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-top",
-          "ours": "16px",
-          "theirs": "15px"
         }
       ]
     },
     {
       "key": "default__hover",
       "channelsCompared": 22,
-      "channelsEqual": 14,
-      "pctExact": 3.76953125,
-      "pctAA": 2.05078125,
+      "channelsEqual": 18,
+      "pctExact": 3.7662760416666665,
+      "pctAA": 2.0572916666666665,
       "mismatches": [
         {
           "part": "root",
@@ -209,39 +171,15 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-bottom",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-top",
-          "ours": "16px",
-          "theirs": "15px"
         }
       ]
     },
     {
       "key": "default__focus-visible",
       "channelsCompared": 22,
-      "channelsEqual": 14,
-      "pctExact": 3.76953125,
-      "pctAA": 2.05078125,
+      "channelsEqual": 18,
+      "pctExact": 3.7662760416666665,
+      "pctAA": 2.0572916666666665,
       "mismatches": [
         {
           "part": "root",
@@ -266,39 +204,15 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-bottom",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-top",
-          "ours": "16px",
-          "theirs": "15px"
         }
       ]
     },
     {
       "key": "default__active",
       "channelsCompared": 22,
-      "channelsEqual": 14,
-      "pctExact": 3.76953125,
-      "pctAA": 2.05078125,
+      "channelsEqual": 18,
+      "pctExact": 3.7662760416666665,
+      "pctAA": 2.0572916666666665,
       "mismatches": [
         {
           "part": "root",
@@ -323,30 +237,6 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-bottom",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-left",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-right",
-          "ours": "16px",
-          "theirs": "15px"
-        },
-        {
-          "part": "root",
-          "channel": "padding-top",
-          "ours": "16px",
-          "theirs": "15px"
         }
       ]
     },

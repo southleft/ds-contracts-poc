@@ -6,6 +6,40 @@
   "browser": "149.0.7827.55",
   "items": [
     {
+      "id": "primary.sm.no-isDisabled|root|gap",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|gap",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
       "id": "primary.sm.no-isDisabled|root|font-family",
       "combo": "primary.sm.no-isDisabled",
       "part": "root",
@@ -19,16 +53,101 @@
       "status": "open"
     },
     {
-      "id": "primary.sm.no-isDisabled|root|line-height",
+      "id": "primary.sm.no-isDisabled|root|font-size",
       "combo": "primary.sm.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|font-weight",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|padding-block",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-top",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|padding-block",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-bottom",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|padding-inline",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|padding-inline",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-right",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -45,191 +164,36 @@
       "status": "open"
     },
     {
-      "id": "primary.sm.no-isDisabled|part-0|font-size",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "primary.md.no-isDisabled|root|gap",
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "primary.sm.no-isDisabled|part-0|font-weight",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "primary.md.no-isDisabled|root|gap",
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|part-0|line-height",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|part-0|color",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|label|font-size",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|label|font-weight",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|label|line-height",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|label|color",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|part-1|font-size",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|part-1|font-weight",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|part-1|line-height",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.sm.no-isDisabled|part-1|color",
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -247,16 +211,33 @@
       "status": "open"
     },
     {
-      "id": "primary.md.no-isDisabled|root|line-height",
+      "id": "primary.md.no-isDisabled|root|font-size",
       "combo": "primary.md.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|root|font-weight",
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
       "status": "open"
     },
     {
@@ -273,191 +254,36 @@
       "status": "open"
     },
     {
-      "id": "primary.md.no-isDisabled|part-0|font-size",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "primary.lg.no-isDisabled|root|gap",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "primary.md.no-isDisabled|part-0|font-weight",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "primary.lg.no-isDisabled|root|gap",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|part-0|line-height",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|part-0|color",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|label|font-size",
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|label|font-weight",
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|label|line-height",
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|label|color",
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|part-1|font-size",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|part-1|font-weight",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|part-1|line-height",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.md.no-isDisabled|part-1|color",
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -475,16 +301,101 @@
       "status": "open"
     },
     {
-      "id": "primary.lg.no-isDisabled|root|line-height",
+      "id": "primary.lg.no-isDisabled|root|font-size",
       "combo": "primary.lg.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|font-weight",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|padding-block",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-top",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|padding-block",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-bottom",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|padding-inline",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-left",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|padding-inline",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-right",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -501,191 +412,36 @@
       "status": "open"
     },
     {
-      "id": "primary.lg.no-isDisabled|part-0|font-size",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "secondary.sm.no-isDisabled|root|gap",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "primary.lg.no-isDisabled|part-0|font-weight",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "secondary.sm.no-isDisabled|root|gap",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|part-0|line-height",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|part-0|color",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|label|font-size",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|label|font-weight",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{p.font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|label|line-height",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|label|color",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|part-1|font-size",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|part-1|font-weight",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|part-1|line-height",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "primary.lg.no-isDisabled|part-1|color",
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -703,16 +459,117 @@
       "status": "open"
     },
     {
-      "id": "secondary.sm.no-isDisabled|root|line-height",
+      "id": "secondary.sm.no-isDisabled|root|font-size",
       "combo": "secondary.sm.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|font-weight",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|background-color",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-muted}",
+      "computedProp": "background-color",
+      "expected": "rgba(5, 54, 89, 0.047)",
+      "observed": "rgba(5, 54, 89, 0.1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-neutral",
+        "color-shadow"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|padding-block",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-top",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|padding-block",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-bottom",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|padding-inline",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|padding-inline",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-right",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -729,188 +586,36 @@
       "status": "open"
     },
     {
-      "id": "secondary.sm.no-isDisabled|part-0|font-size",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "secondary.md.no-isDisabled|root|gap",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "secondary.sm.no-isDisabled|part-0|font-weight",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "secondary.md.no-isDisabled|root|gap",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|part-0|line-height",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|part-0|color",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|label|font-size",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|label|font-weight",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|label|line-height",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|label|color",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|part-1|font-size",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|part-1|font-weight",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|part-1|line-height",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.sm.no-isDisabled|part-1|color",
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -928,16 +633,49 @@
       "status": "open"
     },
     {
-      "id": "secondary.md.no-isDisabled|root|line-height",
+      "id": "secondary.md.no-isDisabled|root|font-size",
       "combo": "secondary.md.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|root|font-weight",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|root|background-color",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-muted}",
+      "computedProp": "background-color",
+      "expected": "rgba(5, 54, 89, 0.047)",
+      "observed": "rgba(5, 54, 89, 0.1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-neutral",
+        "color-shadow"
+      ],
       "status": "open"
     },
     {
@@ -954,188 +692,36 @@
       "status": "open"
     },
     {
-      "id": "secondary.md.no-isDisabled|part-0|font-size",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "secondary.lg.no-isDisabled|root|gap",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "secondary.md.no-isDisabled|part-0|font-weight",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "secondary.lg.no-isDisabled|root|gap",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|part-0|line-height",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|part-0|color",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|label|font-size",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|label|font-weight",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|label|line-height",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|label|color",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|part-1|font-size",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|part-1|font-weight",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|part-1|line-height",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.md.no-isDisabled|part-1|color",
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -1153,16 +739,117 @@
       "status": "open"
     },
     {
-      "id": "secondary.lg.no-isDisabled|root|line-height",
+      "id": "secondary.lg.no-isDisabled|root|font-size",
       "combo": "secondary.lg.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|font-weight",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|background-color",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-muted}",
+      "computedProp": "background-color",
+      "expected": "rgba(5, 54, 89, 0.047)",
+      "observed": "rgba(5, 54, 89, 0.1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-neutral",
+        "color-shadow"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|padding-block",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-top",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|padding-block",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-bottom",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|padding-inline",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-left",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|padding-inline",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-right",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -1179,188 +866,36 @@
       "status": "open"
     },
     {
-      "id": "secondary.lg.no-isDisabled|part-0|font-size",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "ghost.sm.no-isDisabled|root|gap",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "secondary.lg.no-isDisabled|part-0|font-weight",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "ghost.sm.no-isDisabled|root|gap",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|part-0|line-height",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|part-0|color",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|label|font-size",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|label|font-weight",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|label|line-height",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|label|color",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|part-1|font-size",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|part-1|font-weight",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|part-1|line-height",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "secondary.lg.no-isDisabled|part-1|color",
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -1378,16 +913,101 @@
       "status": "open"
     },
     {
-      "id": "ghost.sm.no-isDisabled|root|line-height",
+      "id": "ghost.sm.no-isDisabled|root|font-size",
       "combo": "ghost.sm.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|font-weight",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|padding-block",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-top",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|padding-block",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-bottom",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|padding-inline",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|padding-inline",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-right",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -1404,188 +1024,36 @@
       "status": "open"
     },
     {
-      "id": "ghost.sm.no-isDisabled|part-0|font-size",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "ghost.md.no-isDisabled|root|gap",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "ghost.sm.no-isDisabled|part-0|font-weight",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "ghost.md.no-isDisabled|root|gap",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|part-0|line-height",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|part-0|color",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|label|font-size",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|label|font-weight",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|label|line-height",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|label|color",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|part-1|font-size",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|part-1|font-weight",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|part-1|line-height",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.sm.no-isDisabled|part-1|color",
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -1603,16 +1071,33 @@
       "status": "open"
     },
     {
-      "id": "ghost.md.no-isDisabled|root|line-height",
+      "id": "ghost.md.no-isDisabled|root|font-size",
       "combo": "ghost.md.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|root|font-weight",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
       "status": "open"
     },
     {
@@ -1629,188 +1114,36 @@
       "status": "open"
     },
     {
-      "id": "ghost.md.no-isDisabled|part-0|font-size",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "ghost.lg.no-isDisabled|root|gap",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "ghost.md.no-isDisabled|part-0|font-weight",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "ghost.lg.no-isDisabled|root|gap",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|part-0|line-height",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|part-0|color",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|label|font-size",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|label|font-weight",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|label|line-height",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|label|color",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|part-1|font-size",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|part-1|font-weight",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|part-1|line-height",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.md.no-isDisabled|part-1|color",
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -1828,16 +1161,101 @@
       "status": "open"
     },
     {
-      "id": "ghost.lg.no-isDisabled|root|line-height",
+      "id": "ghost.lg.no-isDisabled|root|font-size",
       "combo": "ghost.lg.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|font-weight",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|padding-block",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-top",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|padding-block",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-bottom",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|padding-inline",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-left",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|padding-inline",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-right",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -1854,188 +1272,36 @@
       "status": "open"
     },
     {
-      "id": "ghost.lg.no-isDisabled|part-0|font-size",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "destructive.sm.no-isDisabled|root|gap",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "ghost.lg.no-isDisabled|part-0|font-weight",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "destructive.sm.no-isDisabled|root|gap",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|part-0|line-height",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|part-0|color",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|label|font-size",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|label|font-weight",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|label|line-height",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|label|color",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|part-1|font-size",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|part-1|font-weight",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|part-1|line-height",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "ghost.lg.no-isDisabled|part-1|color",
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -2053,16 +1319,101 @@
       "status": "open"
     },
     {
-      "id": "destructive.sm.no-isDisabled|root|line-height",
+      "id": "destructive.sm.no-isDisabled|root|font-size",
       "combo": "destructive.sm.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|font-weight",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|padding-block",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-top",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|padding-block",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-1}",
+      "computedProp": "padding-bottom",
+      "expected": "4px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|padding-inline",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|padding-inline",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-2}",
+      "computedProp": "padding-right",
+      "expected": "8px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -2079,191 +1430,36 @@
       "status": "open"
     },
     {
-      "id": "destructive.sm.no-isDisabled|part-0|font-size",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "destructive.md.no-isDisabled|root|gap",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "destructive.sm.no-isDisabled|part-0|font-weight",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "destructive.md.no-isDisabled|root|gap",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|part-0|line-height",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|part-0|color",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|label|font-size",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|label|font-weight",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|label|line-height",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|label|color",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|part-1|font-size",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|part-1|font-weight",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|part-1|line-height",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.sm.no-isDisabled|part-1|color",
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -2281,16 +1477,33 @@
       "status": "open"
     },
     {
-      "id": "destructive.md.no-isDisabled|root|line-height",
+      "id": "destructive.md.no-isDisabled|root|font-size",
       "combo": "destructive.md.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|root|font-weight",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
       "status": "open"
     },
     {
@@ -2307,191 +1520,36 @@
       "status": "open"
     },
     {
-      "id": "destructive.md.no-isDisabled|part-0|font-size",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "destructive.lg.no-isDisabled|root|gap",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "column-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
     {
-      "id": "destructive.md.no-isDisabled|part-0|font-weight",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "destructive.lg.no-isDisabled|root|gap",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-1}",
+      "computedProp": "row-gap",
+      "expected": "4px",
+      "observed": "8px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|part-0|line-height",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|part-0|color",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|label|font-size",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|label|font-weight",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|label|line-height",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|label|color",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|part-1|font-size",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|part-1|font-weight",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|part-1|line-height",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.md.no-isDisabled|part-1|color",
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
       ],
       "status": "open"
     },
@@ -2509,16 +1567,101 @@
       "status": "open"
     },
     {
-      "id": "destructive.lg.no-isDisabled|root|line-height",
+      "id": "destructive.lg.no-isDisabled|root|font-size",
       "combo": "destructive.lg.no-isDisabled",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-sm}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "14px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|font-weight",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "600",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|padding-block",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-top",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|padding-block",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-3}",
+      "computedProp": "padding-bottom",
+      "expected": "12px",
+      "observed": "8px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-2xs",
+        "radius-element",
+        "spacing-2"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|padding-inline",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-left",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|padding-inline",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-right",
+      "expected": "16px",
+      "observed": "12px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -2532,195 +1675,6 @@
       "observed": "auto",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-0|font-size",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-0|font-weight",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-0|line-height",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-0|color",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|label|font-size",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|label|font-weight",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|label|line-height",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|label|color",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-1|font-size",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-1|font-weight",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-1|line-height",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "destructive.lg.no-isDisabled|part-1|color",
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
       "status": "open"
     }
   ]

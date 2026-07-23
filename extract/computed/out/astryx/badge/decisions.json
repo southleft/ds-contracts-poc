@@ -1,0 +1,170 @@
+[
+  {
+    "ids": [
+      "neutral|root|background-color"
+    ],
+    "part": "root",
+    "channel": "background-color",
+    "scope": "axis:variant=neutral",
+    "from": "{color-background-gray}",
+    "to": "{color-neutral}",
+    "observed": "rgba(5, 54, 89, 0.1)",
+    "expected": "rgba(10, 19, 23, 0.2)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "info|root|background-color"
+    ],
+    "part": "root",
+    "channel": "background-color",
+    "scope": "axis:variant=info",
+    "from": "{color-background-blue}",
+    "to": "{color-accent}",
+    "observed": "rgba(0, 100, 224, 1)",
+    "expected": "rgba(1, 113, 227, 0.2)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "success|root|background-color"
+    ],
+    "part": "root",
+    "channel": "background-color",
+    "scope": "axis:variant=success",
+    "from": "{color-background-green}",
+    "to": "{color-success}",
+    "observed": "rgba(13, 134, 38, 1)",
+    "expected": "rgba(36, 187, 94, 0.2)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "warning|root|background-color"
+    ],
+    "part": "root",
+    "channel": "background-color",
+    "scope": "axis:variant=warning",
+    "from": "{color-background-orange}",
+    "to": "{color-warning}",
+    "observed": "rgba(233, 175, 8, 1)",
+    "expected": "rgba(242, 121, 2, 0.2)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "error|root|background-color"
+    ],
+    "part": "root",
+    "channel": "background-color",
+    "scope": "axis:variant=error",
+    "from": "{color-background-red}",
+    "to": "{color-error}",
+    "observed": "rgba(227, 25, 59, 1)",
+    "expected": "rgba(227, 25, 59, 0.2)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "blue|root|padding-block",
+      "blue|root|padding-block",
+      "cyan|root|padding-block",
+      "cyan|root|padding-block",
+      "error|root|padding-block",
+      "error|root|padding-block",
+      "green|root|padding-block",
+      "green|root|padding-block",
+      "info|root|padding-block",
+      "info|root|padding-block",
+      "neutral|root|padding-block",
+      "neutral|root|padding-block",
+      "orange|root|padding-block",
+      "orange|root|padding-block",
+      "pink|root|padding-block",
+      "pink|root|padding-block",
+      "purple|root|padding-block",
+      "purple|root|padding-block",
+      "red|root|padding-block",
+      "red|root|padding-block",
+      "success|root|padding-block",
+      "success|root|padding-block",
+      "teal|root|padding-block",
+      "teal|root|padding-block",
+      "warning|root|padding-block",
+      "warning|root|padding-block",
+      "yellow|root|padding-block",
+      "yellow|root|padding-block"
+    ],
+    "part": "root",
+    "channel": "padding-block",
+    "scope": "base",
+    "from": "{spacing-0-5}",
+    "to": "{spacing-0}",
+    "observed": "0px",
+    "expected": "2px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "blue|root|font-size",
+      "cyan|root|font-size",
+      "error|root|font-size",
+      "green|root|font-size",
+      "info|root|font-size",
+      "neutral|root|font-size",
+      "orange|root|font-size",
+      "pink|root|font-size",
+      "purple|root|font-size",
+      "red|root|font-size",
+      "success|root|font-size",
+      "teal|root|font-size",
+      "warning|root|font-size",
+      "yellow|root|font-size"
+    ],
+    "part": "root",
+    "channel": "font-size",
+    "scope": "base",
+    "from": "{font-size-xs}",
+    "to": "{font-size-sm}",
+    "observed": "12px",
+    "expected": "10px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "error|root|color",
+      "info|root|color",
+      "success|root|color"
+    ],
+    "part": "root",
+    "channel": "color",
+    "scope": "axis:variant=error|info|success",
+    "from": "{color-text-blue}",
+    "to": "{color-on-accent}",
+    "observed": "rgba(255, 255, 255, 1)",
+    "expected": "rgba(4, 47, 151, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "warning|root|color"
+    ],
+    "part": "root",
+    "channel": "color",
+    "scope": "axis:variant=warning",
+    "from": "{color-text-orange}",
+    "to": "{color-on-warning}",
+    "observed": "rgba(10, 19, 23, 1)",
+    "expected": "rgba(107, 34, 3, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  }
+]

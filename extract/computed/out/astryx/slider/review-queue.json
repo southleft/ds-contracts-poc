@@ -6,6 +6,53 @@
   "browser": "149.0.7827.55",
   "items": [
     {
+      "id": "horizontal.tooltip|root|color",
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-on-light"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "horizontal.tooltip|root|gap",
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-inner",
+        "spacing-1"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "horizontal.tooltip|root|gap",
+      "combo": "horizontal.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-inner",
+        "spacing-1"
+      ],
+      "status": "open"
+    },
+    {
       "id": "horizontal.tooltip|root|font-family",
       "combo": "horizontal.tooltip",
       "part": "root",
@@ -19,494 +66,65 @@
       "status": "open"
     },
     {
-      "id": "horizontal.tooltip|label|color",
+      "id": "horizontal.tooltip|root|font-size",
       "combo": "horizontal.tooltip",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.slider.label.color}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|label|font-size",
-      "combo": "horizontal.tooltip",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
+      "ref": "{font-size-xs}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "10px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.tooltip|label|font-weight",
-      "combo": "horizontal.tooltip",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.slider.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|label|line-height",
-      "combo": "horizontal.tooltip",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-track|background-color",
-      "combo": "horizontal.tooltip",
-      "part": "slider-track",
-      "channel": "background-color",
-      "ref": "{imported.slider.slider-track.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(204, 211, 219, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-border-emphasized",
-        "color-skeleton",
-        "color-track"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-track|border-bottom-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-track",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-track|border-bottom-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-track",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-track|border-top-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-track",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-track|border-top-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-track",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|part-1-0-1|background-color",
-      "combo": "horizontal.tooltip",
-      "part": "part-1-0-1",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|part-1-0-1|border-bottom-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|part-1-0-1|border-bottom-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|part-1-0-1|border-top-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|part-1-0-1|border-top-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-thumb|background-color",
-      "combo": "horizontal.tooltip",
-      "part": "slider-thumb",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-thumb|border-bottom-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-thumb|border-bottom-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-thumb|border-top-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|slider-thumb|border-top-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|tooltip|background-color",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0a1317}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|tooltip|border-bottom-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|tooltip|border-bottom-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|tooltip|border-top-left-radius",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|tooltip|border-top-right-radius",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|tooltip|color",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
+      "id": "horizontal.text|root|color",
+      "combo": "horizontal.text",
+      "part": "root",
       "channel": "color",
-      "ref": "{imported.shared.color-ffffff}",
+      "ref": "{color-text-secondary}",
       "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "color-on-light"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.tooltip|tooltip|font-size",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "horizontal.text|root|gap",
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "radius-inner",
+        "spacing-1"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.tooltip|tooltip|line-height",
-      "combo": "horizontal.tooltip",
-      "part": "tooltip",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|label-2|color",
-      "combo": "horizontal.tooltip",
-      "part": "label-2",
-      "channel": "color",
-      "ref": "{imported.shared.color-ffffff}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
+      "id": "horizontal.text|root|gap",
+      "combo": "horizontal.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "radius-inner",
+        "spacing-1"
       ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|label-2|font-size",
-      "combo": "horizontal.tooltip",
-      "part": "label-2",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|label-2|line-height",
-      "combo": "horizontal.tooltip",
-      "part": "label-2",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.tooltip|label-2|max-width",
-      "combo": "horizontal.tooltip",
-      "part": "label-2",
-      "channel": "max-width",
-      "ref": "{imported.slider.label-2.max-width}",
-      "computedProp": "max-width",
-      "expected": "none",
-      "observed": "300px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
       "status": "open"
     },
     {
@@ -523,345 +141,65 @@
       "status": "open"
     },
     {
-      "id": "horizontal.text|label|color",
+      "id": "horizontal.text|root|font-size",
       "combo": "horizontal.text",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.slider.label.color}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|label|font-size",
-      "combo": "horizontal.text",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
+      "ref": "{font-size-xs}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "10px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.text|label|font-weight",
-      "combo": "horizontal.text",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.slider.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|label|line-height",
-      "combo": "horizontal.text",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-track|background-color",
-      "combo": "horizontal.text",
-      "part": "slider-track",
-      "channel": "background-color",
-      "ref": "{imported.slider.slider-track.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(204, 211, 219, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-border-emphasized",
-        "color-skeleton",
-        "color-track"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-track|border-bottom-left-radius",
-      "combo": "horizontal.text",
-      "part": "slider-track",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-track|border-bottom-right-radius",
-      "combo": "horizontal.text",
-      "part": "slider-track",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-track|border-top-left-radius",
-      "combo": "horizontal.text",
-      "part": "slider-track",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-track|border-top-right-radius",
-      "combo": "horizontal.text",
-      "part": "slider-track",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|part-1-0-1|background-color",
-      "combo": "horizontal.text",
-      "part": "part-1-0-1",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|part-1-0-1|border-bottom-left-radius",
-      "combo": "horizontal.text",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|part-1-0-1|border-bottom-right-radius",
-      "combo": "horizontal.text",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|part-1-0-1|border-top-left-radius",
-      "combo": "horizontal.text",
-      "part": "part-1-0-1",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|part-1-0-1|border-top-right-radius",
-      "combo": "horizontal.text",
-      "part": "part-1-0-1",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-thumb-2|background-color",
-      "combo": "horizontal.text",
-      "part": "slider-thumb-2",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-thumb-2|border-bottom-left-radius",
-      "combo": "horizontal.text",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-thumb-2|border-bottom-right-radius",
-      "combo": "horizontal.text",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-thumb-2|border-top-left-radius",
-      "combo": "horizontal.text",
-      "part": "slider-thumb-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|slider-thumb-2|border-top-right-radius",
-      "combo": "horizontal.text",
-      "part": "slider-thumb-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.text|label-3|color",
-      "combo": "horizontal.text",
-      "part": "label-3",
+      "id": "horizontal.none|root|color",
+      "combo": "horizontal.none",
+      "part": "root",
       "channel": "color",
-      "ref": "{imported.shared.color-0a1317}",
+      "ref": "{color-text-secondary}",
       "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "color-on-light"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.text|label-3|font-size",
-      "combo": "horizontal.text",
-      "part": "label-3",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "horizontal.none|root|gap",
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "radius-inner",
+        "spacing-1"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.text|label-3|line-height",
-      "combo": "horizontal.text",
-      "part": "label-3",
-      "channel": "line-height",
-      "ref": "{imported.slider.label-3.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "21px",
+      "id": "horizontal.none|root|gap",
+      "combo": "horizontal.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "radius-inner",
+        "spacing-1"
+      ],
       "status": "open"
     },
     {
@@ -878,297 +216,64 @@
       "status": "open"
     },
     {
-      "id": "horizontal.none|label|color",
+      "id": "horizontal.none|root|font-size",
       "combo": "horizontal.none",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.slider.label.color}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|label|font-size",
-      "combo": "horizontal.none",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
+      "ref": "{font-size-xs}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "10px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.none|label|font-weight",
-      "combo": "horizontal.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.slider.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "vertical.tooltip|root|color",
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
+        "color-on-light"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.none|label|line-height",
-      "combo": "horizontal.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-track|background-color",
-      "combo": "horizontal.none",
-      "part": "slider-track",
-      "channel": "background-color",
-      "ref": "{imported.slider.slider-track.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(204, 211, 219, 1)",
+      "id": "vertical.tooltip|root|gap",
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-border-emphasized",
-        "color-skeleton",
-        "color-track"
+        "radius-inner",
+        "spacing-1"
       ],
       "status": "open"
     },
     {
-      "id": "horizontal.none|slider-track|border-bottom-left-radius",
-      "combo": "horizontal.none",
-      "part": "slider-track",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
+      "id": "vertical.tooltip|root|gap",
+      "combo": "vertical.tooltip",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-track|border-bottom-right-radius",
-      "combo": "horizontal.none",
-      "part": "slider-track",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-track|border-top-left-radius",
-      "combo": "horizontal.none",
-      "part": "slider-track",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-track|border-top-right-radius",
-      "combo": "horizontal.none",
-      "part": "slider-track",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|part-1-0-1|background-color",
-      "combo": "horizontal.none",
-      "part": "part-1-0-1",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|part-1-0-1|border-bottom-left-radius",
-      "combo": "horizontal.none",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|part-1-0-1|border-bottom-right-radius",
-      "combo": "horizontal.none",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|part-1-0-1|border-top-left-radius",
-      "combo": "horizontal.none",
-      "part": "part-1-0-1",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|part-1-0-1|border-top-right-radius",
-      "combo": "horizontal.none",
-      "part": "part-1-0-1",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-thumb-2|background-color",
-      "combo": "horizontal.none",
-      "part": "slider-thumb-2",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-thumb-2|border-bottom-left-radius",
-      "combo": "horizontal.none",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-thumb-2|border-bottom-right-radius",
-      "combo": "horizontal.none",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-thumb-2|border-top-left-radius",
-      "combo": "horizontal.none",
-      "part": "slider-thumb-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "horizontal.none|slider-thumb-2|border-top-right-radius",
-      "combo": "horizontal.none",
-      "part": "slider-thumb-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
+        "radius-inner",
+        "spacing-1"
       ],
       "status": "open"
     },
@@ -1186,494 +291,65 @@
       "status": "open"
     },
     {
-      "id": "vertical.tooltip|label|color",
+      "id": "vertical.tooltip|root|font-size",
       "combo": "vertical.tooltip",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.slider.label.color}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|label|font-size",
-      "combo": "vertical.tooltip",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
+      "ref": "{font-size-xs}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "10px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "vertical.tooltip|label|font-weight",
-      "combo": "vertical.tooltip",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.slider.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|label|line-height",
-      "combo": "vertical.tooltip",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-track|background-color",
-      "combo": "vertical.tooltip",
-      "part": "slider-track",
-      "channel": "background-color",
-      "ref": "{imported.slider.slider-track.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(204, 211, 219, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-border-emphasized",
-        "color-skeleton",
-        "color-track"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-track|border-bottom-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-track",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-track|border-bottom-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-track",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-track|border-top-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-track",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-track|border-top-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-track",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|part-1-0-1|background-color",
-      "combo": "vertical.tooltip",
-      "part": "part-1-0-1",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|part-1-0-1|border-bottom-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|part-1-0-1|border-bottom-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|part-1-0-1|border-top-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|part-1-0-1|border-top-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "part-1-0-1",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-thumb|background-color",
-      "combo": "vertical.tooltip",
-      "part": "slider-thumb",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-thumb|border-bottom-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-thumb|border-bottom-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-thumb|border-top-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|slider-thumb|border-top-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "slider-thumb",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|tooltip|background-color",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0a1317}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|tooltip|border-bottom-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|tooltip|border-bottom-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|tooltip|border-top-left-radius",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|tooltip|border-top-right-radius",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-12}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "12px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-sm",
-        "radius-container",
-        "spacing-3"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|tooltip|color",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
+      "id": "vertical.text|root|color",
+      "combo": "vertical.text",
+      "part": "root",
       "channel": "color",
-      "ref": "{imported.shared.color-ffffff}",
+      "ref": "{color-text-secondary}",
       "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "color-on-light"
       ],
       "status": "open"
     },
     {
-      "id": "vertical.tooltip|tooltip|font-size",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "vertical.text|root|gap",
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "radius-inner",
+        "spacing-1"
       ],
       "status": "open"
     },
     {
-      "id": "vertical.tooltip|tooltip|line-height",
-      "combo": "vertical.tooltip",
-      "part": "tooltip",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|label-2|color",
-      "combo": "vertical.tooltip",
-      "part": "label-2",
-      "channel": "color",
-      "ref": "{imported.shared.color-ffffff}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
+      "id": "vertical.text|root|gap",
+      "combo": "vertical.text",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
+        "radius-inner",
+        "spacing-1"
       ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|label-2|font-size",
-      "combo": "vertical.tooltip",
-      "part": "label-2",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|label-2|line-height",
-      "combo": "vertical.tooltip",
-      "part": "label-2",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "vertical.tooltip|label-2|max-width",
-      "combo": "vertical.tooltip",
-      "part": "label-2",
-      "channel": "max-width",
-      "ref": "{imported.slider.label-2.max-width}",
-      "computedProp": "max-width",
-      "expected": "none",
-      "observed": "300px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
       "status": "open"
     },
     {
@@ -1690,345 +366,65 @@
       "status": "open"
     },
     {
-      "id": "vertical.text|label|color",
+      "id": "vertical.text|root|font-size",
       "combo": "vertical.text",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.slider.label.color}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|label|font-size",
-      "combo": "vertical.text",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
+      "ref": "{font-size-xs}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "10px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "vertical.text|label|font-weight",
-      "combo": "vertical.text",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.slider.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|label|line-height",
-      "combo": "vertical.text",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-track|background-color",
-      "combo": "vertical.text",
-      "part": "slider-track",
-      "channel": "background-color",
-      "ref": "{imported.slider.slider-track.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(204, 211, 219, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-border-emphasized",
-        "color-skeleton",
-        "color-track"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-track|border-bottom-left-radius",
-      "combo": "vertical.text",
-      "part": "slider-track",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-track|border-bottom-right-radius",
-      "combo": "vertical.text",
-      "part": "slider-track",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-track|border-top-left-radius",
-      "combo": "vertical.text",
-      "part": "slider-track",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-track|border-top-right-radius",
-      "combo": "vertical.text",
-      "part": "slider-track",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|part-1-0-1|background-color",
-      "combo": "vertical.text",
-      "part": "part-1-0-1",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|part-1-0-1|border-bottom-left-radius",
-      "combo": "vertical.text",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|part-1-0-1|border-bottom-right-radius",
-      "combo": "vertical.text",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|part-1-0-1|border-top-left-radius",
-      "combo": "vertical.text",
-      "part": "part-1-0-1",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|part-1-0-1|border-top-right-radius",
-      "combo": "vertical.text",
-      "part": "part-1-0-1",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-thumb-2|background-color",
-      "combo": "vertical.text",
-      "part": "slider-thumb-2",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-thumb-2|border-bottom-left-radius",
-      "combo": "vertical.text",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-thumb-2|border-bottom-right-radius",
-      "combo": "vertical.text",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-thumb-2|border-top-left-radius",
-      "combo": "vertical.text",
-      "part": "slider-thumb-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|slider-thumb-2|border-top-right-radius",
-      "combo": "vertical.text",
-      "part": "slider-thumb-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.text|label-3|color",
-      "combo": "vertical.text",
-      "part": "label-3",
+      "id": "vertical.none|root|color",
+      "combo": "vertical.none",
+      "part": "root",
       "channel": "color",
-      "ref": "{imported.shared.color-0a1317}",
+      "ref": "{color-text-secondary}",
       "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
+      "expected": "rgba(78, 96, 111, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "color-background-inverted",
-        "color-icon-primary",
-        "color-on-warning",
-        "color-text-gray",
-        "color-text-primary"
+        "color-on-light"
       ],
       "status": "open"
     },
     {
-      "id": "vertical.text|label-3|font-size",
-      "combo": "vertical.text",
-      "part": "label-3",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "id": "vertical.none|root|gap",
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "radius-inner",
+        "spacing-1"
       ],
       "status": "open"
     },
     {
-      "id": "vertical.text|label-3|line-height",
-      "combo": "vertical.text",
-      "part": "label-3",
-      "channel": "line-height",
-      "ref": "{imported.slider.label-3.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "21px",
+      "id": "vertical.none|root|gap",
+      "combo": "vertical.none",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "4px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "radius-inner",
+        "spacing-1"
+      ],
       "status": "open"
     },
     {
@@ -2045,297 +441,17 @@
       "status": "open"
     },
     {
-      "id": "vertical.none|label|color",
+      "id": "vertical.none|root|font-size",
       "combo": "vertical.none",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.slider.label.color}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|label|font-size",
-      "combo": "vertical.none",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
+      "ref": "{font-size-xs}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "10px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|label|font-weight",
-      "combo": "vertical.none",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.slider.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|label|line-height",
-      "combo": "vertical.none",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-track|background-color",
-      "combo": "vertical.none",
-      "part": "slider-track",
-      "channel": "background-color",
-      "ref": "{imported.slider.slider-track.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(204, 211, 219, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-border-emphasized",
-        "color-skeleton",
-        "color-track"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-track|border-bottom-left-radius",
-      "combo": "vertical.none",
-      "part": "slider-track",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-track|border-bottom-right-radius",
-      "combo": "vertical.none",
-      "part": "slider-track",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-track|border-top-left-radius",
-      "combo": "vertical.none",
-      "part": "slider-track",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-track|border-top-right-radius",
-      "combo": "vertical.none",
-      "part": "slider-track",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|part-1-0-1|background-color",
-      "combo": "vertical.none",
-      "part": "part-1-0-1",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|part-1-0-1|border-bottom-left-radius",
-      "combo": "vertical.none",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|part-1-0-1|border-bottom-right-radius",
-      "combo": "vertical.none",
-      "part": "part-1-0-1",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|part-1-0-1|border-top-left-radius",
-      "combo": "vertical.none",
-      "part": "part-1-0-1",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|part-1-0-1|border-top-right-radius",
-      "combo": "vertical.none",
-      "part": "part-1-0-1",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-thumb-2|background-color",
-      "combo": "vertical.none",
-      "part": "slider-thumb-2",
-      "channel": "background-color",
-      "ref": "{imported.shared.color-0064e0}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-accent",
-        "color-border-blue",
-        "color-icon-accent",
-        "color-icon-blue",
-        "color-text-accent"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-thumb-2|border-bottom-left-radius",
-      "combo": "vertical.none",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-thumb-2|border-bottom-right-radius",
-      "combo": "vertical.none",
-      "part": "slider-thumb-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-thumb-2|border-top-left-radius",
-      "combo": "vertical.none",
-      "part": "slider-thumb-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "vertical.none|slider-thumb-2|border-top-right-radius",
-      "combo": "vertical.none",
-      "part": "slider-thumb-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
+        "spacing-4"
       ],
       "status": "open"
     }

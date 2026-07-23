@@ -77,6 +77,13 @@ const applyArg = arg('apply') ?? fail('need --apply "<item-id>[,<item-id>…]" �
 const toRef = arg('to');
 const toMapRaw = arg('to-map');
 const toMap: Record<string, string> | null = toMapRaw ? (JSON.parse(toMapRaw) as Record<string, string>) : null;
+// Finest-grain explicit ack (Phase B): per-ITEM targets — the per-variant
+// case where ONE observed value legitimately maps to DIFFERENT tokens per
+// axis value (Badge white label = color-on-accent(info) / color-on-error
+// (error) — Meta's own source binds per-variant). Items sharing a target
+// group together; the axis-partition rule then applies per target group.
+const toItemsRaw = arg('to-items');
+const toItems: Record<string, string> | null = toItemsRaw ? (JSON.parse(toItemsRaw) as Record<string, string>) : null;
 const configPath = path.resolve(arg('config') ?? path.join(HERE, 'configs', 'polaris.json'));
 
 const dirAbs = path.resolve(dir);
@@ -129,7 +136,10 @@ interface Group {
 }
 const groups = new Map<string, Group>();
 for (const item of items) {
-  const key = `${item.part}|${item.channel}|${item.observed}`;
+  // per-item targets split same-observed items into per-target groups (the
+  // axis-partition rule then scopes each to its variants).
+  const itemTarget = toItems?.[item.id] ?? '';
+  const key = `${item.part}|${item.channel}|${item.observed}|${itemTarget}`;
   const g = groups.get(key) ?? { part: item.part, channel: item.channel, observed: item.observed, items: [] };
   g.items.push(item);
   groups.set(key, g);
@@ -150,7 +160,13 @@ for (const g of groups.values()) {
   const allForChannel = queue.items.filter(
     (i) => i.part === g.part && i.channel === g.channel && !alreadyResolved.has(i.id),
   );
-  const unselected = allForChannel.filter((i) => !g.items.some((s) => s.id === i.id));
+  // The whole-channel rule compares against the FULL invocation selection —
+  // a multi-value channel arrives as several (part, channel, observed)
+  // groups in ONE apply (--to-map), and each group must see its siblings as
+  // selected (comparing per-group refused every fully-named multi-value
+  // apply; single-value channels never exercised this).
+  const selectedIds = new Set(ids);
+  const unselected = allForChannel.filter((i) => !selectedIds.has(i.id));
   if (unselected.length > 0) {
     fail(
       `items for ${g.part}.${g.channel} not all named: also open ${unselected.map((i) => i.id).join(', ')} — resolve the whole binding site together (partial acks would leave a self-contradicting binding)`,
@@ -165,14 +181,21 @@ for (const g of groups.values()) {
   // channels resolve in ONE whole-channel apply, each value to its own named
   // token; the all-named rule above still holds), then the single --to, then
   // the unique-candidate rule.
-  let to = toMap?.[g.observed] ?? toRef;
+  let to = toItems?.[g.items[0].id] ?? toMap?.[g.observed] ?? toRef;
   if (!to) {
     const cands = g.items[0].candidates;
     if (cands.length === 0) fail(`${g.part}.${g.channel}: no DTCG candidate equals "${g.observed}" — pass an explicit --to "{token.ref}" (guessing names is forbidden)`);
     if (cands.length > 1) fail(`${g.part}.${g.channel}: ${cands.length} DTCG candidates share the value "${g.observed}" (${cands.join(', ')}) — pass an explicit --to`);
     to = `{${cands[0]}}`;
   }
-  if (!/^\{[a-z0-9.-]+\}$/i.test(to)) fail(`--to must be a plain brace-wrapped token ref, got "${to}"`);
+  // Phase B: a resolution target may be a LITERAL CSS value (the v14
+  // literals channel) — a computed truth no token carries (Astryx Card's
+  // 15px padding). Token refs stay brace-wrapped; a literal must look like
+  // a plain dimension/number/color-hex (keywords like 'auto'/'normal' are
+  // NOT resolvable bindings — they stay open by name).
+  const isTokenRef = /^\{[a-z0-9.-]+\}$/i.test(to);
+  const isLiteral = !isTokenRef && /^-?[\d.]+(px|rem|em|%)?$|^#[0-9a-f]{3,8}$/i.test(to);
+  if (!isTokenRef && !isLiteral) fail(`--to must be a brace-wrapped token ref or a plain CSS literal value, got "${to}"`);
 
   let scope: Decision['scope'];
   if (confirmingCombos.length === 0) {
@@ -182,8 +205,15 @@ for (const g of groups.values()) {
     // channel is contradicted by definition — leaving them in place would
     // let the (wrong) overrides beat the (resolved) base in the cascade
     // (the Banner tone map was exactly this).
-    target.tokens ??= {};
-    target.tokens[g.channel] = to;
+    if (isTokenRef) {
+      target.tokens ??= {};
+      target.tokens[g.channel] = to;
+      if (target.literals) delete (target.literals as Record<string, unknown>)[g.channel];
+    } else {
+      target.literals ??= {};
+      (target.literals as Record<string, unknown>)[g.channel] = to;
+      if (target.tokens) delete (target.tokens as Record<string, unknown>)[g.channel];
+    }
     for (const field of ['tokensByProp', 'literalsByProp'] as const) {
       const raw = target[field] as Array<{ prop: string; map: Record<string, Record<string, unknown>> }> | { prop: string; map: Record<string, Record<string, unknown>> } | undefined;
       if (!raw) continue;
@@ -214,15 +244,27 @@ for (const g of groups.values()) {
     const values = [...new Set([...contradictingCombos].map((k) => axisValuesOf(k)[axis.prop]))].sort();
     // merge into tokensByProp WITHOUT violating the v14 refusal rule: reuse
     // the entry (same prop) that already maps this channel, else append one.
-    const entries = tokensByPropEntries(target).map((e) => structuredClone(e));
-    let entry = entries.find((e) => e.prop === axis.prop && Object.values(e.map).some((m) => g.channel in m));
-    if (!entry) entry = entries.find((e) => e.prop === axis.prop && entries.filter((x) => x.prop === axis.prop).length === 1);
-    if (!entry) {
-      entry = { prop: axis.prop, map: {} };
-      entries.push(entry);
+    if (isTokenRef) {
+      const entries = tokensByPropEntries(target).map((e) => structuredClone(e));
+      let entry = entries.find((e) => e.prop === axis.prop && Object.values(e.map).some((m) => g.channel in m));
+      if (!entry) entry = entries.find((e) => e.prop === axis.prop && entries.filter((x) => x.prop === axis.prop).length === 1);
+      if (!entry) {
+        entry = { prop: axis.prop, map: {} };
+        entries.push(entry);
+      }
+      for (const v of values) (entry.map[v] ??= {})[g.channel] = to;
+      target.tokensByProp = entries as never;
+    } else {
+      const rawL = target.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, unknown>> }> | undefined;
+      const entriesL = rawL ? structuredClone(rawL) : [];
+      let entryL = entriesL.find((e) => e.prop === axis.prop);
+      if (!entryL) {
+        entryL = { prop: axis.prop, map: {} };
+        entriesL.push(entryL);
+      }
+      for (const v of values) (entryL.map[v] ??= {})[g.channel] = to;
+      target.literalsByProp = entriesL as never;
     }
-    for (const v of values) (entry.map[v] ??= {})[g.channel] = to;
-    target.tokensByProp = entries as never;
     scope = `axis:${axis.prop}=${values.join('|')}` as Decision['scope'];
   }
 

@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.slider",
   "name": "Slider",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "status": "draft",
-  "description": "Astryx Slider \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "description": "Astryx Slider — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/slider/decisions.md); extension sidecar carries the named overflow.",
   "semantics": {
     "element": "div"
   },
@@ -13,6 +13,8 @@
       "name": "label",
       "description": "The slider label.",
       "type": "text",
+      "default": "Volume",
+      "required": true,
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -21,9 +23,7 @@
         "code": {
           "prop": "label"
         }
-      },
-      "required": true,
-      "default": "Volume"
+      }
     },
     {
       "name": "orientation",
@@ -114,38 +114,413 @@
         "direction": "column"
       },
       "tokens": {
-        "color": "{color-text-secondary}",
-        "gap": "{spacing-2}",
+        "color": "{color-on-light}",
+        "gap": "{spacing-1}",
         "width": "{spacing-12}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-xs}"
+        "font-family": "{font-family-body}"
       },
       "parts": {
         "label": {
           "element": "span",
           "content": {
             "prop": "label"
+          },
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "declared": {
+            "cursor": "pointer",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+          },
+          "tokens": {
+            "color": "{imported.slider.label.color}",
+            "column-gap": "{imported.shared.size-4}",
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.slider.label.font-weight}",
+            "line-height": "{imported.shared.size-20-0004}",
+            "row-gap": "{imported.shared.size-4}",
+            "row-rule-color": "{imported.slider.label.row-rule-color}"
           }
         },
-        "track": {
-          "element": "div",
-          "tokens": {
-            "background-color": "{color-track}",
-            "border-radius": "{radius-full}",
-            "height": "{spacing-1}"
+        "slider": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
           },
           "parts": {
-            "thumb": {
-              "element": "span",
+            "part-1-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "slider-track": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider-track — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "position": "absolute",
+                    "cursor": "pointer",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.slider.slider-track.background-color}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "orientation",
+                      "map": {
+                        "horizontal": {
+                          "bottom": "{imported.slider.slider-track.bottom.horizontal}",
+                          "top": "{imported.slider.slider-track.top.horizontal}"
+                        },
+                        "vertical": {
+                          "bottom": "{imported.slider.slider-track.bottom.vertical}",
+                          "top": "{imported.slider.slider-track.top.vertical}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-1-0-1": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "position": "absolute",
+                    "cursor": "pointer",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-0064e0}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "orientation",
+                      "map": {
+                        "horizontal": {
+                          "bottom": "{imported.slider.part-1-0-1.bottom.horizontal}",
+                          "top": "{imported.slider.part-1-0-1.top.horizontal}"
+                        },
+                        "vertical": {
+                          "bottom": "{imported.slider.part-1-0-1.bottom.vertical}",
+                          "top": "{imported.slider.part-1-0-1.top.vertical}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "slider-thumb-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "position": "absolute",
+                    "cursor": "grab",
+                    "transition-duration": "0.175s",
+                    "transition-property": "background-color, box-shadow",
+                    "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)",
+                    "user-select": "none"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "tooltip",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "background-color": "{imported.shared.color-0064e0}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "z-index": "{imported.shared.num-1}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "orientation",
+                      "map": {
+                        "horizontal": {
+                          "bottom": "{imported.slider.slider-thumb-2.bottom.horizontal}",
+                          "top": "{imported.slider.slider-thumb-2.top.horizontal}"
+                        },
+                        "vertical": {
+                          "bottom": "{imported.slider.slider-thumb-2.bottom.vertical}",
+                          "top": "{imported.slider.slider-thumb-2.top.vertical}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-1-0-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "contents",
+                    "cursor": "pointer",
+                    "user-select": "none"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "text",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "none",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "slider-thumb": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "position": "absolute",
+                        "cursor": "grab",
+                        "transition-duration": "0.175s",
+                        "transition-property": "background-color, box-shadow",
+                        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)",
+                        "user-select": "none"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "text",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "none",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "tokens": {
+                        "background-color": "{imported.shared.color-0064e0}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "z-index": "{imported.shared.num-1}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "bottom": "{imported.slider.slider-thumb.bottom.horizontal}",
+                              "left": "{imported.slider.slider-thumb.left.horizontal}",
+                              "right": "{imported.slider.slider-thumb.right.horizontal}",
+                              "top": "{imported.slider.slider-thumb.top.horizontal}"
+                            },
+                            "vertical": {
+                              "bottom": "{imported.slider.slider-thumb.bottom.vertical}",
+                              "left": "{imported.slider.slider-thumb.left.vertical}",
+                              "right": "{imported.slider.slider-thumb.right.vertical}",
+                              "top": "{imported.slider.slider-thumb.top.vertical}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "tokens": {
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  }
+                },
+                "tooltip": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+                    "user-select": "none"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "text",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "none",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "label-2": {
+                      "text": "40",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "cursor": "pointer",
+                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+                        "user-select": "none"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "text",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "none",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "tokens": {
+                        "color": "{imported.shared.color-ffffff}",
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.slider.label-2.font-weight}",
+                        "line-height": "{imported.shared.size-20-0004}",
+                        "max-width": "{imported.slider.label-2.max-width}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "padding-bottom": "{imported.shared.size-4}",
+                        "padding-left": "{imported.shared.size-8}",
+                        "padding-right": "{imported.shared.size-8}",
+                        "padding-top": "{imported.shared.size-4}",
+                        "row-rule-color": "{imported.shared.color-ffffff}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-0a1317}",
+                    "border-bottom-left-radius": "{imported.shared.size-12}",
+                    "border-bottom-right-radius": "{imported.shared.size-12}",
+                    "border-top-left-radius": "{imported.shared.size-12}",
+                    "border-top-right-radius": "{imported.shared.size-12}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "font-size": "{imported.shared.size-14}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-20-0004}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-ffffff}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "orientation",
+                      "map": {
+                        "horizontal": {
+                          "margin-bottom": "{imported.slider.tooltip.margin-bottom.horizontal}",
+                          "margin-left": "{imported.slider.tooltip.margin-left.horizontal}",
+                          "margin-right": "{imported.slider.tooltip.margin-right.horizontal}",
+                          "margin-top": "{imported.slider.tooltip.margin-top.horizontal}"
+                        },
+                        "vertical": {
+                          "margin-bottom": "{imported.slider.tooltip.margin-bottom.vertical}",
+                          "margin-left": "{imported.slider.tooltip.margin-left.vertical}",
+                          "margin-right": "{imported.slider.tooltip.margin-right.vertical}",
+                          "margin-top": "{imported.slider.tooltip.margin-top.vertical}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "cursor": "pointer",
+                "isolation": "isolate",
+                "position": "relative",
+                "touch-action": "none",
+                "user-select": "none"
+              },
               "tokens": {
-                "background-color": "{color-accent}",
-                "border-radius": "{radius-full}",
-                "width": "{spacing-4}",
-                "height": "{spacing-4}"
+                "bottom": "{imported.shared.size-0}",
+                "flex-grow": "{imported.shared.num-1}",
+                "left": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}"
+              }
+            },
+            "label-3": {
+              "text": "40",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+                "text-wrap-mode": "nowrap"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "valueDisplay",
+                  "equals": "tooltip",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "valueDisplay",
+                  "equals": "none",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "tokens": {
+                "color": "{imported.shared.color-0a1317}",
+                "flex-shrink": "{imported.slider.label-3.flex-shrink}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.slider.label-3.font-weight}",
+                "line-height": "{imported.slider.label-3.line-height}",
+                "row-rule-color": "{imported.shared.color-0a1317}"
               }
             }
+          },
+          "tokens": {
+            "column-gap": "{imported.shared.size-8}",
+            "row-gap": "{imported.shared.size-8}"
           }
         }
+      },
+      "literals": {
+        "font-size": "16px"
       }
     }
   },

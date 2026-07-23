@@ -14,28 +14,28 @@
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 52,
-    "mintedLeavesFolded": 52
+    "mintedLeavesUnfolded": 106,
+    "mintedLeavesFolded": 106
   },
   "bound": {
-    "cellsChecked": 260,
-    "confirmed": 164,
-    "contradictions": 96,
-    "untriaged": 96
+    "cellsChecked": 182,
+    "confirmed": 112,
+    "contradictions": 70,
+    "untriaged": 70
   },
   "minted": {
-    "leaves": 52,
-    "baseBindings": 4,
+    "leaves": 106,
+    "baseBindings": 10,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 0,
-      "perAxis": 4,
+      "uniform": 2,
+      "perAxis": 8,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 0,
+    "base": 2,
     "state": 0
   },
   "codeOnly": {
@@ -47,7 +47,7 @@
   "anatomyPromotion": {
     "partsCarried": 1,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -126,7 +126,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 96.85314685314685,
+    "computedPctEqual": 98.25174825174825,
     "rowsFullyEqual": 44,
     "rows": 52,
     "pixelPerfectExact": 0,

@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.button",
   "name": "Button",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "status": "draft",
-  "description": "Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/button/decisions.md); extension sidecar carries the named overflow. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "description": "Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "button"
   },
@@ -215,25 +215,6 @@
           }
         }
       ],
-      "declared": {
-        "border-bottom-style": "none",
-        "border-left-style": "none",
-        "border-right-style": "none",
-        "border-top-style": "none",
-        "position": "relative",
-        "text-wrap-mode": "nowrap",
-        "transition-duration": "0.175s",
-        "transition-property": "background-image, background-color, color, opacity, transform",
-        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
-      },
-      "declaredStates": {
-        "disabled": {
-          "cursor": "not-allowed"
-        },
-        "focus-visible": {
-          "outline-style": "solid"
-        }
-      },
       "states": {
         "focus-visible": {
           "outline-color": "{color-accent}",
@@ -252,11 +233,73 @@
       },
       "parts": {
         "part-0": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
           "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "contents",
+            "cursor": "pointer",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap"
+          },
+          "parts": {
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              },
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-align": "center",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-500}",
+                "line-height": "{imported.shared.size-20-0004}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "destructive": {
+                      "color": "{imported.button.label.color.destructive}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.destructive}"
+                    },
+                    "ghost": {
+                      "color": "{imported.button.label.color.ghost}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.ghost}"
+                    },
+                    "primary": {
+                      "color": "{imported.button.label.color.primary}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.primary}"
+                    },
+                    "secondary": {
+                      "color": "{imported.button.label.color.secondary}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
           "tokens": {
-            "font-size": "{font-size-base}",
-            "font-weight": "{font-weight-medium}",
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.shared.num-500}",
             "line-height": "{imported.shared.size-20-0004}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
@@ -283,76 +326,34 @@
                 }
               }
             }
-          ],
+          ]
+        },
+        "part-1": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
-            "display": "contents",
+            "display": "block",
+            "position": "absolute",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
             "cursor": "pointer",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
             "text-align": "center",
-            "text-wrap-mode": "nowrap"
+            "text-wrap-mode": "nowrap",
+            "user-select": "none"
           },
           "declaredStates": {
             "disabled": {
               "cursor": "not-allowed"
             }
           },
-          "parts": {
-            "label": {
-              "element": "span",
-              "tokens": {
-                "font-size": "{font-size-base}",
-                "font-weight": "{font-weight-medium}",
-                "line-height": "{imported.shared.size-20-0004}",
-                "min-width": "{imported.shared.size-0}"
-              },
-              "tokensByProp": [
-                {
-                  "prop": "variant",
-                  "map": {
-                    "destructive": {
-                      "color": "{imported.button.label.color.destructive}",
-                      "row-rule-color": "{imported.button.label.row-rule-color.destructive}"
-                    },
-                    "ghost": {
-                      "color": "{imported.button.label.color.ghost}",
-                      "row-rule-color": "{imported.button.label.row-rule-color.ghost}"
-                    },
-                    "primary": {
-                      "color": "{imported.button.label.color.primary}",
-                      "row-rule-color": "{imported.button.label.row-rule-color.primary}"
-                    },
-                    "secondary": {
-                      "color": "{imported.button.label.color.secondary}",
-                      "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
-                    }
-                  }
-                }
-              ],
-              "declared": {
-                "display": "block",
-                "cursor": "pointer",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden",
-                "text-align": "center",
-                "text-overflow": "ellipsis",
-                "text-wrap-mode": "nowrap"
-              },
-              "declaredStates": {
-                "disabled": {
-                  "cursor": "not-allowed"
-                }
-              },
-              "content": {
-                "prop": "label"
-              }
-            }
-          }
-        },
-        "part-1": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
-          "element": "span",
           "tokens": {
-            "font-size": "{font-size-base}",
-            "font-weight": "{font-weight-medium}",
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.shared.num-500}",
             "left": "{imported.shared.size-0}",
             "line-height": "{imported.shared.size-20-0004}",
             "margin-bottom": "{imported.shared.size-neg-1}",
@@ -400,27 +401,26 @@
                 }
               }
             }
-          ],
-          "declared": {
-            "display": "block",
-            "position": "absolute",
-            "border-bottom-style": "none",
-            "border-left-style": "none",
-            "border-right-style": "none",
-            "border-top-style": "none",
-            "cursor": "pointer",
-            "overflow-x": "hidden",
-            "overflow-y": "hidden",
-            "pointer-events": "none",
-            "text-align": "center",
-            "text-wrap-mode": "nowrap",
-            "user-select": "none"
-          },
-          "declaredStates": {
-            "disabled": {
-              "cursor": "not-allowed"
-            }
-          }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "position": "relative",
+        "text-wrap-mode": "nowrap",
+        "transition-duration": "0.175s",
+        "transition-property": "background-image, background-color, color, opacity, transform",
+        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        },
+        "focus-visible": {
+          "outline-style": "solid"
         }
       }
     }

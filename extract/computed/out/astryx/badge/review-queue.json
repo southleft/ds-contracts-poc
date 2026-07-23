@@ -22,6 +22,38 @@
       "status": "open"
     },
     {
+      "id": "neutral|root|padding-block",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "neutral|root|padding-block",
+      "combo": "neutral",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
       "id": "neutral|root|font-family",
       "combo": "neutral",
       "part": "root",
@@ -35,16 +67,20 @@
       "status": "open"
     },
     {
-      "id": "neutral|root|line-height",
+      "id": "neutral|root|font-size",
       "combo": "neutral",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -87,6 +123,38 @@
       "status": "open"
     },
     {
+      "id": "info|root|padding-block",
+      "combo": "info",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info|root|padding-block",
+      "combo": "info",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
       "id": "info|root|font-family",
       "combo": "info",
       "part": "root",
@@ -100,16 +168,20 @@
       "status": "open"
     },
     {
-      "id": "info|root|line-height",
+      "id": "info|root|font-size",
       "combo": "info",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -150,6 +222,38 @@
       "status": "open"
     },
     {
+      "id": "success|root|padding-block",
+      "combo": "success",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success|root|padding-block",
+      "combo": "success",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
       "id": "success|root|font-family",
       "combo": "success",
       "part": "root",
@@ -163,16 +267,20 @@
       "status": "open"
     },
     {
-      "id": "success|root|line-height",
+      "id": "success|root|font-size",
       "combo": "success",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -210,6 +318,38 @@
       "status": "open"
     },
     {
+      "id": "warning|root|padding-block",
+      "combo": "warning",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning|root|padding-block",
+      "combo": "warning",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
       "id": "warning|root|font-family",
       "combo": "warning",
       "part": "root",
@@ -223,16 +363,20 @@
       "status": "open"
     },
     {
-      "id": "warning|root|line-height",
+      "id": "warning|root|font-size",
       "combo": "warning",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     },
     {
@@ -272,6 +416,38 @@
       "status": "open"
     },
     {
+      "id": "error|root|padding-block",
+      "combo": "error",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "error|root|padding-block",
+      "combo": "error",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
       "id": "error|root|font-family",
       "combo": "error",
       "part": "root",
@@ -285,16 +461,52 @@
       "status": "open"
     },
     {
-      "id": "error|root|line-height",
+      "id": "error|root|font-size",
       "combo": "error",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "blue|root|padding-block",
+      "combo": "blue",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "blue|root|padding-block",
+      "combo": "blue",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -311,16 +523,52 @@
       "status": "open"
     },
     {
-      "id": "blue|root|line-height",
+      "id": "blue|root|font-size",
       "combo": "blue",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "cyan|root|padding-block",
+      "combo": "cyan",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "cyan|root|padding-block",
+      "combo": "cyan",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -337,16 +585,52 @@
       "status": "open"
     },
     {
-      "id": "cyan|root|line-height",
+      "id": "cyan|root|font-size",
       "combo": "cyan",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "green|root|padding-block",
+      "combo": "green",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "green|root|padding-block",
+      "combo": "green",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -363,16 +647,52 @@
       "status": "open"
     },
     {
-      "id": "green|root|line-height",
+      "id": "green|root|font-size",
       "combo": "green",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "orange|root|padding-block",
+      "combo": "orange",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "orange|root|padding-block",
+      "combo": "orange",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -389,16 +709,52 @@
       "status": "open"
     },
     {
-      "id": "orange|root|line-height",
+      "id": "orange|root|font-size",
       "combo": "orange",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "pink|root|padding-block",
+      "combo": "pink",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "pink|root|padding-block",
+      "combo": "pink",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -415,16 +771,52 @@
       "status": "open"
     },
     {
-      "id": "pink|root|line-height",
+      "id": "pink|root|font-size",
       "combo": "pink",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "purple|root|padding-block",
+      "combo": "purple",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "purple|root|padding-block",
+      "combo": "purple",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -441,16 +833,52 @@
       "status": "open"
     },
     {
-      "id": "purple|root|line-height",
+      "id": "purple|root|font-size",
       "combo": "purple",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "red|root|padding-block",
+      "combo": "red",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "red|root|padding-block",
+      "combo": "red",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -467,16 +895,52 @@
       "status": "open"
     },
     {
-      "id": "red|root|line-height",
+      "id": "red|root|font-size",
       "combo": "red",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "teal|root|padding-block",
+      "combo": "teal",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "teal|root|padding-block",
+      "combo": "teal",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -493,16 +957,52 @@
       "status": "open"
     },
     {
-      "id": "teal|root|line-height",
+      "id": "teal|root|font-size",
       "combo": "teal",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "yellow|root|padding-block",
+      "combo": "yellow",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-top",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "yellow|root|padding-block",
+      "combo": "yellow",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-0-5}",
+      "computedProp": "padding-bottom",
+      "expected": "2px",
+      "observed": "0px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "radius-none",
+        "spacing-0"
+      ],
       "status": "open"
     },
     {
@@ -519,16 +1019,20 @@
       "status": "open"
     },
     {
-      "id": "yellow|root|line-height",
+      "id": "yellow|root|font-size",
       "combo": "yellow",
       "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.badge.root.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "channel": "font-size",
+      "ref": "{font-size-xs}",
+      "computedProp": "font-size",
+      "expected": "10px",
+      "observed": "12px",
       "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
+      "candidates": [
+        "font-size-sm",
+        "radius-container",
+        "spacing-3"
+      ],
       "status": "open"
     }
   ]

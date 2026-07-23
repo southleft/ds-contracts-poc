@@ -242,28 +242,28 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 36,
-    "mintedLeavesFolded": 37
+    "mintedLeavesUnfolded": 47,
+    "mintedLeavesFolded": 48
   },
   "bound": {
-    "cellsChecked": 360,
-    "confirmed": 76,
-    "contradictions": 150,
-    "untriaged": 150
+    "cellsChecked": 30,
+    "confirmed": 0,
+    "contradictions": 30,
+    "untriaged": 30
   },
   "minted": {
-    "leaves": 37,
-    "baseBindings": 44,
+    "leaves": 48,
+    "baseBindings": 99,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 24,
+      "uniform": 79,
       "perAxis": 14,
       "perPair": 0,
       "refused": 6
     }
   },
   "declared": {
-    "base": 0,
+    "base": 35,
     "state": 0
   },
   "codeOnly": {
@@ -275,7 +275,7 @@
   "anatomyPromotion": {
     "partsCarried": 12,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 2
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -362,7 +362,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 52.85326086956522,
+    "computedPctEqual": 87.90760869565217,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 0,

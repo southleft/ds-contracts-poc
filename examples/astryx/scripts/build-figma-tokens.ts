@@ -33,6 +33,24 @@ const EX = path.join(HERE, '..');
 const read = (rel: string) => JSON.parse(readFileSync(path.join(EX, rel), 'utf8'));
 
 const base = read('tokens/astryx.dtcg.json') as Record<string, { $type?: string; $value: unknown }>;
+// Phase A-2: the MINTED layer (imported.* — computed-floor leaves the DTCG
+// wrap cannot name) joins the upsert under the emitters' slash spelling
+// (imported/button/label/color/primary). Values are browser-computed px/hex
+// literals; same converters apply.
+let mintedFlat: Record<string, { $type?: string; $value: unknown }> = {};
+try {
+  const mintedTree = read('tokens/astryx-minted.dtcg.json') as Record<string, unknown>;
+  const walk = (node: Record<string, unknown>, prefix: string[]) => {
+    for (const [k, v] of Object.entries(node)) {
+      if (v && typeof v === 'object' && '$value' in (v as object)) {
+        mintedFlat[[...prefix, k].join('/')] = v as { $type?: string; $value: unknown };
+      } else if (v && typeof v === 'object') {
+        walk(v as Record<string, unknown>, [...prefix, k]);
+      }
+    }
+  };
+  walk(mintedTree, []);
+} catch { /* no minted layer yet */ }
 const light = read('tokens/modes/astryx.light.dtcg.json') as Record<string, { $value: unknown }>;
 const dark = read('tokens/modes/astryx.dark.dtcg.json') as Record<string, { $value: unknown }>;
 
@@ -79,6 +97,15 @@ function float(v: string): number | null {
 
 const out: Out[] = [];
 const skips: string[] = [];
+for (const name of Object.keys(mintedFlat).sort()) {
+  const entry = mintedFlat[name];
+  const v = String(entry.$value);
+  const c = color(v);
+  if (c) { out.push({ name, type: 'COLOR', light: c, dark: c }); continue; }
+  const f = float(v);
+  if (f !== null) { out.push({ name, type: 'FLOAT', light: f, dark: f }); continue; }
+  out.push({ name, type: 'STRING', light: v, dark: v });
+}
 for (const name of Object.keys(base).sort()) {
   const entry = base[name];
   if (!entry || typeof entry !== 'object' || !('$value' in entry)) continue;

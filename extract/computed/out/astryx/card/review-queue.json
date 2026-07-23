@@ -6,6 +6,21 @@
   "browser": "149.0.7827.55",
   "items": [
     {
+      "id": "default|root|color",
+      "combo": "default",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-on-light"
+      ],
+      "status": "open"
+    },
+    {
       "id": "default|root|padding-block",
       "combo": "default",
       "part": "root",
@@ -97,62 +112,17 @@
       "status": "open"
     },
     {
-      "id": "default|root|border-bottom-width",
+      "id": "default|root|font-size",
       "combo": "default",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.default}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "1px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "border-width"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "default|root|border-left-width",
-      "combo": "default",
-      "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.default}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "1px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "border-width"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "default|root|border-right-width",
-      "combo": "default",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.default}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "1px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "border-width"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "default|root|border-top-width",
-      "combo": "default",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.default}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "1px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "border-width"
+        "spacing-4"
       ],
       "status": "open"
     },
@@ -167,6 +137,21 @@
       "observed": "rgba(0, 0, 0, 0)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "transparent|root|color",
+      "combo": "transparent",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-on-light"
+      ],
       "status": "open"
     },
     {
@@ -209,66 +194,32 @@
       "status": "open"
     },
     {
-      "id": "transparent|root|border-bottom-width",
+      "id": "transparent|root|font-size",
       "combo": "transparent",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.transparent}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "transparent|root|border-left-width",
-      "combo": "transparent",
+      "id": "muted|root|color",
+      "combo": "muted",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.transparent}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "transparent|root|border-right-width",
-      "combo": "transparent",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.transparent}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "transparent|root|border-top-width",
-      "combo": "transparent",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.transparent}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -312,66 +263,32 @@
       "status": "open"
     },
     {
-      "id": "muted|root|border-bottom-width",
+      "id": "muted|root|font-size",
       "combo": "muted",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.muted}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "muted|root|border-left-width",
-      "combo": "muted",
+      "id": "blue|root|color",
+      "combo": "blue",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.muted}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "muted|root|border-right-width",
-      "combo": "muted",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.muted}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "muted|root|border-top-width",
-      "combo": "muted",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.muted}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -415,66 +332,32 @@
       "status": "open"
     },
     {
-      "id": "blue|root|border-bottom-width",
+      "id": "blue|root|font-size",
       "combo": "blue",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.blue}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "blue|root|border-left-width",
-      "combo": "blue",
+      "id": "cyan|root|color",
+      "combo": "cyan",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.blue}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "blue|root|border-right-width",
-      "combo": "blue",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.blue}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "blue|root|border-top-width",
-      "combo": "blue",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.blue}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -518,66 +401,32 @@
       "status": "open"
     },
     {
-      "id": "cyan|root|border-bottom-width",
+      "id": "cyan|root|font-size",
       "combo": "cyan",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.cyan}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "cyan|root|border-left-width",
-      "combo": "cyan",
+      "id": "gray|root|color",
+      "combo": "gray",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.cyan}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "cyan|root|border-right-width",
-      "combo": "cyan",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.cyan}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "cyan|root|border-top-width",
-      "combo": "cyan",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.cyan}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -621,66 +470,32 @@
       "status": "open"
     },
     {
-      "id": "gray|root|border-bottom-width",
+      "id": "gray|root|font-size",
       "combo": "gray",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.gray}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "gray|root|border-left-width",
-      "combo": "gray",
+      "id": "green|root|color",
+      "combo": "green",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.gray}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "gray|root|border-right-width",
-      "combo": "gray",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.gray}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "gray|root|border-top-width",
-      "combo": "gray",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.gray}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -724,66 +539,32 @@
       "status": "open"
     },
     {
-      "id": "green|root|border-bottom-width",
+      "id": "green|root|font-size",
       "combo": "green",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.green}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "green|root|border-left-width",
-      "combo": "green",
+      "id": "orange|root|color",
+      "combo": "orange",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.green}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "green|root|border-right-width",
-      "combo": "green",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.green}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "green|root|border-top-width",
-      "combo": "green",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.green}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -827,66 +608,32 @@
       "status": "open"
     },
     {
-      "id": "orange|root|border-bottom-width",
+      "id": "orange|root|font-size",
       "combo": "orange",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.orange}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "orange|root|border-left-width",
-      "combo": "orange",
+      "id": "pink|root|color",
+      "combo": "pink",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.orange}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "orange|root|border-right-width",
-      "combo": "orange",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.orange}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "orange|root|border-top-width",
-      "combo": "orange",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.orange}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -930,66 +677,32 @@
       "status": "open"
     },
     {
-      "id": "pink|root|border-bottom-width",
+      "id": "pink|root|font-size",
       "combo": "pink",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.pink}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "pink|root|border-left-width",
-      "combo": "pink",
+      "id": "purple|root|color",
+      "combo": "purple",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.pink}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "pink|root|border-right-width",
-      "combo": "pink",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.pink}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "pink|root|border-top-width",
-      "combo": "pink",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.pink}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -1033,66 +746,32 @@
       "status": "open"
     },
     {
-      "id": "purple|root|border-bottom-width",
+      "id": "purple|root|font-size",
       "combo": "purple",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.purple}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "purple|root|border-left-width",
-      "combo": "purple",
+      "id": "red|root|color",
+      "combo": "red",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.purple}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "purple|root|border-right-width",
-      "combo": "purple",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.purple}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "purple|root|border-top-width",
-      "combo": "purple",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.purple}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -1136,66 +815,32 @@
       "status": "open"
     },
     {
-      "id": "red|root|border-bottom-width",
+      "id": "red|root|font-size",
       "combo": "red",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.red}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "red|root|border-left-width",
-      "combo": "red",
+      "id": "teal|root|color",
+      "combo": "teal",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.red}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "red|root|border-right-width",
-      "combo": "red",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.red}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "red|root|border-top-width",
-      "combo": "red",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.red}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -1239,66 +884,32 @@
       "status": "open"
     },
     {
-      "id": "teal|root|border-bottom-width",
+      "id": "teal|root|font-size",
       "combo": "teal",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.teal}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "teal|root|border-left-width",
-      "combo": "teal",
+      "id": "yellow|root|color",
+      "combo": "yellow",
       "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.teal}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "teal|root|border-right-width",
-      "combo": "teal",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.teal}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "teal|root|border-top-width",
-      "combo": "teal",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.teal}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -1342,66 +953,17 @@
       "status": "open"
     },
     {
-      "id": "yellow|root|border-bottom-width",
+      "id": "yellow|root|font-size",
       "combo": "yellow",
       "part": "root",
-      "channel": "border-bottom-width",
-      "ref": "{imported.card.root.border-bottom-width.yellow}",
-      "computedProp": "border-bottom-width",
-      "expected": "3px",
-      "observed": "0px",
+      "channel": "font-size",
+      "ref": "{font-size-base}",
+      "computedProp": "font-size",
+      "expected": "14px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "yellow|root|border-left-width",
-      "combo": "yellow",
-      "part": "root",
-      "channel": "border-left-width",
-      "ref": "{imported.card.root.border-left-width.yellow}",
-      "computedProp": "border-left-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "yellow|root|border-right-width",
-      "combo": "yellow",
-      "part": "root",
-      "channel": "border-right-width",
-      "ref": "{imported.card.root.border-right-width.yellow}",
-      "computedProp": "border-right-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "yellow|root|border-top-width",
-      "combo": "yellow",
-      "part": "root",
-      "channel": "border-top-width",
-      "ref": "{imported.card.root.border-top-width.yellow}",
-      "computedProp": "border-top-width",
-      "expected": "3px",
-      "observed": "0px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-none",
-        "spacing-0"
+        "spacing-4"
       ],
       "status": "open"
     }

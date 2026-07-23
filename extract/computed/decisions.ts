@@ -50,9 +50,20 @@ export function applyDecisions(
       skipped.push(`${d.part}.${d.channel} [${d.scope}] → ${d.to}: part not in the promoted anatomy — NAMED skip`);
       continue;
     }
+    // Phase B: a decision target may be a LITERAL CSS value (v14 literals
+    // channel — resolve.ts routing, mirrored here so re-application is
+    // faithful). Token refs stay brace-wrapped.
+    const isTokenRef = /^\{[a-z0-9.-]+\}$/i.test(d.to);
     if (d.scope === 'base') {
-      target.tokens ??= {};
-      target.tokens[d.channel] = d.to;
+      if (isTokenRef) {
+        target.tokens ??= {};
+        target.tokens[d.channel] = d.to;
+        if (target.literals) delete (target.literals as Record<string, unknown>)[d.channel];
+      } else {
+        target.literals ??= {};
+        (target.literals as Record<string, unknown>)[d.channel] = d.to;
+        if (target.tokens) delete (target.tokens as Record<string, unknown>)[d.channel];
+      }
       for (const field of ['tokensByProp', 'literalsByProp'] as const) {
         const raw = target[field] as
           | Array<{ prop: string; map: Record<string, Record<string, unknown>> }>
@@ -80,15 +91,27 @@ export function applyDecisions(
     }
     const [, prop, valueList] = m;
     const values = valueList.split('|');
-    const entries = tokensByPropEntries(target).map((e) => structuredClone(e));
-    let entry = entries.find((e) => e.prop === prop && Object.values(e.map).some((mm) => d.channel in mm));
-    if (!entry) entry = entries.find((e) => e.prop === prop && entries.filter((x) => x.prop === prop).length === 1);
-    if (!entry) {
-      entry = { prop, map: {} };
-      entries.push(entry);
+    if (isTokenRef) {
+      const entries = tokensByPropEntries(target).map((e) => structuredClone(e));
+      let entry = entries.find((e) => e.prop === prop && Object.values(e.map).some((mm) => d.channel in mm));
+      if (!entry) entry = entries.find((e) => e.prop === prop && entries.filter((x) => x.prop === prop).length === 1);
+      if (!entry) {
+        entry = { prop, map: {} };
+        entries.push(entry);
+      }
+      for (const v of values) (entry.map[v] ??= {})[d.channel] = d.to;
+      target.tokensByProp = entries as never;
+    } else {
+      const rawL = target.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, unknown>> }> | undefined;
+      const entriesL = rawL ? structuredClone(rawL) : [];
+      let entryL = entriesL.find((e) => e.prop === prop);
+      if (!entryL) {
+        entryL = { prop, map: {} };
+        entriesL.push(entryL);
+      }
+      for (const v of values) (entryL.map[v] ??= {})[d.channel] = d.to;
+      target.literalsByProp = entriesL as never;
     }
-    for (const v of values) (entry.map[v] ??= {})[d.channel] = d.to;
-    target.tokensByProp = entries as never;
     applied.push(`${d.part}.${d.channel} [${d.scope}] → ${d.to}`);
   }
   return { applied, skipped };

@@ -27,7 +27,18 @@ const EX = path.join(HERE, '..');
 const REPO = path.join(EX, '..', '..');
 const OUT = path.join(REPO, 'extract', 'computed', 'out', 'astryx');
 
-const COMPONENTS = ['button', 'badge', 'card', 'switch', 'slider'];
+// Switch is EXCLUDED by name this round: the union carried BOTH labelPosition
+// orders as unconditioned sibling branches (order-sensitive signature
+// matching — the anatomy join's named limitation); promoting it would double
+// the rendered content per variant. Its v0.2.0 curated contract ships until
+// the union-order round. Banner remains excluded at capture (unsettled
+// transition, determinism refusal).
+const COMPONENTS = ['button', 'badge', 'card', 'slider'];
+// The minted tree unions over ALL captured components — imported.shared.*
+// leaves can be minted during ANY component's fusion (Switch minted shared
+// sizes other contracts reference); contract promotion and mint sourcing
+// are independent decisions.
+const MINT_SOURCES = ['button', 'badge', 'card', 'slider', 'switch'];
 
 const mintedMerged: Record<string, unknown> = {};
 function mergeInto(target: Record<string, unknown>, src: Record<string, unknown>, prefix = '') {
@@ -61,8 +72,13 @@ for (const name of COMPONENTS) {
 
   writeFileSync(path.join(EX, 'contracts', `${name}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
   writeFileSync(path.join(EX, 'contracts', `${name}.extension.json`), JSON.stringify(extension, null, 2) + '\n');
-  mergeInto(mintedMerged, (extension.mintedTokens ?? {}) as Record<string, unknown>);
   promoted.push(`${name} (${path.basename(src)})`);
+}
+for (const name of MINT_SOURCES) {
+  const extPath = path.join(OUT, name, 'enriched.extension.json');
+  if (!existsSync(extPath)) continue;
+  const extension = JSON.parse(readFileSync(extPath, 'utf8'));
+  mergeInto(mintedMerged, (extension.mintedTokens ?? {}) as Record<string, unknown>);
 }
 
 writeFileSync(path.join(EX, 'tokens', 'astryx-minted.dtcg.json'), JSON.stringify(mintedMerged, null, 2) + '\n');

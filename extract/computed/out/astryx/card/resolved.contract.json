@@ -79,13 +79,12 @@
       },
       "tokens": {
         "background-color": "{color-background-card}",
-        "color": "{color-text-primary}",
+        "color": "{color-on-light}",
         "padding-block": "{spacing-4}",
         "padding-inline": "{spacing-4}",
         "border-radius": "{radius-container}",
         "gap": "{spacing-3}",
         "font-family": "{font-family-body}",
-        "font-size": "{font-size-base}",
         "font-weight": "{imported.card.root.font-weight}",
         "line-height": "{imported.card.root.line-height}"
       },
@@ -274,6 +273,20 @@
         "display": "block",
         "overflow-x": "clip",
         "overflow-y": "clip"
+      },
+      "literalsByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "default": {
+              "padding-block": "15px",
+              "padding-inline": "15px"
+            }
+          }
+        }
+      ],
+      "literals": {
+        "font-size": "16px"
       }
     }
   },

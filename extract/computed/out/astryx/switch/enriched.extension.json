@@ -29,9 +29,17 @@
           }
         },
         "label-2": {
-          "row-rule-color": {
-            "$value": "#4e606f",
-            "$type": "color"
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
           }
         },
         "part-0-0-0": {
@@ -42,6 +50,18 @@
           "z-index": {
             "$value": "1",
             "$type": "number"
+          }
+        },
+        "switch": {
+          "background-color": {
+            "$value": "#0a131733",
+            "$type": "color"
+          }
+        },
+        "switch-thumb": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
           }
         },
         "part-0-1": {
@@ -66,20 +86,48 @@
             "$type": "number"
           }
         },
-        "label": {
-          "row-rule-color": {
-            "$value": "#4e606f",
+        "switch-2": {
+          "background-color": {
+            "$value": "#0a131733",
             "$type": "color"
+          }
+        },
+        "switch-thumb-2": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          }
+        },
+        "label": {
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
           }
         }
       },
       "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-4e606f": {
+          "$value": "#4e606f",
+          "$type": "color"
+        },
         "size-4": {
           "$value": "4px",
           "$type": "dimension"
         },
-        "size-0": {
-          "$value": "0px",
+        "size-9999": {
+          "$value": "9999px",
           "$type": "dimension"
         }
       }
@@ -216,7 +264,53 @@
     "fold-carries-state-delta: [disabled] label.text-emphasis-color rides its source fact"
   ],
   "layout": {
-    "enriched": [],
+    "enriched": [
+      {
+        "part": "part-0",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "switch",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "switch-thumb",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "switch-thumb",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "switch-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "switch-thumb-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "switch-thumb-2",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      }
+    ],
     "contradictions": [],
     "receipts": [
       "layout-not-uniform: part-0-0.flex-direction varies across combos — stays code-only",
@@ -230,7 +324,148 @@
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
-    "base": [],
+    "base": [
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-0-0-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-0-0-0",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-0",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-0",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-0",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "switch",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "switch",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "switch",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "switch-thumb",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "switch-thumb",
+        "channel": "transition-property",
+        "value": "transform, width, height"
+      },
+      {
+        "part": "switch-thumb",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "switch-2",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "switch-2",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "switch-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "switch-thumb-2",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "switch-thumb-2",
+        "channel": "transition-property",
+        "value": "transform, width, height"
+      },
+      {
+        "part": "switch-thumb-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      }
+    ],
     "state": []
   },
   "codeOnlyChannels": [
@@ -668,6 +903,16 @@
     {
       "combo": "start.no-isDisabled",
       "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "root",
       "channel": "gap",
       "ref": "{spacing-2}",
       "computedProp": "column-gap",
@@ -697,142 +942,22 @@
     },
     {
       "combo": "start.no-isDisabled",
-      "part": "label-2",
-      "channel": "color",
-      "ref": "{imported.shared.color-4e606f}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "label-2",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.switch.label-2.font-size}",
+      "ref": "{font-size-sm}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "12px",
+      "observed": "16px",
       "verdict": "contradiction"
     },
     {
-      "combo": "start.no-isDisabled",
-      "part": "label-2",
-      "channel": "font-weight",
-      "ref": "{imported.switch.label-2.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "label-2",
-      "channel": "line-height",
-      "ref": "{imported.switch.label-2.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch-2.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(10, 19, 23, 0.2)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch-thumb-2.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "verdict": "contradiction"
     },
     {
@@ -867,142 +992,12 @@
     },
     {
       "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(10, 19, 23, 0.2)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch-thumb.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.shared.color-4e606f}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.switch.label.font-size}",
+      "ref": "{font-size-sm}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.switch.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "end.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.switch.label.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
+      "expected": "12px",
+      "observed": "16px",
       "verdict": "contradiction"
     }
   ],
@@ -1059,50 +1054,52 @@
       },
       {
         "part": "part-0",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "part-0-0",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "label-2",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "part-0-0-0",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "switch",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "switch-thumb",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "part-0-1",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "part-0-1-0",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "switch-2",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "switch-thumb-2",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "label",
         "join": "matched"
       }
     ],
-    "staticOnly": []
+    "staticOnly": [
+      "track"
+    ]
   },
   "anatomyPromotion": {
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
@@ -1122,6 +1119,7 @@
     ],
     "svgAssets": [],
     "receipts": [
+      "root-display-carried: block via declared (overrides reviewed layout.display \"inline-flex\" — computed truth wins display, receipted)",
       "presence-carried: label-2 (1/2 combos) →  hidden-when labelPosition=end, isDisabled",
       "full-width-carried: part-0-0-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
       "presence-carried: part-0-0-0 (1/2 combos) →  hidden-when labelPosition=start, isDisabled",
@@ -1135,12 +1133,47 @@
       "presence-carried: switch-thumb-2 (1/2 combos) →  hidden-when labelPosition=end, isDisabled",
       "presence-carried: label (1/2 combos) →  hidden-when labelPosition=start, isDisabled"
     ],
-    "refusals": []
+    "refusals": [
+      "static-part-unrendered: reviewed static part \"track\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+    ]
   },
   "enrichmentNotes": [
-    "tokensByProp conflict avoided: part-0-0.flex-shrink on prop labelPosition already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0-0.flex-shrink on prop labelPosition already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0-1.flex-shrink on prop labelPosition already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0-1.flex-shrink on prop labelPosition already reviewed — computed value not re-added"
+    "layout enriched: part-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: switch.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: switch-thumb.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: switch-thumb.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: switch-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: switch-thumb-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: switch-thumb-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb.transition-property = transform, width, height (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-2.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb-2.transition-property = transform, width, height (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)"
   ]
 }

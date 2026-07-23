@@ -228,28 +228,28 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 175,
-    "mintedLeavesFolded": 35
+    "mintedLeavesUnfolded": 190,
+    "mintedLeavesFolded": 50
   },
   "bound": {
-    "cellsChecked": 405,
-    "confirmed": 225,
-    "contradictions": 180,
-    "untriaged": 180
+    "cellsChecked": 189,
+    "confirmed": 82,
+    "contradictions": 107,
+    "untriaged": 107
   },
   "minted": {
-    "leaves": 35,
-    "baseBindings": 17,
+    "leaves": 50,
+    "baseBindings": 35,
     "stateBindings": 6,
     "byShape": {
-      "uniform": 16,
-      "perAxis": 7,
+      "uniform": 31,
+      "perAxis": 10,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 0,
+    "base": 29,
     "state": 5
   },
   "codeOnly": {
@@ -283,9 +283,9 @@
   "pixel": {
     "pairs": 96,
     "exact": {
-      "mean": 0.0994873046875,
+      "mean": 0.10023328993055557,
       "max": 2.4055989583333335,
-      "perfect": 87
+      "perfect": 86
     },
     "aa": {
       "mean": 0,
@@ -329,14 +329,14 @@
         "pctAA": 0
       },
       {
-        "key": "primary.lg.isDisabled__hover",
-        "pctExact": 0.013020833333333334,
+        "key": "ghost.md.no-isDisabled__focus-visible",
+        "pctExact": 0.07161458333333333,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 94.765625,
+    "computedPctEqual": 98.09895833333333,
     "rowsFullyEqual": 0,
     "rows": 96,
     "pixelPerfectExact": 0,

@@ -4998,7 +4998,7 @@ const cases: Case[] = [
       const genArgs = (out: string) => [
         'scripts/generate-components.ts',
         '--contracts', 'examples/astryx/contracts',
-        '--tokens', 'examples/astryx/tokens/astryx.dtcg.json',
+        '--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json',
         '--out', out,
         '--stories',
       ];

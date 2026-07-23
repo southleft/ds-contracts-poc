@@ -97,7 +97,7 @@ headless Chromium with `tokens.css` inlined:
 
 ```bash
 ds-contracts figma examples/astryx/contracts --out examples/astryx/figma \
-  --tokens examples/astryx/tokens/astryx.dtcg.json
+  --tokens examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json
 ```
 
 → 10 Figma Plugin API sync scripts (`examples/astryx/figma/*.figma.js`). A
@@ -142,12 +142,12 @@ node packages/cli/build.mjs                                   # build the CLI
 npx tsx examples/astryx/scripts/build-storybook-tokens.ts     # tokens.css
 node packages/cli/dist/cli.js generate examples/astryx/contracts \
   --out examples/astryx/storybook/src/generated --target react \
-  --tokens examples/astryx/tokens/astryx.dtcg.json --stories
+  --tokens examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json --stories
 npx tsx examples/astryx/scripts/render-proof.ts               # render receipt
 
 # leg 3 — figma
 node packages/cli/dist/cli.js figma examples/astryx/contracts \
-  --out examples/astryx/figma --tokens examples/astryx/tokens/astryx.dtcg.json
+  --out examples/astryx/figma --tokens examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json
 node examples/astryx/scripts/figma-compile-receipt.mjs        # compile receipt
 
 # leg 4 — witness

@@ -6,6 +6,21 @@
   "browser": "149.0.7827.55",
   "items": [
     {
+      "id": "start.no-isDisabled|root|color",
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-on-light"
+      ],
+      "status": "open"
+    },
+    {
       "id": "start.no-isDisabled|root|gap",
       "combo": "start.no-isDisabled",
       "part": "root",
@@ -45,217 +60,32 @@
       "status": "open"
     },
     {
-      "id": "start.no-isDisabled|label-2|color",
+      "id": "start.no-isDisabled|root|font-size",
       "combo": "start.no-isDisabled",
-      "part": "label-2",
-      "channel": "color",
-      "ref": "{imported.shared.color-4e606f}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|label-2|font-size",
-      "combo": "start.no-isDisabled",
-      "part": "label-2",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.switch.label-2.font-size}",
+      "ref": "{font-size-sm}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "12px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
       "status": "open"
     },
     {
-      "id": "start.no-isDisabled|label-2|font-weight",
-      "combo": "start.no-isDisabled",
-      "part": "label-2",
-      "channel": "font-weight",
-      "ref": "{imported.switch.label-2.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
+      "id": "end.no-isDisabled|root|color",
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{color-text-primary}",
+      "computedProp": "color",
+      "expected": "rgba(10, 19, 23, 1)",
+      "observed": "rgba(0, 0, 0, 1)",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|label-2|line-height",
-      "combo": "start.no-isDisabled",
-      "part": "label-2",
-      "channel": "line-height",
-      "ref": "{imported.switch.label-2.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-2|background-color",
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch-2.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(10, 19, 23, 0.2)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-gray"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-2|border-bottom-left-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-2|border-bottom-right-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-2|border-top-left-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-2|border-top-right-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-thumb-2|background-color",
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch-thumb-2.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-thumb-2|border-bottom-left-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-thumb-2|border-bottom-right-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-thumb-2|border-top-left-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "start.no-isDisabled|switch-thumb-2|border-top-right-radius",
-      "combo": "start.no-isDisabled",
-      "part": "switch-thumb-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
+        "color-on-light"
       ],
       "status": "open"
     },
@@ -299,218 +129,18 @@
       "status": "open"
     },
     {
-      "id": "end.no-isDisabled|switch|background-color",
+      "id": "end.no-isDisabled|root|font-size",
       "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(10, 19, 23, 0.2)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-gray"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch|border-bottom-left-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch|border-bottom-right-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch|border-top-left-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch|border-top-right-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch-thumb|background-color",
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "background-color",
-      "ref": "{imported.switch.switch-thumb.background-color}",
-      "computedProp": "background-color",
-      "expected": "rgba(0, 0, 0, 0)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-background-card",
-        "color-background-popover",
-        "color-background-surface",
-        "color-on-accent",
-        "color-on-dark",
-        "color-on-error"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch-thumb|border-bottom-left-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch-thumb|border-bottom-right-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-bottom-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch-thumb|border-top-left-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-left-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|switch-thumb|border-top-right-radius",
-      "combo": "end.no-isDisabled",
-      "part": "switch-thumb",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-9999}",
-      "computedProp": "border-top-right-radius",
-      "expected": "0px",
-      "observed": "9999px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "radius-full"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|label|color",
-      "combo": "end.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.shared.color-4e606f}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(78, 96, 111, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "color-icon-gray",
-        "color-icon-secondary",
-        "color-text-secondary"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|label|font-size",
-      "combo": "end.no-isDisabled",
-      "part": "label",
+      "part": "root",
       "channel": "font-size",
-      "ref": "{imported.switch.label.font-size}",
+      "ref": "{font-size-sm}",
       "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
+      "expected": "12px",
+      "observed": "16px",
       "cause": "UNTRIAGED — a defect until triaged",
       "candidates": [
-        "font-size-base"
+        "spacing-4"
       ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|label|font-weight",
-      "combo": "end.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.switch.label.font-weight}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "font-weight-medium"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "end.no-isDisabled|label|line-height",
-      "combo": "end.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.switch.label.line-height}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [],
       "status": "open"
     }
   ]
