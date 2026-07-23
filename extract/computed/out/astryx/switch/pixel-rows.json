@@ -1,0 +1,82 @@
+[
+  {
+    "key": "start.no-isDisabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.no-isDisabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.no-isDisabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.no-isDisabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.isDisabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.isDisabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.isDisabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "start.isDisabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.no-isDisabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.no-isDisabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.no-isDisabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.no-isDisabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.isDisabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.isDisabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.isDisabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "end.isDisabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

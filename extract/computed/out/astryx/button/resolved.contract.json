@@ -1,0 +1,438 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.button",
+  "name": "Button",
+  "version": "0.3.0",
+  "status": "draft",
+  "description": "Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/button/decisions.md); extension sidecar carries the named overflow. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "The visual style variant of the button.",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "ghost",
+          "destructive"
+        ]
+      },
+      "default": "secondary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "ghost": "Ghost",
+            "destructive": "Destructive"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The size of the button.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the button is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isLoading",
+      "description": "Whether the button is in a loading state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Loading"
+        },
+        "code": {
+          "prop": "isLoading"
+        }
+      }
+    },
+    {
+      "name": "isIconOnly",
+      "description": "Renders as a square icon-only button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Icon Only"
+        },
+        "code": {
+          "prop": "isIconOnly"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible, visible button label.",
+      "type": "text",
+      "default": "Button",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible",
+    "disabled",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "color": "{color-text-primary}",
+        "border-radius": "{radius-element}",
+        "gap": "{spacing-2}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-base}",
+        "font-weight": "{font-weight-medium}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-20-0004}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "primary": {
+              "background-color": "{color-accent}",
+              "color": "{color-on-accent}"
+            },
+            "secondary": {
+              "background-color": "{color-neutral}",
+              "color": "{color-text-primary}"
+            },
+            "ghost": {
+              "color": "{color-text-primary}"
+            },
+            "destructive": {
+              "background-color": "{color-error}",
+              "color": "{color-on-error}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "sm": {
+              "padding-block": "{spacing-2}",
+              "padding-inline": "{spacing-3}",
+              "min-height": "{size-element-sm}"
+            },
+            "md": {
+              "padding-block": "{spacing-2}",
+              "padding-inline": "{spacing-3}",
+              "min-height": "{size-element-md}"
+            },
+            "lg": {
+              "padding-block": "{spacing-2}",
+              "padding-inline": "{spacing-3}",
+              "min-height": "{size-element-lg}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "destructive": {
+              "outline-color": "{imported.button.root.outline-color.destructive}",
+              "row-rule-color": "{imported.button.root.row-rule-color.destructive}"
+            },
+            "ghost": {
+              "outline-color": "{imported.button.root.outline-color.ghost}",
+              "row-rule-color": "{imported.button.root.row-rule-color.ghost}"
+            },
+            "primary": {
+              "outline-color": "{imported.button.root.outline-color.primary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.primary}"
+            },
+            "secondary": {
+              "outline-color": "{imported.button.root.outline-color.secondary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+            }
+          }
+        }
+      ],
+      "declared": {
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "position": "relative",
+        "text-wrap-mode": "nowrap",
+        "transition-duration": "0.175s",
+        "transition-property": "background-image, background-color, color, opacity, transform",
+        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        },
+        "focus-visible": {
+          "outline-style": "solid"
+        }
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{color-accent}",
+          "outline-width": "{border-width}",
+          "outline-offset": "{imported.button.root.outline-offset-state-focus-visible}"
+        },
+        "active": {
+          "background-image": "{imported.button.root.background-image-state-active}"
+        },
+        "disabled": {
+          "opacity": "{imported.button.root.opacity-state-disabled}"
+        },
+        "hover": {
+          "background-image": "{imported.button.root.background-image-state-hover}"
+        }
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "element": "span",
+          "tokens": {
+            "font-size": "{font-size-base}",
+            "font-weight": "{font-weight-medium}",
+            "line-height": "{imported.shared.size-20-0004}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "destructive": {
+                  "color": "{imported.button.part-0.color.destructive}",
+                  "row-rule-color": "{imported.button.part-0.row-rule-color.destructive}"
+                },
+                "ghost": {
+                  "color": "{imported.button.part-0.color.ghost}",
+                  "row-rule-color": "{imported.button.part-0.row-rule-color.ghost}"
+                },
+                "primary": {
+                  "color": "{imported.button.part-0.color.primary}",
+                  "row-rule-color": "{imported.button.part-0.row-rule-color.primary}"
+                },
+                "secondary": {
+                  "color": "{imported.button.part-0.color.secondary}",
+                  "row-rule-color": "{imported.button.part-0.row-rule-color.secondary}"
+                }
+              }
+            }
+          ],
+          "declared": {
+            "display": "contents",
+            "cursor": "pointer",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "parts": {
+            "label": {
+              "element": "span",
+              "tokens": {
+                "font-size": "{font-size-base}",
+                "font-weight": "{font-weight-medium}",
+                "line-height": "{imported.shared.size-20-0004}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "destructive": {
+                      "color": "{imported.button.label.color.destructive}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.destructive}"
+                    },
+                    "ghost": {
+                      "color": "{imported.button.label.color.ghost}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.ghost}"
+                    },
+                    "primary": {
+                      "color": "{imported.button.label.color.primary}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.primary}"
+                    },
+                    "secondary": {
+                      "color": "{imported.button.label.color.secondary}",
+                      "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
+                    }
+                  }
+                }
+              ],
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-align": "center",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "content": {
+                "prop": "label"
+              }
+            }
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "element": "span",
+          "tokens": {
+            "font-size": "{font-size-base}",
+            "font-weight": "{font-weight-medium}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-20-0004}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.button.part-1.right}",
+            "top": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "lg": {
+                  "bottom": "{imported.button.part-1.bottom.lg}"
+                },
+                "md": {
+                  "bottom": "{imported.button.part-1.bottom.md}"
+                },
+                "sm": {
+                  "bottom": "{imported.button.part-1.bottom.sm}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "destructive": {
+                  "color": "{imported.button.part-1.color.destructive}",
+                  "row-rule-color": "{imported.button.part-1.row-rule-color.destructive}"
+                },
+                "ghost": {
+                  "color": "{imported.button.part-1.color.ghost}",
+                  "row-rule-color": "{imported.button.part-1.row-rule-color.ghost}"
+                },
+                "primary": {
+                  "color": "{imported.button.part-1.color.primary}",
+                  "row-rule-color": "{imported.button.part-1.row-rule-color.primary}"
+                },
+                "secondary": {
+                  "color": "{imported.button.part-1.color.secondary}",
+                  "row-rule-color": "{imported.button.part-1.row-rule-color.secondary}"
+                }
+              }
+            }
+          ],
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Button"
+    }
+  }
+}

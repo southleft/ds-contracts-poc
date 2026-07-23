@@ -1,0 +1,1146 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "switch": {
+        "part-0": {
+          "column-gap": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "row-gap": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        },
+        "part-0-0": {
+          "flex-shrink": {
+            "start": {
+              "$value": "1",
+              "$type": "number"
+            },
+            "end": {
+              "$value": "0",
+              "$type": "number"
+            }
+          }
+        },
+        "label-2": {
+          "row-rule-color": {
+            "$value": "#4e606f",
+            "$type": "color"
+          }
+        },
+        "part-0-0-0": {
+          "opacity": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "z-index": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "part-0-1": {
+          "flex-shrink": {
+            "start": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "end": {
+              "$value": "1",
+              "$type": "number"
+            }
+          }
+        },
+        "part-0-1-0": {
+          "opacity": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "z-index": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "label": {
+          "row-rule-color": {
+            "$value": "#4e606f",
+            "$type": "color"
+          }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [disabled] label-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [
+      "layout-not-uniform: part-0-0.flex-direction varies across combos — stays code-only",
+      "layout-not-uniform: part-0-0.align-items varies across combos — stays code-only",
+      "layout-not-uniform: part-0-0.justify-content varies across combos — stays code-only",
+      "layout-not-uniform: part-0-1.flex-direction varies across combos — stays code-only",
+      "layout-not-uniform: part-0-1.align-items varies across combos — stays code-only",
+      "layout-not-uniform: part-0-1.justify-content varies across combos — stays code-only"
+    ],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "part-0-0",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "bottom",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "column-gap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "column",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "isolation",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "left",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "min-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "static",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "right",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "row-gap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0",
+      "channel": "top",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "anchor-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_b_",
+      "distinctValues": 1
+    },
+    {
+      "part": "switch-thumb",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, 0)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-1",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "bottom",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "column-gap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "row",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "isolation",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "isolate",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "left",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "min-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "relative",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "right",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "row-gap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "top",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "anchor-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_3_",
+      "distinctValues": 1
+    },
+    {
+      "part": "switch-thumb-2",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, 0)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "switch-2",
+      "channel": "background-color",
+      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "switch",
+      "channel": "background-color",
+      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "disabled",
+      "part": "label-2",
+      "channel": "color",
+      "sample": "rgba(164, 176, 188, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-2",
+      "channel": "cursor",
+      "sample": "not-allowed",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "sample": "rgba(164, 176, 188, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "color",
+      "sample": "rgba(164, 176, 188, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "cursor",
+      "sample": "not-allowed",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "row-rule-color",
+      "sample": "rgba(164, 176, 188, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-0-0-0",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_f_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "disabled",
+      "part": "part-0-0-0",
+      "channel": "cursor",
+      "sample": "not-allowed",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "part-0-1-0",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_7_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "disabled",
+      "part": "part-0-1-0",
+      "channel": "cursor",
+      "sample": "not-allowed",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "switch-2",
+      "channel": "opacity",
+      "sample": "0.5",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "switch",
+      "channel": "opacity",
+      "sample": "0.5",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-0-0",
+      "channel": "outline-color",
+      "sample": "rgba(0, 95, 204, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-0-0",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-0-0",
+      "channel": "outline-style",
+      "sample": "auto",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-0-0",
+      "channel": "outline-width",
+      "sample": "1px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-1-0",
+      "channel": "outline-color",
+      "sample": "rgba(0, 95, 204, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-1-0",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-1-0",
+      "channel": "outline-style",
+      "sample": "auto",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-1-0",
+      "channel": "outline-width",
+      "sample": "1px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch-2",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch-2",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch-2",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch-2",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "switch",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "switch-2",
+      "channel": "background-color",
+      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "switch",
+      "channel": "background-color",
+      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "label-2",
+      "channel": "color",
+      "ref": "{imported.shared.color-4e606f}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "label-2",
+      "channel": "font-size",
+      "ref": "{imported.switch.label-2.font-size}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "label-2",
+      "channel": "font-weight",
+      "ref": "{imported.switch.label-2.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "label-2",
+      "channel": "line-height",
+      "ref": "{imported.switch.label-2.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-2",
+      "channel": "background-color",
+      "ref": "{imported.switch.switch-2.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(10, 19, 23, 0.2)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-2",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-2",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-2",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-2",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-thumb-2",
+      "channel": "background-color",
+      "ref": "{imported.switch.switch-thumb-2.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-thumb-2",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-thumb-2",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-thumb-2",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "start.no-isDisabled",
+      "part": "switch-thumb-2",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "column-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-2}",
+      "computedProp": "row-gap",
+      "expected": "8px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch",
+      "channel": "background-color",
+      "ref": "{imported.switch.switch.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(10, 19, 23, 0.2)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch-thumb",
+      "channel": "background-color",
+      "ref": "{imported.switch.switch-thumb.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch-thumb",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch-thumb",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch-thumb",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "switch-thumb",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.shared.color-4e606f}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.switch.label.font-size}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.switch.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "end.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.switch.label.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [
+    "union-part-added: start.no-isDisabled__default @0.0.0 (label|field-label)",
+    "union-part-added: start.no-isDisabled__default @0.1.0 (input|)",
+    "union-part-added: start.no-isDisabled__default @0.1.1 (div|switch)",
+    "union-part-added: start.no-isDisabled__default @0.1.1.0 (div|switch-thumb)",
+    "part-missing: start.no-isDisabled__default part-0-0-0",
+    "part-missing: start.no-isDisabled__default switch",
+    "part-missing: start.no-isDisabled__default switch-thumb",
+    "part-missing: start.no-isDisabled__default label",
+    "part-missing: start.no-isDisabled__hover part-0-0-0",
+    "part-missing: start.no-isDisabled__hover switch",
+    "part-missing: start.no-isDisabled__hover switch-thumb",
+    "part-missing: start.no-isDisabled__hover label",
+    "part-missing: start.no-isDisabled__focus-visible part-0-0-0",
+    "part-missing: start.no-isDisabled__focus-visible switch",
+    "part-missing: start.no-isDisabled__focus-visible switch-thumb",
+    "part-missing: start.no-isDisabled__focus-visible label",
+    "part-missing: start.no-isDisabled__active part-0-0-0",
+    "part-missing: start.no-isDisabled__active switch",
+    "part-missing: start.no-isDisabled__active switch-thumb",
+    "part-missing: start.no-isDisabled__active label",
+    "part-missing: start.isDisabled__default part-0-0-0",
+    "part-missing: start.isDisabled__default switch",
+    "part-missing: start.isDisabled__default switch-thumb",
+    "part-missing: start.isDisabled__default label",
+    "part-missing: start.isDisabled__hover part-0-0-0",
+    "part-missing: start.isDisabled__hover switch",
+    "part-missing: start.isDisabled__hover switch-thumb",
+    "part-missing: start.isDisabled__hover label",
+    "part-missing: start.isDisabled__focus-visible part-0-0-0",
+    "part-missing: start.isDisabled__focus-visible switch",
+    "part-missing: start.isDisabled__focus-visible switch-thumb",
+    "part-missing: start.isDisabled__focus-visible label",
+    "part-missing: start.isDisabled__active part-0-0-0",
+    "part-missing: start.isDisabled__active switch",
+    "part-missing: start.isDisabled__active switch-thumb",
+    "part-missing: start.isDisabled__active label"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <label> — span control used (part label-2)",
+    "control-fallback: no control for <input> — span control used (part part-0-0-0)",
+    "control-fallback: no control for <input> — span control used (part part-0-1-0)",
+    "control-fallback: no control for <label> — span control used (part label)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "matched"
+      },
+      {
+        "part": "part-0-0",
+        "join": "matched"
+      },
+      {
+        "part": "label-2",
+        "join": "matched"
+      },
+      {
+        "part": "part-0-0-0",
+        "join": "matched"
+      },
+      {
+        "part": "switch",
+        "join": "matched"
+      },
+      {
+        "part": "switch-thumb",
+        "join": "matched"
+      },
+      {
+        "part": "part-0-1",
+        "join": "matched"
+      },
+      {
+        "part": "part-0-1-0",
+        "join": "matched"
+      },
+      {
+        "part": "switch-2",
+        "join": "matched"
+      },
+      {
+        "part": "switch-thumb-2",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "part-0-0",
+      "label-2",
+      "part-0-0-0",
+      "switch",
+      "switch-thumb",
+      "part-0-1",
+      "part-0-1-0",
+      "switch-2",
+      "switch-thumb-2",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "presence-carried: label-2 (1/2 combos) →  hidden-when labelPosition=end, isDisabled",
+      "full-width-carried: part-0-0-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: part-0-0-0 (1/2 combos) →  hidden-when labelPosition=start, isDisabled",
+      "full-width-carried: switch spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: switch (1/2 combos) →  hidden-when labelPosition=start, isDisabled",
+      "presence-carried: switch-thumb (1/2 combos) →  hidden-when labelPosition=start, isDisabled",
+      "full-width-carried: part-0-1-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: part-0-1-0 (1/2 combos) →  hidden-when labelPosition=end, isDisabled",
+      "full-width-carried: switch-2 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: switch-2 (1/2 combos) →  hidden-when labelPosition=end, isDisabled",
+      "presence-carried: switch-thumb-2 (1/2 combos) →  hidden-when labelPosition=end, isDisabled",
+      "presence-carried: label (1/2 combos) →  hidden-when labelPosition=start, isDisabled"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "tokensByProp conflict avoided: part-0-0.flex-shrink on prop labelPosition already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0-0.flex-shrink on prop labelPosition already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0-1.flex-shrink on prop labelPosition already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0-1.flex-shrink on prop labelPosition already reviewed — computed value not re-added"
+  ]
+}

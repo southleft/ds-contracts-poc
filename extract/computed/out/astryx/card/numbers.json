@@ -1,0 +1,138 @@
+{
+  "component": "Card",
+  "browser": "149.0.7827.55",
+  "captures": 52,
+  "combos": 13,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 658,
+  "elementsPerCapture": 1,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 22
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 52,
+    "mintedLeavesFolded": 52
+  },
+  "bound": {
+    "cellsChecked": 260,
+    "confirmed": 164,
+    "contradictions": 96,
+    "untriaged": 96
+  },
+  "minted": {
+    "leaves": 52,
+    "baseBindings": 4,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 0,
+      "perAxis": 4,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 0,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 0,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 34112,
+    "cellsMatched": 34008,
+    "pct": 99.6951219512195,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        52
+      ],
+      [
+        "width",
+        52
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 52,
+    "exact": {
+      "mean": 0.0020032051282051285,
+      "max": 0.01953125,
+      "perfect": 46
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 52
+    },
+    "worst": [
+      {
+        "key": "teal__default",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "teal__hover",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "teal__focus-visible",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "teal__active",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "red__focus-visible",
+        "pctExact": 0.013020833333333334,
+        "pctAA": 0
+      },
+      {
+        "key": "red__active",
+        "pctExact": 0.013020833333333334,
+        "pctAA": 0
+      },
+      {
+        "key": "default__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "default__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 96.85314685314685,
+    "rowsFullyEqual": 44,
+    "rows": 52,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 52
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 13
+}

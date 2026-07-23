@@ -1,0 +1,222 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.badge",
+  "name": "Badge",
+  "version": "0.3.0",
+  "status": "draft",
+  "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/badge/decisions.md); extension sidecar carries the named overflow. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "The visual style variant of the badge.",
+      "type": {
+        "enum": [
+          "neutral",
+          "info",
+          "success",
+          "warning",
+          "error",
+          "blue",
+          "cyan",
+          "green",
+          "orange",
+          "pink",
+          "purple",
+          "red",
+          "teal",
+          "yellow"
+        ]
+      },
+      "default": "neutral",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "neutral": "Neutral",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error",
+            "blue": "Blue",
+            "cyan": "Cyan",
+            "green": "Green",
+            "orange": "Orange",
+            "pink": "Pink",
+            "purple": "Purple",
+            "red": "Red",
+            "teal": "Teal",
+            "yellow": "Yellow"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Badge label (materialized text slot — Astryx types this as a ReactNode child).",
+      "type": "text",
+      "default": "Badge",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "background-color": "{color-background-gray}",
+        "color": "{color-text-gray}",
+        "padding-inline": "{spacing-2}",
+        "padding-block": "{spacing-0}",
+        "border-radius": "{radius-full}",
+        "gap": "{spacing-1}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}",
+        "font-weight": "{font-weight-medium}",
+        "line-height": "{imported.badge.root.line-height}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "neutral": {
+              "background-color": "{color-background-gray}",
+              "color": "{color-text-gray}"
+            },
+            "info": {
+              "background-color": "{color-background-blue}",
+              "color": "{color-text-blue}"
+            },
+            "success": {
+              "background-color": "{color-background-green}",
+              "color": "{color-text-green}"
+            },
+            "warning": {
+              "background-color": "{color-background-orange}",
+              "color": "{color-text-orange}"
+            },
+            "error": {
+              "background-color": "{color-background-red}",
+              "color": "{color-text-red}"
+            },
+            "blue": {
+              "background-color": "{color-background-blue}",
+              "color": "{color-text-blue}"
+            },
+            "cyan": {
+              "background-color": "{color-background-cyan}",
+              "color": "{color-text-cyan}"
+            },
+            "green": {
+              "background-color": "{color-background-green}",
+              "color": "{color-text-green}"
+            },
+            "orange": {
+              "background-color": "{color-background-orange}",
+              "color": "{color-text-orange}"
+            },
+            "pink": {
+              "background-color": "{color-background-pink}",
+              "color": "{color-text-pink}"
+            },
+            "purple": {
+              "background-color": "{color-background-purple}",
+              "color": "{color-text-purple}"
+            },
+            "red": {
+              "background-color": "{color-background-red}",
+              "color": "{color-text-red}"
+            },
+            "teal": {
+              "background-color": "{color-background-teal}",
+              "color": "{color-text-teal}"
+            },
+            "yellow": {
+              "background-color": "{color-background-yellow}",
+              "color": "{color-text-yellow}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "blue": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.blue}"
+            },
+            "cyan": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.cyan}"
+            },
+            "error": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.error}"
+            },
+            "green": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.green}"
+            },
+            "info": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+            },
+            "neutral": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.neutral}"
+            },
+            "orange": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.orange}"
+            },
+            "pink": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+            },
+            "purple": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.purple}"
+            },
+            "red": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.red}"
+            },
+            "success": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+            },
+            "teal": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.teal}"
+            },
+            "warning": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+            },
+            "yellow": {
+              "row-rule-color": "{imported.badge.root.row-rule-color.yellow}"
+            }
+          }
+        }
+      ],
+      "declared": {
+        "text-wrap-mode": "nowrap"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Badge"
+    }
+  }
+}

@@ -1,0 +1,525 @@
+[
+  {
+    "ids": [
+      "horizontal.none|label|font-size",
+      "horizontal.text|label|font-size",
+      "horizontal.tooltip|label|font-size",
+      "vertical.none|label|font-size",
+      "vertical.text|label|font-size",
+      "vertical.tooltip|label|font-size"
+    ],
+    "part": "label",
+    "channel": "font-size",
+    "scope": "base",
+    "from": "{imported.shared.size-14}",
+    "to": "{font-size-base}",
+    "observed": "14px",
+    "expected": "16px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|label|font-weight",
+      "horizontal.text|label|font-weight",
+      "horizontal.tooltip|label|font-weight",
+      "vertical.none|label|font-weight",
+      "vertical.text|label|font-weight",
+      "vertical.tooltip|label|font-weight"
+    ],
+    "part": "label",
+    "channel": "font-weight",
+    "scope": "base",
+    "from": "{imported.slider.label.font-weight}",
+    "to": "{font-weight-medium}",
+    "observed": "500",
+    "expected": "400",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-track|border-bottom-left-radius",
+      "horizontal.text|slider-track|border-bottom-left-radius",
+      "horizontal.tooltip|slider-track|border-bottom-left-radius",
+      "vertical.none|slider-track|border-bottom-left-radius",
+      "vertical.text|slider-track|border-bottom-left-radius",
+      "vertical.tooltip|slider-track|border-bottom-left-radius"
+    ],
+    "part": "slider-track",
+    "channel": "border-bottom-left-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-track|border-bottom-right-radius",
+      "horizontal.text|slider-track|border-bottom-right-radius",
+      "horizontal.tooltip|slider-track|border-bottom-right-radius",
+      "vertical.none|slider-track|border-bottom-right-radius",
+      "vertical.text|slider-track|border-bottom-right-radius",
+      "vertical.tooltip|slider-track|border-bottom-right-radius"
+    ],
+    "part": "slider-track",
+    "channel": "border-bottom-right-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-track|border-top-left-radius",
+      "horizontal.text|slider-track|border-top-left-radius",
+      "horizontal.tooltip|slider-track|border-top-left-radius",
+      "vertical.none|slider-track|border-top-left-radius",
+      "vertical.text|slider-track|border-top-left-radius",
+      "vertical.tooltip|slider-track|border-top-left-radius"
+    ],
+    "part": "slider-track",
+    "channel": "border-top-left-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-track|border-top-right-radius",
+      "horizontal.text|slider-track|border-top-right-radius",
+      "horizontal.tooltip|slider-track|border-top-right-radius",
+      "vertical.none|slider-track|border-top-right-radius",
+      "vertical.text|slider-track|border-top-right-radius",
+      "vertical.tooltip|slider-track|border-top-right-radius"
+    ],
+    "part": "slider-track",
+    "channel": "border-top-right-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|part-1-0-1|border-bottom-left-radius",
+      "horizontal.text|part-1-0-1|border-bottom-left-radius",
+      "horizontal.tooltip|part-1-0-1|border-bottom-left-radius",
+      "vertical.none|part-1-0-1|border-bottom-left-radius",
+      "vertical.text|part-1-0-1|border-bottom-left-radius",
+      "vertical.tooltip|part-1-0-1|border-bottom-left-radius"
+    ],
+    "part": "part-1-0-1",
+    "channel": "border-bottom-left-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|part-1-0-1|border-bottom-right-radius",
+      "horizontal.text|part-1-0-1|border-bottom-right-radius",
+      "horizontal.tooltip|part-1-0-1|border-bottom-right-radius",
+      "vertical.none|part-1-0-1|border-bottom-right-radius",
+      "vertical.text|part-1-0-1|border-bottom-right-radius",
+      "vertical.tooltip|part-1-0-1|border-bottom-right-radius"
+    ],
+    "part": "part-1-0-1",
+    "channel": "border-bottom-right-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|part-1-0-1|border-top-left-radius",
+      "horizontal.text|part-1-0-1|border-top-left-radius",
+      "horizontal.tooltip|part-1-0-1|border-top-left-radius",
+      "vertical.none|part-1-0-1|border-top-left-radius",
+      "vertical.text|part-1-0-1|border-top-left-radius",
+      "vertical.tooltip|part-1-0-1|border-top-left-radius"
+    ],
+    "part": "part-1-0-1",
+    "channel": "border-top-left-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|part-1-0-1|border-top-right-radius",
+      "horizontal.text|part-1-0-1|border-top-right-radius",
+      "horizontal.tooltip|part-1-0-1|border-top-right-radius",
+      "vertical.none|part-1-0-1|border-top-right-radius",
+      "vertical.text|part-1-0-1|border-top-right-radius",
+      "vertical.tooltip|part-1-0-1|border-top-right-radius"
+    ],
+    "part": "part-1-0-1",
+    "channel": "border-top-right-radius",
+    "scope": "base",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|slider-thumb|border-bottom-left-radius",
+      "vertical.tooltip|slider-thumb|border-bottom-left-radius"
+    ],
+    "part": "slider-thumb",
+    "channel": "border-bottom-left-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|slider-thumb|border-bottom-right-radius",
+      "vertical.tooltip|slider-thumb|border-bottom-right-radius"
+    ],
+    "part": "slider-thumb",
+    "channel": "border-bottom-right-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|slider-thumb|border-top-left-radius",
+      "vertical.tooltip|slider-thumb|border-top-left-radius"
+    ],
+    "part": "slider-thumb",
+    "channel": "border-top-left-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|slider-thumb|border-top-right-radius",
+      "vertical.tooltip|slider-thumb|border-top-right-radius"
+    ],
+    "part": "slider-thumb",
+    "channel": "border-top-right-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|tooltip|border-bottom-left-radius",
+      "vertical.tooltip|tooltip|border-bottom-left-radius"
+    ],
+    "part": "tooltip",
+    "channel": "border-bottom-left-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-12}",
+    "to": "{radius-container}",
+    "observed": "12px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|tooltip|border-bottom-right-radius",
+      "vertical.tooltip|tooltip|border-bottom-right-radius"
+    ],
+    "part": "tooltip",
+    "channel": "border-bottom-right-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-12}",
+    "to": "{radius-container}",
+    "observed": "12px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|tooltip|border-top-left-radius",
+      "vertical.tooltip|tooltip|border-top-left-radius"
+    ],
+    "part": "tooltip",
+    "channel": "border-top-left-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-12}",
+    "to": "{radius-container}",
+    "observed": "12px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|tooltip|border-top-right-radius",
+      "vertical.tooltip|tooltip|border-top-right-radius"
+    ],
+    "part": "tooltip",
+    "channel": "border-top-right-radius",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-12}",
+    "to": "{radius-container}",
+    "observed": "12px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|tooltip|font-size",
+      "vertical.tooltip|tooltip|font-size"
+    ],
+    "part": "tooltip",
+    "channel": "font-size",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-14}",
+    "to": "{font-size-base}",
+    "observed": "14px",
+    "expected": "16px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|label-2|font-size",
+      "vertical.tooltip|label-2|font-size"
+    ],
+    "part": "label-2",
+    "channel": "font-size",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.size-14}",
+    "to": "{font-size-base}",
+    "observed": "14px",
+    "expected": "16px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-thumb-2|border-bottom-left-radius",
+      "horizontal.text|slider-thumb-2|border-bottom-left-radius",
+      "vertical.none|slider-thumb-2|border-bottom-left-radius",
+      "vertical.text|slider-thumb-2|border-bottom-left-radius"
+    ],
+    "part": "slider-thumb-2",
+    "channel": "border-bottom-left-radius",
+    "scope": "axis:valueDisplay=none|text",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-thumb-2|border-bottom-right-radius",
+      "horizontal.text|slider-thumb-2|border-bottom-right-radius",
+      "vertical.none|slider-thumb-2|border-bottom-right-radius",
+      "vertical.text|slider-thumb-2|border-bottom-right-radius"
+    ],
+    "part": "slider-thumb-2",
+    "channel": "border-bottom-right-radius",
+    "scope": "axis:valueDisplay=none|text",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-thumb-2|border-top-left-radius",
+      "horizontal.text|slider-thumb-2|border-top-left-radius",
+      "vertical.none|slider-thumb-2|border-top-left-radius",
+      "vertical.text|slider-thumb-2|border-top-left-radius"
+    ],
+    "part": "slider-thumb-2",
+    "channel": "border-top-left-radius",
+    "scope": "axis:valueDisplay=none|text",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-thumb-2|border-top-right-radius",
+      "horizontal.text|slider-thumb-2|border-top-right-radius",
+      "vertical.none|slider-thumb-2|border-top-right-radius",
+      "vertical.text|slider-thumb-2|border-top-right-radius"
+    ],
+    "part": "slider-thumb-2",
+    "channel": "border-top-right-radius",
+    "scope": "axis:valueDisplay=none|text",
+    "from": "{imported.shared.size-9999}",
+    "to": "{radius-full}",
+    "observed": "9999px",
+    "expected": "0px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.text|label-3|font-size",
+      "vertical.text|label-3|font-size"
+    ],
+    "part": "label-3",
+    "channel": "font-size",
+    "scope": "axis:valueDisplay=text",
+    "from": "{imported.shared.size-14}",
+    "to": "{font-size-base}",
+    "observed": "14px",
+    "expected": "16px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|label|color",
+      "horizontal.text|label|color",
+      "horizontal.tooltip|label|color",
+      "vertical.none|label|color",
+      "vertical.text|label|color",
+      "vertical.tooltip|label|color"
+    ],
+    "part": "label",
+    "channel": "color",
+    "scope": "base",
+    "from": "{imported.slider.label.color}",
+    "to": "{color-text-secondary}",
+    "observed": "rgba(78, 96, 111, 1)",
+    "expected": "rgba(0, 0, 0, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|part-1-0-1|background-color",
+      "horizontal.text|part-1-0-1|background-color",
+      "horizontal.tooltip|part-1-0-1|background-color",
+      "vertical.none|part-1-0-1|background-color",
+      "vertical.text|part-1-0-1|background-color",
+      "vertical.tooltip|part-1-0-1|background-color"
+    ],
+    "part": "part-1-0-1",
+    "channel": "background-color",
+    "scope": "base",
+    "from": "{imported.shared.color-0064e0}",
+    "to": "{color-accent}",
+    "observed": "rgba(0, 100, 224, 1)",
+    "expected": "rgba(0, 0, 0, 0)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|slider-thumb|background-color",
+      "vertical.tooltip|slider-thumb|background-color"
+    ],
+    "part": "slider-thumb",
+    "channel": "background-color",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.color-0064e0}",
+    "to": "{color-accent}",
+    "observed": "rgba(0, 100, 224, 1)",
+    "expected": "rgba(0, 0, 0, 0)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.tooltip|tooltip|background-color",
+      "vertical.tooltip|tooltip|background-color"
+    ],
+    "part": "tooltip",
+    "channel": "background-color",
+    "scope": "axis:valueDisplay=tooltip",
+    "from": "{imported.shared.color-0a1317}",
+    "to": "{color-background-inverted}",
+    "observed": "rgba(10, 19, 23, 1)",
+    "expected": "rgba(0, 0, 0, 0)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|slider-thumb-2|background-color",
+      "horizontal.text|slider-thumb-2|background-color",
+      "vertical.none|slider-thumb-2|background-color",
+      "vertical.text|slider-thumb-2|background-color"
+    ],
+    "part": "slider-thumb-2",
+    "channel": "background-color",
+    "scope": "axis:valueDisplay=none|text",
+    "from": "{imported.shared.color-0064e0}",
+    "to": "{color-accent}",
+    "observed": "rgba(0, 100, 224, 1)",
+    "expected": "rgba(0, 0, 0, 0)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.text|label-3|color",
+      "vertical.text|label-3|color"
+    ],
+    "part": "label-3",
+    "channel": "color",
+    "scope": "axis:valueDisplay=text",
+    "from": "{imported.shared.color-0a1317}",
+    "to": "{color-on-warning}",
+    "observed": "rgba(10, 19, 23, 1)",
+    "expected": "rgba(0, 0, 0, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  }
+]

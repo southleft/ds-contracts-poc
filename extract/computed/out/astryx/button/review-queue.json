@@ -1,0 +1,2727 @@
+{
+  "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
+  "component": "Button",
+  "contract": "examples/astryx/contracts/button.contract.json",
+  "generatedBy": "extract/computed/run.ts",
+  "browser": "149.0.7827.55",
+  "items": [
+    {
+      "id": "primary.sm.no-isDisabled|root|font-family",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|line-height",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|root|min-height",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-0|font-size",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-0|font-weight",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-0|line-height",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-0|color",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|label|font-size",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|label|font-weight",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|label|line-height",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|label|color",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-1|font-size",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-1|font-weight",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-1|line-height",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.sm.no-isDisabled|part-1|color",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|root|font-family",
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|root|line-height",
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|root|min-height",
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-0|font-size",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-0|font-weight",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-0|line-height",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-0|color",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|label|font-size",
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|label|font-weight",
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|label|line-height",
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|label|color",
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-1|font-size",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-1|font-weight",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-1|line-height",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.md.no-isDisabled|part-1|color",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|font-family",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|line-height",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|root|min-height",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-0|font-size",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-0|font-weight",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-0|line-height",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-0|color",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|label|font-size",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|label|font-weight",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|label|line-height",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|label|color",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-1|font-size",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-1|font-weight",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-1|line-height",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "primary.lg.no-isDisabled|part-1|color",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|font-family",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|line-height",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|root|min-height",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-0|font-size",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-0|font-weight",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-0|line-height",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-0|color",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|label|font-size",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|label|font-weight",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|label|line-height",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|label|color",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-1|font-size",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-1|font-weight",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-1|line-height",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.sm.no-isDisabled|part-1|color",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|root|font-family",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|root|line-height",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|root|min-height",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-0|font-size",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-0|font-weight",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-0|line-height",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-0|color",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|label|font-size",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|label|font-weight",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|label|line-height",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|label|color",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-1|font-size",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-1|font-weight",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-1|line-height",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.md.no-isDisabled|part-1|color",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|font-family",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|line-height",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|root|min-height",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-0|font-size",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-0|font-weight",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-0|line-height",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-0|color",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|label|font-size",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|label|font-weight",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|label|line-height",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|label|color",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-1|font-size",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-1|font-weight",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-1|line-height",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "secondary.lg.no-isDisabled|part-1|color",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|font-family",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|line-height",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|root|min-height",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-0|font-size",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-0|font-weight",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-0|line-height",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-0|color",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|label|font-size",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|label|font-weight",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|label|line-height",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|label|color",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-1|font-size",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-1|font-weight",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-1|line-height",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.sm.no-isDisabled|part-1|color",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|root|font-family",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|root|line-height",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|root|min-height",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-0|font-size",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-0|font-weight",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-0|line-height",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-0|color",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|label|font-size",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|label|font-weight",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|label|line-height",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|label|color",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-1|font-size",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-1|font-weight",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-1|line-height",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.md.no-isDisabled|part-1|color",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|font-family",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|line-height",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|root|min-height",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-0|font-size",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-0|font-weight",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-0|line-height",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-0|color",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|label|font-size",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|label|font-weight",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|label|line-height",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|label|color",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-1|font-size",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-1|font-weight",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-1|line-height",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "ghost.lg.no-isDisabled|part-1|color",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-inverted",
+        "color-icon-primary",
+        "color-on-warning",
+        "color-text-gray",
+        "color-text-primary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|font-family",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|line-height",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|root|min-height",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-0|font-size",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-0|font-weight",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-0|line-height",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-0|color",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|label|font-size",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|label|font-weight",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|label|line-height",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|label|color",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-1|font-size",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-1|font-weight",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-1|line-height",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.sm.no-isDisabled|part-1|color",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|root|font-family",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|root|line-height",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|root|min-height",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-0|font-size",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-0|font-weight",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-0|line-height",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-0|color",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|label|font-size",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|label|font-weight",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|label|line-height",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|label|color",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-1|font-size",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-1|font-weight",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-1|line-height",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.md.no-isDisabled|part-1|color",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|font-family",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|line-height",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|root|min-height",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-0|font-size",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-0|font-weight",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-0|line-height",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-0|color",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|label|font-size",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|label|font-weight",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|label|line-height",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|label|color",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-1|font-size",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-size-base"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-1|font-weight",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-1|line-height",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "destructive.lg.no-isDisabled|part-1|color",
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-accent",
+        "color-on-dark",
+        "color-on-error"
+      ],
+      "status": "open"
+    }
+  ]
+}

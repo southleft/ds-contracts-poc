@@ -75,6 +75,8 @@ function fail(msg: string): never {
 const dir = arg('dir') ?? fail('need --dir <out dir> (e.g. extract/computed/out/button)');
 const applyArg = arg('apply') ?? fail('need --apply "<item-id>[,<item-id>…]" — resolution is explicit-ack only, there is no --all');
 const toRef = arg('to');
+const toMapRaw = arg('to-map');
+const toMap: Record<string, string> | null = toMapRaw ? (JSON.parse(toMapRaw) as Record<string, string>) : null;
 const configPath = path.resolve(arg('config') ?? path.join(HERE, 'configs', 'polaris.json'));
 
 const dirAbs = path.resolve(dir);
@@ -159,8 +161,11 @@ for (const g of groups.values()) {
   const enabledCombos = space.enumeration.combos.filter((c) => Object.values(c.stateFlags).every((f) => !f));
   const confirmingCombos = enabledCombos.map((c) => c.key).filter((k) => !contradictingCombos.has(k));
 
-  // resolution target ref
-  let to = toRef;
+  // resolution target ref — per-observed-value map wins (Phase B: multi-value
+  // channels resolve in ONE whole-channel apply, each value to its own named
+  // token; the all-named rule above still holds), then the single --to, then
+  // the unique-candidate rule.
+  let to = toMap?.[g.observed] ?? toRef;
   if (!to) {
     const cands = g.items[0].candidates;
     if (cands.length === 0) fail(`${g.part}.${g.channel}: no DTCG candidate equals "${g.observed}" — pass an explicit --to "{token.ref}" (guessing names is forbidden)`);

@@ -1,0 +1,2339 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-neg-1": {
+          "$value": "-1px",
+          "$type": "dimension"
+        }
+      },
+      "button": {
+        "root": {
+          "outline-color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "background-image-state-active": {
+            "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+            "$type": "gradient"
+          },
+          "opacity-state-disabled": {
+            "$value": "0.5",
+            "$type": "number"
+          },
+          "outline-color-state-focus-visible": {
+            "primary": {
+              "$value": "#0064e0",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0064e0",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0064e0",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#e3193b",
+              "$type": "color"
+            }
+          },
+          "outline-offset-state-focus-visible": {
+            "$value": "3px",
+            "$type": "dimension"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "background-image-state-hover": {
+            "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+            "$type": "gradient"
+          }
+        },
+        "part-0": {
+          "row-rule-color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
+        "label": {
+          "row-rule-color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
+        "part-1": {
+          "bottom": {
+            "sm": {
+              "$value": "29px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "33px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "37px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "$value": "100.812px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "label",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "part-1",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "focus-visible",
+        "part": "root",
+        "channel": "outline-style",
+        "value": "solid"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, 0)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "transform",
+      "sample": "matrix(0.98, 0, 0, 0.98, 0, 0)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-semibold}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-sm}",
+      "computedProp": "min-height",
+      "expected": "28px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-md}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "root",
+      "channel": "min-height",
+      "ref": "{size-element-lg}",
+      "computedProp": "min-height",
+      "expected": "36px",
+      "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    }
+  ],
+  "interactionOnDisabled": [
+    "interaction-on-isDisabled-changed: primary.sm.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: primary.md.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: primary.lg.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: secondary.sm.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: secondary.md.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: secondary.lg.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: ghost.sm.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: ghost.md.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: ghost.lg.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: destructive.sm.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: destructive.md.isDisabled active root.transform",
+    "interaction-on-isDisabled-changed: destructive.lg.isDisabled active root.transform"
+  ],
+  "structureReceipts": [],
+  "styledChannelReceipts": [],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "matched"
+      },
+      {
+        "part": "part-1",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "label",
+      "part-1"
+    ],
+    "svgAssets": [],
+    "receipts": [],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added"
+  ]
+}

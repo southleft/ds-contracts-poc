@@ -1,0 +1,1291 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "card": {
+        "root": {
+          "border-bottom-color": {
+            "default": {
+              "$value": "#ccd3db",
+              "$type": "color"
+            },
+            "transparent": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "muted": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "border-left-color": {
+            "default": {
+              "$value": "#ccd3db",
+              "$type": "color"
+            },
+            "transparent": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "muted": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "border-right-color": {
+            "default": {
+              "$value": "#ccd3db",
+              "$type": "color"
+            },
+            "transparent": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "muted": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "border-top-color": {
+            "default": {
+              "$value": "#ccd3db",
+              "$type": "color"
+            },
+            "transparent": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "muted": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-top",
+      "expected": "16px",
+      "observed": "15px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "padding-block",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-bottom",
+      "expected": "16px",
+      "observed": "15px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-left",
+      "expected": "16px",
+      "observed": "15px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{spacing-4}",
+      "computedProp": "padding-right",
+      "expected": "16px",
+      "observed": "15px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.default}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "1px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.default}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "1px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.default}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "1px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "default",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.default}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "1px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{color-background-body}",
+      "computedProp": "background-color",
+      "expected": "rgba(241, 244, 247, 1)",
+      "observed": "rgba(0, 0, 0, 0)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.transparent}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.transparent}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.transparent}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "transparent",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.transparent}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.muted}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.muted}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.muted}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "muted",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.muted}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.blue}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.blue}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.blue}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "blue",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.blue}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.cyan}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.cyan}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.cyan}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "cyan",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.cyan}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.gray}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.gray}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.gray}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "gray",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.gray}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.green}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.green}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.green}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "green",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.green}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.orange}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.orange}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.orange}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "orange",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.orange}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.pink}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.pink}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.pink}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "pink",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.pink}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.purple}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.purple}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.purple}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "purple",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.purple}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.red}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.red}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.red}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "red",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.red}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.teal}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.teal}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.teal}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "teal",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.teal}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "column-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "gap",
+      "ref": "{spacing-3}",
+      "computedProp": "row-gap",
+      "expected": "12px",
+      "observed": "normal",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "font-family",
+      "ref": "{font-family-body}",
+      "computedProp": "font-family",
+      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "observed": "Times",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "border-bottom-width",
+      "ref": "{imported.card.root.border-bottom-width.yellow}",
+      "computedProp": "border-bottom-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "border-left-width",
+      "ref": "{imported.card.root.border-left-width.yellow}",
+      "computedProp": "border-left-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "border-right-width",
+      "ref": "{imported.card.root.border-right-width.yellow}",
+      "computedProp": "border-right-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "yellow",
+      "part": "root",
+      "channel": "border-top-width",
+      "ref": "{imported.card.root.border-top-width.yellow}",
+      "computedProp": "border-top-width",
+      "expected": "3px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "text-part-typography-carried: root — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-bottom-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-left-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-right-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.border-top-color on prop variant already reviewed — computed value not re-added"
+  ]
+}
