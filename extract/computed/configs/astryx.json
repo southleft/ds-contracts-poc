@@ -19,7 +19,7 @@
     "dtcg": [
       "examples/astryx/tokens/astryx.dtcg.json"
     ],
-    "css": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/theme-neutral/dist/theme.css"
+    "css": "examples/astryx/tokens/astryx.vars.css"
   },
   "browser": {
     "viewport": {

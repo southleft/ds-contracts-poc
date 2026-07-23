@@ -142,10 +142,10 @@
       "tokens": {
         "color": "{color-text-primary}",
         "border-radius": "{radius-element}",
-        "gap": "{spacing-1}",
+        "gap": "{spacing-2}",
         "font-family": "{font-family-body}",
-        "font-size": "{font-size-sm}",
-        "font-weight": "{font-weight-semibold}",
+        "font-size": "{font-size-base}",
+        "font-weight": "{font-weight-medium}",
         "bottom": "{imported.shared.size-0}",
         "left": "{imported.shared.size-0}",
         "line-height": "{imported.shared.size-20-0004}",
@@ -161,7 +161,7 @@
               "color": "{color-on-accent}"
             },
             "secondary": {
-              "background-color": "{color-background-muted}",
+              "background-color": "{color-neutral}",
               "color": "{color-text-primary}"
             },
             "ghost": {
@@ -177,8 +177,8 @@
           "prop": "size",
           "map": {
             "sm": {
-              "padding-block": "{spacing-1}",
-              "padding-inline": "{spacing-2}",
+              "padding-block": "{spacing-2}",
+              "padding-inline": "{spacing-3}",
               "min-height": "{size-element-sm}"
             },
             "md": {
@@ -187,8 +187,8 @@
               "min-height": "{size-element-md}"
             },
             "lg": {
-              "padding-block": "{spacing-3}",
-              "padding-inline": "{spacing-4}",
+              "padding-block": "{spacing-2}",
+              "padding-inline": "{spacing-3}",
               "min-height": "{size-element-lg}"
             }
           }

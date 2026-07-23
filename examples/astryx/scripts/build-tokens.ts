@@ -97,6 +97,26 @@ mkdirSync(path.join(EX, 'tokens/modes'), { recursive: true });
 const write = (rel: string, data: unknown) =>
   writeFileSync(path.join(EX, rel), JSON.stringify(data, null, 2) + '\n');
 write('tokens/astryx.dtcg.json', layer.tree);
+// Phase A-2 gate support: a FLAT custom-properties stylesheet from the same
+// wrap (light-mode resolved values, aliases followed) — the contract-side
+// render in the fidelity gate injects THIS, so every {token} binding
+// resolves to the identical value the library's own stylesheet uses.
+{
+  const flat: string[] = [];
+  const resolveLeaf = (v: string, depth = 0): string => {
+    const m = v.match(/^\{([a-z0-9-]+)\}$/i);
+    if (!m || depth > 8) return v;
+    const t = (layer.tree as Record<string, { $value?: unknown }>)[m[1]];
+    return t && typeof t.$value === 'string' ? resolveLeaf(t.$value, depth + 1) : v;
+  };
+  const lightTree = (layer.modes?.light.tree ?? {}) as Record<string, { $value?: unknown }>;
+  for (const e of [...layer.entries].sort((a, b) => a.path.localeCompare(b.path))) {
+    const raw = String(lightTree[e.path]?.$value ?? (layer.tree as Record<string, { $value?: unknown }>)[e.path]?.$value ?? '');
+    flat.push(`  --${e.path}: ${resolveLeaf(raw)};`);
+  }
+  writeFileSync(path.join(EX, 'tokens/astryx.vars.css'), `:root {\n${flat.join('\n')}\n}\n`);
+  console.log(`✔ tokens/astryx.vars.css: ${flat.length} custom properties (light-resolved)`);
+}
 if (layer.modes) {
   write('tokens/modes/astryx.light.dtcg.json', layer.modes.light.tree);
   write('tokens/modes/astryx.dark.dtcg.json', layer.modes.dark.tree);

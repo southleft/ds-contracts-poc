@@ -1,0 +1,65 @@
+[
+  {
+    "ids": [
+      "horizontal.none|root|color",
+      "horizontal.text|root|color",
+      "horizontal.tooltip|root|color",
+      "vertical.none|root|color",
+      "vertical.text|root|color",
+      "vertical.tooltip|root|color"
+    ],
+    "part": "root",
+    "channel": "color",
+    "scope": "base",
+    "from": "{color-text-secondary}",
+    "to": "{color-on-light}",
+    "observed": "rgba(0, 0, 0, 1)",
+    "expected": "rgba(78, 96, 111, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|root|gap",
+      "horizontal.none|root|gap",
+      "horizontal.text|root|gap",
+      "horizontal.text|root|gap",
+      "horizontal.tooltip|root|gap",
+      "horizontal.tooltip|root|gap",
+      "vertical.none|root|gap",
+      "vertical.none|root|gap",
+      "vertical.text|root|gap",
+      "vertical.text|root|gap",
+      "vertical.tooltip|root|gap",
+      "vertical.tooltip|root|gap"
+    ],
+    "part": "root",
+    "channel": "gap",
+    "scope": "base",
+    "from": "{spacing-2}",
+    "to": "{spacing-1}",
+    "observed": "4px",
+    "expected": "8px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "horizontal.none|root|font-size",
+      "horizontal.text|root|font-size",
+      "horizontal.tooltip|root|font-size",
+      "vertical.none|root|font-size",
+      "vertical.text|root|font-size",
+      "vertical.tooltip|root|font-size"
+    ],
+    "part": "root",
+    "channel": "font-size",
+    "scope": "base",
+    "from": "{font-size-xs}",
+    "to": "{spacing-4}",
+    "observed": "16px",
+    "expected": "10px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  }
+]

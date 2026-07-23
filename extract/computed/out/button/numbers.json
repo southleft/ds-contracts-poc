@@ -283,9 +283,9 @@
   "pixel": {
     "pairs": 96,
     "exact": {
-      "mean": 0.10023328993055557,
+      "mean": 0.0994873046875,
       "max": 2.4055989583333335,
-      "perfect": 86
+      "perfect": 87
     },
     "aa": {
       "mean": 0,
@@ -329,14 +329,14 @@
         "pctAA": 0
       },
       {
-        "key": "primary.lg.no-isDisabled__focus-visible",
-        "pctExact": 0.07161458333333333,
+        "key": "primary.lg.isDisabled__hover",
+        "pctExact": 0.013020833333333334,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 79.89583333333333,
+    "computedPctEqual": 98.09895833333333,
     "rowsFullyEqual": 0,
     "rows": 96,
     "pixelPerfectExact": 0,

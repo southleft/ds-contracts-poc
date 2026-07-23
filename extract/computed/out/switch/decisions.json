@@ -1,0 +1,32 @@
+[
+  {
+    "ids": [
+      "end.no-isDisabled|root|color",
+      "start.no-isDisabled|root|color"
+    ],
+    "part": "root",
+    "channel": "color",
+    "scope": "base",
+    "from": "{color-text-primary}",
+    "to": "{color-on-light}",
+    "observed": "rgba(0, 0, 0, 1)",
+    "expected": "rgba(10, 19, 23, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "end.no-isDisabled|root|font-size",
+      "start.no-isDisabled|root|font-size"
+    ],
+    "part": "root",
+    "channel": "font-size",
+    "scope": "base",
+    "from": "{font-size-sm}",
+    "to": "{spacing-4}",
+    "observed": "16px",
+    "expected": "12px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "ids": [
+      "blue|root|color",
+      "cyan|root|color",
+      "default|root|color",
+      "gray|root|color",
+      "green|root|color",
+      "muted|root|color",
+      "orange|root|color",
+      "pink|root|color",
+      "purple|root|color",
+      "red|root|color",
+      "teal|root|color",
+      "transparent|root|color",
+      "yellow|root|color"
+    ],
+    "part": "root",
+    "channel": "color",
+    "scope": "base",
+    "from": "{color-text-primary}",
+    "to": "{color-on-light}",
+    "observed": "rgba(0, 0, 0, 1)",
+    "expected": "rgba(10, 19, 23, 1)",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "blue|root|font-size",
+      "cyan|root|font-size",
+      "default|root|font-size",
+      "gray|root|font-size",
+      "green|root|font-size",
+      "muted|root|font-size",
+      "orange|root|font-size",
+      "pink|root|font-size",
+      "purple|root|font-size",
+      "red|root|font-size",
+      "teal|root|font-size",
+      "transparent|root|font-size",
+      "yellow|root|font-size"
+    ],
+    "part": "root",
+    "channel": "font-size",
+    "scope": "base",
+    "from": "{font-size-base}",
+    "to": "{spacing-4}",
+    "observed": "16px",
+    "expected": "14px",
+    "cause": "UNTRIAGED — a defect until triaged",
+    "ack": "explicit CLI --apply"
+  }
+]
