@@ -1,0 +1,371 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Switch",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "primary.small.checked.enabled",
+      "axisValues": {
+        "color": "primary",
+        "size": "small"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "primary.medium.checked.enabled",
+      "axisValues": {
+        "color": "primary",
+        "size": "medium"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "secondary.small.checked.enabled",
+      "axisValues": {
+        "color": "secondary",
+        "size": "small"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "secondary.medium.checked.enabled",
+      "axisValues": {
+        "color": "secondary",
+        "size": "medium"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "error.small.checked.enabled",
+      "axisValues": {
+        "color": "error",
+        "size": "small"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "error.medium.checked.enabled",
+      "axisValues": {
+        "color": "error",
+        "size": "medium"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "warning.small.checked.enabled",
+      "axisValues": {
+        "color": "warning",
+        "size": "small"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "warning.medium.checked.enabled",
+      "axisValues": {
+        "color": "warning",
+        "size": "medium"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "info.small.checked.enabled",
+      "axisValues": {
+        "color": "info",
+        "size": "small"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "info.medium.checked.enabled",
+      "axisValues": {
+        "color": "info",
+        "size": "medium"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "success.small.checked.enabled",
+      "axisValues": {
+        "color": "success",
+        "size": "small"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "success.medium.checked.enabled",
+      "axisValues": {
+        "color": "success",
+        "size": "medium"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "primary.small.checked.enabled",
+      "axisValues": {
+        "color": "primary",
+        "size": "small"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "primary.small.checked.disabled",
+      "axisValues": {
+        "color": "primary",
+        "size": "small"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "primary.medium.checked.enabled",
+      "axisValues": {
+        "color": "primary",
+        "size": "medium"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "primary.medium.checked.disabled",
+      "axisValues": {
+        "color": "primary",
+        "size": "medium"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "secondary.small.checked.enabled",
+      "axisValues": {
+        "color": "secondary",
+        "size": "small"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "secondary.small.checked.disabled",
+      "axisValues": {
+        "color": "secondary",
+        "size": "small"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "secondary.medium.checked.enabled",
+      "axisValues": {
+        "color": "secondary",
+        "size": "medium"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "secondary.medium.checked.disabled",
+      "axisValues": {
+        "color": "secondary",
+        "size": "medium"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "error.small.checked.enabled",
+      "axisValues": {
+        "color": "error",
+        "size": "small"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "error.small.checked.disabled",
+      "axisValues": {
+        "color": "error",
+        "size": "small"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "error.medium.checked.enabled",
+      "axisValues": {
+        "color": "error",
+        "size": "medium"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "error.medium.checked.disabled",
+      "axisValues": {
+        "color": "error",
+        "size": "medium"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "warning.small.checked.enabled",
+      "axisValues": {
+        "color": "warning",
+        "size": "small"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "warning.small.checked.disabled",
+      "axisValues": {
+        "color": "warning",
+        "size": "small"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "warning.medium.checked.enabled",
+      "axisValues": {
+        "color": "warning",
+        "size": "medium"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "warning.medium.checked.disabled",
+      "axisValues": {
+        "color": "warning",
+        "size": "medium"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "info.small.checked.enabled",
+      "axisValues": {
+        "color": "info",
+        "size": "small"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "info.small.checked.disabled",
+      "axisValues": {
+        "color": "info",
+        "size": "small"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "info.medium.checked.enabled",
+      "axisValues": {
+        "color": "info",
+        "size": "medium"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "info.medium.checked.disabled",
+      "axisValues": {
+        "color": "info",
+        "size": "medium"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "success.small.checked.enabled",
+      "axisValues": {
+        "color": "success",
+        "size": "small"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "success.small.checked.disabled",
+      "axisValues": {
+        "color": "success",
+        "size": "small"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "success.medium.checked.enabled",
+      "axisValues": {
+        "color": "success",
+        "size": "medium"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "switch-track",
+      "channel": "background-color",
+      "combo": "success.medium.checked.disabled",
+      "axisValues": {
+        "color": "success",
+        "size": "medium"
+      },
+      "token": "palette-success-main"
+    }
+  ],
+  "skips": [
+    "switch-thumb.box-shadow: no var candidate verified against the computed value in any combo",
+    "switch-track.opacity: no var candidate verified against the computed value in any combo"
+  ]
+}

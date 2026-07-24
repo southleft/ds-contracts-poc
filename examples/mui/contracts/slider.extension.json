@@ -1,0 +1,1268 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "color-101010": {
+          "$value": "#101010",
+          "$type": "color"
+        },
+        "size-neg-1": {
+          "$value": "-1px",
+          "$type": "dimension"
+        }
+      },
+      "slider": {
+        "root": {
+          "color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "padding-bottom": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          }
+        },
+        "slider-rail": {
+          "background-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "bottom": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "11px",
+              "$type": "dimension"
+            }
+          },
+          "color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "opacity": {
+            "$value": "0.38",
+            "$type": "number"
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "top": {
+            "small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "15px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-track": {
+          "background-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "border-bottom-width": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-width": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-width": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-width": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "bottom": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "right": {
+            "small": {
+              "$value": "172.812px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "170.812px",
+              "$type": "dimension"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "top": {
+            "small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "15px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-thumb": {
+          "background-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "bottom": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-5px",
+              "$type": "dimension"
+            }
+          },
+          "color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "left": {
+            "$value": "115.188px",
+            "$type": "dimension"
+          },
+          "right": {
+            "small": {
+              "$value": "160.812px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "152.812px",
+              "$type": "dimension"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "top": {
+            "small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "15px",
+              "$type": "dimension"
+            }
+          },
+          "box-shadow-state-active": {
+            "primary": {
+              "$value": "rgba(25, 118, 210, 0.16) 0px 0px 0px 14px",
+              "$type": "shadow"
+            },
+            "secondary": {
+              "$value": "rgba(156, 39, 176, 0.16) 0px 0px 0px 14px",
+              "$type": "shadow"
+            },
+            "error": {
+              "$value": "rgba(211, 47, 47, 0.16) 0px 0px 0px 14px",
+              "$type": "shadow"
+            },
+            "warning": {
+              "$value": "rgba(237, 108, 2, 0.16) 0px 0px 0px 14px",
+              "$type": "shadow"
+            },
+            "info": {
+              "$value": "rgba(2, 136, 209, 0.16) 0px 0px 0px 14px",
+              "$type": "shadow"
+            },
+            "success": {
+              "$value": "rgba(46, 125, 50, 0.16) 0px 0px 0px 14px",
+              "$type": "shadow"
+            }
+          },
+          "z-index-state-active": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "box-shadow-state-focus-visible": {
+            "primary": {
+              "$value": "rgba(25, 118, 210, 0.16) 0px 0px 0px 8px",
+              "$type": "shadow"
+            },
+            "secondary": {
+              "$value": "rgba(156, 39, 176, 0.16) 0px 0px 0px 8px",
+              "$type": "shadow"
+            },
+            "error": {
+              "$value": "rgba(211, 47, 47, 0.16) 0px 0px 0px 8px",
+              "$type": "shadow"
+            },
+            "warning": {
+              "$value": "rgba(237, 108, 2, 0.16) 0px 0px 0px 8px",
+              "$type": "shadow"
+            },
+            "info": {
+              "$value": "rgba(2, 136, 209, 0.16) 0px 0px 0px 8px",
+              "$type": "shadow"
+            },
+            "success": {
+              "$value": "rgba(46, 125, 50, 0.16) 0px 0px 0px 8px",
+              "$type": "shadow"
+            }
+          }
+        },
+        "part-2-0": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "13.3333px",
+            "$type": "dimension"
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-rail",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-track",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "slider-thumb",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "slider-thumb",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "touch-action",
+        "value": "none"
+      },
+      {
+        "part": "slider-rail",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "slider-track",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s, 0s"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transition-duration",
+        "value": "0.15s, 0.15s, 0.15s, 0.15s"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transition-property",
+        "value": "left, width, bottom, height"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-duration",
+        "value": "0.15s, 0.15s, 0.15s"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-property",
+        "value": "box-shadow, left, bottom"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": [
+      {
+        "state": "focus-visible",
+        "part": "part-2-0",
+        "channel": "outline-style",
+        "value": "auto"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "slider-rail",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, -1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-bottom-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-left-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-right-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "border-top-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, 0, -1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-track",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-bottom-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-bottom-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-top-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "border-top-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "box-sizing",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "border-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(1, 0, 0, 1, -6, -6)",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-2-0",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "slider-thumb",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.slider.slider-thumb.box-shadow-state-active.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "z-index",
+      "state": "active",
+      "ref": "{imported.slider.slider-thumb.z-index-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.slider.part-2-0.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-2-0",
+      "channel": "outline-width",
+      "state": "focus-visible",
+      "ref": "{imported.slider.part-2-0.outline-width-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "box-shadow",
+      "state": "focus-visible",
+      "ref": "{imported.slider.slider-thumb.box-shadow-state-focus-visible.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "primary.small",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.small",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.medium",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.medium",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "secondary.small",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "secondary.small",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "secondary.medium",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "secondary.medium",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "error.small",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "error.small",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "error.medium",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "error.medium",
+        "interaction": "default",
+        "part": "slider-thumb",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 24
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <input> — span control used (part part-2-0)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "slider-rail",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-track",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-thumb",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-2-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "slider-rail",
+      "slider-track",
+      "slider-thumb",
+      "part-2-0"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "aspect-carried: slider-thumb computed width == height in every enabled combo (12/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "aspect-carried: part-2-0 computed width == height in every enabled combo (12/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "full-width-carried: part-2-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: slider-thumb.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: slider-thumb.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.touch-action = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-rail.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.transition-delay = 0s, 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.transition-duration = 0.15s, 0.15s, 0.15s, 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.transition-property = left, width, bottom, height (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-delay = 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-duration = 0.15s, 0.15s, 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-property = box-shadow, left, bottom (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-2-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [focus-visible] part-2-0.outline-style = auto (v15 declared vocabulary)"
+  ]
+}

@@ -38,6 +38,14 @@ export interface CapturedNode {
    *  the census captures byte-identical. */
   role?: string | null;
   ariaModal?: string | null;
+  /** EMOTION/CSS-VARS READER (MUI round): channel → candidate [customPropertyName,
+   *  resolvedRawValue] pairs from ALL matching rules (specificity is not
+   *  document order — verification against the computed value picks) for declarations in matching CSSOM rules that
+   *  reference `var(--<varPrefix>…)`. SOURCE evidence — the library's own
+   *  emitted CSS names the token it binds. Captured only when the config
+   *  declares `library.varPrefix`; undefined (and omitted by normalizeNode)
+   *  everywhere else, keeping committed captures byte-identical. */
+  vrefs?: Record<string, Array<[string, string]>>;
 }
 
 export interface Capture {
@@ -70,6 +78,9 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     // undefined (the census case) so committed captures stay byte-identical.
     ...(n.role !== undefined ? { role: n.role } : {}),
     ...(n.ariaModal !== undefined ? { ariaModal: n.ariaModal } : {}),
+    ...(n.vrefs !== undefined
+      ? { vrefs: Object.fromEntries(Object.keys(n.vrefs).sort().map((k) => [k, n.vrefs![k]])) }
+      : {}),
   };
 }
 

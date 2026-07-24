@@ -148,11 +148,11 @@ async function main() {
 
   console.log('phase 1 — capture sweep…');
   const fontProbes = ['-apple-system', 'Segoe UI', 'Inter'];
-  const run1 = await sweep(page, mounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow });
+  const run1 = await sweep(page, mounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
   console.log(`  ${run1.captures.length} captures, ${run1.allProps.length} channels enumerated, browser ${run1.browserVersion}`);
 
   console.log('phase 1 — determinism: second full sweep (no screenshots)…');
-  const run2 = await sweep(page, mounts, { fontProbes, classAllow: cfg.library.classAllow });
+  const run2 = await sweep(page, mounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
   const canon = (r: SweepResult) => JSON.stringify({ captures: r.captures, controls: r.controls });
   const deterministic = canon(run1) === canon(run2);
   let determinismDetail = 'byte-identical across two full sweeps in one session';
@@ -229,7 +229,7 @@ async function main() {
     // regenerate GENERATED artifacts only — decisions.json / decisions.md /
     // resolved.contract.json are HUMAN-DECISION artifacts (resolve.ts) and
     // survive regeneration.
-    for (const f of ['captured-truth.json', 'enriched.contract.json', 'enriched.extension.json', 'review-queue.json', 'scorecard.json', 'numbers.json', 'pixel-rows.json', 'LEDGER.md', 'gate.html', 'replay.html', 'receipts', 'gate-shots', '.replay-shots', 'assets']) {
+    for (const f of ['captured-truth.json', 'enriched.contract.json', 'enriched.extension.json', 'review-queue.json', 'source-bindings.json', 'scorecard.json', 'numbers.json', 'pixel-rows.json', 'LEDGER.md', 'gate.html', 'replay.html', 'receipts', 'gate-shots', '.replay-shots', 'assets']) {
       rmSync(path.join(outDir, f), { recursive: true, force: true });
     }
     mkdirSync(outDir, { recursive: true });
@@ -250,6 +250,93 @@ async function main() {
     }
     const iconAssetsMerged = new Map([...iconAssets, ...promotion.assets]);
     const svgConsumedParts = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
+
+    // ---- EMOTION/CSS-VARS READER (MUI round): var-reference SOURCE bindings.
+    // Per (part, channel): the custom-property each combo's matching CSS
+    // declared, VERIFIED against the captured computed value (a var whose
+    // resolved value is not what the element actually rendered is dropped by
+    // name — cascade approximation can suggest, never assert). Uniform across
+    // combos -> a `tokens` binding; a function of exactly one axis -> a
+    // `tokensByProp` plane; anything else is a named skip. The var name maps
+    // to the DTCG spelling mechanically (strip prefix, camelCase->kebab) and
+    // only EXISTING DTCG leaves bind. Written as source-bindings.json for the
+    // promote step; this run's own fusion is untouched.
+    if (cfg.library.varPrefix) {
+      const vp = cfg.library.varPrefix;
+      const tokenName = (varName: string): string =>
+        varName.slice(vp.length).replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+      const dtcgNames = new Set(dtcgLeaves.map((l) => l.path));
+      const colorTuple = (v: string): string | null => {
+        const m = /^rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)$/.exec(v);
+        if (m) return `${m[1]},${m[2]},${m[3]},${Number(m[4] ?? 1)}`;
+        let s6 = v.trim();
+        const h3 = /^#([0-9a-f]{3,4})$/i.exec(s6);
+        if (h3) s6 = '#' + [...h3[1]].map((c) => c + c).join('');
+        const h = /^#([0-9a-f]{6})([0-9a-f]{2})?$/i.exec(s6);
+        if (h) {
+          const n = parseInt(h[1], 16);
+          return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${h[2] ? Math.round((parseInt(h[2], 16) / 255) * 10000) / 10000 : 1}`;
+        }
+        return null;
+      };
+      const valueEq = (raw: string, computed: string): boolean => {
+        if (raw === computed) return true;
+        const ct = colorTuple(raw); if (ct) return ct === colorTuple(computed);
+        const rem = /^(-?[\d.]+)rem$/.exec(raw);
+        if (rem) return `${Number((Number(rem[1]) * 16).toFixed(4))}px` === computed;
+        return false;
+      };
+      type Fact = { token: string; varName: string };
+      const perPart = new Map<string, Map<string, Map<string, Fact | null>>>(); // part -> channel -> comboKey -> fact
+      for (let pi = 0; pi < aligned.baseFlat.length; pi++) {
+        const partName = aligned.partNames[pi];
+        for (const combo of space.enumeration.combos) {
+          const el = aligned.getAligned(`${combo.key}__default`)[pi];
+          if (!el?.node.vrefs) continue;
+          for (const [ch, cands] of Object.entries(el.node.vrefs)) {
+            if (el.node.style[ch] === undefined) continue; // shorthand/pending-substitution — longhand facts only
+            if (!perPart.has(partName)) perPart.set(partName, new Map());
+            const chans = perPart.get(partName)!;
+            if (!chans.has(ch)) chans.set(ch, new Map());
+            // pick the candidate that VERIFIES against the captured computed
+            // value AND names an existing DTCG leaf (specificity is not
+            // document order; verification decides). Ties are value-identical
+            // by construction — sorted-first, deterministic.
+            const verified = cands
+              .map(([varName, raw]) => ({ token: tokenName(varName), varName, raw }))
+              .filter((c) => dtcgNames.has(c.token) && valueEq(c.raw, el.node.style[ch]))
+              .sort((a, b) => a.token.localeCompare(b.token));
+            chans.get(ch)!.set(combo.key, verified.length > 0 ? { token: verified[0].token, varName: verified[0].varName } : null);
+          }
+        }
+      }
+      // FACTS, not factored bindings: the minted per-pair leaves already
+      // encode axis conditioning in their NAMES (imported.button.root.
+      // background-color.contained.primary) — the promote step ALIASES each
+      // minted leaf to the source-named token when every combo the leaf
+      // covers agrees (DTCG-native aliasing; value equality is already
+      // verified per fact, so the alias cannot change a rendered pixel).
+      const srcFacts: Array<{ part: string; channel: string; combo: string; axisValues: Record<string, string>; token: string }> = [];
+      const srcSkips: string[] = [];
+      for (const [partName, chans] of [...perPart].sort()) {
+        for (const [ch, byCombo] of [...chans].sort()) {
+          const okCount = [...byCombo.values()].filter(Boolean).length;
+          if (okCount === 0) { srcSkips.push(`${partName}.${ch}: no var candidate verified against the computed value in any combo`); continue; }
+          for (const combo of space.enumeration.combos) {
+            const f = byCombo.get(combo.key);
+            if (f) srcFacts.push({ part: partName, channel: ch, combo: combo.key, axisValues: combo.axisValues, token: f.token });
+          }
+        }
+      }
+      writeFileSync(path.join(outDir, 'source-bindings.json'), JSON.stringify({
+        _marker: 'EMOTION/CSS-VARS READER — SOURCE facts: the library\'s own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.',
+        component: comp.name,
+        varPrefix: vp,
+        facts: srcFacts,
+        skips: srcSkips,
+      }, null, 2) + '\n');
+      console.log(`    source-bindings: ${srcFacts.length} verified fact(s) over ${new Set(srcFacts.map((f) => `${f.part}.${f.channel}`)).size} channel(s), ${srcSkips.length} named skip(s)`);
+    }
 
     const controlStyles = Object.fromEntries(Object.entries(run1.controls).map(([t, n]) => [t, n.style]));
     const styledReceipts: string[] = [];

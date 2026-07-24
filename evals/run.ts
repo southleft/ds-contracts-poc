@@ -5055,6 +5055,34 @@ const cases: Case[] = [
       console.log('astryx-figma-genesis: 13/13 foreign-system scripts referee+execute headless; composition trees asserted (repeat labels, instance labels, multi-root); genesis batch runs start-to-finish in one mock');
     },
   },
+  {
+    id: 'mui-figma-genesis',
+    claim: 'C8-journey',
+    run: () => {
+      // The FOURTH library (repo → Polaris → Astryx → MUI) and the first with
+      // Emotion runtime styling: contracts derive from the computed floor with
+      // the CSS-variables reader's source facts aliasing minted leaves to
+      // MUI's own token names. This eval re-runs the compile receipt (referee
+      // per contract axes + headless execute of tokens-then-component per
+      // script) and the genesis-batch builder (which REFUSES to write unless
+      // the exact one-paste byte stream builds all 5 sets in the mock).
+      cpSync(path.join(ROOT, 'examples', 'mui'), path.join(SCRATCH, 'examples', 'mui'), {
+        recursive: true,
+        filter: (src) => !src.includes('.mui-sandbox'),
+      });
+      const receipt = run(process.execPath, ['examples/mui/scripts/figma-compile-receipt.mjs']);
+      if (receipt.status !== 0) throw new Error(`mui figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
+      if (!receipt.out.includes('5 scripts, 121 variants')) {
+        throw new Error(`mui figma compile receipt missing the 5-scripts/121-variants line:\n${receipt.out.slice(0, 800)}`);
+      }
+      const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
+      if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
+      if (!/mock-proven \(5 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\); 912 variables\)/.test(batch.out)) {
+        throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
+      }
+      console.log('mui-figma-genesis: 5/5 Emotion-runtime scripts referee+execute headless (121 variants); token sync 912 variables incl. 61 Figma-native source aliases; one-paste batch mock-proven');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

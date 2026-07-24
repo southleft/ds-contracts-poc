@@ -1,0 +1,195 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.chip",
+  "name": "Chip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "filled",
+          "outlined"
+        ]
+      },
+      "default": "filled",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "filled": "Filled",
+            "outlined": "Outlined"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "default",
+          "primary",
+          "secondary",
+          "error",
+          "success",
+          "warning",
+          "info"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "success": "Success",
+            "warning": "Warning",
+            "info": "Info"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Chip",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "label"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Chip-label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "font-size": "{imported.chip.label.font-size}",
+            "font-weight": "{imported.chip.label.font-weight}",
+            "line-height": "{imported.chip.label.line-height}"
+          },
+          "literals": {
+            "padding-left": "12px",
+            "padding-right": "12px"
+          }
+        }
+      },
+      "declared": {
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "max-width": "100%",
+        "text-wrap-mode": "nowrap",
+        "transition-delay": "0s, 0s",
+        "transition-duration": "0.3s, 0.3s",
+        "transition-property": "background-color, box-shadow",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "tokens": {
+        "background-color": "{imported.chip.root.background-color.{variant}.{color}}",
+        "border-bottom-color": "{imported.chip.root.border-bottom-color.{variant}.{color}}",
+        "border-bottom-left-radius": "{imported.shared.size-16}",
+        "border-bottom-right-radius": "{imported.shared.size-16}",
+        "border-left-color": "{imported.chip.root.border-left-color.{variant}.{color}}",
+        "border-right-color": "{imported.chip.root.border-right-color.{variant}.{color}}",
+        "border-top-color": "{imported.chip.root.border-top-color.{variant}.{color}}",
+        "border-top-left-radius": "{imported.shared.size-16}",
+        "border-top-right-radius": "{imported.shared.size-16}",
+        "color": "{imported.chip.root.color.{variant}.{color}}",
+        "font-size": "{imported.chip.root.font-size}",
+        "line-height": "{imported.chip.root.line-height}",
+        "outline-width": "{imported.chip.root.outline-width}",
+        "row-rule-color": "{imported.chip.root.row-rule-color.{variant}.{color}}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "filled": {
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.filled}",
+              "border-left-width": "{imported.chip.root.border-left-width.filled}",
+              "border-right-width": "{imported.chip.root.border-right-width.filled}",
+              "border-top-width": "{imported.chip.root.border-top-width.filled}"
+            },
+            "outlined": {
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.outlined}",
+              "border-left-width": "{imported.chip.root.border-left-width.outlined}",
+              "border-right-width": "{imported.chip.root.border-right-width.outlined}",
+              "border-top-width": "{imported.chip.root.border-top-width.outlined}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Chip"
+    }
+  }
+}

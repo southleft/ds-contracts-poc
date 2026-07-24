@@ -1,0 +1,133 @@
+{
+  "library": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "framework": "react",
+    "classPrefix": "Mui",
+    "classAllow": "^(?!Mui-)(?!.*-(color|size)[A-Z])(?!.*-(text|outlined|contained|filled|elevation)([A-Z][A-Za-z]*|\\d+)?$)(?!.*-(rounded|clickable|deletable)$)Mui",
+    "varPrefix": "--mui-"
+  },
+  "mount": {
+    "imports": [
+      "import { ThemeProvider, createTheme } from '@mui/material/styles';",
+      "const __cssVarsTheme = createTheme({ cssVariables: true, colorSchemes: { light: true } });"
+    ],
+    "wrapperOpen": "<ThemeProvider theme={__cssVarsTheme}>",
+    "wrapperClose": "</ThemeProvider>"
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/mui/tokens/mui.dtcg.json"
+    ],
+    "css": "examples/mui/tokens/mui.vars.css"
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "__unset"
+  },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/mui/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "variant",
+        "color",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "disableRipple": true
+      }
+    },
+    {
+      "name": "Chip",
+      "importName": "Chip",
+      "contract": "examples/mui/contracts-seed/chip.contract.json",
+      "sampleText": "Chip",
+      "axes": [
+        "variant",
+        "color",
+        "size"
+      ],
+      "fixedProps": {
+        "label": "Chip"
+      }
+    },
+    {
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/mui/contracts-seed/card.contract.json",
+      "sampleText": "Card content",
+      "axes": [
+        "elevation"
+      ],
+      "axisValueMap": {
+        "elevation": {
+          "0": 0,
+          "1": 1,
+          "3": 3,
+          "8": 8
+        }
+      }
+    },
+    {
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/mui/contracts-seed/switch.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "checked",
+          "state": "checked"
+        },
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "disableRipple": true
+      }
+    },
+    {
+      "name": "Slider",
+      "importName": "Slider",
+      "contract": "examples/mui/contracts-seed/slider.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "size"
+      ],
+      "fixedProps": {
+        "value": 40
+      },
+      "callbackProps": [
+        "onChange"
+      ]
+    }
+  ]
+}

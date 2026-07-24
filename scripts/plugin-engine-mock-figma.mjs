@@ -567,6 +567,15 @@ export function createFigmaMock() {
         variables.push(v);
         return v;
       },
+      // MUI round: the genesis token sync emits REAL variable aliases for
+      // source-aliased minted leaves. Validates like real Figma: the argument
+      // must be a Variable, not an id or a value.
+      createVariableAlias(variable) {
+        if (!variable || typeof variable.id !== 'string' || !variable.id.startsWith('VariableID:')) {
+          throw new Error('in createVariableAlias: expected a Variable');
+        }
+        return { type: 'VARIABLE_ALIAS', id: variable.id };
+      },
       async getLocalVariablesAsync() {
         return [...variables];
       },

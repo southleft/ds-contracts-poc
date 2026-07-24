@@ -1,0 +1,242 @@
+[
+  {
+    "key": "primary.small__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.small__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.small__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.small__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.small__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.small__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.small__focus-visible",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.small__active",
+    "pctExact": 0.009765625,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.small__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.small__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.small__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.small__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.small__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.small__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.small__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.small__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.small__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.small__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.small__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.small__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.small__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.small__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.small__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.small__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

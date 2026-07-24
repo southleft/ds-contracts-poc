@@ -653,11 +653,23 @@ export function prepareMint(
           const el = a.getAligned(`${combo.key}__default`)[pi];
           if (!el) continue;
           const v = el.node.style[channel];
+          // MUI round: a channel can be ABSENT on this part in some combos
+          // (union-aligned parts that exist only under certain states).
+          // `unk ??= undefined` is a no-op, so absence used to slip past the
+          // unmintable guard and crash at kindOf — name it instead.
+          if (v === undefined) { unk ??= '<channel absent in this combo>'; continue; }
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
           const k = kindOf(channel, v);
           if (!k) { unk ??= v; continue; } // no break: declared detection needs the full value set
           occurrences.push({ variant: combo.key, axisValues: combo.axisValues, value: k.value });
+        }
+        if (values.size === 0) {
+          // MUI round: interaction-only union parts (-active, -focusVisible
+          // thumbs) have NO element in any __default alignment — zero
+          // observations is a named refusal, not a mintable base fact.
+          codeOnly.push({ part: partName, channel, reason: 'part absent in every default-state combo (interaction-only part) — state rounds own it', sample: '<no default-state observation>', distinctValues: 0 });
+          continue;
         }
         if (unk !== null) {
           // Round 5c — set-plane literals for unmintable-kind geometry

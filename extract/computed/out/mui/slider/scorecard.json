@@ -1,0 +1,5307 @@
+{
+  "component": "Slider",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 12,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 7392,
+    "cellsEqual": 6612,
+    "pctEqual": 89.44805194805195,
+    "rowsFullyEqual": 0,
+    "rows": 48
+  },
+  "pixel": {
+    "pairs": 48,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "meanExact": 5.4410807291666705,
+    "meanAA": 4.592285156250001,
+    "maxAA": 8.776041666666666
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 116,
+    "mintedLeavesUnfolded": 331,
+    "baseBindings": 68,
+    "stateBindings": 5,
+    "codeOnlyChannels": 15,
+    "overflowBindings": 5,
+    "folds": 44
+  },
+  "worstRows": [
+    {
+      "key": "error.medium__active",
+      "pctAA": 8.776041666666666,
+      "pctExact": 9.817708333333334,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "primary.medium__active",
+      "pctAA": 8.772786458333334,
+      "pctExact": 9.817708333333334,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "info.medium__active",
+      "pctAA": 8.772786458333334,
+      "pctExact": 9.817708333333334,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "secondary.medium__active",
+      "pctAA": 8.763020833333334,
+      "pctExact": 9.817708333333334,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "success.medium__active",
+      "pctAA": 8.759765625,
+      "pctExact": 9.817708333333334,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "error.medium__focus-visible",
+      "pctAA": 6.40625,
+      "pctExact": 7.356770833333333,
+      "channelsMismatched": 21
+    },
+    {
+      "key": "primary.medium__focus-visible",
+      "pctAA": 6.402994791666667,
+      "pctExact": 7.356770833333333,
+      "channelsMismatched": 21
+    },
+    {
+      "key": "info.medium__focus-visible",
+      "pctAA": 6.402994791666667,
+      "pctExact": 7.356770833333333,
+      "channelsMismatched": 21
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "slider-rail.transform",
+      48
+    ],
+    [
+      "slider-track.transform",
+      48
+    ],
+    [
+      "slider-track.transition-behavior",
+      48
+    ],
+    [
+      "slider-thumb.border-bottom-left-radius",
+      48
+    ],
+    [
+      "slider-thumb.border-bottom-right-radius",
+      48
+    ],
+    [
+      "slider-thumb.border-top-left-radius",
+      48
+    ],
+    [
+      "slider-thumb.border-top-right-radius",
+      48
+    ],
+    [
+      "slider-thumb.transform",
+      48
+    ],
+    [
+      "slider-thumb.transition-behavior",
+      48
+    ],
+    [
+      "part-2-0.clip",
+      48
+    ],
+    [
+      "part-2-0.overflow-x",
+      48
+    ],
+    [
+      "part-2-0.overflow-y",
+      48
+    ],
+    [
+      "slider-track.border-bottom-style",
+      24
+    ],
+    [
+      "slider-track.border-bottom-width",
+      24
+    ],
+    [
+      "slider-track.border-left-style",
+      24
+    ]
+  ],
+  "namedLosses": [
+    "overflow: slider-thumb.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: slider-thumb.z-index [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-2-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-2-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: slider-thumb.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: slider-rail.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-track.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: slider-track.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: slider-track.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: slider-track.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: slider-track.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-track.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.border-bottom-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.border-bottom-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.border-top-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.border-top-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.box-sizing — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: slider-thumb.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-2-0.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "rows": [
+    {
+      "key": "primary.small__default",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "primary.small__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "primary.small__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 141,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 3.4635416666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "primary.small__active",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 5.859375,
+      "pctAA": 5.390625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "primary.medium__default",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.042317708333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "primary.medium__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.042317708333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "primary.medium__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 133,
+      "pctExact": 7.356770833333333,
+      "pctAA": 6.402994791666667,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "primary.medium__active",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 9.817708333333334,
+      "pctAA": 8.772786458333334,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "secondary.small__default",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "secondary.small__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "secondary.small__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 141,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 3.4635416666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "secondary.small__active",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 5.859375,
+      "pctAA": 5.390625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "secondary.medium__default",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.022786458333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "secondary.medium__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.022786458333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "secondary.medium__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 133,
+      "pctExact": 7.356770833333333,
+      "pctAA": 6.393229166666667,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "secondary.medium__active",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 9.817708333333334,
+      "pctAA": 8.763020833333334,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "error.small__default",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "error.small__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "error.small__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 141,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 3.4635416666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "error.small__active",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 5.859375,
+      "pctAA": 5.390625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "error.medium__default",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.045572916666667,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "error.medium__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.045572916666667,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "error.medium__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 133,
+      "pctExact": 7.356770833333333,
+      "pctAA": 6.40625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "error.medium__active",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 9.817708333333334,
+      "pctAA": 8.776041666666666,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.small__default",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0833333333333335,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "warning.small__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0833333333333335,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.small__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 141,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "warning.small__active",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 5.859375,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.medium__default",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.042317708333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "warning.medium__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.042317708333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.medium__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 133,
+      "pctExact": 7.356770833333333,
+      "pctAA": 5.296223958333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "warning.medium__active",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 9.817708333333334,
+      "pctAA": 5.296223958333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.small__default",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0833333333333335,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "info.small__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0833333333333335,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.small__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 141,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 3.4635416666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "info.small__active",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 5.859375,
+      "pctAA": 5.390625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.medium__default",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.042317708333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "info.medium__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.042317708333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.medium__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 133,
+      "pctExact": 7.356770833333333,
+      "pctAA": 6.402994791666667,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "info.medium__active",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 9.817708333333334,
+      "pctAA": 8.772786458333334,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.small__default",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "success.small__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 2.0963541666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.small__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 141,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 3.4635416666666665,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "success.small__active",
+      "channelsCompared": 154,
+      "channelsEqual": 142,
+      "pctExact": 5.859375,
+      "pctAA": 5.390625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -6, -6)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.medium__default",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.01953125,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "success.medium__hover",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 6.145833333333333,
+      "pctAA": 5.01953125,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.medium__focus-visible",
+      "channelsCompared": 154,
+      "channelsEqual": 133,
+      "pctExact": 7.356770833333333,
+      "pctAA": 6.389973958333333,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "outline-color",
+          "ours": "rgba(16, 16, 16, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ]
+    },
+    {
+      "key": "success.medium__active",
+      "channelsCompared": 154,
+      "channelsEqual": 134,
+      "pctExact": 9.817708333333334,
+      "pctAA": 8.759765625,
+      "mismatches": [
+        {
+          "part": "slider-rail",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-bottom-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-left-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-right-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "solid"
+        },
+        {
+          "part": "slider-track",
+          "channel": "border-top-width",
+          "ours": "0px",
+          "theirs": "1px"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, 0, -3)"
+        },
+        {
+          "part": "slider-track",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-bottom-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-left-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "border-top-right-radius",
+          "ours": "0px",
+          "theirs": "50%"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+        },
+        {
+          "part": "slider-thumb",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-2-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    }
+  ]
+}

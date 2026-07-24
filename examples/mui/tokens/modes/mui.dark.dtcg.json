@@ -1,0 +1,107 @@
+{
+  "palette-primary-main": {
+    "$value": "#90caf9"
+  },
+  "palette-primary-light": {
+    "$value": "#e3f2fd"
+  },
+  "palette-primary-dark": {
+    "$value": "#42a5f5"
+  },
+  "palette-primary-contrast-text": {
+    "$value": "rgba(0, 0, 0, 0.87)"
+  },
+  "palette-secondary-main": {
+    "$value": "#ce93d8"
+  },
+  "palette-secondary-light": {
+    "$value": "#f3e5f5"
+  },
+  "palette-secondary-dark": {
+    "$value": "#ab47bc"
+  },
+  "palette-secondary-contrast-text": {
+    "$value": "rgba(0, 0, 0, 0.87)"
+  },
+  "palette-error-main": {
+    "$value": "#f44336"
+  },
+  "palette-error-light": {
+    "$value": "#e57373"
+  },
+  "palette-error-dark": {
+    "$value": "#d32f2f"
+  },
+  "palette-warning-main": {
+    "$value": "#ffa726"
+  },
+  "palette-warning-light": {
+    "$value": "#ffb74d"
+  },
+  "palette-warning-dark": {
+    "$value": "#f57c00"
+  },
+  "palette-warning-contrast-text": {
+    "$value": "rgba(0, 0, 0, 0.87)"
+  },
+  "palette-info-main": {
+    "$value": "#29b6f6"
+  },
+  "palette-info-light": {
+    "$value": "#4fc3f7"
+  },
+  "palette-info-dark": {
+    "$value": "#0288d1"
+  },
+  "palette-info-contrast-text": {
+    "$value": "rgba(0, 0, 0, 0.87)"
+  },
+  "palette-success-main": {
+    "$value": "#66bb6a"
+  },
+  "palette-success-light": {
+    "$value": "#81c784"
+  },
+  "palette-success-dark": {
+    "$value": "#388e3c"
+  },
+  "palette-success-contrast-text": {
+    "$value": "rgba(0, 0, 0, 0.87)"
+  },
+  "palette-text-primary": {
+    "$value": "#fff"
+  },
+  "palette-text-secondary": {
+    "$value": "rgba(255, 255, 255, 0.7)"
+  },
+  "palette-text-disabled": {
+    "$value": "rgba(255, 255, 255, 0.5)"
+  },
+  "palette-divider": {
+    "$value": "rgba(255, 255, 255, 0.12)"
+  },
+  "palette-background-paper": {
+    "$value": "#121212"
+  },
+  "palette-background-default": {
+    "$value": "#121212"
+  },
+  "palette-action-active": {
+    "$value": "#fff"
+  },
+  "palette-action-hover": {
+    "$value": "rgba(255, 255, 255, 0.08)"
+  },
+  "palette-action-selected": {
+    "$value": "rgba(255, 255, 255, 0.16)"
+  },
+  "palette-action-disabled": {
+    "$value": "rgba(255, 255, 255, 0.3)"
+  },
+  "palette-action-disabled-background": {
+    "$value": "rgba(255, 255, 255, 0.12)"
+  },
+  "palette-action-focus": {
+    "$value": "rgba(255, 255, 255, 0.12)"
+  }
+}

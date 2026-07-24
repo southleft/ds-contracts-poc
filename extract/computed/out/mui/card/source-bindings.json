@@ -1,0 +1,80 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Card",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "0",
+      "axisValues": {
+        "elevation": "0"
+      },
+      "token": "palette-background-paper"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "1",
+      "axisValues": {
+        "elevation": "1"
+      },
+      "token": "palette-background-paper"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "3",
+      "axisValues": {
+        "elevation": "3"
+      },
+      "token": "palette-background-paper"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "8",
+      "axisValues": {
+        "elevation": "8"
+      },
+      "token": "palette-background-paper"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "0",
+      "axisValues": {
+        "elevation": "0"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "1",
+      "axisValues": {
+        "elevation": "1"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "3",
+      "axisValues": {
+        "elevation": "3"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "8",
+      "axisValues": {
+        "elevation": "8"
+      },
+      "token": "palette-text-primary"
+    }
+  ],
+  "skips": []
+}

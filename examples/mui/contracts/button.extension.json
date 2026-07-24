@@ -1,0 +1,2282 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "button": {
+        "root": {
+          "background-color": {
+            "contained": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color": {
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d280",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b080",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f80",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d3280",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c0280",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d180",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-width": {
+            "contained": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "text": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-color": {
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d280",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b080",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f80",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d3280",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c0280",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d180",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-width": {
+            "contained": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "text": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color": {
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d280",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b080",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f80",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d3280",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c0280",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d180",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-width": {
+            "contained": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "text": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-color": {
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d280",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b080",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f80",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d3280",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c0280",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d180",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-width": {
+            "contained": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "text": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "box-shadow": {
+            "contained": {
+              "$value": "rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px",
+              "$type": "shadow"
+            },
+            "outlined": {
+              "$value": "none",
+              "$type": "shadow"
+            },
+            "text": {
+              "$value": "none",
+              "$type": "shadow"
+            }
+          },
+          "color": {
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "font-size": {
+            "small": {
+              "$value": "13px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "15px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "min-width": {
+            "$value": "64px",
+            "$type": "dimension"
+          },
+          "padding-bottom": {
+            "contained": {
+              "small": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            },
+            "outlined": {
+              "small": {
+                "$value": "3px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "5px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "7px",
+                "$type": "dimension"
+              }
+            },
+            "text": {
+              "small": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "padding-left": {
+            "contained": {
+              "small": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "22px",
+                "$type": "dimension"
+              }
+            },
+            "outlined": {
+              "small": {
+                "$value": "9px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "15px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "21px",
+                "$type": "dimension"
+              }
+            },
+            "text": {
+              "small": {
+                "$value": "5px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "11px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "padding-right": {
+            "contained": {
+              "small": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "22px",
+                "$type": "dimension"
+              }
+            },
+            "outlined": {
+              "small": {
+                "$value": "9px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "15px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "21px",
+                "$type": "dimension"
+              }
+            },
+            "text": {
+              "small": {
+                "$value": "5px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "11px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "padding-top": {
+            "contained": {
+              "small": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            },
+            "outlined": {
+              "small": {
+                "$value": "3px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "5px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "7px",
+                "$type": "dimension"
+              }
+            },
+            "text": {
+              "small": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "row-rule-color": {
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "background-color-state-active": {
+            "contained": {
+              "primary": {
+                "$value": "#1565c0",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#7b1fa2",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#c62828",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#1b5e20",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#e65100",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#01579b",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d20a",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b00a",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f0a",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d320a",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c020a",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d10a",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#0000000a",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d20a",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b00a",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f0a",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d320a",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c020a",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d10a",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#0000000a",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-active": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-active": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-active": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-active": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "box-shadow-state-active": {
+            "contained": {
+              "$value": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px",
+              "$type": "shadow"
+            },
+            "outlined": {
+              "$value": "none",
+              "$type": "shadow"
+            },
+            "text": {
+              "$value": "none",
+              "$type": "shadow"
+            }
+          },
+          "background-color-state-disabled": {
+            "contained": {
+              "$value": "#0000001f",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "text": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color-state-disabled": {
+            "contained": {
+              "$value": "#00000042",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            },
+            "text": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-disabled": {
+            "contained": {
+              "$value": "#00000042",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            },
+            "text": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-disabled": {
+            "contained": {
+              "$value": "#00000042",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            },
+            "text": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-disabled": {
+            "contained": {
+              "$value": "#00000042",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            },
+            "text": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "box-shadow-state-disabled": {
+            "$value": "none",
+            "$type": "shadow"
+          },
+          "color-state-disabled": {
+            "$value": "#00000042",
+            "$type": "color"
+          },
+          "row-rule-color-state-disabled": {
+            "$value": "#00000042",
+            "$type": "color"
+          },
+          "box-shadow-state-focus-visible": {
+            "contained": {
+              "$value": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px",
+              "$type": "shadow"
+            },
+            "outlined": {
+              "$value": "none",
+              "$type": "shadow"
+            },
+            "text": {
+              "$value": "none",
+              "$type": "shadow"
+            }
+          },
+          "background-color-state-hover": {
+            "contained": {
+              "primary": {
+                "$value": "#1565c0",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#7b1fa2",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#c62828",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#1b5e20",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#e65100",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#01579b",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
+            },
+            "outlined": {
+              "primary": {
+                "$value": "#1976d20a",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b00a",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f0a",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d320a",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c020a",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d10a",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#0000000a",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d20a",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b00a",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f0a",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d320a",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c020a",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d10a",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#0000000a",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-hover": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-hover": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-hover": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-hover": {
+            "outlined": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "contained": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "text": {
+              "primary": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "inherit": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "box-shadow-state-hover": {
+            "contained": {
+              "$value": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px",
+              "$type": "shadow"
+            },
+            "outlined": {
+              "$value": "none",
+              "$type": "shadow"
+            },
+            "text": {
+              "$value": "none",
+              "$type": "shadow"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "letter-spacing",
+      "foldedInto": "font-size",
+      "ratio": 0.0286,
+      "class": "em-tracking"
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.75,
+      "class": "em-tracking"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [disabled] root.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-transform",
+        "value": "uppercase"
+      },
+      {
+        "part": "root",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.25s, 0.25s, 0.25s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow, border-color"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "root",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "pointer-events",
+        "value": "none"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "border-bottom-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-left-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-right-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-top-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "state": "active",
+      "ref": "{imported.button.root.background-color-state-active.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.button.root.border-bottom-color-state-active.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "state": "active",
+      "ref": "{imported.button.root.border-left-color-state-active.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "state": "active",
+      "ref": "{imported.button.root.border-right-color-state-active.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "state": "active",
+      "ref": "{imported.button.root.border-top-color-state-active.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "state": "hover",
+      "ref": "{imported.button.root.background-color-state-hover.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "ref": "{imported.button.root.border-bottom-color-state-hover.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "state": "hover",
+      "ref": "{imported.button.root.border-left-color-state-hover.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "state": "hover",
+      "ref": "{imported.button.root.border-right-color-state-hover.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "state": "hover",
+      "ref": "{imported.button.root.border-top-color-state-hover.{variant}.{color}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.transition-delay = 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-duration = 0.25s, 0.25s, 0.25s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-property = background-color, box-shadow, border-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] root.cursor = default (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] root.pointer-events = none (v15 declared vocabulary)"
+  ]
+}

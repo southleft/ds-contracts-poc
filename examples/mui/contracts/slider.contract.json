@@ -1,0 +1,419 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.slider",
+  "name": "Slider",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "error",
+          "warning",
+          "info",
+          "success"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "warning": "Warning",
+            "info": "Info",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "cursor": "pointer",
+        "position": "relative",
+        "touch-action": "none"
+      },
+      "parts": {
+        "slider-rail": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Slider-rail — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "cursor": "pointer"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-12}",
+            "border-bottom-right-radius": "{imported.shared.size-12}",
+            "border-top-left-radius": "{imported.shared.size-12}",
+            "border-top-right-radius": "{imported.shared.size-12}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.slider.slider-rail.opacity}",
+            "right": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "error": {
+                  "background-color": "{imported.slider.slider-rail.background-color.error}",
+                  "color": "{imported.slider.slider-rail.color.error}",
+                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.error}"
+                },
+                "info": {
+                  "background-color": "{imported.slider.slider-rail.background-color.info}",
+                  "color": "{imported.slider.slider-rail.color.info}",
+                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.info}"
+                },
+                "primary": {
+                  "background-color": "{imported.slider.slider-rail.background-color.primary}",
+                  "color": "{imported.slider.slider-rail.color.primary}",
+                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.primary}"
+                },
+                "secondary": {
+                  "background-color": "{imported.slider.slider-rail.background-color.secondary}",
+                  "color": "{imported.slider.slider-rail.color.secondary}",
+                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.secondary}"
+                },
+                "success": {
+                  "background-color": "{imported.slider.slider-rail.background-color.success}",
+                  "color": "{imported.slider.slider-rail.color.success}",
+                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.slider.slider-rail.background-color.warning}",
+                  "color": "{imported.slider.slider-rail.color.warning}",
+                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "bottom": "{imported.slider.slider-rail.bottom.medium}",
+                  "top": "{imported.slider.slider-rail.top.medium}"
+                },
+                "small": {
+                  "bottom": "{imported.slider.slider-rail.bottom.small}",
+                  "top": "{imported.slider.slider-rail.top.small}"
+                }
+              }
+            }
+          ]
+        },
+        "slider-track": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Slider-track — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "cursor": "pointer",
+            "transition-delay": "0s, 0s, 0s, 0s",
+            "transition-duration": "0.15s, 0.15s, 0.15s, 0.15s",
+            "transition-property": "left, width, bottom, height",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-12}",
+            "border-bottom-right-radius": "{imported.shared.size-12}",
+            "border-top-left-radius": "{imported.shared.size-12}",
+            "border-top-right-radius": "{imported.shared.size-12}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "error": {
+                  "background-color": "{imported.slider.slider-track.background-color.error}",
+                  "color": "{imported.slider.slider-track.color.error}",
+                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.error}"
+                },
+                "info": {
+                  "background-color": "{imported.slider.slider-track.background-color.info}",
+                  "color": "{imported.slider.slider-track.color.info}",
+                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.info}"
+                },
+                "primary": {
+                  "background-color": "{imported.slider.slider-track.background-color.primary}",
+                  "color": "{imported.slider.slider-track.color.primary}",
+                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.primary}"
+                },
+                "secondary": {
+                  "background-color": "{imported.slider.slider-track.background-color.secondary}",
+                  "color": "{imported.slider.slider-track.color.secondary}",
+                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.secondary}"
+                },
+                "success": {
+                  "background-color": "{imported.slider.slider-track.background-color.success}",
+                  "color": "{imported.slider.slider-track.color.success}",
+                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.slider.slider-track.background-color.warning}",
+                  "color": "{imported.slider.slider-track.color.warning}",
+                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "border-bottom-width": "{imported.slider.slider-track.border-bottom-width.medium}",
+                  "border-left-width": "{imported.slider.slider-track.border-left-width.medium}",
+                  "border-right-width": "{imported.slider.slider-track.border-right-width.medium}",
+                  "border-top-width": "{imported.slider.slider-track.border-top-width.medium}",
+                  "bottom": "{imported.slider.slider-track.bottom.medium}",
+                  "right": "{imported.slider.slider-track.right.medium}",
+                  "top": "{imported.slider.slider-track.top.medium}"
+                },
+                "small": {
+                  "border-bottom-width": "{imported.slider.slider-track.border-bottom-width.small}",
+                  "border-left-width": "{imported.slider.slider-track.border-left-width.small}",
+                  "border-right-width": "{imported.slider.slider-track.border-right-width.small}",
+                  "border-top-width": "{imported.slider.slider-track.border-top-width.small}",
+                  "bottom": "{imported.slider.slider-track.bottom.small}",
+                  "right": "{imported.slider.slider-track.right.small}",
+                  "top": "{imported.slider.slider-track.top.small}"
+                }
+              }
+            }
+          ]
+        },
+        "slider-thumb": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Slider-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "cursor": "pointer",
+            "transition-delay": "0s, 0s, 0s",
+            "transition-duration": "0.15s, 0.15s, 0.15s",
+            "transition-property": "box-shadow, left, bottom",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "part-2-0": {
+              "element": "input",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "aspect-ratio": "1 / 1",
+                "appearance": "auto",
+                "cursor": "default",
+                "font-family": "Arial",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-wrap-mode": "nowrap"
+              },
+              "layout": {
+                "grow": true
+              },
+              "declaredStates": {
+                "focus-visible": {
+                  "outline-style": "auto"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.slider.part-2-0.background-color}",
+                "bottom": "{imported.shared.size-1}",
+                "color": "{imported.shared.color-101010}",
+                "font-size": "{imported.slider.part-2-0.font-size}",
+                "left": "{imported.shared.size-1}",
+                "margin-bottom": "{imported.shared.size-neg-1}",
+                "margin-left": "{imported.shared.size-neg-1}",
+                "margin-right": "{imported.shared.size-neg-1}",
+                "margin-top": "{imported.shared.size-neg-1}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "outline-color": "{imported.shared.color-101010}",
+                "right": "{imported.shared.size-1}",
+                "row-rule-color": "{imported.shared.color-101010}",
+                "top": "{imported.shared.size-1}"
+              }
+            }
+          },
+          "tokens": {
+            "left": "{imported.slider.slider-thumb.left}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-width": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "error": {
+                  "background-color": "{imported.slider.slider-thumb.background-color.error}",
+                  "color": "{imported.slider.slider-thumb.color.error}",
+                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.error}"
+                },
+                "info": {
+                  "background-color": "{imported.slider.slider-thumb.background-color.info}",
+                  "color": "{imported.slider.slider-thumb.color.info}",
+                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.info}"
+                },
+                "primary": {
+                  "background-color": "{imported.slider.slider-thumb.background-color.primary}",
+                  "color": "{imported.slider.slider-thumb.color.primary}",
+                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.primary}"
+                },
+                "secondary": {
+                  "background-color": "{imported.slider.slider-thumb.background-color.secondary}",
+                  "color": "{imported.slider.slider-thumb.color.secondary}",
+                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.secondary}"
+                },
+                "success": {
+                  "background-color": "{imported.slider.slider-thumb.background-color.success}",
+                  "color": "{imported.slider.slider-thumb.color.success}",
+                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.slider.slider-thumb.background-color.warning}",
+                  "color": "{imported.slider.slider-thumb.color.warning}",
+                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "bottom": "{imported.slider.slider-thumb.bottom.medium}",
+                  "right": "{imported.slider.slider-thumb.right.medium}",
+                  "top": "{imported.slider.slider-thumb.top.medium}"
+                },
+                "small": {
+                  "bottom": "{imported.slider.slider-thumb.bottom.small}",
+                  "right": "{imported.slider.slider-thumb.right.small}",
+                  "top": "{imported.slider.slider-thumb.top.small}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-12}",
+        "border-bottom-right-radius": "{imported.shared.size-12}",
+        "border-top-left-radius": "{imported.shared.size-12}",
+        "border-top-right-radius": "{imported.shared.size-12}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.slider.root.padding-bottom}",
+        "padding-top": "{imported.slider.root.padding-top}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "error": {
+              "color": "{imported.slider.root.color.error}",
+              "row-rule-color": "{imported.slider.root.row-rule-color.error}"
+            },
+            "info": {
+              "color": "{imported.slider.root.color.info}",
+              "row-rule-color": "{imported.slider.root.row-rule-color.info}"
+            },
+            "primary": {
+              "color": "{imported.slider.root.color.primary}",
+              "row-rule-color": "{imported.slider.root.row-rule-color.primary}"
+            },
+            "secondary": {
+              "color": "{imported.slider.root.color.secondary}",
+              "row-rule-color": "{imported.slider.root.row-rule-color.secondary}"
+            },
+            "success": {
+              "color": "{imported.slider.root.color.success}",
+              "row-rule-color": "{imported.slider.root.row-rule-color.success}"
+            },
+            "warning": {
+              "color": "{imported.slider.root.color.warning}",
+              "row-rule-color": "{imported.slider.root.row-rule-color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Slider"
+    }
+  }
+}

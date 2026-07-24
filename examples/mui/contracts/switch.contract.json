@@ -1,0 +1,443 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.switch",
+  "name": "Switch",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "error",
+          "warning",
+          "info",
+          "success",
+          "default"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "warning": "Warning",
+            "info": "Info",
+            "success": "Success",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Checked"
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "buttonbase-root": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|ButtonBase-root.Switch-switchBase — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "cursor": "pointer",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0.15s, 0.15s",
+            "transition-property": "left, transform",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)",
+            "user-select": "none"
+          },
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "switch-input": {
+              "element": "input",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input|Switch-input — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "appearance": "auto",
+                "cursor": "pointer",
+                "font-family": "Arial",
+                "user-select": "none"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default",
+                  "pointer-events": "none"
+                },
+                "focus-visible": {
+                  "outline-style": "auto"
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "font-size": "{imported.switch.switch-input.font-size}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "opacity": "{imported.shared.num-0}",
+                "top": "{imported.shared.size-0}",
+                "z-index": "{imported.switch.switch-input.z-index}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-545454}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "medium": {
+                      "left": "{imported.switch.switch-input.left.medium}",
+                      "right": "{imported.switch.switch-input.right.medium}"
+                    },
+                    "small": {
+                      "left": "{imported.switch.switch-input.left.small}",
+                      "right": "{imported.switch.switch-input.right.small}"
+                    }
+                  }
+                }
+              ]
+            },
+            "switch-thumb": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Switch-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "aspect-ratio": "1 / 1",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "cursor": "pointer",
+                "user-select": "none"
+              },
+              "layout": {
+                "grow": true
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default",
+                  "pointer-events": "none"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-ffffff}",
+                "border-bottom-color": "{imported.shared.color-00000000}",
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-color": "{imported.shared.color-00000000}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-color": "{imported.shared.color-00000000}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-color": "{imported.shared.color-00000000}",
+                "border-top-width": "{imported.shared.size-1}",
+                "box-shadow": "{imported.switch.switch-thumb.box-shadow}",
+                "color": "{imported.shared.color-ffffff}",
+                "row-rule-color": "{imported.shared.color-ffffff}"
+              },
+              "states": {
+                "disabled": {
+                  "background-color": "{imported.shared.color-f5f5f5}",
+                  "color": "{imported.shared.color-f5f5f5}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "color",
+                  "map": {
+                    "default": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.default}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.default}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.default}"
+                    },
+                    "error": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.error}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.error}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.error}"
+                    },
+                    "info": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.info}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.info}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.info}"
+                    },
+                    "primary": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.primary}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.primary}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.primary}"
+                    },
+                    "secondary": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.secondary}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.secondary}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.secondary}"
+                    },
+                    "success": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.success}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.success}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.success}"
+                    },
+                    "warning": {
+                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.warning}",
+                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.warning}",
+                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.warning}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default",
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-ffffff}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-width": "{imported.shared.size-0}",
+            "row-rule-color": "{imported.shared.color-ffffff}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.switch.buttonbase-root.z-index}"
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.switch.buttonbase-root.background-color-state-active}"
+            },
+            "disabled": {
+              "color": "{imported.shared.color-f5f5f5}"
+            },
+            "hover": {
+              "background-color": "{imported.switch.buttonbase-root.background-color-state-hover}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "default": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.default}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.default}"
+                },
+                "error": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.error}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.error}"
+                },
+                "info": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.info}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.info}"
+                },
+                "primary": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.primary}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.primary}"
+                },
+                "secondary": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.secondary}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.secondary}"
+                },
+                "success": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.success}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.success}"
+                },
+                "warning": {
+                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.warning}",
+                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "padding-bottom": "{imported.switch.buttonbase-root.padding-bottom.medium}",
+                  "padding-left": "{imported.switch.buttonbase-root.padding-left.medium}",
+                  "padding-right": "{imported.switch.buttonbase-root.padding-right.medium}",
+                  "padding-top": "{imported.switch.buttonbase-root.padding-top.medium}",
+                  "right": "{imported.switch.buttonbase-root.right.medium}"
+                },
+                "small": {
+                  "padding-bottom": "{imported.switch.buttonbase-root.padding-bottom.small}",
+                  "padding-left": "{imported.switch.buttonbase-root.padding-left.small}",
+                  "padding-right": "{imported.switch.buttonbase-root.padding-right.small}",
+                  "padding-top": "{imported.switch.buttonbase-root.padding-top.small}",
+                  "right": "{imported.switch.buttonbase-root.right.small}"
+                }
+              }
+            }
+          ]
+        },
+        "switch-track": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Switch-track — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0.15s, 0.15s",
+            "transition-property": "opacity, background-color",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "background-color": "{imported.switch.switch-track.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-7}",
+            "border-bottom-right-radius": "{imported.shared.size-7}",
+            "border-top-left-radius": "{imported.shared.size-7}",
+            "border-top-right-radius": "{imported.shared.size-7}",
+            "opacity": "{imported.switch.switch-track.opacity}",
+            "opacity-state-checked": "{imported.switch.switch-track.opacity-state-checked}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "default": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.default}"
+                },
+                "error": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.error}"
+                },
+                "info": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.info}"
+                },
+                "primary": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.primary}"
+                },
+                "secondary": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.secondary}"
+                },
+                "success": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.success}"
+                },
+                "warning": {
+                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "flex-shrink": "{imported.shared.num-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "z-index": "{imported.shared.num-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "medium": {
+              "padding-bottom": "{imported.switch.root.padding-bottom.medium}",
+              "padding-left": "{imported.switch.root.padding-left.medium}",
+              "padding-right": "{imported.switch.root.padding-right.medium}",
+              "padding-top": "{imported.switch.root.padding-top.medium}"
+            },
+            "small": {
+              "padding-bottom": "{imported.switch.root.padding-bottom.small}",
+              "padding-left": "{imported.switch.root.padding-left.small}",
+              "padding-right": "{imported.switch.root.padding-right.small}",
+              "padding-top": "{imported.switch.root.padding-top.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Switch"
+    }
+  }
+}

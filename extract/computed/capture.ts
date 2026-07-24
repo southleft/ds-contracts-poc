@@ -130,6 +130,11 @@ export interface CaptureConfig {
      *  stable per-component class (astryx-*) is the identity that matters.
      *  Absent = keep everything (Polaris behavior, byte-unchanged). */
     classAllow?: string;
+    /** EMOTION/CSS-VARS READER: custom-property prefix ("--mui-") whose
+     *  var() references in matching CSSOM rules are captured as SOURCE
+     *  bindings (CapturedNode.vrefs). Absent = reader off (every committed
+     *  library; captures stay byte-identical). */
+    varPrefix?: string;
   };
   mount: {
     /** Raw import lines for providers/locale/stylesheet. */
@@ -404,14 +409,87 @@ document.addEventListener('click', (e) => e.preventDefault(), true);
 // ---------------------------------------------------------------------------
 /** In-page capture (STRING evaluate — the tsx __name serialization trap,
  *  see visual-parity/render.ts). */
-const captureJs = (selector: string, classAllow?: string) => `(() => {
+const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
   const props = window.__ALL_PROPS;
   const allow = ${JSON.stringify(classAllow ?? null)};
   const keepCls = (l) => (allow ? l.filter((c) => new RegExp(allow).test(c)) : l);
   const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
+  // EMOTION/CSS-VARS READER: rules whose declarations reference
+  // var(--<prefix>…) are SOURCE evidence — the library's own CSS names the
+  // token it binds. Collected per element from matching rules in document
+  // order (later rules overwrite — cascade approximation; the Node side
+  // verifies every candidate against the element's computed value and drops
+  // mismatches, so cascade subtleties cannot mint a false binding).
+  const vp = ${JSON.stringify(varPrefix ?? null)};
+  let VRULES = null;
+  const buildVrules = () => {
+    // Two declaration classes per rule (MUI v9 indirection: the combo rule
+    // sets --variant-containedBg: var(--mui-palette-primary-main) and the
+    // base rule reads background-color: var(--variant-containedBg)):
+    //   defs: custom-property decls whose value references var(--<prefix>…)
+    //   chans: channel decls whose value references ANY var()
+    const out = [];
+    const muiRe = new RegExp('var\\\\(\\\\s*(' + vp + '[a-zA-Z0-9-]+)');
+    const anyRe = new RegExp('var\\\\(\\\\s*(--[a-zA-Z0-9-]+)');
+    for (const sh of document.styleSheets) {
+      let rules; try { rules = sh.cssRules; } catch { continue; }
+      for (const r of rules) {
+        if (!r.selectorText || !r.style) continue;
+        const defs = [];
+        const chans = [];
+        const seen = new Set();
+        for (let i = 0; i < r.style.length; i++) {
+          const prop = r.style[i];
+          if (seen.has(prop)) continue; seen.add(prop);
+          const val = r.style.getPropertyValue(prop);
+          if (!val || val.includes('calc(')) continue;
+          if (prop.startsWith('--')) {
+            const m = muiRe.exec(val);
+            if (m) defs.push([prop, m[1]]);
+          } else {
+            const m = anyRe.exec(val);
+            if (m) chans.push([prop, m[1]]);
+          }
+        }
+        if (defs.length || chans.length) out.push([r.selectorText, defs, chans]);
+      }
+    }
+    return out;
+  };
+  // ALL candidates per channel, one indirection hop followed (specificity is
+  // NOT document order — the Node side picks whichever candidate VERIFIES
+  // against the captured computed value).
+  const vrefsOf = (el) => {
+    if (!vp) return undefined;
+    if (!VRULES) VRULES = buildVrules();
+    const cs = getComputedStyle(el);
+    const defs = {}; // intermediate custom prop -> [mui var names]
+    const chans = {}; // channel -> [referenced var names]
+    for (const [sel, rdefs, rchans] of VRULES) {
+      let hit = false; try { hit = el.matches(sel); } catch {}
+      if (!hit) continue;
+      for (const [prop, mui] of rdefs) { (defs[prop] = defs[prop] || []).includes(mui) || defs[prop].push(mui); }
+      for (const [prop, name] of rchans) { (chans[prop] = chans[prop] || []).includes(name) || chans[prop].push(name); }
+    }
+    const out = {};
+    for (const prop of Object.keys(chans)) {
+      const cands = [];
+      const push = (name) => {
+        const raw = cs.getPropertyValue(name).trim();
+        if (raw && !cands.some((c) => c[0] === name)) cands.push([name, raw]);
+      };
+      for (const name of chans[prop]) {
+        if (name.startsWith(vp)) push(name);
+        else for (const mui of (defs[name] || [])) push(mui);
+      }
+      if (cands.length) out[prop] = cands;
+    }
+    return Object.keys(out).length ? out : undefined;
+  };
   const readEl = (el) => {
+    const vr = vrefsOf(el);
     const out = {
       tag: el.tagName.toLowerCase(),
       classes: keepCls([...el.classList]),
@@ -419,6 +497,7 @@ const captureJs = (selector: string, classAllow?: string) => `(() => {
       style: read(getComputedStyle(el)),
       pseudo: {},
     };
+    if (vr) out.vrefs = vr;
     for (const pe of ['::before', '::after']) {
       const pcs = getComputedStyle(el, pe);
       const content = pcs.getPropertyValue('content');
@@ -480,7 +559,7 @@ export interface SweepResult {
 export async function sweep(
   page: Page,
   mounts: Array<{ comp: ComponentConfig; space: PropSpace }>,
-  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string },
+  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string; varPrefix?: string },
 ): Promise<SweepResult> {
   const allProps = (await page.evaluate(
     `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`,
@@ -527,15 +606,24 @@ export async function sweep(
         // inner-element transitions — Checkbox/RadioButton backdrop border
         // colors — get captured mid-flight and fail double-run byte-identity)
         const probe = `(() => { const els = document.querySelectorAll('${stageSel}, ${stageSel} *'); const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
+        // Settle discipline (MUI round): ONE matched pair can be a
+        // mid-transition flat spot — require TWO consecutive stable samples,
+        // with patience sized for 250–300ms transition suites.
         let prev = await page.evaluate(probe);
-        for (let i = 0; i < 10; i++) {
+        let stableRuns = 0;
+        for (let i = 0; i < 25; i++) {
           await page.waitForTimeout(60);
           const cur = await page.evaluate(probe);
-          if (cur === prev) break;
-          prev = cur;
+          if (cur === prev) {
+            stableRuns++;
+            if (stableRuns >= 2) break;
+          } else {
+            stableRuns = 0;
+            prev = cur;
+          }
         }
 
-        const raw = (await page.evaluate(captureJs(stageSel, opts.classAllow))) as CapturedNode | null;
+        const raw = (await page.evaluate(captureJs(stageSel, opts.classAllow, opts.varPrefix))) as CapturedNode | null;
         if (!raw) throw new Error(`capture failed: ${key} ${interaction}`);
         captures.push({
           combo: key,

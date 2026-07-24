@@ -1,0 +1,470 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Chip",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.default.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "default",
+        "size": "small"
+      },
+      "token": "palette-action-selected"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.default.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "default",
+        "size": "medium"
+      },
+      "token": "palette-action-selected"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.primary.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "primary",
+        "size": "small"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.primary.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "primary",
+        "size": "medium"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.secondary.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "secondary",
+        "size": "small"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.secondary.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "secondary",
+        "size": "medium"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.error.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "error",
+        "size": "small"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.error.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "error",
+        "size": "medium"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.success.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "success",
+        "size": "small"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.success.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "success",
+        "size": "medium"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.warning.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "warning",
+        "size": "small"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.warning.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "warning",
+        "size": "medium"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.info.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "info",
+        "size": "small"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "filled.info.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "info",
+        "size": "medium"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.default.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "default",
+        "size": "small"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.default.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "default",
+        "size": "medium"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.primary.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "primary",
+        "size": "small"
+      },
+      "token": "palette-primary-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.primary.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "primary",
+        "size": "medium"
+      },
+      "token": "palette-primary-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.secondary.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "secondary",
+        "size": "small"
+      },
+      "token": "palette-secondary-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.secondary.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "secondary",
+        "size": "medium"
+      },
+      "token": "palette-secondary-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.error.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "error",
+        "size": "small"
+      },
+      "token": "palette-error-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.error.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "error",
+        "size": "medium"
+      },
+      "token": "palette-error-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.success.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "success",
+        "size": "small"
+      },
+      "token": "palette-success-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.success.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "success",
+        "size": "medium"
+      },
+      "token": "palette-success-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.warning.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "warning",
+        "size": "small"
+      },
+      "token": "palette-warning-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.warning.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "warning",
+        "size": "medium"
+      },
+      "token": "palette-warning-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.info.small",
+      "axisValues": {
+        "variant": "filled",
+        "color": "info",
+        "size": "small"
+      },
+      "token": "palette-info-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "filled.info.medium",
+      "axisValues": {
+        "variant": "filled",
+        "color": "info",
+        "size": "medium"
+      },
+      "token": "palette-info-contrast-text"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.default.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "default",
+        "size": "small"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.default.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "default",
+        "size": "medium"
+      },
+      "token": "palette-text-primary"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.primary.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "primary",
+        "size": "small"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.primary.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "primary",
+        "size": "medium"
+      },
+      "token": "palette-primary-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.secondary.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "secondary",
+        "size": "small"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.secondary.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "secondary",
+        "size": "medium"
+      },
+      "token": "palette-secondary-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.error.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "error",
+        "size": "small"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.error.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "error",
+        "size": "medium"
+      },
+      "token": "palette-error-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.success.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "success",
+        "size": "small"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.success.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "success",
+        "size": "medium"
+      },
+      "token": "palette-success-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.warning.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "warning",
+        "size": "small"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.warning.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "warning",
+        "size": "medium"
+      },
+      "token": "palette-warning-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.info.small",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "info",
+        "size": "small"
+      },
+      "token": "palette-info-main"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.info.medium",
+      "axisValues": {
+        "variant": "outlined",
+        "color": "info",
+        "size": "medium"
+      },
+      "token": "palette-info-main"
+    }
+  ],
+  "skips": []
+}
