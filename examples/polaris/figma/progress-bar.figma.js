@@ -1004,28 +1004,64 @@ async function buildNode(spec, registry) {
 function dsCanvasSnapshot(root) {
   var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var factsOf = function (n, id) {
+    var out = [];
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
+    try { if (n.type === 'TEXT') out.push(id + '|text|"' + n.characters + '" ' + String(n.fontSize) + 'px ' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v4 (live finding: description + added property were invisible):
+    try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
+    try {
+      if (n.componentPropertyDefinitions) {
+        var defs = n.componentPropertyDefinitions;
+        var names = Object.keys(defs).sort();
+        for (var d = 0; d < names.length; d++) {
+          var def = defs[names[d]];
+          out.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
+        }
+      }
+    } catch (e) {}
+    return out;
+  };
   var walk = function (n, path) {
     var id = path + ':' + n.type + '/' + n.name;
-    try { if (n.fills && n.fills !== undefined) lines.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) lines.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
-    try { lines.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
-    try { if (n.layoutMode && n.layoutMode !== 'NONE') lines.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
-    try { lines.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
-    try { if (n.type === 'TEXT') lines.push(id + '|text|"' + n.characters + '" ' + String(n.fontSize) + 'px ' + JSON.stringify(n.fontName)); } catch (e) {}
-    try { if (n.opacity !== undefined && n.opacity !== 1) lines.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
-    try { if (n.effects && n.effects.length) lines.push(id + '|effects|' + n.effects.length); } catch (e) {}
-    try { if (n.visible === false) lines.push(id + '|hidden|true'); } catch (e) {}
+    var fs = factsOf(n, id);
+    for (var i = 0; i < fs.length; i++) lines.push(fs[i]);
     var kids = n.children || [];
-    for (var i = 0; i < kids.length; i++) walk(kids[i], path + '/' + i);
+    for (var i2 = 0; i2 < kids.length; i2++) walk(kids[i2], path + '/' + i2);
   };
   walk(root, '');
+  return lines;
+}
+function dsCanvasSetSnapshot(node) {
+  // the SET's OWN facts only (description, property definitions, name) —
+  // small enough to store on the set node; variants own their subtrees.
+  var lines = [];
+  var id = ':' + node.type + '/' + node.name;
+  try { if (node.description) lines.push(id + '|description|' + node.description); } catch (e) {}
+  try {
+    if (node.componentPropertyDefinitions) {
+      var defs = node.componentPropertyDefinitions;
+      var names = Object.keys(defs).sort();
+      for (var d = 0; d < names.length; d++) {
+        var def = defs[names[d]];
+        lines.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
+      }
+    }
+  } catch (e) {}
   return lines;
 }
 function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v3:' + String(h);
+  return 'v4:' + String(h);
 }
 
 
@@ -1038,11 +1074,13 @@ function dsStampFingerprints(node) {
   // Drift can say WHAT changed, not just that something did. Each variant
   // node owns its own pluginData quota — the set never carries the bulk.
   if (node.type === 'COMPONENT_SET') {
+    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
     for (const child of node.children) {
       child.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(child));
       child.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(child)));
     }
   } else {
+    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
     node.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(node)));
   }
 }
@@ -1070,7 +1108,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v3:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -1248,7 +1286,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v3:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };

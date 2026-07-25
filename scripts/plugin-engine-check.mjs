@@ -424,7 +424,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(withStamp.length === sets.length, `drift gate: every generated set carries a canvasFingerprint stamp (${withStamp.length}/${sets.length})`);
   const subject = withStamp[0];
   const stored = subject.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-  assert(stored.startsWith('v3:'), 'drift gate: stamps carry the v2 version prefix (snapshot-bearing scheme)');
+  assert(stored.startsWith('v4:'), 'drift gate: stamps carry the v2 version prefix (snapshot-bearing scheme)');
   assert(fp(subject) === stored, 'drift gate: recomputing the fingerprint over the untouched tree MATCHES the stamp (module ≡ emitted copy)');
   // simulate a designer edit: swap a fill somewhere in the tree
   const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
@@ -432,7 +432,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // LOCALIZATION (live finding: "which of the 63 buttons?"): per-variant
   // stamps exist and the edit resolves to EXACTLY the containing variant.
   const variants = subject.children ?? [];
-  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v3:')), 'drift gate: every VARIANT carries its own v3 fingerprint stamp');
+  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v4:')), 'drift gate: every VARIANT carries its own v4 fingerprint stamp');
   const owner = (() => { let n = victim; while (n && n.parent !== subject) n = n.parent; return n; })();
   assert(owner, 'drift gate: the edited node resolves to a variant of the set');
   const priorFills = victim.fills;
@@ -452,6 +452,22 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   victim.fills = priorFills;
   assert(fp(subject) === stored, 'drift gate: reverting the edit restores the match');
+  // v4 (live finding: description + added property were invisible): set-level
+  // edits diff against the set's own shallow snapshot.
+  {
+    const setSnapFn = new Function(`${srcMatch[1]}; return dsCanvasSetSnapshot;`)();
+    const storedSet = JSON.parse(subject.getSharedPluginData('ds_contracts', 'canvasSetSnapshot') || '[]');
+    const priorDesc = subject.description;
+    subject.description = 'edited by a designer';
+    const freshSet = setSnapFn(subject);
+    assert(freshSet.some((l) => l.includes('|description|edited by a designer')) && !storedSet.some((l) => l.includes('edited by a designer')),
+      'drift gate: a SET DESCRIPTION edit appears in the set-snapshot diff');
+    subject.description = priorDesc;
+    subject.addComponentProperty('Loading', 'BOOLEAN', false);
+    const freshSet2 = setSnapFn(subject);
+    assert(freshSet2.some((l) => l.includes('|propdef|') && l.includes('Loading')),
+      'drift gate: an ADDED COMPONENT PROPERTY appears in the set-snapshot diff');
+  }
   console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);
 }
 

@@ -359,6 +359,13 @@
         : r.status === 'canvas-edited' ? '⚠️ canvas edited'
         : 'ℹ️ ' + r.status;
       var variants = '';
+      if (r.setChanges && r.setChanges.length) {
+        var escS = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+        variants += '<div style="margin-top:2px;">' + r.setChanges.map(function (c) {
+          var chanS = (c.what.split('|')[1] || '?');
+          return '<div style="color:#888;padding-left:14px;">set · ' + escS(chanS) + ': <s>' + escS(String(c.was).slice(0, 48)) + '</s> → <b>' + escS(String(c.now).slice(0, 48)) + '</b></div>';
+        }).join('') + '</div>';
+      }
       if (r.editedVariants && r.editedVariants.length) {
         var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
         variants = '<div style="margin-top:2px;">' + r.editedVariants.map(function (v) {

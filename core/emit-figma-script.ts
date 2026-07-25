@@ -3572,11 +3572,13 @@ function dsStampFingerprints(node) {
   // Drift can say WHAT changed, not just that something did. Each variant
   // node owns its own pluginData quota — the set never carries the bulk.
   if (node.type === 'COMPONENT_SET') {
+    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
     for (const child of node.children) {
       child.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(child));
       child.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(child)));
     }
   } else {
+    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
     node.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(node)));
   }
 }
@@ -3604,7 +3606,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v3:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -3782,7 +3784,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v3:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
