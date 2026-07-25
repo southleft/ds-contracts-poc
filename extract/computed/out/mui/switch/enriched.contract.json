@@ -128,14 +128,14 @@
           "parts": {
             "switch-input": {
               "element": "input",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy input|Switch-input — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input|Switch-input|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
-                "display": "block",
-                "position": "absolute",
+                "display": "none",
                 "appearance": "auto",
                 "box-sizing": "border-box",
                 "cursor": "pointer",
                 "font-family": "Arial",
+                "position": "absolute",
                 "user-select": "none"
               },
               "declaredStates": {
@@ -269,10 +269,18 @@
                   "prop": "size",
                   "map": {
                     "medium": {
+                      "border-bottom-left-radius": "{imported.switch.switch-thumb.border-bottom-left-radius.medium}",
+                      "border-bottom-right-radius": "{imported.switch.switch-thumb.border-bottom-right-radius.medium}",
+                      "border-top-left-radius": "{imported.switch.switch-thumb.border-top-left-radius.medium}",
+                      "border-top-right-radius": "{imported.switch.switch-thumb.border-top-right-radius.medium}",
                       "height": "{imported.switch.switch-thumb.height.medium}",
                       "width": "{imported.switch.switch-thumb.width.medium}"
                     },
                     "small": {
+                      "border-bottom-left-radius": "{imported.switch.switch-thumb.border-bottom-left-radius.small}",
+                      "border-bottom-right-radius": "{imported.switch.switch-thumb.border-bottom-right-radius.small}",
+                      "border-top-left-radius": "{imported.switch.switch-thumb.border-top-left-radius.small}",
+                      "border-top-right-radius": "{imported.switch.switch-thumb.border-top-right-radius.small}",
                       "height": "{imported.switch.switch-thumb.height.small}",
                       "width": "{imported.switch.switch-thumb.width.small}"
                     }
@@ -347,6 +355,10 @@
               "prop": "size",
               "map": {
                 "medium": {
+                  "border-bottom-left-radius": "{imported.switch.buttonbase-root.border-bottom-left-radius.medium}",
+                  "border-bottom-right-radius": "{imported.switch.buttonbase-root.border-bottom-right-radius.medium}",
+                  "border-top-left-radius": "{imported.switch.buttonbase-root.border-top-left-radius.medium}",
+                  "border-top-right-radius": "{imported.switch.buttonbase-root.border-top-right-radius.medium}",
                   "height": "{imported.switch.buttonbase-root.height.medium}",
                   "padding-bottom": "{imported.switch.buttonbase-root.padding-bottom.medium}",
                   "padding-left": "{imported.switch.buttonbase-root.padding-left.medium}",
@@ -356,6 +368,10 @@
                   "width": "{imported.switch.buttonbase-root.width.medium}"
                 },
                 "small": {
+                  "border-bottom-left-radius": "{imported.switch.buttonbase-root.border-bottom-left-radius.small}",
+                  "border-bottom-right-radius": "{imported.switch.buttonbase-root.border-bottom-right-radius.small}",
+                  "border-top-left-radius": "{imported.switch.buttonbase-root.border-top-left-radius.small}",
+                  "border-top-right-radius": "{imported.switch.buttonbase-root.border-top-right-radius.small}",
                   "height": "{imported.switch.buttonbase-root.height.small}",
                   "padding-bottom": "{imported.switch.buttonbase-root.padding-bottom.small}",
                   "padding-left": "{imported.switch.buttonbase-root.padding-left.small}",

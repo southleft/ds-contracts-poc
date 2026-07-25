@@ -5077,10 +5077,10 @@ const cases: Case[] = [
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(5 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\); 958 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(5 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\); 982 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
-      console.log('mui-figma-genesis: 5/5 Emotion-runtime scripts referee+execute headless (121 variants); token sync 958 variables incl. 61 Figma-native source aliases; one-paste batch mock-proven');
+      console.log('mui-figma-genesis: 5/5 Emotion-runtime scripts referee+execute headless (121 variants); token sync 982 variables incl. 61 Figma-native source aliases; one-paste batch mock-proven');
     },
   },
 ];

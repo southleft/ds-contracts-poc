@@ -276,20 +276,16 @@
           "parts": {
             "part-2-0": {
               "element": "input",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy input| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
-                "display": "block",
-                "position": "absolute",
-                "aspect-ratio": "1 / 1",
+                "display": "none",
                 "appearance": "auto",
                 "cursor": "default",
                 "font-family": "Arial",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
+                "position": "absolute",
                 "text-wrap-mode": "nowrap"
-              },
-              "layout": {
-                "grow": true
               },
               "declaredStates": {
                 "focus-visible": {
@@ -376,6 +372,10 @@
               "prop": "size",
               "map": {
                 "medium": {
+                  "border-bottom-left-radius": "{imported.slider.slider-thumb.border-bottom-left-radius.medium}",
+                  "border-bottom-right-radius": "{imported.slider.slider-thumb.border-bottom-right-radius.medium}",
+                  "border-top-left-radius": "{imported.slider.slider-thumb.border-top-left-radius.medium}",
+                  "border-top-right-radius": "{imported.slider.slider-thumb.border-top-right-radius.medium}",
                   "bottom": "{imported.slider.slider-thumb.bottom.medium}",
                   "height": "{imported.slider.slider-thumb.height.medium}",
                   "right": "{imported.slider.slider-thumb.right.medium}",
@@ -385,6 +385,10 @@
                   "width": "{imported.slider.slider-thumb.width.medium}"
                 },
                 "small": {
+                  "border-bottom-left-radius": "{imported.slider.slider-thumb.border-bottom-left-radius.small}",
+                  "border-bottom-right-radius": "{imported.slider.slider-thumb.border-bottom-right-radius.small}",
+                  "border-top-left-radius": "{imported.slider.slider-thumb.border-top-left-radius.small}",
+                  "border-top-right-radius": "{imported.slider.slider-thumb.border-top-right-radius.small}",
                   "bottom": "{imported.slider.slider-thumb.bottom.small}",
                   "height": "{imported.slider.slider-thumb.height.small}",
                   "right": "{imported.slider.slider-thumb.right.small}",

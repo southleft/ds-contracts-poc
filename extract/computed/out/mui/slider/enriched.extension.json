@@ -439,6 +439,46 @@
               "$type": "color"
             }
           },
+          "border-bottom-left-radius": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
           "bottom": {
             "small": {
               "$value": "2px",
@@ -1052,6 +1092,11 @@
       },
       {
         "part": "part-2-0",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-2-0",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       }
@@ -1113,34 +1158,6 @@
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal, normal, normal",
-      "distinctValues": 1
-    },
-    {
-      "part": "slider-thumb",
-      "channel": "border-bottom-left-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "slider-thumb",
-      "channel": "border-bottom-right-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "slider-thumb",
-      "channel": "border-top-left-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "slider-thumb",
-      "channel": "border-top-right-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
       "distinctValues": 1
     },
     {
@@ -1366,8 +1383,7 @@
     "svgAssets": [],
     "receipts": [
       "aspect-carried: slider-thumb computed width == height in every enabled combo (12/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "aspect-carried: part-2-0 computed width == height in every enabled combo (12/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "full-width-carried: part-2-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+      "sr-only-carried-as-hidden: part-2-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": []
   },
@@ -1394,6 +1410,7 @@
     "declared fact carried: part-2-0.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-2-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-2-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-2-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [focus-visible] part-2-0.outline-style = auto (v15 declared vocabulary)"
   ]

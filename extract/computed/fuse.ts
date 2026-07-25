@@ -750,6 +750,15 @@ export function prepareMint(
               if (outer !== base) v = `${Math.round(outer * 1000) / 1000}px`;
             }
           }
+          // Absolute-position round: %-radii on cluster parts resolve
+          // against the part's own captured box (CSS: 50% of a 20px square
+          // is the circle idiom) — baked to px so the mint carries them.
+          if (/^border-.*-radius$/.test(channel) && geomOuterParts.has(pi) && /^[\d.]+%$/.test(v ?? '')) {
+            const pct = parseFloat(v);
+            const w = pxOf(el.node.style['width']);
+            const h = pxOf(el.node.style['height']);
+            if (w !== null && h !== null) v = `${Math.round(((pct / 100) * Math.min(w, h)) * 1000) / 1000}px`;
+          }
           // MUI round: a channel can be ABSENT on this part in some combos
           // (union-aligned parts that exist only under certain states).
           // `unk ??= undefined` is a no-op, so absence used to slip past the

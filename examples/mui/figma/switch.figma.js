@@ -54,6 +54,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -69,6 +97,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -85,38 +117,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -131,7 +131,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -180,34 +184,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -242,6 +218,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -257,6 +261,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -273,38 +281,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -319,7 +295,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -368,34 +348,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -430,6 +382,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -445,6 +425,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -461,38 +445,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -507,7 +459,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -556,34 +512,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -618,6 +546,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -633,6 +589,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -649,38 +609,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -695,7 +623,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -744,34 +676,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -806,6 +710,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -821,6 +753,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -837,38 +773,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -883,7 +787,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -932,34 +840,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -994,6 +874,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1009,6 +917,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -1025,38 +937,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -1071,7 +951,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -1120,34 +1004,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -1182,6 +1038,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1197,6 +1081,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -1213,38 +1101,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -1259,7 +1115,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -1308,34 +1168,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -1370,6 +1202,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1385,6 +1245,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -1401,38 +1265,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -1447,7 +1279,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -1496,34 +1332,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -1558,6 +1366,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1573,6 +1409,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -1589,38 +1429,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -1635,7 +1443,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -1684,34 +1496,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -1746,6 +1530,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1761,6 +1573,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -1777,38 +1593,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -1823,7 +1607,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -1872,34 +1660,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -1934,6 +1694,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1949,6 +1737,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -1965,38 +1757,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -2011,7 +1771,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -2060,34 +1824,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -2122,6 +1858,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -2137,6 +1901,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -2153,38 +1921,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -2199,7 +1935,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -2248,34 +1988,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -2310,6 +2022,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -2325,6 +2065,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
@@ -2341,38 +2085,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 38,
-                    "varName": "imported/switch/switch-input/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 114,
-                    "varName": "imported/switch/switch-input/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -2387,7 +2099,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium"
                   },
                   "effectStack": [
                     {
@@ -2436,34 +2152,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 14,
-                "varName": "imported/switch/switch-track/height/medium"
-              },
-              "fixedWidth": {
-                "px": 34,
-                "varName": "imported/switch/switch-track/width/medium"
-              },
-              "children": []
             }
           ]
         }
@@ -2498,6 +2186,34 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "switch-track",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "grow": true,
+              "fill": "imported/switch/switch-track/background-color",
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-7",
+                "bottomRightRadius": "imported/shared/size-7",
+                "topLeftRadius": "imported/shared/size-7",
+                "topRightRadius": "imported/shared/size-7"
+              },
+              "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
+              "children": []
+            },
+            {
+              "type": "frame",
               "name": "buttonbase-root",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -2513,6 +2229,10 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+                "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
@@ -2529,38 +2249,6 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "switch-input",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "opacity": 0,
-                  "fixedHeight": {
-                    "px": 24,
-                    "varName": "imported/switch/switch-input/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 72,
-                    "varName": "imported/switch/switch-input/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-ffffff"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "name": "switch-thumb",
                   "layout": {
                     "mode": "HORIZONTAL",
@@ -2575,7 +2263,11 @@ const COMPONENTS = [
                     "strokeBottomWeight": "imported/shared/size-1",
                     "strokeLeftWeight": "imported/shared/size-1",
                     "strokeRightWeight": "imported/shared/size-1",
-                    "strokeTopWeight": "imported/shared/size-1"
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                    "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                    "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                    "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small"
                   },
                   "effectStack": [
                     {
@@ -2624,34 +2316,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "switch-track",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "grow": true,
-              "fill": "imported/switch/switch-track/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-7",
-                "bottomRightRadius": "imported/shared/size-7",
-                "topLeftRadius": "imported/shared/size-7",
-                "topRightRadius": "imported/shared/size-7"
-              },
-              "opacity": 0.38,
-              "fixedHeight": {
-                "px": 10,
-                "varName": "imported/switch/switch-track/height/small"
-              },
-              "fixedWidth": {
-                "px": 26,
-                "varName": "imported/switch/switch-track/width/small"
-              },
-              "children": []
             }
           ]
         }
@@ -2935,7 +2599,11 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // natural post-backdrop index — else the opaque backdrop sibling paints
     // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
     // previously hand-corrected on canvas each re-amend).
-    if (!childNode.children || childNode.children.length === 0) {
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
@@ -2962,17 +2630,6 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
-    if (spec.fontFamily) {
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

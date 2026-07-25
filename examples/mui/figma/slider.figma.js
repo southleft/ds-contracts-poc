@@ -136,7 +136,11 @@ const COMPONENTS = [
                 "right": 162.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/medium",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/medium"
               },
               "fill": "imported/slider/slider-thumb/background-color/primary",
               "fixedHeight": {
@@ -147,47 +151,7 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -308,7 +272,11 @@ const COMPONENTS = [
                 "right": 166.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/small",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/small"
               },
               "fill": "imported/slider/slider-thumb/background-color/primary",
               "fixedHeight": {
@@ -319,47 +287,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -480,7 +408,11 @@ const COMPONENTS = [
                 "right": 162.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/medium",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/medium"
               },
               "fill": "imported/slider/slider-thumb/background-color/secondary",
               "fixedHeight": {
@@ -491,47 +423,7 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -652,7 +544,11 @@ const COMPONENTS = [
                 "right": 166.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/small",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/small"
               },
               "fill": "imported/slider/slider-thumb/background-color/secondary",
               "fixedHeight": {
@@ -663,47 +559,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -824,7 +680,11 @@ const COMPONENTS = [
                 "right": 162.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/medium",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/medium"
               },
               "fill": "imported/slider/slider-thumb/background-color/error",
               "fixedHeight": {
@@ -835,47 +695,7 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -996,7 +816,11 @@ const COMPONENTS = [
                 "right": 166.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/small",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/small"
               },
               "fill": "imported/slider/slider-thumb/background-color/error",
               "fixedHeight": {
@@ -1007,47 +831,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -1168,7 +952,11 @@ const COMPONENTS = [
                 "right": 162.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/medium",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/medium"
               },
               "fill": "imported/slider/slider-thumb/background-color/warning",
               "fixedHeight": {
@@ -1179,47 +967,7 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -1340,7 +1088,11 @@ const COMPONENTS = [
                 "right": 166.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/small",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/small"
               },
               "fill": "imported/slider/slider-thumb/background-color/warning",
               "fixedHeight": {
@@ -1351,47 +1103,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -1512,7 +1224,11 @@ const COMPONENTS = [
                 "right": 162.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/medium",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/medium"
               },
               "fill": "imported/slider/slider-thumb/background-color/info",
               "fixedHeight": {
@@ -1523,47 +1239,7 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -1684,7 +1360,11 @@ const COMPONENTS = [
                 "right": 166.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/small",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/small"
               },
               "fill": "imported/slider/slider-thumb/background-color/info",
               "fixedHeight": {
@@ -1695,47 +1375,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -1856,7 +1496,11 @@ const COMPONENTS = [
                 "right": 162.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/medium",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/medium",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/medium",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/medium"
               },
               "fill": "imported/slider/slider-thumb/background-color/success",
               "fixedHeight": {
@@ -1867,47 +1511,7 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/height/medium"
-                  },
-                  "fixedWidth": {
-                    "px": 20,
-                    "varName": "imported/slider/part-2-0/width/medium"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -2028,7 +1632,11 @@ const COMPONENTS = [
                 "right": 166.812
               },
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "bottomLeftRadius": "imported/slider/slider-thumb/border-bottom-left-radius/small",
+                "bottomRightRadius": "imported/slider/slider-thumb/border-bottom-right-radius/small",
+                "topLeftRadius": "imported/slider/slider-thumb/border-top-left-radius/small",
+                "topRightRadius": "imported/slider/slider-thumb/border-top-right-radius/small"
               },
               "fill": "imported/slider/slider-thumb/background-color/success",
               "fixedHeight": {
@@ -2039,47 +1647,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "part-2-0",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "CENTER"
-                  },
-                  "grow": true,
-                  "fill": "imported/slider/part-2-0/background-color",
-                  "margins": {
-                    "bottom": -1,
-                    "left": -1,
-                    "right": -1,
-                    "top": -1
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0"
-                  },
-                  "fixedHeight": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/height/small"
-                  },
-                  "fixedWidth": {
-                    "px": 12,
-                    "varName": "imported/slider/part-2-0/width/small"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "placeholder",
-                      "characters": "",
-                      "fontSize": 13.3333,
-                      "fontStyle": "Medium",
-                      "fontFamily": "Arial",
-                      "textFill": "imported/shared/color-101010"
-                    }
-                  ]
-                }
-              ]
+              "children": []
             }
           ]
         }
@@ -2351,7 +1919,11 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // natural post-backdrop index — else the opaque backdrop sibling paints
     // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
     // previously hand-corrected on canvas each re-amend).
-    if (!childNode.children || childNode.children.length === 0) {
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
@@ -2366,34 +1938,6 @@ function applyInsetOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -2406,17 +1950,6 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
-    if (spec.fontFamily) {
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -2520,7 +2053,6 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
     applyInsetOverlay(node, childNode, child);
-    applyMarginBox(node, childNode, child);
   }
   return node;
 }
@@ -2621,7 +2153,6 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
     applyInsetOverlay(comp, childNode, childSpec);
-    applyMarginBox(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }

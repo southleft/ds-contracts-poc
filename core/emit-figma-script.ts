@@ -1839,7 +1839,16 @@ function variantParts(
   parts: Record<string, Part>,
   subst: Record<string, string>,
 ): Array<[string, Part]> {
-  return Object.entries(parts).filter(([, p]) => {
+  // CSS PAINT ORDER (Switch live finding): positioned elements (absolute OR
+  // relative, z-index auto) paint ABOVE in-flow siblings, each group in DOM
+  // order — the thumb-bearing absolute switchBase must sit over the in-flow
+  // track. Stable partition: in-flow first, positioned after (TextField's
+  // backdrop→input pair keeps its DOM order inside the positioned group).
+  const entries = Object.entries(parts);
+  const positioned = (p: Part): boolean =>
+    p.declared?.['position'] === 'absolute' || p.declared?.['position'] === 'relative';
+  entries.sort((x, y) => Number(positioned(x[1])) - Number(positioned(y[1])));
+  return entries.filter(([, p]) => {
     // v11: a native checkable control (input[type=checkbox|radio]) is CODE
     // semantics — the presentational box and glyphs are the visual; the
     // canvas doesn't draw semantics, so the part compiles to no node at all.
@@ -3015,7 +3024,11 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // natural post-backdrop index — else the opaque backdrop sibling paints
     // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
     // previously hand-corrected on canvas each re-amend).
-    if (!childNode.children || childNode.children.length === 0) {
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';

@@ -36,6 +36,9 @@ export function createFigmaMock() {
   const allStyles = [];
   const collections = [];
   const variables = [];
+  // setBoundVariable value reflection skips fields whose mock accessors have
+  // layout semantics (width/height ride resize + auto-layout sizing).
+  const NUMERIC_REFLECT_EXCLUDE = new Set(['width', 'height']);
   const mixed = Symbol('figma.mixed');
 
   class MockNode {
@@ -216,6 +219,16 @@ export function createFigmaMock() {
 
     setBoundVariable(field, variable) {
       this.boundVariables[field] = { type: 'VARIABLE_ALIAS', id: variable.id };
+      // Real Figma REFLECTS the bound variable's value onto the property —
+      // a FLOAT variable bound to topLeftRadius changes the rendered radius.
+      // (MUI round live-paste-2: the mock recorded the alias only, so the
+      // thumb radius pin read 0 while the real canvas would draw 10.)
+      try {
+        const r = variable.resolveForConsumer?.();
+        if (r && r.resolvedType === 'FLOAT' && typeof r.value === 'number' && !NUMERIC_REFLECT_EXCLUDE.has(field)) {
+          this[field] = r.value;
+        }
+      } catch { /* non-resolvable — alias recorded, value untouched */ }
     }
 
     findOne(cb) {

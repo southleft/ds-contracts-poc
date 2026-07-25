@@ -645,7 +645,11 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // natural post-backdrop index — else the opaque backdrop sibling paints
     // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
     // previously hand-corrected on canvas each re-amend).
-    if (!childNode.children || childNode.children.length === 0) {
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';

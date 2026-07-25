@@ -106,10 +106,45 @@ for (const file of scripts) {
       if (rails.length === 0) throw new Error('slider-rail pin: no nodes');
       const badRail = rails.find((n) => Math.round(n.height) !== 4 || n.width < 100);
       if (badRail) throw new Error(`slider-rail pin: expected h=4/stretched, found ${Math.round(badRail.width)}x${Math.round(badRail.height)}`);
+      // LIVE-PASTE-2 PINS: round thumb (50% radius baked to px), hidden
+      // input (clip-rect idiom carried as display:none — no white cover),
+      // and CSS paint order (rail under track under thumb).
+      const th = mock.root.findAll((n) => n.name === 'slider-thumb' && inMedium(n));
+      const radOf = (n) => n.topLeftRadius ?? n.cornerRadius ?? 0;
+      const badR = th.find((n) => Math.round(radOf(n)) !== 10);
+      if (badR) throw new Error(`slider-thumb radius pin: expected 10, found ${radOf(badR)}`);
+      for (const t of th) {
+        const inputs = (t.children ?? []).filter((c) => c.visible !== false);
+        const whiteCover = inputs.find((c) => (c.fills ?? []).some((f) => f.type === 'SOLID' && f.color && f.color.r > 0.99 && f.color.g > 0.99 && f.color.b > 0.99));
+        if (whiteCover) throw new Error('slider hidden-input pin: a visible white-filled child covers the thumb');
+      }
+      for (const v2 of mock.root.findAll((n) => n.type === 'COMPONENT' && /Size=Medium/.test(n.name))) {
+        const order = (v2.children ?? []).map((c) => c.name);
+        const ir = order.indexOf('slider-rail'); const it = order.indexOf('slider-track'); const ith = order.indexOf('slider-thumb');
+        if (ir < 0 || it < 0 || ith < 0) continue;
+        if (!(ir < it && it < ith)) throw new Error(`slider paint-order pin: expected rail<track<thumb, got [${order.join(', ')}]`);
+      }
     }
     if (name === 'switch') {
       geoPin('switch-track(medium)', mock.root.findAll((n) => n.name === 'switch-track' && inMedium(n)), 34, 14);
       geoPin('switch-thumb(medium)', mock.root.findAll((n) => n.name === 'switch-thumb' && inMedium(n)), 20, 20);
+      // LIVE-PASTE-2 PINS: the absolute switchBase paints ABOVE the in-flow
+      // track (CSS positioned-over-in-flow), the 300%-wide opacity-0 input
+      // is carried hidden, and the thumb is a circle.
+      for (const v2 of mock.root.findAll((n) => n.type === 'COMPONENT' && /Size=Medium/.test(n.name))) {
+        const order = (v2.children ?? []).map((c) => c.name);
+        const itr = order.indexOf('switch-track');
+        const ibb = order.findIndex((nm) => /buttonbase/.test(nm));
+        if (itr < 0 || ibb < 0) continue;
+        if (!(itr < ibb)) throw new Error(`switch paint-order pin: track must precede the absolute switchBase, got [${order.join(', ')}]`);
+      }
+      const hiddenInputs = mock.root.findAll((n) => n.name === 'switch-input' && inMedium(n));
+      const visibleInput = hiddenInputs.find((n) => n.visible !== false && !(n.opacity === 0));
+      if (visibleInput) throw new Error('switch hidden-input pin: the opacity-0 input rendered visible');
+      const th2 = mock.root.findAll((n) => n.name === 'switch-thumb' && inMedium(n));
+      const radOf2 = (n) => n.topLeftRadius ?? n.cornerRadius ?? 0;
+      const badR2 = th2.find((n) => Math.round(radOf2(n)) !== 10);
+      if (badR2) throw new Error(`switch-thumb radius pin: expected 10, found ${radOf2(badR2)}`);
     }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
     rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);

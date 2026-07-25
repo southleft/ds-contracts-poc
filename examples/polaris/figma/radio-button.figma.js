@@ -175,26 +175,6 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "shape",
-                      "name": "backdrop",
-                      "shape": {
-                        "kind": "rect",
-                        "width": 18,
-                        "height": 18
-                      },
-                      "bindings": {
-                        "topLeftRadius": "p/border-radius-full",
-                        "topRightRadius": "p/border-radius-full",
-                        "bottomLeftRadius": "p/border-radius-full",
-                        "bottomRightRadius": "p/border-radius-full",
-                        "strokeWeight": "p/border-width-0165",
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "fill": "imported/radio-button/backdrop/background-color/checked",
-                      "stroke": "imported/radio-button/backdrop/border-top-color/checked"
-                    },
-                    {
-                      "type": "shape",
                       "name": "backdrop-before",
                       "shape": {
                         "kind": "ellipse",
@@ -215,6 +195,26 @@ const COMPONENTS = [
                         "left": 4,
                         "top": 4
                       }
+                    },
+                    {
+                      "type": "shape",
+                      "name": "backdrop",
+                      "shape": {
+                        "kind": "rect",
+                        "width": 18,
+                        "height": 18
+                      },
+                      "bindings": {
+                        "topLeftRadius": "p/border-radius-full",
+                        "topRightRadius": "p/border-radius-full",
+                        "bottomLeftRadius": "p/border-radius-full",
+                        "bottomRightRadius": "p/border-radius-full",
+                        "strokeWeight": "p/border-width-0165",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "fill": "imported/radio-button/backdrop/background-color/checked",
+                      "stroke": "imported/radio-button/backdrop/border-top-color/checked"
                     }
                   ]
                 }

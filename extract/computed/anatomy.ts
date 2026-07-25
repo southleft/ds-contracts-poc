@@ -40,7 +40,13 @@ import { signature, stems, type Capture, type CapturedNode, type Combo, type Fla
  *  and occurrence matching would otherwise swap their identities. */
 export const isSrOnlyStyle = (st: Record<string, string>): boolean =>
   (st['clip-path'] ?? '').startsWith('inset(50%') ||
-  (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px');
+  (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px') ||
+  // MUI round (Slider/Switch live finding): two more hiding idioms — the
+  // legacy clip rect (Slider's input) and opacity:0 (Switch's input, drawn
+  // 300% wide over the whole control). Without these the promoted input
+  // parts carried their default WHITE background and painted over the thumb.
+  st['clip'] === 'rect(0px, 0px, 0px, 0px)' ||
+  st['opacity'] === '0';
 
 // ===========================================================================
 // DEPTH BUILD — Stage B: root descent through transparent wrappers (N3 fix).

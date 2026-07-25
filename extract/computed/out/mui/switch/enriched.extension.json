@@ -103,6 +103,46 @@
           }
         },
         "buttonbase-root": {
+          "border-bottom-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "19px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "19px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "19px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "19px",
+              "$type": "dimension"
+            }
+          },
           "height": {
             "small": {
               "$value": "24px",
@@ -309,6 +349,46 @@
           }
         },
         "switch-thumb": {
+          "border-bottom-left-radius": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          },
           "box-shadow": {
             "$value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
             "$type": "shadow"
@@ -708,6 +788,11 @@
       },
       {
         "part": "switch-input",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "switch-input",
         "channel": "user-select",
         "value": "none"
       },
@@ -822,34 +907,6 @@
     },
     {
       "part": "buttonbase-root",
-      "channel": "border-bottom-left-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "buttonbase-root",
-      "channel": "border-bottom-right-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "buttonbase-root",
-      "channel": "border-top-left-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "buttonbase-root",
-      "channel": "border-top-right-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "buttonbase-root",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -860,34 +917,6 @@
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
-      "distinctValues": 1
-    },
-    {
-      "part": "switch-thumb",
-      "channel": "border-bottom-left-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "switch-thumb",
-      "channel": "border-bottom-right-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "switch-thumb",
-      "channel": "border-top-left-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "switch-thumb",
-      "channel": "border-top-right-radius",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "50%",
       "distinctValues": 1
     },
     {
@@ -1104,6 +1133,7 @@
     "receipts": [
       "root-display-carried: flex",
       "aspect-carried: buttonbase-root computed width == height in every enabled combo (24/38px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "sr-only-carried-as-hidden: switch-input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "aspect-carried: switch-thumb computed width == height in every enabled combo (16/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
       "full-width-carried: switch-thumb spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
       "full-width-carried: switch-track spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
@@ -1128,6 +1158,7 @@
     "declared fact carried: switch-input.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-input.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-input.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: switch-input.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-input.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
