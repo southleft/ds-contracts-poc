@@ -145,11 +145,13 @@
     dependency-ordered. Or receive a bundle by pairing code
     (<span class="mono">ds-contracts figma push &lt;file&gt; --code &lt;CODE&gt;</span>).
   </div>
-  <div class="row">
-    <button class="secondary" id="gen-sample">Build the sample library</button>
-    <span class="hint">Nothing to paste yet? One click builds the reference
-      set baked into this plugin — Card, Badge, Avatar, Button — token-bound,
-      in this file. Safe to re-run.</span>
+  <!-- Live UI finding (TJ, round 41): the button+hint row squeezed the
+       button into a tall sliver and clipped the hint — stacked block layout,
+       hint wraps under the full-width button. -->
+  <div style="margin:6px 0 10px;">
+    <button class="secondary" id="gen-sample" style="width:100%;white-space:nowrap;">Nothing to paste yet? Build the sample library</button>
+    <div class="hint" style="margin-top:4px;white-space:normal;">One click builds the reference set baked into this
+      plugin — Card, Badge, Avatar, Button — token-bound, in this file. Safe to re-run.</div>
   </div>
   <div class="row">
     <input type="text" class="pair-code" id="gen-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
