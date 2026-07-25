@@ -588,10 +588,26 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
   try {
     childNode.layoutPositioning = 'ABSOLUTE';
     const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
     childNode.constraints = {
-      horizontal: a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
-      vertical: a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
     };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
     const w = childSpec.shape ? childSpec.shape.width : childNode.width;
     const h = childSpec.shape ? childSpec.shape.height : childNode.height;
     // Center of the intrinsic box in parent coordinates (MIN pins left/top,

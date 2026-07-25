@@ -29,7 +29,7 @@ import { kebab } from '../types.js';
 import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
 import { INTERACTIONS, stageFor } from './capture.js';
-import { isFusable, type Capture, type Combo, type FlatEl } from './lib.js';
+import { isFusable, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl } from './lib.js';
 import type { AlignedSweep } from './fuse.js';
 
 export interface GateRow {
@@ -270,7 +270,7 @@ ${stages.join('\n')}
         const idx = partIndex.get(part)!;
         const truthEl: FlatEl | null = truthEls[idx];
         if (!truthEl) continue;
-        const channels = [...(styled.get(part) ?? [])].filter(isFusable).sort();
+        const channels = [...(styled.get(part) ?? [])].filter((c) => isFusable(c) && !SYNTHETIC_CHANNELS.has(c)).sort();
         if (channels.length === 0) continue;
         const ours = (await page.evaluate(
           `(() => { const el = document.querySelector('${stageSel} ${sel}'); if (!el) return null; const cs = getComputedStyle(el); const o = {}; for (const p of ${JSON.stringify(channels)}) o[p] = cs.getPropertyValue(p); return o; })()`,

@@ -184,8 +184,8 @@
     "computedPctEqual": 100,
     "rowsFullyEqual": 16,
     "rows": 16,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 16,
+    "pixelPerfectAA": 16,
     "pairs": 16
   },
   "focusVisibleDriverMatched": 0,

@@ -104,6 +104,20 @@ The known edges, so nobody discovers them the hard way:
 - **Behavior, motion, a11y semantics beyond states** are downstream
   concerns the contract deliberately leaves to the code that owns them.
 
+## The supported set (the scope decision, 2026-07-25)
+
+Guaranteed, gated, first-party: **React and Web Components (CEM)** component
+libraries, with four styling methods — **CSS Modules, Emotion (CSS-variables
+mode), StyleX, and Tailwind**. Three of the four readers are built and
+receipted today (CSS Modules/Polaris, StyleX/Astryx, Emotion/MUI); the
+Tailwind reader is the named remaining member. Everything outside this set
+is **explicitly not a core promise**: it runs through the computed floor's
+graceful degradation (correct pixels, literal token names) and graduates to
+full support only as a *reader plugin* — community-contributed under the
+open spec, never a blocker baked into the engine. One-off architectures get
+the alternative path: an attached companion contract carrying what the core
+vocabulary refuses, by name.
+
 ## Why this bounds the roadmap
 
 The target vocabulary — Figma's expressible surface — is **finite and

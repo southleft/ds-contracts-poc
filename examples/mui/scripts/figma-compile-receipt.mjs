@@ -72,6 +72,45 @@ for (const file of scripts) {
     const tok = await runScript(mock.figma, TOKENS_SCRIPT);
     if (!tok || typeof tok.total !== 'number') throw new Error('token sync returned no receipt');
     await runScript(mock.figma, src);
+    // LIVE-CANVAS PINS (2026-07-25 review): the two classes the first live
+    // paste exposed that no gate caught — box-padded text lowering (Chip's
+    // label span owns the pill's 12px side padding; a TEXT node can't carry
+    // it) and root direct-text content (Card renders children as a bare text
+    // node). Pinned here so they can never pass silently again.
+    if (name === 'chip') {
+      const labels = mock.root.findAll((n) => n.name === 'label' && n.type === 'FRAME');
+      if (labels.length === 0) throw new Error('chip pin: no label FRAME — box-padded text lowering missing');
+      const bad = labels.find((f) => f.paddingLeft !== 12 || f.paddingRight !== 12 || !(f.children ?? []).some((c) => c.type === 'TEXT'));
+      if (bad) throw new Error(`chip pin: label frame missing 12px side padding or TEXT child (padL=${bad.paddingLeft}, padR=${bad.paddingRight})`);
+    }
+    if (name === 'card') {
+      const texts = mock.root.findAll((n) => n.type === 'TEXT' && n.characters === 'Card content');
+      if (texts.length === 0) throw new Error('card pin: no "Card content" TEXT node — root content binding missing');
+    }
+    // GEOMETRY PINS (absolute-positioning round): the class the fidelity
+    // gate is structurally blind to (geometry is excluded from computed
+    // comparison) — pinned here at the REAL MUI default-theme numbers so
+    // overlay-anatomy collapse can never pass headlessly again.
+    const geoPin = (label, nodes, w, h) => {
+      if (nodes.length === 0) throw new Error(`${label} pin: no nodes found`);
+      const bad = nodes.find((n) => Math.round(n.width) !== w || Math.round(n.height) !== h);
+      if (bad) throw new Error(`${label} pin: expected ${w}x${h}, found ${Math.round(bad.width)}x${Math.round(bad.height)}`);
+    };
+    const inMedium = (n) => {
+      for (let a = n.parent; a; a = a.parent) if (a.type === 'COMPONENT' && /Size=Medium/.test(a.name)) return true;
+      return false;
+    };
+    if (name === 'slider') {
+      geoPin('slider-thumb(medium)', mock.root.findAll((n) => n.name === 'slider-thumb' && inMedium(n)), 20, 20);
+      const rails = mock.root.findAll((n) => n.name === 'slider-rail' && inMedium(n));
+      if (rails.length === 0) throw new Error('slider-rail pin: no nodes');
+      const badRail = rails.find((n) => Math.round(n.height) !== 4 || n.width < 100);
+      if (badRail) throw new Error(`slider-rail pin: expected h=4/stretched, found ${Math.round(badRail.width)}x${Math.round(badRail.height)}`);
+    }
+    if (name === 'switch') {
+      geoPin('switch-track(medium)', mock.root.findAll((n) => n.name === 'switch-track' && inMedium(n)), 34, 14);
+      geoPin('switch-thumb(medium)', mock.root.findAll((n) => n.name === 'switch-thumb' && inMedium(n)), 20, 20);
+    }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
     rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);
     totalVariants += got;

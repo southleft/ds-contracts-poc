@@ -227,6 +227,21 @@ export interface DeclaredChannelSpec {
 const kw = (...words: string[]) => new RegExp(`^(${words.join('|')})$`);
 
 export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
+  // -- absolute-position round (MUI Slider/Switch): overlay-anatomy facts ---
+  transform: {
+    // IDENTITY-TRANSLATE matrices only — matrix(1, 0, 0, 1, tx, ty), the
+    // shape Chromium computes for translate()/translate(-50%,-50%) on a
+    // sized box. Scales/rotations/skews stay outside the grammar (named
+    // residue) — the canvas lowering folds tx/ty into absolute offsets.
+    value: /^matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$/,
+    canvas: 'draw',
+    note: 'Identity-translate transform on an absolute part — folded into the canvas absolute offsets (tx/ty).',
+  },
+  'box-sizing': {
+    value: kw('border-box', 'content-box'),
+    canvas: 'draw',
+    note: 'Box-sizing changes what captured width/height mean — content-box geometry gets padding added when lowered to canvas frame sizes.',
+  },
   // -- interaction-only channels (matrix §9: no canvas concept) -------------
   cursor: {
     value: /^[a-z-]+$/,

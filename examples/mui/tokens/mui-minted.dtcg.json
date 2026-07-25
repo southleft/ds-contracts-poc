@@ -2562,6 +2562,16 @@
     },
     "switch": {
       "root": {
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "38px",
+            "$type": "dimension"
+          }
+        },
         "padding-bottom": {
           "small": {
             "$value": "7px",
@@ -2601,9 +2611,29 @@
             "$value": "12px",
             "$type": "dimension"
           }
+        },
+        "width": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "58px",
+            "$type": "dimension"
+          }
         }
       },
       "buttonbase-root": {
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "38px",
+            "$type": "dimension"
+          }
+        },
         "padding-bottom": {
           "small": {
             "$value": "4px",
@@ -2651,6 +2681,16 @@
           },
           "medium": {
             "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "38px",
             "$type": "dimension"
           }
         },
@@ -2732,6 +2772,16 @@
           "$value": "13.3333px",
           "$type": "dimension"
         },
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "38px",
+            "$type": "dimension"
+          }
+        },
         "left": {
           "small": {
             "$value": "-24px",
@@ -2749,6 +2799,16 @@
           },
           "medium": {
             "$value": "-38px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "72px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "114px",
             "$type": "dimension"
           }
         },
@@ -2773,6 +2833,26 @@
         "box-shadow": {
           "$value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
           "$type": "shadow"
+        },
+        "height": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
         },
         "background-color-state-checked": {
           "primary": {
@@ -2870,9 +2950,29 @@
           "$value": "#000000",
           "$type": "color"
         },
+        "height": {
+          "small": {
+            "$value": "10px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "14px",
+            "$type": "dimension"
+          }
+        },
         "opacity": {
           "$value": "0.38",
           "$type": "number"
+        },
+        "width": {
+          "small": {
+            "$value": "26px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "34px",
+            "$type": "dimension"
+          }
         },
         "background-color-state-checked": {
           "primary": {
@@ -2942,6 +3042,16 @@
             "$type": "color"
           }
         },
+        "height": {
+          "small": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "30px",
+            "$type": "dimension"
+          }
+        },
         "padding-bottom": {
           "$value": "13px",
           "$type": "dimension"
@@ -2975,6 +3085,10 @@
             "$value": "#2e7d32",
             "$type": "color"
           }
+        },
+        "width": {
+          "$value": "288px",
+          "$type": "dimension"
         }
       },
       "slider-rail": {
@@ -3040,6 +3154,16 @@
             "$type": "color"
           }
         },
+        "height": {
+          "small": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
         "opacity": {
           "$value": "0.38",
           "$type": "number"
@@ -3079,6 +3203,20 @@
             "$value": "15px",
             "$type": "dimension"
           }
+        },
+        "translate-y": {
+          "small": {
+            "$value": "-1px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "-2px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "$value": "288px",
+          "$type": "dimension"
         }
       },
       "slider-track": {
@@ -3184,6 +3322,16 @@
             "$type": "color"
           }
         },
+        "height": {
+          "small": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "6px",
+            "$type": "dimension"
+          }
+        },
         "right": {
           "small": {
             "$value": "172.812px",
@@ -3227,6 +3375,26 @@
           },
           "medium": {
             "$value": "15px",
+            "$type": "dimension"
+          }
+        },
+        "translate-y": {
+          "small": {
+            "$value": "-1px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "-3px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "115.188px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "117.188px",
             "$type": "dimension"
           }
         }
@@ -3294,6 +3462,16 @@
             "$type": "color"
           }
         },
+        "height": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
         "left": {
           "$value": "115.188px",
           "$type": "dimension"
@@ -3341,6 +3519,36 @@
           },
           "medium": {
             "$value": "15px",
+            "$type": "dimension"
+          }
+        },
+        "translate-x": {
+          "small": {
+            "$value": "-6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "-10px",
+            "$type": "dimension"
+          }
+        },
+        "translate-y": {
+          "small": {
+            "$value": "-6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "-10px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
             "$type": "dimension"
           }
         },
@@ -3409,6 +3617,26 @@
         "font-size": {
           "$value": "13.3333px",
           "$type": "dimension"
+        },
+        "height": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
         },
         "outline-color-state-focus-visible": {
           "$value": "#005fcc",

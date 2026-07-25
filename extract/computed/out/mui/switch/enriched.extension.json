@@ -41,6 +41,16 @@
       },
       "switch": {
         "root": {
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "38px",
+              "$type": "dimension"
+            }
+          },
           "padding-bottom": {
             "small": {
               "$value": "7px",
@@ -80,9 +90,29 @@
               "$value": "12px",
               "$type": "dimension"
             }
+          },
+          "width": {
+            "small": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "58px",
+              "$type": "dimension"
+            }
           }
         },
         "buttonbase-root": {
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "38px",
+              "$type": "dimension"
+            }
+          },
           "padding-bottom": {
             "small": {
               "$value": "4px",
@@ -130,6 +160,16 @@
             },
             "medium": {
               "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "38px",
               "$type": "dimension"
             }
           },
@@ -211,6 +251,16 @@
             "$value": "13.3333px",
             "$type": "dimension"
           },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "38px",
+              "$type": "dimension"
+            }
+          },
           "left": {
             "small": {
               "$value": "-24px",
@@ -228,6 +278,16 @@
             },
             "medium": {
               "$value": "-38px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "72px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "114px",
               "$type": "dimension"
             }
           },
@@ -252,6 +312,26 @@
           "box-shadow": {
             "$value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
             "$type": "shadow"
+          },
+          "height": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
           },
           "background-color-state-checked": {
             "primary": {
@@ -349,9 +429,29 @@
             "$value": "#000000",
             "$type": "color"
           },
+          "height": {
+            "small": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "14px",
+              "$type": "dimension"
+            }
+          },
           "opacity": {
             "$value": "0.38",
             "$type": "number"
+          },
+          "width": {
+            "small": {
+              "$value": "26px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "34px",
+              "$type": "dimension"
+            }
           },
           "background-color-state-checked": {
             "primary": {
@@ -533,6 +633,11 @@
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -545,6 +650,11 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "buttonbase-root",
@@ -583,6 +693,11 @@
       },
       {
         "part": "switch-input",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "switch-input",
         "channel": "cursor",
         "value": "pointer"
       },
@@ -615,6 +730,11 @@
         "part": "switch-thumb",
         "channel": "border-top-style",
         "value": "solid"
+      },
+      {
+        "part": "switch-thumb",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "switch-thumb",
@@ -695,13 +815,6 @@
   "codeOnlyChannels": [
     {
       "part": "root",
-      "channel": "box-sizing",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "border-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
@@ -733,13 +846,6 @@
       "channel": "border-top-right-radius",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "buttonbase-root",
-      "channel": "box-sizing",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "border-box",
       "distinctValues": 1
     },
     {
@@ -757,13 +863,6 @@
       "distinctValues": 1
     },
     {
-      "part": "switch-input",
-      "channel": "box-sizing",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "border-box",
-      "distinctValues": 1
-    },
-    {
       "part": "switch-thumb",
       "channel": "border-bottom-left-radius",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -789,13 +888,6 @@
       "channel": "border-top-right-radius",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "50%",
-      "distinctValues": 1
-    },
-    {
-      "part": "switch-thumb",
-      "channel": "box-sizing",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "border-box",
       "distinctValues": 1
     },
     {
@@ -967,6 +1059,11 @@
   ],
   "structureReceipts": [],
   "styledChannelReceipts": [
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: buttonbase-root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: switch-input — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: switch-thumb — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: switch-track — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <input> — span control used (part switch-input)"
   ],
   "anatomyJoin": {
@@ -1016,9 +1113,11 @@
   "enrichmentNotes": [
     "layout enriched: buttonbase-root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: buttonbase-root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: buttonbase-root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: buttonbase-root.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: buttonbase-root.transition-duration = 0.15s, 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1026,6 +1125,7 @@
     "declared fact carried: buttonbase-root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: buttonbase-root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-input.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-input.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-input.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-input.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-input.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1033,6 +1133,7 @@
     "declared fact carried: switch-thumb.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-thumb.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-track.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",

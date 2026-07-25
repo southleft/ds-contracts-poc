@@ -142,6 +142,40 @@ export function alignSweep(
 // ---------------------------------------------------------------------------
 const isEnabled = (combo: Combo): boolean => Object.values(combo.stateFlags).every((f) => !f);
 
+/** Absolute-position round: the overlay-anatomy CLUSTER — uniformly-
+ *  absolute parts (absAdmit) plus every non-text sibling/ancestor part of a
+ *  component that contains any (clusterAdmit). Shared by styledChannels
+ *  (channel admission) and prepareMint (outer-size baking). */
+export function absClusterParts(
+  a: AlignedSweep,
+  space: PropSpace,
+): { absAdmit: Set<number>; clusterAdmit: Set<number>; textExcluded: Set<number> } {
+  const absAdmit = new Set<number>();
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    let seen = 0;
+    let abs = true;
+    for (const combo of space.enumeration.combos) {
+      if (!isEnabled(combo)) continue;
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (!el) continue;
+      seen++;
+      if (el.node.style['position'] !== 'absolute') { abs = false; break; }
+    }
+    if (seen > 0 && abs) absAdmit.add(pi);
+  }
+  const clusterAdmit = new Set<number>();
+  const textExcluded = new Set<number>();
+  if (absAdmit.size > 0) {
+    for (let pi = 0; pi < a.baseFlat.length; pi++) {
+      if (absAdmit.has(pi)) continue;
+      const hasText = a.baseFlat[pi].node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
+      if (hasText) textExcluded.add(pi);
+      else clusterAdmit.add(pi);
+    }
+  }
+  return { absAdmit, clusterAdmit, textExcluded };
+}
+
 export function styledChannels(
   a: AlignedSweep,
   space: PropSpace,
@@ -150,13 +184,40 @@ export function styledChannels(
   receipts: string[],
 ): Map<string, Set<string>> {
   const out = new Map<string, Set<string>>();
+  // ABSOLUTE-POSITION ROUND (MUI Slider/Switch live finding): geometry
+  // channels are excluded from fusion as environment-dependent — the right
+  // rule in general and the wrong rule for exactly one class: a part whose
+  // computed position is uniformly ABSOLUTE (and its direct parent, which
+  // must size itself when every child leaves the flow). Their captured
+  // width/height/offsets are stable decorative geometry (a 20px thumb, a
+  // 4px rail) — without them the canvas stacks the overlay anatomy into
+  // auto-layout blocks. Admission is per-part and receipted; every other
+  // part keeps the exclusion byte-identically.
+  const GEOM_ADMIT = new Set(['width', 'height', 'top', 'left', 'right', 'bottom', 'translate-x', 'translate-y']);
+  const { absAdmit } = absClusterParts(a, space);
+  // An overlay stack is a CLUSTER: the absolute parts, the parent that must
+  // size itself when children leave the flow, AND the in-flow members whose
+  // boxes the stack is built against (Switch's track fills the root; its
+  // thumb sits inside the absolute switchBase). Once a component contains
+  // any uniformly-absolute part, geometry is admitted for EVERY non-text
+  // part (text widths are font-metric-dependent — the one genuinely
+  // environment-coupled case stays excluded, receipted).
+  const { clusterAdmit: parentAdmit, textExcluded } = absClusterParts(a, space);
+  for (const pi of textExcluded) {
+    receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
+  }
+  for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
+    receipts.push(`absolute-geometry-admitted: ${a.partNames[pi]} — ${absAdmit.has(pi) ? 'uniformly position:absolute' : 'overlay-cluster member (component contains absolute parts)'}; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)`);
+  }
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
+    const admit = (p: string): boolean =>
+      isFusable(p) || (GEOM_ADMIT.has(p) && (absAdmit.has(pi) || parentAdmit.has(pi)));
     const tag = a.baseFlat[pi].node.tag;
     const ctrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);
     for (const p of allProps) {
-      if (!isFusable(p)) continue;
+      if (!admit(p)) continue;
       if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
     }
     for (const combo of space.enumeration.combos) {
@@ -164,8 +225,14 @@ export function styledChannels(
       const el = a.getAligned(`${combo.key}__default`)[pi];
       if (!el) continue;
       for (const p of allProps) {
-        if (!isFusable(p)) continue;
+        if (!admit(p)) continue;
         if (el.node.style[p] !== a.baseFlat[pi].node.style[p]) set.add(p);
+      }
+    }
+    // synthetic translate channels live outside the browser enumeration
+    if (absAdmit.has(pi) || parentAdmit.has(pi)) {
+      for (const p of ['translate-x', 'translate-y']) {
+        if (a.baseFlat[pi].node.style[p] !== undefined) set.add(p);
       }
     }
     // Round 5c — TEXT-PART TYPOGRAPHY IS ALWAYS A FACT: a text-bearing
@@ -624,6 +691,15 @@ export function prepareMint(
     return null;
   };
 
+  const pxOf = (val: string | undefined): number | null => {
+    if (val === undefined) return null;
+    const m = /^(-?[\d.]+)px$/.exec(val);
+    return m ? parseFloat(m[1]) : null;
+  };
+  const geomOuterParts = (() => {
+    const { absAdmit, clusterAdmit } = absClusterParts(a, space);
+    return new Set([...absAdmit, ...clusterAdmit]);
+  })();
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
     const obs: MintObservation[] = [];
     const codeOnly: CodeOnlyEntry[] = [];
@@ -652,7 +728,28 @@ export function prepareMint(
         for (const combo of enabledCombos) {
           const el = a.getAligned(`${combo.key}__default`)[pi];
           if (!el) continue;
-          const v = el.node.style[channel];
+          let v = el.node.style[channel];
+          // Absolute-position round: computed width/height are CONTENT-box
+          // sizes; a canvas frame resize is the BORDER box. For the admitted
+          // overlay-cluster geometry, bake padding+border into the minted
+          // value so the variable carries the true canvas size (the slider
+          // root: 4px content + 13px×2 padding = 30px frame).
+          if ((channel === 'width' || channel === 'height') && geomOuterParts.has(pi) && el.node.style['box-sizing'] !== 'border-box') {
+            // border-box parts already capture the outer size (Chromium's
+            // computed geometry follows box-sizing — the Switch root read
+            // 58px with its 12px paddings included; the content-box Slider
+            // root read its bare 4px content height).
+            const base = pxOf(v);
+            if (base !== null) {
+              const sides = channel === 'width' ? ['left', 'right'] : ['top', 'bottom'];
+              let outer = base;
+              for (const side of sides) {
+                outer += pxOf(el.node.style[`padding-${side}`]) ?? 0;
+                outer += pxOf(el.node.style[`border-${side}-width`]) ?? 0;
+              }
+              if (outer !== base) v = `${Math.round(outer * 1000) / 1000}px`;
+            }
+          }
           // MUI round: a channel can be ABSENT on this part in some combos
           // (union-aligned parts that exist only under certain states).
           // `unk ??= undefined` is a no-op, so absence used to slip past the

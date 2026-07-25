@@ -55,6 +55,16 @@
               "$type": "color"
             }
           },
+          "height": {
+            "small": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "30px",
+              "$type": "dimension"
+            }
+          },
           "padding-bottom": {
             "$value": "13px",
             "$type": "dimension"
@@ -88,6 +98,10 @@
               "$value": "#2e7d32",
               "$type": "color"
             }
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
           }
         },
         "slider-rail": {
@@ -153,6 +167,16 @@
               "$type": "color"
             }
           },
+          "height": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
           "opacity": {
             "$value": "0.38",
             "$type": "number"
@@ -192,6 +216,20 @@
               "$value": "15px",
               "$type": "dimension"
             }
+          },
+          "translate-y": {
+            "small": {
+              "$value": "-1px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-2px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
           }
         },
         "slider-track": {
@@ -297,6 +335,16 @@
               "$type": "color"
             }
           },
+          "height": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "6px",
+              "$type": "dimension"
+            }
+          },
           "right": {
             "small": {
               "$value": "172.812px",
@@ -340,6 +388,26 @@
             },
             "medium": {
               "$value": "15px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "small": {
+              "$value": "-1px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-3px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "115.188px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "117.188px",
               "$type": "dimension"
             }
           }
@@ -407,6 +475,16 @@
               "$type": "color"
             }
           },
+          "height": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
           "left": {
             "$value": "115.188px",
             "$type": "dimension"
@@ -454,6 +532,36 @@
             },
             "medium": {
               "$value": "15px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "small": {
+              "$value": "-6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-10px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "small": {
+              "$value": "-6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-10px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
               "$type": "dimension"
             }
           },
@@ -522,6 +630,26 @@
           "font-size": {
             "$value": "13.3333px",
             "$type": "dimension"
+          },
+          "height": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
           },
           "outline-color-state-focus-visible": {
             "$value": "#005fcc",
@@ -869,6 +997,11 @@
       },
       {
         "part": "slider-thumb",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-thumb",
         "channel": "cursor",
         "value": "pointer"
       },
@@ -936,7 +1069,7 @@
     {
       "part": "slider-rail",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, 0, -1)",
       "distinctValues": 2
     },
@@ -971,7 +1104,7 @@
     {
       "part": "slider-track",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, 0, -1)",
       "distinctValues": 2
     },
@@ -1012,15 +1145,8 @@
     },
     {
       "part": "slider-thumb",
-      "channel": "box-sizing",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "border-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "slider-thumb",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, -6, -6)",
       "distinctValues": 2
     },
@@ -1196,6 +1322,11 @@
   "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-rail — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-track — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-thumb — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-2-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <input> — span control used (part part-2-0)"
   ],
   "anatomyJoin": {
@@ -1252,6 +1383,7 @@
     "declared fact carried: slider-track.transition-duration = 0.15s, 0.15s, 0.15s, 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-track.transition-property = left, width, bottom, height (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-track.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: slider-thumb.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb.transition-delay = 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb.transition-duration = 0.15s, 0.15s, 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",

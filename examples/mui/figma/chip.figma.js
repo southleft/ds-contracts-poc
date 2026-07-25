@@ -42,20 +42,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/default",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/default",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -86,20 +97,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/default",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/default",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -130,20 +152,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/primary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/primary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -174,20 +207,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/primary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/primary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -218,20 +262,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/secondary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/secondary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -262,20 +317,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/secondary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/secondary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -306,20 +372,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/error",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/error",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -350,20 +427,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/error",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/error",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -394,20 +482,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/success",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/success",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -438,20 +537,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/success",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/success",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -482,20 +592,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/warning",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/warning",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -526,20 +647,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/warning",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/warning",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -570,20 +702,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/info",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/info",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -614,20 +757,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/filled/info",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/filled/info",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -658,20 +812,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/default",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/default",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -702,20 +867,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/default",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/default",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -746,20 +922,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/primary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/primary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -790,20 +977,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/primary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/primary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -834,20 +1032,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/secondary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/secondary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -878,20 +1087,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/secondary",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/secondary",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -922,20 +1142,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/error",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/error",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -966,20 +1197,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/error",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/error",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -1010,20 +1252,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/success",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/success",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -1054,20 +1307,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/success",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/success",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -1098,20 +1362,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/warning",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/warning",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -1142,20 +1417,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/warning",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/warning",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -1186,20 +1472,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/info",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/info",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }
@@ -1230,20 +1527,31 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Chip",
+                  "contentProp": "Label",
+                  "fontSize": 13,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/chip/root/color/outlined/info",
+                  "lineHeight": 19.5,
+                  "fontFamily": "Roboto",
+                  "textTruncation": true
+                }
+              ],
               "lits": {
                 "paddingLeft": 12,
                 "paddingRight": 12
-              },
-              "characters": "Chip",
-              "fontSize": 13,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/outlined/info",
-              "lineHeight": 19.5,
-              "fontFamily": "Roboto",
-              "textTruncation": true,
-              "contentProp": "Label"
+              }
             }
           ]
         }

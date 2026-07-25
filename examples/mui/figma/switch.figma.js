@@ -37,11 +37,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -60,12 +68,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -77,10 +92,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -147,8 +169,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -170,6 +199,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -188,11 +225,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -211,12 +256,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -228,10 +280,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -298,8 +357,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -321,6 +387,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]
@@ -339,11 +413,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -362,12 +444,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -379,10 +468,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -449,8 +545,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -472,6 +575,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -490,11 +601,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -513,12 +632,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -530,10 +656,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -600,8 +733,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -623,6 +763,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]
@@ -641,11 +789,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -664,12 +820,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -681,10 +844,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -751,8 +921,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -774,6 +951,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -792,11 +977,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -815,12 +1008,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -832,10 +1032,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -902,8 +1109,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -925,6 +1139,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]
@@ -943,11 +1165,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -966,12 +1196,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -983,10 +1220,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1053,8 +1297,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1076,6 +1327,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -1094,11 +1353,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -1117,12 +1384,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -1134,10 +1408,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1204,8 +1485,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1227,6 +1515,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]
@@ -1245,11 +1541,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -1268,12 +1572,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -1285,10 +1596,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1355,8 +1673,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1378,6 +1703,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -1396,11 +1729,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -1419,12 +1760,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -1436,10 +1784,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1506,8 +1861,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1529,6 +1891,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]
@@ -1547,11 +1917,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -1570,12 +1948,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -1587,10 +1972,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1657,8 +2049,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1680,6 +2079,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -1698,11 +2105,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -1721,12 +2136,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -1738,10 +2160,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1808,8 +2237,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1831,6 +2267,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]
@@ -1849,11 +2293,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 38,
+            "varName": "imported/switch/root/height/medium"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/medium",
             "paddingLeft": "imported/switch/root/padding-left/medium",
             "paddingRight": "imported/switch/root/padding-right/medium",
             "paddingTop": "imported/switch/root/padding-top/medium"
+          },
+          "fixedWidth": {
+            "px": 58,
+            "varName": "imported/switch/root/width/medium"
           },
           "children": [
             {
@@ -1872,12 +2324,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/medium"
+              },
+              "fixedHeight": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/height/medium"
+              },
+              "fixedWidth": {
+                "px": 38,
+                "varName": "imported/switch/buttonbase-root/width/medium"
               },
               "children": [
                 {
@@ -1889,10 +2348,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 38,
+                    "varName": "imported/switch/switch-input/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 114,
+                    "varName": "imported/switch/switch-input/width/medium"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -1959,8 +2425,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/switch/switch-thumb/width/medium"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -1982,6 +2455,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 14,
+                "varName": "imported/switch/switch-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 34,
+                "varName": "imported/switch/switch-track/width/medium"
+              },
               "children": []
             }
           ]
@@ -2000,11 +2481,19 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/switch/root/height/small"
+          },
           "bindings": {
             "paddingBottom": "imported/switch/root/padding-bottom/small",
             "paddingLeft": "imported/switch/root/padding-left/small",
             "paddingRight": "imported/switch/root/padding-right/small",
             "paddingTop": "imported/switch/root/padding-top/small"
+          },
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/switch/root/width/small"
           },
           "children": [
             {
@@ -2023,12 +2512,19 @@ const COMPONENTS = [
                 "left": 0
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
                 "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
                 "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
                 "paddingTop": "imported/switch/buttonbase-root/padding-top/small"
+              },
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/height/small"
+              },
+              "fixedWidth": {
+                "px": 24,
+                "varName": "imported/switch/buttonbase-root/width/small"
               },
               "children": [
                 {
@@ -2040,10 +2536,17 @@ const COMPONENTS = [
                     "counter": "CENTER"
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "opacity": 0,
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/switch/switch-input/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 72,
+                    "varName": "imported/switch/switch-input/width/small"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -2110,8 +2613,15 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "children": [],
-                  "fillW": true
+                  "fixedHeight": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 16,
+                    "varName": "imported/switch/switch-thumb/width/small"
+                  },
+                  "children": []
                 }
               ]
             },
@@ -2133,6 +2643,14 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-7"
               },
               "opacity": 0.38,
+              "fixedHeight": {
+                "px": 10,
+                "varName": "imported/switch/switch-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 26,
+                "varName": "imported/switch/switch-track/width/small"
+              },
               "children": []
             }
           ]

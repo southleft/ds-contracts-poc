@@ -55,8 +55,25 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "text",
+                  "type": "frame",
                   "name": "pageOne",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "pageOne-text",
+                      "characters": "1",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "textStyle": "control/sm",
+                      "textFill": "color/text/secondary",
+                      "fontFamily": "Inter"
+                    }
+                  ],
                   "bindings": {
                     "paddingLeft": "space/inset-y/md",
                     "paddingRight": "space/inset-y/md",
@@ -66,17 +83,27 @@ const COMPONENTS = [
                     "topRightRadius": "radius/100",
                     "bottomLeftRadius": "radius/100",
                     "bottomRightRadius": "radius/100"
-                  },
-                  "characters": "1",
-                  "fontSize": 14,
-                  "fontStyle": "Medium",
-                  "textStyle": "control/sm",
-                  "textFill": "color/text/secondary",
-                  "fontFamily": "Inter"
+                  }
                 },
                 {
-                  "type": "text",
+                  "type": "frame",
                   "name": "pageCurrent",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "pageCurrent-text",
+                      "characters": "2",
+                      "fontSize": 14,
+                      "fontStyle": "Semi Bold",
+                      "textFill": "color/nav/selected/foreground",
+                      "fontFamily": "Inter"
+                    }
+                  ],
                   "bindings": {
                     "paddingLeft": "space/inset-y/md",
                     "paddingRight": "space/inset-y/md",
@@ -87,16 +114,28 @@ const COMPONENTS = [
                     "bottomLeftRadius": "radius/100",
                     "bottomRightRadius": "radius/100"
                   },
-                  "fill": "color/nav/selected/background",
-                  "characters": "2",
-                  "fontSize": 14,
-                  "fontStyle": "Semi Bold",
-                  "textFill": "color/nav/selected/foreground",
-                  "fontFamily": "Inter"
+                  "fill": "color/nav/selected/background"
                 },
                 {
-                  "type": "text",
+                  "type": "frame",
                   "name": "pageThree",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "pageThree-text",
+                      "characters": "3",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "textStyle": "control/sm",
+                      "textFill": "color/text/secondary",
+                      "fontFamily": "Inter"
+                    }
+                  ],
                   "bindings": {
                     "paddingLeft": "space/inset-y/md",
                     "paddingRight": "space/inset-y/md",
@@ -106,13 +145,7 @@ const COMPONENTS = [
                     "topRightRadius": "radius/100",
                     "bottomLeftRadius": "radius/100",
                     "bottomRightRadius": "radius/100"
-                  },
-                  "characters": "3",
-                  "fontSize": 14,
-                  "fontStyle": "Medium",
-                  "textStyle": "control/sm",
-                  "textFill": "color/text/secondary",
-                  "fontFamily": "Inter"
+                  }
                 },
                 {
                   "type": "text",
@@ -125,8 +158,25 @@ const COMPONENTS = [
                   "fontFamily": "Inter"
                 },
                 {
-                  "type": "text",
+                  "type": "frame",
                   "name": "pageLast",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "pageLast-text",
+                      "characters": "10",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "textStyle": "control/sm",
+                      "textFill": "color/text/secondary",
+                      "fontFamily": "Inter"
+                    }
+                  ],
                   "bindings": {
                     "paddingLeft": "space/inset-y/md",
                     "paddingRight": "space/inset-y/md",
@@ -136,13 +186,7 @@ const COMPONENTS = [
                     "topRightRadius": "radius/100",
                     "bottomLeftRadius": "radius/100",
                     "bottomRightRadius": "radius/100"
-                  },
-                  "characters": "10",
-                  "fontSize": 14,
-                  "fontStyle": "Medium",
-                  "textStyle": "control/sm",
-                  "textFill": "color/text/secondary",
-                  "fontFamily": "Inter"
+                  }
                 }
               ]
             },

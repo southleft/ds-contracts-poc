@@ -7,14 +7,14 @@ examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json`.
 
 | script | contract | variant axes | variants | headless execute |
 |---|---|---|---|---|
-| button.figma.js | mui.button | variant(3)×color(7)×size(3) | 63 | tokens 912 (61 aliased) · 1 set(s) built |
-| card.figma.js | mui.card | elevation(4) | 4 | tokens 912 (61 aliased) · 1 set(s) built |
-| chip.figma.js | mui.chip | variant(2)×color(7)×size(2) | 28 | tokens 912 (61 aliased) · 1 set(s) built |
-| slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 912 (61 aliased) · 1 set(s) built |
-| switch.figma.js | mui.switch | color(7)×size(2) | 14 | tokens 912 (61 aliased) · 1 set(s) built |
+| button.figma.js | mui.button | variant(3)×color(7)×size(3) | 63 | tokens 958 (61 aliased) · 1 set(s) built |
+| card.figma.js | mui.card | elevation(4) | 4 | tokens 958 (61 aliased) · 1 set(s) built |
+| chip.figma.js | mui.chip | variant(2)×color(7)×size(2) | 28 | tokens 958 (61 aliased) · 1 set(s) built |
+| slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 958 (61 aliased) · 1 set(s) built |
+| switch.figma.js | mui.switch | color(7)×size(2) | 14 | tokens 958 (61 aliased) · 1 set(s) built |
 
 **5 scripts · 121 variants total.** Each script ran to completion
-against the mocked Figma (00-tokens.figma.js first — 912 variables
+against the mocked Figma (00-tokens.figma.js first — 958 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

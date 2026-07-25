@@ -112,6 +112,7 @@
           "declared": {
             "position": "absolute",
             "aspect-ratio": "1 / 1",
+            "box-sizing": "border-box",
             "cursor": "pointer",
             "transition-delay": "0s, 0s",
             "transition-duration": "0.15s, 0.15s",
@@ -132,6 +133,7 @@
                 "display": "block",
                 "position": "absolute",
                 "appearance": "auto",
+                "box-sizing": "border-box",
                 "cursor": "pointer",
                 "font-family": "Arial",
                 "user-select": "none"
@@ -164,12 +166,16 @@
                   "prop": "size",
                   "map": {
                     "medium": {
+                      "height": "{imported.switch.switch-input.height.medium}",
                       "left": "{imported.switch.switch-input.left.medium}",
-                      "right": "{imported.switch.switch-input.right.medium}"
+                      "right": "{imported.switch.switch-input.right.medium}",
+                      "width": "{imported.switch.switch-input.width.medium}"
                     },
                     "small": {
+                      "height": "{imported.switch.switch-input.height.small}",
                       "left": "{imported.switch.switch-input.left.small}",
-                      "right": "{imported.switch.switch-input.right.small}"
+                      "right": "{imported.switch.switch-input.right.small}",
+                      "width": "{imported.switch.switch-input.width.small}"
                     }
                   }
                 }
@@ -185,6 +191,7 @@
                 "border-left-style": "solid",
                 "border-right-style": "solid",
                 "border-top-style": "solid",
+                "box-sizing": "border-box",
                 "cursor": "pointer",
                 "user-select": "none"
               },
@@ -257,6 +264,19 @@
                       "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.warning}"
                     }
                   }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "medium": {
+                      "height": "{imported.switch.switch-thumb.height.medium}",
+                      "width": "{imported.switch.switch-thumb.width.medium}"
+                    },
+                    "small": {
+                      "height": "{imported.switch.switch-thumb.height.small}",
+                      "width": "{imported.switch.switch-thumb.width.small}"
+                    }
+                  }
                 }
               ]
             }
@@ -327,18 +347,22 @@
               "prop": "size",
               "map": {
                 "medium": {
+                  "height": "{imported.switch.buttonbase-root.height.medium}",
                   "padding-bottom": "{imported.switch.buttonbase-root.padding-bottom.medium}",
                   "padding-left": "{imported.switch.buttonbase-root.padding-left.medium}",
                   "padding-right": "{imported.switch.buttonbase-root.padding-right.medium}",
                   "padding-top": "{imported.switch.buttonbase-root.padding-top.medium}",
-                  "right": "{imported.switch.buttonbase-root.right.medium}"
+                  "right": "{imported.switch.buttonbase-root.right.medium}",
+                  "width": "{imported.switch.buttonbase-root.width.medium}"
                 },
                 "small": {
+                  "height": "{imported.switch.buttonbase-root.height.small}",
                   "padding-bottom": "{imported.switch.buttonbase-root.padding-bottom.small}",
                   "padding-left": "{imported.switch.buttonbase-root.padding-left.small}",
                   "padding-right": "{imported.switch.buttonbase-root.padding-right.small}",
                   "padding-top": "{imported.switch.buttonbase-root.padding-top.small}",
-                  "right": "{imported.switch.buttonbase-root.right.small}"
+                  "right": "{imported.switch.buttonbase-root.right.small}",
+                  "width": "{imported.switch.buttonbase-root.width.small}"
                 }
               }
             }
@@ -392,11 +416,25 @@
                   "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.warning}"
                 }
               }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "height": "{imported.switch.switch-track.height.medium}",
+                  "width": "{imported.switch.switch-track.width.medium}"
+                },
+                "small": {
+                  "height": "{imported.switch.switch-track.height.small}",
+                  "width": "{imported.switch.switch-track.width.small}"
+                }
+              }
             }
           ]
         }
       },
       "declared": {
+        "box-sizing": "border-box",
         "overflow-x": "hidden",
         "overflow-y": "hidden",
         "position": "relative"
@@ -414,16 +452,20 @@
           "prop": "size",
           "map": {
             "medium": {
+              "height": "{imported.switch.root.height.medium}",
               "padding-bottom": "{imported.switch.root.padding-bottom.medium}",
               "padding-left": "{imported.switch.root.padding-left.medium}",
               "padding-right": "{imported.switch.root.padding-right.medium}",
-              "padding-top": "{imported.switch.root.padding-top.medium}"
+              "padding-top": "{imported.switch.root.padding-top.medium}",
+              "width": "{imported.switch.root.width.medium}"
             },
             "small": {
+              "height": "{imported.switch.root.height.small}",
               "padding-bottom": "{imported.switch.root.padding-bottom.small}",
               "padding-left": "{imported.switch.root.padding-left.small}",
               "padding-right": "{imported.switch.root.padding-right.small}",
-              "padding-top": "{imported.switch.root.padding-top.small}"
+              "padding-top": "{imported.switch.root.padding-top.small}",
+              "width": "{imported.switch.root.width.small}"
             }
           }
         }

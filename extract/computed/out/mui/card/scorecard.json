@@ -14,11 +14,11 @@
   },
   "pixel": {
     "pairs": 16,
-    "perfectExact": 0,
-    "perfectAA": 0,
-    "meanExact": 4.784342447916667,
-    "meanAA": 1.0107421875,
-    "maxAA": 2.001953125
+    "perfectExact": 16,
+    "perfectAA": 16,
+    "meanExact": 0,
+    "meanAA": 0,
+    "maxAA": 0
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -34,51 +34,51 @@
   },
   "worstRows": [
     {
-      "key": "8__default",
-      "pctAA": 2.001953125,
-      "pctExact": 10.550130208333334,
+      "key": "0__default",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "8__hover",
-      "pctAA": 2.001953125,
-      "pctExact": 10.550130208333334,
+      "key": "0__hover",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "8__focus-visible",
-      "pctAA": 2.001953125,
-      "pctExact": 10.550130208333334,
+      "key": "0__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "8__active",
-      "pctAA": 2.001953125,
-      "pctExact": 10.550130208333334,
+      "key": "0__active",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "3__default",
-      "pctAA": 1.0123697916666667,
-      "pctExact": 5.068359375,
+      "key": "1__default",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "3__hover",
-      "pctAA": 1.0123697916666667,
-      "pctExact": 5.068359375,
+      "key": "1__hover",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "3__focus-visible",
-      "pctAA": 1.0123697916666667,
-      "pctExact": 5.068359375,
+      "key": "1__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "3__active",
-      "pctAA": 1.0123697916666667,
-      "pctExact": 5.068359375,
+      "key": "1__active",
+      "pctAA": 0,
+      "pctExact": 0,
       "channelsMismatched": 0
     }
   ],
@@ -91,128 +91,128 @@
       "key": "0__default",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 1.025390625,
-      "pctAA": 0.419921875,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "0__hover",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 1.025390625,
-      "pctAA": 0.419921875,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "0__focus-visible",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 1.025390625,
-      "pctAA": 0.419921875,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "0__active",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 1.025390625,
-      "pctAA": 0.419921875,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__default",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 2.4934895833333335,
-      "pctAA": 0.6087239583333334,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__hover",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 2.4934895833333335,
-      "pctAA": 0.6087239583333334,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__focus-visible",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 2.4934895833333335,
-      "pctAA": 0.6087239583333334,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__active",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 2.4934895833333335,
-      "pctAA": 0.6087239583333334,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__default",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 5.068359375,
-      "pctAA": 1.0123697916666667,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__hover",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 5.068359375,
-      "pctAA": 1.0123697916666667,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__focus-visible",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 5.068359375,
-      "pctAA": 1.0123697916666667,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__active",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 5.068359375,
-      "pctAA": 1.0123697916666667,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__default",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 10.550130208333334,
-      "pctAA": 2.001953125,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__hover",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 10.550130208333334,
-      "pctAA": 2.001953125,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__focus-visible",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 10.550130208333334,
-      "pctAA": 2.001953125,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__active",
       "channelsCompared": 25,
       "channelsEqual": 25,
-      "pctExact": 10.550130208333334,
-      "pctAA": 2.001953125,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": []
     }
   ]

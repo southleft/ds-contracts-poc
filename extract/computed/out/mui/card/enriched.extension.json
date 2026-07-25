@@ -187,7 +187,9 @@
       "root"
     ],
     "svgAssets": [],
-    "receipts": [],
+    "receipts": [
+      "root-content-carried: the root holds direct text (\"Card content\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
     "refusals": []
   },
   "enrichmentNotes": [

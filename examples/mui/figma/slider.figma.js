@@ -40,7 +40,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 30,
+            "varName": "imported/slider/root/height/medium"
+          },
           "children": [
             {
               "type": "frame",
@@ -52,21 +59,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 0,
-                "bottom": 11,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/primary",
+              "fixedHeight": {
+                "px": 4,
+                "varName": "imported/slider/slider-rail/height/medium"
+              },
               "children": []
             },
             {
@@ -79,17 +93,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 170.812,
-                "bottom": 9,
-                "left": 0
+                "top": 12,
+                "bottom": 12,
+                "left": 0,
+                "right": 170.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/medium",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/medium",
@@ -97,6 +110,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/medium"
               },
               "fill": "imported/slider/slider-track/background-color/primary",
+              "fixedHeight": {
+                "px": 6,
+                "varName": "imported/slider/slider-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 117.188,
+                "varName": "imported/slider/slider-track/width/medium"
+              },
               "children": []
             },
             {
@@ -109,16 +130,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 152.812,
-                "bottom": -5,
-                "left": 115.188
+                "top": 5,
+                "bottom": 5,
+                "left": 105.188,
+                "right": 162.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/primary",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/height/medium"
+              },
+              "fixedWidth": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/width/medium"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -137,8 +165,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/width/medium"
                   },
                   "children": [
                     {
@@ -177,7 +212,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/slider/root/height/small"
+          },
           "children": [
             {
               "type": "frame",
@@ -189,21 +231,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 0,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/primary",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-rail/height/small"
+              },
               "children": []
             },
             {
@@ -216,17 +265,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 172.812,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 172.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/small",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/small",
@@ -234,6 +282,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/small"
               },
               "fill": "imported/slider/slider-track/background-color/primary",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 115.188,
+                "varName": "imported/slider/slider-track/width/small"
+              },
               "children": []
             },
             {
@@ -246,16 +302,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 160.812,
-                "bottom": 2,
-                "left": 115.188
+                "top": 8,
+                "bottom": 8,
+                "left": 109.188,
+                "right": 166.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/primary",
+              "fixedHeight": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/height/small"
+              },
+              "fixedWidth": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/width/small"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -274,8 +337,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/width/small"
                   },
                   "children": [
                     {
@@ -314,7 +384,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 30,
+            "varName": "imported/slider/root/height/medium"
+          },
           "children": [
             {
               "type": "frame",
@@ -326,21 +403,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 0,
-                "bottom": 11,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/secondary",
+              "fixedHeight": {
+                "px": 4,
+                "varName": "imported/slider/slider-rail/height/medium"
+              },
               "children": []
             },
             {
@@ -353,17 +437,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 170.812,
-                "bottom": 9,
-                "left": 0
+                "top": 12,
+                "bottom": 12,
+                "left": 0,
+                "right": 170.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/medium",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/medium",
@@ -371,6 +454,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/medium"
               },
               "fill": "imported/slider/slider-track/background-color/secondary",
+              "fixedHeight": {
+                "px": 6,
+                "varName": "imported/slider/slider-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 117.188,
+                "varName": "imported/slider/slider-track/width/medium"
+              },
               "children": []
             },
             {
@@ -383,16 +474,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 152.812,
-                "bottom": -5,
-                "left": 115.188
+                "top": 5,
+                "bottom": 5,
+                "left": 105.188,
+                "right": 162.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/secondary",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/height/medium"
+              },
+              "fixedWidth": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/width/medium"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -411,8 +509,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/width/medium"
                   },
                   "children": [
                     {
@@ -451,7 +556,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/slider/root/height/small"
+          },
           "children": [
             {
               "type": "frame",
@@ -463,21 +575,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 0,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/secondary",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-rail/height/small"
+              },
               "children": []
             },
             {
@@ -490,17 +609,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 172.812,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 172.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/small",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/small",
@@ -508,6 +626,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/small"
               },
               "fill": "imported/slider/slider-track/background-color/secondary",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 115.188,
+                "varName": "imported/slider/slider-track/width/small"
+              },
               "children": []
             },
             {
@@ -520,16 +646,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 160.812,
-                "bottom": 2,
-                "left": 115.188
+                "top": 8,
+                "bottom": 8,
+                "left": 109.188,
+                "right": 166.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/secondary",
+              "fixedHeight": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/height/small"
+              },
+              "fixedWidth": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/width/small"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -548,8 +681,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/width/small"
                   },
                   "children": [
                     {
@@ -588,7 +728,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 30,
+            "varName": "imported/slider/root/height/medium"
+          },
           "children": [
             {
               "type": "frame",
@@ -600,21 +747,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 0,
-                "bottom": 11,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/error",
+              "fixedHeight": {
+                "px": 4,
+                "varName": "imported/slider/slider-rail/height/medium"
+              },
               "children": []
             },
             {
@@ -627,17 +781,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 170.812,
-                "bottom": 9,
-                "left": 0
+                "top": 12,
+                "bottom": 12,
+                "left": 0,
+                "right": 170.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/medium",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/medium",
@@ -645,6 +798,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/medium"
               },
               "fill": "imported/slider/slider-track/background-color/error",
+              "fixedHeight": {
+                "px": 6,
+                "varName": "imported/slider/slider-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 117.188,
+                "varName": "imported/slider/slider-track/width/medium"
+              },
               "children": []
             },
             {
@@ -657,16 +818,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 152.812,
-                "bottom": -5,
-                "left": 115.188
+                "top": 5,
+                "bottom": 5,
+                "left": 105.188,
+                "right": 162.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/error",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/height/medium"
+              },
+              "fixedWidth": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/width/medium"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -685,8 +853,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/width/medium"
                   },
                   "children": [
                     {
@@ -725,7 +900,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/slider/root/height/small"
+          },
           "children": [
             {
               "type": "frame",
@@ -737,21 +919,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 0,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/error",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-rail/height/small"
+              },
               "children": []
             },
             {
@@ -764,17 +953,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 172.812,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 172.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/small",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/small",
@@ -782,6 +970,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/small"
               },
               "fill": "imported/slider/slider-track/background-color/error",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 115.188,
+                "varName": "imported/slider/slider-track/width/small"
+              },
               "children": []
             },
             {
@@ -794,16 +990,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 160.812,
-                "bottom": 2,
-                "left": 115.188
+                "top": 8,
+                "bottom": 8,
+                "left": 109.188,
+                "right": 166.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/error",
+              "fixedHeight": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/height/small"
+              },
+              "fixedWidth": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/width/small"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -822,8 +1025,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/width/small"
                   },
                   "children": [
                     {
@@ -862,7 +1072,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 30,
+            "varName": "imported/slider/root/height/medium"
+          },
           "children": [
             {
               "type": "frame",
@@ -874,21 +1091,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 0,
-                "bottom": 11,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/warning",
+              "fixedHeight": {
+                "px": 4,
+                "varName": "imported/slider/slider-rail/height/medium"
+              },
               "children": []
             },
             {
@@ -901,17 +1125,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 170.812,
-                "bottom": 9,
-                "left": 0
+                "top": 12,
+                "bottom": 12,
+                "left": 0,
+                "right": 170.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/medium",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/medium",
@@ -919,6 +1142,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/medium"
               },
               "fill": "imported/slider/slider-track/background-color/warning",
+              "fixedHeight": {
+                "px": 6,
+                "varName": "imported/slider/slider-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 117.188,
+                "varName": "imported/slider/slider-track/width/medium"
+              },
               "children": []
             },
             {
@@ -931,16 +1162,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 152.812,
-                "bottom": -5,
-                "left": 115.188
+                "top": 5,
+                "bottom": 5,
+                "left": 105.188,
+                "right": 162.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/warning",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/height/medium"
+              },
+              "fixedWidth": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/width/medium"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -959,8 +1197,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/width/medium"
                   },
                   "children": [
                     {
@@ -999,7 +1244,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/slider/root/height/small"
+          },
           "children": [
             {
               "type": "frame",
@@ -1011,21 +1263,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 0,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/warning",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-rail/height/small"
+              },
               "children": []
             },
             {
@@ -1038,17 +1297,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 172.812,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 172.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/small",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/small",
@@ -1056,6 +1314,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/small"
               },
               "fill": "imported/slider/slider-track/background-color/warning",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 115.188,
+                "varName": "imported/slider/slider-track/width/small"
+              },
               "children": []
             },
             {
@@ -1068,16 +1334,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 160.812,
-                "bottom": 2,
-                "left": 115.188
+                "top": 8,
+                "bottom": 8,
+                "left": 109.188,
+                "right": 166.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/warning",
+              "fixedHeight": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/height/small"
+              },
+              "fixedWidth": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/width/small"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1096,8 +1369,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/width/small"
                   },
                   "children": [
                     {
@@ -1136,7 +1416,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 30,
+            "varName": "imported/slider/root/height/medium"
+          },
           "children": [
             {
               "type": "frame",
@@ -1148,21 +1435,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 0,
-                "bottom": 11,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/info",
+              "fixedHeight": {
+                "px": 4,
+                "varName": "imported/slider/slider-rail/height/medium"
+              },
               "children": []
             },
             {
@@ -1175,17 +1469,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 170.812,
-                "bottom": 9,
-                "left": 0
+                "top": 12,
+                "bottom": 12,
+                "left": 0,
+                "right": 170.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/medium",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/medium",
@@ -1193,6 +1486,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/medium"
               },
               "fill": "imported/slider/slider-track/background-color/info",
+              "fixedHeight": {
+                "px": 6,
+                "varName": "imported/slider/slider-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 117.188,
+                "varName": "imported/slider/slider-track/width/medium"
+              },
               "children": []
             },
             {
@@ -1205,16 +1506,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 152.812,
-                "bottom": -5,
-                "left": 115.188
+                "top": 5,
+                "bottom": 5,
+                "left": 105.188,
+                "right": 162.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/info",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/height/medium"
+              },
+              "fixedWidth": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/width/medium"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1233,8 +1541,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/width/medium"
                   },
                   "children": [
                     {
@@ -1273,7 +1588,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/slider/root/height/small"
+          },
           "children": [
             {
               "type": "frame",
@@ -1285,21 +1607,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 0,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/info",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-rail/height/small"
+              },
               "children": []
             },
             {
@@ -1312,17 +1641,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 172.812,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 172.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/small",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/small",
@@ -1330,6 +1658,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/small"
               },
               "fill": "imported/slider/slider-track/background-color/info",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 115.188,
+                "varName": "imported/slider/slider-track/width/small"
+              },
               "children": []
             },
             {
@@ -1342,16 +1678,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 160.812,
-                "bottom": 2,
-                "left": 115.188
+                "top": 8,
+                "bottom": 8,
+                "left": 109.188,
+                "right": 166.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/info",
+              "fixedHeight": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/height/small"
+              },
+              "fixedWidth": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/width/small"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1370,8 +1713,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/width/small"
                   },
                   "children": [
                     {
@@ -1410,7 +1760,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 30,
+            "varName": "imported/slider/root/height/medium"
+          },
           "children": [
             {
               "type": "frame",
@@ -1422,21 +1779,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 0,
-                "bottom": 11,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/success",
+              "fixedHeight": {
+                "px": 4,
+                "varName": "imported/slider/slider-rail/height/medium"
+              },
               "children": []
             },
             {
@@ -1449,17 +1813,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 170.812,
-                "bottom": 9,
-                "left": 0
+                "top": 12,
+                "bottom": 12,
+                "left": 0,
+                "right": 170.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/medium",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/medium",
@@ -1467,6 +1830,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/medium"
               },
               "fill": "imported/slider/slider-track/background-color/success",
+              "fixedHeight": {
+                "px": 6,
+                "varName": "imported/slider/slider-track/height/medium"
+              },
+              "fixedWidth": {
+                "px": 117.188,
+                "varName": "imported/slider/slider-track/width/medium"
+              },
               "children": []
             },
             {
@@ -1479,16 +1850,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 15,
-                "right": 152.812,
-                "bottom": -5,
-                "left": 115.188
+                "top": 5,
+                "bottom": 5,
+                "left": 105.188,
+                "right": 162.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/success",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/height/medium"
+              },
+              "fixedWidth": {
+                "px": 20,
+                "varName": "imported/slider/slider-thumb/width/medium"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1507,8 +1885,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/height/medium"
+                  },
+                  "fixedWidth": {
+                    "px": 20,
+                    "varName": "imported/slider/part-2-0/width/medium"
                   },
                   "children": [
                     {
@@ -1547,7 +1932,14 @@ const COMPONENTS = [
             "paddingBottom": "imported/slider/root/padding-bottom",
             "paddingTop": "imported/slider/root/padding-top"
           },
-          "blockRoot": true,
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/slider/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/slider/root/height/small"
+          },
           "children": [
             {
               "type": "frame",
@@ -1559,21 +1951,28 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 0,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 0
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "opacity": 0.38,
+              "fixedWidth": {
+                "px": 288,
+                "varName": "imported/slider/slider-rail/width"
+              },
               "fill": "imported/slider/slider-rail/background-color/success",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-rail/height/small"
+              },
               "children": []
             },
             {
@@ -1586,17 +1985,16 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 172.812,
-                "bottom": 12,
-                "left": 0
+                "top": 13,
+                "bottom": 13,
+                "left": 0,
+                "right": 172.812
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-12",
                 "bottomRightRadius": "imported/shared/size-12",
                 "topLeftRadius": "imported/shared/size-12",
                 "topRightRadius": "imported/shared/size-12",
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0",
                 "strokeBottomWeight": "imported/slider/slider-track/border-bottom-width/small",
                 "strokeLeftWeight": "imported/slider/slider-track/border-left-width/small",
@@ -1604,6 +2002,14 @@ const COMPONENTS = [
                 "strokeTopWeight": "imported/slider/slider-track/border-top-width/small"
               },
               "fill": "imported/slider/slider-track/background-color/success",
+              "fixedHeight": {
+                "px": 2,
+                "varName": "imported/slider/slider-track/height/small"
+              },
+              "fixedWidth": {
+                "px": 115.188,
+                "varName": "imported/slider/slider-track/width/small"
+              },
               "children": []
             },
             {
@@ -1616,16 +2022,23 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 14,
-                "right": 160.812,
-                "bottom": 2,
-                "left": 115.188
+                "top": 8,
+                "bottom": 8,
+                "left": 109.188,
+                "right": 166.812
               },
               "bindings": {
-                "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "fill": "imported/slider/slider-thumb/background-color/success",
+              "fixedHeight": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/height/small"
+              },
+              "fixedWidth": {
+                "px": 12,
+                "varName": "imported/slider/slider-thumb/width/small"
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1644,8 +2057,15 @@ const COMPONENTS = [
                     "top": -1
                   },
                   "bindings": {
-                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/height/small"
+                  },
+                  "fixedWidth": {
+                    "px": 12,
+                    "varName": "imported/slider/part-2-0/width/small"
                   },
                   "children": [
                     {

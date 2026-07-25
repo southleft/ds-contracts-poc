@@ -60,10 +60,25 @@ export interface Capture {
 export const normalizeValue = (v: string): string =>
   v.replace(/\brgb\((\d+), (\d+), (\d+)\)/g, 'rgba($1, $2, $3, 1)');
 
+/** Absolute-position round: SYNTHETIC translate channels. An identity-
+ *  translate matrix (matrix(1,0,0,1,tx,ty) — what Chromium computes for
+ *  translate()/translate(-50%,-50%)) decomposes into two px channels so the
+ *  standard mint machinery gives uniform/per-axis planes for free (MUI's
+ *  thumb centers via -50% translates that VARY by the size axis — a uniform-
+ *  only declared fact can't carry them). Excluded from replay application
+ *  and the fidelity gate by name (SYNTHETIC_CHANNELS). */
+export const SYNTHETIC_CHANNELS = new Set(['translate-x', 'translate-y']);
+const IDENTITY_MATRIX = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/;
+
 export function normalizeNode(n: CapturedNode): CapturedNode {
   const norm = (s: StyleMap): StyleMap => {
     const out: StyleMap = {};
     for (const k of Object.keys(s).sort()) out[k] = normalizeValue(s[k]);
+    const m = IDENTITY_MATRIX.exec(out['transform'] ?? '');
+    if (m) {
+      out['translate-x'] = `${parseFloat(m[1])}px`;
+      out['translate-y'] = `${parseFloat(m[2])}px`;
+    }
     return out;
   };
   return {
@@ -119,7 +134,7 @@ export const isFusable = (prop: string): boolean =>
  *  metric (never silently): app-region is unsettable outside app contexts;
  *  text-decoration is a SHORTHAND Chromium enumerates whose re-serialization
  *  reorders (its longhands are captured, applied, and compared individually). */
-export const REPLAY_APPLY_EXCLUDE = new Set(['app-region', 'text-decoration']);
+export const REPLAY_APPLY_EXCLUDE = new Set(['app-region', 'text-decoration', 'translate-x', 'translate-y']);
 
 // ---------------------------------------------------------------------------
 // Value kinds for minting (§5)

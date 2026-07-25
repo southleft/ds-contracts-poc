@@ -9,11 +9,11 @@
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 16,
-    "buttonbase-root": 40,
-    "switch-input": 15,
-    "switch-thumb": 28,
-    "switch-track": 12
+    "root": 18,
+    "buttonbase-root": 42,
+    "switch-input": 17,
+    "switch-thumb": 30,
+    "switch-track": 14
   },
   "folds": {
     "count": 14,
@@ -103,8 +103,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 182,
-    "mintedLeavesFolded": 85
+    "mintedLeavesUnfolded": 202,
+    "mintedLeavesFolded": 105
   },
   "bound": {
     "cellsChecked": 0,
@@ -113,22 +113,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 85,
-    "baseBindings": 51,
+    "leaves": 105,
+    "baseBindings": 61,
     "stateBindings": 29,
     "byShape": {
       "uniform": 63,
-      "perAxis": 17,
+      "perAxis": 27,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 23,
+    "base": 27,
     "state": 7
   },
   "codeOnly": {
-    "base": 17,
+    "base": 13,
     "state": 1,
     "overflowBindings": 16
   },
@@ -146,7 +146,9 @@
     "pct": 99.88112927191679,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [

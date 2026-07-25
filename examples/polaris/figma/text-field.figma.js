@@ -346,6 +346,13 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 8,
+                            "bottom": 8
+                          },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
                             "strokeBottomWeight": "imported/shared/size-0",
@@ -618,6 +625,13 @@ const COMPONENTS = [
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
                             "counter": "MIN"
+                          },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 4,
+                            "bottom": 4
                           },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
@@ -895,6 +909,13 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 8,
+                            "bottom": 8
+                          },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
                             "strokeBottomWeight": "imported/shared/size-0",
@@ -1169,6 +1190,13 @@ const COMPONENTS = [
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
                             "counter": "MIN"
+                          },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 4,
+                            "bottom": 4
                           },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
@@ -1448,6 +1476,13 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 8,
+                            "bottom": 8
+                          },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
                             "strokeBottomWeight": "imported/shared/size-0",
@@ -1720,6 +1755,13 @@ const COMPONENTS = [
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
                             "counter": "MIN"
+                          },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 8,
+                            "bottom": 8
                           },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
@@ -1994,6 +2036,13 @@ const COMPONENTS = [
                             "primary": "MIN",
                             "counter": "MIN"
                           },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 8,
+                            "bottom": 8
+                          },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
                             "strokeBottomWeight": "imported/shared/size-0",
@@ -2266,6 +2315,13 @@ const COMPONENTS = [
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
                             "counter": "MIN"
+                          },
+                          "absolute": {
+                            "h": "MAX",
+                            "v": "STRETCH",
+                            "right": 0,
+                            "top": 8,
+                            "bottom": 8
                           },
                           "fill": "imported/text-field/clearbutton/background-color",
                           "bindings": {
@@ -2623,6 +2679,51 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 // B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
 // lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
 // in-flow siblings — matching the declared anatomy and the HTML render.
@@ -2780,6 +2881,7 @@ async function buildNode(spec, registry) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -2891,6 +2993,7 @@ async function amendSet(set, C) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
@@ -3029,6 +3132,7 @@ async function amendComponent(comp, C) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }

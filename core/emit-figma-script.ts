@@ -115,7 +115,7 @@ export interface NodeSpec {
    *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
    *  runtime sets layoutPositioning ABSOLUTE + constraints + exact offsets
    *  after append. h/v: MIN pins left/top, MAX right/bottom, CENTER centers. */
-  absolute?: { h: 'MIN' | 'MAX' | 'CENTER'; v: 'MIN' | 'MAX' | 'CENTER'; left?: number; right?: number; top?: number; bottom?: number };
+  absolute?: { h: 'MIN' | 'MAX' | 'CENTER' | 'STRETCH'; v: 'MIN' | 'MAX' | 'CENTER' | 'STRETCH'; left?: number; right?: number; top?: number; bottom?: number };
   /** Single DROP_SHADOW (dump v1.2 box-shadow grammar), parsed at compile
    *  time from the resolved box-shadow token value — the runtime applies it
    *  as a native effect. color is 6- or 8-digit hex. */
@@ -1352,6 +1352,15 @@ function applyStyling(
 ): TextCtx {
   const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
   const l = applyLiterals(spec, resolveLiterals(part, subst), t);
+  // absolute-position round: content-box geometry means captured width/
+  // height EXCLUDE padding — a canvas frame resize is border-box, so the
+  // carried paddings are added back (MUI's Slider root declares
+  // box-sizing: content-box; every border-box part is untouched).
+  if (part.declared?.['box-sizing'] === 'content-box' && spec.lits) {
+    const li = spec.lits;
+    if (li.height !== undefined) li.height += (li.paddingTop ?? 0) + (li.paddingBottom ?? 0);
+    if (li.width !== undefined) li.width += (li.paddingLeft ?? 0) + (li.paddingRight ?? 0);
+  }
   const d = applyDeclared(part.declared, l);
   // Round 4: declared aspect-ratio draws natively — height follows the bound
   // width when the contract carries no height channel (Avatar/Thumbnail
@@ -1701,6 +1710,53 @@ function shapePlacement(
   return out;
 }
 
+/** ABSOLUTE-POSITION ROUND (MUI Slider/Switch live finding): a declared
+ *  position:absolute part whose offset facts were ADMITTED to fusion
+ *  (absolute-geometry-admitted receipts) lowers to exact absolute placement.
+ *  Offsets resolve from tokens/literals per combo; a declared identity-
+ *  translate transform (matrix(1,0,0,1,tx,ty)) folds into them. Both sides
+ *  carried → STRETCH (rail: left 0 + right 0 = full width at fixed height).
+ *  No offset carried at all → null (the inset-overlay / parent-bound
+ *  lowerings own those shapes). */
+function absolutePartPlacement(
+  part: Part,
+  subst: Record<string, string>,
+): NodeSpec['absolute'] | null {
+  const tokens = resolveTokens(part, subst);
+  const lits = resolveLiterals(part, subst);
+  const num = (ch: string): number | undefined => {
+    const ref = tokens[ch];
+    let value: string | undefined;
+    if (ref) {
+      let tokenPath = ref.slice(1, -1);
+      for (const [propName, v] of Object.entries(subst)) tokenPath = tokenPath.replaceAll(`{${propName}}`, v);
+      value = String(resolveLiteral(tokenPath));
+    } else if (lits[ch] !== undefined) value = String(lits[ch]);
+    if (value === undefined) return undefined;
+    return parseLitPx(value);
+  };
+  const left = num('left');
+  const right = num('right');
+  const top = num('top');
+  const bottom = num('bottom');
+  if (left === undefined && right === undefined && top === undefined && bottom === undefined) return null;
+  // Per-axis translate rides the SYNTHETIC channels (minted planes resolve
+  // per combo); a uniform declared identity matrix is the fallback spelling.
+  const tm = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/.exec(part.declared?.['transform'] ?? '');
+  const tx = num('translate-x') ?? (tm ? parseFloat(tm[1]) : 0);
+  const ty = num('translate-y') ?? (tm ? parseFloat(tm[2]) : 0);
+  const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
+  if (left !== undefined && right !== undefined) { a.h = 'STRETCH'; a.left = left + tx; a.right = right - tx; }
+  else if (left !== undefined) { a.h = 'MIN'; a.left = left + tx; }
+  else if (right !== undefined) { a.h = 'MAX'; a.right = right - tx; }
+  else { a.h = 'MIN'; a.left = tx; }
+  if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = top + ty; a.bottom = bottom - ty; }
+  else if (top !== undefined) { a.v = 'MIN'; a.top = top + ty; }
+  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = bottom - ty; }
+  else { a.v = 'MIN'; a.top = ty; }
+  return a;
+}
+
 /** B-3 finding 5: overlay-anatomy detection. A part whose FOUR inset
  *  channels (top/right/bottom/left) are ALL carried (tokens or literals) and
  *  ALL resolve to ~0 is an inset-0 overlay (`position: absolute; inset: 0`
@@ -1739,7 +1795,28 @@ function insetOverlayOffsets(
   // All four inset channels carried and numeric → an inset overlay at those
   // offsets (Round 5: offsets generalized beyond 0 — the Checkbox
   // indeterminate glyph rides inset -2px; B-3 finding 5 was the 0 case).
-  if (carried === 4 && numeric) return offsets;
+  // Absolute-position round: carried SYNTHETIC translate channels shift the
+  // box (MUI centers rails/thumbs via translate(-50%) idioms) — folded into
+  // the offsets here. Contracts without the channels are byte-unchanged.
+  if (carried === 4 && numeric) {
+    const tnum = (ch: string): number => {
+      const ref = tokens[ch];
+      if (ref) {
+        let tokenPath = ref.slice(1, -1);
+        for (const [propName, v] of Object.entries(subst)) tokenPath = tokenPath.replaceAll(`{${propName}}`, v);
+        const n = parseLitPx(String(resolveLiteral(tokenPath)));
+        return n ?? 0;
+      }
+      const n = lits[ch] !== undefined ? parseLitPx(String(lits[ch])) : undefined;
+      return n ?? 0;
+    };
+    const tx = tnum('translate-x');
+    const ty = tnum('translate-y');
+    if (tx !== 0 || ty !== 0) {
+      return { top: offsets.top + ty, bottom: offsets.bottom - ty, left: offsets.left + tx, right: offsets.right - tx };
+    }
+    return offsets;
+  }
   // Round 5: a DECLARED position:absolute part with NO carried inset
   // channels whose box is parent-bound (declared aspect-ratio, or max
   // dimensions 100%) lowers to the inset-0 overlay — the floor-promoted
@@ -1936,7 +2013,36 @@ function partToSpecInner(
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
+  // MUI round (Chip live finding): a text-holder part can carry BOX channels
+  // — MUI's Chip label span owns the pill's side padding (literals
+  // padding-left/right 12px). A Figma TEXT node has no padding, so box-
+  // carrying text parts lower to FRAME(padding) → TEXT child; box-less text
+  // parts keep the plain TEXT lowering byte-identically.
+  // PADDING only — the one box fact a TEXT node cannot express. Fills and
+  // radii on text parts keep their proven styled-TEXT lowering (the repo
+  // Switch thumb compiles as a styled TEXT spec — pinned by eval).
+  const textPartHasBox = (): boolean => {
+    const chans = [...Object.keys(resolveTokens(part, subst)), ...Object.keys(resolveLiterals(part, subst))];
+    return chans.some((c) => c.startsWith('padding'));
+  };
+  const wrapTextInBox = (textSpec: NodeSpec): NodeSpec => {
+    const frame: NodeSpec = { type: 'frame', name, layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' }, children: [textSpec] };
+    const textCtx = applyStyling(frame, part, subst, ctx);
+    textSpec.name = `${name}-text`;
+    textSpec.fontSize = textCtx.fontSize ?? 14;
+    textSpec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    textSpec.textStyle = matchTextStyle(textCtx);
+    textSpec.textFill = textCtx.textFill;
+    if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
+    Object.assign(textSpec, textExtras(textCtx));
+    applyVisibleWhen(frame, part, contract);
+    return frame;
+  };
   if (part.text !== undefined) {
+    if (textPartHasBox()) {
+      const textSpec: NodeSpec = { type: 'text', name, characters: part.text };
+      return wrapTextInBox(textSpec);
+    }
     const spec: NodeSpec = { type: 'text', name };
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = part.text;
@@ -1978,9 +2084,14 @@ function partToSpecInner(
     const prop = contract.props.find(
       (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
     )!;
+    const characters = typeof prop.default === 'string' ? prop.default : contract.name;
+    if (textPartHasBox()) {
+      const textSpec: NodeSpec = { type: 'text', name, characters, contentProp: prop.bindings.figma.property };
+      return wrapTextInBox(textSpec);
+    }
     const spec: NodeSpec = { type: 'text', name };
     const textCtx = applyStyling(spec, part, subst, ctx);
-    spec.characters = typeof prop.default === 'string' ? prop.default : contract.name;
+    spec.characters = characters;
     spec.fontSize = textCtx.fontSize ?? 16;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
     spec.textStyle = matchTextStyle(textCtx);
@@ -2005,6 +2116,10 @@ function partToSpecInner(
     if (io) {
       spec.insetOverlay = true;
       if (io.top !== 0 || io.right !== 0 || io.bottom !== 0 || io.left !== 0) spec.insetOffsets = io;
+    } else if (part.declared?.['position'] === 'absolute') {
+      // absolute-position round: overlay anatomy with carried offsets
+      const a = absolutePartPlacement(part, subst);
+      if (a) spec.absolute = a;
     }
   }
   const childCtx = applyStyling(spec, part, subst, ctx);
@@ -2111,10 +2226,15 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // (the Astryx DropdownMenu 240px menu) still got force-FILLed under its
     // hug container and collapsed. Explicit-width children are never fill
     // candidates on that axis.
+    // Absolute-position round (Switch track pin): a measured explicit width
+    // beats flex-grow too — the captured size IS the post-grow used size, so
+    // re-applying FILL on canvas double-counts the stretch (34px track
+    // ballooned to the 58px root). Explicit-width children never fill.
     const isCandidate = (c: NodeSpec): boolean =>
       inFlow(c) &&
+      !hasOwnWidth(c) &&
       (c.grow === true ||
-        (s.layout?.stretchChildren === true && !c.fixedWidth && c.lits?.width === undefined && c.type !== 'instance'));
+        (s.layout?.stretchChildren === true && c.type !== 'instance'));
     const intrinsic = kids.some((c) => inFlow(c) && !isCandidate(c) && canHug(c));
     const ready = established || intrinsic;
     for (const c of kids) {
@@ -2829,10 +2949,26 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
   try {
     childNode.layoutPositioning = 'ABSOLUTE';
     const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
     childNode.constraints = {
-      horizontal: a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
-      vertical: a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
     };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
     const w = childSpec.shape ? childSpec.shape.width : childNode.width;
     const h = childSpec.shape ? childSpec.shape.height : childNode.height;
     // Center of the intrinsic box in parent coordinates (MIN pins left/top,

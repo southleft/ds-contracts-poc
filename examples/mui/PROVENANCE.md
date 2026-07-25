@@ -90,9 +90,17 @@ job and are not built yet.
   all rows (same class as Astryx — hover/active state carrying and font
   rasterization differences; the computed-equality gate is the floor metric
   this round).
-- **Switch 73.6%**: the lowest floor — MUI's Switch is a stacked
-  absolute-position anatomy (track/thumb/input) where geometry channels
-  dominate; state rounds and layout enrichment are the named next class.
+- **Switch 73.6% computed floor** (unchanged): the % is geometry-blind by
+  design — but the ABSOLUTE-POSITIONING ROUND (2026-07-25, after the first
+  live paste exposed Slider/Switch as stacked blocks) now carries the
+  overlay-anatomy geometry: uniformly-absolute parts and their cluster admit
+  width/height/offset channels into fusion (outer-size baked per box-sizing;
+  identity-translate matrices decompose into synthetic per-axis channels),
+  and the emitter lowers them to real absolute placement (STRETCH insets,
+  measured sizes beat flex-grow). The compile receipt pins the REAL numbers
+  headlessly: thumb 20×20, rail h4 stretched, track 34×14 — the class can
+  never pass silently again. Checked-state thumb POSITION stays a named
+  state-round residual (default-state placement only this round).
 - **box-shadow source refs skipped**: `var(--mui-shadows-2)` raw values
   serialize differently from computed box-shadow (comma/space form) — value
   verification refuses, so shadows stay minted literals (named skip in

@@ -1465,6 +1465,41 @@ export function promoteAnatomy(
   }
   for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false)) rootChildren[decorName] = decor;
   if (Object.keys(rootChildren).length > 0) newRoot.parts = rootChildren;
+  // MUI round (Card live finding): the ROOT itself can hold direct text runs
+  // — MUI's Card renders children as a BARE text node (no wrapping element,
+  // so no child part exists to carry content, and the text silently vanished
+  // from the canvas). Bind root content exactly as buildPart binds promoted
+  // text holders; when the mounted text is the children sample and the
+  // contract has no text prop, MINT a children-bound one — the captured
+  // mount is the proof the surface accepts text children.
+  {
+    const rootText = textOf(rootEntry.rep);
+    const carriesContent = (p: Part): boolean =>
+      p.content !== undefined || p.text !== undefined || Object.values(p.parts ?? {}).some(carriesContent);
+    if (rootText.length > 0 && !carriesContent(newRoot)) {
+      let boundProp = [...samplesByProp.entries()].find(([, v]) => v === rootText)?.[0];
+      if (!boundProp && rootText === comp.sampleText && comp.sampleText.length > 0) {
+        const propName = 'children';
+        if (!contract.props.some((p) => p.name === propName)) {
+          contract.props.push({
+            name: propName,
+            type: 'text',
+            default: comp.sampleText,
+            description: 'Promoted from the computed floor: the root renders its children as direct text (captured mount proof).',
+            bindings: { figma: { kind: 'TEXT', property: 'Content' }, code: { prop: 'children' } },
+          } as Contract['props'][number]);
+        }
+        boundProp = propName;
+      }
+      if (boundProp) {
+        newRoot.content = { prop: boundProp };
+        receipts.push(`root-content-carried: the root holds direct text ("${rootText.slice(0, 30)}") with no text-holder child part — bound to text prop "${boundProp}" (MUI Card class)`);
+      } else {
+        newRoot.text = rootText;
+        receipts.push(`root-literal-text-carried: root direct text "${rootText.slice(0, 30)}" matches no prop sample — carried verbatim (named)`);
+      }
+    }
+  }
   // Round 5c — ROOT-HOSTED svg plan: buildPart never runs on the root, so a
   // plan whose host IS the root (Spinner: the glyph is the root's only
   // child) was silently dropped — the assets existed, the contract carried

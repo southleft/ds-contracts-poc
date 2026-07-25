@@ -35,6 +35,21 @@
           "prop": "elevation"
         }
       }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Card content",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
     }
   ],
   "states": [],
@@ -47,6 +62,9 @@
         "transition-duration": "0.3s",
         "transition-property": "box-shadow",
         "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "content": {
+        "prop": "children"
       },
       "tokens": {
         "background-color": "{imported.card.root.background-color}",

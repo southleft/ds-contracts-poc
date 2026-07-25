@@ -12,7 +12,8 @@ const COMPONENTS = [
     "boolProps": [],
     "textProps": [],
     "fontStyles": [
-      "Medium"
+      "Medium",
+      "Regular"
     ],
     "variants": [
       {
@@ -70,7 +71,18 @@ const COMPONENTS = [
               }
             }
           ],
-          "blockRoot": true
+          "blockRoot": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Card content",
+              "fontSize": 16,
+              "fontStyle": "Regular",
+              "textFill": "imported/card/root/color",
+              "contentProp": "Content"
+            }
+          ]
         }
       },
       {
@@ -93,7 +105,18 @@ const COMPONENTS = [
             "topRightRadius": "imported/shared/size-4"
           },
           "effectStack": [],
-          "blockRoot": true
+          "blockRoot": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Card content",
+              "fontSize": 16,
+              "fontStyle": "Regular",
+              "textFill": "imported/card/root/color",
+              "contentProp": "Content"
+            }
+          ]
         }
       },
       {
@@ -151,7 +174,18 @@ const COMPONENTS = [
               }
             }
           ],
-          "blockRoot": true
+          "blockRoot": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Card content",
+              "fontSize": 16,
+              "fontStyle": "Regular",
+              "textFill": "imported/card/root/color",
+              "contentProp": "Content"
+            }
+          ]
         }
       },
       {
@@ -211,7 +245,18 @@ const COMPONENTS = [
               "spread": 2
             }
           ],
-          "blockRoot": true
+          "blockRoot": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Card content",
+              "fontSize": 16,
+              "fontStyle": "Regular",
+              "textFill": "imported/card/root/color",
+              "contentProp": "Content"
+            }
+          ]
         }
       }
     ],
