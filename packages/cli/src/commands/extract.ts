@@ -6,6 +6,16 @@
  *
  *   ds-contracts extract [config.json]            code → proposed contracts
  *   ds-contracts extract --reconcile [config]     + design dump → disagreement report
+ *   ds-contracts extract --draft-capture-config   + DRAFT computed-capture config (G6): axes/
+ *                                                 components prefilled from the static pass,
+ *                                                 "__review:*" markers on everything not
+ *                                                 inferable; the capture runner refuses it
+ *                                                 until a human deletes the draft marker
+ *   ds-contracts extract --accept-candidates <exact|all|list.json>
+ *                                                 bulk raw-value → token acceptance (G14):
+ *                                                 unique exact-value candidates only, every
+ *                                                 acceptance ledgered, ambiguity refused by
+ *                                                 name (extract/accept-candidates.ts)
  *   ds-contracts extract --computed --config <capture.json> [--harness <dir>] [--out <dir>] [--root <dir>]
  *
  * The computed path (real-browser computed-style capture) is the one
@@ -16,6 +26,8 @@
  */
 import { existsSync } from 'node:fs';
 import { runExtractCommand } from '../../../../extract/run.js';
+import { runDraftCaptureConfig } from '../../../../extract/draft-capture-config.js';
+import { runAcceptCommand } from '../../../../extract/accept-candidates.js';
 import { CliUsageError, flagString, parseFlags } from '../lib.js';
 import { CONFIG_FILENAME } from './init.js';
 
@@ -28,8 +40,8 @@ export const COMPUTED_DEGRADE_MESSAGE =
 
 export async function extractCommand(argv: string[]): Promise<number> {
   const parsed = parseFlags(argv, {
-    value: ['config', 'harness', 'out', 'root', 'component'],
-    bool: ['computed', 'reconcile'],
+    value: ['config', 'harness', 'out', 'root', 'component', 'accept-candidates'],
+    bool: ['computed', 'reconcile', 'draft-capture-config'],
   });
 
   if (parsed.flags.get('computed') === true) {
@@ -65,5 +77,16 @@ export async function extractCommand(argv: string[]): Promise<number> {
     flagString(parsed, 'config') ??
     (existsSync(CONFIG_FILENAME) ? CONFIG_FILENAME : undefined);
   runExtractCommand(parsed.flags.get('reconcile') === true ? 'reconcile' : 'code', configArg);
+  // Post-extract onboarding steps ride the SAME run (both read the
+  // code-extraction.json this invocation just wrote — no staleness window).
+  if (parsed.flags.get('reconcile') !== true) {
+    if (parsed.flags.get('draft-capture-config') === true) {
+      runDraftCaptureConfig(configArg, flagString(parsed, 'out'));
+    }
+    const acceptMode = flagString(parsed, 'accept-candidates');
+    if (acceptMode) runAcceptCommand(acceptMode, configArg);
+  } else if (parsed.flags.get('draft-capture-config') === true || parsed.flags.get('accept-candidates') !== undefined) {
+    throw new CliUsageError('--draft-capture-config / --accept-candidates run on the code pass, not with --reconcile');
+  }
   return 0;
 }

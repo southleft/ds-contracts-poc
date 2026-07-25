@@ -146,6 +146,12 @@
     (<span class="mono">ds-contracts figma push &lt;file&gt; --code &lt;CODE&gt;</span>).
   </div>
   <div class="row">
+    <button class="secondary" id="gen-sample">Build the sample library</button>
+    <span class="hint">Nothing to paste yet? One click builds the reference
+      set baked into this plugin — Card, Badge, Avatar, Button — token-bound,
+      in this file. Safe to re-run.</span>
+  </div>
+  <div class="row">
     <input type="text" class="pair-code" id="gen-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
     <button class="secondary" id="gen-receive">Receive by code</button>
     <span class="status" id="gen-receive-status"></span>
@@ -172,6 +178,13 @@
     CHECK it against this file first: the plugin looks up each contract by its
     identity marker and reports every change in plain words. Nothing is
     applied until you review the report and press Apply.
+  </div>
+  <div class="note">
+    What&rsquo;s protected: the check also compares each set against the state
+    its last sync recorded — a set you edited on the canvas is named in the
+    report and its Apply box starts unchecked, so an update never overwrites
+    your edits silently. Applying amends in place: instances keep their
+    overrides (same nodes, same property ids).
   </div>
   <div class="row">
     <input type="text" class="pair-code" id="upd-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
@@ -311,7 +324,7 @@
 </div>
 
 <div class="panel" id="panel-drift" role="tabpanel">
-  <p class="hint">Every generated component set is stamped at genesis with its <b>contract hash</b> (which contract version built it) and a <b>canvas fingerprint</b> (what it looked like the moment it was built). Check Drift recomputes the fingerprint: a mismatch means someone edited the canvas after generation. Re-running a sync script re-stamps.</p>
+  <p class="hint">Every generated component set remembers which contract built it and what it looked like at that moment. <b>Check drift</b> compares that record with the canvas now: a mismatch means the set was edited after it was built, and the report names the variant and the change (was → now). Re-running a sync script — or applying an update — records the current state as the new baseline.</p>
   <button id="drift-check" class="primary">Check drift</button>
   <div id="drift-results" style="margin-top:10px; font-size:11px; line-height:1.5;"></div>
 </div>
@@ -345,6 +358,32 @@
   if (window.DSC_BUILD) { $('engine-stamp').textContent = window.DSC_BUILD; }
   else { $('engine-stamp').textContent = 'engine: NOT INJECTED (dev stub — run npm run plugin:zip and import figma-sync/plugin-dist/)'; }
 
+  function escHtml(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function colorChip(hex) {
+    return '<span style="display:inline-block;width:9px;height:9px;border:1px solid #999;background:' + hex + ';margin-right:3px;"></span>';
+  }
+  // SHARED pretty printer — the Drift and Update reports speak ONE language.
+  // fill/stroke values render as color chips: paint-JSON arrays (drift
+  // snapshots) and bare #hex literals (compiled specs) both chip; variable/
+  // token names pass through as words. Everything else truncates at 48.
+  function prettyChannelValue(chan, val) {
+    if (val === '(absent)' || val === '(removed)') return escHtml(val);
+    if (chan === 'fill' || chan === 'stroke') {
+      try {
+        var paints = JSON.parse(String(val).replace(/ w[\d.]+$/, ''));
+        var hex = paints.filter(function (pp) { return pp.type === 'SOLID' && pp.visible !== false; }).map(function (pp) {
+          var c8 = function (x) { return Math.round((x || 0) * 255).toString(16).padStart(2, '0'); };
+          var hx = '#' + c8(pp.color.r) + c8(pp.color.g) + c8(pp.color.b);
+          return colorChip(hx) + hx;
+        });
+        if (hex.length) return hex.join(', ');
+      } catch (e) { /* not paint JSON — a hex literal or token name below */ }
+      var m = String(val).match(/^#([0-9a-fA-F]{6})([0-9a-fA-F]{2})?$/);
+      if (m) return colorChip('#' + m[1]) + escHtml(val);
+    }
+    return escHtml(String(val).slice(0, 48));
+  }
+
   // --- tabs -----------------------------------------------------------------
   var TAB_NAMES = ['generate', 'update', 'propose', 'paste', 'send', 'runner', 'drift'];
   function select(which) {
@@ -377,38 +416,20 @@
         : 'ℹ️ ' + r.status;
       var variants = '';
       if (r.setChanges && r.setChanges.length) {
-        var escS = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
         variants += '<div style="margin-top:2px;">' + r.setChanges.map(function (c) {
           var chanS = (c.what.split('|')[1] || '?');
-          return '<div style="color:#888;padding-left:14px;">set · ' + escS(chanS) + ': <s>' + escS(String(c.was).slice(0, 48)) + '</s> → <b>' + escS(String(c.now).slice(0, 48)) + '</b></div>';
+          return '<div style="color:#888;padding-left:14px;">set · ' + escHtml(chanS) + ': <s>' + escHtml(String(c.was).slice(0, 48)) + '</s> → <b>' + escHtml(String(c.now).slice(0, 48)) + '</b></div>';
         }).join('') + '</div>';
       }
       if (r.editedVariants && r.editedVariants.length) {
-        var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
         variants = '<div style="margin-top:2px;">' + r.editedVariants.map(function (v) {
-          // Fill/stroke values render as color chips, not raw paint JSON
-          // (live polish item: [{"type":"SOLID","visible":true,… is noise).
-          var pretty = function (chan, val) {
-            if (val === '(absent)' || val === '(removed)') return esc(val);
-            if (chan === 'fill' || chan === 'stroke') {
-              try {
-                var paints = JSON.parse(String(val).replace(/ w[\d.]+$/, ''));
-                var hex = paints.filter(function (pp) { return pp.type === 'SOLID' && pp.visible !== false; }).map(function (pp) {
-                  var c8 = function (x) { return Math.round((x || 0) * 255).toString(16).padStart(2, '0'); };
-                  var hx = '#' + c8(pp.color.r) + c8(pp.color.g) + c8(pp.color.b);
-                  return '<span style="display:inline-block;width:9px;height:9px;border:1px solid #999;background:' + hx + ';margin-right:3px;"></span>' + hx;
-                });
-                if (hex.length) return hex.join(', ');
-              } catch (e) { /* non-solid / unparsable — raw fallback */ }
-            }
-            return esc(String(val).slice(0, 48));
-          };
           var det = (v.changes || []).map(function (c) {
             // key: path:TYPE/name|channel — show "name · channel: was → now"
+            // (values through the SHARED pretty printer: chips for paints).
             var parts = c.what.split('|');
             var nodeLabel = (parts[0].split('/').pop() || parts[0]);
             var chan = parts[1] || '?';
-            return '<div style="color:#888;padding-left:14px;">' + esc(nodeLabel) + ' · ' + esc(chan) + ': <s>' + pretty(chan, c.was) + '</s> → <b>' + pretty(chan, c.now) + '</b></div>';
+            return '<div style="color:#888;padding-left:14px;">' + escHtml(nodeLabel) + ' · ' + escHtml(chan) + ': <s>' + prettyChannelValue(chan, c.was) + '</s> → <b>' + prettyChannelValue(chan, c.now) + '</b></div>';
           }).join('');
           return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>' + det;
         }).join('') + '</div>';
@@ -416,7 +437,7 @@
       if (r.status === 'canvas-edited') {
         variants += '<div style="margin-top:4px;"><a href="#" class="drift-propose" data-set="' + r.name.replace(/"/g, '&quot;') + '" style="color:#09f;text-decoration:underline;">→ Propose this change (review &amp; open PR)</a></div>';
       }
-      return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + ' · spec ' + (r.specHash || '?') + variants + '</div>';
+      return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + variants + '</div>';
     }).join('');
     box.innerHTML = '<div style="margin-bottom:6px;"><b>' + counts['in-sync'] + ' in sync · ' + counts['canvas-edited'] + ' canvas-edited</b></div>' + html;
     box.querySelectorAll('.drift-variant').forEach(function (a) {
@@ -775,6 +796,22 @@
     });
   };
 
+  // G9 — the cold start: one click feeds the baked sample bundle (Card,
+  // Badge, Avatar, Button) straight into the existing generate path. The
+  // JSON lands in the paste box first, so what runs is always reviewable.
+  $('gen-sample').onclick = function () {
+    var DSC = engine();
+    if (!DSC) { resultBox('gen-result', false, 'No engine.'); addLine($('gen-result'), NO_ENGINE); return; }
+    var json = DSC.sampleBundleJson ? DSC.sampleBundleJson() : null;
+    if (!json) {
+      resultBox('gen-result', false, 'No sample available.');
+      addLine($('gen-result'), 'This build carries no baked sample contracts.');
+      return;
+    }
+    $('gen-input').value = json;
+    genRun.onclick();
+  };
+
   genRun.onclick = function () {
     var DSC = engine();
     if (!DSC) { resultBox('gen-result', false, 'No engine.'); addLine($('gen-result'), NO_ENGINE); return; }
@@ -802,8 +839,19 @@
       $('gen-status').textContent = '';
       box.className = 'result ' + (ok ? 'ok' : 'err');
       var built = results.filter(function (r) { return r.ok && r.step.kind === 'component'; });
+      // G12 — narrate the no-op: determinism is invisible unless said out
+      // loud. A re-run where every component script skipped (already in
+      // sync) is the safety demo, not an empty result.
+      var changed = 0, unchanged = 0;
+      results.forEach(function (r) {
+        if (!r.ok || r.step.kind !== 'component' || !r.result) return;
+        var rep = (r.result.results && r.result.results[0]) || r.result;
+        if (rep && rep.skipped) unchanged++; else changed++;
+      });
       box.firstChild.textContent = ok
-        ? 'Done — ' + built.length + ' component(s) synced. The last one is selected on the canvas.'
+        ? (changed === 0 && unchanged > 0
+            ? 'Re-ran: 0 changes — your canvas already matches (' + unchanged + ' component(s) checked; nothing moved, nothing duplicated).'
+            : 'Done — ' + built.length + ' component(s) synced. The last one is selected on the canvas.')
         : 'Stopped at the first failure — the report above names it. A thrown script commits nothing (Figma runs them atomically).';
     });
   };
@@ -849,7 +897,11 @@
         var cb = document.createElement('input');
         cb.type = 'checkbox';
         cb.dataset.contractId = row.contractId;
-        cb.checked = row.action === 'amend' || row.action === 'create';
+        // G2: the engine decides the starting state — canvas-edited targets
+        // start UNCHECKED (warn and default-safe, never blocked).
+        cb.checked = row.defaultSelected !== undefined
+          ? !!row.defaultSelected
+          : (row.action === 'amend' || row.action === 'create');
         cb.disabled = row.action === 'skip' || row.action === 'refused';
         if (cb.disabled) label.className = 'disabled';
         label.appendChild(cb);
@@ -857,6 +909,31 @@
         span.textContent = row.line;
         label.appendChild(span);
         rowsWrap.appendChild(label);
+        if (row.warning) {
+          var warn = document.createElement('div');
+          warn.className = 'log-line warn';
+          warn.style.paddingLeft = '20px';
+          warn.textContent = '⚠ ' + row.warning;
+          rowsWrap.appendChild(warn);
+        }
+        // G8: the interior itemized per channel, rendered with the SAME
+        // pretty printer the Drift tab uses (chips for paints, token names
+        // as words) — one language for both reports.
+        if (row.styleChanges && row.styleChanges.length) {
+          var det = document.createElement('div');
+          det.style.paddingLeft = '20px';
+          det.style.color = 'var(--figma-color-text-secondary, #6b6b6b)';
+          var shown = row.styleChanges.slice(0, 8);
+          det.innerHTML = shown.map(function (c) {
+            var scope = c.variants
+              ? ' <span style="opacity:.7">(' + escHtml(c.variants.slice(0, 3).join(', ')) + (c.variants.length > 3 ? ' +' + (c.variants.length - 3) + ' more' : '') + ')</span>'
+              : '';
+            return '<div>' + escHtml(c.part) + ' · ' + escHtml(c.channel) + ': <s>' + prettyChannelValue(c.channel, c.was) + '</s> → <b>' + prettyChannelValue(c.channel, c.now) + '</b>' + scope + '</div>';
+          }).join('') + (row.styleChanges.length > 8
+            ? '<div>…and ' + (row.styleChanges.length - 8) + ' more style change(s).</div>'
+            : '');
+          rowsWrap.appendChild(det);
+        }
       });
       box.appendChild(rowsWrap);
       plan.lines.slice(plan.rows.length).forEach(function (l) { addLine(box, l); });

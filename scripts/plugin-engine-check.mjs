@@ -17,11 +17,16 @@
  *                  dependencies first (sortByDependencies closure)
  *   4. update    — the EXACT plain-words change report (unchanged / new /
  *                  version → version with +prop), then Apply amends in
- *                  place: same node id, props added, markers updated
+ *                  place: same node id, props added, markers updated.
+ *                  Plus G8 (a recolor-only update itemizes per channel —
+ *                  no "interior/style changes" jargon) and G2 (the check
+ *                  recomputes canvas state; a canvas-edited target warns
+ *                  BY NAME and defaults UNCHECKED — the covenant repair)
  *   5. propose   — the ui.html-embedded dump script runs against the mock
  *                  file; proposeDiff yields a proposal + bounded API diff
  *                  (a mutated base surfaces its +prop/default lines)
  *   6. pr        — the dry-run PR plan, exact lines, zero network
+ *   (2b. G9 — the baked sample bundle parses, plans tokens-first, builds)
  *
  * Every ✔ line below is pinned by evals (plugin-engine-bundle,
  * plugin-update-report, plugin-propose-dry-run).
@@ -87,6 +92,30 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(
     `✔ headless generate: Badge v${badge.version} synced into the mock file (${node.type}, node ${node.id}); stored specHash equals the engine mirror (${mirror})`,
   );
+}
+
+// --- 2b. G9 sample-library cold start --------------------------------------
+// The Generate tab's "Build the sample library" button feeds this exact
+// bundle into the existing generate path — no paste, no repo. The pin: the
+// baked export parses as a CONTRACTS-BUNDLE carrying the curated four,
+// plans tokens-first, and BUILDS in the mock file.
+{
+  const json = DSC.sampleBundleJson();
+  assert(typeof json === 'string' && json.length > 0, 'G9: the engine exports a baked sample bundle');
+  const parsed = DSC.parseIncomingText(json);
+  assert(parsed.ok && parsed.kind === 'bundle', 'G9: the sample bundle parses as a CONTRACTS-BUNDLE');
+  const ids = parsed.contracts.map((c) => c.id);
+  for (const want of ['ds.card', 'ds.badge', 'ds.avatar', 'ds.button']) {
+    assert(ids.includes(want), `G9: the sample bundle carries ${want} (got ${ids.join(', ')})`);
+  }
+  const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '' });
+  assert(plan.ok, `G9: the sample bundle plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
+  assert(plan.steps[0].kind === 'tokens', 'G9: the sample builds tokens first');
+  for (const step of plan.steps) await runScript(step.code);
+  for (const id of ['ds.card', 'ds.badge', 'ds.avatar', 'ds.button']) {
+    assert(markerOf(id), `G9: ${id} built in the mock file`);
+  }
+  console.log('✔ G9 sample library: the baked bundle (Card, Badge, Avatar, Button) parses, plans tokens-first, and builds in the mock — the no-paste cold start');
 }
 
 // --- 3. bundle ordering (dependencies first) -------------------------------
@@ -165,6 +194,62 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log('✔ update report (before anything applies):');
   for (const line of plan.lines) console.log(`    ${line}`);
   console.log(`    ${planSame.lines[0]}`);
+
+  // --- G8: plain-words style diffs ----------------------------------------
+  // A recolor-only update must itemize per channel (both compiled specs are
+  // in hand at plan time) instead of collapsing into the jargon phrase
+  // "interior/style changes (no API change)".
+  {
+    const style = JSON.parse(JSON.stringify(badge));
+    style.version = '1.2.0';
+    const t = style.anatomy.root.tokens;
+    const bg = t['background-color'];
+    t['background-color'] = t['color'];
+    t['color'] = bg;
+    const planStyle = DSC.updatePlan([style], inventory);
+    const row = planStyle.rows[0];
+    assert(row.action === 'amend', `G8: the recolor plans as an amend (got ${row.action}: ${row.line})`);
+    assert(Array.isArray(row.styleChanges) && row.styleChanges.length > 0,
+      `G8: a style-only update carries itemized per-channel changes (got ${JSON.stringify(row.styleChanges)})`);
+    const fillChange = row.styleChanges.find(
+      (c) => c.channel === 'fill' && String(c.was).includes('background') && String(c.now).includes('foreground'),
+    );
+    assert(fillChange, `G8: the recolor names both variables on the fill channel (got ${JSON.stringify(row.styleChanges).slice(0, 300)})`);
+    assert(row.line.includes('style change') && !row.line.includes('interior/style'),
+      `G8: the amend line speaks plain words, not "interior/style changes" (got "${row.line}")`);
+    console.log(`✔ G8 style diff: a recolor-only update itemizes per channel (${row.styleChanges.length} change(s); fill ${fillChange.was} → ${fillChange.now}) with the drift report's language — no more "interior/style changes"`);
+  }
+
+  // --- G2: drift-aware update check (covenant repair) ----------------------
+  // The check RECOMPUTES each target set's canvas state; a canvas-edited set
+  // gets a NAMED overwrite warning and its Apply box defaults UNCHECKED —
+  // warn and default-safe, never blocked. This is the exact reachable state
+  // that silently ate a designer's edit before this pin existed.
+  {
+    const subject = markerOf(badge.id);
+    const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
+    assert(victim, 'G2: an editable filled node exists in the Badge set');
+    const priorFills = victim.fills;
+    victim.fills = [{ type: 'SOLID', color: { r: 0, g: 1, b: 1 }, opacity: 1 }];
+    const invEdited = (await runScript(DSC.inventoryScriptSource())).inventory;
+    const invRow = invEdited.find((r) => r.contractId === badge.id);
+    assert(invRow && invRow.drift === 'canvas-edited',
+      `G2: the inventory scan recomputes the canvas state and flags the edit (drift=${invRow && invRow.drift})`);
+    const planEdited = DSC.updatePlan([vNext], invEdited);
+    const rowE = planEdited.rows[0];
+    assert(rowE.action === 'amend' && rowE.canvasEdited === true, 'G2: the amend row knows its target is canvas-edited');
+    assert(rowE.defaultSelected === false, 'G2: a canvas-edited target defaults to UNCHECKED (warn and default-safe, never blocked)');
+    assert(rowE.warning && rowE.warning.includes('un-proposed canvas edits') && rowE.warning.includes('overwrite'),
+      `G2: the overwrite warning is NAMED (got "${rowE.warning}")`);
+    assert(planEdited.lines.some((l) => l.includes('un-proposed canvas edits')),
+      'G2: the report itself carries the overwrite warning line');
+    victim.fills = priorFills;
+    const invClean = (await runScript(DSC.inventoryScriptSource())).inventory;
+    const planClean = DSC.updatePlan([vNext], invClean);
+    assert(planClean.rows[0].canvasEdited !== true && planClean.rows[0].defaultSelected === true && !planClean.rows[0].warning,
+      'G2: reverting the edit restores default-checked with no warning');
+    console.log('✔ G2 drift-aware update check: a canvas-edited target gets a NAMED overwrite warning and its Apply box defaults UNCHECKED; reverting the edit restores default-checked');
+  }
 
   // Apply the amend only; the Badge node must be amended IN PLACE.
   const before = markerOf(badge.id);
@@ -490,4 +575,4 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint)');
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint)');

@@ -22,6 +22,10 @@
  *   - The propose diff is API-LEVEL (version, props, slots, variant axes)
  *     plus a single named line when anatomy/style bytes differ — interior
  *     style diffs are summarized, not itemized.
+ *   - The UPDATE report's interior diff (G8) itemizes per channel only when
+ *     the recorded installed version matches a baked contract's version (the
+ *     sets this plugin generated); otherwise it says so and stays summary-
+ *     level — never a guessed diff.
  */
 import {
   ContractSchema,
@@ -34,6 +38,7 @@ import {
   tokenCorpusFromJson,
   type Contract,
 } from '../../../core/index.js';
+import { FINGERPRINT_SRC } from '../../../core/canvas-fingerprint.js';
 
 // ---------------------------------------------------------------------------
 // Data baked in at bundle time (scripts/build-plugin-zip.mjs).
@@ -96,6 +101,20 @@ export type ParsedIncoming =
   | { ok: true; kind: 'contract' | 'bundle'; contracts: unknown[] }
   | { ok: false; issue: PlainIssue };
 
+/** One per-channel style difference between the installed spec and the
+ *  incoming one (G8) — rendered by the UI with the Drift tab's pretty
+ *  printer so both reports speak one language. */
+export interface StyleChange {
+  /** Part name (anatomy path tail) the change sits on. */
+  part: string;
+  /** Designer channel word ("fill", "gap", "radius", "text color", …). */
+  channel: string;
+  was: string;
+  now: string;
+  /** Variant names carrying this change; null = every variant. */
+  variants: string[] | null;
+}
+
 export interface UpdateRow {
   contractId: string;
   setName: string;
@@ -104,6 +123,18 @@ export interface UpdateRow {
   /** The exact plain-words report line for this contract. */
   line: string;
   nodeId?: string;
+  /** G2 (covenant repair): the Apply checkbox's starting state. False for
+   *  canvas-edited amend targets — warn and default-safe, never block. */
+  defaultSelected: boolean;
+  /** G2: the target set has un-proposed canvas edits (its recomputed canvas
+   *  state no longer matches the state its last sync recorded). */
+  canvasEdited?: boolean;
+  /** G2: the NAMED overwrite warning for a canvas-edited amend target. */
+  warning?: string;
+  /** G8: per-channel diff of the two compiled specs (installed vs incoming).
+   *  null = the installed spec could not be matched (version unrecorded or
+   *  not a baked contract's version), so nothing can be itemized honestly. */
+  styleChanges?: StyleChange[] | null;
 }
 
 export interface UpdatePlan {
@@ -122,6 +153,10 @@ export interface InventoryRow {
   version: string | null;
   variants: number;
   props: string[];
+  /** G2: canvas state vs the stamp its last sync recorded — the same
+   *  recompute the Drift tab runs, joined into the update check so Apply
+   *  can never silently overwrite a designer's edit. null = no stamp. */
+  drift: 'in-sync' | 'canvas-edited' | 'unstamped' | null;
 }
 
 export function createPluginEngine(data: PluginEngineData) {
@@ -370,9 +405,13 @@ return { marker: 'version', contractId: ${JSON.stringify(contractId)}, version: 
   // -------------------------------------------------------------------------
 
   /** Read-only scan for our identity markers — runs through the same
-   *  run-script path, mutates nothing. */
+   *  run-script path, mutates nothing. G2: the scan also RECOMPUTES each
+   *  set's canvas fingerprint (the same dsCanvasFingerprint the Drift tab
+   *  runs) against the stamp genesis wrote, so the update check knows which
+   *  targets carry un-proposed canvas edits BEFORE anything applies. */
   function inventoryScriptSource(): string {
     return `// ds-contracts plugin: read-only marker inventory (nothing changes).
+${FINGERPRINT_SRC}
 await figma.loadAllPagesAsync();
 const rows = [];
 for (const page of figma.root.children) {
@@ -385,6 +424,14 @@ for (const page of figma.root.children) {
     try {
       props = Object.keys(node.componentPropertyDefinitions || {}).map((k) => k.split('#')[0]);
     } catch (e) { /* non-set components can throw — the row still counts */ }
+    let drift = null;
+    try {
+      const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+      if (stored) {
+        drift = stored.indexOf('v4:') !== 0 ? 'unstamped'
+          : stored === dsCanvasFingerprint(node) ? 'in-sync' : 'canvas-edited';
+      }
+    } catch (e) { /* recompute threw — no drift verdict, never a blocker */ }
     rows.push({
       contractId: contractId || null,
       name: node.name,
@@ -395,6 +442,7 @@ for (const page of figma.root.children) {
       version: node.getSharedPluginData('ds_contracts', 'version') || null,
       variants: node.type === 'COMPONENT_SET' ? node.children.length : 1,
       props: props,
+      drift: drift,
     });
   }
 }
@@ -431,6 +479,170 @@ return { inventory: rows };
     return [...names];
   }
 
+  // -------------------------------------------------------------------------
+  // G8 — plain-words style diffs. Flatten a compiled spec into
+  // `variant>path|channel|value` lines (designer channel words, variable
+  // names, hex literals), then pair-diff two flattenings the same way the
+  // Drift tab pairs canvas snapshots. Pure compute over data already in hand
+  // at plan time.
+  // -------------------------------------------------------------------------
+
+  type SpecNode = import('../../../core/emit-figma-script.js').NodeSpec;
+  type CompiledData = ReturnType<typeof engine.compileComponentData>;
+
+  /** Plugin-API binding fields → the designer's words. */
+  const FIELD_WORDS: Record<string, string> = {
+    paddingLeft: 'padding left',
+    paddingRight: 'padding right',
+    paddingTop: 'padding top',
+    paddingBottom: 'padding bottom',
+    itemSpacing: 'gap',
+    strokeWeight: 'border width',
+    strokeTopWeight: 'border width (top)',
+    strokeRightWeight: 'border width (right)',
+    strokeBottomWeight: 'border width (bottom)',
+    strokeLeftWeight: 'border width (left)',
+    cornerRadius: 'radius',
+    topLeftRadius: 'radius (top left)',
+    topRightRadius: 'radius (top right)',
+    bottomLeftRadius: 'radius (bottom left)',
+    bottomRightRadius: 'radius (bottom right)',
+    minWidth: 'min width',
+    minHeight: 'min height',
+    maxWidth: 'max width',
+    maxHeight: 'max height',
+    width: 'width',
+    height: 'height',
+    radius: 'radius',
+  };
+  const fieldWord = (field: string): string => FIELD_WORDS[field] ?? field;
+
+  const hexOfRgba = (c: { r: number; g: number; b: number; a?: number }): string => {
+    const h = (x: number) => Math.round((x || 0) * 255).toString(16).padStart(2, '0');
+    const alpha = c.a !== undefined && c.a < 1 ? h(c.a) : '';
+    return `#${h(c.r)}${h(c.g)}${h(c.b)}${alpha}`;
+  };
+  const djb2 = (s: string): string => {
+    let h = 5381;
+    for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+    return String(h);
+  };
+  /** Names ride inside `variant>path|channel|value` lines — keep the
+   *  separators out of them. */
+  const cleanSeg = (s: string): string => s.replace(/[|>]/g, '/');
+
+  function specStyleLines(compiled: CompiledData): string[] {
+    const lines: string[] = [];
+    const push = (id: string, channel: string, value: unknown) => {
+      if (value === undefined || value === null || value === '') return;
+      lines.push(`${id}|${channel}|${String(value)}`);
+    };
+    const walk = (spec: SpecNode, id: string) => {
+      if (spec.fill) push(id, 'fill', spec.fill);
+      if (spec.lits?.fillClear) push(id, 'fill', 'transparent');
+      if (spec.lits?.fillColor) push(id, 'fill', hexOfRgba(spec.lits.fillColor));
+      if (spec.stroke) push(id, 'stroke', spec.stroke);
+      if (spec.layout) {
+        push(
+          id,
+          'layout',
+          `${spec.layout.mode === 'HORIZONTAL' ? 'row' : 'column'} ${spec.layout.primary}/${spec.layout.counter}${spec.layout.wrap ? ' wrap' : ''}`,
+        );
+      }
+      for (const [field, varName] of Object.entries(spec.bindings ?? {})) push(id, fieldWord(field), varName);
+      for (const [key, value] of Object.entries(spec.lits ?? {})) {
+        if (typeof value === 'number') push(id, fieldWord(key), value);
+      }
+      if (spec.lits?.radiusCorners) push(id, 'radius', JSON.stringify(spec.lits.radiusCorners));
+      if (spec.lits?.strokeSides) push(id, 'border widths', JSON.stringify(spec.lits.strokeSides));
+      if (spec.characters !== undefined) push(id, 'text', `"${spec.characters}"`);
+      if (spec.fontSize !== undefined) push(id, 'text size', spec.fontSize);
+      if (spec.fontStyle) push(id, 'text weight', spec.fontStyle);
+      if (spec.textStyle) push(id, 'text style', spec.textStyle);
+      if (spec.fontFamily) push(id, 'font', spec.fontFamily);
+      if (spec.textFill) push(id, 'text color', spec.textFill);
+      if (spec.lineHeight !== undefined) push(id, 'line height', spec.lineHeight);
+      if (spec.opacity !== undefined) push(id, 'opacity', spec.opacity);
+      if (spec.fixedWidth) push(id, 'width', `${spec.fixedWidth.px}px (${spec.fixedWidth.varName})`);
+      if (spec.fixedHeight) {
+        push(id, 'height', `${spec.fixedHeight.px}px${spec.fixedHeight.varName ? ` (${spec.fixedHeight.varName})` : ''}`);
+      }
+      if (spec.dropShadow) push(id, 'shadow', JSON.stringify(spec.dropShadow));
+      if (spec.effectStack) push(id, 'shadow', `${spec.effectStack.length} layer(s) · ${djb2(JSON.stringify(spec.effectStack))}`);
+      if (spec.gradient) push(id, 'gradient', JSON.stringify(spec.gradient));
+      if (spec.svg) push(id, 'icon', `svg·${djb2(spec.svg)}`);
+      if (spec.visibleProp) push(id, 'shown when', `${spec.visibleProp}${spec.visibleDefault === false ? ' (off by default)' : ''}`);
+      for (const child of spec.children ?? []) walk(child, `${id}/${cleanSeg(child.name)}`);
+    };
+    for (const v of [...compiled.variants, ...(compiled.stateVariants ?? [])]) {
+      walk(v.spec, `${cleanSeg(v.name)}>${cleanSeg(v.spec.name)}`);
+    }
+    const setId = `set>${cleanSeg(compiled.setName)}`;
+    push(setId, 'description', compiled.description.replace(/\s+/g, ' ').slice(0, 120));
+    for (const bp of compiled.boolProps) push(setId, `${bp.property} default`, String(bp.default));
+    for (const tp of compiled.textProps) push(setId, `${tp.property} default`, `"${tp.default}"`);
+    return lines;
+  }
+
+  /** Pair-diff two flattenings (the Drift tab's prefix-pairing rule), then
+   *  aggregate identical changes across variants. */
+  function styleDiffOf(beforeLines: string[], afterLines: string[], variantCount: number): StyleChange[] {
+    const cut = (l: string): [string, string] => {
+      const i = l.indexOf('|');
+      const j = l.indexOf('|', i + 1);
+      return j > 0 ? [l.slice(0, j), l.slice(j + 1)] : [l, ''];
+    };
+    const inA = new Set(beforeLines);
+    const inB = new Set(afterLines);
+    const removed = beforeLines.filter((l) => !inB.has(l));
+    const added = afterLines.filter((l) => !inA.has(l));
+    const remByPrefix = new Map<string, string[]>();
+    for (const l of removed) {
+      const [p] = cut(l);
+      const arr = remByPrefix.get(p) ?? [];
+      arr.push(l);
+      remByPrefix.set(p, arr);
+    }
+    const used = new Set<string>();
+    const raw: Array<{ prefix: string; was: string; now: string }> = [];
+    for (const l of added) {
+      const [p, v] = cut(l);
+      const candidates = (remByPrefix.get(p) ?? []).filter((r) => !used.has(r));
+      if (candidates.length === 1) {
+        used.add(candidates[0]);
+        raw.push({ prefix: p, was: cut(candidates[0])[1], now: v });
+      } else {
+        raw.push({ prefix: p, was: '(absent)', now: v });
+      }
+    }
+    for (const l of removed) {
+      if (used.has(l)) continue;
+      const [p, v] = cut(l);
+      raw.push({ prefix: p, was: v, now: '(removed)' });
+    }
+    const agg = new Map<string, { change: StyleChange; vnames: string[] }>();
+    for (const r of raw) {
+      const gt = r.prefix.indexOf('>');
+      const variant = gt >= 0 ? r.prefix.slice(0, gt) : '';
+      const rest = gt >= 0 ? r.prefix.slice(gt + 1) : r.prefix;
+      const bar = rest.lastIndexOf('|');
+      const pathPart = bar >= 0 ? rest.slice(0, bar) : rest;
+      const channel = bar >= 0 ? rest.slice(bar + 1) : '';
+      const part = pathPart.split('/').pop() ?? pathPart;
+      const key = `${pathPart}|${channel}|${r.was}|${r.now}`;
+      const entry = agg.get(key);
+      if (entry) {
+        if (!entry.vnames.includes(variant)) entry.vnames.push(variant);
+      } else {
+        agg.set(key, { change: { part, channel, was: r.was, now: r.now, variants: null }, vnames: [variant] });
+      }
+    }
+    return [...agg.values()].map(({ change, vnames }) => ({
+      ...change,
+      variants: vnames.length >= variantCount || (vnames.length === 1 && vnames[0] === 'set') ? null : vnames,
+    }));
+  }
+
   function updatePlan(rawContracts: unknown[], inventory: InventoryRow[]): UpdatePlan {
     const rows: UpdateRow[] = [];
     const incoming: Contract[] = [];
@@ -454,6 +666,7 @@ return { inventory: rows };
             setName: contract.name,
             version: contract.version,
             action: 'refused',
+            defaultSelected: false,
             line: `• ${contract.name}: refused — this bundle carries "${contract.id}" twice; each contract id must appear once.`,
           });
           return;
@@ -468,6 +681,7 @@ return { inventory: rows };
           setName: labelOf(raw, i),
           version: '',
           action: 'refused',
+          defaultSelected: false,
           line: `• ${labelOf(raw, i)}: refused — ${first.headline}`,
         });
         return;
@@ -485,9 +699,10 @@ return { inventory: rows };
       let compiledVariants = 0;
       let hash: string | null = null;
       let expected: string[] = [];
+      let compiledIncoming: CompiledData | null = null;
       try {
-        const compiled = engine.compileComponentData(contract, byId);
-        compiledVariants = compiled.variants.length + (compiled.stateVariants?.length ?? 0);
+        compiledIncoming = engine.compileComponentData(contract, byId);
+        compiledVariants = compiledIncoming.variants.length + (compiledIncoming.stateVariants?.length ?? 0);
         hash = specHashOf(contract, byId);
         expected = expectedProps(contract, byId);
       } catch (e) {
@@ -496,6 +711,7 @@ return { inventory: rows };
           setName: contract.name,
           version: contract.version,
           action: 'refused',
+          defaultSelected: false,
           line: `• ${contract.name}: refused — ${plainFromThrow('the contract cannot compile', e).headline}`,
         });
         return;
@@ -507,6 +723,7 @@ return { inventory: rows };
           setName: contract.name,
           version: contract.version,
           action: 'create',
+          defaultSelected: true,
           line: `• ${contract.name} ${contract.version}: new — will be created (${compiledVariants} variant${compiledVariants === 1 ? '' : 's'}).`,
         });
         return;
@@ -517,6 +734,7 @@ return { inventory: rows };
           setName: contract.name,
           version: contract.version,
           action: 'skip',
+          defaultSelected: false,
           nodeId: found.nodeId,
           line: `• ${contract.name} ${contract.version}: unchanged — will be skipped.`,
         });
@@ -529,20 +747,63 @@ return { inventory: rows };
       const segments: string[] = [];
       for (const p of added) segments.push(`+prop ${p}`);
       for (const p of removed) segments.push(`prop ${p} left the contract (kept — retire by hand)`);
-      if (segments.length === 0) segments.push('interior/style changes (no API change)');
+
+      // G8: itemize the interior per channel. The installed spec is in hand
+      // exactly when the recorded installed version is a baked contract's
+      // version (the sets this plugin generated) — then both compiled specs
+      // diff per channel; otherwise nothing can be itemized honestly.
+      let styleChanges: StyleChange[] | null = null;
+      const baked = bakedById.get(contract.id) ?? null;
+      if (baked && found.version !== null && baked.version === found.version) {
+        try {
+          const installed = engine.compileComponentData(baked, new Map(bakedById));
+          styleChanges = styleDiffOf(
+            specStyleLines(installed),
+            specStyleLines(compiledIncoming),
+            Math.max(compiledVariants, 1),
+          );
+        } catch {
+          styleChanges = null;
+        }
+      }
+      if (segments.length === 0) {
+        if (styleChanges && styleChanges.length > 0) {
+          segments.push(`${styleChanges.length} style change${styleChanges.length === 1 ? '' : 's'} inside — listed below`);
+        } else if (styleChanges) {
+          segments.push('changes inside that this report cannot itemize — apply to see them, or hold this set');
+        } else {
+          segments.push('style changes inside the component (no prop changes)');
+        }
+      }
+
+      // G2 (covenant repair): a canvas-edited target gets a NAMED overwrite
+      // warning and starts UNCHECKED. Warn and default-safe — never block.
+      const canvasEdited = found.drift === 'canvas-edited';
       rows.push({
         contractId: contract.id,
         setName: contract.name,
         version: contract.version,
         action: 'amend',
+        defaultSelected: !canvasEdited,
+        canvasEdited,
+        warning: canvasEdited
+          ? `${contract.name} has un-proposed canvas edits — applying will overwrite them. Review them in the Drift tab (or propose them) first; its box starts unchecked.`
+          : undefined,
+        styleChanges,
         nodeId: found.nodeId,
         line: `• ${contract.name} ${fromText}${contract.version}: ${segments.join('; ')}.`,
       });
     });
 
     const count = (a: UpdateRow['action']) => rows.filter((r) => r.action === a).length;
+    const warned = rows.filter((r) => r.warning);
     const lines = [
       ...rows.map((r) => r.line),
+      ...(warned.length > 0
+        ? [
+            `⚠ ${warned.length} set${warned.length === 1 ? ' has' : 's have'} un-proposed canvas edits — applying overwrites the edits, so ${warned.length === 1 ? 'its box starts' : 'their boxes start'} unchecked.`,
+          ]
+        : []),
       `${count('amend')} to update · ${count('create')} new · ${count('skip')} unchanged${count('refused') ? ` · ${count('refused')} refused` : ''}.`,
       'Nothing has been applied — review the list, then Apply.',
     ];
@@ -796,6 +1057,12 @@ return { inventory: rows };
     ];
   }
 
+  /** G9 — the sample-library cold start: a curated CONTRACTS-BUNDLE built
+   *  from the contracts already baked into this build (Card + the components
+   *  it composes). One click on the Generate tab feeds it straight into the
+   *  existing generate path — no paste, no repo, no CLI. */
+  const SAMPLE_IDS = ['ds.card', 'ds.badge', 'ds.avatar', 'ds.button'];
+
   return {
     contractCount: bakedById.size,
     /** Raw JSON text of a baked repo contract (Propose pre-fills the base
@@ -803,6 +1070,22 @@ return { inventory: rows };
     bakedContract: (id: string): string | null => {
       const c = bakedById.get(id);
       return c ? JSON.stringify(c, null, 2) : null;
+    },
+    /** The baked sample bundle (G9) — null when this build carries none of
+     *  the curated contracts (a stripped custom build). */
+    sampleBundleJson: (): string | null => {
+      const picked = SAMPLE_IDS.map((id) => bakedById.get(id)).filter((c): c is Contract => !!c);
+      if (picked.length === 0) return null;
+      return JSON.stringify(
+        {
+          type: 'CONTRACTS-BUNDLE',
+          version: 1,
+          note: 'Sample library — the reference contracts baked into this plugin build.',
+          contracts: picked,
+        },
+        null,
+        2,
+      );
     },
     parseIncomingText,
     parseIncomingValue,

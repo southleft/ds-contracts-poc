@@ -22,8 +22,15 @@ const USAGE = `ds-contracts ${VERSION} — contracts as the deterministic bridge
 Usage: ds-contracts <command> [options]
 
 Commands:
-  init                                        write ds-contracts.config.json here
+  init [--detect]                             write ds-contracts.config.json here (--detect
+                                              prefills adapter/root/tokens + styling hints from
+                                              the repo — marked detected, NOT confirmed)
   extract [config] [--reconcile]              code → proposed contracts (react-tsx | cem adapter)
+          [--draft-capture-config]            + DRAFT computed-capture config with "__review:*"
+                                              markers (the capture runner refuses it unreviewed)
+          [--accept-candidates exact|<file>]  + bulk raw-value → token acceptance: unique
+                                              exact-value candidates only, every acceptance
+                                              ledgered, ambiguity refused by name
   extract --computed --config <capture.json>  real-browser computed-style capture
           [--harness <dir>] [--out <dir>]     (needs playwright-core + Chromium; degrades by name)
   generate <contracts..> --out <dir>          contract → code

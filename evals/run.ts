@@ -4205,6 +4205,37 @@ const cases: Case[] = [
     },
   },
   {
+    // G6+G14 (docs/18): the brownfield onboarding ramps — draft capture-
+    // config generation (refuses unreviewed drafts by name), the coverage
+    // scorecard, bulk candidate acceptance (ledgered, refusals named), and
+    // init --detect (every prefill detected-not-confirmed). The four suites
+    // carry the load-bearing pins; this gate runs them and checks the names.
+    id: 'onboarding-ramps',
+    claim: 'C5-extraction',
+    run: () => {
+      const files = [
+        'packages/cli/test/draft-capture-config.test.ts',
+        'packages/cli/test/accept-candidates.test.ts',
+        'packages/cli/test/init-detect.test.ts',
+        'packages/cli/test/library-scorecard.test.ts',
+      ];
+      const r = run(TSX, ['--test', ...files]);
+      const out = r.out;
+      if ((r.status ?? -1) !== 0 || !/# fail 0\b/.test(out)) {
+        const notOk = out.split('\n').filter((l) => l.startsWith('not ok')).join('\n');
+        throw new Error(`onboarding suites failed — failing tests:\n${notOk || '(none tagged — see head)'}\n\nHEAD:\n${out.slice(0, 2000)}`);
+      }
+      for (const pin of [
+        'capture runner REFUSES an unreviewed draft by name',
+        'exact mode: only the unambiguous unique-candidate items are accepted',
+        'every prefill is marked detected-not-confirmed',
+      ]) {
+        if (!out.includes(pin)) throw new Error(`onboarding gate missing load-bearing test "${pin}"`);
+      }
+      console.log('onboarding-ramps: draft-config refusal, exact-only bulk acceptance, detect-not-confirmed prefill — 4 suites green');
+    },
+  },
+  {
     // PLUGIN ENGINE (Phase 2, plugin v2) — the Figma plugin's engine bundle:
     // (a) a fresh esbuild of figma-sync/plugin/engine/entry.ts matches the
     // committed drift-guard receipt and the headless harness EXECUTES the
@@ -4223,6 +4254,9 @@ const cases: Case[] = [
         '✔ engine bundle fresh vs committed receipt',
         '✔ headless generate: Badge v',
         'stored specHash equals the engine mirror',
+        // G9 — the sample-library cold start: the baked bundle builds with
+        // ONE click, no paste, no repo (the designer's first trust moment).
+        '✔ G9 sample library: the baked bundle (Card, Badge, Avatar, Button) parses, plans tokens-first, and builds in the mock',
         '✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)',
         'plugin-engine-check: all flows green',
       ]) {
@@ -4284,12 +4318,18 @@ const cases: Case[] = [
         '1 to update · 1 new · 0 unchanged.',
         'Nothing has been applied — review the list, then Apply.',
         '• Badge 1.1.0: unchanged — will be skipped.',
+        // G8 — a recolor-only update itemizes per channel in the drift
+        // report's language instead of "interior/style changes".
+        '✔ G8 style diff: a recolor-only update itemizes per channel',
+        // G2 (covenant repair) — the check recomputes the canvas state; a
+        // canvas-edited target warns BY NAME and defaults UNCHECKED.
+        '✔ G2 drift-aware update check: a canvas-edited target gets a NAMED overwrite warning and its Apply box defaults UNCHECKED',
         '✔ apply: Badge amended in place (same node ',
         '+prop Experimental, markers updated to v9.9.9',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
       }
-      console.log('plugin-update-report: exact plain-words report before apply, amend-in-place after');
+      console.log('plugin-update-report: exact plain-words report before apply, drift-aware default-unchecked + per-channel style diff in the report, amend-in-place after');
     },
   },
   {

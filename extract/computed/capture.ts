@@ -16,6 +16,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Page } from 'playwright-core';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import { DRAFT_MARKER_KEY, draftRefusalMessage } from '../draft-capture-config.js';
 import {
   enumerate,
   normalizeNode,
@@ -176,6 +177,12 @@ export interface CaptureConfig {
 
 export function loadConfig(repoRoot: string, configPath: string): CaptureConfig {
   const cfg = JSON.parse(readFileSync(configPath, 'utf8')) as CaptureConfig;
+  // DRAFT ≠ APPROVED (G6 ack discipline): a machine-drafted config carries a
+  // top-level marker until a human reviews every "__review:*" field and
+  // deletes it — the runner refuses by name, never captures from a draft.
+  if ((cfg as unknown as Record<string, unknown>)[DRAFT_MARKER_KEY] !== undefined) {
+    throw new Error(`REFUSED: ${draftRefusalMessage(configPath)}`);
+  }
   for (const c of cfg.components) {
     const contractPath = path.join(repoRoot, c.contract);
     if (!existsSync(contractPath)) throw new Error(`${c.name}: contract not found: ${c.contract}`);
