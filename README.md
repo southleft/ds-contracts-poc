@@ -173,7 +173,9 @@ That is a claim about the future, so it's held to the same standard as everythin
 14. [Try It With Your Own System](docs/13-try-it-with-your-system.md) · extraction adapters, the design dump, and the disagreement report
 15. [Questions & Objections](docs/14-questions-and-objections.md) · every hard question, asked the skeptic's way, answered with receipts
 16. [The Engine Is a Library](docs/15-engine-as-library.md) · pure-function core, pluggable emitters, browser receipts
-17. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+17. [The Sync Boundary](docs/16-sync-boundary.md) · what a contract carries, what it never will — deterministic core, bounded assist, named gaps
+18. [Run the Gauntlet](docs/17-run-the-gauntlet.md) · the to-and-from sequence packaged for an outside tester — commands, expected outcomes, honest gaps
+19. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 
 ## Honesty as a design principle
 

@@ -73,6 +73,17 @@ Genesis: 5 component sets, 121 variants, 912 variables — the exact
 `GENESIS-BATCH.figma.js` byte stream is executed against the mocked Figma
 before it is written (builder refuses otherwise).
 
+## Provenance anchors (write-back v1)
+
+Every source-aliased leaf also lands in `contracts/<name>.anchors.json` — the
+write-back through-line: `{leaf, token, part, cssProperty, varName, selector}`
+where `selector` is the CSSOM rule that declares the channel (state planes
+anchor to their state rule, e.g. `.Mui-…-switchBase.Mui-checked`). A canvas
+edit to an anchored fact becomes an anchor LOOKUP, not a file scan. Named
+limitation: for Emotion-runtime libraries the anchor is RENDER-level (hashed
+class selectors); FILE-level (`path:line`) anchors are the static readers'
+job and are not built yet.
+
 ## Named residuals (defect-first)
 
 - **Pixel AA 0 everywhere**: the anti-aliased-pixel-perfect metric is 0 across

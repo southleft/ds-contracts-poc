@@ -73,7 +73,14 @@ function mergeInto(target, src, prefix = '') {
 let aliased = 0;
 let literalKept = 0;
 const aliasReceipts = [];
-function aliasPass(node, segs, facts) {
+// PROVENANCE ANCHORS (write-back v1): for every source-aliased leaf, record
+// the through-line back to where the fact lives — the CSS channel, the
+// library's custom property, and the selector of the rule that declares the
+// channel. A future canvas-edit patch is an anchor LOOKUP, not a file scan.
+// Written per component as contracts/<name>.anchors.json (sidecar, never
+// contract vocabulary — same discipline as the extension block).
+const anchorsByComponent = new Map();
+function aliasPass(node, segs, facts, componentName) {
   for (const [k, v] of Object.entries(node)) {
     if (v && typeof v === 'object' && '$value' in v) {
       const leafPath = [...segs, k];
@@ -110,13 +117,25 @@ function aliasPass(node, segs, facts) {
           aliasReceipts.push(`kept literal ${leafPath.join('.')}: minted value ${v.$value} ≠ ${tok} value ${tokenValue(tok)}`);
           break;
         }
-        matched = tok;
+        const witness = covering[0];
+        matched = { token: tok, part, channel, varName: witness.varName ?? '', selector: witness.anchor?.selector ?? '' };
         break;
       }
-      if (matched) { v.$value = `{${matched}}`; aliased++; }
-      else literalKept++;
+      if (matched) {
+        v.$value = `{${matched.token}}`;
+        aliased++;
+        if (!anchorsByComponent.has(componentName)) anchorsByComponent.set(componentName, []);
+        anchorsByComponent.get(componentName).push({
+          leaf: leafPath.join('.'),
+          token: matched.token,
+          part: matched.part,
+          cssProperty: matched.channel,
+          varName: matched.varName,
+          selector: matched.selector,
+        });
+      } else literalKept++;
     } else if (v && typeof v === 'object') {
-      aliasPass(v, [...segs, k], facts);
+      aliasPass(v, [...segs, k], facts, componentName);
     }
   }
 }
@@ -151,8 +170,20 @@ for (const name of MINT_SOURCES) {
   const minted = extension.mintedTokens ?? {};
   const sbPath = path.join(OUT, name, 'source-bindings.json');
   const facts = existsSync(sbPath) ? (JSON.parse(readFileSync(sbPath, 'utf8')).facts ?? []) : [];
-  if (facts.length > 0 && minted.imported) aliasPass(minted.imported, ['imported'], facts);
+  if (facts.length > 0 && minted.imported) aliasPass(minted.imported, ['imported'], facts, name);
   mergeInto(mintedMerged, minted);
+}
+
+// ---- provenance-anchor sidecars ----
+for (const [name, anchors] of [...anchorsByComponent].sort()) {
+  writeFileSync(
+    path.join(EX, 'contracts', `${name}.anchors.json`),
+    JSON.stringify({
+      _marker: 'PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).',
+      component: name,
+      anchors: anchors.sort((a, b) => a.leaf.localeCompare(b.leaf)),
+    }, null, 2) + '\n',
+  );
 }
 
 // ---- resolution guard (the dangling-ref trap this round hit: a promoted

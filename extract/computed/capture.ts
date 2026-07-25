@@ -466,23 +466,29 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     if (!VRULES) VRULES = buildVrules();
     const cs = getComputedStyle(el);
     const defs = {}; // intermediate custom prop -> [mui var names]
-    const chans = {}; // channel -> [referenced var names]
+    const chans = {}; // channel -> [{name, sel}] — sel = the CHANNEL-declaring
+    // rule's selector: the PROVENANCE ANCHOR for write-back (the rule that
+    // declares "background-color: var(...)" is where a patch would land, even
+    // when the token itself resolves through an indirection in another rule).
     for (const [sel, rdefs, rchans] of VRULES) {
       let hit = false; try { hit = el.matches(sel); } catch {}
       if (!hit) continue;
       for (const [prop, mui] of rdefs) { (defs[prop] = defs[prop] || []).includes(mui) || defs[prop].push(mui); }
-      for (const [prop, name] of rchans) { (chans[prop] = chans[prop] || []).includes(name) || chans[prop].push(name); }
+      for (const [prop, name] of rchans) {
+        (chans[prop] = chans[prop] || []);
+        if (!chans[prop].some((c) => c.name === name)) chans[prop].push({ name, sel });
+      }
     }
     const out = {};
     for (const prop of Object.keys(chans)) {
       const cands = [];
-      const push = (name) => {
+      const push = (name, sel) => {
         const raw = cs.getPropertyValue(name).trim();
-        if (raw && !cands.some((c) => c[0] === name)) cands.push([name, raw]);
+        if (raw && !cands.some((c) => c[0] === name)) cands.push([name, raw, sel]);
       };
-      for (const name of chans[prop]) {
-        if (name.startsWith(vp)) push(name);
-        else for (const mui of (defs[name] || [])) push(mui);
+      for (const { name, sel } of chans[prop]) {
+        if (name.startsWith(vp)) push(name, sel);
+        else for (const mui of (defs[name] || [])) push(mui, sel);
       }
       if (cands.length) out[prop] = cands;
     }

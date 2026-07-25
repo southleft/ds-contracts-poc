@@ -39,13 +39,13 @@ export interface CapturedNode {
   role?: string | null;
   ariaModal?: string | null;
   /** EMOTION/CSS-VARS READER (MUI round): channel → candidate [customPropertyName,
-   *  resolvedRawValue] pairs from ALL matching rules (specificity is not
+   *  resolvedRawValue, declaringRuleSelector] triples from ALL matching rules (specificity is not
    *  document order — verification against the computed value picks) for declarations in matching CSSOM rules that
    *  reference `var(--<varPrefix>…)`. SOURCE evidence — the library's own
    *  emitted CSS names the token it binds. Captured only when the config
    *  declares `library.varPrefix`; undefined (and omitted by normalizeNode)
    *  everywhere else, keeping committed captures byte-identical. */
-  vrefs?: Record<string, Array<[string, string]>>;
+  vrefs?: Record<string, Array<[string, string, string]>>;
 }
 
 export interface Capture {

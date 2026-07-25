@@ -286,7 +286,7 @@ async function main() {
         if (rem) return `${Number((Number(rem[1]) * 16).toFixed(4))}px` === computed;
         return false;
       };
-      type Fact = { token: string; varName: string };
+      type Fact = { token: string; varName: string; selector: string };
       const perPart = new Map<string, Map<string, Map<string, Fact | null>>>(); // part -> channel -> comboKey -> fact
       for (let pi = 0; pi < aligned.baseFlat.length; pi++) {
         const partName = aligned.partNames[pi];
@@ -303,10 +303,10 @@ async function main() {
             // document order; verification decides). Ties are value-identical
             // by construction — sorted-first, deterministic.
             const verified = cands
-              .map(([varName, raw]) => ({ token: tokenName(varName), varName, raw }))
+              .map(([varName, raw, selector]) => ({ token: tokenName(varName), varName, raw, selector: selector ?? '' }))
               .filter((c) => dtcgNames.has(c.token) && valueEq(c.raw, el.node.style[ch]))
               .sort((a, b) => a.token.localeCompare(b.token));
-            chans.get(ch)!.set(combo.key, verified.length > 0 ? { token: verified[0].token, varName: verified[0].varName } : null);
+            chans.get(ch)!.set(combo.key, verified.length > 0 ? { token: verified[0].token, varName: verified[0].varName, selector: verified[0].selector } : null);
           }
         }
       }
@@ -316,7 +316,7 @@ async function main() {
       // minted leaf to the source-named token when every combo the leaf
       // covers agrees (DTCG-native aliasing; value equality is already
       // verified per fact, so the alias cannot change a rendered pixel).
-      const srcFacts: Array<{ part: string; channel: string; combo: string; axisValues: Record<string, string>; token: string }> = [];
+      const srcFacts: Array<{ part: string; channel: string; combo: string; axisValues: Record<string, string>; token: string; varName: string; anchor: { selector: string } }> = [];
       const srcSkips: string[] = [];
       for (const [partName, chans] of [...perPart].sort()) {
         for (const [ch, byCombo] of [...chans].sort()) {
@@ -324,7 +324,7 @@ async function main() {
           if (okCount === 0) { srcSkips.push(`${partName}.${ch}: no var candidate verified against the computed value in any combo`); continue; }
           for (const combo of space.enumeration.combos) {
             const f = byCombo.get(combo.key);
-            if (f) srcFacts.push({ part: partName, channel: ch, combo: combo.key, axisValues: combo.axisValues, token: f.token });
+            if (f) srcFacts.push({ part: partName, channel: ch, combo: combo.key, axisValues: combo.axisValues, token: f.token, varName: f.varName, anchor: { selector: f.selector } });
           }
         }
       }

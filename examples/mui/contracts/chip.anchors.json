@@ -1,0 +1,150 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "chip",
+  "anchors": [
+    {
+      "leaf": "imported.chip.root.background-color.filled.error",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-rsxcpl-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.filled.info",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-1nw9y03-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.filled.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-1hb9emr-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.filled.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-1ua3dy1-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.filled.success",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-4c69q-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.filled.warning",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-i6jr8f-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.filled.error",
+      "token": "palette-error-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-contrastText",
+      "selector": ".css-rsxcpl-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.filled.info",
+      "token": "palette-info-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-contrastText",
+      "selector": ".css-1nw9y03-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.filled.primary",
+      "token": "palette-primary-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-contrastText",
+      "selector": ".css-1hb9emr-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.filled.secondary",
+      "token": "palette-secondary-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-contrastText",
+      "selector": ".css-1ua3dy1-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.filled.success",
+      "token": "palette-success-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-contrastText",
+      "selector": ".css-4c69q-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.filled.warning",
+      "token": "palette-warning-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-contrastText",
+      "selector": ".css-i6jr8f-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.outlined.error",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-10r65dk-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.outlined.info",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-367tv3-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.outlined.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-sqgqit-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.outlined.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-vthg4g-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.outlined.success",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-1u4608l-MuiChip-root"
+    },
+    {
+      "leaf": "imported.chip.root.color.outlined.warning",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-y9pykz-MuiChip-root"
+    }
+  ]
+}

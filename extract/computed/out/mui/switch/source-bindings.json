@@ -11,7 +11,11 @@
         "color": "primary",
         "size": "small"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -21,7 +25,11 @@
         "color": "primary",
         "size": "medium"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -31,7 +39,11 @@
         "color": "secondary",
         "size": "small"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -41,7 +53,11 @@
         "color": "secondary",
         "size": "medium"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -51,7 +67,11 @@
         "color": "error",
         "size": "small"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -61,7 +81,11 @@
         "color": "error",
         "size": "medium"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -71,7 +95,11 @@
         "color": "warning",
         "size": "small"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -81,7 +109,11 @@
         "color": "warning",
         "size": "medium"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -91,7 +123,11 @@
         "color": "info",
         "size": "small"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -101,7 +137,11 @@
         "color": "info",
         "size": "medium"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -111,7 +151,11 @@
         "color": "success",
         "size": "small"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "buttonbase-root",
@@ -121,7 +165,11 @@
         "color": "success",
         "size": "medium"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
+      }
     },
     {
       "part": "switch-track",
@@ -131,7 +179,11 @@
         "color": "primary",
         "size": "small"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -141,7 +193,11 @@
         "color": "primary",
         "size": "small"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -151,7 +207,11 @@
         "color": "primary",
         "size": "medium"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -161,7 +221,11 @@
         "color": "primary",
         "size": "medium"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -171,7 +235,11 @@
         "color": "secondary",
         "size": "small"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -181,7 +249,11 @@
         "color": "secondary",
         "size": "small"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -191,7 +263,11 @@
         "color": "secondary",
         "size": "medium"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -201,7 +277,11 @@
         "color": "secondary",
         "size": "medium"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -211,7 +291,11 @@
         "color": "error",
         "size": "small"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -221,7 +305,11 @@
         "color": "error",
         "size": "small"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -231,7 +319,11 @@
         "color": "error",
         "size": "medium"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -241,7 +333,11 @@
         "color": "error",
         "size": "medium"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -251,7 +347,11 @@
         "color": "warning",
         "size": "small"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -261,7 +361,11 @@
         "color": "warning",
         "size": "small"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -271,7 +375,11 @@
         "color": "warning",
         "size": "medium"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -281,7 +389,11 @@
         "color": "warning",
         "size": "medium"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -291,7 +403,11 @@
         "color": "info",
         "size": "small"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -301,7 +417,11 @@
         "color": "info",
         "size": "small"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -311,7 +431,11 @@
         "color": "info",
         "size": "medium"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -321,7 +445,11 @@
         "color": "info",
         "size": "medium"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -331,7 +459,11 @@
         "color": "success",
         "size": "small"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -341,7 +473,11 @@
         "color": "success",
         "size": "small"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -351,7 +487,11 @@
         "color": "success",
         "size": "medium"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     },
     {
       "part": "switch-track",
@@ -361,7 +501,11 @@
         "color": "success",
         "size": "medium"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
+      }
     }
   ],
   "skips": [

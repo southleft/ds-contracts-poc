@@ -1,0 +1,198 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.background-color.contained.error",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-104223-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.background-color.contained.info",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-amado6-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.background-color.contained.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-1qy0m9a-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.background-color.contained.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-1a3n5wg-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.background-color.contained.success",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-ymnqng-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.background-color.contained.warning",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-dzqj57-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.contained.error",
+      "token": "palette-error-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-contrastText",
+      "selector": ".css-104223-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.contained.info",
+      "token": "palette-info-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-contrastText",
+      "selector": ".css-amado6-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.contained.primary",
+      "token": "palette-primary-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-contrastText",
+      "selector": ".css-1qy0m9a-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.contained.secondary",
+      "token": "palette-secondary-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-contrastText",
+      "selector": ".css-1a3n5wg-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.contained.success",
+      "token": "palette-success-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-contrastText",
+      "selector": ".css-ymnqng-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.contained.warning",
+      "token": "palette-warning-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-contrastText",
+      "selector": ".css-dzqj57-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.outlined.error",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-1aebt7r-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.outlined.info",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-x81xpt-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.outlined.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-udwvhn-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.outlined.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-pkw15g-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.outlined.success",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-xr62vo-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.outlined.warning",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-p9l6cg-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.text.error",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-iacmk8-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.text.info",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-549z3h-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.text.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-yhoksd-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.text.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-zh2iwx-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.text.success",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-4w32l-MuiButtonBase-root-MuiButton-root"
+    },
+    {
+      "leaf": "imported.button.root.color.text.warning",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-1vwjvk6-MuiButtonBase-root-MuiButton-root"
+    }
+  ]
+}

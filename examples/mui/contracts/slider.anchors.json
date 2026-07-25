@@ -1,0 +1,54 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "slider",
+  "anchors": [
+    {
+      "leaf": "imported.slider.root.color.error",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-1saal67-MuiSlider-root"
+    },
+    {
+      "leaf": "imported.slider.root.color.info",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-1ciatdz-MuiSlider-root"
+    },
+    {
+      "leaf": "imported.slider.root.color.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-c5x61j-MuiSlider-root"
+    },
+    {
+      "leaf": "imported.slider.root.color.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-12xmqb1-MuiSlider-root"
+    },
+    {
+      "leaf": "imported.slider.root.color.success",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-dmsf23-MuiSlider-root"
+    },
+    {
+      "leaf": "imported.slider.root.color.warning",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-9lk4m2-MuiSlider-root"
+    }
+  ]
+}

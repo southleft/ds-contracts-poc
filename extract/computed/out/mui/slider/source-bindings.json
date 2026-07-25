@@ -11,7 +11,11 @@
         "color": "primary",
         "size": "small"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-c5x61j-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -21,7 +25,11 @@
         "color": "primary",
         "size": "medium"
       },
-      "token": "palette-primary-main"
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-ihw9mh-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -31,7 +39,11 @@
         "color": "secondary",
         "size": "small"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-12xmqb1-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -41,7 +53,11 @@
         "color": "secondary",
         "size": "medium"
       },
-      "token": "palette-secondary-main"
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-w8xqx6-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -51,7 +67,11 @@
         "color": "error",
         "size": "small"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-1saal67-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -61,7 +81,11 @@
         "color": "error",
         "size": "medium"
       },
-      "token": "palette-error-main"
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-kdc487-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -71,7 +95,11 @@
         "color": "warning",
         "size": "small"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-9lk4m2-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -81,7 +109,11 @@
         "color": "warning",
         "size": "medium"
       },
-      "token": "palette-warning-main"
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-3022ji-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -91,7 +123,11 @@
         "color": "info",
         "size": "small"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-1ciatdz-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -101,7 +137,11 @@
         "color": "info",
         "size": "medium"
       },
-      "token": "palette-info-main"
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-1v0xn83-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -111,7 +151,11 @@
         "color": "success",
         "size": "small"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-dmsf23-MuiSlider-root"
+      }
     },
     {
       "part": "root",
@@ -121,7 +165,11 @@
         "color": "success",
         "size": "medium"
       },
-      "token": "palette-success-main"
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-bb7fmt-MuiSlider-root"
+      }
     }
   ],
   "skips": []

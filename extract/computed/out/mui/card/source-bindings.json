@@ -10,7 +10,11 @@
       "axisValues": {
         "elevation": "0"
       },
-      "token": "palette-background-paper"
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -19,7 +23,11 @@
       "axisValues": {
         "elevation": "1"
       },
-      "token": "palette-background-paper"
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -28,7 +36,11 @@
       "axisValues": {
         "elevation": "3"
       },
-      "token": "palette-background-paper"
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -37,7 +49,11 @@
       "axisValues": {
         "elevation": "8"
       },
-      "token": "palette-background-paper"
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -46,7 +62,11 @@
       "axisValues": {
         "elevation": "0"
       },
-      "token": "palette-text-primary"
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -55,7 +75,11 @@
       "axisValues": {
         "elevation": "1"
       },
-      "token": "palette-text-primary"
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -64,7 +88,11 @@
       "axisValues": {
         "elevation": "3"
       },
-      "token": "palette-text-primary"
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     },
     {
       "part": "root",
@@ -73,7 +101,11 @@
       "axisValues": {
         "elevation": "8"
       },
-      "token": "palette-text-primary"
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-2epr5x-MuiPaper-root-MuiCard-root"
+      }
     }
   ],
   "skips": []
