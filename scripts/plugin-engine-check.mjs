@@ -429,12 +429,20 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // simulate a designer edit: swap a fill somewhere in the tree
   const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
   assert(victim, 'drift gate: an editable filled node exists');
+  // LOCALIZATION (live finding: "which of the 63 buttons?"): per-variant
+  // stamps exist and the edit resolves to EXACTLY the containing variant.
+  const variants = subject.children ?? [];
+  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v2:')), 'drift gate: every VARIANT carries its own v2 fingerprint stamp');
+  const owner = (() => { let n = victim; while (n && n.parent !== subject) n = n.parent; return n; })();
+  assert(owner, 'drift gate: the edited node resolves to a variant of the set');
   const priorFills = victim.fills;
   victim.fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 1 }, opacity: 1 }];
   assert(fp(subject) !== stored, 'drift gate: a canvas edit changes the recomputed fingerprint (CANVAS-EDITED detectable)');
+  const flagged = variants.filter((v) => fp(v) !== v.getSharedPluginData('ds_contracts', 'canvasFingerprint'));
+  assert(flagged.length === 1 && flagged[0] === owner, `drift gate: the edit LOCALIZES to exactly the containing variant (flagged ${flagged.length}: ${flagged.map((f) => f.name).join(',')})`);
   victim.fills = priorFills;
   assert(fp(subject) === stored, 'drift gate: reverting the edit restores the match');
-  console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded`);
+  console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);
 }
 
 console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint)');

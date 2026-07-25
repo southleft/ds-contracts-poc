@@ -259,13 +259,26 @@ figma.ui.onmessage = async (msg) => {
         for (const node of marked) {
           const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
           const fresh = dsCanvasFingerprint(node);
+          const status = !stored || stored.indexOf('v2:') !== 0 ? 'unstamped (pre-v2 stamp — re-run its sync script to baseline)' : stored === fresh ? 'in-sync' : 'canvas-edited';
+          // LOCALIZE: on a set-level mismatch, drill into per-variant stamps
+          // so the report names the exact edited variant(s).
+          const editedVariants = [];
+          if (status === 'canvas-edited' && node.type === 'COMPONENT_SET') {
+            for (const child of node.children) {
+              const cs = child.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+              if (cs && cs.indexOf('v2:') === 0 && cs !== dsCanvasFingerprint(child)) {
+                editedVariants.push({ nodeId: child.id, name: child.name });
+              }
+            }
+          }
           rows.push({
             nodeId: node.id,
             name: node.name,
             page: page.name,
             contractId: node.getSharedPluginData('ds_contracts', 'contractId'),
             specHash: node.getSharedPluginData('ds_contracts', 'specHash'),
-            status: !stored || stored.indexOf('v2:') !== 0 ? 'unstamped (pre-v2 stamp — re-run its sync script to baseline)' : stored === fresh ? 'in-sync' : 'canvas-edited',
+            status: status,
+            editedVariants: editedVariants,
           });
         }
       }

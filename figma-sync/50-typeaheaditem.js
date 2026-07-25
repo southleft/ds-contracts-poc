@@ -508,6 +508,18 @@ function dsCanvasFingerprint(root) {
 }
 
 
+// DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
+// Check Drift can LOCALIZE an edit to the exact variant (live finding:
+// "canvas edited" over 63 Button variants is not actionable).
+function dsStampFingerprints(node) {
+  node.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(node));
+  if (node.type === 'COMPONENT_SET') {
+    for (const child of node.children) {
+      child.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(child));
+    }
+  }
+}
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -532,7 +544,7 @@ async function amendSet(set, C) {
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
     if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
-      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+      dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
@@ -692,7 +704,7 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
-  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+  dsStampFingerprints(set);
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -710,7 +722,7 @@ async function amendComponent(comp, C) {
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
     if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
-      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+      dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
@@ -790,7 +802,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
-  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+  dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -957,7 +969,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
+  dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
   return {

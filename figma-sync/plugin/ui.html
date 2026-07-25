@@ -358,9 +358,21 @@
       var badge = r.status === 'in-sync' ? '✅ in sync'
         : r.status === 'canvas-edited' ? '⚠️ canvas edited'
         : 'ℹ️ ' + r.status;
-      return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + ' · spec ' + (r.specHash || '?') + '</div>';
+      var variants = '';
+      if (r.editedVariants && r.editedVariants.length) {
+        variants = '<div style="margin-top:2px;">' + r.editedVariants.map(function (v) {
+          return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>';
+        }).join('') + '</div>';
+      }
+      return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + ' · spec ' + (r.specHash || '?') + variants + '</div>';
     }).join('');
     box.innerHTML = '<div style="margin-bottom:6px;"><b>' + counts['in-sync'] + ' in sync · ' + counts['canvas-edited'] + ' canvas-edited</b></div>' + html;
+    box.querySelectorAll('.drift-variant').forEach(function (a) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: a.getAttribute('data-node') } }, '*');
+      };
+    });
   });
 
   // The engine bundle (window.DSC) is injected at package time — direct
