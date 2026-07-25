@@ -424,7 +424,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(withStamp.length === sets.length, `drift gate: every generated set carries a canvasFingerprint stamp (${withStamp.length}/${sets.length})`);
   const subject = withStamp[0];
   const stored = subject.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-  assert(stored.startsWith('v2:'), 'drift gate: stamps carry the v2 version prefix (geometry-free scheme)');
+  assert(stored.startsWith('v3:'), 'drift gate: stamps carry the v2 version prefix (snapshot-bearing scheme)');
   assert(fp(subject) === stored, 'drift gate: recomputing the fingerprint over the untouched tree MATCHES the stamp (module ≡ emitted copy)');
   // simulate a designer edit: swap a fill somewhere in the tree
   const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
@@ -432,7 +432,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // LOCALIZATION (live finding: "which of the 63 buttons?"): per-variant
   // stamps exist and the edit resolves to EXACTLY the containing variant.
   const variants = subject.children ?? [];
-  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v2:')), 'drift gate: every VARIANT carries its own v2 fingerprint stamp');
+  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v3:')), 'drift gate: every VARIANT carries its own v3 fingerprint stamp');
   const owner = (() => { let n = victim; while (n && n.parent !== subject) n = n.parent; return n; })();
   assert(owner, 'drift gate: the edited node resolves to a variant of the set');
   const priorFills = victim.fills;
@@ -440,6 +440,16 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(fp(subject) !== stored, 'drift gate: a canvas edit changes the recomputed fingerprint (CANVAS-EDITED detectable)');
   const flagged = variants.filter((v) => fp(v) !== v.getSharedPluginData('ds_contracts', 'canvasFingerprint'));
   assert(flagged.length === 1 && flagged[0] === owner, `drift gate: the edit LOCALIZES to exactly the containing variant (flagged ${flagged.length}: ${flagged.map((f) => f.name).join(',')})`);
+  // v3 (live finding "what changed?"): the stored snapshot diffs against a
+  // fresh one and NAMES the edited channel with old and new values.
+  {
+    const snapFn = new Function(`${srcMatch[1]}; return dsCanvasSnapshot;`)();
+    const storedSnap = JSON.parse(owner.getSharedPluginData('ds_contracts', 'canvasSnapshot') || '[]');
+    assert(storedSnap.length > 0, 'drift gate: variants carry a stored snapshot');
+    const freshSnap = snapFn(owner);
+    const changed = freshSnap.filter((l) => !storedSnap.includes(l));
+    assert(changed.length >= 1 && changed.some((l) => l.includes('|fill|') && l.includes('"r":1') ), `drift gate: the snapshot diff NAMES the edited fill with its new value (changed: ${changed.slice(0, 2).join(' ;; ').slice(0, 160)})`);
+  }
   victim.fills = priorFills;
   assert(fp(subject) === stored, 'drift gate: reverting the edit restores the match');
   console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);

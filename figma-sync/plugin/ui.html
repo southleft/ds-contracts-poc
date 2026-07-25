@@ -360,8 +360,16 @@
         : 'ℹ️ ' + r.status;
       var variants = '';
       if (r.editedVariants && r.editedVariants.length) {
+        var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
         variants = '<div style="margin-top:2px;">' + r.editedVariants.map(function (v) {
-          return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>';
+          var det = (v.changes || []).map(function (c) {
+            // key: path:TYPE/name|channel — show "name · channel: was → now"
+            var parts = c.what.split('|');
+            var nodeLabel = (parts[0].split('/').pop() || parts[0]);
+            var chan = parts[1] || '?';
+            return '<div style="color:#888;padding-left:14px;">' + esc(nodeLabel) + ' · ' + esc(chan) + ': <s>' + esc(String(c.was).slice(0, 48)) + '</s> → <b>' + esc(String(c.now).slice(0, 48)) + '</b></div>';
+          }).join('');
+          return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>' + det;
         }).join('') + '</div>';
       }
       return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + ' · spec ' + (r.specHash || '?') + variants + '</div>';

@@ -259,15 +259,34 @@ figma.ui.onmessage = async (msg) => {
         for (const node of marked) {
           const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
           const fresh = dsCanvasFingerprint(node);
-          const status = !stored || stored.indexOf('v2:') !== 0 ? 'unstamped (pre-v2 stamp — re-run its sync script to baseline)' : stored === fresh ? 'in-sync' : 'canvas-edited';
-          // LOCALIZE: on a set-level mismatch, drill into per-variant stamps
-          // so the report names the exact edited variant(s).
+          const status = !stored || stored.indexOf('v3:') !== 0 ? 'unstamped (pre-v3 stamp — re-run its sync script to baseline)' : stored === fresh ? 'in-sync' : 'canvas-edited';
+          // LOCALIZE + EXPLAIN: on a set-level mismatch, drill into variant
+          // stamps, and DIFF the stored snapshot against a fresh one so the
+          // report says WHAT changed, not just that something did.
           const editedVariants = [];
+          const diffSnapshots = function (storedLines, freshLines) {
+            const key = function (l) { var i = l.lastIndexOf('|', l.lastIndexOf('|') - 1); return l.slice(0, i); };
+            const val = function (l) { return l.slice(key(l).length + 1); };
+            const a = {}; storedLines.forEach(function (l) { a[key(l)] = val(l); });
+            const b = {}; freshLines.forEach(function (l) { b[key(l)] = val(l); });
+            const out = [];
+            Object.keys(b).forEach(function (k) {
+              if (!(k in a)) out.push({ what: k, was: '(absent)', now: b[k] });
+              else if (a[k] !== b[k]) out.push({ what: k, was: a[k], now: b[k] });
+            });
+            Object.keys(a).forEach(function (k) { if (!(k in b)) out.push({ what: k, was: a[k], now: '(removed)' }); });
+            return out;
+          };
           if (status === 'canvas-edited' && node.type === 'COMPONENT_SET') {
             for (const child of node.children) {
               const cs = child.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-              if (cs && cs.indexOf('v2:') === 0 && cs !== dsCanvasFingerprint(child)) {
-                editedVariants.push({ nodeId: child.id, name: child.name });
+              if (cs && cs.indexOf('v3:') === 0 && cs !== dsCanvasFingerprint(child)) {
+                let changes = [];
+                try {
+                  const snap = JSON.parse(child.getSharedPluginData('ds_contracts', 'canvasSnapshot') || '[]');
+                  changes = diffSnapshots(snap, dsCanvasSnapshot(child)).slice(0, 6);
+                } catch (e) { /* snapshot unreadable — variant still listed */ }
+                editedVariants.push({ nodeId: child.id, name: child.name, changes: changes });
               }
             }
           }
@@ -520,27 +539,34 @@ async function runLocalRunner() {
 }
 
 // DRIFT ROUND — byte-identical copy of core/canvas-fingerprint.ts
-// FINGERPRINT_SRC (v2, geometry-free; see the module header for why).
-// Keep in lockstep — the plugin-engine gate pins the emitted copy.
+// FINGERPRINT_SRC (v3, snapshot-bearing). Keep in lockstep — the
+// plugin-engine gate pins the emitted copy.
 
-function dsCanvasFingerprint(root) {
-  var h = 5381;
-  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+function dsCanvasSnapshot(root) {
+  var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
-  var walk = function (n) {
-    mix('|' + n.type + '/' + n.name);
-    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
-    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
-    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
-    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
-    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
-    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
-    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
-    try { if (n.visible === false) mix('h'); } catch (e) {}
+  var walk = function (n, path) {
+    var id = path + ':' + n.type + '/' + n.name;
+    try { if (n.fills && n.fills !== undefined) lines.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) lines.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { lines.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') lines.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { lines.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
+    try { if (n.type === 'TEXT') lines.push(id + '|text|"' + n.characters + '" ' + String(n.fontSize) + 'px ' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) lines.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) lines.push(id + '|effects|' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) lines.push(id + '|hidden|true'); } catch (e) {}
     var kids = n.children || [];
-    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+    for (var i = 0; i < kids.length; i++) walk(kids[i], path + '/' + i);
   };
-  walk(root);
-  return 'v2:' + String(h);
+  walk(root, '');
+  return lines;
 }
+function dsCanvasFingerprint(root) {
+  var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
+  var h = 5381;
+  for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
+  return 'v3:' + String(h);
+}
+
+
