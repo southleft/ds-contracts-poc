@@ -30,6 +30,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-card-width",
       "color-border-subtle",
@@ -164,6 +167,9 @@
         "default": "sm"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "radius-avatar",
       "color-identity-background",
@@ -216,6 +222,9 @@
         "confidence": "declared",
         "default": "+3"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-gap-sm",
@@ -297,6 +306,9 @@
         "confidence": "declared",
         "default": "info"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-inset-x-sm",
@@ -404,6 +416,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-banner-width",
@@ -560,6 +575,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLQuoteElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "border-width-divider-strong",
       "color-divider-strong",
@@ -648,6 +666,9 @@
         "default": "#"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "space-inset-y-sm",
       "font-control-family",
@@ -715,6 +736,9 @@
         "kind": "string",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-inset-y-sm"
@@ -800,6 +824,9 @@
         "confidence": "declared",
         "default": false
       }
+    ],
+    "notes": [
+      "props type extends ButtonHTMLAttributes<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "radius-control",
@@ -916,6 +943,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "color-surface-raised",
@@ -1069,6 +1099,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-banner-width",
       "space-gap-sm",
@@ -1217,6 +1250,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "space-inset-y-sm",
       "font-control-family",
@@ -1306,6 +1342,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -1439,6 +1478,9 @@
         "kind": "event",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-gap-sm",
@@ -1653,6 +1695,9 @@
         "default": "https://example.com"
       }
     ],
+    "notes": [
+      "props type extends AnchorHTMLAttributes<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "color-surface-sunken",
       "color-text-secondary",
@@ -1769,6 +1814,9 @@
         "default": "subtle"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLHRElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-divider-length",
       "color-divider-subtle",
@@ -1832,6 +1880,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -1956,6 +2007,9 @@
         "confidence": "declared",
         "default": "Helper text for the wrapped control."
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -2085,6 +2139,9 @@
         "default": "lg"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "font-control-family",
       "font-title-weight",
@@ -2094,12 +2151,31 @@
       "font-control-size-lg"
     ],
     "anatomy": {
-      "root": {},
+      "root": {
+        "component": {
+          "name": "Tag"
+        },
+        "tokens": {
+          "font-family": "{font.control.family}",
+          "font-weight": "{font.title.weight}",
+          "color": "{color.surface.foreground}",
+          "font-size": "{font.control.size.{size}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
       "element": "div",
       "states": [],
       "rawValues": [],
       "notes": [
-        "jsx: root element <Tag> is a component — anatomy not extracted (wrapper components are review items)"
+        "jsx: <Tag> prop ref={…} — expression not extractable on a component ref, skipped",
+        "jsx: <Tag> prop className={…} — expression not extractable on a component ref, skipped",
+        "jsx: <Tag> has element children — extracted as parts INSIDE the component-ref boundary (the ref's slot content); review whether <Tag> is a pass-through wrapper before adoption",
+        "jsx: root element <Tag> is a component — extracted as a component-ref ROOT with its slot content as parts (wrapper mapping is a review item)",
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
       ]
     }
   },
@@ -2157,6 +2233,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends ButtonHTMLAttributes<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "radius-control",
@@ -2245,6 +2324,9 @@
         "default": "md"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "space-gap-sm",
       "space-gap-md",
@@ -2281,6 +2363,9 @@
         "kind": "string",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "color-surface-sunken",
@@ -2345,6 +2430,9 @@
         "confidence": "declared",
         "default": "balanced"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLUListElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -2431,6 +2519,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends LiHTMLAttributes<HTMLLIElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-gap-sm",
@@ -2537,6 +2628,9 @@
         "default": "Details"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-card-width",
       "space-gap-sm",
@@ -2618,6 +2712,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-gap-md",
@@ -2717,6 +2814,9 @@
         "kind": "string",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-gap-sm",
@@ -2991,6 +3091,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-progress-width",
       "size-progress-height",
@@ -3061,6 +3164,9 @@
         "confidence": "declared",
         "default": "section"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -3157,6 +3263,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends AnchorHTMLAttributes<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -3260,6 +3369,9 @@
         "default": "text"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "color-skeleton",
       "size-skeleton-text-width",
@@ -3325,6 +3437,9 @@
         "kind": "string",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-slider-width",
@@ -3430,6 +3545,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "color-action-primary-background"
     ],
@@ -3482,6 +3600,9 @@
         "default": "md"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "space-gap-sm",
       "space-gap-md",
@@ -3533,6 +3654,9 @@
         "kind": "string",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-dot",
@@ -3604,6 +3728,9 @@
         "kind": "event",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-gap-sm",
@@ -3815,6 +3942,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends ButtonHTMLAttributes<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "color-surface-background",
       "font-control-family",
@@ -3911,6 +4041,9 @@
         "confidence": "declared",
         "default": "comfortable"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "color-surface-raised",
@@ -4016,6 +4149,9 @@
         "default": "comfortable"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "space-inset-x-sm",
       "color-surface-foreground",
@@ -4067,6 +4203,9 @@
         "confidence": "declared",
         "default": "comfortable"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "space-inset-x-sm",
@@ -4121,6 +4260,9 @@
         "confidence": "declared",
         "default": "default"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "color-table-row-default",
@@ -4256,6 +4398,9 @@
         "default": "Write something…"
       }
     ],
+    "notes": [
+      "props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-card-width",
       "space-inset-y-sm",
@@ -4354,11 +4499,28 @@
       },
       "element": "label",
       "states": [],
-      "rawValues": [],
+      "rawValues": [
+        {
+          "selector": ".input",
+          "property": "background",
+          "value": "transparent",
+          "candidates": []
+        }
+      ],
       "notes": [
         "jsx: part \"requiredMark\" renders an inline SVG glyph — icon asset not extracted (review item)",
         "css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)",
-        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted"
+        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted",
+        "css: .input { letter-spacing: inherit } — no inversion rule, not extracted",
+        "css: .input { outline: none } — no inversion rule, not extracted"
+      ],
+      "mintables": [
+        {
+          "selector": ".input",
+          "part": "input",
+          "cssProperty": "background",
+          "raw": "transparent"
+        }
       ]
     }
   },
@@ -4419,6 +4581,9 @@
         "confidence": "declared",
         "default": "Enter a value…"
       }
+    ],
+    "notes": [
+      "props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -4518,12 +4683,29 @@
       },
       "element": "label",
       "states": [],
-      "rawValues": [],
+      "rawValues": [
+        {
+          "selector": ".input",
+          "property": "background",
+          "value": "transparent",
+          "candidates": []
+        }
+      ],
       "notes": [
         "jsx: part \"requiredMark\" renders an inline SVG glyph — icon asset not extracted (review item)",
         "css: selector `.root[data-is-disabled]` — not extractable into anatomy, skipped by name",
         "css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)",
-        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted"
+        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted",
+        "css: .input { letter-spacing: inherit } — no inversion rule, not extracted",
+        "css: .input { outline: none } — no inversion rule, not extracted"
+      ],
+      "mintables": [
+        {
+          "selector": ".input",
+          "part": "input",
+          "cssProperty": "background",
+          "raw": "transparent"
+        }
       ]
     }
   },
@@ -4551,6 +4733,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",
@@ -4686,6 +4871,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "radius-100",
@@ -4831,6 +5019,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "size-banner-width",
       "color-surface-raised",
@@ -4952,6 +5143,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-banner-width",
@@ -5075,6 +5269,9 @@
         "confidence": "declared"
       }
     ],
+    "notes": [
+      "props type extends AnchorHTMLAttributes<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried"
+    ],
     "cssVars": [
       "radius-control",
       "space-inset-y-sm",
@@ -5168,6 +5365,9 @@
         "kind": "node",
         "confidence": "declared"
       }
+    ],
+    "notes": [
+      "props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried"
     ],
     "cssVars": [
       "size-card-width",

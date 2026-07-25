@@ -70,7 +70,22 @@
   ],
   "states": [],
   "anatomy": {
-    "root": {}
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "font-family": "{font.control.family}",
+        "font-weight": "{font.title.weight}",
+        "color": "{color.surface.foreground}",
+        "font-size": "{font.control.size.{size}}"
+      },
+      "component": {
+        "id": "ds.tag"
+      }
+    }
   },
   "anchors": {
     "figma": {
