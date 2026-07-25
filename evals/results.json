@@ -1,6 +1,6 @@
 {
-  "passed": 149,
-  "total": 149,
+  "passed": 150,
+  "total": 150,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -634,6 +634,11 @@
     },
     {
       "id": "journey-designer",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "reverse-bridge-dev-door",
       "claim": "C8-journey",
       "pass": true
     },

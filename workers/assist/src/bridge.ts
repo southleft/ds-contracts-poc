@@ -41,9 +41,13 @@ export const CODE_LENGTH = 6;
  *  plugin, the reverse direction: `ds-contracts figma push`) is tagged with
  *  this envelope type so the receiver can branch WITHOUT the bridge ever
  *  inspecting contract contents — the transport stays a dumb pipe, it only
- *  checks the envelope is well-formed and remembers which kind it carried. */
+ *  checks the envelope is well-formed and remembers which kind it carried.
+ *  A CONTRACT-PROPOSAL (plugin → CLI, the dev door: the Propose tab's export
+ *  envelope sent to `ds-contracts figma receive`) rides the same mechanics:
+ *  envelope-tagged, envelope-only validation, kind recorded at upload. */
 export const CONTRACTS_BUNDLE_TYPE = 'CONTRACTS-BUNDLE';
-export type BridgePayloadKind = 'dump' | 'contracts-bundle';
+export const CONTRACT_PROPOSAL_TYPE = 'CONTRACT-PROPOSAL';
+export type BridgePayloadKind = 'dump' | 'contracts-bundle' | 'proposal';
 
 export const BRIDGE_MESSAGES = {
   disabled: 'the plugin bridge is switched off — the owner has not enabled it yet',
@@ -62,6 +66,8 @@ export const BRIDGE_MESSAGES = {
     'this code has expired or its dump was already delivered — press “Receive from plugin” for a fresh code',
   badBundle:
     'that is tagged CONTRACTS-BUNDLE but is not a well-formed bundle — it needs a non-empty "contracts" array of contract documents (ds-contracts figma push builds one for you)',
+  badProposal:
+    'that is tagged CONTRACT-PROPOSAL but is not a well-formed proposal — it needs a "proposedContract" object (the plugin’s Propose tab builds one for you)',
 } as const;
 
 const sessKey = (code: string) => `bridge:sess:${code}`;
@@ -149,8 +155,10 @@ export async function handleBridge(
       // uploads and the original direction). Old receivers ignore the field.
       const kind = ((await env.ASSIST_KV.get(kindKey(code))) ?? 'dump') as BridgePayloadKind;
       // The dump direction stays playground-gated: a design dump never
-      // delivers to a foreign origin. Bundles deliver anywhere — the code
-      // is the auth. The payload is NOT consumed by a refused read.
+      // delivers to a foreign origin. Bundles and proposals deliver
+      // anywhere — the pairing code is the auth (`figma receive` is a plain
+      // fetch with no Origin at all). The payload is NOT consumed by a
+      // refused read.
       if (kind === 'dump' && !origin) {
         return json(403, { error: BRIDGE_MESSAGES.forbiddenOrigin }, cors);
       }
@@ -195,15 +203,17 @@ export async function handleBridge(
 
   // Envelope kind: a payload tagged CONTRACTS-BUNDLE gets its envelope (and
   // ONLY its envelope) checked — a non-empty contracts array of objects.
-  // Contract contents are never inspected here; the plugin's schema referee
-  // owns that. Everything untagged is a dump, exactly as before.
+  // A payload tagged CONTRACT-PROPOSAL (the Propose tab's export, sent to
+  // `ds-contracts figma receive`) gets the same envelope-only treatment: a
+  // proposedContract object must be present. Contract contents are never
+  // inspected here; the receiver's schema referee owns that. Everything
+  // untagged is a dump, exactly as before.
   let kind: BridgePayloadKind = 'dump';
-  if (
-    parsed !== null &&
-    typeof parsed === 'object' &&
-    !Array.isArray(parsed) &&
-    (parsed as { type?: unknown }).type === CONTRACTS_BUNDLE_TYPE
-  ) {
+  const tag =
+    parsed !== null && typeof parsed === 'object' && !Array.isArray(parsed)
+      ? (parsed as { type?: unknown }).type
+      : undefined;
+  if (tag === CONTRACTS_BUNDLE_TYPE) {
     const contracts = (parsed as { contracts?: unknown }).contracts;
     if (
       !Array.isArray(contracts) ||
@@ -213,6 +223,12 @@ export async function handleBridge(
       return json(400, { error: BRIDGE_MESSAGES.badBundle }, uploadCors);
     }
     kind = 'contracts-bundle';
+  } else if (tag === CONTRACT_PROPOSAL_TYPE) {
+    const proposed = (parsed as { proposedContract?: unknown }).proposedContract;
+    if (proposed === null || typeof proposed !== 'object' || Array.isArray(proposed)) {
+      return json(400, { error: BRIDGE_MESSAGES.badProposal }, uploadCors);
+    }
+    kind = 'proposal';
   }
 
   // Session must be open. Wrong code and expired code take the identical

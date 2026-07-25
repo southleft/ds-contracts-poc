@@ -13,6 +13,7 @@ import {
   BRIDGE_TTL_SECONDS,
   CODE_ALPHABET,
   CODE_LENGTH,
+  CONTRACT_PROPOSAL_TYPE,
   CONTRACTS_BUNDLE_TYPE,
   randomCode,
 } from '../src/bridge';
@@ -245,6 +246,67 @@ test('bundle: last write wins across kinds — a dump then a bundle delivers the
   const body = (await delivered.json()) as { kind: string; dump: unknown };
   assert.equal(body.kind, 'contracts-bundle');
   assert.deepEqual(body.dump, JSON.parse(BUNDLE));
+});
+
+// ---------------------------------------------------------------------------
+// CONTRACT-PROPOSAL payloads (plugin Propose tab → `ds-contracts figma
+// receive` — the dev door, no GitHub)
+// ---------------------------------------------------------------------------
+
+const PROPOSAL = JSON.stringify({
+  type: CONTRACT_PROPOSAL_TYPE,
+  baseContractId: 'acme.pill',
+  baseVersion: '1.0.0',
+  setName: 'Pill',
+  summary: ['prop `tone`: enum value "warning" added'],
+  proposedContract: { id: 'acme.pill', name: 'Pill', version: '1.1.0', props: [] },
+  proposalNotes: [],
+});
+
+test('proposal: plugin upload ("null" origin) → CLI GET (no origin) delivers once with kind "proposal", byte-identical, all keys gone', async () => {
+  const env = makeEnv();
+  const code = await createSession(env);
+  // The plugin's fetch arrives with the literal "null" origin.
+  const sent = await handleRequest(req(`/bridge/${code}`, { origin: 'null', body: PROPOSAL }), env, deps);
+  assert.equal(sent.status, 200);
+  assert.deepEqual(await sent.json(), { ok: true, bytes: PROPOSAL.length });
+  assert.equal(env.ASSIST_KV.store.get(`bridge:kind:${code}`), 'proposal');
+  assert.equal(env.ASSIST_KV.ttls.get(`bridge:kind:${code}`), BRIDGE_TTL_SECONDS);
+
+  // `figma receive` is a plain node fetch — no Origin header at all. The
+  // pairing code is the auth; the proposal delivers.
+  const delivered = await handleRequest(req(`/bridge/${code}`, { method: 'GET', origin: null }), env, deps);
+  assert.equal(delivered.status, 200);
+  const body = (await delivered.json()) as { status: string; kind: string; dump: unknown };
+  assert.equal(body.status, 'delivered');
+  assert.equal(body.kind, 'proposal');
+  assert.deepEqual(body.dump, JSON.parse(PROPOSAL));
+
+  // One-time read deletes the kind marker along with dump + session.
+  for (const k of [`bridge:dump:${code}`, `bridge:kind:${code}`, `bridge:sess:${code}`]) {
+    assert.ok(!env.ASSIST_KV.store.has(k), k);
+  }
+  const again = await handleRequest(req(`/bridge/${code}`, { method: 'GET', origin: null }), env, deps);
+  assert.equal(again.status, 410);
+});
+
+test('proposal: a malformed CONTRACT-PROPOSAL envelope is refused 400 by name, nothing stored, session stays open', async () => {
+  const env = makeEnv();
+  const code = await createSession(env);
+  for (const bad of [
+    JSON.stringify({ type: CONTRACT_PROPOSAL_TYPE }), // no proposedContract
+    JSON.stringify({ type: CONTRACT_PROPOSAL_TYPE, proposedContract: null }),
+    JSON.stringify({ type: CONTRACT_PROPOSAL_TYPE, proposedContract: 'not-an-object' }),
+    JSON.stringify({ type: CONTRACT_PROPOSAL_TYPE, proposedContract: [1, 2] }),
+  ]) {
+    const res = await handleRequest(req(`/bridge/${code}`, { origin: 'null', body: bad }), env, deps);
+    assert.equal(res.status, 400, bad);
+    assert.equal(((await res.json()) as { error: string }).error, BRIDGE_MESSAGES.badProposal);
+  }
+  assert.ok(!env.ASSIST_KV.store.has(`bridge:dump:${code}`));
+  assert.ok(!env.ASSIST_KV.store.has(`bridge:kind:${code}`));
+  const waiting = await handleRequest(req(`/bridge/${code}`, { method: 'GET' }), env, deps);
+  assert.deepEqual(await waiting.json(), { status: 'waiting' });
 });
 
 // ---------------------------------------------------------------------------

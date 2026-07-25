@@ -33,6 +33,9 @@ Commands:
           [--tokens f,f] [--icons dir] [--file-key KEY]
   figma push <file> --code <CODE>             send a CONTRACTS-BUNDLE to the plugin bridge
           [--bridge <url>]                    (pairing-code flow, deliver-once, 15-min TTL)
+  figma receive --out <contracts-dir>         the dev door: print a pairing code, wait for the
+          [--bridge <url>] [--apply]          plugin's proposed contract, land it as a reviewed
+                                              local diff (writes NOTHING without --apply)
   diff [config]                               parity referee: contracts vs code/design
                                               exit 0 clean · 1 drift · 2 error
   propose-pr <file> --repo owner/name         open the contract change as a reviewable PR

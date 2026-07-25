@@ -11,8 +11,16 @@
  *       contract document is wrapped into a one-contract bundle. The bridge
  *       stays a dumb pipe: the payload is tagged, never inspected beyond
  *       "is it JSON / is it a well-formed bundle envelope".
+ *
+ *   figma receive --out <contracts-dir> [--bridge <url>] [--apply]
+ *       the DEV DOOR: open a bridge session, print the pairing code, wait
+ *       for the plugin's Propose tab to send its CONTRACT-PROPOSAL under
+ *       that code, then land it as a REVIEWED LOCAL DIFF. Without --apply
+ *       nothing but the proposal artifact (<out>/.proposals/<id>.proposal.json)
+ *       is written — the contract file is never touched silently. With
+ *       --apply the contract file is written too; git stays yours.
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { figmaScriptEmitter } from '../../../../core/emitter.js';
 import {
@@ -93,12 +101,274 @@ async function pushCommand(argv: string[]): Promise<number> {
   return 0;
 }
 
+// ---------------------------------------------------------------------------
+// figma receive — the dev door (plugin Propose tab → reviewed local diff).
+// PURE CORE below (parse / plan / diff — unit-pinned, no I/O), thin shell at
+// the bottom (network + filesystem, executes exactly what the plan says).
+// ---------------------------------------------------------------------------
+
+/** The proposal envelope the plugin's Propose tab exports (engine
+ *  proposeDiff's exportJson) and the bridge tags as kind 'proposal'. */
+export const CONTRACT_PROPOSAL_TYPE = 'CONTRACT-PROPOSAL';
+
+export interface ProposalEnvelope {
+  type: typeof CONTRACT_PROPOSAL_TYPE;
+  baseContractId: string;
+  baseVersion?: string;
+  setName?: string;
+  summary: string[];
+  proposedContract: Record<string, unknown>;
+  proposalNotes: string[];
+}
+
+/** Envelope referee — refusals by name, never a guess. PURE. */
+export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvelope } | { ok: false; error: string } {
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) {
+    return { ok: false, error: 'the delivered payload is not a JSON object' };
+  }
+  const o = raw as Record<string, unknown>;
+  if (o.type !== CONTRACT_PROPOSAL_TYPE) {
+    return { ok: false, error: `the payload is not tagged ${CONTRACT_PROPOSAL_TYPE} (got type ${JSON.stringify(o.type ?? null)})` };
+  }
+  const proposed = o.proposedContract;
+  if (proposed === null || typeof proposed !== 'object' || Array.isArray(proposed)) {
+    return { ok: false, error: 'the proposal has no "proposedContract" object — re-run Read the set & diff in the plugin and send again' };
+  }
+  const id = (proposed as { id?: unknown }).id ?? o.baseContractId;
+  if (typeof id !== 'string' || id.length === 0) {
+    return { ok: false, error: 'neither proposedContract.id nor baseContractId names the contract — the proposal cannot be matched to a file' };
+  }
+  return {
+    ok: true,
+    proposal: {
+      type: CONTRACT_PROPOSAL_TYPE,
+      baseContractId: typeof o.baseContractId === 'string' ? o.baseContractId : id,
+      baseVersion: typeof o.baseVersion === 'string' ? o.baseVersion : undefined,
+      setName: typeof o.setName === 'string' ? o.setName : undefined,
+      summary: Array.isArray(o.summary) ? o.summary.filter((s): s is string => typeof s === 'string') : [],
+      proposedContract: proposed as Record<string, unknown>,
+      proposalNotes: Array.isArray(o.proposalNotes) ? o.proposalNotes.filter((s): s is string => typeof s === 'string') : [],
+    },
+  };
+}
+
+/** id → filename convention: the namespace prefix drops
+ *  (`polaris.badge` → `badge.contract.json`) — the same convention the
+ *  plugin's PR path pre-fills. PURE. */
+export const contractFileNameForId = (id: string): string =>
+  `${id.replace(/^[^.]+\./, '')}.contract.json`;
+
+/** Minimal unified diff (LCS over lines, 3 lines of context) — zero-dep by
+ *  repo culture; contract files are small so O(n·m) is fine. PURE. */
+export function unifiedDiff(oldText: string, newText: string, filePath: string): string[] {
+  if (oldText === newText) return [];
+  const a = oldText.split('\n');
+  const b = newText.split('\n');
+  // LCS table.
+  const lcs: number[][] = Array.from({ length: a.length + 1 }, () => new Array<number>(b.length + 1).fill(0));
+  for (let i = a.length - 1; i >= 0; i--) {
+    for (let j = b.length - 1; j >= 0; j--) {
+      lcs[i][j] = a[i] === b[j] ? lcs[i + 1][j + 1] + 1 : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+    }
+  }
+  // Walk into ops: ' ' keep, '-' del, '+' add.
+  const ops: Array<{ tag: ' ' | '-' | '+'; line: string; ai: number; bi: number }> = [];
+  let i = 0;
+  let j = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) ops.push({ tag: ' ', line: a[i], ai: i++, bi: j++ });
+    else if (lcs[i + 1][j] >= lcs[i][j + 1]) ops.push({ tag: '-', line: a[i], ai: i++, bi: j });
+    else ops.push({ tag: '+', line: b[j], ai: i, bi: j++ });
+  }
+  while (i < a.length) ops.push({ tag: '-', line: a[i], ai: i++, bi: j });
+  while (j < b.length) ops.push({ tag: '+', line: b[j], ai: i, bi: j++ });
+  // Group into hunks with 3 lines of context.
+  const CONTEXT = 3;
+  const changed = ops.map((op) => op.tag !== ' ');
+  const keep = new Array<boolean>(ops.length).fill(false);
+  for (let k = 0; k < ops.length; k++) {
+    if (!changed[k]) continue;
+    for (let c = Math.max(0, k - CONTEXT); c <= Math.min(ops.length - 1, k + CONTEXT); c++) keep[c] = true;
+  }
+  const out: string[] = [`--- a/${filePath}`, `+++ b/${filePath}`];
+  let k = 0;
+  while (k < ops.length) {
+    if (!keep[k]) { k++; continue; }
+    const start = k;
+    let end = k;
+    while (end < ops.length && keep[end]) end++;
+    const hunk = ops.slice(start, end);
+    const aStart = (hunk.find((h) => h.tag !== '+')?.ai ?? hunk[0].ai) + 1;
+    const bStart = (hunk.find((h) => h.tag !== '-')?.bi ?? hunk[0].bi) + 1;
+    const aCount = hunk.filter((h) => h.tag !== '+').length;
+    const bCount = hunk.filter((h) => h.tag !== '-').length;
+    out.push(`@@ -${aStart},${aCount} +${bStart},${bCount} @@`);
+    for (const h of hunk) out.push(h.tag + h.line);
+    k = end;
+  }
+  return out;
+}
+
+export interface ReceivePlan {
+  contractId: string;
+  /** Target contract filename inside --out (existing match by id, else the
+   *  <name>.contract.json convention). */
+  fileName: string;
+  /** Proposal artifact filename, always written: .proposals/<id>.proposal.json */
+  proposalFileName: string;
+  proposalText: string;
+  newText: string;
+  oldText: string | null;
+  changed: boolean;
+  diff: string[];
+  /** The ONLY contract-file write the shell may perform. null = the shell
+   *  MUST NOT touch the contract file (the no-silent-write guarantee lives
+   *  here, in the pure core, where it is unit-pinned). */
+  contractWrite: { fileName: string; contents: string } | null;
+}
+
+/** Decide everything about landing a delivered proposal — PURE. The shell
+ *  supplies the delivered envelope, the existing file (matched by contract
+ *  id, or null), and whether --apply was given. */
+export function planReceive(
+  proposal: ProposalEnvelope,
+  existing: { fileName: string; text: string } | null,
+  apply: boolean,
+): ReceivePlan {
+  const contractId = String(proposal.proposedContract.id ?? proposal.baseContractId);
+  const fileName = existing ? existing.fileName : contractFileNameForId(contractId);
+  const newText = JSON.stringify(proposal.proposedContract, null, 2) + '\n';
+  const oldText = existing ? existing.text : null;
+  const changed = oldText !== newText;
+  return {
+    contractId,
+    fileName,
+    proposalFileName: path.join('.proposals', `${contractId}.proposal.json`),
+    proposalText: JSON.stringify(proposal, null, 2) + '\n',
+    newText,
+    oldText,
+    changed,
+    diff: unifiedDiff(oldText ?? '', newText, fileName),
+    contractWrite: apply && changed ? { fileName, contents: newText } : null,
+  };
+}
+
+/** Find the *.contract.json in outDir whose document id matches — the id is
+ *  the identity, the filename only the convention. Thin I/O helper. */
+export function findExistingContractFile(outDir: string, contractId: string): { fileName: string; text: string } | null {
+  if (!existsSync(outDir)) return null;
+  for (const f of readdirSync(outDir).filter((f) => f.endsWith('.contract.json')).sort()) {
+    try {
+      const text = readFileSync(path.join(outDir, f), 'utf8');
+      if ((JSON.parse(text) as { id?: unknown }).id === contractId) return { fileName: f, text };
+    } catch {
+      /* unreadable/non-JSON neighbors are not this command's problem */
+    }
+  }
+  return null;
+}
+
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+async function receiveCommand(argv: string[]): Promise<number> {
+  const parsed = parseFlags(argv, { value: ['out', 'bridge'], bool: ['apply'] });
+  const out = flagString(parsed, 'out');
+  if (!out) throw new CliUsageError('figma receive needs --out <contracts-dir> — where the reviewed diff lands');
+  const apply = parsed.flags.get('apply') === true;
+  const base = (
+    flagString(parsed, 'bridge') ??
+    process.env.DS_CONTRACTS_BRIDGE_URL ??
+    DEFAULT_BRIDGE_URL
+  ).replace(/\/$/, '');
+  const outDir = path.resolve(out);
+
+  // 1. Mint the pairing code.
+  const created = await fetch(`${base}/bridge/session`, { method: 'POST' });
+  const session = (await created.json().catch(() => ({}))) as { code?: string; ttlSeconds?: number; error?: string };
+  if (!created.ok || typeof session.code !== 'string') {
+    console.error(`✘ bridge refused the session (${created.status}): ${session.error ?? 'unnamed error'}`);
+    return 1;
+  }
+  const code = session.code;
+  const ttlSeconds = session.ttlSeconds ?? 15 * 60;
+  console.log(`Pairing code: ${code}`);
+  console.log(
+    `In the Figma plugin's Propose tab, run "Read the set & diff", then enter this code under "Send to repo". Waiting (code expires in ${Math.round(ttlSeconds / 60)} minutes; Ctrl-C to stop)…`,
+  );
+
+  // 2. Poll politely — the same 2.5s cadence the plugin and playground use.
+  const deadline = Date.now() + ttlSeconds * 1000;
+  let delivered: { kind?: string; dump?: unknown } | null = null;
+  while (Date.now() < deadline) {
+    let res: Response;
+    try {
+      res = await fetch(`${base}/bridge/${encodeURIComponent(code)}`);
+    } catch {
+      await sleep(2500); // transient network blip — keep polling
+      continue;
+    }
+    const body = (await res.json().catch(() => ({}))) as { status?: string; kind?: string; dump?: unknown; error?: string };
+    if (res.ok && body.status === 'delivered') { delivered = body; break; }
+    if (res.ok && body.status === 'waiting') { await sleep(2500); continue; }
+    console.error(`✘ bridge refused (${res.status}): ${body.error ?? 'unnamed error'}`);
+    return 1;
+  }
+  if (!delivered) {
+    console.error('✘ Nothing arrived before the code expired — run figma receive again for a fresh code.');
+    return 1;
+  }
+  const kind = delivered.kind ?? 'dump';
+  if (kind !== 'proposal') {
+    console.error(
+      `✘ Refused — that code carried a ${kind === 'dump' ? 'canvas dump' : kind}, not a ${CONTRACT_PROPOSAL_TYPE}. figma receive only lands proposals from the plugin's Propose tab; deliver-once means this payload is now gone — send again to a fresh code.`,
+    );
+    return 1;
+  }
+  const envelope = parseProposal(delivered.dump);
+  if (!envelope.ok) {
+    console.error(`✘ Refused — ${envelope.error}`);
+    return 1;
+  }
+
+  // 3. Plan (pure), then execute EXACTLY the plan.
+  const proposal = envelope.proposal;
+  const plan = planReceive(proposal, findExistingContractFile(outDir, String(proposal.proposedContract.id ?? proposal.baseContractId)), apply);
+
+  mkdirSync(path.dirname(path.join(outDir, plan.proposalFileName)), { recursive: true });
+  writeFileSync(path.join(outDir, plan.proposalFileName), plan.proposalText);
+  console.log(`✔ Proposal saved: ${path.join(out, plan.proposalFileName)}`);
+
+  if (proposal.summary.length > 0) {
+    console.log(`\nProposed change — ${proposal.setName ?? plan.contractId}:`);
+    for (const line of proposal.summary) console.log(`  ${line}`);
+  }
+  if (!plan.changed) {
+    console.log(`\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply.`);
+    return 0;
+  }
+  console.log(plan.oldText === null ? `\nNew contract (no ${plan.fileName} in ${out} yet):` : '');
+  for (const line of plan.diff) console.log(line);
+
+  if (plan.contractWrite === null) {
+    console.log(
+      `\nNothing written to ${plan.fileName} — review the diff above, then re-run with --apply to write it (or apply by hand from ${path.join(out, plan.proposalFileName)}).`,
+    );
+    return 0;
+  }
+  writeFileSync(path.join(outDir, plan.contractWrite.fileName), plan.contractWrite.contents);
+  console.log(
+    `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
+  );
+  return 0;
+}
+
 export async function figmaCommand(argv: string[]): Promise<number> {
   if (argv[0] === 'push') return pushCommand(argv.slice(1));
+  if (argv[0] === 'receive') return receiveCommand(argv.slice(1));
 
   const parsed = parseFlags(argv, { value: ['out', 'tokens', 'icons', 'file-key'] });
   if (parsed.positionals.length === 0) {
-    throw new CliUsageError('figma needs contract files/directories (or the `push` subcommand)');
+    throw new CliUsageError('figma needs contract files/directories (or the `push` / `receive` subcommands)');
   }
   const out = flagString(parsed, 'out');
   if (!out) throw new CliUsageError('figma needs --out <dir>');

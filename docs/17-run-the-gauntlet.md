@@ -81,6 +81,16 @@ the DTCG export. A Storybook story rides along. The round trip is gated:
 `scripts/deterministic-roundtrip.mjs` chains contract→canvas→contract→code
 and asserts byte-identical node trees across runs.
 
+**The dev door (no GitHub):** a designer's proposed change can also land
+straight in a developer's working tree. Run
+`npx @ds-contracts/cli figma receive --out contracts` — it prints a
+6-character pairing code; the designer enters it in the plugin's Propose tab
+under **Send to repo**, and the proposal arrives as a unified diff in your
+terminal plus a saved artifact in `contracts/.proposals/`. Nothing is
+written to a contract file without `--apply`, and even then git stays
+yours — every change enters the repo as a reviewed change
+([doc 16](16-sync-boundary.md)).
+
 ## What to throw at it (the actual gauntlet)
 
 In rough order of expected pain:

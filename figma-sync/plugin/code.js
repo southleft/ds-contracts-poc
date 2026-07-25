@@ -219,6 +219,38 @@ figma.ui.onmessage = async (msg) => {
     }
     return;
   }
+  if (msg.type === 'push-proposal') {
+    // Send-to-repo (the dev door): POST the Propose tab's export envelope to
+    // the bridge under the pairing code `ds-contracts figma receive` printed.
+    // Network-only — nothing in this file changes, nothing is stored; the
+    // envelope leaves for the bridge and nowhere else. Allowed anytime.
+    const answer = (ok, message) => post({ type: 'proposal-push-result', ok, message });
+    try {
+      const body = String(msg.body || '');
+      if (!body) return answer(false, 'Nothing to send — run "Read the set & diff" first.');
+      if (body.length > BRIDGE_MAX_DUMP_BYTES) {
+        return answer(false, 'This proposal is too large for the bridge (' + (body.length / (1024 * 1024)).toFixed(1) + ' MB, cap 4 MB).');
+      }
+      const pairCode = String(msg.pairCode || '');
+      const res = await fetch(BRIDGE_BASE + '/bridge/' + encodeURIComponent(pairCode), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body,
+      });
+      if (res.ok) {
+        return answer(true, 'Delivered (' + Math.max(1, Math.round(body.length / 1024)) + ' KB) — the terminal showing code ' + pairCode + ' picks it up within a few seconds and prints the diff. Nothing lands in the repo without --apply there.');
+      }
+      // The worker's refusals are plain words already — show them verbatim.
+      let workerMessage = null;
+      try {
+        const parsed = await res.json();
+        if (parsed && typeof parsed.error === 'string') workerMessage = parsed.error;
+      } catch (e) { /* non-JSON error body */ }
+      return answer(false, workerMessage || ('The bridge answered HTTP ' + res.status + ' with no named message — try again.'));
+    } catch (e) {
+      return answer(false, 'Could not reach the bridge (' + String(e && e.message ? e.message : e) + ') — check your connection and try again.');
+    }
+  }
   if (msg.type === 'query-selection-sets') {
     // Allowed anytime (read-only), like select-node.
     try {

@@ -231,6 +231,23 @@
       Use a fine-grained token scoped to ONE repo with Contents and Pull
       requests read/write.</span>
   </div>
+  <div class="field" id="prop-bridge-section" hidden>
+    <label for="prop-bridge-code">Send to repo (pairing code) — no GitHub, no token</label>
+    <div class="row">
+      <input type="text" id="prop-bridge-code" maxlength="6" spellcheck="false" autocomplete="off"
+        placeholder="ABC234" style="max-width:110px;flex:none;" />
+      <button class="secondary" id="prop-bridge-send">Send to repo</button>
+      <span class="status" id="prop-bridge-status"></span>
+    </div>
+    <span class="hint">On the developer&rsquo;s machine,
+      <span class="mono">npx @ds-contracts/cli figma receive --out contracts</span>
+      prints a 6-character code — enter it here. The proposal travels through
+      the pairing bridge (one-time delivery, 15-minute TTL, contents never
+      logged) and lands as a reviewed local diff; the CLI writes nothing
+      without <span class="mono">--apply</span>. Nothing is stored here
+      either — the code is used for this one send and forgotten.</span>
+    <div class="result" id="prop-bridge-result" hidden style="flex:none;max-height:90px;"></div>
+  </div>
 </div>
 
 <div class="panel" id="panel-paste" role="tabpanel">
@@ -957,6 +974,7 @@
         a.style.marginTop = '6px';
         box.appendChild(a);
         $('prop-pr-section').hidden = false;
+        $('prop-bridge-section').hidden = false;
         if (!$('pr-path').value) {
           $('pr-path').value = 'contracts/' + String(baseRaw.id || 'component').replace(/^[^.]+\./, '') + '.contract.json';
         }
@@ -1006,6 +1024,30 @@
     box = resultBox('pr-result', null, 'Opening the PR…');
     runPrLive(DSC, input, token, box);
   };
+
+  // --- Send to repo (pairing bridge — the dev door, no GitHub) --------------
+  // POSTs the propose result's export envelope (the SAME JSON the download
+  // link carries) to the bridge under the code `ds-contracts figma receive`
+  // printed. code.js does the fetch; nothing is stored on either side.
+  $('prop-bridge-send').onclick = function () {
+    if (!lastProposal) return;
+    var pairCode = $('prop-bridge-code').value.trim().toUpperCase();
+    if (!CODE_ALPHABET_RE.test(pairCode)) {
+      $('prop-bridge-status').textContent = '';
+      addLine(resultBox('prop-bridge-result', false, 'Not sent.'),
+        'That does not look like a pairing code — 6 letters/digits printed by `ds-contracts figma receive` (letters I, L, O and digits 0, 1 are never used).');
+      return;
+    }
+    $('prop-bridge-result').hidden = true;
+    $('prop-bridge-status').textContent = 'Sending the proposal…';
+    parent.postMessage({ pluginMessage: { type: 'push-proposal', pairCode: pairCode, body: lastProposal.exportJson } }, '*');
+  };
+
+  function showProposalPushResult(msg) {
+    $('prop-bridge-status').textContent = '';
+    var box = resultBox('prop-bridge-result', msg.ok, msg.ok ? 'Sent.' : 'Not sent.');
+    addLine(box, msg.message);
+  }
 
   function ghFetch(token, method, url, body) {
     return fetch(url, {
@@ -1085,6 +1127,8 @@
     } else if (msg.type === 'bridge-poll-result') {
       var handler = bridgePollHandlers[msg.replyTo];
       if (handler) handler(msg);
+    } else if (msg.type === 'proposal-push-result') {
+      showProposalPushResult(msg);
     } else if (msg.type === 'paste-result') {
       setBusy(false);
       $('paste-status').textContent = '';

@@ -4119,6 +4119,92 @@ const cases: Case[] = [
     },
   },
   {
+    // REVERSE BRIDGE (the dev door, no GitHub): a designer's proposed
+    // contract change leaves the plugin's Propose tab and lands in a
+    // developer's working tree as a REVIEWED LOCAL DIFF — plugin → pairing
+    // bridge (kind 'proposal') → `figma receive` → unified diff + saved
+    // .proposals artifact; the contract file NEVER moves without --apply.
+    // Two layers, zero network: (a) the CLI unit suite pins the pure core
+    // (parseProposal / planReceive / unifiedDiff — contractWrite is null
+    // without --apply, the guarantee lives in the plan) AND the real
+    // receiveCommand shell against an in-process fake bridge (existing
+    // contract bytes never move); (b) the plugin's exact exportJson envelope
+    // (engine proposeDiff's shape) travels through the REAL worker pipeline
+    // (handleRequest, Map-backed KV, fetchImpl throws) — kind-tagged
+    // 'proposal', deliver-once, delivered to a no-Origin read (the code is
+    // the auth), malformed envelope refused BY NAME — then parses and plans
+    // on the CLI side from the delivered bytes.
+    id: 'reverse-bridge-dev-door',
+    claim: 'C8-journey',
+    run: () => {
+      // (a) The CLI unit suite — pure core + thin shell.
+      const t = run(TSX, ['--test', 'packages/cli/test/figma-receive.test.ts']);
+      if (t.status !== 0) throw new Error(`figma-receive unit suite failed:\n${t.out.slice(0, 4000)}`);
+      for (const line of [
+        'planReceive WITHOUT --apply: contractWrite is null even when the diff is non-empty — nothing writes silently',
+        'figma receive (shell) without --apply: proposal artifact saved, contract file untouched; with --apply: written',
+        'figma receive (shell): a dump-kind delivery is refused by name, nothing written',
+      ]) {
+        if (!t.out.includes(line)) throw new Error(`missing figma-receive test: ${line}`);
+      }
+      if (!/# fail 0/.test(t.out)) throw new Error(`figma-receive suite reports failures:\n${t.out.slice(-2000)}`);
+
+      // (b) The plugin envelope through the real worker, then the CLI's
+      // referee + plan over the delivered bytes.
+      const trip = run(TSX, ['-e', `
+        import { handleRequest } from './workers/assist/src/index.ts';
+        import { parseProposal, planReceive, CONTRACT_PROPOSAL_TYPE } from './packages/cli/src/commands/figma.ts';
+        (async () => {
+          // The envelope EXACTLY as the plugin engine's proposeDiff exports it.
+          const envelope = {
+            type: CONTRACT_PROPOSAL_TYPE,
+            baseContractId: 'polaris.badge', baseVersion: '1.0.0', setName: 'Badge',
+            summary: ['version: 1.0.0 → 1.1.0'],
+            proposedContract: { id: 'polaris.badge', name: 'Badge', version: '1.1.0', props: [] },
+            proposalNotes: [],
+          };
+          const store = new Map();
+          const env = { ANTHROPIC_API_KEY: 'x', ASSIST_KV: { get: async (k) => (store.has(k) ? store.get(k) : null), put: async (k, v) => { store.set(k, v); }, delete: async (k) => { store.delete(k); } }, ASSIST_ENABLED: 'true', BRIDGE_ENABLED: 'true' };
+          const deps = { fetchImpl: () => { throw new Error('bridge routes must not fetch'); }, now: () => new Date() };
+          const req = (p, o) => { o = o || {}; const h = new Headers(); if (o.origin !== null) h.set('origin', o.origin); h.set('cf-connecting-ip', '203.0.113.7'); const m = o.method || 'POST'; return new Request('https://assist.example' + p, { method: m, headers: h, body: m === 'GET' ? undefined : (o.body || '{}') }); };
+          // figma receive mints the session — a plain fetch, no Origin header.
+          const created = await handleRequest(req('/bridge/session', { origin: null }), env, deps);
+          if (created.status !== 200) throw new Error('session mint failed: ' + created.status);
+          const code = (await created.json()).code;
+          // The plugin uploads — the literal "null" origin a plugin iframe sends.
+          const sent = await handleRequest(req('/bridge/' + code, { origin: 'null', body: JSON.stringify(envelope) }), env, deps);
+          if (sent.status !== 200) throw new Error('bridge refused the proposal upload: ' + sent.status);
+          if (store.get('bridge:kind:' + code) !== 'proposal') throw new Error('payload kind not recorded as proposal');
+          // The CLI polls — no Origin at all; the pairing code is the auth.
+          const delivered = await handleRequest(req('/bridge/' + code, { method: 'GET', origin: null }), env, deps);
+          const body = await delivered.json();
+          if (body.status !== 'delivered' || body.kind !== 'proposal') throw new Error('delivery wrong: ' + JSON.stringify(body).slice(0, 200));
+          if (JSON.stringify(body.dump) !== JSON.stringify(envelope)) throw new Error('proposal not byte-identical through the bridge');
+          if (store.has('bridge:dump:' + code) || store.has('bridge:sess:' + code) || store.has('bridge:kind:' + code)) throw new Error('deliver-once keys not deleted after delivery');
+          // The CLI side over the DELIVERED bytes: referee → plan; without
+          // --apply the plan forbids the contract write, diff still renders.
+          const parsed = parseProposal(body.dump);
+          if (!parsed.ok) throw new Error('CLI referee refused the plugin envelope: ' + parsed.error);
+          const plan = planReceive(parsed.proposal, { fileName: 'badge.contract.json', text: '{\\n  "id": "polaris.badge",\\n  "version": "1.0.0"\\n}\\n' }, false);
+          if (plan.contractWrite !== null) throw new Error('planReceive without --apply must not write the contract file');
+          if (!plan.changed || plan.diff.length === 0) throw new Error('the reviewed diff did not render');
+          if (!plan.diff.some((l) => l.startsWith('+') && l.includes('1.1.0'))) throw new Error('the diff does not carry the proposed version line');
+          // Referee: a malformed proposal envelope refuses BY NAME.
+          const s2 = await handleRequest(req('/bridge/session', { origin: null }), env, deps);
+          const code2 = (await s2.json()).code;
+          const refused = await handleRequest(req('/bridge/' + code2, { origin: 'null', body: JSON.stringify({ type: CONTRACT_PROPOSAL_TYPE }) }), env, deps);
+          const rb = await refused.json();
+          if (refused.status !== 400 || !String(rb.error).includes('proposedContract')) throw new Error('malformed proposal must refuse 400 naming the envelope, got ' + refused.status + ': ' + rb.error);
+          console.log('dev-door ok: proposal kind-tagged, deliver-once, byte-identical, no-write-without-apply plan, malformed envelope refused by name');
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (trip.status !== 0 || !trip.out.includes('dev-door ok:')) {
+        throw new Error(`reverse-bridge round trip failed:\n${trip.out}`);
+      }
+      console.log('reverse-bridge-dev-door: plugin exportJson envelope → real worker pipeline (kind proposal, deliver-once) → CLI referee + plan (no write without --apply) — plus the 12-case figma-receive unit suite incl. the live shell against a fake bridge');
+    },
+  },
+  {
     // PLUGIN ENGINE (Phase 2, plugin v2) — the Figma plugin's engine bundle:
     // (a) a fresh esbuild of figma-sync/plugin/engine/entry.ts matches the
     // committed drift-guard receipt and the headless harness EXECUTES the
