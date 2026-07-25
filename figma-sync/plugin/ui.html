@@ -369,12 +369,29 @@
       if (r.editedVariants && r.editedVariants.length) {
         var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
         variants = '<div style="margin-top:2px;">' + r.editedVariants.map(function (v) {
+          // Fill/stroke values render as color chips, not raw paint JSON
+          // (live polish item: [{"type":"SOLID","visible":true,… is noise).
+          var pretty = function (chan, val) {
+            if (val === '(absent)' || val === '(removed)') return esc(val);
+            if (chan === 'fill' || chan === 'stroke') {
+              try {
+                var paints = JSON.parse(String(val).replace(/ w[\d.]+$/, ''));
+                var hex = paints.filter(function (pp) { return pp.type === 'SOLID' && pp.visible !== false; }).map(function (pp) {
+                  var c8 = function (x) { return Math.round((x || 0) * 255).toString(16).padStart(2, '0'); };
+                  var hx = '#' + c8(pp.color.r) + c8(pp.color.g) + c8(pp.color.b);
+                  return '<span style="display:inline-block;width:9px;height:9px;border:1px solid #999;background:' + hx + ';margin-right:3px;"></span>' + hx;
+                });
+                if (hex.length) return hex.join(', ');
+              } catch (e) { /* non-solid / unparsable — raw fallback */ }
+            }
+            return esc(String(val).slice(0, 48));
+          };
           var det = (v.changes || []).map(function (c) {
             // key: path:TYPE/name|channel — show "name · channel: was → now"
             var parts = c.what.split('|');
             var nodeLabel = (parts[0].split('/').pop() || parts[0]);
             var chan = parts[1] || '?';
-            return '<div style="color:#888;padding-left:14px;">' + esc(nodeLabel) + ' · ' + esc(chan) + ': <s>' + esc(String(c.was).slice(0, 48)) + '</s> → <b>' + esc(String(c.now).slice(0, 48)) + '</b></div>';
+            return '<div style="color:#888;padding-left:14px;">' + esc(nodeLabel) + ' · ' + esc(chan) + ': <s>' + pretty(chan, c.was) + '</s> → <b>' + pretty(chan, c.now) + '</b></div>';
           }).join('');
           return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>' + det;
         }).join('') + '</div>';
