@@ -6,8 +6,8 @@
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 400,
-    "cellsEqual": 400,
+    "cellsCompared": 704,
+    "cellsEqual": 704,
     "pctEqual": 100,
     "rowsFullyEqual": 16,
     "rows": 16
@@ -24,13 +24,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 10,
-    "mintedLeavesUnfolded": 9,
-    "baseBindings": 10,
+    "mintedLeaves": 12,
+    "mintedLeavesUnfolded": 12,
+    "baseBindings": 21,
     "stateBindings": 0,
     "codeOnlyChannels": 1,
     "overflowBindings": 0,
-    "folds": 9
+    "folds": 18
   },
   "worstRows": [
     {
@@ -84,133 +84,133 @@
   ],
   "topMismatchedChannels": [],
   "namedLosses": [
-    "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "rows": [
     {
       "key": "0__default",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "0__hover",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "0__focus-visible",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "0__active",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__default",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__hover",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__focus-visible",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "1__active",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__default",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__hover",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__focus-visible",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "3__active",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__default",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__hover",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__focus-visible",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "8__active",
-      "channelsCompared": 25,
-      "channelsEqual": 25,
+      "channelsCompared": 44,
+      "channelsEqual": 44,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []

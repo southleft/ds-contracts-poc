@@ -29,27 +29,37 @@
               "$type": "shadow"
             }
           },
-          "color": {
-            "$value": "#000000de",
-            "$type": "color"
-          },
-          "font-size": {
-            "$value": "16px",
+          "width": {
+            "$value": "288px",
             "$type": "dimension"
-          },
+          }
+        },
+        "label": {
           "font-weight": {
             "$value": "400",
             "$type": "number"
           },
-          "row-rule-color": {
-            "$value": "#000000de",
-            "$type": "color"
+          "padding-bottom": {
+            "$value": "24px",
+            "$type": "dimension"
           }
         }
       },
       "shared": {
         "size-4": {
           "$value": "4px",
+          "$type": "dimension"
+        },
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
           "$type": "dimension"
         }
       }
@@ -109,6 +119,60 @@
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
     }
   ],
   "foldedStateSkips": [],
@@ -151,7 +215,7 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "root",
+      "part": "label",
       "channel": "line-height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
@@ -170,13 +234,18 @@
   "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "text-part-typography-carried: root — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
   ],
   "anatomyJoin": {
     "computed": [
       {
         "part": "root",
         "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
       }
     ],
     "staticOnly": []
@@ -184,11 +253,12 @@
   "anatomyPromotion": {
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
-      "root"
+      "root",
+      "label"
     ],
     "svgAssets": [],
     "receipts": [
-      "root-content-carried: the root holds direct text (\"Card content\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+      "child-content-carried: label holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)"
     ],
     "refusals": []
   },

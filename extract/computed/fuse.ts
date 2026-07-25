@@ -209,10 +209,34 @@ export function styledChannels(
   for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
     receipts.push(`absolute-geometry-admitted: ${a.partNames[pi]} — ${absAdmit.has(pi) ? 'uniformly position:absolute' : 'overlay-cluster member (component contains absolute parts)'}; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)`);
   }
+  // BLOCK-ROOT WIDTH (Card live finding, live-paste-3): a block-display root
+  // fills its container in CSS — the canvas hug reads as "not a card." The
+  // captured stage width IS the rendered truth of the capture (same
+  // stage-dependent receipt as the slider root); admit the root's width
+  // channel when its computed display is uniformly block.
+  const rootPi = a.baseFlat.findIndex((e) => e.path === '');
+  const blockRootAdmit = new Set<number>();
+  if (rootPi >= 0 && !absAdmit.has(rootPi) && !parentAdmit.has(rootPi)) {
+    let block = true;
+    let seen = 0;
+    for (const combo of space.enumeration.combos) {
+      if (!isEnabled(combo)) continue;
+      const el = a.getAligned(`${combo.key}__default`)[rootPi];
+      if (!el) continue;
+      seen++;
+      if (el.node.style['display'] !== 'block') { block = false; break; }
+    }
+    if (seen > 0 && block) {
+      blockRootAdmit.add(rootPi);
+      receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
+    }
+  }
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
     const admit = (p: string): boolean =>
-      isFusable(p) || (GEOM_ADMIT.has(p) && (absAdmit.has(pi) || parentAdmit.has(pi)));
+      isFusable(p) ||
+      (GEOM_ADMIT.has(p) && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
+      (p === 'width' && blockRootAdmit.has(pi));
     const tag = a.baseFlat[pi].node.tag;
     const ctrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);
@@ -698,7 +722,11 @@ export function prepareMint(
   };
   const geomOuterParts = (() => {
     const { absAdmit, clusterAdmit } = absClusterParts(a, space);
-    return new Set([...absAdmit, ...clusterAdmit]);
+    const out = new Set([...absAdmit, ...clusterAdmit]);
+    // block-root width rides the same outer-size baking (box-sizing-aware)
+    const rootPi = a.baseFlat.findIndex((e) => e.path === '');
+    if (rootPi >= 0) out.add(rootPi);
+    return out;
   })();
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
     const obs: MintObservation[] = [];

@@ -1973,6 +1973,10 @@
         "$value": "16px",
         "$type": "dimension"
       },
+      "color-000000de": {
+        "$value": "#000000de",
+        "$type": "color"
+      },
       "num-0": {
         "$value": "0",
         "$type": "number"
@@ -2542,21 +2546,19 @@
             "$type": "shadow"
           }
         },
-        "color": {
-          "$value": "#000000de",
-          "$type": "color"
-        },
-        "font-size": {
-          "$value": "16px",
+        "width": {
+          "$value": "288px",
           "$type": "dimension"
-        },
+        }
+      },
+      "label": {
         "font-weight": {
           "$value": "400",
           "$type": "number"
         },
-        "row-rule-color": {
-          "$value": "#000000de",
-          "$type": "color"
+        "padding-bottom": {
+          "$value": "24px",
+          "$type": "dimension"
         }
       }
     },

@@ -33,7 +33,13 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-4",
             "bottomRightRadius": "imported/shared/size-4",
             "topLeftRadius": "imported/shared/size-4",
-            "topRightRadius": "imported/shared/size-4"
+            "topRightRadius": "imported/shared/size-4",
+            "minHeight": "imported/shared/size-0",
+            "minWidth": "imported/shared/size-0"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/card/root/width"
           },
           "effectStack": [
             {
@@ -71,16 +77,34 @@ const COMPONENTS = [
               }
             }
           ],
-          "blockRoot": true,
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
-              "characters": "Card content",
-              "fontSize": 16,
-              "fontStyle": "Regular",
-              "textFill": "imported/card/root/color",
-              "contentProp": "Content"
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Card content",
+                  "contentProp": "Content",
+                  "fontSize": 16,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-000000de"
+                }
+              ],
+              "bindings": {
+                "minHeight": "imported/shared/size-0",
+                "minWidth": "imported/shared/size-0",
+                "paddingBottom": "imported/card/label/padding-bottom",
+                "paddingLeft": "imported/shared/size-16",
+                "paddingRight": "imported/shared/size-16",
+                "paddingTop": "imported/shared/size-16"
+              }
             }
           ]
         }
@@ -102,19 +126,43 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-4",
             "bottomRightRadius": "imported/shared/size-4",
             "topLeftRadius": "imported/shared/size-4",
-            "topRightRadius": "imported/shared/size-4"
+            "topRightRadius": "imported/shared/size-4",
+            "minHeight": "imported/shared/size-0",
+            "minWidth": "imported/shared/size-0"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/card/root/width"
           },
           "effectStack": [],
-          "blockRoot": true,
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
-              "characters": "Card content",
-              "fontSize": 16,
-              "fontStyle": "Regular",
-              "textFill": "imported/card/root/color",
-              "contentProp": "Content"
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Card content",
+                  "contentProp": "Content",
+                  "fontSize": 16,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-000000de"
+                }
+              ],
+              "bindings": {
+                "minHeight": "imported/shared/size-0",
+                "minWidth": "imported/shared/size-0",
+                "paddingBottom": "imported/card/label/padding-bottom",
+                "paddingLeft": "imported/shared/size-16",
+                "paddingRight": "imported/shared/size-16",
+                "paddingTop": "imported/shared/size-16"
+              }
             }
           ]
         }
@@ -136,7 +184,13 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-4",
             "bottomRightRadius": "imported/shared/size-4",
             "topLeftRadius": "imported/shared/size-4",
-            "topRightRadius": "imported/shared/size-4"
+            "topRightRadius": "imported/shared/size-4",
+            "minHeight": "imported/shared/size-0",
+            "minWidth": "imported/shared/size-0"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/card/root/width"
           },
           "effectStack": [
             {
@@ -174,16 +228,34 @@ const COMPONENTS = [
               }
             }
           ],
-          "blockRoot": true,
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
-              "characters": "Card content",
-              "fontSize": 16,
-              "fontStyle": "Regular",
-              "textFill": "imported/card/root/color",
-              "contentProp": "Content"
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Card content",
+                  "contentProp": "Content",
+                  "fontSize": 16,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-000000de"
+                }
+              ],
+              "bindings": {
+                "minHeight": "imported/shared/size-0",
+                "minWidth": "imported/shared/size-0",
+                "paddingBottom": "imported/card/label/padding-bottom",
+                "paddingLeft": "imported/shared/size-16",
+                "paddingRight": "imported/shared/size-16",
+                "paddingTop": "imported/shared/size-16"
+              }
             }
           ]
         }
@@ -205,7 +277,13 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-4",
             "bottomRightRadius": "imported/shared/size-4",
             "topLeftRadius": "imported/shared/size-4",
-            "topRightRadius": "imported/shared/size-4"
+            "topRightRadius": "imported/shared/size-4",
+            "minHeight": "imported/shared/size-0",
+            "minWidth": "imported/shared/size-0"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/card/root/width"
           },
           "effectStack": [
             {
@@ -245,16 +323,34 @@ const COMPONENTS = [
               "spread": 2
             }
           ],
-          "blockRoot": true,
           "children": [
             {
-              "type": "text",
+              "type": "frame",
               "name": "label",
-              "characters": "Card content",
-              "fontSize": 16,
-              "fontStyle": "Regular",
-              "textFill": "imported/card/root/color",
-              "contentProp": "Content"
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-text",
+                  "characters": "Card content",
+                  "contentProp": "Content",
+                  "fontSize": 16,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-000000de"
+                }
+              ],
+              "bindings": {
+                "minHeight": "imported/shared/size-0",
+                "minWidth": "imported/shared/size-0",
+                "paddingBottom": "imported/card/label/padding-bottom",
+                "paddingLeft": "imported/shared/size-16",
+                "paddingRight": "imported/shared/size-16",
+                "paddingTop": "imported/shared/size-16"
+              }
             }
           ]
         }

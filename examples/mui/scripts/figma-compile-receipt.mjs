@@ -85,7 +85,15 @@ for (const file of scripts) {
     }
     if (name === 'card') {
       const texts = mock.root.findAll((n) => n.type === 'TEXT' && n.characters === 'Card content');
-      if (texts.length === 0) throw new Error('card pin: no "Card content" TEXT node — root content binding missing');
+      if (texts.length === 0) throw new Error('card pin: no "Card content" TEXT node — content binding missing');
+      // LIVE-PASTE-3 PINS: the canonical CardContent composition — text sits
+      // inside a 16px-padded content part on a 288px block-width card.
+      const contents = mock.root.findAll((n) => n.name === 'label' && n.type === 'FRAME');
+      const badPad = contents.find((f) => Math.round(f.paddingLeft) !== 16 || Math.round(f.paddingTop) !== 16);
+      if (contents.length === 0 || badPad) throw new Error(`card pin: CardContent part missing 16px padding (found ${contents.length} parts${badPad ? `, pad ${badPad.paddingLeft}/${badPad.paddingTop}` : ''})`);
+      const roots = mock.root.findAll((n) => n.type === 'COMPONENT' && /Elevation=/.test(n.name));
+      const badW = roots.find((n) => Math.round(n.width) !== 288);
+      if (badW) throw new Error(`card pin: block-root width expected 288, found ${Math.round(badW.width)}`);
     }
     // GEOMETRY PINS (absolute-positioning round): the class the fidelity
     // gate is structurally blind to (geometry is excluded from computed

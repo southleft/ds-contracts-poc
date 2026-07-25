@@ -85,6 +85,20 @@ export interface ComponentConfig {
   stateProps?: StateAxisSpec[];
   /** Props pinned to fixed values on every mount (recorded). */
   fixedProps?: Record<string, string | number | boolean>;
+  /** MUI round (Card live finding): the library's CANONICAL child
+   *  composition — sampleText mounts wrapped in this imported component
+   *  (<Card><CardContent>text</CardContent></Card>). A bare mount that no
+   *  real consumer writes captures a truth nobody ships (MUI's flush,
+   *  padding-less Card); the canonical composition IS the component's
+   *  rendered contract. Recorded in provenance. */
+  childWrap?: { importName: string };
+  /** MUI round (Card live finding #2): mount the stage as a BLOCK context
+   *  instead of the default flex row. A display:block component inside the
+   *  flex stage shrink-to-fits (the 114px Card) — CSS-true block behavior
+   *  needs a block formatting context so width:auto fills the stage. Only
+   *  block-rooted components need this; flex stages stay the default (the
+   *  line-box-strut receipt). */
+  blockStage?: boolean;
   /** Round 4: per-component stage override (Banner's promoted anatomy —
    *  dismiss + action row — needs a taller stage than the global default;
    *  the same stage is used by capture, replay, and the gate). */
@@ -286,7 +300,10 @@ export function buildHarnessPage(
   cfg: CaptureConfig,
   mounts: Array<{ comp: ComponentConfig; space: PropSpace }>,
 ): string {
-  const importNames = [...new Set(mounts.map((m) => m.comp.importName))].sort();
+  const importNames = [...new Set([
+    ...mounts.map((m) => m.comp.importName),
+    ...mounts.flatMap((m) => (m.comp.childWrap ? [m.comp.childWrap.importName] : [])),
+  ])].sort();
   const specs = mounts.flatMap(({ comp, space }) =>
     space.enumeration.combos.map((combo) => ({
       key: `${comp.name}:${combo.key}`,
@@ -294,6 +311,8 @@ export function buildHarnessPage(
       props: comboProps(comp, space, combo),
       callbacks: comp.callbackProps ?? [],
       text: comp.sampleText,
+      ...(comp.childWrap ? { childWrap: comp.childWrap.importName } : {}),
+      ...(comp.blockStage ? { blockStage: true } : {}),
       stage: stageFor(cfg, comp),
     })),
   );
@@ -328,7 +347,7 @@ ${cfg.mount.imports.join('\n')}
 const COMPONENTS = { ${importNames.join(', ')} };
 const EXTRA = { ${extraNames.join(', ')} };
 const SPECS = ${JSON.stringify(specs)};
-const stageStyle = (st) => ({ display: 'flex', alignItems: 'flex-start', width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
+const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
 const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding} });
 
 // presence-value marker grammar: {"$callback":true} → () => {};
@@ -350,12 +369,13 @@ function App() {
     ${cfg.mount.wrapperOpen}
       {SPECS.map((s) => {
         const C = COMPONENTS[s.component];
+        const W = s.childWrap ? COMPONENTS[s.childWrap] : null;
         const props = resolveMarkers({ ...s.props });
         for (const cb of s.callbacks) props[cb] = () => {};
         return (
           <React.Fragment key={s.key}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
-            <div data-combo={s.key} style={stageStyle(s.stage)}><C {...props}>{s.text}</C></div>
+            <div data-combo={s.key} style={stageStyle(s.stage, s.blockStage)}>{W ? <C {...props}><W>{s.text}</W></C> : <C {...props}>{s.text}</C>}</div>
           </React.Fragment>
         );
       })}

@@ -40,7 +40,7 @@
       "name": "children",
       "type": "text",
       "default": "Card content",
-      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -63,8 +63,28 @@
         "transition-property": "box-shadow",
         "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
       },
-      "content": {
-        "prop": "children"
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|CardContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          },
+          "tokens": {
+            "color": "{imported.shared.color-000000de}",
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.card.label.font-weight}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.card.label.padding-bottom}",
+            "padding-left": "{imported.shared.size-16}",
+            "padding-right": "{imported.shared.size-16}",
+            "padding-top": "{imported.shared.size-16}",
+            "row-rule-color": "{imported.shared.color-000000de}"
+          }
+        }
       },
       "tokens": {
         "background-color": "{imported.card.root.background-color}",
@@ -72,10 +92,11 @@
         "border-bottom-right-radius": "{imported.shared.size-4}",
         "border-top-left-radius": "{imported.shared.size-4}",
         "border-top-right-radius": "{imported.shared.size-4}",
-        "color": "{imported.card.root.color}",
-        "font-size": "{imported.card.root.font-size}",
-        "font-weight": "{imported.card.root.font-weight}",
-        "row-rule-color": "{imported.card.root.row-rule-color}"
+        "color": "{imported.shared.color-000000de}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "row-rule-color": "{imported.shared.color-000000de}",
+        "width": "{imported.card.root.width}"
       },
       "tokensByProp": [
         {

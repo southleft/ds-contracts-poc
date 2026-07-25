@@ -1190,7 +1190,25 @@ export function promoteAnatomy(
       // text/content binding
       if (hasText) {
         const txt = textOf(e.rep);
-        const boundProp = [...samplesByProp.entries()].find(([, v]) => v === txt)?.[0];
+        let boundProp = [...samplesByProp.entries()].find(([, v]) => v === txt)?.[0];
+        // MUI round (Card live finding #2): a promoted text-holder whose text
+        // IS the children sample binds content even when the contract has no
+        // text prop yet — the mounted composition (CardContent holding the
+        // children) is the proof; mint the children prop like the root flow.
+        if (!boundProp && txt === comp.sampleText && comp.sampleText.length > 0) {
+          if (!contract.props.some((p) => p.name === 'children')) {
+            contract.props.push({
+              name: 'children',
+              type: 'text',
+              default: comp.sampleText,
+              description: 'Promoted from the computed floor: the mounted children render as this part\'s text (captured mount proof).',
+              bindings: { figma: { kind: 'TEXT', property: 'Content' }, code: { prop: 'children' } },
+            } as Contract['props'][number]);
+            samplesByProp.set('children', comp.sampleText);
+          }
+          boundProp = 'children';
+          receipts.push(`child-content-carried: ${e.partName} holds the children sample text — bound to minted text prop "children" (MUI CardContent class)`);
+        }
         if (boundProp) part.content = { prop: boundProp };
         else {
           part.text = txt;
