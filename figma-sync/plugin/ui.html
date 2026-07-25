@@ -379,6 +379,9 @@
           return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>' + det;
         }).join('') + '</div>';
       }
+      if (r.status === 'canvas-edited') {
+        variants += '<div style="margin-top:4px;"><a href="#" class="drift-propose" data-set="' + r.name.replace(/"/g, '&quot;') + '" style="color:#09f;text-decoration:underline;">→ Propose this change (review &amp; open PR)</a></div>';
+      }
       return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + ' · spec ' + (r.specHash || '?') + variants + '</div>';
     }).join('');
     box.innerHTML = '<div style="margin-bottom:6px;"><b>' + counts['in-sync'] + ' in sync · ' + counts['canvas-edited'] + ' canvas-edited</b></div>' + html;
@@ -386,6 +389,16 @@
       a.onclick = function (e) {
         e.preventDefault();
         parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: a.getAttribute('data-node') } }, '*');
+      };
+    });
+    // DELIVERY GLUE: a drifted set flows straight into the Propose tab —
+    // pre-named, read-and-diffed, PR section one click away.
+    box.querySelectorAll('.drift-propose').forEach(function (a) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        select('propose');
+        $('prop-set').value = a.getAttribute('data-set');
+        $('prop-run').click();
       };
     });
   });
