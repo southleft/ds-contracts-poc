@@ -1,0 +1,87 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.card",
+  "name": "Card",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Card content",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "justify": "center"
+          },
+          "tokens": {
+            "column-gap": "{imported.shared.size-16}",
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.card.label.font-weight}",
+            "line-height": "{imported.shared.size-24}",
+            "padding-bottom": "{imported.shared.size-24}",
+            "padding-left": "{imported.shared.size-24}",
+            "padding-right": "{imported.shared.size-24}",
+            "padding-top": "{imported.shared.size-24}",
+            "row-gap": "{imported.shared.size-16}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.card.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-e5e7eb}",
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-e5e7eb}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-e5e7eb}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-e5e7eb}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-1}",
+        "box-shadow": "{imported.card.root.box-shadow}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Card"
+    }
+  }
+}

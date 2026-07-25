@@ -75,7 +75,8 @@ import { promoteAnatomy } from './anatomy.js';
 import { labeledPair } from './label-png.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
 import { kebab } from '../types.js';
-import { flatten, normalizeValue, type Capture, type CapturedNode, type FlatEl, type StyleMap } from './lib.js';
+import { flatten, normalizeValue, type Capture, type CapturedNode, type FlatEl, type StyleMap, oklchToRgba,
+} from './lib.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
 
@@ -267,6 +268,8 @@ async function main() {
         varName.slice(vp.length).replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
       const dtcgNames = new Set(dtcgLeaves.map((l) => l.path));
       const colorTuple = (v: string): string | null => {
+        const ok = oklchToRgba(v.trim());
+        if (ok) return `${ok.r},${ok.g},${ok.b},${ok.a}`;
         const m = /^rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)$/.exec(v);
         if (m) return `${m[1]},${m[2]},${m[3]},${Number(m[4] ?? 1)}`;
         let s6 = v.trim();

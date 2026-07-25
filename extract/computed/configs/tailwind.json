@@ -1,0 +1,69 @@
+{
+  "library": {
+    "package": "flowbite-react",
+    "version": "0.12.17",
+    "framework": "react",
+    "classPrefix": "",
+    "classAllow": "^$",
+    "varPrefix": "--"
+  },
+  "mount": {
+    "imports": [
+      "import '../tailwind.css';"
+    ],
+    "wrapperOpen": "<>",
+    "wrapperClose": "</>"
+  },
+  "tokens": {
+    "dtcg": ["examples/tailwind/tokens/tailwind.dtcg.json"],
+    "css": "examples/tailwind/tokens/tailwind.vars.css"
+  },
+  "browser": {
+    "viewport": { "width": 900, "height": 1000 },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": { "width": 320, "height": 96, "padding": 16 },
+  "enumeration": { "cartesianLimit": 512, "unsetLabel": "__unset" },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/tailwind/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": ["color", "size"],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }]
+    },
+    {
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/tailwind/contracts-seed/badge.contract.json",
+      "sampleText": "Badge",
+      "axes": ["color", "size"]
+    },
+    {
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/tailwind/contracts-seed/card.contract.json",
+      "sampleText": "Card content",
+      "axes": []
+    },
+    {
+      "name": "Alert",
+      "importName": "Alert",
+      "contract": "examples/tailwind/contracts-seed/alert.contract.json",
+      "sampleText": "Alert message",
+      "axes": ["color"]
+    },
+    {
+      "name": "ToggleSwitch",
+      "importName": "ToggleSwitch",
+      "contract": "examples/tailwind/contracts-seed/toggleswitch.contract.json",
+      "sampleText": "",
+      "axes": ["sizing"],
+      "stateProps": [{ "prop": "checked", "state": "checked" }],
+      "fixedProps": { "label": "Toggle" },
+      "callbackProps": ["onChange"]
+    }
+  ]
+}

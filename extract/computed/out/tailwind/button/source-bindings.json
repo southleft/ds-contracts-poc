@@ -1,0 +1,2110 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Button",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.xs.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.xs.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.sm.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.sm.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.md.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.md.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.lg.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.lg.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.xl.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "alternative.xl.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".bg-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.xs.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.xs.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.sm.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.sm.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.md.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.md.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.lg.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.lg.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.xl.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.xl.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.xs.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.xs.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.sm.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.sm.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.md.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.md.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.lg.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.lg.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.xl.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "dark.xl.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.xs.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.xs.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.sm.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.sm.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.md.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.md.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.lg.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.lg.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.xl.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.xl.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.xs.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.xs.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xs"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.sm.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.sm.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "sm"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.md.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.md.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "md"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.lg.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.lg.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "lg"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.xl.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.xl.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xl"
+      },
+      "token": "color-white",
+      "varName": "--color-white",
+      "anchor": {
+        "selector": ".text-white"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.xs.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.xs.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.sm.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.sm.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.md.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.md.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.lg.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.lg.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.xl.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.xl.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.xs.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.xs.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.sm.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.sm.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.md.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.md.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.lg.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.lg.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.xl.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "alternative.xl.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.xs.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.xs.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.sm.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.sm.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.md.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.md.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.lg.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.lg.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.xl.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dark.xl.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.xs.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.xs.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.sm.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.sm.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.md.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.md.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.lg.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.lg.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.xl.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "green.xl.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.xs.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.xs.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.sm.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.sm.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.md.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.md.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.lg.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.lg.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.xl.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "red.xl.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xl"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".text-base"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.xs.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.xs.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.sm.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.sm.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.md.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.md.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.lg.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.lg.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.xl.enabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default.xl.disabled",
+      "axisValues": {
+        "color": "default",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.xs.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.xs.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.sm.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.sm.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.md.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.md.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.lg.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.lg.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.xl.enabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "alternative.xl.disabled",
+      "axisValues": {
+        "color": "alternative",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.xs.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.xs.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.sm.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.sm.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.md.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.md.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.lg.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.lg.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.xl.enabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "dark.xl.disabled",
+      "axisValues": {
+        "color": "dark",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.xs.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.xs.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.sm.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.sm.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.md.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.md.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.lg.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.lg.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.xl.enabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "green.xl.disabled",
+      "axisValues": {
+        "color": "green",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.xs.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.xs.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xs"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.sm.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.sm.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.md.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.md.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.lg.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.lg.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.xl.enabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "red.xl.disabled",
+      "axisValues": {
+        "color": "red",
+        "size": "xl"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: no var candidate verified against the computed value in any combo"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "component": "Button",
+  "browser": "149.0.7827.55",
+  "captures": 200,
+  "combos": 50,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 564,
+  "elementsPerCapture": 1,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 33
+  },
+  "folds": {
+    "count": 4,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 196,
+    "mintedLeavesFolded": 136
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 136,
+    "baseBindings": 25,
+    "stateBindings": 13,
+    "byShape": {
+      "uniform": 12,
+      "perAxis": 26,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 1,
+    "state": 1
+  },
+  "codeOnly": {
+    "base": 0,
+    "state": 4,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 112400,
+    "cellsMatched": 112120,
+    "pct": 99.7508896797153,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "perspective-origin",
+        120
+      ],
+      [
+        "inline-size",
+        80
+      ],
+      [
+        "width",
+        80
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 200,
+    "exact": {
+      "mean": 0.0030273437500000005,
+      "max": 0.032552083333333336,
+      "perfect": 143
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 200
+    },
+    "worst": [
+      {
+        "key": "dark.md.disabled__default",
+        "pctExact": 0.032552083333333336,
+        "pctAA": 0
+      },
+      {
+        "key": "default.sm.disabled__hover",
+        "pctExact": 0.026041666666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "green.md.disabled__default",
+        "pctExact": 0.026041666666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "dark.md.disabled__hover",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "dark.md.disabled__focus-visible",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "dark.xl.disabled__default",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "dark.xl.disabled__hover",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "dark.xl.disabled__focus-visible",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 97.57575757575758,
+    "rowsFullyEqual": 160,
+    "rows": 200,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 200
+  },
+  "focusVisibleDriverMatched": 25,
+  "focusVisibleDriverTotal": 50
+}

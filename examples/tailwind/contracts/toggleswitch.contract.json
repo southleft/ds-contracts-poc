@@ -1,0 +1,172 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.toggleswitch",
+  "name": "ToggleSwitch",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "sizing",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Sizing",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "sizing"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Toggle",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer",
+            "position": "relative",
+            "text-align": "center"
+          },
+          "tokens": {
+            "background-color": "{imported.toggle-switch.part-0.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "bottom": "{imported.shared.size-0}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "background-color-state-checked": "{imported.toggle-switch.part-0.background-color-state-checked}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "sizing",
+              "map": {
+                "lg": {
+                  "height": "{imported.toggle-switch.part-0.height.lg}",
+                  "min-width": "{imported.toggle-switch.part-0.min-width.lg}",
+                  "width": "{imported.toggle-switch.part-0.width.lg}"
+                },
+                "md": {
+                  "height": "{imported.toggle-switch.part-0.height.md}",
+                  "min-width": "{imported.toggle-switch.part-0.min-width.md}",
+                  "width": "{imported.toggle-switch.part-0.width.md}"
+                },
+                "sm": {
+                  "height": "{imported.toggle-switch.part-0.height.sm}",
+                  "min-width": "{imported.toggle-switch.part-0.min-width.sm}",
+                  "width": "{imported.toggle-switch.part-0.width.sm}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "content": {
+            "prop": "label"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer"
+          },
+          "tokens": {
+            "color": "{imported.toggle-switch.label.color}",
+            "font-size": "{imported.toggle-switch.label.font-size}",
+            "font-weight": "{imported.toggle-switch.label.font-weight}",
+            "line-height": "{imported.toggle-switch.label.line-height}",
+            "margin-left": "{imported.toggle-switch.label.margin-left}",
+            "margin-top": "{imported.toggle-switch.label.margin-top}",
+            "row-rule-color": "{imported.toggle-switch.label.row-rule-color}"
+          }
+        }
+      },
+      "declared": {
+        "cursor": "pointer"
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{imported.toggle-switch.root.outline-color-state-focus-visible}",
+          "outline-width": "{imported.toggle-switch.root.outline-width-state-focus-visible}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "sizing",
+          "map": {
+            "lg": {
+              "height": "{imported.toggle-switch.root.height.lg}",
+              "width": "{imported.toggle-switch.root.width.lg}"
+            },
+            "md": {
+              "height": "{imported.toggle-switch.root.height.md}",
+              "width": "{imported.toggle-switch.root.width.md}"
+            },
+            "sm": {
+              "height": "{imported.toggle-switch.root.height.sm}",
+              "width": "{imported.toggle-switch.root.width.sm}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "ToggleSwitch"
+    }
+  }
+}

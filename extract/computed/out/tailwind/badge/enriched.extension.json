@@ -1,0 +1,439 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "flowbite-react@0.12.17",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "badge": {
+        "root": {
+          "background-color": {
+            "info": {
+              "$value": "#cefafe",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#fde8e8",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#def7ec",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#fdf6b2",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#e5edff",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#fce8f3",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "info": {
+              "$value": "#005f78",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#9b1c1c",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#03543f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#723b13",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#42389d",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#99154b",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "14px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "$value": "600",
+            "$type": "number"
+          },
+          "line-height": {
+            "xs": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "info": {
+              "$value": "#005f78",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#9b1c1c",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#03543f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#723b13",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#42389d",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#99154b",
+              "$type": "color"
+            }
+          },
+          "background-color-state-active": {
+            "info": {
+              "$value": "#a2f4fd",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#fbd5d5",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#bcf0da",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#fce96a",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#cddbfe",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#fad1e8",
+              "$type": "color"
+            }
+          },
+          "background-color-state-hover": {
+            "info": {
+              "$value": "#a2f4fd",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#fbd5d5",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#bcf0da",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#fce96a",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#cddbfe",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#fad1e8",
+              "$type": "color"
+            }
+          }
+        },
+        "label": {
+          "color": {
+            "info": {
+              "$value": "#005f78",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#9b1c1c",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#03543f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#723b13",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#42389d",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#99154b",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "14px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "$value": "600",
+            "$type": "number"
+          },
+          "line-height": {
+            "xs": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "row-rule-color": {
+            "info": {
+              "$value": "#005f78",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#9b1c1c",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#03543f",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#723b13",
+              "$type": "color"
+            },
+            "indigo": {
+              "$value": "#42389d",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#99154b",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "child-content-carried: label holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)"
+  ]
+}

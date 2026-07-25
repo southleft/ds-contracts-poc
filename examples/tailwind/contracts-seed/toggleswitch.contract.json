@@ -1,0 +1,70 @@
+{
+  "id": "flowbite.toggleswitch",
+  "name": "ToggleSwitch",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "sizing",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Sizing",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "sizing"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Toggle",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "ToggleSwitch"
+    }
+  },
+  "states": [
+    "disabled",
+    "focus-visible",
+    "hover"
+  ]
+}

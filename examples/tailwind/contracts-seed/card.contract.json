@@ -1,0 +1,26 @@
+{
+  "id": "flowbite.card",
+  "name": "Card",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Card"
+    }
+  },
+  "states": []
+}

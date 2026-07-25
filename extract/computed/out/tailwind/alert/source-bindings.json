@@ -1,0 +1,88 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Alert",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "color-cyan-100",
+      "varName": "--color-cyan-100",
+      "anchor": {
+        "selector": ".bg-cyan-100"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "color-cyan-700",
+      "varName": "--color-cyan-700",
+      "anchor": {
+        "selector": ".text-cyan-700"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "failure",
+      "axisValues": {
+        "color": "failure"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success",
+      "axisValues": {
+        "color": "success"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning",
+      "axisValues": {
+        "color": "warning"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: no var candidate verified against the computed value in any combo"
+  ]
+}

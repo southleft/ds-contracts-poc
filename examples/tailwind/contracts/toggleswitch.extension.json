@@ -1,0 +1,424 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "flowbite-react@0.12.17",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-9999": {
+          "$value": "9999px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      },
+      "toggle-switch": {
+        "root": {
+          "height": {
+            "sm": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "28px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "sm": {
+              "$value": "92.4375px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "100.438px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "108.438px",
+              "$type": "dimension"
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        },
+        "part-0": {
+          "background-color": {
+            "$value": "#e5e7eb",
+            "$type": "color"
+          },
+          "height": {
+            "sm": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "28px",
+              "$type": "dimension"
+            }
+          },
+          "min-width": {
+            "sm": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "44px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "52px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "sm": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "44px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "52px",
+              "$type": "dimension"
+            }
+          },
+          "box-shadow-state-active": {
+            "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+            "$type": "shadow"
+          },
+          "background-color-state-checked": {
+            "$value": "#1a56db",
+            "$type": "color"
+          },
+          "box-shadow-state-focus-visible": {
+            "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+            "$type": "shadow"
+          }
+        },
+        "label": {
+          "color": {
+            "$value": "#111827",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "margin-left": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "margin-top": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "$value": "#111827",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "part-0",
+      "channel": "--tw-ring-shadow",
+      "sample": "0 0 0 calc(4px + 0px) #A4CAFE",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "--tw-outline-style",
+      "sample": "none",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0",
+      "channel": "--tw-ring-shadow",
+      "sample": "0 0 0 calc(4px + 0px) #A4CAFE",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "--tw-outline-style",
+      "sample": "none",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "part-0",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.toggle-switch.part-0.box-shadow-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0",
+      "channel": "box-shadow",
+      "state": "focus-visible",
+      "ref": "{imported.toggle-switch.part-0.box-shadow-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "sm.no-checked",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "sm.checked",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md.no-checked",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md.checked",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "lg.no-checked",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "lg.checked",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 6
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [
+    "interaction-on-checked-changed: sm.checked focus-visible root.--tw-outline-style",
+    "interaction-on-checked-changed: sm.checked focus-visible root.outline-color",
+    "interaction-on-checked-changed: sm.checked focus-visible root.outline-width",
+    "interaction-on-checked-changed: sm.checked focus-visible part-0.--tw-ring-shadow",
+    "interaction-on-checked-changed: sm.checked focus-visible part-0.box-shadow",
+    "interaction-on-checked-changed: sm.checked active root.--tw-outline-style",
+    "interaction-on-checked-changed: sm.checked active part-0.--tw-ring-shadow",
+    "interaction-on-checked-changed: sm.checked active part-0.box-shadow",
+    "interaction-on-checked-changed: md.checked focus-visible root.--tw-outline-style",
+    "interaction-on-checked-changed: md.checked focus-visible root.outline-color",
+    "interaction-on-checked-changed: md.checked focus-visible root.outline-width",
+    "interaction-on-checked-changed: md.checked focus-visible part-0.--tw-ring-shadow",
+    "interaction-on-checked-changed: md.checked focus-visible part-0.box-shadow",
+    "interaction-on-checked-changed: md.checked active root.--tw-outline-style",
+    "interaction-on-checked-changed: md.checked active part-0.--tw-ring-shadow",
+    "interaction-on-checked-changed: md.checked active part-0.box-shadow",
+    "interaction-on-checked-changed: lg.checked focus-visible root.--tw-outline-style",
+    "interaction-on-checked-changed: lg.checked focus-visible root.outline-color",
+    "interaction-on-checked-changed: lg.checked focus-visible root.outline-width",
+    "interaction-on-checked-changed: lg.checked focus-visible part-0.--tw-ring-shadow"
+  ],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex"
+    ],
+    "refusals": [
+      "pseudo-decor-nonuniform: part-0::after drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":2,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":20,\"h\":20,\"top\":2,\"left\":2,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":24,\"h\":24,\"top\":2,\"left\":2,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0}) — the bounded v1 decor grammar carries one box; named refusal"
+    ]
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

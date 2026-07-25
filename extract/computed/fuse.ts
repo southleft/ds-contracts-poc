@@ -159,7 +159,11 @@ export function absClusterParts(
       const el = a.getAligned(`${combo.key}__default`)[pi];
       if (!el) continue;
       seen++;
-      if (el.node.style['position'] !== 'absolute') { abs = false; break; }
+      // Tailwind round: an absolutely-positioned PSEUDO (Flowbite's toggle
+      // thumb is ::after with position:absolute) makes its HOST an overlay
+      // anatomy exactly like an absolute child element would.
+      const pseudoAbs = Object.values(el.node.pseudo ?? {}).some((ps) => ps?.['position'] === 'absolute');
+      if (el.node.style['position'] !== 'absolute' && !pseudoAbs) { abs = false; break; }
     }
     if (seen > 0 && abs) absAdmit.add(pi);
   }
@@ -777,6 +781,14 @@ export function prepareMint(
               }
               if (outer !== base) v = `${Math.round(outer * 1000) / 1000}px`;
             }
+          }
+          // Tailwind round: rounded-full compiles to calc(infinity*1px);
+          // Chromium clamps to 3.35544e+07px (scientific notation — outside
+          // the px grammar). Any absurd radius IS the pill idiom — carried
+          // as the 9999px pill sentinel (Figma clamps to half-box exactly
+          // like the browser).
+          if (/^border-.*-radius$/.test(channel) && /^[\d.]+e\+?\d+px$/.test(v ?? '')) {
+            v = '9999px';
           }
           // Absolute-position round: %-radii on cluster parts resolve
           // against the part's own captured box (CSS: 50% of a 20px square

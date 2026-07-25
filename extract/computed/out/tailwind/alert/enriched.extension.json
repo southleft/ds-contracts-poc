@@ -1,0 +1,452 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "flowbite-react@0.12.17",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "alert": {
+        "root": {
+          "background-color": {
+            "info": {
+              "$value": "#cefafe",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#fde8e8",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#def7ec",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#fdf6b2",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-left-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-right-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-top-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "info": {
+              "$value": "#007595",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#8e4b10",
+              "$type": "color"
+            }
+          },
+          "row-rule-color": {
+            "info": {
+              "$value": "#007595",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#8e4b10",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0": {
+          "color": {
+            "info": {
+              "$value": "#007595",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#8e4b10",
+              "$type": "color"
+            }
+          },
+          "row-rule-color": {
+            "info": {
+              "$value": "#007595",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#8e4b10",
+              "$type": "color"
+            }
+          }
+        },
+        "label": {
+          "color": {
+            "info": {
+              "$value": "#007595",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#8e4b10",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "row-rule-color": {
+            "info": {
+              "$value": "#007595",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#8e4b10",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "part-0",
+        "field": "align",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "child-content-carried: label holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)"
+  ]
+}

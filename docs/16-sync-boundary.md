@@ -108,9 +108,9 @@ The known edges, so nobody discovers them the hard way:
 
 Guaranteed, gated, first-party: **React and Web Components (CEM)** component
 libraries, with four styling methods — **CSS Modules, Emotion (CSS-variables
-mode), StyleX, and Tailwind**. Three of the four readers are built and
-receipted today (CSS Modules/Polaris, StyleX/Astryx, Emotion/MUI); the
-Tailwind reader is the named remaining member. Everything outside this set
+mode), StyleX, and Tailwind**. All four readers are built and receipted
+(CSS Modules/Polaris, StyleX/Astryx, Emotion/MUI, Tailwind v4/Flowbite —
+`examples/tailwind/`). Everything outside this set
 is **explicitly not a core promise**: it runs through the computed floor's
 graceful degradation (correct pixels, literal token names) and graduates to
 full support only as a *reader plugin* — community-contributed under the

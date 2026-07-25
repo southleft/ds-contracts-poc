@@ -1,0 +1,209 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Alert message",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "label": {
+              "content": {
+                "prop": "children"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "layout": {
+                "grow": true
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.alert.label.font-weight}",
+                "line-height": "{imported.shared.size-20}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "color",
+                  "map": {
+                    "failure": {
+                      "color": "{imported.alert.label.color.failure}",
+                      "row-rule-color": "{imported.alert.label.row-rule-color.failure}"
+                    },
+                    "info": {
+                      "color": "{imported.alert.label.color.info}",
+                      "row-rule-color": "{imported.alert.label.row-rule-color.info}"
+                    },
+                    "success": {
+                      "color": "{imported.alert.label.color.success}",
+                      "row-rule-color": "{imported.alert.label.row-rule-color.success}"
+                    },
+                    "warning": {
+                      "color": "{imported.alert.label.color.warning}",
+                      "row-rule-color": "{imported.alert.label.row-rule-color.warning}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "failure": {
+                  "color": "{imported.alert.part-0.color.failure}",
+                  "row-rule-color": "{imported.alert.part-0.row-rule-color.failure}"
+                },
+                "info": {
+                  "color": "{imported.alert.part-0.color.info}",
+                  "row-rule-color": "{imported.alert.part-0.row-rule-color.info}"
+                },
+                "success": {
+                  "color": "{imported.alert.part-0.color.success}",
+                  "row-rule-color": "{imported.alert.part-0.row-rule-color.success}"
+                },
+                "warning": {
+                  "color": "{imported.alert.part-0.color.warning}",
+                  "row-rule-color": "{imported.alert.part-0.row-rule-color.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "column-gap": "{imported.shared.size-8}",
+        "font-size": "{imported.shared.size-14}",
+        "line-height": "{imported.shared.size-20}",
+        "padding-bottom": "{imported.shared.size-16}",
+        "padding-left": "{imported.shared.size-16}",
+        "padding-right": "{imported.shared.size-16}",
+        "padding-top": "{imported.shared.size-16}",
+        "row-gap": "{imported.shared.size-8}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "failure": {
+              "background-color": "{imported.alert.root.background-color.failure}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.failure}",
+              "border-left-color": "{imported.alert.root.border-left-color.failure}",
+              "border-right-color": "{imported.alert.root.border-right-color.failure}",
+              "border-top-color": "{imported.alert.root.border-top-color.failure}",
+              "color": "{imported.alert.root.color.failure}",
+              "row-rule-color": "{imported.alert.root.row-rule-color.failure}"
+            },
+            "info": {
+              "background-color": "{imported.alert.root.background-color.info}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.info}",
+              "border-left-color": "{imported.alert.root.border-left-color.info}",
+              "border-right-color": "{imported.alert.root.border-right-color.info}",
+              "border-top-color": "{imported.alert.root.border-top-color.info}",
+              "color": "{imported.alert.root.color.info}",
+              "row-rule-color": "{imported.alert.root.row-rule-color.info}"
+            },
+            "success": {
+              "background-color": "{imported.alert.root.background-color.success}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.success}",
+              "border-left-color": "{imported.alert.root.border-left-color.success}",
+              "border-right-color": "{imported.alert.root.border-right-color.success}",
+              "border-top-color": "{imported.alert.root.border-top-color.success}",
+              "color": "{imported.alert.root.color.success}",
+              "row-rule-color": "{imported.alert.root.row-rule-color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.alert.root.background-color.warning}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.warning}",
+              "border-left-color": "{imported.alert.root.border-left-color.warning}",
+              "border-right-color": "{imported.alert.root.border-right-color.warning}",
+              "border-top-color": "{imported.alert.root.border-top-color.warning}",
+              "color": "{imported.alert.root.color.warning}",
+              "row-rule-color": "{imported.alert.root.row-rule-color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Alert"
+    }
+  }
+}

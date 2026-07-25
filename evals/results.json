@@ -1,6 +1,6 @@
 {
-  "passed": 148,
-  "total": 148,
+  "passed": 149,
+  "total": 149,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -739,6 +739,11 @@
     },
     {
       "id": "mui-figma-genesis",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "tailwind-figma-genesis",
       "claim": "C8-journey",
       "pass": true
     }

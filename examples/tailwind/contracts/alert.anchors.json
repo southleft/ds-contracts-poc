@@ -1,0 +1,22 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "alert",
+  "anchors": [
+    {
+      "leaf": "imported.alert.root.background-color.info",
+      "token": "color-cyan-100",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--color-cyan-100",
+      "selector": ".bg-cyan-100"
+    },
+    {
+      "leaf": "imported.alert.root.color.info",
+      "token": "color-cyan-700",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-cyan-700",
+      "selector": ".text-cyan-700"
+    }
+  ]
+}

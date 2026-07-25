@@ -1,0 +1,118 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.background-color.alternative",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--color-white",
+      "selector": ".bg-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.dark",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.default",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.green",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.red",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.dark",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.default",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.green",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.red",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color.dark",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color.default",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color.green",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.color.red",
+      "token": "color-white",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--color-white",
+      "selector": ".text-white"
+    },
+    {
+      "leaf": "imported.button.root.font-weight",
+      "token": "font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--font-weight-medium",
+      "selector": ".font-medium"
+    }
+  ]
+}

@@ -407,10 +407,17 @@ createRoot(document.getElementById('root')).render(<App />);
     ],
     { cwd: harness },
   );
+  // TAILWIND ROUND: the stylesheet is INLINED, not linked — file:// pages
+  // treat linked sheets as opaque origins, so document.styleSheets[n]
+  // .cssRules THROWS and the CSS-vars reader sees zero rules (Emotion never
+  // hit this: it injects <style> tags). Inlining keeps CSSOM readable for
+  // every stylesheet-shipping library.
+  const bundleCssPath = path.join(pageDir, 'bundle.css');
+  const bundleCss = existsSync(bundleCssPath) ? readFileSync(bundleCssPath, 'utf8') : '';
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-<link rel="stylesheet" href="bundle.css">
+${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>
@@ -432,6 +439,15 @@ document.addEventListener('click', (e) => e.preventDefault(), true);
 const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
+  // Tailwind round (Flowbite ToggleSwitch): the component's FIRST DOM child
+  // can be a hidden sr-only input rendered as a SIBLING of the visible
+  // control — the captured root is the first child that actually renders
+  // boxes (getClientRects), falling back to firstElementChild (identical
+  // pick for every component whose first child is visible).
+  let rootEl = stage.firstElementChild;
+  for (const c of stage.children) {
+    if (c.getClientRects().length > 0) { rootEl = c; break; }
+  }
   const props = window.__ALL_PROPS;
   const allow = ${JSON.stringify(classAllow ?? null)};
   const keepCls = (l) => (allow ? l.filter((c) => new RegExp(allow).test(c)) : l);
@@ -453,10 +469,22 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     const out = [];
     const muiRe = new RegExp('var\\\\(\\\\s*(' + vp + '[a-zA-Z0-9-]+)');
     const anyRe = new RegExp('var\\\\(\\\\s*(--[a-zA-Z0-9-]+)');
+    // Tailwind round: v4 nests every rule inside @layer blocks (and @media)
+    // — grouping rules have no selectorText and must be RECURSED into, or
+    // the reader sees ~zero style rules.
+    const flatRules = [];
+    const collectRules = (list) => {
+      for (const r of list) {
+        if (r.selectorText && r.style) flatRules.push(r);
+        else if (r.cssRules) { try { collectRules(r.cssRules); } catch {} }
+      }
+    };
     for (const sh of document.styleSheets) {
       let rules; try { rules = sh.cssRules; } catch { continue; }
-      for (const r of rules) {
-        if (!r.selectorText || !r.style) continue;
+      collectRules(rules);
+    }
+    {
+      for (const r of flatRules) {
         const defs = [];
         const chans = [];
         const seen = new Set();
@@ -469,8 +497,12 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
             const m = muiRe.exec(val);
             if (m) defs.push([prop, m[1]]);
           } else {
-            const m = anyRe.exec(val);
-            if (m) chans.push([prop, m[1]]);
+            // Tailwind round: fallback chains (var(--tw-leading, var(--text-
+            // sm--line-height))) carry the REAL token in the fallback — every
+            // referenced var is a candidate; Node-side verification picks.
+            let m;
+            const g = new RegExp(anyRe.source, 'g');
+            while ((m = g.exec(val)) !== null) chans.push([prop, m[1]]);
           }
         }
         if (defs.length || chans.length) out.push([r.selectorText, defs, chans]);
@@ -535,7 +567,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     }
     return out;
   };
-  return readEl(stage.firstElementChild);
+  return readEl(rootEl);
 })()`;
 
 export const INTERACTIONS = ['default', 'hover', 'focus-visible', 'active'] as const;
@@ -603,7 +635,10 @@ export async function sweep(
     for (const combo of space.enumeration.combos) {
       const key = `${comp.name}:${combo.key}`;
       const stageSel = `[data-combo="${key}"]`;
-      const rootLoc = page.locator(`${stageSel} > *`).first();
+      // Tailwind round (Flowbite ToggleSwitch): the first stage child can be
+      // a HIDDEN sr-only input — interaction drivers target the first
+      // VISIBLE child (identical pick everywhere the first child is visible).
+      const rootLoc = page.locator(`${stageSel} > *`).filter({ visible: true }).first();
       for (const interaction of INTERACTIONS) {
         // pin infinite animations at a deterministic time point (idempotent)
         for (const n of (await page.evaluate(pinInfiniteAnimationsJs)) as string[]) pinnedAnimations.add(n);
@@ -828,10 +863,17 @@ window.__setSpec(false);
     ],
     { cwd: harness },
   );
+  // TAILWIND ROUND: the stylesheet is INLINED, not linked — file:// pages
+  // treat linked sheets as opaque origins, so document.styleSheets[n]
+  // .cssRules THROWS and the CSS-vars reader sees zero rules (Emotion never
+  // hit this: it injects <style> tags). Inlining keeps CSSOM readable for
+  // every stylesheet-shipping library.
+  const bundleCssPath = path.join(pageDir, 'bundle.css');
+  const bundleCss = existsSync(bundleCssPath) ? readFileSync(bundleCssPath, 'utf8') : '';
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-<link rel="stylesheet" href="bundle.css">
+${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>document.addEventListener('click', (e) => e.preventDefault(), true);</script>

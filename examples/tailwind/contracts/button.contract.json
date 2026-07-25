@@ -1,0 +1,268 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.button",
+  "name": "Button",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "default",
+          "alternative",
+          "dark",
+          "green",
+          "red"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "alternative": "Alternative",
+            "dark": "Dark",
+            "green": "Green",
+            "red": "Red"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Button",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "active",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "declaredStates": {
+        "disabled": {
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "bottom": "{imported.shared.size-0}",
+        "font-weight": "{imported.button.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.button.root.background-color-state-active.{color}}",
+          "box-shadow": "{imported.button.root.box-shadow-state-active.{color}}",
+          "color": "{imported.button.root.color-state-active.{color}}",
+          "outline-color": "{imported.button.root.outline-color-state-active.{color}}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-active.{color}}"
+        },
+        "disabled": {
+          "opacity": "{imported.button.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{color}}",
+          "outline-color": "{imported.button.root.outline-color-state-focus-visible}",
+          "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "background-color": "{imported.button.root.background-color-state-hover.{color}}",
+          "color": "{imported.button.root.color-state-hover.{color}}",
+          "outline-color": "{imported.button.root.outline-color-state-hover.{color}}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-hover.{color}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "alternative": {
+              "background-color": "{imported.button.root.background-color.alternative}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.alternative}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.alternative}",
+              "border-left-color": "{imported.button.root.border-left-color.alternative}",
+              "border-left-width": "{imported.button.root.border-left-width.alternative}",
+              "border-right-color": "{imported.button.root.border-right-color.alternative}",
+              "border-right-width": "{imported.button.root.border-right-width.alternative}",
+              "border-top-color": "{imported.button.root.border-top-color.alternative}",
+              "border-top-width": "{imported.button.root.border-top-width.alternative}",
+              "color": "{imported.button.root.color.alternative}",
+              "outline-color": "{imported.button.root.outline-color.alternative}",
+              "row-rule-color": "{imported.button.root.row-rule-color.alternative}"
+            },
+            "dark": {
+              "background-color": "{imported.button.root.background-color.dark}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.dark}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.dark}",
+              "border-left-color": "{imported.button.root.border-left-color.dark}",
+              "border-left-width": "{imported.button.root.border-left-width.dark}",
+              "border-right-color": "{imported.button.root.border-right-color.dark}",
+              "border-right-width": "{imported.button.root.border-right-width.dark}",
+              "border-top-color": "{imported.button.root.border-top-color.dark}",
+              "border-top-width": "{imported.button.root.border-top-width.dark}",
+              "color": "{imported.button.root.color.dark}",
+              "outline-color": "{imported.button.root.outline-color.dark}",
+              "row-rule-color": "{imported.button.root.row-rule-color.dark}"
+            },
+            "default": {
+              "background-color": "{imported.button.root.background-color.default}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.default}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.default}",
+              "border-left-color": "{imported.button.root.border-left-color.default}",
+              "border-left-width": "{imported.button.root.border-left-width.default}",
+              "border-right-color": "{imported.button.root.border-right-color.default}",
+              "border-right-width": "{imported.button.root.border-right-width.default}",
+              "border-top-color": "{imported.button.root.border-top-color.default}",
+              "border-top-width": "{imported.button.root.border-top-width.default}",
+              "color": "{imported.button.root.color.default}",
+              "outline-color": "{imported.button.root.outline-color.default}",
+              "row-rule-color": "{imported.button.root.row-rule-color.default}"
+            },
+            "green": {
+              "background-color": "{imported.button.root.background-color.green}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.green}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.green}",
+              "border-left-color": "{imported.button.root.border-left-color.green}",
+              "border-left-width": "{imported.button.root.border-left-width.green}",
+              "border-right-color": "{imported.button.root.border-right-color.green}",
+              "border-right-width": "{imported.button.root.border-right-width.green}",
+              "border-top-color": "{imported.button.root.border-top-color.green}",
+              "border-top-width": "{imported.button.root.border-top-width.green}",
+              "color": "{imported.button.root.color.green}",
+              "outline-color": "{imported.button.root.outline-color.green}",
+              "row-rule-color": "{imported.button.root.row-rule-color.green}"
+            },
+            "red": {
+              "background-color": "{imported.button.root.background-color.red}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.red}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.red}",
+              "border-left-color": "{imported.button.root.border-left-color.red}",
+              "border-left-width": "{imported.button.root.border-left-width.red}",
+              "border-right-color": "{imported.button.root.border-right-color.red}",
+              "border-right-width": "{imported.button.root.border-right-width.red}",
+              "border-top-color": "{imported.button.root.border-top-color.red}",
+              "border-top-width": "{imported.button.root.border-top-width.red}",
+              "color": "{imported.button.root.color.red}",
+              "outline-color": "{imported.button.root.outline-color.red}",
+              "row-rule-color": "{imported.button.root.row-rule-color.red}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "font-size": "{imported.button.root.font-size.lg}",
+              "line-height": "{imported.button.root.line-height.lg}",
+              "padding-left": "{imported.button.root.padding-left.lg}",
+              "padding-right": "{imported.button.root.padding-right.lg}"
+            },
+            "md": {
+              "font-size": "{imported.button.root.font-size.md}",
+              "line-height": "{imported.button.root.line-height.md}",
+              "padding-left": "{imported.button.root.padding-left.md}",
+              "padding-right": "{imported.button.root.padding-right.md}"
+            },
+            "sm": {
+              "font-size": "{imported.button.root.font-size.sm}",
+              "line-height": "{imported.button.root.line-height.sm}",
+              "padding-left": "{imported.button.root.padding-left.sm}",
+              "padding-right": "{imported.button.root.padding-right.sm}"
+            },
+            "xl": {
+              "font-size": "{imported.button.root.font-size.xl}",
+              "line-height": "{imported.button.root.line-height.xl}",
+              "padding-left": "{imported.button.root.padding-left.xl}",
+              "padding-right": "{imported.button.root.padding-right.xl}"
+            },
+            "xs": {
+              "font-size": "{imported.button.root.font-size.xs}",
+              "line-height": "{imported.button.root.line-height.xs}",
+              "padding-left": "{imported.button.root.padding-left.xs}",
+              "padding-right": "{imported.button.root.padding-right.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Button"
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.badge",
+  "name": "Badge",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning",
+          "indigo",
+          "pink"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning",
+            "indigo": "Indigo",
+            "pink": "Pink"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm"
+        ]
+      },
+      "default": "xs",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Badge",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "font-weight": "{imported.badge.label.font-weight}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "failure": {
+                  "color": "{imported.badge.label.color.failure}",
+                  "row-rule-color": "{imported.badge.label.row-rule-color.failure}"
+                },
+                "indigo": {
+                  "color": "{imported.badge.label.color.indigo}",
+                  "row-rule-color": "{imported.badge.label.row-rule-color.indigo}"
+                },
+                "info": {
+                  "color": "{imported.badge.label.color.info}",
+                  "row-rule-color": "{imported.badge.label.row-rule-color.info}"
+                },
+                "pink": {
+                  "color": "{imported.badge.label.color.pink}",
+                  "row-rule-color": "{imported.badge.label.row-rule-color.pink}"
+                },
+                "success": {
+                  "color": "{imported.badge.label.color.success}",
+                  "row-rule-color": "{imported.badge.label.row-rule-color.success}"
+                },
+                "warning": {
+                  "color": "{imported.badge.label.color.warning}",
+                  "row-rule-color": "{imported.badge.label.row-rule-color.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "sm": {
+                  "font-size": "{imported.badge.label.font-size.sm}",
+                  "line-height": "{imported.badge.label.line-height.sm}"
+                },
+                "xs": {
+                  "font-size": "{imported.badge.label.font-size.xs}",
+                  "line-height": "{imported.badge.label.line-height.xs}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "column-gap": "{imported.shared.size-4}",
+        "font-weight": "{imported.badge.root.font-weight}",
+        "padding-bottom": "{imported.badge.root.padding-bottom}",
+        "padding-left": "{imported.badge.root.padding-left}",
+        "padding-right": "{imported.badge.root.padding-right}",
+        "padding-top": "{imported.badge.root.padding-top}",
+        "row-gap": "{imported.shared.size-4}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.badge.root.background-color-state-active.{color}}"
+        },
+        "hover": {
+          "background-color": "{imported.badge.root.background-color-state-hover.{color}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "failure": {
+              "background-color": "{imported.badge.root.background-color.failure}",
+              "color": "{imported.badge.root.color.failure}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.failure}"
+            },
+            "indigo": {
+              "background-color": "{imported.badge.root.background-color.indigo}",
+              "color": "{imported.badge.root.color.indigo}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.indigo}"
+            },
+            "info": {
+              "background-color": "{imported.badge.root.background-color.info}",
+              "color": "{imported.badge.root.color.info}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+            },
+            "pink": {
+              "background-color": "{imported.badge.root.background-color.pink}",
+              "color": "{imported.badge.root.color.pink}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+            },
+            "success": {
+              "background-color": "{imported.badge.root.background-color.success}",
+              "color": "{imported.badge.root.color.success}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.badge.root.background-color.warning}",
+              "color": "{imported.badge.root.color.warning}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "sm": {
+              "font-size": "{imported.badge.root.font-size.sm}",
+              "line-height": "{imported.badge.root.line-height.sm}"
+            },
+            "xs": {
+              "font-size": "{imported.badge.root.font-size.xs}",
+              "line-height": "{imported.badge.root.line-height.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Badge"
+    }
+  }
+}

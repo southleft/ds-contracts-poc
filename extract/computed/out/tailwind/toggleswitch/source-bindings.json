@@ -1,0 +1,166 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "ToggleSwitch",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "sm.no-checked",
+      "axisValues": {
+        "sizing": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "sm.checked",
+      "axisValues": {
+        "sizing": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "md.no-checked",
+      "axisValues": {
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "md.checked",
+      "axisValues": {
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "lg.no-checked",
+      "axisValues": {
+        "sizing": "lg"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "lg.checked",
+      "axisValues": {
+        "sizing": "lg"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "sm.no-checked",
+      "axisValues": {
+        "sizing": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "sm.checked",
+      "axisValues": {
+        "sizing": "sm"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "md.no-checked",
+      "axisValues": {
+        "sizing": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "md.checked",
+      "axisValues": {
+        "sizing": "md"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "lg.no-checked",
+      "axisValues": {
+        "sizing": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "lg.checked",
+      "axisValues": {
+        "sizing": "lg"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    }
+  ],
+  "skips": [
+    "label.line-height: no var candidate verified against the computed value in any combo"
+  ]
+}

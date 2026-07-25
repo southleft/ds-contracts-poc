@@ -1,0 +1,402 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Badge",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.xs",
+      "axisValues": {
+        "color": "info",
+        "size": "xs"
+      },
+      "token": "color-cyan-100",
+      "varName": "--color-cyan-100",
+      "anchor": {
+        "selector": ".bg-cyan-100"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "size": "sm"
+      },
+      "token": "color-cyan-100",
+      "varName": "--color-cyan-100",
+      "anchor": {
+        "selector": ".bg-cyan-100"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.xs",
+      "axisValues": {
+        "color": "info",
+        "size": "xs"
+      },
+      "token": "color-cyan-800",
+      "varName": "--color-cyan-800",
+      "anchor": {
+        "selector": ".text-cyan-800"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "size": "sm"
+      },
+      "token": "color-cyan-800",
+      "varName": "--color-cyan-800",
+      "anchor": {
+        "selector": ".text-cyan-800"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.xs",
+      "axisValues": {
+        "color": "info",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "failure.xs",
+      "axisValues": {
+        "color": "failure",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "failure.sm",
+      "axisValues": {
+        "color": "failure",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.xs",
+      "axisValues": {
+        "color": "success",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.sm",
+      "axisValues": {
+        "color": "success",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.xs",
+      "axisValues": {
+        "color": "warning",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.sm",
+      "axisValues": {
+        "color": "warning",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "indigo.xs",
+      "axisValues": {
+        "color": "indigo",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "indigo.sm",
+      "axisValues": {
+        "color": "indigo",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "pink.xs",
+      "axisValues": {
+        "color": "pink",
+        "size": "xs"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "pink.sm",
+      "axisValues": {
+        "color": "pink",
+        "size": "sm"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info.xs",
+      "axisValues": {
+        "color": "info",
+        "size": "xs"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "size": "sm"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "failure.xs",
+      "axisValues": {
+        "color": "failure",
+        "size": "xs"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "failure.sm",
+      "axisValues": {
+        "color": "failure",
+        "size": "sm"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success.xs",
+      "axisValues": {
+        "color": "success",
+        "size": "xs"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success.sm",
+      "axisValues": {
+        "color": "success",
+        "size": "sm"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning.xs",
+      "axisValues": {
+        "color": "warning",
+        "size": "xs"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning.sm",
+      "axisValues": {
+        "color": "warning",
+        "size": "sm"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "indigo.xs",
+      "axisValues": {
+        "color": "indigo",
+        "size": "xs"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "indigo.sm",
+      "axisValues": {
+        "color": "indigo",
+        "size": "sm"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "pink.xs",
+      "axisValues": {
+        "color": "pink",
+        "size": "xs"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "pink.sm",
+      "axisValues": {
+        "color": "pink",
+        "size": "sm"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: no var candidate verified against the computed value in any combo"
+  ]
+}
