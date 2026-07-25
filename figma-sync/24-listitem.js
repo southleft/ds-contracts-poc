@@ -486,6 +486,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -504,6 +528,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -660,6 +690,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -675,6 +708,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -753,6 +789,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -919,6 +956,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {

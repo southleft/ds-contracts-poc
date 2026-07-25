@@ -980,6 +980,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -998,6 +1022,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -1154,6 +1184,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -1169,6 +1202,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -1247,6 +1283,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -1413,6 +1450,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -2144,6 +2182,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2162,6 +2224,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -2318,6 +2386,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -2333,6 +2404,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -2411,6 +2485,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -2577,6 +2652,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -3936,7 +4012,11 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // natural post-backdrop index — else the opaque backdrop sibling paints
     // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
     // previously hand-corrected on canvas each re-amend).
-    if (!childNode.children || childNode.children.length === 0) {
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
@@ -4112,6 +4192,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4130,6 +4234,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -4288,6 +4398,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -4303,6 +4416,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -4382,6 +4498,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -4548,6 +4665,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -5620,6 +5738,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5638,6 +5780,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -5794,6 +5942,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -5809,6 +5960,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -5887,6 +6041,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -6053,6 +6208,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -6600,6 +6756,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -6618,6 +6798,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -6774,6 +6960,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -6789,6 +6978,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -6867,6 +7059,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -7033,6 +7226,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -7868,6 +8062,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7886,6 +8104,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -8042,6 +8266,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -8057,6 +8284,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -8135,6 +8365,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -8301,6 +8532,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -8408,44 +8640,6 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "slider-track",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "fill": "imported/slider/slider-track/background-color",
-                      "bindings": {
-                        "bottomLeftRadius": "imported/shared/size-9999",
-                        "bottomRightRadius": "imported/shared/size-9999",
-                        "topLeftRadius": "imported/shared/size-9999",
-                        "topRightRadius": "imported/shared/size-9999",
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-1",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "fill": "imported/shared/color-0064e0",
-                      "bindings": {
-                        "bottomLeftRadius": "imported/shared/size-9999",
-                        "bottomRightRadius": "imported/shared/size-9999",
-                        "topLeftRadius": "imported/shared/size-9999",
-                        "topRightRadius": "imported/shared/size-9999",
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
                       "name": "part-1-0-2",
                       "layout": {
                         "mode": "HORIZONTAL",
@@ -8484,6 +8678,58 @@ const COMPONENTS = [
                           "children": []
                         }
                       ]
+                    },
+                    {
+                      "type": "frame",
+                      "name": "slider-track",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": 6
+                      },
+                      "fill": "imported/slider/slider-track/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-9999",
+                        "bottomRightRadius": "imported/shared/size-9999",
+                        "topLeftRadius": "imported/shared/size-9999",
+                        "topRightRadius": "imported/shared/size-9999",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "name": "part-1-0-1",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": 6
+                      },
+                      "fill": "imported/shared/color-0064e0",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-9999",
+                        "bottomRightRadius": "imported/shared/size-9999",
+                        "topLeftRadius": "imported/shared/size-9999",
+                        "topRightRadius": "imported/shared/size-9999",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": []
                     }
                   ]
                 }
@@ -8542,6 +8788,16 @@ const COMPONENTS = [
               },
               "children": [
                 {
+                  "type": "text",
+                  "name": "label-3",
+                  "characters": "40",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-0a1317",
+                  "lineHeight": 21,
+                  "fontFamily": "-apple-system"
+                },
+                {
                   "type": "frame",
                   "name": "part-1-0",
                   "layout": {
@@ -8557,6 +8813,13 @@ const COMPONENTS = [
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": 6
                       },
                       "fill": "imported/slider/slider-track/background-color",
                       "bindings": {
@@ -8577,6 +8840,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": 6
+                      },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -8596,6 +8866,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": -10
+                      },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -8608,16 +8885,6 @@ const COMPONENTS = [
                       "children": []
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "name": "label-3",
-                  "characters": "40",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "textFill": "imported/shared/color-0a1317",
-                  "lineHeight": 21,
-                  "fontFamily": "-apple-system"
                 }
               ],
               "fillW": true
@@ -8690,6 +8957,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": 6
+                      },
                       "fill": "imported/slider/slider-track/background-color",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -8709,6 +8983,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": 6
+                      },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -8727,6 +9008,13 @@ const COMPONENTS = [
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 10,
+                        "bottom": -10
                       },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
@@ -8806,44 +9094,6 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "slider-track",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "fill": "imported/slider/slider-track/background-color",
-                      "bindings": {
-                        "bottomLeftRadius": "imported/shared/size-9999",
-                        "bottomRightRadius": "imported/shared/size-9999",
-                        "topLeftRadius": "imported/shared/size-9999",
-                        "topRightRadius": "imported/shared/size-9999",
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-1",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "fill": "imported/shared/color-0064e0",
-                      "bindings": {
-                        "bottomLeftRadius": "imported/shared/size-9999",
-                        "bottomRightRadius": "imported/shared/size-9999",
-                        "topLeftRadius": "imported/shared/size-9999",
-                        "topRightRadius": "imported/shared/size-9999",
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
                       "name": "part-1-0-2",
                       "layout": {
                         "mode": "HORIZONTAL",
@@ -8882,6 +9132,58 @@ const COMPONENTS = [
                           "children": []
                         }
                       ]
+                    },
+                    {
+                      "type": "frame",
+                      "name": "slider-track",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 0,
+                        "bottom": 0
+                      },
+                      "fill": "imported/slider/slider-track/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-9999",
+                        "bottomRightRadius": "imported/shared/size-9999",
+                        "topLeftRadius": "imported/shared/size-9999",
+                        "topRightRadius": "imported/shared/size-9999",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "name": "part-1-0-1",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 96,
+                        "bottom": 0
+                      },
+                      "fill": "imported/shared/color-0064e0",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-9999",
+                        "bottomRightRadius": "imported/shared/size-9999",
+                        "topLeftRadius": "imported/shared/size-9999",
+                        "topRightRadius": "imported/shared/size-9999",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": []
                     }
                   ]
                 }
@@ -8940,6 +9242,16 @@ const COMPONENTS = [
               },
               "children": [
                 {
+                  "type": "text",
+                  "name": "label-3",
+                  "characters": "40",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-0a1317",
+                  "lineHeight": 21,
+                  "fontFamily": "-apple-system"
+                },
+                {
                   "type": "frame",
                   "name": "part-1-0",
                   "layout": {
@@ -8955,6 +9267,13 @@ const COMPONENTS = [
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 0,
+                        "bottom": 0
                       },
                       "fill": "imported/slider/slider-track/background-color",
                       "bindings": {
@@ -8975,6 +9294,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 96,
+                        "bottom": 0
+                      },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -8994,6 +9320,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 76,
+                        "bottom": 64
+                      },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -9006,16 +9339,6 @@ const COMPONENTS = [
                       "children": []
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "name": "label-3",
-                  "characters": "40",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "textFill": "imported/shared/color-0a1317",
-                  "lineHeight": 21,
-                  "fontFamily": "-apple-system"
                 }
               ],
               "fillW": true
@@ -9088,6 +9411,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 0,
+                        "bottom": 0
+                      },
                       "fill": "imported/slider/slider-track/background-color",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -9107,6 +9437,13 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 96,
+                        "bottom": 0
+                      },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
                         "bottomLeftRadius": "imported/shared/size-9999",
@@ -9125,6 +9462,13 @@ const COMPONENTS = [
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "MIN"
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "STRETCH",
+                        "left": 0,
+                        "top": 76,
+                        "bottom": 64
                       },
                       "fill": "imported/shared/color-0064e0",
                       "bindings": {
@@ -9399,6 +9743,51 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 // B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
 // lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
 // in-flow siblings — matching the declared anatomy and the HTML render.
@@ -9412,7 +9801,11 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // natural post-backdrop index — else the opaque backdrop sibling paints
     // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
     // previously hand-corrected on canvas each re-amend).
-    if (!childNode.children || childNode.children.length === 0) {
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
@@ -9528,6 +9921,7 @@ async function buildNode(spec, registry) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -9559,6 +9953,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9577,6 +9995,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -9638,6 +10062,7 @@ async function amendSet(set, C) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
@@ -9734,6 +10159,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -9749,6 +10177,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -9775,6 +10206,7 @@ async function amendComponent(comp, C) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
@@ -9828,6 +10260,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -9994,6 +10427,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -10533,6 +10967,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -10551,6 +11009,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -10707,6 +11171,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -10722,6 +11189,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -10800,6 +11270,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -10966,6 +11437,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -11045,8 +11517,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11059,13 +11548,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-2",
                 "paddingLeft": "spacing-3",
                 "paddingRight": "spacing-3"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11098,8 +11581,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11112,13 +11612,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-1",
                 "paddingLeft": "spacing-2",
                 "paddingRight": "spacing-2"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11151,8 +11645,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11165,13 +11676,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-3",
                 "paddingLeft": "spacing-4",
                 "paddingRight": "spacing-4"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11204,8 +11709,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11218,13 +11740,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-2",
                 "paddingLeft": "spacing-3",
                 "paddingRight": "spacing-3"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11257,8 +11773,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11271,13 +11804,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-1",
                 "paddingLeft": "spacing-2",
                 "paddingRight": "spacing-2"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11310,8 +11837,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11324,13 +11868,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-3",
                 "paddingLeft": "spacing-4",
                 "paddingRight": "spacing-4"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11363,8 +11901,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11377,13 +11932,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-2",
                 "paddingLeft": "spacing-3",
                 "paddingRight": "spacing-3"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11416,8 +11965,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11430,13 +11996,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-1",
                 "paddingLeft": "spacing-2",
                 "paddingRight": "spacing-2"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11469,8 +12029,25 @@ const COMPONENTS = [
               "contentProp": "Label"
             },
             {
-              "type": "text",
+              "type": "frame",
               "name": "field",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "field-text",
+                  "characters": "you@example.com",
+                  "contentProp": "Placeholder",
+                  "fontSize": 12,
+                  "fontStyle": "Medium",
+                  "textFill": "color-text-secondary",
+                  "fontFamily": "-apple-system"
+                }
+              ],
               "fill": "color-background-surface",
               "stroke": "color-border",
               "bindings": {
@@ -11483,13 +12060,7 @@ const COMPONENTS = [
                 "paddingBottom": "spacing-3",
                 "paddingLeft": "spacing-4",
                 "paddingRight": "spacing-4"
-              },
-              "characters": "you@example.com",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
-              "contentProp": "Placeholder"
+              }
             }
           ]
         }
@@ -11878,6 +12449,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11896,6 +12491,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -12052,6 +12653,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -12067,6 +12671,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -12145,6 +12752,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -12311,6 +12919,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -13992,6 +14601,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14010,6 +14643,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -14166,6 +14805,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -14181,6 +14823,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -14259,6 +14904,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -14425,6 +15071,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -14888,6 +15535,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14906,6 +15577,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -15062,6 +15739,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -15077,6 +15757,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -15155,6 +15838,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -15321,6 +16005,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -15867,6 +16552,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -15885,6 +16594,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -16041,6 +16756,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -16056,6 +16774,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -16134,6 +16855,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -16300,6 +17022,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {
@@ -16836,6 +17559,30 @@ async function buildNode(spec, registry) {
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
+
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
+}
+
+
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C);
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16854,6 +17601,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
+    // the baseline NOW (its current state becomes the reference). An existing
+    // stamp is never overwritten on skip: canvas edits stay detectable.
+    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
@@ -17010,6 +17763,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
   // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
   const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
   if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
@@ -17025,6 +17781,9 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+      comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
+    }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
   const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
@@ -17103,6 +17862,7 @@ async function amendComponent(comp, C) {
   }
   comp.description = C.description;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
   // Re-fit (or adopt into) the host section — mirrors amendSet.
   const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
   if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
@@ -17269,6 +18029,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(target));
   ensureHostSection(compPage, target, displayName);
 
   return {

@@ -242,6 +242,39 @@ figma.ui.onmessage = async (msg) => {
     }
     return;
   }
+  if (msg.type === 'check-drift') {
+    // DRIFT ROUND: recompute every generated set's canvas fingerprint and
+    // compare with the stamp genesis wrote. Mismatch = the canvas was edited
+    // after generation. (The contract-side twin: specHash — a freshly pasted
+    // bundle whose hash differs means the CODE side moved.)
+    try {
+      await figma.loadAllPagesAsync();
+      const rows = [];
+      for (const page of figma.root.children) {
+        const marked = page.findAll(function (n) {
+          return (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
+            n.getSharedPluginData('ds_contracts', 'contractId') &&
+            !(n.parent && n.parent.type === 'COMPONENT_SET');
+        });
+        for (const node of marked) {
+          const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+          const fresh = dsCanvasFingerprint(node);
+          rows.push({
+            nodeId: node.id,
+            name: node.name,
+            page: page.name,
+            contractId: node.getSharedPluginData('ds_contracts', 'contractId'),
+            specHash: node.getSharedPluginData('ds_contracts', 'specHash'),
+            status: !stored ? 'unstamped (generated before the drift round — re-run its sync script)' : stored === fresh ? 'in-sync' : 'canvas-edited',
+          });
+        }
+      }
+      post({ type: 'drift-result', ok: true, rows: rows });
+    } catch (e) {
+      post({ type: 'drift-result', ok: false, error: String(e && e.message ? e.message : e) });
+    }
+    return;
+  }
   if (busy) {
     figma.notify('A run is already in progress.', { error: true });
     return;
@@ -471,4 +504,29 @@ async function runLocalRunner() {
   done(failed.length === 0, failed.length === 0
     ? 'Sync complete: ' + results.length + ' script(s) ran clean.'
     : 'FAILED at ' + failed[0].script + ': ' + failed[0].error);
+}
+
+// DRIFT ROUND — byte-identical copy of core/canvas-fingerprint.ts
+// FINGERPRINT_SRC (a plugin cannot import at runtime; keep in lockstep —
+// the plugin-engine gate pins the emitted copy against the module).
+function dsCanvasFingerprint(root) {
+  var h = 5381;
+  var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var walk = function (n) {
+    mix('|' + n.type + '/' + n.name);
+    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
+    try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) mix('h'); } catch (e) {}
+    var kids = n.children || [];
+    for (var i = 0; i < kids.length; i++) walk(kids[i]);
+  };
+  walk(root);
+  return String(h);
 }

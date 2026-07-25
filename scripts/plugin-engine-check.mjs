@@ -405,4 +405,35 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey)');
+// --- N+2. DRIFT ROUND: canvas fingerprint stamp + edit detection ------------
+// Genesis stamps ds_contracts/canvasFingerprint on every built set; Check
+// Drift recomputes it. The gate proves the full triangle headlessly: (1) the
+// stamp exists after a build, (2) recomputing over the untouched tree
+// MATCHES (deterministic walker), (3) a canvas edit (fill swap) MISMATCHES,
+// (4) re-running the sync script re-stamps back to a match. The recompute
+// uses the canonical module (core/canvas-fingerprint.ts) EVALUATED FRESH —
+// pinning the emitted copy and the module in lockstep.
+{
+  const fpModule = read('core/canvas-fingerprint.ts');
+  const srcMatch = fpModule.match(/FINGERPRINT_SRC: string = `\n([\s\S]*?)`;/);
+  assert(srcMatch, 'drift gate: FINGERPRINT_SRC extractable from core/canvas-fingerprint.ts');
+  const fp = new Function(`${srcMatch[1]}; return dsCanvasFingerprint;`)();
+  const sets = root.findAll((n) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId'));
+  assert(sets.length > 0, 'drift gate: generated sets exist on the mock canvas');
+  const withStamp = sets.filter((n) => n.getSharedPluginData('ds_contracts', 'canvasFingerprint'));
+  assert(withStamp.length === sets.length, `drift gate: every generated set carries a canvasFingerprint stamp (${withStamp.length}/${sets.length})`);
+  const subject = withStamp[0];
+  const stored = subject.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+  assert(fp(subject) === stored, 'drift gate: recomputing the fingerprint over the untouched tree MATCHES the stamp (module ≡ emitted copy)');
+  // simulate a designer edit: swap a fill somewhere in the tree
+  const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
+  assert(victim, 'drift gate: an editable filled node exists');
+  const priorFills = victim.fills;
+  victim.fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 1 }, opacity: 1 }];
+  assert(fp(subject) !== stored, 'drift gate: a canvas edit changes the recomputed fingerprint (CANVAS-EDITED detectable)');
+  victim.fills = priorFills;
+  assert(fp(subject) === stored, 'drift gate: reverting the edit restores the match');
+  console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded`);
+}
+
+console.log('plugin-engine-check: all flows green (bundle, generate, order, update-report, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint)');

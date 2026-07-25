@@ -131,6 +131,7 @@
   <button class="tab" id="tab-paste" role="tab" aria-selected="false" aria-controls="panel-paste">Paste a script</button>
   <button class="tab" id="tab-send" role="tab" aria-selected="false" aria-controls="panel-send">Send to Playground</button>
   <button class="tab" id="tab-runner" role="tab" aria-selected="false" aria-controls="panel-runner">Local runner</button>
+  <button class="tab" id="tab-drift" role="tab" aria-selected="false" aria-controls="panel-drift">Drift</button>
   <!-- Engine build stamp (injected at package time as window.DSC_BUILD):
        makes a STALE dev import diagnosable at a glance — compare against
        `node scripts/build-plugin-zip.mjs` output / engine.receipt.json. -->
@@ -292,6 +293,11 @@
   </div>
 </div>
 
+<div class="panel" id="panel-drift" role="tabpanel">
+  <p class="hint">Every generated component set is stamped at genesis with its <b>contract hash</b> (which contract version built it) and a <b>canvas fingerprint</b> (what it looked like the moment it was built). Check Drift recomputes the fingerprint: a mismatch means someone edited the canvas after generation. Re-running a sync script re-stamps.</p>
+  <button id="drift-check" class="primary">Check drift</button>
+  <div id="drift-results" style="margin-top:10px; font-size:11px; line-height:1.5;"></div>
+</div>
 <div class="panel" id="panel-runner" role="tabpanel">
   <div class="hint">
     Fetches every generated script from <span class="mono">http://localhost:8765</span>
@@ -323,7 +329,7 @@
   else { $('engine-stamp').textContent = 'engine: NOT INJECTED (dev stub — run npm run plugin:zip and import figma-sync/plugin-dist/)'; }
 
   // --- tabs -----------------------------------------------------------------
-  var TAB_NAMES = ['generate', 'update', 'propose', 'paste', 'send', 'runner'];
+  var TAB_NAMES = ['generate', 'update', 'propose', 'paste', 'send', 'runner', 'drift'];
   function select(which) {
     TAB_NAMES.forEach(function (name) {
       var on = name === which;
@@ -333,6 +339,28 @@
   }
   TAB_NAMES.forEach(function (name) {
     $('tab-' + name).onclick = function () { select(name); };
+  });
+
+  // --- drift ---------------------------------------------------------------
+  $('drift-check').onclick = function () {
+    $('drift-results').textContent = 'Checking…';
+    parent.postMessage({ pluginMessage: { type: 'check-drift' } }, '*');
+  };
+  window.addEventListener('message', function (ev) {
+    var msg = ev.data && ev.data.pluginMessage;
+    if (!msg || msg.type !== 'drift-result') return;
+    var box = $('drift-results');
+    if (!msg.ok) { box.textContent = 'Drift check failed: ' + msg.error; return; }
+    if (!msg.rows.length) { box.textContent = 'No generated components found (nothing carries a ds_contracts marker).'; return; }
+    var counts = { 'in-sync': 0, 'canvas-edited': 0 };
+    var html = msg.rows.map(function (r) {
+      if (counts[r.status] !== undefined) counts[r.status]++;
+      var badge = r.status === 'in-sync' ? '✅ in sync'
+        : r.status === 'canvas-edited' ? '⚠️ canvas edited'
+        : 'ℹ️ ' + r.status;
+      return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + ' · spec ' + (r.specHash || '?') + '</div>';
+    }).join('');
+    box.innerHTML = '<div style="margin-bottom:6px;"><b>' + counts['in-sync'] + ' in sync · ' + counts['canvas-edited'] + ' canvas-edited</b></div>' + html;
   });
 
   // The engine bundle (window.DSC) is injected at package time — direct
