@@ -40,9 +40,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -55,9 +56,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -70,9 +72,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -85,9 +88,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -100,9 +104,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -115,9 +120,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading2xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -130,9 +136,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading3xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -145,9 +152,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -160,9 +168,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -175,9 +184,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -190,9 +200,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -205,9 +216,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -220,9 +232,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -235,9 +248,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -250,9 +264,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -265,9 +280,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -280,9 +296,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading2xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -295,9 +312,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading3xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -310,9 +328,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -325,9 +344,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -340,9 +360,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -355,9 +376,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -370,9 +392,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -385,9 +408,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -400,9 +424,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -415,9 +440,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -430,9 +456,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -445,9 +472,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading2xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -460,9 +488,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading3xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -475,9 +504,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -490,9 +520,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -505,9 +536,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -520,9 +552,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -535,9 +568,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -550,9 +584,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -565,9 +600,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -580,9 +616,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -595,9 +632,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -610,9 +648,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading2xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -625,9 +664,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading3xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -640,9 +680,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -655,9 +696,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -670,9 +712,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -685,9 +728,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -700,9 +744,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -715,9 +760,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -730,9 +776,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -745,9 +792,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -760,9 +808,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -775,9 +824,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading2xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -790,9 +840,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading3xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -805,9 +856,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -820,9 +872,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -835,9 +888,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }
@@ -850,9 +904,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true
         }

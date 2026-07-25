@@ -843,6 +843,13 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // value (subst), so the per-variant layout override resolves right here.
   const l = resolveLayout(part, subst);
   if (!l && isRoot) {
+    // BLOCK-FLOW ROOT (Card live-paste-4 finding): a declared display:block
+    // root is CSS block flow — children stack vertically from the top-left
+    // and block children span the width. The centered default is for
+    // control-like roots (Button); centering a Card's content is wrong.
+    if (part.declared?.['display'] === 'block') {
+      return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
+    }
     return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
   }
   return {

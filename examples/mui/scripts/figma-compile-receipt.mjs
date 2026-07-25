@@ -94,6 +94,10 @@ for (const file of scripts) {
       const roots = mock.root.findAll((n) => n.type === 'COMPONENT' && /Elevation=/.test(n.name));
       const badW = roots.find((n) => Math.round(n.width) !== 288);
       if (badW) throw new Error(`card pin: block-root width expected 288, found ${Math.round(badW.width)}`);
+      // LIVE-PASTE-4 PIN: block flow — the CardContent part spans the full
+      // card width (left-aligned text), never centered as a hugging island.
+      const narrow = contents.find((f) => Math.round(f.width) !== 288);
+      if (narrow) throw new Error(`card pin: CardContent must span the 288 block width (left-aligned flow), found ${Math.round(narrow.width)}`);
     }
     // GEOMETRY PINS (absolute-positioning round): the class the fidelity
     // gate is structurally blind to (geometry is excluded from computed

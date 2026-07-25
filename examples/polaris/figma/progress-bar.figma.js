@@ -37,9 +37,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Tone=Highlight",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -79,9 +80,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Tone=Primary",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -121,9 +123,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Tone=Success",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -163,9 +166,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Tone=Critical",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -205,9 +209,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Tone=Highlight",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -247,9 +252,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Tone=Primary",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -289,9 +295,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Tone=Success",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -331,9 +338,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Tone=Critical",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -373,9 +381,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Tone=Highlight",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -415,9 +424,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Tone=Primary",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -457,9 +467,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Tone=Success",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",
@@ -499,9 +510,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Tone=Critical",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "topLeftRadius": "p/border-radius-100",

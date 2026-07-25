@@ -49,9 +49,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Md",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-avatar-one-bg-fill",
           "bindings": {
@@ -100,9 +101,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Xs",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-avatar-one-bg-fill",
           "bindings": {
@@ -151,9 +153,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Sm",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-avatar-one-bg-fill",
           "bindings": {
@@ -202,9 +205,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Lg",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-avatar-one-bg-fill",
           "bindings": {
@@ -253,9 +257,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Xl",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-avatar-one-bg-fill",
           "bindings": {

@@ -33,9 +33,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-bg-surface",
           "bindings": {
@@ -84,9 +85,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-bg-surface",
           "bindings": {
@@ -135,9 +137,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-bg-surface",
           "bindings": {
@@ -186,9 +189,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "p/color-bg-surface",
           "bindings": {

@@ -4518,9 +4518,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=1",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -4598,7 +4599,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -4611,9 +4613,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=0",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -4656,7 +4659,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -4669,9 +4673,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=3",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -4749,7 +4754,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -4762,9 +4768,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=8",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -4844,7 +4851,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -8159,9 +8167,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Primary, Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -8295,9 +8304,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Primary, Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -8431,9 +8441,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Secondary, Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -8567,9 +8578,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Secondary, Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -8703,9 +8715,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Error, Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -8839,9 +8852,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Error, Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -8975,9 +8989,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Warning, Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -9111,9 +9126,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Warning, Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -9247,9 +9263,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Info, Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -9383,9 +9400,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Info, Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -9519,9 +9537,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Success, Size=Medium",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -9655,9 +9674,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Color=Success, Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",

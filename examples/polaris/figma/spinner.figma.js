@@ -33,9 +33,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true,
           "children": [
@@ -57,9 +58,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "blockRoot": true,
           "children": [

@@ -24,9 +24,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=1",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -104,7 +105,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -117,9 +119,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=0",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -162,7 +165,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -175,9 +179,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=3",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -255,7 +260,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
@@ -268,9 +274,10 @@ const COMPONENTS = [
           "type": "root",
           "name": "Elevation=8",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -350,7 +357,8 @@ const COMPONENTS = [
                 "paddingLeft": "imported/shared/size-16",
                 "paddingRight": "imported/shared/size-16",
                 "paddingTop": "imported/shared/size-16"
-              }
+              },
+              "fillW": true
             }
           ]
         }
