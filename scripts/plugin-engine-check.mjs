@@ -467,6 +467,25 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     const freshSet2 = setSnapFn(subject);
     assert(freshSet2.some((l) => l.includes('|propdef|') && l.includes('Loading')),
       'drift gate: an ADDED COMPONENT PROPERTY appears in the set-snapshot diff');
+    // LIVE FINDING (round 2): the plugin HANDLER's diff parser is its own
+    // code path — extract diffSnapshots from code.js and pin the three edit
+    // classes end-to-end (the first parser collided keys per node and
+    // reported NOTHING while every module-level check stayed green).
+    const codeJs = read('figma-sync/plugin/code.js');
+    const dm = codeJs.match(/const diffSnapshots = function \(storedLines, freshLines\) \{[\s\S]*?\n          \};/);
+    assert(dm, 'drift gate: diffSnapshots extractable from code.js');
+    const diffFn = new Function('storedLines', 'freshLines', `${dm[0]}\nreturn diffSnapshots(storedLines, freshLines);`);
+    const stored2 = [':COMPONENT_SET/Button|description|old words', ':COMPONENT_SET/Button|propdef|Disabled:BOOLEAN=false', ':COMPONENT_SET/Button|propdef|Label:TEXT=Button'];
+    const fresh2 = [':COMPONENT_SET/Button|description|new words', ':COMPONENT_SET/Button|propdef|Disabled:BOOLEAN=false', ':COMPONENT_SET/Button|propdef|Label:TEXT=Button', ':COMPONENT_SET/Button|propdef|Loading:BOOLEAN=false'];
+    const d2 = diffFn(stored2, fresh2);
+    assert(d2.some((c) => c.what.endsWith('|description') && c.was === 'old words' && c.now === 'new words'),
+      `drift gate: handler diff pairs a DESCRIPTION edit was→now (got ${JSON.stringify(d2).slice(0, 160)})`);
+    assert(d2.some((c) => c.what.endsWith('|propdef') && c.was === '(absent)' && c.now.includes('Loading')),
+      'drift gate: handler diff reports an ADDED property as (absent)→value without colliding with existing propdefs');
+    assert(d2.length === 2, `drift gate: unchanged propdef lines do NOT report (got ${d2.length} changes)`);
+    const d3 = diffFn(['/0:FRAME/label|fill|[{"r":1}]', '/0:FRAME/label|sizing|HUG/HUG '], ['/0:FRAME/label|fill|[{"r":0}]', '/0:FRAME/label|sizing|HUG/HUG ']);
+    assert(d3.length === 1 && d3[0].what.endsWith('|fill') && d3[0].was.includes('"r":1') && d3[0].now.includes('"r":0'),
+      'drift gate: handler diff pairs a FILL edit was→now while sibling facts on the same node stay quiet');
   }
   console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);
 }

@@ -264,17 +264,36 @@ figma.ui.onmessage = async (msg) => {
           // stamps, and DIFF the stored snapshot against a fresh one so the
           // report says WHAT changed, not just that something did.
           const editedVariants = [];
+          // LINE-SET diff with prefix pairing (live finding: the first key
+          // parser truncated to the node id, so every fact on a node collided
+          // and only the LAST one was compared — fill/description/propdef
+          // edits all vanished). removed/added lines pair by their id|channel
+          // prefix when the pairing is unambiguous; everything else lists as
+          // (absent)/(removed).
           const diffSnapshots = function (storedLines, freshLines) {
-            const key = function (l) { var i = l.lastIndexOf('|', l.lastIndexOf('|') - 1); return l.slice(0, i); };
-            const val = function (l) { return l.slice(key(l).length + 1); };
-            const a = {}; storedLines.forEach(function (l) { a[key(l)] = val(l); });
-            const b = {}; freshLines.forEach(function (l) { b[key(l)] = val(l); });
+            const inA = {}; storedLines.forEach(function (l) { inA[l] = true; });
+            const inB = {}; freshLines.forEach(function (l) { inB[l] = true; });
+            const removed = storedLines.filter(function (l) { return !inB[l]; });
+            const added = freshLines.filter(function (l) { return !inA[l]; });
+            const prefixOf = function (l) { var i = l.indexOf('|'); var j = l.indexOf('|', i + 1); return j > 0 ? l.slice(0, j) : l; };
+            const valOf = function (l) { return l.slice(prefixOf(l).length + 1); };
+            const remByPrefix = {};
+            removed.forEach(function (l) { var k = prefixOf(l); (remByPrefix[k] = remByPrefix[k] || []).push(l); });
             const out = [];
-            Object.keys(b).forEach(function (k) {
-              if (!(k in a)) out.push({ what: k, was: '(absent)', now: b[k] });
-              else if (a[k] !== b[k]) out.push({ what: k, was: a[k], now: b[k] });
+            const usedRem = {};
+            added.forEach(function (l) {
+              var k = prefixOf(l);
+              var candidates = (remByPrefix[k] || []).filter(function (r) { return !usedRem[r]; });
+              if (candidates.length === 1) {
+                usedRem[candidates[0]] = true;
+                out.push({ what: k, was: valOf(candidates[0]), now: valOf(l) });
+              } else {
+                out.push({ what: k, was: '(absent)', now: valOf(l) });
+              }
             });
-            Object.keys(a).forEach(function (k) { if (!(k in b)) out.push({ what: k, was: a[k], now: '(removed)' }); });
+            removed.forEach(function (l) {
+              if (!usedRem[l]) out.push({ what: prefixOf(l), was: valOf(l), now: '(removed)' });
+            });
             return out;
           };
           // v4: SET-LEVEL edits (description, added/removed properties)
