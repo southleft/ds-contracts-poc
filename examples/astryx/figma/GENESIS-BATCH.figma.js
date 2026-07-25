@@ -987,11 +987,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -1000,7 +1000,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -1022,10 +1022,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -1202,7 +1204,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -2189,11 +2192,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -2202,7 +2205,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -2224,10 +2227,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -2404,7 +2409,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -4199,11 +4205,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -4212,7 +4218,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -4234,10 +4240,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -4416,7 +4424,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -5745,11 +5754,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -5758,7 +5767,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -5780,10 +5789,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -5960,7 +5971,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -6763,11 +6775,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -6776,7 +6788,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -6798,10 +6810,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -6978,7 +6992,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -8069,11 +8084,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -8082,7 +8097,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -8104,10 +8119,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -8284,7 +8301,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -9960,11 +9978,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -9973,7 +9991,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -9995,10 +10013,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -10177,7 +10197,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -10974,11 +10995,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -10987,7 +11008,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -11009,10 +11030,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -11189,7 +11212,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -12456,11 +12480,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -12469,7 +12493,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -12491,10 +12515,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -12671,7 +12697,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -14608,11 +14635,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -14621,7 +14648,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -14643,10 +14670,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -14823,7 +14852,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -15542,11 +15572,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -15555,7 +15585,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -15577,10 +15607,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -15757,7 +15789,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -16559,11 +16592,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -16572,7 +16605,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -16594,10 +16627,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -16774,7 +16809,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -17566,11 +17602,11 @@ function dsCanvasFingerprint(root) {
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -17579,7 +17615,7 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }
 
 
@@ -17601,10 +17637,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -17781,7 +17819,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };

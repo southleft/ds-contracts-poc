@@ -415,7 +415,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
 // pinning the emitted copy and the module in lockstep.
 {
   const fpModule = read('core/canvas-fingerprint.ts');
-  const srcMatch = fpModule.match(/FINGERPRINT_SRC: string = `\n([\s\S]*?)`;/);
+  const srcMatch = fpModule.match(/FINGERPRINT_SRC: string = `([\s\S]*?)`;/);
   assert(srcMatch, 'drift gate: FINGERPRINT_SRC extractable from core/canvas-fingerprint.ts');
   const fp = new Function(`${srcMatch[1]}; return dsCanvasFingerprint;`)();
   const sets = root.findAll((n) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId'));
@@ -424,6 +424,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(withStamp.length === sets.length, `drift gate: every generated set carries a canvasFingerprint stamp (${withStamp.length}/${sets.length})`);
   const subject = withStamp[0];
   const stored = subject.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+  assert(stored.startsWith('v2:'), 'drift gate: stamps carry the v2 version prefix (geometry-free scheme)');
   assert(fp(subject) === stored, 'drift gate: recomputing the fingerprint over the untouched tree MATCHES the stamp (module ≡ emitted copy)');
   // simulate a designer edit: swap a fill somewhere in the tree
   const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];

@@ -265,7 +265,7 @@ figma.ui.onmessage = async (msg) => {
             page: page.name,
             contractId: node.getSharedPluginData('ds_contracts', 'contractId'),
             specHash: node.getSharedPluginData('ds_contracts', 'specHash'),
-            status: !stored ? 'unstamped (generated before the drift round — re-run its sync script)' : stored === fresh ? 'in-sync' : 'canvas-edited',
+            status: !stored || stored.indexOf('v2:') !== 0 ? 'unstamped (pre-v2 stamp — re-run its sync script to baseline)' : stored === fresh ? 'in-sync' : 'canvas-edited',
           });
         }
       }
@@ -507,19 +507,20 @@ async function runLocalRunner() {
 }
 
 // DRIFT ROUND — byte-identical copy of core/canvas-fingerprint.ts
-// FINGERPRINT_SRC (a plugin cannot import at runtime; keep in lockstep —
-// the plugin-engine gate pins the emitted copy against the module).
+// FINGERPRINT_SRC (v2, geometry-free; see the module header for why).
+// Keep in lockstep — the plugin-engine gate pins the emitted copy.
+
 function dsCanvasFingerprint(root) {
   var h = 5381;
   var mix = function (s) { for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0; };
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var walk = function (n) {
     mix('|' + n.type + '/' + n.name);
-    try { mix(':' + r1(n.width) + 'x' + r1(n.height) + '@' + r1(n.x) + ',' + r1(n.y)); } catch (e) {}
     try { if (n.fills && n.fills !== undefined) mix('f' + JSON.stringify(n.fills)); } catch (e) {}
     try { if (n.strokes && n.strokes.length) mix('s' + JSON.stringify(n.strokes) + (n.strokeWeight || 0)); } catch (e) {}
     try { mix('r' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') mix('l' + n.layoutMode + n.primaryAxisAlignItems + n.counterAxisAlignItems + r1(n.itemSpacing) + ',' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { mix('z' + (n.layoutSizingHorizontal || '') + (n.layoutSizingVertical || '') + (n.layoutPositioning || '')); } catch (e) {}
     try { if (n.type === 'TEXT') mix('t' + n.characters + '/' + String(n.fontSize) + '/' + JSON.stringify(n.fontName)); } catch (e) {}
     try { if (n.opacity !== undefined && n.opacity !== 1) mix('o' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) mix('e' + n.effects.length); } catch (e) {}
@@ -528,5 +529,5 @@ function dsCanvasFingerprint(root) {
     for (var i = 0; i < kids.length; i++) walk(kids[i]);
   };
   walk(root);
-  return String(h);
+  return 'v2:' + String(h);
 }

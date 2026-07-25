@@ -3581,10 +3581,12 @@ async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: a pre-round set has no fingerprint — establish
-    // the baseline NOW (its current state becomes the reference). An existing
-    // stamp is never overwritten on skip: canvas edits stay detectable.
-    if (!set.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v2:') !== 0) {
       set.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(set));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -3761,7 +3763,8 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    if (!comp.getSharedPluginData('ds_contracts', 'canvasFingerprint')) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v2:') !== 0) {
       comp.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(comp));
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
