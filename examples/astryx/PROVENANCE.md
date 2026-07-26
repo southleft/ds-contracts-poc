@@ -38,6 +38,32 @@ npm install --no-audit --no-fund @astryxdesign/core@0.1.6 @astryxdesign/theme-ne
 npm run extract:code -- examples/astryx/extract.config.json
 ```
 
+## Minted-literal provenance (the re-anchoring round)
+
+`tokens/astryx-minted.dtcg.json` holds the computed-floor leaves the DTCG wrap
+cannot name (`imported.*`). Its values come from browser-computed truth, so
+their PROVENANCE IS THE VALUE — StyleX compiles the source token name away
+into a literal hex in the atomic class, which is why this example ships **no
+`source-bindings.json`** and cannot run MUI's evidence-driven alias pass
+(`examples/mui/scripts/promote-floor.mjs`).
+
+Nine of those leaves are no longer literals. Their provenance is a **human
+ledger**, not an extraction fact:
+
+| | |
+|---|---|
+| Pass | `scripts/reanchor-minted.ts` (`--propose` / `--apply`) |
+| Anchor plane | `tokens/astryx.dtcg.json` — THEME-NEUTRAL, value-fingerprinted; a re-themed anchor is refused by name |
+| Review queue | `tokens/reanchor-proposals.{json,md}` — 21 rows; the 54 ambiguous refs are a human's to decide and no ranking may decide them |
+| Ledger | `tokens/reanchor-decisions.json` — 9 acked rows, each with rationale, `darkDelta` ack and named cause |
+| Receipt | `tokens/MINTED.md` — N aliased / N literal / N named refusals |
+| Convergence | `scripts/promote-floor.ts` re-applies the ledger after regenerating the tree, so a re-run cannot silently revert a decision |
+
+The nine are **not vendor facts**. They are a value join (1 leaf : 1
+equal-valued semantic token) corroborated by a committed sibling binding in
+the same contract cell, then explicitly acked. Reverting one is deleting its
+row and re-running `promote-floor.ts`.
+
 ## License attribution
 
 Astryx is Copyright (c) Meta Platforms, Inc. and affiliates, MIT-licensed.

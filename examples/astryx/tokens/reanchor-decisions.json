@@ -1,0 +1,196 @@
+{
+  "_marker": "ASTRYX MINTED RE-ANCHORING — THE HUMAN LEDGER. Every row here is an explicit ack that a minted literal may be rewritten to a semantic token. Nothing is applied without a row AND an explicit `reanchor-minted.ts --apply <id>`; there is no --all. TO REVERT ANY ROW: delete it from `decisions` and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` — the minted tree is regenerated from the computed-floor capture and only the surviving rows are re-applied. Row shape follows extract/computed/out/*/decisions.json.",
+  "_provenance": "The 9 rows below were authored by the orchestrator in the re-anchoring round and are marked ackNote \"auto-clean: single candidate, exact name affinity, orchestrator-applied\". 1 leaf : 1 candidate : perfect name affinity + a corroborating sibling binding is the ONLY auto-alias the house precedent supports. The 54 AMBIGUOUS refs in tokens/reanchor-proposals.md are deliberately NOT here — they are the owner's review queue and no ranking may decide them.",
+  "_reviewQueue": "examples/astryx/tokens/reanchor-proposals.md",
+  "decisions": [
+    {
+      "ids": [
+        "RA-014975"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.cyan"
+      ],
+      "value": "#014975",
+      "candidates": [
+        "color-text-cyan"
+      ],
+      "to": "color-text-cyan",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.cyan}"
+      ],
+      "rationale": "Badge tone=cyan: the minted literal #014975 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"cyan\") already binds `color` to {color-text-cyan}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:cyan→*-cyan; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-cyan} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #014975 in both modes today; {color-text-cyan} is #014975 light / #A1EEF9 dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-042f97"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.blue"
+      ],
+      "value": "#042F97",
+      "candidates": [
+        "color-text-blue"
+      ],
+      "to": "color-text-blue",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.blue}"
+      ],
+      "rationale": "Badge tone=blue: the minted literal #042F97 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"blue\") already binds `color` to {color-text-blue}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:blue→*-blue; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-blue} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #042F97 in both modes today; {color-text-blue} is #042F97 light / #AFD7FF dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-083943"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.teal"
+      ],
+      "value": "#083943",
+      "candidates": [
+        "color-text-teal"
+      ],
+      "to": "color-text-teal",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.teal}"
+      ],
+      "rationale": "Badge tone=teal: the minted literal #083943 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"teal\") already binds `color` to {color-text-teal}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:teal→*-teal; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-teal} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #083943 in both modes today; {color-text-teal} is #083943 light / #40DCCD dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-09441f"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.green"
+      ],
+      "value": "#09441F",
+      "candidates": [
+        "color-text-green"
+      ],
+      "to": "color-text-green",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.green}"
+      ],
+      "rationale": "Badge tone=green: the minted literal #09441F is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"green\") already binds `color` to {color-text-green}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:green→*-green; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-green} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #09441F in both modes today; {color-text-green} is #09441F light / #A5F690 dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-3e0697"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.purple"
+      ],
+      "value": "#3E0697",
+      "candidates": [
+        "color-text-purple"
+      ],
+      "to": "color-text-purple",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.purple}"
+      ],
+      "rationale": "Badge tone=purple: the minted literal #3E0697 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"purple\") already binds `color` to {color-text-purple}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:purple→*-purple; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-purple} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #3E0697 in both modes today; {color-text-purple} is #3E0697 light / #B3B0FE dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-650053"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.pink"
+      ],
+      "value": "#650053",
+      "candidates": [
+        "color-text-pink"
+      ],
+      "to": "color-text-pink",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.pink}"
+      ],
+      "rationale": "Badge tone=pink: the minted literal #650053 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"pink\") already binds `color` to {color-text-pink}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:pink→*-pink; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-pink} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #650053 in both modes today; {color-text-pink} is #650053 light / #FEADE3 dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-6b2203"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.orange"
+      ],
+      "value": "#6B2203",
+      "candidates": [
+        "color-text-orange"
+      ],
+      "to": "color-text-orange",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.orange}"
+      ],
+      "rationale": "Badge tone=orange: the minted literal #6B2203 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"orange\") already binds `color` to {color-text-orange}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:orange→*-orange; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-orange} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #6B2203 in both modes today; {color-text-orange} is #6B2203 light / #FDB876 dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-753f07"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.yellow"
+      ],
+      "value": "#753F07",
+      "candidates": [
+        "color-text-yellow"
+      ],
+      "to": "color-text-yellow",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.yellow}"
+      ],
+      "rationale": "Badge tone=yellow: the minted literal #753F07 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"yellow\") already binds `color` to {color-text-yellow}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:yellow→*-yellow; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-yellow} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #753F07 in both modes today; {color-text-yellow} is #753F07 light / #FBCE03 dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-7b0210"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.red"
+      ],
+      "value": "#7B0210",
+      "candidates": [
+        "color-text-red"
+      ],
+      "to": "color-text-red",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.red}"
+      ],
+      "rationale": "Badge tone=red: the minted literal #7B0210 is the ONLY value match against the theme-neutral anchor (1 leaf : 1 candidate). Corroborated by a COMMITTED BINDING, not by name-shape alone — the same contract cell (badge, prop \"variant\", value \"red\") already binds `color` to {color-text-red}, and CSS row-rule-color computes from currentColor, i.e. from that same `color`. Affinity rules fired: +0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill); +2 axis:red→*-red; +4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-red} (score 6).",
+      "darkDelta": "ACKNOWLEDGED DARK REPAIR. The leaf is mode-FROZEN at #7B0210 in both modes today; {color-text-red} is #7B0210 light / #FFB2B8 dark. In dark mode the badge tone rule stops painting the light-mode dark hue and follows the tone text colour. This is a DELIBERATE pixel change in dark mode and the point of the round; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    }
+  ]
+}

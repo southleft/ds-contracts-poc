@@ -1640,39 +1640,39 @@
                 "$type": "color"
               },
               "blue": {
-                "$value": "#042f97",
+                "$value": "{color-text-blue}",
                 "$type": "color"
               },
               "cyan": {
-                "$value": "#014975",
+                "$value": "{color-text-cyan}",
                 "$type": "color"
               },
               "green": {
-                "$value": "#09441f",
+                "$value": "{color-text-green}",
                 "$type": "color"
               },
               "orange": {
-                "$value": "#6b2203",
+                "$value": "{color-text-orange}",
                 "$type": "color"
               },
               "pink": {
-                "$value": "#650053",
+                "$value": "{color-text-pink}",
                 "$type": "color"
               },
               "purple": {
-                "$value": "#3e0697",
+                "$value": "{color-text-purple}",
                 "$type": "color"
               },
               "red": {
-                "$value": "#7b0210",
+                "$value": "{color-text-red}",
                 "$type": "color"
               },
               "teal": {
-                "$value": "#083943",
+                "$value": "{color-text-teal}",
                 "$type": "color"
               },
               "yellow": {
-                "$value": "#753f07",
+                "$value": "{color-text-yellow}",
                 "$type": "color"
               }
             }

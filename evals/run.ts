@@ -5667,6 +5667,147 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // ASTRYX MINTED-LITERAL RE-ANCHORING (2026-07-26) — the pass that attacks
+    // DOCS-THEME.md's named finding (111 of 222 color refs ride minted
+    // literals, so an alternate theme re-skins only half the surface).
+    //
+    // StyleX compiles the source token NAME away, so astryx has no
+    // source-bindings.json and MUI's evidence-driven alias pass cannot run.
+    // All that survives is the VALUE — so the pass is a value join that RANKS
+    // and PRESENTS and never auto-resolves, plus a human ledger.
+    //
+    // This pin covers the four properties the round is worth nothing without,
+    // and FALSIFIES each one:
+    //   1. --propose is deterministic (two runs, byte-identical outputs)
+    //   2. the ANCHOR-PLANE guard refuses a docs-plane anchor BY NAME (joining
+    //      a re-themed plane would freeze theme-neutral behind a "clean" alias)
+    //   3. --apply refuses an un-acked id, and refuses an EXCLUDED row
+    //   4. the BYTE-GATE holds: the 9 applied aliases resolve to the same
+    //      NEUTRAL values and the 13 neutral component scripts re-emit
+    //      byte-identical (aliasing must not move a neutral pixel)
+    id: 'astryx-reanchor-minted',
+    claim: 'C1-determinism',
+    run: () => {
+      cpSync(path.join(ROOT, 'examples', 'astryx'), path.join(SCRATCH, 'examples', 'astryx'), {
+        recursive: true,
+        filter: (src) => !src.includes('.astryx-sandbox'),
+      });
+      const SCRIPT = 'examples/astryx/scripts/reanchor-minted.ts';
+      const T = (rel: string) => path.join(SCRATCH, rel);
+      const sha = (rel: string) => createHash('sha256').update(readFileSync(T(rel))).digest('hex');
+      const OUTPUTS = [
+        'examples/astryx/tokens/reanchor-proposals.json',
+        'examples/astryx/tokens/reanchor-proposals.md',
+        'examples/astryx/tokens/MINTED.md',
+      ];
+      const MINTED = 'examples/astryx/tokens/astryx-minted.dtcg.json';
+      const BASE = 'examples/astryx/tokens/astryx.dtcg.json';
+
+      // --- 1. propose is deterministic -------------------------------------
+      const p1 = run(TSX, [SCRIPT, '--propose']);
+      if (p1.status !== 0) throw new Error(`--propose failed:\n${p1.out}`);
+      const h1 = OUTPUTS.map(sha);
+      const p2 = run(TSX, [SCRIPT, '--propose']);
+      if (p2.status !== 0) throw new Error(`--propose (run B) failed:\n${p2.out}`);
+      const h2 = OUTPUTS.map(sha);
+      if (h1.join() !== h2.join()) throw new Error(`--propose is NOT byte-stable:\n${h1.join()}\n${h2.join()}`);
+      // and it agrees with the COMMITTED artifacts (no uncommitted drift)
+      for (const rel of OUTPUTS) {
+        if (!readFileSync(T(rel)).equals(readFileSync(path.join(ROOT, rel)))) {
+          throw new Error(`${rel} regenerates DIFFERENT bytes than the committed artifact`);
+        }
+      }
+      const proposals = JSON.parse(readFileSync(T(OUTPUTS[0]), 'utf8'));
+      const disp = (d: string) => proposals.rows.filter((r: any) => r.disposition === d);
+      const refsOf = (d: string) => disp(d).reduce((a: number, r: any) => a + r.refs, 0);
+      if (refsOf('applied') !== 9 || refsOf('ambiguous') !== 54) {
+        throw new Error(`join moved: expected 9 applied / 54 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
+      }
+      const cardBorder = proposals.rows.find((r: any) => r.exclusion === 'card-border-degraded-capture');
+      if (!cardBorder || cardBorder.refs !== 48) {
+        throw new Error(`the 48 card-border refs are not refused by name (got ${cardBorder ? cardBorder.refs : 'no row'})`);
+      }
+      if (disp('ambiguous').some((r: any) => r.candidates.length < 2)) {
+        throw new Error('an "ambiguous" row has fewer than 2 candidates — the disposition is wrong');
+      }
+
+      // --- 2. the anchor-plane guard ---------------------------------------
+      const docsAnchor = run(TSX, [SCRIPT, '--propose', '--anchor', 'examples/astryx/tokens/astryx-docs.dtcg.json']);
+      if (docsAnchor.status === 0) throw new Error('a DOCS-plane anchor was ACCEPTED — the join would freeze theme-neutral behind a "clean" alias');
+      if (!docsAnchor.out.includes('anchor plane is NOT theme-neutral') || !docsAnchor.out.includes('color-accent')) {
+        throw new Error(`the anchor refusal does not name the plane and the probe:\n${docsAnchor.out}`);
+      }
+      // FALSIFIED by step 1: the NEUTRAL anchor is accepted (p1.status === 0).
+
+      // --- 3. --apply is explicit-ack only ---------------------------------
+      const unacked = run(TSX, [SCRIPT, '--apply', 'RA-ffffff']);
+      if (unacked.status === 0) throw new Error('an UN-ACKED ambiguous id was applied');
+      if (!unacked.out.includes('un-acked ids never land')) throw new Error(`the un-acked refusal is not named:\n${unacked.out}`);
+      const excluded = run(TSX, [SCRIPT, '--apply', 'RA-X-cardborder-000000']);
+      if (excluded.status === 0) throw new Error('an EXCLUDED row was applied — exclusions must never be targets');
+      if (!excluded.out.includes('exclusions are receipts')) throw new Error(`the exclusion refusal is not named:\n${excluded.out}`);
+      const mintedBefore = sha(MINTED);
+
+      // FALSIFY: an ACKED id applies, idempotently, leaving the tree untouched
+      const acked = run(TSX, [SCRIPT, '--apply', 'RA-042f97']);
+      if (acked.status !== 0) throw new Error(`an acked id did NOT apply:\n${acked.out}`);
+      if (sha(MINTED) !== mintedBefore) throw new Error('--apply on an already-landed row was not idempotent');
+
+      // --- 4. the byte-gate + the light plane ------------------------------
+      if (!acked.out.includes('13 neutral-plane component script(s) re-emitted BYTE-IDENTICAL')) {
+        throw new Error(`the byte-gate did not run over all 13 component scripts:\n${acked.out}`);
+      }
+      const ledger = JSON.parse(readFileSync(T('examples/astryx/tokens/reanchor-decisions.json'), 'utf8')).decisions;
+      const base = JSON.parse(readFileSync(T(BASE), 'utf8'));
+      const mintedTree = JSON.parse(readFileSync(T(MINTED), 'utf8'));
+      const at = (p: string) => p.split('.').reduce<any>((n, s) => (n ? n[s] : undefined), mintedTree);
+      const norm = (v: string) => String(v).trim().toLowerCase();
+      if (ledger.length !== 9) throw new Error(`expected 9 ledger rows, got ${ledger.length}`);
+      for (const d of ledger) {
+        if (d.ack !== 'explicit CLI --apply') throw new Error(`ledger row ${d.ids} carries the wrong ack`);
+        if (norm(base[d.to].$value) !== norm(d.value)) {
+          throw new Error(`LIGHT PLANE MOVED: {${d.to}} is ${base[d.to].$value}, the ledger was acked against ${d.value}`);
+        }
+        for (const leaf of d.leaves) {
+          if (at(leaf)?.$value !== `{${d.to}}`) throw new Error(`${leaf} is not aliased to {${d.to}}`);
+        }
+      }
+
+      // FALSIFY the byte-gate: move ONE byte of a committed component script
+      // and the gate must refuse by name rather than accept the diff.
+      const badge = T('examples/astryx/figma/badge.figma.js');
+      const badgeSrc = readFileSync(badge);
+      writeFileSync(badge, Buffer.concat([badgeSrc, Buffer.from('\n// tamper\n')]));
+      const tampered = run(TSX, [SCRIPT, '--apply', 'RA-042f97']);
+      writeFileSync(badge, badgeSrc);
+      if (tampered.status === 0) throw new Error('the byte-gate ACCEPTED a moved neutral component script');
+      if (!tampered.out.includes('BYTE-GATE') || !tampered.out.includes('badge.figma.js')) {
+        throw new Error(`the byte-gate refusal does not name the moved script:\n${tampered.out}`);
+      }
+
+      // FALSIFY the stale-ledger guard: drift the DTCG under the ledger.
+      const baseSrc = readFileSync(T(BASE), 'utf8');
+      writeFileSync(T(BASE), baseSrc.replace('"#042F97"', '"#123456"'));
+      const stale = run(TSX, [SCRIPT, '--apply', 'RA-042f97']);
+      if (stale.status === 0) throw new Error('--apply accepted a ledger whose token value had drifted');
+      if (!stale.out.includes('STALE LEDGER')) throw new Error(`the drift refusal is not named:\n${stale.out}`);
+      // …and the same drift must move --propose (proving step 1 measures the
+      // real input, not a cached constant).
+      const drifted = run(TSX, [SCRIPT, '--propose']);
+      if (drifted.status !== 0) throw new Error(`--propose failed on the drifted anchor:\n${drifted.out}`);
+      if (OUTPUTS.map(sha).join() === h1.join()) throw new Error('--propose produced identical bytes from a DIFFERENT anchor — it is not reading the input');
+      writeFileSync(T(BASE), baseSrc);
+
+      console.log(
+        `astryx-reanchor-minted: value-identity join over the minted tree — --propose byte-stable ×2 AND byte-equal to the committed artifacts ` +
+          `(${proposals.rows.length} rows: 9 applied refs, 54 ambiguous refs left UNDECIDED for review, 48 card-border refs REFUSED by name for a degraded capture); ` +
+          `a docs-plane anchor is refused BY NAME (the silent-no-op trap); --apply refuses an un-acked id AND an excluded row, and is idempotent on an acked one; ` +
+          `the 9 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
+          `Falsified: tampered script → BYTE-GATE refusal; drifted DTCG → STALE LEDGER refusal + moved proposals`,
+      );
+    },
+  },
+  {
     // STATE-PLANE PROJECTION ROUND — the defect: `checked` was declared a
     // capture-config stateProp with state "checked", OUTSIDE the closed
     // contract state vocabulary. Nothing checked it (StateAxisSpec.state is a

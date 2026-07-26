@@ -153,8 +153,15 @@ node examples/astryx/scripts/figma-compile-receipt.mjs        # compile receipt
 # leg 4 — witness
 node examples/astryx/scripts/flagship-doc-crosscheck.mjs
 
+# leg 5 — minted-literal re-anchoring (value join + human ledger)
+npx tsx examples/astryx/scripts/reanchor-minted.ts --propose   # review queue + tokens/MINTED.md
+#   then, for each row a HUMAN acked in tokens/reanchor-decisions.json:
+npx tsx examples/astryx/scripts/reanchor-minted.ts --apply "RA-042f97,…"
+#   (promote-floor.ts re-applies the committed ledger automatically, so a
+#    re-run of leg 1 cannot silently revert a decision)
+
 # and the standing gate
-npm run eval    # 138/138, incl. the astryx-dev-journey pin
+npm run eval    # incl. the astryx-dev-journey and astryx-reanchor-minted pins
 ```
 
 ## Gate: `astryx-dev-journey` (evals/run.ts)

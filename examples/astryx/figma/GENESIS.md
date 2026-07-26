@@ -15,10 +15,17 @@ the mock); the live run is confirmation, not debugging.
 3. Go to the **"Paste a script"** tab.
 4. Paste the full contents of **`GENESIS-BATCH.figma.js`** → Run.
 
-That's it. The script upserts the **Astryx token collection** (186 variables,
-Light/Dark modes, literal values — Astryx has no primitive/alias layer), then
-builds all **13 component sets in dependency order**, each hosted on a named
-background Section:
+That's it. The script upserts the **Astryx token collection** (**423
+variables**: the 186-token wrap + the 237 minted `imported/*` leaves,
+Light/Dark modes), then builds all **13 component sets in dependency order**,
+each hosted on a named background Section:
+
+> Astryx's own token layer has **no primitive/alias tier** — the values are
+> literal `light-dark()` pairs — so all 186 base variables carry literal
+> values. **9 of the minted variables are now Figma-NATIVE aliases** onto base
+> tokens (`examples/astryx/scripts/reanchor-minted.ts`, receipt
+> `examples/astryx/tokens/MINTED.md`): the badge tone rules, which used to be
+> frozen at their light-mode hex in both modes and now follow the mode.
 
 | Component | Grid | Notes |
 |---|---|---|
@@ -50,6 +57,7 @@ token sets into the Generate flow is a roadmap item.)
 
 ```bash
 npx tsx examples/astryx/scripts/build-tokens.ts          # DTCG wrap (alias pass)
+npx tsx examples/astryx/scripts/reanchor-minted.ts --propose   # minted review queue + MINTED.md
 npx tsx examples/astryx/scripts/build-figma-tokens.ts    # 00-tokens.figma.js
 npx tsx packages/cli/src/cli.ts figma examples/astryx/contracts \
   --out examples/astryx/figma \

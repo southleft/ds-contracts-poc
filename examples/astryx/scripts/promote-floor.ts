@@ -21,6 +21,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyDecisions, contractRefs, loadDecisions, resolutionGuard } from './reanchor-minted.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EX = path.join(HERE, '..');
@@ -81,6 +82,31 @@ for (const name of MINT_SOURCES) {
   mergeInto(mintedMerged, (extension.mintedTokens ?? {}) as Record<string, unknown>);
 }
 
+// ---------------------------------------------------------------------------
+// RE-ANCHORING RE-APPLY — the trap this round would otherwise have set.
+//
+// The minted tree above is regenerated from the computed-floor capture, which
+// only ever holds LITERALS. Without this step, running promote-floor.ts after
+// examples/astryx/scripts/reanchor-minted.ts would SILENTLY REVERT every
+// acked alias — a pipeline that quietly undoes a human decision is worse than
+// one that breaks loudly. So the committed ledger is re-applied here, and the
+// MUI resolution guard (promote-floor.mjs:260-303) runs over the result:
+// every alias must resolve in the neutral DTCG base, and every contract
+// {imported.*} ref (axis-expanded) must still resolve in the tree.
+//
+// applyDecisions is idempotent and refuses on drift (stale ledger vs drifted
+// DTCG), so this is the same code path `--apply` takes — one implementation.
+// ---------------------------------------------------------------------------
+const decisions = loadDecisions();
+const base = JSON.parse(readFileSync(path.join(EX, 'tokens', 'astryx.dtcg.json'), 'utf8')) as Record<string, { $value: unknown; $type?: string }>;
+const refs = contractRefs(path.join(EX, 'contracts'));
+const reanchor = applyDecisions(mintedMerged, decisions, base, null);
+resolutionGuard(mintedMerged, base, refs);
+
 writeFileSync(path.join(EX, 'tokens', 'astryx-minted.dtcg.json'), JSON.stringify(mintedMerged, null, 2) + '\n');
 console.log(`✔ floor-promoted ${promoted.length} contract(s) → examples/astryx/contracts (v0.3.0): ${promoted.join(', ')}`);
 console.log(`✔ minted tree → examples/astryx/tokens/astryx-minted.dtcg.json`);
+console.log(
+  `✔ re-anchoring ledger re-applied: ${reanchor.applied} leaf/leaves aliased from ` +
+    `tokens/reanchor-decisions.json (${decisions.length} acked row(s)); resolution guard green`,
+);
