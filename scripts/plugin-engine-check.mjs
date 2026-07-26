@@ -696,4 +696,39 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle)');
+// --- N+3. SIBLING BUNDLES (72b5075 follow-up): astryx + polaris + docs-theme
+// through the same real engine bundle path. Result-level pins: parse, plan
+// (tokenSet-first), execute in a fresh mock, marked-node + variable counts.
+{
+  const silent2 = { log() {}, warn() {}, error() {} };
+  const runIn2 = (mock, code) =>
+    vm.runInContext(`(async () => {\n${code}\n})()`, vm.createContext({ figma: mock.figma, console: silent2 }), {
+      timeout: 300_000,
+    });
+  const exercise = async (file, expectName, expectContracts) => {
+    const text = read(file);
+    const parsed = DSC.parseIncomingText(text);
+    assert(parsed.ok && parsed.kind === 'bundle', `${file} parses as a CONTRACTS-BUNDLE`);
+    assert(parsed.tokenSet && parsed.tokenSet.name === expectName, `${file} carries tokenSet "${expectName}"`);
+    assert(parsed.contracts.length === expectContracts, `${file}: ${expectContracts} contracts (got ${parsed.contracts.length})`);
+    const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet, icons: parsed.icons });
+    assert(plan.ok, `${file} plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
+    assert(plan.steps[0].kind === 'tokens' && plan.steps[0].title.includes(`"${expectName}"`), `${file}: tokenSet syncs first`);
+    const mock = createFigmaMock();
+    for (const step of plan.steps) await runIn2(mock, step.code);
+    const built = mock.root.findAll(
+      (n) => (n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent?.type !== 'COMPONENT_SET')) && n.getSharedPluginData('ds_contracts', 'contractId'),
+    );
+    const vars = await mock.figma.variables.getLocalVariablesAsync();
+    return { built: built.length, vars: vars.length };
+  };
+  const astryx = await exercise('examples/astryx/figma/astryx.bundle.json', 'Astryx', 13);
+  assert(astryx.built === 13, `astryx bundle builds all 13 components (got ${astryx.built})`);
+  const polaris = await exercise('examples/polaris/figma/polaris.bundle.json', 'Polaris', 12);
+  assert(polaris.built === 12, `polaris bundle builds all 12 components incl. icon-bearing ones (got ${polaris.built})`);
+  const docs = await exercise('examples/astryx/figma/astryx-docs.bundle.json', 'Astryx (docs theme)', 13);
+  assert(docs.built === 13 && docs.vars === astryx.vars, `docs-theme bundle builds the same 13 with the same variable count (${docs.built}, ${docs.vars} vs ${astryx.vars})`);
+  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned): the JSON-only rule holds for EVERY example round through the real engine path`);
+}
+
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, sibling-bundles)');

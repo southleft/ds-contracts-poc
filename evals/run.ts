@@ -99,6 +99,16 @@ function resetScratch() {
   for (const f of ['mui.bundle.json', 'GENESIS-BATCH.figma.js']) {
     cpSync(path.join(ROOT, 'examples', 'mui', 'figma', f), path.join(SCRATCH, 'examples', 'mui', 'figma', f));
   }
+  // The sibling-bundles flow exercises the astryx/polaris/astryx-docs bundles
+  // through the same engine path — staged as files, same discipline as above.
+  for (const [dir, f] of [
+    ['astryx', 'astryx.bundle.json'],
+    ['astryx', 'astryx-docs.bundle.json'],
+    ['polaris', 'polaris.bundle.json'],
+  ]) {
+    mkdirSync(path.join(SCRATCH, 'examples', dir, 'figma'), { recursive: true });
+    cpSync(path.join(ROOT, 'examples', dir, 'figma', f), path.join(SCRATCH, 'examples', dir, 'figma', f));
+  }
   for (const file of ['package.json', 'tsconfig.json']) {
     cpSync(path.join(ROOT, file), path.join(SCRATCH, file));
   }

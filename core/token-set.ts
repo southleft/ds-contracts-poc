@@ -246,10 +246,16 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
   const rows: TokenSetRow[] = [];
   // base first (alias targets must exist before minted alias rows apply —
   // the script does two passes, but ordering keeps the payload readable)
-  for (const name of Object.keys(base).sort()) {
-    const entry = base[name];
-    const lv = String(light[name]?.$value ?? entry.$value);
-    const dv = String(dark[name]?.$value ?? entry.$value);
+  for (const dotName of Object.keys(base).sort()) {
+    const entry = base[dotName];
+    // Figma variable names spell dot-paths with slashes (the emitters'
+    // convention: the sync runtime binds `p.color-x` as `p/color-x`).
+    // Dot-less names (MUI/Tailwind/Astryx wraps) pass through unchanged —
+    // this fires only for nested-tree wraps like Polaris (live gate finding:
+    // Missing variable p/color-avatar-one-bg-fill).
+    const name = dotName.split('.').join('/');
+    const lv = String(light[dotName]?.$value ?? entry.$value);
+    const dv = String(dark[dotName]?.$value ?? entry.$value);
     const lc = colorOf(lv);
     const dc = colorOf(dv);
     if (entry.$type === 'color' && lc && dc) {
