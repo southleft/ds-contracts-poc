@@ -195,16 +195,28 @@ async function main() {
   let determinismDetail = 'byte-identical across two full sweeps in one session';
   if (!deterministic) {
     const unstable = new Set<string>();
+    // ORGANISM round: the refusal now NAMES where it happened. "UNSTABLE
+    // channels: transform" sent the reader hunting; the witness (capture key,
+    // element path + signature, both observed values) is what makes the
+    // refusal actionable — a determinism refusal without a location is a
+    // half-receipt.
+    const witnesses: string[] = [];
     for (let i = 0; i < run1.captures.length; i++) {
       const a = flatten(run1.captures[i].root);
       const b = flatten(run2.captures[i].root);
       for (let j = 0; j < Math.min(a.length, b.length); j++) {
         for (const p of Object.keys(a[j].node.style)) {
-          if (a[j].node.style[p] !== b[j].node.style[p]) unstable.add(p);
+          if (a[j].node.style[p] === b[j].node.style[p]) continue;
+          unstable.add(p);
+          if (witnesses.length < 8) {
+            witnesses.push(
+              `${run1.captures[i].combo}__${run1.captures[i].interaction} @${a[j].path || 'root'} (${a[j].sig}) ${p}: "${a[j].node.style[p]}" vs "${b[j].node.style[p]}"`,
+            );
+          }
         }
       }
     }
-    determinismDetail = `UNSTABLE channels across double-run: ${[...unstable].sort().join(', ') || '(structural)'}`;
+    determinismDetail = `UNSTABLE channels across double-run: ${[...unstable].sort().join(', ') || '(structural)'}${witnesses.length ? ` — witnesses: ${witnesses.join(' | ')}` : ''}`;
     console.log(`  ✖ ${determinismDetail}`);
     throw new Error(`determinism self-check FAILED — ${determinismDetail}`);
   }

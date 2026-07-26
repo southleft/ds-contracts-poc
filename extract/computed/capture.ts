@@ -59,6 +59,36 @@ export interface PresenceProp {
   value: unknown;
 }
 
+/** ORGANISM round (Table): one node of the canonical-children tree.
+ *
+ *  MOLECULE round shipped a STRICTLY ONE-LEVEL list (`<Tabs><Tab/><Tab/></Tabs>`);
+ *  a composed organism is a TREE (`<Table><TableHead><TableRow><TableCell>
+ *  <Checkbox/></TableCell>…`). `children` recurses; the marker grammar
+ *  ($callback/$import/$render) is resolved at EVERY depth, and every
+ *  referenced export is imported at every depth.
+ *
+ *  `children` and `text` are MUTUALLY EXCLUSIVE on one node (refused at load
+ *  by name) — a node is either a text leaf or a composition. */
+export interface ChildSpec {
+  importName: string;
+  props?: Record<string, unknown>;
+  text?: string;
+  children?: ChildSpec[];
+}
+
+/** Depth-first walk of a childrenSpec forest (config order preserved). */
+export const walkChildSpecs = (specs: ChildSpec[] | undefined): ChildSpec[] => {
+  const out: ChildSpec[] = [];
+  const rec = (list: ChildSpec[]): void => {
+    for (const c of list) {
+      out.push(c);
+      if (c.children) rec(c.children);
+    }
+  };
+  rec(specs ?? []);
+  return out;
+};
+
 export interface ComponentConfig {
   /** Display name; also the CSS-module stem prefix stripped in part naming. */
   name: string;
@@ -75,7 +105,17 @@ export interface ComponentConfig {
   axes: string[];
   /** Round 4: contract-side enum axis value → LIBRARY value mounted for it
    *  (Checkbox checked: unchecked→false, checked→true,
-   *  indeterminate→"indeterminate"). Unlisted values mount verbatim. */
+   *  indeterminate→"indeterminate"). Unlisted values mount verbatim.
+   *
+   *  ORGANISM round — MULTI-PROP AXIS VALUES: a mapped value of the shape
+   *  `{"$props": {libProp: value, …}}` mounts THOSE library props instead of
+   *  the axis prop itself. One contract axis, several library props: MUI's
+   *  Checkbox spells its tri-state as TWO independent booleans
+   *  (`checked` + `indeterminate`), and the single-axis rule is not a
+   *  cosmetic preference — the svg-content promotion carries per-value icon
+   *  assets only when the markup is a function of exactly ONE axis
+   *  (`svg-content-multi-axis` refusal otherwise), so a two-axis spelling
+   *  would silently lose all three checkbox glyphs. Still pure JSON. */
   axisValueMap?: Record<string, Record<string, unknown>>;
   /** Round 4: structure-creating optional props (see PresenceProp). */
   presenceProps?: PresenceProp[];
@@ -106,7 +146,7 @@ export interface ComponentConfig {
    *  <Import {...props}>text?</Import>; props use the marker grammar.
    *  Mutually exclusive with childWrap (refused at load). Recorded in
    *  provenance; sampleText is '' for these components. */
-  childrenSpec?: Array<{ importName: string; props?: Record<string, unknown>; text?: string }>;
+  childrenSpec?: ChildSpec[];
   /** MUI round (Card live finding #2): mount the stage as a BLOCK context
    *  instead of the default flex row. A display:block component inside the
    *  flex stage shrink-to-fits (the 114px Card) — CSS-true block behavior
@@ -202,6 +242,14 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
     if (!existsSync(contractPath)) throw new Error(`${c.name}: contract not found: ${c.contract}`);
     if (c.childWrap && c.childrenSpec) {
       throw new Error(`${c.name}: childWrap and childrenSpec are mutually exclusive — one canonical composition per component`);
+    }
+    // ORGANISM round: a childrenSpec node is either a TEXT LEAF or a
+    // COMPOSITION — never both (an ambiguous node would silently drop one of
+    // the two in the renderer; name the refusal instead).
+    for (const cs of walkChildSpecs(c.childrenSpec)) {
+      if (cs.children && cs.text !== undefined) {
+        throw new Error(`${c.name}: childrenSpec node "${cs.importName}" carries BOTH text and children — mutually exclusive (a node is a text leaf or a composition)`);
+      }
     }
   }
   return cfg;
@@ -302,7 +350,18 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
     // Round 4 axisValueMap: contract axis value → library value (Checkbox
     // checked enum → boolean|'indeterminate').
     const mapped = comp.axisValueMap?.[a.prop];
-    props[a.prop] = mapped && v in mapped ? mapped[v] : v;
+    const mv = mapped && v in mapped ? mapped[v] : undefined;
+    // ORGANISM round: {"$props": {…}} mounts SEVERAL library props for one
+    // contract axis value (MUI Checkbox's tri-state = checked+indeterminate).
+    if (mv && typeof mv === 'object' && !Array.isArray(mv) && '$props' in (mv as Record<string, unknown>)) {
+      const expand = (mv as { $props: Record<string, unknown> }).$props;
+      if (expand === null || typeof expand !== 'object') {
+        throw new Error(`${comp.name}: axisValueMap ${a.prop}="${v}" $props must be an object of library props`);
+      }
+      for (const [lp, lv] of Object.entries(expand)) props[lp] = lv;
+      continue;
+    }
+    props[a.prop] = mv !== undefined ? mv : v;
   }
   for (const s of space.stateProps) if (combo.stateFlags[s.prop]) props[s.prop] = true;
   return props;
@@ -327,7 +386,9 @@ export function buildHarnessPage(
   const importNames = [...new Set([
     ...mounts.map((m) => m.comp.importName),
     ...mounts.flatMap((m) => (m.comp.childWrap ? [m.comp.childWrap.importName] : [])),
-    ...mounts.flatMap((m) => (m.comp.childrenSpec ?? []).map((c) => c.importName)),
+    // ORGANISM round: the childrenSpec TREE is walked — every imported export
+    // at every depth must land in the mount page's import list.
+    ...mounts.flatMap((m) => walkChildSpecs(m.comp.childrenSpec).map((c) => c.importName)),
   ])].sort();
   const specs = mounts.flatMap(({ comp, space }) =>
     space.enumeration.combos.map((combo) => ({
@@ -360,6 +421,10 @@ export function buildHarnessPage(
     }
   };
   for (const s of specs) collectImports(s.props);
+  // ORGANISM round: markers inside childrenSpec props (at any depth) are
+  // resolved at mount — collect their imports here too (the portal page
+  // already did this; the census page did not — a latent one-level gap).
+  for (const m of mounts) for (const cs of walkChildSpecs(m.comp.childrenSpec)) collectImports(cs.props ?? {});
   const extraImportLines = [...extraImports.entries()]
     .sort()
     .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
@@ -398,8 +463,17 @@ function resolveMarkers(v) {
 
 // MOLECULE round: canonical children — childWrap (one wrapped text child),
 // childrenSpec (N imported children), or bare sampleText.
+// ORGANISM round: childrenSpec RECURSES — a node with .children mounts its
+// own child list instead of text (mutually exclusive, refused at load).
+function renderKidList(list) {
+  return list.map((cs, i) => React.createElement(
+    COMPONENTS[cs.importName],
+    { key: i, ...resolveMarkers({ ...(cs.props || {}) }) },
+    cs.children ? renderKidList(cs.children) : cs.text,
+  ));
+}
 function renderKids(s) {
-  if (s.childrenSpec) return s.childrenSpec.map((cs, i) => React.createElement(COMPONENTS[cs.importName], { key: i, ...resolveMarkers({ ...(cs.props || {}) }) }, cs.text));
+  if (s.childrenSpec) return renderKidList(s.childrenSpec);
   if (s.childWrap) { const W = COMPONENTS[s.childWrap]; return <W>{s.text}</W>; }
   return s.text;
 }
@@ -848,7 +922,7 @@ export function buildPortalHarnessPage(
     }
   };
   for (const s of specs) collectImports(s.props);
-  for (const cs of comp.childrenSpec ?? []) collectImports(cs.props ?? {});
+  for (const cs of walkChildSpecs(comp.childrenSpec)) collectImports(cs.props ?? {});
   const extraImportLines = [...extraImports.entries()]
     .sort()
     .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
@@ -856,7 +930,7 @@ export function buildPortalHarnessPage(
   const kidImports = [...new Set([
     comp.importName,
     ...(comp.childWrap ? [comp.childWrap.importName] : []),
-    ...(comp.childrenSpec ?? []).map((c) => c.importName),
+    ...walkChildSpecs(comp.childrenSpec).map((c) => c.importName),
   ])].sort();
 
   const stageJs = `{ display:'flex', alignItems:'flex-start', width:${st.width}, height:${st.height}, padding:${st.padding}, boxSizing:'border-box', background:'#fff', overflow:'hidden' }`;
@@ -886,8 +960,16 @@ function resolveMarkers(v) {
   }
   return v;
 }
+// ORGANISM round: childrenSpec RECURSES (see buildHarnessPage).
+function renderKidList(list) {
+  return list.map((cs, i) => React.createElement(
+    COMPONENTS[cs.importName],
+    { key: i, ...resolveMarkers({ ...(cs.props || {}) }) },
+    cs.children ? renderKidList(cs.children) : cs.text,
+  ));
+}
 function renderKids() {
-  if (CHILDREN_SPEC) return CHILDREN_SPEC.map((cs, i) => React.createElement(COMPONENTS[cs.importName], { key: i, ...resolveMarkers({ ...(cs.props || {}) }) }, cs.text));
+  if (CHILDREN_SPEC) return renderKidList(CHILDREN_SPEC);
   if (CHILD_WRAP) { const W = COMPONENTS[CHILD_WRAP]; return <W>{TEXT}</W>; }
   return TEXT;
 }

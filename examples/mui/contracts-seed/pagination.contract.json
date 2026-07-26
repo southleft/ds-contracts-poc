@@ -1,0 +1,26 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.table-pagination",
+  "name": "TablePagination",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. Mounted as component='div' (the composition every real table ships; the default renders a <td> that only makes sense inside a table footer). count/rowsPerPage/page pinned so the rendered strings are deterministic. NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 the component forces BOTH arrow IconButtons Mui-disabled — the ENABLED arrow colors are unobservable at this combo and are absent from the captured truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "TablePagination"
+    }
+  }
+}

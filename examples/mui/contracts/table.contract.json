@@ -1,0 +1,1500 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.table",
+  "name": "Table",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI ORGANISM round — the first ORGANISM through the computed pipeline. Props/axes only; the whole composed DataTable anatomy (head row + 5 columns incl. a checkbox column and a sort-label column, two body rows one of them selected/checked, a right-aligned action cell) is promoted from captured DOM truth via the RECURSIVE childrenSpec tree. NAMED EXCLUSIONS (v1): stickyHeader (position:sticky has no carried spelling); the row overflow menu is captured CLOSED (an open Menu portals a root and the single-portaled-root policy would drop the in-stage table); TableSortLabel direction='asc' only (the direction axis is excluded by name); TableContainer/Paper is not the captured root (axes ride the root mount and `size` is a Table prop); rows are INLINED, not component refs (promotion emits no refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding with unchanged child classes). Column widths are deterministic AT THE PINNED STAGE WIDTH — table-layout:auto reflows with available width. NAMED RESIDUE: the schema's semantics vocabulary has no table/thead/tbody/tr/td elements (element=div + role=table, the repo's own ds.table precedent) — the CSS table box model is LOWERED to the flex vocabulary at promotion (table-lowering receipts) rather than growing the bounded grammar with keywords no target renders. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div",
+    "role": "table"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "parts": {
+        "tablehead-root": {
+          "element": "div",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy thead|TableHead-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "attrs": {
+            "role": "rowgroup"
+          },
+          "parts": {
+            "tablerow-head": {
+              "element": "div",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy tr|TableRow-head.TableRow-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "stretch"
+              },
+              "attrs": {
+                "role": "row"
+              },
+              "parts": {
+                "tablecell-head": {
+                  "element": "div",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th|TableCell-head.TableCell-paddingCheckbox.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "parts": {
+                    "buttonbase-root": {
+                      "element": "span",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|ButtonBase-root.Checkbox-indeterminate.Checkbox-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "inline-flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "declared": {
+                        "aspect-ratio": "1 / 1",
+                        "box-sizing": "border-box",
+                        "cursor": "pointer",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                        "position": "relative",
+                        "text-align": "left",
+                        "user-select": "none"
+                      },
+                      "parts": {
+                        "part-0-0-0-0-0": {
+                          "element": "input",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "none",
+                            "appearance": "auto",
+                            "box-sizing": "border-box",
+                            "cursor": "pointer",
+                            "font-family": "Arial",
+                            "position": "absolute",
+                            "user-select": "none"
+                          },
+                          "declaredStates": {
+                            "focus-visible": {
+                              "outline-style": "auto"
+                            }
+                          },
+                          "tokens": {
+                            "bottom": "{imported.shared.size-0}",
+                            "font-size": "{imported.shared.size-13-3333}",
+                            "left": "{imported.shared.size-0}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "opacity": "{imported.shared.num-0}",
+                            "right": "{imported.shared.size-0}",
+                            "top": "{imported.shared.size-0}",
+                            "z-index": "{imported.shared.num-1}"
+                          },
+                          "tokensByProp": [
+                            {
+                              "prop": "size",
+                              "map": {
+                                "medium": {
+                                  "height": "{imported.table.part-0-0-0-0-0.height.medium}",
+                                  "width": "{imported.table.part-0-0-0-0-0.width.medium}"
+                                },
+                                "small": {
+                                  "height": "{imported.table.part-0-0-0-0-0.height.small}",
+                                  "width": "{imported.table.part-0-0-0-0-0.width.small}"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "icon": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "cursor": "pointer",
+                            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                            "overflow-x": "hidden",
+                            "overflow-y": "hidden",
+                            "text-align": "left",
+                            "transition-duration": "0.3s",
+                            "transition-property": "fill",
+                            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                            "user-select": "none"
+                          },
+                          "layout": {
+                            "grow": true
+                          },
+                          "icon": {
+                            "asset": "table-icon",
+                            "size": 24
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-1976d2}",
+                            "fill": "{imported.shared.color-1976d2}",
+                            "flex-shrink": "{imported.shared.num-0}",
+                            "font-size": "{imported.shared.size-24}",
+                            "font-weight": "{imported.shared.num-500}",
+                            "height": "{imported.shared.size-24}",
+                            "letter-spacing": "{imported.shared.size-0-14994}",
+                            "line-height": "{imported.shared.size-24}",
+                            "row-rule-color": "{imported.shared.color-1976d2}",
+                            "width": "{imported.shared.size-24}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-1976d2}",
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.shared.num-500}",
+                        "left": "{imported.shared.size-0}",
+                        "letter-spacing": "{imported.shared.size-0-14994}",
+                        "line-height": "{imported.shared.size-24}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-1976d2}",
+                        "top": "{imported.shared.size-0}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "size",
+                          "map": {
+                            "medium": {
+                              "border-bottom-left-radius": "{imported.table.buttonbase-root.border-bottom-left-radius.medium}",
+                              "border-bottom-right-radius": "{imported.table.buttonbase-root.border-bottom-right-radius.medium}",
+                              "border-top-left-radius": "{imported.table.buttonbase-root.border-top-left-radius.medium}",
+                              "border-top-right-radius": "{imported.table.buttonbase-root.border-top-right-radius.medium}",
+                              "height": "{imported.table.buttonbase-root.height.medium}",
+                              "padding-bottom": "{imported.table.buttonbase-root.padding-bottom.medium}",
+                              "padding-left": "{imported.table.buttonbase-root.padding-left.medium}",
+                              "padding-right": "{imported.table.buttonbase-root.padding-right.medium}",
+                              "padding-top": "{imported.table.buttonbase-root.padding-top.medium}",
+                              "width": "{imported.table.buttonbase-root.width.medium}"
+                            },
+                            "small": {
+                              "border-bottom-left-radius": "{imported.table.buttonbase-root.border-bottom-left-radius.small}",
+                              "border-bottom-right-radius": "{imported.table.buttonbase-root.border-bottom-right-radius.small}",
+                              "border-top-left-radius": "{imported.table.buttonbase-root.border-top-left-radius.small}",
+                              "border-top-right-radius": "{imported.table.buttonbase-root.border-top-right-radius.small}",
+                              "height": "{imported.table.buttonbase-root.height.small}",
+                              "padding-bottom": "{imported.table.buttonbase-root.padding-bottom.small}",
+                              "padding-left": "{imported.table.buttonbase-root.padding-left.small}",
+                              "padding-right": "{imported.table.buttonbase-root.padding-right.small}",
+                              "padding-top": "{imported.table.buttonbase-root.padding-top.small}",
+                              "width": "{imported.table.buttonbase-root.width.small}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-52}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.tablecell-head.height.medium}",
+                          "padding-left": "{imported.table.tablecell-head.padding-left.medium}",
+                          "padding-right": "{imported.table.tablecell-head.padding-right.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.tablecell-head.height.small}",
+                          "padding-left": "{imported.table.tablecell-head.padding-left.small}",
+                          "padding-right": "{imported.table.tablecell-head.padding-right.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "tablecell-head-2": {
+                  "element": "div",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th|TableCell-head.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "parts": {
+                    "label": {
+                      "text": "Name",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|ButtonBase-root.TableSortLabel-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "inline-flex",
+                        "align": "center",
+                        "justify": "start"
+                      },
+                      "parts": {
+                        "icon-2": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root.TableSortLabel-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "cursor": "pointer",
+                            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                            "overflow-x": "hidden",
+                            "overflow-y": "hidden",
+                            "text-align": "left",
+                            "transition-delay": "0s, 0s",
+                            "transition-duration": "0.2s, 0.2s",
+                            "transition-property": "opacity, transform",
+                            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)",
+                            "user-select": "none"
+                          },
+                          "icon": {
+                            "asset": "table-icon-2",
+                            "size": 18
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-00000099}",
+                            "fill": "{imported.shared.color-00000099}",
+                            "flex-shrink": "{imported.shared.num-0}",
+                            "font-size": "{imported.shared.size-18}",
+                            "font-weight": "{imported.shared.num-500}",
+                            "letter-spacing": "{imported.shared.size-0-14994}",
+                            "line-height": "{imported.shared.size-24}",
+                            "margin-left": "{imported.table.icon-2.margin-left}",
+                            "margin-right": "{imported.table.icon-2.margin-right}",
+                            "row-rule-color": "{imported.shared.color-00000099}",
+                            "width": "{imported.shared.size-18}"
+                          }
+                        }
+                      },
+                      "declared": {
+                        "box-sizing": "border-box",
+                        "cursor": "pointer",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                        "position": "relative",
+                        "text-align": "left",
+                        "user-select": "none"
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-000000de}",
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.shared.num-500}",
+                        "left": "{imported.shared.size-0}",
+                        "letter-spacing": "{imported.shared.size-0-14994}",
+                        "line-height": "{imported.shared.size-24}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-000000de}",
+                        "top": "{imported.shared.size-0}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-240-125}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.tablecell-head-2.height.medium}",
+                          "padding-bottom": "{imported.table.tablecell-head-2.padding-bottom.medium}",
+                          "padding-top": "{imported.table.tablecell-head-2.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.tablecell-head-2.height.small}",
+                          "padding-bottom": "{imported.table.tablecell-head-2.padding-bottom.small}",
+                          "padding-top": "{imported.table.tablecell-head-2.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-2": {
+                  "element": "div",
+                  "text": "Role",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th|TableCell-head.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-132-969}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-2.height.medium}",
+                          "padding-bottom": "{imported.table.label-2.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-2.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-2.height.small}",
+                          "padding-bottom": "{imported.table.label-2.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-2.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-3": {
+                  "element": "div",
+                  "text": "Team",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th|TableCell-head.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-142-484}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-3.height.medium}",
+                          "padding-bottom": "{imported.table.label-3.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-3.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-3.height.small}",
+                          "padding-bottom": "{imported.table.label-3.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-3.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-4": {
+                  "element": "div",
+                  "text": "Actions",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th|TableCell-alignRight.TableCell-head.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "end"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "right"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-120-422}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-4.height.medium}",
+                          "padding-bottom": "{imported.table.label-4.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-4.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-4.height.small}",
+                          "padding-bottom": "{imported.table.label-4.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-4.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "outline-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "tokens": {
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        },
+        "tablebody-root": {
+          "element": "div",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy tbody|TableBody-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "attrs": {
+            "role": "rowgroup"
+          },
+          "parts": {
+            "tablerow-root": {
+              "element": "div",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy tr|TableRow-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "stretch"
+              },
+              "attrs": {
+                "role": "row"
+              },
+              "parts": {
+                "tablecell-body": {
+                  "element": "div",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-paddingCheckbox.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "parts": {
+                    "buttonbase-root-2": {
+                      "element": "span",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|ButtonBase-root.Checkbox-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "inline-flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "declared": {
+                        "aspect-ratio": "1 / 1",
+                        "box-sizing": "border-box",
+                        "cursor": "pointer",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                        "position": "relative",
+                        "text-align": "left",
+                        "user-select": "none"
+                      },
+                      "parts": {
+                        "part-1-0-0-0-0": {
+                          "element": "input",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "none",
+                            "appearance": "auto",
+                            "box-sizing": "border-box",
+                            "cursor": "pointer",
+                            "font-family": "Arial",
+                            "position": "absolute",
+                            "user-select": "none"
+                          },
+                          "tokens": {
+                            "bottom": "{imported.shared.size-0}",
+                            "font-size": "{imported.shared.size-13-3333}",
+                            "left": "{imported.shared.size-0}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "opacity": "{imported.shared.num-0}",
+                            "right": "{imported.shared.size-0}",
+                            "top": "{imported.shared.size-0}",
+                            "z-index": "{imported.shared.num-1}"
+                          },
+                          "tokensByProp": [
+                            {
+                              "prop": "size",
+                              "map": {
+                                "medium": {
+                                  "height": "{imported.table.part-1-0-0-0-0.height.medium}",
+                                  "width": "{imported.table.part-1-0-0-0-0.width.medium}"
+                                },
+                                "small": {
+                                  "height": "{imported.table.part-1-0-0-0-0.height.small}",
+                                  "width": "{imported.table.part-1-0-0-0-0.width.small}"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "icon-3": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "cursor": "pointer",
+                            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                            "overflow-x": "hidden",
+                            "overflow-y": "hidden",
+                            "text-align": "left",
+                            "transition-duration": "0.3s",
+                            "transition-property": "fill",
+                            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                            "user-select": "none"
+                          },
+                          "layout": {
+                            "grow": true
+                          },
+                          "icon": {
+                            "asset": "table-icon-3",
+                            "size": 24
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-00000099}",
+                            "fill": "{imported.shared.color-00000099}",
+                            "flex-shrink": "{imported.shared.num-0}",
+                            "font-size": "{imported.shared.size-24}",
+                            "height": "{imported.shared.size-24}",
+                            "letter-spacing": "{imported.shared.size-0-14994}",
+                            "line-height": "{imported.table.icon-3.line-height}",
+                            "row-rule-color": "{imported.shared.color-00000099}",
+                            "width": "{imported.shared.size-24}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-00000099}",
+                        "font-size": "{imported.shared.size-14}",
+                        "left": "{imported.shared.size-0}",
+                        "letter-spacing": "{imported.shared.size-0-14994}",
+                        "line-height": "{imported.shared.size-20-02}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-00000099}",
+                        "top": "{imported.shared.size-0}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "size",
+                          "map": {
+                            "medium": {
+                              "border-bottom-left-radius": "{imported.table.buttonbase-root-2.border-bottom-left-radius.medium}",
+                              "border-bottom-right-radius": "{imported.table.buttonbase-root-2.border-bottom-right-radius.medium}",
+                              "border-top-left-radius": "{imported.table.buttonbase-root-2.border-top-left-radius.medium}",
+                              "border-top-right-radius": "{imported.table.buttonbase-root-2.border-top-right-radius.medium}",
+                              "height": "{imported.table.buttonbase-root-2.height.medium}",
+                              "padding-bottom": "{imported.table.buttonbase-root-2.padding-bottom.medium}",
+                              "padding-left": "{imported.table.buttonbase-root-2.padding-left.medium}",
+                              "padding-right": "{imported.table.buttonbase-root-2.padding-right.medium}",
+                              "padding-top": "{imported.table.buttonbase-root-2.padding-top.medium}",
+                              "width": "{imported.table.buttonbase-root-2.width.medium}"
+                            },
+                            "small": {
+                              "border-bottom-left-radius": "{imported.table.buttonbase-root-2.border-bottom-left-radius.small}",
+                              "border-bottom-right-radius": "{imported.table.buttonbase-root-2.border-bottom-right-radius.small}",
+                              "border-top-left-radius": "{imported.table.buttonbase-root-2.border-top-left-radius.small}",
+                              "border-top-right-radius": "{imported.table.buttonbase-root-2.border-top-right-radius.small}",
+                              "height": "{imported.table.buttonbase-root-2.height.small}",
+                              "padding-bottom": "{imported.table.buttonbase-root-2.padding-bottom.small}",
+                              "padding-left": "{imported.table.buttonbase-root-2.padding-left.small}",
+                              "padding-right": "{imported.table.buttonbase-root-2.padding-right.small}",
+                              "padding-top": "{imported.table.buttonbase-root-2.padding-top.small}",
+                              "width": "{imported.table.buttonbase-root-2.width.small}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-52}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.tablecell-body.height.medium}",
+                          "padding-left": "{imported.table.tablecell-body.padding-left.medium}",
+                          "padding-right": "{imported.table.tablecell-body.padding-right.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.tablecell-body.height.small}",
+                          "padding-left": "{imported.table.tablecell-body.padding-left.small}",
+                          "padding-right": "{imported.table.tablecell-body.padding-right.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-5": {
+                  "element": "div",
+                  "text": "Frozen yoghurt",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-240-125}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-5.height.medium}",
+                          "padding-bottom": "{imported.table.label-5.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-5.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-5.height.small}",
+                          "padding-bottom": "{imported.table.label-5.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-5.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-6": {
+                  "element": "div",
+                  "text": "Designer",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-132-969}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-6.height.medium}",
+                          "padding-bottom": "{imported.table.label-6.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-6.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-6.height.small}",
+                          "padding-bottom": "{imported.table.label-6.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-6.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-7": {
+                  "element": "div",
+                  "text": "Platform",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-142-484}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-7.height.medium}",
+                          "padding-bottom": "{imported.table.label-7.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-7.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-7.height.small}",
+                          "padding-bottom": "{imported.table.label-7.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-7.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "tablecell-alignright": {
+                  "element": "div",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-alignRight.TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "end"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "parts": {
+                    "label-8": {
+                      "element": "button",
+                      "text": "⋮",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "inline-flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "declared": {
+                        "appearance": "none",
+                        "border-bottom-style": "none",
+                        "border-left-style": "none",
+                        "border-right-style": "none",
+                        "border-top-style": "none",
+                        "cursor": "pointer",
+                        "position": "relative",
+                        "transition-duration": "0.15s",
+                        "transition-property": "background-color",
+                        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                        "user-select": "none"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.table.label-8.background-color}",
+                        "border-bottom-width": "{imported.shared.size-0}",
+                        "border-left-width": "{imported.shared.size-0}",
+                        "border-right-width": "{imported.shared.size-0}",
+                        "border-top-width": "{imported.shared.size-0}",
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-0000008a}",
+                        "flex-shrink": "{imported.shared.num-0}",
+                        "font-size": "{imported.shared.size-18}",
+                        "font-weight": "{imported.shared.num-400}",
+                        "left": "{imported.shared.size-0}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-width": "{imported.shared.size-0}",
+                        "padding-bottom": "{imported.shared.size-5}",
+                        "padding-left": "{imported.shared.size-5}",
+                        "padding-right": "{imported.shared.size-5}",
+                        "padding-top": "{imported.shared.size-5}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-0000008a}",
+                        "top": "{imported.shared.size-0}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "right"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-120-422}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.tablecell-alignright.height.medium}",
+                          "padding-bottom": "{imported.table.tablecell-alignright.padding-bottom.medium}",
+                          "padding-top": "{imported.table.tablecell-alignright.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.tablecell-alignright.height.small}",
+                          "padding-bottom": "{imported.table.tablecell-alignright.padding-bottom.small}",
+                          "padding-top": "{imported.table.tablecell-alignright.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "outline-width": "{imported.shared.size-0}"
+              }
+            },
+            "tablerow-root-2": {
+              "element": "div",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy tr|TableRow-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "stretch"
+              },
+              "attrs": {
+                "role": "row"
+              },
+              "parts": {
+                "tablecell-body-2": {
+                  "element": "div",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-paddingCheckbox.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "parts": {
+                    "buttonbase-root-3": {
+                      "element": "span",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|ButtonBase-root.Checkbox-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "inline-flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "declared": {
+                        "aspect-ratio": "1 / 1",
+                        "box-sizing": "border-box",
+                        "cursor": "pointer",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                        "position": "relative",
+                        "text-align": "left",
+                        "user-select": "none"
+                      },
+                      "parts": {
+                        "part-1-1-0-0-0": {
+                          "element": "input",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "none",
+                            "appearance": "auto",
+                            "box-sizing": "border-box",
+                            "cursor": "pointer",
+                            "font-family": "Arial",
+                            "position": "absolute",
+                            "user-select": "none"
+                          },
+                          "tokens": {
+                            "bottom": "{imported.shared.size-0}",
+                            "font-size": "{imported.shared.size-13-3333}",
+                            "left": "{imported.shared.size-0}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "opacity": "{imported.shared.num-0}",
+                            "right": "{imported.shared.size-0}",
+                            "top": "{imported.shared.size-0}",
+                            "z-index": "{imported.shared.num-1}"
+                          },
+                          "tokensByProp": [
+                            {
+                              "prop": "size",
+                              "map": {
+                                "medium": {
+                                  "height": "{imported.table.part-1-1-0-0-0.height.medium}",
+                                  "width": "{imported.table.part-1-1-0-0-0.width.medium}"
+                                },
+                                "small": {
+                                  "height": "{imported.table.part-1-1-0-0-0.height.small}",
+                                  "width": "{imported.table.part-1-1-0-0-0.width.small}"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "icon-4": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "cursor": "pointer",
+                            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                            "overflow-x": "hidden",
+                            "overflow-y": "hidden",
+                            "text-align": "left",
+                            "transition-duration": "0.3s",
+                            "transition-property": "fill",
+                            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                            "user-select": "none"
+                          },
+                          "layout": {
+                            "grow": true
+                          },
+                          "icon": {
+                            "asset": "table-icon-4",
+                            "size": 24
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-1976d2}",
+                            "fill": "{imported.shared.color-1976d2}",
+                            "flex-shrink": "{imported.shared.num-0}",
+                            "font-size": "{imported.shared.size-24}",
+                            "height": "{imported.shared.size-24}",
+                            "letter-spacing": "{imported.shared.size-0-14994}",
+                            "line-height": "{imported.table.icon-4.line-height}",
+                            "row-rule-color": "{imported.shared.color-1976d2}",
+                            "width": "{imported.shared.size-24}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-1976d2}",
+                        "font-size": "{imported.shared.size-14}",
+                        "left": "{imported.shared.size-0}",
+                        "letter-spacing": "{imported.shared.size-0-14994}",
+                        "line-height": "{imported.shared.size-20-02}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-1976d2}",
+                        "top": "{imported.shared.size-0}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "size",
+                          "map": {
+                            "medium": {
+                              "border-bottom-left-radius": "{imported.table.buttonbase-root-3.border-bottom-left-radius.medium}",
+                              "border-bottom-right-radius": "{imported.table.buttonbase-root-3.border-bottom-right-radius.medium}",
+                              "border-top-left-radius": "{imported.table.buttonbase-root-3.border-top-left-radius.medium}",
+                              "border-top-right-radius": "{imported.table.buttonbase-root-3.border-top-right-radius.medium}",
+                              "height": "{imported.table.buttonbase-root-3.height.medium}",
+                              "padding-bottom": "{imported.table.buttonbase-root-3.padding-bottom.medium}",
+                              "padding-left": "{imported.table.buttonbase-root-3.padding-left.medium}",
+                              "padding-right": "{imported.table.buttonbase-root-3.padding-right.medium}",
+                              "padding-top": "{imported.table.buttonbase-root-3.padding-top.medium}",
+                              "width": "{imported.table.buttonbase-root-3.width.medium}"
+                            },
+                            "small": {
+                              "border-bottom-left-radius": "{imported.table.buttonbase-root-3.border-bottom-left-radius.small}",
+                              "border-bottom-right-radius": "{imported.table.buttonbase-root-3.border-bottom-right-radius.small}",
+                              "border-top-left-radius": "{imported.table.buttonbase-root-3.border-top-left-radius.small}",
+                              "border-top-right-radius": "{imported.table.buttonbase-root-3.border-top-right-radius.small}",
+                              "height": "{imported.table.buttonbase-root-3.height.small}",
+                              "padding-bottom": "{imported.table.buttonbase-root-3.padding-bottom.small}",
+                              "padding-left": "{imported.table.buttonbase-root-3.padding-left.small}",
+                              "padding-right": "{imported.table.buttonbase-root-3.padding-right.small}",
+                              "padding-top": "{imported.table.buttonbase-root-3.padding-top.small}",
+                              "width": "{imported.table.buttonbase-root-3.width.small}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-52}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.tablecell-body-2.height.medium}",
+                          "padding-left": "{imported.table.tablecell-body-2.padding-left.medium}",
+                          "padding-right": "{imported.table.tablecell-body-2.padding-right.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.tablecell-body-2.height.small}",
+                          "padding-left": "{imported.table.tablecell-body-2.padding-left.small}",
+                          "padding-right": "{imported.table.tablecell-body-2.padding-right.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-9": {
+                  "element": "div",
+                  "text": "Ice cream sandwich",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-240-125}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-9.height.medium}",
+                          "padding-bottom": "{imported.table.label-9.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-9.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-9.height.small}",
+                          "padding-bottom": "{imported.table.label-9.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-9.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-10": {
+                  "element": "div",
+                  "text": "Engineer",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-132-969}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-10.height.medium}",
+                          "padding-bottom": "{imported.table.label-10.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-10.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-10.height.small}",
+                          "padding-bottom": "{imported.table.label-10.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-10.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-11": {
+                  "element": "div",
+                  "text": "Contracts",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-142-484}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.label-11.height.medium}",
+                          "padding-bottom": "{imported.table.label-11.padding-bottom.medium}",
+                          "padding-top": "{imported.table.label-11.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.label-11.height.small}",
+                          "padding-bottom": "{imported.table.label-11.padding-bottom.small}",
+                          "padding-top": "{imported.table.label-11.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "tablecell-alignright-2": {
+                  "element": "div",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td|TableCell-alignRight.TableCell-body.TableCell-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "end"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "parts": {
+                    "label-12": {
+                      "element": "button",
+                      "text": "⋮",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "inline-flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "declared": {
+                        "appearance": "none",
+                        "border-bottom-style": "none",
+                        "border-left-style": "none",
+                        "border-right-style": "none",
+                        "border-top-style": "none",
+                        "cursor": "pointer",
+                        "position": "relative",
+                        "transition-duration": "0.15s",
+                        "transition-property": "background-color",
+                        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                        "user-select": "none"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.table.label-12.background-color}",
+                        "border-bottom-width": "{imported.shared.size-0}",
+                        "border-left-width": "{imported.shared.size-0}",
+                        "border-right-width": "{imported.shared.size-0}",
+                        "border-top-width": "{imported.shared.size-0}",
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-0000008a}",
+                        "flex-shrink": "{imported.shared.num-0}",
+                        "font-size": "{imported.shared.size-18}",
+                        "font-weight": "{imported.shared.num-400}",
+                        "left": "{imported.shared.size-0}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-width": "{imported.shared.size-0}",
+                        "padding-bottom": "{imported.shared.size-5}",
+                        "padding-left": "{imported.shared.size-5}",
+                        "padding-right": "{imported.shared.size-5}",
+                        "padding-top": "{imported.shared.size-5}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-0000008a}",
+                        "top": "{imported.shared.size-0}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "right"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e0e0e0}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "letter-spacing": "{imported.shared.size-0-14994}",
+                    "line-height": "{imported.shared.size-20-02}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "row-rule-color": "{imported.shared.color-000000de}",
+                    "width": "{imported.shared.size-120-422}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.table.tablecell-alignright-2.height.medium}",
+                          "padding-bottom": "{imported.table.tablecell-alignright-2.padding-bottom.medium}",
+                          "padding-top": "{imported.table.tablecell-alignright-2.padding-top.medium}"
+                        },
+                        "small": {
+                          "height": "{imported.table.tablecell-alignright-2.height.small}",
+                          "padding-bottom": "{imported.table.tablecell-alignright-2.padding-bottom.small}",
+                          "padding-top": "{imported.table.tablecell-alignright-2.padding-top.small}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.table.tablerow-root-2.background-color}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "outline-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "tokens": {
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box"
+      },
+      "tokens": {
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Table"
+    }
+  }
+}

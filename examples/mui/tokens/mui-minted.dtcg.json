@@ -2120,6 +2120,94 @@
       "size-32": {
         "$value": "32px",
         "$type": "dimension"
+      },
+      "size-21": {
+        "$value": "21px",
+        "$type": "dimension"
+      },
+      "size-42": {
+        "$value": "42px",
+        "$type": "dimension"
+      },
+      "size-9": {
+        "$value": "9px",
+        "$type": "dimension"
+      },
+      "size-52": {
+        "$value": "52px",
+        "$type": "dimension"
+      },
+      "size-0-13132": {
+        "$value": "0.13132px",
+        "$type": "dimension"
+      },
+      "size-20-125": {
+        "$value": "20.125px",
+        "$type": "dimension"
+      },
+      "size-8": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "color-767676": {
+        "$value": "#767676",
+        "$type": "color"
+      },
+      "size-40": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "size-20": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "color-e0e0e0": {
+        "$value": "#e0e0e0",
+        "$type": "color"
+      },
+      "size-0-14994": {
+        "$value": "0.14994px",
+        "$type": "dimension"
+      },
+      "size-13-3333": {
+        "$value": "13.3333px",
+        "$type": "dimension"
+      },
+      "num-1": {
+        "$value": "1",
+        "$type": "number"
+      },
+      "size-240-125": {
+        "$value": "240.125px",
+        "$type": "dimension"
+      },
+      "color-00000099": {
+        "$value": "#00000099",
+        "$type": "color"
+      },
+      "size-18": {
+        "$value": "18px",
+        "$type": "dimension"
+      },
+      "size-132-969": {
+        "$value": "132.969px",
+        "$type": "dimension"
+      },
+      "size-142-484": {
+        "$value": "142.484px",
+        "$type": "dimension"
+      },
+      "size-120-422": {
+        "$value": "120.422px",
+        "$type": "dimension"
+      },
+      "size-20-02": {
+        "$value": "20.02px",
+        "$type": "dimension"
+      },
+      "size-5": {
+        "$value": "5px",
+        "$type": "dimension"
       }
     },
     "chip": {
@@ -5181,6 +5269,1156 @@
         "padding-top": {
           "$value": "20px",
           "$type": "dimension"
+        }
+      }
+    },
+    "checkbox": {
+      "root": {
+        "color": {
+          "unchecked": {
+            "$value": "{palette-text-secondary}",
+            "$type": "color"
+          },
+          "checked": {
+            "$value": "{palette-primary-main}",
+            "$type": "color"
+          },
+          "indeterminate": {
+            "$value": "{palette-primary-main}",
+            "$type": "color"
+          }
+        },
+        "row-rule-color": {
+          "unchecked": {
+            "$value": "#00000099",
+            "$type": "color"
+          },
+          "checked": {
+            "$value": "#1976d2",
+            "$type": "color"
+          },
+          "indeterminate": {
+            "$value": "#1976d2",
+            "$type": "color"
+          }
+        }
+      },
+      "part-0": {
+        "font-size": {
+          "$value": "13.3333px",
+          "$type": "dimension"
+        },
+        "opacity": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "z-index": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "outline-color-state-focus-visible": {
+          "$value": "#005fcc",
+          "$type": "color"
+        },
+        "outline-offset-state-focus-visible": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "outline-width-state-focus-visible": {
+          "$value": "1px",
+          "$type": "dimension"
+        }
+      },
+      "icon": {
+        "color": {
+          "unchecked": {
+            "$value": "#00000099",
+            "$type": "color"
+          },
+          "checked": {
+            "$value": "#1976d2",
+            "$type": "color"
+          },
+          "indeterminate": {
+            "$value": "#1976d2",
+            "$type": "color"
+          }
+        },
+        "fill": {
+          "unchecked": {
+            "$value": "#00000099",
+            "$type": "color"
+          },
+          "checked": {
+            "$value": "#1976d2",
+            "$type": "color"
+          },
+          "indeterminate": {
+            "$value": "#1976d2",
+            "$type": "color"
+          }
+        },
+        "flex-shrink": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "row-rule-color": {
+          "unchecked": {
+            "$value": "#00000099",
+            "$type": "color"
+          },
+          "checked": {
+            "$value": "#1976d2",
+            "$type": "color"
+          },
+          "indeterminate": {
+            "$value": "#1976d2",
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "pagination": {
+      "root": {
+        "width": {
+          "$value": "428px",
+          "$type": "dimension"
+        }
+      },
+      "tablepagination-toolbar": {
+        "width": {
+          "$value": "428px",
+          "$type": "dimension"
+        }
+      },
+      "tablepagination-spacer": {
+        "flex-grow": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "width": {
+          "$value": "67.0312px",
+          "$type": "dimension"
+        }
+      },
+      "label": {
+        "letter-spacing": {
+          "$value": "0.14994px",
+          "$type": "dimension"
+        },
+        "line-height": {
+          "$value": "20.02px",
+          "$type": "dimension"
+        }
+      },
+      "inputbase-root": {
+        "height": {
+          "$value": "29.125px",
+          "$type": "dimension"
+        },
+        "margin-right": {
+          "$value": "32px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "48px",
+          "$type": "dimension"
+        }
+      },
+      "label-2": {
+        "min-width": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "padding-bottom": {
+          "$value": "5px",
+          "$type": "dimension"
+        },
+        "padding-top": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "outline-width-state-active": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "outline-width-state-focus-visible": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      },
+      "select-nativeinput": {
+        "background-color": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "font-size": {
+          "$value": "13.3333px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "21px",
+          "$type": "dimension"
+        },
+        "padding-bottom": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "padding-top": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "top": {
+          "$value": "8.125px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "48px",
+          "$type": "dimension"
+        }
+      },
+      "icon": {
+        "bottom": {
+          "$value": "2.5625px",
+          "$type": "dimension"
+        },
+        "top": {
+          "$value": "2.5625px",
+          "$type": "dimension"
+        }
+      },
+      "label-3": {
+        "letter-spacing": {
+          "$value": "0.14994px",
+          "$type": "dimension"
+        },
+        "line-height": {
+          "$value": "20.02px",
+          "$type": "dimension"
+        }
+      },
+      "tablepagination-actions": {
+        "width": {
+          "$value": "80px",
+          "$type": "dimension"
+        }
+      },
+      "buttonbase-root": {
+        "background-color": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      },
+      "buttonbase-root-2": {
+        "background-color": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      }
+    },
+    "table": {
+      "tablecell-head": {
+        "height": {
+          "small": {
+            "$value": "37.797px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "57.797px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "buttonbase-root": {
+        "border-bottom-left-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-bottom-right-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-top-left-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-top-right-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "part-0-0-0-0-0": {
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "outline-color-state-focus-visible": {
+          "$value": "#005fcc",
+          "$type": "color"
+        },
+        "outline-offset-state-focus-visible": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "outline-width-state-focus-visible": {
+          "$value": "1px",
+          "$type": "dimension"
+        }
+      },
+      "tablecell-head-2": {
+        "height": {
+          "small": {
+            "$value": "37.797px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "57.797px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "icon-2": {
+        "margin-left": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "margin-right": {
+          "$value": "4px",
+          "$type": "dimension"
+        }
+      },
+      "label-2": {
+        "height": {
+          "small": {
+            "$value": "37.797px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "57.797px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-3": {
+        "height": {
+          "small": {
+            "$value": "37.797px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "57.797px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-4": {
+        "height": {
+          "small": {
+            "$value": "37.797px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "57.797px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "tablecell-body": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "buttonbase-root-2": {
+        "border-bottom-left-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-bottom-right-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-top-left-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-top-right-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "part-1-0-0-0-0": {
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "icon-3": {
+        "line-height": {
+          "$value": "34.32px",
+          "$type": "dimension"
+        }
+      },
+      "label-5": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-6": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-7": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "tablecell-alignright": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-8": {
+        "background-color": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      },
+      "tablerow-root-2": {
+        "background-color": {
+          "$value": "#1976d214",
+          "$type": "color"
+        }
+      },
+      "tablecell-body-2": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "buttonbase-root-3": {
+        "border-bottom-left-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-bottom-right-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-top-left-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "border-top-right-radius": {
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "part-1-1-0-0-0": {
+        "height": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "42px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "icon-4": {
+        "line-height": {
+          "$value": "34.32px",
+          "$type": "dimension"
+        }
+      },
+      "label-9": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-10": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-11": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "tablecell-alignright-2": {
+        "height": {
+          "small": {
+            "$value": "45px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "65px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "small": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label-12": {
+        "background-color": {
+          "$value": "#00000000",
+          "$type": "color"
         }
       }
     }

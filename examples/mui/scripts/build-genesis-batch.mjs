@@ -29,10 +29,13 @@ const ORDER = [
   '00-tokens.figma.js',
   'button.figma.js', 'card.figma.js', 'chip.figma.js', 'slider.figma.js', 'switch.figma.js',
   'tabs.figma.js', 'accordion.figma.js', 'autocomplete.figma.js', 'dialog.figma.js',
+  // ORGANISM round: Checkbox + the composed DataTable (sets), TablePagination
+  // (standalone — no variant axes).
+  'checkbox.figma.js', 'table.figma.js', 'table-pagination.figma.js',
   'menu.figma.js', 'tooltip.figma.js',
 ];
 // standalone (no variant axes → COMPONENT, not COMPONENT_SET)
-const STANDALONE = ['Menu', 'Tooltip'];
+const STANDALONE = ['Menu', 'Tooltip', 'TablePagination'];
 
 const blocks = ORDER.map((f) => `// ───── ${f} ─────
 await (async () => {

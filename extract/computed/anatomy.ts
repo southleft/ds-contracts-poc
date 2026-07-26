@@ -34,6 +34,105 @@ import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
 import { signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
 
+// ---------------------------------------------------------------------------
+// ORGANISM ROUND (Table) — TABLE-DISPLAY LOWERING
+// ---------------------------------------------------------------------------
+/** The CSS table box model is outside EVERY vocabulary the schema speaks:
+ *  `LayoutSchema.display` is flex|inline-flex and the declared registry is
+ *  inline|inline-block|block|contents|none. Before this round a
+ *  `display:table-row` part fell through to the
+ *  `display-outside-vocabulary` receipt and then took the emitter's default
+ *  layoutSpec (HORIZONTAL/CENTER/CENTER) — structurally wrong for a table
+ *  and SILENT.
+ *
+ *  The decision (organism round): do NOT grow the declared registry with
+ *  table keywords no target can render. LOWER the table box model to the
+ *  flex vocabulary it is behaviorally equivalent to for the non-spanning,
+ *  colgroup-free case the anatomy can see:
+ *
+ *    table / inline-table / table-header-group / table-row-group /
+ *    table-footer-group        → column stack, children stretch (rows fill
+ *                                the table width — exactly what a table does)
+ *    table-row                 → row, children stretch (every cell takes the
+ *                                row's height — the table box model's own
+ *                                rule; the CELLS then center their content)
+ *    table-cell                → row; counter axis from the cell's OWN
+ *                                computed vertical-align, main axis from its
+ *                                computed text-align (align="right" columns)
+ *    table-column / -caption   → NOT lowered (named residue below)
+ *
+ *  Everything the lowering cannot express — border-collapse, border-spacing,
+ *  table-layout, colspan/rowspan — keeps flowing through the ordinary
+ *  declared/codeOnly path and is named there.
+ *
+ *  Every lowering emits a `table-lowering:` receipt. */
+const TABLE_DISPLAYS = new Set([
+  'table', 'inline-table', 'table-header-group', 'table-row-group', 'table-footer-group',
+  'table-row', 'table-cell',
+]);
+
+export const isTableDisplay = (d: string | undefined): boolean => (d ?? '').startsWith('table') || d === 'inline-table';
+
+export interface TableLowering {
+  layout: NonNullable<Part['layout']>;
+  note: string;
+}
+
+/** Pure: lower ONE computed table display to the flex vocabulary, reading
+ *  the element's own vertical-align / text-align for the axis alignments.
+ *  Returns null for table displays outside the lowered set (named residue). */
+export function lowerTableDisplay(display: string, style: Record<string, string>): TableLowering | null {
+  const vAlign = style['vertical-align'] ?? '';
+  const counter =
+    vAlign === 'middle' ? 'center' : vAlign === 'bottom' ? 'end' : vAlign === 'top' ? 'start' : null;
+  switch (display) {
+    case 'table':
+    case 'inline-table':
+    case 'table-header-group':
+    case 'table-row-group':
+    case 'table-footer-group':
+      return {
+        layout: { display: 'flex', direction: 'column', align: 'stretch' },
+        note: `${display} → flex column, children stretch (row groups stack and fill the table width)`,
+      };
+    case 'table-row':
+      return {
+        layout: { display: 'flex', direction: 'row', align: 'stretch' },
+        note: 'table-row → flex row, children stretch (every cell takes the row height — the table box model\'s own rule; the cell centers its own content)',
+      };
+    case 'table-cell': {
+      const ta = style['text-align'] ?? '';
+      const justify = ta === 'right' || ta === 'end' ? 'end' : ta === 'center' ? 'center' : 'start';
+      return {
+        layout: { display: 'flex', direction: 'row', align: counter ?? 'center', justify },
+        note: `table-cell → flex row (counter axis ${counter ?? 'center (vertical-align "' + (vAlign || 'unset') + '" outside the lowered set — middle assumed, named)'}, main axis ${justify} from text-align:${ta || 'unset'})`,
+      };
+    }
+    default:
+      return null;
+  }
+}
+
+/** The ARIA role a lowered table box keeps (the table box model's meaning,
+ *  carried on a plain <div> — see the element lowering in buildPart). */
+export function tableRoleFor(display: string, tag: string): string | null {
+  switch (display) {
+    case 'table':
+    case 'inline-table':
+      return 'table';
+    case 'table-header-group':
+    case 'table-row-group':
+    case 'table-footer-group':
+      return 'rowgroup';
+    case 'table-row':
+      return 'row';
+    case 'table-cell':
+      return tag === 'th' ? 'columnheader' : 'cell';
+    default:
+      return null;
+  }
+}
+
 /** Visually-hidden (sr-only) style signature: clip-path inset(50%) or the
  *  1px clip box. Part of the UNION signature — a toned Badge renders an
  *  sr-only announcement span with the same tag+stems as the visible label,
@@ -1280,6 +1379,24 @@ export function promoteAnatomy(
           part.layout = { display: d as 'flex' | 'inline-flex', ...part.layout };
         } else if (/^(inline|inline-block|block|contents|none)$/.test(d)) {
           part.declared = { display: d, ...part.declared };
+        } else if (TABLE_DISPLAYS.has(d)) {
+          // ORGANISM round: the CSS table box model lowered to the flex
+          // vocabulary (see lowerTableDisplay). Receipted per part — the
+          // canvas draws real rows/columns instead of the emitter's default
+          // HORIZONTAL/CENTER/CENTER guess.
+          const low = lowerTableDisplay(d, e.rep.style)!;
+          part.layout = { ...low.layout, ...part.layout };
+          // …and so is the ELEMENT. A promoted <tr>/<thead> outside a <table>
+          // is DELETED by the HTML parser and a bare <th>/<td> ignores its
+          // flex layout — the lowering must be complete or it is a silent
+          // structural loss (caught by the fidelity gate: the first Table
+          // capture scored 33.5% because the emitted rows were parsed away).
+          // The semantics are NOT dropped: each lowered part carries the
+          // matching ARIA role, which is what the table box model means.
+          const role = tableRoleFor(d, e.rep.tag);
+          part.element = 'div';
+          if (role) part.attrs = { role, ...part.attrs };
+          receipts.push(`table-lowering: ${e.partName} ${low.note}; element <${e.rep.tag}> → <div>${role ? ` role="${role}"` : ''} (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)`);
         } else {
           receipts.push(`display-outside-vocabulary: ${e.partName} = "${d}" — carried by neither layout nor the declared registry (named residue)`);
         }
@@ -1472,6 +1589,18 @@ export function promoteAnatomy(
           if (Object.keys(newRoot.layout).length === 0) delete newRoot.layout;
         }
         newRoot.declared = { display: d, ...newRoot.declared };
+      } else if (TABLE_DISPLAYS.has(d)) {
+        // ORGANISM round: a display:table ROOT (the Table organism) lowers
+        // exactly like a promoted part — the root is the column stack its
+        // row groups fill.
+        const low = lowerTableDisplay(d, rootEntry.rep.style)!;
+        newRoot.layout = { ...low.layout, ...newRoot.layout };
+        const rootRole = tableRoleFor(d, rootEntry.rep.tag);
+        if (rootRole && contract.semantics.role === undefined) {
+          contract.semantics.role = rootRole;
+          receipts.push(`table-lowering: root semantics.role minted "${rootRole}" — the root's table box model is lowered to flex, and the reviewed contract declared no role (the meaning must not be lost with the display)`);
+        }
+        receipts.push(`table-lowering: root ${low.note}${contract.semantics.element !== 'div' ? ` — NOTE reviewed semantics.element is <${contract.semantics.element}>, which the code generator will emit outside any <table>` : ''}`);
       }
     }
   }

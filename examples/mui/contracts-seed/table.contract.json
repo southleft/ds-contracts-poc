@@ -1,0 +1,51 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.table",
+  "name": "Table",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI ORGANISM round — the first ORGANISM through the computed pipeline. Props/axes only; the whole composed DataTable anatomy (head row + 5 columns incl. a checkbox column and a sort-label column, two body rows one of them selected/checked, a right-aligned action cell) is promoted from captured DOM truth via the RECURSIVE childrenSpec tree. NAMED EXCLUSIONS (v1): stickyHeader (position:sticky has no carried spelling); the row overflow menu is captured CLOSED (an open Menu portals a root and the single-portaled-root policy would drop the in-stage table); TableSortLabel direction='asc' only (the direction axis is excluded by name); TableContainer/Paper is not the captured root (axes ride the root mount and `size` is a Table prop); rows are INLINED, not component refs (promotion emits no refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding with unchanged child classes). Column widths are deterministic AT THE PINNED STAGE WIDTH — table-layout:auto reflows with available width. NAMED RESIDUE: the schema's semantics vocabulary has no table/thead/tbody/tr/td elements (element=div + role=table, the repo's own ds.table precedent) — the CSS table box model is LOWERED to the flex vocabulary at promotion (table-lowering receipts) rather than growing the bounded grammar with keywords no target renders. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div",
+    "role": "table"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Table"
+    }
+  }
+}

@@ -1,0 +1,580 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Table",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked, .css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate"
+      }
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked, .css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate"
+      }
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+      }
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+      }
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked, .css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate"
+      }
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked, .css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-1kih386-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active .MuiTableSortLabel-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-1kih386-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active .MuiTableSortLabel-icon"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kih386-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kih386-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active"
+      }
+    },
+    {
+      "part": "label-10",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-6melek-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-10",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kis9cl-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-11",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-6melek-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-11",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kis9cl-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-12",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-3lya2u-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "label-12",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-3lya2u-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-bfxqge-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-5ilu4b-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-bfxqge-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-5ilu4b-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-4",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-10h4z56-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-4",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1e9c3nx-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-5",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-6melek-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-5",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kis9cl-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-6",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-6melek-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-6",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kis9cl-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-7",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-6melek-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-7",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kis9cl-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-8",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-3lya2u-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "label-8",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-3lya2u-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "label-9",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-6melek-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "label-9",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1kis9cl-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-wqx2l2-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-3wds0e-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-wqx2l2-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-3wds0e-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-17dzdh0-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-m3zp1z-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-17dzdh0-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-m3zp1z-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-p3l59b-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1nwf9q8-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-bfxqge-MuiTableCell-root"
+      }
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-5ilu4b-MuiTableCell-root"
+      }
+    }
+  ],
+  "skips": []
+}

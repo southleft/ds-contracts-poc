@@ -116,9 +116,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "label",
               "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "children": [
                 {
@@ -132,11 +133,11 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16",
                 "paddingBottom": "imported/shared/size-24",
                 "paddingLeft": "imported/shared/size-24",
                 "paddingRight": "imported/shared/size-24",
-                "paddingTop": "imported/shared/size-24"
+                "paddingTop": "imported/shared/size-24",
+                "itemSpacing": "imported/shared/size-16"
               }
             }
           ]

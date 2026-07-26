@@ -1,0 +1,386 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.table-pagination",
+  "name": "TablePagination",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. Mounted as component='div' (the composition every real table ships; the default renders a <td> that only makes sense inside a table footer). count/rowsPerPage/page pinned so the rendered strings are deterministic. NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 the component forces BOTH arrow IconButtons Mui-disabled — the ENABLED arrow colors are unobservable at this combo and are absent from the captured truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "overflow-x": "auto",
+        "overflow-y": "auto"
+      },
+      "parts": {
+        "tablepagination-toolbar": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|TablePagination-toolbar.Toolbar-gutters.Toolbar-regular.Toolbar-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "tablepagination-spacer": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|TablePagination-spacer — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "flex-grow": "{imported.pagination.tablepagination-spacer.flex-grow}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-000000de}",
+                "width": "{imported.pagination.tablepagination-spacer.width}"
+              }
+            },
+            "label": {
+              "element": "p",
+              "text": "Rows per page:",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy p|TablePagination-selectLabel — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-400}",
+                "letter-spacing": "{imported.pagination.label.letter-spacing}",
+                "line-height": "{imported.pagination.label.line-height}",
+                "margin-bottom": "{imported.shared.size-14}",
+                "margin-top": "{imported.shared.size-14}",
+                "row-rule-color": "{imported.shared.color-000000de}"
+              }
+            },
+            "inputbase-root": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|InputBase-root.Select-root.TablePagination-input.TablePagination-select — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "label-2": {
+                  "text": "10",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|InputBase-input.Select-select.TablePagination-select — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "text-align": "right",
+                    "text-overflow": "ellipsis",
+                    "text-wrap-mode": "nowrap",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.shared.size-0-13132}",
+                    "line-height": "{imported.shared.size-20-125}",
+                    "min-height": "{imported.shared.size-20-125}",
+                    "min-width": "{imported.pagination.label-2.min-width}",
+                    "padding-bottom": "{imported.pagination.label-2.padding-bottom}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-24}",
+                    "padding-top": "{imported.pagination.label-2.padding-top}",
+                    "row-rule-color": "{imported.shared.color-000000de}"
+                  }
+                },
+                "select-nativeinput": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input|Select-nativeInput|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "box-sizing": "border-box",
+                    "cursor": "text",
+                    "font-family": "Arial",
+                    "overflow-x": "clip",
+                    "overflow-y": "clip",
+                    "pointer-events": "none",
+                    "position": "absolute"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.pagination.select-nativeinput.background-color}",
+                    "border-bottom-color": "{imported.shared.color-767676}",
+                    "border-bottom-width": "{imported.shared.size-2}",
+                    "border-left-color": "{imported.shared.color-767676}",
+                    "border-left-width": "{imported.shared.size-2}",
+                    "border-right-color": "{imported.shared.color-767676}",
+                    "border-right-width": "{imported.shared.size-2}",
+                    "border-top-color": "{imported.shared.color-767676}",
+                    "border-top-width": "{imported.shared.size-2}",
+                    "bottom": "{imported.shared.size-0}",
+                    "font-size": "{imported.pagination.select-nativeinput.font-size}",
+                    "height": "{imported.pagination.select-nativeinput.height}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.shared.num-0}",
+                    "padding-bottom": "{imported.pagination.select-nativeinput.padding-bottom}",
+                    "padding-left": "{imported.shared.size-2}",
+                    "padding-right": "{imported.shared.size-2}",
+                    "padding-top": "{imported.pagination.select-nativeinput.padding-top}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.pagination.select-nativeinput.top}",
+                    "width": "{imported.pagination.select-nativeinput.width}"
+                  }
+                },
+                "icon": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg|Select-icon.SvgIcon-root.TablePagination-selectIcon — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "position": "absolute",
+                    "cursor": "text",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "pointer-events": "none",
+                    "transition-duration": "0.3s",
+                    "transition-property": "fill",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                    "user-select": "none"
+                  },
+                  "icon": {
+                    "asset": "table-pagination-icon",
+                    "size": 24
+                  },
+                  "tokens": {
+                    "bottom": "{imported.pagination.icon.bottom}",
+                    "color": "{imported.shared.color-0000008a}",
+                    "fill": "{imported.shared.color-0000008a}",
+                    "flex-shrink": "{imported.shared.num-0}",
+                    "font-size": "{imported.shared.size-24}",
+                    "height": "{imported.shared.size-24}",
+                    "left": "{imported.shared.size-24}",
+                    "letter-spacing": "{imported.shared.size-0-13132}",
+                    "line-height": "{imported.shared.size-20-125}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-0000008a}",
+                    "top": "{imported.pagination.icon.top}",
+                    "width": "{imported.shared.size-24}"
+                  }
+                }
+              },
+              "declared": {
+                "box-sizing": "border-box",
+                "cursor": "text",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "position": "relative"
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-000000de}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.pagination.inputbase-root.height}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-13132}",
+                "line-height": "{imported.shared.size-20-125}",
+                "margin-left": "{imported.shared.size-8}",
+                "margin-right": "{imported.pagination.inputbase-root.margin-right}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-000000de}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.pagination.inputbase-root.width}"
+              }
+            },
+            "label-3": {
+              "element": "p",
+              "text": "1–3 of 3",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy p|TablePagination-displayedRows — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-400}",
+                "letter-spacing": "{imported.pagination.label-3.letter-spacing}",
+                "line-height": "{imported.pagination.label-3.line-height}",
+                "margin-bottom": "{imported.shared.size-14}",
+                "margin-top": "{imported.shared.size-14}",
+                "row-rule-color": "{imported.shared.color-000000de}"
+              }
+            },
+            "tablepagination-actions": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|TablePagination-actions.TablePaginationActions-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "parts": {
+                "buttonbase-root": {
+                  "element": "button",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "inline-flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "icon": {
+                    "asset": "table-pagination-buttonbase-root",
+                    "size": 24
+                  },
+                  "declared": {
+                    "appearance": "none",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "pointer-events": "none",
+                    "position": "relative",
+                    "transition-duration": "0.15s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.pagination.buttonbase-root.background-color}",
+                    "border-bottom-left-radius": "{imported.shared.size-20}",
+                    "border-bottom-right-radius": "{imported.shared.size-20}",
+                    "border-bottom-width": "{imported.shared.size-0}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-left-radius": "{imported.shared.size-20}",
+                    "border-top-right-radius": "{imported.shared.size-20}",
+                    "border-top-width": "{imported.shared.size-0}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-00000042}",
+                    "flex-shrink": "{imported.shared.num-0}",
+                    "font-size": "{imported.shared.size-24}",
+                    "height": "{imported.shared.size-40}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "outline-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-8}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-8}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-00000042}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-40}"
+                  }
+                },
+                "buttonbase-root-2": {
+                  "element": "button",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "inline-flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "icon": {
+                    "asset": "table-pagination-buttonbase-root-2",
+                    "size": 24
+                  },
+                  "declared": {
+                    "appearance": "none",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "pointer-events": "none",
+                    "position": "relative",
+                    "transition-duration": "0.15s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.pagination.buttonbase-root-2.background-color}",
+                    "border-bottom-left-radius": "{imported.shared.size-20}",
+                    "border-bottom-right-radius": "{imported.shared.size-20}",
+                    "border-bottom-width": "{imported.shared.size-0}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-left-radius": "{imported.shared.size-20}",
+                    "border-top-right-radius": "{imported.shared.size-20}",
+                    "border-top-width": "{imported.shared.size-0}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-00000042}",
+                    "flex-shrink": "{imported.shared.num-0}",
+                    "font-size": "{imported.shared.size-24}",
+                    "height": "{imported.shared.size-40}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "outline-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-8}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-8}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-00000042}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-40}"
+                  }
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-40}",
+                "margin-left": "{imported.shared.size-20}",
+                "row-rule-color": "{imported.shared.color-000000de}",
+                "width": "{imported.pagination.tablepagination-actions.width}"
+              }
+            }
+          },
+          "declared": {
+            "position": "relative"
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.shared.size-52}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-52}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-24}",
+            "padding-right": "{imported.shared.size-2}",
+            "right": "{imported.shared.size-0}",
+            "row-rule-color": "{imported.shared.color-000000de}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.pagination.tablepagination-toolbar.width}"
+          }
+        }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-000000de}",
+        "font-size": "{imported.shared.size-14}",
+        "height": "{imported.shared.size-52}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "row-rule-color": "{imported.shared.color-000000de}",
+        "width": "{imported.pagination.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "TablePagination"
+    }
+  }
+}

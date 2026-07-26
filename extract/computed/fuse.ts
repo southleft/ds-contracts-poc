@@ -180,6 +180,162 @@ export function absClusterParts(
   return { absAdmit, clusterAdmit, textExcluded };
 }
 
+// ---------------------------------------------------------------------------
+// ORGANISM ROUND (Table) — TABLE-CELL COLUMN GEOMETRY
+// ---------------------------------------------------------------------------
+/** Geometry is excluded from fusion BY NAME (environment-dependent: font
+ *  metrics, container width). The absolute round found the first class where
+ *  that rule is wrong (overlay anatomy). This is the second.
+ *
+ *  A table cell's width is not the cell's own choice — the table's column
+ *  algorithm assigns ONE width to the whole COLUMN, and the browser proves
+ *  it: header and body cells of the same column measure identical outer
+ *  widths in every combo. That agreement IS the evidence. Without it the
+ *  canvas draws hugging cells and the table stops being a table.
+ *
+ *  Rules (all named, none silent):
+ *   · column identity = the cell's INDEX within its row part (the anatomy
+ *     has no colgroup concept). A row whose cell count differs from the
+ *     others REFUSES the whole table by name.
+ *   · agreement = every cell of a column, in every enabled combo, within
+ *     0.5px of the column's first cell (OUTER, box-sizing-baked).
+ *     Disagreement → `table-column-width-disagreement` refusal, nothing
+ *     admitted (the honest fallback is hugging cells).
+ *   · HEIGHT rides the ROW, not the cell: a cell's own computed height is
+ *     its CONTENT height (Chromium reports 30px for a cell inside a 63px
+ *     row). The table box model gives every cell in a row the row's height —
+ *     so the cell's admitted height VALUE is read from its row element
+ *     (`table-cell-height-from-row`). Without it the per-cell dividers
+ *     (border-bottom lives on CELLS in MUI) land at different y positions.
+ *   · The claim is only ever "deterministic at the PINNED stage width" —
+ *     table-layout:auto reflows with available width. Same determinism class
+ *     as every other computed-capture fact (recorded in provenance).
+ *
+ *  Table-display parts are also EXCLUDED from the absolute-cluster geometry
+ *  admission: a table contains absolute descendants (MUI's Checkbox input),
+ *  which would otherwise admit width/height for every non-text part —
+ *  including the lying per-cell heights. Their sizes come from the lowered
+ *  flex stack instead. */
+export interface TableGeometry {
+  /** part index → its uniform computed table display. */
+  lowered: Map<number, string>;
+  /** cell part indices whose COLUMN width agreed (width+height admitted). */
+  cellAdmit: Set<number>;
+  /** cell part index → its row part index (height is read from the row). */
+  rowOfCell: Map<number, number>;
+  receipts: string[];
+  refusals: string[];
+}
+
+const pxNum = (val: string | undefined): number | null => {
+  if (val === undefined) return null;
+  const m = /^(-?[\d.]+)px$/.exec(val);
+  return m ? parseFloat(m[1]) : null;
+};
+
+/** Outer (border-box) size of one element on one axis, box-sizing-aware —
+ *  the same baking the absolute round applies in prepareMint. */
+const outerPx = (style: Record<string, string>, axis: 'width' | 'height'): number | null => {
+  const base = pxNum(style[axis]);
+  if (base === null) return null;
+  if (style['box-sizing'] === 'border-box') return base;
+  const sides = axis === 'width' ? ['left', 'right'] : ['top', 'bottom'];
+  let outer = base;
+  for (const side of sides) {
+    outer += pxNum(style[`padding-${side}`]) ?? 0;
+    outer += pxNum(style[`border-${side}-width`]) ?? 0;
+  }
+  return Math.round(outer * 1000) / 1000;
+};
+
+export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry {
+  const out: TableGeometry = { lowered: new Map(), cellAdmit: new Set(), rowOfCell: new Map(), receipts: [], refusals: [] };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  // 1. uniform table displays
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const displays = new Set<string>();
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (el) displays.add(el.node.style['display']);
+    }
+    if (displays.size === 1) {
+      const d = [...displays][0];
+      if (d === 'table' || d === 'inline-table' || d.startsWith('table-')) out.lowered.set(pi, d);
+    }
+  }
+  if (out.lowered.size === 0) return out;
+
+  // 2. rows → their cells, in union-child order (the DOM order the union
+  //    preserves). Column identity = index within the row.
+  const idxOf = new Map<number, number>();
+  a.union.entries.forEach((e, i) => idxOf.set(e.id, i));
+  const columns = new Map<number, number[]>(); // column index → cell part indices
+  let cellCount: number | null = null;
+  for (const [pi, d] of out.lowered) {
+    if (d !== 'table-row') continue;
+    const rowEntry = a.union.entries[pi];
+    const cells = rowEntry.children
+      .map((c) => idxOf.get(c.id)!)
+      .filter((ci) => out.lowered.get(ci) === 'table-cell');
+    if (cells.length === 0) continue;
+    if (cellCount === null) cellCount = cells.length;
+    else if (cells.length !== cellCount) {
+      out.refusals.push(
+        `table-column-arity-disagreement: row "${a.partNames[pi]}" has ${cells.length} cells, an earlier row has ${cellCount} — column identity is index-within-row (no colgroup/colspan concept in the anatomy); NO column widths admitted`,
+      );
+      return { ...out, cellAdmit: new Set(), rowOfCell: new Map() };
+    }
+    cells.forEach((ci, col) => {
+      (columns.get(col) ?? columns.set(col, []).get(col)!).push(ci);
+      out.rowOfCell.set(ci, pi);
+    });
+  }
+
+  // 3. per column: outer widths agree across rows in EVERY enabled combo
+  for (const [col, cells] of [...columns].sort((x, y) => x[0] - y[0])) {
+    let agreed = true;
+    const widths: string[] = [];
+    for (const combo of enabled) {
+      const els = a.getAligned(`${combo.key}__default`);
+      const seen: Array<{ part: string; w: number }> = [];
+      for (const ci of cells) {
+        const el = els[ci];
+        if (!el) continue;
+        const w = outerPx(el.node.style, 'width');
+        if (w === null) {
+          out.refusals.push(`table-column-width-unreadable: column ${col} cell "${a.partNames[ci]}" width "${el.node.style['width']}" is not a px length in combo ${combo.key} — column NOT admitted`);
+          agreed = false;
+          break;
+        }
+        seen.push({ part: a.partNames[ci], w });
+      }
+      if (!agreed) break;
+      if (seen.length < 2) continue; // a one-row column proves nothing across rows
+      const first = seen[0].w;
+      const bad = seen.find((s) => Math.abs(s.w - first) > 0.5);
+      if (bad) {
+        out.refusals.push(
+          `table-column-width-disagreement: column ${col} in combo ${combo.key} — "${seen[0].part}" ${first}px vs "${bad.part}" ${bad.w}px (>0.5px); the column algorithm did not produce one width, so NO width is admitted for this column (hugging cells is the honest fallback)`,
+        );
+        agreed = false;
+        break;
+      }
+      widths.push(`${combo.key}=${first}px`);
+    }
+    if (!agreed) continue;
+    for (const ci of cells) out.cellAdmit.add(ci);
+    out.receipts.push(
+      `table-column-width-admitted: column ${col} (${cells.map((ci) => a.partNames[ci]).join(', ')}) — every row measures the same OUTER width in every enabled combo (${widths.join(', ') || 'single-row column'}); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)`,
+    );
+  }
+  if (out.cellAdmit.size > 0) {
+    out.receipts.push(
+      `table-cell-height-from-row: the admitted cells take their HEIGHT from their ROW element — a cell's own computed height is its CONTENT height (Chromium reports e.g. 30px inside a 63px row), and the table box model gives every cell in a row the row's height; without it the per-cell border-bottom dividers land at different y positions (named)`,
+    );
+  }
+  return out;
+}
+
 export function styledChannels(
   a: AlignedSweep,
   space: PropSpace,
@@ -207,10 +363,23 @@ export function styledChannels(
   // part (text widths are font-metric-dependent — the one genuinely
   // environment-coupled case stays excluded, receipted).
   const { clusterAdmit: parentAdmit, textExcluded } = absClusterParts(a, space);
+  // ORGANISM round (Table): table-display parts NEVER take the absolute-
+  // cluster geometry admission — a table contains absolute descendants (MUI's
+  // Checkbox input), which would otherwise admit the LYING per-cell heights
+  // (a cell reports its content height, not its row's). Their sizes come from
+  // the lowered flex stack, and admitted cells take width/height from the
+  // column rule below.
+  const table = tableGeometry(a, space);
+  receipts.push(...table.receipts, ...table.refusals);
   for (const pi of textExcluded) {
+    if (table.lowered.has(pi)) continue;
     receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
   }
   for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
+    if (table.lowered.has(pi)) {
+      receipts.push(`table-geometry-excluded: ${a.partNames[pi]} (display:${table.lowered.get(pi)}) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)`);
+      continue;
+    }
     receipts.push(`absolute-geometry-admitted: ${a.partNames[pi]} — ${absAdmit.has(pi) ? 'uniformly position:absolute' : 'overlay-cluster member (component contains absolute parts)'}; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)`);
   }
   // BLOCK-ROOT WIDTH (Card live finding, live-paste-3): a block-display root
@@ -237,9 +406,11 @@ export function styledChannels(
   }
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
+    const inTableBox = table.lowered.has(pi);
     const admit = (p: string): boolean =>
       isFusable(p) ||
-      (GEOM_ADMIT.has(p) && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
+      (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
+      ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
       (p === 'width' && blockRootAdmit.has(pi));
     const tag = a.baseFlat[pi].node.tag;
     const ctrl = controls[tag] ?? controls['span'];
@@ -258,11 +429,15 @@ export function styledChannels(
       }
     }
     // synthetic translate channels live outside the browser enumeration
-    if (absAdmit.has(pi) || parentAdmit.has(pi)) {
+    if (!inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) {
       for (const p of ['translate-x', 'translate-y']) {
         if (a.baseFlat[pi].node.style[p] !== undefined) set.add(p);
       }
     }
+    // ORGANISM round: an admitted table cell ALWAYS carries width+height —
+    // the column width and the row height are facts of the table box model,
+    // not deltas from a <span> control baseline.
+    if (table.cellAdmit.has(pi)) { set.add('width'); set.add('height'); }
     // Round 5c — TEXT-PART TYPOGRAPHY IS ALWAYS A FACT: a text-bearing
     // part whose typography equals the mount context (the provider's 13px/
     // 20px/450 body) looked "unstyled" against the span control and was
@@ -724,12 +899,18 @@ export function prepareMint(
     const m = /^(-?[\d.]+)px$/.exec(val);
     return m ? parseFloat(m[1]) : null;
   };
+  // ORGANISM round: the admitted table cells ride the SAME box-sizing-aware
+  // outer baking (MUI's cells are content-box: 48px content + 4px padding is
+  // a 52px canvas frame) — and their HEIGHT value is read from the ROW (a
+  // cell's own computed height is its content height; see tableGeometry).
+  const tableGeo = tableGeometry(a, space);
   const geomOuterParts = (() => {
     const { absAdmit, clusterAdmit } = absClusterParts(a, space);
     const out = new Set([...absAdmit, ...clusterAdmit]);
     // block-root width rides the same outer-size baking (box-sizing-aware)
     const rootPi = a.baseFlat.findIndex((e) => e.path === '');
     if (rootPi >= 0) out.add(rootPi);
+    for (const pi of tableGeo.cellAdmit) out.add(pi);
     return out;
   })();
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
@@ -781,6 +962,18 @@ export function prepareMint(
               }
               if (outer !== base) v = `${Math.round(outer * 1000) / 1000}px`;
             }
+          }
+          // ORGANISM round (Table): a cell's HEIGHT is its ROW's height. The
+          // browser reports the cell's CONTENT height (30px inside a 63px
+          // row) — carrying that would land the per-cell border-bottom
+          // dividers at different y positions. Read from the row element in
+          // the SAME combo; a row without a readable height leaves the cell's
+          // own value (named through the unmintable path if it is unusable).
+          if (channel === 'height' && tableGeo.cellAdmit.has(pi)) {
+            const rowPi = tableGeo.rowOfCell.get(pi);
+            const rowEl = rowPi === undefined ? null : a.getAligned(`${combo.key}__default`)[rowPi];
+            const rh = rowEl ? outerPx(rowEl.node.style, 'height') : null;
+            if (rh !== null) v = `${rh}px`;
           }
           // Tailwind round: rounded-full compiles to calc(infinity*1px);
           // Chromium clamps to 3.35544e+07px (scientific notation — outside

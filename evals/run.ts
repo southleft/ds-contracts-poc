@@ -3508,6 +3508,141 @@ const cases: Case[] = [
     },
   },
   {
+    // ORGANISM ROUND — the four engine classes the composed MUI DataTable
+    // required, pinned as PURE functions so none of them can regress
+    // headlessly:
+    //   1. RECURSIVE childrenSpec — the canonical-children vocabulary is a
+    //      TREE, imports are collected at every depth, and a node that is
+    //      BOTH a text leaf and a composition is a NAMED load refusal.
+    //   2. TABLE LOWERING — display:table* is outside every vocabulary the
+    //      schema speaks; it lowers to flex (+ the matching ARIA role)
+    //      instead of growing the bounded declared grammar.
+    //   3. TABLE-CELL COLUMN WIDTH — geometry is excluded from fusion BY
+    //      NAME; a column whose rows AGREE re-admits width, and a column
+    //      whose rows DISAGREE refuses by name and admits nothing.
+    //   4. The promoted organism actually carries it: the committed
+    //      table.contract.json has one width per column, shared by header
+    //      and body, and per-cell dividers.
+    id: 'organism-table-lowering',
+    claim: 'C5-extraction',
+    run: () => {
+      // loadConfig REFUSES a config whose seed contracts are missing — stage
+      // them (files, not trees: the scratch-hermeticity discipline).
+      cpSync(path.join(ROOT, 'examples', 'mui', 'contracts-seed'), path.join(SCRATCH, 'examples', 'mui', 'contracts-seed'), {
+        recursive: true,
+      });
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { loadConfig, walkChildSpecs } from './extract/computed/capture.ts';
+        import { lowerTableDisplay, tableRoleFor } from './extract/computed/anatomy.ts';
+
+        // 1. recursive childrenSpec over the REAL committed config
+        const cfg = loadConfig(process.cwd(), 'extract/computed/configs/mui.json');
+        const table = cfg.components.find((c) => c.name === 'Table');
+        if (!table) throw new Error('the MUI config has no Table component');
+        const flat = walkChildSpecs(table.childrenSpec);
+        const depth = (list, d = 1) => Math.max(d, ...(list ?? []).map((c) => c.children ? depth(c.children, d + 1) : d));
+        if (depth(table.childrenSpec) < 4) throw new Error('Table childrenSpec is not a TREE (depth ' + depth(table.childrenSpec) + ' < 4)');
+        if (flat.length !== 26) throw new Error('expected 26 childrenSpec nodes in the Table organism, got ' + flat.length);
+        for (const want of ['TableHead', 'TableBody', 'TableRow', 'TableCell', 'Checkbox', 'TableSortLabel', 'IconButton']) {
+          if (!flat.some((c) => c.importName === want)) throw new Error('childrenSpec walk missed ' + want + ' — nested imports would never reach the mount page');
+        }
+        // the text-leaf-vs-composition refusal is NAMED at load
+        const tmp = JSON.parse(fs.readFileSync('extract/computed/configs/mui.json', 'utf8'));
+        tmp.components = [{ ...table, childrenSpec: [{ importName: 'TableHead', text: 'x', children: [{ importName: 'TableRow' }] }] }];
+        fs.mkdirSync('.eval-tmp', { recursive: true });
+        fs.writeFileSync('.eval-tmp/bad.json', JSON.stringify(tmp));
+        let refused = '';
+        try { loadConfig(process.cwd(), '.eval-tmp/bad.json'); } catch (e) { refused = String(e.message); }
+        fs.rmSync('.eval-tmp', { recursive: true, force: true });
+        if (!refused.includes('BOTH text and children')) throw new Error('a text+children childrenSpec node was NOT refused by name (got: ' + refused + ')');
+
+        // 2. table lowering + ARIA role
+        const cell = lowerTableDisplay('table-cell', { 'vertical-align': 'middle', 'text-align': 'right' });
+        if (!cell || cell.layout.direction !== 'row' || cell.layout.align !== 'center' || cell.layout.justify !== 'end') {
+          throw new Error('table-cell lowering wrong: ' + JSON.stringify(cell));
+        }
+        const row = lowerTableDisplay('table-row', {});
+        if (!row || row.layout.direction !== 'row' || row.layout.align !== 'stretch') throw new Error('table-row lowering wrong: ' + JSON.stringify(row));
+        const stack = lowerTableDisplay('table-header-group', {});
+        if (!stack || stack.layout.direction !== 'column' || stack.layout.align !== 'stretch') throw new Error('table-header-group lowering wrong: ' + JSON.stringify(stack));
+        if (lowerTableDisplay('table-column', {}) !== null) throw new Error('table-column must NOT lower (named residue)');
+        const roles = ['table:table', 'table-row-group:rowgroup', 'table-row:row'].map((s) => s.split(':'));
+        for (const [d, want] of roles) if (tableRoleFor(d, 'div') !== want) throw new Error(d + ' role should be ' + want);
+        if (tableRoleFor('table-cell', 'th') !== 'columnheader' || tableRoleFor('table-cell', 'td') !== 'cell') throw new Error('cell roles wrong');
+
+        console.log('organism engine: childrenSpec tree ' + flat.length + ' nodes depth ' + depth(table.childrenSpec) + '; lowering + roles pinned; text+children refused by name');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('organism engine:')) {
+        throw new Error(`organism engine pins failed:\n${probe.out}`);
+      }
+      // 3. the column-width admission REFUSES a disagreeing column by name
+      const refusal = run(TSX, ['-e', `
+        import { tableGeometry } from './extract/computed/fuse.ts';
+        // Two rows, two columns. Column 0 agrees (60px outer everywhere);
+        // column 1 DISAGREES between the header and the body row.
+        const style = (o) => ({ display: 'table-cell', 'box-sizing': 'border-box', ...o });
+        const el = (s) => ({ path: '', sig: '', partName: '', node: { tag: 'td', classes: [], nodes: [], style: s, pseudo: {} } });
+        const parts = ['root', 'rowA', 'a0', 'a1', 'rowB', 'b0', 'b1'];
+        const styles = [
+          { display: 'table' }, { display: 'table-row' }, style({ width: '60px' }), style({ width: '100px' }),
+          { display: 'table-row' }, style({ width: '60px' }), style({ width: '140px' }),
+        ];
+        const mk = (id, parent) => ({ id, parent, children: [], sig: '', rep: {}, repPath: '', repKey: '', inBase: true, partName: parts[id] });
+        const nodes = [];
+        for (let i = 0; i < parts.length; i++) nodes.push(mk(i, null));
+        const link = (p, c) => { nodes[c].parent = nodes[p]; nodes[p].children.push(nodes[c]); };
+        link(0, 1); link(1, 2); link(1, 3); link(0, 4); link(4, 5); link(4, 6);
+        const aligned = new Map([['base__default', styles.map((s) => el(s))]]);
+        const a = {
+          baseFlat: styles.map((s) => el(s)),
+          partNames: parts,
+          union: { entries: nodes },
+          getAligned: (k) => aligned.get(k),
+        };
+        const space = { enumeration: { combos: [{ key: 'base', axisValues: {}, stateFlags: {} }] } };
+        const g = tableGeometry(a, space);
+        const admitted = [...g.cellAdmit].map((i) => parts[i]).sort();
+        if (admitted.join(',') !== 'a0,b0') throw new Error('expected only the AGREEING column admitted, got [' + admitted.join(', ') + ']');
+        if (!g.refusals.some((r) => r.startsWith('table-column-width-disagreement:'))) {
+          throw new Error('a disagreeing column did NOT refuse by name: ' + JSON.stringify(g.refusals));
+        }
+        console.log('column admission: agreeing column admitted, disagreeing column REFUSED BY NAME');
+      `]);
+      if (refusal.status !== 0 || !refusal.out.includes('column admission:')) {
+        throw new Error(`table-column admission pins failed:\n${refusal.out}`);
+      }
+      // 4. the PROMOTED organism carries it: one width per column, shared by
+      //    header and body rows, plus the per-cell divider.
+      const contract = JSON.parse(
+        readFileSync(path.join(ROOT, 'examples/mui/contracts/table.contract.json'), 'utf8'),
+      ) as { anatomy: { root: Record<string, unknown> } };
+      type P = { attrs?: Record<string, string>; parts?: Record<string, P>; tokens?: Record<string, string>; layout?: Record<string, string> };
+      const rows: P[] = [];
+      const walk = (p: P) => {
+        if (p.attrs?.role === 'row') rows.push(p);
+        for (const c of Object.values(p.parts ?? {})) walk(c);
+      };
+      walk(contract.anatomy.root as P);
+      if (rows.length !== 3) throw new Error(`promoted table has ${rows.length} role="row" parts, expected 3`);
+      const grid = rows.map((r) =>
+        Object.values(r.parts ?? {}).map((c) => {
+          if (!c.tokens?.['width']) throw new Error('a promoted table cell carries no width token — the column fact is gone');
+          if (!c.tokens?.['border-bottom-width']) throw new Error('a promoted table cell carries no bottom divider');
+          return c.tokens['width'];
+        }),
+      );
+      if (grid.some((r) => r.length !== 5)) throw new Error(`promoted rows are not all 5 cells: ${grid.map((r) => r.length).join('/')}`);
+      for (let ci = 0; ci < 5; ci++) {
+        const refs = new Set(grid.map((r) => r[ci]));
+        if (refs.size !== 1) throw new Error(`column ${ci} does not share ONE width token across header+body: ${[...refs].join(' vs ')}`);
+      }
+      console.log(
+        `organism-table-lowering: recursive childrenSpec + table→flex lowering + ARIA roles pinned; a disagreeing column refuses BY NAME; the promoted DataTable shares ONE width token per column across all 3 rows (${grid[0].join(', ')}) with per-cell dividers`,
+      );
+    },
+  },
+  {
     // ROUND 4 — CANVAS PIXEL GATE receipts: the committed per-component
     // scorecards exist for the 10 pixel-scoped components, quote per-cell
     // masked numbers, keep the summary consistent with the rows (prose-drift
@@ -4281,7 +4416,7 @@ const cases: Case[] = [
         // path (same sets + standalone Menu/Tooltip, 1270 variables incl. 70
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(63), Card(4), Chip(28), Dialog(5), Slider(12), Switch(14), Tabs(6) + standalone Menu, Tooltip with 1270 variables (70 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(63), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(14), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1514 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -5215,22 +5350,28 @@ const cases: Case[] = [
       // MUI's own token names. MOLECULE round: 11 components — the original 5
       // + Tabs/Accordion/Autocomplete (census) + Dialog/Menu/Tooltip (portal-
       // swept overlays; Menu and Tooltip are STANDALONE, no variant axes).
+      // ORGANISM round: 14 — plus Checkbox (tri-state on one axis, three
+      // glyph assets), TablePagination (STANDALONE) and TABLE, the first
+      // composed ORGANISM (recursive childrenSpec; the CSS table box model
+      // lowered to the flex vocabulary, per-column widths minted).
       // This eval re-runs the compile receipt (referee per contract axes +
-      // headless execute of tokens-then-component per script) and the
-      // genesis-batch builder (which REFUSES to write unless the exact
-      // one-paste byte stream builds all 9 sets + 2 standalone in the mock).
+      // headless execute of tokens-then-component per script, INCLUDING the
+      // organism structural pins — rows horizontal, one width per column
+      // shared by header and body, per-cell dividers, selected-row tint) and
+      // the genesis-batch builder (which REFUSES to write unless the exact
+      // one-paste byte stream builds all 11 sets + 3 standalone in the mock).
       cpSync(path.join(ROOT, 'examples', 'mui'), path.join(SCRATCH, 'examples', 'mui'), {
         recursive: true,
         filter: (src) => !src.includes('.mui-sandbox'),
       });
       const receipt = run(process.execPath, ['examples/mui/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`mui figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('11 scripts, 140 variants')) {
-        throw new Error(`mui figma compile receipt missing the 11-scripts/140-variants line:\n${receipt.out.slice(0, 800)}`);
+      if (!receipt.out.includes('14 scripts, 146 variants')) {
+        throw new Error(`mui figma compile receipt missing the 14-scripts/146-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(9 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\); standalone: Menu, Tooltip; 1270 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(11 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1514 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -5255,7 +5396,7 @@ const cases: Case[] = [
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 11/11 Emotion-runtime scripts referee+execute headless (140 variants, molecule round: 9 sets + standalone Menu/Tooltip); token sync 1270 variables incl. 70 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 4 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (146 variants, organism round: 11 sets + standalone TablePagination/Menu/Tooltip); token sync 1514 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 14 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {

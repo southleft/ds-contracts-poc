@@ -81,9 +81,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -121,9 +121,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-2",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -162,9 +162,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-3",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -301,9 +301,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -341,9 +341,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-2",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -382,9 +382,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-3",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -521,9 +521,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -561,9 +561,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-2",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -602,9 +602,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-3",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -741,9 +741,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -781,9 +781,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-2",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -822,9 +822,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-3",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -961,9 +961,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -1001,9 +1001,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-2",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -1042,9 +1042,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-3",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -1181,9 +1181,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -1221,9 +1221,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-2",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -1262,9 +1262,9 @@ const COMPONENTS = [
                       "type": "frame",
                       "name": "label-3",
                       "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
+                        "mode": "VERTICAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
                       },
                       "children": [
                         {

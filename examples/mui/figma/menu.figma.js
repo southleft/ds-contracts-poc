@@ -203,7 +203,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
-                        "counter": "MIN"
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -234,7 +234,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
-                        "counter": "MIN"
+                        "counter": "CENTER"
                       },
                       "children": [
                         {
@@ -264,7 +264,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
-                        "counter": "MIN"
+                        "counter": "CENTER"
                       },
                       "children": [
                         {

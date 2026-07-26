@@ -1847,14 +1847,21 @@ function variantParts(
   parts: Record<string, Part>,
   subst: Record<string, string>,
 ): Array<[string, Part]> {
-  // CSS PAINT ORDER (Switch live finding): positioned elements (absolute OR
-  // relative, z-index auto) paint ABOVE in-flow siblings, each group in DOM
-  // order — the thumb-bearing absolute switchBase must sit over the in-flow
-  // track. Stable partition: in-flow first, positioned after (TextField's
-  // backdrop→input pair keeps its DOM order inside the positioned group).
+  // CSS PAINT ORDER (Switch live finding): OUT-OF-FLOW elements paint ABOVE
+  // in-flow siblings, each group in DOM order — the thumb-bearing absolute
+  // switchBase must sit over the in-flow track. Stable partition: in-flow
+  // first, positioned after (TextField's backdrop→input pair keeps its DOM
+  // order inside the positioned group).
+  //
+  // ORGANISM round — position:relative NO LONGER PARTITIONS. A relative box
+  // stays IN FLOW: CSS paints it above overlapping siblings but never moves
+  // it in the layout. In an auto-layout row there is no overlap to resolve,
+  // so the partition only reordered the row — MUI's TablePagination select
+  // jumped to the END of its toolbar (…label, displayedRows, actions, select)
+  // and Autocomplete's relative chips fell BEHIND their input. Absolute parts
+  // (the Switch/Slider overlay pins) partition exactly as before.
   const entries = Object.entries(parts);
-  const positioned = (p: Part): boolean =>
-    p.declared?.['position'] === 'absolute' || p.declared?.['position'] === 'relative';
+  const positioned = (p: Part): boolean => p.declared?.['position'] === 'absolute';
   entries.sort((x, y) => Number(positioned(x[1])) - Number(positioned(y[1])));
   return entries.filter(([, p]) => {
     // v11: a native checkable control (input[type=checkbox|radio]) is CODE
@@ -2043,7 +2050,18 @@ function partToSpecInner(
     return chans.some((c) => c.startsWith('padding'));
   };
   const wrapTextInBox = (textSpec: NodeSpec): NodeSpec => {
-    const frame: NodeSpec = { type: 'frame', name, layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' }, children: [textSpec] };
+    // ORGANISM round: the wrapper frame is the PART's box — when the part
+    // carries a layout, that layout is the box's layout. The hardcoded
+    // MIN/MIN default drew every text TABLE CELL's glyphs at the top-left of
+    // a 57.8px-tall cell instead of vertically centered (and ignored
+    // align="right" columns). Parts with no layout keep the MIN/MIN default
+    // byte-identically.
+    const frame: NodeSpec = {
+      type: 'frame',
+      name,
+      layout: resolveLayout(part, subst) ? layoutSpec(part, false, subst) : { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' },
+      children: [textSpec],
+    };
     const textCtx = applyStyling(frame, part, subst, ctx);
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;

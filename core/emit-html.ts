@@ -772,12 +772,25 @@ function renderComponentHtml(
         .join('\n');
       return `${pad}<${el} class="${cls}"${attrString(part)}>\n${inner}\n${pad}</${el}>`;
     }
-    if (part.content) {
-      const value = part.content.prop === 'children' && extraText !== undefined ? extraText : textValue(part.content.prop);
-      return `${pad}<${textEl} class="${cls}"${attrString(part)}>${escapeHtml(value)}</${textEl}>`;
-    }
-    if (part.text !== undefined) {
-      return `${pad}<${textEl} class="${cls}"${attrString(part)}>${escapeHtml(part.text)}</${textEl}>`;
+    // ORGANISM round — the MOLECULE-round emitter class, found AGAIN in the
+    // static emitter: a text part that also CONTAINS parts silently DROPPED
+    // its children. The Figma emitter learned this in the molecule round
+    // (Tooltip's label → arrow); emit-html never did, and the MUI
+    // TableSortLabel ("Name" + its sort arrow) rendered the label with no
+    // arrow — invisible in every number until the organism pair image showed
+    // it. Text and children are siblings inside the part's own box. Childless
+    // text parts emit byte-identical markup.
+    if (part.content || part.text !== undefined) {
+      const value = part.content
+        ? (part.content.prop === 'children' && extraText !== undefined ? extraText : textValue(part.content.prop))
+        : part.text!;
+      const kids = Object.entries(part.parts ?? {})
+        .map(([childName, child]) => renderPart(childName, child, pad + '  ', textEl))
+        .filter(Boolean)
+        .join('\n');
+      return kids
+        ? `${pad}<${textEl} class="${cls}"${attrString(part)}>${escapeHtml(value)}\n${kids}\n${pad}</${textEl}>`
+        : `${pad}<${textEl} class="${cls}"${attrString(part)}>${escapeHtml(value)}</${textEl}>`;
     }
     if (part.meter) {
       const num = (propName: string, fallback: number) => {

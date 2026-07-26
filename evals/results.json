@@ -1,6 +1,6 @@
 {
-  "passed": 151,
-  "total": 151,
+  "passed": 152,
+  "total": 152,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -600,6 +600,11 @@
     {
       "id": "svg-content-round-trip",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "organism-table-lowering",
+      "claim": "C5-extraction",
       "pass": true
     },
     {

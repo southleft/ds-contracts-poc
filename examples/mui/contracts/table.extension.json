@@ -1,0 +1,4684 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-e0e0e0": {
+          "$value": "#e0e0e0",
+          "$type": "color"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "num-500": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "size-0-14994": {
+          "$value": "0.14994px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "size-52": {
+          "$value": "52px",
+          "$type": "dimension"
+        },
+        "color-1976d2": {
+          "$value": "#1976d2",
+          "$type": "color"
+        },
+        "size-13-3333": {
+          "$value": "13.3333px",
+          "$type": "dimension"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-240-125": {
+          "$value": "240.125px",
+          "$type": "dimension"
+        },
+        "color-00000099": {
+          "$value": "#00000099",
+          "$type": "color"
+        },
+        "size-18": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "size-132-969": {
+          "$value": "132.969px",
+          "$type": "dimension"
+        },
+        "size-142-484": {
+          "$value": "142.484px",
+          "$type": "dimension"
+        },
+        "size-120-422": {
+          "$value": "120.422px",
+          "$type": "dimension"
+        },
+        "size-20-02": {
+          "$value": "20.02px",
+          "$type": "dimension"
+        },
+        "num-400": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "color-0000008a": {
+          "$value": "#0000008a",
+          "$type": "color"
+        },
+        "size-5": {
+          "$value": "5px",
+          "$type": "dimension"
+        }
+      },
+      "table": {
+        "tablecell-head": {
+          "height": {
+            "small": {
+              "$value": "37.797px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "57.797px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "buttonbase-root": {
+          "border-bottom-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0-0-0-0-0": {
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-offset-state-focus-visible": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        },
+        "tablecell-head-2": {
+          "height": {
+            "small": {
+              "$value": "37.797px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "57.797px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "icon-2": {
+          "margin-left": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "margin-right": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "height": {
+            "small": {
+              "$value": "37.797px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "57.797px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-3": {
+          "height": {
+            "small": {
+              "$value": "37.797px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "57.797px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-4": {
+          "height": {
+            "small": {
+              "$value": "37.797px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "57.797px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "tablecell-body": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "buttonbase-root-2": {
+          "border-bottom-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0-0-0-0": {
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "icon-3": {
+          "line-height": {
+            "$value": "34.32px",
+            "$type": "dimension"
+          }
+        },
+        "label-5": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-6": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-7": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "tablecell-alignright": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-8": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          }
+        },
+        "tablerow-root-2": {
+          "background-color": {
+            "$value": "#1976d214",
+            "$type": "color"
+          }
+        },
+        "tablecell-body-2": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "buttonbase-root-3": {
+          "border-bottom-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-1-0-0-0": {
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "42px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "icon-4": {
+          "line-height": {
+            "$value": "34.32px",
+            "$type": "dimension"
+          }
+        },
+        "label-9": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-10": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-11": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "tablecell-alignright-2": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "65px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-12": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "tablecell-head",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-8",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-9",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-10",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-11",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-12",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "buttonbase-root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "buttonbase-root",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "field": "justify",
+        "value": "start"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label-8",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-8",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label-12",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-12",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tablecell-head",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "tablecell-head",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablecell-head",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "tablecell-head-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "tablecell-head-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablecell-head-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-duration",
+        "value": "0.2s, 0.2s"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-property",
+        "value": "opacity, transform"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-4",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-4",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-4",
+        "channel": "text-align",
+        "value": "right"
+      },
+      {
+        "part": "tablecell-body",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "tablecell-body",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablecell-body",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-3",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon-3",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-5",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-5",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-5",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-6",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-7",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-7",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-7",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "tablecell-alignright",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "tablecell-alignright",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablecell-alignright",
+        "channel": "text-align",
+        "value": "right"
+      },
+      {
+        "part": "label-8",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "label-8",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "label-8",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "label-8",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "label-8",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "label-8",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-8",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-8",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "label-8",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "label-8",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label-8",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "tablecell-body-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "tablecell-body-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablecell-body-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon-4",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-4",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon-4",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-4",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-4",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "icon-4",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon-4",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon-4",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon-4",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-9",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-9",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-9",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-10",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-10",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-10",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-11",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-11",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-11",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "tablecell-alignright-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "tablecell-alignright-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablecell-alignright-2",
+        "channel": "text-align",
+        "value": "right"
+      },
+      {
+        "part": "label-12",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "label-12",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "label-12",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "label-12",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "label-12",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "label-12",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-12",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-12",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "label-12",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "label-12",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label-12",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "focus-visible",
+        "part": "part-0-0-0-0-0",
+        "channel": "outline-style",
+        "value": "auto"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablehead-root",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablehead-root",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-header-group",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablehead-root",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablehead-root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-head",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-head",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-row",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-head",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-head",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-head-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "transform",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "matrix(-1, 0, 0, -1, 0, 0)",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "row-reverse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablebody-root",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablebody-root",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-row-group",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablebody-root",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablebody-root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-row",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-0-0-0",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-3",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "row-reverse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "border-bottom-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "border-bottom-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "border-top-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "border-top-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root-2",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-row",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablerow-root-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-body-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root-3",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-4",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-9",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-9",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-9",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-9",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-10",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-10",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-10",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-10",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-11",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-11",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-11",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-11",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "table-cell",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "row-reverse",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablecell-alignright-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "border-bottom-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "border-bottom-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "border-collapse",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "collapse",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "border-top-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "border-top-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-12",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.table.part-0-0-0-0-0.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "outline-offset",
+      "state": "focus-visible",
+      "ref": "{imported.table.part-0-0-0-0-0.outline-offset-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "outline-width",
+      "state": "focus-visible",
+      "ref": "{imported.table.part-0-0-0-0-0.outline-width-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "table-column-width-admitted: column 0 (tablecell-head, tablecell-body, tablecell-body-2) — every row measures the same OUTER width in every enabled combo (small=52px, medium=52px); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)",
+    "table-column-width-admitted: column 1 (tablecell-head-2, label-5, label-9) — every row measures the same OUTER width in every enabled combo (small=240.125px, medium=240.125px); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)",
+    "table-column-width-admitted: column 2 (label-2, label-6, label-10) — every row measures the same OUTER width in every enabled combo (small=132.969px, medium=132.969px); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)",
+    "table-column-width-admitted: column 3 (label-3, label-7, label-11) — every row measures the same OUTER width in every enabled combo (small=142.484px, medium=142.484px); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)",
+    "table-column-width-admitted: column 4 (label-4, tablecell-alignright, tablecell-alignright-2) — every row measures the same OUTER width in every enabled combo (small=120.422px, medium=120.422px); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)",
+    "table-cell-height-from-row: the admitted cells take their HEIGHT from their ROW element — a cell's own computed height is its CONTENT height (Chromium reports e.g. 30px inside a 63px row), and the table box model gives every cell in a row the row's height; without it the per-cell border-bottom dividers land at different y positions (named)",
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-8 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-12 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "table-geometry-excluded: root (display:table) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablehead-root (display:table-header-group) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablerow-head (display:table-row) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablecell-head (display:table-cell) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "absolute-geometry-admitted: buttonbase-root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-0-0-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-0-0-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "table-geometry-excluded: tablecell-head-2 (display:table-cell) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "absolute-geometry-admitted: icon-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-1-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "table-geometry-excluded: tablebody-root (display:table-row-group) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablerow-root (display:table-row) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablecell-body (display:table-cell) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "absolute-geometry-admitted: buttonbase-root-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-0-0-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-0-0-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "table-geometry-excluded: tablecell-alignright (display:table-cell) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablerow-root-2 (display:table-row) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "table-geometry-excluded: tablecell-body-2 (display:table-cell) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "absolute-geometry-admitted: buttonbase-root-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-1-0-0-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-1-0-0-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "table-geometry-excluded: tablecell-alignright-2 (display:table-cell) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)",
+    "control-fallback: no control for <table> — span control used (part root)",
+    "control-fallback: no control for <thead> — span control used (part tablehead-root)",
+    "control-fallback: no control for <tr> — span control used (part tablerow-head)",
+    "control-fallback: no control for <th> — span control used (part tablecell-head)",
+    "control-fallback: no control for <input> — span control used (part part-0-0-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-1-0)",
+    "control-fallback: no control for <th> — span control used (part tablecell-head-2)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-1-0-0-0)",
+    "control-fallback: no control for <th> — span control used (part label-2)",
+    "control-fallback: no control for <th> — span control used (part label-3)",
+    "control-fallback: no control for <th> — span control used (part label-4)",
+    "control-fallback: no control for <tbody> — span control used (part tablebody-root)",
+    "control-fallback: no control for <tr> — span control used (part tablerow-root)",
+    "control-fallback: no control for <td> — span control used (part tablecell-body)",
+    "control-fallback: no control for <input> — span control used (part part-1-0-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-0-0-1-0)",
+    "control-fallback: no control for <td> — span control used (part label-5)",
+    "text-part-typography-carried: label-5 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <td> — span control used (part label-6)",
+    "text-part-typography-carried: label-6 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <td> — span control used (part label-7)",
+    "text-part-typography-carried: label-7 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <td> — span control used (part tablecell-alignright)",
+    "text-part-typography-carried: label-8 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <tr> — span control used (part tablerow-root-2)",
+    "control-fallback: no control for <td> — span control used (part tablecell-body-2)",
+    "control-fallback: no control for <input> — span control used (part part-1-1-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "control-fallback: no control for <path> — span control used (part part-1-1-0-0-1-0)",
+    "control-fallback: no control for <td> — span control used (part label-9)",
+    "text-part-typography-carried: label-9 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <td> — span control used (part label-10)",
+    "text-part-typography-carried: label-10 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <td> — span control used (part label-11)",
+    "text-part-typography-carried: label-11 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <td> — span control used (part tablecell-alignright-2)",
+    "text-part-typography-carried: label-12 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "tablehead-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablerow-head",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablecell-head",
+        "join": "computed-only"
+      },
+      {
+        "part": "buttonbase-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablecell-head-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-1-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablebody-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablerow-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablecell-body",
+        "join": "computed-only"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0-0-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-6",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-7",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablecell-alignright",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-8",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablerow-root-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablecell-body-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "buttonbase-root-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-1-0-0-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-9",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-10",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-11",
+        "join": "computed-only"
+      },
+      {
+        "part": "tablecell-alignright-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-12",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "tablehead-root",
+      "tablerow-head",
+      "tablecell-head",
+      "buttonbase-root",
+      "part-0-0-0-0-0",
+      "icon",
+      "tablecell-head-2",
+      "label",
+      "icon-2",
+      "label-2",
+      "label-3",
+      "label-4",
+      "tablebody-root",
+      "tablerow-root",
+      "tablecell-body",
+      "buttonbase-root-2",
+      "part-1-0-0-0-0",
+      "icon-3",
+      "label-5",
+      "label-6",
+      "label-7",
+      "tablecell-alignright",
+      "label-8",
+      "tablerow-root-2",
+      "tablecell-body-2",
+      "buttonbase-root-3",
+      "part-1-1-0-0-0",
+      "icon-4",
+      "label-9",
+      "label-10",
+      "label-11",
+      "tablecell-alignright-2",
+      "label-12"
+    ],
+    "svgAssets": [
+      "table-icon",
+      "table-icon-2",
+      "table-icon-3",
+      "table-icon-4"
+    ],
+    "receipts": [
+      "svg-viewbox-reconstructed: Table.icon@small — 0 0 24 24 from computed size 24×24 (path extent 21.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Table.icon@medium — 0 0 24 24 from computed size 24×24 (path extent 21.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-bumped: Table.icon-2@small — computed size 18 < path extent 20; viewBox reconstructed as 0 0 20 20 (named reconstruction)",
+      "svg-viewbox-bumped: Table.icon-2@medium — computed size 18 < path extent 20; viewBox reconstructed as 0 0 20 20 (named reconstruction)",
+      "svg-viewbox-reconstructed: Table.icon-3@small — 0 0 24 24 from computed size 24×24 (path extent 21.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Table.icon-3@medium — 0 0 24 24 from computed size 24×24 (path extent 21.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Table.icon-4@small — 0 0 24 24 from computed size 24×24 (path extent 21.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Table.icon-4@medium — 0 0 24 24 from computed size 24×24 (path extent 21.0; viewBox is not a computed style — named reconstruction)",
+      "table-lowering: root table → flex column, children stretch (row groups stack and fill the table width)",
+      "table-lowering: tablehead-root table-header-group → flex column, children stretch (row groups stack and fill the table width); element <thead> → <div> role=\"rowgroup\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablerow-head table-row → flex row, children stretch (every cell takes the row height — the table box model's own rule; the cell centers its own content); element <tr> → <div> role=\"row\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablecell-head table-cell → flex row (counter axis center, main axis start from text-align:left); element <th> → <div> role=\"columnheader\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "aspect-carried: buttonbase-root computed width == height in every enabled combo (24/42px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "sr-only-carried-as-hidden: part-0-0-0-0-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "full-width-carried: icon spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "table-lowering: tablecell-head-2 table-cell → flex row (counter axis center, main axis start from text-align:left); element <th> → <div> role=\"columnheader\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label = \"Name\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Role\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-2 table-cell → flex row (counter axis center, main axis start from text-align:left); element <th> → <div> role=\"columnheader\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-3 = \"Team\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-3 table-cell → flex row (counter axis center, main axis start from text-align:left); element <th> → <div> role=\"columnheader\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-4 = \"Actions\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-4 table-cell → flex row (counter axis center, main axis end from text-align:right); element <th> → <div> role=\"columnheader\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablebody-root table-row-group → flex column, children stretch (row groups stack and fill the table width); element <tbody> → <div> role=\"rowgroup\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablerow-root table-row → flex row, children stretch (every cell takes the row height — the table box model's own rule; the cell centers its own content); element <tr> → <div> role=\"row\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablecell-body table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "aspect-carried: buttonbase-root-2 computed width == height in every enabled combo (24/42px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "sr-only-carried-as-hidden: part-1-0-0-0-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "full-width-carried: icon-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "literal-text-carried: label-5 = \"Frozen yoghurt\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-5 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-6 = \"Designer\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-6 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-7 = \"Platform\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-7 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablecell-alignright table-cell → flex row (counter axis center, main axis end from text-align:right); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-8 = \"⋮\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: tablerow-root-2 table-row → flex row, children stretch (every cell takes the row height — the table box model's own rule; the cell centers its own content); element <tr> → <div> role=\"row\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablecell-body-2 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "aspect-carried: buttonbase-root-3 computed width == height in every enabled combo (24/42px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "sr-only-carried-as-hidden: part-1-1-0-0-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "full-width-carried: icon-4 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "literal-text-carried: label-9 = \"Ice cream sandwich\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-9 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-10 = \"Engineer\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-10 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-11 = \"Contracts\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "table-lowering: label-11 table-cell → flex row (counter axis center, main axis start from text-align:left); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "table-lowering: tablecell-alignright-2 table-cell → flex row (counter axis center, main axis end from text-align:right); element <td> → <div> role=\"cell\" (a table element outside a <table> is dropped by the HTML parser — the lowering carries the semantics as ARIA)",
+      "literal-text-carried: label-12 = \"⋮\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: buttonbase-root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: buttonbase-root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: buttonbase-root-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: buttonbase-root-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-8.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-8.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: buttonbase-root-3.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: buttonbase-root-3.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-12.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-12.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-head.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-head.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-head.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0-0.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-0-0-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-head-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-head-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-head-2.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-2.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.transition-duration = 0.2s, 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.transition-property = opacity, transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-4.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-4.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-4.text-align = right (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-body.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-body.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-body.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root-2.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0-0-0.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0-0-0-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0-0-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-3.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-7.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-7.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-alignright.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-alignright.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-alignright.text-align = right (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-8.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-body-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-body-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-body-2.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-3.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-3.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: buttonbase-root-3.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: buttonbase-root-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1-0-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1-0-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-1-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1-0-0-0.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-1-0-0-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1-0-0-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-4.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-4.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-9.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-9.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-9.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-10.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-10.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-10.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-11.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-11.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-11.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-alignright-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablecell-alignright-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablecell-alignright-2.text-align = right (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-12.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-12.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [focus-visible] part-0-0-0-0-0.outline-style = auto (v15 declared vocabulary)"
+  ]
+}

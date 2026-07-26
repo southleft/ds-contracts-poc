@@ -27,7 +27,15 @@ const EX = path.join(HERE, '..');
 const REPO = path.join(EX, '..', '..');
 const OUT = path.join(REPO, 'extract', 'computed', 'out', 'mui');
 
-const COMPONENTS = ['button', 'chip', 'card', 'switch', 'slider', 'tabs', 'accordion', 'autocomplete', 'tooltip', 'menu', 'dialog'];
+// ORGANISM round appends checkbox, pagination and table (the composed
+// DataTable — the first ORGANISM). `table` reads extract/computed/out/mui/table.
+const COMPONENTS = ['button', 'chip', 'card', 'switch', 'slider', 'tabs', 'accordion', 'autocomplete', 'tooltip', 'menu', 'dialog', 'checkbox', 'pagination', 'table'];
+// The emitted Figma script is named kebab(contract.name), so a promoted
+// contract FILE must carry the same stem or the compile receipt cannot find
+// it. Capture-dir names come from the capture config (out/mui/<comp.name
+// lowercased>); this is the one place the two spellings differ.
+const CONTRACT_STEM = { pagination: 'table-pagination' };
+const stemOf = (n) => CONTRACT_STEM[n] ?? n;
 const MINT_SOURCES = COMPONENTS;
 
 // ---- DTCG base (for alias value verification) ----
@@ -172,8 +180,8 @@ for (const name of COMPONENTS) {
     `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
     `carries the named overflow.`;
 
-  writeFileSync(path.join(EX, 'contracts', `${name}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
-  writeFileSync(path.join(EX, 'contracts', `${name}.extension.json`), JSON.stringify(extension, null, 2) + '\n');
+  writeFileSync(path.join(EX, 'contracts', `${stemOf(name)}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
+  writeFileSync(path.join(EX, 'contracts', `${stemOf(name)}.extension.json`), JSON.stringify(extension, null, 2) + '\n');
   promoted.push(name);
 }
 
@@ -216,7 +224,7 @@ for (const [name, anchors] of [...anchorsByComponent].sort()) {
   })(mintedMerged, []);
   const dangling = [];
   for (const name of COMPONENTS) {
-    const contract = JSON.parse(readFileSync(path.join(EX, 'contracts', `${name}.contract.json`), 'utf8'));
+    const contract = JSON.parse(readFileSync(path.join(EX, 'contracts', `${stemOf(name)}.contract.json`), 'utf8'));
     const enums = {};
     for (const pr of contract.props ?? []) if (pr.type?.enum) enums[pr.name] = pr.type.enum;
     const expand = (ref) => {

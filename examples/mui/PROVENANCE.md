@@ -35,9 +35,9 @@ At promotion, minted leaves whose covering combos all agree become **DTCG
 aliases** (`imported.button.root.background-color.contained.primary` →
 `{palette-primary-main}`), value-verified twice; the Figma token sync emits
 those as **native variable aliases** so they inherit Light/Dark from the
-palette targets. 70 leaves aliased (molecule round; was 61 over the first
-five components), 0 refusals; everything else stays a literal minted leaf
-(named).
+palette targets. 73 leaves aliased (organism round; 70 at the molecule round,
+61 over the first five components), 0 refusals; everything else stays a
+literal minted leaf (named).
 
 ## Pipeline (all commands from repo root)
 
@@ -51,7 +51,7 @@ node examples/mui/scripts/promote-floor.mjs         # contracts v0.2.0 + minted 
 npx tsx packages/cli/src/cli.ts figma examples/mui/contracts --out examples/mui/figma \
   --icons examples/mui/assets/icons \
   --tokens examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json
-node examples/mui/scripts/build-figma-tokens.mjs    # 00-tokens.figma.js (1270 vars, 70 native aliases)
+node examples/mui/scripts/build-figma-tokens.mjs    # 00-tokens.figma.js (1514 vars, 73 native aliases)
 node examples/mui/scripts/figma-compile-receipt.mjs # referee + headless execute per script
 node examples/mui/scripts/build-genesis-batch.mjs   # GENESIS-BATCH.figma.js (refuses unless mock-proven)
 npx tsx packages/cli/src/cli.ts figma bundle examples/mui/contracts \
@@ -96,12 +96,99 @@ for all six (the three census components additionally re-run against the
 final shared capture code: `captured-truth.json` byte-identical to the first
 pass).
 
-Genesis: 9 component sets + 2 standalone components (Menu, Tooltip — no
-variant axes), 140 variants, 1270 variables — the exact
-`GENESIS-BATCH.figma.js` byte stream is executed against the mocked Figma
-before it is written (builder refuses otherwise).
+### Organism round (2026-07-25 — Checkbox, TablePagination, and TABLE: the first ORGANISM)
 
-## The portal sweep (new this round)
+| component | combos | computed equality | pixel rows |
+|---|---|---|---|
+| Checkbox | 6 | 72.464% | AA perfect 12/24 |
+| TablePagination | 1 | 93.970% | AA perfect 0/4 (mean AA 12.0% masked) |
+| **Table** (composed DataTable) | 2 | **85.201%** | AA perfect 0/8 (mean AA 27.5% masked — sort-arrow rotation + text metrics, named below) |
+
+All three double-swept in one session — byte-identity REQUIRED and held. The
+Table's 38 captured elements per combo promote to **34 parts**: head row +
+5 columns (checkbox cell → Checkbox, sort-label cell → TableSortLabel, three
+text columns, a right-aligned action cell) and two body rows, one of them
+`selected` with a checked box.
+
+Genesis: **11 component sets + 3 standalone** (Menu, Tooltip, TablePagination
+— no variant axes), **146 variants, 1514 variables** (73 Figma-native source
+aliases), 14 embedded icon assets — the exact `GENESIS-BATCH.figma.js` byte
+stream is executed against the mocked Figma before it is written (builder
+refuses otherwise), and `mui.bundle.json` is built twice byte-identically.
+
+## The organism: what the composed DataTable needed (new this round)
+
+Four engine classes, each pinned so it can never regress headlessly
+(`evals/run.ts` → `organism-table-lowering`, plus the structural pins in
+`examples/mui/scripts/figma-compile-receipt.mjs`):
+
+1. **`childrenSpec` RECURSES.** The molecule round's canonical-children
+   vocabulary was strictly ONE level (`<Tabs><Tab/><Tab/></Tabs>`); an
+   organism is a TREE. Child entries take an optional `children` array;
+   imports and the `$callback/$import/$render` marker grammar are resolved at
+   EVERY depth, on both the census page and the portal page. A node that is
+   BOTH a text leaf and a composition is a NAMED load refusal. (The census
+   page also never collected marker imports from `childrenSpec` props at all —
+   a latent one-level gap, fixed with the same walk.)
+2. **The CSS table box model is LOWERED, not admitted.** `display:table*` is
+   outside every vocabulary the schema speaks (`LayoutSchema.display` =
+   flex|inline-flex; the declared registry = inline|inline-block|block|
+   contents|none), so before this round a `display:table-row` part fell
+   through to a `display-outside-vocabulary` receipt and then took the
+   emitter's default `HORIZONTAL/CENTER/CENTER` — structurally wrong and
+   SILENT. Rather than grow the bounded grammar with keywords no target
+   renders, promotion lowers (`table-lowering:` receipt per part):
+   `table`/`*-group` → flex column with stretched children, `table-row` →
+   flex row with stretched children (the table box model's own "every cell
+   takes the row height" rule), `table-cell` → flex row whose counter axis
+   comes from its computed `vertical-align` and whose main axis comes from
+   its computed `text-align` (this is what makes `align="right"` columns
+   right-align). The ELEMENT lowers too — a promoted `<tr>`/`<thead>` outside
+   a `<table>` is DELETED by the HTML parser, which scored the first Table
+   capture at 33.5% — so each lowered part becomes a `<div>` carrying the
+   matching ARIA role (`table`/`rowgroup`/`row`/`columnheader`/`cell`).
+   `border-collapse`, `border-spacing`, `table-layout` and the sort-arrow
+   `transform` stay named `codeOnly` residue.
+3. **TABLE-CELL COLUMN WIDTH re-admits geometry.** Geometry is excluded from
+   fusion BY NAME (environment-dependent); the absolute round found the first
+   class where that is wrong (overlay anatomy), and this is the second. A
+   cell's width is not the cell's own choice — the table's column algorithm
+   assigns ONE width to the whole column, and the browser proves it: header
+   and body cells of a column measure identical OUTER widths (box-sizing
+   baked; MUI's cells are content-box, so 48px content + 4px padding is a
+   52px canvas frame). Agreement across every row in every enabled combo
+   admits the channel; disagreement is a `table-column-width-disagreement`
+   refusal that admits NOTHING (hugging cells is the honest fallback). HEIGHT
+   rides the ROW, not the cell: Chromium reports a cell's CONTENT height
+   (30px inside a 63px row), and carrying that would step the per-cell
+   dividers. Table-display parts are also excluded from the absolute-cluster
+   geometry admission (a table contains absolute descendants — MUI's Checkbox
+   input — which would otherwise admit those lying heights).
+   Admitted at the pinned 720×360/16 stage (688px content width):
+   `52 / 240.125 / 132.969 / 142.484 / 120.422` — five columns summing
+   exactly to 688.
+4. **Two emitters were dropping facts, both found by the organism.**
+   `core/emit-html.ts` silently DROPPED the children of a text part — the
+   same class the Figma emitter learned in the molecule round (Tooltip's
+   label → arrow), never taught to the static emitter; the MUI
+   TableSortLabel rendered "Name" with no sort arrow, and Polaris's Avatar
+   had been dropping its person glyph in `generated/html/avatar.html` all
+   along. And the Figma emitter's box-padded text lowering hardcoded
+   `HORIZONTAL/MIN/MIN` on the wrapper frame, ignoring the part's own
+   layout — every text table cell drew its glyphs at the top-left of a
+   57.8px-tall cell. Both fixed; childless / layout-less parts stay
+   byte-identical.
+
+**No new emitter channel was needed for the table itself**: the minted `width`
+and `height` reach `spec.fixedWidth` / `spec.fixedHeight` through the existing
+token path, the lowering reaches `layoutSpec` through `Part.layout`, the
+dividers ride the existing `border-bottom-*` channels, and the selected-row
+tint rides the TR part's `background-color`. The compile receipt pins the REAL
+canvas numbers headlessly: rows HORIZONTAL, five cells per row, one width per
+column shared by header and body, a 1px bottom divider on every cell, equal
+cell heights within a row, and a fill on the selected row only.
+
+## The portal sweep (molecule round)
 
 Dialog, Menu and Tooltip render their real DOM through React portals into
 `document.body` — they cannot share the census page (a fixed, viewport-
@@ -222,3 +309,108 @@ job and are not built yet.
   them). Icon-less bundles byte-identical under the change. The committed
   Polaris bundle predates this and still lacks its icon SVGs — its
   engine-path equivalence pin remains the noted follow-up from 72b5075.
+
+### Organism-round residuals and NAMED EXCLUSIONS (defect-first)
+
+The composed DataTable is captured at a deliberately bounded scope. Every cut
+below is greppable — in this file, in the `__note` fields of
+`extract/computed/configs/mui.json`, in the seed contract descriptions, or as
+an engine receipt in `enriched.extension.json`.
+
+- **`stickyHeader` EXCLUDED BY NAME.** `position: sticky` has no carried
+  spelling (`contract-schema` position = relative|static|absolute) and the
+  sticky header additionally flips the table's `border-collapse` to
+  `separate` and paints a background the non-sticky header does not have.
+  Belt and braces: `-stickyHeader$` is also excluded from `classAllow`, so a
+  stray sticky capture can never branch the anatomy union.
+- **The row overflow MENU is captured CLOSED.** An open `Menu` portals a root
+  to `document.body`, and the single-portaled-root policy
+  (`capture.ts` portalSweep) receipts and DROPS in-stage roots — i.e. it
+  would drop the entire table. Open-menu-in-organism needs multi-root fusion
+  (the machinery exists but is exhibit-only, `anatomy.buildMultiRootUnion`).
+- **`TableSortLabel` carries `direction="asc"` only** — the direction axis is
+  excluded by name, and `-directionAsc`/`-directionDesc` are excluded from
+  `classAllow` (axis-valued classes would union-branch).
+- **The active sort arrow's 180° ROTATION is not carried.** MUI rotates the
+  glyph with `transform: matrix(-1, 0, 0, -1, 0, 0)`; `transform` has no
+  carried spelling beyond the absolute round's identity-translate
+  decomposition, so it lands as `declared-channel value outside the bounded
+  grammar` in `codeOnly` and the canvas draws the glyph in its AUTHORED
+  orientation (pointing down). Visible in the gate pair image — the single
+  remaining visual difference.
+- **TableContainer / Paper is NOT the captured root.** Enumerated axes ride
+  the ROOT mount and `size` is a `Table` prop, so the organism IS the
+  `<Table>`; the Paper elevation wrapper is a separate concern (and `Card`
+  already carries MUI's Paper elevations this round).
+- **NO composition refs (v1).** Promotion never emits `component`/`repeat`/
+  `slot` refs, so the rows are INLINED, not instances of the standalone
+  Checkbox contract. This is not only a machinery limit — it is the RIGHT
+  answer here: MUI's `size="small"` DESCENDANT rule zeroes the nested
+  Checkbox's own padding (42×42 → 24×24) with UNCHANGED child classes, so a
+  composed Checkbox instance would be wrong in small tables.
+- **TWO body rows, not three.** Repeated siblings are separate parts under a
+  GLOBAL naming counter (`label`, `label-2`, … `label-12`), so each extra row
+  multiplies the part count. Two rows is the minimum that proves both the
+  plain and the `selected`/checked row; the third row of the recon adds parts
+  and no new fact.
+- **The row-action control carries a TEXT glyph (`⋮`), not an icon asset.**
+  The `childrenSpec` grammar mounts imported COMPONENTS and
+  `@mui/icons-material` is not in the pinned sandbox; raw SVG markup in
+  config (an `$svg` marker) is deliberately NOT invented this round.
+- **Column widths are deterministic AT THE PINNED STAGE WIDTH.**
+  `table-layout: auto` reflows with the available width, so the admitted
+  widths are a fact of the 720×360/16 stage (688px content), not of the
+  component in the abstract. Same determinism class as every other
+  computed-capture fact; recorded in the admission receipt itself.
+- **The schema has no table ELEMENTS.** `semantics.element` is
+  `div` + `role: "table"` (the repo's own `ds.table` precedent) and the
+  lowered parts carry ARIA roles — the generated code emits divs, not a real
+  `<table>`.
+- **TablePagination's rows-per-page Select is pinned CONTROLLED-CLOSED**
+  (`slotProps.select.open = false`). The census active-driver's `mouse.down`
+  lands on the Select, opens the MUI menu, and the select icon's 180° open
+  rotation PERSISTED into the next sweep — a witnessed double-run
+  byte-identity refusal. Same determinism-pin class as Menu/Dialog
+  `transitionDuration: 0`. (The determinism refusal now NAMES its witness —
+  capture key, element path + signature, both values — instead of only
+  listing the unstable channel.)
+- **TablePagination's arrows are FORCED-DISABLED at the pinned combo.** At
+  `count=3 / rowsPerPage=10 / page=0` the component itself marks both arrow
+  IconButtons `Mui-disabled`, so the ENABLED arrow colors are unobservable
+  and absent from the captured truth. A paging axis would need a second fixed
+  combo — deliberately out of v1.
+- **Checkbox's tri-state is ONE axis by necessity, not preference.** The
+  svg-content promotion carries per-value glyph assets only when the markup
+  is a function of exactly ONE axis (`svg-content-multi-axis` refusal
+  otherwise), so a `checked` × `indeterminate` two-axis spelling would have
+  lost ALL THREE glyphs. The capture config expands one contract value into
+  several library props through the new `{"$props": {…}}` grammar. NAMED
+  RESIDUE: the CODE lowering back to MUI's two-boolean API is not spelled by
+  the contract's code binding.
+- **Checkbox 72.5% computed floor** — the same geometry-blind class as Switch
+  (73.6%): the 42×42 control box, its 9px padding and the absolute
+  full-cover input dominate the misses. 12/24 pixel rows are AA-perfect,
+  which is the strongest pixel result of any MUI component so far.
+- **Table 85.2% / mean AA 27.5% masked** — the sort-arrow rotation above plus
+  text metrics: the emit-html side renders the same strings at the same
+  bound sizes but the browser lays out the contract's flex cells with
+  marginally different glyph origins than the real table's cells. The
+  structural pins (per-column widths shared header↔body, per-cell dividers,
+  equal cell heights, selected-row fill) cover what the percentage cannot.
+- **Sibling-example changes this round were REVIEWED, not blind-repinned.**
+  The two emitter fixes changed three committed artifacts outside MUI:
+  `examples/polaris/generated/html/avatar.html` (the dropped glyph now
+  renders), and `examples/polaris/figma/{radio-button,tag}.figma.js` +
+  `examples/tailwind/figma/card.figma.js` + MUI's own
+  `{autocomplete,menu,tabs}.figma.js`. The Polaris script diffs were verified
+  to be PURE REORDERINGS (node multisets byte-equal) caused by the third
+  emitter correction below; the rest are the text-part layout landing.
+- **`position: relative` no longer partitions in the Figma emitter.** The
+  Switch live finding partitioned "positioned" (absolute OR relative) parts
+  after in-flow siblings so out-of-flow overlays paint on top. But a relative
+  box stays IN FLOW — CSS paints it above overlapping siblings and never
+  moves it — and in an auto-layout row there is nothing to overlap, so the
+  partition only REORDERED the row: MUI's TablePagination select jumped to
+  the end of its toolbar and Autocomplete's relative chips fell behind their
+  input. Only `absolute` partitions now; the Switch/Slider overlay pins are
+  unchanged and still green.

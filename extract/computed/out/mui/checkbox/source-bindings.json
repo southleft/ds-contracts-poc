@@ -1,0 +1,86 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Checkbox",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked, .css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked, .css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-2n9rd3-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-disabled"
+      }
+    }
+  ],
+  "skips": []
+}

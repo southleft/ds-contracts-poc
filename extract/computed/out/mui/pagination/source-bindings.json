@@ -1,0 +1,52 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Pagination",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1hezwcy-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1hezwcy-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-c4hhgn-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1rvaqho-MuiTablePagination-root"
+      }
+    }
+  ],
+  "skips": []
+}

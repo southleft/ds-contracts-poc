@@ -1,0 +1,263 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. The tri-state rides ONE enum axis (`checked`: unchecked|checked|indeterminate) because the svg-content promotion carries per-value glyph assets only for a single-axis function; the capture config expands each value into MUI's own two-boolean API (checked + indeterminate) through the $props grammar. NAMED RESIDUE: the CODE lowering of the tri-state back to MUI's two props is not spelled by the contract's code binding (canvas-side tri-state, code-side two booleans). disableRipple pinned (the Button/Switch ripple-determinism precedent). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "part-0": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Arial",
+            "position": "absolute",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default",
+              "pointer-events": "none"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.checkbox.part-0.font-size}",
+            "height": "{imported.shared.size-42}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.checkbox.part-0.opacity}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-42}",
+            "z-index": "{imported.checkbox.part-0.z-index}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-545454}"
+            }
+          }
+        },
+        "icon": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "transition-duration": "0.3s",
+            "transition-property": "fill",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "user-select": "none"
+          },
+          "layout": {
+            "grow": true
+          },
+          "parts": {
+            "icon-unchecked": {
+              "icon": {
+                "asset": "checkbox-icon-unchecked",
+                "size": 24
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "unchecked"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when checked=unchecked."
+            },
+            "icon-checked": {
+              "icon": {
+                "asset": "checkbox-icon-checked",
+                "size": 24
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "checked"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when checked=checked."
+            },
+            "icon-indeterminate": {
+              "icon": {
+                "asset": "checkbox-icon-indeterminate",
+                "size": 24
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "indeterminate"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when checked=indeterminate."
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default",
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "flex-shrink": "{imported.checkbox.icon.flex-shrink}",
+            "font-size": "{imported.shared.size-24}",
+            "height": "{imported.shared.size-24}",
+            "width": "{imported.shared.size-24}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-00000042}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "color": "{imported.checkbox.icon.color.checked}",
+                  "fill": "{imported.checkbox.icon.fill.checked}",
+                  "row-rule-color": "{imported.checkbox.icon.row-rule-color.checked}"
+                },
+                "indeterminate": {
+                  "color": "{imported.checkbox.icon.color.indeterminate}",
+                  "fill": "{imported.checkbox.icon.fill.indeterminate}",
+                  "row-rule-color": "{imported.checkbox.icon.row-rule-color.indeterminate}"
+                },
+                "unchecked": {
+                  "color": "{imported.checkbox.icon.color.unchecked}",
+                  "fill": "{imported.checkbox.icon.fill.unchecked}",
+                  "row-rule-color": "{imported.checkbox.icon.row-rule-color.unchecked}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "cursor": "pointer",
+        "position": "relative",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "default",
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-21}",
+        "border-bottom-right-radius": "{imported.shared.size-21}",
+        "border-top-left-radius": "{imported.shared.size-21}",
+        "border-top-right-radius": "{imported.shared.size-21}",
+        "bottom": "{imported.shared.size-0}",
+        "height": "{imported.shared.size-42}",
+        "left": "{imported.shared.size-0}",
+        "outline-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.shared.size-9}",
+        "padding-left": "{imported.shared.size-9}",
+        "padding-right": "{imported.shared.size-9}",
+        "padding-top": "{imported.shared.size-9}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-42}"
+      },
+      "states": {
+        "disabled": {
+          "color": "{imported.shared.color-00000042}",
+          "row-rule-color": "{imported.shared.color-00000042}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "checked",
+          "map": {
+            "checked": {
+              "color": "{imported.checkbox.root.color.checked}",
+              "row-rule-color": "{imported.checkbox.root.row-rule-color.checked}"
+            },
+            "indeterminate": {
+              "color": "{imported.checkbox.root.color.indeterminate}",
+              "row-rule-color": "{imported.checkbox.root.row-rule-color.indeterminate}"
+            },
+            "unchecked": {
+              "color": "{imported.checkbox.root.color.unchecked}",
+              "row-rule-color": "{imported.checkbox.root.row-rule-color.unchecked}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Checkbox"
+    }
+  }
+}

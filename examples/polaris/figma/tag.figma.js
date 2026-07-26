@@ -67,6 +67,55 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "link",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-8",
+                "bottomRightRadius": "imported/shared/size-8",
+                "topLeftRadius": "imported/shared/size-8",
+                "topRightRadius": "imported/shared/size-8"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "name": "text-2",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "label-2",
+                      "bindings": {
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "characters": "Wholesale",
+                      "fontSize": 12,
+                      "fontStyle": "Medium",
+                      "textFill": "imported/tag/link/color",
+                      "lineHeight": 20,
+                      "textDecoration": "NONE",
+                      "textTruncation": true,
+                      "visibleProp": "Show Linked",
+                      "visibleDefault": false
+                    }
+                  ],
+                  "visibleProp": "Show Linked",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show Linked",
+              "visibleDefault": false
+            },
+            {
+              "type": "frame",
               "name": "text",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -149,7 +198,35 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Removable",
               "visibleDefault": false
-            },
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=large",
+        "row": 1,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=large",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "fill": "p/color-bg-fill-tertiary",
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200"
+          },
+          "lits": {
+            "paddingLeft": 8,
+            "paddingRight": 8,
+            "minHeight": 24
+          },
+          "children": [
             {
               "type": "frame",
               "name": "link",
@@ -198,35 +275,7 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Linked",
               "visibleDefault": false
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=large",
-        "row": 1,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=large",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "CENTER"
-          },
-          "fill": "p/color-bg-fill-tertiary",
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200"
-          },
-          "lits": {
-            "paddingLeft": 8,
-            "paddingRight": 8,
-            "minHeight": 24
-          },
-          "children": [
+            },
             {
               "type": "frame",
               "name": "text",
@@ -326,55 +375,6 @@ const COMPONENTS = [
                 }
               ],
               "visibleProp": "Show Removable",
-              "visibleDefault": false
-            },
-            {
-              "type": "frame",
-              "name": "link",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-8",
-                "bottomRightRadius": "imported/shared/size-8",
-                "topLeftRadius": "imported/shared/size-8",
-                "topRightRadius": "imported/shared/size-8"
-              },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "text-2",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "label-2",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "Wholesale",
-                      "fontSize": 12,
-                      "fontStyle": "Medium",
-                      "textFill": "imported/tag/link/color",
-                      "lineHeight": 20,
-                      "textDecoration": "NONE",
-                      "textTruncation": true,
-                      "visibleProp": "Show Linked",
-                      "visibleDefault": false
-                    }
-                  ],
-                  "visibleProp": "Show Linked",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show Linked",
               "visibleDefault": false
             }
           ]
@@ -408,6 +408,55 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "link",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-8",
+                "bottomRightRadius": "imported/shared/size-8",
+                "topLeftRadius": "imported/shared/size-8",
+                "topRightRadius": "imported/shared/size-8"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "name": "text-2",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "label-2",
+                      "bindings": {
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "characters": "Wholesale",
+                      "fontSize": 12,
+                      "fontStyle": "Medium",
+                      "textFill": "imported/tag/link/color",
+                      "lineHeight": 20,
+                      "textDecoration": "NONE",
+                      "textTruncation": true,
+                      "visibleProp": "Show Linked",
+                      "visibleDefault": false
+                    }
+                  ],
+                  "visibleProp": "Show Linked",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show Linked",
+              "visibleDefault": false
+            },
+            {
+              "type": "frame",
               "name": "text",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -490,7 +539,35 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Removable",
               "visibleDefault": false
-            },
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=large, State=Disabled",
+        "row": 1,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Size=large, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "fill": "imported/tag/root/background-color-state-disabled",
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200"
+          },
+          "lits": {
+            "paddingLeft": 8,
+            "paddingRight": 8,
+            "minHeight": 24
+          },
+          "children": [
             {
               "type": "frame",
               "name": "link",
@@ -539,35 +616,7 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Linked",
               "visibleDefault": false
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=large, State=Disabled",
-        "row": 1,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Size=large, State=Disabled",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "CENTER"
-          },
-          "fill": "imported/tag/root/background-color-state-disabled",
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200"
-          },
-          "lits": {
-            "paddingLeft": 8,
-            "paddingRight": 8,
-            "minHeight": 24
-          },
-          "children": [
+            },
             {
               "type": "frame",
               "name": "text",
@@ -667,55 +716,6 @@ const COMPONENTS = [
                 }
               ],
               "visibleProp": "Show Removable",
-              "visibleDefault": false
-            },
-            {
-              "type": "frame",
-              "name": "link",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-8",
-                "bottomRightRadius": "imported/shared/size-8",
-                "topLeftRadius": "imported/shared/size-8",
-                "topRightRadius": "imported/shared/size-8"
-              },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "text-2",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "label-2",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "Wholesale",
-                      "fontSize": 12,
-                      "fontStyle": "Medium",
-                      "textFill": "imported/tag/link/color",
-                      "lineHeight": 20,
-                      "textDecoration": "NONE",
-                      "textTruncation": true,
-                      "visibleProp": "Show Linked",
-                      "visibleDefault": false
-                    }
-                  ],
-                  "visibleProp": "Show Linked",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show Linked",
               "visibleDefault": false
             }
           ]
@@ -750,6 +750,55 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "link",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-8",
+                "bottomRightRadius": "imported/shared/size-8",
+                "topLeftRadius": "imported/shared/size-8",
+                "topRightRadius": "imported/shared/size-8"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "name": "text-2",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "label-2",
+                      "bindings": {
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "characters": "Wholesale",
+                      "fontSize": 12,
+                      "fontStyle": "Medium",
+                      "textFill": "imported/tag/link/color",
+                      "lineHeight": 20,
+                      "textDecoration": "NONE",
+                      "textTruncation": true,
+                      "visibleProp": "Show Linked",
+                      "visibleDefault": false
+                    }
+                  ],
+                  "visibleProp": "Show Linked",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show Linked",
+              "visibleDefault": false
+            },
+            {
+              "type": "frame",
               "name": "text",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -831,55 +880,6 @@ const COMPONENTS = [
                 }
               ],
               "visibleProp": "Show Removable",
-              "visibleDefault": false
-            },
-            {
-              "type": "frame",
-              "name": "link",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-8",
-                "bottomRightRadius": "imported/shared/size-8",
-                "topLeftRadius": "imported/shared/size-8",
-                "topRightRadius": "imported/shared/size-8"
-              },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "text-2",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "label-2",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "Wholesale",
-                      "fontSize": 12,
-                      "fontStyle": "Medium",
-                      "textFill": "imported/tag/link/color",
-                      "lineHeight": 20,
-                      "textDecoration": "NONE",
-                      "textTruncation": true,
-                      "visibleProp": "Show Linked",
-                      "visibleDefault": false
-                    }
-                  ],
-                  "visibleProp": "Show Linked",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show Linked",
               "visibleDefault": false
             }
           ]
@@ -915,6 +915,55 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
+              "name": "link",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-8",
+                "bottomRightRadius": "imported/shared/size-8",
+                "topLeftRadius": "imported/shared/size-8",
+                "topRightRadius": "imported/shared/size-8"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "name": "text-2",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "MIN"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "label-2",
+                      "bindings": {
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "characters": "Wholesale",
+                      "fontSize": 12,
+                      "fontStyle": "Medium",
+                      "textFill": "imported/tag/link/color",
+                      "lineHeight": 20,
+                      "textDecoration": "NONE",
+                      "textTruncation": true,
+                      "visibleProp": "Show Linked",
+                      "visibleDefault": false
+                    }
+                  ],
+                  "visibleProp": "Show Linked",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show Linked",
+              "visibleDefault": false
+            },
+            {
+              "type": "frame",
               "name": "text",
               "layout": {
                 "mode": "HORIZONTAL",
@@ -1013,7 +1062,37 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Removable",
               "visibleDefault": false
-            },
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=none, State=Focus Visible",
+        "row": 0,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Size=none, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "fill": "p/color-bg-fill-tertiary",
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "strokeWeight": "imported/tag/root/outline-width-state-focus-visible"
+          },
+          "lits": {
+            "paddingLeft": 6,
+            "paddingRight": 6
+          },
+          "stroke": "imported/tag/root/outline-color-state-focus-visible",
+          "strokeOutside": true,
+          "children": [
             {
               "type": "frame",
               "name": "link",
@@ -1062,37 +1141,7 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Linked",
               "visibleDefault": false
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=none, State=Focus Visible",
-        "row": 0,
-        "col": 3,
-        "spec": {
-          "type": "root",
-          "name": "Size=none, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "CENTER"
-          },
-          "fill": "p/color-bg-fill-tertiary",
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "strokeWeight": "imported/tag/root/outline-width-state-focus-visible"
-          },
-          "lits": {
-            "paddingLeft": 6,
-            "paddingRight": 6
-          },
-          "stroke": "imported/tag/root/outline-color-state-focus-visible",
-          "strokeOutside": true,
-          "children": [
+            },
             {
               "type": "frame",
               "name": "text",
@@ -1177,7 +1226,38 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Removable",
               "visibleDefault": false
-            },
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=large, State=Focus Visible",
+        "row": 1,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Size=large, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "fill": "p/color-bg-fill-tertiary",
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "strokeWeight": "imported/tag/root/outline-width-state-focus-visible"
+          },
+          "lits": {
+            "paddingLeft": 8,
+            "paddingRight": 8,
+            "minHeight": 24
+          },
+          "stroke": "imported/tag/root/outline-color-state-focus-visible",
+          "strokeOutside": true,
+          "children": [
             {
               "type": "frame",
               "name": "link",
@@ -1226,38 +1306,7 @@ const COMPONENTS = [
               ],
               "visibleProp": "Show Linked",
               "visibleDefault": false
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=large, State=Focus Visible",
-        "row": 1,
-        "col": 3,
-        "spec": {
-          "type": "root",
-          "name": "Size=large, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "CENTER"
-          },
-          "fill": "p/color-bg-fill-tertiary",
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "strokeWeight": "imported/tag/root/outline-width-state-focus-visible"
-          },
-          "lits": {
-            "paddingLeft": 8,
-            "paddingRight": 8,
-            "minHeight": 24
-          },
-          "stroke": "imported/tag/root/outline-color-state-focus-visible",
-          "strokeOutside": true,
-          "children": [
+            },
             {
               "type": "frame",
               "name": "text",
@@ -1357,55 +1406,6 @@ const COMPONENTS = [
                 }
               ],
               "visibleProp": "Show Removable",
-              "visibleDefault": false
-            },
-            {
-              "type": "frame",
-              "name": "link",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-8",
-                "bottomRightRadius": "imported/shared/size-8",
-                "topLeftRadius": "imported/shared/size-8",
-                "topRightRadius": "imported/shared/size-8"
-              },
-              "children": [
-                {
-                  "type": "frame",
-                  "name": "text-2",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "name": "label-2",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "Wholesale",
-                      "fontSize": 12,
-                      "fontStyle": "Medium",
-                      "textFill": "imported/tag/link/color",
-                      "lineHeight": 20,
-                      "textDecoration": "NONE",
-                      "textTruncation": true,
-                      "visibleProp": "Show Linked",
-                      "visibleDefault": false
-                    }
-                  ],
-                  "visibleProp": "Show Linked",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show Linked",
               "visibleDefault": false
             }
           ]

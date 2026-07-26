@@ -1,0 +1,71 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. The tri-state rides ONE enum axis (`checked`: unchecked|checked|indeterminate) because the svg-content promotion carries per-value glyph assets only for a single-axis function; the capture config expands each value into MUI's own two-boolean API (checked + indeterminate) through the $props grammar. NAMED RESIDUE: the CODE lowering of the tri-state back to MUI's two props is not spelled by the contract's code binding (canvas-side tri-state, code-side two booleans). disableRipple pinned (the Button/Switch ripple-determinism precedent). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Checkbox"
+    }
+  }
+}

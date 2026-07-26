@@ -91,44 +91,6 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "autocomplete-input",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "CENTER"
-                      },
-                      "bindings": {
-                        "minWidth": "imported/autocomplete/autocomplete-input/min-width",
-                        "paddingRight": "imported/shared/size-4",
-                        "paddingBottom": "imported/autocomplete/autocomplete-input/padding-bottom/medium",
-                        "paddingLeft": "imported/autocomplete/autocomplete-input/padding-left/medium",
-                        "paddingTop": "imported/autocomplete/autocomplete-input/padding-top/medium"
-                      },
-                      "fixedHeight": {
-                        "px": 38,
-                        "varName": "imported/autocomplete/autocomplete-input/height/medium"
-                      },
-                      "fixedWidth": {
-                        "px": 53.734,
-                        "varName": "imported/autocomplete/autocomplete-input/width/medium"
-                      },
-                      "children": [
-                        {
-                          "type": "text",
-                          "name": "placeholder",
-                          "characters": "",
-                          "fontSize": 16,
-                          "fontStyle": "Medium",
-                          "lineHeight": 23,
-                          "letterSpacing": 0.15008,
-                          "fontFamily": "Roboto",
-                          "textTruncation": true,
-                          "textFill": "imported/shared/color-000000de"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
                       "name": "autocomplete-tag",
                       "layout": {
                         "mode": "HORIZONTAL",
@@ -256,6 +218,44 @@ const COMPONENTS = [
                           "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/shared/color-00000042",
                           "iconSize": 16
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "name": "autocomplete-input",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "CENTER"
+                      },
+                      "bindings": {
+                        "minWidth": "imported/autocomplete/autocomplete-input/min-width",
+                        "paddingRight": "imported/shared/size-4",
+                        "paddingBottom": "imported/autocomplete/autocomplete-input/padding-bottom/medium",
+                        "paddingLeft": "imported/autocomplete/autocomplete-input/padding-left/medium",
+                        "paddingTop": "imported/autocomplete/autocomplete-input/padding-top/medium"
+                      },
+                      "fixedHeight": {
+                        "px": 38,
+                        "varName": "imported/autocomplete/autocomplete-input/height/medium"
+                      },
+                      "fixedWidth": {
+                        "px": 53.734,
+                        "varName": "imported/autocomplete/autocomplete-input/width/medium"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "name": "placeholder",
+                          "characters": "",
+                          "fontSize": 16,
+                          "fontStyle": "Medium",
+                          "lineHeight": 23,
+                          "letterSpacing": 0.15008,
+                          "fontFamily": "Roboto",
+                          "textTruncation": true,
+                          "textFill": "imported/shared/color-000000de"
                         }
                       ]
                     },
@@ -461,44 +461,6 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "autocomplete-input",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "CENTER"
-                      },
-                      "bindings": {
-                        "minWidth": "imported/autocomplete/autocomplete-input/min-width",
-                        "paddingRight": "imported/shared/size-4",
-                        "paddingBottom": "imported/autocomplete/autocomplete-input/padding-bottom/small",
-                        "paddingLeft": "imported/autocomplete/autocomplete-input/padding-left/small",
-                        "paddingTop": "imported/autocomplete/autocomplete-input/padding-top/small"
-                      },
-                      "fixedHeight": {
-                        "px": 28,
-                        "varName": "imported/autocomplete/autocomplete-input/height/small"
-                      },
-                      "fixedWidth": {
-                        "px": 86.734,
-                        "varName": "imported/autocomplete/autocomplete-input/width/small"
-                      },
-                      "children": [
-                        {
-                          "type": "text",
-                          "name": "placeholder",
-                          "characters": "",
-                          "fontSize": 16,
-                          "fontStyle": "Medium",
-                          "lineHeight": 23,
-                          "letterSpacing": 0.15008,
-                          "fontFamily": "Roboto",
-                          "textTruncation": true,
-                          "textFill": "imported/shared/color-000000de"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
                       "name": "autocomplete-tag",
                       "layout": {
                         "mode": "HORIZONTAL",
@@ -626,6 +588,44 @@ const COMPONENTS = [
                           "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/shared/color-00000042",
                           "iconSize": 16
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "name": "autocomplete-input",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "MIN",
+                        "counter": "CENTER"
+                      },
+                      "bindings": {
+                        "minWidth": "imported/autocomplete/autocomplete-input/min-width",
+                        "paddingRight": "imported/shared/size-4",
+                        "paddingBottom": "imported/autocomplete/autocomplete-input/padding-bottom/small",
+                        "paddingLeft": "imported/autocomplete/autocomplete-input/padding-left/small",
+                        "paddingTop": "imported/autocomplete/autocomplete-input/padding-top/small"
+                      },
+                      "fixedHeight": {
+                        "px": 28,
+                        "varName": "imported/autocomplete/autocomplete-input/height/small"
+                      },
+                      "fixedWidth": {
+                        "px": 86.734,
+                        "varName": "imported/autocomplete/autocomplete-input/width/small"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "name": "placeholder",
+                          "characters": "",
+                          "fontSize": 16,
+                          "fontStyle": "Medium",
+                          "lineHeight": 23,
+                          "letterSpacing": 0.15008,
+                          "fontFamily": "Roboto",
+                          "textTruncation": true,
+                          "textFill": "imported/shared/color-000000de"
                         }
                       ]
                     },

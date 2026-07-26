@@ -4,7 +4,7 @@
     "version": "9.2.0",
     "framework": "react",
     "classPrefix": "Mui",
-    "classAllow": "^(?!Mui-)(?!.*-(color|size)[A-Z])(?!.*[a-z]Size[A-Z][A-Za-z]*$)(?!.*-paperWidth[A-Z])(?!.*-tooltipArrow$)(?!.*-popupIndicatorOpen$)(?!.*Collapse-(entered|hidden)$)(?!.*-(text|outlined|contained|filled|elevation)([A-Z][A-Za-z]*|\\d+)?$)(?!.*-(rounded|clickable|deletable)$)Mui",
+    "classAllow": "^(?!Mui-)(?!.*-(color|size)[A-Z])(?!.*[a-z]Size[A-Z][A-Za-z]*$)(?!.*-paperWidth[A-Z])(?!.*-tooltipArrow$)(?!.*-popupIndicatorOpen$)(?!.*Collapse-(entered|hidden)$)(?!.*-stickyHeader$)(?!.*-direction[A-Z][A-Za-z]*$)(?!.*-(text|outlined|contained|filled|standard|elevation)([A-Z][A-Za-z]*|\\d+)?$)(?!.*-(rounded|clickable|deletable)$)Mui",
     "varPrefix": "--mui-"
   },
   "mount": {
@@ -267,6 +267,120 @@
       "childWrap": {
         "importName": "DialogContent"
       }
+    },
+    {
+      "__note": "ORGANISM ROUND — Checkbox. Tri-state on ONE axis: MUI spells the tri-state as TWO independent booleans (checked + indeterminate), but the svg-content promotion carries per-value glyph assets only when the markup is a function of exactly ONE axis (svg-content-multi-axis refusal otherwise) — so the axis value expands into several library props through the $props grammar. All THREE glyphs (unchecked box, checked box, indeterminate dash) become distinct assets. disableRipple pinned (the Button/Switch precedent — the ripple never settles).",
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/mui/contracts-seed/checkbox.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": { "$props": { "checked": false } },
+          "checked": { "$props": { "checked": true } },
+          "indeterminate": { "$props": { "checked": false, "indeterminate": true } }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "disableRipple": true
+      }
+    },
+    {
+      "__note": "ORGANISM ROUND — TablePagination (component='div', the composition every real table ships). count/rowsPerPage/page pinned so the rendered text is deterministic ('1–3 of 3'). The rows-per-page Select is pinned CONTROLLED-CLOSED (slotProps.select.open=false): the census active-driver's mouse.down lands on it, opens the MUI menu, and the select icon's 180° open rotation PERSISTED into the next sweep — a witnessed double-run byte-identity refusal (same determinism-pin class as Menu/Dialog transitionDuration:0). NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 BOTH arrow IconButtons are forced Mui-disabled by the component itself — the ENABLED arrow colors are unobservable at this combo and are NOT in the captured truth (a paging axis would need a second fixed combo; deliberately out of v1).",
+      "name": "Pagination",
+      "importName": "TablePagination",
+      "contract": "examples/mui/contracts-seed/pagination.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "component": "div",
+        "count": 3,
+        "rowsPerPage": 10,
+        "page": 0,
+        "slotProps": { "select": { "open": false } }
+      },
+      "callbackProps": [
+        "onPageChange",
+        "onRowsPerPageChange"
+      ],
+      "blockStage": true,
+      "stage": { "width": 460, "height": 120, "padding": 16 }
+    },
+    {
+      "__note": "ORGANISM ROUND — the composed DataTable, the first ORGANISM through the pipeline. NAMED EXCLUSIONS (v1): (1) stickyHeader is NOT captured — position:sticky has no carried spelling (contract-schema position = relative|static|absolute) and the sticky header also flips border-collapse to separate and paints its own background; (2) the row overflow MENU is captured CLOSED — an open Menu portals a root to document.body and the single-portaled-root policy would DROP the in-stage table; (3) TableSortLabel carries direction='asc' only — the direction axis is excluded by name (the -directionAsc/-directionDesc classes are also excluded from classAllow so a stray axis can never branch the union); (4) TableContainer/Paper is NOT the captured root — enumerated axes ride the ROOT mount and `size` is a Table prop, so the organism IS the Table (Paper elevation is already a captured component this round); (5) rows are INLINED, not component refs — promotion emits no component/repeat/slot refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding (42x42 -> 24x24) with UNCHANGED child classes, so composing the standalone Checkbox contract would be WRONG in small tables; (6) TWO body rows, not three — repeated siblings are separate parts under a GLOBAL naming counter (label, label-2, ...), so the sample is the minimum that proves both the plain and the selected/checked row; (7) the row-action control carries a TEXT glyph, not an icon asset — the childrenSpec grammar mounts imported COMPONENTS and @mui/icons-material is not in the pinned sandbox; raw SVG markup in config is deliberately NOT invented this round.",
+      "name": "Table",
+      "importName": "Table",
+      "contract": "examples/mui/contracts-seed/table.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ],
+      "blockStage": true,
+      "stage": { "width": 720, "height": 360, "padding": 16 },
+      "childrenSpec": [
+        {
+          "importName": "TableHead",
+          "children": [
+            {
+              "importName": "TableRow",
+              "children": [
+                { "importName": "TableCell", "props": { "padding": "checkbox" }, "children": [
+                  { "importName": "Checkbox", "props": { "indeterminate": true, "disableRipple": true } }
+                ] },
+                { "importName": "TableCell", "props": { "sortDirection": "asc" }, "children": [
+                  { "importName": "TableSortLabel", "props": { "active": true, "direction": "asc" }, "text": "Name" }
+                ] },
+                { "importName": "TableCell", "text": "Role" },
+                { "importName": "TableCell", "text": "Team" },
+                { "importName": "TableCell", "props": { "align": "right" }, "text": "Actions" }
+              ]
+            }
+          ]
+        },
+        {
+          "importName": "TableBody",
+          "children": [
+            {
+              "importName": "TableRow",
+              "children": [
+                { "importName": "TableCell", "props": { "padding": "checkbox" }, "children": [
+                  { "importName": "Checkbox", "props": { "checked": false, "disableRipple": true } }
+                ] },
+                { "importName": "TableCell", "text": "Frozen yoghurt" },
+                { "importName": "TableCell", "text": "Designer" },
+                { "importName": "TableCell", "text": "Platform" },
+                { "importName": "TableCell", "props": { "align": "right" }, "children": [
+                  { "importName": "IconButton", "props": { "size": "small", "disableRipple": true, "aria-label": "row actions" }, "text": "⋮" }
+                ] }
+              ]
+            },
+            {
+              "importName": "TableRow",
+              "props": { "selected": true },
+              "children": [
+                { "importName": "TableCell", "props": { "padding": "checkbox" }, "children": [
+                  { "importName": "Checkbox", "props": { "checked": true, "disableRipple": true } }
+                ] },
+                { "importName": "TableCell", "text": "Ice cream sandwich" },
+                { "importName": "TableCell", "text": "Engineer" },
+                { "importName": "TableCell", "text": "Contracts" },
+                { "importName": "TableCell", "props": { "align": "right" }, "children": [
+                  { "importName": "IconButton", "props": { "size": "small", "disableRipple": true, "aria-label": "row actions" }, "text": "⋮" }
+                ] }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

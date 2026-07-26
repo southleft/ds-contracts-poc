@@ -201,6 +201,90 @@ for (const file of scripts) {
       if (textNode('Tooltip text').length === 0) throw new Error('tooltip pin: bubble text missing');
       if (partNamed('tooltip-arrow').length === 0) throw new Error('tooltip pin: tooltip-arrow part missing');
     }
+    // ORGANISM-ROUND STRUCTURAL PINS (2026-07-25).
+    if (name === 'checkbox') {
+      // THREE glyphs, one per `checked` variant — the whole reason the
+      // tri-state rides ONE axis (the svg promotion refuses multi-axis
+      // markup by name and would have carried no glyph at all).
+      for (const [variant, glyph] of [['Unchecked', 'icon-unchecked'], ['Checked', 'icon-checked'], ['Indeterminate', 'icon-indeterminate']]) {
+        const v = mock.root.findAll((n) => n.type === 'COMPONENT' && n.name === `Checked=${variant}`);
+        if (v.length !== 1) throw new Error(`checkbox pin: expected exactly one Checked=${variant} variant, found ${v.length}`);
+        if (v[0].findAll((n) => n.name === glyph).length === 0) throw new Error(`checkbox pin: Checked=${variant} carries no "${glyph}" glyph part`);
+      }
+      // the opacity-0 full-cover input must never paint over the glyph
+      const painted = mock.root.findAll((n) => /input/i.test(n.name) && n.visible !== false && (n.fills ?? []).some((f) => f.type === 'SOLID'));
+      if (painted.length > 0) throw new Error(`checkbox pin: the sr-only input rendered as a painted node (${painted[0].name})`);
+    }
+    if (name === 'table-pagination') {
+      // the toolbar in DOM ORDER — the select must sit BETWEEN its label and
+      // the displayed-rows text (the position:relative partition used to
+      // throw it to the end of the row).
+      const toolbar = mock.root.findAll((n) => n.name === 'tablepagination-toolbar')[0];
+      if (!toolbar) throw new Error('table-pagination pin: tablepagination-toolbar missing');
+      const flat = (n) => [n, ...n.findAll()];
+      const order = flat(toolbar).map((n) => n.characters ?? n.name);
+      const at = (s) => order.findIndex((o) => o === s);
+      for (const s of ['Rows per page:', '10', '1–3 of 3']) {
+        if (at(s) < 0) throw new Error(`table-pagination pin: "${s}" missing from the toolbar (order: ${order.join(' | ')})`);
+      }
+      if (!(at('Rows per page:') < at('10') && at('10') < at('1–3 of 3'))) {
+        throw new Error(`table-pagination pin: toolbar out of DOM order — expected label < select < displayedRows, got ${order.join(' | ')}`);
+      }
+      const actions = mock.root.findAll((n) => n.name === 'tablepagination-actions');
+      if (actions.length === 0) throw new Error('table-pagination pin: tablepagination-actions missing');
+      const buttons = actions[actions.length - 1].children ?? [];
+      if (buttons.length !== 2) throw new Error(`table-pagination pin: expected 2 arrow buttons, found ${buttons.length}`);
+    }
+    if (name === 'table') {
+      // THE ORGANISM PIN — the class no percentage can see: a table that is
+      // not a table. Rows must be horizontal stacks, every column must carry
+      // ONE width shared by header and body, every cell must carry the 1px
+      // bottom divider (MUI puts the row rule on CELLS), the cells of a row
+      // must be the SAME height (or the dividers step), and the selected row
+      // must carry its own tint. Numbers are the REAL captured geometry at
+      // the pinned 720×360/16 stage (688px content width).
+      const COLUMNS = [52, 240.13, 132.97, 142.48, 120.42];
+      const variants = mock.root.findAll((n) => n.type === 'COMPONENT' && /^Size=/.test(n.name));
+      if (variants.length !== 2) throw new Error(`table pin: expected 2 Size variants, found ${variants.length}`);
+      for (const variant of variants) {
+        const rows = variant.findAll((n) => /^tablerow-/.test(n.name));
+        if (rows.length !== 3) throw new Error(`table pin: ${variant.name} has ${rows.length} rows, expected 3 (1 head + 2 body)`);
+        const grid = [];
+        for (const row of rows) {
+          if (row.layoutMode !== 'HORIZONTAL') {
+            throw new Error(`table pin: row ${row.name} in ${variant.name} is ${row.layoutMode}, not HORIZONTAL — the table-row lowering collapsed`);
+          }
+          const cells = row.children ?? [];
+          if (cells.length !== 5) throw new Error(`table pin: row ${row.name} in ${variant.name} has ${cells.length} cells, expected 5`);
+          const noDivider = cells.find((c) => Math.round(c.strokeBottomWeight ?? 0) !== 1 || (c.strokes ?? []).length === 0);
+          if (noDivider) throw new Error(`table pin: cell ${noDivider.name} in ${variant.name} carries no 1px bottom divider (the MUI row rule lives on cells)`);
+          const heights = new Set(cells.map((c) => Math.round(c.height * 100) / 100));
+          if (heights.size !== 1) throw new Error(`table pin: cells of ${row.name} in ${variant.name} have different heights {${[...heights].join(', ')}} — the dividers would step`);
+          grid.push(cells.map((c) => Math.round(c.width * 100) / 100));
+        }
+        for (const [ri, widths] of grid.entries()) {
+          for (let ci = 0; ci < COLUMNS.length; ci++) {
+            if (Math.abs(widths[ci] - COLUMNS[ci]) > 0.5) {
+              throw new Error(`table pin: ${variant.name} row ${ri} column ${ci} width ${widths[ci]} ≠ pinned ${COLUMNS[ci]} — the column algorithm's one-width-per-column fact is gone`);
+            }
+          }
+        }
+        // the selected body row carries its own fill; the plain one does not
+        const selected = variant.findAll((n) => n.name === 'tablerow-root-2')[0];
+        const plain = variant.findAll((n) => n.name === 'tablerow-root')[0];
+        if (!selected || (selected.fills ?? []).length === 0) throw new Error(`table pin: ${variant.name} selected row carries no fill (the Mui-selected tint rides the TR, not the cells)`);
+        if (plain && (plain.fills ?? []).length > 0) throw new Error(`table pin: ${variant.name} unselected row carries a fill — the selected tint is not row-specific`);
+      }
+      // the composed children: the head checkbox glyph, the sort arrow beside
+      // "Name", and the right-aligned action control in every body row
+      if (textNode('Name').length === 0) throw new Error('table pin: sort-label text "Name" missing');
+      const sortLabel = mock.root.findAll((n) => n.name === 'label' && (n.children ?? []).length > 1);
+      if (sortLabel.length === 0) throw new Error('table pin: the TableSortLabel part carries no arrow child (child-bearing text part dropped its children)');
+      for (const s of ['Frozen yoghurt', 'Ice cream sandwich', 'Actions']) {
+        if (textNode(s).length === 0) throw new Error(`table pin: cell text "${s}" missing`);
+      }
+      if (mock.root.findAll((n) => n.name === 'icon-2').length === 0) throw new Error('table pin: sort-label icon part missing');
+    }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
     rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);
     totalVariants += got;
