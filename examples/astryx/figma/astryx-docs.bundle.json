@@ -1,0 +1,5276 @@
+{
+  "type": "CONTRACTS-BUNDLE",
+  "version": 1,
+  "tokenSet": {
+    "name": "Astryx (docs theme)",
+    "base": {
+      "color-accent": {
+        "$value": "#15110C",
+        "$type": "color"
+      },
+      "color-accent-muted": {
+        "$value": "rgba(21,17,12,0.08)",
+        "$type": "color"
+      },
+      "color-on-accent": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-neutral": {
+        "$value": "rgba(5,54,89,0.1)",
+        "$type": "color"
+      },
+      "color-background-surface": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-background-body": {
+        "$value": "#F8F4ED",
+        "$type": "color"
+      },
+      "color-overlay": {
+        "$value": "#01122866",
+        "$type": "color"
+      },
+      "color-overlay-hover": {
+        "$value": "#0536590C",
+        "$type": "color"
+      },
+      "color-overlay-pressed": {
+        "$value": "#05365919",
+        "$type": "color"
+      },
+      "color-background-muted": {
+        "$value": "#0536590C",
+        "$type": "color"
+      },
+      "color-text-primary": {
+        "$value": "#15110C",
+        "$type": "color"
+      },
+      "color-text-secondary": {
+        "$value": "#4E606F",
+        "$type": "color"
+      },
+      "color-text-disabled": {
+        "$value": "#A4B0BC",
+        "$type": "color"
+      },
+      "color-text-accent": {
+        "$value": "#15110C",
+        "$type": "color"
+      },
+      "color-on-dark": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-on-light": {
+        "$value": "#000000",
+        "$type": "color"
+      },
+      "color-icon-accent": {
+        "$value": "#15110C",
+        "$type": "color"
+      },
+      "color-icon-primary": {
+        "$value": "#15110C",
+        "$type": "color"
+      },
+      "color-icon-secondary": {
+        "$value": "#4E606F",
+        "$type": "color"
+      },
+      "color-icon-disabled": {
+        "$value": "#A4B0BC",
+        "$type": "color"
+      },
+      "color-background-card": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-background-popover": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-background-inverted": {
+        "$value": "#0A1317",
+        "$type": "color"
+      },
+      "color-background-error-inverted": {
+        "$value": "#AA071E",
+        "$type": "color"
+      },
+      "color-success": {
+        "$value": "#0D8626",
+        "$type": "color"
+      },
+      "color-success-muted": {
+        "$value": "#0B991F33",
+        "$type": "color"
+      },
+      "color-on-success": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-error": {
+        "$value": "#E3193B",
+        "$type": "color"
+      },
+      "color-error-muted": {
+        "$value": "#E3193B33",
+        "$type": "color"
+      },
+      "color-on-error": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "color-warning": {
+        "$value": "#E9AF08",
+        "$type": "color"
+      },
+      "color-warning-muted": {
+        "$value": "#E2A40033",
+        "$type": "color"
+      },
+      "color-on-warning": {
+        "$value": "#0A1317",
+        "$type": "color"
+      },
+      "color-border": {
+        "$value": "#05365919",
+        "$type": "color"
+      },
+      "color-border-emphasized": {
+        "$value": "#CCD3DB",
+        "$type": "color"
+      },
+      "color-skeleton": {
+        "$value": "#CCD3DB",
+        "$type": "color"
+      },
+      "color-track": {
+        "$value": "#CCD3DB",
+        "$type": "color"
+      },
+      "color-shadow": {
+        "$value": "rgba(5,54,89,0.1)",
+        "$type": "color"
+      },
+      "color-tint-hover": {
+        "$value": "black"
+      },
+      "color-background-blue": {
+        "$value": "#0171E333",
+        "$type": "color"
+      },
+      "color-border-blue": {
+        "$value": "#0064E0",
+        "$type": "color"
+      },
+      "color-icon-blue": {
+        "$value": "#0064E0",
+        "$type": "color"
+      },
+      "color-text-blue": {
+        "$value": "#042F97",
+        "$type": "color"
+      },
+      "color-background-cyan": {
+        "$value": "#03A7D733",
+        "$type": "color"
+      },
+      "color-border-cyan": {
+        "$value": "#089DD0",
+        "$type": "color"
+      },
+      "color-icon-cyan": {
+        "$value": "#00ACC1",
+        "$type": "color"
+      },
+      "color-text-cyan": {
+        "$value": "#014975",
+        "$type": "color"
+      },
+      "color-background-gray": {
+        "$value": "#0A131733",
+        "$type": "color"
+      },
+      "color-border-gray": {
+        "$value": "#647685",
+        "$type": "color"
+      },
+      "color-icon-gray": {
+        "$value": "#4E606F",
+        "$type": "color"
+      },
+      "color-text-gray": {
+        "$value": "#0A1317",
+        "$type": "color"
+      },
+      "color-background-green": {
+        "$value": "#24BB5E33",
+        "$type": "color"
+      },
+      "color-border-green": {
+        "$value": "#0D8626",
+        "$type": "color"
+      },
+      "color-icon-green": {
+        "$value": "#0D8626",
+        "$type": "color"
+      },
+      "color-text-green": {
+        "$value": "#09441F",
+        "$type": "color"
+      },
+      "color-background-orange": {
+        "$value": "#F2790233",
+        "$type": "color"
+      },
+      "color-border-orange": {
+        "$value": "#EB6E00",
+        "$type": "color"
+      },
+      "color-icon-orange": {
+        "$value": "#E9690B",
+        "$type": "color"
+      },
+      "color-text-orange": {
+        "$value": "#6B2203",
+        "$type": "color"
+      },
+      "color-background-pink": {
+        "$value": "#E638B333",
+        "$type": "color"
+      },
+      "color-border-pink": {
+        "$value": "#F351C0",
+        "$type": "color"
+      },
+      "color-icon-pink": {
+        "$value": "#C2185B",
+        "$type": "color"
+      },
+      "color-text-pink": {
+        "$value": "#650053",
+        "$type": "color"
+      },
+      "color-background-purple": {
+        "$value": "#7952FF33",
+        "$type": "color"
+      },
+      "color-border-purple": {
+        "$value": "#9081FF",
+        "$type": "color"
+      },
+      "color-icon-purple": {
+        "$value": "#5B08D8",
+        "$type": "color"
+      },
+      "color-text-purple": {
+        "$value": "#3E0697",
+        "$type": "color"
+      },
+      "color-background-red": {
+        "$value": "#E3193B33",
+        "$type": "color"
+      },
+      "color-border-red": {
+        "$value": "#E3193B",
+        "$type": "color"
+      },
+      "color-icon-red": {
+        "$value": "#D31130",
+        "$type": "color"
+      },
+      "color-text-red": {
+        "$value": "#7B0210",
+        "$type": "color"
+      },
+      "color-background-teal": {
+        "$value": "#0DB7AF33",
+        "$type": "color"
+      },
+      "color-border-teal": {
+        "$value": "#08A3A3",
+        "$type": "color"
+      },
+      "color-icon-teal": {
+        "$value": "#009688",
+        "$type": "color"
+      },
+      "color-text-teal": {
+        "$value": "#083943",
+        "$type": "color"
+      },
+      "color-background-yellow": {
+        "$value": "#E2A40033",
+        "$type": "color"
+      },
+      "color-border-yellow": {
+        "$value": "#C58600",
+        "$type": "color"
+      },
+      "color-icon-yellow": {
+        "$value": "#FBC02D",
+        "$type": "color"
+      },
+      "color-text-yellow": {
+        "$value": "#753F07",
+        "$type": "color"
+      },
+      "spacing-0": {
+        "$value": "0px",
+        "$type": "dimension"
+      },
+      "spacing-0-5": {
+        "$value": "2px",
+        "$type": "dimension"
+      },
+      "spacing-1": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "spacing-1-5": {
+        "$value": "6px",
+        "$type": "dimension"
+      },
+      "spacing-2": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "spacing-3": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "spacing-4": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "spacing-5": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "spacing-6": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "spacing-7": {
+        "$value": "28px",
+        "$type": "dimension"
+      },
+      "spacing-8": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "spacing-9": {
+        "$value": "36px",
+        "$type": "dimension"
+      },
+      "spacing-10": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "spacing-11": {
+        "$value": "44px",
+        "$type": "dimension"
+      },
+      "spacing-12": {
+        "$value": "48px",
+        "$type": "dimension"
+      },
+      "size-element-sm": {
+        "$value": "28px",
+        "$type": "dimension"
+      },
+      "size-element-md": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "size-element-lg": {
+        "$value": "36px",
+        "$type": "dimension"
+      },
+      "border-width": {
+        "$value": "1px",
+        "$type": "dimension"
+      },
+      "radius-none": {
+        "$value": "0px",
+        "$type": "dimension"
+      },
+      "radius-inner": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "radius-element": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "radius-container": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "radius-page": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "radius-chat": {
+        "$value": "28px",
+        "$type": "dimension"
+      },
+      "radius-full": {
+        "$value": "9999px",
+        "$type": "dimension"
+      },
+      "shadow-low": {
+        "$value": "0px 1px 1px light-dark(rgba(0,0,0,0.1),rgba(0,0,0,0.2)),0px 2px 8px light-dark(rgba(0,0,0,0.1),rgba(0,0,0,0.2))"
+      },
+      "shadow-med": {
+        "$value": "0px 1px 2px light-dark(rgba(0,0,0,0.1),rgba(0,0,0,0.2)),0px 2px 12px light-dark(rgba(0,0,0,0.1),rgba(0,0,0,0.2))"
+      },
+      "shadow-high": {
+        "$value": "0px 2px 2px light-dark(rgba(0,0,0,0.1),rgba(0,0,0,0.2)),0px 8px 24px light-dark(rgba(0,0,0,0.1),rgba(0,0,0,0.3))"
+      },
+      "shadow-inset-hover": {
+        "$value": "inset 0px 0px 0px 2px light-dark(rgba(5,54,89,0.15),rgba(223,226,229,0.2))"
+      },
+      "shadow-inset-selected": {
+        "$value": "inset 0px 0px 0px 2px rgba(1,113,227,0.5)"
+      },
+      "shadow-inset-success": {
+        "$value": "inset 0px 0px 0px 2px rgba(38,167,86,0.3)"
+      },
+      "shadow-inset-warning": {
+        "$value": "inset 0px 0px 0px 2px rgba(226,164,0,0.3)"
+      },
+      "shadow-inset-error": {
+        "$value": "inset 0px 0px 0px 2px rgba(227,25,59,0.3)"
+      },
+      "duration-fast-min": {
+        "$value": "130ms",
+        "$type": "duration"
+      },
+      "duration-fast": {
+        "$value": "175ms",
+        "$type": "duration"
+      },
+      "duration-fast-max": {
+        "$value": "230ms",
+        "$type": "duration"
+      },
+      "duration-medium-min": {
+        "$value": "310ms",
+        "$type": "duration"
+      },
+      "duration-medium": {
+        "$value": "410ms",
+        "$type": "duration"
+      },
+      "duration-medium-max": {
+        "$value": "550ms",
+        "$type": "duration"
+      },
+      "duration-slow-min": {
+        "$value": "730ms",
+        "$type": "duration"
+      },
+      "duration-slow": {
+        "$value": "975ms",
+        "$type": "duration"
+      },
+      "duration-slow-max": {
+        "$value": "1300ms",
+        "$type": "duration"
+      },
+      "ease-standard": {
+        "$value": "cubic-bezier(0.24,1,0.4,1)"
+      },
+      "transition-fast": {
+        "$value": "0.15s ease"
+      },
+      "transition-normal": {
+        "$value": "0.2s ease"
+      },
+      "font-family-body": {
+        "$value": "Figtree,\"Figtree Variable\",system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif"
+      },
+      "font-family-code": {
+        "$value": "\"SF Mono\",Monaco,Consolas,monospace"
+      },
+      "font-family-heading": {
+        "$value": "Figtree,\"Figtree Variable\",system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif"
+      },
+      "font-size-4xs": {
+        "$value": "0.375rem",
+        "$type": "dimension"
+      },
+      "font-size-3xs": {
+        "$value": "0.4375rem",
+        "$type": "dimension"
+      },
+      "font-size-2xs": {
+        "$value": "0.5rem",
+        "$type": "dimension"
+      },
+      "font-size-xs": {
+        "$value": "0.625rem",
+        "$type": "dimension"
+      },
+      "font-size-sm": {
+        "$value": "0.75rem",
+        "$type": "dimension"
+      },
+      "font-size-base": {
+        "$value": "0.875rem",
+        "$type": "dimension"
+      },
+      "font-size-lg": {
+        "$value": "1.0625rem",
+        "$type": "dimension"
+      },
+      "font-size-xl": {
+        "$value": "1.25rem",
+        "$type": "dimension"
+      },
+      "font-size-2xl": {
+        "$value": "1.5rem",
+        "$type": "dimension"
+      },
+      "font-size-3xl": {
+        "$value": "1.8125rem",
+        "$type": "dimension"
+      },
+      "font-size-4xl": {
+        "$value": "2.1875rem",
+        "$type": "dimension"
+      },
+      "font-size-5xl": {
+        "$value": "2.625rem",
+        "$type": "dimension"
+      },
+      "font-weight-normal": {
+        "$value": "400",
+        "$type": "number"
+      },
+      "font-weight-medium": {
+        "$value": "500",
+        "$type": "number"
+      },
+      "font-weight-semibold": {
+        "$value": "600",
+        "$type": "number"
+      },
+      "font-weight-bold": {
+        "$value": "700",
+        "$type": "number"
+      },
+      "text-heading-1-size": {
+        "$value": "{font-size-2xl}"
+      },
+      "text-heading-1-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-heading-1-leading": {
+        "$value": "1.3333",
+        "$type": "number"
+      },
+      "text-heading-2-size": {
+        "$value": "{font-size-xl}"
+      },
+      "text-heading-2-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-heading-2-leading": {
+        "$value": "1.4",
+        "$type": "number"
+      },
+      "text-heading-3-size": {
+        "$value": "{font-size-lg}"
+      },
+      "text-heading-3-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-heading-3-leading": {
+        "$value": "1.4118",
+        "$type": "number"
+      },
+      "text-heading-4-size": {
+        "$value": "{font-size-base}"
+      },
+      "text-heading-4-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-heading-4-leading": {
+        "$value": "1.4286",
+        "$type": "number"
+      },
+      "text-heading-5-size": {
+        "$value": "{font-size-sm}"
+      },
+      "text-heading-5-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-heading-5-leading": {
+        "$value": "1.6667",
+        "$type": "number"
+      },
+      "text-heading-6-size": {
+        "$value": "{font-size-xs}"
+      },
+      "text-heading-6-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-heading-6-leading": {
+        "$value": "1.6",
+        "$type": "number"
+      },
+      "text-body-size": {
+        "$value": "{font-size-base}"
+      },
+      "text-body-weight": {
+        "$value": "{font-weight-normal}"
+      },
+      "text-body-leading": {
+        "$value": "1.4286",
+        "$type": "number"
+      },
+      "text-large-size": {
+        "$value": "{font-size-lg}"
+      },
+      "text-large-weight": {
+        "$value": "{font-weight-semibold}"
+      },
+      "text-large-leading": {
+        "$value": "1.4118",
+        "$type": "number"
+      },
+      "text-label-size": {
+        "$value": "{font-size-base}"
+      },
+      "text-label-weight": {
+        "$value": "{font-weight-medium}"
+      },
+      "text-label-leading": {
+        "$value": "1.4286",
+        "$type": "number"
+      },
+      "text-code-size": {
+        "$value": "{font-size-base}"
+      },
+      "text-code-weight": {
+        "$value": "{font-weight-normal}"
+      },
+      "text-code-leading": {
+        "$value": "1.4286",
+        "$type": "number"
+      },
+      "text-supporting-size": {
+        "$value": "{font-size-sm}"
+      },
+      "text-supporting-weight": {
+        "$value": "{font-weight-normal}"
+      },
+      "text-supporting-leading": {
+        "$value": "1.6667",
+        "$type": "number"
+      },
+      "text-display-1-size": {
+        "$value": "{font-size-5xl}"
+      },
+      "text-display-1-weight": {
+        "$value": "600"
+      },
+      "text-display-1-leading": {
+        "$value": "1.2381",
+        "$type": "number"
+      },
+      "text-display-2-size": {
+        "$value": "{font-size-4xl}"
+      },
+      "text-display-2-weight": {
+        "$value": "600"
+      },
+      "text-display-2-leading": {
+        "$value": "1.2571",
+        "$type": "number"
+      },
+      "text-display-3-size": {
+        "$value": "{font-size-3xl}"
+      },
+      "text-display-3-weight": {
+        "$value": "600"
+      },
+      "text-display-3-leading": {
+        "$value": "1.2414",
+        "$type": "number"
+      }
+    },
+    "modes": {
+      "light": {
+        "color-accent": {
+          "$value": "#15110C",
+          "$type": "color"
+        },
+        "color-accent-muted": {
+          "$value": "rgba(21,17,12,0.08)",
+          "$type": "color"
+        },
+        "color-on-accent": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-neutral": {
+          "$value": "rgba(5,54,89,0.1)",
+          "$type": "color"
+        },
+        "color-background-surface": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-background-body": {
+          "$value": "#F8F4ED",
+          "$type": "color"
+        },
+        "color-overlay": {
+          "$value": "#01122866",
+          "$type": "color"
+        },
+        "color-overlay-hover": {
+          "$value": "#0536590C",
+          "$type": "color"
+        },
+        "color-overlay-pressed": {
+          "$value": "#05365919",
+          "$type": "color"
+        },
+        "color-background-muted": {
+          "$value": "#0536590C",
+          "$type": "color"
+        },
+        "color-text-primary": {
+          "$value": "#15110C",
+          "$type": "color"
+        },
+        "color-text-secondary": {
+          "$value": "#4E606F",
+          "$type": "color"
+        },
+        "color-text-disabled": {
+          "$value": "#A4B0BC",
+          "$type": "color"
+        },
+        "color-text-accent": {
+          "$value": "#15110C",
+          "$type": "color"
+        },
+        "color-on-dark": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-on-light": {
+          "$value": "#000000",
+          "$type": "color"
+        },
+        "color-icon-accent": {
+          "$value": "#15110C",
+          "$type": "color"
+        },
+        "color-icon-primary": {
+          "$value": "#15110C",
+          "$type": "color"
+        },
+        "color-icon-secondary": {
+          "$value": "#4E606F",
+          "$type": "color"
+        },
+        "color-icon-disabled": {
+          "$value": "#A4B0BC",
+          "$type": "color"
+        },
+        "color-background-card": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-background-popover": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-background-inverted": {
+          "$value": "#0A1317",
+          "$type": "color"
+        },
+        "color-background-error-inverted": {
+          "$value": "#AA071E",
+          "$type": "color"
+        },
+        "color-success": {
+          "$value": "#0D8626",
+          "$type": "color"
+        },
+        "color-success-muted": {
+          "$value": "#0B991F33",
+          "$type": "color"
+        },
+        "color-on-success": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-error": {
+          "$value": "#E3193B",
+          "$type": "color"
+        },
+        "color-error-muted": {
+          "$value": "#E3193B33",
+          "$type": "color"
+        },
+        "color-on-error": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-warning": {
+          "$value": "#E9AF08",
+          "$type": "color"
+        },
+        "color-warning-muted": {
+          "$value": "#E2A40033",
+          "$type": "color"
+        },
+        "color-on-warning": {
+          "$value": "#0A1317",
+          "$type": "color"
+        },
+        "color-border": {
+          "$value": "#05365919",
+          "$type": "color"
+        },
+        "color-border-emphasized": {
+          "$value": "#CCD3DB",
+          "$type": "color"
+        },
+        "color-skeleton": {
+          "$value": "#CCD3DB",
+          "$type": "color"
+        },
+        "color-track": {
+          "$value": "#CCD3DB",
+          "$type": "color"
+        },
+        "color-shadow": {
+          "$value": "rgba(5,54,89,0.1)",
+          "$type": "color"
+        },
+        "color-tint-hover": {
+          "$value": "black"
+        },
+        "color-background-blue": {
+          "$value": "#0171E333",
+          "$type": "color"
+        },
+        "color-border-blue": {
+          "$value": "#0064E0",
+          "$type": "color"
+        },
+        "color-icon-blue": {
+          "$value": "#0064E0",
+          "$type": "color"
+        },
+        "color-text-blue": {
+          "$value": "#042F97",
+          "$type": "color"
+        },
+        "color-background-cyan": {
+          "$value": "#03A7D733",
+          "$type": "color"
+        },
+        "color-border-cyan": {
+          "$value": "#089DD0",
+          "$type": "color"
+        },
+        "color-icon-cyan": {
+          "$value": "#00ACC1",
+          "$type": "color"
+        },
+        "color-text-cyan": {
+          "$value": "#014975",
+          "$type": "color"
+        },
+        "color-background-gray": {
+          "$value": "#0A131733",
+          "$type": "color"
+        },
+        "color-border-gray": {
+          "$value": "#647685",
+          "$type": "color"
+        },
+        "color-icon-gray": {
+          "$value": "#4E606F",
+          "$type": "color"
+        },
+        "color-text-gray": {
+          "$value": "#0A1317",
+          "$type": "color"
+        },
+        "color-background-green": {
+          "$value": "#24BB5E33",
+          "$type": "color"
+        },
+        "color-border-green": {
+          "$value": "#0D8626",
+          "$type": "color"
+        },
+        "color-icon-green": {
+          "$value": "#0D8626",
+          "$type": "color"
+        },
+        "color-text-green": {
+          "$value": "#09441F",
+          "$type": "color"
+        },
+        "color-background-orange": {
+          "$value": "#F2790233",
+          "$type": "color"
+        },
+        "color-border-orange": {
+          "$value": "#EB6E00",
+          "$type": "color"
+        },
+        "color-icon-orange": {
+          "$value": "#E9690B",
+          "$type": "color"
+        },
+        "color-text-orange": {
+          "$value": "#6B2203",
+          "$type": "color"
+        },
+        "color-background-pink": {
+          "$value": "#E638B333",
+          "$type": "color"
+        },
+        "color-border-pink": {
+          "$value": "#F351C0",
+          "$type": "color"
+        },
+        "color-icon-pink": {
+          "$value": "#C2185B",
+          "$type": "color"
+        },
+        "color-text-pink": {
+          "$value": "#650053",
+          "$type": "color"
+        },
+        "color-background-purple": {
+          "$value": "#7952FF33",
+          "$type": "color"
+        },
+        "color-border-purple": {
+          "$value": "#9081FF",
+          "$type": "color"
+        },
+        "color-icon-purple": {
+          "$value": "#5B08D8",
+          "$type": "color"
+        },
+        "color-text-purple": {
+          "$value": "#3E0697",
+          "$type": "color"
+        },
+        "color-background-red": {
+          "$value": "#E3193B33",
+          "$type": "color"
+        },
+        "color-border-red": {
+          "$value": "#E3193B",
+          "$type": "color"
+        },
+        "color-icon-red": {
+          "$value": "#D31130",
+          "$type": "color"
+        },
+        "color-text-red": {
+          "$value": "#7B0210",
+          "$type": "color"
+        },
+        "color-background-teal": {
+          "$value": "#0DB7AF33",
+          "$type": "color"
+        },
+        "color-border-teal": {
+          "$value": "#08A3A3",
+          "$type": "color"
+        },
+        "color-icon-teal": {
+          "$value": "#009688",
+          "$type": "color"
+        },
+        "color-text-teal": {
+          "$value": "#083943",
+          "$type": "color"
+        },
+        "color-background-yellow": {
+          "$value": "#E2A40033",
+          "$type": "color"
+        },
+        "color-border-yellow": {
+          "$value": "#C58600",
+          "$type": "color"
+        },
+        "color-icon-yellow": {
+          "$value": "#FBC02D",
+          "$type": "color"
+        },
+        "color-text-yellow": {
+          "$value": "#753F07",
+          "$type": "color"
+        }
+      },
+      "dark": {
+        "color-accent": {
+          "$value": "#DFE2E5",
+          "$type": "color"
+        },
+        "color-accent-muted": {
+          "$value": "rgba(223,226,229,0.14)",
+          "$type": "color"
+        },
+        "color-on-accent": {
+          "$value": "#15110C",
+          "$type": "color"
+        },
+        "color-neutral": {
+          "$value": "rgba(223,226,229,0.2)",
+          "$type": "color"
+        },
+        "color-background-surface": {
+          "$value": "#1F1F22",
+          "$type": "color"
+        },
+        "color-background-body": {
+          "$value": "#111112",
+          "$type": "color"
+        },
+        "color-overlay": {
+          "$value": "#11111299",
+          "$type": "color"
+        },
+        "color-overlay-hover": {
+          "$value": "#FFFFFF0C",
+          "$type": "color"
+        },
+        "color-overlay-pressed": {
+          "$value": "#FFFFFF19",
+          "$type": "color"
+        },
+        "color-background-muted": {
+          "$value": "#1111127F",
+          "$type": "color"
+        },
+        "color-text-primary": {
+          "$value": "#DFE2E5",
+          "$type": "color"
+        },
+        "color-text-secondary": {
+          "$value": "#AAAFB5",
+          "$type": "color"
+        },
+        "color-text-disabled": {
+          "$value": "#6F747C",
+          "$type": "color"
+        },
+        "color-text-accent": {
+          "$value": "#DFE2E5",
+          "$type": "color"
+        },
+        "color-on-dark": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-on-light": {
+          "$value": "#000000",
+          "$type": "color"
+        },
+        "color-icon-accent": {
+          "$value": "#DFE2E5",
+          "$type": "color"
+        },
+        "color-icon-primary": {
+          "$value": "#DFE2E5",
+          "$type": "color"
+        },
+        "color-icon-secondary": {
+          "$value": "#AAAFB5",
+          "$type": "color"
+        },
+        "color-icon-disabled": {
+          "$value": "#6F747C",
+          "$type": "color"
+        },
+        "color-background-card": {
+          "$value": "#1F1F22",
+          "$type": "color"
+        },
+        "color-background-popover": {
+          "$value": "#28292C",
+          "$type": "color"
+        },
+        "color-background-inverted": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-background-error-inverted": {
+          "$value": "#E3193B",
+          "$type": "color"
+        },
+        "color-success": {
+          "$value": "#0D8626",
+          "$type": "color"
+        },
+        "color-success-muted": {
+          "$value": "#0B991F3F",
+          "$type": "color"
+        },
+        "color-on-success": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-error": {
+          "$value": "#F5394F",
+          "$type": "color"
+        },
+        "color-error-muted": {
+          "$value": "#F5394F3F",
+          "$type": "color"
+        },
+        "color-on-error": {
+          "$value": "#FFFFFF",
+          "$type": "color"
+        },
+        "color-warning": {
+          "$value": "#F2C00B",
+          "$type": "color"
+        },
+        "color-warning-muted": {
+          "$value": "#E2A4003F",
+          "$type": "color"
+        },
+        "color-on-warning": {
+          "$value": "#0A1317",
+          "$type": "color"
+        },
+        "color-border": {
+          "$value": "#F2F4F619",
+          "$type": "color"
+        },
+        "color-border-emphasized": {
+          "$value": "#494D53",
+          "$type": "color"
+        },
+        "color-skeleton": {
+          "$value": "#5A5E66",
+          "$type": "color"
+        },
+        "color-track": {
+          "$value": "#5A5E66",
+          "$type": "color"
+        },
+        "color-shadow": {
+          "$value": "rgba(0,0,0,0.3)",
+          "$type": "color"
+        },
+        "color-tint-hover": {
+          "$value": "white"
+        },
+        "color-background-blue": {
+          "$value": "#0171E333",
+          "$type": "color"
+        },
+        "color-border-blue": {
+          "$value": "#2694FE",
+          "$type": "color"
+        },
+        "color-icon-blue": {
+          "$value": "#2694FE",
+          "$type": "color"
+        },
+        "color-text-blue": {
+          "$value": "#AFD7FF",
+          "$type": "color"
+        },
+        "color-background-cyan": {
+          "$value": "#03A7D733",
+          "$type": "color"
+        },
+        "color-border-cyan": {
+          "$value": "#0171A4",
+          "$type": "color"
+        },
+        "color-icon-cyan": {
+          "$value": "#26C6DA",
+          "$type": "color"
+        },
+        "color-text-cyan": {
+          "$value": "#A1EEF9",
+          "$type": "color"
+        },
+        "color-background-gray": {
+          "$value": "#666A724C",
+          "$type": "color"
+        },
+        "color-border-gray": {
+          "$value": "#748695",
+          "$type": "color"
+        },
+        "color-icon-gray": {
+          "$value": "#AAAFB5",
+          "$type": "color"
+        },
+        "color-text-gray": {
+          "$value": "#E7EAED",
+          "$type": "color"
+        },
+        "color-background-green": {
+          "$value": "#24BB5E33",
+          "$type": "color"
+        },
+        "color-border-green": {
+          "$value": "#0B991F",
+          "$type": "color"
+        },
+        "color-icon-green": {
+          "$value": "#26A756",
+          "$type": "color"
+        },
+        "color-text-green": {
+          "$value": "#A5F690",
+          "$type": "color"
+        },
+        "color-background-orange": {
+          "$value": "#F2790233",
+          "$type": "color"
+        },
+        "color-border-orange": {
+          "$value": "#B34A01",
+          "$type": "color"
+        },
+        "color-icon-orange": {
+          "$value": "#FB8C00",
+          "$type": "color"
+        },
+        "color-text-orange": {
+          "$value": "#FDB876",
+          "$type": "color"
+        },
+        "color-background-pink": {
+          "$value": "#E638B333",
+          "$type": "color"
+        },
+        "color-border-pink": {
+          "$value": "#C02294",
+          "$type": "color"
+        },
+        "color-icon-pink": {
+          "$value": "#EC407A",
+          "$type": "color"
+        },
+        "color-text-pink": {
+          "$value": "#FEADE3",
+          "$type": "color"
+        },
+        "color-background-purple": {
+          "$value": "#7952FF33",
+          "$type": "color"
+        },
+        "color-border-purple": {
+          "$value": "#7340FE",
+          "$type": "color"
+        },
+        "color-icon-purple": {
+          "$value": "#7952FF",
+          "$type": "color"
+        },
+        "color-text-purple": {
+          "$value": "#B3B0FE",
+          "$type": "color"
+        },
+        "color-background-red": {
+          "$value": "#E3193B33",
+          "$type": "color"
+        },
+        "color-border-red": {
+          "$value": "#F5394F",
+          "$type": "color"
+        },
+        "color-icon-red": {
+          "$value": "#E3193B",
+          "$type": "color"
+        },
+        "color-text-red": {
+          "$value": "#FFB2B8",
+          "$type": "color"
+        },
+        "color-background-teal": {
+          "$value": "#0DB7AF33",
+          "$type": "color"
+        },
+        "color-border-teal": {
+          "$value": "#08767D",
+          "$type": "color"
+        },
+        "color-icon-teal": {
+          "$value": "#26A69A",
+          "$type": "color"
+        },
+        "color-text-teal": {
+          "$value": "#40DCCD",
+          "$type": "color"
+        },
+        "color-background-yellow": {
+          "$value": "#E2A40033",
+          "$type": "color"
+        },
+        "color-border-yellow": {
+          "$value": "#B47700",
+          "$type": "color"
+        },
+        "color-icon-yellow": {
+          "$value": "#FFEE58",
+          "$type": "color"
+        },
+        "color-text-yellow": {
+          "$value": "#FBCE03",
+          "$type": "color"
+        }
+      }
+    },
+    "minted": {
+      "imported": {
+        "shared": {
+          "size-0": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "size-20-0004": {
+            "$value": "20.0004px",
+            "$type": "dimension"
+          },
+          "size-14": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "num-500": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "size-neg-1": {
+            "$value": "-1px",
+            "$type": "dimension"
+          },
+          "size-4": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "size-8": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "num-1": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "size-9999": {
+            "$value": "9999px",
+            "$type": "dimension"
+          },
+          "color-0064e0": {
+            "$value": "#0064e0",
+            "$type": "color"
+          },
+          "color-0a1317": {
+            "$value": "#0a1317",
+            "$type": "color"
+          },
+          "size-12": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "color-ffffff": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "color-4e606f": {
+            "$value": "#4e606f",
+            "$type": "color"
+          }
+        },
+        "button": {
+          "root": {
+            "outline-color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "row-rule-color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "background-image-state-active": {
+              "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+              "$type": "gradient"
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "outline-color-state-focus-visible": {
+              "primary": {
+                "$value": "#0064e0",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0064e0",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0064e0",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e3193b",
+                "$type": "color"
+              }
+            },
+            "outline-offset-state-focus-visible": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "background-image-state-hover": {
+              "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+              "$type": "gradient"
+            }
+          },
+          "part-0": {
+            "color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "row-rule-color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
+          "label": {
+            "color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "row-rule-color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
+          "part-1": {
+            "bottom": {
+              "sm": {
+                "$value": "29px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "33px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "37px",
+                "$type": "dimension"
+              }
+            },
+            "color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "right": {
+              "$value": "100.812px",
+              "$type": "dimension"
+            },
+            "row-rule-color": {
+              "primary": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "badge": {
+          "root": {
+            "line-height": {
+              "$value": "20.0004px",
+              "$type": "dimension"
+            },
+            "row-rule-color": {
+              "neutral": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "info": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#0a1317",
+                "$type": "color"
+              },
+              "error": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "blue": {
+                "$value": "#042f97",
+                "$type": "color"
+              },
+              "cyan": {
+                "$value": "#014975",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#09441f",
+                "$type": "color"
+              },
+              "orange": {
+                "$value": "#6b2203",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#650053",
+                "$type": "color"
+              },
+              "purple": {
+                "$value": "#3e0697",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#7b0210",
+                "$type": "color"
+              },
+              "teal": {
+                "$value": "#083943",
+                "$type": "color"
+              },
+              "yellow": {
+                "$value": "#753f07",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "card": {
+          "root": {
+            "border-bottom-color": {
+              "default": {
+                "$value": "#ccd3db",
+                "$type": "color"
+              },
+              "transparent": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "muted": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "blue": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "cyan": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "gray": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "orange": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "purple": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "teal": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "yellow": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "border-bottom-width": {
+              "default": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "transparent": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "muted": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "blue": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "cyan": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "gray": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "orange": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "pink": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "purple": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "teal": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "yellow": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "border-left-color": {
+              "default": {
+                "$value": "#ccd3db",
+                "$type": "color"
+              },
+              "transparent": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "muted": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "blue": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "cyan": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "gray": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "orange": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "purple": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "teal": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "yellow": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "border-left-width": {
+              "default": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "transparent": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "muted": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "blue": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "cyan": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "gray": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "orange": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "pink": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "purple": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "teal": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "yellow": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "border-right-color": {
+              "default": {
+                "$value": "#ccd3db",
+                "$type": "color"
+              },
+              "transparent": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "muted": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "blue": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "cyan": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "gray": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "orange": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "purple": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "teal": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "yellow": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "border-right-width": {
+              "default": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "transparent": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "muted": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "blue": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "cyan": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "gray": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "orange": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "pink": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "purple": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "teal": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "yellow": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "border-top-color": {
+              "default": {
+                "$value": "#ccd3db",
+                "$type": "color"
+              },
+              "transparent": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "muted": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "blue": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "cyan": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "gray": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "orange": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "purple": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "teal": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "yellow": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            },
+            "border-top-width": {
+              "default": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "transparent": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "muted": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "blue": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "cyan": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "gray": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "orange": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "pink": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "purple": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "teal": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "yellow": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider": {
+          "label": {
+            "color": {
+              "$value": "#4e606f",
+              "$type": "color"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "row-rule-color": {
+              "$value": "#4e606f",
+              "$type": "color"
+            }
+          },
+          "slider-track": {
+            "background-color": {
+              "$value": "#ccd3db",
+              "$type": "color"
+            },
+            "bottom": {
+              "horizontal": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "top": {
+              "horizontal": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "part-1-0-1": {
+            "bottom": {
+              "horizontal": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "top": {
+              "horizontal": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "96px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "slider-thumb-2": {
+            "bottom": {
+              "horizontal": {
+                "$value": "-10px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "64px",
+                "$type": "dimension"
+              }
+            },
+            "top": {
+              "horizontal": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "76px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "slider-thumb": {
+            "bottom": {
+              "horizontal": {
+                "$value": "-10px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "64px",
+                "$type": "dimension"
+              }
+            },
+            "left": {
+              "horizontal": {
+                "$value": "19.6562px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "24.5781px",
+                "$type": "dimension"
+              }
+            },
+            "right": {
+              "horizontal": {
+                "$value": "9.5px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "4.57812px",
+                "$type": "dimension"
+              }
+            },
+            "top": {
+              "horizontal": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "76px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "tooltip": {
+            "margin-bottom": {
+              "horizontal": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "margin-left": {
+              "horizontal": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
+            },
+            "margin-right": {
+              "horizontal": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
+            },
+            "margin-top": {
+              "horizontal": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "label-2": {
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "max-width": {
+              "$value": "300px",
+              "$type": "dimension"
+            }
+          },
+          "label-3": {
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "21px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "switch": {
+          "part-0": {
+            "column-gap": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "row-gap": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "part-0-0": {
+            "flex-shrink": {
+              "start": {
+                "$value": "1",
+                "$type": "number"
+              },
+              "end": {
+                "$value": "0",
+                "$type": "number"
+              }
+            }
+          },
+          "label-2": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20.0004px",
+              "$type": "dimension"
+            }
+          },
+          "part-0-0-0": {
+            "opacity": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "z-index": {
+              "$value": "1",
+              "$type": "number"
+            }
+          },
+          "switch": {
+            "background-color": {
+              "$value": "#0a131733",
+              "$type": "color"
+            }
+          },
+          "switch-thumb": {
+            "background-color": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "part-0-1": {
+            "flex-shrink": {
+              "start": {
+                "$value": "0",
+                "$type": "number"
+              },
+              "end": {
+                "$value": "1",
+                "$type": "number"
+              }
+            }
+          },
+          "part-0-1-0": {
+            "opacity": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "z-index": {
+              "$value": "1",
+              "$type": "number"
+            }
+          },
+          "switch-2": {
+            "background-color": {
+              "$value": "#0a131733",
+              "$type": "color"
+            }
+          },
+          "switch-thumb-2": {
+            "background-color": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "label": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20.0004px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "contracts": [
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.badge",
+      "name": "Badge",
+      "version": "0.3.0",
+      "status": "draft",
+      "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/badge/decisions.md); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "description": "The visual style variant of the badge.",
+          "type": {
+            "enum": [
+              "neutral",
+              "info",
+              "success",
+              "warning",
+              "error",
+              "blue",
+              "cyan",
+              "green",
+              "orange",
+              "pink",
+              "purple",
+              "red",
+              "teal",
+              "yellow"
+            ]
+          },
+          "default": "neutral",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "neutral": "Neutral",
+                "info": "Info",
+                "success": "Success",
+                "warning": "Warning",
+                "error": "Error",
+                "blue": "Blue",
+                "cyan": "Cyan",
+                "green": "Green",
+                "orange": "Orange",
+                "pink": "Pink",
+                "purple": "Purple",
+                "red": "Red",
+                "teal": "Teal",
+                "yellow": "Yellow"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "description": "Badge label (materialized text slot — Astryx types this as a ReactNode child).",
+          "type": "text",
+          "default": "Badge",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          },
+          "tokens": {
+            "background-color": "{color-background-gray}",
+            "color": "{color-text-gray}",
+            "padding-inline": "{spacing-2}",
+            "padding-block": "{spacing-0}",
+            "border-radius": "{radius-full}",
+            "gap": "{spacing-1}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}",
+            "font-weight": "{font-weight-medium}",
+            "line-height": "{imported.badge.root.line-height}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "neutral": {
+                  "background-color": "{color-neutral}",
+                  "color": "{color-text-gray}"
+                },
+                "info": {
+                  "background-color": "{color-accent}",
+                  "color": "{color-on-accent}"
+                },
+                "success": {
+                  "background-color": "{color-success}",
+                  "color": "{color-on-accent}"
+                },
+                "warning": {
+                  "background-color": "{color-warning}",
+                  "color": "{color-on-warning}"
+                },
+                "error": {
+                  "background-color": "{color-error}",
+                  "color": "{color-on-accent}"
+                },
+                "blue": {
+                  "background-color": "{color-background-blue}",
+                  "color": "{color-text-blue}"
+                },
+                "cyan": {
+                  "background-color": "{color-background-cyan}",
+                  "color": "{color-text-cyan}"
+                },
+                "green": {
+                  "background-color": "{color-background-green}",
+                  "color": "{color-text-green}"
+                },
+                "orange": {
+                  "background-color": "{color-background-orange}",
+                  "color": "{color-text-orange}"
+                },
+                "pink": {
+                  "background-color": "{color-background-pink}",
+                  "color": "{color-text-pink}"
+                },
+                "purple": {
+                  "background-color": "{color-background-purple}",
+                  "color": "{color-text-purple}"
+                },
+                "red": {
+                  "background-color": "{color-background-red}",
+                  "color": "{color-text-red}"
+                },
+                "teal": {
+                  "background-color": "{color-background-teal}",
+                  "color": "{color-text-teal}"
+                },
+                "yellow": {
+                  "background-color": "{color-background-yellow}",
+                  "color": "{color-text-yellow}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "blue": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.blue}"
+                },
+                "cyan": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.cyan}"
+                },
+                "error": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.error}"
+                },
+                "green": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.green}"
+                },
+                "info": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+                },
+                "neutral": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.neutral}"
+                },
+                "orange": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.orange}"
+                },
+                "pink": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+                },
+                "purple": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.purple}"
+                },
+                "red": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.red}"
+                },
+                "success": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+                },
+                "teal": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.teal}"
+                },
+                "warning": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+                },
+                "yellow": {
+                  "row-rule-color": "{imported.badge.root.row-rule-color.yellow}"
+                }
+              }
+            }
+          ],
+          "declared": {
+            "text-wrap-mode": "nowrap"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Badge"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.banner",
+      "name": "Banner",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Astryx Banner — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status + container axes and the dismissable/expanded flags are verbatim; the banner message is a materialized text slot (Astryx types it as ReactNode children). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "status",
+          "description": "The banner tone.",
+          "type": {
+            "enum": [
+              "info",
+              "warning",
+              "error",
+              "success"
+            ]
+          },
+          "default": "info",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Status",
+              "values": {
+                "info": "Info",
+                "warning": "Warning",
+                "error": "Error",
+                "success": "Success"
+              }
+            },
+            "code": {
+              "prop": "status"
+            }
+          }
+        },
+        {
+          "name": "container",
+          "description": "How the banner is contained.",
+          "type": {
+            "enum": [
+              "card",
+              "section"
+            ]
+          },
+          "default": "card",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Container",
+              "values": {
+                "card": "Card",
+                "section": "Section"
+              }
+            },
+            "code": {
+              "prop": "container"
+            }
+          }
+        },
+        {
+          "name": "isDismissable",
+          "description": "Whether the banner can be dismissed.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Dismissable"
+            },
+            "code": {
+              "prop": "isDismissable"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "description": "Banner message (materialized slot).",
+          "type": "text",
+          "default": "Banner message",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Message"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "color": "{color-text-primary}",
+            "gap": "{spacing-2}",
+            "padding-block": "{spacing-3}",
+            "padding-inline": "{spacing-4}",
+            "border-radius": "{radius-container}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}"
+          },
+          "tokensByProp": {
+            "prop": "status",
+            "map": {
+              "info": {
+                "background-color": "{color-background-blue}",
+                "color": "{color-text-blue}"
+              },
+              "warning": {
+                "background-color": "{color-warning-muted}",
+                "color": "{color-text-primary}"
+              },
+              "error": {
+                "background-color": "{color-error-muted}",
+                "color": "{color-text-primary}"
+              },
+              "success": {
+                "background-color": "{color-success-muted}",
+                "color": "{color-text-primary}"
+              }
+            }
+          },
+          "parts": {
+            "message": {
+              "element": "div",
+              "content": {
+                "prop": "children"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Banner"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.button",
+      "name": "Button",
+      "version": "0.3.0",
+      "status": "draft",
+      "description": "Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/button/decisions.md); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "description": "The visual style variant of the button.",
+          "type": {
+            "enum": [
+              "primary",
+              "secondary",
+              "ghost",
+              "destructive"
+            ]
+          },
+          "default": "secondary",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "ghost": "Ghost",
+                "destructive": "Destructive"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "size",
+          "description": "The size of the button.",
+          "type": {
+            "enum": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "default": "md",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "sm": "Sm",
+                "md": "Md",
+                "lg": "Lg"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the button is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "isLoading",
+          "description": "Whether the button is in a loading state.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Loading"
+            },
+            "code": {
+              "prop": "isLoading"
+            }
+          }
+        },
+        {
+          "name": "isIconOnly",
+          "description": "Renders as a square icon-only button.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Icon Only"
+            },
+            "code": {
+              "prop": "isIconOnly"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "description": "Accessible, visible button label.",
+          "type": "text",
+          "default": "Button",
+          "required": true,
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        }
+      ],
+      "states": [
+        "focus-visible",
+        "disabled",
+        "active",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          },
+          "tokens": {
+            "color": "{color-text-primary}",
+            "border-radius": "{radius-element}",
+            "gap": "{spacing-2}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-base}",
+            "font-weight": "{font-weight-medium}",
+            "bottom": "{imported.shared.size-0}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-20-0004}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "primary": {
+                  "background-color": "{color-accent}",
+                  "color": "{color-on-accent}"
+                },
+                "secondary": {
+                  "background-color": "{color-neutral}",
+                  "color": "{color-text-primary}"
+                },
+                "ghost": {
+                  "color": "{color-text-primary}"
+                },
+                "destructive": {
+                  "background-color": "{color-error}",
+                  "color": "{color-on-error}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "sm": {
+                  "padding-block": "{spacing-2}",
+                  "padding-inline": "{spacing-3}",
+                  "min-height": "{size-element-sm}"
+                },
+                "md": {
+                  "padding-block": "{spacing-2}",
+                  "padding-inline": "{spacing-3}",
+                  "min-height": "{size-element-md}"
+                },
+                "lg": {
+                  "padding-block": "{spacing-2}",
+                  "padding-inline": "{spacing-3}",
+                  "min-height": "{size-element-lg}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "destructive": {
+                  "outline-color": "{imported.button.root.outline-color.destructive}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.destructive}"
+                },
+                "ghost": {
+                  "outline-color": "{imported.button.root.outline-color.ghost}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.ghost}"
+                },
+                "primary": {
+                  "outline-color": "{imported.button.root.outline-color.primary}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.primary}"
+                },
+                "secondary": {
+                  "outline-color": "{imported.button.root.outline-color.secondary}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+                }
+              }
+            }
+          ],
+          "states": {
+            "focus-visible": {
+              "outline-color": "{color-accent}",
+              "outline-width": "{border-width}",
+              "outline-offset": "{imported.button.root.outline-offset-state-focus-visible}"
+            },
+            "active": {
+              "background-image": "{imported.button.root.background-image-state-active}"
+            },
+            "disabled": {
+              "opacity": "{imported.button.root.opacity-state-disabled}"
+            },
+            "hover": {
+              "background-image": "{imported.button.root.background-image-state-hover}"
+            }
+          },
+          "parts": {
+            "part-0": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "contents",
+                "cursor": "pointer",
+                "text-align": "center",
+                "text-wrap-mode": "nowrap"
+              },
+              "parts": {
+                "label": {
+                  "element": "span",
+                  "content": {
+                    "prop": "label"
+                  },
+                  "declared": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "text-align": "center",
+                    "text-overflow": "ellipsis",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "line-height": "{imported.shared.size-20-0004}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "variant",
+                      "map": {
+                        "destructive": {
+                          "color": "{imported.button.label.color.destructive}",
+                          "row-rule-color": "{imported.button.label.row-rule-color.destructive}"
+                        },
+                        "ghost": {
+                          "color": "{imported.button.label.color.ghost}",
+                          "row-rule-color": "{imported.button.label.row-rule-color.ghost}"
+                        },
+                        "primary": {
+                          "color": "{imported.button.label.color.primary}",
+                          "row-rule-color": "{imported.button.label.row-rule-color.primary}"
+                        },
+                        "secondary": {
+                          "color": "{imported.button.label.color.secondary}",
+                          "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-500}",
+                "line-height": "{imported.shared.size-20-0004}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "destructive": {
+                      "color": "{imported.button.part-0.color.destructive}",
+                      "row-rule-color": "{imported.button.part-0.row-rule-color.destructive}"
+                    },
+                    "ghost": {
+                      "color": "{imported.button.part-0.color.ghost}",
+                      "row-rule-color": "{imported.button.part-0.row-rule-color.ghost}"
+                    },
+                    "primary": {
+                      "color": "{imported.button.part-0.color.primary}",
+                      "row-rule-color": "{imported.button.part-0.row-rule-color.primary}"
+                    },
+                    "secondary": {
+                      "color": "{imported.button.part-0.color.secondary}",
+                      "row-rule-color": "{imported.button.part-0.row-rule-color.secondary}"
+                    }
+                  }
+                }
+              ]
+            },
+            "part-1": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "border-bottom-style": "none",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none",
+                "text-align": "center",
+                "text-wrap-mode": "nowrap",
+                "user-select": "none"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-500}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-20-0004}",
+                "margin-bottom": "{imported.shared.size-neg-1}",
+                "margin-left": "{imported.shared.size-neg-1}",
+                "margin-right": "{imported.shared.size-neg-1}",
+                "margin-top": "{imported.shared.size-neg-1}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.button.part-1.right}",
+                "top": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "lg": {
+                      "bottom": "{imported.button.part-1.bottom.lg}"
+                    },
+                    "md": {
+                      "bottom": "{imported.button.part-1.bottom.md}"
+                    },
+                    "sm": {
+                      "bottom": "{imported.button.part-1.bottom.sm}"
+                    }
+                  }
+                },
+                {
+                  "prop": "variant",
+                  "map": {
+                    "destructive": {
+                      "color": "{imported.button.part-1.color.destructive}",
+                      "row-rule-color": "{imported.button.part-1.row-rule-color.destructive}"
+                    },
+                    "ghost": {
+                      "color": "{imported.button.part-1.color.ghost}",
+                      "row-rule-color": "{imported.button.part-1.row-rule-color.ghost}"
+                    },
+                    "primary": {
+                      "color": "{imported.button.part-1.color.primary}",
+                      "row-rule-color": "{imported.button.part-1.row-rule-color.primary}"
+                    },
+                    "secondary": {
+                      "color": "{imported.button.part-1.color.secondary}",
+                      "row-rule-color": "{imported.button.part-1.row-rule-color.secondary}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "position": "relative",
+            "text-wrap-mode": "nowrap",
+            "transition-duration": "0.175s",
+            "transition-property": "background-image, background-color, color, opacity, transform",
+            "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Button"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.card",
+      "name": "Card",
+      "version": "0.3.0",
+      "status": "draft",
+      "description": "Astryx Card — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Card/Card.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). The single extracted structural axis (variant, 13 values) is verbatim; children is a materialized content slot (Astryx types Card body as ReactNode, dropped as a node prop). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/card/decisions.md); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "description": "The surface tone of the card.",
+          "type": {
+            "enum": [
+              "default",
+              "transparent",
+              "muted",
+              "blue",
+              "cyan",
+              "gray",
+              "green",
+              "orange",
+              "pink",
+              "purple",
+              "red",
+              "teal",
+              "yellow"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "default": "Default",
+                "transparent": "Transparent",
+                "muted": "Muted",
+                "blue": "Blue",
+                "cyan": "Cyan",
+                "gray": "Gray",
+                "green": "Green",
+                "orange": "Orange",
+                "pink": "Pink",
+                "purple": "Purple",
+                "red": "Red",
+                "teal": "Teal",
+                "yellow": "Yellow"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "description": "Card body (materialized slot).",
+          "type": "text",
+          "default": "Card content",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Body"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "direction": "column"
+          },
+          "tokens": {
+            "background-color": "{color-background-card}",
+            "color": "{color-on-light}",
+            "padding-block": "{spacing-4}",
+            "padding-inline": "{spacing-4}",
+            "border-radius": "{radius-container}",
+            "gap": "{spacing-3}",
+            "font-family": "{font-family-body}",
+            "font-weight": "{imported.card.root.font-weight}",
+            "line-height": "{imported.card.root.line-height}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "background-color": "{color-background-card}"
+                },
+                "transparent": {
+                  "background-color": "{color-background-body}"
+                },
+                "muted": {
+                  "background-color": "{color-background-muted}"
+                },
+                "blue": {
+                  "background-color": "{color-background-blue}"
+                },
+                "cyan": {
+                  "background-color": "{color-background-cyan}"
+                },
+                "gray": {
+                  "background-color": "{color-background-gray}"
+                },
+                "green": {
+                  "background-color": "{color-background-green}"
+                },
+                "orange": {
+                  "background-color": "{color-background-orange}"
+                },
+                "pink": {
+                  "background-color": "{color-background-pink}"
+                },
+                "purple": {
+                  "background-color": "{color-background-purple}"
+                },
+                "red": {
+                  "background-color": "{color-background-red}"
+                },
+                "teal": {
+                  "background-color": "{color-background-teal}"
+                },
+                "yellow": {
+                  "background-color": "{color-background-yellow}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "blue": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.blue}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.blue}",
+                  "border-left-color": "{imported.card.root.border-left-color.blue}",
+                  "border-left-width": "{imported.card.root.border-left-width.blue}",
+                  "border-right-color": "{imported.card.root.border-right-color.blue}",
+                  "border-right-width": "{imported.card.root.border-right-width.blue}",
+                  "border-top-color": "{imported.card.root.border-top-color.blue}",
+                  "border-top-width": "{imported.card.root.border-top-width.blue}"
+                },
+                "cyan": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.cyan}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.cyan}",
+                  "border-left-color": "{imported.card.root.border-left-color.cyan}",
+                  "border-left-width": "{imported.card.root.border-left-width.cyan}",
+                  "border-right-color": "{imported.card.root.border-right-color.cyan}",
+                  "border-right-width": "{imported.card.root.border-right-width.cyan}",
+                  "border-top-color": "{imported.card.root.border-top-color.cyan}",
+                  "border-top-width": "{imported.card.root.border-top-width.cyan}"
+                },
+                "default": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.default}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.default}",
+                  "border-left-color": "{imported.card.root.border-left-color.default}",
+                  "border-left-width": "{imported.card.root.border-left-width.default}",
+                  "border-right-color": "{imported.card.root.border-right-color.default}",
+                  "border-right-width": "{imported.card.root.border-right-width.default}",
+                  "border-top-color": "{imported.card.root.border-top-color.default}",
+                  "border-top-width": "{imported.card.root.border-top-width.default}"
+                },
+                "gray": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.gray}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.gray}",
+                  "border-left-color": "{imported.card.root.border-left-color.gray}",
+                  "border-left-width": "{imported.card.root.border-left-width.gray}",
+                  "border-right-color": "{imported.card.root.border-right-color.gray}",
+                  "border-right-width": "{imported.card.root.border-right-width.gray}",
+                  "border-top-color": "{imported.card.root.border-top-color.gray}",
+                  "border-top-width": "{imported.card.root.border-top-width.gray}"
+                },
+                "green": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.green}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.green}",
+                  "border-left-color": "{imported.card.root.border-left-color.green}",
+                  "border-left-width": "{imported.card.root.border-left-width.green}",
+                  "border-right-color": "{imported.card.root.border-right-color.green}",
+                  "border-right-width": "{imported.card.root.border-right-width.green}",
+                  "border-top-color": "{imported.card.root.border-top-color.green}",
+                  "border-top-width": "{imported.card.root.border-top-width.green}"
+                },
+                "muted": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.muted}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.muted}",
+                  "border-left-color": "{imported.card.root.border-left-color.muted}",
+                  "border-left-width": "{imported.card.root.border-left-width.muted}",
+                  "border-right-color": "{imported.card.root.border-right-color.muted}",
+                  "border-right-width": "{imported.card.root.border-right-width.muted}",
+                  "border-top-color": "{imported.card.root.border-top-color.muted}",
+                  "border-top-width": "{imported.card.root.border-top-width.muted}"
+                },
+                "orange": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.orange}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.orange}",
+                  "border-left-color": "{imported.card.root.border-left-color.orange}",
+                  "border-left-width": "{imported.card.root.border-left-width.orange}",
+                  "border-right-color": "{imported.card.root.border-right-color.orange}",
+                  "border-right-width": "{imported.card.root.border-right-width.orange}",
+                  "border-top-color": "{imported.card.root.border-top-color.orange}",
+                  "border-top-width": "{imported.card.root.border-top-width.orange}"
+                },
+                "pink": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.pink}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.pink}",
+                  "border-left-color": "{imported.card.root.border-left-color.pink}",
+                  "border-left-width": "{imported.card.root.border-left-width.pink}",
+                  "border-right-color": "{imported.card.root.border-right-color.pink}",
+                  "border-right-width": "{imported.card.root.border-right-width.pink}",
+                  "border-top-color": "{imported.card.root.border-top-color.pink}",
+                  "border-top-width": "{imported.card.root.border-top-width.pink}"
+                },
+                "purple": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.purple}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.purple}",
+                  "border-left-color": "{imported.card.root.border-left-color.purple}",
+                  "border-left-width": "{imported.card.root.border-left-width.purple}",
+                  "border-right-color": "{imported.card.root.border-right-color.purple}",
+                  "border-right-width": "{imported.card.root.border-right-width.purple}",
+                  "border-top-color": "{imported.card.root.border-top-color.purple}",
+                  "border-top-width": "{imported.card.root.border-top-width.purple}"
+                },
+                "red": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.red}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.red}",
+                  "border-left-color": "{imported.card.root.border-left-color.red}",
+                  "border-left-width": "{imported.card.root.border-left-width.red}",
+                  "border-right-color": "{imported.card.root.border-right-color.red}",
+                  "border-right-width": "{imported.card.root.border-right-width.red}",
+                  "border-top-color": "{imported.card.root.border-top-color.red}",
+                  "border-top-width": "{imported.card.root.border-top-width.red}"
+                },
+                "teal": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.teal}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.teal}",
+                  "border-left-color": "{imported.card.root.border-left-color.teal}",
+                  "border-left-width": "{imported.card.root.border-left-width.teal}",
+                  "border-right-color": "{imported.card.root.border-right-color.teal}",
+                  "border-right-width": "{imported.card.root.border-right-width.teal}",
+                  "border-top-color": "{imported.card.root.border-top-color.teal}",
+                  "border-top-width": "{imported.card.root.border-top-width.teal}"
+                },
+                "transparent": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.transparent}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.transparent}",
+                  "border-left-color": "{imported.card.root.border-left-color.transparent}",
+                  "border-left-width": "{imported.card.root.border-left-width.transparent}",
+                  "border-right-color": "{imported.card.root.border-right-color.transparent}",
+                  "border-right-width": "{imported.card.root.border-right-width.transparent}",
+                  "border-top-color": "{imported.card.root.border-top-color.transparent}",
+                  "border-top-width": "{imported.card.root.border-top-width.transparent}"
+                },
+                "yellow": {
+                  "border-bottom-color": "{imported.card.root.border-bottom-color.yellow}",
+                  "border-bottom-width": "{imported.card.root.border-bottom-width.yellow}",
+                  "border-left-color": "{imported.card.root.border-left-color.yellow}",
+                  "border-left-width": "{imported.card.root.border-left-width.yellow}",
+                  "border-right-color": "{imported.card.root.border-right-color.yellow}",
+                  "border-right-width": "{imported.card.root.border-right-width.yellow}",
+                  "border-top-color": "{imported.card.root.border-top-color.yellow}",
+                  "border-top-width": "{imported.card.root.border-top-width.yellow}"
+                }
+              }
+            }
+          ],
+          "declared": {
+            "display": "block",
+            "overflow-x": "clip",
+            "overflow-y": "clip"
+          },
+          "literalsByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "padding-block": "15px",
+                  "padding-inline": "15px"
+                }
+              }
+            }
+          ],
+          "literals": {
+            "font-size": "16px"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Card"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.checkbox-input",
+      "name": "CheckboxInput",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Astryx CheckboxInput — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + size + the disabled/readonly/optional/required flags are verbatim; description, disabledMessage, htmlName and isLoading are dropped. STRUCTURAL: the control renders as a styled box (div), not a native <input> — a11y semantics are a Phase A-2 concern. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "label",
+          "description": "The checkbox label.",
+          "type": "text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          },
+          "required": true,
+          "default": "Accept terms"
+        },
+        {
+          "name": "size",
+          "description": "The control size.",
+          "type": {
+            "enum": [
+              "sm",
+              "md"
+            ]
+          },
+          "default": "md",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "sm": "Sm",
+                "md": "Md"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the checkbox is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "isReadOnly",
+          "description": "Whether the checkbox is read-only.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Read Only"
+            },
+            "code": {
+              "prop": "isReadOnly"
+            }
+          }
+        },
+        {
+          "name": "isRequired",
+          "description": "Whether the checkbox is required.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Required"
+            },
+            "code": {
+              "prop": "isRequired"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "inline-flex",
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "color": "{color-text-primary}",
+            "gap": "{spacing-2}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}"
+          },
+          "parts": {
+            "control": {
+              "element": "span",
+              "tokens": {
+                "background-color": "{color-background-surface}",
+                "border-color": "{color-border-emphasized}",
+                "border-width": "{border-width}",
+                "border-radius": "{radius-inner}",
+                "width": "{size-element-sm}",
+                "height": "{size-element-sm}"
+              }
+            },
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "CheckboxInput"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "astryx.dropdown-menu-item",
+      "name": "DropdownMenuItem",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "PROMOTED from the Phase B composition-tier extraction (round 2, StyleX anatomy). One menu row — the repeated item of astryx.dropdown-menu. Curation receipts: the extracted anatomy leaned on the internal <Item> layout component (astryx.item); promotion FLATTENS it to the element row Item renders (a deep-internal contract is not part of the exhibit set), keeping the extracted StyleX token bindings verbatim. The extracted `description`/`endContent`/icon channels are deferred to a later round — this exhibit carries the label row, the composition proof's moving part.",
+      "semantics": {
+        "element": "button",
+        "role": "menuitem"
+      },
+      "props": [
+        {
+          "name": "label",
+          "description": "The menu item's label text.",
+          "type": "text",
+          "default": "Menu item",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the item is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "padding-block": "{spacing-2}",
+            "padding-inline": "{spacing-2}",
+            "border-radius": "{radius-element}",
+            "font-family": "{font-family-body}",
+            "font-size": "{text-label-size}",
+            "color": "{color-text-primary}"
+          },
+          "parts": {
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "DropdownMenuItem"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "astryx.dropdown-menu",
+      "name": "DropdownMenu",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "PROMOTED from the Phase B composition-tier extraction (round 2) — the flagship composition exhibit: a MULTI-ROOT component (trigger + menu overlay) whose menu holds a REPEATED astryx.dropdown-menu-item collection over the `items` prop. The extraction recovered exactly this shape from Meta's source (fragment root → trigger Button ref + popover.render overlay carrying the items repeat AND the children slot). Curation receipts: (1) the DUAL MODE — items-array XOR compound children — is mutually exclusive in code; the contract carries the DATA mode (repeat), the canvas-projectable one; (2) the DropdownMenuContext provider ref was dropped (context is a code mechanism, not anatomy); (3) the popover overlay projects as a sibling root below the trigger — live placement/anchoring is a design-tool behavior outside the contract (same convention as the composite Modal's roots); (4) the repeat sample is authored (design-time values are not decidable from code — the extractor said so by name).",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "items",
+          "description": "The menu's item records — one astryx.dropdown-menu-item per record (the extracted repeat channel).",
+          "type": {
+            "arrayOf": {
+              "label": "text"
+            }
+          },
+          "bindings": {
+            "figma": {
+              "kind": "NONE"
+            },
+            "code": {
+              "prop": "items"
+            }
+          }
+        },
+        {
+          "name": "hasChevron",
+          "description": "Whether the trigger shows the dropdown chevron (extracted, default true).",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Has Chevron"
+            },
+            "code": {
+              "prop": "hasChevron"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "trigger": {
+          "description": "The menu trigger — a real astryx.button instance (extracted ref, aria-haspopup=menu).",
+          "component": {
+            "id": "astryx.button",
+            "props": {
+              "label": "Options"
+            }
+          }
+        },
+        "menu": {
+          "description": "The overlay menu surface (extracted via the popover.render hook call; role=menu). Projects as a sibling root — live anchoring is design-tool behavior.",
+          "attrs": {
+            "role": "menu"
+          },
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "tokens": {
+            "gap": "{spacing-0-5}",
+            "padding-block": "{spacing-1}",
+            "padding-inline": "{spacing-1}",
+            "background-color": "{color-background-surface}",
+            "border-radius": "{radius-container}",
+            "box-shadow": "{shadow-med}"
+          },
+          "literals": {
+            "width": "240px"
+          },
+          "parts": {
+            "item": {
+              "description": "The dynamic child collection — one astryx.dropdown-menu-item per `items` record.",
+              "repeat": {
+                "itemsProp": "items",
+                "sample": [
+                  {
+                    "label": "Edit"
+                  },
+                  {
+                    "label": "Duplicate"
+                  },
+                  {
+                    "label": "Delete"
+                  }
+                ]
+              },
+              "component": {
+                "id": "astryx.dropdown-menu-item"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "DropdownMenu"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.progress-bar",
+      "name": "ProgressBar",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Astryx ProgressBar — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/ProgressBar/ProgressBar.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). value/max/label/variant and the value-label/indeterminate/disabled flags are verbatim (89% facts-carried, the richest census extraction). STRUCTURAL: the track/fill render as styled boxes, not a native <progress>. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "value",
+          "description": "Current progress value.",
+          "type": "number",
+          "default": 40,
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Value"
+            },
+            "code": {
+              "prop": "value"
+            }
+          }
+        },
+        {
+          "name": "max",
+          "description": "Maximum progress value.",
+          "type": "number",
+          "default": 100,
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Max"
+            },
+            "code": {
+              "prop": "max"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "description": "Accessible label for the progress bar.",
+          "type": "text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          },
+          "required": true,
+          "default": "Uploading"
+        },
+        {
+          "name": "variant",
+          "description": "The fill tone.",
+          "type": {
+            "enum": [
+              "accent",
+              "success",
+              "warning",
+              "neutral",
+              "error"
+            ]
+          },
+          "default": "accent",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "accent": "Accent",
+                "success": "Success",
+                "warning": "Warning",
+                "neutral": "Neutral",
+                "error": "Error"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "isIndeterminate",
+          "description": "Whether progress is indeterminate.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Indeterminate"
+            },
+            "code": {
+              "prop": "isIndeterminate"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the progress bar is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "tokens": {
+            "color": "{color-text-secondary}",
+            "gap": "{spacing-1}",
+            "width": "{spacing-12}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-xs}"
+          },
+          "parts": {
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            },
+            "track": {
+              "element": "div",
+              "tokens": {
+                "background-color": "{color-track}",
+                "border-radius": "{radius-full}",
+                "height": "{spacing-1}"
+              },
+              "parts": {
+                "fill": {
+                  "element": "div",
+                  "tokens": {
+                    "background-color": "{color-accent}",
+                    "border-radius": "{radius-full}",
+                    "height": "{spacing-1}"
+                  },
+                  "tokensByProp": {
+                    "prop": "variant",
+                    "map": {
+                      "accent": {
+                        "background-color": "{color-accent}"
+                      },
+                      "success": {
+                        "background-color": "{color-success}"
+                      },
+                      "warning": {
+                        "background-color": "{color-warning}"
+                      },
+                      "neutral": {
+                        "background-color": "{color-neutral}"
+                      },
+                      "error": {
+                        "background-color": "{color-error}"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "ProgressBar"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.slider",
+      "name": "Slider",
+      "version": "0.3.0",
+      "status": "draft",
+      "description": "Astryx Slider — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/slider/decisions.md); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "label",
+          "description": "The slider label.",
+          "type": "text",
+          "default": "Volume",
+          "required": true,
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        },
+        {
+          "name": "orientation",
+          "description": "Slider orientation.",
+          "type": {
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "default": "horizontal",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Orientation",
+              "values": {
+                "horizontal": "Horizontal",
+                "vertical": "Vertical"
+              }
+            },
+            "code": {
+              "prop": "orientation"
+            }
+          }
+        },
+        {
+          "name": "valueDisplay",
+          "description": "How the current value is shown.",
+          "type": {
+            "enum": [
+              "tooltip",
+              "text",
+              "none"
+            ]
+          },
+          "default": "tooltip",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Value Display",
+              "values": {
+                "tooltip": "Tooltip",
+                "text": "Text",
+                "none": "None"
+              }
+            },
+            "code": {
+              "prop": "valueDisplay"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the slider is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "isRequired",
+          "description": "Whether the slider is required.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Required"
+            },
+            "code": {
+              "prop": "isRequired"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "tokens": {
+            "color": "{color-on-light}",
+            "gap": "{spacing-1}",
+            "width": "{spacing-12}",
+            "font-family": "{font-family-body}"
+          },
+          "parts": {
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              },
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "declared": {
+                "cursor": "pointer",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "color": "{imported.slider.label.color}",
+                "column-gap": "{imported.shared.size-4}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.slider.label.font-weight}",
+                "line-height": "{imported.shared.size-20-0004}",
+                "row-gap": "{imported.shared.size-4}",
+                "row-rule-color": "{imported.slider.label.row-rule-color}"
+              }
+            },
+            "slider": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "part-1-0": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "parts": {
+                    "slider-track": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider-track — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "position": "absolute",
+                        "cursor": "pointer",
+                        "user-select": "none"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.slider.slider-track.background-color}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "bottom": "{imported.slider.slider-track.bottom.horizontal}",
+                              "top": "{imported.slider.slider-track.top.horizontal}"
+                            },
+                            "vertical": {
+                              "bottom": "{imported.slider.slider-track.bottom.vertical}",
+                              "top": "{imported.slider.slider-track.top.vertical}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "part-1-0-1": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "position": "absolute",
+                        "cursor": "pointer",
+                        "user-select": "none"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.shared.color-0064e0}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "bottom": "{imported.slider.part-1-0-1.bottom.horizontal}",
+                              "top": "{imported.slider.part-1-0-1.top.horizontal}"
+                            },
+                            "vertical": {
+                              "bottom": "{imported.slider.part-1-0-1.bottom.vertical}",
+                              "top": "{imported.slider.part-1-0-1.top.vertical}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "slider-thumb-2": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "position": "absolute",
+                        "cursor": "grab",
+                        "transition-duration": "0.175s",
+                        "transition-property": "background-color, box-shadow",
+                        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)",
+                        "user-select": "none"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "tooltip",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "tokens": {
+                        "background-color": "{imported.shared.color-0064e0}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "z-index": "{imported.shared.num-1}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "bottom": "{imported.slider.slider-thumb-2.bottom.horizontal}",
+                              "top": "{imported.slider.slider-thumb-2.top.horizontal}"
+                            },
+                            "vertical": {
+                              "bottom": "{imported.slider.slider-thumb-2.bottom.vertical}",
+                              "top": "{imported.slider.slider-thumb-2.top.vertical}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "part-1-0-2": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "contents",
+                        "cursor": "pointer",
+                        "user-select": "none"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "text",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "none",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "parts": {
+                        "slider-thumb": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|slider-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "position": "absolute",
+                            "cursor": "grab",
+                            "transition-duration": "0.175s",
+                            "transition-property": "background-color, box-shadow",
+                            "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)",
+                            "user-select": "none"
+                          },
+                          "stylesWhen": [
+                            {
+                              "prop": "valueDisplay",
+                              "equals": "text",
+                              "styles": {
+                                "display": "none"
+                              }
+                            },
+                            {
+                              "prop": "valueDisplay",
+                              "equals": "none",
+                              "styles": {
+                                "display": "none"
+                              }
+                            }
+                          ],
+                          "tokens": {
+                            "background-color": "{imported.shared.color-0064e0}",
+                            "border-bottom-left-radius": "{imported.shared.size-9999}",
+                            "border-bottom-right-radius": "{imported.shared.size-9999}",
+                            "border-top-left-radius": "{imported.shared.size-9999}",
+                            "border-top-right-radius": "{imported.shared.size-9999}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "z-index": "{imported.shared.num-1}"
+                          },
+                          "tokensByProp": [
+                            {
+                              "prop": "orientation",
+                              "map": {
+                                "horizontal": {
+                                  "bottom": "{imported.slider.slider-thumb.bottom.horizontal}",
+                                  "left": "{imported.slider.slider-thumb.left.horizontal}",
+                                  "right": "{imported.slider.slider-thumb.right.horizontal}",
+                                  "top": "{imported.slider.slider-thumb.top.horizontal}"
+                                },
+                                "vertical": {
+                                  "bottom": "{imported.slider.slider-thumb.bottom.vertical}",
+                                  "left": "{imported.slider.slider-thumb.left.vertical}",
+                                  "right": "{imported.slider.slider-thumb.right.vertical}",
+                                  "top": "{imported.slider.slider-thumb.top.vertical}"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "tokens": {
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      }
+                    },
+                    "tooltip": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "none",
+                        "border-bottom-style": "none",
+                        "border-left-style": "none",
+                        "border-right-style": "none",
+                        "border-top-style": "none",
+                        "cursor": "pointer",
+                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+                        "user-select": "none"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "text",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "none",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "parts": {
+                        "label-2": {
+                          "text": "40",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "cursor": "pointer",
+                            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+                            "user-select": "none"
+                          },
+                          "stylesWhen": [
+                            {
+                              "prop": "valueDisplay",
+                              "equals": "text",
+                              "styles": {
+                                "display": "none"
+                              }
+                            },
+                            {
+                              "prop": "valueDisplay",
+                              "equals": "none",
+                              "styles": {
+                                "display": "none"
+                              }
+                            }
+                          ],
+                          "tokens": {
+                            "color": "{imported.shared.color-ffffff}",
+                            "font-size": "{imported.shared.size-14}",
+                            "font-weight": "{imported.slider.label-2.font-weight}",
+                            "line-height": "{imported.shared.size-20-0004}",
+                            "max-width": "{imported.slider.label-2.max-width}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "padding-bottom": "{imported.shared.size-4}",
+                            "padding-left": "{imported.shared.size-8}",
+                            "padding-right": "{imported.shared.size-8}",
+                            "padding-top": "{imported.shared.size-4}",
+                            "row-rule-color": "{imported.shared.color-ffffff}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "background-color": "{imported.shared.color-0a1317}",
+                        "border-bottom-left-radius": "{imported.shared.size-12}",
+                        "border-bottom-right-radius": "{imported.shared.size-12}",
+                        "border-top-left-radius": "{imported.shared.size-12}",
+                        "border-top-right-radius": "{imported.shared.size-12}",
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-ffffff}",
+                        "font-size": "{imported.shared.size-14}",
+                        "left": "{imported.shared.size-0}",
+                        "line-height": "{imported.shared.size-20-0004}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-ffffff}",
+                        "top": "{imported.shared.size-0}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "margin-bottom": "{imported.slider.tooltip.margin-bottom.horizontal}",
+                              "margin-left": "{imported.slider.tooltip.margin-left.horizontal}",
+                              "margin-right": "{imported.slider.tooltip.margin-right.horizontal}",
+                              "margin-top": "{imported.slider.tooltip.margin-top.horizontal}"
+                            },
+                            "vertical": {
+                              "margin-bottom": "{imported.slider.tooltip.margin-bottom.vertical}",
+                              "margin-left": "{imported.slider.tooltip.margin-left.vertical}",
+                              "margin-right": "{imported.slider.tooltip.margin-right.vertical}",
+                              "margin-top": "{imported.slider.tooltip.margin-top.vertical}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "declared": {
+                    "cursor": "pointer",
+                    "isolation": "isolate",
+                    "position": "relative",
+                    "touch-action": "none",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "flex-grow": "{imported.shared.num-1}",
+                    "left": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  }
+                },
+                "label-3": {
+                  "text": "40",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "tooltip",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "valueDisplay",
+                      "equals": "none",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "color": "{imported.shared.color-0a1317}",
+                    "flex-shrink": "{imported.slider.label-3.flex-shrink}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.slider.label-3.font-weight}",
+                    "line-height": "{imported.slider.label-3.line-height}",
+                    "row-rule-color": "{imported.shared.color-0a1317}"
+                  }
+                }
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-8}",
+                "row-gap": "{imported.shared.size-8}"
+              }
+            }
+          },
+          "literals": {
+            "font-size": "16px"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Slider"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.switch",
+      "name": "Switch",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; value, description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "label",
+          "description": "The switch label.",
+          "type": "text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          },
+          "required": true,
+          "default": "Enable notifications"
+        },
+        {
+          "name": "labelPosition",
+          "description": "Where the label sits relative to the track.",
+          "type": {
+            "enum": [
+              "start",
+              "end"
+            ]
+          },
+          "default": "end",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Label Position",
+              "values": {
+                "start": "Start",
+                "end": "End"
+              }
+            },
+            "code": {
+              "prop": "labelPosition"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the switch is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "isRequired",
+          "description": "Whether the switch is required.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Required"
+            },
+            "code": {
+              "prop": "isRequired"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "inline-flex",
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "color": "{color-text-primary}",
+            "gap": "{spacing-2}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}"
+          },
+          "parts": {
+            "track": {
+              "element": "span",
+              "tokens": {
+                "background-color": "{color-background-muted}",
+                "border-radius": "{radius-full}",
+                "width": "{spacing-8}",
+                "height": "{spacing-5}"
+              }
+            },
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Switch"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.text-input",
+      "name": "TextInput",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Astryx TextInput — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the optional/required/disabled/clear/autofocus flags are verbatim (83% facts-carried); description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "type",
+          "description": "The input type.",
+          "type": {
+            "enum": [
+              "text",
+              "password",
+              "email"
+            ]
+          },
+          "default": "text",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Type",
+              "values": {
+                "text": "Text",
+                "password": "Password",
+                "email": "Email"
+              }
+            },
+            "code": {
+              "prop": "type"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "description": "The field label.",
+          "type": "text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          },
+          "required": true,
+          "default": "Email"
+        },
+        {
+          "name": "size",
+          "description": "The field size.",
+          "type": {
+            "enum": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "default": "md",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "sm": "Sm",
+                "md": "Md",
+                "lg": "Lg"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "placeholder",
+          "description": "Placeholder text.",
+          "type": "text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Placeholder"
+            },
+            "code": {
+              "prop": "placeholder"
+            }
+          },
+          "default": "you@example.com"
+        },
+        {
+          "name": "isRequired",
+          "description": "Whether the field is required.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Required"
+            },
+            "code": {
+              "prop": "isRequired"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the field is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "hasClear",
+          "description": "Whether the field shows a clear button.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Has Clear"
+            },
+            "code": {
+              "prop": "hasClear"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "tokens": {
+            "color": "{color-text-primary}",
+            "gap": "{spacing-1}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}"
+          },
+          "parts": {
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "color": "{color-text-secondary}",
+                "font-size": "{font-size-xs}"
+              }
+            },
+            "field": {
+              "element": "div",
+              "tokens": {
+                "background-color": "{color-background-surface}",
+                "border-color": "{color-border}",
+                "border-width": "{border-width}",
+                "border-radius": "{radius-element}",
+                "color": "{color-text-secondary}",
+                "padding-block": "{spacing-2}",
+                "padding-inline": "{spacing-3}"
+              },
+              "tokensByProp": {
+                "prop": "size",
+                "map": {
+                  "sm": {
+                    "padding-block": "{spacing-1}",
+                    "padding-inline": "{spacing-2}"
+                  },
+                  "md": {
+                    "padding-block": "{spacing-2}",
+                    "padding-inline": "{spacing-3}"
+                  },
+                  "lg": {
+                    "padding-block": "{spacing-3}",
+                    "padding-inline": "{spacing-4}"
+                  }
+                }
+              },
+              "content": {
+                "prop": "placeholder"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "TextInput"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "astryx.toast",
+      "name": "Toast",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "PROMOTED from the Phase B composition-tier extraction (round 2, wrapper-ref descent) — the vendor-refereed exhibit: Astryx's own Toast.doc.mjs declares anatomy Body / End content / Dismiss button, and the extraction recovered exactly those three (body slot, endContent slot, ghost dismiss astryx.button with its real props) once the MediaTheme wrapper descended. Curation receipts: (1) the MediaTheme theme-provider ref was dropped and its interior lifted to the root (a theme boundary is a code mechanism, not anatomy); (2) the extracted behavioral props (isAutoHide/autoHideDuration/isExiting) are timing mechanics with no visual projection — dropped from the exhibit, receipted here; (3) root keeps the extracted StyleX token bindings verbatim (padding, radius, shadow, body typography).",
+      "semantics": {
+        "element": "div",
+        "role": "status"
+      },
+      "props": [
+        {
+          "name": "body",
+          "description": "The toast's primary message content (vendor anatomy: Body, required).",
+          "type": "text",
+          "default": "Saved successfully",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Body"
+            },
+            "code": {
+              "prop": "body"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "attrs": {
+            "aria-atomic": "true"
+          },
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "start"
+          },
+          "tokens": {
+            "gap": "{spacing-3}",
+            "padding-block": "{spacing-4}",
+            "padding-inline": "{spacing-4}",
+            "background-color": "{color-background-surface}",
+            "border-radius": "{radius-container}",
+            "box-shadow": "{shadow-med}",
+            "font-family": "{font-family-body}",
+            "font-size": "{text-body-size}",
+            "line-height": "{text-body-leading}"
+          },
+          "literals": {
+            "width": "360px"
+          },
+          "parts": {
+            "content": {
+              "description": "Vendor anatomy: Body (required).",
+              "element": "div",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "grow": true
+              },
+              "parts": {
+                "bodyText": {
+                  "element": "span",
+                  "content": {
+                    "prop": "body"
+                  }
+                }
+              }
+            },
+            "endContent": {
+              "description": "Vendor anatomy: End content (optional trailing action) — a slot accepting composed instances.",
+              "element": "div",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "center"
+              },
+              "slot": {
+                "name": "endContent",
+                "accepts": [
+                  "astryx.button"
+                ]
+              },
+              "optional": true
+            },
+            "dismiss": {
+              "description": "Vendor anatomy: Dismiss button (required) — the extracted ghost astryx.button with its real props.",
+              "component": {
+                "id": "astryx.button",
+                "props": {
+                  "variant": "ghost",
+                  "label": "Dismiss"
+                }
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Toast"
+        }
+      }
+    },
+    {
+      "$schema": "../../../contracts/contract.schema.json",
+      "id": "astryx.token",
+      "name": "Token",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "Astryx Token (Tag/Chip) — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Token/Token.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). size + color axes and the disabled/optional flags are verbatim; href link-mode and the description/isLabelHidden a11y text are dropped (documented). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "label",
+          "description": "Tag label.",
+          "type": "text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          },
+          "required": true,
+          "default": "Tag"
+        },
+        {
+          "name": "size",
+          "description": "The size of the tag.",
+          "type": {
+            "enum": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "default": "md",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "sm": "Sm",
+                "md": "Md",
+                "lg": "Lg"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "color",
+          "description": "The tag color.",
+          "type": {
+            "enum": [
+              "default",
+              "red",
+              "orange",
+              "yellow",
+              "green",
+              "teal",
+              "cyan",
+              "blue",
+              "purple",
+              "pink",
+              "gray"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Color",
+              "values": {
+                "default": "Default",
+                "red": "Red",
+                "orange": "Orange",
+                "yellow": "Yellow",
+                "green": "Green",
+                "teal": "Teal",
+                "cyan": "Cyan",
+                "blue": "Blue",
+                "purple": "Purple",
+                "pink": "Pink",
+                "gray": "Gray"
+              }
+            },
+            "code": {
+              "prop": "color"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "description": "Whether the tag is disabled.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Is Disabled"
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "inline-flex",
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          },
+          "tokens": {
+            "background-color": "{color-background-gray}",
+            "color": "{color-text-primary}",
+            "border-radius": "{radius-full}",
+            "gap": "{spacing-1}",
+            "font-family": "{font-family-body}",
+            "font-weight": "{font-weight-medium}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "default": {
+                  "background-color": "{color-background-muted}",
+                  "color": "{color-text-primary}"
+                },
+                "red": {
+                  "background-color": "{color-background-red}",
+                  "color": "{color-text-red}"
+                },
+                "orange": {
+                  "background-color": "{color-background-orange}",
+                  "color": "{color-text-orange}"
+                },
+                "yellow": {
+                  "background-color": "{color-background-yellow}",
+                  "color": "{color-text-yellow}"
+                },
+                "green": {
+                  "background-color": "{color-background-green}",
+                  "color": "{color-text-green}"
+                },
+                "teal": {
+                  "background-color": "{color-background-teal}",
+                  "color": "{color-text-teal}"
+                },
+                "cyan": {
+                  "background-color": "{color-background-cyan}",
+                  "color": "{color-text-cyan}"
+                },
+                "blue": {
+                  "background-color": "{color-background-blue}",
+                  "color": "{color-text-blue}"
+                },
+                "purple": {
+                  "background-color": "{color-background-purple}",
+                  "color": "{color-text-purple}"
+                },
+                "pink": {
+                  "background-color": "{color-background-pink}",
+                  "color": "{color-text-pink}"
+                },
+                "gray": {
+                  "background-color": "{color-background-gray}",
+                  "color": "{color-text-gray}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "sm": {
+                  "padding-block": "{spacing-0-5}",
+                  "padding-inline": "{spacing-1-5}",
+                  "font-size": "{font-size-2xs}"
+                },
+                "md": {
+                  "padding-block": "{spacing-0-5}",
+                  "padding-inline": "{spacing-2}",
+                  "font-size": "{font-size-xs}"
+                },
+                "lg": {
+                  "padding-block": "{spacing-1}",
+                  "padding-inline": "{spacing-3}",
+                  "font-size": "{font-size-sm}"
+                }
+              }
+            }
+          ],
+          "parts": {
+            "label": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@astryxdesign/core",
+          "export": "Token"
+        }
+      }
+    }
+  ]
+}
