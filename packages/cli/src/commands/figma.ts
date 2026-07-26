@@ -130,7 +130,18 @@ async function bundleCommand(argv: string[]): Promise<number> {
   loadContracts(files);
   const contracts = files.map((f) => JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>);
 
-  const base = readJsonObject(path.resolve(tokenFiles[0]));
+  // Nested DTCG trees (Polaris's wrap) flatten to dot-path names — the
+  // tokenSet base is flat by format; a nested wrap collapsing to one "token"
+  // was the live finding this closes. Flat inputs pass through unchanged.
+  const flattenDtcg = (node: Record<string, unknown>, prefix: string[] = [], out: Record<string, unknown> = {}): Record<string, unknown> => {
+    for (const [k, v] of Object.entries(node)) {
+      if (k.startsWith('$')) continue;
+      if (v && typeof v === 'object' && '$value' in (v as object)) out[[...prefix, k].join('.')] = v;
+      else if (v && typeof v === 'object') flattenDtcg(v as Record<string, unknown>, [...prefix, k], out);
+    }
+    return out;
+  };
+  const base = flattenDtcg(readJsonObject(path.resolve(tokenFiles[0])));
   const minted = tokenFiles[1] ? readJsonObject(path.resolve(tokenFiles[1])) : undefined;
   const light = modeFiles[0] ? readJsonObject(path.resolve(modeFiles[0])) : undefined;
   const dark = modeFiles[1] ? readJsonObject(path.resolve(modeFiles[1])) : undefined;
