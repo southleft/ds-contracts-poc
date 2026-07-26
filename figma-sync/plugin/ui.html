@@ -1,20 +1,38 @@
 <!-- DS Contracts Sync Runner — plugin UI. Dependency-free vanilla HTML/CSS/JS;
-     talks to code.js via postMessage. Carbon-simple chrome: squared corners,
-     1px borders, underline tabs. Colors ride Figma's themeColors variables
-     (--figma-color-*) with neutral fallbacks, so one scheme covers light and
-     dark. -->
+     talks to code.js via postMessage.
+
+     INFORMATION ARCHITECTURE (docs/19, re-housed 2026-07-26): three user
+     intents — Build / Changes / Send — plus an Advanced drawer for the two
+     developer surfaces (Paste a script, Local runner) and the engine stamp.
+     The seven implementation-shaped tabs are gone; the machinery behind them
+     is not. This is a RE-HOUSING, not a rewrite: every engine call, message
+     type and protected sentence below is the one that was live before.
+
+     CHROME: Carbon-simple. 11px/16 body in 400/600 only, 10px meta, mono 10
+     for values; 4px grid, 12px gutter, squared corners, underline tabs. All
+     colour rides Figma's themeColors variables (--figma-color-*) with neutral
+     fallbacks — there is NO literal hex in this file's JS-generated markup, so
+     one scheme covers light and dark (the dark-mode bug the design pass
+     named). Report markup emits CLASSES; the stylesheet owns the palette. -->
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* The `hidden` ATTRIBUTE is how every state toggle below speaks. Its UA
+     rule is display:none, which ANY author display rule outranks — and this
+     sheet gives .section/.row a display. Without this line a "hidden" panel
+     shows anyway (caught in the dark-mode screenshot pass). */
+  [hidden] { display: none !important; }
   html, body { height: 100%; }
   body {
-    font: 11px/1.5 Inter, -apple-system, "Helvetica Neue", sans-serif;
+    font: 400 11px/16px Inter, -apple-system, "Helvetica Neue", sans-serif;
     color: var(--figma-color-text, #333);
     background: var(--figma-color-bg, #fff);
     display: flex; flex-direction: column;
   }
+  b, strong, .strong { font-weight: 600; }
+
+  /* --- tab bar ------------------------------------------------------------ */
   .tabs {
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; align-items: stretch;
     border-bottom: 1px solid var(--figma-color-border, #d9d9d9);
     flex: none;
   }
@@ -22,91 +40,95 @@
     appearance: none; background: none; border: none;
     border-bottom: 2px solid transparent;
     font: inherit; font-weight: 600; color: var(--figma-color-text-secondary, #6b6b6b);
-    padding: 10px 10px 8px; cursor: pointer; border-radius: 0;
+    padding: 8px 12px 6px; cursor: pointer; border-radius: 0;
+    display: flex; align-items: center; gap: 4px;
   }
   .tab[aria-selected="true"] {
     color: var(--figma-color-text, #333);
     border-bottom-color: var(--figma-color-bg-brand, #0d99ff);
   }
-  .panel { display: none; flex: 1; flex-direction: column; min-height: 0; padding: 12px; gap: 10px; }
+  .tab-advanced { margin-left: auto; }
+  /* Presence only — "something is waiting", never a count. */
+  .dot {
+    width: 6px; height: 6px; flex: none;
+    background: var(--figma-color-icon-brand, #0d99ff);
+  }
+
+  /* --- panels + sections -------------------------------------------------- */
+  .panel { display: none; flex: 1; flex-direction: column; min-height: 0; padding: 12px; gap: 16px; overflow-y: auto; }
   .panel.active { display: flex; }
+  /* 16px between sections, 8px inside one. A section carries EITHER a label
+     or a rule — never both. */
+  .section { display: flex; flex-direction: column; gap: 8px; flex: none; }
+  .section.grow { flex: 1; min-height: 0; }
+  .section-label { font-weight: 600; }
+  .rule { border-top: 1px solid var(--figma-color-border, #d9d9d9); padding-top: 16px; }
+  .indent { padding-left: 16px; }
+
+  /* --- type ---------------------------------------------------------------- */
+  .meta { font-size: 10px; color: var(--figma-color-text-secondary, #6b6b6b); }
+  .hint { color: var(--figma-color-text-secondary, #6b6b6b); flex: none; }
+  code, .mono { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; }
+  .text-success { color: var(--figma-color-text-success, #198f51); }
+  .text-warning { color: var(--figma-color-text-warning, #a86a00); }
+  .text-danger { color: var(--figma-color-text-danger, #dc3412); }
+  .text-brand { color: var(--figma-color-text-brand, #007be5); }
+  .status { font-size: 10px; color: var(--figma-color-text-secondary, #6b6b6b); }
+
+  /* --- the warning card (freshness, trust notes) --------------------------- */
   .note {
     border: 1px solid var(--figma-color-border, #d9d9d9);
     border-left: 3px solid var(--figma-color-icon-warning, #f3c11b);
-    padding: 6px 8px;
+    padding: 8px;
     color: var(--figma-color-text-secondary, #6b6b6b);
     flex: none;
   }
-  .hint { color: var(--figma-color-text-secondary, #6b6b6b); flex: none; }
-  code, .mono {
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 10px;
-  }
+
+  /* --- inputs -------------------------------------------------------------- */
   textarea {
-    flex: 1; min-height: 120px; width: 100%; resize: none;
-    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1.5;
+    flex: 1; min-height: 96px; width: 100%; resize: none;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1.6;
     color: var(--figma-color-text, #333);
     background: var(--figma-color-bg-secondary, #f5f5f5);
     border: 1px solid var(--figma-color-border, #d9d9d9);
     border-radius: 0; padding: 8px; outline: none;
   }
   textarea:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
+  input[type="text"], input[type="password"] {
+    font: inherit; color: var(--figma-color-text, #333);
+    background: var(--figma-color-bg-secondary, #f5f5f5);
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    border-radius: 0; padding: 6px 8px; outline: none;
+  }
+  input[type="text"]:focus, input[type="password"]:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
+  /* Pairing codes are the ONE literal uppercase in this UI — they are typed
+     from a terminal that prints them uppercase. */
+  .pair-code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    width: 88px; flex: none;
+  }
+  /* The channel read key (dscr_ + hex): long, lowercase, pasted once. It
+     takes the row's remaining width instead of a fixed 180px stub. */
+  .channel-key {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10px; text-transform: lowercase;
+    flex: 1; min-width: 180px;
+  }
+  .field { display: flex; flex-direction: column; gap: 4px; flex: none; }
+  .field label { font-weight: 600; }
   .row { display: flex; align-items: center; gap: 8px; flex: none; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: none; }
+
+  /* --- buttons + links ------------------------------------------------------ */
+  /* ONE filled button per panel. Everything else is a bordered secondary, and
+     in-report actions are links. Busy = disabled + label swap; no spinners. */
   button.primary {
     appearance: none; font: inherit; font-weight: 600;
     color: var(--figma-color-text-onbrand, #fff);
     background: var(--figma-color-bg-brand, #0d99ff);
     border: 1px solid transparent; border-radius: 0;
     padding: 6px 16px; cursor: pointer;
-  }
-  button.primary:disabled { opacity: 0.5; cursor: default; }
-  .status { color: var(--figma-color-text-secondary, #6b6b6b); }
-  .result {
-    flex: 1; min-height: 90px; overflow: auto;
-    border: 1px solid var(--figma-color-border, #d9d9d9);
-    padding: 8px; background: var(--figma-color-bg-secondary, #f5f5f5);
-  }
-  .result .headline { font-weight: 600; margin-bottom: 6px; }
-  .result.ok .headline { color: var(--figma-color-text-success, #198f51); }
-  .result.err .headline { color: var(--figma-color-text-danger, #dc3412); }
-  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-  .chip {
-    border: 1px solid var(--figma-color-border, #d9d9d9);
-    padding: 1px 6px; border-radius: 0;
-    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px;
-  }
-  pre {
-    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1.5;
-    white-space: pre-wrap; word-break: break-word;
-  }
-  .log-line.ok { color: var(--figma-color-text-success, #198f51); }
-  .log-line.warn { color: var(--figma-color-text-warning, #a86a00); }
-  .log-line.error { color: var(--figma-color-text-danger, #dc3412); }
-  .field { display: flex; flex-direction: column; gap: 4px; flex: none; }
-  .field label { font-weight: 600; }
-  input[type="text"] {
-    font: inherit; color: var(--figma-color-text, #333);
-    background: var(--figma-color-bg-secondary, #f5f5f5);
-    border: 1px solid var(--figma-color-border, #d9d9d9);
-    border-radius: 0; padding: 6px 8px; outline: none;
-  }
-  input[type="text"]:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
-  #send-code {
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
-  }
-  .pair-code {
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-    width: 110px;
-  }
-  /* Channel read key (dscr_ + 64 hex): long, lowercase, pasted once —
-     narrow enough to sit on the same row as its button, wide enough to show
-     the prefix and enough tail to tell two channels apart. */
-  .channel-key {
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 11px; text-transform: lowercase;
-    width: 180px;
   }
   button.secondary {
     appearance: none; font: inherit; font-weight: 600;
@@ -115,260 +137,291 @@
     border: 1px solid var(--figma-color-border, #d9d9d9); border-radius: 0;
     padding: 6px 12px; cursor: pointer;
   }
-  button.secondary:disabled { opacity: 0.5; cursor: default; }
-  input[type="password"] {
-    font: inherit; color: var(--figma-color-text, #333);
-    background: var(--figma-color-bg-secondary, #f5f5f5);
+  button:disabled { opacity: 0.5; cursor: default; }
+  a.link, a.row-action, a.variant-link, a.download {
+    color: var(--figma-color-text-brand, #007be5);
+    text-decoration: underline; cursor: pointer;
+  }
+  a.download { font-weight: 600; display: block; }
+
+  /* --- collapsed help ------------------------------------------------------- */
+  details.help { flex: none; }
+  details.help > summary {
+    cursor: pointer; list-style: none;
+    color: var(--figma-color-text-secondary, #6b6b6b);
+    text-decoration: underline dotted;
+  }
+  details.help > summary::-webkit-details-marker { display: none; }
+  details.help > summary::marker { content: ""; }
+  details.help[open] > summary { margin-bottom: 8px; }
+  details.help > *:not(summary) { margin-top: 8px; }
+
+  /* --- reports -------------------------------------------------------------- */
+  .result {
+    flex: 1; min-height: 88px; overflow: auto;
     border: 1px solid var(--figma-color-border, #d9d9d9);
-    border-radius: 0; padding: 6px 8px; outline: none;
+    padding: 8px; background: var(--figma-color-bg-secondary, #f5f5f5);
   }
-  input[type="password"]:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
-  .rows { display: flex; flex-direction: column; gap: 2px; margin: 6px 0; }
-  .rows label { display: flex; gap: 6px; align-items: baseline; cursor: pointer; }
+  .result.short { flex: none; max-height: 140px; }
+  .result .headline { font-weight: 600; margin-bottom: 8px; }
+  .result.ok .headline { color: var(--figma-color-text-success, #198f51); }
+  .result.err .headline { color: var(--figma-color-text-danger, #dc3412); }
+  .result > * + * { margin-top: 4px; }
+
+  /* Row anatomy: name (600) + right-aligned status word; meta line; indented
+     mono diff lines. An in-sync row is two lines and stops. */
+  .report-row { padding: 4px 0; border-bottom: 1px solid var(--figma-color-border, #d9d9d9); }
+  .report-row:last-child { border-bottom: none; }
+  .report-head { display: flex; align-items: baseline; gap: 8px; }
+  .report-name { font-weight: 600; }
+  .report-status { margin-left: auto; white-space: nowrap; }
+  .report-meta { font-size: 10px; color: var(--figma-color-text-secondary, #6b6b6b); }
+  .diff-line {
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px;
+    padding-left: 16px; color: var(--figma-color-text-secondary, #6b6b6b);
+  }
+  .diff-line .now { font-weight: 600; color: var(--figma-color-text, #333); }
+  .variant-link { display: block; padding-left: 16px; }
+  .swatch {
+    display: inline-block; width: 8px; height: 8px; vertical-align: -1px;
+    border: 1px solid var(--figma-color-border, #d9d9d9); margin-right: 4px;
+  }
+  .rows { display: flex; flex-direction: column; gap: 2px; }
+  .rows label { display: flex; gap: 8px; align-items: baseline; cursor: pointer; }
   .rows label.disabled { color: var(--figma-color-text-secondary, #6b6b6b); cursor: default; }
-  a.download {
-    color: var(--figma-color-text-brand, #007be5); font-weight: 600;
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip {
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    padding: 1px 6px; border-radius: 0;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px;
   }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: none; }
+  pre {
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1.6;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .log-line.ok { color: var(--figma-color-text-success, #198f51); }
+  .log-line.warn { color: var(--figma-color-text-warning, #a86a00); }
+  .log-line.error { color: var(--figma-color-text-danger, #dc3412); }
 </style>
 
 <div class="tabs" role="tablist">
-  <button class="tab" id="tab-generate" role="tab" aria-selected="true" aria-controls="panel-generate">Generate</button>
-  <button class="tab" id="tab-update" role="tab" aria-selected="false" aria-controls="panel-update">Update library</button>
-  <button class="tab" id="tab-propose" role="tab" aria-selected="false" aria-controls="panel-propose">Propose</button>
-  <button class="tab" id="tab-paste" role="tab" aria-selected="false" aria-controls="panel-paste">Paste a script</button>
-  <button class="tab" id="tab-send" role="tab" aria-selected="false" aria-controls="panel-send">Send to Playground</button>
-  <button class="tab" id="tab-runner" role="tab" aria-selected="false" aria-controls="panel-runner">Local runner</button>
-  <button class="tab" id="tab-drift" role="tab" aria-selected="false" aria-controls="panel-drift">Drift</button>
-  <!-- Engine build stamp (injected at package time as window.DSC_BUILD):
-       makes a STALE dev import diagnosable at a glance — compare against
-       `node scripts/build-plugin-zip.mjs` output / engine.receipt.json. -->
-  <span id="engine-stamp" style="margin-left:auto;align-self:center;font-size:10px;opacity:.55;white-space:nowrap"></span>
+  <button class="tab" id="tab-build" role="tab" aria-selected="true" aria-controls="panel-build">Build</button>
+  <button class="tab" id="tab-changes" role="tab" aria-selected="false" aria-controls="panel-changes">Changes<span class="dot" id="changes-dot" hidden></span></button>
+  <button class="tab" id="tab-send" role="tab" aria-selected="false" aria-controls="panel-send">Send</button>
+  <button class="tab tab-advanced" id="tab-advanced" role="tab" aria-selected="false" aria-controls="panel-advanced"><span aria-hidden="true">&#9881;</span>Advanced</button>
 </div>
 
-<div class="panel active" id="panel-generate" role="tabpanel">
-  <div class="hint">
-    Paste a contract JSON (or a CONTRACTS-BUNDLE) and the plugin builds it in
-    THIS file — schema-checked, emitted and run locally, token-bound,
-    dependency-ordered. Or receive a bundle by pairing code
-    (<span class="mono">ds-contracts figma push &lt;file&gt; --code &lt;CODE&gt;</span>).
+<!-- ========================================================================
+     BUILD — "I have contracts (or want the sample); put them on this canvas."
+     The paste box is the surface. Receive-by-code lives here and ONLY here,
+     folded away; the standing channel lives in Changes. When the file already
+     has marked sets the same button runs the CHECK, and the shared report
+     (per-set boxes, protected-edits card, Apply) answers below.
+     ==================================================================== -->
+<div class="panel active" id="panel-build" role="tabpanel">
+  <div class="section" id="build-empty" hidden>
+    <div class="strong">Nothing here is contract-backed yet.</div>
+    <div class="row"><button class="primary" id="gen-sample" data-busy="Building…">Build the sample library</button></div>
+    <div class="meta">Card, Badge, Avatar, Button — token-bound, built in this file in ~30 seconds. Safe to re-run.</div>
+    <div class="meta">Or paste your contracts file below.</div>
   </div>
-  <!-- Live UI finding (TJ, round 41): the button+hint row squeezed the
-       button into a tall sliver and clipped the hint — stacked block layout,
-       hint wraps under the full-width button. -->
-  <div style="margin:6px 0 10px;">
-    <button class="secondary" id="gen-sample" style="width:100%;white-space:nowrap;">Nothing to paste yet? Build the sample library</button>
-    <div class="hint" style="margin-top:4px;white-space:normal;">One click builds the reference set baked into this
-      plugin — Card, Badge, Avatar, Button — token-bound, in this file. Safe to re-run.</div>
-  </div>
-  <div class="row">
-    <input type="text" class="pair-code" id="gen-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
-    <button class="secondary" id="gen-receive">Receive by code</button>
-    <span class="status" id="gen-receive-status"></span>
-  </div>
-  <!-- G1 — THE STANDING CHANNEL. The pairing code above needs both people in
-       the same minute; this needs neither. Paste the read key once (it is
-       saved for you) and CI's latest bundle is always one button away. -->
-  <div class="row">
-    <input type="text" class="channel-key" id="gen-channel-key" spellcheck="false" autocomplete="off" placeholder="dscr_… (CI channel key — paste once)" />
-    <button class="secondary" id="gen-channel-check">Check for updates</button>
-    <span class="status" id="gen-channel-status"></span>
-  </div>
-  <textarea id="gen-input" spellcheck="false"
-    placeholder='// Paste a contract document ({ "id": "…", … }) or a CONTRACTS-BUNDLE here.'></textarea>
-  <div class="row">
-    <label class="hint" style="display:flex;gap:6px;align-items:center;">
-      <input type="checkbox" id="gen-tokens" checked />
-      Sync token variables first (fresh files need it; re-running upserts)
-    </label>
-  </div>
-  <div class="row">
-    <button class="primary" id="gen-run">Generate in this file</button>
-    <span class="status" id="gen-status"></span>
-  </div>
-  <div class="result" id="gen-result" hidden></div>
-</div>
-
-<div class="panel" id="panel-update" role="tabpanel">
-  <div class="hint">
-    Receive a contracts bundle (a CI artifact via
-    <span class="mono">ds-contracts figma push</span>, or paste it), then
-    CHECK it against this file first: the plugin looks up each contract by its
-    identity marker and reports every change in plain words. Nothing is
-    applied until you review the report and press Apply.
-  </div>
-  <div class="note">
-    What&rsquo;s protected: the check also compares each set against the state
-    its last sync recorded — a set you edited on the canvas is named in the
-    report and its Apply box starts unchecked, so an update never overwrites
-    your edits silently. Applying amends in place: instances keep their
-    overrides (same nodes, same property ids).
-  </div>
-  <div class="row">
-    <input type="text" class="pair-code" id="upd-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
-    <button class="secondary" id="upd-receive">Receive by code</button>
-    <span class="status" id="upd-receive-status"></span>
-  </div>
-  <!-- The same standing channel, mirrored here: this is where a channel
-       delivery usually belongs (an update to a library that already exists),
-       and it is the tab where the out-of-order guard can speak. One key, two
-       fields — typing in either updates both and saves once. -->
-  <div class="row">
-    <input type="text" class="channel-key" id="upd-channel-key" spellcheck="false" autocomplete="off" placeholder="dscr_… (CI channel key — paste once)" />
-    <button class="secondary" id="upd-channel-check">Check for updates</button>
-    <span class="status" id="upd-channel-status"></span>
-  </div>
-  <textarea id="upd-input" spellcheck="false"
-    placeholder='// Paste a CONTRACTS-BUNDLE (or a single contract) here, or receive one by code above.'></textarea>
-  <div class="row">
-    <button class="primary" id="upd-check">Check against this file</button>
-    <button class="secondary" id="upd-apply" disabled>Apply selected</button>
-    <span class="status" id="upd-status"></span>
-  </div>
-  <div class="result" id="upd-result" hidden></div>
-</div>
-
-<div class="panel" id="panel-propose" role="tabpanel">
-  <div class="hint">
-    Select a generated set on the canvas (or name it), and the plugin reads it
-    back with the repo&rsquo;s dump script, proposes a contract from what is
-    drawn, and diffs it against the contract the set was generated from — a
-    reviewable change, exported as JSON or opened as a GitHub PR.
-  </div>
-  <div class="field">
-    <label for="prop-set">Component set name</label>
-    <input type="text" id="prop-set" spellcheck="false" autocomplete="off" placeholder="Badge (empty = your current selection)" />
-  </div>
-  <div class="field">
-    <label for="prop-base">Base contract (the contract this set was generated from)</label>
-    <textarea id="prop-base" spellcheck="false" style="min-height:70px;flex:none;"
-      placeholder='// Paste the base contract JSON. For sets generated from a repo contract the plugin pre-fills this after reading the set.'></textarea>
-  </div>
-  <div class="row">
-    <button class="primary" id="prop-run">Read the set &amp; diff</button>
-    <span class="status" id="prop-status"></span>
-  </div>
-  <div class="result" id="prop-result" hidden></div>
-  <div class="field" id="prop-pr-section" hidden>
-    <label>Open a GitHub PR (optional)</label>
-    <div class="grid2">
-      <input type="text" id="pr-repo" spellcheck="false" autocomplete="off" placeholder="owner/repo" />
-      <input type="text" id="pr-path" spellcheck="false" autocomplete="off" placeholder="contracts/badge.contract.json" />
-      <input type="text" id="pr-base" spellcheck="false" autocomplete="off" placeholder="base branch (empty = default)" />
-      <input type="password" id="pr-token" spellcheck="false" autocomplete="off" placeholder="fine-grained token (optional for dry run)" />
-    </div>
-    <label class="hint" style="display:flex;gap:6px;align-items:center;">
-      <input type="checkbox" id="pr-dry" checked />
-      Dry run — show the exact plan, send nothing
-    </label>
+  <div class="section grow">
+    <div class="hint" id="build-guidance">Paste your contracts file below — the plugin checks it, then builds it in this file, token-bound and safe to re-run.</div>
+    <textarea id="gen-input" spellcheck="false" placeholder="Paste your contracts file here."></textarea>
+    <details class="help">
+      <summary>Other ways to receive</summary>
+      <div class="row">
+        <input type="text" class="pair-code" id="gen-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
+        <button class="secondary" id="gen-receive">Receive by code</button>
+      </div>
+      <div class="status" id="gen-receive-status"></div>
+      <div class="meta">A developer with the file open can hand it to you directly:
+        <span class="mono">ds-contracts figma push &lt;file&gt; --code &lt;CODE&gt;</span> prints a
+        6-character code, good for 15 minutes, and you both have to be there.
+        For a standing feed that needs neither of you, connect your team's
+        channel in Changes.</div>
+    </details>
     <div class="row">
-      <button class="secondary" id="pr-run">Open PR</button>
-      <span class="status" id="pr-status"></span>
+      <button class="primary" id="gen-run" data-busy="Working…">Generate in this file</button>
+      <button class="secondary" id="build-apply" data-busy="Applying…" disabled hidden>Apply selected</button>
+      <span class="status" id="gen-status"></span>
     </div>
-    <div class="result" id="pr-result" hidden style="flex:none;max-height:140px;"></div>
-    <span class="hint">The token is used for these requests only, kept in this
-      window&rsquo;s memory, and never stored — closing the plugin forgets it.
-      Use a fine-grained token scoped to ONE repo with Contents and Pull
-      requests read/write.</span>
+    <div class="result" id="gen-result" hidden></div>
   </div>
-  <div class="field" id="prop-bridge-section" hidden>
-    <label for="prop-bridge-code">Send to repo (pairing code) — no GitHub, no token</label>
+</div>
+
+<!-- ========================================================================
+     CHANGES — "what moved?" Two sources, two sections: what the team sent
+     (the standing CI channel) and what happened on this canvas (drift).
+     Neither runs without a click; the channel's head-only check-on-open is
+     the single exception and it only ever writes a status line.
+     ==================================================================== -->
+<div class="panel" id="panel-changes" role="tabpanel">
+  <!-- State 1: no key yet. This is SETUP, not an error. -->
+  <div class="section" id="channel-setup" hidden>
+    <div class="section-label">Get updates from your team automatically</div>
+    <div>When engineers merge component changes, your team's CI can deliver
+      them straight to this plugin — nothing to schedule, no codes to trade.</div>
+    <div class="meta">One-time setup: ask an engineer to run
+      <span class="mono">ds-contracts figma claim-channel</span> in your
+      design-system repo. It creates two keys — they keep the publish key in
+      CI, and they send you the read key (it starts with dscr_). Paste the
+      read key here once; it's remembered for you.</div>
     <div class="row">
-      <input type="text" id="prop-bridge-code" maxlength="6" spellcheck="false" autocomplete="off"
-        placeholder="ABC234" style="max-width:110px;flex:none;" />
-      <button class="secondary" id="prop-bridge-send">Send to repo</button>
-      <span class="status" id="prop-bridge-status"></span>
+      <input type="text" class="channel-key" id="channel-key" spellcheck="false" autocomplete="off" placeholder="Read key from your engineer (dscr_…)" />
+      <button class="primary" id="channel-connect">Connect</button>
     </div>
-    <span class="hint">On the developer&rsquo;s machine,
-      <span class="mono">npx @ds-contracts/cli figma receive --out contracts</span>
-      prints a 6-character code — enter it here. The proposal travels through
-      the pairing bridge (one-time delivery, 15-minute TTL, contents never
-      logged) and lands as a reviewed local diff; the CLI writes nothing
-      without <span class="mono">--apply</span>. Nothing is stored here
-      either — the code is used for this one send and forgotten.</span>
-    <div class="result" id="prop-bridge-result" hidden style="flex:none;max-height:90px;"></div>
+    <div class="meta">The read key can only read. It can't change this file,
+      and it can't write to your repo.</div>
+  </div>
+
+  <!-- State 2: connected. -->
+  <div class="section" id="channel-connected" hidden>
+    <div class="row">
+      <span class="section-label">From your team — <span class="text-success">Connected</span></span>
+      <span class="meta">·</span>
+      <a class="row-action" id="channel-change" href="#">Change key</a>
+    </div>
+    <div class="status" id="channel-status"></div>
+    <div class="row">
+      <button class="primary" id="channel-check" data-busy="Checking…">Check for updates</button>
+      <span class="status" id="changes-status"></span>
+    </div>
+    <!-- The bundle a delivery lands in. Never typed into — it is the target
+         the delivery's ordering is bound to (a pull into Build must never
+         lend its delivery number to bytes sitting here, and vice versa). -->
+    <textarea id="changes-input" hidden></textarea>
+    <div class="result" id="changes-result" hidden></div>
+    <div class="row" id="changes-apply-row" hidden>
+      <button class="secondary" id="changes-apply" data-busy="Applying…" disabled>Apply selected</button>
+    </div>
+  </div>
+
+  <div class="section grow">
+    <div class="section-label">On this canvas</div>
+    <div class="hint" id="drift-empty" hidden>No contract-backed components in
+      this file yet. <a class="row-action" id="drift-goto-build" href="#">Build</a> some first.</div>
+    <div class="row" id="drift-actions">
+      <button class="secondary" id="drift-check" data-busy="Checking…">Check drift</button>
+      <span class="status" id="drift-last"></span>
+    </div>
+    <details class="help" id="drift-help">
+      <summary>What drift means</summary>
+      <div class="meta">Every generated component set remembers which contract
+        built it and what it looked like at that moment. Check drift compares
+        that record with the canvas now: a mismatch means the set was edited
+        after it was built, and the report names the variant and the change
+        (was → now). Re-running a sync script — or applying an update —
+        records the current state as the new baseline.</div>
+    </details>
+    <div class="result" id="drift-results" hidden></div>
   </div>
 </div>
 
-<div class="panel" id="panel-paste" role="tabpanel">
-  <div class="note">
-    Runs the pasted script with full plugin permissions in THIS file —
-    paste only scripts you generated yourself.
-  </div>
-  <div class="hint">
-    Copy the playground&rsquo;s <strong>Figma script</strong> output (or any
-    <span class="mono">figma-sync/*.js</span> script) and paste it below.
-  </div>
-  <textarea id="paste-input" spellcheck="false"
-    placeholder="// Paste a generated Figma script here — a plain async plugin body ending in `return <report>`."></textarea>
-  <div class="row">
-    <button class="primary" id="paste-run">Run script</button>
-    <span class="status" id="paste-status"></span>
-  </div>
-  <div class="result" id="paste-result" hidden></div>
-</div>
-
+<!-- ========================================================================
+     SEND — "get my canvas change to the code side." Reached mainly from a
+     Changes row; the two doors (GitHub PR, pairing bridge) appear once a
+     proposal exists.
+     ==================================================================== -->
 <div class="panel" id="panel-send" role="tabpanel">
-  <div class="hint">
-    Reads this file&rsquo;s component sets with the repo&rsquo;s dump script
-    (read-only — nothing in this file changes) and sends the dump to the
-    playground under a pairing code. The Plugin API resolves bound variable
-    <em>names</em> on any Figma plan, so the playground&rsquo;s proposal binds
-    your real tokens instead of minting provisional ones.
-  </div>
-  <div class="field">
-    <label for="send-code">Pairing code</label>
-    <input type="text" id="send-code" maxlength="6" spellcheck="false" autocomplete="off"
-      placeholder="ABC234" />
-    <span class="hint">In the playground&rsquo;s Figma tab, press
-      <strong>Receive from plugin</strong> — it shows a 6-character code (good
-      for 15 minutes). Codes are one-time: after each delivery the playground
-      shows a FRESH code automatically — use that one for your next send.</span>
-  </div>
-  <div class="field">
-    <label for="send-sets">Component set names (optional)</label>
-    <input type="text" id="send-sets" spellcheck="false" autocomplete="off"
-      placeholder="Badge, Switch, Card" />
-    <span class="hint">Comma-separated, exact names — MULTIPLE sets travel in
-      ONE send (e.g. <code>Dialog, Button-Brand Primary</code> arrives as one
-      dump and proposes together). Left empty, the plugin sends the component
-      set(s) of your CURRENT SELECTION on the canvas; with nothing selected it
-      sends every component set in this file (the Slot utility is always
-      skipped) — the same scoping the dump script&rsquo;s TARGET_SETS line
-      gives the copy/paste route.</span>
-  </div>
-  <div class="row">
-    <button class="primary" id="send-run">Send to Playground</button>
-    <span class="status" id="send-status"></span>
-  </div>
-  <div class="result" id="send-result" hidden></div>
-  <div class="hint">
-    Privacy: the dump (component structure, styles, variable names — never
-    your Figma token, never file contents beyond the chosen sets) goes to the
-    playground&rsquo;s bridge, is held at most 15 minutes, and is deleted the
-    moment your playground tab picks it up. Its contents are never logged.
+  <div class="section grow">
+    <div class="hint">Usually you arrive here from Changes — “Propose this
+      change.” To start cold, select a generated set on the canvas.</div>
+    <div class="field">
+      <label for="prop-set">Component set name</label>
+      <input type="text" id="prop-set" spellcheck="false" autocomplete="off" placeholder="Badge (empty = your current selection)" />
+    </div>
+    <div class="field">
+      <label for="prop-base">Base contract (the contract this set was generated from)</label>
+      <textarea id="prop-base" spellcheck="false" style="min-height:64px;flex:none;"
+        placeholder="Paste the base contract JSON. For sets generated from a repo contract the plugin pre-fills this after reading the set."></textarea>
+    </div>
+    <div class="row">
+      <button class="primary" id="prop-run" data-busy="Reading…">Read the set &amp; diff</button>
+      <span class="status" id="prop-status"></span>
+    </div>
+    <div class="result" id="prop-result" hidden></div>
+    <div class="field" id="prop-pr-section" hidden>
+      <label>Open a GitHub PR (optional)</label>
+      <div class="grid2">
+        <input type="text" id="pr-repo" spellcheck="false" autocomplete="off" placeholder="owner/repo" />
+        <input type="text" id="pr-path" spellcheck="false" autocomplete="off" placeholder="contracts/badge.contract.json" />
+        <input type="text" id="pr-base" spellcheck="false" autocomplete="off" placeholder="base branch (empty = default)" />
+        <input type="password" id="pr-token" spellcheck="false" autocomplete="off" placeholder="fine-grained token (optional for dry run)" />
+      </div>
+      <label class="meta" style="display:flex;gap:8px;align-items:center;">
+        <input type="checkbox" id="pr-dry" checked />
+        Dry run — show the exact plan, send nothing
+      </label>
+      <div class="row">
+        <button class="secondary" id="pr-run">Open PR</button>
+        <span class="status" id="pr-status"></span>
+      </div>
+      <div class="result short" id="pr-result" hidden></div>
+      <div class="meta">The token is used for these requests only, kept in
+        this window's memory, and never stored — closing the plugin forgets
+        it. Use a fine-grained token scoped to ONE repo with Contents and Pull
+        requests read/write.</div>
+    </div>
+    <div class="field" id="prop-bridge-section" hidden>
+      <label for="prop-bridge-code">Send to repo (pairing code) — no GitHub, no token</label>
+      <div class="row">
+        <input type="text" class="pair-code" id="prop-bridge-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
+        <button class="secondary" id="prop-bridge-send">Send to repo</button>
+        <span class="status" id="prop-bridge-status"></span>
+      </div>
+      <div class="meta">On the developer's machine,
+        <span class="mono">npx @ds-contracts/cli figma receive --out contracts</span>
+        prints a 6-character code — enter it here. The proposal travels through
+        the pairing bridge (one-time delivery, 15-minute TTL, contents never
+        logged) and lands as a reviewed local diff; the CLI writes nothing
+        without <span class="mono">--apply</span>. Nothing is stored here
+        either — the code is used for this one send and forgotten.</div>
+      <div class="result short" id="prop-bridge-result" hidden></div>
+    </div>
   </div>
 </div>
 
-<div class="panel" id="panel-drift" role="tabpanel">
-  <p class="hint">Every generated component set remembers which contract built it and what it looked like at that moment. <b>Check drift</b> compares that record with the canvas now: a mismatch means the set was edited after it was built, and the report names the variant and the change (was → now). Re-running a sync script — or applying an update — records the current state as the new baseline.</p>
-  <button id="drift-check" class="primary">Check drift</button>
-  <div id="drift-results" style="margin-top:10px; font-size:11px; line-height:1.5;"></div>
-</div>
-<div class="panel" id="panel-runner" role="tabpanel">
-  <div class="hint">
-    Fetches every generated script from <span class="mono">http://localhost:8765</span>
-    (<span class="mono">npm run figma:serve</span>) and runs them in dependency
-    order — SHA-256-verified against the server manifest, stopping on first
-    failure. The from-disk transport for full-library rebuilds.
+<!-- ========================================================================
+     ADVANCED — the drawer. Two developer surfaces and the diagnostics that
+     make a stale import obvious. No end user needs anything here.
+     ==================================================================== -->
+<div class="panel" id="panel-advanced" role="tabpanel">
+  <div class="section">
+    <div class="section-label">Paste a script</div>
+    <div class="meta">Debug surface — runs raw generated scripts with full
+      plugin permissions. For developers of this tool.</div>
+    <textarea id="paste-input" spellcheck="false"
+      placeholder="Paste a generated Figma script — a plain async plugin body ending in `return <report>`."></textarea>
+    <div class="row">
+      <button class="secondary" id="paste-run" data-busy="Running…">Run script</button>
+      <span class="status" id="paste-status"></span>
+    </div>
+    <div class="result" id="paste-result" hidden></div>
   </div>
-  <div class="row">
-    <button class="primary" id="runner-run">Run all scripts</button>
-    <span class="status" id="runner-status"></span>
+  <div class="section">
+    <div class="section-label">Local runner</div>
+    <div class="meta">Full-library rebuild from a localhost script server:
+      fetches every generated script from <span class="mono">http://localhost:8765</span>
+      (<span class="mono">npm run figma:serve</span>) and runs them in
+      dependency order — SHA-256-verified against the server manifest,
+      stopping on first failure. For developers of this tool.</div>
+    <div class="row">
+      <button class="secondary" id="runner-run" data-busy="Running…">Run all scripts</button>
+      <span class="status" id="runner-status"></span>
+    </div>
+    <div class="result" id="runner-result" hidden>
+      <div class="headline" id="runner-headline"></div>
+      <pre id="runner-log"></pre>
+    </div>
   </div>
-  <div class="result" id="runner-result" hidden>
-    <div class="headline" id="runner-headline"></div>
-    <pre id="runner-log"></pre>
+  <div class="section">
+    <div class="section-label">Diagnostics</div>
+    <!-- Engine build stamp (injected at package time as window.DSC_BUILD):
+         makes a STALE dev import diagnosable at a glance — compare against
+         `node scripts/build-plugin-zip.mjs` output / engine.receipt.json. -->
+    <div class="meta mono" id="engine-stamp"></div>
+    <div class="meta" id="diag-file"></div>
   </div>
 </div>
 
@@ -386,10 +439,12 @@
   else { $('engine-stamp').textContent = 'engine: NOT INJECTED (dev stub — run npm run plugin:zip and import figma-sync/plugin-dist/)'; }
 
   function escHtml(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  // The swatch's BORDER is a theme var (class); only its fill is inline —
+  // that fill is the value being reported, not styling.
   function colorChip(hex) {
-    return '<span style="display:inline-block;width:9px;height:9px;border:1px solid #999;background:' + hex + ';margin-right:3px;"></span>';
+    return '<span class="swatch" style="background:' + hex + ';"></span>';
   }
-  // SHARED pretty printer — the Drift and Update reports speak ONE language.
+  // SHARED pretty printer — the drift and update reports speak ONE language.
   // fill/stroke values render as color chips: paint-JSON arrays (drift
   // snapshots) and bare #hex literals (compiled specs) both chip; variable/
   // token names pass through as words. Everything else truncates at 48.
@@ -410,9 +465,16 @@
     }
     return escHtml(String(val).slice(0, 48));
   }
+  /** was → now, per the design pass: no strikethrough. Old value in the
+   *  secondary colour, an arrow, the new value at weight 600. */
+  function wasNow(chan, was, now) {
+    return '<span class="was">' + prettyChannelValue(chan, was) + '</span> → ' +
+      '<span class="now">' + prettyChannelValue(chan, now) + '</span>';
+  }
 
   // --- tabs -----------------------------------------------------------------
-  var TAB_NAMES = ['generate', 'update', 'propose', 'paste', 'send', 'runner', 'drift'];
+  var TAB_NAMES = ['build', 'changes', 'send', 'advanced'];
+  var userPickedTab = false;
   function select(which) {
     TAB_NAMES.forEach(function (name) {
       var on = name === which;
@@ -421,69 +483,9 @@
     });
   }
   TAB_NAMES.forEach(function (name) {
-    $('tab-' + name).onclick = function () { select(name); };
+    $('tab-' + name).onclick = function () { userPickedTab = true; select(name); };
   });
-
-  // --- drift ---------------------------------------------------------------
-  $('drift-check').onclick = function () {
-    $('drift-results').textContent = 'Checking…';
-    parent.postMessage({ pluginMessage: { type: 'check-drift' } }, '*');
-  };
-  window.addEventListener('message', function (ev) {
-    var msg = ev.data && ev.data.pluginMessage;
-    if (!msg || msg.type !== 'drift-result') return;
-    var box = $('drift-results');
-    if (!msg.ok) { box.textContent = 'Drift check failed: ' + msg.error; return; }
-    if (!msg.rows.length) { box.textContent = 'No generated components found (nothing carries a ds_contracts marker).'; return; }
-    var counts = { 'in-sync': 0, 'canvas-edited': 0 };
-    var html = msg.rows.map(function (r) {
-      if (counts[r.status] !== undefined) counts[r.status]++;
-      var badge = r.status === 'in-sync' ? '✅ in sync'
-        : r.status === 'canvas-edited' ? '⚠️ canvas edited'
-        : 'ℹ️ ' + r.status;
-      var variants = '';
-      if (r.setChanges && r.setChanges.length) {
-        variants += '<div style="margin-top:2px;">' + r.setChanges.map(function (c) {
-          var chanS = (c.what.split('|')[1] || '?');
-          return '<div style="color:#888;padding-left:14px;">set · ' + escHtml(chanS) + ': <s>' + escHtml(String(c.was).slice(0, 48)) + '</s> → <b>' + escHtml(String(c.now).slice(0, 48)) + '</b></div>';
-        }).join('') + '</div>';
-      }
-      if (r.editedVariants && r.editedVariants.length) {
-        variants = '<div style="margin-top:2px;">' + r.editedVariants.map(function (v) {
-          var det = (v.changes || []).map(function (c) {
-            // key: path:TYPE/name|channel — show "name · channel: was → now"
-            // (values through the SHARED pretty printer: chips for paints).
-            var parts = c.what.split('|');
-            var nodeLabel = (parts[0].split('/').pop() || parts[0]);
-            var chan = parts[1] || '?';
-            return '<div style="color:#888;padding-left:14px;">' + escHtml(nodeLabel) + ' · ' + escHtml(chan) + ': <s>' + prettyChannelValue(chan, c.was) + '</s> → <b>' + prettyChannelValue(chan, c.now) + '</b></div>';
-          }).join('');
-          return '<a href="#" class="drift-variant" data-node="' + v.nodeId + '" style="display:block;color:#c60;text-decoration:underline;">↳ ' + v.name + '</a>' + det;
-        }).join('') + '</div>';
-      }
-      if (r.status === 'canvas-edited') {
-        variants += '<div style="margin-top:4px;"><a href="#" class="drift-propose" data-set="' + r.name.replace(/"/g, '&quot;') + '" style="color:#09f;text-decoration:underline;">→ Propose this change (review &amp; open PR)</a></div>';
-      }
-      return '<div style="padding:4px 0;border-bottom:1px solid #eee;"><b>' + r.name + '</b> <span style="color:#666">(' + r.page + ' · ' + r.contractId + ')</span><br>' + badge + variants + '</div>';
-    }).join('');
-    box.innerHTML = '<div style="margin-bottom:6px;"><b>' + counts['in-sync'] + ' in sync · ' + counts['canvas-edited'] + ' canvas-edited</b></div>' + html;
-    box.querySelectorAll('.drift-variant').forEach(function (a) {
-      a.onclick = function (e) {
-        e.preventDefault();
-        parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: a.getAttribute('data-node') } }, '*');
-      };
-    });
-    // DELIVERY GLUE: a drifted set flows straight into the Propose tab —
-    // pre-named, read-and-diffed, PR section one click away.
-    box.querySelectorAll('.drift-propose').forEach(function (a) {
-      a.onclick = function (e) {
-        e.preventDefault();
-        select('propose');
-        $('prop-set').value = a.getAttribute('data-set');
-        $('prop-run').click();
-      };
-    });
-  });
+  $('drift-goto-build').onclick = function (e) { e.preventDefault(); userPickedTab = true; select('build'); };
 
   // The engine bundle (window.DSC) is injected at package time — direct
   // repo loads without the zip build get a named message, not broken tabs.
@@ -497,218 +499,180 @@
   // The current file's key (posted by code.js on startup) — overrides each
   // generated script's WRONG FILE guard so the set lands in THIS file.
   var currentFileKey = '';
+  // How many contract-backed sets this file carries. Decides the default tab,
+  // the Build empty state, and whether Build's button generates or checks.
+  var markedSets = 0;
+  var inventoryKnown = false;
 
   // --- busy handling --------------------------------------------------------
-  var pasteRun = $('paste-run');
-  var runnerRun = $('runner-run');
-  var sendRun = $('send-run');
-  var genRun = $('gen-run');
-  var updCheck = $('upd-check');
-  var updApply = $('upd-apply');
-  var propRun = $('prop-run');
-
+  // Busy = disabled + label swap. No spinners anywhere.
+  var BUSY_BUTTONS = ['paste-run', 'runner-run', 'gen-run', 'gen-sample', 'prop-run', 'drift-check', 'channel-check']
+    .map(function (id) { return $(id); });
+  var APPLY_BUTTONS = [$('build-apply'), $('changes-apply')];
+  function swapLabel(btn, on) {
+    if (!btn.dataset.busy) return;
+    if (on) {
+      if (!btn.dataset.idle) btn.dataset.idle = btn.textContent;
+      btn.textContent = btn.dataset.busy;
+    } else if (btn.dataset.idle) {
+      btn.textContent = btn.dataset.idle;
+    }
+  }
   function setBusy(on) {
-    pasteRun.disabled = on;
-    runnerRun.disabled = on;
-    sendRun.disabled = on;
-    genRun.disabled = on;
-    updCheck.disabled = on;
-    propRun.disabled = on;
-    if (on) updApply.disabled = true;
+    BUSY_BUTTONS.forEach(function (b) { b.disabled = on; swapLabel(b, on); });
+    APPLY_BUTTONS.forEach(function (b) { swapLabel(b, on); if (on) b.disabled = true; });
+    if (!on) syncApplyEnabled();
   }
 
-  pasteRun.onclick = function () {
-    var code = $('paste-input').value;
-    if (!code.trim()) { $('paste-status').textContent = 'Nothing to run — paste a script first.'; return; }
-    setBusy(true);
-    $('paste-status').textContent = 'Running…';
-    $('paste-result').hidden = true;
-    parent.postMessage({ pluginMessage: { type: 'run-paste', code: code } }, '*');
-  };
-
-  // --- send to playground -----------------------------------------------------
-  // The dump logic is the repo's extract/figma/dump.plugin.js, embedded
-  // VERBATIM in the #dump-source block below (the plugin-zip build refuses to
-  // package a drifted copy). The only change made at send time is the same
-  // one the copy/paste route makes by hand: the TARGET_SETS line.
-  var CODE_ALPHABET_RE = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$/;
-
-  function sendError(message) {
-    var box = $('send-result');
+  // --- result-box helpers ---------------------------------------------------
+  function resultBox(id, ok, headline) {
+    var box = $(id);
     box.hidden = false;
-    box.className = 'result err';
+    box.className = 'result' + (box.classList.contains('short') ? ' short' : '') + (ok === null ? '' : ok ? ' ok' : ' err');
     box.textContent = '';
-    var headline = document.createElement('div');
-    headline.className = 'headline';
-    headline.textContent = 'Not sent.';
-    box.appendChild(headline);
-    var line = document.createElement('div');
-    line.textContent = message;
-    box.appendChild(line);
+    var h = document.createElement('div');
+    h.className = 'headline';
+    h.textContent = headline;
+    box.appendChild(h);
+    return box;
   }
-
-  // Scope + send. Empty names box + a canvas selection = the selection's
-  // component set(s), in plain words; empty box + no selection = every set
-  // (also in plain words). The names box stays the explicit override, and the
-  // scoping mechanism is unchanged: the TARGET_SETS seam of the VERBATIM
-  // embedded dump script.
-  function doSend(pairCode, sets, scopeLine) {
-    var source = $('dump-source').textContent.replace(/^\n/, '');
-    var scoped = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
-      'const TARGET_SETS = ' + JSON.stringify(sets) + ';');
-    if (scoped === source) {
-      sendError('Could not scope the dump script (its TARGET_SETS line was not found) — this build is broken; re-download the plugin from the playground.');
-      setBusy(false);
-      return;
-    }
-    $('send-status').textContent = scopeLine;
-    parent.postMessage({ pluginMessage: { type: 'run-send', dumpCode: scoped, pairCode: pairCode } }, '*');
-  }
-
-  var pendingSendCode = null; // pairing code awaiting the selection answer
-
-  sendRun.onclick = function () {
-    $('send-result').hidden = true;
-    var pairCode = $('send-code').value.trim().toUpperCase();
-    if (!CODE_ALPHABET_RE.test(pairCode)) {
-      sendError('That does not look like a pairing code — 6 letters/digits from the playground’s “Receive from plugin” panel (letters I, L, O and digits 0, 1 are never used).');
-      return;
-    }
-    var sets = $('send-sets').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-    setBusy(true);
-    if (sets.length > 0) {
-      doSend(pairCode, sets, 'Sending: ' + sets.join(', ') + ' (from the names box)…');
-      return;
-    }
-    // Empty box: ask code.js what the current selection resolves to.
-    pendingSendCode = pairCode;
-    $('send-status').textContent = 'Checking your selection…';
-    parent.postMessage({ pluginMessage: { type: 'query-selection-sets' } }, '*');
-  };
-
-  function showSendResult(msg) {
-    var box = $('send-result');
-    box.hidden = false;
-    box.className = 'result ' + (msg.ok ? 'ok' : 'err');
-    box.textContent = '';
-    var headline = document.createElement('div');
-    headline.className = 'headline';
-    headline.textContent = msg.ok ? 'Sent — switch to your playground tab.' : 'Not sent.';
-    box.appendChild(headline);
-    var line = document.createElement('div');
-    line.textContent = msg.message;
-    box.appendChild(line);
-  }
-
-  // Summary chips from the well-known report keys the generated scripts
-  // return (created/amended/skipped, variants, node ids, props). Anything
-  // else still shows in the full JSON below — nothing is hidden.
-  function chipsFor(report) {
-    var chips = [];
-    if (!report || typeof report !== 'object' || Array.isArray(report)) return chips;
-    if (report.skipped) chips.push('skipped' + (report.reason ? ': ' + report.reason : ''));
-    else if (report.amended) chips.push('amended');
-    else if (report.createdNodeIds || report.created) chips.push('created');
-    if (report.name) chips.push(String(report.name));
-    if (typeof report.variants === 'number') chips.push(report.variants + ' variant' + (report.variants === 1 ? '' : 's'));
-    if (report.nodeId) chips.push('node ' + report.nodeId);
-    if (report.key) chips.push('key ' + String(report.key).slice(0, 12) + '…');
-    if (Array.isArray(report.properties) && report.properties.length) chips.push('props: ' + report.properties.join(', '));
-    ['addedVariants', 'rebuiltVariants', 'renamedVariants', 'extraVariants', 'addedProps', 'editedDefaults']
-      .forEach(function (k) {
-        var v = report[k];
-        var n = Array.isArray(v) ? v.length : (typeof v === 'number' ? v : 0);
-        if (n) chips.push(k + ': ' + n);
-      });
-    return chips;
-  }
-
-  function showPasteResult(msg) {
-    var box = $('paste-result');
-    box.hidden = false;
-    box.className = 'result ' + (msg.ok ? 'ok' : 'err');
-    box.textContent = '';
-    var headline = document.createElement('div');
-    headline.className = 'headline';
-    box.appendChild(headline);
-    if (msg.ok) {
-      headline.textContent = 'Script finished — report:';
-      // Plain words about WHERE the component is now — the report JSON below
-      // is the receipt, this line is the story.
-      if (msg.focus && msg.focus.kind === 'skipped') {
-        var skipLine = document.createElement('div');
-        skipLine.style.marginBottom = '8px';
-        skipLine.textContent =
-          'Already exists in this file: ' + (msg.focus.name || 'this component') +
-          ' (node ' + msg.focus.nodeId + '). Run in a fresh file — tokens first — to watch it build.';
-        var selectBtn = document.createElement('button');
-        selectBtn.className = 'primary';
-        selectBtn.style.display = 'block';
-        selectBtn.style.marginTop = '6px';
-        selectBtn.textContent = 'Select it';
-        selectBtn.onclick = function () {
-          parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: msg.focus.nodeId } }, '*');
-        };
-        skipLine.appendChild(selectBtn);
-        box.appendChild(skipLine);
-      } else if (msg.focus && msg.focus.kind === 'selected') {
-        var doneLine = document.createElement('div');
-        doneLine.style.marginBottom = '8px';
-        doneLine.textContent =
-          'Selected ' + (msg.focus.name || 'the result') + ' on the canvas and zoomed to it — it is what this contract builds.';
-        box.appendChild(doneLine);
-      }
-      var chips = chipsFor(msg.result);
-      if (chips.length) {
-        var strip = document.createElement('div');
-        strip.className = 'chips';
-        chips.forEach(function (c) {
-          var el = document.createElement('span');
-          el.className = 'chip';
-          el.textContent = c;
-          strip.appendChild(el);
-        });
-        box.appendChild(strip);
-      }
-      var pre = document.createElement('pre');
-      pre.textContent = JSON.stringify(msg.result, null, 2);
-      box.appendChild(pre);
-    } else {
-      headline.textContent = 'Script threw — nothing was committed.';
-      var err = document.createElement('pre');
-      err.textContent = msg.error + (msg.stack ? '\n\n' + msg.stack : '');
-      box.appendChild(err);
-      var note = document.createElement('div');
-      note.className = 'hint';
-      note.style.marginTop = '6px';
-      note.textContent = 'Scripts are atomic on throw by Figma’s design — a failed run does not leave a half-synced file. Fix or regenerate the script and paste it again.';
-      box.appendChild(note);
-    }
-  }
-
-  // --- local runner ---------------------------------------------------------
-  runnerRun.onclick = function () {
-    setBusy(true);
-    $('runner-status').textContent = 'Running…';
-    $('runner-result').hidden = false;
-    $('runner-result').className = 'result';
-    $('runner-headline').textContent = '';
-    $('runner-log').textContent = '';
-    parent.postMessage({ pluginMessage: { type: 'run-runner' } }, '*');
-  };
-
-  function appendLog(line, level) {
+  function addLine(box, text, level) {
     var el = document.createElement('div');
-    el.className = 'log-line ' + (level || 'info');
-    el.textContent = line;
-    $('runner-log').appendChild(el);
-    $('runner-result').scrollTop = $('runner-result').scrollHeight;
+    if (level) el.className = 'log-line ' + level;
+    el.textContent = text;
+    box.appendChild(el);
+    box.scrollTop = box.scrollHeight;
+    return el;
+  }
+  function addMeta(box, text) {
+    var el = document.createElement('div');
+    el.className = 'report-meta';
+    el.textContent = text;
+    box.appendChild(el);
+    return el;
+  }
+  /** A warning line: the word "Warning:" carries the colour, never an emoji. */
+  function addWarning(box, text, indent) {
+    var el = document.createElement('div');
+    el.className = indent ? 'indent' : '';
+    var w = document.createElement('span');
+    w.className = 'text-warning';
+    w.textContent = 'Warning: ';
+    el.appendChild(w);
+    el.appendChild(document.createTextNode(text));
+    box.appendChild(el);
+    return el;
+  }
+  function addIssues(box, issues) {
+    (issues || []).forEach(function (issue) {
+      addLine(box, issue.headline, 'error');
+      if (issue.detail) {
+        var pre = document.createElement('pre');
+        pre.textContent = issue.detail;
+        box.appendChild(pre);
+      }
+    });
   }
 
-  // ==========================================================================
-  // Engine tabs (Generate / Update library / Propose) — window.DSC computes,
-  // code.js executes through the same run-script machinery as the paste tab.
-  // ==========================================================================
+  // --- drift ---------------------------------------------------------------
+  var DRIFT_STATE_KEY = 'drift-checked';
+  function relWhen(iso) {
+    var DSC = engine();
+    if (DSC && DSC.relativeWhen) return DSC.relativeWhen(iso, new Date());
+    return 'at an unrecorded time';
+  }
+  function showDriftLastChecked(iso) {
+    $('drift-last').textContent = iso ? 'Drift last checked: ' + relWhen(iso) : '';
+  }
+  $('drift-check').onclick = function () {
+    resultBox('drift-results', null, 'Checking this file’s generated sets…');
+    parent.postMessage({ pluginMessage: { type: 'check-drift' } }, '*');
+  };
+
+  function renderDrift(msg) {
+    if (!msg.ok) {
+      addLine(resultBox('drift-results', false, 'Drift check failed.'), msg.error);
+      return;
+    }
+    if (!msg.rows.length) {
+      resultBox('drift-results', null, 'No contract-backed components in this file yet.');
+      return;
+    }
+    var counts = { 'in-sync': 0, 'canvas-edited': 0 };
+    msg.rows.forEach(function (r) { if (counts[r.status] !== undefined) counts[r.status]++; });
+    var allClean = counts['in-sync'] === msg.rows.length;
+    var box = resultBox('drift-results', allClean ? true : null,
+      allClean ? 'Everything matches.' : 'Drift report:');
+    if (allClean) {
+      var clean = document.createElement('div');
+      clean.appendChild(document.createTextNode(msg.rows.length + ' set' + (msg.rows.length === 1 ? '' : 's') + ' checked — '));
+      var ok = document.createElement('span');
+      ok.className = 'text-success';
+      ok.textContent = 'everything matches its contract.';
+      clean.appendChild(ok);
+      box.appendChild(clean);
+    } else {
+      var parts = [msg.rows.length + ' set' + (msg.rows.length === 1 ? '' : 's')];
+      if (counts['in-sync']) parts.push(counts['in-sync'] + ' in sync');
+      if (counts['canvas-edited']) parts.push(counts['canvas-edited'] + ' canvas edited');
+      addMeta(box, parts.join(' · '));
+    }
+    var html = msg.rows.map(function (r) {
+      var statusClass = r.status === 'in-sync' ? 'text-success'
+        : r.status === 'canvas-edited' ? 'text-warning' : 'report-meta';
+      var statusWord = r.status === 'in-sync' ? 'In sync'
+        : r.status === 'canvas-edited' ? 'Canvas edited' : r.status;
+      var body = '';
+      if (r.setChanges && r.setChanges.length) {
+        body += r.setChanges.map(function (c) {
+          var chanS = (c.what.split('|')[1] || '?');
+          return '<div class="diff-line">set · ' + escHtml(chanS) + ': ' + wasNow(chanS, c.was, c.now) + '</div>';
+        }).join('');
+      }
+      if (r.editedVariants && r.editedVariants.length) {
+        body += r.editedVariants.map(function (v) {
+          var det = (v.changes || []).map(function (c) {
+            // key: path:TYPE/name|channel — show "name · channel: was → now"
+            // (values through the SHARED pretty printer: chips for paints).
+            var pieces = c.what.split('|');
+            var nodeLabel = (pieces[0].split('/').pop() || pieces[0]);
+            var chan = pieces[1] || '?';
+            return '<div class="diff-line">' + escHtml(nodeLabel) + ' · ' + escHtml(chan) + ': ' + wasNow(chan, c.was, c.now) + '</div>';
+          }).join('');
+          return '<a href="#" class="variant-link drift-variant" data-node="' + v.nodeId + '">' + escHtml(v.name) + '</a>' + det;
+        }).join('');
+      }
+      if (r.status === 'canvas-edited') {
+        body += '<div class="indent"><a href="#" class="row-action drift-propose" data-set="' +
+          escHtml(r.name).replace(/"/g, '&quot;') + '">Propose this change</a></div>';
+      }
+      return '<div class="report-row">' +
+        '<div class="report-head"><span class="report-name">' + escHtml(r.name) + '</span>' +
+        '<span class="report-status ' + statusClass + '">' + escHtml(statusWord) + '</span></div>' +
+        '<div class="report-meta">' + escHtml(r.page) + ' · ' + escHtml(r.contractId) + '</div>' +
+        body + '</div>';
+    }).join('');
+    var wrap = document.createElement('div');
+    wrap.innerHTML = html;
+    box.appendChild(wrap);
+    wrap.querySelectorAll('.drift-variant').forEach(function (a) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: a.getAttribute('data-node') } }, '*');
+      };
+    });
+    // DELIVERY GLUE: a drifted set flows straight into Send — pre-named,
+    // read-and-diffed, PR section one click away.
+    wrap.querySelectorAll('.drift-propose').forEach(function (a) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        userPickedTab = true;
+        select('send');
+        $('prop-set').value = a.getAttribute('data-set');
+        $('prop-run').click();
+      };
+    });
+  }
 
   // --- engine-run correlation ----------------------------------------------
   var enginePending = {}; // id → callback(msg)
@@ -744,39 +708,56 @@
     next(0);
   }
 
-  // --- result-box helpers ---------------------------------------------------
-  function resultBox(id, ok, headline) {
-    var box = $(id);
-    box.hidden = false;
-    box.className = 'result ' + (ok === null ? '' : ok ? 'ok' : 'err');
-    box.textContent = '';
-    var h = document.createElement('div');
-    h.className = 'headline';
-    h.textContent = headline;
-    box.appendChild(h);
-    return box;
-  }
-  function addLine(box, text, level) {
-    var el = document.createElement('div');
-    if (level) el.className = 'log-line ' + level;
-    el.textContent = text;
-    box.appendChild(el);
-    box.scrollTop = box.scrollHeight;
-    return el;
-  }
-  function addIssues(box, issues) {
-    (issues || []).forEach(function (issue) {
-      addLine(box, issue.headline, 'error');
-      if (issue.detail) {
-        var pre = document.createElement('pre');
-        pre.textContent = issue.detail;
-        box.appendChild(pre);
-      }
+  // --- this file's inventory ------------------------------------------------
+  // One read-only marker read on open: it decides the default tab, the Build
+  // empty state, and whether Build checks or generates. Nothing is staged.
+  function refreshInventory(cb) {
+    var DSC = engine();
+    if (!DSC || !DSC.inventoryScriptSource) { inventoryKnown = true; syncSurfaces(); if (cb) cb(); return; }
+    engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (msg) {
+      markedSets = (msg.ok && msg.result && msg.result.inventory) ? msg.result.inventory.length : 0;
+      inventoryKnown = true;
+      syncSurfaces();
+      if (cb) cb();
     });
   }
 
+  /** Every surface that depends on "does this file have contract-backed
+   *  sets?" or "is the paste box empty?" — one function, called after any
+   *  event that can change either. */
+  function syncSurfaces() {
+    var empty = markedSets === 0 && !$('gen-input').value.trim();
+    $('build-empty').hidden = !empty;
+    // ONE filled button per panel: in the empty state the sample IS the
+    // action, so Generate steps back to a bordered secondary.
+    $('gen-sample').className = empty ? 'primary' : 'secondary';
+    $('gen-run').className = empty ? 'secondary' : 'primary';
+    $('gen-run').textContent = markedSets > 0 ? 'Check against this file' : 'Generate in this file';
+    delete $('gen-run').dataset.idle;
+    $('build-guidance').textContent = markedSets > 0
+      ? 'Paste your contracts file below — the plugin checks it against what this file already has, and nothing changes until you press Apply.'
+      : 'Paste your contracts file below — the plugin builds it in this file, token-bound and safe to re-run.';
+    var noSets = inventoryKnown && markedSets === 0;
+    $('drift-empty').hidden = !noSets;
+    $('drift-actions').hidden = noSets;
+    $('drift-help').hidden = noSets;
+    $('diag-file').textContent = 'file key: ' + (currentFileKey || '(unshared draft)') +
+      ' · contract-backed sets: ' + (inventoryKnown ? markedSets : 'unread');
+    // Default tab, once: marked sets → Changes (the common return visit is a
+    // check, not a build); otherwise Build.
+    if (inventoryKnown && !userPickedTab && markedSets > 0) select('changes');
+  }
+  $('gen-input').addEventListener('input', function () {
+    // Hand-editing the box detaches it from a channel delivery: the ordering
+    // belonged to the bytes that arrived, not to these.
+    if (lastChannelDelivery && lastChannelDelivery.target === 'gen-input') lastChannelDelivery = null;
+    syncSurfaces();
+  });
+
   // --- receive by pairing code (bridge GET via code.js) ---------------------
+  var CODE_ALPHABET_RE = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$/;
   var pollTimers = {};
+  var bridgePollHandlers = {};
   function receiveByCode(codeInputId, statusId, onBundle) {
     var code = $(codeInputId).value.trim().toUpperCase();
     if (!CODE_ALPHABET_RE.test(code)) {
@@ -792,10 +773,10 @@
       if (msg.status === 'delivered') {
         clearInterval(pollTimers[codeInputId]); pollTimers[codeInputId] = null;
         if (msg.kind !== 'contracts-bundle') {
-          $(statusId).textContent = 'That code carried a canvas dump, not a contracts bundle — use Send to Playground for dumps.';
+          $(statusId).textContent = 'That code carried a canvas dump, not a contracts file — this box only takes contracts.';
           return;
         }
-        $(statusId).textContent = 'Bundle received.';
+        $(statusId).textContent = 'Contracts file received.';
         onBundle(msg.dump);
       } else if (msg.status === 'waiting') {
         // keep polling
@@ -813,36 +794,40 @@
       }
     }, 15 * 60 * 1000);
   }
-  var bridgePollHandlers = {};
 
   // --- the standing CI channel (G1) ----------------------------------------
-  // The pairing code above is the AD-HOC path: it needs a person on each end
-  // in the same 15 minutes. This is the standing one — CI publishes whenever,
-  // the designer checks whenever. There is deliberately NO TIMER: a Figma
-  // plugin has no background execution, so a poll loop would only run while
-  // this window is open and would lie about being a watcher. Two triggers:
-  // once when the plugin opens (a cheap head-only read) and this button.
-  var channelKeyInputs = ['gen-channel-key', 'upd-channel-key'];
-  var channelStatusIds = { 'gen-channel-key': 'gen-channel-status', 'upd-channel-key': 'upd-channel-status' };
+  // The pairing code in Build is the AD-HOC path: it needs a person on each
+  // end in the same 15 minutes. This is the standing one — CI publishes
+  // whenever, the designer checks whenever. There is deliberately NO TIMER: a
+  // Figma plugin has no background execution, so a poll loop would only run
+  // while this window is open and would lie about being a watcher. Two
+  // triggers: once when the plugin opens (a cheap head-only read) and the
+  // "Check for updates" button.
   var channelCheckPending = {};
   var channelSeq = 0;
-  /** The delivery behind whatever is currently in the Update box — null for a
+  /** The delivery behind whatever is currently in a bundle box — null for a
    *  paste or a pairing-code receive, which carry no ordering and therefore
    *  keep exactly today's behaviour. */
   var lastChannelDelivery = null;
+  var savedChannelKey = '';
 
-  function channelKey() { return ($('gen-channel-key').value || $('upd-channel-key').value || '').trim(); }
-  function setChannelStatus(text) {
-    channelKeyInputs.forEach(function (id) { $(channelStatusIds[id]).textContent = text; });
+  function channelKey() { return savedChannelKey || $('channel-key').value.trim(); }
+  function setChannelStatus(text) { $('channel-status').textContent = text; }
+  /** Setup vs connected — an empty key is SETUP, never an error. */
+  function syncChannelState(forceSetup) {
+    var connected = !!savedChannelKey && !forceSetup;
+    $('channel-connected').hidden = !connected;
+    $('channel-setup').hidden = connected;
   }
-  // One key, two fields: typing in either mirrors to the other and saves.
-  channelKeyInputs.forEach(function (id) {
-    $(id).addEventListener('change', function () {
-      var value = $(id).value.trim();
-      channelKeyInputs.forEach(function (other) { if (other !== id) $(other).value = value; });
-      parent.postMessage({ pluginMessage: { type: 'channel-key-save', key: value } }, '*');
-    });
-  });
+  $('channel-connect').onclick = function () {
+    var value = $('channel-key').value.trim();
+    parent.postMessage({ pluginMessage: { type: 'channel-key-save', key: value } }, '*');
+  };
+  $('channel-change').onclick = function (e) {
+    e.preventDefault();
+    $('channel-key').value = savedChannelKey;
+    syncChannelState(true);
+  };
 
   /** One non-consuming peek. cb(result) — result.status is
    *  'current' | 'update' | 'error'. Asking twice is free by design. */
@@ -872,7 +857,8 @@
 
   /** CHECK-ON-OPEN: one head-only read (no bundle bytes) that reports
    *  whether anything is waiting. It NEVER fills a box or plans anything —
-   *  opening the plugin must not stage work the designer did not ask for. */
+   *  opening the plugin must not stage work the designer did not ask for.
+   *  Its only marks are the square dot on the Changes tab and one sentence. */
   function channelCheckOnOpen() {
     if (!channelKey()) return;
     var DSC = engine();
@@ -884,18 +870,21 @@
       channelCheck({ since: last === null ? 0 : last, metaOnly: true }, function (res) {
         if (res.status === 'error') { setChannelStatus(res.message); return; }
         if (res.status === 'current') {
+          $('changes-dot').hidden = true;
           setChannelStatus(res.seq === 0
             ? 'Channel is live — CI has not published to it yet.'
             : 'Up to date with CI (delivery #' + res.seq + ').');
           return;
         }
-        setChannelStatus('CI has an update waiting (delivery #' + res.seq + ') — press “Check for updates”.');
+        $('changes-dot').hidden = false;
+        setChannelStatus('Update waiting — delivery #' + res.seq + ', published ' +
+          relWhen(res.publishedAt) + '. Check for updates to review.');
       });
     });
   }
 
-  /** The explicit button: pull the full delivery, drop the bundle into the
-   *  named box, and run EXACTLY the path a pairing-code receive runs. */
+  /** The explicit button: pull the full delivery into the named box and run
+   *  EXACTLY the path a pairing-code receive runs. */
   function channelPull(targetInputId, onBundle) {
     var DSC = engine();
     if (!DSC) { setChannelStatus(NO_ENGINE); return; }
@@ -906,6 +895,7 @@
       channelCheck({ since: last === null ? 0 : last, metaOnly: false }, function (res) {
         if (res.status === 'error') { setChannelStatus(res.message); return; }
         if (res.status === 'current') {
+          $('changes-dot').hidden = true;
           setChannelStatus(res.seq === 0
             ? 'Channel is live — CI has not published to it yet.'
             : 'Nothing new: this file is already at CI delivery #' + res.seq + '.');
@@ -917,10 +907,10 @@
         }
         // The freshness verdict is computed HERE, against this file's own
         // apply log — the worker cannot know what this file already applied.
-        // …and it is bound to the BOX it landed in. A pull into the Generate
-        // box must never lend its delivery number to whatever happens to be
-        // sitting in the Update box (the report would claim an ordering that
-        // belongs to different bytes).
+        // …and it is bound to the BOX it landed in. A pull into one box must
+        // never lend its delivery number to whatever happens to be sitting in
+        // the other (the report would claim an ordering that belongs to
+        // different bytes).
         lastChannelDelivery = {
           seq: res.seq,
           publishedAt: res.publishedAt || null,
@@ -931,6 +921,7 @@
           freshness: DSC.channelFreshness({ seq: res.seq }, log, fp),
         };
         $(targetInputId).value = JSON.stringify(res.bundle, null, 2);
+        $('changes-dot').hidden = true;
         setChannelStatus('Delivery #' + res.seq + ' received — ' +
           DSC.provenanceLine(res.provenance || null, res.publishedAt || null, new Date()));
         onBundle();
@@ -938,54 +929,312 @@
     });
   }
 
-  $('gen-channel-check').onclick = function () {
-    channelPull('gen-input', function () {
-      $('gen-channel-status').textContent += ' Review it below, then press Generate.';
-    });
-  };
-  $('upd-channel-check').onclick = function () {
-    updState = null;
-    updApply.disabled = true;
-    channelPull('upd-input', function () {
-      $('upd-channel-status').textContent += ' Now press “Check against this file”.';
-    });
+  $('channel-check').onclick = function () {
+    CHANGES.state = null;
+    $('changes-apply').disabled = true;
+    $('changes-apply-row').hidden = true;
+    channelPull('changes-input', function () { runCheck(CHANGES); });
   };
 
-  // --- Generate from contract ----------------------------------------------
+  // ==========================================================================
+  // THE SHARED CHECK/APPLY REPORT — one renderer, two homes: Build (what you
+  // pasted or received by code) and Changes (what the channel delivered).
+  // Every sentence here was live before the re-housing.
+  // ==========================================================================
+  var BUILD = { input: 'gen-input', result: 'gen-result', status: 'gen-status', apply: 'build-apply', applyRow: null, state: null };
+  var CHANGES = { input: 'changes-input', result: 'changes-result', status: 'changes-status', apply: 'changes-apply', applyRow: 'changes-apply-row', state: null };
+  var CONTEXTS = [BUILD, CHANGES];
+
+  function syncApplyEnabled() {
+    CONTEXTS.forEach(function (ctx) {
+      var btn = $(ctx.apply);
+      var live = !!(ctx.state && ctx.state.plan && ctx.state.plan.rows.some(function (r) {
+        return r.action === 'amend' || r.action === 'create';
+      }));
+      btn.hidden = !ctx.state;
+      btn.disabled = !live;
+      if (ctx.applyRow) $(ctx.applyRow).hidden = !ctx.state;
+    });
+  }
+
+  /** The protected-edits promise. The card's paragraph is VERBATIM; the
+   *  summary states the promise so a collapsed card still makes it. */
+  function protectedCard() {
+    var d = document.createElement('details');
+    d.className = 'help';
+    var s = document.createElement('summary');
+    s.textContent = 'What’s protected: an update never overwrites your canvas edits silently.';
+    d.appendChild(s);
+    var p = document.createElement('div');
+    p.className = 'meta';
+    p.textContent = 'What’s protected: the check also compares each set against the state ' +
+      'its last sync recorded — a set you edited on the canvas is named in the ' +
+      'report and its Apply box starts unchecked, so an update never overwrites ' +
+      'your edits silently. Applying amends in place: instances keep their ' +
+      'overrides (same nodes, same property ids).';
+    d.appendChild(p);
+    return d;
+  }
+
+  /** "6 sets · 2 new · 3 unchanged · 1 refused" — the counts blob replaced
+   *  by one meta line. */
+  function planSummary(plan) {
+    var n = { create: 0, amend: 0, skip: 0, refused: 0 };
+    plan.rows.forEach(function (r) { if (n[r.action] !== undefined) n[r.action]++; });
+    var parts = [plan.rows.length + ' set' + (plan.rows.length === 1 ? '' : 's')];
+    if (n.create) parts.push(n.create + ' new');
+    if (n.amend) parts.push(n.amend + ' to update');
+    if (n.skip) parts.push(n.skip + ' unchanged');
+    if (n.refused) parts.push(n.refused + ' refused');
+    return parts.join(' · ');
+  }
+
+  var STATUS_WORD = { create: 'New', amend: 'Update', skip: 'Unchanged', refused: 'Refused' };
+  var STATUS_CLASS = { create: 'text-brand', amend: 'text-brand', skip: 'report-meta', refused: 'text-danger' };
+
+  function renderPlan(ctx, plan, delivery) {
+    var DSC = engine();
+    var box = resultBox(ctx.result, null, 'Change report — nothing applied yet:');
+    // Provenance rides ABOVE the report: who published this, from what
+    // commit, when. It is echoed by the worker unread — the plugin is the
+    // first thing in the chain that even looks at it.
+    if (delivery) {
+      addMeta(box, 'Delivery #' + delivery.seq + ' — ' + DSC.provenanceLine(
+        delivery.provenance, delivery.publishedAt, new Date()));
+    }
+    // The freshness guard speaks in the .note pattern — a bordered card with
+    // a warning rule, never red.
+    if (delivery && delivery.freshness && delivery.freshness.stale) {
+      var f = delivery.freshness;
+      var note = document.createElement('div');
+      note.className = 'note';
+      note.textContent = (f.lastAppliedSeq !== null && f.seq < f.lastAppliedSeq)
+        ? 'This delivery (#' + f.seq + ') is older than what this file already applied (#' + f.lastAppliedSeq + '). All boxes start unchecked.'
+        : 'This delivery (#' + f.seq + ') is the one this file already applied. All boxes start unchecked.';
+      box.appendChild(note);
+    }
+    box.appendChild(protectedCard());
+    addMeta(box, planSummary(plan));
+
+    var rowsWrap = document.createElement('div');
+    rowsWrap.className = 'rows';
+    plan.rows.forEach(function (row) {
+      var wrap = document.createElement('div');
+      wrap.className = 'report-row';
+      var label = document.createElement('label');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.dataset.contractId = row.contractId;
+      // G2: the engine decides the starting state — canvas-edited targets
+      // start UNCHECKED (warn and default-safe, never blocked).
+      cb.checked = row.defaultSelected !== undefined
+        ? !!row.defaultSelected
+        : (row.action === 'amend' || row.action === 'create');
+      cb.disabled = row.action === 'skip' || row.action === 'refused';
+      if (cb.disabled) label.className = 'disabled';
+      label.appendChild(cb);
+      var name = document.createElement('span');
+      name.className = 'report-name';
+      name.textContent = row.setName;
+      label.appendChild(name);
+      var status = document.createElement('span');
+      status.className = 'report-status ' + (row.canvasEdited ? 'text-warning' : (STATUS_CLASS[row.action] || 'report-meta'));
+      status.textContent = row.canvasEdited ? 'Canvas edited' : (STATUS_WORD[row.action] || row.action);
+      label.appendChild(status);
+      wrap.appendChild(label);
+      // The engine's plain-words line, verbatim minus its bullet (the
+      // checkbox is the bullet now) and minus the name the head already says.
+      var detail = String(row.line).replace(/^•\s*/, '');
+      if (detail.indexOf(row.setName + ' ') === 0) detail = detail.slice(row.setName.length + 1);
+      var meta = document.createElement('div');
+      meta.className = 'report-meta';
+      meta.textContent = detail;
+      wrap.appendChild(meta);
+      if (row.warning) addWarning(wrap, row.warning, true);
+      // G8: the interior itemized per channel, rendered with the SAME pretty
+      // printer the drift report uses (chips for paints, token names as
+      // words) — one language for both reports.
+      if (row.styleChanges && row.styleChanges.length) {
+        var shown = row.styleChanges.slice(0, 8);
+        var det = document.createElement('div');
+        det.innerHTML = shown.map(function (c) {
+          var scope = c.variants
+            ? ' (' + escHtml(c.variants.slice(0, 3).join(', ')) + (c.variants.length > 3 ? ' +' + (c.variants.length - 3) + ' more' : '') + ')'
+            : '';
+          return '<div class="diff-line">' + escHtml(c.part) + ' · ' + escHtml(c.channel) + ': ' +
+            wasNow(c.channel, c.was, c.now) + scope + '</div>';
+        }).join('') + (row.styleChanges.length > 8
+          ? '<div class="diff-line">…and ' + (row.styleChanges.length - 8) + ' more style change(s).</div>'
+          : '');
+        wrap.appendChild(det);
+      }
+      rowsWrap.appendChild(wrap);
+    });
+    box.appendChild(rowsWrap);
+    // Whatever the plan says beyond the rows. The engine's own out-of-order
+    // line is dropped here because the .note above already said it, in the
+    // decided words; everything else keeps its "⚠ " turned into a word.
+    plan.lines.slice(plan.rows.length).forEach(function (l) {
+      if (l.indexOf('⚠ Out of order') === 0) return;
+      if (l.indexOf('⚠ ') === 0) addWarning(box, l.slice(2));
+      else addLine(box, l);
+    });
+    return { box: box, rowsWrap: rowsWrap };
+  }
+
+  /** CHECK — read this file's markers, plan against them, render the report.
+   *  Nothing is applied. */
+  function runCheck(ctx) {
+    var DSC = engine();
+    if (!DSC) { addLine(resultBox(ctx.result, false, 'No engine.'), NO_ENGINE); return; }
+    ctx.state = null;
+    syncApplyEnabled();
+    var parsed = DSC.parseIncomingText($(ctx.input).value);
+    if (!parsed.ok) {
+      addIssues(resultBox(ctx.result, false, 'Nothing checked.'), [parsed.issue]);
+      return;
+    }
+    setBusy(true);
+    $(ctx.status).textContent = 'Reading this file’s markers (read-only)…';
+    engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (msg) {
+      setBusy(false);
+      $(ctx.status).textContent = '';
+      if (!msg.ok) {
+        addIssues(resultBox(ctx.result, false, 'Could not read the file.'), [{ headline: msg.error }]);
+        return;
+      }
+      var inventory = (msg.result && msg.result.inventory) || [];
+      markedSets = inventory.length;
+      inventoryKnown = true;
+      // G1/S2: a channel delivery brings an ORDERING with it. If it is not
+      // newer than what this file already applied from that channel, the
+      // guard fires by name and every box starts unchecked. A paste or a
+      // pairing-code receive passes null and behaves exactly as before.
+      var delivery = lastChannelDelivery && lastChannelDelivery.target === ctx.input ? lastChannelDelivery : null;
+      var plan = DSC.updatePlan(parsed.contracts, inventory, parsed.tokenSet || null, parsed.icons || null, delivery ? delivery.freshness : null);
+      var rendered = renderPlan(ctx, plan, delivery);
+      ctx.state = {
+        contracts: parsed.contracts, plan: plan, rowsWrap: rendered.rowsWrap,
+        tokenSet: parsed.tokenSet || null, icons: parsed.icons || null, delivery: delivery,
+      };
+      syncApplyEnabled();
+      syncSurfaces();
+    });
+  }
+
+  /** APPLY — the boxes the designer left ticked, in dependency order. */
+  function runApply(ctx) {
+    var DSC = engine();
+    if (!DSC || !ctx.state) return;
+    var selected = [];
+    ctx.state.rowsWrap.querySelectorAll('input[type=checkbox]').forEach(function (cb) {
+      if (cb.checked && !cb.disabled) selected.push(cb.dataset.contractId);
+    });
+    var apply = DSC.updateApplySteps(ctx.state.contracts, selected, {
+      fileKey: currentFileKey, tokenSet: ctx.state.tokenSet, icons: ctx.state.icons,
+    });
+    if (!apply.ok) {
+      addIssues(resultBox(ctx.result, false, 'Nothing applied.'), apply.issues);
+      return;
+    }
+    var box = resultBox(ctx.result, null, 'Applying ' + selected.length + ' component(s)…');
+    apply.notes.forEach(function (n) { addMeta(box, n); });
+    setBusy(true);
+    $(ctx.status).textContent = 'Applying…';
+    runSteps(apply.steps, function (line, level) { addLine(box, line, level); }, function (ok, results) {
+      setBusy(false);
+      $(ctx.status).textContent = '';
+      box.className = 'result ' + (ok ? 'ok' : 'err');
+      var amended = 0, created = 0, skipped = 0;
+      results.forEach(function (r) {
+        if (!r.ok || r.step.kind !== 'component' || !r.result) return;
+        var rep = (r.result.results && r.result.results[0]) || r.result;
+        if (rep.skipped) skipped++;
+        else if (rep.amended) amended++;
+        else created++;
+      });
+      box.firstChild.textContent = ok
+        ? 'Applied — ' + amended + ' amended in place, ' + created + ' created, ' + skipped + ' already up to date. Instances keep their overrides (same nodes, same property ids).'
+        : 'Stopped at the first failure — nothing after it ran; the failed script committed nothing.';
+      var state = ctx.state;
+      ctx.state = null;
+      syncApplyEnabled();
+      refreshInventory();
+      // G1/S2: give this FILE a memory. The apply log is what the freshness
+      // guard reads next time — without it every delivery looks new. Written
+      // only on a clean apply of a CHANNEL delivery; a partial run records
+      // nothing rather than claiming a delivery number it did not finish.
+      var delivery = state && state.delivery;
+      if (ok && delivery && DSC.recordApplyScriptSource) {
+        engineRun(DSC.recordApplyScriptSource({
+          source: 'channel',
+          channel: delivery.channel,
+          seq: delivery.seq,
+          publishedAt: delivery.publishedAt || null,
+          appliedAt: new Date().toISOString(),
+          contractIds: selected,
+          bytes: delivery.bytes || null,
+        }), {}, function (rec) {
+          if (rec.ok) {
+            addLine(box, 'Recorded delivery #' + delivery.seq + ' in this file’s apply log — a later, older delivery will now be caught.', 'ok');
+            setChannelStatus('Up to date with CI (delivery #' + delivery.seq + ').');
+          } else {
+            addWarning(box, 'Applied, but the apply log could not be written (' + rec.error + ') — the next check cannot detect an out-of-order delivery.');
+          }
+        });
+      }
+    });
+  }
+
+  $('build-apply').onclick = function () { runApply(BUILD); };
+  $('changes-apply').onclick = function () { runApply(CHANGES); };
+
+  // --- Build: receive by code + sample + the one button ---------------------
   $('gen-receive').onclick = function () {
     receiveByCode('gen-code', 'gen-receive-status', function (bundle) {
       $('gen-input').value = JSON.stringify(bundle, null, 2);
-      $('gen-receive-status').textContent = 'Bundle received — review it below, then press Generate.';
+      // A pairing-code receive carries NO delivery number — drop any channel
+      // delivery still attached to this box so the report never claims an
+      // ordering these bytes do not have.
+      if (lastChannelDelivery && lastChannelDelivery.target === 'gen-input') lastChannelDelivery = null;
+      BUILD.state = null;
+      syncApplyEnabled();
+      syncSurfaces();
+      $('gen-receive-status').textContent = 'Contracts file received — review it below, then press ' +
+        (markedSets > 0 ? '“Check against this file”.' : '“Generate in this file”.');
     });
   };
 
   // G9 — the cold start: one click feeds the baked sample bundle (Card,
-  // Badge, Avatar, Button) straight into the existing generate path. The
-  // JSON lands in the paste box first, so what runs is always reviewable.
+  // Badge, Avatar, Button) straight into the existing generate path. The JSON
+  // lands in the paste box first, so what runs is always reviewable. This
+  // button exists NOWHERE else in the plugin.
   $('gen-sample').onclick = function () {
     var DSC = engine();
-    if (!DSC) { resultBox('gen-result', false, 'No engine.'); addLine($('gen-result'), NO_ENGINE); return; }
+    if (!DSC) { addLine(resultBox('gen-result', false, 'No engine.'), NO_ENGINE); return; }
     var json = DSC.sampleBundleJson ? DSC.sampleBundleJson() : null;
     if (!json) {
-      resultBox('gen-result', false, 'No sample available.');
-      addLine($('gen-result'), 'This build carries no baked sample contracts.');
+      addLine(resultBox('gen-result', false, 'No sample available.'), 'This build carries no baked sample contracts.');
       return;
     }
     $('gen-input').value = json;
-    genRun.onclick();
+    syncSurfaces();
+    generate();
   };
 
-  genRun.onclick = function () {
+  /** Straight generate — the no-marked-sets path. */
+  function generate() {
     var DSC = engine();
-    if (!DSC) { resultBox('gen-result', false, 'No engine.'); addLine($('gen-result'), NO_ENGINE); return; }
+    if (!DSC) { addLine(resultBox('gen-result', false, 'No engine.'), NO_ENGINE); return; }
     var parsed = DSC.parseIncomingText($('gen-input').value);
     if (!parsed.ok) {
-      var boxE = resultBox('gen-result', false, 'Nothing generated.');
-      addIssues(boxE, [parsed.issue]);
+      addIssues(resultBox('gen-result', false, 'Nothing generated.'), [parsed.issue]);
       return;
     }
     var plan = DSC.planGenerate(parsed.contracts, {
-      withTokens: $('gen-tokens').checked,
+      // Tokens-first is not a choice any more: a fresh file needs it and a
+      // re-run upserts, so the control was a way to break your own build.
+      withTokens: true,
       fileKey: currentFileKey,
       // A bundle-carried foreign token set (contracts + tokens in ONE JSON
       // paste): the tokens step syncs it as its own named collection.
@@ -994,12 +1243,11 @@
       icons: parsed.icons || null,
     });
     if (!plan.ok) {
-      var boxR = resultBox('gen-result', false, 'Refused — the contract did not pass the referee.');
-      addIssues(boxR, plan.issues);
+      addIssues(resultBox('gen-result', false, 'Refused — the contract did not pass the referee.'), plan.issues);
       return;
     }
     var box = resultBox('gen-result', null, 'Generating ' + parsed.contracts.length + ' contract(s)…');
-    plan.notes.forEach(function (n) { addLine(box, n, 'warn'); });
+    plan.notes.forEach(function (n) { addMeta(box, n); });
     setBusy(true);
     $('gen-status').textContent = 'Running…';
     runSteps(plan.steps, function (line, level) { addLine(box, line, level); }, function (ok, results) {
@@ -1021,178 +1269,24 @@
             ? 'Re-ran: 0 changes — your canvas already matches (' + unchanged + ' component(s) checked; nothing moved, nothing duplicated).'
             : 'Done — ' + built.length + ' component(s) synced. The last one is selected on the canvas.')
         : 'Stopped at the first failure — the report above names it. A thrown script commits nothing (Figma runs them atomically).';
+      refreshInventory();
     });
+  }
+
+  // ONE button. With marked sets in the file it runs the check (create and
+  // amend both live in that report); on a fresh file it just builds.
+  $('gen-run').onclick = function () {
+    if (markedSets > 0) runCheck(BUILD);
+    else generate();
   };
 
-  // --- Update library -------------------------------------------------------
-  var updState = null; // { contracts, plan } after a check
-
-  $('upd-receive').onclick = function () {
-    receiveByCode('upd-code', 'upd-receive-status', function (bundle) {
-      $('upd-input').value = JSON.stringify(bundle, null, 2);
-      $('upd-receive-status').textContent = 'Bundle received — press “Check against this file”.';
-      updState = null;
-      updApply.disabled = true;
-      // A pairing-code receive carries NO delivery number — drop any channel
-      // delivery still attached to the box so the report never claims an
-      // ordering this bundle does not have.
-      lastChannelDelivery = null;
-    });
-  };
-
-  // Hand-editing the box detaches it from the channel delivery for the same
-  // reason: the ordering belonged to the bytes that arrived, not to these.
-  $('upd-input').addEventListener('input', function () { lastChannelDelivery = null; });
-
-  updCheck.onclick = function () {
-    var DSC = engine();
-    if (!DSC) { resultBox('upd-result', false, 'No engine.'); addLine($('upd-result'), NO_ENGINE); return; }
-    updState = null;
-    updApply.disabled = true;
-    var parsed = DSC.parseIncomingText($('upd-input').value);
-    if (!parsed.ok) {
-      addIssues(resultBox('upd-result', false, 'Nothing checked.'), [parsed.issue]);
-      return;
-    }
-    setBusy(true);
-    $('upd-status').textContent = 'Reading this file’s markers (read-only)…';
-    engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (msg) {
-      setBusy(false);
-      $('upd-status').textContent = '';
-      if (!msg.ok) {
-        addIssues(resultBox('upd-result', false, 'Could not read the file.'), [{ headline: msg.error }]);
-        return;
-      }
-      var inventory = (msg.result && msg.result.inventory) || [];
-      // G1/S2: a channel delivery brings an ORDERING with it. If it is not
-      // newer than what this file already applied from that channel, the
-      // guard fires by name and every box starts unchecked. A paste or a
-      // pairing-code receive passes null and behaves exactly as before.
-      var delivery = lastChannelDelivery && lastChannelDelivery.target === 'upd-input' ? lastChannelDelivery : null;
-      var plan = DSC.updatePlan(parsed.contracts, inventory, parsed.tokenSet || null, parsed.icons || null, delivery ? delivery.freshness : null);
-      var box = resultBox('upd-result', null, 'Change report — nothing applied yet:');
-      // Provenance rides ABOVE the report: who published this, from what
-      // commit, when. It is echoed by the worker unread — the plugin is the
-      // first thing in the chain that even looks at it.
-      if (delivery) {
-        addLine(box, 'Delivery #' + delivery.seq + ' — ' + DSC.provenanceLine(
-          delivery.provenance, delivery.publishedAt, new Date()));
-      }
-      var rowsWrap = document.createElement('div');
-      rowsWrap.className = 'rows';
-      plan.rows.forEach(function (row) {
-        var label = document.createElement('label');
-        var cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.dataset.contractId = row.contractId;
-        // G2: the engine decides the starting state — canvas-edited targets
-        // start UNCHECKED (warn and default-safe, never blocked).
-        cb.checked = row.defaultSelected !== undefined
-          ? !!row.defaultSelected
-          : (row.action === 'amend' || row.action === 'create');
-        cb.disabled = row.action === 'skip' || row.action === 'refused';
-        if (cb.disabled) label.className = 'disabled';
-        label.appendChild(cb);
-        var span = document.createElement('span');
-        span.textContent = row.line;
-        label.appendChild(span);
-        rowsWrap.appendChild(label);
-        if (row.warning) {
-          var warn = document.createElement('div');
-          warn.className = 'log-line warn';
-          warn.style.paddingLeft = '20px';
-          warn.textContent = '⚠ ' + row.warning;
-          rowsWrap.appendChild(warn);
-        }
-        // G8: the interior itemized per channel, rendered with the SAME
-        // pretty printer the Drift tab uses (chips for paints, token names
-        // as words) — one language for both reports.
-        if (row.styleChanges && row.styleChanges.length) {
-          var det = document.createElement('div');
-          det.style.paddingLeft = '20px';
-          det.style.color = 'var(--figma-color-text-secondary, #6b6b6b)';
-          var shown = row.styleChanges.slice(0, 8);
-          det.innerHTML = shown.map(function (c) {
-            var scope = c.variants
-              ? ' <span style="opacity:.7">(' + escHtml(c.variants.slice(0, 3).join(', ')) + (c.variants.length > 3 ? ' +' + (c.variants.length - 3) + ' more' : '') + ')</span>'
-              : '';
-            return '<div>' + escHtml(c.part) + ' · ' + escHtml(c.channel) + ': <s>' + prettyChannelValue(c.channel, c.was) + '</s> → <b>' + prettyChannelValue(c.channel, c.now) + '</b>' + scope + '</div>';
-          }).join('') + (row.styleChanges.length > 8
-            ? '<div>…and ' + (row.styleChanges.length - 8) + ' more style change(s).</div>'
-            : '');
-          rowsWrap.appendChild(det);
-        }
-      });
-      box.appendChild(rowsWrap);
-      plan.lines.slice(plan.rows.length).forEach(function (l) { addLine(box, l); });
-      updState = { contracts: parsed.contracts, plan: plan, rowsWrap: rowsWrap, tokenSet: parsed.tokenSet || null, icons: parsed.icons || null, delivery: delivery };
-      updApply.disabled = !plan.rows.some(function (r) { return r.action === 'amend' || r.action === 'create'; });
-    });
-  };
-
-  updApply.onclick = function () {
-    var DSC = engine();
-    if (!DSC || !updState) return;
-    var selected = [];
-    updState.rowsWrap.querySelectorAll('input[type=checkbox]').forEach(function (cb) {
-      if (cb.checked && !cb.disabled) selected.push(cb.dataset.contractId);
-    });
-    var apply = DSC.updateApplySteps(updState.contracts, selected, { fileKey: currentFileKey, tokenSet: updState.tokenSet, icons: updState.icons });
-    if (!apply.ok) {
-      addIssues(resultBox('upd-result', false, 'Nothing applied.'), apply.issues);
-      return;
-    }
-    var box = resultBox('upd-result', null, 'Applying ' + selected.length + ' component(s)…');
-    apply.notes.forEach(function (n) { addLine(box, n, 'warn'); });
-    setBusy(true);
-    $('upd-status').textContent = 'Applying…';
-    runSteps(apply.steps, function (line, level) { addLine(box, line, level); }, function (ok, results) {
-      setBusy(false);
-      $('upd-status').textContent = '';
-      updApply.disabled = true;
-      box.className = 'result ' + (ok ? 'ok' : 'err');
-      var amended = 0, created = 0, skipped = 0;
-      results.forEach(function (r) {
-        if (!r.ok || r.step.kind !== 'component' || !r.result) return;
-        var rep = (r.result.results && r.result.results[0]) || r.result;
-        if (rep.skipped) skipped++;
-        else if (rep.amended) amended++;
-        else created++;
-      });
-      box.firstChild.textContent = ok
-        ? 'Applied — ' + amended + ' amended in place, ' + created + ' created, ' + skipped + ' already up to date. Instances keep their overrides (same nodes, same property ids).'
-        : 'Stopped at the first failure — nothing after it ran; the failed script committed nothing.';
-      // G1/S2: give this FILE a memory. The apply log is what the freshness
-      // guard reads next time — without it every delivery looks new. Written
-      // only on a clean apply of a CHANNEL delivery; a partial run records
-      // nothing rather than claiming a delivery number it did not finish.
-      var delivery = updState && updState.delivery;
-      if (ok && delivery && DSC.recordApplyScriptSource) {
-        engineRun(DSC.recordApplyScriptSource({
-          source: 'channel',
-          channel: delivery.channel,
-          seq: delivery.seq,
-          publishedAt: delivery.publishedAt || null,
-          appliedAt: new Date().toISOString(),
-          contractIds: selected,
-          bytes: delivery.bytes || null,
-        }), {}, function (rec) {
-          addLine(box, rec.ok
-            ? 'Recorded delivery #' + delivery.seq + ' in this file’s apply log — a later, older delivery will now be caught.'
-            : 'Applied, but the apply log could not be written (' + rec.error + ') — the next check cannot detect an out-of-order delivery.',
-            rec.ok ? 'ok' : 'warn');
-          if (rec.ok) setChannelStatus('Up to date with CI (delivery #' + delivery.seq + ').');
-        });
-      }
-    });
-  };
-
-  // --- Propose change -------------------------------------------------------
+  // --- Send: propose a change ----------------------------------------------
   var pendingProposeNames = null;
+  var propRun = $('prop-run');
 
   propRun.onclick = function () {
     var DSC = engine();
-    if (!DSC) { resultBox('prop-result', false, 'No engine.'); addLine($('prop-result'), NO_ENGINE); return; }
+    if (!DSC) { addLine(resultBox('prop-result', false, 'No engine.'), NO_ENGINE); return; }
     var name = $('prop-set').value.trim();
     if (name) { proposeFor(name); return; }
     pendingProposeNames = true;
@@ -1257,8 +1351,6 @@
         a.download = (baseRaw.id || 'contract') + '.proposal.json';
         a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(diff.exportJson);
         a.textContent = 'Download the proposed contract diff (JSON)';
-        a.style.display = 'block';
-        a.style.marginTop = '6px';
         box.appendChild(a);
         $('prop-pr-section').hidden = false;
         $('prop-bridge-section').hidden = false;
@@ -1332,8 +1424,7 @@
 
   function showProposalPushResult(msg) {
     $('prop-bridge-status').textContent = '';
-    var box = resultBox('prop-bridge-result', msg.ok, msg.ok ? 'Sent.' : 'Not sent.');
-    addLine(box, msg.message);
+    addLine(resultBox('prop-bridge-result', msg.ok, msg.ok ? 'Sent.' : 'Not sent.'), msg.message);
   }
 
   function ghFetch(token, method, url, body) {
@@ -1402,12 +1493,118 @@
     });
   }
 
+  // --- Advanced: paste a script --------------------------------------------
+  $('paste-run').onclick = function () {
+    var code = $('paste-input').value;
+    if (!code.trim()) { $('paste-status').textContent = 'Nothing to run — paste a script first.'; return; }
+    setBusy(true);
+    $('paste-status').textContent = 'Running…';
+    $('paste-result').hidden = true;
+    parent.postMessage({ pluginMessage: { type: 'run-paste', code: code } }, '*');
+  };
+
+  // Summary chips from the well-known report keys the generated scripts
+  // return (created/amended/skipped, variants, node ids, props). Anything
+  // else still shows in the full JSON below — nothing is hidden.
+  function chipsFor(report) {
+    var chips = [];
+    if (!report || typeof report !== 'object' || Array.isArray(report)) return chips;
+    if (report.skipped) chips.push('skipped' + (report.reason ? ': ' + report.reason : ''));
+    else if (report.amended) chips.push('amended');
+    else if (report.createdNodeIds || report.created) chips.push('created');
+    if (report.name) chips.push(String(report.name));
+    if (typeof report.variants === 'number') chips.push(report.variants + ' variant' + (report.variants === 1 ? '' : 's'));
+    if (report.nodeId) chips.push('node ' + report.nodeId);
+    if (report.key) chips.push('key ' + String(report.key).slice(0, 12) + '…');
+    if (Array.isArray(report.properties) && report.properties.length) chips.push('props: ' + report.properties.join(', '));
+    ['addedVariants', 'rebuiltVariants', 'renamedVariants', 'extraVariants', 'addedProps', 'editedDefaults']
+      .forEach(function (k) {
+        var v = report[k];
+        var n = Array.isArray(v) ? v.length : (typeof v === 'number' ? v : 0);
+        if (n) chips.push(k + ': ' + n);
+      });
+    return chips;
+  }
+
+  function showPasteResult(msg) {
+    var box = resultBox('paste-result', msg.ok, msg.ok ? 'Script finished — report:' : 'Script threw — nothing was committed.');
+    if (msg.ok) {
+      // Plain words about WHERE the component is now — the report JSON below
+      // is the receipt, this line is the story.
+      if (msg.focus && msg.focus.kind === 'skipped') {
+        var skipLine = document.createElement('div');
+        skipLine.textContent =
+          'Already exists in this file: ' + (msg.focus.name || 'this component') +
+          ' (node ' + msg.focus.nodeId + '). Run in a fresh file — tokens first — to watch it build.';
+        var selectLink = document.createElement('a');
+        selectLink.className = 'row-action';
+        selectLink.href = '#';
+        selectLink.textContent = 'Select it';
+        selectLink.onclick = function (e) {
+          e.preventDefault();
+          parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: msg.focus.nodeId } }, '*');
+        };
+        skipLine.appendChild(document.createTextNode(' '));
+        skipLine.appendChild(selectLink);
+        box.appendChild(skipLine);
+      } else if (msg.focus && msg.focus.kind === 'selected') {
+        addLine(box,
+          'Selected ' + (msg.focus.name || 'the result') + ' on the canvas and zoomed to it — it is what this contract builds.');
+      }
+      var chips = chipsFor(msg.result);
+      if (chips.length) {
+        var strip = document.createElement('div');
+        strip.className = 'chips';
+        chips.forEach(function (c) {
+          var el = document.createElement('span');
+          el.className = 'chip';
+          el.textContent = c;
+          strip.appendChild(el);
+        });
+        box.appendChild(strip);
+      }
+      var pre = document.createElement('pre');
+      pre.textContent = JSON.stringify(msg.result, null, 2);
+      box.appendChild(pre);
+    } else {
+      var err = document.createElement('pre');
+      err.textContent = msg.error + (msg.stack ? '\n\n' + msg.stack : '');
+      box.appendChild(err);
+      addMeta(box, 'Scripts are atomic on throw by Figma’s design — a failed run does not leave a half-synced file. Fix or regenerate the script and paste it again.');
+    }
+  }
+
+  // --- Advanced: local runner -----------------------------------------------
+  $('runner-run').onclick = function () {
+    setBusy(true);
+    $('runner-status').textContent = 'Running…';
+    $('runner-result').hidden = false;
+    $('runner-result').className = 'result';
+    $('runner-headline').textContent = '';
+    $('runner-log').textContent = '';
+    parent.postMessage({ pluginMessage: { type: 'run-runner' } }, '*');
+  };
+
+  function appendLog(line, level) {
+    var el = document.createElement('div');
+    el.className = 'log-line ' + (level || 'info');
+    el.textContent = line;
+    $('runner-log').appendChild(el);
+    $('runner-result').scrollTop = $('runner-result').scrollHeight;
+  }
+
   // --- messages from code.js --------------------------------------------------
   window.onmessage = function (event) {
     var msg = event.data && event.data.pluginMessage;
     if (!msg) return;
     if (msg.type === 'init') {
       currentFileKey = msg.fileKey || '';
+      syncSurfaces();
+      // The remembered "drift last checked" line is per FILE — a timestamp
+      // from another file would be a small lie.
+      parent.postMessage({ pluginMessage: { type: 'ui-state-load', key: DRIFT_STATE_KEY + ':' + currentFileKey } }, '*');
+    } else if (msg.type === 'ui-state') {
+      if (msg.key === DRIFT_STATE_KEY + ':' + currentFileKey) showDriftLastChecked(msg.value);
     } else if (msg.type === 'engine-result') {
       var cb = enginePending[msg.id];
       if (cb) { delete enginePending[msg.id]; cb(msg); }
@@ -1415,15 +1612,18 @@
       var handler = bridgePollHandlers[msg.replyTo];
       if (handler) handler(msg);
     } else if (msg.type === 'channel-key') {
-      // The stored read key, echoed into both fields. Then ONE head-only
+      // The stored read key, echoed into the field. Then ONE head-only
       // check-on-open — the only automatic network call this plugin makes.
-      var storedKey = msg.key || '';
-      channelKeyInputs.forEach(function (id) { $(id).value = storedKey; });
-      if (storedKey) channelCheckOnOpen();
+      savedChannelKey = msg.key || '';
+      $('channel-key').value = savedChannelKey;
+      syncChannelState(false);
+      if (savedChannelKey) channelCheckOnOpen();
     } else if (msg.type === 'channel-key-saved') {
       if (!msg.ok) { setChannelStatus(msg.message || 'Could not save the channel key.'); return; }
-      setChannelStatus(msg.key ? 'Channel key saved — checking…' : 'Channel key cleared.');
-      if (msg.key) channelCheckOnOpen();
+      savedChannelKey = msg.key || '';
+      syncChannelState(false);
+      setChannelStatus(savedChannelKey ? 'Channel key saved — checking…' : 'Channel key cleared.');
+      if (savedChannelKey) channelCheckOnOpen();
     } else if (msg.type === 'channel-check-result') {
       var channelCb = channelCheckPending[msg.replyTo];
       if (channelCb) { delete channelCheckPending[msg.replyTo]; channelCb(msg); }
@@ -1434,33 +1634,23 @@
       $('paste-status').textContent = '';
       showPasteResult(msg);
     } else if (msg.type === 'selection-sets') {
-      if (pendingProposeNames) {
-        pendingProposeNames = null;
-        var propNames = Array.isArray(msg.names) ? msg.names : [];
-        if (propNames.length === 0) {
-          $('prop-status').textContent = '';
-          addIssues(resultBox('prop-result', false, 'Nothing selected.'), [{ headline: 'Select the generated set on the canvas (or type its name) and try again.' }]);
-        } else {
-          $('prop-set').value = propNames[0];
-          proposeFor(propNames[0]);
-        }
-        return;
-      }
-      if (pendingSendCode === null) return;
-      var code = pendingSendCode;
-      pendingSendCode = null;
-      var names = Array.isArray(msg.names) ? msg.names : [];
-      if (names.length > 0) {
-        doSend(code, names, 'Sending: ' + names.join(', ') + ' (from your selection)…');
+      if (!pendingProposeNames) return;
+      pendingProposeNames = null;
+      var propNames = Array.isArray(msg.names) ? msg.names : [];
+      if (propNames.length === 0) {
+        $('prop-status').textContent = '';
+        addIssues(resultBox('prop-result', false, 'Nothing selected.'), [{ headline: 'Select the generated set on the canvas (or type its name) and try again.' }]);
       } else {
-        doSend(code, [], 'Nothing selected and the names box is empty — sending every component set in this file…');
+        $('prop-set').value = propNames[0];
+        proposeFor(propNames[0]);
       }
-    } else if (msg.type === 'send-status') {
-      $('send-status').textContent = msg.line;
-    } else if (msg.type === 'send-result') {
-      setBusy(false);
-      $('send-status').textContent = '';
-      showSendResult(msg);
+    } else if (msg.type === 'drift-result') {
+      renderDrift(msg);
+      if (msg.ok) {
+        var now = new Date().toISOString();
+        showDriftLastChecked(now);
+        parent.postMessage({ pluginMessage: { type: 'ui-state-save', key: DRIFT_STATE_KEY + ':' + currentFileKey, value: now } }, '*');
+      }
     } else if (msg.type === 'runner-log') {
       appendLog(msg.line, msg.level);
     } else if (msg.type === 'runner-done') {
@@ -1478,6 +1668,12 @@
   // above runs a single head-only check — CHECK-ON-OPEN. Nothing else in
   // this plugin reaches the network without a click.
   parent.postMessage({ pluginMessage: { type: 'channel-key-load' } }, '*');
+  // One read-only marker read: which tab opens, and whether Build shows its
+  // empty state. Drift NEVER auto-runs — it reads every marked set in the
+  // file, so it stays behind a click.
+  syncChannelState(false);
+  syncSurfaces();
+  refreshInventory();
 </script>
 
 <!-- The repo's extract/figma/dump.plugin.js, embedded VERBATIM (read-only dump

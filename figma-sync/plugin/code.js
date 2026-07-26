@@ -51,6 +51,12 @@ const CHANNEL_BASE = BRIDGE_BASE;
 // in clientStorage carries the same weight as the runner token above.
 const CHANNEL_KEY_STORAGE_KEY = 'ds_contracts_channel_key';
 
+// Small remembered UI facts (currently: when drift was last checked in THIS
+// file, keyed by file key). clientStorage, not file pluginData, deliberately:
+// a drift check is READ-ONLY and must stay that way — recording "I looked"
+// must never write to the document the designer asked us not to touch.
+const UI_STATE_PREFIX = 'ds_contracts_ui_';
+
 // ---------------------------------------------------------------------------
 // Pure-JS SHA-256 (the plugin sandbox has no WebCrypto). Standard FIPS 180-4
 // implementation over the UTF-8 bytes of the input string; returns lowercase
@@ -254,6 +260,25 @@ figma.ui.onmessage = async (msg) => {
     } catch (e) {
       post({ type: 'channel-key-saved', ok: false, message: 'Could not save the channel key: ' + String(e && e.message ? e.message : e) });
     }
+    return;
+  }
+  if (msg.type === 'ui-state-load') {
+    // Read-only, allowed anytime. An unreadable value is simply "nothing
+    // remembered" — the line it feeds is a courtesy, never a gate.
+    let value = null;
+    try {
+      value = await figma.clientStorage.getAsync(UI_STATE_PREFIX + String(msg.key || ''));
+    } catch (e) { /* no storage — the line simply does not show */ }
+    post({ type: 'ui-state', key: String(msg.key || ''), value: value === undefined ? null : value });
+    return;
+  }
+  if (msg.type === 'ui-state-save') {
+    // Fire-and-forget: a remembered timestamp is never worth an error box.
+    try {
+      const value = msg.value;
+      if (value === null || value === undefined) await figma.clientStorage.deleteAsync(UI_STATE_PREFIX + String(msg.key || ''));
+      else await figma.clientStorage.setAsync(UI_STATE_PREFIX + String(msg.key || ''), value);
+    } catch (e) { /* no storage — nothing is remembered, nothing breaks */ }
     return;
   }
   if (msg.type === 'channel-check') {
