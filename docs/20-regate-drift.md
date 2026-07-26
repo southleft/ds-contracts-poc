@@ -62,7 +62,9 @@ documented in `regate.ts`'s header; the third was NOT, and it was a defect:
 | astryx/Button | 98.099 → 95.391 | (c) INSTRUMENT SCOPE | 22 unresolved refs, all 22 in the shipped minted tree. Recaptured → committed 95.391. |
 | astryx/Badge | 100.000 → 96.296 | (c) INSTRUMENT SCOPE | 1 unresolved ref, present in the shipped minted tree. Recaptured → committed 96.296; the 100.000 was unreproducible by any current run. |
 | astryx/Card | 98.252 → **98.252** | — (counterfactual) | EXACT *despite* 54 unresolved refs — the affected channels are already mismatched or uncompared. Skew presence ≠ skew impact, which is why `unresolvedTokenRefs` is pinned SEPARATELY from `pctEqual`. |
-| **24 others** | **exact** | — | all of mui except Chip/Tooltip, all of tailwind, polaris Avatar/Banner/ProgressBar/RadioButton/Spinner/Text/Thumbnail. |
+| mui/Menu | 93.434 → **94.152** | (c) vocabulary change | MOLECULE LIVE-DEFECT ROUND (round 6). The portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root: the demotion drops 4 non-painting elements (the layer, the INVISIBLE `MuiBackdrop`, two classless focus-trap sentinels) and promotes the PAPER. `cellsCompared` 198 → 171; the surviving parts are the ones that draw, and they score better. Re-baselined with the cause in `regate-baseline.json`. |
+| mui/Dialog | 95.604 → **95.402** | (c) vocabulary change | Same round: the two classless focus-trap sentinels are dropped from the captured anatomy (they draw nothing, contain nothing, and lowered to full-bleed invisible frames over the component). `cellsCompared` 455 → 435. Those sentinel rows matched nearly perfectly, so removing them LOWERS the surviving percentage while the canvas strictly improves — the clearest case yet for pinning the denominator separately. |
+| **22 others** | **exact** | — | all of mui except Chip/Tooltip/Menu/Dialog, all of tailwind, polaris Avatar/Banner/ProgressBar/RadioButton/Spinner/Text/Thumbnail. |
 
 The bisect was by CAUSE, not by commit count: eleven engine commits were
 replayed in a `git worktree` (with `node_modules` symlinked) against the MAIN

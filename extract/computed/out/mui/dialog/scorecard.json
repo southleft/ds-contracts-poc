@@ -6,9 +6,9 @@
   "combos": 5,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 455,
-    "cellsEqual": 435,
-    "pctEqual": 95.6043956043956,
+    "cellsCompared": 435,
+    "cellsEqual": 415,
+    "pctEqual": 95.40229885057471,
     "rowsFullyEqual": 0,
     "rows": 20
   },
@@ -26,7 +26,7 @@
     "contradictions": 0,
     "mintedLeaves": 21,
     "mintedLeavesUnfolded": 21,
-    "baseBindings": 49,
+    "baseBindings": 45,
     "stateBindings": 0,
     "codeOnlyChannels": 5,
     "overflowBindings": 0,
@@ -107,11 +107,15 @@
     "code-only: dialog-paper.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
   "rows": [
     {
       "key": "xs__default",
-      "channelsCompared": 91,
-      "channelsEqual": 87,
+      "channelsCompared": 87,
+      "channelsEqual": 83,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [
@@ -171,8 +175,8 @@
     },
     {
       "key": "sm__default",
-      "channelsCompared": 91,
-      "channelsEqual": 87,
+      "channelsCompared": 87,
+      "channelsEqual": 83,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [
@@ -232,8 +236,8 @@
     },
     {
       "key": "md__default",
-      "channelsCompared": 91,
-      "channelsEqual": 87,
+      "channelsCompared": 87,
+      "channelsEqual": 83,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [
@@ -293,8 +297,8 @@
     },
     {
       "key": "lg__default",
-      "channelsCompared": 91,
-      "channelsEqual": 87,
+      "channelsCompared": 87,
+      "channelsEqual": 83,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [
@@ -354,8 +358,8 @@
     },
     {
       "key": "xl__default",
-      "channelsCompared": 91,
-      "channelsEqual": 87,
+      "channelsCompared": 87,
+      "channelsEqual": 83,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [

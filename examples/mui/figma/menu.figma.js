@@ -29,266 +29,176 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "fill": "imported/menu/root/background-color",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/shared/size-16"
+          },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 5,
+              "radius": 5,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.2
+              },
+              "spread": -3
+            },
+            {
+              "x": 0,
+              "y": 8,
+              "radius": 10,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.14
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 3,
+              "radius": 14,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.12
+              },
+              "spread": 2
+            }
+          ],
           "fixedHeight": {
-            "px": 1000,
+            "px": 124,
             "varName": "imported/menu/root/height"
           },
-          "bindings": {
-            "minWidth": "imported/shared/size-0"
-          },
           "fixedWidth": {
-            "px": 900,
-            "varName": "imported/shared/size-900"
+            "px": 114.766,
+            "varName": "imported/menu/root/width"
           },
           "children": [
             {
               "type": "frame",
-              "name": "backdrop-invisible",
+              "name": "list-padding",
               "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 1000,
-                "varName": "imported/menu/backdrop-invisible/height"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 900,
-                "varName": "imported/shared/size-900"
-              },
-              "children": []
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
-              "fixedHeight": {
-                "px": 0,
-                "varName": "imported/shared/size-0"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 900,
-                "varName": "imported/shared/size-900"
-              },
-              "children": []
-            },
-            {
-              "type": "frame",
-              "name": "part-3",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 0,
-                "varName": "imported/shared/size-0"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 900,
-                "varName": "imported/shared/size-900"
-              },
-              "children": []
-            },
-            {
-              "type": "frame",
-              "name": "menu-paper",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 24,
-                "right": 761.234,
-                "bottom": 852,
-                "left": 24
-              },
-              "fill": "imported/menu/menu-paper/background-color",
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-4",
-                "bottomRightRadius": "imported/shared/size-4",
-                "topLeftRadius": "imported/shared/size-4",
-                "topRightRadius": "imported/shared/size-4",
-                "minWidth": "imported/shared/size-16"
-              },
-              "effectStack": [
-                {
-                  "x": 0,
-                  "y": 5,
-                  "radius": 5,
-                  "color": {
-                    "r": 0,
-                    "g": 0,
-                    "b": 0,
-                    "a": 0.2
-                  },
-                  "spread": -3
-                },
-                {
-                  "x": 0,
-                  "y": 8,
-                  "radius": 10,
-                  "color": {
-                    "r": 0,
-                    "g": 0,
-                    "b": 0,
-                    "a": 0.14
-                  },
-                  "spread": 1
-                },
-                {
-                  "x": 0,
-                  "y": 3,
-                  "radius": 14,
-                  "color": {
-                    "r": 0,
-                    "g": 0,
-                    "b": 0,
-                    "a": 0.12
-                  },
-                  "spread": 2
-                }
-              ],
               "fixedHeight": {
                 "px": 124,
-                "varName": "imported/menu/menu-paper/height"
+                "varName": "imported/menu/list-padding/height"
+              },
+              "bindings": {
+                "minWidth": "imported/shared/size-0",
+                "paddingBottom": "imported/menu/list-padding/padding-bottom",
+                "paddingTop": "imported/menu/list-padding/padding-top"
               },
               "fixedWidth": {
                 "px": 114.766,
-                "varName": "imported/menu/menu-paper/width"
+                "varName": "imported/menu/list-padding/width"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "list-padding",
+                  "name": "label",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "fixedHeight": {
-                    "px": 124,
-                    "varName": "imported/menu/list-padding/height"
-                  },
-                  "bindings": {
-                    "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/menu/list-padding/padding-bottom",
-                    "paddingTop": "imported/menu/list-padding/padding-top"
-                  },
-                  "fixedWidth": {
-                    "px": 114.766,
-                    "varName": "imported/menu/list-padding/width"
+                    "counter": "CENTER"
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "label",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "CENTER"
-                      },
-                      "children": [
-                        {
-                          "type": "text",
-                          "name": "label-text",
-                          "characters": "Profile",
-                          "fontSize": 16,
-                          "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de",
-                          "lineHeight": 24,
-                          "letterSpacing": 0.15008,
-                          "fontFamily": "Roboto"
-                        }
-                      ],
-                      "fill": "imported/menu/label/background-color",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0",
-                        "paddingBottom": "imported/shared/size-6",
-                        "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16",
-                        "paddingTop": "imported/shared/size-6"
-                      }
-                    },
-                    {
-                      "type": "frame",
-                      "name": "label-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "CENTER"
-                      },
-                      "children": [
-                        {
-                          "type": "text",
-                          "name": "label-2-text",
-                          "characters": "My account",
-                          "fontSize": 16,
-                          "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de",
-                          "lineHeight": 24,
-                          "letterSpacing": 0.15008,
-                          "fontFamily": "Roboto"
-                        }
-                      ],
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0",
-                        "paddingBottom": "imported/shared/size-6",
-                        "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16",
-                        "paddingTop": "imported/shared/size-6"
-                      }
-                    },
-                    {
-                      "type": "frame",
-                      "name": "label-3",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "CENTER"
-                      },
-                      "children": [
-                        {
-                          "type": "text",
-                          "name": "label-3-text",
-                          "characters": "Log out",
-                          "fontSize": 16,
-                          "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de",
-                          "lineHeight": 24,
-                          "letterSpacing": 0.15008,
-                          "fontFamily": "Roboto"
-                        }
-                      ],
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0",
-                        "paddingBottom": "imported/shared/size-6",
-                        "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16",
-                        "paddingTop": "imported/shared/size-6"
-                      }
+                      "type": "text",
+                      "name": "label-text",
+                      "characters": "Profile",
+                      "fontSize": 16,
+                      "fontStyle": "Regular",
+                      "textFill": "imported/shared/color-000000de",
+                      "lineHeight": 24,
+                      "letterSpacing": 0.15008,
+                      "fontFamily": "Roboto"
                     }
-                  ]
+                  ],
+                  "bindings": {
+                    "minHeight": "imported/shared/size-0",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-6",
+                    "paddingLeft": "imported/shared/size-16",
+                    "paddingRight": "imported/shared/size-16",
+                    "paddingTop": "imported/shared/size-6"
+                  },
+                  "fillW": true
+                },
+                {
+                  "type": "frame",
+                  "name": "label-2",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "label-2-text",
+                      "characters": "My account",
+                      "fontSize": 16,
+                      "fontStyle": "Regular",
+                      "textFill": "imported/shared/color-000000de",
+                      "lineHeight": 24,
+                      "letterSpacing": 0.15008,
+                      "fontFamily": "Roboto"
+                    }
+                  ],
+                  "bindings": {
+                    "minHeight": "imported/shared/size-0",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-6",
+                    "paddingLeft": "imported/shared/size-16",
+                    "paddingRight": "imported/shared/size-16",
+                    "paddingTop": "imported/shared/size-6"
+                  },
+                  "fillW": true
+                },
+                {
+                  "type": "frame",
+                  "name": "label-3",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "MIN",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "label-3-text",
+                      "characters": "Log out",
+                      "fontSize": 16,
+                      "fontStyle": "Regular",
+                      "textFill": "imported/shared/color-000000de",
+                      "lineHeight": 24,
+                      "letterSpacing": 0.15008,
+                      "fontFamily": "Roboto"
+                    }
+                  ],
+                  "bindings": {
+                    "minHeight": "imported/shared/size-0",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-6",
+                    "paddingLeft": "imported/shared/size-16",
+                    "paddingRight": "imported/shared/size-16",
+                    "paddingTop": "imported/shared/size-6"
+                  },
+                  "fillW": true
                 }
               ]
             }
@@ -296,7 +206,7 @@ const COMPONENTS = [
         }
       }
     ],
-    "colW": 960
+    "colW": 380
   }
 ];
 const ROW_H = 240, PAD = 40;
@@ -611,38 +521,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
-// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
-// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
-// in-flow siblings — matching the declared anatomy and the HTML render.
-function applyInsetOverlay(parent, childNode, childSpec) {
-  if (!childSpec.insetOverlay) return;
-  try {
-    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
-    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
-    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
-    // check, the RadioButton dot, a remove button) must stay ON TOP at its
-    // natural post-backdrop index — else the opaque backdrop sibling paints
-    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
-    // previously hand-corrected on canvas each re-amend).
-    // Absolute-position round: the backdrop shove applies ONLY to true
-    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
-    // at their y positions) keeps its compile-time paint order — the shove
-    // was inverting rail/track stacking.
-    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
-      parent.insertChild(0, childNode);
-    }
-    childNode.layoutPositioning = 'ABSOLUTE';
-    childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-    childNode.x = o.left;
-    childNode.y = o.top;
-    childNode.resize(
-      Math.max(1, parent.width - o.left - o.right),
-      Math.max(1, parent.height - o.top - o.bottom),
-    );
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -740,9 +618,11 @@ async function buildNode(spec, registry) {
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
+  const built = [];
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
@@ -752,7 +632,14 @@ async function buildNode(spec, registry) {
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
-      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
+      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
+      // sizing is meaningless there (real Figma drops it the moment
+      // layoutPositioning becomes ABSOLUTE) and the instruction only made
+      // the Dialog backdrop LOOK healthy in the headless mock while the
+      // canvas drew a squat band. Out-of-flow boxes are sized by
+      // resizeOutOfFlow against the parent's final box.
+      !child.overlay && !child.insetOverlay && !child.absolute
     ) {
       // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
       // height follows the auto-layout parent (FILL), never Figma's 100×100
@@ -767,7 +654,6 @@ async function buildNode(spec, registry) {
     if (child.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyInsetOverlay(node, childNode, child);
   }
   return node;
 }
@@ -970,16 +856,19 @@ async function amendSet(set, C) {
     } else {
       for (const child of [...comp.children]) child.remove();
       applyFrameSpec(comp, v.spec);
+      const built = [];
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -987,7 +876,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyInsetOverlay(comp, childNode, childSpec);
       }
       report.rebuiltVariants++;
     }
@@ -1117,16 +1005,19 @@ async function amendComponent(comp, C) {
   const registry = { texts: [], slots: [], visibles: [] };
   for (const child of [...comp.children]) child.remove();
   applyFrameSpec(comp, v.spec);
+  const built = [];
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -1134,7 +1025,6 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
-    applyInsetOverlay(comp, childNode, childSpec);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

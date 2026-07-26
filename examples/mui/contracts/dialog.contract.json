@@ -82,16 +82,6 @@
             "top": "{imported.shared.size-0}"
           }
         },
-        "part-1": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
-          "declared": {
-            "display": "block"
-          },
-          "tokens": {
-            "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}"
-          }
-        },
         "dialog-container": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Dialog-container.Dialog-scrollPaper — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
@@ -189,16 +179,6 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}"
-          }
-        },
-        "part-3": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
-          "declared": {
-            "display": "block"
-          },
-          "tokens": {
-            "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}"
           }
         }
       },

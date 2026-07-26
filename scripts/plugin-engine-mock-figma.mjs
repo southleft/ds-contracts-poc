@@ -198,11 +198,28 @@ export function createFigmaMock() {
         ? contribs.reduce((a, b) => a + b, 0) + this.itemSpacing * Math.max(0, inFlow.length - 1)
         : contribs.reduce((a, b) => Math.max(a, b), 0);
       const min = axis === 'w' ? this.minWidth : this.minHeight;
-      return Math.max(content + pad, min ?? 0);
+      const max = axis === 'w' ? this.maxWidth : this.maxHeight;
+      // MOLECULE LIVE-DEFECT ROUND (round 6): min/max sizing CLAMP the
+      // computed box in real Figma. The mock modelled `min` only, so a
+      // `maxWidth`-bound hugging box (the new max-width lowering: MUI's
+      // Tooltip bubble, MUI's Tab) was unmeasurable headlessly.
+      return Math.min(Math.max(content + pad, min ?? 0), max ?? Infinity);
     }
 
     get width() {
-      if (this.layoutSizingHorizontal === 'FILL' && this.parent?.layoutMode && this.parent.layoutMode !== 'NONE') {
+      // REAL-FIGMA CONTRACT (round 6, live Dialog finding): an ABSOLUTELY
+      // POSITIONED child is OUT of the auto-layout flow — FILL sizing does
+      // not apply to it (Figma converts the sizing back to FIXED the moment
+      // layoutPositioning becomes ABSOLUTE, and constraints take over). The
+      // lenient mock honored FILL anyway, so Dialog's inset:0 backdrop
+      // measured a perfect full-bleed layer headlessly while the real canvas
+      // drew the SQUAT GREY BAND the owner photographed. Absolute children
+      // now measure by their own box, exactly like the canvas.
+      if (
+        this.layoutSizingHorizontal === 'FILL' &&
+        this.layoutPositioning !== 'ABSOLUTE' &&
+        this.parent?.layoutMode && this.parent.layoutMode !== 'NONE'
+      ) {
         return Math.max(0, this.parent.width - this.parent.paddingLeft - this.parent.paddingRight);
       }
       return this._intrinsicSize('w', 0);
@@ -213,7 +230,12 @@ export function createFigmaMock() {
     }
 
     get height() {
-      if (this.layoutSizingVertical === 'FILL' && this.parent?.layoutMode && this.parent.layoutMode !== 'NONE') {
+      // See the width getter: ABSOLUTE children never FILL (round 6).
+      if (
+        this.layoutSizingVertical === 'FILL' &&
+        this.layoutPositioning !== 'ABSOLUTE' &&
+        this.parent?.layoutMode && this.parent.layoutMode !== 'NONE'
+      ) {
         return Math.max(0, this.parent.height - this.parent.paddingTop - this.parent.paddingBottom);
       }
       return this._intrinsicSize('h', 0);

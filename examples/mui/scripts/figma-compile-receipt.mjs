@@ -231,16 +231,102 @@ for (const file of scripts) {
     // headless proof the class can never silently collapse.
     const textNode = (s) => mock.root.findAll((n) => n.type === 'TEXT' && n.characters === s);
     const partNamed = (nm) => mock.root.findAll((n) => n.name === nm);
+    // MOLECULE LIVE-DEFECT ROUND (round 6, 2026-07-26) — LAYOUT-AWARE PINS.
+    // The molecule pins below this block validated ANATOMY (a part exists, a
+    // string reaches the canvas) and were all GREEN while the live paste
+    // showed four broken components: the mock builds real node trees with
+    // w/h/x/y and nobody was asserting on them. One layout pin per live
+    // defect, each of which FAILS against the pre-round artifacts.
+    const rootsOf = () => mock.root.findAll((n) => n.type === 'COMPONENT');
     if (name === 'dialog') {
       // the modal pair: backdrop part + the paper carrying the content text
       if (partNamed('backdrop-root').length === 0) throw new Error('dialog pin: backdrop-root missing — the modal backdrop part collapsed');
       if (partNamed('dialog-paper').length === 0) throw new Error('dialog pin: dialog-paper missing');
       if (textNode('Dialog body copy for the molecule round.').length === 0) throw new Error('dialog pin: DialogContent text missing');
+      // LIVE DEFECT 2 — the backdrop lowered as a SQUAT GREY BAND (full
+      // width, a few px tall, the paper overlapping it) because an
+      // out-of-flow child was sized against the parent box AS IT STOOD when
+      // that child was appended, and Figma drops FILL sizing the moment a
+      // node goes ABSOLUTE. Pin the scrim geometry per variant.
+      for (const v of rootsOf()) {
+        const kids = v.children ?? [];
+        const bd = kids.find((c) => c.name === 'backdrop-root');
+        if (!bd) throw new Error(`dialog pin: ${v.name} has no backdrop-root child`);
+        if (kids.indexOf(bd) !== 0) throw new Error(`dialog pin: ${v.name} paints the backdrop at index ${kids.indexOf(bd)} — the scrim must be child 0 (BEHIND the paper)`);
+        if (bd.layoutPositioning !== 'ABSOLUTE') throw new Error(`dialog pin: ${v.name} backdrop is in flow (${bd.layoutPositioning}) — the scrim is an inset-0 layer, not a row`);
+        if (Math.round(bd.width) !== Math.round(v.width) || Math.round(bd.height) !== Math.round(v.height)) {
+          throw new Error(
+            `dialog pin (SQUAT BAND): ${v.name} backdrop is ${Math.round(bd.width)}x${Math.round(bd.height)} but the component is ${Math.round(v.width)}x${Math.round(v.height)} — the scrim must cover the whole cell`,
+          );
+        }
+        // …and the paper must FIT the cell and be CENTERED in it. Wider
+        // maxWidth variants baked 900/1200/1536px papers that hung off the
+        // cell's left edge on the live canvas.
+        const container = kids.find((c) => c.name === 'dialog-container');
+        if (!container) throw new Error(`dialog pin: ${v.name} has no dialog-container`);
+        if (container.primaryAxisAlignItems !== 'CENTER') throw new Error(`dialog pin: ${v.name} dialog-container justifies ${container.primaryAxisAlignItems}, not CENTER — the paper would not be centered`);
+        const box = (container.children ?? [])[0];
+        if (!box) throw new Error(`dialog pin: ${v.name} dialog-container is empty`);
+        if (box.width > v.width + 0.5) {
+          throw new Error(
+            `dialog pin (PAPER OVERFLOW): ${v.name} paper box is ${Math.round(box.width)}px wide inside a ${Math.round(v.width)}px cell — a centered paper wider than its cell hangs off BOTH edges`,
+          );
+        }
+        const paper = box.findAll((n) => n.name === 'dialog-paper')[0] ?? box;
+        if (paper.maxWidth != null && paper.width > paper.maxWidth + 0.5) {
+          throw new Error(`dialog pin: ${v.name} paper ${Math.round(paper.width)} exceeds its bound maxWidth ${paper.maxWidth}`);
+        }
+      }
+      // the focus-trap sentinels are DOM plumbing, never canvas anatomy
+      const sentinels = mock.root.findAll((n) => /^part-\d+$/.test(n.name));
+      if (sentinels.length > 0) throw new Error(`dialog pin: ${sentinels.length} classless focus-trap sentinel part(s) reached the canvas (${sentinels.map((n) => n.name).join(', ')})`);
     }
     if (name === 'menu') {
-      if (partNamed('menu-paper').length === 0) throw new Error('menu pin: menu-paper (Popover paper) missing');
       for (const item of ['Profile', 'My account', 'Log out']) {
         if (textNode(item).length === 0) throw new Error(`menu pin: MenuItem "${item}" missing`);
+      }
+      // LIVE DEFECT 1 — the component was 900x1000 (the CAPTURE STAGE) with
+      // the real ~115x124 paper in its top-left corner: the portal capture
+      // carried MUI's full-bleed `position:fixed; inset:0` Popover LAYER as
+      // the root. The PAPER is the component.
+      const roots = rootsOf();
+      if (roots.length !== 1) throw new Error(`menu pin: expected one standalone Menu component, found ${roots.length}`);
+      const paper = roots[0];
+      if (paper.width > 400 || paper.height > 400) {
+        throw new Error(
+          `menu pin (STAGE-SIZED ROOT): the Menu component is ${Math.round(paper.width)}x${Math.round(paper.height)} — that is the capture stage, not the Popover paper. The full-bleed scrim layer must be demoted and the paper promoted.`,
+        );
+      }
+      if ((paper.fills ?? []).length === 0) throw new Error('menu pin: the Menu root carries no fill — the promoted root is not the paper');
+      // …the invisible backdrop and the focus-trap sentinels are not anatomy
+      for (const junk of ['backdrop-invisible', 'backdrop-root']) {
+        if (partNamed(junk).length > 0) throw new Error(`menu pin: "${junk}" reached the canvas — an INVISIBLE MuiBackdrop is a scrim layer, not a Menu part`);
+      }
+      const sentinels = mock.root.findAll((n) => /^part-\d+$/.test(n.name));
+      if (sentinels.length > 0) throw new Error(`menu pin: ${sentinels.length} classless focus-trap sentinel part(s) reached the canvas`);
+      // LIVE DEFECT 1a — the items flowed HORIZONTALLY (ul.MuiList-root is
+      // display:block and the block-flow lowering was root-only), so item 2
+      // was clipped off the paper. They stack, and each spans the paper.
+      const list = partNamed('list-padding')[0];
+      if (!list) throw new Error('menu pin: list-padding (ul.MuiList-root) missing');
+      if (list.layoutMode !== 'VERTICAL') {
+        throw new Error(`menu pin (HORIZONTAL MENU): the MenuItem list lowered ${list.layoutMode} — a display:block list is CSS block flow and stacks its block-level children VERTICALLY`);
+      }
+      const items = (list.children ?? []).filter((c) => /^label(-\d+)?$/.test(c.name));
+      if (items.length !== 3) throw new Error(`menu pin: expected 3 MenuItem rows under the list, found ${items.length}`);
+      for (const it of items) {
+        if (it.layoutSizingHorizontal !== 'FILL') throw new Error(`menu pin: MenuItem "${it.name}" does not span the paper (layoutSizingHorizontal=${it.layoutSizingHorizontal}) — a block-level list item fills its container`);
+        if (Math.round(it.width) !== Math.round(paper.width)) throw new Error(`menu pin: MenuItem "${it.name}" is ${Math.round(it.width)} wide inside a ${Math.round(paper.width)} paper`);
+      }
+      // LIVE DEFECT 1c — MUI autofocuses the first MenuItem on open, so the
+      // captured "default" plane of item 1 was really :focus-visible and the
+      // grey tint baked into its BASE fill. Every item paints the same.
+      const fillSig = (n) => JSON.stringify((n.fills ?? []).filter((f) => f.visible !== false));
+      const sigs = new Set(items.map(fillSig));
+      if (sigs.size !== 1) {
+        throw new Error(
+          `menu pin (AUTOFOCUS TINT): the three MenuItems carry ${sigs.size} different base fills — the autofocused first item's :focus-visible tint is baked into the default plane (${[...sigs].join(' vs ')})`,
+        );
       }
     }
     if (name === 'tabs') {
@@ -248,11 +334,60 @@ for (const file of scripts) {
       for (const t of ['Overview', 'Activity', 'Settings']) {
         if (textNode(t).length === 0) throw new Error(`tabs pin: Tab label "${t}" missing`);
       }
+      // LIVE DEFECT 3 — only "Overview" reached the canvas and the indicator
+      // rendered detached. Cause: MUI's Tab carries `max-width: 360px`, the
+      // emitter baked a CEILING as a fixed WIDTH, and three 360px tabs
+      // overflowed (and were clipped by) a 288px strip.
+      for (const v of rootsOf()) {
+        const list = v.findAll((n) => n.name === 'tabs-list')[0];
+        if (!list) throw new Error(`tabs pin: ${v.name} has no tabs-list`);
+        const labels = (list.children ?? []).filter((c) => /^label(-\d+)?$/.test(c.name));
+        if (labels.length !== 3) throw new Error(`tabs pin: ${v.name} strip carries ${labels.length} Tab boxes, expected 3`);
+        for (const l of labels) {
+          if (l.width > list.width * 0.6) {
+            throw new Error(
+              `tabs pin (MAX-WIDTH AS WIDTH): ${v.name} Tab "${l.name}" is ${Math.round(l.width)} wide in a ${Math.round(list.width)} strip — a hugging tab cannot be more than half the strip; max-width is a CEILING, not a width`,
+            );
+          }
+          if (l.layoutSizingHorizontal === 'FILL') {
+            throw new Error(`tabs pin: ${v.name} Tab "${l.name}" FILLs the strip — align-items:stretch is a CROSS-axis fact and must not widen a flex ROW child`);
+          }
+        }
+        // the indicator sits UNDER the active (first) tab, on the bottom edge
+        const ind = v.findAll((n) => n.name === 'tabs-indicator')[0];
+        if (!ind) throw new Error(`tabs pin: ${v.name} has no tabs-indicator`);
+        if (ind.layoutPositioning !== 'ABSOLUTE') throw new Error(`tabs pin: ${v.name} indicator is in flow — it is an absolutely-positioned underline`);
+        const parentH = ind.parent.height;
+        if (Math.round(ind.y + ind.height) !== Math.round(parentH)) {
+          throw new Error(`tabs pin (DETACHED INDICATOR): ${v.name} indicator bottom is ${Math.round(ind.y + ind.height)} but its container is ${Math.round(parentH)} tall — the underline must sit on the bottom edge`);
+        }
+        if (Math.round(ind.x) !== 0) throw new Error(`tabs pin: ${v.name} indicator starts at x=${Math.round(ind.x)} — tab 0 is selected, so it starts at the strip's left edge`);
+        if (Math.abs(ind.width - labels[0].width) > 15) {
+          throw new Error(`tabs pin: ${v.name} indicator is ${Math.round(ind.width)} wide but the active tab is ${Math.round(labels[0].width)} — the underline tracks the ACTIVE tab, not the strip`);
+        }
+      }
     }
     if (name === 'accordion') {
       if (partNamed('accordionsummary-gutters').length === 0) throw new Error('accordion pin: AccordionSummary button missing');
       if (textNode('Accordion title').length === 0) throw new Error('accordion pin: summary title text missing');
       if (textNode('Details body copy for the molecule round.').length === 0) throw new Error('accordion pin: AccordionDetails text missing');
+      // LIVE DEFECT 5a — the summary title rendered CENTERED. MUI's content
+      // span is flex-grow:1 inside a ButtonBase whose computed
+      // justify-content is `center`; the bare-text lowering DROPPED grow, so
+      // a hugging text node got centered by its parent.
+      for (const v of rootsOf()) {
+        const summary = v.findAll((n) => n.name === 'accordionsummary-gutters')[0];
+        if (!summary) throw new Error(`accordion pin: ${v.name} has no AccordionSummary`);
+        const title = summary.findAll((n) => n.characters === 'Accordion title')[0];
+        if (!title) throw new Error(`accordion pin: ${v.name} summary carries no title text`);
+        const spans = title.layoutSizingHorizontal === 'FILL' || Math.round(title.width) >= Math.round(summary.width - summary.paddingLeft - summary.paddingRight);
+        if (!spans) {
+          throw new Error(
+            `accordion pin (CENTERED TITLE): ${v.name} summary title is ${Math.round(title.width)} wide inside a ${Math.round(summary.width)} row that justifies ${summary.primaryAxisAlignItems} — MUI's flex-grow:1 content span fills the row and left-aligns the text`,
+          );
+        }
+        if (title.textAlignHorizontal !== 'LEFT') throw new Error(`accordion pin: ${v.name} summary title aligns ${title.textAlignHorizontal}, not LEFT`);
+      }
     }
     if (name === 'autocomplete') {
       // chips + both end-adornment indicators; the OPEN listbox is a NAMED
@@ -268,6 +403,35 @@ for (const file of scripts) {
       // the positioned bubble: label text + arrow part
       if (textNode('Tooltip text').length === 0) throw new Error('tooltip pin: bubble text missing');
       if (partNamed('tooltip-arrow').length === 0) throw new Error('tooltip pin: tooltip-arrow part missing');
+      // LIVE DEFECT 4 — the bubble STRETCHED instead of hugging "Tooltip
+      // text": MUI's tooltip carries `max-width: 300px` and the emitter
+      // baked the ceiling as a fixed width. The bubble hugs BENEATH a real
+      // Figma maxWidth ceiling.
+      const bubble = partNamed('label').find((n) => n.type === 'FRAME');
+      if (!bubble) throw new Error('tooltip pin: no bubble frame');
+      const txt = bubble.findAll((n) => n.characters === 'Tooltip text')[0];
+      if (!txt) throw new Error('tooltip pin: bubble carries no text node');
+      const hugged = txt.width + bubble.paddingLeft + bubble.paddingRight;
+      if (bubble.width > hugged + 24) {
+        throw new Error(
+          `tooltip pin (STRETCHED BUBBLE): the bubble is ${Math.round(bubble.width)} wide but its text + padding hug at ${Math.round(hugged)} — max-width is a CEILING, not a width`,
+        );
+      }
+      if (bubble.maxWidth == null) throw new Error('tooltip pin: the 300px max-width ceiling is not bound as a Figma maxWidth — the fact was dropped, not lowered');
+      // …and the `arrow` presence prop reaches the canvas as a real BOOLEAN
+      // component property whose default HIDES the arrow (a presence axis is
+      // a boolean property, never a variant plane — pinned so "the arrow
+      // never materialised" can be answered by the receipt, not by a guess).
+      const comp = rootsOf()[0];
+      const defs = comp.componentPropertyDefinitions ?? {};
+      const arrowKey = Object.keys(defs).find((k) => k.startsWith('Show Arrow#') || k === 'Show Arrow');
+      if (!arrowKey) throw new Error(`tooltip pin: no "Show Arrow" component property (found: ${Object.keys(defs).join(', ') || 'none'})`);
+      if (defs[arrowKey].type !== 'BOOLEAN' || defs[arrowKey].defaultValue !== false) {
+        throw new Error(`tooltip pin: "Show Arrow" is ${defs[arrowKey].type} default ${defs[arrowKey].defaultValue}, expected BOOLEAN default false`);
+      }
+      const arrow = partNamed('tooltip-arrow')[0];
+      if (arrow.componentPropertyReferences?.visible !== arrowKey) throw new Error('tooltip pin: the arrow node is not wired to the "Show Arrow" boolean');
+      if (arrow.visible !== false) throw new Error('tooltip pin: the arrow is visible at the default (arrow=false) state');
     }
     // ORGANISM-ROUND STRUCTURAL PINS (2026-07-25).
     if (name === 'checkbox') {

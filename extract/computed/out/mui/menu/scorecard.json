@@ -6,9 +6,9 @@
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 198,
-    "cellsEqual": 185,
-    "pctEqual": 93.43434343434343,
+    "cellsCompared": 171,
+    "cellsEqual": 161,
+    "pctEqual": 94.15204678362574,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -24,11 +24,11 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 23,
-    "mintedLeavesUnfolded": 23,
-    "baseBindings": 107,
+    "mintedLeaves": 18,
+    "mintedLeavesUnfolded": 18,
+    "baseBindings": 81,
     "stateBindings": 0,
-    "codeOnlyChannels": 17,
+    "codeOnlyChannels": 14,
     "overflowBindings": 0,
     "folds": 45
   },
@@ -37,7 +37,7 @@
       "key": "__default",
       "pctAA": 100,
       "pctExact": 100,
-      "channelsMismatched": 13
+      "channelsMismatched": 10
     },
     {
       "key": "__hover",
@@ -60,27 +60,15 @@
   ],
   "topMismatchedChannels": [
     [
-      "root.position",
+      "root.max-height",
       1
     ],
     [
-      "backdrop-invisible.position",
+      "root.max-width",
       1
     ],
     [
-      "backdrop-invisible.z-index",
-      1
-    ],
-    [
-      "menu-paper.max-height",
-      1
-    ],
-    [
-      "menu-paper.max-width",
-      1
-    ],
-    [
-      "menu-paper.transition-behavior",
+      "root.transition-behavior",
       1
     ],
     [
@@ -113,12 +101,9 @@
     ]
   ],
   "namedLosses": [
-    "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: backdrop-invisible.position — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: backdrop-invisible.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: menu-paper.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: menu-paper.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: menu-paper.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: list-padding.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: list-padding.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -131,46 +116,32 @@
     "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 198,
-      "channelsEqual": 185,
+      "channelsCompared": 171,
+      "channelsEqual": 161,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [
         {
           "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "fixed"
-        },
-        {
-          "part": "backdrop-invisible",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "fixed"
-        },
-        {
-          "part": "backdrop-invisible",
-          "channel": "z-index",
-          "ours": "auto",
-          "theirs": "-1"
-        },
-        {
-          "part": "menu-paper",
           "channel": "max-height",
           "ours": "none",
           "theirs": "calc(100% - 96px)"
         },
         {
-          "part": "menu-paper",
+          "part": "root",
           "channel": "max-width",
           "ours": "none",
           "theirs": "calc(100% - 32px)"
         },
         {
-          "part": "menu-paper",
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"

@@ -104,20 +104,20 @@
     {
       "library": "mui",
       "component": "Dialog",
-      "rerunPctEqual": 95.6043956043956,
-      "cellsCompared": 455,
+      "rerunPctEqual": 95.40229885057471,
+      "cellsCompared": 435,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 95.6043956043956,
-      "gapCause": ""
+      "committedPctEqual": 95.40229885057471,
+      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE \u2014 the two classless focus-trap sentinels (`<div tabindex=0>` around the modal content) are dropped from the captured anatomy; they draw nothing, contain nothing and lowered to full-bleed invisible frames over the component. cellsCompared 455 -> 435. Those sentinel rows matched nearly perfectly (empty divs), so removing them LOWERS the surviving percentage (95.604 -> 95.402) while the canvas strictly improves. Dialog KEEPS its full-bleed layer root by rule: its scrim is visible anatomy."
     },
     {
       "library": "mui",
       "component": "Menu",
-      "rerunPctEqual": 93.43434343434343,
-      "cellsCompared": 198,
+      "rerunPctEqual": 94.15204678362574,
+      "cellsCompared": 171,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 93.43434343434343,
-      "gapCause": ""
+      "committedPctEqual": 94.15204678362574,
+      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE \u2014 the portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root. The demotion drops 4 non-painting elements (the layer itself, the INVISIBLE MuiBackdrop, two classless focus-trap sentinels) and promotes the PAPER; cellsCompared 198 -> 171. The surviving parts are the ones that draw, and they score better (93.434 -> 94.152). Live cause: the generated component was 900x1000 (the capture stage) with the 115x124 paper in its corner."
     },
     {
       "library": "mui",

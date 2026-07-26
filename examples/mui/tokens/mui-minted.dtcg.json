@@ -2097,10 +2097,6 @@
         "$value": "#616161eb",
         "$type": "color"
       },
-      "size-900": {
-        "$value": "900px",
-        "$type": "dimension"
-      },
       "size-24": {
         "$value": "24px",
         "$type": "dimension"
@@ -5886,22 +5882,6 @@
     },
     "menu": {
       "root": {
-        "height": {
-          "$value": "1000px",
-          "$type": "dimension"
-        },
-        "z-index": {
-          "$value": "1300",
-          "$type": "number"
-        }
-      },
-      "backdrop-invisible": {
-        "height": {
-          "$value": "1000px",
-          "$type": "dimension"
-        }
-      },
-      "menu-paper": {
         "background-color": {
           "$value": "#ffffff",
           "$type": "color"
@@ -5943,12 +5923,6 @@
         "width": {
           "$value": "114.766px",
           "$type": "dimension"
-        }
-      },
-      "label": {
-        "background-color": {
-          "$value": "#0000001f",
-          "$type": "color"
         }
       }
     },

@@ -920,13 +920,15 @@ const COMPONENTS = [
             {
               "type": "text",
               "name": "labelText",
+              "grow": true,
               "characters": "Navigation item",
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "control/sm",
               "textFill": "color/nav/default/foreground",
               "fontFamily": "Inter",
-              "contentProp": "Label"
+              "contentProp": "Label",
+              "fillW": true
             },
             {
               "type": "slot",
@@ -989,13 +991,15 @@ const COMPONENTS = [
             {
               "type": "text",
               "name": "labelText",
+              "grow": true,
               "characters": "Navigation item",
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "control/sm",
               "textFill": "color/nav/selected/foreground",
               "fontFamily": "Inter",
-              "contentProp": "Label"
+              "contentProp": "Label",
+              "fillW": true
             },
             {
               "type": "slot",
@@ -3713,9 +3717,11 @@ async function buildNode(spec, registry) {
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
+  const built = [];
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
@@ -3725,7 +3731,14 @@ async function buildNode(spec, registry) {
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
-      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
+      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
+      // sizing is meaningless there (real Figma drops it the moment
+      // layoutPositioning becomes ABSOLUTE) and the instruction only made
+      // the Dialog backdrop LOOK healthy in the headless mock while the
+      // canvas drew a squat band. Out-of-flow boxes are sized by
+      // resizeOutOfFlow against the parent's final box.
+      !child.overlay && !child.insetOverlay && !child.absolute
     ) {
       // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
       // height follows the auto-layout parent (FILL), never Figma's 100×100
@@ -3942,16 +3955,19 @@ async function amendSet(set, C) {
     } else {
       for (const child of [...comp.children]) child.remove();
       applyFrameSpec(comp, v.spec);
+      const built = [];
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -4088,16 +4104,19 @@ async function amendComponent(comp, C) {
   const registry = { texts: [], slots: [], visibles: [] };
   for (const child of [...comp.children]) child.remove();
   applyFrameSpec(comp, v.spec);
+  const built = [];
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }

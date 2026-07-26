@@ -361,10 +361,28 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
-  "structureReceipts": [],
+  "structureReceipts": [
+    "portal-inert-children-dropped: xs — 2 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: xs — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthXs.css-b42rmb-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-inert-children-dropped: sm — 2 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: sm — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthSm.css-1hxnt5f-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-inert-children-dropped: md — 2 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: md — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthMd.css-27nnfp-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-inert-children-dropped: lg — 2 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: lg — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthLg.css-dc6isx-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-inert-children-dropped: xl — 2 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: xl — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthXl.css-n1xz2r-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane"
+  ],
   "styledChannelReceipts": [
     "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "inheritance-check-rejected: dialog-paper.caret-color — values track ancestor \"dialog-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: dialog-paper.color — values track ancestor \"dialog-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label.caret-color equals ancestor \"dialog-paper\" on all 5 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"dialog-paper\" on all 5 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -374,10 +392,6 @@
       },
       {
         "part": "backdrop-root",
-        "join": "computed-only"
-      },
-      {
-        "part": "part-1",
         "join": "computed-only"
       },
       {
@@ -391,10 +405,6 @@
       {
         "part": "label",
         "join": "computed-only"
-      },
-      {
-        "part": "part-3",
-        "join": "computed-only"
       }
     ],
     "staticOnly": []
@@ -404,11 +414,9 @@
     "partsCarried": [
       "root",
       "backdrop-root",
-      "part-1",
       "dialog-container",
       "dialog-paper",
-      "label",
-      "part-3"
+      "label"
     ],
     "svgAssets": [],
     "receipts": [

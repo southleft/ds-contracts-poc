@@ -95,9 +95,17 @@ allow (root refs, plain color-kind refs on nested parts).
 | Tabs | 6 | 93.750% | AA perfect 18/24 |
 | Accordion | 8 | 91.813% | AA perfect 3/32 (mean AA 20.9% — expansion geometry, named below) |
 | Autocomplete | 2 | 95.110% | AA perfect 0/8 |
-| Dialog | 5 | 95.604% | pixel not comparable (portal, named below) |
-| Menu | 1 | 93.434% | pixel not comparable (portal, named below) |
-| Tooltip | 2 | 70.543% | pixel not comparable (portal, named below) |
+| Dialog | 5 | 95.402% | pixel not comparable (portal, named below) |
+| Menu | 1 | 94.152% | pixel not comparable (portal, named below) |
+| Tooltip | 2 | 90.698% | pixel not comparable (portal, named below) |
+
+The three portal numbers moved at the **live-defect round (round 6)** — see
+"Round 6" below. Menu 93.434 → 94.152 and Dialog 95.604 → 95.402 are
+VOCABULARY changes (non-painting elements dropped from the captured anatomy),
+recorded with their causes in `extract/computed/regate-baseline.json`.
+Tooltip 70.543 → 90.698 came for free from the previous round's
+inheritance-aware refusal (its committed `out/` artifacts were stale); the
+captured truth is byte-identical.
 
 Every capture double-swept in one session — byte-identity REQUIRED and held
 for all six (the three census components additionally re-run against the
@@ -212,6 +220,46 @@ MULTI-ROOT-CAPTURE refusal. Open-drivers are recorded in provenance
 (`open:true`; Menu adds `anchorReference='anchorPosition'` +
 `transitionDuration:0`; Dialog pins `transitionDuration:0`).
 
+### Round 6 — the LIVE-DEFECT round (2026-07-26): what a paste showed that no gate could
+
+The owner pasted `examples/mui/figma/mui.bundle.json` into the real plugin.
+Nine of fourteen components rendered faithfully. The four that did not were
+**exactly the portal/children-composed molecules** — every one of them
+mock-proven and green, because the mock validated ANATOMY (a part exists, a
+string reaches the canvas) while the defects were all LAYOUT. The mock builds
+real node trees with `w/h/x/y`; nobody was asserting on them. That gap is now
+closed: `examples/mui/scripts/figma-compile-receipt.mjs` carries one
+layout-aware pin per live defect, and each of them FAILS against the
+pre-round artifacts (verified by replaying the new pins in a worktree at the
+previous commit).
+
+| live defect | root cause | fix |
+|---|---|---|
+| **Menu is 900×1000** (the capture STAGE) with a 115×124 paper in the corner | the portal capture carried MUI's `position:fixed; inset:0` **Popover LAYER** as the component root | `capture.ts` `demoteFullBleedScrim` — a full-bleed fixed root that draws **no box of its own** and has exactly ONE box-drawing, not-full-bleed child is a modal LAYER; the child (the PAPER) is the component. Dialog refuses the demotion **by rule**: its one boxed child is a VISIBLE full-bleed scrim, so the layer root stays |
+| **Menu items flow HORIZONTALLY**, item 2 clipped | `ul.MuiList-root` is `display:block` and the block-flow lowering was **root-only** | `layoutSpec` extends block flow to any depth, decided by the CHILDREN's outside display: all-block-level children stack VERTICALLY; inline-level children (inline-flex icon buttons, the pagination arrows) keep the line box |
+| **Menu item 1 carries a grey tint** its identical siblings do not | MUI **autofocuses** the first MenuItem on open, so the sampled "default" plane was really `:focus-visible` | `capturePortalRoots` blurs the focused element before sampling and RECEIPTS what it blurred (`portal-autofocus-neutralized`) |
+| **Dialog backdrop = a squat grey band** with the paper overlapping it | an out-of-flow child was sized against the parent box **as it stood when that child was appended** — and Figma drops FILL sizing the moment a node goes ABSOLUTE, so the scrim kept its ~1px height while auto-layout grew the parent around it | `resizeOutOfFlow` post-pass: every inset-0 / STRETCH-absolute child is sized against the parent's FINAL box. Idempotent — for an already-established parent the numbers are identical |
+| **wide `maxWidth` Dialogs hang off the cell's left edge** | `max-width` was lowered as a FIXED width, so `md/lg/xl` baked 900/1200/1536px papers into a 900px cell | `max-width` on a PART now binds the real Figma `maxWidth` **ceiling** and the box HUGS beneath it (a ROOT keeps the old lowering — a component root has no container to be fluid inside, and every golden pins those design widths) |
+| **only 1 of 3 Tabs reaches the canvas**, indicator detached | same `max-width` cause: MUI's Tab carries `max-width: 360`, three 360px tabs overflowed (and were clipped by) a 288px strip | same fix. Exposed a second bug underneath: `align-items: stretch` was lowering to HORIZONTAL fill **on the wrong axis**, so the moment tabs stopped carrying a baked width all three FILLed the strip. `stretchChildren` now only widens under a VERTICAL layout (where the cross axis IS horizontal); main-axis growth rides `flex-grow`, the channel that means it |
+| **Tooltip bubble stretches** instead of hugging "Tooltip text" | same `max-width` cause (MUI's tooltip carries `max-width: 300`) | same fix; the 300px ceiling survives as a bound Figma `maxWidth` |
+| **Accordion summary text is CENTERED** | MUI's content span is `flex-grow: 1` inside a ButtonBase whose computed `justify-content` is `center` — and the bare-text lowering **dropped `layout.grow`**, so a hugging text node got centered | text specs carry `grow`, which makes them fill candidates (and skips the residual-margin box: a grown child has no residual margin to reserve) |
+| **two invisible full-bleed frames** over the Dialog | MUI Modal renders two classless `<div tabindex=0>` focus-trap sentinels; they are captured elements, so they promoted to parts | `stripInertPortalChildren` — a direct child of a portal root that draws no box, carries no library class and contains nothing is DOM plumbing, not anatomy |
+
+**Mock lessons added** (`scripts/plugin-engine-mock-figma.mjs`), so none of
+these can pass headlessly again: an ABSOLUTE child no longer honours FILL
+sizing (real Figma converts it to FIXED and lets constraints take over — the
+lenient mock is what let the squat band look perfect), and `minWidth`/
+`maxWidth`/`minHeight`/`maxHeight` now CLAMP the computed box (without which
+the new max-width ceiling was unmeasurable).
+
+**The arrow "that never materialised" was never lost.** A `presenceProps` axis
+lowers to a real Figma **BOOLEAN component property** — `Show Arrow`, default
+`false`, wired to the arrow node's `visible` through
+`componentPropertyReferences` — not to a variant plane. That is why the set is
+a single COMPONENT. The compile receipt now pins the property, its type, its
+default and the wiring, so the question is answered by a receipt instead of a
+guess.
+
 Canonical-children vocabulary (census + portal pages alike):
 `childrenSpec` mounts N imported children in order
 (`<Tabs><Tab/><Tab/><Tab/></Tabs>`, Accordion's Summary/Details, Menu's
@@ -234,6 +282,35 @@ job and are not built yet.
 
 ## Named residuals (defect-first)
 
+- **Round-6 exclusions, named rather than faked:**
+  - **The Accordion has no expand chevron.** `AccordionSummary`'s `expandIcon`
+    takes a React ELEMENT. The capture config's marker vocabulary resolves
+    `$import`/`$render` to package EXPORTS only, and the pinned sandbox does
+    not ship `@mui/icons-material` (already recorded under the icon-asset
+    residual below). Adding the chevron therefore needs either a new sandbox
+    dependency or a raw-element marker in the config grammar — both are
+    changes to the capture contract, not to this round's defect list. A
+    hand-drawn chevron would be a fabricated fact on the canvas, so there is
+    none.
+  - **The AccordionDetails body copy still clips at the right edge.** The
+    details box hugs its text (426px) inside a 288px fixed-width ancestor.
+    Fixing it needs TEXT WRAPPING — a block-level box filling its containing
+    block AND the text node inside it becoming fixed-width so Figma wraps.
+    Both halves are a general class (every hugging text node in the corpus is
+    affected), not a molecule fix; attempting it in this round would have
+    changed every component's text lowering with no gate to catch the fallout.
+    Named for its own round.
+  - **The Menu paper's width is a Roboto measurement.** `115px` is what the
+    browser measured with the library's font; the canvas draws Inter. Figma
+    clips at the paper box, so a wider metric can still crop an item's text
+    even though the ITEM now spans the paper correctly. The class (baked
+    content-derived widths vs. canvas font metrics) is not new to this round
+    and is not closed by it.
+  - **The five Dialog `maxWidth` variants now render IDENTICALLY** — correctly
+    so: MUI's paper hugs its content and this content (432px) never reaches
+    even the `xs` 444px ceiling, so the ceiling is a bound variable that
+    nothing currently exercises. That is the truth of the mount, not a defect;
+    a wider `sampleText` would separate them.
 - **Pixel AA 0 everywhere**: the anti-aliased-pixel-perfect metric is 0 across
   all rows (same class as Astryx — hover/active state carrying and font
   rasterization differences; the computed-equality gate is the floor metric

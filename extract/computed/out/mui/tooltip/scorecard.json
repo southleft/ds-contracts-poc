@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 129,
-    "cellsEqual": 91,
-    "pctEqual": 70.54263565891473,
+    "cellsEqual": 117,
+    "pctEqual": 90.69767441860465,
     "rowsFullyEqual": 0,
     "rows": 8
   },
@@ -118,6 +118,10 @@
     [
       "label.top",
       1
+    ],
+    [
+      "tooltip-arrow.overflow-wrap",
+      1
     ]
   ],
   "namedLosses": [
@@ -134,6 +138,10 @@
     "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: tooltip-arrow.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
   "rows": [
     {
       "key": "off__default",
@@ -199,7 +207,7 @@
     {
       "key": "on__default",
       "channelsCompared": 78,
-      "channelsEqual": 44,
+      "channelsEqual": 70,
       "pctExact": 100,
       "pctAA": 100,
       "mismatches": [
@@ -247,9 +255,9 @@
         },
         {
           "part": "tooltip-arrow",
-          "channel": "(selector)",
-          "ours": "MISSING .tooltip__tooltip-arrow",
-          "theirs": ""
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
         }
       ],
       "note": "size mismatch ours 320x96 vs orig 73x37"

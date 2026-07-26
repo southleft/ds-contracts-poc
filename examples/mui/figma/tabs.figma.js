@@ -105,16 +105,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       }
                     },
                     {
@@ -145,16 +142,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     },
@@ -186,16 +180,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     }
@@ -325,16 +316,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       }
                     },
                     {
@@ -365,16 +353,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     },
@@ -406,16 +391,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     }
@@ -545,16 +527,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       }
                     },
                     {
@@ -585,16 +564,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     },
@@ -626,16 +602,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     }
@@ -765,16 +738,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       }
                     },
                     {
@@ -805,16 +775,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     },
@@ -846,16 +813,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 1
                     }
@@ -985,16 +949,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       }
                     },
                     {
@@ -1025,16 +986,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 0.6
                     },
@@ -1066,16 +1024,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 0.6
                     }
@@ -1205,16 +1160,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       }
                     },
                     {
@@ -1245,16 +1197,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 0.6
                     },
@@ -1286,16 +1235,13 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-0",
                         "strokeRightWeight": "imported/shared/size-0",
                         "strokeTopWeight": "imported/shared/size-0",
+                        "maxWidth": "imported/shared/size-360",
                         "minHeight": "imported/shared/size-48",
                         "minWidth": "imported/shared/size-90",
                         "paddingBottom": "imported/shared/size-12",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16",
                         "paddingTop": "imported/shared/size-12"
-                      },
-                      "fixedWidth": {
-                        "px": 360,
-                        "varName": "imported/shared/size-360"
                       },
                       "opacity": 0.6
                     }
@@ -1671,6 +1617,31 @@ function applyInsetOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        childNode.resize(
+          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+        );
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+  }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1770,9 +1741,11 @@ async function buildNode(spec, registry) {
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
+  const built = [];
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
@@ -1782,7 +1755,14 @@ async function buildNode(spec, registry) {
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
-      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
+      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
+      // sizing is meaningless there (real Figma drops it the moment
+      // layoutPositioning becomes ABSOLUTE) and the instruction only made
+      // the Dialog backdrop LOOK healthy in the headless mock while the
+      // canvas drew a squat band. Out-of-flow boxes are sized by
+      // resizeOutOfFlow against the parent's final box.
+      !child.overlay && !child.insetOverlay && !child.absolute
     ) {
       // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
       // height follows the auto-layout parent (FILL), never Figma's 100×100
@@ -1799,6 +1779,7 @@ async function buildNode(spec, registry) {
     }
     applyInsetOverlay(node, childNode, child);
   }
+  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -2000,16 +1981,19 @@ async function amendSet(set, C) {
     } else {
       for (const child of [...comp.children]) child.remove();
       applyFrameSpec(comp, v.spec);
+      const built = [];
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -2019,6 +2003,7 @@ async function amendSet(set, C) {
         }
     applyInsetOverlay(comp, childNode, childSpec);
       }
+  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -2147,16 +2132,19 @@ async function amendComponent(comp, C) {
   const registry = { texts: [], slots: [], visibles: [] };
   for (const child of [...comp.children]) child.remove();
   applyFrameSpec(comp, v.spec);
+  const built = [];
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -2166,6 +2154,7 @@ async function amendComponent(comp, C) {
     }
     applyInsetOverlay(comp, childNode, childSpec);
   }
+  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

@@ -6,72 +6,68 @@
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 675,
-  "elementsPerCapture": 9,
+  "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 10,
-    "backdrop-invisible": 16,
-    "part-1": 4,
-    "menu-paper": 36,
+    "root": 36,
     "list-padding": 25,
-    "label": 39,
+    "label": 38,
     "label-2": 38,
-    "label-3": 38,
-    "part-3": 4
+    "label-3": 38
   },
   "folds": {
     "count": 45,
     "receipts": [
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "border-bottom-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "border-left-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "border-right-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "border-top-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "menu-paper",
+        "part": "root",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -293,8 +289,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 23,
-    "mintedLeavesFolded": 23
+    "mintedLeavesUnfolded": 18,
+    "mintedLeavesFolded": 18
   },
   "bound": {
     "cellsChecked": 0,
@@ -303,36 +299,36 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 23,
-    "baseBindings": 107,
+    "leaves": 18,
+    "baseBindings": 81,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 107,
+      "uniform": 81,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 28,
+    "base": 26,
     "state": 0
   },
   "codeOnly": {
-    "base": 17,
+    "base": 14,
     "state": 0,
     "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 9,
+    "partsCarried": 5,
     "svgAssets": 0,
     "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 6057,
-    "cellsMatched": 6057,
+    "cellsCompared": 3365,
+    "cellsMatched": 3365,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -364,7 +360,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 93.43434343434343,
+    "computedPctEqual": 94.15204678362574,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

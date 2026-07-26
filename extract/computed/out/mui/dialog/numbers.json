@@ -6,16 +6,14 @@
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 675,
-  "elementsPerCapture": 7,
+  "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 9,
     "backdrop-root": 14,
-    "part-1": 2,
     "dialog-container": 8,
     "dialog-paper": 36,
-    "label": 21,
-    "part-3": 2
+    "label": 21
   },
   "folds": {
     "count": 18,
@@ -140,10 +138,10 @@
   },
   "minted": {
     "leaves": 21,
-    "baseBindings": 49,
+    "baseBindings": 45,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 48,
+      "uniform": 44,
       "perAxis": 1,
       "perPair": 0,
       "refused": 0
@@ -160,16 +158,16 @@
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 7,
+    "partsCarried": 5,
     "svgAssets": 0,
     "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 23555,
-    "cellsMatched": 23525,
-    "pct": 99.87263850562513,
+    "cellsCompared": 16825,
+    "cellsMatched": 16795,
+    "pct": 99.82169390787519,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -237,7 +235,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 95.6043956043956,
+    "computedPctEqual": 95.40229885057471,
     "rowsFullyEqual": 0,
     "rows": 20,
     "pixelPerfectExact": 0,

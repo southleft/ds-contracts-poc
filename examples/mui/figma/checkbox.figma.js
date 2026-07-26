@@ -75,8 +75,7 @@ const COMPONENTS = [
                   "name": "icon-unchecked",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
                   "svgPaintVar": "imported/checkbox/icon/fill/unchecked",
-                  "iconSize": 24,
-                  "fillW": true
+                  "iconSize": 24
                 }
               ]
             }
@@ -138,8 +137,7 @@ const COMPONENTS = [
                   "name": "icon-checked",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
                   "svgPaintVar": "imported/checkbox/icon/fill/checked",
-                  "iconSize": 24,
-                  "fillW": true
+                  "iconSize": 24
                 }
               ]
             }
@@ -201,8 +199,7 @@ const COMPONENTS = [
                   "name": "icon-indeterminate",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
                   "svgPaintVar": "imported/checkbox/icon/fill/indeterminate",
-                  "iconSize": 24,
-                  "fillW": true
+                  "iconSize": 24
                 }
               ]
             }
@@ -607,9 +604,11 @@ async function buildNode(spec, registry) {
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
+  const built = [];
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
@@ -619,7 +618,14 @@ async function buildNode(spec, registry) {
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
-      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
+      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
+      // sizing is meaningless there (real Figma drops it the moment
+      // layoutPositioning becomes ABSOLUTE) and the instruction only made
+      // the Dialog backdrop LOOK healthy in the headless mock while the
+      // canvas drew a squat band. Out-of-flow boxes are sized by
+      // resizeOutOfFlow against the parent's final box.
+      !child.overlay && !child.insetOverlay && !child.absolute
     ) {
       // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
       // height follows the auto-layout parent (FILL), never Figma's 100×100
@@ -836,16 +842,19 @@ async function amendSet(set, C) {
     } else {
       for (const child of [...comp.children]) child.remove();
       applyFrameSpec(comp, v.spec);
+      const built = [];
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -982,16 +991,19 @@ async function amendComponent(comp, C) {
   const registry = { texts: [], slots: [], visibles: [] };
   for (const child of [...comp.children]) child.remove();
   applyFrameSpec(comp, v.spec);
+  const built = [];
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }

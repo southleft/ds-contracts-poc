@@ -894,6 +894,9 @@ export interface PortalCapture {
   postBytes: number;
   currentReader: { present: boolean; sig: string; descendantEls: number };
   roots: CapturedRoot[];
+  /** Round 6: the element autofocus neutralization moved focus AWAY from
+   *  before sampling ('' / absent = focus was already on <body>). */
+  blurred?: string;
 }
 
 /** Settle budget after mounting an overlay combo: portal insertion + a
@@ -1054,6 +1057,21 @@ const markBaselineJs = `(() => {
   return window.__depthBaseline.size;
 })()`;
 
+/** Round 6 — AUTOFOCUS NEUTRALIZATION (see capturePortalRoots). Blurs the
+ *  focused element so the DEFAULT-interaction sample is not silently a
+ *  :focus-visible sample, and returns a stable description of what was
+ *  blurred ('' when focus was already on <body>). MUI's Modal focus trap
+ *  re-focuses the CONTAINER on focusout — never a ButtonBase — so the
+ *  :focus-visible plane genuinely leaves the item. STRING evaluate (the tsx
+ *  __name serialization trap). */
+const blurActiveJs = `(() => {
+  const el = document.activeElement;
+  if (!el || el === document.body || typeof el.blur !== 'function') return '';
+  const sig = el.tagName.toLowerCase() + '|' + [...el.classList].join('.');
+  el.blur();
+  return sig;
+})()`;
+
 /** The whole-document baseline-diff read (STRING evaluate — the tsx __name
  *  serialization trap). Reads every new root as a full CapturedNode using the
  *  SAME longhand set (window.__ALL_PROPS) and ::before/::after rule as the
@@ -1135,6 +1153,17 @@ export async function capturePortalRoots(
   await page.evaluate(markBaselineJs);
   await page.evaluate(`window.__setSpec(${specIndex})`);
   await page.waitForTimeout(PORTAL_SETTLE_MS);
+  // MOLECULE LIVE-DEFECT ROUND (round 6) — AUTOFOCUS NEUTRALIZATION. An
+  // overlay that AUTOFOCUSES on open (MUI's Menu focuses its first MenuItem)
+  // renders that item in the :focus-visible plane, and the portal reader —
+  // which samples the DEFAULT interaction only — baked the grey focus tint
+  // into the item's BASE fill. Live evidence (round 6 paste): menu item 1
+  // carried rgba(0,0,0,0.12) while its identical siblings carried none.
+  // Blur before sampling so the sampled plane really is the default one.
+  // The blur is RECEIPTED (below) whether or not it moved focus, and the
+  // double-run byte-identity check still has to pass over it.
+  const blurred = (await page.evaluate(blurActiveJs)) as string;
+  if (blurred !== '') await page.waitForTimeout(120);
   const raw = (await page.evaluate(capturePortalJs(classAllow))) as {
     preBytes: number;
     postBytes: number;
@@ -1147,6 +1176,7 @@ export async function capturePortalRoots(
     postBytes: raw.postBytes,
     currentReader: raw.currentReader,
     roots: raw.roots.map((r) => ({ location: r.location, bytes: r.bytes, node: normalizeNode(r.node) })),
+    ...(blurred !== '' ? { blurred } : {}),
   };
   if (beforeReset) await beforeReset(result);
   await page.evaluate(`window.__setSpec(false)`); // reset-per-combo (R1)
@@ -1168,6 +1198,85 @@ export async function capturePortalRoots(
  *  Interactions: DEFAULT ONLY — overlay hover/focus/active states are a
  *  named residual of this round (the census state drivers assume an
  *  in-stage, persistent mount). Callers record this in provenance. */
+/** Element children of a captured node (text runs dropped). */
+const capturedChildEls = (n: CapturedNode): CapturedNode[] =>
+  n.nodes.filter((c) => c.t === 'el').map((c) => (c as { el: CapturedNode }).el);
+
+/** A captured node DRAWS a box of its own: a non-transparent background, a
+ *  border, or a shadow. (The same test `anatomy.isBoxlessNode` makes, kept
+ *  local so capture.ts never imports anatomy.ts — anatomy.ts imports THIS
+ *  module and a runtime cycle is not worth a shared three-line predicate.) */
+function capturedDrawsBox(n: CapturedNode): boolean {
+  const s = n.style;
+  const bg = s['background-color'];
+  const opaqueBg = !!bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
+  const border = ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
+    .some((p) => s[p] !== undefined && s[p] !== '0px');
+  const shadow = !!s['box-shadow'] && s['box-shadow'] !== 'none';
+  return opaqueBg || border || shadow;
+}
+
+/** Out of flow AND pinned to all four edges — a layer that covers whatever
+ *  contains it (`position: fixed; inset: 0` = the whole viewport). */
+function capturedFullBleed(n: CapturedNode): boolean {
+  const s = n.style;
+  if (s['position'] !== 'fixed' && s['position'] !== 'absolute') return false;
+  return (['top', 'right', 'bottom', 'left'] as const).every((p) => s[p] === '0px');
+}
+
+/** MOLECULE LIVE-DEFECT ROUND (round 6) — FULL-BLEED SCRIM DEMOTION.
+ *
+ *  A portaled overlay root is not always the component's visual box. MUI's
+ *  Popover/Menu root is `position: fixed; inset: 0` — a viewport-covering
+ *  MODAL LAYER carrying an INVISIBLE backdrop (MuiBackdrop-invisible), two
+ *  classless focus-trap sentinels, and the paper. Carried as the captured
+ *  root it made the Figma component the size of the CAPTURE STAGE (900×1000)
+ *  with the real 113×124 paper in its top-left corner — the live round-6
+ *  paste's loudest defect.
+ *
+ *  Demotion fires only when the layer draws NOTHING of its own:
+ *    1. the root is `position: fixed` and pinned to all four edges;
+ *    2. exactly ONE element child draws a box (background / border / shadow)
+ *       — every other child is an invisible backdrop or a zero-box sentinel;
+ *    3. that child is NOT itself full-bleed.
+ *  Condition 3 is what keeps DIALOG intact: its single boxed child is the
+ *  VISIBLE rgba(0,0,0,.5) scrim pinned to all four edges, so the layer root
+ *  stays and the multi-part overlay (scrim behind, paper centered on top)
+ *  lowers as designed. Tooltip's popper is `position: absolute` — never a
+ *  candidate. Returns null when the rule does not fire. */
+export function demoteFullBleedScrim(
+  n: CapturedNode,
+): { root: CapturedNode; dropped: string[] } | null {
+  if (n.style['position'] !== 'fixed') return null;
+  if (!(['top', 'right', 'bottom', 'left'] as const).every((p) => n.style[p] === '0px')) return null;
+  if (capturedDrawsBox(n)) return null;
+  const kids = capturedChildEls(n);
+  if (kids.length < 2) return null;
+  const boxed = kids.filter((k) => capturedDrawsBox(k));
+  if (boxed.length !== 1) return null;
+  if (capturedFullBleed(boxed[0])) return null;
+  const sigOf = (k: CapturedNode): string => `${k.tag}|${k.classes.join('.')}`;
+  return { root: boxed[0], dropped: kids.filter((k) => k !== boxed[0]).map(sigOf) };
+}
+
+/** ROUND 6 — INERT PORTAL CHILD strip. A focus-trap SENTINEL (React-ARIA /
+ *  MUI Modal render two: `<div tabindex="0">` before and after the content)
+ *  can paint nothing, contains nothing, and carries no library class — but
+ *  it IS a captured element, so it promoted into a contract part and lowered
+ *  to a full-bleed invisible frame sitting over the whole component (the
+ *  live Dialog carried two). Drop a DIRECT child of a portal root that draws
+ *  no box, has no class-stem, no element children and no text. Anything that
+ *  could ever paint, or that contains anything, is kept. */
+export function stripInertPortalChildren(n: CapturedNode): { root: CapturedNode; dropped: number } {
+  const inert = (k: CapturedNode): boolean =>
+    k.classes.length === 0 &&
+    !capturedDrawsBox(k) &&
+    k.nodes.length === 0;
+  const kept = n.nodes.filter((c) => c.t !== 'el' || !inert((c as { el: CapturedNode }).el));
+  if (kept.length === n.nodes.length) return { root: n, dropped: 0 };
+  return { root: { ...n, nodes: kept }, dropped: n.nodes.length - kept.length };
+}
+
 export async function portalSweep(
   page: Page,
   comp: ComponentConfig,
@@ -1204,7 +1313,27 @@ export async function portalSweep(
         `${comp.name}:${combo.key}: MULTI-ROOT-CAPTURE refusal — ${portaled.length} portaled + ${inStage.length} in-stage new roots; single-root fusion carries exactly one root (multi-root fusion is a named future class)`,
       );
     }
-    captures.push({ combo: `${comp.name}:${combo.key}`, interaction: 'default', root: picked.node });
+    let root = picked.node;
+    const demoted = demoteFullBleedScrim(root);
+    if (demoted) {
+      receipts.push(
+        `portal-scrim-demoted: ${combo.key} — the portaled root is a full-bleed (position:fixed; inset:0) modal LAYER that draws no box of its own; the one box-drawing child (${demoted.root.tag}|${demoted.root.classes.join('.')}) is the component's visual root. Dropped from the canvas: ${demoted.dropped.map((d) => `"${d}"`).join(', ')} (invisible backdrop / focus-trap sentinels — none of them paint). A VISIBLE full-bleed scrim (Dialog) refuses this demotion by rule.`,
+      );
+      root = demoted.root;
+    }
+    const stripped = stripInertPortalChildren(root);
+    if (stripped.dropped > 0) {
+      receipts.push(
+        `portal-inert-children-dropped: ${combo.key} — ${stripped.dropped} direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy`,
+      );
+      root = stripped.root;
+    }
+    if (pc.blurred) {
+      receipts.push(
+        `portal-autofocus-neutralized: ${combo.key} — focus was on "${pc.blurred}" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane`,
+      );
+    }
+    captures.push({ combo: `${comp.name}:${combo.key}`, interaction: 'default', root });
   }
   return { captures, receipts };
 }

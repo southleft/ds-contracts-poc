@@ -903,6 +903,30 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
     }
     return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
   }
+  // BLOCK-FLOW PART (round 6, Menu live finding): the block-flow rule above
+  // was ROOT-ONLY, so a display:block container DEEPER in the tree fell
+  // through to the HORIZONTAL default. MUI's `ul.MuiList-root` is exactly
+  // that — the live paste drew the three MenuItems SIDE BY SIDE (and the
+  // second one clipped off the paper). CSS decides by the CHILDREN's
+  // outside display: a block box whose in-flow children are all BLOCK-LEVEL
+  // stacks them vertically; inline-level children (MUI's inline-flex
+  // IconButtons in an end-adornment, the pagination arrows) form a LINE box
+  // and stay horizontal. `layout.display` is 'flex' | 'inline-flex' by
+  // schema, so the two cases are distinguishable without guessing. A
+  // single-child block box is left alone (one child lays out the same in
+  // both modes and the byte-neutrality of every prior contract matters).
+  if (!l && !isRoot && part.declared?.['display'] === 'block') {
+    const kids = Object.values(part.parts ?? {}).filter(
+      (k) => k.declared?.['position'] !== 'absolute' && k.declared?.['position'] !== 'fixed',
+    );
+    const blockLevel = (k: Part): boolean => {
+      const d = k.layout?.display ?? k.declared?.['display'];
+      return d === 'flex' || d === 'block' || d === 'grid' || d === 'list-item' || d === 'table';
+    };
+    if (kids.length >= 2 && kids.every(blockLevel)) {
+      return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
+    }
+  }
   return {
     mode: l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL',
     primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
@@ -1157,11 +1181,28 @@ function applyTokens(
       case 'width':
         spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
         break;
-      case 'max-width':
-        // Fluid-up-to on the code side; a canvas component renders at its
-        // natural (max) width — the token still binds the dimension.
-        spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
+      case 'max-width': {
+        // ROUND 6 (live paste): max-width is a CEILING, not a width.
+        //
+        // Baking it as a FIXED width is right for a ROOT — a component's
+        // root box has no container to be fluid inside, so it renders at
+        // its natural (max) width (the Card/Toast/Chip design widths every
+        // golden pins). For a PART it was catastrophic, twice in one paste:
+        // MUI's Tab carries max-width 360, so three 360px tabs overflowed a
+        // 288px strip and only "Overview" reached the canvas; MUI's Tooltip
+        // bubble carries max-width 300, so the bubble stretched to 300px
+        // instead of hugging "Tooltip text". A PART now binds the real
+        // Figma `maxWidth` field and HUGS beneath it — the CSS semantics
+        // exactly. Text nodes have no maxWidth field (Figma sizes text by
+        // textAutoResize), so a bare-text part keeps the old lowering.
+        const value = px(resolveLiteral(tokenPath));
+        if (spec.type === 'root' || spec.type === 'text' || !Number.isFinite(value)) {
+          spec.fixedWidth = { px: value, varName };
+        } else {
+          spec.bindings = { ...spec.bindings, maxWidth: varName };
+        }
         break;
+      }
       case 'min-width':
         spec.bindings = { ...spec.bindings, minWidth: varName };
         break;
@@ -2110,6 +2151,7 @@ function partToSpecInner(
       type: 'frame',
       name,
       layout: resolveLayout(part, subst) ? layoutSpec(part, false, subst) : { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' },
+      grow: part.layout?.grow || undefined,
       children: [textSpec],
     };
     const textCtx = applyStyling(frame, part, subst, ctx);
@@ -2141,6 +2183,15 @@ function partToSpecInner(
       return wrapTextInBox(textSpec);
     }
     const spec: NodeSpec = { type: 'text', name };
+    // ROUND 6 (Accordion live finding): `layout.grow` was carried on frame
+    // parts and DROPPED on bare-text parts. MUI's AccordionSummary content
+    // span is exactly that — flex-grow:1 inside a ButtonBase whose computed
+    // justify-content is `center`, so the dropped grow left a hugging text
+    // node CENTERED in the summary row. MUI left-aligns it because the span
+    // fills the row. Carrying grow makes the text a fill candidate (and, as
+    // a CSS consequence, skips the residual-margin box — a grown child has
+    // no residual margin to reserve).
+    if (part.layout?.grow) spec.grow = true;
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = part.text;
     spec.fontSize = textCtx.fontSize ?? 14;
@@ -2187,6 +2238,7 @@ function partToSpecInner(
       return wrapTextInBox(textSpec);
     }
     const spec: NodeSpec = { type: 'text', name };
+    if (part.layout?.grow) spec.grow = true; // round 6 — see the text branch above
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = characters;
     spec.fontSize = textCtx.fontSize ?? 16;
@@ -2327,11 +2379,24 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // beats flex-grow too — the captured size IS the post-grow used size, so
     // re-applying FILL on canvas double-counts the stretch (34px track
     // ballooned to the 58px root). Explicit-width children never fill.
+    // ROUND 6 (Tabs live finding): `stretchChildren` is CSS
+    // `align-items: stretch` — a CROSS-axis fact. Under a VERTICAL layout
+    // the cross axis IS horizontal (block flow: a block child spans its
+    // container), which is what this annotation lowers. Under a HORIZONTAL
+    // layout the cross axis is VERTICAL, so horizontal FILL is simply the
+    // wrong axis: it makes every flex row child as wide as the whole row.
+    // It went unnoticed while such children carried a baked width (MUI's
+    // Tab rode `max-width: 360` as a fixed width); the moment max-width
+    // became a real ceiling, all three Tabs FILLed to the strip width and
+    // stacked on top of each other. Main-axis growth still lowers — through
+    // `grow` (flex-grow), which is the channel that actually means it.
     const isCandidate = (c: NodeSpec): boolean =>
       inFlow(c) &&
       !hasOwnWidth(c) &&
       (c.grow === true ||
-        (s.layout?.stretchChildren === true && c.type !== 'instance'));
+        (s.layout?.stretchChildren === true &&
+          (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
+          c.type !== 'instance'));
     const intrinsic = kids.some((c) => inFlow(c) && !isCandidate(c) && canHug(c));
     const ready = established || intrinsic;
     for (const c of kids) {
@@ -3174,6 +3239,55 @@ const insetOverlayCall = (has: boolean, args: string): string =>
   has ? `
     applyInsetOverlay(${args});` : '';
 
+/** ROUND 6 (Dialog live finding) — OUT-OF-FLOW RESIZE POST-PASS.
+ *
+ *  An out-of-flow child was sized against the parent box AS IT STOOD WHEN
+ *  THAT CHILD WAS APPENDED. For a hug-height auto-layout parent the first
+ *  child is appended into a parent that is still ~0 tall, so Dialog's
+ *  `inset: 0` backdrop — the modal scrim, always child #0 so it paints
+ *  behind — was resized to a few pixels and stayed there while the rest of
+ *  the content grew the parent around it. That is the SQUAT GREY BAND the
+ *  live paste showed: full width, wrong height, paper overlapping it.
+ *  STRETCH constraints do not rescue it — Figma applies those when a frame
+ *  is RESIZED, not when auto-layout content grows it.
+ *
+ *  Re-sizing every inset-0 / STRETCH-absolute child against the parent's
+ *  FINAL box after the whole subtree is appended is idempotent: for a parent
+ *  whose box was already established the numbers are identical, so every
+ *  prior contract's canvas is unchanged. */
+const outOfFlowResizeRuntime = (has: boolean): string =>
+  has
+    ? `
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        childNode.resize(
+          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+        );
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+  }
+}
+`
+    : '';
+const outOfFlowResizeCall = (has: boolean, args: string): string =>
+  has ? `
+  resizeOutOfFlow(${args});` : '';
+
 /** v14 literals: literal-fidelity channel application (applyFrameSpec tail).
  *  Emitted ONLY when a compiled spec carries lits — contracts without
  *  literals emit byte-identical scripts (the golden discipline, same as
@@ -3609,7 +3723,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
-${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${marginBoxRuntime(hasMargins)}
+${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${marginBoxRuntime(hasMargins)}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -3695,9 +3809,11 @@ async function buildNode(spec, registry) {
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
+  const built = [];
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    built.push([child, childNode]);
     applyOverlay(node, childNode, child);${absoluteCall(hasAbsolute, 'node, childNode, child')}
     if (child.pct != null) {
       try {
@@ -3707,7 +3823,14 @@ async function buildNode(spec, registry) {
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
-      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
+      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
+      // sizing is meaningless there (real Figma drops it the moment
+      // layoutPositioning becomes ABSOLUTE) and the instruction only made
+      // the Dialog backdrop LOOK healthy in the headless mock while the
+      // canvas drew a squat band. Out-of-flow boxes are sized by
+      // resizeOutOfFlow against the parent's final box.
+      !child.overlay && !child.insetOverlay && !child.absolute
     ) {
       // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
       // height follows the auto-layout parent (FILL), never Figma's 100×100
@@ -3722,7 +3845,7 @@ async function buildNode(spec, registry) {
     if (child.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child')}
-  }
+  }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}
   return node;
 }
 
@@ -3834,16 +3957,19 @@ async function amendSet(set, C) {
     } else {
       for (const child of [...comp.children]) child.remove();
       applyFrameSpec(comp, v.spec);
+      const built = [];
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -3851,7 +3977,7 @@ async function amendSet(set, C) {
         if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec')}
-      }
+      }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -3980,16 +4106,19 @@ async function amendComponent(comp, C) {
   const registry = { texts: [], slots: [], visibles: [] };
   for (const child of [...comp.children]) child.remove();
   applyFrameSpec(comp, v.spec);
+  const built = [];
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
@@ -3997,7 +4126,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
-  }
+  }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
