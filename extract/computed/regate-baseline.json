@@ -1,5 +1,5 @@
 {
-  "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
+  "_marker": "REGATE DRIFT BASELINE \u2014 what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
   "recordedAt": "2026-07-26",
   "rows": [
     {
@@ -8,8 +8,8 @@
       "rerunPctEqual": 96.29629629629629,
       "cellsCompared": 1512,
       "unresolvedTokenRefs": 1,
-      "committedPctEqual": 100,
-      "gapCause": "CONTRACT/MINT SKEW — 1 ref the frozen promoted contract carries ({imported.badge.root.line-height}) is no longer produced by the current mint; renders as an EMPTY custom property. Not an engine regression: astryx/Badge measured 96.296 at 0078020, the very commit that COMMITTED 100.000."
+      "committedPctEqual": 96.29629629629629,
+      "gapCause": "INSTRUMENT SCOPE (repair-wave #19 correction \u2014 the earlier 'CONTRACT/MINT SKEW' story was FALSIFIED). 1 unresolved refs, and ALL of them resolve against examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree. They sit in the contract's REVIEWED layer, which fusion preserves by design, so the recapture this baseline's predecessor prescribed was RUN (real harness, pinned @astryxdesign/core@0.1.6 sandbox, double-run byte-identity) and closed none of them. The defect is that gate.ts builds its inventory and its rendered custom properties from cfg.tokens.dtcg + the FRESH mint only, never the shipped minted tree, so reviewed-layer leaves render EMPTY. pctEqual now reproduces exactly because the receipt was recaptured; the refs stay open against the proposed gate-inventory fix (docs/20-regate-drift.md)."
     },
     {
       "library": "astryx",
@@ -17,8 +17,8 @@
       "rerunPctEqual": 95.390625,
       "cellsCompared": 11520,
       "unresolvedTokenRefs": 22,
-      "committedPctEqual": 98.09895833333333,
-      "gapCause": "CONTRACT/MINT SKEW — 22 unresolved refs (imported.shared.*). Measured 94.766 at 0078020 (committed 98.099), improved to 95.391 by the absolute-positioning round f52c334."
+      "committedPctEqual": 95.390625,
+      "gapCause": "INSTRUMENT SCOPE (repair-wave #19 correction \u2014 the earlier 'CONTRACT/MINT SKEW' story was FALSIFIED). 22 unresolved refs, and ALL of them resolve against examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree. They sit in the contract's REVIEWED layer, which fusion preserves by design, so the recapture this baseline's predecessor prescribed was RUN (real harness, pinned @astryxdesign/core@0.1.6 sandbox, double-run byte-identity) and closed none of them. The defect is that gate.ts builds its inventory and its rendered custom properties from cfg.tokens.dtcg + the FRESH mint only, never the shipped minted tree, so reviewed-layer leaves render EMPTY. pctEqual now reproduces exactly because the receipt was recaptured; the refs stay open against the proposed gate-inventory fix (docs/20-regate-drift.md)."
     },
     {
       "library": "astryx",
@@ -27,16 +27,16 @@
       "cellsCompared": 1144,
       "unresolvedTokenRefs": 54,
       "committedPctEqual": 98.25174825174825,
-      "gapCause": "NO GAP, but 54 unresolved refs — named because the pair is counterfactual: astryx/Card is the same CONTRACT/MINT SKEW as Slider/Button/Badge (the frozen contract references imported.card.* leaves the current mint no longer produces) yet scores EXACTLY its committed 98.252. The affected channels (font-weight, line-height, per-tone border widths) are ones the gate already counted as mismatched or does not compare, so the empty custom properties cost nothing here. Skew presence is not skew impact — this row is why unresolvedTokenRefs is pinned SEPARATELY from pctEqual."
+      "gapCause": "NO GAP, and 54 unresolved refs \u2014 the counterfactual row that proves unresolvedTokenRefs must be pinned SEPARATELY from pctEqual: the affected channels are already mismatched or uncompared, so the empty custom properties cost nothing here. Same INSTRUMENT SCOPE cause as astryx Button/Badge/Slider (the gate inventory omits the shipped minted tree); NOT recaptured this round \u2014 it was outside the named scope and its receipt already agreed with the instrument."
     },
     {
       "library": "astryx",
       "component": "Slider",
-      "rerunPctEqual": 55.29891304347826,
+      "rerunPctEqual": 55.33288043478261,
       "cellsCompared": 2944,
       "unresolvedTokenRefs": 44,
-      "committedPctEqual": 87.90760869565217,
-      "gapCause": "CONTRACT/MINT SKEW, worst case — 44 unresolved refs (imported.shared.color-*/size-*, imported.slider.label.color). Measured 52.853 at 0078020 (committed 87.908) and has IMPROVED since (53.397 at f52c334, 55.299 at 53792d3). The CANVAS is unaffected: examples/astryx/tokens/astryx-minted.dtcg.json carries all 237 leaves the shipped contract references."
+      "committedPctEqual": 55.33288043478261,
+      "gapCause": "INSTRUMENT SCOPE (repair-wave #19 correction \u2014 the earlier 'CONTRACT/MINT SKEW' story was FALSIFIED). 44 unresolved refs, and ALL of them resolve against examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree. They sit in the contract's REVIEWED layer, which fusion preserves by design, so the recapture this baseline's predecessor prescribed was RUN (real harness, pinned @astryxdesign/core@0.1.6 sandbox, double-run byte-identity) and closed none of them. The defect is that gate.ts builds its inventory and its rendered custom properties from cfg.tokens.dtcg + the FRESH mint only, never the shipped minted tree, so reviewed-layer leaves render EMPTY. pctEqual now reproduces exactly because the receipt was recaptured; the refs stay open against the proposed gate-inventory fix (docs/20-regate-drift.md)."
     },
     {
       "library": "astryx",
@@ -45,7 +45,7 @@
       "cellsCompared": 1536,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 76.30208333333333,
-      "gapCause": "ENGINE IMPROVED — absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020."
+      "gapCause": "ENGINE IMPROVED \u2014 absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020."
     },
     {
       "library": "mui",
@@ -99,7 +99,7 @@
       "cellsCompared": 6832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 87.70491803278688,
-      "gapCause": "ENGINE IMPROVED — state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f."
+      "gapCause": "ENGINE IMPROVED \u2014 state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f."
     },
     {
       "library": "mui",
@@ -171,7 +171,7 @@
       "cellsCompared": 129,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 70.54263565891473,
-      "gapCause": "ENGINE IMPROVED — organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b."
+      "gapCause": "ENGINE IMPROVED \u2014 organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b."
     },
     {
       "library": "polaris",
@@ -185,11 +185,11 @@
     {
       "library": "polaris",
       "component": "Badge",
-      "rerunPctEqual": 95.15895953757226,
+      "rerunPctEqual": 97.32658959537572,
       "cellsCompared": 22144,
-      "unresolvedTokenRefs": 2,
+      "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.32658959537572,
-      "gapCause": "POLLUTED DECISION LEDGER — extract/computed/out/badge/decisions.json acks {font-size-sm} and {spacing-0}, REPO-convention names absent from the Polaris inventory (which spells {p.*}). Surfaced once regate began applying the ledger the harness applies. The SHIPPED contract is clean; the harness-local resolved.contract.json is not. Human-ack artifact — named, not silently rewritten."
+      "gapCause": "repaired: FOREIGN decision ledger removed (repair wave #19). extract/computed/out/badge/decisions.json was not a polluted Polaris ledger \u2014 it was the ASTRYX Badge ledger in full (its combo ids are astryx's 14 Badge variants; both rows appear verbatim in out/astryx/badge/decisions.md with identical queue counts; the only commit that ever wrote it is 2f494ab, an astryx round). b66e5a3's namespacing restore covered the GENERATED artifacts but run.ts preserves the human-decision ones, so it survived. Removed along with the stale resolved.contract.json it had produced \u2014 which promote-floor PREFERS, and which would have silently regressed the shipped Badge contract on the next promotion. 2 unresolved refs -> 0, committed number reproduced exactly. Guarded by the apply-time value check + eval decision-ledger-value-check."
     },
     {
       "library": "polaris",
@@ -203,11 +203,11 @@
     {
       "library": "polaris",
       "component": "Button",
-      "rerunPctEqual": 85.85798816568047,
+      "rerunPctEqual": 91.33136094674556,
       "cellsCompared": 81120,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.33136094674556,
-      "gapCause": "ENGINE REGRESSED — state-plane projection 53792d3 (91.095 → 85.621 offline). The nested-pair lift mints label/icon BASE color as tokensByProp ({imported.button.label.color.{variant}.critical}); that base binding blocks inheritance of the ROOT hover/focus state color and no nested per-state binding replaces it, so every hover/focus/active row renders the base colour. OPEN — its own round."
+      "gapCause": "repaired: inheritance-aware nested refusal (repair wave #19). The nested-pair lift (53792d3) minted a BASE colour on the nested label/icon that blocked inheritance of the root's hover/focus-visible colour while every nested per-state delta went uncarried (91.331 -> 85.858). fuse.ts now REFUSES that base binding BY NAME when the capture proves the channel is pure inheritance (equal to its ancestor on all 960 planes) AND its own state delta cannot be carried \u2014 counting BOTH doors, the nested-state vocabulary and the pre-mint stateCodeOnly drop, because label died at the first and icon at the second. Reproduces the committed harness scorecard EXACTLY (74088/81120 cells, 320/960 rows) and the re-fused contract is BYTE-IDENTICAL to the committed enriched.contract.json, so no downstream artifact moved. Pinned by eval nested-inheritance-refusal."
     },
     {
       "library": "polaris",
@@ -216,7 +216,7 @@
       "cellsCompared": 2440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.11602209944752,
-      "gapCause": "VOCABULARY CHANGE — live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 → 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
+      "gapCause": "VOCABULARY CHANGE \u2014 live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 \u2192 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
     },
     {
       "library": "polaris",
@@ -252,7 +252,7 @@
       "cellsCompared": 7353,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.05605158730158,
-      "gapCause": "VOCABULARY CHANGE — same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 → 7353."
+      "gapCause": "VOCABULARY CHANGE \u2014 same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 \u2192 7353."
     },
     {
       "library": "polaris",
@@ -270,7 +270,7 @@
       "cellsCompared": 40832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.86239193083574,
-      "gapCause": "VOCABULARY CHANGE — same class (acb0342); cellsCompared 44416 → 40832, % within 0.005 of committed."
+      "gapCause": "VOCABULARY CHANGE \u2014 same class (acb0342); cellsCompared 44416 \u2192 40832, % within 0.005 of committed."
     },
     {
       "library": "polaris",

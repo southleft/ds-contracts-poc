@@ -35,7 +35,7 @@ import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { chromiumExecutable } from '../figma/visual-parity/render.js';
 import { mintTokens } from '../../core/mint-tokens.js';
-import { flattenTokens } from '../../core/tokens.js';
+import { flattenTokens, tokenInventoryFromJson } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import {
@@ -406,6 +406,11 @@ async function main() {
     // Round 5c: carried-channel re-mints (defaultless-axis contest) ride the
     // styled-channel receipts into the extension block + the ledger.
     styledReceipts.push(...prep.remintReceipts);
+    // Inheritance-aware refusal (nested-state repair round): the MEASURED
+    // pure-inheritance findings ride the same receipt channel, so both the
+    // dropped bindings and the near-misses that were checked and KEPT are
+    // legible in the extension block and the ledger.
+    styledReceipts.push(...prep.inheritanceReceipts);
     // nestedPairs: applyMintToContract can spell a nested pair as a
     // per-value tokensByProp map (state-plane projection round).
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
@@ -413,6 +418,7 @@ async function main() {
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       prep.declared, prep.declaredStates, prep.setPlaneLiterals,
+      { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas },
     );
 
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
@@ -448,7 +454,14 @@ async function main() {
     if (existsSync(decisionsPath)) {
       const decisions = JSON.parse(readFileSync(decisionsPath, 'utf8')) as AckedDecision[];
       const resolved = structuredClone(enriched) as Contract;
-      const { applied, skipped } = applyDecisions(resolved, decisions);
+      // Apply-time value check: the SAME inventory the gate renders with
+      // (cfg.tokens.dtcg + the minted tree), so an acked resolution that
+      // cannot resolve is refused by name instead of rendering empty.
+      const decisionInventory = tokenInventoryFromJson([
+        ...cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(REPO, p), 'utf8')) as Record<string, unknown>),
+        mergedTree,
+      ]);
+      const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
       decisionNotes = [
         ...applied.map((a) => `decision re-applied: ${a}`),
         ...skipped.map((sk) => `decision SKIPPED: ${sk}`),

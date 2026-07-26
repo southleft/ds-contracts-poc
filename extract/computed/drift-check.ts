@@ -65,7 +65,15 @@ interface BaselineRow {
   unresolvedTokenRefs: number;
   /** the committed harness scorecard's number — context, never the pin. */
   committedPctEqual: number;
-  /** why the two differ, by name. '' = they agree exactly. */
+  /** why the two differ, by name. Three forms, all deliberate:
+   *   · ''                — they agree, and there is nothing to explain.
+   *   · '<CAUSE> …'       — they differ; this names why.
+   *   · 'repaired: …'     — they AGREE NOW because a later round closed a gap
+   *                         this baseline used to carry. Kept so the history
+   *                         is not silently erased by the fix.
+   *  A row may also agree on pctEqual while carrying unresolvedTokenRefs > 0;
+   *  that is a different defect on the same row and the cause names it (the
+   *  astryx rows). Both are printed. */
   gapCause: string;
 }
 
@@ -157,8 +165,16 @@ if (WRITE) {
 console.log('');
 for (const r of rows) {
   const same = Math.abs(r.rerunPctEqual - r.committedPctEqual) < 0.0005;
+  // An EXACT row still prints its cause when it has one — a 'repaired:' note,
+  // or the reason it carries unresolved refs despite agreeing. Suppressing it
+  // is how a closed finding becomes invisible and gets rediscovered.
+  const note = same
+    ? r.gapCause
+      ? `EXACT — ${r.gapCause.split(/(?<=\.)\s/)[0]}`
+      : 'EXACT'
+    : `gap ${(r.rerunPctEqual - r.committedPctEqual).toFixed(3)} — ${r.gapCause || 'UNNAMED (name it in the baseline)'}`;
   console.log(
-    `  ${(r.library + '/' + r.component).padEnd(24)} offline ${r.rerunPctEqual.toFixed(3).padStart(7)}%  committed ${r.committedPctEqual.toFixed(3).padStart(7)}%  ${same ? 'EXACT' : `gap ${(r.rerunPctEqual - r.committedPctEqual).toFixed(3)} — ${r.gapCause || 'UNNAMED (name it in the baseline)'}`}${r.unresolvedTokenRefs ? `  [${r.unresolvedTokenRefs} unresolved refs]` : ''}`,
+    `  ${(r.library + '/' + r.component).padEnd(24)} offline ${r.rerunPctEqual.toFixed(3).padStart(7)}%  committed ${r.committedPctEqual.toFixed(3).padStart(7)}%  ${note}${r.unresolvedTokenRefs ? `  [${r.unresolvedTokenRefs} unresolved refs]` : ''}`,
   );
 }
 

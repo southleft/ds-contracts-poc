@@ -830,6 +830,22 @@ export interface MintPrep {
    *  (min-height auto→24px) — the refused-mint set planes are computed in
    *  applyMintToContract from the observations themselves. */
   setPlaneLiterals: SetPlaneLiteral[];
+  /** INHERITANCE-AWARE REFUSAL (this round) — `part|channel` keys for which
+   *  the CAPTURE proves the part carries no independent fact: an INHERITED
+   *  channel whose value equals its nearest captured ancestor's on EVERY
+   *  captured plane (base and every interaction/state plane), where that
+   *  ancestor itself carries the channel. A MEASURED fact, not a policy —
+   *  applyMintToContract decides what to do with it. */
+  inheritanceOnly: string[];
+  /** `part|channel` keys (non-root) on which SOME state delta was OBSERVED —
+   *  whatever became of it. The mint's own bindings are not a sufficient
+   *  signal here: a delta can be dropped BEFORE minting (padding-incompatible
+   *  coverage → stateCodeOnly), and polaris Button's `icon` is exactly that
+   *  case, so reading only mintStates would have missed half the defect. */
+  inheritanceStateDeltas: string[];
+  /** Human-readable receipts for the entries above (and for the near-misses
+   *  that were checked and REJECTED, so the check's reach is legible). */
+  inheritanceReceipts: string[];
 }
 
 /** Box-geometry channels with no inheritance to lean on — the base-plane
@@ -844,6 +860,29 @@ export const BASE_FALLBACK_CHANNELS = new Set([
   'border-bottom-left-radius', 'border-bottom-right-radius',
   'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
 ]);
+
+/** CSS-INHERITED channels, restricted to the mintable kinds (color/px/number).
+ *  The complement of BASE_FALLBACK_CHANNELS's premise: these channels DO have
+ *  inheritance to lean on, so a child that is absent renders its ancestor's
+ *  value — which is why round 4 already refuses a base-plane LITERAL here
+ *  ("inherited channels are usually RIGHT via CSS inheritance when absent — a
+ *  base literal would break that (Button's primary label went dark)").
+ *  The membership is the CSS specification's, not a threshold: `color`,
+ *  `fill`/`stroke` (SVG paint), and the text metrics all inherit. */
+export const INHERITED_CHANNELS = new Set([
+  'color', 'fill', 'stroke', 'caret-color',
+  'font-size', 'font-weight', 'letter-spacing', 'line-height', 'word-spacing',
+  'text-indent', 'stroke-width', 'fill-opacity', 'stroke-opacity',
+]);
+
+/** Nested (non-root) `Part.states` vocabulary — v13 carries PLAIN color-kind
+ *  refs only. ONE implementation: the state-binding placer below refuses by
+ *  it, and the inheritance-aware base refusal reads the same predicate to
+ *  learn which nested state deltas will go uncarried. Two spellings of this
+ *  rule is how the base door and the state door drifted apart in the first
+ *  place (the regression this comment's round repairs). */
+export const nestedStateCarriable = (channel: string, placeholders: string[]): boolean =>
+  ['color', 'background-color', 'border-color'].includes(channel) && placeholders.length === 0;
 
 /** Round 5c — SET-PLANE LITERALS: a geometry channel the mint refuses (or
  *  cannot kind — min-height auto→24px) still has EXACT per-plane truth on a
@@ -1118,6 +1157,75 @@ export function prepareMint(
   const folded = buildBaseObs(true);
   const unfolded = buildBaseObs(false);
 
+  // ---- INHERITANCE-AWARE REFUSAL: measure pure-inheritance channels -------
+  //
+  // A nested part whose INHERITED channel reads EXACTLY its ancestor's value
+  // on every captured plane carries no fact of its own — what the capture
+  // recorded there IS CSS inheritance, observed. Binding it anyway pins the
+  // child to ONE plane's value and severs the chain, so every plane the
+  // ancestor changes (and the child cannot spell) renders the base value.
+  //
+  // Measured here from the captures; the POLICY (when the redundancy becomes
+  // harmful enough to refuse) lives in applyMintToContract, which is the only
+  // place that knows which nested state bindings actually go uncarried.
+  const inheritanceOnly: string[] = [];
+  const inheritanceReceipts: string[] = [];
+  {
+    // Parent by the UNION's own links, NOT by repPath: a repPath is only
+    // meaningful inside the capture that introduced its node (an icon part
+    // introduced by a withIcon=on capture can hold path '0' while the base
+    // capture's label holds '0' too), so prefix arithmetic across parts
+    // would mis-attribute ancestry. `union.entries` is DFS order over the
+    // union tree and carries real parent pointers.
+    const indexOfNode = new Map(a.union.entries.map((e, i) => [e, i] as const));
+    const ancestorOf = (pi: number): number | null => {
+      const parent = a.union.entries[pi]?.parent;
+      const ai = parent ? indexOfNode.get(parent) : undefined;
+      return ai === undefined ? null : ai;
+    };
+    for (let pi = 0; pi < a.baseFlat.length; pi++) {
+      if (a.union.entries[pi]?.parent == null) continue; // root has no ancestor
+      const partName = a.partNames[pi];
+      if (svgConsumedParts?.has(partName)) continue;
+      const ai = ancestorOf(pi);
+      if (ai === null) continue;
+      const ancestorName = a.partNames[ai];
+      const ancestorCarries = carriedChannels(partByName.get(ancestorName));
+      const ancestorStyled = styled.get(ancestorName) ?? new Set<string>();
+      for (const channel of [...(styled.get(partName) ?? [])].sort()) {
+        if (!INHERITED_CHANNELS.has(channel)) continue;
+        // The ancestor must itself CARRY the channel — reviewed or mintable.
+        // Without that, dropping the child's binding would leave the channel
+        // bound nowhere and the "never worse" argument would not hold.
+        if (!ancestorCarries.has(channel) && !ancestorStyled.has(channel)) {
+          inheritanceReceipts.push(
+            `inheritance-check-rejected: ${partName}.${channel} — values track ancestor "${ancestorName}" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)`,
+          );
+          continue;
+        }
+        // Equality on EVERY captured plane, not just the default one — a
+        // channel that agrees at rest and diverges on :hover is a real fact.
+        let planes = 0;
+        let equalEverywhere = true;
+        for (const [, els] of a.union.alignedByKey) {
+          const child = els[pi];
+          const anc = els[ai];
+          if (!child || !anc) continue;
+          const cv = child.node.style[channel];
+          const av = anc.node.style[channel];
+          if (cv === undefined || av === undefined) continue;
+          planes++;
+          if (cv !== av) { equalEverywhere = false; break; }
+        }
+        if (!equalEverywhere || planes === 0) continue;
+        inheritanceOnly.push(`${partName}|${channel}`);
+        inheritanceReceipts.push(
+          `inheritance-only: ${partName}.${channel} equals ancestor "${ancestorName}" on all ${planes} captured planes — the part carries no independent ${channel} fact (CSS inheritance, observed)`,
+        );
+      }
+    }
+  }
+
   // ---- state deltas (§2 / §5.2 state minting) ----
   interface StateDelta { state: string; part: string; channel: string; occurrences: MintObservation['occurrences']; kinds: Set<string>; samples: Set<string>; combosSeen: Set<string> }
   const stateDeltaChannels = new Map<string, StateDelta>();
@@ -1287,6 +1395,15 @@ export function prepareMint(
     foldedStateSkips: [...new Set(foldedStateSkips)],
     remintReceipts: [...new Set(remintReceipts)],
     setPlaneLiterals,
+    inheritanceOnly: [...new Set(inheritanceOnly)].sort(),
+    inheritanceStateDeltas: [
+      ...new Set(
+        [...stateDeltaChannels.values()]
+          .filter((d) => d.part !== 'root')
+          .map((d) => `${d.part}|${d.channel}`),
+      ),
+    ].sort(),
+    inheritanceReceipts: [...new Set(inheritanceReceipts)].sort(),
   };
 }
 
@@ -1320,6 +1437,11 @@ export function applyMintToContract(
   declaredEnrichments: DeclaredEnrichment[] = [],
   declaredStateEnrichments: DeclaredStateEnrichment[] = [],
   setPlaneLiterals: SetPlaneLiteral[] = [],
+  /** prepareMint's MEASURED inheritance facts: `only` = `part|channel` keys
+   *  whose value is provably the ancestor's on every captured plane;
+   *  `stateDeltas` = keys on which some state delta was observed at all
+   *  (see MintPrep.inheritanceOnly / .inheritanceStateDeltas). */
+  inheritance: { only: string[]; stateDeltas: string[] } = { only: [], stateDeltas: [] },
 ): ApplyResult {
   const enriched = structuredClone(contract) as Contract & Record<string, unknown>;
   const overflowBindings: OverflowBinding[] = [];
@@ -1367,6 +1489,63 @@ export function applyMintToContract(
     byProp.set(prop, map);
     (map[value] ??= {})[channel] = ref;
   };
+
+  // ---- INHERITANCE-AWARE BASE REFUSAL (this round) -----------------------
+  //
+  // THE DEFECT THIS REPAIRS. The state-plane projection round lifted the mint
+  // so a NESTED part may carry a two-axis BASE binding (`nestedPairs`), but
+  // the nested STATE door stayed where v13 left it — plain color-kind refs
+  // only. polaris Button's `label` therefore gained a base colour
+  // (`{imported.button.label.color.{variant}.critical}`) while all four of
+  // its per-state colour deltas were refused as pair refs. The committed
+  // contract bound NO colour on `label` at all and the label simply inherited
+  // the root's :hover/:focus-visible colour; the new base binding severs that
+  // chain and nothing replaces it, so every hover/focus/active row renders
+  // the resting colour (91.331 → 85.858 offline).
+  //
+  // The rule, and only where both halves are true:
+  //   1. the CAPTURE proves the channel is pure inheritance (prepareMint's
+  //      inheritanceOnly — equal to the ancestor on EVERY plane), AND
+  //   2. a state delta on that channel WAS observed and is NOT carried as a
+  //      nested state binding. "Not carried" is read from the outcome, not
+  //      from one refusal site: a delta can die at the nested-state door
+  //      (nestedStateCarriable — Button's `label`, a pair ref) or never reach
+  //      the mint at all (padding-incompatible coverage → stateCodeOnly —
+  //      Button's `icon`). Both leave the plane uncarried, and reading only
+  //      the mint bindings would have repaired half the component.
+  // Then the base binding is refused BY NAME and the channel stays uncarried,
+  // which is what makes inheritance work again.
+  //
+  // Why this is never worse: (1) says the child's truth IS the ancestor's on
+  // every plane, so an uncarried child renders exactly what the ancestor
+  // renders and inherits the ancestor's accuracy — while the base binding can
+  // only ever be right on the planes that do not move. Under (2) at least one
+  // plane does move. Note round 4 already refuses a base-plane LITERAL on
+  // these same channels for these same reasons ("Button's primary label went
+  // dark"); this closes the tokensByProp door the lift opened beside it.
+  const inheritanceOnlySet = new Set(inheritance.only);
+  const inheritanceRefused = new Set<string>();
+  if (inheritanceOnlySet.size > 0) {
+    // Which nested state bindings the placer WILL carry (same predicate it
+    // refuses by — one implementation, so the two doors cannot drift apart
+    // again).
+    const stateCarried = new Set<string>();
+    mintStates.bindings.forEach((b, i) => {
+      const obs = stateObs[i];
+      if (!obs || b.ref === null) return;
+      const partName = obs.part === '' ? 'root' : obs.part;
+      if (partName === 'root') return; // root states are a different door
+      const parsed = stateOfMintProperty(obs.cssProperty);
+      if (!parsed) return;
+      if (nestedStateCarriable(parsed.channel, placeholdersOf(b.ref.slice(1, -1)))) {
+        stateCarried.add(`${partName}|${parsed.channel}`);
+      }
+    });
+    for (const key of inheritance.stateDeltas) {
+      if (!inheritanceOnlySet.has(key) || stateCarried.has(key)) continue;
+      inheritanceRefused.add(key);
+    }
+  }
 
   const apply = (result: MintResult, obsList: MintObservation[], isState: boolean) => {
     result.bindings.forEach((b, i) => {
@@ -1435,7 +1614,7 @@ export function applyMintToContract(
         }
         if (partName !== 'root') {
           // v13 Part.states: color-kind channels, plain refs only
-          if (!['color', 'background-color', 'border-color'].includes(channel) || phs.length > 0) {
+          if (!nestedStateCarriable(channel, phs)) {
             overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'v13 Part.states carries plain color-kind refs only on non-root parts' });
             return;
           }
@@ -1483,6 +1662,20 @@ export function applyMintToContract(
       }
 
       // ---- base bindings ----
+      // Inheritance-aware refusal (see the precompute above): this nested
+      // part's channel is provably its ancestor's on every captured plane AND
+      // its own state deltas cannot be carried. Binding the base value here
+      // would sever the inheritance that renders those planes correctly.
+      if (inheritanceRefused.has(`${partName}|${channel}`)) {
+        overflowBindings.push({
+          part: partName,
+          channel,
+          ref: b.ref,
+          refusal:
+            `inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)`,
+        });
+        return;
+      }
       if (phs.length === 0) {
         target.tokens ??= {};
         if (!(channel in target.tokens)) target.tokens[channel] = b.ref;

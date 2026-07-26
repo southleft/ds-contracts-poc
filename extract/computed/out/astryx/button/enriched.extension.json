@@ -10,18 +10,6 @@
           "$value": "0px",
           "$type": "dimension"
         },
-        "size-20-0004": {
-          "$value": "20.0004px",
-          "$type": "dimension"
-        },
-        "size-14": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "num-500": {
-          "$value": "500",
-          "$type": "number"
-        },
         "size-neg-1": {
           "$value": "-1px",
           "$type": "dimension"
@@ -29,6 +17,20 @@
       },
       "button": {
         "root": {
+          "height": {
+            "sm": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "36px",
+              "$type": "dimension"
+            }
+          },
           "outline-color": {
             "primary": {
               "$value": "#ffffff",
@@ -64,6 +66,10 @@
               "$value": "#ffffff",
               "$type": "color"
             }
+          },
+          "width": {
+            "$value": "99.8125px",
+            "$type": "dimension"
           },
           "background-image-state-active": {
             "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
@@ -105,24 +111,6 @@
           }
         },
         "part-0": {
-          "color": {
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "ghost": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "destructive": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          },
           "row-rule-color": {
             "primary": {
               "$value": "#ffffff",
@@ -143,24 +131,6 @@
           }
         },
         "label": {
-          "color": {
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "ghost": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "destructive": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          },
           "row-rule-color": {
             "primary": {
               "$value": "#ffffff",
@@ -195,23 +165,9 @@
               "$type": "dimension"
             }
           },
-          "color": {
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "ghost": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "destructive": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
+          "height": {
+            "$value": "1px",
+            "$type": "dimension"
           },
           "right": {
             "$value": "100.812px",
@@ -234,6 +190,10 @@
               "$value": "#ffffff",
               "$type": "color"
             }
+          },
+          "width": {
+            "$value": "1px",
+            "$type": "dimension"
           }
         }
       }
@@ -463,148 +423,8 @@
     "base": [
       {
         "part": "root",
-        "channel": "border-bottom-style",
-        "value": "none"
-      },
-      {
-        "part": "root",
-        "channel": "border-left-style",
-        "value": "none"
-      },
-      {
-        "part": "root",
-        "channel": "border-right-style",
-        "value": "none"
-      },
-      {
-        "part": "root",
-        "channel": "border-top-style",
-        "value": "none"
-      },
-      {
-        "part": "root",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "root",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "root",
-        "channel": "transition-duration",
-        "value": "0.175s"
-      },
-      {
-        "part": "root",
-        "channel": "transition-property",
-        "value": "background-image, background-color, color, opacity, transform"
-      },
-      {
-        "part": "root",
-        "channel": "transition-timing-function",
-        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
-      },
-      {
-        "part": "part-0",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "part-0",
-        "channel": "text-align",
-        "value": "center"
-      },
-      {
-        "part": "part-0",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "label",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "label",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "label",
-        "channel": "text-align",
-        "value": "center"
-      },
-      {
-        "part": "label",
-        "channel": "text-overflow",
-        "value": "ellipsis"
-      },
-      {
-        "part": "label",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "part-1",
-        "channel": "border-bottom-style",
-        "value": "none"
-      },
-      {
-        "part": "part-1",
-        "channel": "border-left-style",
-        "value": "none"
-      },
-      {
-        "part": "part-1",
-        "channel": "border-right-style",
-        "value": "none"
-      },
-      {
-        "part": "part-1",
-        "channel": "border-top-style",
-        "value": "none"
-      },
-      {
-        "part": "part-1",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "part-1",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "part-1",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "part-1",
-        "channel": "pointer-events",
-        "value": "none"
-      },
-      {
-        "part": "part-1",
-        "channel": "text-align",
-        "value": "center"
-      },
-      {
-        "part": "part-1",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "part-1",
-        "channel": "user-select",
-        "value": "none"
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
       }
     ],
     "state": [
@@ -642,10 +462,17 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "root",
-      "channel": "transform",
+      "part": "part-0",
+      "channel": "height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "matrix(1, 0, 0, 1, 0, 0)",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
       "distinctValues": 1
     },
     {
@@ -676,26 +503,6 @@
     {
       "combo": "primary.sm.no-isDisabled",
       "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
       "channel": "font-family",
       "ref": "{font-family-body}",
       "computedProp": "font-family",
@@ -706,61 +513,11 @@
     {
       "combo": "primary.sm.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-top",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-bottom",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-left",
-      "expected": "8px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-right",
-      "expected": "8px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -774,23 +531,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "primary.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "primary.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
       "verdict": "contradiction"
     },
     {
@@ -806,21 +663,11 @@
     {
       "combo": "primary.md.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -834,23 +681,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
       "verdict": "contradiction"
     },
     {
@@ -866,61 +813,11 @@
     {
       "combo": "primary.lg.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-top",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-bottom",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-left",
-      "expected": "16px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-right",
-      "expected": "16px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -934,23 +831,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.primary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
       "verdict": "contradiction"
     },
     {
@@ -966,71 +963,11 @@
     {
       "combo": "secondary.sm.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-muted}",
-      "computedProp": "background-color",
-      "expected": "rgba(5, 54, 89, 0.047)",
-      "observed": "rgba(5, 54, 89, 0.1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-top",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-bottom",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-left",
-      "expected": "8px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-right",
-      "expected": "8px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1044,23 +981,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1076,31 +1113,11 @@
     {
       "combo": "secondary.md.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-muted}",
-      "computedProp": "background-color",
-      "expected": "rgba(5, 54, 89, 0.047)",
-      "observed": "rgba(5, 54, 89, 0.1)",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1114,23 +1131,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1146,71 +1263,11 @@
     {
       "combo": "secondary.lg.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-muted}",
-      "computedProp": "background-color",
-      "expected": "rgba(5, 54, 89, 0.047)",
-      "observed": "rgba(5, 54, 89, 0.1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-top",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-bottom",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-left",
-      "expected": "16px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-right",
-      "expected": "16px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1224,23 +1281,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.secondary}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1256,61 +1413,11 @@
     {
       "combo": "ghost.sm.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-top",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-bottom",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-left",
-      "expected": "8px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-right",
-      "expected": "8px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1324,23 +1431,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1356,21 +1563,11 @@
     {
       "combo": "ghost.md.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1384,23 +1581,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1416,61 +1713,11 @@
     {
       "combo": "ghost.lg.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-top",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-bottom",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-left",
-      "expected": "16px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-right",
-      "expected": "16px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1484,23 +1731,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "ghost.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.ghost}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1516,61 +1863,11 @@
     {
       "combo": "destructive.sm.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-top",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-1}",
-      "computedProp": "padding-bottom",
-      "expected": "4px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-left",
-      "expected": "8px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-2}",
-      "computedProp": "padding-right",
-      "expected": "8px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1584,23 +1881,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.sm.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1616,21 +2013,11 @@
     {
       "combo": "destructive.md.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1644,23 +2031,123 @@
       "verdict": "contradiction"
     },
     {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "column-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-1}",
-      "computedProp": "row-gap",
-      "expected": "4px",
-      "observed": "8px",
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.md.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
       "verdict": "contradiction"
     },
     {
@@ -1676,61 +2163,11 @@
     {
       "combo": "destructive.lg.no-isDisabled",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-sm}",
-      "computedProp": "font-size",
-      "expected": "12px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-weight",
-      "ref": "{font-weight-semibold}",
-      "computedProp": "font-weight",
-      "expected": "600",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-top",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-3}",
-      "computedProp": "padding-bottom",
-      "expected": "12px",
-      "observed": "8px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-left",
-      "expected": "16px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "padding-inline",
-      "ref": "{spacing-4}",
-      "computedProp": "padding-right",
-      "expected": "16px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -1741,6 +2178,126 @@
       "computedProp": "min-height",
       "expected": "36px",
       "observed": "auto",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-0",
+      "channel": "color",
+      "ref": "{imported.button.part-0.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.button.label.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "font-weight",
+      "ref": "{imported.shared.num-500}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "destructive.lg.no-isDisabled",
+      "part": "part-1",
+      "channel": "color",
+      "ref": "{imported.button.part-1.color.destructive}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
       "verdict": "contradiction"
     }
   ],
@@ -1759,7 +2316,27 @@
     "interaction-on-isDisabled-changed: destructive.lg.isDisabled active root.transform"
   ],
   "structureReceipts": [],
-  "styledChannelReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "inheritance-only: label.caret-color equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-weight equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.caret-color equals ancestor \"root\" on all 96 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.color equals ancestor \"root\" on all 96 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.font-size equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.font-weight equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.line-height equals ancestor \"root\" on all 96 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.caret-color equals ancestor \"root\" on all 96 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.color equals ancestor \"root\" on all 96 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.font-size equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.font-weight equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.line-height equals ancestor \"root\" on all 96 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
   "anatomyJoin": {
     "computed": [
       {
@@ -1768,7 +2345,7 @@
       },
       {
         "part": "part-0",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "label",
@@ -1776,7 +2353,7 @@
       },
       {
         "part": "part-1",
-        "join": "computed-only"
+        "join": "matched"
       }
     ],
     "staticOnly": []
@@ -1791,44 +2368,34 @@
     ],
     "svgAssets": [],
     "receipts": [
-      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)"
+      "sr-only-carried-as-hidden: part-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": []
   },
   "enrichmentNotes": [
-    "declared fact carried: root.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.transition-property = background-image, background-color, color, opacity, transform (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.text-align = center (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.text-align = center (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared state fact carried: [disabled] label.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] part-0.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] part-1.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] root.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] root.outline-style = solid (v15 declared vocabulary)"
+    "declared fact carried: root.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added"
   ]
 }

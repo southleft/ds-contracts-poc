@@ -6,6 +6,13 @@ offline re-fuse (`extract/computed/regate.ts`) produces different numbers for
 either fixed or left open with its cause located. Defect-first — the fixes
 are at the bottom because the findings matter more.*
 
+*Updated by the **REPAIR WAVE** (task #19): 3 of the 4 open items are closed and
+the 4th is falsified — the astryx fix this document prescribed was executed and
+does not work, and the real cause is named. Only 5 of 36 components now differ
+from their committed receipt, all of them for reasons that are documented
+vocabulary changes rather than defects. Start at "REPAIR WAVE" below; the
+triage-round sections are kept beneath it, marked where superseded.*
+
 Reproduced at `c9242cc`; the whole 36-component baseline was **re-verified at
 `c1ce72d`** after the concurrent re-anchoring round moved
 `examples/astryx/tokens/astryx-minted.dtcg.json` under this triage (36/36 still
@@ -46,14 +53,14 @@ documented in `regate.ts`'s header; the third was NOT, and it was a defect:
 | mui/Chip | 87.705 → **90.164** | (a) engine improved | state-plane projection `53792d3`. Reproduced 87.705 EXACTLY at its own commit `82d312f`. |
 | mui/Tooltip | 70.543 → **90.698** | (a) engine improved | organism/table-lowering round `3e14f6f`. Reproduced 70.543 EXACTLY at its own commit `aab937b`. |
 | astryx/Switch | 76.302 → **77.344** | (a) engine improved | absolute-positioning round `f52c334`. Reproduced 76.302 EXACTLY at `0078020`. |
-| polaris/Button | 91.331 → **85.858** | **(b) engine REGRESSED — OPEN** | state-plane projection `53792d3`. See below. |
+| polaris/Button | 91.331 → **85.858** → **91.331** | **(b) engine REGRESSED — FIXED (repair wave)** | state-plane projection `53792d3`. Repaired by the inheritance-aware nested refusal; reproduces the committed number EXACTLY (74088/81120 cells, 320/960 rows). See below. |
 | polaris/Checkbox | 84.116 → 80.820 | (c) vocabulary change | live-paste-2 `acb0342` (sr-only hidden inputs carried as hidden). `cellsCompared` 2896 → 2440. |
 | polaris/Tag | 82.056 → 80.919 | (c) vocabulary change | same class, `acb0342`. cells 8064 → 7353. |
 | polaris/TextField | 81.862 → 81.857 | (c) vocabulary change | same class, `acb0342`. cells 44416 → 40832; % within 0.005. |
-| polaris/Badge | 97.327 → 95.159 | **(c) polluted ledger — OPEN** | `out/badge/decisions.json` acks `{font-size-sm}` / `{spacing-0}` — REPO-convention names absent from the Polaris inventory (`{p.*}`). Surfaced only once the runner began applying the ledger the harness applies. |
-| astryx/Slider | 87.908 → **55.299** | (c) contract/mint SKEW | 44 unresolved refs. See below. |
-| astryx/Button | 98.099 → 95.391 | (c) contract/mint SKEW | 22 unresolved refs; measured 94.766 at `0078020` and has since IMPROVED. |
-| astryx/Badge | 100.000 → 96.296 | (c) contract/mint SKEW | 1 unresolved ref; measured 96.296 at `0078020`, the commit that committed 100.000. |
+| polaris/Badge | 97.327 → 95.159 → **97.327** | **(c) FOREIGN ledger — FIXED (repair wave)** | not "polluted"; the file was the **astryx** Badge ledger, whole. Removed; 2 unresolved refs → 0, committed number reproduced EXACTLY. See below. |
+| astryx/Slider | 87.908 → **55.299** | (c) INSTRUMENT SCOPE (was misnamed "contract/mint skew") | 44 unresolved refs, **all 44 present in the shipped minted tree**. Recaptured — the number is now the honest 55.333 and the receipt agrees with the instrument. See below. |
+| astryx/Button | 98.099 → 95.391 | (c) INSTRUMENT SCOPE | 22 unresolved refs, all 22 in the shipped minted tree. Recaptured → committed 95.391. |
+| astryx/Badge | 100.000 → 96.296 | (c) INSTRUMENT SCOPE | 1 unresolved ref, present in the shipped minted tree. Recaptured → committed 96.296; the 100.000 was unreproducible by any current run. |
 | astryx/Card | 98.252 → **98.252** | — (counterfactual) | EXACT *despite* 54 unresolved refs — the affected channels are already mismatched or uncompared. Skew presence ≠ skew impact, which is why `unresolvedTokenRefs` is pinned SEPARATELY from `pctEqual`. |
 | **24 others** | **exact** | — | all of mui except Chip/Tooltip, all of tailwind, polaris Avatar/Banner/ProgressBar/RadioButton/Spinner/Text/Thumbnail. |
 
@@ -63,7 +70,74 @@ repo's committed captured truth, so only the ENGINE varied. Worktrees older
 than `2d2098a` lack regate's `--out` flag, so HEAD's runner was overlaid to
 reach the mui/astryx out-roots.
 
+## REPAIR WAVE (task #19) — what this round changed
+
+Four items were taken from the triage above. Two were repaired at the engine,
+one was a data removal, and one was **falsified**: the fix this document
+proposed for astryx does not work, and the real cause is somewhere else.
+
+| item | before → after | outcome |
+|---|---|---|
+| polaris Button nested-state colour | 85.858 → **91.331** | FIXED — inheritance-aware nested refusal |
+| astryx Button/Badge/Slider skew | 22 / 1 / 44 unresolved refs | **NAMED BLOCKED** — recapture executed faithfully and did NOT close it; true cause located (below) |
+| orphaned `out/{card,slider,switch}` | 3 dirs | REMOVED |
+| polaris Badge ledger | 95.159 → **97.327**, 2 refs → 0 | FIXED — the ledger was astryx's, whole |
+
+Guards added: evals `nested-inheritance-refusal` and
+`decision-ledger-value-check` (both Chromium-free, both self-falsifying).
+
+## astryx is an INSTRUMENT SCOPE defect, not contract/mint skew
+
+This document's own §"astryx Slider was never an engine regression" named the
+cause as version skew and prescribed a recapture. **The recapture was run — all
+three components, real harness, pinned sandbox at `@astryxdesign/core@0.1.6`,
+double-run byte-identity IDENTICAL — and it closed nothing.** Numbers before and
+after are the same to three decimals, and every unresolved ref survived.
+
+The reason it cannot work, and the actual cause:
+
+- Those refs live in the **reviewed layer** of the shipped contract
+  (`anatomy.label.tokens.font-size = {imported.shared.size-14}`), not in the
+  fresh enrichment. Fusion preserves reviewed bindings by design — that is the
+  whole point of the static layer — so a recapture re-mints around them and
+  leaves them exactly where they were.
+- Every one of those refs **does resolve**: all 22 of Button's, Badge's 1, and
+  Slider's 44 are present in `examples/astryx/tokens/astryx-minted.dtcg.json`
+  (237 leaves), which is why the eval `shipped-contract-refs-resolve` passes and
+  why the canvas is fine.
+- What is actually wrong is the **gate's inventory**. `gate.ts` renders with
+  `cfg.tokens.css` + `mintedTokenCss(FRESH mint)` and builds its inventory from
+  `cfg.tokens.dtcg` + the FRESH mint. The library's **shipped** minted tree is
+  in neither. So the gate scores a contract against a token set the contract was
+  never promoted against, and the reviewed layer's leaves render as empty custom
+  properties. The premise recorded above — "the harness's contract is freshly
+  minted, so it never needed to be" — is false for any contract whose reviewed
+  layer carries minted refs from an earlier round.
+
+**Proposed fix (NOT executed here — it changes the measured meaning for all four
+libraries and rewrites committed harness receipts, which is an owner call):**
+give the gate the shipped minted tree as well as the fresh one, fresh winning on
+collision, for BOTH `tokenInventoryFromJson` and `mintedTokenCss`. Expected to
+take astryx's three rows to zero unresolved refs and to be a no-op for
+polaris/mui/tailwind (they already measure zero) — which is the falsification
+test the next wave should run first.
+
+What the recapture DID buy, and why it was kept: the committed astryx receipts
+were stale. `astryx/Badge` claimed **100.000**, a number no current engine can
+produce. The three components now carry numbers a real harness run actually
+measured (96.296 / 95.391 / 55.333), each with double-run byte-identity, so
+committed and offline agree and the rows' `gapCause` is empty for the first
+time. Card and Switch were NOT recaptured (out of the named scope) and keep
+their existing gaps. `promote-floor` was deliberately NOT re-run for astryx: the
+shipped contracts already resolve every ref, so regenerating them would churn
+shipped artifacts and the bundle pins without closing anything.
+
 ## astryx Slider was never an engine regression
+
+*(Triage-round text, kept for the record. Its headline still holds — this is
+not an engine regression and the canvas is untouched — but its CAUSE and its
+prescribed fix are **superseded by the section above**: the refs resolve fine
+against the shipped minted tree, and a recapture does not close them.)*
 
 The 32-point drop is **contract/mint version skew**, and the canvas is
 untouched:
@@ -86,7 +160,61 @@ The canvas output is unaffected: `astryx-minted.dtcg.json` carries every leaf
 the shipped contract references, and all 44 shipped contracts across the four
 libraries resolve every ref (now pinned — see below).
 
-## polaris Button IS a real regression — OPEN
+## polaris Button IS a real regression — FIXED (repair wave)
+
+**Repaired.** The offline gate now reproduces the committed harness scorecard
+EXACTLY — 91.331%, 74088/81120 cells, 320/960 rows fully equal — and the
+re-fused contract is **byte-identical to the committed
+`enriched.contract.json`**, which is why no downstream artifact (shipped
+contract, figma script, genesis, bundle) needed regenerating: the engine
+produces exactly what was already committed.
+
+The fix, in `fuse.ts`, is an **inheritance-aware refusal** in two halves so
+that neither half can drift from the other:
+
+- `prepareMint` MEASURES the fact: for a non-root part and a CSS-inherited
+  channel, is the value identical to its nearest ancestor's on EVERY captured
+  plane? For Button's `label.color` the answer is yes on all 960 planes — base
+  and all four state planes — because the label never had a colour of its own;
+  what the capture recorded there IS inheritance. A guard rejects the candidate
+  when the ancestor carries the channel nowhere (astryx Slider's `label-3` is
+  the live example, receipted).
+- `applyMintToContract` APPLIES the policy: refuse the base binding when the
+  channel is inheritance-only AND its own state delta goes uncarried. "Uncarried"
+  is read from the outcome, because a delta can die at either of two doors —
+  the nested-state vocabulary (Button's `label`, a pair ref) or *before minting*
+  (Button's `icon`, padding-incompatible coverage → `stateCodeOnly`). Reading
+  only the mint bindings repaired the label and left the icon broken: 89.507,
+  not 91.331. Both doors were needed.
+
+Why it is never worse: if the child's truth equals the ancestor's on every
+plane, an uncarried child renders whatever the ancestor renders and inherits
+its accuracy exactly, while a base binding can only be right on the planes that
+do not move — and the rule fires only when a plane does move. Round 4 already
+refuses a base-plane LITERAL on these same channels for these same reasons
+("Button's primary label went dark"); this closes the `tokensByProp` door the
+nested-pair lift opened beside it.
+
+Blast radius, measured — and it is not zero elsewhere, so stating it precisely
+matters. The refusal fires on **three** components across the 36:
+
+| component | binding refused | pctEqual | cellsCompared |
+|---|---|---|---|
+| polaris/Button | `label.color`, `icon.color` | 85.858 → **91.331** | unchanged |
+| mui/Switch | `switch-thumb.color` | **unchanged** | unchanged |
+| polaris/Tag | `icon-3.color` | **unchanged** | unchanged |
+
+The latter two are provably harmless: the refused channel was already rendering
+identically (or its cells were already mismatched/uncompared), so the number
+does not move — but the binding is gone and the extension receipt says so, which
+is why they are listed rather than described as "nothing else changed". mui Chip
+and the rest of the state round's wins are untouched, because their nested state
+channels are `background-color`, which does not inherit. The check itself ran
+everywhere: astryx Button measured 15 inheritance-only channels and refused
+none of them; astryx Slider had 17 candidates rejected by the ancestor-carries
+guard, which is that guard doing real work rather than decorating.
+
+### The original finding
 
 The one class (b) finding. At `53792d3` (state-plane projection) the offline
 number fell 91.095 → 85.621, `cellsCompared` unchanged at 81120,
@@ -116,7 +244,56 @@ validate, and guessing at it inside a triage round is how the state round's
 own first cut over-reached (its commit message says so). Left OPEN, located to
 the commit, the file, and the ref shape.
 
-## polaris Badge's ledger is polluted — OPEN
+## polaris Badge's ledger was not polluted — it was FOREIGN (FIXED)
+
+The triage called this a *polluted* Polaris ledger with two bad rows. It was
+not: **every row in the file was astryx's**, and the file had no Polaris
+content at all.
+
+The evidence is exact. `out/badge/decisions.json`'s combo ids are
+`blue, cyan, error, green, info, neutral, orange, pink, purple, red, success,
+teal, warning, yellow` — precisely the **astryx** Badge combo set. Polaris
+Badge's combos are tone×progress (`attention-strong.complete`, `critical.none`,
+…) and share not one id. Both rows appear verbatim in
+`out/astryx/badge/decisions.md` — same scope, `from`, `to`, `observed`,
+`expected`, and the same queue-item counts (28 and 14). Git agrees: the only
+commit that ever touched the file is `2f494ab`, an **astryx** round ("badge 42"
+decisions), written into the un-namespaced root before `--out` namespacing.
+
+Why the namespacing fix missed it: `b66e5a3` restored the Polaris artifacts
+from `5c93c8a`, but `run.ts` deliberately PRESERVES the human-decision
+artifacts (`decisions.json`, `decisions.md`, `resolved.contract.json`) from
+regeneration — so the restore covered the generated side and left astryx's
+ledger sitting in the Polaris directory. That commit's claim that "Polaris
+artifacts [were] RESTORED to their pre-astryx state" is therefore incomplete by
+exactly three files.
+
+Removed, not rewritten: there is no `{p.*}` spelling to map these rows to,
+because they are not Polaris facts. Badge now reproduces its committed 97.327
+exactly with 0 unresolved refs.
+
+**A loaded gun came out with it.** `out/badge/resolved.contract.json` was a
+pre-promotion contract carrying the same astryx tokens (`{spacing-0}`,
+`{font-size-sm}`) and no promoted parts. It was NOT the source of the shipped
+contract — shipped matches `enriched.contract.json` — but `promote-floor.ts`
+prefers `resolved.contract.json` whenever it exists, so the next promotion
+would have silently regressed the shipped Badge contract. Removed; promote-floor
+re-run and verified byte-stable (it now reads `enriched.contract.json`, and no
+shipped contract changed). An audit of every other `resolved.contract.json`
+across all four libraries confirms each one really is
+`applyDecisions(enriched, ledger)` — Badge was the only stale promotion source.
+
+**The guardable class** — `applyDecisions` matched on (part, channel, scope)
+and never consulted `ids`, so a foreign ledger applied silently. Keying off
+`ids` is NOT the fix (measured: 6 of 9 Polaris ledgers carry ids from an older
+combo enumeration and are perfectly valid — that check would refuse real rows).
+The fix is the **apply-time value check**: a decision whose `to` is a token ref
+absent from the library's inventory is now a NAMED skip, never a silent write.
+Pinned by `decision-ledger-value-check`, which also asserts that no committed
+ledger in any of the four libraries targets a token its own library does not
+ship.
+
+### The original finding
 
 `extract/computed/out/badge/decisions.json` carries two human-acked
 resolutions to `{font-size-sm}` and `{spacing-0}` — the REPO's token spelling,
@@ -140,8 +317,24 @@ never cleaned. `out/slider` and `out/switch` are byte-identical duplicates of
 Card (96.853 vs the current 98.252).
 
 They are why an astryx regate run that FORGETS `--out` still appears to work.
-No eval references them. **Proposed** (not executed — deletion of committed
-receipts is the owner's call): remove all three directories.
+No eval references them.
+
+**REMOVED (repair wave).** One correction to the paragraph above first: `out/slider`
+and `out/switch` are **not** byte-identical duplicates. Their `captured-truth.json`
+files are byte-identical to the astryx ones, but their ledgers are an OLDER,
+worse generation — both ack `font-size → {spacing-4}` (a spacing token for a
+type channel), which the namespaced astryx ledgers later corrected to the
+literal `16px`. So all three directories are stale supersets, not duplicates,
+and `out/card` additionally carries a lower score (96.853 vs 98.252). Nothing
+in `evals/` or `scripts/` referenced any of the three paths; the only textual
+hits were this document and `extract/figma/visual-parity/REPORT.md`, whose
+`out/switch/...` is a different out-root entirely.
+
+The same `--out` namespacing gap was also live in `.gitignore`: the literal
+`extract/computed/out/.orig-shots/` and `extract/computed/out/.regate-probe.html`
+spellings matched only the un-namespaced root, so every namespaced library's
+transient render surfaces were untracked churn. Both are now `**`-matched at any
+depth.
 
 ## Re-baseline policy
 
@@ -163,9 +356,19 @@ round compares like with like:
   `cellsCompared` (a moved denominator is a vocabulary change and must be
   acknowledged, never averaged into a percentage), ANY change in unresolved-ref
   count, or a component that stops fusing. `-- --write` re-records, deliberately.
-- Recapture is owed for: **astryx Button/Badge/Slider** (mint skew — a
+- ~~Recapture is owed for: **astryx Button/Badge/Slider** (mint skew — a
   recapture re-promotes the contract against the current mint and closes it),
-  and **polaris Button** once the nested-state regression is fixed.
+  and **polaris Button** once the nested-state regression is fixed.~~
+  **DONE / FALSIFIED (repair wave).** polaris Button needed no recapture at all
+  — the repaired engine re-fuses the committed contract byte-identically. The
+  astryx three WERE recaptured (real harness, pinned sandbox, double-run
+  byte-identity) and it did **not** close the refs; see the instrument-scope
+  section. Their receipts are now honest and gap-free; the refs stay open
+  against the proposed gate-inventory fix.
+
+The repair wave re-recorded the baseline. Rows that went exact carry
+`gapCause: ""`; the astryx three carry a gapCause naming the INSTRUMENT cause
+rather than the disproven skew story.
 
 ## Fixed this round
 

@@ -21,6 +21,27 @@
  *
  * A decision naming a part the promoted anatomy no longer has is a NAMED
  * skip (never silent) — the caller quotes skips in the ledger.
+ *
+ * APPLY-TIME VALUE CHECK (repair round — the polaris Badge finding). Matching
+ * is by (part, channel, scope): `ids` are provenance, never a selector. That
+ * is deliberate — combo-key vocabularies drift between rounds, so keying off
+ * ids would refuse legitimate ledgers (MEASURED: 6 of the 9 polaris ledgers
+ * carry ids from an older enumeration and are perfectly valid). But it also
+ * means a ledger belonging to a DIFFERENT library applies silently if it
+ * happens to name the same part+channel, and one did: the pre-namespacing
+ * astryx Badge run left its ledger in the un-namespaced polaris root, where
+ * its `{spacing-0}` / `{font-size-sm}` targets — astryx's un-prefixed
+ * spelling, absent from Polaris's `{p.*}` inventory — overwrote the Polaris
+ * Badge's real bindings and rendered as EMPTY custom properties (97.327 →
+ * 95.159, 2 unresolved refs).
+ *
+ * So: when the caller supplies the library's token inventory, a decision
+ * whose `to` is a token ref the inventory does not contain is a NAMED SKIP.
+ * A legitimate decision resolves by construction — it was recorded against
+ * this library's own tree — so the check cannot mis-fire on real rows; it
+ * only refuses to write a ref that provably cannot render. The inventory is
+ * OPTIONAL so existing callers keep working, and its absence is not a
+ * silent pass: the caller that gates a number passes it.
  */
 import { tokensByPropEntries, walkAnatomy, type Contract, type Part } from '../../scripts/contract-schema.js';
 
@@ -40,6 +61,10 @@ export interface AckedDecision {
 export function applyDecisions(
   contract: Contract,
   decisions: AckedDecision[],
+  /** Flat token-path inventory for THIS library (tokenInventoryFromJson over
+   *  cfg.tokens.dtcg + the minted tree). When given, a decision whose `to`
+   *  ref is absent from it is refused BY NAME — see the header. */
+  inventory?: Set<string>,
 ): { applied: string[]; skipped: string[] } {
   const applied: string[] = [];
   const skipped: string[] = [];
@@ -54,6 +79,13 @@ export function applyDecisions(
     // channel — resolve.ts routing, mirrored here so re-application is
     // faithful). Token refs stay brace-wrapped.
     const isTokenRef = /^\{[a-z0-9.-]+\}$/i.test(d.to);
+    // Apply-time value check (header): never write a ref that cannot render.
+    if (isTokenRef && inventory && !inventory.has(d.to.slice(1, -1))) {
+      skipped.push(
+        `${d.part}.${d.channel} [${d.scope}] → ${d.to}: target token is NOT in this library's inventory — NAMED skip (an acked resolution that cannot resolve would render as an EMPTY custom property; a ledger recorded against a different library is the known cause)`,
+      );
+      continue;
+    }
     if (d.scope === 'base') {
       if (isTokenRef) {
         target.tokens ??= {};

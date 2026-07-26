@@ -54,6 +54,19 @@ import {
 import type { Capture as DepthCapture, CapturedNode as DepthNode } from '../extract/computed/lib.js';
 import { decomposeTranslate, isAbsurdRadius } from '../extract/computed/lib.js';
 import { kebab as depthKebab } from '../extract/types.js';
+// POLARIS/ASTRYX REPAIR WAVE pins (both Chromium-free — the first replays the
+// COMMITTED capture through fusion, the second is pure JSON).
+import {
+  alignSweep as fuseAlignSweep,
+  applyMintToContract as fuseApplyMint,
+  detectFolds as fuseDetectFolds,
+  enrichLayout as fuseEnrichLayout,
+  prepareMint as fusePrepareMint,
+  styledChannels as fuseStyledChannels,
+} from '../extract/computed/fuse.js';
+import { reconstructCaptures as fuseReconstruct } from '../extract/computed/replay.js';
+import { mintTokens as coreMintTokens } from '../core/mint-tokens.js';
+import { applyDecisions as computedApplyDecisions, type AckedDecision } from '../extract/computed/decisions.js';
 
 const ROOT = process.cwd();
 const SCRATCH = path.join(ROOT, 'evals', '.scratch');
@@ -6285,6 +6298,175 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error('planted cross-library token ref was NOT refused — the ref check is decorative');
       }
       console.log(`shipped-contract-refs-resolve: ${contracts} shipped contracts across 4 libraries resolve EVERY token ref against their own library trees (planted cross-library ref refused by name); the offline-gate number itself is pinned on demand by \`npm run extract:computed:drift\``);
+    },
+  },
+  {
+    // INHERITANCE-AWARE NESTED REFUSAL (polaris/astryx repair wave).
+    //
+    // The state-plane projection round let a NESTED part carry a two-axis
+    // BASE binding, but the nested STATE door still carries plain color-kind
+    // refs only. polaris Button's `label` therefore gained a base colour
+    // while all four of its per-state colour deltas were refused — severing
+    // the CSS inheritance that had been rendering :hover/:focus-visible
+    // correctly, and costing 91.331 → 85.858 on the offline gate.
+    //
+    // The repair refuses that base binding when the CAPTURE proves the
+    // channel is pure inheritance (equal to the ancestor on EVERY plane) AND
+    // the part's own state delta goes uncarried. This pin replays the
+    // COMMITTED Button capture through the real fusion path — no Chromium,
+    // no harness — and asserts BOTH directions, so it cannot pass by
+    // accident: with the measured facts the label carries no colour; with
+    // them withheld (the pre-fix engine) it does.
+    id: 'nested-inheritance-refusal',
+    claim: 'C2-refusal',
+    run: () => {
+      const cfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/polaris.json'));
+      const comp = cfg.components.find((c) => c.name === 'Button')!;
+      const outDir = path.join(ROOT, 'extract/computed/out/button');
+      const truth = JSON.parse(readFileSync(path.join(outDir, 'captured-truth.json'), 'utf8'));
+      const space = propSpaceFor(ROOT, cfg, comp);
+      const captures = fuseReconstruct(truth).map((c) => ({ ...c, combo: `${comp.name}:${c.combo}` }));
+      const aligned = fuseAlignSweep(
+        { captures, controls: truth.controls, allProps: truth._provenance.channels, browserVersion: 'committed', fontChecks: {}, pinnedAnimations: [] } as never,
+        comp, space, cfg.library.classPrefix,
+      );
+      const promotion = depthPromoteAnatomy(space, comp, aligned.union, depthKebab(space.contract.name));
+      const svgConsumed = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
+      const controlStyles = Object.fromEntries(Object.entries(truth.controls as Record<string, { style: Record<string, string> }>).map(([t, n]) => [t, n.style]));
+      const styled = fuseStyledChannels(aligned, space, controlStyles, truth._provenance.channels, []);
+      const folds = fuseDetectFolds(aligned, styled);
+      const layout = fuseEnrichLayout(aligned, space, styled, promotion.contract);
+      const prep = fusePrepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed);
+
+      // The MEASURED fact: label.color tracks its ancestor on every plane.
+      if (!prep.inheritanceOnly.includes('label|color')) {
+        throw new Error(`polaris Button label.color was NOT measured as inheritance-only — the capture-side half of the refusal is not firing (got: ${prep.inheritanceOnly.join(', ') || 'none'})`);
+      }
+      const labelOf = (contract: unknown): Record<string, unknown> | null => {
+        const walk = (p: Record<string, unknown>): Record<string, unknown> | null => {
+          for (const [k, v] of Object.entries((p.parts ?? {}) as Record<string, Record<string, unknown>>)) {
+            if (k === 'label') return v;
+            const hit = walk(v);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        return walk(((contract as Record<string, never>).anatomy as Record<string, never>).root);
+      };
+      const colourBindings = (label: Record<string, unknown> | null): number => {
+        if (!label) return -1;
+        let n = 'color' in ((label.tokens ?? {}) as object) ? 1 : 0;
+        for (const e of (label.tokensByProp ?? []) as Array<{ map: Record<string, Record<string, string>> }>) {
+          for (const m of Object.values(e.map)) if ('color' in m) n++;
+        }
+        return n;
+      };
+      const mintBase = coreMintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
+      const mintStates = coreMintTokens(comp.name, prep.stateObs, prep.axes, { nestedPairs: true });
+      const applyWith = (inheritance: { only: string[]; stateDeltas: string[] }) =>
+        fuseApplyMint(
+          promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
+          prep.declared, prep.declaredStates, prep.setPlaneLiterals, inheritance,
+        ).enriched;
+
+      const repaired = colourBindings(labelOf(applyWith({ only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas })));
+      if (repaired !== 0) {
+        throw new Error(`polaris Button's nested label still carries ${repaired} colour binding(s) — the base binding blocks inheritance of the root's hover/focus colour on every state plane`);
+      }
+      // FALSIFIABLE: withhold the measured facts (= the pre-fix engine) and
+      // the very same inputs must reproduce the regression, or this pin is
+      // asserting nothing about the repair.
+      const preFix = colourBindings(labelOf(applyWith({ only: [], stateDeltas: [] })));
+      if (preFix <= 0) {
+        throw new Error(`without the inheritance facts the label carried ${preFix} colour bindings — the pin cannot distinguish the repair from the defect it fixes`);
+      }
+      // The safety condition must be load-bearing, not decorative: a channel
+      // whose ANCESTOR carries it nowhere is deliberately left bound (astryx
+      // Slider's label-3 is the live example), so a blanket "drop every
+      // inherited nested binding" rule would be a different, unsafe fix.
+      const rejected = prep.inheritanceReceipts.filter((r) => r.startsWith('inheritance-check-rejected:'));
+      console.log(`nested-inheritance-refusal: polaris Button label.color measured inheritance-only across the committed capture; base binding refused (${preFix} colour binding(s) without the facts → 0 with them); ${prep.inheritanceOnly.length} inheritance-only channel(s), ${rejected.length} candidate(s) rejected by the ancestor-carries guard`);
+    },
+  },
+  {
+    // DECISION LEDGER APPLY-TIME VALUE CHECK (polaris/astryx repair wave).
+    //
+    // applyDecisions matches by (part, channel, scope) — `ids` are provenance,
+    // never a selector, because combo vocabularies drift between rounds. That
+    // also means a ledger belonging to a DIFFERENT library applies silently,
+    // and one did: the pre-namespacing astryx Badge run left its ledger in the
+    // un-namespaced polaris root, where its `{spacing-0}`/`{font-size-sm}`
+    // targets overwrote Polaris's real bindings and rendered as EMPTY custom
+    // properties (97.327 → 95.159).
+    //
+    // Two pins: the guard refuses an unresolvable target by name, and NO
+    // committed ledger carries a target outside its own library's inventory.
+    id: 'decision-ledger-value-check',
+    claim: 'C2-refusal',
+    run: () => {
+      const inventory = tokenInventoryFromJson([
+        JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-light.dtcg.json'), 'utf8')) as Record<string, unknown>,
+      ]);
+      const mk = () => JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/badge.contract.json'), 'utf8'));
+      const foreign: AckedDecision[] = [{
+        ids: ['blue|root|padding-block'], part: 'root', channel: 'padding-block', scope: 'base',
+        from: '{spacing-0-5}', to: '{spacing-0}', observed: '0px', expected: '2px',
+        cause: 'the astryx Badge ledger, verbatim', ack: 'planted',
+      }];
+      const guarded = mk();
+      const before = guarded.anatomy.root.tokens['padding-block'];
+      const res = computedApplyDecisions(guarded, foreign, inventory);
+      if (res.applied.length !== 0 || res.skipped.length !== 1 || !res.skipped[0].includes('NOT in this library')) {
+        throw new Error(`a decision targeting {spacing-0} (absent from the Polaris inventory) was NOT refused by name: applied=${JSON.stringify(res.applied)} skipped=${JSON.stringify(res.skipped)}`);
+      }
+      if (guarded.anatomy.root.tokens['padding-block'] !== before) {
+        throw new Error('the refused decision still mutated the contract — the guard must refuse BEFORE writing');
+      }
+      // FALSIFIABLE both ways: without the inventory the same ledger applies,
+      // which is exactly the silent corruption this guard exists to stop.
+      const unguarded = mk();
+      computedApplyDecisions(unguarded, foreign);
+      if (unguarded.anatomy.root.tokens['padding-block'] !== '{spacing-0}') {
+        throw new Error('the planted foreign decision did not apply without the inventory — the pin cannot show what the guard prevents');
+      }
+      // A LEGITIMATE target must still apply, or the guard is over-broad.
+      const ok = mk();
+      computedApplyDecisions(ok, [{ ...foreign[0], to: '{p.space-0}' }], inventory);
+      if (ok.anatomy.root.tokens['padding-block'] !== '{p.space-0}') {
+        throw new Error('a decision targeting a REAL Polaris token was refused — the guard is over-broad');
+      }
+      // REGRESSION PIN: no committed ledger may target a token its own
+      // library does not ship.
+      const roots: Array<{ lib: string; out: string }> = [
+        { lib: 'polaris', out: 'extract/computed/out' },
+        { lib: 'mui', out: 'extract/computed/out/mui' },
+        { lib: 'astryx', out: 'extract/computed/out/astryx' },
+        { lib: 'tailwind', out: 'extract/computed/out/tailwind' },
+      ];
+      const bad: string[] = [];
+      let ledgers = 0;
+      for (const { lib, out } of roots) {
+        const tokensDir = path.join(ROOT, 'examples', lib, 'tokens');
+        const trees = readdirSync(tokensDir)
+          .filter((f) => f.endsWith('.dtcg.json'))
+          .map((f) => JSON.parse(readFileSync(path.join(tokensDir, f), 'utf8')) as Record<string, unknown>);
+        const inv = tokenInventoryFromJson(trees);
+        const outAbs = path.join(ROOT, out);
+        for (const d of readdirSync(outAbs)) {
+          const led = path.join(outAbs, d, 'decisions.json');
+          if (!existsSync(led) || !statSync(path.join(outAbs, d)).isDirectory()) continue;
+          ledgers++;
+          for (const row of JSON.parse(readFileSync(led, 'utf8')) as AckedDecision[]) {
+            if (/^\{[a-z0-9.-]+\}$/i.test(row.to) && !inv.has(row.to.slice(1, -1))) {
+              bad.push(`${lib}/${d}: ${row.part}.${row.channel} → ${row.to}`);
+            }
+          }
+        }
+      }
+      if (bad.length > 0) {
+        throw new Error(`${bad.length} committed decision row(s) target a token absent from their own library's trees (the cross-library ledger class):\n  - ${bad.join('\n  - ')}`);
+      }
+      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships`);
     },
   },
 ];

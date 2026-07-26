@@ -9,16 +9,16 @@
   "elementsPerCapture": 12,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 4,
+    "root": 6,
     "label": 20,
-    "slider": 4,
-    "part-1-0": 15,
-    "slider-track": 15,
-    "part-1-0-1": 15,
-    "slider-thumb-2": 19,
-    "part-1-0-2": 5,
-    "slider-thumb": 20,
-    "tooltip": 44,
+    "slider": 6,
+    "part-1-0": 17,
+    "slider-track": 19,
+    "part-1-0-1": 19,
+    "slider-thumb-2": 23,
+    "part-1-0-2": 7,
+    "slider-thumb": 24,
+    "tooltip": 46,
     "label-2": 25,
     "label-3": 17
   },
@@ -242,67 +242,69 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 47,
-    "mintedLeavesFolded": 48
+    "mintedLeavesUnfolded": 110,
+    "mintedLeavesFolded": 111
   },
   "bound": {
-    "cellsChecked": 30,
-    "confirmed": 0,
-    "contradictions": 30,
-    "untriaged": 30
+    "cellsChecked": 354,
+    "confirmed": 70,
+    "contradictions": 150,
+    "untriaged": 150
   },
   "minted": {
-    "leaves": 48,
-    "baseBindings": 99,
+    "leaves": 111,
+    "baseBindings": 66,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 79,
-      "perAxis": 14,
-      "perPair": 0,
-      "refused": 6
+      "uniform": 32,
+      "perAxis": 24,
+      "perPair": 8,
+      "refused": 2
     }
   },
   "declared": {
-    "base": 35,
+    "base": 0,
     "state": 0
   },
   "codeOnly": {
-    "base": 17,
+    "base": 21,
     "state": 22,
-    "overflowBindings": 6
+    "overflowBindings": 2
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
     "partsCarried": 12,
     "svgAssets": 0,
-    "refusals": 2
+    "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 131200,
-    "cellsMatched": 130836,
-    "pct": 99.72256097560975,
+    "cellsMatched": 130843,
+    "pct": 99.72789634146342,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
         "inline-size",
-        120
+        118
       ],
       [
         "perspective-origin",
-        120
+        118
       ],
       [
         "width",
-        120
+        118
       ],
       [
         "overlay",
-        4
+        3
       ]
     ]
   },
@@ -362,7 +364,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 87.90760869565217,
+    "computedPctEqual": 55.33288043478261,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 0,

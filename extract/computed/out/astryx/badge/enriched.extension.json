@@ -7,10 +7,6 @@
     "imported": {
       "badge": {
         "root": {
-          "line-height": {
-            "$value": "20.0004px",
-            "$type": "dimension"
-          },
           "row-rule-color": {
             "neutral": {
               "$value": "#0a1317",
@@ -138,13 +134,7 @@
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
-    "base": [
-      {
-        "part": "root",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      }
-    ],
+    "base": [],
     "state": []
   },
   "codeOnlyChannels": [],
@@ -160,36 +150,6 @@
     {
       "combo": "neutral",
       "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-gray}",
-      "computedProp": "background-color",
-      "expected": "rgba(10, 19, 23, 0.2)",
-      "observed": "rgba(5, 54, 89, 0.1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "neutral",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "neutral",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "neutral",
-      "part": "root",
       "channel": "font-family",
       "ref": "{font-family-body}",
       "computedProp": "font-family",
@@ -200,51 +160,11 @@
     {
       "combo": "neutral",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-blue}",
-      "computedProp": "background-color",
-      "expected": "rgba(1, 113, 227, 0.2)",
-      "observed": "rgba(0, 100, 224, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info",
-      "part": "root",
-      "channel": "color",
-      "ref": "{color-text-blue}",
-      "computedProp": "color",
-      "expected": "rgba(4, 47, 151, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "info",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -260,51 +180,11 @@
     {
       "combo": "info",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-green}",
-      "computedProp": "background-color",
-      "expected": "rgba(36, 187, 94, 0.2)",
-      "observed": "rgba(13, 134, 38, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success",
-      "part": "root",
-      "channel": "color",
-      "ref": "{color-text-green}",
-      "computedProp": "color",
-      "expected": "rgba(9, 68, 31, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "success",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -320,51 +200,11 @@
     {
       "combo": "success",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-orange}",
-      "computedProp": "background-color",
-      "expected": "rgba(242, 121, 2, 0.2)",
-      "observed": "rgba(233, 175, 8, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning",
-      "part": "root",
-      "channel": "color",
-      "ref": "{color-text-orange}",
-      "computedProp": "color",
-      "expected": "rgba(107, 34, 3, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "warning",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -380,51 +220,11 @@
     {
       "combo": "warning",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "error",
-      "part": "root",
-      "channel": "background-color",
-      "ref": "{color-background-red}",
-      "computedProp": "background-color",
-      "expected": "rgba(227, 25, 59, 0.2)",
-      "observed": "rgba(227, 25, 59, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "error",
-      "part": "root",
-      "channel": "color",
-      "ref": "{color-text-red}",
-      "computedProp": "color",
-      "expected": "rgba(123, 2, 16, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "error",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "error",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -440,31 +240,11 @@
     {
       "combo": "error",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "blue",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "blue",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -480,31 +260,11 @@
     {
       "combo": "blue",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "cyan",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "cyan",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -520,31 +280,11 @@
     {
       "combo": "cyan",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "green",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "green",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -560,31 +300,11 @@
     {
       "combo": "green",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "orange",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "orange",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -600,31 +320,11 @@
     {
       "combo": "orange",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "pink",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "pink",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -640,31 +340,11 @@
     {
       "combo": "pink",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "purple",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "purple",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -680,31 +360,11 @@
     {
       "combo": "purple",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "red",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "red",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -720,31 +380,11 @@
     {
       "combo": "red",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "teal",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "teal",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -760,31 +400,11 @@
     {
       "combo": "teal",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "yellow",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-top",
-      "expected": "2px",
-      "observed": "0px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "yellow",
-      "part": "root",
-      "channel": "padding-block",
-      "ref": "{spacing-0-5}",
-      "computedProp": "padding-bottom",
-      "expected": "2px",
-      "observed": "0px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     },
     {
@@ -800,11 +420,11 @@
     {
       "combo": "yellow",
       "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "12px",
+      "channel": "line-height",
+      "ref": "{imported.badge.root.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
       "verdict": "contradiction"
     }
   ],
@@ -818,9 +438,7 @@
         "join": "matched"
       }
     ],
-    "staticOnly": [
-      "label"
-    ]
+    "staticOnly": []
   },
   "anatomyPromotion": {
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
@@ -828,14 +446,23 @@
       "root"
     ],
     "svgAssets": [],
-    "receipts": [
-      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)"
-    ],
-    "refusals": [
-      "static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
-    ]
+    "receipts": [],
+    "refusals": []
   },
   "enrichmentNotes": [
-    "declared fact carried: root.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added"
   ]
 }

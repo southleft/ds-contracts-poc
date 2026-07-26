@@ -1,6 +1,6 @@
 {
-  "passed": 158,
-  "total": 158,
+  "passed": 160,
+  "total": 160,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -789,6 +789,16 @@
     },
     {
       "id": "shipped-contract-refs-resolve",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "nested-inheritance-refusal",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "decision-ledger-value-check",
       "claim": "C2-refusal",
       "pass": true
     }

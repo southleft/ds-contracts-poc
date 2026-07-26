@@ -9,10 +9,10 @@
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 42,
-    "part-0": 20,
+    "root": 44,
+    "part-0": 22,
     "label": 21,
-    "part-1": 37
+    "part-1": 39
   },
   "folds": {
     "count": 35,
@@ -228,32 +228,32 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 190,
-    "mintedLeavesFolded": 50
+    "mintedLeavesUnfolded": 181,
+    "mintedLeavesFolded": 41
   },
   "bound": {
-    "cellsChecked": 189,
-    "confirmed": 82,
-    "contradictions": 107,
-    "untriaged": 107
+    "cellsChecked": 405,
+    "confirmed": 225,
+    "contradictions": 180,
+    "untriaged": 180
   },
   "minted": {
-    "leaves": 50,
-    "baseBindings": 35,
+    "leaves": 41,
+    "baseBindings": 21,
     "stateBindings": 6,
     "byShape": {
-      "uniform": 31,
-      "perAxis": 10,
+      "uniform": 19,
+      "perAxis": 8,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 29,
+    "base": 1,
     "state": 5
   },
   "codeOnly": {
-    "base": 2,
+    "base": 3,
     "state": 1,
     "overflowBindings": 0
   },
@@ -271,7 +271,9 @@
     "pct": 99.92378048780488,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -283,9 +285,9 @@
   "pixel": {
     "pairs": 96,
     "exact": {
-      "mean": 0.10023328993055557,
+      "mean": 0.0994873046875,
       "max": 2.4055989583333335,
-      "perfect": 86
+      "perfect": 87
     },
     "aa": {
       "mean": 0,
@@ -329,14 +331,14 @@
         "pctAA": 0
       },
       {
-        "key": "ghost.md.no-isDisabled__focus-visible",
-        "pctExact": 0.07161458333333333,
+        "key": "primary.lg.isDisabled__hover",
+        "pctExact": 0.013020833333333334,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 98.09895833333333,
+    "computedPctEqual": 95.390625,
     "rowsFullyEqual": 0,
     "rows": 96,
     "pixelPerfectExact": 0,

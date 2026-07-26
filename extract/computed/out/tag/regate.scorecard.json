@@ -229,7 +229,7 @@
       "baseBindings": 102,
       "stateBindings": 19,
       "codeOnlyChannels": 101,
-      "overflowBindings": 17,
+      "overflowBindings": 18,
       "folds": 81
     },
     "worstRows": [
@@ -357,6 +357,7 @@
       "overflow: icon.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
       "overflow: icon.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
       "overflow: icon.width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: icon-3.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
       "overflow: root.background-color [active] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",
       "overflow: root.outline-color [disabled] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",
       "overflow: root.padding-left [disabled] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",

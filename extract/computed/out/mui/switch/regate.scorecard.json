@@ -223,7 +223,7 @@
       "baseBindings": 71,
       "stateBindings": 22,
       "codeOnlyChannels": 6,
-      "overflowBindings": 21,
+      "overflowBindings": 22,
       "folds": 14
     },
     "worstRows": [
@@ -339,6 +339,7 @@
       ]
     ],
     "namedLosses": [
+      "overflow: switch-thumb.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
       "overflow: buttonbase-root.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: buttonbase-root.color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: buttonbase-root.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",

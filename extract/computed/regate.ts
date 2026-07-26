@@ -36,7 +36,7 @@ import path from 'node:path';
 import { chromium, type Browser } from 'playwright-core';
 import { chromiumExecutable } from '../figma/visual-parity/render.js';
 import { mintTokens } from '../../core/mint-tokens.js';
-import { flattenTokens } from '../../core/tokens.js';
+import { flattenTokens, tokenInventoryFromJson } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import { loadConfig, propSpaceFor, INTERACTIONS, type SweepResult } from './capture.js';
@@ -205,6 +205,9 @@ async function main() {
     const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
     const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
+    // mirror run.ts: re-mint + inheritance-refusal receipts ride the styled
+    // channel receipts into the extension block (`?? []` — pre-v15 builds).
+    styledReceipts.push(...(prep.remintReceipts ?? []), ...(prep.inheritanceReceipts ?? []));
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes, { nestedPairs: true });
     // `?? []` keeps the runner executable against pre-v15 fusion builds — the
@@ -215,6 +218,7 @@ async function main() {
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       declaredBase, declaredState, prep.setPlaneLiterals ?? [],
+      { only: prep.inheritanceOnly ?? [], stateDeltas: prep.inheritanceStateDeltas ?? [] },
     );
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
     const mergeInto = (dst: Record<string, unknown>, src: Record<string, unknown>) => {
@@ -310,7 +314,14 @@ async function main() {
     if (existsSync(decisionsPath)) {
       const decisions = JSON.parse(readFileSync(decisionsPath, 'utf8')) as AckedDecision[];
       const resolved = structuredClone(enriched) as Contract;
-      const { applied, skipped } = applyDecisions(resolved, decisions);
+      // Apply-time value check: the SAME inventory the gate renders with
+      // (cfg.tokens.dtcg + the minted tree), so an acked resolution that
+      // cannot resolve is refused by name instead of rendering empty.
+      const decisionInventory = tokenInventoryFromJson([
+        ...cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(REPO, p), 'utf8')) as Record<string, unknown>),
+        mergedTree,
+      ]);
+      const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
       decisionNotes.push(...applied.map((a) => `applied: ${a}`), ...skipped.map((sk) => `SKIPPED: ${sk}`));
       ContractSchema.parse(resolved);
       const resolvedErrs: string[] = [];

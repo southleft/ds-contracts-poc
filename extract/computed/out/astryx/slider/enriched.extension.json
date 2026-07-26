@@ -6,25 +6,111 @@
   "mintedTokens": {
     "imported": {
       "slider": {
+        "root": {
+          "height": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "45px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "44px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "184px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "184px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "184px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "width": {
+            "$value": "49.1562px",
+            "$type": "dimension"
+          }
+        },
         "label": {
-          "color": {
-            "$value": "#4e606f",
-            "$type": "color"
-          },
-          "font-weight": {
-            "$value": "500",
-            "$type": "number"
-          },
           "row-rule-color": {
             "$value": "#4e606f",
             "$type": "color"
           }
         },
-        "slider-track": {
-          "background-color": {
-            "$value": "#ccd3db",
-            "$type": "color"
+        "slider": {
+          "height": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "21px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "160px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "160px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "160px",
+                "$type": "dimension"
+              }
+            }
           },
+          "width": {
+            "$value": "49.1562px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-0": {
+          "height": {
+            "horizontal": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "160px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "tooltip": {
+              "$value": "49.1562px",
+              "$type": "dimension"
+            },
+            "text": {
+              "$value": "23.625px",
+              "$type": "dimension"
+            },
+            "none": {
+              "$value": "49.1562px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-track": {
           "bottom": {
             "horizontal": {
               "$value": "6px",
@@ -35,6 +121,76 @@
               "$type": "dimension"
             }
           },
+          "height": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "160px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "24.5781px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "11.8125px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "24.5781px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "right": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "20.5781px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "7.8125px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "20.5781px",
+                "$type": "dimension"
+              }
+            }
+          },
           "top": {
             "horizontal": {
               "$value": "10px",
@@ -43,6 +199,56 @@
             "vertical": {
               "$value": "0px",
               "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "-2px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "49.1562px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "23.625px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "49.1562px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
             }
           }
         },
@@ -57,6 +263,76 @@
               "$type": "dimension"
             }
           },
+          "height": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "24.5781px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "11.8125px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "24.5781px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "right": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "29.5px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "14.1875px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "29.5px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "20.5781px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "7.8125px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "20.5781px",
+                "$type": "dimension"
+              }
+            }
+          },
           "top": {
             "horizontal": {
               "$value": "10px",
@@ -65,6 +341,56 @@
             "vertical": {
               "$value": "96px",
               "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "-2px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "19.6562px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "9.4375px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "19.6562px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
             }
           }
         },
@@ -86,6 +412,20 @@
             },
             "vertical": {
               "$value": "76px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "$value": "-10px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "10px",
               "$type": "dimension"
             }
           }
@@ -130,6 +470,20 @@
               "$value": "76px",
               "$type": "dimension"
             }
+          },
+          "translate-x": {
+            "$value": "-10px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
           }
         },
         "tooltip": {
@@ -172,16 +526,16 @@
               "$value": "0px",
               "$type": "dimension"
             }
+          },
+          "row-rule-color": {
+            "$value": "#ffffff",
+            "$type": "color"
           }
         },
         "label-2": {
-          "font-weight": {
-            "$value": "400",
-            "$type": "number"
-          },
-          "max-width": {
-            "$value": "300px",
-            "$type": "dimension"
+          "row-rule-color": {
+            "$value": "#ffffff",
+            "$type": "color"
           }
         },
         "label-3": {
@@ -189,27 +543,15 @@
             "$value": "0",
             "$type": "number"
           },
-          "font-weight": {
-            "$value": "400",
-            "$type": "number"
-          },
-          "line-height": {
-            "$value": "21px",
-            "$type": "dimension"
+          "row-rule-color": {
+            "$value": "#0a1317",
+            "$type": "color"
           }
         }
       },
       "shared": {
         "size-4": {
           "$value": "4px",
-          "$type": "dimension"
-        },
-        "size-14": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "size-20-0004": {
-          "$value": "20.0004px",
           "$type": "dimension"
         },
         "size-8": {
@@ -224,25 +566,9 @@
           "$value": "1",
           "$type": "number"
         },
-        "size-9999": {
-          "$value": "9999px",
+        "size-20": {
+          "$value": "20px",
           "$type": "dimension"
-        },
-        "color-0064e0": {
-          "$value": "#0064e0",
-          "$type": "color"
-        },
-        "color-0a1317": {
-          "$value": "#0a1317",
-          "$type": "color"
-        },
-        "size-12": {
-          "$value": "12px",
-          "$type": "dimension"
-        },
-        "color-ffffff": {
-          "$value": "#ffffff",
-          "$type": "color"
         }
       }
     }
@@ -467,23 +793,7 @@
   ],
   "foldedStateSkips": [],
   "layout": {
-    "enriched": [
-      {
-        "part": "label",
-        "field": "align",
-        "value": "center"
-      },
-      {
-        "part": "slider",
-        "field": "align",
-        "value": "center"
-      },
-      {
-        "part": "part-1-0",
-        "field": "align",
-        "value": "center"
-      }
-    ],
+    "enriched": [],
     "contradictions": [],
     "receipts": [
       "layout-not-uniform: part-1-0.flex-direction varies across combos — stays code-only",
@@ -493,183 +803,7 @@
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
-    "base": [
-      {
-        "part": "label",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "part-1-0",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "part-1-0",
-        "channel": "isolation",
-        "value": "isolate"
-      },
-      {
-        "part": "part-1-0",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "part-1-0",
-        "channel": "touch-action",
-        "value": "none"
-      },
-      {
-        "part": "part-1-0",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "slider-track",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "slider-track",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "part-1-0-1",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "part-1-0-1",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "slider-thumb-2",
-        "channel": "cursor",
-        "value": "grab"
-      },
-      {
-        "part": "slider-thumb-2",
-        "channel": "transition-duration",
-        "value": "0.175s"
-      },
-      {
-        "part": "slider-thumb-2",
-        "channel": "transition-property",
-        "value": "background-color, box-shadow"
-      },
-      {
-        "part": "slider-thumb-2",
-        "channel": "transition-timing-function",
-        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
-      },
-      {
-        "part": "slider-thumb-2",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "part-1-0-2",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "part-1-0-2",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "slider-thumb",
-        "channel": "cursor",
-        "value": "grab"
-      },
-      {
-        "part": "slider-thumb",
-        "channel": "transition-duration",
-        "value": "0.175s"
-      },
-      {
-        "part": "slider-thumb",
-        "channel": "transition-property",
-        "value": "background-color, box-shadow"
-      },
-      {
-        "part": "slider-thumb",
-        "channel": "transition-timing-function",
-        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
-      },
-      {
-        "part": "slider-thumb",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "tooltip",
-        "channel": "border-bottom-style",
-        "value": "none"
-      },
-      {
-        "part": "tooltip",
-        "channel": "border-left-style",
-        "value": "none"
-      },
-      {
-        "part": "tooltip",
-        "channel": "border-right-style",
-        "value": "none"
-      },
-      {
-        "part": "tooltip",
-        "channel": "border-top-style",
-        "value": "none"
-      },
-      {
-        "part": "tooltip",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "tooltip",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "tooltip",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "label-2",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label-2",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "label-2",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "label-3",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      }
-    ],
+    "base": [],
     "state": []
   },
   "codeOnlyChannels": [
@@ -697,23 +831,37 @@
     {
       "part": "slider-track",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, 0, -2)",
       "distinctValues": 2
     },
     {
       "part": "part-1-0-1",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, 0, -2)",
       "distinctValues": 2
     },
     {
       "part": "slider-thumb-2",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, -10, -10)",
       "distinctValues": 2
+    },
+    {
+      "part": "part-1-0-2",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
     },
     {
       "part": "slider-thumb",
@@ -725,7 +873,7 @@
     {
       "part": "slider-thumb",
       "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "matrix(1, 0, 0, 1, -10, -10)",
       "distinctValues": 2
     },
@@ -759,6 +907,13 @@
     },
     {
       "part": "tooltip",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "fit-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
       "channel": "position",
       "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "fixed",
@@ -783,6 +938,13 @@
       "channel": "position-try-fallbacks",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "flip-block, flip-inline, flip-block flip-inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "fit-content",
       "distinctValues": 1
     },
     {
@@ -855,7 +1017,7 @@
       "part": "tooltip",
       "channel": "display",
       "sample": "block",
-      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "active",
@@ -951,34 +1113,14 @@
   ],
   "overflowBindings": [
     {
-      "part": "slider-track",
-      "channel": "left",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "slider-track",
-      "channel": "right",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "part-1-0-1",
-      "channel": "left",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "part-1-0-1",
-      "channel": "right",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
       "part": "slider-thumb-2",
       "channel": "left",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
     },
     {
       "part": "slider-thumb-2",
       "channel": "right",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
     }
   ],
   "pairwiseRefusals": [],
@@ -991,36 +1133,6 @@
     {
       "combo": "horizontal.tooltip",
       "part": "root",
-      "channel": "color",
-      "ref": "{color-text-secondary}",
-      "computedProp": "color",
-      "expected": "rgba(78, 96, 111, 1)",
-      "observed": "rgba(0, 0, 0, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "horizontal.tooltip",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "column-gap",
-      "expected": "8px",
-      "observed": "4px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "horizontal.tooltip",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "row-gap",
-      "expected": "8px",
-      "observed": "4px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "horizontal.tooltip",
-      "part": "root",
       "channel": "font-family",
       "ref": "{font-family-body}",
       "computedProp": "font-family",
@@ -1030,42 +1142,312 @@
     },
     {
       "combo": "horizontal.tooltip",
-      "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "16px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "horizontal.text",
-      "part": "root",
+      "part": "label",
       "channel": "color",
-      "ref": "{color-text-secondary}",
+      "ref": "{imported.slider.label.color}",
       "computedProp": "color",
-      "expected": "rgba(78, 96, 111, 1)",
-      "observed": "rgba(0, 0, 0, 1)",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
       "verdict": "contradiction"
     },
     {
-      "combo": "horizontal.text",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "column-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "horizontal.tooltip",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "horizontal.text",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "row-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "horizontal.tooltip",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.slider.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-track",
+      "channel": "background-color",
+      "ref": "{imported.slider.slider-track.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(204, 211, 219, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-track",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-track",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-track",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-track",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "part-1-0-1",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-thumb",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0a1317}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "color",
+      "ref": "{imported.shared.color-ffffff}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "tooltip",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "label-2",
+      "channel": "color",
+      "ref": "{imported.shared.color-ffffff}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "label-2",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "label-2",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.tooltip",
+      "part": "label-2",
+      "channel": "max-width",
+      "ref": "{imported.slider.label-2.max-width}",
+      "computedProp": "max-width",
+      "expected": "none",
+      "observed": "300px",
       "verdict": "contradiction"
     },
     {
@@ -1080,42 +1462,222 @@
     },
     {
       "combo": "horizontal.text",
-      "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "16px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "horizontal.none",
-      "part": "root",
+      "part": "label",
       "channel": "color",
-      "ref": "{color-text-secondary}",
+      "ref": "{imported.slider.label.color}",
       "computedProp": "color",
-      "expected": "rgba(78, 96, 111, 1)",
-      "observed": "rgba(0, 0, 0, 1)",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
       "verdict": "contradiction"
     },
     {
-      "combo": "horizontal.none",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "column-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "horizontal.text",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "horizontal.none",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "row-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "horizontal.text",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.slider.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-track",
+      "channel": "background-color",
+      "ref": "{imported.slider.slider-track.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(204, 211, 219, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-track",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-track",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-track",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-track",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "part-1-0-1",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "part-1-0-1",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "part-1-0-1",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-thumb-2",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-thumb-2",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "slider-thumb-2",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "label-3",
+      "channel": "color",
+      "ref": "{imported.shared.color-0a1317}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "label-3",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.text",
+      "part": "label-3",
+      "channel": "line-height",
+      "ref": "{imported.slider.label-3.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "21px",
       "verdict": "contradiction"
     },
     {
@@ -1130,42 +1692,192 @@
     },
     {
       "combo": "horizontal.none",
-      "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "16px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "vertical.tooltip",
-      "part": "root",
+      "part": "label",
       "channel": "color",
-      "ref": "{color-text-secondary}",
+      "ref": "{imported.slider.label.color}",
       "computedProp": "color",
-      "expected": "rgba(78, 96, 111, 1)",
-      "observed": "rgba(0, 0, 0, 1)",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
       "verdict": "contradiction"
     },
     {
-      "combo": "vertical.tooltip",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "column-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "horizontal.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "vertical.tooltip",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "row-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "horizontal.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.slider.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-track",
+      "channel": "background-color",
+      "ref": "{imported.slider.slider-track.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(204, 211, 219, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-track",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-track",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-track",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-track",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "part-1-0-1",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "part-1-0-1",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "part-1-0-1",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-thumb-2",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-thumb-2",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "horizontal.none",
+      "part": "slider-thumb-2",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
       "verdict": "contradiction"
     },
     {
@@ -1180,42 +1892,312 @@
     },
     {
       "combo": "vertical.tooltip",
-      "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "16px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "vertical.text",
-      "part": "root",
+      "part": "label",
       "channel": "color",
-      "ref": "{color-text-secondary}",
+      "ref": "{imported.slider.label.color}",
       "computedProp": "color",
-      "expected": "rgba(78, 96, 111, 1)",
-      "observed": "rgba(0, 0, 0, 1)",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
       "verdict": "contradiction"
     },
     {
-      "combo": "vertical.text",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "column-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "vertical.tooltip",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "vertical.text",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "row-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "vertical.tooltip",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.slider.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-track",
+      "channel": "background-color",
+      "ref": "{imported.slider.slider-track.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(204, 211, 219, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-track",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-track",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-track",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-track",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "part-1-0-1",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "part-1-0-1",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-thumb",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "slider-thumb",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0a1317}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-12}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "12px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "color",
+      "ref": "{imported.shared.color-ffffff}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "tooltip",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "label-2",
+      "channel": "color",
+      "ref": "{imported.shared.color-ffffff}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "label-2",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "label-2",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.tooltip",
+      "part": "label-2",
+      "channel": "max-width",
+      "ref": "{imported.slider.label-2.max-width}",
+      "computedProp": "max-width",
+      "expected": "none",
+      "observed": "300px",
       "verdict": "contradiction"
     },
     {
@@ -1230,42 +2212,222 @@
     },
     {
       "combo": "vertical.text",
-      "part": "root",
-      "channel": "font-size",
-      "ref": "{font-size-xs}",
-      "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "16px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "vertical.none",
-      "part": "root",
+      "part": "label",
       "channel": "color",
-      "ref": "{color-text-secondary}",
+      "ref": "{imported.slider.label.color}",
       "computedProp": "color",
-      "expected": "rgba(78, 96, 111, 1)",
-      "observed": "rgba(0, 0, 0, 1)",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
       "verdict": "contradiction"
     },
     {
-      "combo": "vertical.none",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "column-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "vertical.text",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
       "verdict": "contradiction"
     },
     {
-      "combo": "vertical.none",
-      "part": "root",
-      "channel": "gap",
-      "ref": "{spacing-2}",
-      "computedProp": "row-gap",
-      "expected": "8px",
-      "observed": "4px",
+      "combo": "vertical.text",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.slider.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-track",
+      "channel": "background-color",
+      "ref": "{imported.slider.slider-track.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(204, 211, 219, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-track",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-track",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-track",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-track",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "part-1-0-1",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "part-1-0-1",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "part-1-0-1",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-thumb-2",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-thumb-2",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "slider-thumb-2",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "label-3",
+      "channel": "color",
+      "ref": "{imported.shared.color-0a1317}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(10, 19, 23, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "label-3",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-14}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.text",
+      "part": "label-3",
+      "channel": "line-height",
+      "ref": "{imported.slider.label-3.line-height}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "21px",
       "verdict": "contradiction"
     },
     {
@@ -1280,12 +2442,192 @@
     },
     {
       "combo": "vertical.none",
-      "part": "root",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.slider.label.color}",
+      "computedProp": "color",
+      "expected": "rgba(0, 0, 0, 1)",
+      "observed": "rgba(78, 96, 111, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "label",
       "channel": "font-size",
-      "ref": "{font-size-xs}",
+      "ref": "{imported.shared.size-14}",
       "computedProp": "font-size",
-      "expected": "10px",
-      "observed": "16px",
+      "expected": "16px",
+      "observed": "14px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{imported.slider.label.font-weight}",
+      "computedProp": "font-weight",
+      "expected": "400",
+      "observed": "500",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{imported.shared.size-20-0004}",
+      "computedProp": "line-height",
+      "expected": "24px",
+      "observed": "20.0004px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-track",
+      "channel": "background-color",
+      "ref": "{imported.slider.slider-track.background-color}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(204, 211, 219, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-track",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-track",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-track",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-track",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "part-1-0-1",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "part-1-0-1",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "part-1-0-1",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "part-1-0-1",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-thumb-2",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-0064e0}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0)",
+      "observed": "rgba(0, 100, 224, 1)",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-thumb-2",
+      "channel": "border-bottom-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-bottom-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-thumb-2",
+      "channel": "border-top-left-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-left-radius",
+      "expected": "0px",
+      "observed": "9999px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "vertical.none",
+      "part": "slider-thumb-2",
+      "channel": "border-top-right-radius",
+      "ref": "{imported.shared.size-9999}",
+      "computedProp": "border-top-right-radius",
+      "expected": "0px",
+      "observed": "9999px",
       "verdict": "contradiction"
     }
   ],
@@ -1359,9 +2701,42 @@
     "part-missing: vertical.none__active label-2"
   ],
   "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-track — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-thumb-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-thumb — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tooltip — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part label)",
+    "translate-door-generalized: slider-track — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "translate-door-generalized: part-1-0-1 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "translate-door-generalized: slider-thumb-2 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "translate-door-generalized: slider-thumb — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
     "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"tooltip\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.caret-color — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.color — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.caret-color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.font-size — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.line-height — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label-2.caret-color equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1375,49 +2750,46 @@
       },
       {
         "part": "slider",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "part-1-0",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "slider-track",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "part-1-0-1",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "slider-thumb-2",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "part-1-0-2",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "slider-thumb",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "tooltip",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "label-2",
-        "join": "computed-only"
+        "join": "matched"
       },
       {
         "part": "label-3",
-        "join": "computed-only"
+        "join": "matched"
       }
     ],
-    "staticOnly": [
-      "track",
-      "thumb"
-    ]
+    "staticOnly": []
   },
   "anatomyPromotion": {
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
@@ -1441,54 +2813,46 @@
       "presence-carried: part-1-0-2 (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
       "presence-carried: slider-thumb (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
       "presence-carried: tooltip (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
-      "literal-text-carried: label-2 = \"40\" (no text prop sample matches — the mounted value is carried verbatim)",
       "presence-carried: label-2 (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
-      "literal-text-carried: label-3 = \"40\" (no text prop sample matches — the mounted value is carried verbatim)",
       "presence-carried: label-3 (2/6 combos) →  hidden-when valueDisplay=tooltip, valueDisplay=none"
     ],
-    "refusals": [
-      "static-part-unrendered: reviewed static part \"track\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
-      "static-part-unrendered: reviewed static part \"thumb\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
-    ]
+    "refusals": []
   },
   "enrichmentNotes": [
-    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: slider.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.isolation = isolate (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.touch-action = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-track.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-track.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb-2.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb-2.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: tooltip.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "nested pair carried: slider.height = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: slider-track.left = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: slider-track.right = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: slider-track.width = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: part-1-0-1.left = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: part-1-0-1.right = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: part-1-0-1.width = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "tokensByProp conflict avoided: slider-track.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-track.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-track.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-track.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1-0-1.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1-0-1.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1-0-1.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: part-1-0-1.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb-2.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb-2.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb-2.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb-2.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.left on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.right on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.left on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.right on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: slider-thumb.top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-left on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-right on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-top on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-bottom on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-left on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-right on prop orientation already reviewed — computed value not re-added",
+    "tokensByProp conflict avoided: tooltip.margin-top on prop orientation already reviewed — computed value not re-added"
   ]
 }
