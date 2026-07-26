@@ -176,7 +176,10 @@ export interface InventoryRow {
   /** G2: canvas state vs the stamp its last sync recorded — the same
    *  recompute the Drift tab runs, joined into the update check so Apply
    *  can never silently overwrite a designer's edit. null = no stamp. */
-  drift: 'in-sync' | 'canvas-edited' | 'unstamped' | null;
+  /** 'version-changed': the stamp predates the current fingerprint scheme
+   *  (v4→v5 with the prototype-wiring round) — regenerate to re-baseline.
+   *  Deliberately NOT 'canvas-edited': that would be a false alarm. */
+  drift: 'in-sync' | 'canvas-edited' | 'unstamped' | 'version-changed' | null;
 }
 
 export function createPluginEngine(data: PluginEngineData) {
@@ -521,7 +524,10 @@ for (const page of figma.root.children) {
     try {
       const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
       if (stored) {
-        drift = stored.indexOf('v4:') !== 0 ? 'unstamped'
+        // VERSION HONESTY (prototype-wiring round, v4→v5): a stamp from an
+        // older scheme is not comparable — reporting 'canvas-edited' would
+        // be a false alarm on an untouched file. 'version-changed' names it.
+        drift = stored.indexOf('v5:') !== 0 ? (/^v\\d+:/.test(stored) ? 'version-changed' : 'unstamped')
           : stored === dsCanvasFingerprint(node) ? 'in-sync' : 'canvas-edited';
       }
     } catch (e) { /* recompute threw — no drift verdict, never a blocker */ }

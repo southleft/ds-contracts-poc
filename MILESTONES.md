@@ -900,6 +900,45 @@ two days, with every fix following the fix→teach-the-mock→gate→live patter
   text, Cancel/Save Button instances with a real gap — from one pasted
   contract, deterministically, no AI in the conversion. Suite: **146/146**.
 
+## 2026-07-26 — The State axis goes LIVE: prototype wiring, and its limits named
+
+State previews shipped as a *drawn grid* — a designer could see the hover cell
+but never feel it. The generator now emits Figma **prototype reactions** as a
+deterministic function of the contract, so a generated component set behaves in
+presentation mode:
+
+- **Wired:** every `State=Default` variant on the default axis plane gets
+  `ON_HOVER → CHANGE_TO State=Hover` and `ON_PRESS → CHANGE_TO State=Active`,
+  in that **canonical order** — never the contract's `states[]` order (MUI and
+  Polaris Button declare different orders for identical semantics; same
+  semantics must emit the same bytes). `transition: null` always: durations are
+  not contract facts, and the capability matrix keeps animation code-only.
+  MUI Button (75 variants): 3 wired cells, 6 reactions. Polaris Button (220):
+  5 wired cells, 10 reactions.
+- **Excluded BY NAME:** `focus-visible` and `disabled`. Figma's `Trigger` union
+  has no focus and no disabled trigger — those previews stay preview-only and
+  are **destinations of nothing**, asserted *positively* by the gate rather
+  than left as an unstated absence.
+- **Coverage limit, receipted:** previews pin non-primary axes to their
+  defaults, so off-default cells have no twin and carry zero reactions. The
+  emitted script's `stateReactions` list is the human-readable receipt of
+  exactly which cells are wired.
+- **Fingerprint v4 → v5.** v4 was blind to reactions: a designer stripping or
+  re-pointing one produced no drift signal — the same invisibility class that
+  forced v3 → v4. Snapshots now carry `…|reaction|ON_HOVER→CHANGE_TO <variant
+  NAME>` (name, never node id, so the fact is file-portable). A canvas stamped
+  by an older plugin reports **`version-changed`**, not `canvas-edited` — a
+  version bump is not a designer's edit, and saying so would be a false alarm.
+- **Mock taught, so the failure class can't pass headlessly:** `node.reactions`
+  is now getter-only and plain assignment **throws**; `setReactionsAsync`
+  validates that every `CHANGE_TO` destination is a sibling of the *same*
+  component set, refusing by name otherwise. Both refusals are falsified pins.
+- **API shapes pinned, not assumed:** `figma-sync/plugin/typings/reactions.d.ts`
+  vendors the relevant subset of `@figma/plugin-typings@1.131.0` with line-range
+  provenance — the checked-in evidence for every shape the emitter writes.
+
+Suite: **154/154**.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
@@ -922,4 +961,5 @@ two days, with every fix following the fix→teach-the-mock→gate→live patter
 | Plugin engine freshness | zip build refuses a stale engine by committed input-hash receipt | `plugin-engine-bundle` eval (guard fires on a real core mutation) |
 | Canvas fidelity | headless canvas renders vs the real npm package, 7/10 PASS (3 at exact 0.00), every >10% cell named | `canvas-gate-standing-pin` eval · `examples/polaris/receipts/canvas-gate/` |
 | Vendor-doc referee | extraction proposals diffed against the vendor's own shipped docs, 0 silent rows | `examples/astryx/extraction/DOC-REFEREE.md` |
+| Live prototype behavior | hover/press wired as reactions on the State axis; focus/disabled excluded by name and asserted as destinations of nothing | `npm run plugin:check` prototype-wiring pins · `state-reactions-wired-deterministically` eval |
 | Advanced composition, LIVE | the multi-root composite (composed instance + repeated collection + labeled set-instances + inset backdrop) builds correctly on a real canvas from one pasted contract; both real-Figma quirks found en route are mock-modeled | owner's live run 2026-07-22 · `npm run plugin:check` composite pins |

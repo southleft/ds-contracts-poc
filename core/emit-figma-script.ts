@@ -42,6 +42,8 @@ import {
   slotVisibilityProperty,
   statePreviewLabel,
   statePreviewSubstProps,
+  withStateSegment,
+  baseTwinName,
   walkAnatomy,
   type Contract,
   type Part,
@@ -296,8 +298,56 @@ export interface ComponentData {
    *  an explicit State=Default segment. Omitted entirely when the contract
    *  does not opt in, so unchanged contracts keep a stable specHash. */
   stateVariants?: VariantSpec[];
+  /** PROTOTYPE WIRING: deterministic Figma prototype reactions binding each
+   *  base (State=Default) variant to its hover/active preview twin, so a
+   *  generated set actually SWAPS in presentation mode. Names, never node
+   *  ids — the runtime resolves them against the set it just built/amended.
+   *  Omitted entirely when empty (a contract that does not opt in keeps a
+   *  byte-identical specHash). NEVER carried inside spec/NodeSpec: the
+   *  canvas-gate channels cannot measure reactions and must not grow the
+   *  concept. */
+  stateReactions?: StateReaction[];
   colW: number;
 }
+
+/** One wired interaction. `trigger` is the Figma Trigger type verbatim; the
+ *  action is always `{type:'NODE', navigation:'CHANGE_TO', transition:null}`
+ *  (see figma-sync/plugin/typings/reactions.d.ts for the vendored shapes). */
+export interface StateReaction {
+  /** Variant name of the source — always a `State=Default` variant. */
+  from: string;
+  trigger: 'ON_HOVER' | 'ON_PRESS';
+  /** Variant name of the destination preview twin. */
+  to: string;
+}
+
+/**
+ * The trigger map, in CANONICAL emission order.
+ *
+ * hover  → ON_HOVER  CHANGE_TO State=Hover
+ * active → ON_PRESS  CHANGE_TO State=Active
+ *
+ * Both auto-revert (Figma restores the source variant when the pointer
+ * leaves / the press ends), so no return wiring is emitted and preview
+ * variants carry ZERO reactions.
+ *
+ * EXCLUDED BY NAME — `focus-visible` and `disabled`: Figma's prototyping
+ * Trigger union has no focus or disabled trigger at all (ON_CLICK, ON_HOVER,
+ * ON_PRESS, ON_DRAG, AFTER_TIMEOUT, MOUSE_*, ON_KEY_DOWN, ON_MEDIA_*). Their
+ * preview variants stay PREVIEW-ONLY: reachable by hand on the canvas,
+ * destinations of nothing in the prototype. Not a gap in this round — a
+ * limit of the target surface, positively asserted by the plugin-engine gate.
+ *
+ * The order is FIXED here, not read from `contract.states[]`: MUI Button
+ * declares ["disabled","active","focus-visible","hover"] and Polaris Button
+ * declares ["disabled","focus-visible","active","hover"] — same semantics
+ * must emit the same bytes.
+ */
+type ContractState = Contract['states'][number];
+const STATE_REACTION_TRIGGERS: ReadonlyArray<{ state: ContractState; trigger: StateReaction['trigger'] }> = [
+  { state: 'hover', trigger: 'ON_HOVER' },
+  { state: 'active', trigger: 'ON_PRESS' },
+];
 
 /** Data the engine needs — parsed trees and assets, never paths. */
 export interface FigmaEngineInput {
@@ -2457,7 +2507,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
             `${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`,
           );
         }
-        nameParts.push(`${STATE_PREVIEW_PROPERTY}=${statePreviewLabel(stateName)}`);
+        const previewName = withStateSegment(nameParts.join(', '), statePreviewLabel(stateName));
         const row = primaryIdx === 0 && primary ? pi : 0;
         const col =
           primaryIdx === 0 || !primary
@@ -2465,7 +2515,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
             : baseColsN + si * primaryValues.length + pi;
         const rootSpec: NodeSpec = {
           type: 'root',
-          name: nameParts.join(', '),
+          name: previewName,
           layout: layoutSpec(root, true, subst),
         };
         // Same resolveTokens rule as the base loop: per-combo tokensByProp
@@ -2519,6 +2569,43 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         };
         collectStyles(rootSpec);
         stateVariants.push({ name: rootSpec.name, row, col, spec: rootSpec });
+      }
+    }
+  }
+
+  // PROTOTYPE WIRING (this round): pair every base State=Default variant that
+  // HAS a hover/active twin with that twin. Derived from the preview names by
+  // the ONE shared pairing rule (baseTwinName / withStateSegment) — the same
+  // rule the runtime's withStateAxis applies when it renames base variants.
+  //
+  // COVERAGE LIMIT, RECEIPTED: preview variants pin every non-primary axis to
+  // values[0] (see the bounded-explosion loop above), so ONLY base variants
+  // whose non-primary axes sit at their defaults get a twin — and therefore a
+  // reaction. Every other base variant (MUI Button Size=Small/Large, every
+  // Color≠the-primary-axis cell) carries ZERO reactions BY CONSTRUCTION. That
+  // is a named exclusion, not a silent skip: the plugin-engine gate asserts
+  // the off-default cells are empty, and the emitted script's stateReactions
+  // list is the human-readable receipt of exactly which cells are wired.
+  //
+  // Standalone COMPONENT contracts are skipped by name: a contract with state
+  // previews always has ≥2 compiled variants, so `isSet` is true below and a
+  // non-set can never reach the wiring (asserted by the isSet guard).
+  const stateReactions: StateReaction[] = [];
+  if (stateVariants.length > 0) {
+    const previewNames = new Set(stateVariants.map((v) => v.name));
+    const seenBase = new Set<string>();
+    for (const sv of stateVariants) {
+      const from = baseTwinName(sv.name);
+      if (from === null || seenBase.has(from)) continue;
+      seenBase.add(from);
+      const axisPart = from === `${STATE_PREVIEW_PROPERTY}=${STATE_PREVIEW_DEFAULT}`
+        ? ''
+        : from.slice(0, from.length - `, ${STATE_PREVIEW_PROPERTY}=${STATE_PREVIEW_DEFAULT}`.length);
+      for (const { state, trigger } of STATE_REACTION_TRIGGERS) {
+        if (!contract.states.includes(state)) continue;
+        const to = withStateSegment(axisPart, statePreviewLabel(state));
+        if (!previewNames.has(to)) continue;
+        stateReactions.push({ from, trigger, to });
       }
     }
   }
@@ -2637,6 +2724,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     fontStyles: [...fontStyles],
     variants,
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
+    ...(stateReactions.length > 0 ? { stateReactions } : {}),
     colW: Math.max(
       380,
       ...[...variants, ...stateVariants].map((v) => (v.spec.fixedWidth?.px ?? 0) + 60),
@@ -3297,6 +3385,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never \`node.reactions = […]\`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -3636,7 +3774,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -3795,6 +3933,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -3814,7 +3955,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -4062,6 +4203,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -4071,6 +4214,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 

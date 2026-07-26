@@ -52,7 +52,8 @@ token sets into the Generate flow is a roadmap item.)
 npx tsx examples/astryx/scripts/build-tokens.ts          # DTCG wrap (alias pass)
 npx tsx examples/astryx/scripts/build-figma-tokens.ts    # 00-tokens.figma.js
 npx tsx packages/cli/src/cli.ts figma examples/astryx/contracts \
-  --out examples/astryx/figma --tokens examples/astryx/tokens/astryx.dtcg.json
+  --out examples/astryx/figma \
+  --tokens examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json
 node examples/astryx/scripts/build-genesis-batch.mjs     # GENESIS-BATCH.figma.js
 node examples/astryx/scripts/figma-compile-receipt.mjs   # the gate (13/13)
 ```

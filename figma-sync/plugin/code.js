@@ -291,7 +291,18 @@ figma.ui.onmessage = async (msg) => {
         for (const node of marked) {
           const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
           const fresh = dsCanvasFingerprint(node);
-          const status = !stored || stored.indexOf('v4:') !== 0 ? 'unstamped (pre-v4 stamp — re-run its sync script to baseline)' : stored === fresh ? 'in-sync' : 'canvas-edited';
+          // VERSION HONESTY (prototype-wiring round): the scheme moved v4→v5
+          // (reactions became a tracked fact). A canvas stamped by an older
+          // plugin is NOT "canvas-edited" — we simply cannot compare, and
+          // saying "edited" would be a false alarm on an untouched file. Name
+          // the version change and the remedy instead.
+          const FP_VERSION = 'v5:';
+          const olderStamp = stored && stored.indexOf('v') === 0 && stored.indexOf(':') > 0 && stored.indexOf(FP_VERSION) !== 0;
+          const status = !stored
+            ? 'unstamped (no fingerprint — re-run its sync script to baseline)'
+            : olderStamp
+              ? 'fingerprint version changed (' + stored.slice(0, stored.indexOf(':') + 1) + ' → ' + FP_VERSION + ') — regenerate to re-baseline; NOT a canvas edit'
+              : stored === fresh ? 'in-sync' : 'canvas-edited';
           // LOCALIZE + EXPLAIN: on a set-level mismatch, drill into variant
           // stamps, and DIFF the stored snapshot against a fresh one so the
           // report says WHAT changed, not just that something did.
@@ -340,7 +351,7 @@ figma.ui.onmessage = async (msg) => {
           if (status === 'canvas-edited' && node.type === 'COMPONENT_SET') {
             for (const child of node.children) {
               const cs = child.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-              if (cs && cs.indexOf('v4:') === 0 && cs !== dsCanvasFingerprint(child)) {
+              if (cs && cs.indexOf('v5:') === 0 && cs !== dsCanvasFingerprint(child)) {
                 let changes = [];
                 try {
                   const snap = JSON.parse(child.getSharedPluginData('ds_contracts', 'canvasSnapshot') || '[]');
@@ -600,7 +611,8 @@ async function runLocalRunner() {
 }
 
 // DRIFT ROUND — byte-identical copy of core/canvas-fingerprint.ts
-// FINGERPRINT_SRC (v4). Keep in lockstep — the plugin-engine gate pins it.
+// FINGERPRINT_SRC (v5). Keep in lockstep — the plugin-engine gate pins it
+// by SUBSTRING COMPARISON (not just by evaluating the module copy).
 
 function dsCanvasSnapshot(root) {
   var lines = [];
@@ -625,6 +637,33 @@ function dsCanvasSnapshot(root) {
         for (var d = 0; d < names.length; d++) {
           var def = defs[names[d]];
           out.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
+        }
+      }
+    } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
         }
       }
     } catch (e) {}
@@ -662,7 +701,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 

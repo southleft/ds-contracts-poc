@@ -20,6 +20,7 @@ import path from 'node:path';
 import {
   ContractSchema,
   statePreviewLabel,
+  withStateSegment,
   statePreviewSubstProps,
   STATE_PREVIEW_PROPERTY,
   type Contract,
@@ -264,8 +265,9 @@ export function deriveCells(contract: Contract, data: ComponentData): Cell[] {
           subst[prop.name] = value;
           nameParts.push(`${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`);
         }
-        nameParts.push(`${STATE_PREVIEW_PROPERTY}=${statePreviewLabel(stateName)}`);
-        const name = nameParts.join(', ');
+        // ONE pairing rule, shared with the emitter (contract-schema.ts) —
+        // this loop THROWS on derivation drift, so the two must not diverge.
+        const name = withStateSegment(nameParts.join(', '), statePreviewLabel(stateName));
         const v = stateVariants[si2];
         if (!v || v.name !== name) {
           throw new Error(`${contract.id}: cell derivation drift at state variant ${si2}: derived "${name}" vs compiled "${v?.name}"`);

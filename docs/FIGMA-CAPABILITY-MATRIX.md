@@ -149,7 +149,7 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | `transform: skew()` / `matrix()` | **no** — `relativeTransform` is settable but constrained to **unit axes** (`sqrt(m00²+m10²) == 1` — no shear survives) [S8]; only escape is baking the skewed geometry into a vector via `createNodeFromSvg` | — | named-gap (B11) | CARRY-CODE-ONLY (vector-bake VERIFY-BY-SPIKE if ever needed) |
 | `transform-origin` | **approx** — no property; compensating translation | — | absent | CARRY-WITH-NAMED-LIMIT |
 | 3D transforms, `perspective` | **no** | — | absent | CARRY-CODE-ONLY |
-| `transition`, `animation`, `@keyframes` | **no** — canvas nodes are static (prototype reactions are a different, non-rendered domain) | — | carried code-side (`animation: spin\|pulse`; `transition` whitelisted) — already declared [R2] | CARRY-CODE-ONLY (standing) |
+| `transition`, `animation`, `@keyframes` | **no** — canvas nodes are static. STILL TRUE after the prototype-wiring round: the reactions this generator emits carry `transition: null` (no duration, no easing, no keyframes) — a variant swap is instantaneous. Durations are not contract facts, so the animation domain stays code-only | — | carried code-side (`animation: spin\|pulse`; `transition` whitelisted) — already declared [R2] | CARRY-CODE-ONLY (standing) |
 
 ### 7 · Compositing & visibility
 
@@ -176,7 +176,8 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | `cursor` | **no** — no node property | — | whitelisted (code) [R2] | CARRY-CODE-ONLY (§ b) |
 | `pointer-events`, `user-select`, `resize`, `touch-action` | **no** | — | whitelisted / absent | CARRY-CODE-ONLY |
 | `scrollbar-*`, `scroll-snap-*`, `overscroll-behavior`, `scroll-behavior` | **no** static equivalent | — | absent | CARRY-CODE-ONLY |
-| live `:hover/:active/:focus-visible` behavior | **no** — states render only as opt-in preview variants (`figmaStatePreviews`, shipped) [R2] | state-preview fields bind normally | carried (C4) | CARRY-WITH-NAMED-LIMIT (standing) |
+| live `:hover` / `:active` behavior | **native (prototype domain)** — the generator WIRES prototype reactions on the opt-in preview axis: `State=Default` → `ON_HOVER` CHANGE_TO `State=Hover`, `ON_PRESS` CHANGE_TO `State=Active` (`transition: null`; both auto-revert). Presentation mode swaps live [S-typings: Trigger, Action, ReactionMixin] | state-preview fields bind normally | carried (C4) + wired | CARRY-BOTH (wired on the default axis plane; off-default-axis cells are a NAMED coverage limit) |
+| live `:focus-visible` / `:disabled` behavior | **no** — Figma's `Trigger` union has NO focus and NO disabled trigger (`ON_CLICK`/`ON_HOVER`/`ON_PRESS`/`ON_DRAG`/`AFTER_TIMEOUT`/`MOUSE_*`/`ON_KEY_DOWN`/`ON_MEDIA_*`). Their preview variants render but are destinations of NOTHING — EXCLUDED BY NAME, positively asserted by the plugin-engine gate | state-preview fields bind normally | carried (C4), preview-only | CARRY-WITH-NAMED-LIMIT (standing) |
 
 ### 10 · Conditionals & carriers
 
@@ -246,7 +247,7 @@ CARRY-CODE-ONLY: fully rendered in code, declared here, annotated on canvas.
 |---|---|
 | `cursor` | "Cursor changes (pointer on hover) exist only in the coded component." |
 | `transition` / `animation` | "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame." |
-| live states | "Hover/press/focus render live in code; the State variants here are static previews." |
+| live states | "Hover and press are WIRED here — run presentation mode and the component swaps. Focus and disabled render live only in code; those State variants are static previews (Figma has no focus or disabled trigger)." |
 | `@media` / `@container` | "Responsive behavior lives in code. This canvas shows the base layout only." |
 | per-side border colors | "This part's borders use different colors per side in code; Figma strokes share one color, so the canvas shows the dominant side." |
 | `border-style: double/groove/…` | "This border style has no Figma equivalent; the canvas shows a solid stroke of the same width." |

@@ -1416,6 +1416,124 @@ const cases: Case[] = [
     },
   },
   {
+    // PROTOTYPE WIRING: the State preview axis carries LIVE behavior. The
+    // emitted script must name every wire (source variant, trigger,
+    // destination variant) deterministically, in the CANONICAL [hover,
+    // active] order regardless of how the contract declares states — and it
+    // must EXCLUDE focus-visible/disabled BY NAME, because Figma's Trigger
+    // union has no focus or disabled trigger to wire them to.
+    id: 'state-reactions-wired-deterministically',
+    claim: 'C1-determinism',
+    run: () => {
+      // Declare `active` FIRST and `hover` LAST — the emission order must NOT
+      // follow the contract's array order (MUI and Polaris Button declare
+      // different orders for identical semantics; same semantics, same bytes).
+      editJson(CONTRACT, (c) => {
+        c.states = ['active', 'focus-visible', 'disabled', 'hover'];
+        c.anatomy.root.states.active = { 'background-color': '{color.action.{variant}.background-hover}' };
+      });
+      if (buildTokens().status !== 0 || generate().status !== 0) throw new Error('Build failed');
+      if (run(TSX, ['scripts/generate-figma.ts']).status !== 0) throw new Error('figma:plan failed');
+      const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /^\d+-button\.js$/.test(n))!;
+      const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
+      const C = parseSyncComponent(script);
+      const wires: Array<{ from: string; trigger: string; to: string }> = C.stateReactions ?? [];
+      const previewNames = new Set((C.stateVariants ?? []).map((v: any) => v.name));
+
+      // 4 primary-axis values (Variant) × 2 wired states = 8 wires.
+      if (wires.length !== 8) {
+        throw new Error(`Expected 8 wires (4 Variant values × [hover, active]), got ${wires.length}`);
+      }
+      // CANONICAL ORDER: every source's pair is [ON_HOVER, ON_PRESS] — the
+      // contract declared active before hover, and it must not matter.
+      for (let i = 0; i < wires.length; i += 2) {
+        if (wires[i].trigger !== 'ON_HOVER' || wires[i + 1].trigger !== 'ON_PRESS') {
+          throw new Error(`Canonical order broken at ${i}: ${wires[i].trigger}, ${wires[i + 1].trigger} (contract order must not leak)`);
+        }
+        if (wires[i].from !== wires[i + 1].from) throw new Error('Wires are not grouped by source variant');
+      }
+      // Sources are State=Default variants; destinations are real preview
+      // variants differing ONLY in the State= segment.
+      for (const w of wires) {
+        if (!w.from.endsWith(', State=Default')) throw new Error(`Source is not a State=Default variant: ${w.from}`);
+        if (!previewNames.has(w.to)) throw new Error(`Destination is not an emitted preview variant: ${w.to}`);
+        const axis = w.from.slice(0, -', State=Default'.length);
+        const wantLabel = w.trigger === 'ON_HOVER' ? 'Hover' : 'Active';
+        if (w.to !== `${axis}, State=${wantLabel}`) {
+          throw new Error(`Destination must differ ONLY in State=: ${w.from} → ${w.to}`);
+        }
+      }
+      // EXCLUDED BY NAME — positively asserted: the two states Figma has no
+      // trigger for are emitted as previews but are destinations of NOTHING.
+      const tos = new Set(wires.map((w) => w.to));
+      for (const label of ['Focus Visible', 'Disabled']) {
+        if (![...previewNames].some((n: any) => n.endsWith(`, State=${label}`))) {
+          throw new Error(`State=${label} preview missing — the exclusion pin has nothing to assert against`);
+        }
+        if ([...tos].some((n) => n.endsWith(`, State=${label}`))) {
+          throw new Error(`State=${label} must be the destination of NOTHING (no Figma trigger exists — preview-only)`);
+        }
+      }
+      // Off-default-axis base variants are NOT wired (previews pin non-primary
+      // axes to values[0]) — a named coverage limit, receipted by omission.
+      if (wires.some((w) => !w.from.includes('Size=Medium'))) {
+        throw new Error('A wire escaped the default plane — the coverage limit is not holding');
+      }
+      // Runtime shape: the async setter, never plain assignment; CHANGE_TO
+      // with a null transition (durations are not contract facts).
+      if (!script.includes('await child.setReactionsAsync(want)')) throw new Error('setReactionsAsync call missing from the runtime');
+      const codeLines = script.split('\n').filter((l) => !/^\s*(\/\/|\*|\/\*)/.test(l));
+      if (codeLines.some((l) => /\.reactions\s*=[^=]/.test(l))) {
+        throw new Error('Plain assignment to node.reactions — read-only under documentAccess: dynamic-page');
+      }
+      if (!script.includes(`navigation: 'CHANGE_TO', transition: null`)) {
+        throw new Error('Action must be CHANGE_TO with transition: null');
+      }
+      if (!script.includes(`return 'v5:' + String(h);`)) throw new Error('Fingerprint must be v5 (reaction-aware)');
+
+      // A NON-OPTED contract carries no stateReactions field at all — the
+      // omit-when-empty rule that keeps its specHash stable.
+      const af = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /^\d+-avatar\.js$/.test(n))!;
+      const avatar = parseSyncComponent(readFileSync(path.join(SCRATCH, 'figma-sync', af), 'utf8'));
+      if ('stateReactions' in avatar) throw new Error('Non-opted contract must OMIT stateReactions entirely');
+
+      // The MOCK must refuse like real Figma, or the failure classes pass
+      // headlessly: (a) plain assignment throws, (b) a CHANGE_TO destination
+      // outside the source's own component set refuses BY NAME.
+      const probe = path.join(SCRATCH, 'reaction-refusal-probe.mjs');
+      writeFileSync(probe, `
+import { createFigmaMock } from './scripts/plugin-engine-mock-figma.mjs';
+const { figma, firstPage } = createFigmaMock();
+const mk = (setName, variantName) => {
+  const c = figma.createComponent(); c.name = variantName;
+  const s = figma.combineAsVariants([c], firstPage); s.name = setName;
+  return c;
+};
+const a = mk('A', 'State=Default');
+const b = mk('B', 'State=Hover');
+const sib = figma.createComponent(); sib.name = 'State=Hover'; a.parent.appendChild(sib);
+let assign = 'NO THROW';
+try { a.reactions = []; } catch (e) { assign = e.message; }
+let cross = 'NO THROW';
+try {
+  await a.setReactionsAsync([{ trigger: { type: 'ON_HOVER' }, actions: [{ type: 'NODE', destinationId: b.id, navigation: 'CHANGE_TO', transition: null }] }]);
+} catch (e) { cross = e.message; }
+await a.setReactionsAsync([{ trigger: { type: 'ON_HOVER' }, actions: [{ type: 'NODE', destinationId: sib.id, navigation: 'CHANGE_TO', transition: null }] }]);
+console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
+`);
+      const probed = run(process.execPath, [probe]);
+      if (probed.status !== 0) throw new Error(`Reaction refusal probe failed to run: ${probed.out}`);
+      const got = JSON.parse(probed.out.trim().split('\n').pop()!);
+      if (!/read-only/.test(got.assign) || !/setReactionsAsync/.test(got.assign)) {
+        throw new Error(`Mock must refuse plain assignment to reactions by name, got: ${got.assign}`);
+      }
+      if (!/not a variant of the same component set/.test(got.cross)) {
+        throw new Error(`Mock must refuse a cross-set CHANGE_TO destination by name, got: ${got.cross}`);
+      }
+      if (got.ok !== 1) throw new Error('Mock must ACCEPT a same-set sibling CHANGE_TO');
+    },
+  },
+  {
     // The State axis is declared surface when opted in, kit-rot drift when not.
     id: 'state-axis-drift-both-directions',
     claim: 'C3-detection',

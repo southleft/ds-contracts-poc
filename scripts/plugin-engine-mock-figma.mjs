@@ -27,6 +27,19 @@
  *   - createNodeFromSvg validates (non-empty, no duplicate attributes) and
  *     returns an empty 16×16 frame (vector internals out of scope).
  *   - Fonts always "load"; text style application is exact (textStyleId).
+ *   - PROTOTYPE REACTIONS (2026-07-26, prototype-wiring round): `reactions`
+ *     is a GETTER over `_reactions` and the setter THROWS; writes go through
+ *     `setReactionsAsync`, which validates CHANGE_TO destinations the way
+ *     real Figma does — the destination must be a sibling under the SAME
+ *     component set. A plain-assignment mock that silently succeeded would
+ *     let a whole failure class pass headlessly.
+ *     NAMED DEVIATION (stricter than real Figma, deliberately): Figma's own
+ *     typings say `reactions` is read-only only when the manifest declares
+ *     `"documentAccess": "dynamic-page"`. figma-sync/plugin/manifest.json
+ *     does NOT, so assignment would currently work on a live canvas. The
+ *     mock refuses anyway because setReactionsAsync is correct under BOTH
+ *     manifest modes and this keeps the emitter on the portable path — see
+ *     figma-sync/plugin/typings/reactions.d.ts for the vendored evidence.
  */
 
 let nextId = 1;
@@ -85,6 +98,7 @@ export function createFigmaMock() {
       this.description = '';
       this.boundVariables = {};
       this.componentPropertyReferences = {};
+      this._reactions = [];
       this._shared = new Map();
       if (type !== 'TEXT') this.children = [];
       if (type === 'TEXT') {
@@ -207,6 +221,50 @@ export function createFigmaMock() {
 
     set height(v) {
       this._h = v;
+    }
+
+    // --- prototype reactions (see the fidelity note above) -----------------
+    get reactions() {
+      return this._reactions;
+    }
+
+    set reactions(_v) {
+      throw new Error(
+        'in set_reactions: reactions is read-only; use setReactionsAsync to update the value',
+      );
+    }
+
+    async setReactionsAsync(reactions) {
+      if (!Array.isArray(reactions)) {
+        throw new Error('in setReactionsAsync: expected an array of Reaction');
+      }
+      const owner = this.parent && this.parent.type === 'COMPONENT_SET' ? this.parent : null;
+      for (const r of reactions) {
+        if (!r || typeof r !== 'object') throw new Error('in setReactionsAsync: expected a Reaction object');
+        if (r.trigger !== null && (!r.trigger || typeof r.trigger.type !== 'string')) {
+          throw new Error('in setReactionsAsync: Reaction.trigger must be a Trigger or null');
+        }
+        const actions = r.actions ?? (r.action ? [r.action] : []);
+        for (const a of actions) {
+          if (!a || a.type !== 'NODE') continue;
+          if (a.navigation !== 'CHANGE_TO') continue;
+          // Real Figma refuses a CHANGE_TO whose destination is not a
+          // sibling variant of the SAME component set — a variant swap is
+          // intra-set by definition. Refuse BY NAME.
+          const dest = a.destinationId ? root.findOne((n) => n.id === a.destinationId) : null;
+          if (!dest) {
+            throw new Error(
+              `in setReactionsAsync: CHANGE_TO destinationId "${a.destinationId}" does not resolve to a node in this file`,
+            );
+          }
+          if (!owner || dest.parent !== owner) {
+            throw new Error(
+              `in setReactionsAsync: CHANGE_TO destination "${dest.name}" is not a variant of the same component set as "${this.name}" (navigation CHANGE_TO requires sibling variants)`,
+            );
+          }
+        }
+      }
+      this._reactions = reactions.map((r) => ({ ...r }));
     }
 
     setSharedPluginData(namespace, key, value) {

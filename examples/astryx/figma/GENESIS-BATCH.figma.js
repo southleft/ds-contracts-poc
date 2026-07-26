@@ -674,6 +674,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -1007,6 +1057,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -1041,7 +1118,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -1088,7 +1165,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -1247,6 +1324,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -1266,7 +1346,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -1514,6 +1594,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -1523,6 +1605,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -1941,6 +2024,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -2273,6 +2406,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -2307,7 +2467,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -2354,7 +2514,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -2513,6 +2673,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -2532,7 +2695,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -2780,6 +2943,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -2789,6 +2954,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -3952,6 +4118,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -4347,6 +4563,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -4381,7 +4624,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -4428,7 +4671,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -4589,6 +4832,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -4608,7 +4854,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -4857,6 +5103,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -4866,6 +5114,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -5580,6 +5829,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -5957,6 +6256,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -5991,7 +6317,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -6038,7 +6364,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -6197,6 +6523,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -6216,7 +6545,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -6464,6 +6793,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -6473,6 +6804,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -6705,6 +7037,56 @@ function withStateAxis(C) {
     const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
     return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
   }).concat(C.stateVariants);
+}
+
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
 }
 
 function findComponentByName(name) {
@@ -7039,6 +7421,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -7073,7 +7482,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -7120,7 +7529,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -7279,6 +7688,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -7298,7 +7710,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -7546,6 +7958,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -7555,6 +7969,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -8077,6 +8492,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -8409,6 +8874,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -8443,7 +8935,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -8490,7 +8982,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -8649,6 +9141,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -8668,7 +9163,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -8916,6 +9411,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -8925,6 +9422,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -9172,16 +9670,6 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "text",
-                  "name": "label-3",
-                  "characters": "40",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "textFill": "imported/shared/color-0a1317",
-                  "lineHeight": 21,
-                  "fontFamily": "-apple-system"
-                },
-                {
                   "type": "frame",
                   "name": "part-1-0",
                   "layout": {
@@ -9269,6 +9757,16 @@ const COMPONENTS = [
                       "children": []
                     }
                   ]
+                },
+                {
+                  "type": "text",
+                  "name": "label-3",
+                  "characters": "40",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-0a1317",
+                  "lineHeight": 21,
+                  "fontFamily": "-apple-system"
                 }
               ],
               "fillW": true
@@ -9626,16 +10124,6 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "text",
-                  "name": "label-3",
-                  "characters": "40",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "textFill": "imported/shared/color-0a1317",
-                  "lineHeight": 21,
-                  "fontFamily": "-apple-system"
-                },
-                {
                   "type": "frame",
                   "name": "part-1-0",
                   "layout": {
@@ -9723,6 +10211,16 @@ const COMPONENTS = [
                       "children": []
                     }
                   ]
+                },
+                {
+                  "type": "text",
+                  "name": "label-3",
+                  "characters": "40",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "textFill": "imported/shared/color-0a1317",
+                  "lineHeight": 21,
+                  "fontFamily": "-apple-system"
                 }
               ],
               "fillW": true
@@ -9950,6 +10448,56 @@ function withStateAxis(C) {
     const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
     return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
   }).concat(C.stateVariants);
+}
+
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
 }
 
 function findComponentByName(name) {
@@ -10364,6 +10912,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -10398,7 +10973,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -10445,7 +11020,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -10606,6 +11181,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -10625,7 +11203,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -10875,6 +11453,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -10884,6 +11464,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -11108,6 +11689,56 @@ function withStateAxis(C) {
     const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
     return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
   }).concat(C.stateVariants);
+}
+
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
 }
 
 function findComponentByName(name) {
@@ -11442,6 +12073,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -11476,7 +12134,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -11523,7 +12181,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -11682,6 +12340,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -11701,7 +12362,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -11949,6 +12610,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -11958,6 +12621,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -12656,6 +13320,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -12988,6 +13702,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -13022,7 +13763,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -13069,7 +13810,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -13228,6 +13969,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -13247,7 +13991,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -13495,6 +14239,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -13504,6 +14250,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -14872,6 +15619,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -15204,6 +16001,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -15238,7 +16062,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -15285,7 +16109,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -15444,6 +16268,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -15463,7 +16290,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -15711,6 +16538,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -15720,6 +16549,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -15870,6 +16700,56 @@ function withStateAxis(C) {
   }).concat(C.stateVariants);
 }
 
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -16202,6 +17082,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -16236,7 +17143,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -16283,7 +17190,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -16442,6 +17349,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -16461,7 +17371,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -16709,6 +17619,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -16718,6 +17630,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -16904,6 +17817,56 @@ function withStateAxis(C) {
     const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
     return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
   }).concat(C.stateVariants);
+}
+
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
 }
 
 function findComponentByName(name) {
@@ -17283,6 +18246,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -17317,7 +18307,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -17364,7 +18354,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -17523,6 +18513,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -17542,7 +18535,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -17790,6 +18783,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -17799,6 +18794,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 
@@ -17987,6 +18983,56 @@ function withStateAxis(C) {
     const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
     return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
   }).concat(C.stateVariants);
+}
+
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
 }
 
 function findComponentByName(name) {
@@ -18354,6 +19400,33 @@ function dsCanvasSnapshot(root) {
         }
       }
     } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
     return out;
   };
   var walk = function (n, path) {
@@ -18388,7 +19461,7 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v4:' + String(h);
+  return 'v5:' + String(h);
 }
 
 
@@ -18435,7 +19508,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v4:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -18594,6 +19667,9 @@ async function amendSet(set, C) {
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
   // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
   // mismatch means the canvas was edited after generation.
   dsStampFingerprints(set);
@@ -18613,7 +19689,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v4:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -18861,6 +19937,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
   ensureHostSection(compPage, target, displayName);
 
@@ -18870,6 +19948,7 @@ async function syncOne(C) {
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
   };
 }
 

@@ -1062,6 +1062,42 @@ export const STATE_PREVIEW_DEFAULT = 'Default';
  *  "Focus Visible". Deterministic — the differ recomputes the same labels. */
 export const statePreviewLabel = (state: string) => state.split('-').map(pascal).join(' ');
 
+// --- base ↔ preview variant NAME pairing -----------------------------------
+// ONE rule, one place. The Figma generator builds preview names with it, the
+// canvas-gate compiler re-derives them (and THROWS on drift), and the
+// prototype-wiring round pairs a State=Default variant with its State=Hover /
+// State=Active twin with it. The State= segment is ALWAYS emitted last and
+// its values never contain a comma (statePreviewLabel joins with spaces), so
+// the split is unambiguous.
+
+/** Append (or replace) the trailing `State=<label>` segment on a variant
+ *  name. An empty axis part yields a name that is only the State segment —
+ *  the same rule the emitted runtime's `withStateAxis` applies. */
+export function withStateSegment(axisPart: string, label: string): string {
+  return axisPart
+    ? `${axisPart}, ${STATE_PREVIEW_PROPERTY}=${label}`
+    : `${STATE_PREVIEW_PROPERTY}=${label}`;
+}
+
+/** Split a variant name into its axis segments and its State= value.
+ *  `state` is null when the name carries no State segment (a set that does
+ *  not opt into previews). */
+export function splitStateSegment(variantName: string): { axisPart: string; state: string | null } {
+  const m = /^(.*?)(?:, )?State=([^,]*)$/.exec(variantName);
+  if (!m) return { axisPart: variantName, state: null };
+  return { axisPart: m[1], state: m[2] };
+}
+
+/** The name of the BASE (State=Default) twin of a preview variant — the
+ *  reaction's source. Returns null for a name that is not a preview variant
+ *  (no State segment, or already State=Default): those are destinations of
+ *  nothing and sources of nothing. */
+export function baseTwinName(previewVariantName: string): string | null {
+  const { axisPart, state } = splitStateSegment(previewVariantName);
+  if (state === null || state === STATE_PREVIEW_DEFAULT) return null;
+  return withStateSegment(axisPart, STATE_PREVIEW_DEFAULT);
+}
+
 /** The prop names an opted-in contract's root state overrides substitute
  *  (e.g. "{color.action.{variant}.background-hover}" → "variant"). The
  *  single member (validation refuses more) names the PRIMARY enum axis that

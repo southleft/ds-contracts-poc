@@ -38,6 +38,15 @@ const bundle = await buildEngineBundle();
 // necessarily differ between two runs, so they are normalized to stable
 // NAMES via each run's own variable/style tables; everything else must be
 // byte-identical.
+// `_reactions` is deliberately NOT skipped — prototype wiring is part of the
+// determinism claim. It rides the normal own-enumerable walk (`reactions` is
+// a prototype getter, so there is no double count). NAMED LIMIT: a reaction's
+// destinationId is a run-scoped node id and canonicalizes to `<node-ref>`
+// below, so this fingerprint proves the SHAPE of the wiring is stable, not
+// which sibling it points at. Destination identity by NAME is what the v5
+// canvas fingerprint records, and the plugin-engine gate asserts it there;
+// the composite exercised here is a standalone COMPONENT with no siblings and
+// therefore no reactions at all.
 const SKIP_FIELDS = new Set([
   'parent', 'children', 'id', 'key', 'removed',
   '_shared', '_mainComponent', '_propSeq', '_resized', '_w', '_h',

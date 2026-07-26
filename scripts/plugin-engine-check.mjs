@@ -503,13 +503,20 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const srcMatch = fpModule.match(/FINGERPRINT_SRC: string = `([\s\S]*?)`;/);
   assert(srcMatch, 'drift gate: FINGERPRINT_SRC extractable from core/canvas-fingerprint.ts');
   const fp = new Function(`${srcMatch[1]}; return dsCanvasFingerprint;`)();
+  // LOCKSTEP, BY BYTES (this round): the old gate only EVALUATED the module
+  // copy — code.js's hand-maintained twin could silently diverge while every
+  // assertion stayed green. Pin the actual bytes.
+  assert(
+    read('figma-sync/plugin/code.js').includes(srcMatch[1]),
+    'drift gate: figma-sync/plugin/code.js carries FINGERPRINT_SRC BYTE-IDENTICALLY (module ≡ plugin copy)',
+  );
   const sets = root.findAll((n) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId'));
   assert(sets.length > 0, 'drift gate: generated sets exist on the mock canvas');
   const withStamp = sets.filter((n) => n.getSharedPluginData('ds_contracts', 'canvasFingerprint'));
   assert(withStamp.length === sets.length, `drift gate: every generated set carries a canvasFingerprint stamp (${withStamp.length}/${sets.length})`);
   const subject = withStamp[0];
   const stored = subject.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-  assert(stored.startsWith('v4:'), 'drift gate: stamps carry the v2 version prefix (snapshot-bearing scheme)');
+  assert(stored.startsWith('v5:'), 'drift gate: stamps carry the v5 version prefix (reaction-bearing scheme)');
   assert(fp(subject) === stored, 'drift gate: recomputing the fingerprint over the untouched tree MATCHES the stamp (module ≡ emitted copy)');
   // simulate a designer edit: swap a fill somewhere in the tree
   const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
@@ -517,7 +524,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // LOCALIZATION (live finding: "which of the 63 buttons?"): per-variant
   // stamps exist and the edit resolves to EXACTLY the containing variant.
   const variants = subject.children ?? [];
-  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v4:')), 'drift gate: every VARIANT carries its own v4 fingerprint stamp');
+  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v5:')), 'drift gate: every VARIANT carries its own v5 fingerprint stamp');
   const owner = (() => { let n = victim; while (n && n.parent !== subject) n = n.parent; return n; })();
   assert(owner, 'drift gate: the edited node resolves to a variant of the set');
   const priorFills = victim.fills;
@@ -701,6 +708,145 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(
     `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1649 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
+
+  // --- PROTOTYPE WIRING: the State axis is LIVE, and its limits are named --
+  // MUI Button declares states ["disabled","active","focus-visible","hover"]
+  // and opts into figmaStatePreviews, so its State=Default cells on the
+  // default (Size=Medium) plane must carry EXACTLY [ON_HOVER→Hover,
+  // ON_PRESS→Active]. Everything else in the set must carry ZERO — and the
+  // two states Figma has no trigger for must be destinations of NOTHING.
+  {
+    const setOf = (mock) => mock.root.findOne((n) => n.type === 'COMPONENT_SET' && n.name === 'Button');
+    const wiringOf = (mock) => {
+      const set = setOf(mock);
+      const nameById = new Map(set.children.map((c) => [c.id, c.name]));
+      return set.children
+        .filter((c) => c.reactions.length > 0)
+        .map((c) => `${c.name} :: ${c.reactions
+          .map((r) => `${r.trigger.type}→${r.actions[0].navigation} ${nameById.get(r.actions[0].destinationId) ?? '(external)'}`)
+          .join(' | ')}`)
+        .sort();
+    };
+    const wiringA = wiringOf(mockA);
+    const wiringB = wiringOf(mockB);
+    const setA = setOf(mockA);
+
+    // 1. exactly the three default-plane State=Default cells are sources
+    //    (Variant is the PRIMARY axis; Color/Size sit at values[0]).
+    assert(
+      wiringA.length === 3,
+      `prototype wiring: exactly 3 Button variants carry reactions — one per primary-axis value on the default plane (got ${wiringA.length}: ${wiringA.map((w) => w.split(' :: ')[0]).join(' / ')})`,
+    );
+    assert(
+      wiringA.every((w) => w.startsWith('Variant=') && w.split(' :: ')[0].endsWith(', State=Default')),
+      `prototype wiring: every source is a State=Default variant (got ${wiringA.map((w) => w.split(' :: ')[0]).join(' / ')})`,
+    );
+    // 2. each source carries EXACTLY [ON_HOVER→Hover, ON_PRESS→Active], in
+    //    that canonical order, CHANGE_TO a sibling differing ONLY in State=.
+    for (const w of wiringA) {
+      const [from, wires] = w.split(' :: ');
+      const axis = from.slice(0, from.length - ', State=Default'.length);
+      assert(
+        wires === `ON_HOVER→CHANGE_TO ${axis}, State=Hover | ON_PRESS→CHANGE_TO ${axis}, State=Active`,
+        `prototype wiring: "${from}" carries exactly [ON_HOVER→Hover, ON_PRESS→Active] to siblings differing ONLY in the State= segment (got ${wires})`,
+      );
+    }
+    // 3. transition is ALWAYS null — durations are not contract facts.
+    assert(
+      setA.children.every((c) => c.reactions.every((r) => r.actions.every((a) => a.transition === null))),
+      'prototype wiring: every action carries transition:null (animation stays code-only, per the capability matrix)',
+    );
+    // 4. POSITIVE ASSERTION of the named exclusions: Figma has no focus or
+    //    disabled trigger, so those previews are destinations of NOTHING.
+    const destinations = new Set(
+      setA.children.flatMap((c) => c.reactions.flatMap((r) => r.actions.map((a) => a.destinationId))),
+    );
+    const destNames = [...destinations].map((id) => setA.children.find((c) => c.id === id)?.name ?? '(external)');
+    assert(
+      !destNames.some((n) => n.includes('State=Focus Visible')),
+      `prototype wiring: State=Focus Visible is the destination of NOTHING — EXCLUDED BY NAME (no focus trigger exists in Figma's Trigger union); preview-only`,
+    );
+    assert(
+      !destNames.some((n) => n.includes('State=Disabled')),
+      'prototype wiring: State=Disabled is the destination of NOTHING — EXCLUDED BY NAME (no disabled trigger exists); preview-only',
+    );
+    // 5. off-default-axis base variants carry ZERO — the receipted coverage
+    //    limit (previews pin non-primary axes to values[0]).
+    const offPlane = setA.children.filter(
+      (c) => c.name.endsWith(', State=Default') && !(c.name.includes('Color=Primary') && c.name.includes('Size=Medium')),
+    );
+    assert(offPlane.length > 0, 'prototype wiring: the set HAS off-default-axis base variants (else the limit is untested)');
+    assert(
+      offPlane.every((c) => c.reactions.length === 0),
+      `prototype wiring: off-default-axis base variants carry ZERO reactions — a NAMED coverage limit, not a silent skip (${offPlane.filter((c) => c.reactions.length > 0).length} violations of ${offPlane.length})`,
+    );
+    // 6. preview variants themselves carry ZERO (hover/press auto-revert).
+    const previews = setA.children.filter((c) => !c.name.endsWith(', State=Default'));
+    assert(
+      previews.length > 0 && previews.every((c) => c.reactions.length === 0),
+      'prototype wiring: preview variants carry ZERO reactions — hover/press auto-revert, so no return wiring is emitted',
+    );
+    // 7. the JSON-only paste wires IDENTICALLY to the compiled-script path.
+    assert(
+      wiringA.join('\n') === wiringB.join('\n'),
+      'prototype wiring: bundle path ≡ script path on the full reaction wiring (names, triggers, destinations)',
+    );
+    // 8. a NON-OPTED contract's set is untouched — hand prototyping survives.
+    const chip = mockA.root.findOne((n) => n.type === 'COMPONENT_SET' && n.name === 'Chip');
+    assert(
+      chip && chip.children.every((c) => c.reactions.length === 0),
+      'prototype wiring: a contract without state previews (Chip) has ZERO reactions anywhere — non-opted sets are never touched',
+    );
+
+    // 9. THE MOCK'S REFUSALS (real-Figma fidelity, so the failure classes
+    //    cannot pass headlessly).
+    const src = setA.children.find((c) => c.reactions.length > 0);
+    let assignThrew = '';
+    try { src.reactions = []; } catch (e) { assignThrew = e.message; }
+    assert(
+      assignThrew.includes('read-only') && assignThrew.includes('setReactionsAsync'),
+      `prototype wiring: plain assignment to node.reactions REFUSES BY NAME (got: ${assignThrew || 'NO THROW — a false green'})`,
+    );
+    const otherSet = mockA.root.findOne((n) => n.type === 'COMPONENT_SET' && n.name === 'Chip');
+    let crossThrew = '';
+    try {
+      await src.setReactionsAsync([
+        { trigger: { type: 'ON_HOVER' }, actions: [{ type: 'NODE', destinationId: otherSet.children[0].id, navigation: 'CHANGE_TO', transition: null }] },
+      ]);
+    } catch (e) { crossThrew = e.message; }
+    assert(
+      crossThrew.includes('not a variant of the same component set'),
+      `prototype wiring: a CHANGE_TO destination in a DIFFERENT component set REFUSES BY NAME (got: ${crossThrew || 'NO THROW — a false green'})`,
+    );
+    assert(
+      src.reactions.length === 2,
+      'prototype wiring: the refused write left the existing reactions intact (no partial application)',
+    );
+
+    // 10. FINGERPRINT v5 sees reactions — the v4 blindness this round closes.
+    const fpSrc = read('core/canvas-fingerprint.ts').match(/FINGERPRINT_SRC: string = `([\s\S]*?)`;/)[1];
+    const fpFn = new Function(`${fpSrc}; return dsCanvasFingerprint;`)();
+    const snapFn = new Function(`${fpSrc}; return dsCanvasSnapshot;`)();
+    const beforeFp = fpFn(src);
+    const lines = snapFn(src).filter((l) => l.includes('|reaction|'));
+    assert(
+      lines.length === 2 && lines[0].includes('ON_HOVER') && lines[0].includes('State=Hover') && !/\d+:\d+/.test(lines[0].split('|reaction|')[1]),
+      `prototype wiring: the v5 snapshot records reactions by DESTINATION NAME, never node id (got ${JSON.stringify(lines[0] ?? '(none)')})`,
+    );
+    await src.setReactionsAsync([src.reactions[0]]); // a designer strips the press wiring
+    assert(
+      fpFn(src) !== beforeFp,
+      'prototype wiring: STRIPPING a reaction changes the v5 fingerprint — the drift signal v4 was blind to',
+    );
+    assert(
+      beforeFp.startsWith('v5:') && fpFn(src).startsWith('v5:'),
+      'prototype wiring: fingerprints carry the v5 prefix',
+    );
+
+    console.log(
+      `✔ prototype wiring (MUI Button, 75 variants): ${wiringA.length} State=Default cells carry [ON_HOVER→Hover, ON_PRESS→Active] CHANGE_TO their State= siblings, transition null; State=Focus Visible + State=Disabled are destinations of NOTHING (no Figma trigger exists — EXCLUDED BY NAME); off-default-axis bases and all previews carry ZERO; bundle path ≡ script path; the mock refuses plain assignment AND a cross-set CHANGE_TO by name; v5 fingerprint catches a stripped reaction`,
+    );
+  }
 }
 
 // --- N+3. SIBLING BUNDLES (72b5075 follow-up): astryx + polaris + docs-theme
@@ -738,4 +884,4 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned): the JSON-only rule holds for EVERY example round through the real engine path`);
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, sibling-bundles)');
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, sibling-bundles)');
