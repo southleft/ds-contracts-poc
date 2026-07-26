@@ -1,0 +1,825 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-48": {
+          "$value": "48px",
+          "$type": "dimension"
+        },
+        "size-288": {
+          "$value": "288px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "num-500": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "size-0-39998": {
+          "$value": "0.39998px",
+          "$type": "dimension"
+        },
+        "size-17-5": {
+          "$value": "17.5px",
+          "$type": "dimension"
+        },
+        "size-360": {
+          "$value": "360px",
+          "$type": "dimension"
+        },
+        "size-90": {
+          "$value": "90px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      },
+      "tabs": {
+        "tabs-fixed": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "label": {
+          "color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          }
+        },
+        "label-2": {
+          "color": {
+            "primary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "opacity": {
+            "primary": {
+              "$value": "1",
+              "$type": "number"
+            },
+            "secondary": {
+              "$value": "1",
+              "$type": "number"
+            },
+            "inherit": {
+              "$value": "0.6",
+              "$type": "number"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          }
+        },
+        "label-3": {
+          "color": {
+            "primary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "opacity": {
+            "primary": {
+              "$value": "1",
+              "$type": "number"
+            },
+            "secondary": {
+              "$value": "1",
+              "$type": "number"
+            },
+            "inherit": {
+              "$value": "0.6",
+              "$type": "number"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000099",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          }
+        },
+        "tabs-indicator": {
+          "background-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            }
+          },
+          "height": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "185.594px",
+            "$type": "dimension"
+          },
+          "top": {
+            "$value": "46px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "102.406px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "label",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "label-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label-3",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "label-3",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-3",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "tabs-fixed",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "tabs-fixed",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "tabs-fixed",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "tabs-fixed",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "tabs-list",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "text-transform",
+        "value": "uppercase"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-transform",
+        "value": "uppercase"
+      },
+      {
+        "part": "label-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-transform",
+        "value": "uppercase"
+      },
+      {
+        "part": "label-3",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "tabs-indicator",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "tabs-indicator",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "tabs-indicator",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "label",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs-fixed — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs-list — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs-indicator — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "tabs-fixed",
+        "join": "computed-only"
+      },
+      {
+        "part": "tabs-list",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "tabs-indicator",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "tabs-fixed",
+      "tabs-list",
+      "label",
+      "label-2",
+      "label-3",
+      "tabs-indicator"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "full-width-carried: tabs-fixed spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "literal-text-carried: label = \"Overview\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Activity\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-3 = \"Settings\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: label.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-3.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-3.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-3.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-fixed.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-fixed.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-fixed.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-fixed.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-list.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-indicator.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-indicator.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs-indicator.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

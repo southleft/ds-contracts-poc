@@ -84,8 +84,14 @@ export interface ComponentConfig {
    *  contract declares the STATE instead (Button declares states:[disabled]
    *  with no disabled prop — the React surface accepts the prop). */
   stateProps?: StateAxisSpec[];
-  /** Props pinned to fixed values on every mount (recorded). */
-  fixedProps?: Record<string, string | number | boolean>;
+  /** Props pinned to fixed values on every mount (recorded). MOLECULE round:
+   *  widened from scalars — arrays/objects mount verbatim through the marker
+   *  grammar (Autocomplete options/value), and the `$render` marker mounts
+   *  the ONLY function shape the vocabulary admits: {"$render":"pkg#Export"}
+   *  → (params) => <Export {...params} /> — the identity render-prop
+   *  (Autocomplete's required renderInput). Any richer function body is a
+   *  named refusal, never config. */
+  fixedProps?: Record<string, unknown>;
   /** MUI round (Card live finding): the library's CANONICAL child
    *  composition — sampleText mounts wrapped in this imported component
    *  (<Card><CardContent>text</CardContent></Card>). A bare mount that no
@@ -93,6 +99,14 @@ export interface ComponentConfig {
    *  padding-less Card); the canonical composition IS the component's
    *  rendered contract. Recorded in provenance. */
   childWrap?: { importName: string };
+  /** MOLECULE round (Tabs/Accordion/Menu): canonical MULTI-child composition
+   *  — components whose canonical children are SEVERAL imported components
+   *  (<Tabs><Tab/><Tab/><Tab/></Tabs>, <Accordion><AccordionSummary/>
+   *  <AccordionDetails/></Accordion>). Each entry mounts in order as
+   *  <Import {...props}>text?</Import>; props use the marker grammar.
+   *  Mutually exclusive with childWrap (refused at load). Recorded in
+   *  provenance; sampleText is '' for these components. */
+  childrenSpec?: Array<{ importName: string; props?: Record<string, unknown>; text?: string }>;
   /** MUI round (Card live finding #2): mount the stage as a BLOCK context
    *  instead of the default flex row. A display:block component inside the
    *  flex stage shrink-to-fits (the 114px Card) — CSS-true block behavior
@@ -186,6 +200,9 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
   for (const c of cfg.components) {
     const contractPath = path.join(repoRoot, c.contract);
     if (!existsSync(contractPath)) throw new Error(`${c.name}: contract not found: ${c.contract}`);
+    if (c.childWrap && c.childrenSpec) {
+      throw new Error(`${c.name}: childWrap and childrenSpec are mutually exclusive — one canonical composition per component`);
+    }
   }
   return cfg;
 }
@@ -310,6 +327,7 @@ export function buildHarnessPage(
   const importNames = [...new Set([
     ...mounts.map((m) => m.comp.importName),
     ...mounts.flatMap((m) => (m.comp.childWrap ? [m.comp.childWrap.importName] : [])),
+    ...mounts.flatMap((m) => (m.comp.childrenSpec ?? []).map((c) => c.importName)),
   ])].sort();
   const specs = mounts.flatMap(({ comp, space }) =>
     space.enumeration.combos.map((combo) => ({
@@ -319,16 +337,20 @@ export function buildHarnessPage(
       callbacks: comp.callbackProps ?? [],
       text: comp.sampleText,
       ...(comp.childWrap ? { childWrap: comp.childWrap.importName } : {}),
+      ...(comp.childrenSpec ? { childrenSpec: comp.childrenSpec } : {}),
       ...(comp.blockStage ? { blockStage: true } : {}),
       stage: stageFor(cfg, comp),
     })),
   );
   // Round 4 presence-value marker grammar: collect $import values into real
   // import statements; markers resolve at mount time (resolveMarkers below).
+  // MOLECULE round: $render carries the same "pkg#Export" spelling — the
+  // referenced Export is imported the same way.
   const extraImports = new Map<string, Set<string>>(); // pkg → exports
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
-      const imp = (v as Record<string, unknown>)['$import'];
+      const rec = v as Record<string, unknown>;
+      const imp = typeof rec['$import'] === 'string' ? rec['$import'] : typeof rec['$render'] === 'string' ? rec['$render'] : undefined;
       if (typeof imp === 'string') {
         const [pkg, name] = imp.split('#');
         (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
@@ -358,11 +380,14 @@ const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(bloc
 const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding} });
 
 // presence-value marker grammar: {"$callback":true} → () => {};
-// {"$import":"pkg#Name"} → the imported binding (resolved recursively).
+// {"$import":"pkg#Name"} → the imported binding (resolved recursively);
+// {"$render":"pkg#Name"} → (params) => <Name {...params} /> — the identity
+// render-prop, the ONLY function shape admitted (MOLECULE round).
 function resolveMarkers(v) {
   if (v && typeof v === 'object') {
     if (v.$callback === true) return () => {};
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
+    if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
     if (Array.isArray(v)) return v.map(resolveMarkers);
     const out = {};
     for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
@@ -371,18 +396,25 @@ function resolveMarkers(v) {
   return v;
 }
 
+// MOLECULE round: canonical children — childWrap (one wrapped text child),
+// childrenSpec (N imported children), or bare sampleText.
+function renderKids(s) {
+  if (s.childrenSpec) return s.childrenSpec.map((cs, i) => React.createElement(COMPONENTS[cs.importName], { key: i, ...resolveMarkers({ ...(cs.props || {}) }) }, cs.text));
+  if (s.childWrap) { const W = COMPONENTS[s.childWrap]; return <W>{s.text}</W>; }
+  return s.text;
+}
+
 function App() {
   return (
     ${cfg.mount.wrapperOpen}
       {SPECS.map((s) => {
         const C = COMPONENTS[s.component];
-        const W = s.childWrap ? COMPONENTS[s.childWrap] : null;
         const props = resolveMarkers({ ...s.props });
         for (const cb of s.callbacks) props[cb] = () => {};
         return (
           <React.Fragment key={s.key}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
-            <div data-combo={s.key} style={stageStyle(s.stage, s.blockStage)}>{W ? <C {...props}><W>{s.text}</W></C> : <C {...props}>{s.text}</C>}</div>
+            <div data-combo={s.key} style={stageStyle(s.stage, s.blockStage)}><C {...props}>{renderKids(s)}</C></div>
           </React.Fragment>
         );
       })}
@@ -779,10 +811,14 @@ export const PORTAL_SETTLE_MS = 700;
 const PORTAL_STAGE_ID = 'depth-stage';
 
 /** Build the two-phase driver page for ONE portalCapture component. The page
- *  exposes `window.__setSpec(bool)`: true mounts the component (open-driver +
- *  fixed/axis props + callbacks + sampleText children) inside the stage; false
- *  empties it (baseline / reset-per-combo). Mirrors buildHarnessPage's marker
- *  grammar ($callback / $import) and provider wrapping. */
+ *  exposes `window.__setSpec(v)`: a combo INDEX (or true = 0) mounts that
+ *  combo's props (open-driver + fixed/axis props + callbacks + canonical
+ *  children) inside the stage; false/null empties it (baseline / reset-per-
+ *  combo). MOLECULE round: every enumerated combo is baked (per-combo props
+ *  via comboProps — presence/state axes included), and the canonical-children
+ *  vocabulary (childWrap / childrenSpec / $render) matches buildHarnessPage.
+ *  Mirrors buildHarnessPage's marker grammar ($callback/$import/$render) and
+ *  provider wrapping. */
 export function buildPortalHarnessPage(
   harness: string,
   cfg: CaptureConfig,
@@ -790,16 +826,19 @@ export function buildPortalHarnessPage(
 ): string {
   const { comp, space } = mount;
   const st = stageFor(cfg, comp);
-  // props for the (single) base combo + the open-driver props on top.
-  const baseCombo = space.enumeration.combos.find((c) => c.key === space.baseComboKey)!;
-  const props: Record<string, unknown> = { ...comboProps(comp, space, baseCombo), ...(comp.openDriver ?? {}) };
+  // per-combo props + the open-driver props on top (driven on every mount).
+  const specs = space.enumeration.combos.map((combo) => ({
+    key: combo.key,
+    props: { ...comboProps(comp, space, combo), ...(comp.openDriver ?? {}) } as Record<string, unknown>,
+  }));
 
-  // $import markers anywhere in the props become real import statements
-  // (resolved at mount by resolveMarkers), exactly as buildHarnessPage does.
+  // $import/$render markers anywhere in the props become real import
+  // statements (resolved at mount by resolveMarkers), as buildHarnessPage.
   const extraImports = new Map<string, Set<string>>();
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
-      const imp = (v as Record<string, unknown>)['$import'];
+      const rec = v as Record<string, unknown>;
+      const imp = typeof rec['$import'] === 'string' ? rec['$import'] : typeof rec['$render'] === 'string' ? rec['$render'] : undefined;
       if (typeof imp === 'string') {
         const [pkg, name] = imp.split('#');
         (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
@@ -808,28 +847,38 @@ export function buildPortalHarnessPage(
       for (const x of Object.values(v)) collectImports(x);
     }
   };
-  collectImports(props);
+  for (const s of specs) collectImports(s.props);
+  for (const cs of comp.childrenSpec ?? []) collectImports(cs.props ?? {});
   const extraImportLines = [...extraImports.entries()]
     .sort()
     .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
   const extraNames = [...extraImports.values()].flatMap((s) => [...s]).sort();
+  const kidImports = [...new Set([
+    comp.importName,
+    ...(comp.childWrap ? [comp.childWrap.importName] : []),
+    ...(comp.childrenSpec ?? []).map((c) => c.importName),
+  ])].sort();
 
   const stageJs = `{ display:'flex', alignItems:'flex-start', width:${st.width}, height:${st.height}, padding:${st.padding}, boxSizing:'border-box', background:'#fff', overflow:'hidden' }`;
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ${comp.importName} } from '${cfg.library.package}';
+import { ${kidImports.join(', ')} } from '${cfg.library.package}';
 ${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
 const C = ${comp.importName};
+const COMPONENTS = { ${kidImports.join(', ')} };
 const EXTRA = { ${extraNames.join(', ')} };
-const PROPS = ${JSON.stringify(props)};
+const SPECS = ${JSON.stringify(specs)};
 const CALLBACKS = ${JSON.stringify(comp.callbackProps ?? [])};
 const TEXT = ${JSON.stringify(comp.sampleText)};
+const CHILD_WRAP = ${JSON.stringify(comp.childWrap?.importName ?? null)};
+const CHILDREN_SPEC = ${JSON.stringify(comp.childrenSpec ?? null)};
 function resolveMarkers(v) {
   if (v && typeof v === 'object') {
     if (v.$callback === true) return () => {};
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
+    if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
     if (Array.isArray(v)) return v.map(resolveMarkers);
     const out = {};
     for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
@@ -837,19 +886,28 @@ function resolveMarkers(v) {
   }
   return v;
 }
+function renderKids() {
+  if (CHILDREN_SPEC) return CHILDREN_SPEC.map((cs, i) => React.createElement(COMPONENTS[cs.importName], { key: i, ...resolveMarkers({ ...(cs.props || {}) }) }, cs.text));
+  if (CHILD_WRAP) { const W = COMPONENTS[CHILD_WRAP]; return <W>{TEXT}</W>; }
+  return TEXT;
+}
 const stageStyle = ${stageJs};
-let open = false;
+let specIdx = null;
 let root = null;
 function render() {
-  const props = resolveMarkers({ ...PROPS });
-  for (const cb of CALLBACKS) props[cb] = () => {};
+  let content = null;
+  if (specIdx !== null) {
+    const props = resolveMarkers({ ...SPECS[specIdx].props });
+    for (const cb of CALLBACKS) props[cb] = () => {};
+    content = <C {...props}>{renderKids()}</C>;
+  }
   root.render(
     ${cfg.mount.wrapperOpen}
-      <div id="${PORTAL_STAGE_ID}" style={stageStyle}>{open ? <C {...props}>{TEXT}</C> : null}</div>
+      <div id="${PORTAL_STAGE_ID}" style={stageStyle}>{content}</div>
     ${cfg.mount.wrapperClose}
   );
 }
-window.__setSpec = (v) => { open = !!v; render(); };
+window.__setSpec = (v) => { specIdx = (v === false || v === null || v === undefined) ? null : (v === true ? 0 : v); render(); };
 root = createRoot(document.getElementById('root'));
 window.__setSpec(false);
 `;
@@ -929,8 +987,19 @@ const capturePortalJs = (classAllow?: string) => `(() => {
     }
     return out;
   };
-  const all = [...document.querySelectorAll('*')];
+  // MOLECULE round: BODY-scoped diff — Emotion-runtime libraries inject new
+  // <style> elements into <head> on a component's first mount; the whole-
+  // document diff reported them as phantom "portaled roots" (and only on the
+  // first combo of the first sweep — an attribution/determinism breaker).
+  // React portals land in document.body; head mutations are never component
+  // DOM. (Polaris/static-CSS libraries: identical behavior — their roots
+  // were always in body.)
+  const all = [...document.body.querySelectorAll('*')];
   const newRoots = all.filter((el) => !baseline.has(el) && (!el.parentElement || baseline.has(el.parentElement)));
+  // MOLECULE round: tag each new root so callers can locate/screenshot it
+  // before the reset (attributes are never part of the captured node — only
+  // tag/classes/styles/role/aria-modal are read, and reads happen above).
+  newRoots.forEach((el, i) => el.setAttribute('data-portal-root', String(i)));
   const cur = stage && stage.firstElementChild;
   const currentReader = cur
     ? { present: true, sig: cur.tagName.toLowerCase() + '|' + [...cur.classList].filter((c) => !c.includes('--')).map((c) => c.replace(/^Polaris-/, '')).join('.'), descendantEls: cur.querySelectorAll('*').length }
@@ -951,16 +1020,21 @@ const capturePortalJs = (classAllow?: string) => `(() => {
  *  settle → whole-document diff → reset (clean state for the next combo). The
  *  page must already be loaded (buildPortalHarnessPage) and `window.__ALL_PROPS`
  *  set. Nodes are normalized like the census (styles sorted/rgba-canonical),
- *  role/aria-modal preserved. */
+ *  role/aria-modal preserved. MOLECULE round: `specIndex` selects which baked
+ *  combo mounts (default 0 — the depth-receipt single-combo behavior,
+ *  unchanged); `beforeReset` runs while the combo is still MOUNTED (root
+ *  elements carry data-portal-root="<i>") — the screenshot hook. */
 export async function capturePortalRoots(
   page: Page,
   comboKey: string,
   classAllow?: string,
+  specIndex = 0,
+  beforeReset?: (raw: PortalCapture) => Promise<void>,
 ): Promise<PortalCapture> {
   await page.evaluate(`window.__setSpec(false)`);
   await page.waitForTimeout(150);
   await page.evaluate(markBaselineJs);
-  await page.evaluate(`window.__setSpec(true)`);
+  await page.evaluate(`window.__setSpec(${specIndex})`);
   await page.waitForTimeout(PORTAL_SETTLE_MS);
   const raw = (await page.evaluate(capturePortalJs(classAllow))) as {
     preBytes: number;
@@ -968,13 +1042,70 @@ export async function capturePortalRoots(
     currentReader: PortalCapture['currentReader'];
     roots: Array<{ location: 'in-stage' | 'portaled'; bytes: number; node: CapturedNode }>;
   };
-  await page.evaluate(`window.__setSpec(false)`); // reset-per-combo (R1)
-  await page.waitForTimeout(120);
-  return {
+  const result: PortalCapture = {
     combo: comboKey,
     preBytes: raw.preBytes,
     postBytes: raw.postBytes,
     currentReader: raw.currentReader,
     roots: raw.roots.map((r) => ({ location: r.location, bytes: r.bytes, node: normalizeNode(r.node) })),
   };
+  if (beforeReset) await beforeReset(result);
+  await page.evaluate(`window.__setSpec(false)`); // reset-per-combo (R1)
+  await page.waitForTimeout(120);
+  return result;
+}
+
+/** MOLECULE round — the portal SWEEP: every enumerated combo of a
+ *  portalCapture component through the baseline-diff reader, yielding
+ *  production `Capture` entries the census fusion consumes unchanged.
+ *
+ *  Root policy (single-root fusion): exactly ONE portaled root is the
+ *  captured root (the overlay — Dialog's modal root, Tooltip's popper,
+ *  Menu's popover root); in-stage roots (the mount's anchor child, e.g. the
+ *  Tooltip anchor) are RECEIPTED, never carried. Zero portaled + one
+ *  in-stage root falls back to the in-stage root. Anything else is a NAMED
+ *  refusal (MULTI-ROOT-CAPTURE) — multi-root fusion is not built.
+ *
+ *  Interactions: DEFAULT ONLY — overlay hover/focus/active states are a
+ *  named residual of this round (the census state drivers assume an
+ *  in-stage, persistent mount). Callers record this in provenance. */
+export async function portalSweep(
+  page: Page,
+  comp: ComponentConfig,
+  space: PropSpace,
+  opts: { screenshots?: string; classAllow?: string },
+): Promise<{ captures: Capture[]; receipts: string[] }> {
+  const captures: Capture[] = [];
+  const receipts: string[] = [];
+  if (opts.screenshots) mkdirSync(opts.screenshots, { recursive: true });
+  for (let i = 0; i < space.enumeration.combos.length; i++) {
+    const combo = space.enumeration.combos[i];
+    const pc = await capturePortalRoots(page, combo.key, opts.classAllow, i, async (raw) => {
+      if (!opts.screenshots) return;
+      const portaledIdx = raw.roots.map((r, j) => (r.location === 'portaled' ? j : -1)).filter((j) => j >= 0);
+      const pickIdx = portaledIdx.length === 1 ? portaledIdx[0] : raw.roots.length === 1 ? 0 : -1;
+      if (pickIdx < 0) return; // the refusal below names it; nothing to shoot
+      const shot = await page.locator(`[data-portal-root="${pickIdx}"]`).screenshot({ timeout: 10_000 });
+      writeFileSync(path.join(opts.screenshots!, `${comp.name}--${combo.key}__default.png`), shot);
+    });
+    const portaled = pc.roots.filter((r) => r.location === 'portaled');
+    const inStage = pc.roots.filter((r) => r.location === 'in-stage');
+    let picked: CapturedRoot;
+    if (portaled.length === 1) {
+      picked = portaled[0];
+      if (inStage.length > 0) {
+        receipts.push(
+          `portal-anchor-receipt: ${combo.key} — ${inStage.length} in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root`,
+        );
+      }
+    } else if (portaled.length === 0 && inStage.length === 1) {
+      picked = inStage[0];
+    } else {
+      throw new Error(
+        `${comp.name}:${combo.key}: MULTI-ROOT-CAPTURE refusal — ${portaled.length} portaled + ${inStage.length} in-stage new roots; single-root fusion carries exactly one root (multi-root fusion is a named future class)`,
+      );
+    }
+    captures.push({ combo: `${comp.name}:${combo.key}`, interaction: 'default', root: picked.node });
+  }
+  return { captures, receipts };
 }

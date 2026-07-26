@@ -1,0 +1,70 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tabs",
+  "anchors": [
+    {
+      "leaf": "imported.tabs.label-2.color.primary",
+      "token": "palette-text-secondary",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+    },
+    {
+      "leaf": "imported.tabs.label-2.color.secondary",
+      "token": "palette-text-secondary",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+    },
+    {
+      "leaf": "imported.tabs.label-3.color.primary",
+      "token": "palette-text-secondary",
+      "part": "label-3",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+    },
+    {
+      "leaf": "imported.tabs.label-3.color.secondary",
+      "token": "palette-text-secondary",
+      "part": "label-3",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+    },
+    {
+      "leaf": "imported.tabs.label.color.primary",
+      "token": "palette-primary-main",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root.Mui-selected"
+    },
+    {
+      "leaf": "imported.tabs.label.color.secondary",
+      "token": "palette-secondary-main",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root.Mui-selected"
+    },
+    {
+      "leaf": "imported.tabs.tabs-indicator.background-color.primary",
+      "token": "palette-primary-main",
+      "part": "tabs-indicator",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-11vcyky-MuiTabs-indicator"
+    },
+    {
+      "leaf": "imported.tabs.tabs-indicator.background-color.secondary",
+      "token": "palette-secondary-main",
+      "part": "tabs-indicator",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-m5gb1f-MuiTabs-indicator"
+    }
+  ]
+}

@@ -589,7 +589,13 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const parsed = DSC.parseIncomingText(bundleText);
   assert(parsed.ok && parsed.kind === 'bundle', 'mui.bundle.json parses as a CONTRACTS-BUNDLE');
   assert(parsed.tokenSet && parsed.tokenSet.name === 'MUI', 'the bundle surfaces its tokenSet (collection "MUI")');
-  const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet });
+  // MOLECULE round: the bundle carries Autocomplete's 4 floor-reconstructed
+  // icon SVGs — JSON stays the only thing a user pastes.
+  assert(
+    parsed.icons && Object.keys(parsed.icons).length === 4,
+    `the bundle surfaces its 4 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
+  );
+  const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet, icons: parsed.icons });
   assert(plan.ok, `the foreign bundle plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
   assert(
     plan.steps[0].kind === 'tokens' && plan.steps[0].title.includes('"MUI"'),
@@ -622,22 +628,34 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const shapeA = setShape(mockA);
   const shapeB = setShape(mockB);
   assert(
-    shapeA === 'Button(63), Card(4), Chip(28), Slider(12), Switch(14)',
+    shapeA === 'Accordion(4), Autocomplete(2), Button(63), Card(4), Chip(28), Dialog(5), Slider(12), Switch(14), Tabs(6)',
     `the bundle path builds the exact MUI set shape (got ${shapeA})`,
   );
   assert(shapeA === shapeB, `bundle path ≡ script path on component sets (${shapeA} vs ${shapeB})`);
+  // MOLECULE round: Menu and Tooltip have no variant axes — they build
+  // STANDALONE COMPONENTs, a shape the set pin above cannot see.
+  const standaloneShape = (mock) =>
+    mock.root
+      .findAll((n) => n.type === 'COMPONENT' && (n.name === 'Menu' || n.name === 'Tooltip'))
+      .map((n) => n.name)
+      .sort()
+      .join(', ');
+  const soloA = standaloneShape(mockA);
+  const soloB = standaloneShape(mockB);
+  assert(soloA === 'Menu, Tooltip', `the bundle path builds the standalone Menu + Tooltip components (got ${soloA || 'none'})`);
+  assert(soloA === soloB, `bundle path ≡ script path on standalone components (${soloA} vs ${soloB})`);
 
   const aliasCountOf = (mock) =>
     mock.variables.filter((v) =>
       Object.values(v.valuesByMode).some((val) => val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS'),
     ).length;
   assert(
-    mockA.variables.length === 982 && mockB.variables.length === 982,
-    `both paths land 982 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 1270 && mockB.variables.length === 1270,
+    `both paths land 1270 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
-    aliasCountOf(mockA) === 61 && aliasCountOf(mockB) === 61,
-    `both paths carry 61 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
+    aliasCountOf(mockA) === 70 && aliasCountOf(mockB) === 70,
+    `both paths carry 70 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
   );
   const namesA = mockA.variables.map((v) => v.name).sort().join('\n');
   const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
@@ -674,7 +692,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} with 982 variables (61 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1270 variables (70 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 }
 

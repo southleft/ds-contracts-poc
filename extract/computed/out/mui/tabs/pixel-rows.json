@@ -1,0 +1,122 @@
+[
+  {
+    "key": "primary.primary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.primary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.primary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.primary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.secondary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.secondary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.secondary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.secondary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.primary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.primary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.primary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.primary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.secondary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.secondary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.secondary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.secondary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.primary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.primary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.primary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.primary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.secondary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.secondary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.secondary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.secondary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

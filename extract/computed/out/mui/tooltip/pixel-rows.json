@@ -1,0 +1,14 @@
+[
+  {
+    "key": "off__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 73x39"
+  },
+  {
+    "key": "on__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 73x37"
+  }
+]

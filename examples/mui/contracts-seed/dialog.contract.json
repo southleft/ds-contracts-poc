@@ -1,0 +1,56 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.dialog",
+  "name": "Dialog",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture: backdrop + container + paper). Canonical composition: DialogContent child (childWrap — the Card precedent). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "maxWidth",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "sm",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Max width",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "maxWidth"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Dialog"
+    }
+  }
+}

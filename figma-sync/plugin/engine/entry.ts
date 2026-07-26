@@ -115,6 +115,9 @@ export type ParsedIncoming =
       /** The bundle's foreign token set (name + flat DTCG base + optional
        *  modes/minted) — null when the paste rides the baked repo tokens. */
       tokenSet: TokenSetPayload | null;
+      /** Bundle-carried icon assets ({name: svgMarkup}) — null when the
+       *  paste carries none; merged over the baked repo icons at plan time. */
+      icons: Record<string, string> | null;
     }
   | { ok: false; issue: PlainIssue };
 
@@ -238,10 +241,26 @@ export function createPluginEngine(data: PluginEngineData) {
         }
         tokenSet = parsedSet.tokenSet;
       }
-      return { ok: true, kind: 'bundle', contracts, tokenSet };
+      // Optional bundle-carried icon assets (MOLECULE round — Autocomplete's
+      // floor-reconstructed indicator/chip-delete SVGs): {name: svgMarkup},
+      // the same map the CLI's --icons dir provides. Without it, a contract
+      // referencing icon assets keeps the emitter's own named refusal.
+      const rawIcons = (raw as { icons?: unknown }).icons;
+      let icons: Record<string, string> | null = null;
+      if (rawIcons !== undefined && rawIcons !== null) {
+        if (typeof rawIcons !== 'object' || Array.isArray(rawIcons)) {
+          return { ok: false, issue: plain('This bundle\'s "icons" section must be an object of {name: "<svg…>"} entries.') };
+        }
+        const bad = Object.entries(rawIcons as Record<string, unknown>).find(([, v]) => typeof v !== 'string');
+        if (bad) {
+          return { ok: false, issue: plain(`This bundle's "icons" entry "${bad[0]}" is not SVG text — every value must be a string.`) };
+        }
+        icons = rawIcons as Record<string, string>;
+      }
+      return { ok: true, kind: 'bundle', contracts, tokenSet, icons };
     }
     if (raw && typeof raw === 'object' && typeof (raw as { id?: unknown }).id === 'string') {
-      return { ok: true, kind: 'contract', contracts: [raw], tokenSet: null };
+      return { ok: true, kind: 'contract', contracts: [raw], tokenSet: null, icons: null };
     }
     return {
       ok: false,
@@ -331,9 +350,14 @@ export function createPluginEngine(data: PluginEngineData) {
    *  bundle path and the script path compile IDENTICAL component data. The
    *  token inventory is base + minted and NOTHING else — a contract ref
    *  outside both keeps the emitter's own named "Cannot resolve token"
-   *  refusal. */
-  const foreignEngineFor = (tokenSet: TokenSetPayload): typeof engine =>
-    createFigmaEngine({ tokens: tokenSetTokenTrees(tokenSet), icons });
+   *  refusal. MOLECULE round: bundle-carried icon assets merge OVER the
+   *  baked repo icons (`figma bundle --icons` embeds them — Autocomplete's
+   *  floor-reconstructed SVGs); a missing asset keeps the emitter's named
+   *  "needs icon asset" refusal. */
+  const mergedIcons = (bundleIcons: Record<string, string> | null | undefined): Map<string, string> =>
+    bundleIcons ? new Map([...icons, ...Object.entries(bundleIcons)]) : icons;
+  const foreignEngineFor = (tokenSet: TokenSetPayload, bundleIcons?: Record<string, string> | null): typeof engine =>
+    createFigmaEngine({ tokens: tokenSetTokenTrees(tokenSet), icons: mergedIcons(bundleIcons) });
 
   // -------------------------------------------------------------------------
   // Generate from contract
@@ -352,6 +376,9 @@ export function createPluginEngine(data: PluginEngineData) {
      *  and the bundle's contracts resolve against base + minted instead of
      *  the baked repo tokens. */
     tokenSet?: TokenSetPayload | null;
+    /** Bundle-carried icon assets (parseIncoming* surfaces them) — merged
+     *  over the baked repo icons for the incoming contracts' compile. */
+    icons?: Record<string, string> | null;
   }
 
   function planGenerate(rawContracts: unknown[], opts: PlanOptions = {}):
@@ -397,7 +424,12 @@ export function createPluginEngine(data: PluginEngineData) {
     // one for `--tokens base,minted`; baked repo dependencies keep the
     // baked engine (they were written against the repo tokens).
     const tokenSet = opts.tokenSet ?? null;
-    const foreign = tokenSet ? foreignEngineFor(tokenSet) : null;
+    const bundleIcons = opts.icons ?? null;
+    const foreign = tokenSet
+      ? foreignEngineFor(tokenSet, bundleIcons)
+      : bundleIcons
+        ? createFigmaEngine({ tokens: data.tokens, icons: mergedIcons(bundleIcons) })
+        : null;
 
     const steps: GenerateStep[] = [];
     if (opts.withTokens !== false) {
@@ -708,10 +740,16 @@ return { inventory: rows };
     rawContracts: unknown[],
     inventory: InventoryRow[],
     tokenSet: TokenSetPayload | null = null,
+    bundleIcons: Record<string, string> | null = null,
   ): UpdatePlan {
-    // A bundle-carried foreign token set: every incoming contract compiles
-    // against base + minted (the same engine choice planGenerate makes).
-    const foreign = tokenSet ? foreignEngineFor(tokenSet) : null;
+    // A bundle-carried foreign token set (and any bundle-carried icons):
+    // every incoming contract compiles against base + minted (the same
+    // engine choice planGenerate makes).
+    const foreign = tokenSet
+      ? foreignEngineFor(tokenSet, bundleIcons)
+      : bundleIcons
+        ? createFigmaEngine({ tokens: data.tokens, icons: mergedIcons(bundleIcons) })
+        : null;
     const eng = foreign ?? engine;
     const rows: UpdateRow[] = [];
     const incoming: Contract[] = [];

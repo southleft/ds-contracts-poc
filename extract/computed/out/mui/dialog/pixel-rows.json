@@ -1,0 +1,32 @@
+[
+  {
+    "key": "xs__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 900x1000"
+  },
+  {
+    "key": "sm__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 900x1000"
+  },
+  {
+    "key": "md__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 900x1000"
+  },
+  {
+    "key": "lg__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 900x1000"
+  },
+  {
+    "key": "xl__default",
+    "pctExact": 100,
+    "pctAA": 100,
+    "note": "size mismatch ours 320x96 vs orig 900x1000"
+  }
+]

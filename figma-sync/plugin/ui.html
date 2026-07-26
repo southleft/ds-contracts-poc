@@ -829,6 +829,8 @@
       // A bundle-carried foreign token set (contracts + tokens in ONE JSON
       // paste): the tokens step syncs it as its own named collection.
       tokenSet: parsed.tokenSet || null,
+      // Bundle-carried icon assets ride the same paste (figma bundle --icons).
+      icons: parsed.icons || null,
     });
     if (!plan.ok) {
       var boxR = resultBox('gen-result', false, 'Refused — the contract did not pass the referee.');
@@ -893,7 +895,7 @@
         return;
       }
       var inventory = (msg.result && msg.result.inventory) || [];
-      var plan = DSC.updatePlan(parsed.contracts, inventory, parsed.tokenSet || null);
+      var plan = DSC.updatePlan(parsed.contracts, inventory, parsed.tokenSet || null, parsed.icons || null);
       var box = resultBox('upd-result', null, 'Change report — nothing applied yet:');
       var rowsWrap = document.createElement('div');
       rowsWrap.className = 'rows';
@@ -942,7 +944,7 @@
       });
       box.appendChild(rowsWrap);
       plan.lines.slice(plan.rows.length).forEach(function (l) { addLine(box, l); });
-      updState = { contracts: parsed.contracts, plan: plan, rowsWrap: rowsWrap, tokenSet: parsed.tokenSet || null };
+      updState = { contracts: parsed.contracts, plan: plan, rowsWrap: rowsWrap, tokenSet: parsed.tokenSet || null, icons: parsed.icons || null };
       updApply.disabled = !plan.rows.some(function (r) { return r.action === 'amend' || r.action === 'create'; });
     });
   };
@@ -954,7 +956,7 @@
     updState.rowsWrap.querySelectorAll('input[type=checkbox]').forEach(function (cb) {
       if (cb.checked && !cb.disabled) selected.push(cb.dataset.contractId);
     });
-    var apply = DSC.updateApplySteps(updState.contracts, selected, { fileKey: currentFileKey, tokenSet: updState.tokenSet });
+    var apply = DSC.updateApplySteps(updState.contracts, selected, { fileKey: currentFileKey, tokenSet: updState.tokenSet, icons: updState.icons });
     if (!apply.ok) {
       addIssues(resultBox('upd-result', false, 'Nothing applied.'), apply.issues);
       return;

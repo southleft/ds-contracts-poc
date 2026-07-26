@@ -1,0 +1,92 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.accordion",
+  "name": "Accordion",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: AccordionSummary + AccordionDetails children (childrenSpec). expanded is modeled as an enum axis (collapsed|expanded → boolean via axisValueMap — the Checkbox precedent), so both planes render as variants and gate honestly. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "elevation",
+          "outlined"
+        ]
+      },
+      "default": "elevation",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "elevation": "Elevation",
+            "outlined": "Outlined"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "expanded",
+      "type": {
+        "enum": [
+          "collapsed",
+          "expanded"
+        ]
+      },
+      "default": "collapsed",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Expanded",
+          "values": {
+            "collapsed": "Collapsed",
+            "expanded": "Expanded"
+          }
+        },
+        "code": {
+          "prop": "expanded"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "hover",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Accordion"
+    }
+  }
+}

@@ -1,0 +1,682 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Accordion",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "elevation.collapsed.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "elevation.collapsed.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "elevation.expanded.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "elevation.expanded.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outlined.collapsed.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outlined.collapsed.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outlined.expanded.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outlined.expanded.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "elevation.collapsed.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "elevation.collapsed.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "elevation.expanded.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "elevation.expanded.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "outlined.collapsed.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "outlined.collapsed.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "outlined.expanded.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-left-radius",
+      "combo": "outlined.expanded.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "elevation.collapsed.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "elevation.collapsed.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "elevation.expanded.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "elevation.expanded.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "outlined.collapsed.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "outlined.collapsed.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "outlined.expanded.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-right-radius",
+      "combo": "outlined.expanded.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:last-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "elevation.collapsed.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "elevation.collapsed.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "elevation.expanded.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "elevation.expanded.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "outlined.collapsed.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "outlined.collapsed.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "outlined.expanded.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-left-radius",
+      "combo": "outlined.expanded.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "elevation.collapsed.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "elevation.collapsed.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "elevation.expanded.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "elevation.expanded.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "outlined.collapsed.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "outlined.collapsed.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "outlined.expanded.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-right-radius",
+      "combo": "outlined.expanded.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "shape-border-radius",
+      "varName": "--mui-shape-borderRadius",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root:first-of-type"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "elevation.collapsed.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "elevation.collapsed.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "elevation.expanded.enabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "elevation.expanded.disabled",
+      "axisValues": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-18ssyxf-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.collapsed.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.collapsed.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.expanded.enabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outlined.expanded.disabled",
+      "axisValues": {
+        "variant": "outlined",
+        "expanded": "expanded"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1bdomwo-MuiPaper-root-MuiAccordion-root"
+      }
+    }
+  ],
+  "skips": [
+    "accordionsummary-gutters.opacity: no var candidate verified against the computed value in any combo"
+  ]
+}

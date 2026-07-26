@@ -1,0 +1,260 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Tabs",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "primary.primary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root.Mui-selected"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "primary.secondary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root.Mui-selected"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "secondary.primary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root.Mui-selected"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "secondary.secondary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root.Mui-selected"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "primary.primary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "primary.secondary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "secondary.primary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "secondary.secondary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "primary.primary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "primary.secondary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-n6e6a9-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "secondary.primary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "secondary.secondary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-cixaqa-MuiButtonBase-root-MuiTab-root"
+      }
+    },
+    {
+      "part": "tabs-indicator",
+      "channel": "background-color",
+      "combo": "primary.primary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-11vcyky-MuiTabs-indicator"
+      }
+    },
+    {
+      "part": "tabs-indicator",
+      "channel": "background-color",
+      "combo": "primary.secondary",
+      "axisValues": {
+        "textColor": "primary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-m5gb1f-MuiTabs-indicator"
+      }
+    },
+    {
+      "part": "tabs-indicator",
+      "channel": "background-color",
+      "combo": "secondary.primary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-11vcyky-MuiTabs-indicator"
+      }
+    },
+    {
+      "part": "tabs-indicator",
+      "channel": "background-color",
+      "combo": "secondary.secondary",
+      "axisValues": {
+        "textColor": "secondary",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-m5gb1f-MuiTabs-indicator"
+      }
+    },
+    {
+      "part": "tabs-indicator",
+      "channel": "background-color",
+      "combo": "inherit.primary",
+      "axisValues": {
+        "textColor": "inherit",
+        "indicatorColor": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-11vcyky-MuiTabs-indicator"
+      }
+    },
+    {
+      "part": "tabs-indicator",
+      "channel": "background-color",
+      "combo": "inherit.secondary",
+      "axisValues": {
+        "textColor": "inherit",
+        "indicatorColor": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-m5gb1f-MuiTabs-indicator"
+      }
+    }
+  ],
+  "skips": []
+}

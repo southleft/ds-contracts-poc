@@ -1,0 +1,251 @@
+{
+  "component": "Menu",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 198,
+    "cellsEqual": 185,
+    "pctEqual": 93.43434343434343,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "meanExact": 100,
+    "meanAA": 100,
+    "maxAA": 100
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 23,
+    "mintedLeavesUnfolded": 23,
+    "baseBindings": 107,
+    "stateBindings": 0,
+    "codeOnlyChannels": 17,
+    "overflowBindings": 0,
+    "folds": 45
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 13
+    },
+    {
+      "key": "__hover",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "__active",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.position",
+      1
+    ],
+    [
+      "backdrop-invisible.position",
+      1
+    ],
+    [
+      "backdrop-invisible.z-index",
+      1
+    ],
+    [
+      "menu-paper.max-height",
+      1
+    ],
+    [
+      "menu-paper.max-width",
+      1
+    ],
+    [
+      "menu-paper.transition-behavior",
+      1
+    ],
+    [
+      "list-padding.list-style-type",
+      1
+    ],
+    [
+      "label.list-style-type",
+      1
+    ],
+    [
+      "label.vertical-align",
+      1
+    ],
+    [
+      "label-2.list-style-type",
+      1
+    ],
+    [
+      "label-2.vertical-align",
+      1
+    ],
+    [
+      "label-3.list-style-type",
+      1
+    ],
+    [
+      "label-3.vertical-align",
+      1
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: backdrop-invisible.position — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: backdrop-invisible.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: menu-paper.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: menu-paper.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: menu-paper.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: list-padding.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: list-padding.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 198,
+      "channelsEqual": 185,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "backdrop-invisible",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "backdrop-invisible",
+          "channel": "z-index",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "menu-paper",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "calc(100% - 96px)"
+        },
+        {
+          "part": "menu-paper",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 32px)"
+        },
+        {
+          "part": "menu-paper",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "list-padding",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label-2",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label-2",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label-3",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label-3",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000"
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    }
+  ]
+}

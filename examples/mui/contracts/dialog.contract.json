@@ -1,0 +1,227 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.dialog",
+  "name": "Dialog",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture: backdrop + container + paper). Canonical composition: DialogContent child (childWrap — the Card precedent). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "maxWidth",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "sm",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Max width",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "maxWidth"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Dialog body copy for the molecule round.",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {
+        "backdrop-root": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Backdrop-root.Dialog-backdrop.Modal-backdrop — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "declared": {
+            "transition-property": "opacity",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "background-color": "{imported.dialog.backdrop-root.background-color}",
+            "bottom": "{imported.shared.size-0}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          },
+          "tokens": {
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        },
+        "dialog-container": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Dialog-container.Dialog-scrollPaper — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "dialog-paper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Dialog-paper.Paper-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column"
+              },
+              "parts": {
+                "label": {
+                  "content": {
+                    "prop": "children"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "overflow-x": "auto",
+                    "overflow-y": "auto"
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000de}",
+                    "flex-grow": "{imported.dialog.label.flex-grow}",
+                    "font-size": "{imported.dialog.label.font-size}",
+                    "font-weight": "{imported.dialog.label.font-weight}",
+                    "padding-bottom": "{imported.dialog.label.padding-bottom}",
+                    "padding-left": "{imported.dialog.label.padding-left}",
+                    "padding-right": "{imported.dialog.label.padding-right}",
+                    "padding-top": "{imported.dialog.label.padding-top}",
+                    "row-rule-color": "{imported.shared.color-000000de}"
+                  }
+                }
+              },
+              "declared": {
+                "overflow-x": "auto",
+                "overflow-y": "auto",
+                "position": "relative",
+                "transition-duration": "0.3s",
+                "transition-property": "box-shadow",
+                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+              },
+              "tokens": {
+                "background-color": "{imported.dialog.dialog-paper.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-4}",
+                "border-bottom-right-radius": "{imported.shared.size-4}",
+                "border-top-left-radius": "{imported.shared.size-4}",
+                "border-top-right-radius": "{imported.shared.size-4}",
+                "bottom": "{imported.shared.size-0}",
+                "box-shadow": "{imported.dialog.dialog-paper.box-shadow}",
+                "color": "{imported.shared.color-000000de}",
+                "left": "{imported.shared.size-0}",
+                "margin-bottom": "{imported.shared.size-32}",
+                "margin-left": "{imported.shared.size-32}",
+                "margin-right": "{imported.shared.size-32}",
+                "margin-top": "{imported.shared.size-32}",
+                "outline-width": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-000000de}",
+                "top": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "maxWidth",
+                  "map": {
+                    "lg": {
+                      "max-width": "{imported.dialog.dialog-paper.max-width.lg}"
+                    },
+                    "md": {
+                      "max-width": "{imported.dialog.dialog-paper.max-width.md}"
+                    },
+                    "sm": {
+                      "max-width": "{imported.dialog.dialog-paper.max-width.sm}"
+                    },
+                    "xl": {
+                      "max-width": "{imported.dialog.dialog-paper.max-width.xl}"
+                    },
+                    "xs": {
+                      "max-width": "{imported.dialog.dialog-paper.max-width.xs}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "transition-property": "opacity",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-width": "{imported.shared.size-0}"
+          }
+        },
+        "part-3": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          },
+          "tokens": {
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.dialog.root.width}",
+        "z-index": "{imported.dialog.root.z-index}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Dialog"
+    }
+  }
+}

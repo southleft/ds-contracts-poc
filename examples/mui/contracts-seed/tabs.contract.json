@@ -1,0 +1,79 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.tabs",
+  "name": "Tabs",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: three Tab children (childrenSpec, disableRipple pinned — the Button ripple precedent); value pinned to 0 (controlled). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "textColor",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "inherit"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Text color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "inherit": "Inherit"
+          }
+        },
+        "code": {
+          "prop": "textColor"
+        }
+      }
+    },
+    {
+      "name": "indicatorColor",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Indicator color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary"
+          }
+        },
+        "code": {
+          "prop": "indicatorColor"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Tabs"
+    }
+  }
+}

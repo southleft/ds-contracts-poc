@@ -1,0 +1,227 @@
+{
+  "component": "Tooltip",
+  "browser": "149.0.7827.55",
+  "captures": 2,
+  "combos": 2,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 675,
+  "elementsPerCapture": 3,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 13,
+    "label": 42,
+    "tooltip-arrow": 31
+  },
+  "folds": {
+    "count": 18,
+    "receipts": [
+      {
+        "part": "label",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 29,
+    "mintedLeavesFolded": 30
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 30,
+    "baseBindings": 46,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 43,
+      "perAxis": 3,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 12,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 9,
+    "state": 0,
+    "overflowBindings": 3
+  },
+  "pseudoElementFindings": 1,
+  "anatomyPromotion": {
+    "partsCarried": 3,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 3365,
+    "cellsMatched": 3352,
+    "pct": 99.61367013372957,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "perspective-origin",
+        5
+      ],
+      [
+        "inline-size",
+        4
+      ],
+      [
+        "width",
+        4
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 2,
+    "exact": {
+      "mean": 100,
+      "max": 100,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 100,
+      "max": 100,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "off__default",
+        "pctExact": 100,
+        "pctAA": 100,
+        "note": "size mismatch ours 320x96 vs orig 73x39"
+      },
+      {
+        "key": "on__default",
+        "pctExact": 100,
+        "pctAA": 100,
+        "note": "size mismatch ours 320x96 vs orig 73x37"
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 70.54263565891473,
+    "rowsFullyEqual": 0,
+    "rows": 8,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 8
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 0
+}

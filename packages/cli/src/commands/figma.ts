@@ -39,6 +39,7 @@ import {
   expandContractArgs,
   flagString,
   loadContracts,
+  loadIcons,
   parseFlags,
   splitList,
 } from '../lib.js';
@@ -55,6 +56,9 @@ export interface ContractsBundle {
   /** Foreign token set (figma bundle writes it) — rides through push
    *  verbatim so the plugin can sync it; never inspected here. */
   tokenSet?: unknown;
+  /** Bundle-carried icon assets ({name: svgMarkup}; figma bundle --icons
+   *  writes it) — rides through push verbatim. */
+  icons?: unknown;
 }
 
 /** Read a file as a bundle: an existing CONTRACTS-BUNDLE envelope passes
@@ -73,11 +77,13 @@ export function toBundle(filePath: string): ContractsBundle {
       throw new CliUsageError(`${filePath}: a ${CONTRACTS_BUNDLE_TYPE} needs a non-empty "contracts" array`);
     }
     const tokenSet = (raw as { tokenSet?: unknown }).tokenSet;
+    const icons = (raw as { icons?: unknown }).icons;
     return {
       type: CONTRACTS_BUNDLE_TYPE,
       version: 1,
       contracts,
       ...(tokenSet !== undefined && tokenSet !== null ? { tokenSet } : {}),
+      ...(icons !== undefined && icons !== null ? { icons } : {}),
     };
   }
   if (raw && typeof raw === 'object' && typeof (raw as { id?: unknown }).id === 'string') {
@@ -106,7 +112,7 @@ const readJsonObject = (filePath: string): Record<string, unknown> => {
 };
 
 async function bundleCommand(argv: string[]): Promise<number> {
-  const parsed = parseFlags(argv, { value: ['tokens', 'modes', 'name', 'out'] });
+  const parsed = parseFlags(argv, { value: ['tokens', 'modes', 'name', 'out', 'icons'] });
   if (parsed.positionals.length === 0) {
     throw new CliUsageError('figma bundle needs contract files/directories');
   }
@@ -129,6 +135,36 @@ async function bundleCommand(argv: string[]): Promise<number> {
   const files = expandContractArgs(parsed.positionals);
   loadContracts(files);
   const contracts = files.map((f) => JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>);
+
+  // MOLECULE round: contracts referencing icon assets (icon.asset) make the
+  // bundle carry the SVGs — JSON stays the only thing a user pastes. Exactly
+  // the referenced assets embed (sorted — deterministic bytes); a referenced
+  // asset missing from --icons, or refs with no --icons at all, refuses BY
+  // NAME (a bundle that cannot render its own icons is not a bundle).
+  const iconRefs = new Set<string>();
+  const collectIconRefs = (v: unknown): void => {
+    if (v && typeof v === 'object') {
+      const asset = (v as { icon?: { asset?: unknown } }).icon?.asset;
+      if (typeof asset === 'string') iconRefs.add(asset);
+      for (const x of Object.values(v)) collectIconRefs(x);
+    }
+  };
+  for (const c of contracts) collectIconRefs(c);
+  const iconsDir = flagString(parsed, 'icons');
+  let icons: Record<string, string> | undefined;
+  if (iconRefs.size > 0) {
+    if (!iconsDir) {
+      throw new CliUsageError(
+        `these contracts reference ${iconRefs.size} icon asset(s) (${[...iconRefs].sort().join(', ')}) — pass --icons <dir> so the bundle can carry them`,
+      );
+    }
+    const available = loadIcons(iconsDir);
+    const missing = [...iconRefs].sort().filter((n) => !available.has(n));
+    if (missing.length > 0) {
+      throw new CliUsageError(`icon asset(s) referenced but not in ${iconsDir}: ${missing.join(', ')}`);
+    }
+    icons = Object.fromEntries([...iconRefs].sort().map((n) => [n, available.get(n)!]));
+  }
 
   // Nested DTCG trees (Polaris's wrap) flatten to dot-path names — the
   // tokenSet base is flat by format; a nested wrap collapsing to one "token"
@@ -156,6 +192,7 @@ async function bundleCommand(argv: string[]): Promise<number> {
       ...(light || dark ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } } : {}),
       ...(minted ? { minted } : {}),
     },
+    ...(icons ? { icons } : {}),
     contracts,
   };
   const text = JSON.stringify(bundle, null, 2) + '\n';
@@ -164,7 +201,7 @@ async function bundleCommand(argv: string[]): Promise<number> {
   writeFileSync(outPath, text);
   const baseCount = Object.keys(base).length;
   console.log(
-    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ', minted tree' : ''}${light || dark ? `, modes: ${[light && 'light', dark && 'dark'].filter(Boolean).join('/')}` : ''}; ${text.length} bytes). Paste it into the plugin's Generate tab — JSON is the only thing a user ever pastes.`,
+    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ', minted tree' : ''}${light || dark ? `, modes: ${[light && 'light', dark && 'dark'].filter(Boolean).join('/')}` : ''}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ''}; ${text.length} bytes). Paste it into the plugin's Generate tab — JSON is the only thing a user ever pastes.`,
   );
   return 0;
 }

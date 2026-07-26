@@ -2052,11 +2052,23 @@ function partToSpecInner(
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
     Object.assign(textSpec, textExtras(textCtx));
+    // MOLECULE round (Tooltip finding): a text part can CONTAIN parts — the
+    // Tooltip bubble's label carries the absolute-positioned arrow span. The
+    // old text lowering silently DROPPED child parts; here they compile
+    // after the text child (childless text parts push nothing — byte-
+    // identical for every prior contract).
+    frame.children!.push(
+      ...variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
+        partToSpecs(childName, child, contract, byId, textCtx, subst),
+      ),
+    );
     applyVisibleWhen(frame, part, contract);
     return frame;
   };
   if (part.text !== undefined) {
-    if (textPartHasBox()) {
+    // A TEXT node has no children — a child-BEARING text part must take the
+    // frame lowering even without box channels (same Tooltip finding).
+    if (textPartHasBox() || Object.keys(part.parts ?? {}).length > 0) {
       const textSpec: NodeSpec = { type: 'text', name, characters: part.text };
       return wrapTextInBox(textSpec);
     }

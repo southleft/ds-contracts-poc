@@ -1,0 +1,193 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Autocomplete",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-2navfl-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator"
+      }
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-2navfl-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator"
+      }
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-lamsnf-MuiInputBase-root-MuiOutlinedInput-root"
+      }
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-lamsnf-MuiInputBase-root-MuiOutlinedInput-root"
+      }
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-16vgerp-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+      }
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-16vgerp-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+      }
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "background-color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-action-selected",
+      "varName": "--mui-palette-action-selected",
+      "anchor": {
+        "selector": ".css-18wx48k-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "background-color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-action-selected",
+      "varName": "--mui-palette-action-selected",
+      "anchor": {
+        "selector": ".css-1prq41w-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-18wx48k-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1prq41w-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "background-color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-action-selected",
+      "varName": "--mui-palette-action-selected",
+      "anchor": {
+        "selector": ".css-18wx48k-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "background-color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-action-selected",
+      "varName": "--mui-palette-action-selected",
+      "anchor": {
+        "selector": ".css-1prq41w-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-18wx48k-MuiButtonBase-root-MuiChip-root"
+      }
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1prq41w-MuiButtonBase-root-MuiChip-root"
+      }
+    }
+  ],
+  "skips": [
+    "icon.color: no var candidate verified against the computed value in any combo",
+    "icon-2.color: no var candidate verified against the computed value in any combo"
+  ]
+}

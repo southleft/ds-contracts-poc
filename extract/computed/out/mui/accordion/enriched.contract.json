@@ -1,0 +1,438 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.accordion",
+  "name": "Accordion",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: AccordionSummary + AccordionDetails children (childrenSpec). expanded is modeled as an enum axis (collapsed|expanded → boolean via axisValueMap — the Checkbox precedent), so both planes render as variants and gate honestly. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "elevation",
+          "outlined"
+        ]
+      },
+      "default": "elevation",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "elevation": "Elevation",
+            "outlined": "Outlined"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "expanded",
+      "type": {
+        "enum": [
+          "collapsed",
+          "expanded"
+        ]
+      },
+      "default": "collapsed",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Expanded",
+          "values": {
+            "collapsed": "Collapsed",
+            "expanded": "Expanded"
+          }
+        },
+        "code": {
+          "prop": "expanded"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "hover",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "position": "relative",
+        "transition-duration": "0.15s",
+        "transition-property": "margin",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "parts": {
+        "accordion-heading": {
+          "element": "h3",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy h3|Accordion-heading — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "inline"
+          },
+          "parts": {
+            "accordionsummary-gutters": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|AccordionSummary-gutters.AccordionSummary-root.ButtonBase-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "parts": {
+                "label": {
+                  "text": "Accordion title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|AccordionSummary-content — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true
+                  },
+                  "declared": {
+                    "cursor": "pointer",
+                    "font-family": "Arial",
+                    "transition-duration": "0.15s",
+                    "transition-property": "margin",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                    "user-select": "none"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "default",
+                      "pointer-events": "none"
+                    }
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000de}",
+                    "flex-grow": "{imported.accordion.label.flex-grow}",
+                    "font-size": "{imported.accordion.label.font-size}",
+                    "font-weight": "{imported.accordion.label.font-weight}",
+                    "row-rule-color": "{imported.shared.color-000000de}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "expanded",
+                      "map": {
+                        "collapsed": {
+                          "margin-bottom": "{imported.accordion.label.margin-bottom.collapsed}",
+                          "margin-top": "{imported.accordion.label.margin-top.collapsed}"
+                        },
+                        "expanded": {
+                          "margin-bottom": "{imported.accordion.label.margin-bottom.expanded}",
+                          "margin-top": "{imported.accordion.label.margin-top.expanded}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "appearance": "none",
+                "border-bottom-style": "none",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "cursor": "pointer",
+                "position": "relative",
+                "transition-delay": "0s, 0s",
+                "transition-duration": "0.15s, 0.15s",
+                "transition-property": "min-height, background-color",
+                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)",
+                "user-select": "none"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default",
+                  "pointer-events": "none"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.accordion.accordionsummary-gutters.background-color}",
+                "border-bottom-width": "{imported.shared.size-0}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-000000de}",
+                "left": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "outline-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-16}",
+                "padding-right": "{imported.shared.size-16}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-000000de}",
+                "top": "{imported.shared.size-0}"
+              },
+              "states": {
+                "focus-visible": {
+                  "background-color": "{imported.accordion.accordionsummary-gutters.background-color-state-focus-visible}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "expanded",
+                  "map": {
+                    "collapsed": {
+                      "height": "{imported.accordion.accordionsummary-gutters.height.collapsed}",
+                      "min-height": "{imported.accordion.accordionsummary-gutters.min-height.collapsed}"
+                    },
+                    "expanded": {
+                      "height": "{imported.accordion.accordionsummary-gutters.height.expanded}",
+                      "min-height": "{imported.accordion.accordionsummary-gutters.min-height.expanded}"
+                    }
+                  }
+                },
+                {
+                  "prop": "variant",
+                  "map": {
+                    "elevation": {
+                      "width": "{imported.accordion.accordionsummary-gutters.width.elevation}"
+                    },
+                    "outlined": {
+                      "width": "{imported.accordion.accordionsummary-gutters.width.outlined}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "color": "{imported.shared.color-000000de}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "row-rule-color": "{imported.shared.color-000000de}"
+          }
+        },
+        "collapse-root": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-root.Collapse-vertical — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "transition-duration": "0.3s",
+            "transition-property": "height",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "parts": {
+            "collapse-vertical": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-vertical.Collapse-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "collapse-vertical-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-vertical.Collapse-wrapperInner — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "layout": {
+                    "grow": true
+                  },
+                  "parts": {
+                    "accordion-region": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|Accordion-region — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block"
+                      },
+                      "parts": {
+                        "label-2": {
+                          "text": "Details body copy for the molecule round.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|AccordionDetails-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block"
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-000000de}",
+                            "font-size": "{imported.shared.size-16}",
+                            "font-weight": "{imported.accordion.label-2.font-weight}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "padding-bottom": "{imported.shared.size-16}",
+                            "padding-left": "{imported.shared.size-16}",
+                            "padding-right": "{imported.shared.size-16}",
+                            "padding-top": "{imported.accordion.label-2.padding-top}",
+                            "row-rule-color": "{imported.shared.color-000000de}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "color": "{imported.shared.color-000000de}",
+                        "height": "{imported.shared.size-60}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "row-rule-color": "{imported.shared.color-000000de}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "elevation": {
+                              "width": "{imported.accordion.accordion-region.width.elevation}"
+                            },
+                            "outlined": {
+                              "width": "{imported.accordion.accordion-region.width.outlined}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000de}",
+                    "height": "{imported.shared.size-60}",
+                    "row-rule-color": "{imported.shared.color-000000de}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "variant",
+                      "map": {
+                        "elevation": {
+                          "width": "{imported.accordion.collapse-vertical-2.width.elevation}"
+                        },
+                        "outlined": {
+                          "width": "{imported.accordion.collapse-vertical-2.width.outlined}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "height": "{imported.shared.size-60}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-000000de}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "elevation": {
+                      "width": "{imported.accordion.collapse-vertical.width.elevation}"
+                    },
+                    "outlined": {
+                      "width": "{imported.accordion.collapse-vertical.width.outlined}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "color": "{imported.shared.color-000000de}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "row-rule-color": "{imported.shared.color-000000de}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "expanded",
+              "map": {
+                "collapsed": {
+                  "height": "{imported.accordion.collapse-root.height.collapsed}"
+                },
+                "expanded": {
+                  "height": "{imported.accordion.collapse-root.height.expanded}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "elevation": {
+                  "width": "{imported.accordion.collapse-root.width.elevation}"
+                },
+                "outlined": {
+                  "width": "{imported.accordion.collapse-root.width.outlined}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.accordion.root.background-color}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000de}",
+        "height": "{imported.accordion.root.height.{variant}.{expanded}}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "row-rule-color": "{imported.shared.color-000000de}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.accordion.root.width}"
+      },
+      "states": {
+        "disabled": {
+          "background-color": "{imported.accordion.root.background-color-state-disabled}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "elevation": {
+              "border-bottom-color": "{imported.accordion.root.border-bottom-color.elevation}",
+              "border-bottom-width": "{imported.accordion.root.border-bottom-width.elevation}",
+              "border-left-color": "{imported.accordion.root.border-left-color.elevation}",
+              "border-left-width": "{imported.accordion.root.border-left-width.elevation}",
+              "border-right-color": "{imported.accordion.root.border-right-color.elevation}",
+              "border-right-width": "{imported.accordion.root.border-right-width.elevation}",
+              "border-top-color": "{imported.accordion.root.border-top-color.elevation}",
+              "border-top-width": "{imported.accordion.root.border-top-width.elevation}",
+              "box-shadow": "{imported.accordion.root.box-shadow.elevation}"
+            },
+            "outlined": {
+              "border-bottom-color": "{imported.accordion.root.border-bottom-color.outlined}",
+              "border-bottom-width": "{imported.accordion.root.border-bottom-width.outlined}",
+              "border-left-color": "{imported.accordion.root.border-left-color.outlined}",
+              "border-left-width": "{imported.accordion.root.border-left-width.outlined}",
+              "border-right-color": "{imported.accordion.root.border-right-color.outlined}",
+              "border-right-width": "{imported.accordion.root.border-right-width.outlined}",
+              "border-top-color": "{imported.accordion.root.border-top-color.outlined}",
+              "border-top-width": "{imported.accordion.root.border-top-width.outlined}",
+              "box-shadow": "{imported.accordion.root.box-shadow.outlined}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Accordion"
+    }
+  }
+}

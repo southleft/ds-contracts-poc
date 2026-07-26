@@ -42,6 +42,8 @@ Commands:
           --tokens <base[,minted]>            CONTRACTS-BUNDLE JSON (the only thing a user
           [--modes <light[,dark]>]            pastes into the plugin — it syncs the tokenSet
           [--name <collection>]               as a named collection and builds the components;
+          [--icons dir]                       icon assets referenced by the contracts embed
+                                              as SVG text — required when refs exist;
                                               deterministic: same inputs → identical bytes)
   figma push <file> --code <CODE>             send a CONTRACTS-BUNDLE to the plugin bridge
           [--bridge <url>]                    (pairing-code flow, deliver-once, 15-min TTL)

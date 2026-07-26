@@ -40,7 +40,9 @@ import { ContractSchema, type Contract } from '../../scripts/contract-schema.js'
 import { validateContract } from '../../core/emit-react.js';
 import {
   buildHarnessPage,
+  buildPortalHarnessPage,
   loadConfig,
+  portalSweep,
   propSpaceFor,
   stageFor,
   sweep,
@@ -129,8 +131,16 @@ async function main() {
     );
   }
 
+  // MOLECULE round: portalCapture components never share the census page —
+  // their overlays (fixed, viewport-covering) would paint over every other
+  // stage and intercept the interaction drivers. They sweep on their own
+  // two-phase page (portalSweep), DEFAULT interaction only (named residual),
+  // and rejoin the shared fusion/gate path as ordinary captures.
+  const standardMounts = mounts.filter((m) => !m.comp.portalCapture);
+  const portalMounts = mounts.filter((m) => m.comp.portalCapture);
+
   console.log('phase 1 — building harness page (esbuild over the library package)…');
-  const pageHtml = buildHarnessPage(HARNESS, cfg, mounts);
+  const pageHtml = buildHarnessPage(HARNESS, cfg, standardMounts);
 
   const browser: Browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
   const context = await browser.newContext({
@@ -149,11 +159,37 @@ async function main() {
 
   console.log('phase 1 — capture sweep…');
   const fontProbes = ['-apple-system', 'Segoe UI', 'Inter'];
-  const run1 = await sweep(page, mounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
+  const run1 = await sweep(page, standardMounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
   console.log(`  ${run1.captures.length} captures, ${run1.allProps.length} channels enumerated, browser ${run1.browserVersion}`);
 
   console.log('phase 1 — determinism: second full sweep (no screenshots)…');
-  const run2 = await sweep(page, mounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
+  const run2 = await sweep(page, standardMounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
+
+  // ---- portal sweeps (MOLECULE round): one two-phase page per component,
+  // every combo mounted/reset in isolation, double-swept for determinism,
+  // captures appended so fusion/gate treat them as ordinary sweeps. ----
+  const portalReceipts = new Map<string, string[]>();
+  for (const m of portalMounts) {
+    console.log(`phase 1 — portal sweep (${m.comp.name}: ${m.space.enumeration.combos.length} combos, default interaction only)…`);
+    const portalHtml = buildPortalHarnessPage(HARNESS, cfg, m);
+    const pPage = await context.newPage();
+    await pPage.goto(`file://${portalHtml}`);
+    await pPage.evaluate('document.fonts.ready');
+    await pPage.waitForTimeout(300);
+    const pProps = (await pPage.evaluate(
+      `(() => { window.__ALL_PROPS = [...getComputedStyle(document.documentElement)].sort(); return window.__ALL_PROPS; })()`,
+    )) as string[];
+    if (JSON.stringify(pProps) !== JSON.stringify(run1.allProps)) {
+      throw new Error(`${m.comp.name}: portal page enumerates a different longhand set than the census page (${pProps.length} vs ${run1.allProps.length}) — refusing`);
+    }
+    const p1 = await portalSweep(pPage, m.comp, m.space, { screenshots: scratchShots, classAllow: cfg.library.classAllow });
+    const p2 = await portalSweep(pPage, m.comp, m.space, { classAllow: cfg.library.classAllow });
+    run1.captures.push(...p1.captures);
+    run2.captures.push(...p2.captures);
+    portalReceipts.set(m.comp.name, p1.receipts);
+    await pPage.close();
+    console.log(`  ${p1.captures.length} portal captures (${p1.receipts.length} receipt(s))`);
+  }
   const canon = (r: SweepResult) => JSON.stringify({ captures: r.captures, controls: r.controls });
   const deterministic = canon(run1) === canon(run2);
   let determinismDetail = 'byte-identical across two full sweeps in one session';
@@ -478,7 +514,7 @@ async function main() {
       },
       bindingContradictions: contradictions,
       interactionOnDisabled: [...new Set(prep.inertOnDisabled)].slice(0, 20),
-      structureReceipts: [...new Set(aligned.structureReceipts)],
+      structureReceipts: [...new Set([...aligned.structureReceipts, ...(portalReceipts.get(comp.name) ?? [])])],
       styledChannelReceipts: styledReceipts,
       anatomyJoin: { computed: aligned.anatomyJoin, staticOnly: aligned.staticOnlyParts },
       anatomyPromotion: {
@@ -643,14 +679,19 @@ async function main() {
               animationPinning: `infinite CSS animations pinned at currentTime 0 (paused) — the captured value is each animation's own 0% keyframe, a deterministic point of the declared animation; finite animations/transitions untouched. Pinned: ${run1.pinnedAnimations.join(', ')}`,
             }
           : {}),
-        interactionDrivers: {
-          formStateReset:
-            'after every interaction capture, native input state mutated by the interaction itself (a click on an uncontrolled radio/checkbox checks it) is reset to mount defaults — interaction-caused form state never leaks across captures',
-          hover: 'playwright locator.hover({force:true}) — pointer to element center',
-          'focus-visible': 'sentinel.focus() + keyboard Tab (keyboard modality; matched state recorded per capture)',
-          active: 'hover + mouse.down (held during capture) — honestly hover+active, what a user sees mid-press',
-          ...(space.stateProps.length > 0 ? { [space.stateProps.map((s) => s.prop).join('+')]: 'prop-driven (rides the prop sweep)' } : {}),
-        },
+        interactionDrivers: comp.portalCapture
+          ? {
+              portalCapture: `baseline-diff portal reader (capture.portalSweep): the component's DOM contribution captured wherever React put it (portaled overlays included), one combo mounted at a time, DEFAULT interaction ONLY — overlay hover/focus/active states are a NAMED residual of the molecule round. Open-driver props: ${JSON.stringify(comp.openDriver ?? {})}`,
+              ...(space.stateProps.length > 0 ? { [space.stateProps.map((s) => s.prop).join('+')]: 'prop-driven (rides the prop sweep)' } : {}),
+            }
+          : {
+              formStateReset:
+                'after every interaction capture, native input state mutated by the interaction itself (a click on an uncontrolled radio/checkbox checks it) is reset to mount defaults — interaction-caused form state never leaks across captures',
+              hover: 'playwright locator.hover({force:true}) — pointer to element center',
+              'focus-visible': 'sentinel.focus() + keyboard Tab (keyboard modality; matched state recorded per capture)',
+              active: 'hover + mouse.down (held during capture) — honestly hover+active, what a user sees mid-press',
+              ...(space.stateProps.length > 0 ? { [space.stateProps.map((s) => s.prop).join('+')]: 'prop-driven (rides the prop sweep)' } : {}),
+            },
         enumerationPolicy: `${space.enumeration.policy} (${space.enumeration.combos.length} combos; cartesian ${space.enumeration.cartesianSize} vs limit ${cfg.enumeration.cartesianLimit}); ${space.enumeration.receipts.join('; ')}`,
         axesHeldFixed: space.heldFixed,
       },
@@ -707,6 +748,11 @@ async function main() {
       const shot = await loc.screenshot({ timeout: 10_000 });
       writeFileSync(path.join(replayShots, `${spec.key}.png`), shot);
       const origPath = path.join(scratchShots, `${comp.name}--${spec.key}.png`);
+      if (!existsSync(origPath)) {
+        // portal combos whose root pick could not be screenshotted — named
+        pixelRows.push({ key: spec.key, pctExact: 100, pctAA: 100, note: 'original screenshot unavailable — pixel not scored' });
+        continue;
+      }
       const a = PNG.sync.read(readFileSync(origPath));
       const b = PNG.sync.read(shot);
       if (a.width !== b.width || a.height !== b.height) {

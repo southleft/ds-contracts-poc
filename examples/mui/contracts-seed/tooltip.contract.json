@@ -1,0 +1,26 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture: the popper subtree is the component's rendered contribution; the anchor child is receipted, never carried). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). placement is HELD FIXED at its default ('bottom') — anchored positioning is not modeled by the vocabulary (named refusal, PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Tooltip"
+    }
+  }
+}

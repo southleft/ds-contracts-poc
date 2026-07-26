@@ -891,6 +891,10 @@ export function prepareMint(
   for (const combo of space.enumeration.combos) {
     const defaults = a.getAligned(`${combo.key}__default`);
     for (const interaction of ['hover', 'focus-visible', 'active'] as Interaction[]) {
+      // MOLECULE round: portal-swept components capture DEFAULT only —
+      // interaction planes simply do not exist for them (named in
+      // provenance); absence is not an error here.
+      if (!a.byKey.has(`${combo.key}__${interaction}`)) continue;
       const els = a.getAligned(`${combo.key}__${interaction}`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
         if (svgConsumedParts?.has(a.partNames[pi])) continue;

@@ -1,0 +1,1281 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "accordion": {
+        "root": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "border-bottom-color": {
+            "elevation": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            }
+          },
+          "border-bottom-width": {
+            "elevation": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-color": {
+            "elevation": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            }
+          },
+          "border-left-width": {
+            "elevation": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color": {
+            "elevation": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            }
+          },
+          "border-right-width": {
+            "elevation": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-color": {
+            "elevation": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#0000001f",
+              "$type": "color"
+            }
+          },
+          "border-top-width": {
+            "elevation": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "box-shadow": {
+            "elevation": {
+              "$value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+              "$type": "shadow"
+            },
+            "outlined": {
+              "$value": "none",
+              "$type": "shadow"
+            }
+          },
+          "height": {
+            "elevation": {
+              "collapsed": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "expanded": {
+                "$value": "124px",
+                "$type": "dimension"
+              }
+            },
+            "outlined": {
+              "collapsed": {
+                "$value": "50px",
+                "$type": "dimension"
+              },
+              "expanded": {
+                "$value": "126px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
+          },
+          "background-color-state-disabled": {
+            "$value": "#0000001f",
+            "$type": "color"
+          }
+        },
+        "accordionsummary-gutters": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "height": {
+            "collapsed": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "expanded": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "min-height": {
+            "collapsed": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "expanded": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "elevation": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "286px",
+              "$type": "dimension"
+            }
+          },
+          "opacity-state-disabled": {
+            "$value": "0.38",
+            "$type": "number"
+          },
+          "background-color-state-focus-visible": {
+            "$value": "#0000001f",
+            "$type": "color"
+          }
+        },
+        "label": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "font-size": {
+            "$value": "13.3333px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "margin-bottom": {
+            "collapsed": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "expanded": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "collapsed": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "expanded": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "collapse-root": {
+          "height": {
+            "collapsed": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "expanded": {
+              "$value": "60px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "elevation": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "286px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "collapse-vertical": {
+          "width": {
+            "elevation": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "286px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "collapse-vertical-2": {
+          "width": {
+            "elevation": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "286px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "accordion-region": {
+          "width": {
+            "elevation": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "outlined": {
+              "$value": "286px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "padding-top": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-60": {
+          "$value": "60px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "accordion-region",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "accordionsummary-gutters",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "margin"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "transition-duration",
+        "value": "0.15s, 0.15s"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "transition-property",
+        "value": "min-height, background-color"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "label",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "label",
+        "channel": "transition-property",
+        "value": "margin"
+      },
+      {
+        "part": "label",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "transition-property",
+        "value": "height"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "accordionsummary-gutters",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "state": "disabled",
+        "part": "accordionsummary-gutters",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "disabled",
+        "part": "label",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "state": "disabled",
+        "part": "label",
+        "channel": "pointer-events",
+        "value": "none"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "border-bottom-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-left-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-right-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-top-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "overflow-anchor",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordion-heading",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "collapse-root",
+      "channel": "overflow-x",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "hidden",
+      "distinctValues": 2
+    },
+    {
+      "part": "collapse-root",
+      "channel": "overflow-y",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "hidden",
+      "distinctValues": 2
+    },
+    {
+      "part": "collapse-root",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 2
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 2
+    },
+    {
+      "part": "collapse-vertical-2",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 2
+    },
+    {
+      "part": "accordion-region",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 2
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "opacity",
+      "state": "disabled",
+      "ref": "{imported.accordion.accordionsummary-gutters.opacity-state-disabled}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "elevation.collapsed.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "elevation.collapsed.disabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "elevation.expanded.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "elevation.expanded.disabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "outlined.collapsed.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "outlined.collapsed.disabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "outlined.expanded.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "outlined.expanded.disabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 8
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: accordion-heading — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: accordionsummary-gutters — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: collapse-root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: collapse-vertical — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: collapse-vertical-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: accordion-region — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-fallback: no control for <h3> — span control used (part accordion-heading)",
+    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "accordion-heading",
+        "join": "computed-only"
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "collapse-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "collapse-vertical",
+        "join": "computed-only"
+      },
+      {
+        "part": "collapse-vertical-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "accordion-region",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "accordion-heading",
+      "accordionsummary-gutters",
+      "label",
+      "collapse-root",
+      "collapse-vertical",
+      "collapse-vertical-2",
+      "accordion-region",
+      "label-2"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "literal-text-carried: label = \"Accordion title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "full-width-carried: collapse-vertical-2 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "literal-text-carried: label-2 = \"Details body copy for the molecule round\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: accordionsummary-gutters.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: accordionsummary-gutters.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-property = margin (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.transition-duration = 0.15s, 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.transition-property = min-height, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordionsummary-gutters.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transition-property = margin (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: collapse-root.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: collapse-root.transition-property = height (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: collapse-root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] accordionsummary-gutters.cursor = default (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] accordionsummary-gutters.pointer-events = none (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] label.pointer-events = none (v15 declared vocabulary)"
+  ]
+}

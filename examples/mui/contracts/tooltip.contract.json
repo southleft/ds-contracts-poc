@@ -1,0 +1,129 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.tooltip",
+  "name": "Tooltip",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture: the popper subtree is the component's rendered contribution; the anchor child is receipted, never carried). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). placement is HELD FIXED at its default ('bottom') — anchored positioning is not modeled by the vocabulary (named refusal, PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "arrow",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `arrow` (true); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Arrow"
+        },
+        "code": {
+          "prop": "arrow"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "position": "absolute",
+        "transform": "matrix(1, 0, 0, 1, 17, 53)"
+      },
+      "parts": {
+        "label": {
+          "text": "Tooltip text",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Tooltip-tooltip.Tooltip-tooltipPlacementBottom — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0.2s, 0.133s",
+            "transition-property": "opacity, transform",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "parts": {
+            "tooltip-arrow": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tooltip-arrow — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "transform": "matrix(1, 0, 0, 1, 29, 0)"
+              },
+              "visibleWhen": {
+                "prop": "arrow"
+              },
+              "tokens": {
+                "bottom": "{imported.tooltip.tooltip-arrow.bottom}",
+                "color": "{imported.shared.color-616161eb}",
+                "font-size": "{imported.shared.size-11}",
+                "font-weight": "{imported.tooltip.tooltip-arrow.font-weight}",
+                "height": "{imported.tooltip.tooltip-arrow.height}",
+                "left": "{imported.shared.size-0}",
+                "margin-top": "{imported.tooltip.tooltip-arrow.margin-top}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.tooltip.tooltip-arrow.right}",
+                "row-rule-color": "{imported.shared.color-616161eb}",
+                "top": "{imported.shared.size-0}",
+                "translate-x": "{imported.tooltip.tooltip-arrow.translate-x}",
+                "translate-y": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-11}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-616161eb}",
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "color": "{imported.tooltip.label.color}",
+            "font-size": "{imported.shared.size-11}",
+            "font-weight": "{imported.tooltip.label.font-weight}",
+            "margin-left": "{imported.tooltip.label.margin-left}",
+            "margin-right": "{imported.tooltip.label.margin-right}",
+            "margin-top": "{imported.tooltip.label.margin-top}",
+            "max-width": "{imported.tooltip.label.max-width}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-4}",
+            "padding-left": "{imported.tooltip.label.padding-left}",
+            "padding-right": "{imported.tooltip.label.padding-right}",
+            "padding-top": "{imported.shared.size-4}",
+            "row-rule-color": "{imported.tooltip.label.row-rule-color}"
+          }
+        }
+      },
+      "tokens": {
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.tooltip.root.right}",
+        "top": "{imported.shared.size-0}",
+        "translate-x": "{imported.tooltip.root.translate-x}",
+        "translate-y": "{imported.tooltip.root.translate-y}",
+        "width": "{imported.tooltip.root.width}",
+        "z-index": "{imported.tooltip.root.z-index}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Tooltip"
+    }
+  }
+}

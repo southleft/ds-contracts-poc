@@ -4,7 +4,7 @@
     "version": "9.2.0",
     "framework": "react",
     "classPrefix": "Mui",
-    "classAllow": "^(?!Mui-)(?!.*-(color|size)[A-Z])(?!.*-(text|outlined|contained|filled|elevation)([A-Z][A-Za-z]*|\\d+)?$)(?!.*-(rounded|clickable|deletable)$)Mui",
+    "classAllow": "^(?!Mui-)(?!.*-(color|size)[A-Z])(?!.*[a-z]Size[A-Z][A-Za-z]*$)(?!.*-paperWidth[A-Z])(?!.*-tooltipArrow$)(?!.*-popupIndicatorOpen$)(?!.*Collapse-(entered|hidden)$)(?!.*-(text|outlined|contained|filled|elevation)([A-Z][A-Za-z]*|\\d+)?$)(?!.*-(rounded|clickable|deletable)$)Mui",
     "varPrefix": "--mui-"
   },
   "mount": {
@@ -132,6 +132,141 @@
       "callbackProps": [
         "onChange"
       ]
+    },
+    {
+      "name": "Tabs",
+      "importName": "Tabs",
+      "contract": "examples/mui/contracts-seed/tabs.contract.json",
+      "sampleText": "",
+      "axes": [
+        "textColor",
+        "indicatorColor"
+      ],
+      "fixedProps": {
+        "value": 0
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "childrenSpec": [
+        { "importName": "Tab", "props": { "label": "Overview", "disableRipple": true } },
+        { "importName": "Tab", "props": { "label": "Activity", "disableRipple": true } },
+        { "importName": "Tab", "props": { "label": "Settings", "disableRipple": true } }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "importName": "Accordion",
+      "contract": "examples/mui/contracts-seed/accordion.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "expanded"
+      ],
+      "axisValueMap": {
+        "expanded": {
+          "collapsed": false,
+          "expanded": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "childrenSpec": [
+        { "importName": "AccordionSummary", "text": "Accordion title" },
+        { "importName": "AccordionDetails", "text": "Details body copy for the molecule round." }
+      ],
+      "blockStage": true,
+      "stage": { "width": 320, "height": 220, "padding": 16 }
+    },
+    {
+      "name": "Autocomplete",
+      "importName": "Autocomplete",
+      "contract": "examples/mui/contracts-seed/autocomplete.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ],
+      "fixedProps": {
+        "multiple": true,
+        "options": ["Alpha", "Beta", "Gamma", "Delta"],
+        "value": ["Alpha", "Beta"],
+        "renderInput": { "$render": "@mui/material#TextField" }
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "blockStage": true,
+      "stage": { "width": 320, "height": 140, "padding": 16 }
+    },
+    {
+      "name": "Tooltip",
+      "importName": "Tooltip",
+      "contract": "examples/mui/contracts-seed/tooltip.contract.json",
+      "sampleText": "Anchor",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true,
+        "title": "Tooltip text"
+      },
+      "presenceProps": [
+        {
+          "prop": "arrow",
+          "libraryProp": "arrow",
+          "value": true
+        }
+      ],
+      "childWrap": {
+        "importName": "Button"
+      }
+    },
+    {
+      "name": "Menu",
+      "importName": "Menu",
+      "contract": "examples/mui/contracts-seed/menu.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true,
+        "anchorReference": "anchorPosition",
+        "anchorPosition": { "top": 24, "left": 24 },
+        "transitionDuration": 0
+      },
+      "callbackProps": [
+        "onClose"
+      ],
+      "childrenSpec": [
+        { "importName": "MenuItem", "props": { "disableRipple": true }, "text": "Profile" },
+        { "importName": "MenuItem", "props": { "disableRipple": true }, "text": "My account" },
+        { "importName": "MenuItem", "props": { "disableRipple": true }, "text": "Log out" }
+      ]
+    },
+    {
+      "name": "Dialog",
+      "importName": "Dialog",
+      "contract": "examples/mui/contracts-seed/dialog.contract.json",
+      "sampleText": "Dialog body copy for the molecule round.",
+      "axes": [
+        "maxWidth"
+      ],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "fixedProps": {
+        "transitionDuration": 0
+      },
+      "callbackProps": [
+        "onClose"
+      ],
+      "childWrap": {
+        "importName": "DialogContent"
+      }
     }
   ]
 }

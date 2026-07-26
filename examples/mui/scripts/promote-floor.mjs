@@ -18,7 +18,7 @@
  * own palette instead of anonymous imported literals. Leaves with no
  * agreeing fact stay literal; every refusal is receipted.
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -27,7 +27,7 @@ const EX = path.join(HERE, '..');
 const REPO = path.join(EX, '..', '..');
 const OUT = path.join(REPO, 'extract', 'computed', 'out', 'mui');
 
-const COMPONENTS = ['button', 'chip', 'card', 'switch', 'slider'];
+const COMPONENTS = ['button', 'chip', 'card', 'switch', 'slider', 'tabs', 'accordion', 'autocomplete', 'tooltip', 'menu', 'dialog'];
 const MINT_SOURCES = COMPONENTS;
 
 // ---- DTCG base (for alias value verification) ----
@@ -142,8 +142,22 @@ function aliasPass(node, segs, facts, componentName) {
 
 // ---- promotion ----
 const promoted = [];
+const promotedAssets = [];
 for (const name of COMPONENTS) {
   const dir = path.join(OUT, name);
+  // MOLECULE round (Polaris round-4 pattern): floor-reconstructed svg assets
+  // (Autocomplete's chip-delete/clear/popup indicators) → committed icon
+  // assets — the figma compile (`--icons examples/mui/assets/icons`) emits
+  // them; a contract referencing an uncopied asset refuses by name there.
+  const floorAssets = path.join(dir, 'assets');
+  if (existsSync(floorAssets)) {
+    mkdirSync(path.join(EX, 'assets', 'icons'), { recursive: true });
+    for (const f of readdirSync(floorAssets).sort()) {
+      if (!f.endsWith('.svg')) continue;
+      writeFileSync(path.join(EX, 'assets', 'icons', f), readFileSync(path.join(floorAssets, f), 'utf8'));
+      promotedAssets.push(f);
+    }
+  }
   const resolvedPath = path.join(dir, 'resolved.contract.json');
   const enrichedPath = path.join(dir, 'enriched.contract.json');
   const src = existsSync(resolvedPath) ? resolvedPath : enrichedPath;
@@ -247,4 +261,5 @@ writeFileSync(
     aliasReceipts.map((r) => `  - ${r}`).join('\n') + '\n',
 );
 console.log(`✔ floor-promoted ${promoted.length} contract(s) → examples/mui/contracts (v0.2.0): ${promoted.join(', ')}`);
+if (promotedAssets.length > 0) console.log(`✔ ${promotedAssets.length} floor-reconstructed icon asset(s) → examples/mui/assets/icons/: ${promotedAssets.join(', ')}`);
 console.log(`✔ minted tree → examples/mui/tokens/mui-minted.dtcg.json (${aliased} source-aliased, ${literalKept} literal, ${aliasReceipts.length} named refusals)`);

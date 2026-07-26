@@ -1,0 +1,379 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.tabs",
+  "name": "Tabs",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: three Tab children (childrenSpec, disableRipple pinned — the Button ripple precedent); value pinned to 0 (controlled). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "textColor",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "inherit"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Text color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "inherit": "Inherit"
+          }
+        },
+        "code": {
+          "prop": "textColor"
+        }
+      }
+    },
+    {
+      "name": "indicatorColor",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Indicator color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary"
+          }
+        },
+        "code": {
+          "prop": "indicatorColor"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "tabs-fixed": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Tabs-fixed.Tabs-scroller — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "relative",
+            "text-wrap-mode": "nowrap"
+          },
+          "layout": {
+            "grow": true
+          },
+          "parts": {
+            "tabs-list": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|Tabs-list — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "label": {
+                  "element": "button",
+                  "text": "Overview",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.Tab-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "column",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "appearance": "none",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "pointer",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "relative",
+                    "text-transform": "uppercase",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-00000000}",
+                    "border-bottom-width": "{imported.shared.size-0}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-width": "{imported.shared.size-0}",
+                    "bottom": "{imported.shared.size-0}",
+                    "flex-shrink": "{imported.shared.num-0}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-39998}",
+                    "line-height": "{imported.shared.size-17-5}",
+                    "max-width": "{imported.shared.size-360}",
+                    "min-height": "{imported.shared.size-48}",
+                    "min-width": "{imported.shared.size-90}",
+                    "outline-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-12}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "padding-top": "{imported.shared.size-12}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "textColor",
+                      "map": {
+                        "inherit": {
+                          "color": "{imported.tabs.label.color.inherit}",
+                          "row-rule-color": "{imported.tabs.label.row-rule-color.inherit}"
+                        },
+                        "primary": {
+                          "color": "{imported.tabs.label.color.primary}",
+                          "row-rule-color": "{imported.tabs.label.row-rule-color.primary}"
+                        },
+                        "secondary": {
+                          "color": "{imported.tabs.label.color.secondary}",
+                          "row-rule-color": "{imported.tabs.label.row-rule-color.secondary}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-2": {
+                  "element": "button",
+                  "text": "Activity",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.Tab-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "column",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "appearance": "none",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "pointer",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "relative",
+                    "text-transform": "uppercase",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-00000000}",
+                    "border-bottom-width": "{imported.shared.size-0}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-width": "{imported.shared.size-0}",
+                    "bottom": "{imported.shared.size-0}",
+                    "flex-shrink": "{imported.shared.num-0}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-39998}",
+                    "line-height": "{imported.shared.size-17-5}",
+                    "max-width": "{imported.shared.size-360}",
+                    "min-height": "{imported.shared.size-48}",
+                    "min-width": "{imported.shared.size-90}",
+                    "outline-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-12}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "padding-top": "{imported.shared.size-12}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "textColor",
+                      "map": {
+                        "inherit": {
+                          "color": "{imported.tabs.label-2.color.inherit}",
+                          "opacity": "{imported.tabs.label-2.opacity.inherit}",
+                          "row-rule-color": "{imported.tabs.label-2.row-rule-color.inherit}"
+                        },
+                        "primary": {
+                          "color": "{imported.tabs.label-2.color.primary}",
+                          "opacity": "{imported.tabs.label-2.opacity.primary}",
+                          "row-rule-color": "{imported.tabs.label-2.row-rule-color.primary}"
+                        },
+                        "secondary": {
+                          "color": "{imported.tabs.label-2.color.secondary}",
+                          "opacity": "{imported.tabs.label-2.opacity.secondary}",
+                          "row-rule-color": "{imported.tabs.label-2.row-rule-color.secondary}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-3": {
+                  "element": "button",
+                  "text": "Settings",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.Tab-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "column",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "appearance": "none",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "pointer",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "relative",
+                    "text-transform": "uppercase",
+                    "user-select": "none"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-00000000}",
+                    "border-bottom-width": "{imported.shared.size-0}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-width": "{imported.shared.size-0}",
+                    "bottom": "{imported.shared.size-0}",
+                    "flex-shrink": "{imported.shared.num-0}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-39998}",
+                    "line-height": "{imported.shared.size-17-5}",
+                    "max-width": "{imported.shared.size-360}",
+                    "min-height": "{imported.shared.size-48}",
+                    "min-width": "{imported.shared.size-90}",
+                    "outline-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-12}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "padding-top": "{imported.shared.size-12}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "textColor",
+                      "map": {
+                        "inherit": {
+                          "color": "{imported.tabs.label-3.color.inherit}",
+                          "opacity": "{imported.tabs.label-3.opacity.inherit}",
+                          "row-rule-color": "{imported.tabs.label-3.row-rule-color.inherit}"
+                        },
+                        "primary": {
+                          "color": "{imported.tabs.label-3.color.primary}",
+                          "opacity": "{imported.tabs.label-3.opacity.primary}",
+                          "row-rule-color": "{imported.tabs.label-3.row-rule-color.primary}"
+                        },
+                        "secondary": {
+                          "color": "{imported.tabs.label-3.color.secondary}",
+                          "opacity": "{imported.tabs.label-3.opacity.secondary}",
+                          "row-rule-color": "{imported.tabs.label-3.row-rule-color.secondary}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "text-wrap-mode": "nowrap"
+              },
+              "tokens": {
+                "height": "{imported.shared.size-48}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-288}"
+              }
+            },
+            "tabs-indicator": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tabs-indicator — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "text-wrap-mode": "nowrap",
+                "transition-duration": "0.3s",
+                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "height": "{imported.tabs.tabs-indicator.height}",
+                "left": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.tabs.tabs-indicator.right}",
+                "top": "{imported.tabs.tabs-indicator.top}",
+                "width": "{imported.tabs.tabs-indicator.width}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "indicatorColor",
+                  "map": {
+                    "primary": {
+                      "background-color": "{imported.tabs.tabs-indicator.background-color.primary}"
+                    },
+                    "secondary": {
+                      "background-color": "{imported.tabs.tabs-indicator.background-color.secondary}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "flex-grow": "{imported.tabs.tabs-fixed.flex-grow}",
+            "height": "{imported.shared.size-48}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-288}"
+          }
+        }
+      },
+      "declared": {
+        "overflow-x": "hidden",
+        "overflow-y": "hidden"
+      },
+      "tokens": {
+        "height": "{imported.shared.size-48}",
+        "min-height": "{imported.shared.size-48}",
+        "width": "{imported.shared.size-288}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Tabs"
+    }
+  }
+}

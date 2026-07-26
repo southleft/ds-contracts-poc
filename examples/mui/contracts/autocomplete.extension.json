@@ -1,0 +1,3115 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "autocomplete": {
+        "root": {
+          "height": {
+            "small": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "56px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "formcontrol-fullwidth": {
+          "height": {
+            "small": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "56px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "autocomplete-inputroot": {
+          "height": {
+            "small": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "56px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "$value": "65px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "9px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "autocomplete-tag": {
+          "background-color": {
+            "$value": "#00000014",
+            "$type": "color"
+          },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          },
+          "margin-bottom": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "64.2969px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "77.2969px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label": {
+          "padding-left": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "icon": {
+          "font-size": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "22px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "small": {
+              "$value": "-4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-6px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "small": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "5px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "autocomplete-tag-2": {
+          "background-color": {
+            "$value": "#00000014",
+            "$type": "color"
+          },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          },
+          "margin-bottom": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "57.9688px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "70.9688px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-2": {
+          "padding-left": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "icon-2": {
+          "font-size": {
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "22px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "small": {
+              "$value": "-4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "-6px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "small": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "5px",
+              "$type": "dimension"
+            }
+          },
+          "color-state-active": {
+            "medium": {
+              "$value": "#00000066",
+              "$type": "color"
+            },
+            "small": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "fill-state-active": {
+            "medium": {
+              "$value": "#00000066",
+              "$type": "color"
+            },
+            "small": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "row-rule-color-state-active": {
+            "medium": {
+              "$value": "#00000066",
+              "$type": "color"
+            },
+            "small": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "color-state-hover": {
+            "medium": {
+              "$value": "#00000066",
+              "$type": "color"
+            },
+            "small": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "fill-state-hover": {
+            "medium": {
+              "$value": "#00000066",
+              "$type": "color"
+            },
+            "small": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          },
+          "row-rule-color-state-hover": {
+            "medium": {
+              "$value": "#00000066",
+              "$type": "color"
+            },
+            "small": {
+              "$value": "#00000042",
+              "$type": "color"
+            }
+          }
+        },
+        "autocomplete-input": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "height": {
+            "small": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "38px",
+              "$type": "dimension"
+            }
+          },
+          "min-width": {
+            "$value": "30px",
+            "$type": "dimension"
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "7.5px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "5px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "7.5px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "small": {
+              "$value": "86.734px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "53.734px",
+              "$type": "dimension"
+            }
+          },
+          "outline-width-state-active": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "autocomplete-endadornment": {
+          "bottom": {
+            "small": {
+              "$value": "-8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "$value": "227px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "9px",
+            "$type": "dimension"
+          },
+          "top": {
+            "small": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "28px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "$value": "-14px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "52px",
+            "$type": "dimension"
+          }
+        },
+        "autocomplete-clearindicator": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "margin-right": {
+            "$value": "-2px",
+            "$type": "dimension"
+          }
+        },
+        "autocomplete-popupindicator": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "margin-right": {
+            "$value": "-2px",
+            "$type": "dimension"
+          }
+        },
+        "outlinedinput-notchedoutline": {
+          "height": {
+            "small": {
+              "$value": "45px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "61px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "top": {
+            "$value": "-5px",
+            "$type": "dimension"
+          },
+          "border-bottom-color-state-active": {
+            "small": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "medium": {
+              "$value": "#000000de",
+              "$type": "color"
+            }
+          },
+          "border-bottom-width-state-active": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-color-state-active": {
+            "small": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "medium": {
+              "$value": "#000000de",
+              "$type": "color"
+            }
+          },
+          "border-left-width-state-active": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color-state-active": {
+            "small": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "medium": {
+              "$value": "#000000de",
+              "$type": "color"
+            }
+          },
+          "border-right-width-state-active": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-color-state-active": {
+            "small": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "medium": {
+              "$value": "#000000de",
+              "$type": "color"
+            }
+          },
+          "border-top-width-state-active": {
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-288": {
+          "$value": "288px",
+          "$type": "dimension"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
+        "size-0-15008": {
+          "$value": "0.15008px",
+          "$type": "dimension"
+        },
+        "size-23": {
+          "$value": "23px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-13": {
+          "$value": "13px",
+          "$type": "dimension"
+        },
+        "size-19-5": {
+          "$value": "19.5px",
+          "$type": "dimension"
+        },
+        "num-400": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "color-00000042": {
+          "$value": "#00000042",
+          "$type": "color"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-28": {
+          "$value": "28px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "color-0000008a": {
+          "$value": "#0000008a",
+          "$type": "color"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-0000003b": {
+          "$value": "#0000003b",
+          "$type": "color"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-11": {
+          "$value": "11px",
+          "$type": "dimension"
+        },
+        "color-1976d2": {
+          "$value": "#1976d2",
+          "$type": "color"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "foldedInto": "font-size",
+      "ratio": 1,
+      "class": "em-tracking"
+    },
+    {
+      "part": "icon",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.5,
+      "class": "em-tracking"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "foldedInto": "font-size",
+      "ratio": 1,
+      "class": "em-tracking"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.5,
+      "class": "em-tracking"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "height",
+      "foldedInto": "font-size",
+      "ratio": 1,
+      "class": "em-tracking"
+    },
+    {
+      "part": "icon-2",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.5,
+      "class": "em-tracking"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "width",
+      "foldedInto": "font-size",
+      "ratio": 1,
+      "class": "em-tracking"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.5,
+      "class": "em-tracking"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [active] icon-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [
+      {
+        "part": "formcontrol-fullwidth",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "transition-duration",
+        "value": "0.3s, 0.3s"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "autocomplete-tag",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "transition-duration",
+        "value": "0.3s, 0.3s"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-input",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "autocomplete-input",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "autocomplete-input",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "autocomplete-input",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "autocomplete-input",
+        "channel": "overflow-y",
+        "value": "clip"
+      },
+      {
+        "part": "autocomplete-input",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "autocomplete-endadornment",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "autocomplete-endadornment",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "autocomplete-endadornment",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, -14)"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "transition-property",
+        "value": "width"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      {
+        "part": "label-3",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-align",
+        "value": "left"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "top",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-inputroot",
+      "channel": "flex-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "wrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "max-width",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "calc(100% - 4px)",
+      "distinctValues": 2
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "max-width",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "calc(100% - 4px)",
+      "distinctValues": 2
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0.01s",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "mui-auto-fill-cancel",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-clearindicator",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "min-width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "autocomplete-clearindicator",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "autocomplete-popupindicator",
+      "channel": "transform",
+      "sample": "matrix(-1, 0, 0, -1, 0, 0)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "autocomplete-clearindicator",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "autocomplete-clearindicator",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "autocomplete-input",
+      "channel": "outline-width",
+      "state": "active",
+      "ref": "{imported.autocomplete.autocomplete-input.outline-width-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "state": "active",
+      "ref": "{imported.autocomplete.icon-2.color-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "state": "active",
+      "ref": "{imported.autocomplete.icon-2.fill-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "icon-2",
+      "channel": "row-rule-color",
+      "state": "active",
+      "ref": "{imported.autocomplete.icon-2.row-rule-color-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-bottom-color-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-bottom-width",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-bottom-width-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-left-color",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-left-color-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-left-width",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-left-width-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-right-color",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-right-color-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-right-width",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-right-width-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-top-color",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-top-color-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-top-width",
+      "state": "active",
+      "ref": "{imported.autocomplete.outlinedinput-notchedoutline.border-top-width-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "outline-width",
+      "state": "focus-visible",
+      "ref": "{imported.autocomplete.autocomplete-input.outline-width-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-bottom-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1976d2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-bottom-width",
+      "state": "focus-visible",
+      "ref": "{imported.shared.size-2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-left-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1976d2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-left-width",
+      "state": "focus-visible",
+      "ref": "{imported.shared.size-2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-right-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1976d2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-right-width",
+      "state": "focus-visible",
+      "ref": "{imported.shared.size-2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-top-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1976d2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-top-width",
+      "state": "focus-visible",
+      "ref": "{imported.shared.size-2}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "state": "hover",
+      "ref": "{imported.autocomplete.icon-2.color-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "state": "hover",
+      "ref": "{imported.autocomplete.icon-2.fill-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "icon-2",
+      "channel": "row-rule-color",
+      "state": "hover",
+      "ref": "{imported.autocomplete.icon-2.row-rule-color-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-000000de}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-left-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-000000de}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-right-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-000000de}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "border-top-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-000000de}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: formcontrol-fullwidth — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-inputroot — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-tag — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-0-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-tag-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-1-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-input — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-endadornment — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-clearindicator — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-3-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: autocomplete-popupindicator — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-3-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: outlinedinput-notchedoutline — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-4-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-1-0)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-1-1-0)",
+    "control-fallback: no control for <input> — span control used (part autocomplete-input)",
+    "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-3-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-3-1-0-0)",
+    "control-fallback: no control for <fieldset> — span control used (part outlinedinput-notchedoutline)",
+    "control-fallback: no control for <legend> — span control used (part part-0-0-4-0)",
+    "text-part-typography-carried: label-3 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-tag",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-1-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-input",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-endadornment",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-clearindicator",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-3-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-3-1-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "formcontrol-fullwidth",
+      "autocomplete-inputroot",
+      "autocomplete-tag",
+      "label",
+      "icon",
+      "autocomplete-tag-2",
+      "label-2",
+      "icon-2",
+      "autocomplete-input",
+      "autocomplete-endadornment",
+      "autocomplete-clearindicator",
+      "autocomplete-popupindicator",
+      "outlinedinput-notchedoutline",
+      "part-0-0-4-0",
+      "label-3"
+    ],
+    "svgAssets": [
+      "autocomplete-autocomplete-clearindicator",
+      "autocomplete-autocomplete-popupindicator",
+      "autocomplete-icon",
+      "autocomplete-icon-2"
+    ],
+    "receipts": [
+      "svg-viewbox-bumped: Autocomplete.icon@small — computed size 16 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-reconstructed: Autocomplete.icon@medium — 0 0 22 22 from computed size 22×22 (path extent 22.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-bumped: Autocomplete.icon-2@small — computed size 16 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-reconstructed: Autocomplete.icon-2@medium — 0 0 22 22 from computed size 22×22 (path extent 22.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Autocomplete.autocomplete-clearindicator@small — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Autocomplete.autocomplete-clearindicator@medium — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Autocomplete.autocomplete-popupindicator@small — 0 0 24 24 from computed size 24×24 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Autocomplete.autocomplete-popupindicator@medium — 0 0 24 24 from computed size 24×24 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "literal-text-carried: label = \"Alpha\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "aspect-carried: icon computed width == height in every enabled combo (16/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "literal-text-carried: label-2 = \"Beta\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "aspect-carried: icon-2 computed width == height in every enabled combo (16/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "literal-text-carried: label-3 = \"​\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: formcontrol-fullwidth.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-inputroot.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-tag.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-tag.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-tag-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-tag-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-clearindicator.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-clearindicator.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-popupindicator.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-popupindicator.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: formcontrol-fullwidth.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-inputroot.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-inputroot.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-inputroot.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-inputroot.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-tag.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-tag.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.transition-duration = 0.3s, 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-tag-2.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-tag-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.transition-duration = 0.3s, 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-tag-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-input.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-input.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-input.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-input.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-input.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-input.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-endadornment.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-endadornment.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-endadornment.transform = matrix(1, 0, 0, 1, 0, -14) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-clearindicator.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-clearindicator.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-popupindicator.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: outlinedinput-notchedoutline.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-4-0.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-4-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-4-0.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.transition-property = width (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.transition-timing-function = cubic-bezier(0, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-align = left (v15 declared vocabulary — canvas-drawable)"
+  ]
+}
