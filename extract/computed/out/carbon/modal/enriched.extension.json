@@ -1,0 +1,1729 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@carbon/react@1.112.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "modal": {
+        "root": {
+          "background-color": {
+            "$value": "#00000099",
+            "$type": "color"
+          },
+          "height": {
+            "$value": "1000px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "900px",
+            "$type": "dimension"
+          },
+          "z-index": {
+            "$value": "9000",
+            "$type": "number"
+          }
+        },
+        "part-1": {
+          "background-color": {
+            "$value": "#f4f4f4",
+            "$type": "color"
+          },
+          "grid-template-columns": {
+            "unset": {
+              "$value": "754px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "430px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "538px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "754px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "862px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "$value": "213.969px",
+            "$type": "dimension"
+          },
+          "outline-offset": {
+            "$value": "-3px",
+            "$type": "dimension"
+          },
+          "width": {
+            "unset": {
+              "$value": "756px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "432px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "540px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "756px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "864px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0": {
+          "height": {
+            "$value": "63.9844px",
+            "$type": "dimension"
+          },
+          "max-height": {
+            "$value": "500px",
+            "$type": "dimension"
+          },
+          "width": {
+            "unset": {
+              "$value": "754px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "430px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "538px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "754px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "862px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-2": {
+          "color": {
+            "$value": "#525252",
+            "$type": "color"
+          },
+          "letter-spacing": {
+            "$value": "0.32px",
+            "$type": "dimension"
+          },
+          "margin-bottom": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "$value": "#525252",
+            "$type": "color"
+          }
+        },
+        "label-3": {
+          "font-size": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "unset": {
+              "$value": "90px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "25.1875px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "46.7969px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "90px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "111.594px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0-2": {
+          "bottom": {
+            "$value": "163.969px",
+            "$type": "dimension"
+          },
+          "left": {
+            "unset": {
+              "$value": "706px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "382px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "490px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "706px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "814px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0-2-0": {
+          "z-index": {
+            "$value": "9000",
+            "$type": "number"
+          }
+        },
+        "part-1-0-2-0-0-0": {
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "max-width": {
+            "$value": "320px",
+            "$type": "dimension"
+          }
+        },
+        "label-4": {
+          "background-color": {
+            "$value": "#393939",
+            "$type": "color"
+          },
+          "max-width": {
+            "$value": "288px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-0-2-0-1-1": {
+          "width": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "label-5": {
+          "grid-row-start": {
+            "$value": "2",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-2": {
+          "height": {
+            "$value": "64px",
+            "$type": "dimension"
+          },
+          "width": {
+            "unset": {
+              "$value": "754px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "430px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "538px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "754px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "862px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-6": {
+          "background-color": {
+            "$value": "#393939",
+            "$type": "color"
+          },
+          "padding-bottom": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "15px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "63px",
+            "$type": "dimension"
+          }
+        },
+        "label-7": {
+          "background-color": {
+            "$value": "#0f62fe",
+            "$type": "color"
+          },
+          "box-shadow": {
+            "$value": "rgba(224, 224, 224, 1) -1px 0px 0px 0px",
+            "$type": "shadow"
+          },
+          "padding-bottom": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "15px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "63px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-500-5": {
+          "$value": "500.5px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "num-400": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-450-5": {
+          "$value": "450.5px",
+          "$type": "dimension"
+        },
+        "size-neg-1": {
+          "$value": "-1px",
+          "$type": "dimension"
+        },
+        "color-c6c6c6": {
+          "$value": "#c6c6c6",
+          "$type": "color"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-48": {
+          "$value": "48px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "color-ffffff": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-0-16": {
+          "$value": "0.16px",
+          "$type": "dimension"
+        },
+        "size-18-0001": {
+          "$value": "18.0001px",
+          "$type": "dimension"
+        },
+        "num-6000": {
+          "$value": "6000",
+          "$type": "number"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-2-0-0-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-7",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "part-1-2",
+        "field": "justify",
+        "value": "end"
+      },
+      {
+        "part": "label-6",
+        "field": "justify",
+        "value": "space-between"
+      },
+      {
+        "part": "label-7",
+        "field": "justify",
+        "value": "space-between"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [
+      "layout-value-outside-vocabulary: label-6.align-items = \"baseline\" — stays code-only",
+      "layout-value-outside-vocabulary: label-7.align-items = \"baseline\" — stays code-only"
+    ],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.24s, 0s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "opacity, visibility"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.3, 1), linear"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "max-height",
+        "value": "90%"
+      },
+      {
+        "part": "part-1",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-duration",
+        "value": "0.24s"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.3, 1)"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0-2-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "transition-duration",
+        "value": "0.11s"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1-0-2-0-1",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-2-0-1-1",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "label-5",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-6",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-6",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s, 0s"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s, 0.07s, 0.07s"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-property",
+        "value": "background, box-shadow, border-color, outline"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "label-7",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-7",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-7",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-7",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-7",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-7",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-7",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "label-7",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s, 0s"
+      },
+      {
+        "part": "label-7",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s, 0.07s, 0.07s"
+      },
+      {
+        "part": "label-7",
+        "channel": "transition-property",
+        "value": "background, box-shadow, border-color, outline"
+      },
+      {
+        "part": "label-7",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "label-8",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-8",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-8",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label-8",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "\"\"",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "fixed",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "grid-template-rows",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "71.9844px 75.9844px 0px 64px",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "grid-column-end",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2-0-0-0",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "top",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "right",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "top",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "max-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2-0-1-1",
+      "channel": "right",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2-0-1-1",
+      "channel": "top",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2-0-1-1",
+      "channel": "will-change",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "transform",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "--cds-border-subtle",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "#c6c6c6",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "--cds-border-tile",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "#a8a8a8",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "--cds-field",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "#ffffff",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "--cds-layer",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "#ffffff",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "--cds-layer-background",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "#f4f4f4",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "grid-column-end",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "grid-row-end",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-2",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-2",
+      "channel": "grid-column-end",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-1",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-2",
+      "channel": "grid-row-end",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-1",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-2",
+      "channel": "grid-row-start",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "baseline",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "flex-basis",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "top",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "baseline",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "flex-basis",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-7",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "top",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-8",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "unset",
+        "interaction": "default",
+        "part": "label-4",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "unset",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "unset",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "xs",
+        "interaction": "default",
+        "part": "label-4",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "xs",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "xs",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "sm",
+        "interaction": "default",
+        "part": "label-4",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "sm",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "sm",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md",
+        "interaction": "default",
+        "part": "label-4",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md",
+        "interaction": "default",
+        "part": "part-1-0-2-0-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 15
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [
+    "portal-autofocus-neutralized: unset — focus was on \"button|cds--btn.cds--btn--primary\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-autofocus-neutralized: xs — focus was on \"button|cds--btn.cds--btn--primary\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-autofocus-neutralized: sm — focus was on \"button|cds--btn.cds--btn--primary\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-autofocus-neutralized: md — focus was on \"button|cds--btn.cds--btn--primary\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-autofocus-neutralized: lg — focus was on \"button|cds--btn.cds--btn--primary\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-5 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-6 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-7 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2-0-0-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2-0-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label-4 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2-0-1-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label-8 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <h2> — span control used (part label-2)",
+    "text-part-typography-carried: label-2 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <h2> — span control used (part label-3)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-2-0-0-0-0-0)",
+    "text-part-typography-carried: label-4 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-5 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-6 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-7 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-8 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "inheritance-check-rejected: label-2.caret-color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.caret-color — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.color — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-size — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-weight — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.letter-spacing — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.line-height — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-size — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.letter-spacing — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.line-height — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.caret-color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-size — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-weight — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.letter-spacing — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.line-height — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.caret-color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.font-size — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.font-weight — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.letter-spacing — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.line-height — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-8.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-8.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-8.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0-2-0-0-0.caret-color — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0-2-0-0-0.color — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0-2-0-0-0.font-size — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0-2-0-0-0.letter-spacing — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0-2-0-0-0.line-height — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2-0-0-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2-0-1-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-6",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-7",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-8",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label",
+      "part-1",
+      "part-1-0",
+      "label-2",
+      "label-3",
+      "part-1-0-2",
+      "part-1-0-2-0",
+      "part-1-0-2-0-0",
+      "part-1-0-2-0-0-0",
+      "part-1-0-2-0-1",
+      "label-4",
+      "part-1-0-2-0-1-1",
+      "label-5",
+      "part-1-2",
+      "label-6",
+      "label-7",
+      "label-8"
+    ],
+    "svgAssets": [
+      "modal-part-1-0-2-0-0-0"
+    ],
+    "receipts": [
+      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@unset — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@xs — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@sm — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@md — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@lg — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "root-display-carried: flex",
+      "literal-text-carried: label = \"Focus sentinel\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "display-outside-vocabulary: part-1 = \"grid\" — carried by neither layout nor the declared registry (named residue)",
+      "literal-text-carried: label-2 = \"Label\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-3 = \"Modal heading\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-4 = \"Close\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "child-content-carried: label-5 holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)",
+      "literal-text-carried: label-6 = \"Cancel\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-7 = \"Save\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-8 = \"Focus sentinel\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label-8 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
+    ],
+    "refusals": [
+      "pseudo-decor-unconditional-placement: part-1-0-2-0-1-1::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)"
+    ]
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1-0-2-0-0-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1-0-2-0-0-0.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1-2.layout.justify = end (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-6.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-7.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-duration = 0.24s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-property = opacity, visibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-timing-function = cubic-bezier(0, 0, 0.3, 1), linear (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.max-height = 90% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1.transition-duration = 0.24s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transition-timing-function = cubic-bezier(0, 0, 0.3, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0-2-0-0-0.transition-duration = 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-0-0.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2-0-1-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.transition-delay = 0s, 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.transition-duration = 0.07s, 0.07s, 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.transition-property = background, box-shadow, border-color, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.transition-timing-function = cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-7.transition-delay = 0s, 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.transition-duration = 0.07s, 0.07s, 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.transition-property = background, box-shadow, border-color, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-7.transition-timing-function = cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-8.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

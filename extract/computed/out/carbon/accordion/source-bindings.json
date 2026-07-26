@@ -1,0 +1,459 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Accordion",
+  "varPrefix": "--cds-",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.unset.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "unset"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.unset.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "unset"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.sm.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "sm"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.sm.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "sm"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.md.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "md"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.md.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "md"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.lg.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "lg"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "start.lg.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "lg"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.unset.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "unset"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.unset.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "unset"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.sm.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "sm"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.sm.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "sm"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.md.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "md"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.md.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "md"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.lg.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "lg"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "end.lg.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "lg"
+      },
+      "token": "icon-disabled",
+      "varName": "--cds-icon-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled] .cds--accordion__arrow"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.unset.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "unset"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.unset.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "unset"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.sm.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "sm"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.sm.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "sm"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.md.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "md"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.md.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "md"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.lg.enabled",
+      "axisValues": {
+        "align": "start",
+        "size": "lg"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "start.lg.disabled",
+      "axisValues": {
+        "align": "start",
+        "size": "lg"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.unset.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "unset"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.unset.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "unset"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.sm.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "sm"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.sm.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "sm"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.md.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "md"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.md.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "md"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.lg.enabled",
+      "axisValues": {
+        "align": "end",
+        "size": "lg"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--accordion__heading"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "end.lg.disabled",
+      "axisValues": {
+        "align": "end",
+        "size": "lg"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--accordion__heading[disabled]"
+      }
+    }
+  ],
+  "skips": [
+    "part-0-0.min-block-size: no var candidate verified against the computed value in any combo",
+    "part-0-0.padding-inline-end: no var candidate verified against the computed value in any combo"
+  ]
+}

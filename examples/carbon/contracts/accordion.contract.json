@@ -1,0 +1,322 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.accordion",
+  "name": "Accordion",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). childrenSpec mounts the canonical AccordionItem. NAMED DEFERRAL: expansion (`open`) is an AccordionItem prop, not an Accordion prop — the axis grammar drives the ROOT mount only, so the item is pinned open and an Expanded axis is out of round 1. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "align",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "default": "end",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Align",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "align"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {
+        "part-0": {
+          "element": "li",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy li| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "parts": {
+            "part-0-0": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "start"
+              },
+              "parts": {
+                "icon": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "font-feature-settings": "normal",
+                    "outline-style": "solid",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "text-rendering": "auto",
+                    "transition-duration": "0.11s",
+                    "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+                  },
+                  "icon": {
+                    "asset": "accordion-icon",
+                    "size": 16
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "fill": "{imported.shared.color-161616}",
+                    "flex-basis": "{imported.shared.size-16}",
+                    "flex-shrink": "{imported.accordion.icon.flex-shrink}",
+                    "outline-color": "{imported.accordion.icon.outline-color}",
+                    "outline-offset": "{imported.accordion.icon.outline-offset}",
+                    "outline-width": "{imported.accordion.icon.outline-width}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.shared.color-16161640}"
+                    }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "align",
+                      "map": {
+                        "end": {
+                          "margin-left": "{imported.accordion.icon.margin-left.end}",
+                          "margin-top": "{imported.accordion.icon.margin-top.end}"
+                        },
+                        "start": {
+                          "margin-left": "{imported.accordion.icon.margin-left.start}",
+                          "margin-top": "{imported.accordion.icon.margin-top.start}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label": {
+                  "text": "Accordion title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "text-rendering": "auto"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "font-size": "{imported.accordion.label.font-size}",
+                    "font-weight": "{imported.accordion.label.font-weight}",
+                    "letter-spacing": "{imported.accordion.label.letter-spacing}",
+                    "line-height": "{imported.accordion.label.line-height}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "z-index": "{imported.accordion.label.z-index}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.shared.color-16161640}"
+                    }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "align",
+                      "map": {
+                        "end": {
+                          "margin-right": "{imported.accordion.label.margin-right.end}"
+                        },
+                        "start": {
+                          "margin-right": "{imported.accordion.label.margin-right.start}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "appearance": "none",
+                "border-bottom-style": "none",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "cursor": "pointer",
+                "position": "relative",
+                "text-align": "start",
+                "transition-duration": "0.11s",
+                "transition-property": "background-color",
+                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.accordion.part-0-0.background-color}",
+                "border-bottom-width": "{imported.shared.size-0}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-161616}",
+                "font-size": "{imported.shared.size-16}",
+                "left": "{imported.shared.size-0}",
+                "min-height": "{imported.accordion.part-0-0.min-height.unset}",
+                "min-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-0}",
+                "padding-right": "{imported.shared.size-16}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-161616}",
+                "top": "{imported.shared.size-0}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-16161640}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "lg": {
+                      "min-height": "{imported.accordion.part-0-0.min-height.lg}"
+                    },
+                    "md": {
+                      "min-height": "{imported.accordion.part-0-0.min-height.md}"
+                    },
+                    "sm": {
+                      "min-height": "{imported.accordion.part-0-0.min-height.sm}"
+                    }
+                  }
+                }
+              ]
+            },
+            "part-0-1-2": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none"
+              }
+            },
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "max-height": "fit-content",
+                "transition-duration": "0.11s",
+                "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9)"
+              },
+              "parts": {
+                "label-2": {
+                  "text": "Details body copy for the Carbon round.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-16}",
+                    "font-weight": "{imported.accordion.label-2.font-weight}",
+                    "line-height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.accordion.label-2.padding-right}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "align",
+                      "map": {
+                        "end": {
+                          "margin-left": "{imported.accordion.label-2.margin-left.end}"
+                        },
+                        "start": {
+                          "margin-left": "{imported.accordion.label-2.margin-left.start}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.accordion.part-0-1.padding-bottom}",
+                "padding-top": "{imported.accordion.part-0-1.padding-top}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-top-style": "solid",
+            "transition-duration": "0.11s",
+            "transition-property": "border-color",
+            "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.accordion.part-0.border-bottom-color}",
+            "border-bottom-width": "{imported.accordion.part-0.border-bottom-width}",
+            "border-top-color": "{imported.accordion.part-0.border-top-color}",
+            "border-top-width": "{imported.accordion.part-0.border-top-width}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "tokens": {
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "width": "{imported.accordion.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Accordion"
+    }
+  },
+  "figmaStatePreviews": true
+}

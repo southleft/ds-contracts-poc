@@ -1,0 +1,2861 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@carbon/react@1.112.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-40": {
+          "$value": "40px",
+          "$type": "dimension"
+        },
+        "size-0-16": {
+          "$value": "0.16px",
+          "$type": "dimension"
+        },
+        "size-18-0001": {
+          "$value": "18.0001px",
+          "$type": "dimension"
+        },
+        "color-000000": {
+          "$value": "#000000",
+          "$type": "color"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "num-600": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "size-neg-2": {
+          "$value": "-2px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-neg-1": {
+          "$value": "-1px",
+          "$type": "dimension"
+        },
+        "size-18": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-3": {
+          "$value": "3px",
+          "$type": "dimension"
+        },
+        "size-42": {
+          "$value": "42px",
+          "$type": "dimension"
+        },
+        "color-525252": {
+          "$value": "#525252",
+          "$type": "color"
+        },
+        "color-161616": {
+          "$value": "#161616",
+          "$type": "color"
+        }
+      },
+      "tabs": {
+        "root": {
+          "max-height": {
+            "$value": "64px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "328px",
+            "$type": "dimension"
+          }
+        },
+        "part-0": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          }
+        },
+        "part-1": {
+          "width": {
+            "$value": "261.781px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-0": {
+          "border-bottom-color": {
+            "$value": "#0f62fe",
+            "$type": "color"
+          },
+          "color": {
+            "$value": "#161616",
+            "$type": "color"
+          },
+          "row-rule-color": {
+            "$value": "#161616",
+            "$type": "color"
+          },
+          "width": {
+            "$value": "94.3125px",
+            "$type": "dimension"
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#0f62fe",
+            "$type": "color"
+          }
+        },
+        "part-1-0-0": {
+          "width": {
+            "$value": "62.3125px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-1-0": {
+          "left": {
+            "$value": "93.3125px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "235.688px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-2": {
+          "border-bottom-color": {
+            "$value": "#e0e0e0",
+            "$type": "color"
+          },
+          "width": {
+            "$value": "80px",
+            "$type": "dimension"
+          },
+          "border-bottom-color-state-active": {
+            "$value": "#8d8d8d",
+            "$type": "color"
+          },
+          "outline-color-state-active": {
+            "$value": "#0f62fe",
+            "$type": "color"
+          },
+          "border-bottom-color-state-hover": {
+            "$value": "#8d8d8d",
+            "$type": "color"
+          }
+        },
+        "part-1-2-0": {
+          "width": {
+            "$value": "48px",
+            "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        },
+        "part-1-3-0": {
+          "left": {
+            "$value": "174.312px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "154.688px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-4": {
+          "border-bottom-color": {
+            "$value": "#e0e0e0",
+            "$type": "color"
+          },
+          "width": {
+            "$value": "84.4688px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-4-0": {
+          "width": {
+            "$value": "52.4688px",
+            "$type": "dimension"
+          }
+        },
+        "label-3": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        },
+        "part-1-5-0": {
+          "left": {
+            "$value": "259.781px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "69.2188px",
+            "$type": "dimension"
+          }
+        },
+        "part-2": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-1-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-3-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-4-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-5-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [active] label-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] label-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2-0.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] part-1-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] label-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2-0.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-1-2.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-1",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "part-1",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "transition-duration",
+        "value": "0.07s"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "transition-property",
+        "value": "color"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "transition-property",
+        "value": "border, outline"
+      },
+      {
+        "part": "part-1-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1-2-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-2-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-2-0",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-2-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "transition-property",
+        "value": "border, outline"
+      },
+      {
+        "part": "part-1-4",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1-4-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-4-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-4-0",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-4-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-2",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "part-2",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-2",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-2",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-2",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-2",
+        "channel": "text-align",
+        "value": "start"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "part-0",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "scroll-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "smooth",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "scrollbar-width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "will-change",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "scroll-position",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-bottom-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-left-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-right-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-top-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "position",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "absolute",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-2",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-bottom-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-left-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-right-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-top-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "position",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "absolute",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-4",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-bottom-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-left-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-right-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-top-style",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "position",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "absolute",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-2",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-2",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-2",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "part-1-1-0",
+      "channel": "border-bottom-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-left-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-right-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "border-top-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "bottom",
+      "ref": "{imported.shared.size-42}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "color",
+      "ref": "{imported.shared.color-000000}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "height",
+      "ref": "{imported.shared.size-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "left",
+      "ref": "{imported.tabs.part-1-1-0.left}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "margin-bottom",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "margin-left",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "margin-right",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "margin-top",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "padding-bottom",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "padding-left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "padding-right",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "padding-top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "right",
+      "ref": "{imported.tabs.part-1-1-0.right}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "top",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "width",
+      "ref": "{imported.shared.size-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-bottom-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-left-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-right-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "border-top-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "bottom",
+      "ref": "{imported.shared.size-42}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "color",
+      "ref": "{imported.shared.color-000000}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "height",
+      "ref": "{imported.shared.size-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "left",
+      "ref": "{imported.tabs.part-1-3-0.left}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "margin-bottom",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "margin-left",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "margin-right",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "margin-top",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "padding-bottom",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "padding-left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "padding-right",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "padding-top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "right",
+      "ref": "{imported.tabs.part-1-3-0.right}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "top",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-3-0",
+      "channel": "width",
+      "ref": "{imported.shared.size-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-bottom-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-left-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-right-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "border-top-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "bottom",
+      "ref": "{imported.shared.size-42}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "color",
+      "ref": "{imported.shared.color-000000}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "height",
+      "ref": "{imported.shared.size-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "left",
+      "ref": "{imported.tabs.part-1-5-0.left}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "margin-bottom",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "margin-left",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "margin-right",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "margin-top",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "padding-bottom",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "padding-left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "padding-right",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "padding-top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "right",
+      "ref": "{imported.tabs.part-1-5-0.right}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "top",
+      "ref": "{imported.shared.size-neg-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-1-5-0",
+      "channel": "width",
+      "ref": "{imported.shared.size-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "state": "active",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "row-rule-color",
+      "state": "active",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.tabs.part-1-2.border-bottom-color-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "outline-color",
+      "state": "active",
+      "ref": "{imported.tabs.part-1-2.outline-color-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "row-rule-color",
+      "state": "active",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.tabs.part-1-0.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2-0",
+      "channel": "row-rule-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "ref": "{imported.tabs.part-1-2.border-bottom-color-state-hover}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-2",
+      "channel": "row-rule-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "",
+        "interaction": "default",
+        "part": "part-2",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 2
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-1-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-1-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-2-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-3-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-3-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-4-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-5 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-5-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-5-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-5 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-2-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "svg-host-color-carried: part-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0)",
+    "svg-host-color-carried: part-1-1-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-1-1-0-0-0)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "svg-host-color-carried: part-1-3-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "control-fallback: no control for <path> — span control used (part part-1-3-0-0-0)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "svg-host-color-carried: part-1-5-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "control-fallback: no control for <path> — span control used (part part-1-5-0-0-0)",
+    "svg-host-color-carried: part-2 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-5)",
+    "control-fallback: no control for <path> — span control used (part part-2-0-0)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-1-2-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"part-1-4-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-0.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-1-0.color — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-2.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-2.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-3-0.color — values track ancestor \"part-1-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-4.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-4.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-1-5-0.color — values track ancestor \"part-1-5\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-2.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label-2.caret-color equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.letter-spacing equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.caret-color equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.font-size equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.letter-spacing equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.line-height equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-weight equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label.letter-spacing equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.font-size equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.font-weight equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.letter-spacing equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.line-height equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-1.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-1.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-1.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2-0.caret-color equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2-0.color equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2-0.font-size equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2-0.letter-spacing equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2-0.line-height equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-2.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-3.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-3.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-3.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4-0.caret-color equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4-0.color equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4-0.font-size equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4-0.letter-spacing equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4-0.line-height equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-4.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-5.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-5.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-5.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.letter-spacing equals ancestor \"root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.line-height equals ancestor \"root\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-2.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-1-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-2-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-3-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-3-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-4-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-5-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-5-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-2-0-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "part-1",
+      "part-1-0",
+      "part-1-0-0",
+      "label",
+      "part-1-1",
+      "part-1-2",
+      "part-1-2-0",
+      "label-2",
+      "part-1-3",
+      "part-1-4",
+      "part-1-4-0",
+      "label-3",
+      "part-1-5",
+      "part-2"
+    ],
+    "svgAssets": [
+      "tabs-part-0",
+      "tabs-part-1-1-0",
+      "tabs-part-1-3-0",
+      "tabs-part-1-5-0",
+      "tabs-part-2"
+    ],
+    "receipts": [
+      "svg-viewbox-reconstructed: Tabs.part-0@ — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-bumped: Tabs.part-1-1-0@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Tabs.part-1-3-0@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Tabs.part-1-5-0@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-reconstructed: Tabs.part-2@ — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex",
+      "literal-text-carried: label = \"Overview\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "sr-only-carried-as-hidden: part-1-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "literal-text-carried: label-2 = \"Activity\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-2 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "sr-only-carried-as-hidden: part-1-3 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "literal-text-carried: label-3 = \"Settings\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "sr-only-carried-as-hidden: part-1-5 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.transition-duration = 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.transition-property = color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.transition-property = border, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-2-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-4.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-4.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.transition-property = border, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-4-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-5.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-5.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-5.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2.text-align = start (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

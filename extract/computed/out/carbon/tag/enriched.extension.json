@@ -1,0 +1,844 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@carbon/react@1.112.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "tag": {
+        "root": {
+          "background-color": {
+            "unset": {
+              "$value": "#e0e0e0",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#ffd7d9",
+              "$type": "color"
+            },
+            "magenta": {
+              "$value": "#ffd6e8",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#e8daff",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#d0e2ff",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#bae6ff",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#9ef0f0",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#a7f0ba",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#e0e0e0",
+              "$type": "color"
+            },
+            "cool-gray": {
+              "$value": "#dde1e6",
+              "$type": "color"
+            },
+            "warm-gray": {
+              "$value": "#e5e0df",
+              "$type": "color"
+            },
+            "high-contrast": {
+              "$value": "#393939",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "unset": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#a2191f",
+              "$type": "color"
+            },
+            "magenta": {
+              "$value": "#9f1853",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#6929c4",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00539a",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005d5d",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0e6027",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "cool-gray": {
+              "$value": "#121619",
+              "$type": "color"
+            },
+            "warm-gray": {
+              "$value": "#171414",
+              "$type": "color"
+            },
+            "high-contrast": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "letter-spacing": {
+            "$value": "0.32px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "208px",
+            "$type": "dimension"
+          },
+          "min-height": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "18px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          },
+          "min-width": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "outline-color": {
+            "unset": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#a2191f",
+              "$type": "color"
+            },
+            "magenta": {
+              "$value": "#9f1853",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#6929c4",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00539a",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005d5d",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0e6027",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "cool-gray": {
+              "$value": "#121619",
+              "$type": "color"
+            },
+            "warm-gray": {
+              "$value": "#171414",
+              "$type": "color"
+            },
+            "high-contrast": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#393939",
+              "$type": "color"
+            }
+          },
+          "outline-offset": {
+            "unset": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "red": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "magenta": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "purple": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "blue": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "cyan": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "teal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "green": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "gray": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "cool-gray": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "warm-gray": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "high-contrast": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "outline": {
+              "$value": "-1px",
+              "$type": "dimension"
+            }
+          },
+          "outline-width": {
+            "unset": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "red": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "magenta": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "purple": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "blue": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "cyan": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "teal": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "green": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "gray": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "cool-gray": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "warm-gray": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "high-contrast": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "outline": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "unset": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "unset": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "row-rule-color": {
+            "unset": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#a2191f",
+              "$type": "color"
+            },
+            "magenta": {
+              "$value": "#9f1853",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#6929c4",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00539a",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005d5d",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0e6027",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "cool-gray": {
+              "$value": "#121619",
+              "$type": "color"
+            },
+            "warm-gray": {
+              "$value": "#171414",
+              "$type": "color"
+            },
+            "high-contrast": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "label": {
+          "color": {
+            "unset": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#a2191f",
+              "$type": "color"
+            },
+            "magenta": {
+              "$value": "#9f1853",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#6929c4",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00539a",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005d5d",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0e6027",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "cool-gray": {
+              "$value": "#121619",
+              "$type": "color"
+            },
+            "warm-gray": {
+              "$value": "#171414",
+              "$type": "color"
+            },
+            "high-contrast": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.32px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "unset": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#a2191f",
+              "$type": "color"
+            },
+            "magenta": {
+              "$value": "#9f1853",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#6929c4",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00539a",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005d5d",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0e6027",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#161616",
+              "$type": "color"
+            },
+            "cool-gray": {
+              "$value": "#121619",
+              "$type": "color"
+            },
+            "warm-gray": {
+              "$value": "#171414",
+              "$type": "color"
+            },
+            "high-contrast": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "--cds-layout-size-height-lg",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "2rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "--cds-layout-size-height-md",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.5rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "--cds-layout-size-height-sm",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.125rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "--cds-layout-size-height-xs",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.125rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "outline-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "--cds-layout-size-height-lg",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "2rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "--cds-layout-size-height-md",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.5rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "--cds-layout-size-height-sm",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.125rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "--cds-layout-size-height-xs",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.125rem",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label.caret-color equals ancestor \"root\" on all 208 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"root\" on all 208 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"root\" on all 208 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.letter-spacing equals ancestor \"root\" on all 208 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "child-content-carried: label holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

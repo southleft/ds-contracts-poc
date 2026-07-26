@@ -1,0 +1,120 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Tabs",
+  "varPrefix": "--cds-",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "",
+      "axisValues": {},
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tab--overflow-nav-button svg"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "",
+      "axisValues": {},
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tabs__nav-item--close-icon--selected svg"
+      }
+    },
+    {
+      "part": "icon-5",
+      "channel": "fill",
+      "combo": "",
+      "axisValues": {},
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tab--overflow-nav-button svg"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "",
+      "axisValues": {},
+      "token": "background",
+      "varName": "--cds-background",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tab--overflow-nav-button"
+      }
+    },
+    {
+      "part": "part-1-0",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--tabs.cds--tabs--contained .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected:focus .cds--tabs__nav-link:focus, .cds--tabs .cds--tabs__nav-item--selected:active .cds--tabs__nav-link:active"
+      }
+    },
+    {
+      "part": "part-1-2",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tabs__nav-link"
+      }
+    },
+    {
+      "part": "part-1-4",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tabs__nav-link"
+      }
+    },
+    {
+      "part": "part-2",
+      "channel": "background-color",
+      "combo": "",
+      "axisValues": {},
+      "token": "background",
+      "varName": "--cds-background",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tab--overflow-nav-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--tabs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "max-block-size",
+      "combo": "",
+      "axisValues": {},
+      "token": "layout-size-height-xl",
+      "varName": "--cds-layout-size-height-xl",
+      "anchor": {
+        "selector": ".cds--tabs"
+      }
+    }
+  ],
+  "skips": [
+    "root.min-block-size: no var candidate verified against the computed value in any combo"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tabs",
+  "anchors": [
+    {
+      "leaf": "imported.tabs.part-0.background-color",
+      "token": "background",
+      "part": "part-0",
+      "cssProperty": "background-color",
+      "varName": "--cds-background",
+      "selector": ".cds--tabs .cds--tab--overflow-nav-button"
+    },
+    {
+      "leaf": "imported.tabs.part-1-0.color",
+      "token": "text-primary",
+      "part": "part-1-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-primary",
+      "selector": ".cds--tabs.cds--tabs--contained .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected:focus .cds--tabs__nav-link:focus, .cds--tabs .cds--tabs__nav-item--selected:active .cds--tabs__nav-link:active"
+    },
+    {
+      "leaf": "imported.tabs.part-2.background-color",
+      "token": "background",
+      "part": "part-2",
+      "cssProperty": "background-color",
+      "varName": "--cds-background",
+      "selector": ".cds--tabs .cds--tab--overflow-nav-button"
+    }
+  ]
+}

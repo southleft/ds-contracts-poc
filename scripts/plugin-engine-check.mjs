@@ -1125,10 +1125,30 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   const polaris = await exercise('examples/polaris/figma/polaris.bundle.json', 'Polaris', 12);
   assert(polaris.built === 12, `polaris bundle builds all 12 components incl. icon-bearing ones (got ${polaris.built})`);
+  // CARBON ROUND (library #7, the generality CONTROL CASE): the same engine
+  // path, a config-only library. Two pins beyond "it builds", both of them
+  // things only Carbon can prove:
+  //   (1) REAL MODES. Carbon themes are CLASS SCOPES (.cds--white / .cds--g100),
+  //       so Light and Dark are two complete inventories of the SAME names —
+  //       a mode pair with no guessing. A base colour must differ per mode.
+  //   (2) the DEFAULTLESS-AXIS pin (no "Unset" variant cell ever reaches the
+  //       canvas) lives where the variant grid is built — examples/carbon/
+  //       scripts/figma-compile-receipt.mjs.
+  const carbon = await exercise('examples/carbon/figma/carbon.bundle.json', 'Carbon', 10);
+  assert(carbon.built === 10, `carbon bundle builds all 10 components (got ${carbon.built})`);
+  {
+    const layer = carbon.byName.get('layer-01');
+    assert(layer, 'carbon bundle emits the base token layer-01');
+    const modes = Object.values(layer.valuesByMode);
+    assert(modes.length === 2, `carbon layer-01 carries TWO modes (got ${modes.length}) — Carbon's Light/Dark are two real theme blocks, not one theme twice`);
+    const hx = (v) => `#${['r', 'g', 'b'].map((k) => Math.round((v[k] || 0) * 255).toString(16).padStart(2, '0')).join('')}`;
+    const [lv, dv] = modes.map(hx);
+    assert(lv === '#f4f4f4' && dv === '#262626', `carbon layer-01 resolves .cds--white #f4f4f4 / .cds--g100 #262626 (got ${lv} / ${dv}) — if these were equal the Dark mode would be the Light theme wearing a different label`);
+  }
   const docs = await exercise('examples/astryx/figma/astryx-docs.bundle.json', 'Astryx (docs theme)', 13);
   assert(docs.built === 13 && docs.vars === astryx.vars, `docs-theme bundle builds the same 13 with the same variable count (${docs.built}, ${docs.vars} vs ${astryx.vars})`);
   assert(docs.aliases === astryx.aliases, `docs-theme bundle carries the SAME ${astryx.aliases} minted aliases — re-anchoring is what makes them re-theme (got ${docs.aliases})`);
-  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these ${docs.aliases} now DO re-theme): the JSON-only rule holds for EVERY example round through the real engine path`);
+  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these ${docs.aliases} now DO re-theme): carbon (10 built, ${carbon.vars} vars, Light/Dark = .cds--white/.cds--g100 proven distinct on layer-01): the JSON-only rule holds for EVERY example round through the real engine path`);
 }
 
 console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles)');

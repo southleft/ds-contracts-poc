@@ -1,0 +1,81 @@
+{
+  "id": "carbon.inlinenotification",
+  "name": "InlineNotification",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "kind",
+      "type": {
+        "enum": [
+          "error",
+          "info",
+          "info-square",
+          "success",
+          "warning",
+          "warning-alt"
+        ]
+      },
+      "default": "error",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Kind",
+          "values": {
+            "error": "Error",
+            "info": "Info",
+            "info-square": "Info Square",
+            "success": "Success",
+            "warning": "Warning",
+            "warning-alt": "Warning Alt"
+          }
+        },
+        "code": {
+          "prop": "kind"
+        }
+      }
+    },
+    {
+      "name": "contrast",
+      "type": {
+        "enum": [
+          "high",
+          "low"
+        ]
+      },
+      "default": "high",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Contrast",
+          "values": {
+            "high": "High",
+            "low": "Low"
+          }
+        },
+        "code": {
+          "prop": "contrast"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). kind enum read from InlineNotificationProps. `lowContrast` is a BOOLEAN in the library and a two-value VARIANT AXIS here (axisValueMap high->false / low->true): it selects a rendering, so it is an axis, not a state.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "InlineNotification"
+    }
+  },
+  "states": []
+}

@@ -1,0 +1,1466 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Tag",
+  "varPrefix": "--cds-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset.unset",
+      "axisValues": {
+        "type": "unset",
+        "size": "unset"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset.sm",
+      "axisValues": {
+        "type": "unset",
+        "size": "sm"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset.md",
+      "axisValues": {
+        "type": "unset",
+        "size": "md"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset.lg",
+      "axisValues": {
+        "type": "unset",
+        "size": "lg"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "red.unset",
+      "axisValues": {
+        "type": "red",
+        "size": "unset"
+      },
+      "token": "tag-background-red",
+      "varName": "--cds-tag-background-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "red.sm",
+      "axisValues": {
+        "type": "red",
+        "size": "sm"
+      },
+      "token": "tag-background-red",
+      "varName": "--cds-tag-background-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "red.md",
+      "axisValues": {
+        "type": "red",
+        "size": "md"
+      },
+      "token": "tag-background-red",
+      "varName": "--cds-tag-background-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "red.lg",
+      "axisValues": {
+        "type": "red",
+        "size": "lg"
+      },
+      "token": "tag-background-red",
+      "varName": "--cds-tag-background-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magenta.unset",
+      "axisValues": {
+        "type": "magenta",
+        "size": "unset"
+      },
+      "token": "tag-background-magenta",
+      "varName": "--cds-tag-background-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magenta.sm",
+      "axisValues": {
+        "type": "magenta",
+        "size": "sm"
+      },
+      "token": "tag-background-magenta",
+      "varName": "--cds-tag-background-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magenta.md",
+      "axisValues": {
+        "type": "magenta",
+        "size": "md"
+      },
+      "token": "tag-background-magenta",
+      "varName": "--cds-tag-background-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magenta.lg",
+      "axisValues": {
+        "type": "magenta",
+        "size": "lg"
+      },
+      "token": "tag-background-magenta",
+      "varName": "--cds-tag-background-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "purple.unset",
+      "axisValues": {
+        "type": "purple",
+        "size": "unset"
+      },
+      "token": "tag-background-purple",
+      "varName": "--cds-tag-background-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "purple.sm",
+      "axisValues": {
+        "type": "purple",
+        "size": "sm"
+      },
+      "token": "tag-background-purple",
+      "varName": "--cds-tag-background-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "purple.md",
+      "axisValues": {
+        "type": "purple",
+        "size": "md"
+      },
+      "token": "tag-background-purple",
+      "varName": "--cds-tag-background-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "purple.lg",
+      "axisValues": {
+        "type": "purple",
+        "size": "lg"
+      },
+      "token": "tag-background-purple",
+      "varName": "--cds-tag-background-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "blue.unset",
+      "axisValues": {
+        "type": "blue",
+        "size": "unset"
+      },
+      "token": "tag-background-blue",
+      "varName": "--cds-tag-background-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "blue.sm",
+      "axisValues": {
+        "type": "blue",
+        "size": "sm"
+      },
+      "token": "tag-background-blue",
+      "varName": "--cds-tag-background-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "blue.md",
+      "axisValues": {
+        "type": "blue",
+        "size": "md"
+      },
+      "token": "tag-background-blue",
+      "varName": "--cds-tag-background-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "blue.lg",
+      "axisValues": {
+        "type": "blue",
+        "size": "lg"
+      },
+      "token": "tag-background-blue",
+      "varName": "--cds-tag-background-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cyan.unset",
+      "axisValues": {
+        "type": "cyan",
+        "size": "unset"
+      },
+      "token": "tag-background-cyan",
+      "varName": "--cds-tag-background-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cyan.sm",
+      "axisValues": {
+        "type": "cyan",
+        "size": "sm"
+      },
+      "token": "tag-background-cyan",
+      "varName": "--cds-tag-background-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cyan.md",
+      "axisValues": {
+        "type": "cyan",
+        "size": "md"
+      },
+      "token": "tag-background-cyan",
+      "varName": "--cds-tag-background-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cyan.lg",
+      "axisValues": {
+        "type": "cyan",
+        "size": "lg"
+      },
+      "token": "tag-background-cyan",
+      "varName": "--cds-tag-background-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "teal.unset",
+      "axisValues": {
+        "type": "teal",
+        "size": "unset"
+      },
+      "token": "tag-background-teal",
+      "varName": "--cds-tag-background-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "teal.sm",
+      "axisValues": {
+        "type": "teal",
+        "size": "sm"
+      },
+      "token": "tag-background-teal",
+      "varName": "--cds-tag-background-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "teal.md",
+      "axisValues": {
+        "type": "teal",
+        "size": "md"
+      },
+      "token": "tag-background-teal",
+      "varName": "--cds-tag-background-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "teal.lg",
+      "axisValues": {
+        "type": "teal",
+        "size": "lg"
+      },
+      "token": "tag-background-teal",
+      "varName": "--cds-tag-background-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "green.unset",
+      "axisValues": {
+        "type": "green",
+        "size": "unset"
+      },
+      "token": "tag-background-green",
+      "varName": "--cds-tag-background-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "green.sm",
+      "axisValues": {
+        "type": "green",
+        "size": "sm"
+      },
+      "token": "tag-background-green",
+      "varName": "--cds-tag-background-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "green.md",
+      "axisValues": {
+        "type": "green",
+        "size": "md"
+      },
+      "token": "tag-background-green",
+      "varName": "--cds-tag-background-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "green.lg",
+      "axisValues": {
+        "type": "green",
+        "size": "lg"
+      },
+      "token": "tag-background-green",
+      "varName": "--cds-tag-background-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "gray.unset",
+      "axisValues": {
+        "type": "gray",
+        "size": "unset"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "gray.sm",
+      "axisValues": {
+        "type": "gray",
+        "size": "sm"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "gray.md",
+      "axisValues": {
+        "type": "gray",
+        "size": "md"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "gray.lg",
+      "axisValues": {
+        "type": "gray",
+        "size": "lg"
+      },
+      "token": "tag-background-gray",
+      "varName": "--cds-tag-background-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cool-gray.unset",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "unset"
+      },
+      "token": "tag-background-cool-gray",
+      "varName": "--cds-tag-background-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cool-gray.sm",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "sm"
+      },
+      "token": "tag-background-cool-gray",
+      "varName": "--cds-tag-background-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cool-gray.md",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "md"
+      },
+      "token": "tag-background-cool-gray",
+      "varName": "--cds-tag-background-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "cool-gray.lg",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "lg"
+      },
+      "token": "tag-background-cool-gray",
+      "varName": "--cds-tag-background-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warm-gray.unset",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "unset"
+      },
+      "token": "tag-background-warm-gray",
+      "varName": "--cds-tag-background-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warm-gray.sm",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "sm"
+      },
+      "token": "tag-background-warm-gray",
+      "varName": "--cds-tag-background-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warm-gray.md",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "md"
+      },
+      "token": "tag-background-warm-gray",
+      "varName": "--cds-tag-background-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warm-gray.lg",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "lg"
+      },
+      "token": "tag-background-warm-gray",
+      "varName": "--cds-tag-background-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "high-contrast.unset",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "unset"
+      },
+      "token": "background-inverse",
+      "varName": "--cds-background-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "high-contrast.sm",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "sm"
+      },
+      "token": "background-inverse",
+      "varName": "--cds-background-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "high-contrast.md",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "md"
+      },
+      "token": "background-inverse",
+      "varName": "--cds-background-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "high-contrast.lg",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "lg"
+      },
+      "token": "background-inverse",
+      "varName": "--cds-background-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outline.unset",
+      "axisValues": {
+        "type": "outline",
+        "size": "unset"
+      },
+      "token": "background",
+      "varName": "--cds-background",
+      "anchor": {
+        "selector": ".cds--tag--outline:not(.cds--tag--operational):not(span):not([disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outline.sm",
+      "axisValues": {
+        "type": "outline",
+        "size": "sm"
+      },
+      "token": "background",
+      "varName": "--cds-background",
+      "anchor": {
+        "selector": ".cds--tag--outline:not(.cds--tag--operational):not(span):not([disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outline.md",
+      "axisValues": {
+        "type": "outline",
+        "size": "md"
+      },
+      "token": "background",
+      "varName": "--cds-background",
+      "anchor": {
+        "selector": ".cds--tag--outline:not(.cds--tag--operational):not(span):not([disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "outline.lg",
+      "axisValues": {
+        "type": "outline",
+        "size": "lg"
+      },
+      "token": "background",
+      "varName": "--cds-background",
+      "anchor": {
+        "selector": ".cds--tag--outline:not(.cds--tag--operational):not(span):not([disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.unset",
+      "axisValues": {
+        "type": "unset",
+        "size": "unset"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.sm",
+      "axisValues": {
+        "type": "unset",
+        "size": "sm"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.md",
+      "axisValues": {
+        "type": "unset",
+        "size": "md"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.lg",
+      "axisValues": {
+        "type": "unset",
+        "size": "lg"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.unset",
+      "axisValues": {
+        "type": "red",
+        "size": "unset"
+      },
+      "token": "tag-color-red",
+      "varName": "--cds-tag-color-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.sm",
+      "axisValues": {
+        "type": "red",
+        "size": "sm"
+      },
+      "token": "tag-color-red",
+      "varName": "--cds-tag-color-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.md",
+      "axisValues": {
+        "type": "red",
+        "size": "md"
+      },
+      "token": "tag-color-red",
+      "varName": "--cds-tag-color-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "red.lg",
+      "axisValues": {
+        "type": "red",
+        "size": "lg"
+      },
+      "token": "tag-color-red",
+      "varName": "--cds-tag-color-red",
+      "anchor": {
+        "selector": ".cds--tag--red"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magenta.unset",
+      "axisValues": {
+        "type": "magenta",
+        "size": "unset"
+      },
+      "token": "tag-color-magenta",
+      "varName": "--cds-tag-color-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magenta.sm",
+      "axisValues": {
+        "type": "magenta",
+        "size": "sm"
+      },
+      "token": "tag-color-magenta",
+      "varName": "--cds-tag-color-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magenta.md",
+      "axisValues": {
+        "type": "magenta",
+        "size": "md"
+      },
+      "token": "tag-color-magenta",
+      "varName": "--cds-tag-color-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magenta.lg",
+      "axisValues": {
+        "type": "magenta",
+        "size": "lg"
+      },
+      "token": "tag-color-magenta",
+      "varName": "--cds-tag-color-magenta",
+      "anchor": {
+        "selector": ".cds--tag--magenta"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "purple.unset",
+      "axisValues": {
+        "type": "purple",
+        "size": "unset"
+      },
+      "token": "tag-color-purple",
+      "varName": "--cds-tag-color-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "purple.sm",
+      "axisValues": {
+        "type": "purple",
+        "size": "sm"
+      },
+      "token": "tag-color-purple",
+      "varName": "--cds-tag-color-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "purple.md",
+      "axisValues": {
+        "type": "purple",
+        "size": "md"
+      },
+      "token": "tag-color-purple",
+      "varName": "--cds-tag-color-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "purple.lg",
+      "axisValues": {
+        "type": "purple",
+        "size": "lg"
+      },
+      "token": "tag-color-purple",
+      "varName": "--cds-tag-color-purple",
+      "anchor": {
+        "selector": ".cds--tag--purple"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "blue.unset",
+      "axisValues": {
+        "type": "blue",
+        "size": "unset"
+      },
+      "token": "tag-color-blue",
+      "varName": "--cds-tag-color-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "blue.sm",
+      "axisValues": {
+        "type": "blue",
+        "size": "sm"
+      },
+      "token": "tag-color-blue",
+      "varName": "--cds-tag-color-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "blue.md",
+      "axisValues": {
+        "type": "blue",
+        "size": "md"
+      },
+      "token": "tag-color-blue",
+      "varName": "--cds-tag-color-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "blue.lg",
+      "axisValues": {
+        "type": "blue",
+        "size": "lg"
+      },
+      "token": "tag-color-blue",
+      "varName": "--cds-tag-color-blue",
+      "anchor": {
+        "selector": ".cds--tag--blue"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cyan.unset",
+      "axisValues": {
+        "type": "cyan",
+        "size": "unset"
+      },
+      "token": "tag-color-cyan",
+      "varName": "--cds-tag-color-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cyan.sm",
+      "axisValues": {
+        "type": "cyan",
+        "size": "sm"
+      },
+      "token": "tag-color-cyan",
+      "varName": "--cds-tag-color-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cyan.md",
+      "axisValues": {
+        "type": "cyan",
+        "size": "md"
+      },
+      "token": "tag-color-cyan",
+      "varName": "--cds-tag-color-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cyan.lg",
+      "axisValues": {
+        "type": "cyan",
+        "size": "lg"
+      },
+      "token": "tag-color-cyan",
+      "varName": "--cds-tag-color-cyan",
+      "anchor": {
+        "selector": ".cds--tag--cyan"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "teal.unset",
+      "axisValues": {
+        "type": "teal",
+        "size": "unset"
+      },
+      "token": "tag-color-teal",
+      "varName": "--cds-tag-color-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "teal.sm",
+      "axisValues": {
+        "type": "teal",
+        "size": "sm"
+      },
+      "token": "tag-color-teal",
+      "varName": "--cds-tag-color-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "teal.md",
+      "axisValues": {
+        "type": "teal",
+        "size": "md"
+      },
+      "token": "tag-color-teal",
+      "varName": "--cds-tag-color-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "teal.lg",
+      "axisValues": {
+        "type": "teal",
+        "size": "lg"
+      },
+      "token": "tag-color-teal",
+      "varName": "--cds-tag-color-teal",
+      "anchor": {
+        "selector": ".cds--tag--teal"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.unset",
+      "axisValues": {
+        "type": "green",
+        "size": "unset"
+      },
+      "token": "tag-color-green",
+      "varName": "--cds-tag-color-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.sm",
+      "axisValues": {
+        "type": "green",
+        "size": "sm"
+      },
+      "token": "tag-color-green",
+      "varName": "--cds-tag-color-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.md",
+      "axisValues": {
+        "type": "green",
+        "size": "md"
+      },
+      "token": "tag-color-green",
+      "varName": "--cds-tag-color-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "green.lg",
+      "axisValues": {
+        "type": "green",
+        "size": "lg"
+      },
+      "token": "tag-color-green",
+      "varName": "--cds-tag-color-green",
+      "anchor": {
+        "selector": ".cds--tag--green"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "gray.unset",
+      "axisValues": {
+        "type": "gray",
+        "size": "unset"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "gray.sm",
+      "axisValues": {
+        "type": "gray",
+        "size": "sm"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "gray.md",
+      "axisValues": {
+        "type": "gray",
+        "size": "md"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "gray.lg",
+      "axisValues": {
+        "type": "gray",
+        "size": "lg"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cool-gray.unset",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "unset"
+      },
+      "token": "tag-color-cool-gray",
+      "varName": "--cds-tag-color-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cool-gray.sm",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "sm"
+      },
+      "token": "tag-color-cool-gray",
+      "varName": "--cds-tag-color-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cool-gray.md",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "md"
+      },
+      "token": "tag-color-cool-gray",
+      "varName": "--cds-tag-color-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "cool-gray.lg",
+      "axisValues": {
+        "type": "cool-gray",
+        "size": "lg"
+      },
+      "token": "tag-color-cool-gray",
+      "varName": "--cds-tag-color-cool-gray",
+      "anchor": {
+        "selector": ".cds--tag--cool-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warm-gray.unset",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "unset"
+      },
+      "token": "tag-color-warm-gray",
+      "varName": "--cds-tag-color-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warm-gray.sm",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "sm"
+      },
+      "token": "tag-color-warm-gray",
+      "varName": "--cds-tag-color-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warm-gray.md",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "md"
+      },
+      "token": "tag-color-warm-gray",
+      "varName": "--cds-tag-color-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warm-gray.lg",
+      "axisValues": {
+        "type": "warm-gray",
+        "size": "lg"
+      },
+      "token": "tag-color-warm-gray",
+      "varName": "--cds-tag-color-warm-gray",
+      "anchor": {
+        "selector": ".cds--tag--warm-gray"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "high-contrast.unset",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "unset"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "high-contrast.sm",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "sm"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "high-contrast.md",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "md"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "high-contrast.lg",
+      "axisValues": {
+        "type": "high-contrast",
+        "size": "lg"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outline.unset",
+      "axisValues": {
+        "type": "outline",
+        "size": "unset"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outline.sm",
+      "axisValues": {
+        "type": "outline",
+        "size": "sm"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outline.md",
+      "axisValues": {
+        "type": "outline",
+        "size": "md"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outline.lg",
+      "axisValues": {
+        "type": "outline",
+        "size": "lg"
+      },
+      "token": "tag-color-gray",
+      "varName": "--cds-tag-color-gray",
+      "anchor": {
+        "selector": ".cds--tag"
+      }
+    }
+  ],
+  "skips": [
+    "root.min-block-size: no var candidate verified against the computed value in any combo"
+  ]
+}

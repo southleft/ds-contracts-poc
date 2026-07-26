@@ -1,0 +1,214 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tag",
+  "anchors": [
+    {
+      "leaf": "imported.tag.root.background-color.blue",
+      "token": "tag-background-blue",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-blue",
+      "selector": ".cds--tag--blue"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.cool-gray",
+      "token": "tag-background-cool-gray",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-cool-gray",
+      "selector": ".cds--tag--cool-gray"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.cyan",
+      "token": "tag-background-cyan",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-cyan",
+      "selector": ".cds--tag--cyan"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.gray",
+      "token": "tag-background-gray",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-gray",
+      "selector": ".cds--tag"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.green",
+      "token": "tag-background-green",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-green",
+      "selector": ".cds--tag--green"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.high-contrast",
+      "token": "background-inverse",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-background-inverse",
+      "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.magenta",
+      "token": "tag-background-magenta",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-magenta",
+      "selector": ".cds--tag--magenta"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.outline",
+      "token": "background",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-background",
+      "selector": ".cds--tag--outline:not(.cds--tag--operational):not(span):not([disabled])"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.purple",
+      "token": "tag-background-purple",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-purple",
+      "selector": ".cds--tag--purple"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.red",
+      "token": "tag-background-red",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-red",
+      "selector": ".cds--tag--red"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.teal",
+      "token": "tag-background-teal",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-teal",
+      "selector": ".cds--tag--teal"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.unset",
+      "token": "tag-background-gray",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-gray",
+      "selector": ".cds--tag"
+    },
+    {
+      "leaf": "imported.tag.root.background-color.warm-gray",
+      "token": "tag-background-warm-gray",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--cds-tag-background-warm-gray",
+      "selector": ".cds--tag--warm-gray"
+    },
+    {
+      "leaf": "imported.tag.root.color.blue",
+      "token": "tag-color-blue",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-blue",
+      "selector": ".cds--tag--blue"
+    },
+    {
+      "leaf": "imported.tag.root.color.cool-gray",
+      "token": "tag-color-cool-gray",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-cool-gray",
+      "selector": ".cds--tag--cool-gray"
+    },
+    {
+      "leaf": "imported.tag.root.color.cyan",
+      "token": "tag-color-cyan",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-cyan",
+      "selector": ".cds--tag--cyan"
+    },
+    {
+      "leaf": "imported.tag.root.color.gray",
+      "token": "tag-color-gray",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-gray",
+      "selector": ".cds--tag"
+    },
+    {
+      "leaf": "imported.tag.root.color.green",
+      "token": "tag-color-green",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-green",
+      "selector": ".cds--tag--green"
+    },
+    {
+      "leaf": "imported.tag.root.color.high-contrast",
+      "token": "text-inverse",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-text-inverse",
+      "selector": ".cds--tag--high-contrast:not(.cds--tag--operational)"
+    },
+    {
+      "leaf": "imported.tag.root.color.magenta",
+      "token": "tag-color-magenta",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-magenta",
+      "selector": ".cds--tag--magenta"
+    },
+    {
+      "leaf": "imported.tag.root.color.outline",
+      "token": "tag-color-gray",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-gray",
+      "selector": ".cds--tag"
+    },
+    {
+      "leaf": "imported.tag.root.color.purple",
+      "token": "tag-color-purple",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-purple",
+      "selector": ".cds--tag--purple"
+    },
+    {
+      "leaf": "imported.tag.root.color.red",
+      "token": "tag-color-red",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-red",
+      "selector": ".cds--tag--red"
+    },
+    {
+      "leaf": "imported.tag.root.color.teal",
+      "token": "tag-color-teal",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-teal",
+      "selector": ".cds--tag--teal"
+    },
+    {
+      "leaf": "imported.tag.root.color.unset",
+      "token": "tag-color-gray",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-gray",
+      "selector": ".cds--tag"
+    },
+    {
+      "leaf": "imported.tag.root.color.warm-gray",
+      "token": "tag-color-warm-gray",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-tag-color-warm-gray",
+      "selector": ".cds--tag--warm-gray"
+    }
+  ]
+}

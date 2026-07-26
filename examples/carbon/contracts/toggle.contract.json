@@ -1,0 +1,279 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.toggle",
+  "name": "Toggle",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). `toggled` is a VARIANT AXIS, never a stateProp (it is outside the closed contract state vocabulary). `size` is PINNED to md in fixedProps — a Size×Toggled knob offset is a two-axis product the decor grammar cannot spell (named in examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "toggled",
+      "type": {
+        "enum": [
+          "untoggled",
+          "toggled"
+        ]
+      },
+      "default": "untoggled",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Toggled",
+          "values": {
+            "untoggled": "Untoggled",
+            "toggled": "Toggled"
+          }
+        },
+        "code": {
+          "prop": "toggled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "user-select": "none"
+      },
+      "parts": {
+        "part-0": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap",
+            "user-select": "none"
+          },
+          "tokens": {
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-width": "{imported.shared.size-0}",
+            "height": "{imported.toggle.part-0.height}",
+            "left": "{imported.shared.size-16}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}",
+            "right": "{imported.toggle.part-0.right}",
+            "width": "{imported.toggle.part-0.width}"
+          },
+          "states": {
+            "disabled": {
+              "background-color": "{imported.toggle.part-0.background-color-state-disabled}",
+              "color": "{imported.shared.color-1010104d}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "toggled",
+              "map": {
+                "toggled": {
+                  "bottom": "{imported.toggle.part-0.bottom.toggled}",
+                  "top": "{imported.toggle.part-0.top.toggled}"
+                },
+                "untoggled": {
+                  "bottom": "{imported.toggle.part-0.bottom.untoggled}",
+                  "top": "{imported.toggle.part-0.top.untoggled}"
+                }
+              }
+            }
+          ]
+        },
+        "part-1": {
+          "element": "label",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "inline",
+            "cursor": "default",
+            "user-select": "none"
+          },
+          "parts": {
+            "label": {
+              "text": "Toggle",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "default",
+                "user-select": "none"
+              },
+              "tokens": {
+                "color": "{imported.toggle.label.color}",
+                "font-size": "{imported.shared.size-12}",
+                "font-weight": "{imported.toggle.label.font-weight}",
+                "letter-spacing": "{imported.toggle.label.letter-spacing}",
+                "line-height": "{imported.shared.size-16}",
+                "margin-bottom": "{imported.shared.size-16}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.toggle.label.row-rule-color}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-16161640}"
+                }
+              }
+            },
+            "part-1-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "parts": {
+                "part-1-1-0": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "transition-duration": "0.07s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.2, 0, 1, 0.9)",
+                    "user-select": "none"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-12}",
+                    "border-bottom-right-radius": "{imported.shared.size-12}",
+                    "border-top-left-radius": "{imported.shared.size-12}",
+                    "border-top-right-radius": "{imported.shared.size-12}",
+                    "bottom": "{imported.shared.size-0}",
+                    "height": "{imported.shared.size-24}",
+                    "left": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.toggle.part-1-1-0.width}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "background-color": "{imported.toggle.part-1-1-0.background-color-state-disabled}"
+                    }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "toggled",
+                      "map": {
+                        "toggled": {
+                          "background-color": "{imported.toggle.part-1-1-0.background-color.toggled}"
+                        },
+                        "untoggled": {
+                          "background-color": "{imported.toggle.part-1-1-0.background-color.untoggled}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-2": {
+                  "text": "Off",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "user-select": "none"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "font-size": "{imported.toggle.label-2.font-size}",
+                    "font-weight": "{imported.toggle.label-2.font-weight}",
+                    "letter-spacing": "{imported.toggle.label-2.letter-spacing}",
+                    "line-height": "{imported.toggle.label-2.line-height}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.shared.color-16161640}"
+                    }
+                  }
+                }
+              },
+              "declared": {
+                "cursor": "pointer",
+                "user-select": "none"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "column-gap": "{imported.toggle.part-1-1.column-gap}",
+                "grid-template-rows": "{imported.shared.size-24}",
+                "height": "{imported.shared.size-24}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "toggled",
+                  "map": {
+                    "toggled": {
+                      "width": "{imported.toggle.part-1-1.width.toggled}"
+                    },
+                    "untoggled": {
+                      "width": "{imported.toggle.part-1-1.width.untoggled}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "tokens": {
+        "height": "{imported.toggle.root.height}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "toggled",
+          "map": {
+            "toggled": {
+              "width": "{imported.toggle.root.width.toggled}"
+            },
+            "untoggled": {
+              "width": "{imported.toggle.root.width.untoggled}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Toggle"
+    }
+  },
+  "figmaStatePreviews": true
+}

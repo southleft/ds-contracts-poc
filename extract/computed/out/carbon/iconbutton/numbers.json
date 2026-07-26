@@ -1,0 +1,340 @@
+{
+  "component": "IconButton",
+  "browser": "149.0.7827.55",
+  "captures": 160,
+  "combos": 40,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 502,
+  "elementsPerCapture": 8,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 7,
+    "part-0": 4,
+    "part-0-0": 49,
+    "icon": 28,
+    "part-0-0-0-0": 24,
+    "part-1": 11,
+    "label": 35,
+    "part-1-1": 11
+  },
+  "folds": {
+    "count": 32,
+    "receipts": [
+      {
+        "part": "part-0-0",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 372,
+    "mintedLeavesFolded": 273
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 273,
+    "baseBindings": 73,
+    "stateBindings": 44,
+    "byShape": {
+      "uniform": 61,
+      "perAxis": 56,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 14,
+    "state": 15
+  },
+  "codeOnly": {
+    "base": 8,
+    "state": 0,
+    "overflowBindings": 44
+  },
+  "pseudoElementFindings": 240,
+  "anatomyPromotion": {
+    "partsCarried": 6,
+    "svgAssets": 1,
+    "refusals": 1
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 640000,
+    "cellsMatched": 639880,
+    "pct": 99.98125,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        60
+      ],
+      [
+        "width",
+        60
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 160,
+    "exact": {
+      "mean": 0.1390136718750001,
+      "max": 0.2630208333333333,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 0.08741861979166655,
+      "max": 0.13020833333333334,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "tertiary.xs.enabled__hover",
+        "pctExact": 0.24479166666666666,
+        "pctAA": 0.13020833333333334
+      },
+      {
+        "key": "tertiary.unset.enabled__hover",
+        "pctExact": 0.2630208333333333,
+        "pctAA": 0.12239583333333333
+      },
+      {
+        "key": "tertiary.sm.enabled__hover",
+        "pctExact": 0.2630208333333333,
+        "pctAA": 0.12239583333333333
+      },
+      {
+        "key": "tertiary.lg.enabled__hover",
+        "pctExact": 0.2630208333333333,
+        "pctAA": 0.12239583333333333
+      },
+      {
+        "key": "tertiary.md.enabled__hover",
+        "pctExact": 0.25,
+        "pctAA": 0.12239583333333333
+      },
+      {
+        "key": "tertiary.xs.enabled__active",
+        "pctExact": 0.2265625,
+        "pctAA": 0.11979166666666667
+      },
+      {
+        "key": "primary.xs.enabled__hover",
+        "pctExact": 0.24479166666666666,
+        "pctAA": 0.1171875
+      },
+      {
+        "key": "secondary.xs.enabled__hover",
+        "pctExact": 0.24479166666666666,
+        "pctAA": 0.1171875
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 91.8103448275862,
+    "rowsFullyEqual": 0,
+    "rows": 160,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 160
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 40
+}

@@ -522,7 +522,17 @@ function renderKidList(list) {
 function renderKids(s) {
   if (s.childrenSpec) return renderKidList(s.childrenSpec);
   if (s.childWrap) { const W = COMPONENTS[s.childWrap]; return <W>{s.text}</W>; }
-  return s.text;
+  // CARBON ROUND: sampleText "" means the component takes NO sample text, and
+  // React does not treat that the same as an empty string — '' is a REAL child.
+  // Carbon's Checkbox forwards its rest props (children included) straight onto
+  // an <input>, and React refuses children on a void element: the whole tree
+  // threw and the harness page rendered NOTHING (waitForSelector timeout, no
+  // mention of children anywhere). Six libraries tolerated the empty child by
+  // accident; one library that forwards children to a void element cannot.
+  // Byte-identity for the tolerant libraries is PROVEN, not assumed — see
+  // examples/carbon/PROVENANCE.md (tailwind ToggleSwitch + mui Switch
+  // re-captured under this change: captured-truth.json byte-identical).
+  return s.text === '' ? undefined : s.text;
 }
 
 function App() {
@@ -1021,7 +1031,10 @@ function renderKidList(list) {
 function renderKids() {
   if (CHILDREN_SPEC) return renderKidList(CHILDREN_SPEC);
   if (CHILD_WRAP) { const W = COMPONENTS[CHILD_WRAP]; return <W>{TEXT}</W>; }
-  return TEXT;
+  // CARBON ROUND: "" = no children, not an empty-string child (see the census
+  // page's renderKids above — Carbon's Checkbox forwards children onto a void
+  // <input> and React throws). Kept in lockstep with the census page.
+  return TEXT === '' ? undefined : TEXT;
 }
 const stageStyle = ${stageJs};
 let specIdx = null;

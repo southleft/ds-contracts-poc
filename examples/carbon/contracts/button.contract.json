@@ -1,0 +1,345 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.button",
+  "name": "Button",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). ButtonKinds/ButtonSizes read from the library source (lib/components/Button/Button.js). `size` is DEFAULTLESS in Carbon (the destructure has no fallback) — the capture prepends the __unset pseudo-value. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "kind",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "tertiary",
+          "ghost",
+          "danger",
+          "danger--primary",
+          "danger--ghost",
+          "danger--tertiary"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Kind",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "tertiary": "Tertiary",
+            "ghost": "Ghost",
+            "danger": "Danger",
+            "danger--primary": "Danger Primary",
+            "danger--ghost": "Danger Ghost",
+            "danger--tertiary": "Danger Tertiary"
+          }
+        },
+        "code": {
+          "prop": "kind"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl",
+            "2xl": "2XL"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Button",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "active",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "justify": "space-between"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "cursor": "pointer",
+        "position": "relative",
+        "text-align": "start",
+        "transition-delay": "0s, 0s, 0s, 0s",
+        "transition-duration": "0.07s, 0.07s, 0.07s, 0.07s",
+        "transition-property": "background, box-shadow, border-color, outline",
+        "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "flex-shrink": "{imported.button.root.flex-shrink}",
+        "font-size": "{imported.button.root.font-size}",
+        "font-weight": "{imported.button.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.button.root.letter-spacing}",
+        "line-height": "{imported.button.root.line-height}",
+        "max-width": "{imported.button.root.max-width}",
+        "min-height": "{imported.button.root.min-height.unset}",
+        "padding-bottom": "{imported.button.root.padding-bottom.unset}",
+        "padding-left": "{imported.button.root.padding-left}",
+        "padding-top": "{imported.button.root.padding-top.unset}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.button.root.background-color-state-active.{kind}}",
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-active.{kind}}",
+          "border-left-color": "{imported.button.root.border-left-color-state-active.{kind}}",
+          "border-right-color": "{imported.button.root.border-right-color-state-active.{kind}}",
+          "border-top-color": "{imported.button.root.border-top-color-state-active.{kind}}",
+          "box-shadow": "{imported.button.root.box-shadow-state-active.{kind}}",
+          "color": "{imported.button.root.color-state-active.{kind}}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-active.{kind}}"
+        },
+        "disabled": {
+          "background-color": "{imported.button.root.background-color-state-disabled.{kind}}",
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-disabled.{kind}}",
+          "border-left-color": "{imported.button.root.border-left-color-state-disabled.{kind}}",
+          "border-right-color": "{imported.button.root.border-right-color-state-disabled.{kind}}",
+          "border-top-color": "{imported.button.root.border-top-color-state-disabled.{kind}}",
+          "color": "{imported.button.root.color-state-disabled.{kind}}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-disabled.{kind}}"
+        },
+        "focus-visible": {
+          "background-color": "{imported.button.root.background-color-state-focus-visible.{kind}}",
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-focus-visible.{kind}}",
+          "border-left-color": "{imported.button.root.border-left-color-state-focus-visible.{kind}}",
+          "border-right-color": "{imported.button.root.border-right-color-state-focus-visible.{kind}}",
+          "border-top-color": "{imported.button.root.border-top-color-state-focus-visible.{kind}}",
+          "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{kind}}",
+          "color": "{imported.button.root.color-state-focus-visible.{kind}}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-focus-visible.{kind}}"
+        },
+        "hover": {
+          "background-color": "{imported.button.root.background-color-state-hover.{kind}}",
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-hover.{kind}}",
+          "border-left-color": "{imported.button.root.border-left-color-state-hover.{kind}}",
+          "border-right-color": "{imported.button.root.border-right-color-state-hover.{kind}}",
+          "border-top-color": "{imported.button.root.border-top-color-state-hover.{kind}}",
+          "color": "{imported.button.root.color-state-hover.{kind}}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-hover.{kind}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "kind",
+          "map": {
+            "danger": {
+              "background-color": "{imported.button.root.background-color.danger}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.danger}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.danger}",
+              "border-left-color": "{imported.button.root.border-left-color.danger}",
+              "border-left-width": "{imported.button.root.border-left-width.danger}",
+              "border-right-color": "{imported.button.root.border-right-color.danger}",
+              "border-right-width": "{imported.button.root.border-right-width.danger}",
+              "border-top-color": "{imported.button.root.border-top-color.danger}",
+              "border-top-width": "{imported.button.root.border-top-width.danger}",
+              "color": "{imported.button.root.color.danger}",
+              "padding-right": "{imported.button.root.padding-right.danger}",
+              "row-rule-color": "{imported.button.root.row-rule-color.danger}"
+            },
+            "danger--ghost": {
+              "background-color": "{imported.button.root.background-color.danger--ghost}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.danger--ghost}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.danger--ghost}",
+              "border-left-color": "{imported.button.root.border-left-color.danger--ghost}",
+              "border-left-width": "{imported.button.root.border-left-width.danger--ghost}",
+              "border-right-color": "{imported.button.root.border-right-color.danger--ghost}",
+              "border-right-width": "{imported.button.root.border-right-width.danger--ghost}",
+              "border-top-color": "{imported.button.root.border-top-color.danger--ghost}",
+              "border-top-width": "{imported.button.root.border-top-width.danger--ghost}",
+              "color": "{imported.button.root.color.danger--ghost}",
+              "padding-right": "{imported.button.root.padding-right.danger--ghost}",
+              "row-rule-color": "{imported.button.root.row-rule-color.danger--ghost}"
+            },
+            "danger--primary": {
+              "background-color": "{imported.button.root.background-color.danger--primary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.danger--primary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.danger--primary}",
+              "border-left-color": "{imported.button.root.border-left-color.danger--primary}",
+              "border-left-width": "{imported.button.root.border-left-width.danger--primary}",
+              "border-right-color": "{imported.button.root.border-right-color.danger--primary}",
+              "border-right-width": "{imported.button.root.border-right-width.danger--primary}",
+              "border-top-color": "{imported.button.root.border-top-color.danger--primary}",
+              "border-top-width": "{imported.button.root.border-top-width.danger--primary}",
+              "color": "{imported.button.root.color.danger--primary}",
+              "padding-right": "{imported.button.root.padding-right.danger--primary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.danger--primary}"
+            },
+            "danger--tertiary": {
+              "background-color": "{imported.button.root.background-color.danger--tertiary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.danger--tertiary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.danger--tertiary}",
+              "border-left-color": "{imported.button.root.border-left-color.danger--tertiary}",
+              "border-left-width": "{imported.button.root.border-left-width.danger--tertiary}",
+              "border-right-color": "{imported.button.root.border-right-color.danger--tertiary}",
+              "border-right-width": "{imported.button.root.border-right-width.danger--tertiary}",
+              "border-top-color": "{imported.button.root.border-top-color.danger--tertiary}",
+              "border-top-width": "{imported.button.root.border-top-width.danger--tertiary}",
+              "color": "{imported.button.root.color.danger--tertiary}",
+              "padding-right": "{imported.button.root.padding-right.danger--tertiary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.danger--tertiary}"
+            },
+            "ghost": {
+              "background-color": "{imported.button.root.background-color.ghost}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.ghost}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.ghost}",
+              "border-left-color": "{imported.button.root.border-left-color.ghost}",
+              "border-left-width": "{imported.button.root.border-left-width.ghost}",
+              "border-right-color": "{imported.button.root.border-right-color.ghost}",
+              "border-right-width": "{imported.button.root.border-right-width.ghost}",
+              "border-top-color": "{imported.button.root.border-top-color.ghost}",
+              "border-top-width": "{imported.button.root.border-top-width.ghost}",
+              "color": "{imported.button.root.color.ghost}",
+              "padding-right": "{imported.button.root.padding-right.ghost}",
+              "row-rule-color": "{imported.button.root.row-rule-color.ghost}"
+            },
+            "primary": {
+              "background-color": "{imported.button.root.background-color.primary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.primary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.primary}",
+              "border-left-color": "{imported.button.root.border-left-color.primary}",
+              "border-left-width": "{imported.button.root.border-left-width.primary}",
+              "border-right-color": "{imported.button.root.border-right-color.primary}",
+              "border-right-width": "{imported.button.root.border-right-width.primary}",
+              "border-top-color": "{imported.button.root.border-top-color.primary}",
+              "border-top-width": "{imported.button.root.border-top-width.primary}",
+              "color": "{imported.button.root.color.primary}",
+              "padding-right": "{imported.button.root.padding-right.primary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.primary}"
+            },
+            "secondary": {
+              "background-color": "{imported.button.root.background-color.secondary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.secondary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.secondary}",
+              "border-left-color": "{imported.button.root.border-left-color.secondary}",
+              "border-left-width": "{imported.button.root.border-left-width.secondary}",
+              "border-right-color": "{imported.button.root.border-right-color.secondary}",
+              "border-right-width": "{imported.button.root.border-right-width.secondary}",
+              "border-top-color": "{imported.button.root.border-top-color.secondary}",
+              "border-top-width": "{imported.button.root.border-top-width.secondary}",
+              "color": "{imported.button.root.color.secondary}",
+              "padding-right": "{imported.button.root.padding-right.secondary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+            },
+            "tertiary": {
+              "background-color": "{imported.button.root.background-color.tertiary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.tertiary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.tertiary}",
+              "border-left-color": "{imported.button.root.border-left-color.tertiary}",
+              "border-left-width": "{imported.button.root.border-left-width.tertiary}",
+              "border-right-color": "{imported.button.root.border-right-color.tertiary}",
+              "border-right-width": "{imported.button.root.border-right-width.tertiary}",
+              "border-top-color": "{imported.button.root.border-top-color.tertiary}",
+              "border-top-width": "{imported.button.root.border-top-width.tertiary}",
+              "color": "{imported.button.root.color.tertiary}",
+              "padding-right": "{imported.button.root.padding-right.tertiary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.tertiary}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "2xl": {
+              "min-height": "{imported.button.root.min-height.2xl}",
+              "padding-bottom": "{imported.button.root.padding-bottom.2xl}",
+              "padding-top": "{imported.button.root.padding-top.2xl}"
+            },
+            "lg": {
+              "min-height": "{imported.button.root.min-height.lg}",
+              "padding-bottom": "{imported.button.root.padding-bottom.lg}",
+              "padding-top": "{imported.button.root.padding-top.lg}"
+            },
+            "md": {
+              "min-height": "{imported.button.root.min-height.md}",
+              "padding-bottom": "{imported.button.root.padding-bottom.md}",
+              "padding-top": "{imported.button.root.padding-top.md}"
+            },
+            "sm": {
+              "min-height": "{imported.button.root.min-height.sm}",
+              "padding-bottom": "{imported.button.root.padding-bottom.sm}",
+              "padding-top": "{imported.button.root.padding-top.sm}"
+            },
+            "xl": {
+              "min-height": "{imported.button.root.min-height.xl}",
+              "padding-bottom": "{imported.button.root.padding-bottom.xl}",
+              "padding-top": "{imported.button.root.padding-top.xl}"
+            },
+            "xs": {
+              "min-height": "{imported.button.root.min-height.xs}",
+              "padding-bottom": "{imported.button.root.padding-bottom.xs}",
+              "padding-top": "{imported.button.root.padding-top.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Button"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -54,6 +54,7 @@ const LIBRARIES: Array<{ name: string; config: string; out: string }> = [
   { name: 'mui', config: 'extract/computed/configs/mui.json', out: 'extract/computed/out/mui' },
   { name: 'astryx', config: 'extract/computed/configs/astryx.json', out: 'extract/computed/out/astryx' },
   { name: 'tailwind', config: 'extract/computed/configs/tailwind.json', out: 'extract/computed/out/tailwind' },
+  { name: 'carbon', config: 'extract/computed/configs/carbon.json', out: 'extract/computed/out/carbon' },
 ];
 
 interface BaselineRow {
@@ -65,6 +66,14 @@ interface BaselineRow {
   unresolvedTokenRefs: number;
   /** the committed harness scorecard's number — context, never the pin. */
   committedPctEqual: number;
+  /** CARBON ROUND: per-row tolerance override, in percentage points. Present
+   *  ONLY where the offline instrument is measurably not reproducible to the
+   *  global 0.001 on that row, and the `gapCause` must say why and quote the
+   *  measured spread. This is a widened pin, never a disabled one — the value
+   *  is sized to the measured noise, and every engine-change-sized move this
+   *  baseline has ever recorded (+1.042, +2.459, +20.155, -3.296) is an order
+   *  of magnitude above it, so a real regression still fails. */
+  tolerance?: number;
   /** why the two differ, by name. Three forms, all deliberate:
    *   · ''                — they agree, and there is nothing to explain.
    *   · '<CAUSE> …'       — they differ; this names why.
@@ -127,11 +136,18 @@ for (const lib of LIBRARIES) {
       unresolvedTokenRefs: rg.scorecard.unresolvedTokenRefs?.count ?? 0,
       committedPctEqual: sc.computed.pctEqual,
       gapCause: p?.gapCause ?? '',
+      ...(p?.tolerance !== undefined ? { tolerance: p.tolerance } : {}),
     };
     rows.push(row);
     if (WRITE || !p) continue;
-    if (Math.abs(row.rerunPctEqual - p.rerunPctEqual) > TOLERANCE) {
-      failures.push(`${key}: offline pctEqual ${p.rerunPctEqual.toFixed(3)} → ${row.rerunPctEqual.toFixed(3)} (tolerance ${TOLERANCE})`);
+    // A row may widen its OWN tolerance (BaselineRow.tolerance) when the
+    // offline instrument is measurably not reproducible on it; the widening is
+    // carried in the committed baseline next to the reason, never passed on the
+    // command line, so it cannot be applied silently to a row that never asked
+    // for it.
+    const rowTol = p.tolerance ?? TOLERANCE;
+    if (Math.abs(row.rerunPctEqual - p.rerunPctEqual) > rowTol) {
+      failures.push(`${key}: offline pctEqual ${p.rerunPctEqual.toFixed(3)} → ${row.rerunPctEqual.toFixed(3)} (tolerance ${rowTol}${p.tolerance !== undefined ? ' — this row\'s OWN widened tolerance' : ''})`);
     }
     if (row.cellsCompared !== p.cellsCompared) {
       failures.push(`${key}: cellsCompared ${p.cellsCompared} → ${row.cellsCompared} — the compared VOCABULARY moved; a percentage cannot absorb this`);
@@ -174,7 +190,7 @@ for (const r of rows) {
       : 'EXACT'
     : `gap ${(r.rerunPctEqual - r.committedPctEqual).toFixed(3)} — ${r.gapCause || 'UNNAMED (name it in the baseline)'}`;
   console.log(
-    `  ${(r.library + '/' + r.component).padEnd(24)} offline ${r.rerunPctEqual.toFixed(3).padStart(7)}%  committed ${r.committedPctEqual.toFixed(3).padStart(7)}%  ${note}${r.unresolvedTokenRefs ? `  [${r.unresolvedTokenRefs} unresolved refs]` : ''}`,
+    `  ${(r.library + '/' + r.component).padEnd(24)} offline ${r.rerunPctEqual.toFixed(3).padStart(7)}%  committed ${r.committedPctEqual.toFixed(3).padStart(7)}%  ${note}${r.tolerance !== undefined ? `  [tolerance ±${r.tolerance}]` : ''}${r.unresolvedTokenRefs ? `  [${r.unresolvedTokenRefs} unresolved refs]` : ''}`,
   );
 }
 

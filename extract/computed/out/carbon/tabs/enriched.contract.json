@@ -1,0 +1,542 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.tabs",
+  "name": "Tabs",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). childrenSpec is 2-deep (Tabs > TabList > Tab×3 + TabPanels > TabPanel). NAMED DEFERRAL: Carbon spells the line/contained distinction as a BOOLEAN `contained` on TabList (a CHILD), not as a `type` enum on Tabs — the recon predicted an enum and the library does not have one. Root axes: none; `contained` is pinned false (the line tabs) in the childrenSpec. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "part-0": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "none",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer",
+            "position": "relative",
+            "text-align": "start"
+          },
+          "icon": {
+            "asset": "tabs-part-0",
+            "size": 16
+          },
+          "tokens": {
+            "background-color": "{imported.tabs.part-0.background-color}",
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-width": "{imported.shared.size-0}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000}",
+            "flex-shrink": "{imported.shared.num-0}",
+            "font-size": "{imported.shared.size-14}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-40}",
+            "z-index": "{imported.shared.num-1}"
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "part-1-0": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "appearance": "none",
+                "border-bottom-style": "solid",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "cursor": "pointer",
+                "outline-style": "solid",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "relative",
+                "text-align": "start",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap",
+                "transition-duration": "0.07s",
+                "transition-property": "color",
+                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+              },
+              "parts": {
+                "part-1-0-0": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex"
+                  },
+                  "parts": {
+                    "label": {
+                      "text": "Overview",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "cursor": "pointer",
+                        "text-rendering": "auto",
+                        "text-wrap-mode": "nowrap"
+                      },
+                      "layout": {
+                        "grow": true
+                      },
+                      "tokens": {
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.shared.num-600}",
+                        "letter-spacing": "{imported.shared.size-0-16}",
+                        "line-height": "{imported.shared.size-18-0001}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "text-rendering": "auto",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-neg-1}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-600}",
+                    "height": "{imported.shared.size-18}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-1}",
+                    "width": "{imported.tabs.part-1-0-0.width}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-00000000}",
+                "border-bottom-color": "{imported.tabs.part-1-0.border-bottom-color}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.tabs.part-1-0.color}",
+                "flex-grow": "{imported.shared.num-1}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-600}",
+                "height": "{imported.shared.size-40}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "outline-color": "{imported.shared.color-00000000}",
+                "outline-offset": "{imported.shared.size-neg-2}",
+                "outline-width": "{imported.shared.size-2}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-16}",
+                "padding-right": "{imported.shared.size-16}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.tabs.part-1-0.row-rule-color}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.part-1-0.width}"
+              }
+            },
+            "part-1-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-wrap-mode": "nowrap"
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-1}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "margin-bottom": "{imported.shared.size-neg-1}",
+                "margin-left": "{imported.shared.size-neg-1}",
+                "margin-right": "{imported.shared.size-neg-1}",
+                "margin-top": "{imported.shared.size-neg-1}",
+                "width": "{imported.shared.size-3}"
+              }
+            },
+            "part-1-2": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "appearance": "none",
+                "border-bottom-style": "solid",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "cursor": "pointer",
+                "outline-style": "solid",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "relative",
+                "text-align": "start",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap",
+                "transition-delay": "0s, 0s",
+                "transition-duration": "0.07s, 0.07s",
+                "transition-property": "border, outline",
+                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+              },
+              "parts": {
+                "part-1-2-0": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex"
+                  },
+                  "parts": {
+                    "label-2": {
+                      "text": "Activity",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "cursor": "pointer",
+                        "text-rendering": "auto",
+                        "text-wrap-mode": "nowrap"
+                      },
+                      "layout": {
+                        "grow": true
+                      },
+                      "tokens": {
+                        "color": "{imported.shared.color-525252}",
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.tabs.label-2.font-weight}",
+                        "letter-spacing": "{imported.shared.size-0-16}",
+                        "line-height": "{imported.shared.size-18-0001}",
+                        "row-rule-color": "{imported.shared.color-525252}"
+                      },
+                      "states": {
+                        "active": {
+                          "color": "{imported.shared.color-161616}"
+                        },
+                        "hover": {
+                          "color": "{imported.shared.color-161616}"
+                        }
+                      }
+                    }
+                  },
+                  "declared": {
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "text-rendering": "auto",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-neg-1}",
+                    "color": "{imported.shared.color-525252}",
+                    "font-size": "{imported.shared.size-14}",
+                    "height": "{imported.shared.size-18}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-525252}",
+                    "top": "{imported.shared.size-1}",
+                    "width": "{imported.tabs.part-1-2-0.width}"
+                  },
+                  "states": {
+                    "active": {
+                      "color": "{imported.shared.color-161616}"
+                    },
+                    "hover": {
+                      "color": "{imported.shared.color-161616}"
+                    }
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-00000000}",
+                "border-bottom-color": "{imported.tabs.part-1-2.border-bottom-color}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-525252}",
+                "flex-grow": "{imported.shared.num-1}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-40}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "outline-color": "{imported.shared.color-00000000}",
+                "outline-offset": "{imported.shared.size-neg-2}",
+                "outline-width": "{imported.shared.size-2}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-16}",
+                "padding-right": "{imported.shared.size-16}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-525252}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.part-1-2.width}"
+              },
+              "states": {
+                "active": {
+                  "color": "{imported.shared.color-161616}"
+                },
+                "hover": {
+                  "color": "{imported.shared.color-161616}"
+                }
+              }
+            },
+            "part-1-3": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-wrap-mode": "nowrap"
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-1}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "margin-bottom": "{imported.shared.size-neg-1}",
+                "margin-left": "{imported.shared.size-neg-1}",
+                "margin-right": "{imported.shared.size-neg-1}",
+                "margin-top": "{imported.shared.size-neg-1}",
+                "width": "{imported.shared.size-3}"
+              }
+            },
+            "part-1-4": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "appearance": "none",
+                "border-bottom-style": "solid",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "cursor": "pointer",
+                "outline-style": "solid",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "relative",
+                "text-align": "start",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap",
+                "transition-delay": "0s, 0s",
+                "transition-duration": "0.07s, 0.07s",
+                "transition-property": "border, outline",
+                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+              },
+              "parts": {
+                "part-1-4-0": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex"
+                  },
+                  "parts": {
+                    "label-3": {
+                      "text": "Settings",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "cursor": "pointer",
+                        "text-rendering": "auto",
+                        "text-wrap-mode": "nowrap"
+                      },
+                      "layout": {
+                        "grow": true
+                      },
+                      "tokens": {
+                        "color": "{imported.shared.color-525252}",
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.tabs.label-3.font-weight}",
+                        "letter-spacing": "{imported.shared.size-0-16}",
+                        "line-height": "{imported.shared.size-18-0001}",
+                        "row-rule-color": "{imported.shared.color-525252}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "text-rendering": "auto",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-neg-1}",
+                    "color": "{imported.shared.color-525252}",
+                    "font-size": "{imported.shared.size-14}",
+                    "height": "{imported.shared.size-18}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-525252}",
+                    "top": "{imported.shared.size-1}",
+                    "width": "{imported.tabs.part-1-4-0.width}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-00000000}",
+                "border-bottom-color": "{imported.tabs.part-1-4.border-bottom-color}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-525252}",
+                "flex-grow": "{imported.shared.num-1}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-40}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "outline-color": "{imported.shared.color-00000000}",
+                "outline-offset": "{imported.shared.size-neg-2}",
+                "outline-width": "{imported.shared.size-2}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-16}",
+                "padding-right": "{imported.shared.size-16}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "row-rule-color": "{imported.shared.color-525252}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.part-1-4.width}"
+              }
+            },
+            "part-1-5": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-wrap-mode": "nowrap"
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-1}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "margin-bottom": "{imported.shared.size-neg-1}",
+                "margin-left": "{imported.shared.size-neg-1}",
+                "margin-right": "{imported.shared.size-neg-1}",
+                "margin-top": "{imported.shared.size-neg-1}",
+                "width": "{imported.shared.size-3}"
+              }
+            }
+          },
+          "declared": {
+            "overflow-x": "auto",
+            "overflow-y": "auto"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.shared.size-40}",
+            "letter-spacing": "{imported.shared.size-0-16}",
+            "line-height": "{imported.shared.size-18-0001}",
+            "width": "{imported.tabs.part-1.width}"
+          }
+        },
+        "part-2": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "none",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer",
+            "position": "relative",
+            "text-align": "start"
+          },
+          "icon": {
+            "asset": "tabs-part-2",
+            "size": 16
+          },
+          "tokens": {
+            "background-color": "{imported.tabs.part-2.background-color}",
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-width": "{imported.shared.size-0}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000}",
+            "flex-shrink": "{imported.shared.num-0}",
+            "font-size": "{imported.shared.size-14}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-40}"
+          }
+        }
+      },
+      "declared": {
+        "overflow-x": "hidden",
+        "overflow-y": "auto",
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "font-size": "{imported.shared.size-14}",
+        "height": "{imported.shared.size-40}",
+        "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-16}",
+        "line-height": "{imported.shared.size-18-0001}",
+        "max-height": "{imported.tabs.root.max-height}",
+        "min-height": "{imported.shared.size-40}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.tabs.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Tabs"
+    }
+  }
+}

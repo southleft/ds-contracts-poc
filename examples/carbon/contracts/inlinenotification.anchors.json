@@ -1,0 +1,118 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "inlinenotification",
+  "anchors": [
+    {
+      "leaf": "imported.inline-notification.icon.fill.error.high",
+      "token": "support-error-inverse",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-error-inverse",
+      "selector": ".cds--inline-notification--error .cds--inline-notification__icon, .cds--inline-notification--error .cds--toast-notification__icon, .cds--inline-notification--error .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.error.low",
+      "token": "support-error",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-error",
+      "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--error .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--error .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--error .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.info-square.high",
+      "token": "support-info-inverse",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-info-inverse",
+      "selector": ".cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--info-square .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.info-square.low",
+      "token": "support-info",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-info",
+      "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.info.high",
+      "token": "support-info-inverse",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-info-inverse",
+      "selector": ".cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--info-square .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.info.low",
+      "token": "support-info",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-info",
+      "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.success.high",
+      "token": "support-success-inverse",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-success-inverse",
+      "selector": ".cds--inline-notification--success .cds--inline-notification__icon, .cds--inline-notification--success .cds--toast-notification__icon, .cds--inline-notification--success .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.success.low",
+      "token": "support-success",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-success",
+      "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--success .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--success .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--success .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.warning-alt.high",
+      "token": "support-warning-inverse",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-warning-inverse",
+      "selector": ".cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.warning-alt.low",
+      "token": "support-warning",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-warning",
+      "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.warning.high",
+      "token": "support-warning-inverse",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-warning-inverse",
+      "selector": ".cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.icon.fill.warning.low",
+      "token": "support-warning",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-support-warning",
+      "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+    },
+    {
+      "leaf": "imported.inline-notification.root.color.high",
+      "token": "text-inverse",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-text-inverse",
+      "selector": ".cds--inline-notification"
+    },
+    {
+      "leaf": "imported.inline-notification.root.color.low",
+      "token": "text-primary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--cds-text-primary",
+      "selector": ".cds--inline-notification--low-contrast"
+    }
+  ]
+}

@@ -1,0 +1,411 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.iconbutton",
+  "name": "IconButton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). IconButtonKinds read from lib/components/IconButton/index.d.ts; size is the ButtonSize subset xs|sm|md|lg and is DEFAULTLESS. The glyph rides the marker grammar ({\"$import\":\"@carbon/icons-react#Add\"}). NAMED: Carbon’s IconButton mounts its <button> INSIDE a tooltip popover container (span.cds--popover-container.cds--icon-tooltip), so the captured ROOT is that container — the canonical rendering, not a wrapper the harness invented. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "kind",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "tertiary",
+          "ghost"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Kind",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "tertiary": "Tertiary",
+            "ghost": "Ghost"
+          }
+        },
+        "code": {
+          "prop": "kind"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [
+    "active",
+    "disabled",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "position": "relative"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "aspect-ratio": "1 / 1"
+          },
+          "parts": {
+            "part-0-0": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "inline-flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "declared": {
+                "aspect-ratio": "1 / 1",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "cursor": "pointer",
+                "position": "relative",
+                "text-align": "start",
+                "transition-delay": "0s, 0s, 0s, 0s",
+                "transition-duration": "0.07s, 0.07s, 0.07s, 0.07s",
+                "transition-property": "background, box-shadow, border-color, outline",
+                "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+              },
+              "icon": {
+                "asset": "icon-button-part-0-0",
+                "size": 16
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed",
+                  "pointer-events": "none"
+                }
+              },
+              "tokens": {
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-width": "{imported.shared.size-1}",
+                "bottom": "{imported.shared.size-0}",
+                "flex-shrink": "{imported.icon-button.part-0-0.flex-shrink}",
+                "font-size": "{imported.icon-button.part-0-0.font-size}",
+                "height": "{imported.icon-button.part-0-0.height.unset}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.icon-button.part-0-0.letter-spacing}",
+                "line-height": "{imported.icon-button.part-0-0.line-height}",
+                "max-width": "{imported.icon-button.part-0-0.max-width}",
+                "min-height": "{imported.icon-button.part-0-0.min-height.unset}",
+                "min-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-0}",
+                "padding-right": "{imported.shared.size-0}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.icon-button.part-0-0.width.unset}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "kind",
+                  "map": {
+                    "ghost": {
+                      "background-color": "{imported.icon-button.part-0-0.background-color.ghost}",
+                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.ghost}",
+                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.ghost}",
+                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.ghost}",
+                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.ghost}",
+                      "color": "{imported.icon-button.part-0-0.color.ghost}",
+                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.ghost}"
+                    },
+                    "primary": {
+                      "background-color": "{imported.icon-button.part-0-0.background-color.primary}",
+                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.primary}",
+                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.primary}",
+                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.primary}",
+                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.primary}",
+                      "color": "{imported.icon-button.part-0-0.color.primary}",
+                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.primary}"
+                    },
+                    "secondary": {
+                      "background-color": "{imported.icon-button.part-0-0.background-color.secondary}",
+                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.secondary}",
+                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.secondary}",
+                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.secondary}",
+                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.secondary}",
+                      "color": "{imported.icon-button.part-0-0.color.secondary}",
+                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.secondary}"
+                    },
+                    "tertiary": {
+                      "background-color": "{imported.icon-button.part-0-0.background-color.tertiary}",
+                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.tertiary}",
+                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.tertiary}",
+                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.tertiary}",
+                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.tertiary}",
+                      "color": "{imported.icon-button.part-0-0.color.tertiary}",
+                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.tertiary}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "lg": {
+                      "height": "{imported.icon-button.part-0-0.height.lg}",
+                      "min-height": "{imported.icon-button.part-0-0.min-height.lg}",
+                      "width": "{imported.icon-button.part-0-0.width.lg}"
+                    },
+                    "md": {
+                      "height": "{imported.icon-button.part-0-0.height.md}",
+                      "min-height": "{imported.icon-button.part-0-0.min-height.md}",
+                      "width": "{imported.icon-button.part-0-0.width.md}"
+                    },
+                    "sm": {
+                      "height": "{imported.icon-button.part-0-0.height.sm}",
+                      "min-height": "{imported.icon-button.part-0-0.min-height.sm}",
+                      "width": "{imported.icon-button.part-0-0.width.sm}"
+                    },
+                    "xs": {
+                      "height": "{imported.icon-button.part-0-0.height.xs}",
+                      "min-height": "{imported.icon-button.part-0-0.min-height.xs}",
+                      "width": "{imported.icon-button.part-0-0.width.xs}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "height": "{imported.icon-button.part-0.height.unset}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "width": "{imported.icon-button.part-0.width.unset}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "lg": {
+                  "height": "{imported.icon-button.part-0.height.lg}",
+                  "width": "{imported.icon-button.part-0.width.lg}"
+                },
+                "md": {
+                  "height": "{imported.icon-button.part-0.height.md}",
+                  "width": "{imported.icon-button.part-0.width.md}"
+                },
+                "sm": {
+                  "height": "{imported.icon-button.part-0.height.sm}",
+                  "width": "{imported.icon-button.part-0.width.sm}"
+                },
+                "xs": {
+                  "height": "{imported.icon-button.part-0.height.xs}",
+                  "width": "{imported.icon-button.part-0.width.xs}"
+                }
+              }
+            }
+          ]
+        },
+        "part-1": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "pointer-events": "none"
+          },
+          "parts": {
+            "label": {
+              "text": "Add",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "position": "absolute"
+              },
+              "declaredStates": {
+                "active": {
+                  "display": "block",
+                  "transform": "matrix(1, 0, 0, 1, -28.8516, -30)"
+                },
+                "focus-visible": {
+                  "display": "block",
+                  "transform": "matrix(1, 0, 0, 1, -28.8516, -30)"
+                },
+                "hover": {
+                  "display": "block",
+                  "transform": "matrix(1, 0, 0, 1, -28.8516, -30)"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.icon-button.label.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-2}",
+                "border-bottom-right-radius": "{imported.shared.size-2}",
+                "border-top-left-radius": "{imported.shared.size-2}",
+                "border-top-right-radius": "{imported.shared.size-2}",
+                "color": "{imported.icon-button.label.color}",
+                "font-size": "{imported.icon-button.label.font-size}",
+                "font-weight": "{imported.icon-button.label.font-weight}",
+                "letter-spacing": "{imported.icon-button.label.letter-spacing}",
+                "line-height": "{imported.icon-button.label.line-height}",
+                "max-width": "{imported.icon-button.label.max-width}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.shared.size-2}",
+                "padding-left": "{imported.icon-button.label.padding-left}",
+                "padding-right": "{imported.icon-button.label.padding-right}",
+                "padding-top": "{imported.shared.size-2}",
+                "row-rule-color": "{imported.icon-button.label.row-rule-color}",
+                "top": "{imported.shared.size-0}",
+                "z-index": "{imported.shared.num-6000}"
+              }
+            },
+            "part-1-1": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "position": "absolute",
+                "pointer-events": "none"
+              },
+              "declaredStates": {
+                "active": {
+                  "display": "block",
+                  "transform": "matrix(1, 0, 0, 1, -4, -8)"
+                },
+                "focus-visible": {
+                  "display": "block",
+                  "transform": "matrix(1, 0, 0, 1, -4, -8)"
+                },
+                "hover": {
+                  "display": "block",
+                  "transform": "matrix(1, 0, 0, 1, -4, -8)"
+                }
+              },
+              "tokens": {
+                "height": "{imported.icon-button.part-1-1.height}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.icon-button.part-1-1.width}",
+                "z-index": "{imported.shared.num-6000}"
+              }
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "height": "{imported.icon-button.part-1.height.unset}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.icon-button.part-1.width.unset}",
+            "z-index": "{imported.shared.num-6000}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "lg": {
+                  "height": "{imported.icon-button.part-1.height.lg}",
+                  "width": "{imported.icon-button.part-1.width.lg}"
+                },
+                "md": {
+                  "height": "{imported.icon-button.part-1.height.md}",
+                  "width": "{imported.icon-button.part-1.width.md}"
+                },
+                "sm": {
+                  "height": "{imported.icon-button.part-1.height.sm}",
+                  "width": "{imported.icon-button.part-1.width.sm}"
+                },
+                "xs": {
+                  "height": "{imported.icon-button.part-1.height.xs}",
+                  "width": "{imported.icon-button.part-1.width.xs}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "height": "{imported.icon-button.root.height.unset}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.icon-button.root.width.unset}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "height": "{imported.icon-button.root.height.lg}",
+              "width": "{imported.icon-button.root.width.lg}"
+            },
+            "md": {
+              "height": "{imported.icon-button.root.height.md}",
+              "width": "{imported.icon-button.root.width.md}"
+            },
+            "sm": {
+              "height": "{imported.icon-button.root.height.sm}",
+              "width": "{imported.icon-button.root.width.sm}"
+            },
+            "xs": {
+              "height": "{imported.icon-button.root.height.xs}",
+              "width": "{imported.icon-button.root.width.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "IconButton"
+    }
+  }
+}

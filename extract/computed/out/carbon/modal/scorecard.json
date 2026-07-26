@@ -1,0 +1,1343 @@
+{
+  "component": "Modal",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 5,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 1560,
+    "cellsEqual": 1400,
+    "pctEqual": 89.74358974358974,
+    "rowsFullyEqual": 0,
+    "rows": 20
+  },
+  "pixel": {
+    "pairs": 20,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "meanExact": 100,
+    "meanAA": 100,
+    "maxAA": 100
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 83,
+    "mintedLeavesUnfolded": 82,
+    "baseBindings": 227,
+    "stateBindings": 0,
+    "codeOnlyChannels": 37,
+    "overflowBindings": 0,
+    "folds": 51
+  },
+  "worstRows": [
+    {
+      "key": "unset__default",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 32
+    },
+    {
+      "key": "xs__default",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 32
+    },
+    {
+      "key": "sm__default",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 32
+    },
+    {
+      "key": "md__default",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 32
+    },
+    {
+      "key": "lg__default",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 32
+    },
+    {
+      "key": "unset__hover",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "unset__focus-visible",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "unset__active",
+      "pctAA": 100,
+      "pctExact": 100,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.content",
+      5
+    ],
+    [
+      "root.position",
+      5
+    ],
+    [
+      "root.transition-behavior",
+      5
+    ],
+    [
+      "label.clip",
+      5
+    ],
+    [
+      "part-1.display",
+      5
+    ],
+    [
+      "part-1.grid-template-rows",
+      5
+    ],
+    [
+      "part-1-0.grid-column-end",
+      5
+    ],
+    [
+      "label-4.overflow-wrap",
+      5
+    ],
+    [
+      "label-4.right",
+      5
+    ],
+    [
+      "label-4.top",
+      5
+    ],
+    [
+      "part-1-0-2-0-1-1.right",
+      5
+    ],
+    [
+      "part-1-0-2-0-1-1.top",
+      5
+    ],
+    [
+      "part-1-0-2-0-1-1.will-change",
+      5
+    ],
+    [
+      "label-5.--cds-border-subtle",
+      5
+    ],
+    [
+      "label-5.--cds-border-tile",
+      5
+    ]
+  ],
+  "namedLosses": [
+    "promotion: pseudo-decor-unconditional-placement: part-1-0-2-0-1-1::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)",
+    "code-only: root.content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: part-1.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0-2-0-0-0.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-4.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-4.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-4.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-4.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-4.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0-2-0-1-1.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0-2-0-1-1.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0-2-0-1-1.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.--cds-border-subtle — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.--cds-border-tile — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.--cds-field — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.--cds-layer — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.--cds-layer-background — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.grid-row-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-2.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-2.grid-row-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-2.grid-row-start — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-6.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-6.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-6.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-7.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-7.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-7.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-7.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-8.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "unset__default",
+      "channelsCompared": 312,
+      "channelsEqual": 280,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "content",
+          "ours": "normal",
+          "theirs": "\"\""
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "root",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "label",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-1",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "71.9844px 75.9844px 0px 64px"
+        },
+        {
+          "part": "part-1-0",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-4",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "will-change",
+          "ours": "auto",
+          "theirs": "transform"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-subtle",
+          "ours": "",
+          "theirs": "#c6c6c6"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-tile",
+          "ours": "",
+          "theirs": "#a8a8a8"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-field",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer-background",
+          "ours": "",
+          "theirs": "#f4f4f4"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-2"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-start",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-6",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-6",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-6",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-6",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-7",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-7",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-7",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-7",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-8",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000"
+    },
+    {
+      "key": "unset__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "unset__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "unset__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "xs__default",
+      "channelsCompared": 312,
+      "channelsEqual": 280,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "content",
+          "ours": "normal",
+          "theirs": "\"\""
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "root",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "label",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-1",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "71.9844px 75.9844px 0px 64px"
+        },
+        {
+          "part": "part-1-0",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-4",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "will-change",
+          "ours": "auto",
+          "theirs": "transform"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-subtle",
+          "ours": "",
+          "theirs": "#c6c6c6"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-tile",
+          "ours": "",
+          "theirs": "#a8a8a8"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-field",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer-background",
+          "ours": "",
+          "theirs": "#f4f4f4"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-2"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-start",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-6",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-6",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-6",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-6",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-7",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-7",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-7",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-7",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-8",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000"
+    },
+    {
+      "key": "xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "sm__default",
+      "channelsCompared": 312,
+      "channelsEqual": 280,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "content",
+          "ours": "normal",
+          "theirs": "\"\""
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "root",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "label",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-1",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "71.9844px 75.9844px 0px 64px"
+        },
+        {
+          "part": "part-1-0",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-4",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "will-change",
+          "ours": "auto",
+          "theirs": "transform"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-subtle",
+          "ours": "",
+          "theirs": "#c6c6c6"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-tile",
+          "ours": "",
+          "theirs": "#a8a8a8"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-field",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer-background",
+          "ours": "",
+          "theirs": "#f4f4f4"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-2"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-start",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-6",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-6",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-6",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-6",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-7",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-7",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-7",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-7",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-8",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000"
+    },
+    {
+      "key": "sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "md__default",
+      "channelsCompared": 312,
+      "channelsEqual": 280,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "content",
+          "ours": "normal",
+          "theirs": "\"\""
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "root",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "label",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-1",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "71.9844px 75.9844px 0px 64px"
+        },
+        {
+          "part": "part-1-0",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-4",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "will-change",
+          "ours": "auto",
+          "theirs": "transform"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-subtle",
+          "ours": "",
+          "theirs": "#c6c6c6"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-tile",
+          "ours": "",
+          "theirs": "#a8a8a8"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-field",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer-background",
+          "ours": "",
+          "theirs": "#f4f4f4"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-2"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-start",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-6",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-6",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-6",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-6",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-7",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-7",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-7",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-7",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-8",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000"
+    },
+    {
+      "key": "md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "lg__default",
+      "channelsCompared": 312,
+      "channelsEqual": 280,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "content",
+          "ours": "normal",
+          "theirs": "\"\""
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "root",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal"
+        },
+        {
+          "part": "label",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-1",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "71.9844px 75.9844px 0px 64px"
+        },
+        {
+          "part": "part-1-0",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-4",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-4",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-4",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "right",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "top",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "part-1-0-2-0-1-1",
+          "channel": "will-change",
+          "ours": "auto",
+          "theirs": "transform"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-subtle",
+          "ours": "",
+          "theirs": "#c6c6c6"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-border-tile",
+          "ours": "",
+          "theirs": "#a8a8a8"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-field",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer",
+          "ours": "",
+          "theirs": "#ffffff"
+        },
+        {
+          "part": "label-5",
+          "channel": "--cds-layer-background",
+          "ours": "",
+          "theirs": "#f4f4f4"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-5",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-2"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-column-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-end",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "part-1-2",
+          "channel": "grid-row-start",
+          "ours": "auto",
+          "theirs": "-1"
+        },
+        {
+          "part": "label-6",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-6",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-6",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-6",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-7",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "label-7",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "50%"
+        },
+        {
+          "part": "label-7",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "label-7",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-8",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000"
+    },
+    {
+      "key": "lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 100,
+      "pctAA": 100,
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    }
+  ]
+}

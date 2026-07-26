@@ -1,0 +1,670 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@carbon/react@1.112.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "text-input": {
+        "root": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "height": {
+            "unset": {
+              "$value": "64px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "56px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "64px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "72px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0": {
+          "height": {
+            "$value": "24px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "color": {
+            "$value": "#525252",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.32px",
+            "$type": "dimension"
+          },
+          "margin-bottom": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "$value": "#525252",
+            "$type": "color"
+          }
+        },
+        "part-1": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "height": {
+            "unset": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0": {
+          "height": {
+            "unset": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-0-0": {
+          "background-color": {
+            "$value": "#f4f4f4",
+            "$type": "color"
+          },
+          "border-bottom-color": {
+            "$value": "#8d8d8d",
+            "$type": "color"
+          },
+          "height": {
+            "unset": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "outline-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "outline-offset": {
+            "$value": "-2px",
+            "$type": "dimension"
+          },
+          "outline-width": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "outline-color-state-active": {
+            "$value": "#0f62fe",
+            "$type": "color"
+          },
+          "border-bottom-color-state-disabled": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#0f62fe",
+            "$type": "color"
+          }
+        },
+        "part-1-0-1": {
+          "bottom": {
+            "unset": {
+              "$value": "41px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "25px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "33px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "41px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "49px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "$value": "289px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-0-16": {
+          "$value": "0.16px",
+          "$type": "dimension"
+        },
+        "size-18-0001": {
+          "$value": "18.0001px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-288": {
+          "$value": "288px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-neg-1": {
+          "$value": "-1px",
+          "$type": "dimension"
+        },
+        "color-16161640": {
+          "$value": "#16161640",
+          "$type": "color"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [disabled] label.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "root",
+        "field": "align",
+        "value": "start"
+      },
+      {
+        "part": "part-0",
+        "field": "justify",
+        "value": "space-between"
+      },
+      {
+        "part": "part-1",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "part-1",
+        "field": "align",
+        "value": "start"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "overflow-y",
+        "value": "clip"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "transition-property",
+        "value": "background-color, outline"
+      },
+      {
+        "part": "part-1-0-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "position",
+        "value": "absolute"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "part-1-0-0",
+        "channel": "cursor",
+        "value": "not-allowed"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "label",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-1",
+      "channel": "clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rect(0px, 0px, 0px, 0px)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "part-1-0-0",
+      "channel": "outline-color",
+      "state": "active",
+      "ref": "{imported.text-input.part-1-0-0.outline-color-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.text-input.part-1-0-0.border-bottom-color-state-disabled}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-1-0-0.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-fallback: no control for <label> — span control used (part label)",
+    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <input> — span control used (part part-1-0-0)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: part-0.font-size equals ancestor \"root\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.letter-spacing equals ancestor \"root\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.line-height equals ancestor \"root\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.font-size equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.letter-spacing equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-0.line-height equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-1.font-size equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-1.letter-spacing equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-1.line-height equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.font-size equals ancestor \"part-1\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.letter-spacing equals ancestor \"part-1\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.line-height equals ancestor \"part-1\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.font-size equals ancestor \"root\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.letter-spacing equals ancestor \"root\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: part-1.line-height equals ancestor \"root\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-1",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "label",
+      "part-1",
+      "part-1-0",
+      "part-1-0-0",
+      "part-1-0-1"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "literal-text-carried: label = \"Label\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: part-1-0-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "sr-only-carried-as-hidden: part-1-0-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-0.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.transition-property = background-color, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-0.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] part-1-0-0.cursor = not-allowed (v15 declared vocabulary)"
+  ]
+}

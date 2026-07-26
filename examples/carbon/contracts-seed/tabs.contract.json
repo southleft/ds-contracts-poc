@@ -1,0 +1,26 @@
+{
+  "id": "carbon.tabs",
+  "name": "Tabs",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). childrenSpec is 2-deep (Tabs > TabList > Tab×3 + TabPanels > TabPanel). NAMED DEFERRAL: Carbon spells the line/contained distinction as a BOOLEAN `contained` on TabList (a CHILD), not as a `type` enum on Tabs — the recon predicted an enum and the library does not have one. Root axes: none; `contained` is pinned false (the line tabs) in the childrenSpec.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Tabs"
+    }
+  },
+  "states": []
+}

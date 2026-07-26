@@ -1,0 +1,2335 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "InlineNotification",
+  "config": "extract/computed/configs/carbon.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-duration",
+        "value": "0.11s, 0.11s"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-property",
+        "value": "outline, background-color"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "InlineNotification",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 12,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 7488,
+      "cellsEqual": 7232,
+      "pctEqual": 96.58119658119658,
+      "rowsFullyEqual": 0,
+      "rows": 48
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 122,
+      "mintedLeavesUnfolded": 318,
+      "baseBindings": 84,
+      "stateBindings": 1,
+      "codeOnlyChannels": 10,
+      "overflowBindings": 2,
+      "folds": 116
+    },
+    "worstRows": [
+      {
+        "key": "success.high__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.high__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.high__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.high__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.low__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.low__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.low__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "success.low__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "part-0-0-0.d",
+        48
+      ],
+      [
+        "part-0-1.flex-wrap",
+        48
+      ],
+      [
+        "label-3.word-break",
+        48
+      ],
+      [
+        "part-0-0-1-2.d",
+        32
+      ],
+      [
+        "part-0-0-0.fill",
+        24
+      ],
+      [
+        "part-0-0-1.d",
+        16
+      ],
+      [
+        "part-0-0-1.display",
+        16
+      ],
+      [
+        "part-0-0-1.fill",
+        8
+      ],
+      [
+        "part-0-0-1-2.fill",
+        8
+      ],
+      [
+        "part-0-0-2.d",
+        8
+      ]
+    ],
+    "namedLosses": [
+      "overflow: part-0-0-1-2.fill — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: part-1.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-0.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-1-2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-1.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-1.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
+      "leavesAdded": 998,
+      "divergent": [
+        {
+          "token": "imported.inline-notification.icon.fill.error.high",
+          "fresh": "#fa4d56",
+          "shipped": "{support-error-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.error.low",
+          "fresh": "#da1e28",
+          "shipped": "{support-error}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.info-square.high",
+          "fresh": "#4589ff",
+          "shipped": "{support-info-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.info-square.low",
+          "fresh": "#0043ce",
+          "shipped": "{support-info}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.info.high",
+          "fresh": "#4589ff",
+          "shipped": "{support-info-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.info.low",
+          "fresh": "#0043ce",
+          "shipped": "{support-info}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.success.high",
+          "fresh": "#42be65",
+          "shipped": "{support-success-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.success.low",
+          "fresh": "#24a148",
+          "shipped": "{support-success}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.warning-alt.high",
+          "fresh": "#f1c21b",
+          "shipped": "{support-warning-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.warning-alt.low",
+          "fresh": "#f1c21b",
+          "shipped": "{support-warning}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.warning.high",
+          "fresh": "#f1c21b",
+          "shipped": "{support-warning-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.icon.fill.warning.low",
+          "fresh": "#f1c21b",
+          "shipped": "{support-warning}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.root.color.high",
+          "fresh": "#ffffff",
+          "shipped": "{text-inverse}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.inline-notification.root.color.low",
+          "fresh": "#161616",
+          "shipped": "{text-primary}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "error.high__default",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.high__hover",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.high__focus-visible",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.high__active",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.low__default",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.low__hover",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.low__focus-visible",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.low__active",
+        "channelsCompared": 154,
+        "channelsEqual": 149,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.high__default",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.high__hover",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.high__focus-visible",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.high__active",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.low__default",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.low__hover",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.low__focus-visible",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.low__active",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.high__default",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.high__hover",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.high__focus-visible",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.high__active",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(69, 137, 255, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.low__default",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.low__hover",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.low__focus-visible",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info-square.low__active",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(0, 67, 206, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.high__default",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(66, 190, 101, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.high__hover",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(66, 190, 101, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.high__focus-visible",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(66, 190, 101, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.high__active",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(66, 190, 101, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.low__default",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(36, 161, 72, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.low__hover",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(36, 161, 72, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.low__focus-visible",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(36, 161, 72, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.low__active",
+        "channelsCompared": 154,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "inline"
+          },
+          {
+            "part": "part-0-0-1",
+            "channel": "fill",
+            "ours": "rgba(36, 161, 72, 1)",
+            "theirs": "none"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.high__default",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.high__hover",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.high__focus-visible",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.high__active",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.low__default",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.low__hover",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.low__focus-visible",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.low__active",
+        "channelsCompared": 153,
+        "channelsEqual": 148,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.high__default",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.high__hover",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.high__focus-visible",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.high__active",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.low__default",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.low__hover",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.low__focus-visible",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning-alt.low__active",
+        "channelsCompared": 169,
+        "channelsEqual": 163,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "part-0-0-0",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "fill",
+            "ours": "rgba(241, 194, 27, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "part-0-0-1-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
+          },
+          {
+            "part": "part-0-0-2",
+            "channel": "d",
+            "ours": "none",
+            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "label-3",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

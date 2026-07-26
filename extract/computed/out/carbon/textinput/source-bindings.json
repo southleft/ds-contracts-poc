@@ -1,0 +1,465 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "TextInput",
+  "varPrefix": "--cds-",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unset.enabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unset.disabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--label--disabled, .cds--form__helper-text--disabled"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "xs.enabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "xs.disabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--label--disabled, .cds--form__helper-text--disabled"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "sm.enabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "sm.disabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--label--disabled, .cds--form__helper-text--disabled"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "md.enabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "md.disabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--label--disabled, .cds--form__helper-text--disabled"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "lg.enabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "lg.disabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--label--disabled, .cds--form__helper-text--disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "-webkit-text-fill-color",
+      "combo": "unset.disabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "-webkit-text-fill-color",
+      "combo": "xs.disabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "-webkit-text-fill-color",
+      "combo": "sm.disabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "-webkit-text-fill-color",
+      "combo": "md.disabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "-webkit-text-fill-color",
+      "combo": "lg.disabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "unset.enabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "unset.disabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "xs.enabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "xs.disabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "sm.enabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "sm.disabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "md.enabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "md.disabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "lg.enabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "background-color",
+      "combo": "lg.disabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "field",
+      "varName": "--cds-field",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "unset.enabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "unset.disabled",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "xs.enabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "xs.disabled",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "sm.enabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "sm.disabled",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "md.enabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "md.disabled",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "lg.enabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--text-input"
+      }
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "color",
+      "combo": "lg.disabled",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--text-input:disabled"
+      }
+    }
+  ],
+  "skips": [
+    "part-1-0-0.block-size: no var candidate verified against the computed value in any combo"
+  ]
+}

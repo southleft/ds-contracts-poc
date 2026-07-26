@@ -1,0 +1,50 @@
+{
+  "id": "carbon.toggle",
+  "name": "Toggle",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "toggled",
+      "type": {
+        "enum": [
+          "untoggled",
+          "toggled"
+        ]
+      },
+      "default": "untoggled",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Toggled",
+          "values": {
+            "untoggled": "Untoggled",
+            "toggled": "Toggled"
+          }
+        },
+        "code": {
+          "prop": "toggled"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). `toggled` is a VARIANT AXIS, never a stateProp (it is outside the closed contract state vocabulary). `size` is PINNED to md in fixedProps — a Size×Toggled knob offset is a two-axis product the decor grammar cannot spell (named in examples/tailwind/PROVENANCE.md).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Toggle"
+    }
+  },
+  "states": []
+}

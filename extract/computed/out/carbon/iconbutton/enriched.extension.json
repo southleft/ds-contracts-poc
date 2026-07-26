@@ -1,0 +1,2308 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@carbon/react@1.112.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "num-6000": {
+          "$value": "6000",
+          "$type": "number"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-0f62fe": {
+          "$value": "#0f62fe",
+          "$type": "color"
+        }
+      },
+      "icon-button": {
+        "root": {
+          "height": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0": {
+          "height": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0-0": {
+          "background-color": {
+            "primary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#393939",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color": {
+            "primary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-left-color": {
+            "primary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-right-color": {
+            "primary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-top-color": {
+            "primary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "height": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "letter-spacing": {
+            "$value": "0.16px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "18.0001px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "320px",
+            "$type": "dimension"
+          },
+          "min-height": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "width": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "background-color-state-active": {
+            "primary": {
+              "$value": "#002d9c",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#6f6f6f",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#002d9c",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#8d8d8d80",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color-state-active": {
+            "primary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-active": {
+            "primary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-active": {
+            "primary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-active": {
+            "primary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "box-shadow-state-active": {
+            "primary": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0px 0px 2px inset",
+              "$type": "shadow"
+            },
+            "secondary": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0px 0px 2px inset",
+              "$type": "shadow"
+            },
+            "tertiary": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0px 0px 2px inset",
+              "$type": "shadow"
+            },
+            "ghost": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset",
+              "$type": "shadow"
+            }
+          },
+          "color-state-active": {
+            "tertiary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "row-rule-color-state-active": {
+            "tertiary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "background-color-state-disabled": {
+            "primary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color-state-disabled": {
+            "primary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-disabled": {
+            "primary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-disabled": {
+            "primary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-disabled": {
+            "primary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#c6c6c6",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "color-state-disabled": {
+            "primary": {
+              "$value": "#8d8d8d",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#8d8d8d",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#16161640",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#16161640",
+              "$type": "color"
+            }
+          },
+          "row-rule-color-state-disabled": {
+            "primary": {
+              "$value": "#8d8d8d",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#8d8d8d",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#16161640",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#16161640",
+              "$type": "color"
+            }
+          },
+          "background-color-state-focus-visible": {
+            "tertiary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#8d8d8d80",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#393939",
+              "$type": "color"
+            }
+          },
+          "box-shadow-state-focus-visible": {
+            "primary": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0px 0px 2px inset",
+              "$type": "shadow"
+            },
+            "secondary": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0px 0px 2px inset",
+              "$type": "shadow"
+            },
+            "tertiary": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0px 0px 2px inset",
+              "$type": "shadow"
+            },
+            "ghost": {
+              "$value": "rgba(15, 98, 254, 1) 0px 0px 0px 1px inset",
+              "$type": "shadow"
+            }
+          },
+          "color-state-focus-visible": {
+            "tertiary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "row-rule-color-state-focus-visible": {
+            "tertiary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          },
+          "background-color-state-hover": {
+            "primary": {
+              "$value": "#0050e6",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#474747",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#0050e6",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#8d8d8d1f",
+              "$type": "color"
+            }
+          },
+          "color-state-hover": {
+            "tertiary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "row-rule-color-state-hover": {
+            "tertiary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0043ce",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
+        "part-1": {
+          "height": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "unset": {
+              "$value": "48px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "48px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label": {
+          "background-color": {
+            "$value": "#393939",
+            "$type": "color"
+          },
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.16px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "18.0001px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "288px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "bottom-state-active": {
+            "unset": {
+              "$value": "26px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "18px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "26px",
+              "$type": "dimension"
+            }
+          },
+          "left-state-active": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "right-state-active": {
+            "unset": {
+              "$value": "-33.7031px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "-45.7031px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "-41.7031px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "-37.7031px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "-33.7031px",
+              "$type": "dimension"
+            }
+          },
+          "bottom-state-focus-visible": {
+            "unset": {
+              "$value": "26px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "18px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "26px",
+              "$type": "dimension"
+            }
+          },
+          "left-state-focus-visible": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "right-state-focus-visible": {
+            "unset": {
+              "$value": "-33.7031px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "-45.7031px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "-41.7031px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "-37.7031px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "-33.7031px",
+              "$type": "dimension"
+            }
+          },
+          "bottom-state-hover": {
+            "unset": {
+              "$value": "26px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "18px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "26px",
+              "$type": "dimension"
+            }
+          },
+          "left-state-hover": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "right-state-hover": {
+            "unset": {
+              "$value": "-33.7031px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "-45.7031px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "-41.7031px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "-37.7031px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "-33.7031px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-1-1": {
+          "height": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "bottom-state-active": {
+            "unset": {
+              "$value": "44px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          },
+          "left-state-active": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "right-state-active": {
+            "unset": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "bottom-state-focus-visible": {
+            "unset": {
+              "$value": "44px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          },
+          "left-state-focus-visible": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "right-state-focus-visible": {
+            "unset": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "bottom-state-hover": {
+            "unset": {
+              "$value": "44px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          },
+          "left-state-hover": {
+            "unset": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "right-state-hover": {
+            "unset": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "part-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [active] part-0-0.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] part-0-0.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] part-0-0.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] part-0-0.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] part-0-0.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [disabled] part-0-0.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] part-0-0.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] part-0-0.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] part-0-0.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] part-0-0.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] part-0-0.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] part-0-0.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] part-0-0.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] part-0-0.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] part-0-0.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-0-0.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-0-0.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-0-0.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-0-0.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] part-0-0.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [
+      {
+        "part": "part-0-0",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "part-0-0",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s, 0s"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s, 0.07s, 0.07s"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-property",
+        "value": "background, box-shadow, border-color, outline"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "pointer-events",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "active",
+        "part": "label",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "active",
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -28.8516, -30)"
+      },
+      {
+        "state": "active",
+        "part": "part-1-1",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "active",
+        "part": "part-1-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -4, -8)"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0-0",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0-0",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "focus-visible",
+        "part": "label",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "focus-visible",
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -28.8516, -30)"
+      },
+      {
+        "state": "focus-visible",
+        "part": "part-1-1",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "focus-visible",
+        "part": "part-1-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -4, -8)"
+      },
+      {
+        "state": "hover",
+        "part": "label",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "hover",
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -28.8516, -30)"
+      },
+      {
+        "state": "hover",
+        "part": "part-1-1",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "hover",
+        "part": "part-1-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -4, -8)"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "part-0-0",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "top",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "left",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "max-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1",
+      "channel": "left",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-1",
+      "channel": "will-change",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "transform",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "label",
+      "channel": "bottom",
+      "state": "active",
+      "ref": "{imported.icon-button.label.bottom-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "left",
+      "state": "active",
+      "ref": "{imported.icon-button.label.left-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "right",
+      "state": "active",
+      "ref": "{imported.icon-button.label.right-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.background-color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.border-bottom-color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-left-color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.border-left-color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-right-color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.border-right-color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-top-color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.border-top-color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.box-shadow-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "row-rule-color",
+      "state": "active",
+      "ref": "{imported.icon-button.part-0-0.row-rule-color-state-active.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "bottom",
+      "state": "active",
+      "ref": "{imported.icon-button.part-1-1.bottom-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "left",
+      "state": "active",
+      "ref": "{imported.icon-button.part-1-1.left-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "right",
+      "state": "active",
+      "ref": "{imported.icon-button.part-1-1.right-state-active.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.background-color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.border-bottom-color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.border-left-color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.border-right-color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.border-top-color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.icon-button.part-0-0.row-rule-color-state-disabled.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "bottom",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.label.bottom-state-focus-visible.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "left",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.label.left-state-focus-visible.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "right",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.label.right-state-focus-visible.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-0-0.background-color-state-focus-visible.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-bottom-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-0f62fe}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-left-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-0f62fe}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-right-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-0f62fe}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-top-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-0f62fe}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "box-shadow",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-0-0.box-shadow-state-focus-visible.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-0-0.color-state-focus-visible.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "row-rule-color",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-0-0.row-rule-color-state-focus-visible.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "bottom",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-1-1.bottom-state-focus-visible.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "left",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-1-1.left-state-focus-visible.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "right",
+      "state": "focus-visible",
+      "ref": "{imported.icon-button.part-1-1.right-state-focus-visible.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "bottom",
+      "state": "hover",
+      "ref": "{imported.icon-button.label.bottom-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "left",
+      "state": "hover",
+      "ref": "{imported.icon-button.label.left-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "right",
+      "state": "hover",
+      "ref": "{imported.icon-button.label.right-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "state": "hover",
+      "ref": "{imported.icon-button.part-0-0.background-color-state-hover.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "state": "hover",
+      "ref": "{imported.icon-button.part-0-0.color-state-hover.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "row-rule-color",
+      "state": "hover",
+      "ref": "{imported.icon-button.part-0-0.row-rule-color-state-hover.{kind}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "bottom",
+      "state": "hover",
+      "ref": "{imported.icon-button.part-1-1.bottom-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "left",
+      "state": "hover",
+      "ref": "{imported.icon-button.part-1-1.left-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-1-1",
+      "channel": "right",
+      "state": "hover",
+      "ref": "{imported.icon-button.part-1-1.right-state-hover.{size}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "default",
+        "part": "part-1-1",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "default",
+        "part": "part-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "hover",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "display": "block",
+          "inline-size": "57.7031px",
+          "inset-block-start": "14px",
+          "perspective-origin": "28.8438px 4px",
+          "top": "14px",
+          "transform": "matrix(1, 0, 0, 1, 0, 8)",
+          "transform-origin": "28.8516px 4px",
+          "width": "57.7031px",
+          "translate-x": "0px",
+          "translate-y": "8px"
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "hover",
+        "part": "part-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "bottom": "0px",
+          "inset-block-end": "0px",
+          "inset-block-start": "0px",
+          "inset-inline-end": "0px",
+          "inset-inline-start": "0px",
+          "left": "0px",
+          "perspective-origin": "4px 2px",
+          "right": "0px",
+          "top": "0px",
+          "transform-origin": "4px 2px"
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "focus-visible",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "display": "block",
+          "inline-size": "57.7031px",
+          "inset-block-start": "14px",
+          "perspective-origin": "28.8438px 4px",
+          "top": "14px",
+          "transform": "matrix(1, 0, 0, 1, 0, 8)",
+          "transform-origin": "28.8516px 4px",
+          "width": "57.7031px",
+          "translate-x": "0px",
+          "translate-y": "8px"
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "focus-visible",
+        "part": "part-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "bottom": "0px",
+          "inset-block-end": "0px",
+          "inset-block-start": "0px",
+          "inset-inline-end": "0px",
+          "inset-inline-start": "0px",
+          "left": "0px",
+          "perspective-origin": "4px 2px",
+          "right": "0px",
+          "top": "0px",
+          "transform-origin": "4px 2px"
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "active",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "display": "block",
+          "inline-size": "57.7031px",
+          "inset-block-start": "14px",
+          "perspective-origin": "28.8438px 4px",
+          "top": "14px",
+          "transform": "matrix(1, 0, 0, 1, 0, 8)",
+          "transform-origin": "28.8516px 4px",
+          "width": "57.7031px",
+          "translate-x": "0px",
+          "translate-y": "8px"
+        }
+      },
+      {
+        "combo": "primary.unset.enabled",
+        "interaction": "active",
+        "part": "part-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "bottom": "0px",
+          "inset-block-end": "0px",
+          "inset-block-start": "0px",
+          "inset-inline-end": "0px",
+          "inset-inline-start": "0px",
+          "left": "0px",
+          "perspective-origin": "4px 2px",
+          "right": "0px",
+          "top": "0px",
+          "transform-origin": "4px 2px"
+        }
+      },
+      {
+        "combo": "primary.unset.disabled",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.unset.disabled",
+        "interaction": "default",
+        "part": "part-1-1",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "primary.unset.disabled",
+        "interaction": "default",
+        "part": "part-1-1",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 240
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.letter-spacing — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.caret-color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.font-size — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.letter-spacing — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.line-height — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-1",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "part-0-0",
+      "part-1",
+      "label",
+      "part-1-1"
+    ],
+    "svgAssets": [
+      "icon-button-part-0-0"
+    ],
+    "receipts": [
+      "svg-viewbox-bumped: IconButton.part-0-0@primary.unset.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@primary.xs.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@primary.sm.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@primary.md.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@primary.lg.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@secondary.unset.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@secondary.xs.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@secondary.sm.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@secondary.md.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@secondary.lg.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@tertiary.unset.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@tertiary.xs.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@tertiary.sm.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@tertiary.md.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@tertiary.lg.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@ghost.unset.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@ghost.xs.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@ghost.sm.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@ghost.md.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: IconButton.part-0-0@ghost.lg.enabled — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "aspect-carried: part-0 computed width == height in every enabled combo (24/32/40/48px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "aspect-carried: part-0-0 computed width == height in every enabled combo (24/32/40/48px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "aspect-carried: part-1 computed width == height in every enabled combo (24/32/40/48px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "literal-text-carried: label = \"Add\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": [
+      "pseudo-decor-unconditional-placement: part-1-1::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)"
+    ]
+  },
+  "enrichmentNotes": [
+    "layout enriched: part-0-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-0-0.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0.transition-delay = 0s, 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.transition-duration = 0.07s, 0.07s, 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.transition-property = background, box-shadow, border-color, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.transition-timing-function = cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [active] label.display = block (v15 declared vocabulary)",
+    "declared state fact carried: [active] label.transform = matrix(1, 0, 0, 1, -28.8516, -30) (v15 declared vocabulary)",
+    "declared state fact carried: [active] part-1-1.display = block (v15 declared vocabulary)",
+    "declared state fact carried: [active] part-1-1.transform = matrix(1, 0, 0, 1, -4, -8) (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] part-0-0.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] part-0-0.pointer-events = none (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] part-0.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] label.display = block (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] label.transform = matrix(1, 0, 0, 1, -28.8516, -30) (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] part-1-1.display = block (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] part-1-1.transform = matrix(1, 0, 0, 1, -4, -8) (v15 declared vocabulary)",
+    "declared state fact carried: [hover] label.display = block (v15 declared vocabulary)",
+    "declared state fact carried: [hover] label.transform = matrix(1, 0, 0, 1, -28.8516, -30) (v15 declared vocabulary)",
+    "declared state fact carried: [hover] part-1-1.display = block (v15 declared vocabulary)",
+    "declared state fact carried: [hover] part-1-1.transform = matrix(1, 0, 0, 1, -4, -8) (v15 declared vocabulary)"
+  ]
+}

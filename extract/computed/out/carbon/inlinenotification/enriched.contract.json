@@ -1,0 +1,499 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.inlinenotification",
+  "name": "InlineNotification",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). kind enum read from InlineNotificationProps. `lowContrast` is a BOOLEAN in the library and a two-value VARIANT AXIS here (axisValueMap high->false / low->true): it selects a rendering, so it is an axis, not a state. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "kind",
+      "type": {
+        "enum": [
+          "error",
+          "info",
+          "info-square",
+          "success",
+          "warning",
+          "warning-alt"
+        ]
+      },
+      "default": "error",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Kind",
+          "values": {
+            "error": "Error",
+            "info": "Info",
+            "info-square": "Info Square",
+            "success": "Success",
+            "warning": "Warning",
+            "warning-alt": "Warning Alt"
+          }
+        },
+        "code": {
+          "prop": "kind"
+        }
+      }
+    },
+    {
+      "name": "contrast",
+      "type": {
+        "enum": [
+          "high",
+          "low"
+        ]
+      },
+      "default": "high",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Contrast",
+          "values": {
+            "high": "High",
+            "low": "Low"
+          }
+        },
+        "code": {
+          "prop": "contrast"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "icon": {
+              "element": "svg",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden"
+              },
+              "parts": {
+                "part-0-0-0": {
+                  "element": "path",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline"
+                  },
+                  "tokens": {
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.part-0-0-0.color.high}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-0.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.part-0-0-0.color.low}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-0.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-0-0-1-2": {
+                  "element": "path",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "kind",
+                      "equals": "error",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "kind",
+                      "equals": "success",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.part-0-0-1-2.color.high}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-1-2.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.part-0-0-1-2.color.low}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-1-2.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-0-0-2": {
+                  "element": "path",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "kind",
+                      "equals": "error",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "kind",
+                      "equals": "info",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "kind",
+                      "equals": "info-square",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "kind",
+                      "equals": "success",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "kind",
+                      "equals": "warning",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "fill": "{imported.inline-notification.part-0-0-2.fill}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.part-0-0-2.color.high}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-2.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.part-0-0-2.color.low}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-2.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-0-0-1": {
+                  "element": "path",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy path||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none"
+                  },
+                  "tokens": {
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.inline-notification.part-0-0-1.opacity}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.part-0-0-1.color.high}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-1.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.part-0-0-1.color.low}",
+                          "row-rule-color": "{imported.inline-notification.part-0-0-1.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label": {
+                  "element": "title",
+                  "text": "error icon",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy title| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline"
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-16}",
+                    "font-weight": "{imported.inline-notification.label.font-weight}",
+                    "line-height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.label.color.high}",
+                          "fill": "{imported.inline-notification.label.fill.{kind}.high}",
+                          "row-rule-color": "{imported.inline-notification.label.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.label.color.low}",
+                          "fill": "{imported.inline-notification.label.fill.{kind}.low}",
+                          "row-rule-color": "{imported.inline-notification.label.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "flex-shrink": "{imported.inline-notification.icon.flex-shrink}",
+                "margin-right": "{imported.shared.size-16}",
+                "margin-top": "{imported.shared.size-14}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "contrast",
+                  "map": {
+                    "high": {
+                      "color": "{imported.inline-notification.icon.color.high}",
+                      "fill": "{imported.inline-notification.icon.fill.{kind}.high}",
+                      "row-rule-color": "{imported.inline-notification.icon.row-rule-color.high}"
+                    },
+                    "low": {
+                      "color": "{imported.inline-notification.icon.color.low}",
+                      "fill": "{imported.inline-notification.icon.fill.{kind}.low}",
+                      "row-rule-color": "{imported.inline-notification.icon.row-rule-color.low}"
+                    }
+                  }
+                }
+              ]
+            },
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "label-2": {
+                  "text": "Notification title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.inline-notification.label-2.font-weight}",
+                    "letter-spacing": "{imported.inline-notification.label-2.letter-spacing}",
+                    "line-height": "{imported.inline-notification.label-2.line-height}",
+                    "margin-right": "{imported.inline-notification.label-2.margin-right}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.label-2.color.high}",
+                          "row-rule-color": "{imported.inline-notification.label-2.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.label-2.color.low}",
+                          "row-rule-color": "{imported.inline-notification.label-2.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-3": {
+                  "text": "Notification subtitle",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.inline-notification.label-3.font-weight}",
+                    "letter-spacing": "{imported.inline-notification.label-3.letter-spacing}",
+                    "line-height": "{imported.inline-notification.label-3.line-height}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "contrast",
+                      "map": {
+                        "high": {
+                          "color": "{imported.inline-notification.label-3.color.high}",
+                          "row-rule-color": "{imported.inline-notification.label-3.row-rule-color.high}"
+                        },
+                        "low": {
+                          "color": "{imported.inline-notification.label-3.color.low}",
+                          "row-rule-color": "{imported.inline-notification.label-3.row-rule-color.low}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "padding-bottom": "{imported.inline-notification.part-0-1.padding-bottom}",
+                "padding-top": "{imported.inline-notification.part-0-1.padding-top}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "contrast",
+                  "map": {
+                    "high": {
+                      "color": "{imported.inline-notification.part-0-1.color.high}",
+                      "row-rule-color": "{imported.inline-notification.part-0-1.row-rule-color.high}"
+                    },
+                    "low": {
+                      "color": "{imported.inline-notification.part-0-1.color.low}",
+                      "row-rule-color": "{imported.inline-notification.part-0-1.row-rule-color.low}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "flex-grow": "{imported.inline-notification.part-0.flex-grow}",
+            "margin-left": "{imported.inline-notification.part-0.margin-left}",
+            "margin-right": "{imported.inline-notification.part-0.margin-right}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "contrast",
+              "map": {
+                "high": {
+                  "color": "{imported.inline-notification.part-0.color.high}",
+                  "row-rule-color": "{imported.inline-notification.part-0.row-rule-color.high}"
+                },
+                "low": {
+                  "color": "{imported.inline-notification.part-0.color.low}",
+                  "row-rule-color": "{imported.inline-notification.part-0.row-rule-color.low}"
+                }
+              }
+            }
+          ]
+        },
+        "part-1": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "center",
+            "justify": "center"
+          },
+          "icon": {
+            "asset": "inline-notification-part-1",
+            "size": 16
+          },
+          "declared": {
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer",
+            "outline-style": "solid",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0.11s, 0.11s",
+            "transition-property": "outline, background-color",
+            "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+          },
+          "tokens": {
+            "background-color": "{imported.inline-notification.part-1.background-color}",
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-width": "{imported.shared.size-0}",
+            "color": "{imported.inline-notification.part-1.color}",
+            "max-width": "{imported.shared.size-48}",
+            "min-width": "{imported.shared.size-48}",
+            "outline-color": "{imported.inline-notification.part-1.outline-color}",
+            "outline-offset": "{imported.inline-notification.part-1.outline-offset}",
+            "outline-width": "{imported.inline-notification.part-1.outline-width}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "declared": {
+        "border-left-style": "solid",
+        "position": "relative"
+      },
+      "tokens": {
+        "background-color": "{imported.inline-notification.root.background-color.{kind}.{contrast}}",
+        "border-left-color": "{imported.inline-notification.root.border-left-color.{kind}.{contrast}}",
+        "border-left-width": "{imported.inline-notification.root.border-left-width}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "max-width": "{imported.inline-notification.root.max-width}",
+        "min-height": "{imported.shared.size-48}",
+        "min-width": "{imported.inline-notification.root.min-width}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "contrast",
+          "map": {
+            "high": {
+              "color": "{imported.inline-notification.root.color.high}",
+              "row-rule-color": "{imported.inline-notification.root.row-rule-color.high}"
+            },
+            "low": {
+              "color": "{imported.inline-notification.root.color.low}",
+              "row-rule-color": "{imported.inline-notification.root.row-rule-color.low}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "InlineNotification"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "carbon.modal",
+  "name": "Modal",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). portalCapture + openDriver {open:true}. Carbon’s Modal is NOT portalled — it renders in place as a position:fixed full-bleed scrim — which is exactly the prediction the whole-document baseline-diff reader is being tested against.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Modal"
+    }
+  },
+  "states": []
+}

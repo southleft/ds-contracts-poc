@@ -1,0 +1,6613 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "IconButton",
+  "config": "extract/computed/configs/carbon.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "text-align",
+        "value": "start"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s, 0s"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-duration",
+        "value": "0.07s, 0.07s, 0.07s, 0.07s"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-property",
+        "value": "background, box-shadow, border-color, outline"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+      },
+      {
+        "part": "part-1",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "pointer-events",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "active",
+        "part": "label",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "active",
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -28.8516, -30)"
+      },
+      {
+        "state": "active",
+        "part": "part-1-1",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "active",
+        "part": "part-1-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -4, -8)"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0-0",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0-0",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "disabled",
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "focus-visible",
+        "part": "label",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "focus-visible",
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -28.8516, -30)"
+      },
+      {
+        "state": "focus-visible",
+        "part": "part-1-1",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "focus-visible",
+        "part": "part-1-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -4, -8)"
+      },
+      {
+        "state": "hover",
+        "part": "label",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "hover",
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -28.8516, -30)"
+      },
+      {
+        "state": "hover",
+        "part": "part-1-1",
+        "channel": "display",
+        "value": "block"
+      },
+      {
+        "state": "hover",
+        "part": "part-1-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -4, -8)"
+      }
+    ]
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "IconButton",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 40,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 9280,
+      "cellsEqual": 8520,
+      "pctEqual": 91.8103448275862,
+      "rowsFullyEqual": 0,
+      "rows": 160
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 273,
+      "mintedLeavesUnfolded": 372,
+      "baseBindings": 73,
+      "stateBindings": 44,
+      "codeOnlyChannels": 8,
+      "overflowBindings": 44,
+      "folds": 32
+    },
+    "worstRows": [
+      {
+        "key": "primary.unset.enabled__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.unset.enabled__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.unset.enabled__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.xs.enabled__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.xs.enabled__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.xs.enabled__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.sm.enabled__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      },
+      {
+        "key": "primary.sm.enabled__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 6
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "label.left",
+        160
+      ],
+      [
+        "label.overflow-wrap",
+        160
+      ],
+      [
+        "part-1-1.left",
+        160
+      ],
+      [
+        "part-1-1.will-change",
+        160
+      ],
+      [
+        "label.display",
+        60
+      ],
+      [
+        "part-1-1.display",
+        60
+      ]
+    ],
+    "namedLosses": [
+      "promotion: pseudo-decor-unconditional-placement: part-1-1::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)",
+      "overflow: label.bottom [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.left [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.right [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-right-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-top-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.row-rule-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.bottom [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.left [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.right [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.background-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.bottom [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.left [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.right [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.background-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-bottom-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-left-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-right-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.border-top-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.row-rule-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.bottom [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.left [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.right [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.bottom [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.left [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.right [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.background-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-0-0.row-rule-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.bottom [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.left [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: part-1-1.right [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: part-0-0.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-1.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-1.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
+      "leavesAdded": 847,
+      "divergent": [
+        {
+          "token": "imported.icon-button.part-0-0.background-color-state-focus-visible.primary",
+          "fresh": "#0f62fe",
+          "shipped": "{button-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.background-color-state-focus-visible.secondary",
+          "fresh": "#393939",
+          "shipped": "{button-secondary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.background-color.primary",
+          "fresh": "#0f62fe",
+          "shipped": "{button-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.background-color.secondary",
+          "fresh": "#393939",
+          "shipped": "{button-secondary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-active.primary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-active.secondary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-disabled.primary",
+          "fresh": "#8d8d8d",
+          "shipped": "{text-on-color-disabled}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-disabled.secondary",
+          "fresh": "#8d8d8d",
+          "shipped": "{text-on-color-disabled}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-focus-visible.ghost",
+          "fresh": "#0f62fe",
+          "shipped": "{link-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-focus-visible.primary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-focus-visible.secondary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-hover.primary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color-state-hover.secondary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color.ghost",
+          "fresh": "#0f62fe",
+          "shipped": "{link-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color.primary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color.secondary",
+          "fresh": "#ffffff",
+          "shipped": "{text-on-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.icon-button.part-0-0.color.tertiary",
+          "fresh": "#0f62fe",
+          "shipped": "{button-tertiary}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "primary.unset.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.unset.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.xs.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.sm.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.md.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.lg.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.unset.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.xs.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.sm.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.md.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.lg.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.unset.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.xs.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.sm.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.md.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "tertiary.lg.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.unset.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "12px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.xs.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "16px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.sm.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "20px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.md.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.enabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.enabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.enabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.enabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 52,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.disabled__default",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.disabled__hover",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.disabled__focus-visible",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "ghost.lg.disabled__active",
+        "channelsCompared": 58,
+        "channelsEqual": 54,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "50%"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "will-change",
+            "ours": "auto",
+            "theirs": "transform"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "library": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "framework": "react",
+    "classPrefix": "cds--",
+    "classAllow": "^cds--(?!.*--)",
+    "varPrefix": "--cds-"
+  },
+  "mount": {
+    "__note": "LOAD-BEARING. Carbon themes are CLASS SCOPES (.cds--white/.cds--g10/.cds--g90/.cds--g100), never :root — a page without the <Theme> wrapper renders pixel-correct (every var() carries a literal fallback) while EVERY custom property resolves EMPTY at :root, so the CSS-vars reader verifies zero candidates and the round yields ZERO source facts in silence. Verified by probe: getComputedStyle(:root)['--cds-layer-01'] = '' vs '#f4f4f4' inside .cds--white. The wrapper's implicit cds--layer-one context is what makes the layer/field token family resolve too.",
+    "imports": [
+      "import '@carbon/styles/css/styles.css';",
+      "import { Theme } from '@carbon/react';"
+    ],
+    "wrapperOpen": "<Theme theme=\"white\">",
+    "wrapperClose": "</Theme>"
+  },
+  "tokens": {
+    "dtcg": ["examples/carbon/tokens/carbon.dtcg.json"],
+    "css": "examples/carbon/tokens/carbon.vars.css",
+    "minted": "examples/carbon/tokens/carbon-minted.dtcg.json"
+  },
+  "browser": {
+    "viewport": { "width": 900, "height": 1000 },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": { "width": 320, "height": 96, "padding": 16 },
+  "enumeration": {
+    "__note": "unsetLabel is \"unset\", NOT the drafter's default \"__unset\". CARBON FINDING: Carbon is the first library through the pipeline with a DEFAULTLESS enum axis that reaches minting (Button/Tag/TextInput/Modal/IconButton size, Accordion size, Tag type). The pseudo-value becomes a SEGMENT of every minted token path (imported.tag.root.background-color.{type}.unset), and the contract token-ref regex is /^\\{[a-z0-9.{}-]+\\}$/i \u2014 underscores are not in that class, so \"__unset\" fails ContractSchema.parse at the end of fusion with a wall of brace-wrapping errors that never mention the underscore. The field exists to be configurable and loadConfig refuses a collision with a real axis value by name, so this is a CONFIG fix, not an engine one \u2014 but extract/draft-capture-config.ts still DRAFTS \"__unset\", so the next defaultless-axis library hits the same wall (named in examples/carbon/PROVENANCE.md).",
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "__note": "size is DEFAULTLESS (Carbon's destructure has no fallback) — the __unset pseudo-value leads the axis. Sizing does NOT ride a per-component rule: the size prop emits BOTH .cds--btn--<size> (no CSS) and .cds--layout--size-<size> (the real rule, reading the :root layout tokens), which is why the :root layout block is in the DTCG base.",
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/carbon/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": ["kind", "size"],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "stage": { "width": 360, "height": 128, "padding": 16 }
+    },
+    {
+      "name": "Tag",
+      "importName": "Tag",
+      "contract": "examples/carbon/contracts-seed/tag.contract.json",
+      "sampleText": "Tag",
+      "axes": ["type", "size"]
+    },
+    {
+      "__note": "TRI-STATE ON ONE AXIS (MUI Checkbox precedent): Carbon spells it as two independent booleans, so the axis value expands through $props. The visible box is a ::before/::after PSEUDO on the label — the pseudo-decor v1 grammar's named refusals are expected here and are receipted, not worked around.",
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/carbon/contracts-seed/checkbox.contract.json",
+      "sampleText": "",
+      "axes": ["checked"],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": { "$props": { "checked": false } },
+          "checked": { "$props": { "checked": true } },
+          "indeterminate": { "$props": { "checked": false, "indeterminate": true } }
+        }
+      },
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "fixedProps": { "id": "carbon-checkbox", "labelText": "Checkbox" },
+      "callbackProps": ["onChange"]
+    },
+    {
+      "__note": "`toggled` is a VARIANT AXIS, never a stateProp — loadConfig refuses an out-of-vocabulary state by name (STATE-PLANE PROJECTION round). size PINNED to md: a Size×Toggled knob offset is the two-axis product the decor grammar cannot spell (examples/tailwind/PROVENANCE.md).",
+      "name": "Toggle",
+      "importName": "Toggle",
+      "contract": "examples/carbon/contracts-seed/toggle.contract.json",
+      "sampleText": "",
+      "axes": ["toggled"],
+      "axisValueMap": { "toggled": { "untoggled": false, "toggled": true } },
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "fixedProps": { "id": "carbon-toggle", "labelText": "Toggle", "size": "md" },
+      "callbackProps": ["onToggle"]
+    },
+    {
+      "name": "TextInput",
+      "importName": "TextInput",
+      "contract": "examples/carbon/contracts-seed/textinput.contract.json",
+      "sampleText": "",
+      "axes": ["size"],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "fixedProps": { "id": "carbon-text-input", "labelText": "Label", "placeholder": "Placeholder" },
+      "blockStage": true,
+      "stage": { "width": 320, "height": 140, "padding": 16 }
+    },
+    {
+      "__note": "`lowContrast` is a library BOOLEAN and a two-value VARIANT AXIS here — it selects a rendering, so it is an axis, not a state. The $props grammar maps the contract axis `contrast` onto the library prop `lowContrast`.",
+      "name": "InlineNotification",
+      "importName": "InlineNotification",
+      "contract": "examples/carbon/contracts-seed/inlinenotification.contract.json",
+      "sampleText": "",
+      "axes": ["kind", "contrast"],
+      "axisValueMap": {
+        "contrast": {
+          "high": { "$props": { "lowContrast": false } },
+          "low": { "$props": { "lowContrast": true } }
+        }
+      },
+      "fixedProps": { "title": "Notification title", "subtitle": "Notification subtitle" },
+      "callbackProps": ["onClose", "onCloseButtonClick"],
+      "blockStage": true,
+      "stage": { "width": 460, "height": 140, "padding": 16 }
+    },
+    {
+      "__note": "NAMED DEFERRAL: expansion (`open`) is an AccordionItem prop, not an Accordion prop — the axis grammar drives the ROOT mount only, so the item is pinned open and an Expanded axis is out of round 1.",
+      "name": "Accordion",
+      "importName": "Accordion",
+      "contract": "examples/carbon/contracts-seed/accordion.contract.json",
+      "sampleText": "",
+      "axes": ["align", "size"],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "childrenSpec": [
+        { "importName": "AccordionItem", "props": { "open": true, "title": "Accordion title" }, "text": "Details body copy for the Carbon round." }
+      ],
+      "blockStage": true,
+      "stage": { "width": 360, "height": 220, "padding": 16 }
+    },
+    {
+      "__note": "2-deep childrenSpec (the organism round's recursive grammar). NAMED DEFERRAL: Carbon has no `type` enum — the line/contained distinction is a BOOLEAN `contained` on TabList, a CHILD, and the axis grammar cannot reach a child prop. `contained` is pinned false (line tabs); a Contained axis needs child-prop enumeration and is out of round 1. DETERMINISM PIN (witnessed, not precautionary): UNCONTROLLED, Carbon's TabList defaults to activation:'automatic', so the focus-visible driver's Tab keypress SELECTS whichever tab it lands on and the selection survived into the next sweep — the double-run self-check failed with Tab 0's border-block-end-color reading rgba(15,98,254) in run 1 and rgba(224,224,224) in run 2 (and the list width jittering 261.781 vs 261.922px as the selected tab's bolder text remeasured). `selectedIndex: 0` + the onChange callback makes it CONTROLLED (useControllableState), which is the same fix MUI Tabs carries as `value: 0`.",
+      "name": "Tabs",
+      "importName": "Tabs",
+      "contract": "examples/carbon/contracts-seed/tabs.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": { "selectedIndex": 0 },
+      "callbackProps": ["onChange"],
+      "childrenSpec": [
+        {
+          "importName": "TabList",
+          "props": { "aria-label": "Carbon tabs", "contained": false },
+          "children": [
+            { "importName": "Tab", "text": "Overview" },
+            { "importName": "Tab", "text": "Activity" },
+            { "importName": "Tab", "text": "Settings" }
+          ]
+        },
+        {
+          "importName": "TabPanels",
+          "children": [
+            { "importName": "TabPanel", "text": "Overview panel" },
+            { "importName": "TabPanel", "text": "Activity panel" },
+            { "importName": "TabPanel", "text": "Settings panel" }
+          ]
+        }
+      ],
+      "blockStage": true,
+      "stage": { "width": 360, "height": 180, "padding": 16 }
+    },
+    {
+      "__note": "THE CONTROL-CASE PREDICTION: Carbon's Modal is NOT portalled — it renders IN PLACE as a position:fixed, viewport-filling scrim (verified: document.body has no extra child). portalCapture routes it to the two-phase baseline-diff reader anyway, because a z-index 9000 full-bleed overlay on the SHARED census page would paint over every other stage and swallow the interaction drivers.",
+      "name": "Modal",
+      "importName": "Modal",
+      "contract": "examples/carbon/contracts-seed/modal.contract.json",
+      "sampleText": "Modal body copy for the Carbon round.",
+      "axes": ["size"],
+      "portalCapture": true,
+      "openDriver": { "open": true },
+      "fixedProps": {
+        "modalHeading": "Modal heading",
+        "modalLabel": "Label",
+        "primaryButtonText": "Save",
+        "secondaryButtonText": "Cancel"
+      },
+      "callbackProps": ["onRequestClose", "onRequestSubmit"]
+    },
+    {
+      "__note": "The glyph rides the EXISTING marker grammar: renderIcon = {\"$import\":\"@carbon/icons-react#Add\"} — IconButton forwards renderIcon to ButtonBase through its rest spread (verified: 1 <svg> rendered, no children needed). NAMED: the captured ROOT is Carbon's tooltip popover container (span.cds--popover-container.cds--icon-tooltip) — an icon button IS a tooltip trigger in Carbon, not a bare <button>.",
+      "name": "IconButton",
+      "importName": "IconButton",
+      "contract": "examples/carbon/contracts-seed/iconbutton.contract.json",
+      "sampleText": "",
+      "axes": ["kind", "size"],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "fixedProps": {
+        "label": "Add",
+        "renderIcon": { "$import": "@carbon/icons-react#Add" }
+      },
+      "stage": { "width": 320, "height": 120, "padding": 16 }
+    }
+  ]
+}

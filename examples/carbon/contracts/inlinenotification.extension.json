@@ -1,0 +1,1794 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@carbon/react@1.112.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "inline-notification": {
+        "root": {
+          "background-color": {
+            "error": {
+              "high": {
+                "$value": "#393939",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#fff1f1",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "high": {
+                "$value": "#393939",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#edf5ff",
+                "$type": "color"
+              }
+            },
+            "info-square": {
+              "high": {
+                "$value": "#393939",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#edf5ff",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "high": {
+                "$value": "#393939",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#defbe6",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "high": {
+                "$value": "#393939",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#fcf4d6",
+                "$type": "color"
+              }
+            },
+            "warning-alt": {
+              "high": {
+                "$value": "#393939",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#fcf4d6",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color": {
+            "error": {
+              "high": {
+                "$value": "#fa4d56",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#da1e28",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "high": {
+                "$value": "#4589ff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#0043ce",
+                "$type": "color"
+              }
+            },
+            "info-square": {
+              "high": {
+                "$value": "#4589ff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#0043ce",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "high": {
+                "$value": "#42be65",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#24a148",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "high": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              }
+            },
+            "warning-alt": {
+              "high": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-width": {
+            "$value": "3px",
+            "$type": "dimension"
+          },
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "max-width": {
+            "$value": "608px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "288px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "margin-left": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "margin-right": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "icon": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "fill": {
+            "error": {
+              "high": {
+                "$value": "#fa4d56",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#da1e28",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "high": {
+                "$value": "#4589ff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#0043ce",
+                "$type": "color"
+              }
+            },
+            "info-square": {
+              "high": {
+                "$value": "#4589ff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#0043ce",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "high": {
+                "$value": "#42be65",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#24a148",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "high": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              }
+            },
+            "warning-alt": {
+              "high": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              }
+            }
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0-0-0": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0-0-1-2": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0-0-2": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "fill": {
+            "$value": "#f1c21b",
+            "$type": "color"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0-0-1": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "opacity": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "label": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "fill": {
+            "error": {
+              "high": {
+                "$value": "#fa4d56",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#da1e28",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "high": {
+                "$value": "#4589ff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#0043ce",
+                "$type": "color"
+              }
+            },
+            "info-square": {
+              "high": {
+                "$value": "#4589ff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#0043ce",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "high": {
+                "$value": "#42be65",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#24a148",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "high": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              }
+            },
+            "warning-alt": {
+              "high": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#f1c21b",
+                "$type": "color"
+              }
+            }
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-0-1": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "padding-bottom": {
+            "$value": "15px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "$value": "15px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "label-2": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "$value": "600",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.16px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "18.0001px",
+            "$type": "dimension"
+          },
+          "margin-right": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "label-3": {
+          "color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.16px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "18.0001px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          }
+        },
+        "part-1": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "color": {
+            "$value": "#000000",
+            "$type": "color"
+          },
+          "outline-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "outline-offset": {
+            "$value": "-2px",
+            "$type": "dimension"
+          },
+          "outline-width": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "outline-color-state-focus-visible": {
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#0f62fe",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-48": {
+          "$value": "48px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "part-1",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "part-1",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "part-1",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-duration",
+        "value": "0.11s, 0.11s"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-property",
+        "value": "outline, background-color"
+      },
+      {
+        "part": "part-1",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "icon",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "d",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")",
+      "distinctValues": 5
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "fill",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 7
+    },
+    {
+      "part": "part-0-0-1-2",
+      "channel": "d",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")",
+      "distinctValues": 4
+    },
+    {
+      "part": "part-0-0-2",
+      "channel": "d",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "d",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-0-1",
+      "channel": "fill",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 3
+    },
+    {
+      "part": "part-0-1",
+      "channel": "flex-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "wrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "part-0-0-1-2",
+      "channel": "fill",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "part-1",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.inline-notification.part-1.outline-color-state-focus-visible.{contrast}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "error.low",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info.low",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info-square.low",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "success.low",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning.low",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning-alt.low",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 6
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [
+    "union-part-added: info.high__default @0.0.1 (path|)",
+    "union-part-added: warning-alt.high__default @0.0.2 (path|)",
+    "part-missing: info.high__default part-0-0-1",
+    "part-missing: info.high__hover part-0-0-1",
+    "part-missing: info.high__focus-visible part-0-0-1",
+    "part-missing: info.high__active part-0-0-1",
+    "part-missing: info.low__default part-0-0-1",
+    "part-missing: info.low__hover part-0-0-1",
+    "part-missing: info.low__focus-visible part-0-0-1",
+    "part-missing: info.low__active part-0-0-1",
+    "part-missing: info-square.high__default part-0-0-1",
+    "part-missing: info-square.high__hover part-0-0-1",
+    "part-missing: info-square.high__focus-visible part-0-0-1",
+    "part-missing: info-square.high__active part-0-0-1",
+    "part-missing: info-square.low__default part-0-0-1",
+    "part-missing: info-square.low__hover part-0-0-1",
+    "part-missing: info-square.low__focus-visible part-0-0-1",
+    "part-missing: info-square.low__active part-0-0-1",
+    "part-missing: warning.high__default part-0-0-1",
+    "part-missing: warning.high__hover part-0-0-1",
+    "part-missing: warning.high__focus-visible part-0-0-1",
+    "part-missing: warning.high__active part-0-0-1",
+    "part-missing: warning.low__default part-0-0-1",
+    "part-missing: warning.low__hover part-0-0-1",
+    "part-missing: warning.low__focus-visible part-0-0-1",
+    "part-missing: warning.low__active part-0-0-1",
+    "part-missing: warning-alt.high__default part-0-0-1",
+    "part-missing: warning-alt.high__hover part-0-0-1",
+    "part-missing: warning-alt.high__focus-visible part-0-0-1",
+    "part-missing: warning-alt.high__active part-0-0-1",
+    "part-missing: warning-alt.low__default part-0-0-1",
+    "part-missing: warning-alt.low__hover part-0-0-1",
+    "part-missing: warning-alt.low__focus-visible part-0-0-1",
+    "part-missing: warning-alt.low__active part-0-0-1"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-1-2)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-2)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-1)",
+    "control-fallback: no control for <title> — span control used (part label)",
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "svg-host-color-carried: part-1 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-0)",
+    "inheritance-check-rejected: icon.fill — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.letter-spacing — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: icon.caret-color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: icon.color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.caret-color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.caret-color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.fill equals ancestor \"icon\" on all 48 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-0.caret-color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-0.color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-1-2.caret-color equals ancestor \"icon\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-1-2.color equals ancestor \"icon\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-1.caret-color equals ancestor \"icon\" on all 16 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-1.color equals ancestor \"icon\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-2.caret-color equals ancestor \"icon\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-2.color equals ancestor \"icon\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-0-2.fill equals ancestor \"icon\" on all 8 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-1.caret-color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-1.color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.caret-color equals ancestor \"root\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.color equals ancestor \"root\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-1-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "icon",
+      "part-0-0-0",
+      "part-0-0-1-2",
+      "part-0-0-2",
+      "part-0-0-1",
+      "label",
+      "part-0-1",
+      "label-2",
+      "label-3",
+      "part-1"
+    ],
+    "svgAssets": [
+      "inline-notification-part-1"
+    ],
+    "receipts": [
+      "svg-child-outside-grammar: InlineNotification.icon@error.high — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@error.low — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@info.high — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@info.low — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@info-square.high — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@info-square.low — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@success.high — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@success.low — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@warning.high — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@warning.low — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@warning-alt.high — <title> (v1 carries path/g only); asset refused",
+      "svg-child-outside-grammar: InlineNotification.icon@warning-alt.low — <title> (v1 carries path/g only); asset refused",
+      "svg-viewbox-bumped: InlineNotification.part-1@error.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@error.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@info.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@info.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@info-square.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@info-square.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@success.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@success.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@warning.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@warning.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@warning-alt.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.part-1@warning-alt.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "root-display-carried: flex",
+      "presence-carried: part-0-0-1-2 (8/12 combos) →  hidden-when kind=error, kind=success",
+      "presence-carried: part-0-0-2 (2/12 combos) →  hidden-when kind=error, kind=info, kind=info-square, kind=success, kind=warning",
+      "sr-only-carried-as-hidden: part-0-0-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "literal-text-carried: label = \"error icon\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Notification title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-3 = \"Notification subtitle\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: part-1.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transition-duration = 0.11s, 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transition-property = outline, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "nested pair carried: icon.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: label.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
+  ]
+}

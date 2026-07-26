@@ -1,0 +1,93 @@
+{
+  "id": "carbon.tag",
+  "name": "Tag",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "red",
+          "magenta",
+          "purple",
+          "blue",
+          "cyan",
+          "teal",
+          "green",
+          "gray",
+          "cool-gray",
+          "warm-gray",
+          "high-contrast",
+          "outline"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "red": "Red",
+            "magenta": "Magenta",
+            "purple": "Purple",
+            "blue": "Blue",
+            "cyan": "Cyan",
+            "teal": "Teal",
+            "green": "Green",
+            "gray": "Gray",
+            "cool-gray": "Cool Gray",
+            "warm-gray": "Warm Gray",
+            "high-contrast": "High Contrast",
+            "outline": "Outline"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). TYPES/SIZES read from the library source (lib/components/Tag/Tag.js). BOTH axes are defaultless in Carbon.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Tag"
+    }
+  },
+  "states": []
+}

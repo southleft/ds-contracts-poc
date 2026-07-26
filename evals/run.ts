@@ -120,6 +120,10 @@ function resetScratch() {
     ['astryx', 'astryx.bundle.json'],
     ['astryx', 'astryx-docs.bundle.json'],
     ['polaris', 'polaris.bundle.json'],
+    // CARBON ROUND: the recurring hermeticity lesson — any gate flow that reads
+    // an examples/ file needs it staged here, or plugin-engine-check passes
+    // locally and dies in scratch.
+    ['carbon', 'carbon.bundle.json'],
   ]) {
     mkdirSync(path.join(SCRATCH, 'examples', dir, 'figma'), { recursive: true });
     cpSync(path.join(ROOT, 'examples', dir, 'figma', f), path.join(SCRATCH, 'examples', dir, 'figma', f));
@@ -6163,6 +6167,100 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    id: 'carbon-figma-genesis',
+    claim: 'C8-journey',
+    run: () => {
+      // THE GENERALITY CONTROL CASE — library #7 (@carbon/react), run against
+      // the explicit prediction that a new library costs CONFIG ONLY. What this
+      // eval pins is the SHIPPED end of that claim; the engine-side accounting
+      // lives in examples/carbon/PROVENANCE.md ("The generality verdict").
+      //
+      // Three things here are Carbon-specific and cannot be checked anywhere
+      // else in the suite:
+      //   (1) DEFAULTLESS ENUM AXES. Carbon is the first library whose axes ship
+      //       with no default (Button/Tag/TextInput/Modal/IconButton/Accordion
+      //       `size`, Tag `type`). The capture leads such an axis with the
+      //       `unset` pseudo-value, that value becomes a SEGMENT of every minted
+      //       token path, and the contract token-ref regex forbids underscores —
+      //       which is why the config carries `unsetLabel: "unset"` and not the
+      //       drafter's `"__unset"`. The compile receipt refuses an "Unset"
+      //       variant cell by name.
+      //   (2) CLASS-SCOPED THEMES. Carbon's Light/Dark are `.cds--white` and
+      //       `.cds--g100` — two complete inventories of the same 339 names.
+      //   (3) A FOREIGN-PACKAGE GLYPH through the untouched marker grammar
+      //       ({"$import":"@carbon/icons-react#Add"}).
+      cpSync(path.join(ROOT, 'examples', 'carbon'), path.join(SCRATCH, 'examples', 'carbon'), {
+        recursive: true,
+        filter: (src) => !src.includes('.carbon-sandbox'),
+      });
+      const receipt = run(process.execPath, ['examples/carbon/scripts/figma-compile-receipt.mjs']);
+      if (receipt.status !== 0) throw new Error(`carbon figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
+      if (!receipt.out.includes('10 scripts, 132 variants')) {
+        throw new Error(`carbon compile receipt missing the 10-scripts/132-variants line:\n${receipt.out.slice(0, 800)}`);
+      }
+      const batch = run(process.execPath, ['examples/carbon/scripts/build-genesis-batch.mjs']);
+      if (batch.status !== 0) throw new Error(`carbon genesis batch refused:\n${batch.out.slice(0, 1600)}`);
+      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1459 variables\)/.test(batch.out)) {
+        throw new Error(`carbon genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
+      }
+      // The token wrap is a PURE function of the pinned compiled stylesheet, so
+      // the committed DTCG must be byte-reproducible — and it re-asserts the
+      // .cds--white / .cds--g100 / :root-layout block sizes it was written
+      // against, refusing rather than silently shrinking on a Carbon bump.
+      // (Run only when the sandbox is present; the eval suite is network-free.)
+      const sandboxCss = path.join(ROOT, 'examples/carbon/.carbon-sandbox/node_modules/@carbon/styles/css/styles.css');
+      let tokenNote = 'token wrap not re-run (sandbox absent — network-free suite)';
+      if (existsSync(sandboxCss)) {
+        const before = readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8');
+        const tw = run(process.execPath, [path.join(ROOT, 'examples/carbon/scripts/build-tokens.mjs')]);
+        if (tw.status !== 0) throw new Error(`carbon build-tokens refused:\n${tw.out.slice(0, 800)}`);
+        const after = readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8');
+        if (before !== after) throw new Error('committed examples/carbon/tokens/carbon.dtcg.json is STALE — a fresh wrap of the pinned stylesheet differs');
+        tokenNote = 'token wrap re-run against the pinned stylesheet: byte-identical';
+      }
+      // MODES ARE REAL, not one theme twice — checked on the committed files.
+      const light = JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/modes/carbon.light.dtcg.json'), 'utf8')) as Record<string, { $value: string }>;
+      const dark = JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/modes/carbon.dark.dtcg.json'), 'utf8')) as Record<string, { $value: string }>;
+      const differing = Object.keys(light).filter((k) => k in dark && light[k].$value !== dark[k].$value);
+      if (differing.length < 200) {
+        throw new Error(`carbon Light/Dark differ on only ${differing.length} tokens — .cds--white and .cds--g100 are two DIFFERENT themes; this few means one block was parsed twice`);
+      }
+      if (light['layer-01'].$value !== '#f4f4f4' || dark['layer-01'].$value !== '#262626') {
+        throw new Error(`carbon layer-01 is ${light['layer-01'].$value}/${dark['layer-01'].$value}, expected #f4f4f4/#262626 (the contextual-alias resolution follows ONE hop INSIDE each theme block — taking the literal var() fallback instead would bake the light value into Dark)`);
+      }
+      // NO "unset" LEAKED INTO A CONTRACT ENUM. The pseudo-value is a
+      // capture-side plane; a contract that carries it as a real enum value
+      // would put an Unset cell on the canvas.
+      for (const f of readdirSync(path.join(ROOT, 'examples/carbon/contracts')).filter((x) => x.endsWith('.contract.json'))) {
+        const c = JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/contracts', f), 'utf8')) as { props?: Array<{ name: string; type?: { enum?: string[] } }> };
+        for (const pr of c.props ?? []) {
+          if (pr.type?.enum?.includes('unset')) throw new Error(`${f}: prop "${pr.name}" carries the "unset" PSEUDO-value as a real enum value — it is a capture-side plane, never a variant`);
+        }
+      }
+      // FOREIGN-TOKEN BUNDLE freshness (two-mode variant).
+      const bundleArgs = [
+        'packages/cli/src/cli.ts', 'figma', 'bundle', 'examples/carbon/contracts',
+        '--tokens', 'examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtcg.json',
+        '--modes', 'examples/carbon/tokens/modes/carbon.light.dtcg.json,examples/carbon/tokens/modes/carbon.dark.dtcg.json',
+        '--name', 'Carbon',
+        '--icons', 'examples/carbon/assets/icons',
+      ];
+      const c1 = run(TSX, [...bundleArgs, '--out', 'examples/carbon/figma/bundle-run-a.json']);
+      const c2 = run(TSX, [...bundleArgs, '--out', 'examples/carbon/figma/bundle-run-b.json']);
+      if (c1.status !== 0 || c2.status !== 0) throw new Error(`figma bundle (carbon) failed:\n${(c1.out + c2.out).slice(0, 1200)}`);
+      const runA = readFileSync(path.join(SCRATCH, 'examples/carbon/figma/bundle-run-a.json'), 'utf8');
+      const runB = readFileSync(path.join(SCRATCH, 'examples/carbon/figma/bundle-run-b.json'), 'utf8');
+      if (runA !== runB) throw new Error('carbon figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
+      const committed = readFileSync(path.join(ROOT, 'examples/carbon/figma/carbon.bundle.json'), 'utf8');
+      if (runA !== committed) throw new Error('committed examples/carbon/figma/carbon.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
+      console.log(
+        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1459 variables incl. 94 Figma-native source aliases); ` +
+          `Light/Dark = .cds--white/.cds--g100 differ on ${differing.length} tokens; no "unset" pseudo-value reached a contract enum; ` +
+          `one-paste batch mock-proven; committed carbon.bundle.json fresh and byte-deterministic; ${tokenNote} — the generality control case`,
+      );
+    },
+  },
+  {
     id: 'generalized-translate-door',
     claim: 'C5-extraction',
     run: () => {
@@ -6271,7 +6369,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     id: 'shipped-contract-refs-resolve',
     claim: 'C2-refusal',
     run: () => {
-      const libs = ['polaris', 'astryx', 'mui', 'tailwind'];
+      const libs = ['polaris', 'astryx', 'mui', 'tailwind', 'carbon'];
       let contracts = 0;
       const findings: string[] = [];
       for (const lib of libs) {
@@ -6307,7 +6405,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!planted.some((e) => e.includes('{font-size-sm}') && e.includes('does not exist in tokens/'))) {
         throw new Error('planted cross-library token ref was NOT refused — the ref check is decorative');
       }
-      console.log(`shipped-contract-refs-resolve: ${contracts} shipped contracts across 4 libraries resolve EVERY token ref against their own library trees (planted cross-library ref refused by name); the offline-gate number itself is pinned on demand by \`npm run extract:computed:drift\``);
+      console.log(`shipped-contract-refs-resolve: ${contracts} shipped contracts across ${libs.length} libraries resolve EVERY token ref against their own library trees (planted cross-library ref refused by name); the offline-gate number itself is pinned on demand by \`npm run extract:computed:drift\``);
     },
   },
   {

@@ -1,0 +1,162 @@
+{
+  "component": "Button",
+  "browser": "149.0.7827.55",
+  "captures": 448,
+  "combos": 112,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 502,
+  "elementsPerCapture": 1,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 46
+  },
+  "folds": {
+    "count": 5,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 565,
+    "mintedLeavesFolded": 365
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 365,
+    "baseBindings": 26,
+    "stateBindings": 30,
+    "byShape": {
+      "uniform": 11,
+      "perAxis": 45,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 7,
+    "state": 1
+  },
+  "codeOnly": {
+    "base": 6,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 224000,
+    "cellsMatched": 224000,
+    "pct": 100,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": []
+  },
+  "pixel": {
+    "pairs": 448,
+    "exact": {
+      "mean": 0.5444675021701413,
+      "max": 0.5620659722222222,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 0.02434624565972234,
+      "max": 0.05642361111111111,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "danger--primary.unset.enabled__default",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.unset.enabled__hover",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.unset.enabled__focus-visible",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.unset.enabled__active",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.xs.enabled__default",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.xs.enabled__hover",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.xs.enabled__focus-visible",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      },
+      {
+        "key": "danger--primary.xs.enabled__active",
+        "pctExact": 0.5620659722222222,
+        "pctAA": 0.05642361111111111
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 77.28066770186335,
+    "rowsFullyEqual": 0,
+    "rows": 448,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 448
+  },
+  "focusVisibleDriverMatched": 56,
+  "focusVisibleDriverTotal": 112
+}

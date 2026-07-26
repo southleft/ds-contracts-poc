@@ -1,0 +1,341 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.tag",
+  "name": "Tag",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). TYPES/SIZES read from the library source (lib/components/Tag/Tag.js). BOTH axes are defaultless in Carbon. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "red",
+          "magenta",
+          "purple",
+          "blue",
+          "cyan",
+          "teal",
+          "green",
+          "gray",
+          "cool-gray",
+          "warm-gray",
+          "high-contrast",
+          "outline"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "red": "Red",
+            "magenta": "Magenta",
+            "purple": "Purple",
+            "blue": "Blue",
+            "cyan": "Cyan",
+            "teal": "Teal",
+            "green": "Green",
+            "gray": "Gray",
+            "cool-gray": "Cool Gray",
+            "warm-gray": "Warm Gray",
+            "high-contrast": "High Contrast",
+            "outline": "Outline"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Tag",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "default",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "color": "{imported.tag.label.color.unset}",
+            "font-size": "{imported.tag.label.font-size}",
+            "font-weight": "{imported.tag.label.font-weight}",
+            "letter-spacing": "{imported.tag.label.letter-spacing}",
+            "line-height": "{imported.shared.size-16}",
+            "row-rule-color": "{imported.tag.label.row-rule-color.unset}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "type",
+              "map": {
+                "blue": {
+                  "color": "{imported.tag.label.color.blue}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.blue}"
+                },
+                "cool-gray": {
+                  "color": "{imported.tag.label.color.cool-gray}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.cool-gray}"
+                },
+                "cyan": {
+                  "color": "{imported.tag.label.color.cyan}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.cyan}"
+                },
+                "gray": {
+                  "color": "{imported.tag.label.color.gray}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.gray}"
+                },
+                "green": {
+                  "color": "{imported.tag.label.color.green}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.green}"
+                },
+                "high-contrast": {
+                  "color": "{imported.tag.label.color.high-contrast}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.high-contrast}"
+                },
+                "magenta": {
+                  "color": "{imported.tag.label.color.magenta}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.magenta}"
+                },
+                "outline": {
+                  "color": "{imported.tag.label.color.outline}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.outline}"
+                },
+                "purple": {
+                  "color": "{imported.tag.label.color.purple}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.purple}"
+                },
+                "red": {
+                  "color": "{imported.tag.label.color.red}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.red}"
+                },
+                "teal": {
+                  "color": "{imported.tag.label.color.teal}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.teal}"
+                },
+                "warm-gray": {
+                  "color": "{imported.tag.label.color.warm-gray}",
+                  "row-rule-color": "{imported.tag.label.row-rule-color.warm-gray}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "cursor": "default"
+      },
+      "tokens": {
+        "background-color": "{imported.tag.root.background-color.unset}",
+        "border-bottom-left-radius": "{imported.shared.size-16}",
+        "border-bottom-right-radius": "{imported.shared.size-16}",
+        "border-top-left-radius": "{imported.shared.size-16}",
+        "border-top-right-radius": "{imported.shared.size-16}",
+        "color": "{imported.tag.root.color.unset}",
+        "font-size": "{imported.tag.root.font-size}",
+        "letter-spacing": "{imported.tag.root.letter-spacing}",
+        "max-width": "{imported.tag.root.max-width}",
+        "min-height": "{imported.tag.root.min-height.unset}",
+        "min-width": "{imported.tag.root.min-width}",
+        "outline-color": "{imported.tag.root.outline-color.unset}",
+        "outline-offset": "{imported.tag.root.outline-offset.unset}",
+        "outline-width": "{imported.tag.root.outline-width.unset}",
+        "padding-left": "{imported.tag.root.padding-left.unset}",
+        "padding-right": "{imported.tag.root.padding-right.unset}",
+        "row-rule-color": "{imported.tag.root.row-rule-color.unset}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "min-height": "{imported.tag.root.min-height.lg}",
+              "padding-left": "{imported.tag.root.padding-left.lg}",
+              "padding-right": "{imported.tag.root.padding-right.lg}"
+            },
+            "md": {
+              "min-height": "{imported.tag.root.min-height.md}",
+              "padding-left": "{imported.tag.root.padding-left.md}",
+              "padding-right": "{imported.tag.root.padding-right.md}"
+            },
+            "sm": {
+              "min-height": "{imported.tag.root.min-height.sm}",
+              "padding-left": "{imported.tag.root.padding-left.sm}",
+              "padding-right": "{imported.tag.root.padding-right.sm}"
+            }
+          }
+        },
+        {
+          "prop": "type",
+          "map": {
+            "blue": {
+              "background-color": "{imported.tag.root.background-color.blue}",
+              "color": "{imported.tag.root.color.blue}",
+              "outline-color": "{imported.tag.root.outline-color.blue}",
+              "outline-offset": "{imported.tag.root.outline-offset.blue}",
+              "outline-width": "{imported.tag.root.outline-width.blue}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.blue}"
+            },
+            "cool-gray": {
+              "background-color": "{imported.tag.root.background-color.cool-gray}",
+              "color": "{imported.tag.root.color.cool-gray}",
+              "outline-color": "{imported.tag.root.outline-color.cool-gray}",
+              "outline-offset": "{imported.tag.root.outline-offset.cool-gray}",
+              "outline-width": "{imported.tag.root.outline-width.cool-gray}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.cool-gray}"
+            },
+            "cyan": {
+              "background-color": "{imported.tag.root.background-color.cyan}",
+              "color": "{imported.tag.root.color.cyan}",
+              "outline-color": "{imported.tag.root.outline-color.cyan}",
+              "outline-offset": "{imported.tag.root.outline-offset.cyan}",
+              "outline-width": "{imported.tag.root.outline-width.cyan}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.cyan}"
+            },
+            "gray": {
+              "background-color": "{imported.tag.root.background-color.gray}",
+              "color": "{imported.tag.root.color.gray}",
+              "outline-color": "{imported.tag.root.outline-color.gray}",
+              "outline-offset": "{imported.tag.root.outline-offset.gray}",
+              "outline-width": "{imported.tag.root.outline-width.gray}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.gray}"
+            },
+            "green": {
+              "background-color": "{imported.tag.root.background-color.green}",
+              "color": "{imported.tag.root.color.green}",
+              "outline-color": "{imported.tag.root.outline-color.green}",
+              "outline-offset": "{imported.tag.root.outline-offset.green}",
+              "outline-width": "{imported.tag.root.outline-width.green}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.green}"
+            },
+            "high-contrast": {
+              "background-color": "{imported.tag.root.background-color.high-contrast}",
+              "color": "{imported.tag.root.color.high-contrast}",
+              "outline-color": "{imported.tag.root.outline-color.high-contrast}",
+              "outline-offset": "{imported.tag.root.outline-offset.high-contrast}",
+              "outline-width": "{imported.tag.root.outline-width.high-contrast}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.high-contrast}"
+            },
+            "magenta": {
+              "background-color": "{imported.tag.root.background-color.magenta}",
+              "color": "{imported.tag.root.color.magenta}",
+              "outline-color": "{imported.tag.root.outline-color.magenta}",
+              "outline-offset": "{imported.tag.root.outline-offset.magenta}",
+              "outline-width": "{imported.tag.root.outline-width.magenta}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.magenta}"
+            },
+            "outline": {
+              "background-color": "{imported.tag.root.background-color.outline}",
+              "color": "{imported.tag.root.color.outline}",
+              "outline-color": "{imported.tag.root.outline-color.outline}",
+              "outline-offset": "{imported.tag.root.outline-offset.outline}",
+              "outline-width": "{imported.tag.root.outline-width.outline}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.outline}"
+            },
+            "purple": {
+              "background-color": "{imported.tag.root.background-color.purple}",
+              "color": "{imported.tag.root.color.purple}",
+              "outline-color": "{imported.tag.root.outline-color.purple}",
+              "outline-offset": "{imported.tag.root.outline-offset.purple}",
+              "outline-width": "{imported.tag.root.outline-width.purple}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.purple}"
+            },
+            "red": {
+              "background-color": "{imported.tag.root.background-color.red}",
+              "color": "{imported.tag.root.color.red}",
+              "outline-color": "{imported.tag.root.outline-color.red}",
+              "outline-offset": "{imported.tag.root.outline-offset.red}",
+              "outline-width": "{imported.tag.root.outline-width.red}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.red}"
+            },
+            "teal": {
+              "background-color": "{imported.tag.root.background-color.teal}",
+              "color": "{imported.tag.root.color.teal}",
+              "outline-color": "{imported.tag.root.outline-color.teal}",
+              "outline-offset": "{imported.tag.root.outline-offset.teal}",
+              "outline-width": "{imported.tag.root.outline-width.teal}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.teal}"
+            },
+            "warm-gray": {
+              "background-color": "{imported.tag.root.background-color.warm-gray}",
+              "color": "{imported.tag.root.color.warm-gray}",
+              "outline-color": "{imported.tag.root.outline-color.warm-gray}",
+              "outline-offset": "{imported.tag.root.outline-offset.warm-gray}",
+              "outline-width": "{imported.tag.root.outline-width.warm-gray}",
+              "row-rule-color": "{imported.tag.root.row-rule-color.warm-gray}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Tag"
+    }
+  }
+}

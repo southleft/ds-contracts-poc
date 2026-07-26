@@ -1,0 +1,322 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.textinput",
+  "name": "TextInput",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). size xs|sm|md|lg, ALL FOUR verified distinct by live probe (24/32/40/48px). The recon predicted xs might not exist because the compiled CSS ships no `.cds--text-input--xs` rule — it does not, and the height still moves: Carbon routes control sizing through the SHARED `.cds--layout--size-*` classes and the :root layout tokens, not through per-component size rules. `invalid`/`warn` are DEFERRED BY NAME from round 1 (they add a validation subtree and a second border plane). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "start"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "justify": "space-between"
+          },
+          "parts": {
+            "label": {
+              "element": "label",
+              "text": "Label",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "default"
+              },
+              "tokens": {
+                "color": "{imported.text-input.label.color}",
+                "font-size": "{imported.text-input.label.font-size}",
+                "font-weight": "{imported.text-input.label.font-weight}",
+                "letter-spacing": "{imported.text-input.label.letter-spacing}",
+                "line-height": "{imported.shared.size-16}",
+                "margin-bottom": "{imported.text-input.label.margin-bottom}",
+                "row-rule-color": "{imported.text-input.label.row-rule-color}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-16161640}"
+                }
+              }
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.text-input.part-0.height}",
+            "letter-spacing": "{imported.shared.size-0-16}",
+            "line-height": "{imported.shared.size-18-0001}",
+            "width": "{imported.shared.size-288}"
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "start"
+          },
+          "parts": {
+            "part-1-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "part-1-0-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "appearance": "auto",
+                    "border-bottom-style": "solid",
+                    "cursor": "text",
+                    "font-feature-settings": "normal",
+                    "outline-style": "solid",
+                    "overflow-x": "clip",
+                    "overflow-y": "clip",
+                    "text-rendering": "auto",
+                    "transition-delay": "0s, 0s",
+                    "transition-duration": "0.07s, 0.07s",
+                    "transition-property": "background-color, outline",
+                    "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
+                  },
+                  "layout": {
+                    "grow": true
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "background-color": "{imported.text-input.part-1-0-0.background-color}",
+                    "border-bottom-color": "{imported.text-input.part-1-0-0.border-bottom-color}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "font-size": "{imported.shared.size-14}",
+                    "height": "{imported.text-input.part-1-0-0.height.unset}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "outline-color": "{imported.text-input.part-1-0-0.outline-color}",
+                    "outline-offset": "{imported.text-input.part-1-0-0.outline-offset}",
+                    "outline-width": "{imported.text-input.part-1-0-0.outline-width}",
+                    "padding-left": "{imported.shared.size-16}",
+                    "padding-right": "{imported.shared.size-16}",
+                    "width": "{imported.shared.size-288}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.shared.color-16161640}"
+                    }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "lg": {
+                          "height": "{imported.text-input.part-1-0-0.height.lg}"
+                        },
+                        "md": {
+                          "height": "{imported.text-input.part-1-0-0.height.md}"
+                        },
+                        "sm": {
+                          "height": "{imported.text-input.part-1-0-0.height.sm}"
+                        },
+                        "xs": {
+                          "height": "{imported.text-input.part-1-0-0.height.xs}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-1-0-1": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "absolute"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.text-input.part-1-0-1.bottom.unset}",
+                    "font-size": "{imported.shared.size-14}",
+                    "height": "{imported.shared.size-1}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "margin-bottom": "{imported.shared.size-neg-1}",
+                    "margin-left": "{imported.shared.size-neg-1}",
+                    "margin-right": "{imported.shared.size-neg-1}",
+                    "margin-top": "{imported.shared.size-neg-1}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.text-input.part-1-0-1.right}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-1}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "lg": {
+                          "bottom": "{imported.text-input.part-1-0-1.bottom.lg}"
+                        },
+                        "md": {
+                          "bottom": "{imported.text-input.part-1-0-1.bottom.md}"
+                        },
+                        "sm": {
+                          "bottom": "{imported.text-input.part-1-0-1.bottom.sm}"
+                        },
+                        "xs": {
+                          "bottom": "{imported.text-input.part-1-0-1.bottom.xs}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "position": "relative"
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.text-input.part-1-0.height.unset}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-288}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "lg": {
+                      "height": "{imported.text-input.part-1-0.height.lg}"
+                    },
+                    "md": {
+                      "height": "{imported.text-input.part-1-0.height.md}"
+                    },
+                    "sm": {
+                      "height": "{imported.text-input.part-1-0.height.sm}"
+                    },
+                    "xs": {
+                      "height": "{imported.text-input.part-1-0.height.xs}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "flex-grow": "{imported.text-input.part-1.flex-grow}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.text-input.part-1.height.unset}",
+            "letter-spacing": "{imported.shared.size-0-16}",
+            "line-height": "{imported.shared.size-18-0001}",
+            "width": "{imported.shared.size-288}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "lg": {
+                  "height": "{imported.text-input.part-1.height.lg}"
+                },
+                "md": {
+                  "height": "{imported.text-input.part-1.height.md}"
+                },
+                "sm": {
+                  "height": "{imported.text-input.part-1.height.sm}"
+                },
+                "xs": {
+                  "height": "{imported.text-input.part-1.height.xs}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "flex-grow": "{imported.text-input.root.flex-grow}",
+        "font-size": "{imported.shared.size-14}",
+        "height": "{imported.text-input.root.height.unset}",
+        "letter-spacing": "{imported.shared.size-0-16}",
+        "line-height": "{imported.shared.size-18-0001}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-288}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "height": "{imported.text-input.root.height.lg}"
+            },
+            "md": {
+              "height": "{imported.text-input.root.height.md}"
+            },
+            "sm": {
+              "height": "{imported.text-input.root.height.sm}"
+            },
+            "xs": {
+              "height": "{imported.text-input.root.height.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "TextInput"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -1,0 +1,512 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "InlineNotification",
+  "varPrefix": "--cds-",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "error.high",
+      "axisValues": {
+        "kind": "error",
+        "contrast": "high"
+      },
+      "token": "support-error-inverse",
+      "varName": "--cds-support-error-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification--error .cds--inline-notification__icon, .cds--inline-notification--error .cds--toast-notification__icon, .cds--inline-notification--error .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "error.low",
+      "axisValues": {
+        "kind": "error",
+        "contrast": "low"
+      },
+      "token": "support-error",
+      "varName": "--cds-support-error",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--error .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--error .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--error .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.high",
+      "axisValues": {
+        "kind": "info",
+        "contrast": "high"
+      },
+      "token": "support-info-inverse",
+      "varName": "--cds-support-info-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--info-square .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.low",
+      "axisValues": {
+        "kind": "info",
+        "contrast": "low"
+      },
+      "token": "support-info",
+      "varName": "--cds-support-info",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info-square.high",
+      "axisValues": {
+        "kind": "info-square",
+        "contrast": "high"
+      },
+      "token": "support-info-inverse",
+      "varName": "--cds-support-info-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--info-square .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info-square.low",
+      "axisValues": {
+        "kind": "info-square",
+        "contrast": "low"
+      },
+      "token": "support-info",
+      "varName": "--cds-support-info",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--info .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--info-square .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "success.high",
+      "axisValues": {
+        "kind": "success",
+        "contrast": "high"
+      },
+      "token": "support-success-inverse",
+      "varName": "--cds-support-success-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification--success .cds--inline-notification__icon, .cds--inline-notification--success .cds--toast-notification__icon, .cds--inline-notification--success .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "success.low",
+      "axisValues": {
+        "kind": "success",
+        "contrast": "low"
+      },
+      "token": "support-success",
+      "varName": "--cds-support-success",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--success .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--success .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--success .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "warning.high",
+      "axisValues": {
+        "kind": "warning",
+        "contrast": "high"
+      },
+      "token": "support-warning-inverse",
+      "varName": "--cds-support-warning-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "warning.low",
+      "axisValues": {
+        "kind": "warning",
+        "contrast": "low"
+      },
+      "token": "support-warning",
+      "varName": "--cds-support-warning",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "warning-alt.high",
+      "axisValues": {
+        "kind": "warning-alt",
+        "contrast": "high"
+      },
+      "token": "support-warning-inverse",
+      "varName": "--cds-support-warning-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "warning-alt.low",
+      "axisValues": {
+        "kind": "warning-alt",
+        "contrast": "low"
+      },
+      "token": "support-warning",
+      "varName": "--cds-support-warning",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning .cds--actionable-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--inline-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--toast-notification__icon, .cds--inline-notification--low-contrast.cds--inline-notification--warning-alt .cds--actionable-notification__icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "error.high",
+      "axisValues": {
+        "kind": "error",
+        "contrast": "high"
+      },
+      "token": "icon-inverse",
+      "varName": "--cds-icon-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "error.low",
+      "axisValues": {
+        "kind": "error",
+        "contrast": "low"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast .cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info.high",
+      "axisValues": {
+        "kind": "info",
+        "contrast": "high"
+      },
+      "token": "icon-inverse",
+      "varName": "--cds-icon-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info.low",
+      "axisValues": {
+        "kind": "info",
+        "contrast": "low"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast .cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info-square.high",
+      "axisValues": {
+        "kind": "info-square",
+        "contrast": "high"
+      },
+      "token": "icon-inverse",
+      "varName": "--cds-icon-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info-square.low",
+      "axisValues": {
+        "kind": "info-square",
+        "contrast": "low"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast .cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "success.high",
+      "axisValues": {
+        "kind": "success",
+        "contrast": "high"
+      },
+      "token": "icon-inverse",
+      "varName": "--cds-icon-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "success.low",
+      "axisValues": {
+        "kind": "success",
+        "contrast": "low"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast .cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning.high",
+      "axisValues": {
+        "kind": "warning",
+        "contrast": "high"
+      },
+      "token": "icon-inverse",
+      "varName": "--cds-icon-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning.low",
+      "axisValues": {
+        "kind": "warning",
+        "contrast": "low"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast .cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning-alt.high",
+      "axisValues": {
+        "kind": "warning-alt",
+        "contrast": "high"
+      },
+      "token": "icon-inverse",
+      "varName": "--cds-icon-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning-alt.low",
+      "axisValues": {
+        "kind": "warning-alt",
+        "contrast": "low"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast .cds--inline-notification__close-button .cds--inline-notification__close-icon"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "error.high",
+      "axisValues": {
+        "kind": "error",
+        "contrast": "high"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "error.low",
+      "axisValues": {
+        "kind": "error",
+        "contrast": "low"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.high",
+      "axisValues": {
+        "kind": "info",
+        "contrast": "high"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.low",
+      "axisValues": {
+        "kind": "info",
+        "contrast": "low"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info-square.high",
+      "axisValues": {
+        "kind": "info-square",
+        "contrast": "high"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info-square.low",
+      "axisValues": {
+        "kind": "info-square",
+        "contrast": "low"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.high",
+      "axisValues": {
+        "kind": "success",
+        "contrast": "high"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.low",
+      "axisValues": {
+        "kind": "success",
+        "contrast": "low"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.high",
+      "axisValues": {
+        "kind": "warning",
+        "contrast": "high"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.low",
+      "axisValues": {
+        "kind": "warning",
+        "contrast": "low"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning-alt.high",
+      "axisValues": {
+        "kind": "warning-alt",
+        "contrast": "high"
+      },
+      "token": "text-inverse",
+      "varName": "--cds-text-inverse",
+      "anchor": {
+        "selector": ".cds--inline-notification"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning-alt.low",
+      "axisValues": {
+        "kind": "warning-alt",
+        "contrast": "low"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--inline-notification--low-contrast"
+      }
+    }
+  ],
+  "skips": []
+}

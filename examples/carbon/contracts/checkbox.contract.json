@@ -1,0 +1,203 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.checkbox",
+  "name": "Checkbox",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). TRI-STATE ON ONE AXIS (the MUI Checkbox precedent): Carbon spells it as two independent booleans (`checked` + `indeterminate`); the axis value expands into both library props through the $props grammar so the per-value glyph promotion stays single-axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "start"
+      },
+      "parts": {
+        "part-0": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "cursor": "default",
+            "font-feature-settings": "normal",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-rendering": "auto",
+            "text-wrap-mode": "nowrap"
+          },
+          "declaredStates": {
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-1}",
+            "color": "{imported.shared.color-000000}",
+            "font-size": "{imported.checkbox.part-0.font-size}",
+            "height": "{imported.shared.size-1}",
+            "left": "{imported.checkbox.part-0.left}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-color": "{imported.shared.color-000000}",
+            "right": "{imported.checkbox.part-0.right}",
+            "row-rule-color": "{imported.shared.color-000000}",
+            "top": "{imported.shared.size-20}",
+            "width": "{imported.shared.size-1}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-545454}"
+            }
+          }
+        },
+        "part-1": {
+          "element": "label",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "label": {
+              "text": "Checkbox",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "user-select": "none"
+              },
+              "layout": {
+                "grow": true
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.checkbox.label.font-weight}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.shared.size-18-0001}",
+                "padding-left": "{imported.checkbox.label.padding-left}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-16161640}"
+                }
+              }
+            }
+          },
+          "declared": {
+            "cursor": "pointer",
+            "position": "relative",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.shared.size-20}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-16}",
+            "line-height": "{imported.shared.size-18-0001}",
+            "min-height": "{imported.shared.size-20}",
+            "padding-left": "{imported.shared.size-20}",
+            "padding-top": "{imported.shared.size-1}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.checkbox.part-1.width}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-16161640}"
+            }
+          }
+        },
+        "part-2": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-14}",
+            "letter-spacing": "{imported.shared.size-0-16}",
+            "line-height": "{imported.shared.size-18-0001}",
+            "margin-top": "{imported.checkbox.part-2.margin-top}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "flex-grow": "{imported.checkbox.root.flex-grow}",
+        "font-size": "{imported.shared.size-14}",
+        "height": "{imported.shared.size-20}",
+        "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-16}",
+        "line-height": "{imported.shared.size-18-0001}",
+        "margin-bottom": "{imported.checkbox.root.margin-bottom}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.checkbox.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Checkbox"
+    }
+  }
+}

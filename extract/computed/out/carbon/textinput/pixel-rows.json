@@ -1,0 +1,202 @@
+[
+  {
+    "key": "unset.enabled__default",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "unset.enabled__hover",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "unset.enabled__focus-visible",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "unset.enabled__active",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "unset.disabled__default",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "unset.disabled__hover",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "unset.disabled__focus-visible",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "unset.disabled__active",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "xs.enabled__default",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "xs.enabled__hover",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "xs.enabled__focus-visible",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "xs.enabled__active",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "xs.disabled__default",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "xs.disabled__hover",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "xs.disabled__focus-visible",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "xs.disabled__active",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "sm.enabled__default",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "sm.enabled__hover",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "sm.enabled__focus-visible",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "sm.enabled__active",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "sm.disabled__default",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "sm.disabled__hover",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "sm.disabled__focus-visible",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "sm.disabled__active",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "md.enabled__default",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "md.enabled__hover",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "md.enabled__focus-visible",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "md.enabled__active",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "md.disabled__default",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "md.disabled__hover",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "md.disabled__focus-visible",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "md.disabled__active",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "lg.enabled__default",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "lg.enabled__hover",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "lg.enabled__focus-visible",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "lg.enabled__active",
+    "pctExact": 1.453125,
+    "pctAA": 0.5491071428571429
+  },
+  {
+    "key": "lg.disabled__default",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "lg.disabled__hover",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "lg.disabled__focus-visible",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  },
+  {
+    "key": "lg.disabled__active",
+    "pctExact": 1.4375,
+    "pctAA": 0.4419642857142857
+  }
+]

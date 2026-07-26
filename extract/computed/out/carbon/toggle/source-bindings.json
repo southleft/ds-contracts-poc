@@ -1,0 +1,164 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Toggle",
+  "varPrefix": "--cds-",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "untoggled.enabled",
+      "axisValues": {
+        "toggled": "untoggled"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--toggle__label-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "untoggled.disabled",
+      "axisValues": {
+        "toggled": "untoggled"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--toggle--disabled .cds--toggle__label-text, .cds--toggle--disabled .cds--toggle__text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "toggled.enabled",
+      "axisValues": {
+        "toggled": "toggled"
+      },
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--toggle__label-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "toggled.disabled",
+      "axisValues": {
+        "toggled": "toggled"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--toggle--disabled .cds--toggle__label-text, .cds--toggle--disabled .cds--toggle__text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "untoggled.enabled",
+      "axisValues": {
+        "toggled": "untoggled"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--toggle__text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "untoggled.disabled",
+      "axisValues": {
+        "toggled": "untoggled"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--toggle--disabled .cds--toggle__label-text, .cds--toggle--disabled .cds--toggle__text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "toggled.enabled",
+      "axisValues": {
+        "toggled": "toggled"
+      },
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--toggle__text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "toggled.disabled",
+      "axisValues": {
+        "toggled": "toggled"
+      },
+      "token": "text-disabled",
+      "varName": "--cds-text-disabled",
+      "anchor": {
+        "selector": ".cds--toggle--disabled .cds--toggle__label-text, .cds--toggle--disabled .cds--toggle__text"
+      }
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "background-color",
+      "combo": "untoggled.enabled",
+      "axisValues": {
+        "toggled": "untoggled"
+      },
+      "token": "toggle-off",
+      "varName": "--cds-toggle-off",
+      "anchor": {
+        "selector": ".cds--toggle__switch"
+      }
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "background-color",
+      "combo": "untoggled.disabled",
+      "axisValues": {
+        "toggled": "untoggled"
+      },
+      "token": "button-disabled",
+      "varName": "--cds-button-disabled",
+      "anchor": {
+        "selector": ".cds--toggle--disabled .cds--toggle__switch"
+      }
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "background-color",
+      "combo": "toggled.enabled",
+      "axisValues": {
+        "toggled": "toggled"
+      },
+      "token": "support-success",
+      "varName": "--cds-support-success",
+      "anchor": {
+        "selector": ".cds--toggle__switch--checked"
+      }
+    },
+    {
+      "part": "part-1-1-0",
+      "channel": "background-color",
+      "combo": "toggled.disabled",
+      "axisValues": {
+        "toggled": "toggled"
+      },
+      "token": "button-disabled",
+      "varName": "--cds-button-disabled",
+      "anchor": {
+        "selector": ".cds--toggle--disabled .cds--toggle__switch"
+      }
+    }
+  ],
+  "skips": []
+}

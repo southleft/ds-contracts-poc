@@ -1,0 +1,655 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "carbon.modal",
+  "name": "Modal",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). portalCapture + openDriver {open:true}. Carbon’s Modal is NOT portalled — it renders in place as a position:fixed full-bleed scrim — which is exactly the prediction the whole-document baseline-diff reader is being tested against. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Modal body copy for the Carbon round.",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "text": "Focus sentinel",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-500-5}",
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.shared.num-400}",
+            "height": "{imported.shared.size-1}",
+            "left": "{imported.shared.size-450-5}",
+            "line-height": "{imported.shared.size-16}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-450-5}",
+            "top": "{imported.shared.size-500-5}",
+            "width": "{imported.shared.size-1}"
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "parts": {
+            "part-1-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "overflow-x": "auto",
+                "overflow-y": "auto"
+              },
+              "parts": {
+                "label-2": {
+                  "element": "h2",
+                  "text": "Label",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "color": "{imported.modal.label-2.color}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "letter-spacing": "{imported.modal.label-2.letter-spacing}",
+                    "line-height": "{imported.shared.size-16}",
+                    "margin-bottom": "{imported.modal.label-2.margin-bottom}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.modal.label-2.row-rule-color}"
+                  }
+                },
+                "label-3": {
+                  "element": "h2",
+                  "text": "Modal heading",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "font-size": "{imported.modal.label-3.font-size}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "line-height": "{imported.modal.label-3.line-height}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-right": "{imported.modal.label-3.padding-right.unset}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "lg": {
+                          "padding-right": "{imported.modal.label-3.padding-right.lg}"
+                        },
+                        "md": {
+                          "padding-right": "{imported.modal.label-3.padding-right.md}"
+                        },
+                        "sm": {
+                          "padding-right": "{imported.modal.label-3.padding-right.sm}"
+                        },
+                        "xs": {
+                          "padding-right": "{imported.modal.label-3.padding-right.xs}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "part-1-0-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "position": "absolute"
+                  },
+                  "parts": {
+                    "part-1-0-2-0": {
+                      "element": "span",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "inline-block",
+                        "position": "relative"
+                      },
+                      "parts": {
+                        "part-1-0-2-0-0": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block"
+                          },
+                          "parts": {
+                            "part-1-0-2-0-0-0": {
+                              "element": "button",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "layout": {
+                                "display": "inline-flex",
+                                "align": "center",
+                                "justify": "center"
+                              },
+                              "icon": {
+                                "asset": "modal-part-1-0-2-0-0-0",
+                                "size": 20
+                              },
+                              "declared": {
+                                "border-bottom-style": "solid",
+                                "border-left-style": "solid",
+                                "border-right-style": "solid",
+                                "border-top-style": "solid",
+                                "cursor": "pointer",
+                                "position": "relative",
+                                "text-align": "start",
+                                "transition-duration": "0.11s",
+                                "transition-property": "background-color",
+                                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+                              },
+                              "tokens": {
+                                "background-color": "{imported.shared.color-00000000}",
+                                "border-bottom-color": "{imported.shared.color-00000000}",
+                                "border-left-color": "{imported.shared.color-00000000}",
+                                "border-right-color": "{imported.shared.color-00000000}",
+                                "border-top-color": "{imported.shared.color-00000000}",
+                                "bottom": "{imported.shared.size-0}",
+                                "color": "{imported.shared.color-ffffff}",
+                                "flex-shrink": "{imported.modal.part-1-0-2-0-0-0.flex-shrink}",
+                                "font-size": "{imported.shared.size-14}",
+                                "height": "{imported.shared.size-48}",
+                                "left": "{imported.shared.size-0}",
+                                "letter-spacing": "{imported.shared.size-0-16}",
+                                "line-height": "{imported.shared.size-18-0001}",
+                                "max-width": "{imported.modal.part-1-0-2-0-0-0.max-width}",
+                                "min-height": "{imported.shared.size-48}",
+                                "min-width": "{imported.shared.size-0}",
+                                "padding-bottom": "{imported.shared.size-12}",
+                                "padding-left": "{imported.shared.size-12}",
+                                "padding-right": "{imported.shared.size-12}",
+                                "padding-top": "{imported.shared.size-12}",
+                                "right": "{imported.shared.size-0}",
+                                "row-rule-color": "{imported.shared.color-ffffff}",
+                                "top": "{imported.shared.size-0}",
+                                "width": "{imported.shared.size-48}"
+                              }
+                            }
+                          },
+                          "tokens": {
+                            "height": "{imported.shared.size-48}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "width": "{imported.shared.size-48}"
+                          }
+                        },
+                        "part-1-0-2-0-1": {
+                          "element": "span",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block",
+                            "position": "absolute",
+                            "pointer-events": "none"
+                          },
+                          "parts": {
+                            "label-4": {
+                              "text": "Close",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "none",
+                                "position": "absolute"
+                              },
+                              "tokens": {
+                                "background-color": "{imported.modal.label-4.background-color}",
+                                "border-bottom-left-radius": "{imported.shared.size-2}",
+                                "border-bottom-right-radius": "{imported.shared.size-2}",
+                                "border-top-left-radius": "{imported.shared.size-2}",
+                                "border-top-right-radius": "{imported.shared.size-2}",
+                                "color": "{imported.shared.color-ffffff}",
+                                "font-size": "{imported.shared.size-14}",
+                                "font-weight": "{imported.shared.num-400}",
+                                "letter-spacing": "{imported.shared.size-0-16}",
+                                "line-height": "{imported.shared.size-18-0001}",
+                                "max-width": "{imported.modal.label-4.max-width}",
+                                "min-height": "{imported.shared.size-0}",
+                                "min-width": "{imported.shared.size-0}",
+                                "padding-bottom": "{imported.shared.size-2}",
+                                "padding-left": "{imported.shared.size-16}",
+                                "padding-right": "{imported.shared.size-16}",
+                                "padding-top": "{imported.shared.size-2}",
+                                "row-rule-color": "{imported.shared.color-ffffff}",
+                                "z-index": "{imported.shared.num-6000}"
+                              }
+                            },
+                            "part-1-0-2-0-1-1": {
+                              "element": "span",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "none",
+                                "position": "absolute",
+                                "pointer-events": "none"
+                              },
+                              "tokens": {
+                                "height": "{imported.shared.size-8}",
+                                "min-height": "{imported.shared.size-0}",
+                                "min-width": "{imported.shared.size-0}",
+                                "width": "{imported.modal.part-1-0-2-0-1-1.width}",
+                                "z-index": "{imported.shared.num-6000}"
+                              }
+                            }
+                          },
+                          "tokens": {
+                            "bottom": "{imported.shared.size-0}",
+                            "height": "{imported.shared.size-48}",
+                            "left": "{imported.shared.size-0}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}",
+                            "right": "{imported.shared.size-0}",
+                            "top": "{imported.shared.size-0}",
+                            "width": "{imported.shared.size-48}",
+                            "z-index": "{imported.shared.num-6000}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "height": "{imported.shared.size-48}",
+                        "left": "{imported.shared.size-0}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "top": "{imported.shared.size-0}",
+                        "width": "{imported.shared.size-48}",
+                        "z-index": "{imported.modal.part-1-0-2-0.z-index}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "bottom": "{imported.modal.part-1-0-2.bottom}",
+                    "height": "{imported.shared.size-48}",
+                    "left": "{imported.modal.part-1-0-2.left.unset}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-48}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "lg": {
+                          "left": "{imported.modal.part-1-0-2.left.lg}"
+                        },
+                        "md": {
+                          "left": "{imported.modal.part-1-0-2.left.md}"
+                        },
+                        "sm": {
+                          "left": "{imported.modal.part-1-0-2.left.sm}"
+                        },
+                        "xs": {
+                          "left": "{imported.modal.part-1-0-2.left.xs}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "grid-column-start": "{imported.shared.num-1}",
+                "grid-row-end": "{imported.shared.num-1}",
+                "grid-row-start": "{imported.shared.num-1}",
+                "height": "{imported.modal.part-1-0.height}",
+                "margin-bottom": "{imported.shared.size-8}",
+                "max-height": "{imported.modal.part-1-0.max-height}",
+                "padding-left": "{imported.shared.size-16}",
+                "padding-right": "{imported.shared.size-48}",
+                "padding-top": "{imported.shared.size-16}",
+                "width": "{imported.modal.part-1-0.width.unset}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "lg": {
+                      "width": "{imported.modal.part-1-0.width.lg}"
+                    },
+                    "md": {
+                      "width": "{imported.modal.part-1-0.width.md}"
+                    },
+                    "sm": {
+                      "width": "{imported.modal.part-1-0.width.sm}"
+                    },
+                    "xs": {
+                      "width": "{imported.modal.part-1-0.width.xs}"
+                    }
+                  }
+                }
+              ]
+            },
+            "label-5": {
+              "content": {
+                "prop": "children"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "overflow-x": "auto",
+                "overflow-y": "auto",
+                "position": "relative"
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-400}",
+                "grid-column-start": "{imported.shared.num-1}",
+                "grid-row-start": "{imported.modal.label-5.grid-row-start}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-16}",
+                "line-height": "{imported.modal.label-5.line-height}",
+                "padding-bottom": "{imported.shared.size-48}",
+                "padding-left": "{imported.shared.size-16}",
+                "padding-right": "{imported.shared.size-16}",
+                "padding-top": "{imported.shared.size-8}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}"
+              }
+            },
+            "part-1-2": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "justify": "end"
+              },
+              "parts": {
+                "label-6": {
+                  "element": "button",
+                  "text": "Cancel",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "justify": "space-between"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "text-align": "start",
+                    "transition-delay": "0s, 0s, 0s, 0s",
+                    "transition-duration": "0.07s, 0.07s, 0.07s, 0.07s",
+                    "transition-property": "background, box-shadow, border-color, outline",
+                    "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.modal.label-6.background-color}",
+                    "border-bottom-color": "{imported.shared.color-00000000}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-color": "{imported.shared.color-00000000}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-color": "{imported.shared.color-00000000}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-color": "{imported.shared.color-00000000}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "min-height": "{imported.shared.size-48}",
+                    "padding-bottom": "{imported.modal.label-6.padding-bottom}",
+                    "padding-left": "{imported.modal.label-6.padding-left}",
+                    "padding-right": "{imported.modal.label-6.padding-right}",
+                    "padding-top": "{imported.shared.size-14}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-ffffff}",
+                    "top": "{imported.shared.size-0}"
+                  }
+                },
+                "label-7": {
+                  "element": "button",
+                  "text": "Save",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "justify": "space-between"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "text-align": "start",
+                    "transition-delay": "0s, 0s, 0s, 0s",
+                    "transition-duration": "0.07s, 0.07s, 0.07s, 0.07s",
+                    "transition-property": "background, box-shadow, border-color, outline",
+                    "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.modal.label-7.background-color}",
+                    "border-bottom-color": "{imported.shared.color-00000000}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-color": "{imported.shared.color-00000000}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-color": "{imported.shared.color-00000000}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-color": "{imported.shared.color-00000000}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "bottom": "{imported.shared.size-0}",
+                    "box-shadow": "{imported.modal.label-7.box-shadow}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-400}",
+                    "left": "{imported.shared.size-0}",
+                    "letter-spacing": "{imported.shared.size-0-16}",
+                    "line-height": "{imported.shared.size-18-0001}",
+                    "min-height": "{imported.shared.size-48}",
+                    "padding-bottom": "{imported.modal.label-7.padding-bottom}",
+                    "padding-left": "{imported.modal.label-7.padding-left}",
+                    "padding-right": "{imported.modal.label-7.padding-right}",
+                    "padding-top": "{imported.shared.size-14}",
+                    "right": "{imported.shared.size-0}",
+                    "row-rule-color": "{imported.shared.color-ffffff}",
+                    "top": "{imported.shared.size-0}"
+                  }
+                }
+              },
+              "tokens": {
+                "grid-column-start": "{imported.shared.num-1}",
+                "height": "{imported.modal.part-1-2.height}",
+                "width": "{imported.modal.part-1-2.width.unset}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "lg": {
+                      "width": "{imported.modal.part-1-2.width.lg}"
+                    },
+                    "md": {
+                      "width": "{imported.modal.part-1-2.width.md}"
+                    },
+                    "sm": {
+                      "width": "{imported.modal.part-1-2.width.sm}"
+                    },
+                    "xs": {
+                      "width": "{imported.modal.part-1-2.width.xs}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "max-height": "90%",
+            "outline-style": "solid",
+            "position": "relative",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "transition-duration": "0.24s",
+            "transition-property": "transform",
+            "transition-timing-function": "cubic-bezier(0, 0, 0.3, 1)"
+          },
+          "tokens": {
+            "background-color": "{imported.modal.part-1.background-color}",
+            "border-bottom-color": "{imported.shared.color-c6c6c6}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-c6c6c6}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-c6c6c6}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-c6c6c6}",
+            "border-top-width": "{imported.shared.size-1}",
+            "bottom": "{imported.shared.size-0}",
+            "grid-template-columns": "{imported.modal.part-1.grid-template-columns.unset}",
+            "height": "{imported.modal.part-1.height}",
+            "left": "{imported.shared.size-0}",
+            "outline-color": "{imported.shared.color-00000000}",
+            "outline-offset": "{imported.modal.part-1.outline-offset}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.modal.part-1.width.unset}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "lg": {
+                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.lg}",
+                  "width": "{imported.modal.part-1.width.lg}"
+                },
+                "md": {
+                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.md}",
+                  "width": "{imported.modal.part-1.width.md}"
+                },
+                "sm": {
+                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.sm}",
+                  "width": "{imported.modal.part-1.width.sm}"
+                },
+                "xs": {
+                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.xs}",
+                  "width": "{imported.modal.part-1.width.xs}"
+                }
+              }
+            }
+          ]
+        },
+        "label-8": {
+          "text": "Focus sentinel",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-500-5}",
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.shared.num-400}",
+            "height": "{imported.shared.size-1}",
+            "left": "{imported.shared.size-450-5}",
+            "line-height": "{imported.shared.size-16}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-450-5}",
+            "top": "{imported.shared.size-500-5}",
+            "width": "{imported.shared.size-1}"
+          }
+        }
+      },
+      "declared": {
+        "transition-delay": "0s, 0s",
+        "transition-duration": "0.24s, 0s",
+        "transition-property": "opacity, visibility",
+        "transition-timing-function": "cubic-bezier(0, 0, 0.3, 1), linear"
+      },
+      "tokens": {
+        "background-color": "{imported.modal.root.background-color}",
+        "bottom": "{imported.shared.size-0}",
+        "height": "{imported.modal.root.height}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.modal.root.width}",
+        "z-index": "{imported.modal.root.z-index}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "Modal"
+    }
+  }
+}

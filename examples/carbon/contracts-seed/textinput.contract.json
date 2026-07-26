@@ -1,0 +1,53 @@
+{
+  "id": "carbon.textinput",
+  "name": "TextInput",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). size xs|sm|md|lg, ALL FOUR verified distinct by live probe (24/32/40/48px). The recon predicted xs might not exist because the compiled CSS ships no `.cds--text-input--xs` rule — it does not, and the height still moves: Carbon routes control sizing through the SHARED `.cds--layout--size-*` classes and the :root layout tokens, not through per-component size rules. `invalid`/`warn` are DEFERRED BY NAME from round 1 (they add a validation subtree and a second border plane).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@carbon/react",
+      "export": "TextInput"
+    }
+  },
+  "states": []
+}

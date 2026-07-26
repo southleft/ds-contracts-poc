@@ -1,0 +1,195 @@
+{
+  "component": "Accordion",
+  "browser": "149.0.7827.55",
+  "captures": 64,
+  "combos": 16,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 502,
+  "elementsPerCapture": 10,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 5,
+    "part-0": 14,
+    "part-0-0": 43,
+    "icon": 20,
+    "part-0-0-0-0": 10,
+    "label": 10,
+    "part-0-1-2": 11,
+    "label-3": 9,
+    "part-0-1": 9,
+    "label-2": 9
+  },
+  "folds": {
+    "count": 9,
+    "receipts": [
+      {
+        "part": "part-0-0",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 37,
+    "mintedLeavesFolded": 37
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 37,
+    "baseBindings": 54,
+    "stateBindings": 26,
+    "byShape": {
+      "uniform": 75,
+      "perAxis": 5,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 29,
+    "state": 3
+  },
+  "codeOnly": {
+    "base": 34,
+    "state": 1,
+    "overflowBindings": 23
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 8,
+    "svgAssets": 1,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 256000,
+    "cellsMatched": 256000,
+    "pct": 100,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": []
+  },
+  "pixel": {
+    "pairs": 64,
+    "exact": {
+      "mean": 2.389520202020203,
+      "max": 3.782828282828283,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 1.0227272727272718,
+      "max": 1.643939393939394,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "start.unset.enabled__default",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.unset.enabled__hover",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.unset.enabled__focus-visible",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.unset.enabled__active",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.sm.enabled__default",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.sm.enabled__hover",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.sm.enabled__focus-visible",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      },
+      {
+        "key": "start.sm.enabled__active",
+        "pctExact": 3.782828282828283,
+        "pctAA": 1.643939393939394
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 76.46198830409357,
+    "rowsFullyEqual": 0,
+    "rows": 64,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 64
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 16
+}

@@ -1,0 +1,142 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "iconbutton",
+  "anchors": [
+    {
+      "leaf": "imported.icon-button.part-0-0.background-color-state-focus-visible.primary",
+      "token": "button-primary",
+      "part": "part-0-0",
+      "cssProperty": "background-color",
+      "varName": "--cds-button-primary",
+      "selector": ".cds--btn--primary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.background-color-state-focus-visible.secondary",
+      "token": "button-secondary",
+      "part": "part-0-0",
+      "cssProperty": "background-color",
+      "varName": "--cds-button-secondary",
+      "selector": ".cds--btn--secondary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.background-color.primary",
+      "token": "button-primary",
+      "part": "part-0-0",
+      "cssProperty": "background-color",
+      "varName": "--cds-button-primary",
+      "selector": ".cds--btn--primary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.background-color.secondary",
+      "token": "button-secondary",
+      "part": "part-0-0",
+      "cssProperty": "background-color",
+      "varName": "--cds-button-secondary",
+      "selector": ".cds--btn--secondary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-active.primary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--primary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-active.secondary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--secondary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-disabled.primary",
+      "token": "text-on-color-disabled",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color-disabled",
+      "selector": ".cds--btn:disabled, .cds--btn:hover:disabled, .cds--btn:focus:disabled, .cds--btn.cds--btn--disabled, .cds--btn.cds--btn--disabled:hover, .cds--btn.cds--btn--disabled:focus"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-disabled.secondary",
+      "token": "text-on-color-disabled",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color-disabled",
+      "selector": ".cds--btn:disabled, .cds--btn:hover:disabled, .cds--btn:focus:disabled, .cds--btn.cds--btn--disabled, .cds--btn.cds--btn--disabled:hover, .cds--btn.cds--btn--disabled:focus"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-focus-visible.ghost",
+      "token": "link-primary",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-link-primary",
+      "selector": ".cds--btn--ghost"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-focus-visible.primary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--primary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-focus-visible.secondary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--secondary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-hover.primary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--primary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color-state-hover.secondary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--secondary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color.ghost",
+      "token": "link-primary",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-link-primary",
+      "selector": ".cds--btn--ghost"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color.primary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--primary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color.secondary",
+      "token": "text-on-color",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-text-on-color",
+      "selector": ".cds--btn--secondary"
+    },
+    {
+      "leaf": "imported.icon-button.part-0-0.color.tertiary",
+      "token": "button-tertiary",
+      "part": "part-0-0",
+      "cssProperty": "color",
+      "varName": "--cds-button-tertiary",
+      "selector": ".cds--btn--tertiary"
+    }
+  ]
+}
