@@ -17,6 +17,15 @@ import type { Env, KVNamespaceLite } from './env';
 export const DEFAULT_IP_DAILY_LIMIT = 5;
 export const DEFAULT_DAILY_TOKEN_BUDGET = 600_000;
 export const DEFAULT_BRIDGE_IP_DAILY_LIMIT = 40;
+/** Minting a standing channel is a once-per-repository act, not a per-build
+ *  one — 10/day/IP is generous for a team setting several up in one sitting
+ *  and still stops a mint loop. */
+export const DEFAULT_CHANNEL_CLAIM_IP_DAILY_LIMIT = 10;
+/** Publishes are capped PER CHANNEL PER UTC DAY, never per IP: CI runners
+ *  churn IP addresses, so an IP cap would not hold for the one caller that
+ *  matters. 200/day comfortably covers a monorepo merging every few minutes;
+ *  a runaway workflow loop stops at the line. */
+export const DEFAULT_CHANNEL_PUBLISH_DAILY_LIMIT = 200;
 
 const DAY_TTL_SECONDS = 2 * 24 * 60 * 60; // outlive the UTC day, then vanish
 
@@ -73,6 +82,39 @@ export async function reserveBridgeSlot(
 ): Promise<boolean> {
   const limit = intVar(env.BRIDGE_IP_DAILY_LIMIT, DEFAULT_BRIDGE_IP_DAILY_LIMIT);
   const key = `ip:bridge-${kind}:${ip}:${utcDay(now)}`;
+  const used = await readCount(env.ASSIST_KV, key);
+  if (used >= limit) return false;
+  await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });
+  return true;
+}
+
+/**
+ * Reserve one channel-MINT slot for this IP today (`POST /channel/claim`).
+ * The only channel counter keyed by IP — at claim time there is no channel
+ * to key by yet.
+ */
+export async function reserveChannelClaimSlot(env: Env, ip: string, now: Date): Promise<boolean> {
+  const limit = intVar(env.CHANNEL_CLAIM_IP_DAILY_LIMIT, DEFAULT_CHANNEL_CLAIM_IP_DAILY_LIMIT);
+  const key = `ip:channel-claim:${ip}:${utcDay(now)}`;
+  const used = await readCount(env.ASSIST_KV, key);
+  if (used >= limit) return false;
+  await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });
+  return true;
+}
+
+/**
+ * Reserve one PUBLISH slot for this CHANNEL today. Keyed by the derived read
+ * key, so a CI fleet behind a hundred egress addresses shares one budget and
+ * one runaway workflow cannot spend anyone else's. Channel reads are
+ * deliberately UNCOUNTED, like bridge polls: an unguessable key, no writes.
+ */
+export async function reserveChannelPublishSlot(
+  env: Env,
+  readKey: string,
+  now: Date,
+): Promise<boolean> {
+  const limit = intVar(env.CHANNEL_PUBLISH_DAILY_LIMIT, DEFAULT_CHANNEL_PUBLISH_DAILY_LIMIT);
+  const key = `chan-pub:${readKey}:${utcDay(now)}`;
   const used = await readCount(env.ASSIST_KV, key);
   if (used >= limit) return false;
   await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });

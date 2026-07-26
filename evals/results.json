@@ -1,6 +1,6 @@
 {
-  "passed": 155,
-  "total": 155,
+  "passed": 156,
+  "total": 156,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -649,6 +649,11 @@
     },
     {
       "id": "reverse-bridge-dev-door",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "channel-round-trip",
       "claim": "C8-journey",
       "pass": true
     },

@@ -11,12 +11,31 @@
 #      "contracts": [...] }, workers/assist/src/bridge.ts) — so a designer can
 #      deliver it to the Figma plugin with
 #      `npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>`,
-#   5. writes the proposal/skip counts into the job summary.
+#   5. PUBLISHES the bundle to the standing CI→Figma channel, so the
+#      designer's plugin finds it waiting with no human courier,
+#   6. writes the proposal/skip counts into the job summary.
 #
-# Roadmap (named, not v1): a fully-async CI→designer channel that pushes the
-# bundle to the plugin without a human in the loop. v1 is deliberately a human
-# running `ds-contracts figma push` with this artifact — the pairing code is
-# minted where the designer is looking. See examples/ci/README.md.
+# The channel step is the fully-async half that used to be roadmap here. It
+# needs one repository secret, minted once:
+#
+#     npx @ds-contracts/cli figma claim-channel
+#     → WRITE key (dscw_…)  → repo secret DS_CONTRACTS_CHANNEL_KEY (this file)
+#     → READ  key (dscr_…)  → the designer pastes it into the Figma plugin
+#
+# The read key is sha256(write key): the designer's half can only READ, so a
+# shared Figma file or a screenshotted plugin window can never inject into
+# this repository's source of truth. See workers/assist/src/channel.ts.
+#
+# The pairing-code path (`ds-contracts figma push … --code <CODE>`) is NOT
+# removed — it stays as the ad-hoc route for a repo with no channel yet, or a
+# one-off bundle from a laptop. It is the "unverified" path: nothing about
+# who published travels with it.
+#
+# STILL OPEN, named rather than implied: the delivery is not SIGNED. The
+# provenance below is attached by this workflow and echoed unread by the
+# worker; anyone holding the write key can publish any provenance they like.
+# HMAC-verified deliveries with a "verified" badge in the plugin are docs/18
+# G1's slice S3 and are excluded from this round BY NAME.
 #
 # Validated locally step-by-step against the published CLI:
 # examples/ci/VALIDATION.md (produced by examples/ci/validate.mjs).
@@ -85,6 +104,32 @@ jobs:
           name: CONTRACTS-BUNDLE
           path: contracts-bundle.json
 
+      - name: Publish to the standing CI→Figma channel
+        # The zero-chore delivery. No pairing code, no human courier, no
+        # synchronous window: the designer's plugin finds this waiting on its
+        # next "Check for updates" and reviews it before anything applies.
+        #
+        # Provenance (repo / run / commit / ref) is auto-detected from the
+        # GITHUB_* context and rides as a SIBLING of the bundle — never inside
+        # it, so `ds-contracts figma bundle` keeps its byte-determinism.
+        #
+        # Skipped, not failed, when the secret is absent: a fork PR and a repo
+        # that has not minted a channel both still get their artifact.
+        #
+        # VERSION HONESTY: `figma publish` and `figma claim-channel` ship in
+        # the NEXT CLI release — the published 0.1.0 the steps above pin does
+        # NOT carry them. Until that release the pin below resolves to a
+        # version that does not exist, so this step is documentation, not a
+        # working recipe; the `if:` guard means a repo with no secret never
+        # reaches it. Bump both pins together when the release lands.
+        # (examples/ci/VALIDATION.md therefore does not cover this step —
+        # examples/ci/validate.mjs classifies it CI-only for this reason.)
+        if: ${{ env.DS_CONTRACTS_CHANNEL_KEY != '' }}
+        env:
+          DS_CONTRACTS_CHANNEL_KEY: ${{ secrets.DS_CONTRACTS_CHANNEL_KEY }}
+        run: |
+          npx --yes @ds-contracts/cli@0.2.0 figma publish contracts-bundle.json | tee publish.log
+
       - name: Job summary — proposal / skip counts
         run: |
           {
@@ -93,7 +138,17 @@ jobs:
             grep -E "proposed contract" extract.log | sed 's/^/- /'
             grep -E "seen but not extractable" extract.log | sed 's/^/- /' || echo "- 0 components skipped"
             echo ""
-            echo "Artifact **CONTRACTS-BUNDLE** is ready for the designer:"
-            echo '`npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>`'
-            echo "(the code comes from the Figma plugin's Receive panel)"
+            if [ -f publish.log ]; then
+              echo "### Delivered to the standing channel"
+              echo ""
+              sed 's/^/- /' publish.log
+              echo ""
+              echo "The designer's plugin picks this up on its next **Check for updates**."
+            else
+              echo "No channel configured (secret \`DS_CONTRACTS_CHANNEL_KEY\` is unset)."
+              echo "Mint one with \`npx @ds-contracts/cli figma claim-channel\`, or hand the"
+              echo "artifact over the ad-hoc pairing-code route:"
+              echo '`npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>`'
+              echo "(the code comes from the Figma plugin's Receive panel)"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"

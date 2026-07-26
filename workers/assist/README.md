@@ -170,6 +170,79 @@ creation and uploads counted as separate classes). Playground polls are
 deliberately uncounted: origin-gated KV reads against an unguessable code,
 one every 2.5s for at most 15 minutes.
 
+## Standing CI↔Figma channel (`/channel/*`) — the async delivery route
+
+A third Anthropic-free surface on the same Worker (`src/channel.ts`),
+answering the question the bridge structurally cannot: *"has CI published
+anything since I last looked?"* The bridge is deliver-once, so asking is
+destructive and can only be asked while both people are present. The channel
+is a standing, non-consuming inbox — CI publishes on merge, the designer
+checks whenever they open the plugin.
+
+**The key split is the whole security story.** `POST /channel/claim` mints a
+pair:
+
+| key | shape | holder | can |
+|---|---|---|---|
+| write key | `dscw_` + 32 chars (160 bits) | CI, as a repository secret | publish |
+| read key | `dscr_` + `sha256(writeKey)` hex | the designer, pasted into the plugin | read |
+
+Derivation runs one way. Holding the write key you can compute the read key
+(CI may read its own channel); holding the read key you cannot recover the
+write key. So a leaked Figma file, a screenshotted plugin window, or a
+compromised plugin `clientStorage` leaks a key that **reads** contracts and
+can never **inject** into the repository's source of truth. Key *shape* is
+refused by name on the wrong route (it is not a secret — the caller can read
+its own prefix); key *existence* answers an indistinguishable `404`.
+
+| Route | Who | What |
+|---|---|---|
+| `POST /channel/claim` | anyone (per-IP capped) | `{ writeKey, readKey, ttlSeconds: 2592000, maxBytes }` |
+| `POST /channel/:writeKey` | CI — any origin, usually none | body `{ bundle: <CONTRACTS-BUNDLE>, provenance?: {…} }`; assigns the next `seq`; last write wins; `404` wrong/expired key, `413` over 4MB, `400` non-JSON or malformed envelope |
+| `GET /channel/:readKey?since=N[&meta=1]` | the plugin — any origin, usually `null` | `{ status: "current", seq }` or `{ status: "update", seq, publishedAt, provenance?, bundle }`. **Non-consuming** — nothing is deleted, ever. `meta=1` returns the head without the bundle (the plugin's cheap check-on-open). |
+
+`seq` is monotonic per channel. That is what lets the plugin say "CI has an
+update waiting (#12)" — impossible under deliver-once — and it is the
+ordering base G3's staleness refusal will need. KV is last-write-wins and
+eventually consistent, so two racing publishes can land the same `seq` and a
+read moments after a publish can serve the previous one. Accepted and
+bounded, exactly as the counters are: this is a delivery channel with a human
+pressing Apply at the end, not a ledger. The plugin-side **freshness guard**
+(`figma-sync/plugin/engine/entry.ts`) is what makes a mis-ordered delivery
+visible rather than silent — it compares against a file-local apply log in
+the Figma file's root `pluginData` and starts every Apply box unchecked.
+
+TTL is 30 days, **rolling on publish and never on read**: a channel CI has
+abandoned dies on purpose; a channel touched weekly lives indefinitely.
+Re-claiming after an expiry restarts `seq` at 1, which is precisely the case
+the freshness guard names.
+
+Origins: every channel route answers **any** origin including none — both
+callers are origin-less by nature (a CI runner's fetch has no `Origin`, a
+Figma plugin's sends `Origin: null`), so an origin gate would gate nothing.
+The key is the auth, the same reasoning the bridge's upload route documents.
+
+Privacy: bundle contents are never logged and never inspected past the
+envelope. The `provenance` sibling is stored and echoed **without being read
+at all** — this Worker cannot tell you which repo published.
+
+Caps: its own kill switch (`CHANNEL_ENABLED`, independent of both
+`ASSIST_ENABLED` and `BRIDGE_ENABLED` — the channel costs KV operations
+only, never model tokens), `CHANNEL_CLAIM_IP_DAILY_LIMIT` (default 10, the
+only IP-keyed channel counter — at claim time there is no channel to key
+by), and `CHANNEL_PUBLISH_DAILY_LIMIT` (default 200, keyed **by channel**,
+because CI runners churn IP addresses and an IP cap would not hold for the
+one caller that matters). Reads are uncounted.
+
+**Named exclusions.** Deliveries are **not signed**: possession of the write
+key is the only authentication, so anyone holding it can publish any
+`provenance` they like and the plugin will render it. HMAC-verified
+deliveries with a "verified" badge are docs/18 G1 slice S3, excluded by name
+(the Figma plugin sandbox has no WebCrypto for an end-to-end in-plugin
+check). Also absent by design: no Durable Objects, no cron, no server push,
+no webhook out, no multi-channel management or revoke endpoint (revoking =
+stop publishing and let the 30 days run out, or claim a new pair).
+
 ## Hard caps & abuse resistance
 
 | Layer | Default | Refusal |
@@ -180,6 +253,12 @@ one every 2.5s for at most 15 minutes.
 | Global daily token budget (`ASSIST_DAILY_TOKEN_BUDGET`) | 600,000 tokens/day (input+output, all visitors) | `429` — "daily assist budget spent — bring your own key in the Describe tab pattern, or try tomorrow" |
 | Per-call output cap | `max_tokens` 1024 / 4096 / 2048 / 8192 | enforced by the API |
 | Body size | 320KB (repo-profile samples cap separately at 200KB; fix-contract contracts at 64KB serialized) | `413` / `400` |
+| Bridge kill switch (`BRIDGE_ENABLED`) | ships `"true"` — KV only, no model tokens | `503` |
+| Bridge per-IP daily cap (`BRIDGE_IP_DAILY_LIMIT`) | 40/day, session + upload as separate classes; polls uncounted | `429` |
+| Channel kill switch (`CHANNEL_ENABLED`) | ships `"true"` — KV only, no model tokens; independent of both switches above | `503` |
+| Channel claim cap (`CHANNEL_CLAIM_IP_DAILY_LIMIT`) | 10/day **per IP** — the only IP-keyed channel counter (no channel exists yet at claim time) | `429` |
+| Channel publish cap (`CHANNEL_PUBLISH_DAILY_LIMIT`) | 200/day **per channel**, never per IP (CI runners churn addresses); reads uncounted | `429` |
+| Bridge / channel body size | 4MB of JSON text each | `413` |
 
 Ordering: CORS → kill switch → route → validation → **cache** (repo-profile
 hits cost zero tokens and burn no quota) → per-IP → budget → one model call.
@@ -266,6 +345,23 @@ Config surface, all optional except the first two:
 | `ASSIST_IP_DAILY_LIMIT` | var | `"5"` | per-IP, per-endpoint-class, per UTC day |
 | `ASSIST_DAILY_TOKEN_BUDGET` | var | `"600000"` | global tokens/day ≈ $10 (see budget math) |
 | `ASSIST_DEV_ORIGIN` | var | unset | exact-match extra origin for local dev, e.g. `http://localhost:5173` |
+| `BRIDGE_ENABLED` | var | `"true"` | pairing-bridge kill switch, independent of assist |
+| `BRIDGE_IP_DAILY_LIMIT` | var | `"40"` | per-IP, per bridge class, per UTC day |
+| `CHANNEL_ENABLED` | var | `"true"` | standing-channel kill switch, independent of both above |
+| `CHANNEL_CLAIM_IP_DAILY_LIMIT` | var | `"10"` | per-IP channel MINTS per UTC day |
+| `CHANNEL_PUBLISH_DAILY_LIMIT` | var | `"200"` | publishes per CHANNEL per UTC day (not per IP) |
+
+After deploying, smoke the channel end to end without touching the plugin —
+the only two calls that need no key:
+
+```sh
+BASE=https://ds-contracts-assist.southleft-llc.workers.dev
+curl -sX POST "$BASE/channel/claim"            # → { writeKey, readKey, ttlSeconds }
+curl -s "$BASE/channel/<readKey>?since=0"      # → { status: "current", seq: 0 }
+```
+
+A claim that answers `503` means `CHANNEL_ENABLED` is not `"true"` in the
+deployed config; everything else is unaffected by that switch.
 
 Local dev: `npm run dev` (wrangler dev with a local KV simulator), with
 `ASSIST_DEV_ORIGIN` set so the local playground origin passes CORS.
@@ -303,6 +399,26 @@ network. Covered:
   (playground-only session/read vs. any-origin upload, `*` preflight), the
   independent kill switch, and 405s. Bridge routes never touch the
   Anthropic transport (the mock throws if reached).
+- Standing channel (`test/channel.test.ts`, 24 cases): write-key shape and
+  uniqueness, `readKey === sha256(writeKey)` against node's own crypto, the
+  **split asserted positively in both directions** (a write key cannot read,
+  a read key cannot write — each refused 400 by name, with the channel
+  provably unchanged afterwards), the claim → publish → read lifecycle
+  including "claimed but never published" answering `current` at seq 0,
+  **non-consuming reads** (ten reads, keys survive), `since` semantics
+  (at-head and ahead-of-head both `current` with no payload; a garbage
+  `since` treated as "I have nothing"), `meta=1` heads without the payload,
+  seq monotonicity with last-write-wins, provenance echoed verbatim and
+  **not inherited** by a later publish that omits it, wrong/expired keys
+  indistinguishable on both routes, malformed keys refused by shape with no
+  KV probe, the 30-day `expirationTtl` on **every** channel write plus the
+  proof that reads perform no writes at all, the 4MB cap, all twelve
+  malformed-envelope shapes refused by name, the publish cap holding across
+  **churning IPs** while a second channel keeps its own budget, claim capped
+  per IP with reads uncounted, kill-switch independence in both directions,
+  any-origin answers, 405s, and a full bridge round trip proving the two
+  surfaces share one KV without disturbing each other. Channel routes never
+  touch the Anthropic transport (the mock throws if reached).
 
 **Not covered — needs live infra:** real workerd runtime behavior
 (`wrangler dev` locally / `wrangler deploy` + smoke request are the check),

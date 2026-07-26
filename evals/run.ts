@@ -4477,6 +4477,209 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // G1 (docs/18) — THE STANDING CI↔FIGMA CHANNEL, slices S1+S2, end to end
+    // with ZERO network. The pairing-code bridge needs a person on each end
+    // in the same 15 minutes; docs/18 calls that "the courier that dies of
+    // neglect" and names G1 the hinge under G3, G13 and the whole
+    // "zero manual sync chores" claim.
+    //
+    // This gate walks the real thing in-process: the CLI's own pure core
+    // (detectProvenance / buildPublishBody / publishDryRunLines — the exact
+    // functions `figma publish` runs) → the REAL worker pipeline
+    // (workers/assist handleRequest over a Map-backed KV, fetchImpl throws)
+    // → the plugin engine's own channel functions (the same module-level
+    // exports the built bundle puts on window.DSC, pinned separately by
+    // plugin-engine-check's `standing-channel` flow).
+    //
+    // What it must prove, in the order the round's risk sits:
+    //   1. THE KEY SPLIT — readKey === sha256(writeKey); a readKey cannot
+    //      publish, a writeKey cannot read. A leaked Figma-side key reads;
+    //      it can never inject into the source of truth.
+    //   2. NON-CONSUMING reads with a monotonic seq (the bridge cannot do
+    //      either; "1 update waiting" is impossible under deliver-once).
+    //   3. PROVENANCE echoes back byte-identically and UNREAD.
+    //   4. THE FRESHNESS GUARD — the silent-downgrade hole this round
+    //      closes. Republishing an equal/older delivery to a file that
+    //      already applied #N fires BY NAME and unchecks Apply.
+    // The live HTTP transport itself is pinned by
+    // workers/assist/test/channel.test.ts (24 cases).
+    id: 'channel-round-trip',
+    claim: 'C8-journey',
+    run: () => {
+      const badgePath = path.join(ROOT, 'examples', 'polaris', 'contracts', 'badge.contract.json');
+      const work = path.join(SCRATCH, 'chan-work');
+      mkdirSync(work, { recursive: true });
+      const badge = JSON.parse(readFileSync(badgePath, 'utf8')) as Record<string, unknown>;
+      writeFileSync(
+        path.join(work, 'contracts-bundle.json'),
+        JSON.stringify({ type: 'CONTRACTS-BUNDLE', version: 1, contracts: [badge] }, null, 2) + '\n',
+      );
+
+      const trip = run(TSX, ['-e', `
+        import { createHash } from 'node:crypto';
+        import { handleRequest } from './workers/assist/src/index.ts';
+        import { CHANNEL_MESSAGES, CHANNEL_TTL_SECONDS } from './workers/assist/src/channel.ts';
+        import { toBundle, detectProvenance, buildPublishBody, publishDryRunLines, maskChannelKey } from './packages/cli/src/commands/figma.ts';
+        import { parseApplyLog, appendApplyEntry, lastAppliedSeq, channelFreshness, channelFingerprint, provenanceLine } from './figma-sync/plugin/engine/entry.ts';
+        (async () => {
+          const ttls = new Map();
+          const store = new Map();
+          const env = {
+            ANTHROPIC_API_KEY: 'x',
+            ASSIST_KV: {
+              get: async (k) => (store.has(k) ? store.get(k) : null),
+              put: async (k, v, o) => { store.set(k, v); ttls.set(k, o && o.expirationTtl); },
+              delete: async (k) => { store.delete(k); },
+            },
+            ASSIST_ENABLED: 'true', BRIDGE_ENABLED: 'true', CHANNEL_ENABLED: 'true',
+          };
+          const deps = { fetchImpl: () => { throw new Error('channel routes must not fetch'); }, now: () => new Date('2026-07-25T12:00:00Z') };
+          const req = (p, o) => { o = o || {}; const h = new Headers(); if (o.origin) h.set('origin', o.origin); h.set('cf-connecting-ip', o.ip || '203.0.113.7'); const m = o.method || 'POST'; return new Request('https://assist.example' + p, { method: m, headers: h, body: m === 'GET' ? undefined : (o.body || '{}') }); };
+
+          // --- 1. THE CLI'S PURE CORE (no network, no key) ------------------
+          const bundle = toBundle('chan-work/contracts-bundle.json');
+          if (bundle.type !== 'CONTRACTS-BUNDLE' || bundle.contracts.length !== 1) throw new Error('toBundle envelope wrong');
+          const ciEnv = {
+            GITHUB_REPOSITORY: 'acme/design-system', GITHUB_RUN_ID: '17654321',
+            GITHUB_SHA: '9f1c2ab3d4e5f60718293a4b5c6d7e8f90a1b2c3', GITHUB_REF: 'refs/heads/main',
+            GITHUB_SERVER_URL: 'https://github.com',
+          };
+          const prov = detectProvenance(ciEnv, {}, new Date('2026-07-25T11:59:00Z'));
+          if (!prov || prov.repo !== 'acme/design-system' || prov.runId !== '17654321') throw new Error('GitHub Actions context not detected: ' + JSON.stringify(prov));
+          if (prov.runUrl !== 'https://github.com/acme/design-system/actions/runs/17654321') throw new Error('runUrl not derived from server+repo+run: ' + prov.runUrl);
+          if (detectProvenance({}, {}, new Date()) !== null) throw new Error('a laptop run must yield NO provenance rather than invented fields');
+          const overridden = detectProvenance({}, { repo: 'x/y', commit: 'deadbeef' }, new Date());
+          if (!overridden || overridden.repo !== 'x/y' || overridden.runId !== undefined) throw new Error('explicit flags must work with no CI env, and must not invent the missing fields');
+          // PROVENANCE IS A SIBLING, NEVER INSIDE THE BUNDLE — figma bundle's
+          // byte-determinism guarantee survives contact with the channel.
+          const body = buildPublishBody(bundle, prov);
+          if (JSON.stringify(body.bundle) !== JSON.stringify(bundle)) throw new Error('publish envelope mutated the bundle bytes');
+          if (JSON.stringify(body.bundle).includes('acme/design-system')) throw new Error('provenance leaked INTO the bundle — figma bundle determinism broken');
+          const dry = publishDryRunLines('contracts-bundle.json', 'https://assist.example', bundle, prov, JSON.stringify(bundle).length);
+          if (!dry[0].startsWith('DRY RUN') || !dry.some((l) => l.includes('POST https://assist.example/channel/<writeKey>'))) throw new Error('dry-run plan does not print the exact request: ' + JSON.stringify(dry));
+          if (!dry.some((l) => l.includes('never persisted, never logged'))) throw new Error('dry-run must state the key discipline');
+          if (dry.some((l) => l.includes('dscw_'))) throw new Error('the dry-run plan must never print a key');
+
+          // --- 2. CLAIM: the key split ---------------------------------------
+          const claimed = await handleRequest(req('/channel/claim'), env, deps);
+          if (claimed.status !== 200) throw new Error('claim failed: ' + claimed.status);
+          const { writeKey, readKey, ttlSeconds } = await claimed.json();
+          if (ttlSeconds !== CHANNEL_TTL_SECONDS) throw new Error('claim did not report the 30-day TTL');
+          if (readKey !== 'dscr_' + createHash('sha256').update(writeKey).digest('hex')) throw new Error('readKey is NOT sha256(writeKey) — the one-way derivation is the whole security story');
+          // Only ever a masked prefix reaches a log line — never the key.
+          const masked = maskChannelKey(writeKey);
+          if (!masked.startsWith('dscw_') || masked.length !== 10 || !masked.endsWith('…')) throw new Error('maskChannelKey must show a 9-char prefix and an ellipsis: ' + masked);
+          if (writeKey.indexOf(masked) === 0 || writeKey.slice(9).length === 0) throw new Error('the mask must not be a usable prefix of the key');
+          // A leaked Figma-side key cannot publish…
+          const injected = await handleRequest(req('/channel/' + readKey, { body: JSON.stringify(buildPublishBody(bundle, null)) }), env, deps);
+          if (injected.status !== 400 || (await injected.json()).error !== CHANNEL_MESSAGES.notWriteKey) throw new Error('a READ key must be refused BY NAME on the publish route — this is the supply-chain guarantee');
+          // …and the CI secret is not a read route.
+          const misread = await handleRequest(req('/channel/' + writeKey, { method: 'GET' }), env, deps);
+          if (misread.status !== 400 || (await misread.json()).error !== CHANNEL_MESSAGES.notReadKey) throw new Error('a WRITE key must be refused BY NAME on the read route');
+
+          // --- 3. PUBLISH + NON-CONSUMING READ -------------------------------
+          const sent = await handleRequest(req('/channel/' + writeKey, { body: JSON.stringify(body) }), env, deps);
+          const sentBody = await sent.json();
+          if (sent.status !== 200 || sentBody.ok !== true || sentBody.seq !== 1) throw new Error('publish failed: ' + sent.status + ' ' + JSON.stringify(sentBody));
+          for (const k of ['chan:' + readKey + ':meta', 'chan:' + readKey + ':bundle', 'chan:' + readKey + ':prov']) {
+            if (ttls.get(k) !== CHANNEL_TTL_SECONDS) throw new Error('KV write without the 30-day TTL: ' + k);
+          }
+          // The designer reads. TWICE. Nothing is consumed — the bridge could
+          // never do this, and "1 update waiting" is impossible without it.
+          let delivered = null;
+          for (let i = 0; i < 2; i++) {
+            const got = await handleRequest(req('/channel/' + readKey + '?since=0', { method: 'GET', origin: 'null' }), env, deps);
+            if (got.status !== 200) throw new Error('read ' + (i + 1) + ' failed: ' + got.status);
+            delivered = await got.json();
+            if (delivered.status !== 'update' || delivered.seq !== 1) throw new Error('read ' + (i + 1) + ' did not deliver: ' + JSON.stringify(delivered).slice(0, 200));
+          }
+          if (JSON.stringify(delivered.bundle) !== JSON.stringify(bundle)) throw new Error('bundle not byte-identical through the channel');
+          if (delivered.bundle.contracts[0].id !== 'polaris.badge') throw new Error('wrong contract delivered');
+          // PROVENANCE echoed back verbatim, and the worker never read it.
+          if (JSON.stringify(delivered.provenance) !== JSON.stringify(prov)) throw new Error('provenance did not echo byte-identically: ' + JSON.stringify(delivered.provenance));
+          // Already at the head: told so, and NOT handed 4 MB again.
+          const current = await handleRequest(req('/channel/' + readKey + '?since=1', { method: 'GET' }), env, deps);
+          const currentBody = await current.json();
+          if (currentBody.status !== 'current' || 'bundle' in currentBody) throw new Error('a caller at the head must be told "current" with no payload');
+          // The cheap check-on-open question.
+          const head = await handleRequest(req('/channel/' + readKey + '?since=0&meta=1', { method: 'GET' }), env, deps);
+          const headBody = await head.json();
+          if (headBody.status !== 'update' || 'bundle' in headBody || !headBody.provenance) throw new Error('meta=1 must answer the head WITH provenance and WITHOUT the bundle');
+
+          // --- 4. THE PLUGIN SIDE: apply → memory → freshness guard ----------
+          const fp = channelFingerprint(readKey);
+          if (readKey.indexOf(fp) !== 0 || fp.length !== 12) throw new Error('the apply log must store a fingerprint of the key');
+          if (fp === readKey) throw new Error('the full read key must never be what lands in the file');
+          const line = provenanceLine(delivered.provenance, delivered.publishedAt, new Date('2026-07-25T12:04:00Z'));
+          if (line !== 'acme/design-system — CI run #17654321, commit 9f1c2ab, branch main, published 4 minutes ago.') throw new Error('provenance line wrong: ' + line);
+          // Fresh file: the guard is SILENT (it must never cry wolf on day one).
+          let log = parseApplyLog(null);
+          if (channelFreshness({ seq: 1 }, log, fp).stale !== false) throw new Error('the guard fired on a first-ever delivery');
+          // The designer applies #1; the file remembers.
+          log = appendApplyEntry(log, { source: 'channel', channel: fp, seq: 1, publishedAt: delivered.publishedAt, appliedAt: '2026-07-25T12:05:00Z', contractIds: ['polaris.badge'], bytes: delivered.bytes });
+          if (lastAppliedSeq(log, fp) !== 1) throw new Error('the apply log did not record delivery #1');
+
+          // --- 5. THE HOLE THIS ROUND CLOSES ---------------------------------
+          // seq is monotonic, so a WORKER can never hand back an older number.
+          const second = await handleRequest(req('/channel/' + writeKey, { body: JSON.stringify(buildPublishBody(bundle, null)) }), env, deps);
+          if ((await second.json()).seq !== 2) throw new Error('seq is not monotonic across publishes');
+          // The real-world path to an out-of-order delivery: the channel
+          // expires after 30 days with no publish and is RE-CLAIMED, so its
+          // numbering restarts at 1 while the file still remembers a higher
+          // number. Before this round that applied as an ordinary
+          // default-SELECTED change — the silent downgrade.
+          let deep = parseApplyLog(null);
+          deep = appendApplyEntry(deep, { source: 'channel', channel: fp, seq: 7, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+          const stale = channelFreshness({ seq: 1 }, deep, fp);
+          if (!stale.stale) throw new Error('THE SILENT-DOWNGRADE HOLE IS OPEN: an older delivery was not caught');
+          if (!stale.line.includes('#1') || !stale.line.includes('#7') || !stale.line.includes('BACKWARDS')) throw new Error('the refusal must NAME both delivery numbers: ' + stale.line);
+          const equal = channelFreshness({ seq: 7 }, deep, fp);
+          if (!equal.stale || !equal.line.includes('last applied')) throw new Error('re-applying the SAME delivery must be named too: ' + equal.line);
+          // A DIFFERENT channel's numbers are never borrowed — two channels
+          // number independently, so comparing them would invent a warning.
+          if (channelFreshness({ seq: 1 }, deep, 'dscr_someother').stale !== false) throw new Error('a different channel must not inherit this one\\'s ordering');
+          // A pairing-code receive / paste carries no ordering at all and is
+          // therefore untouched by this round, by construction.
+          if (channelFreshness({ seq: 1 }, deep, null).stale !== false) throw new Error('a source with no channel must keep todays behaviour');
+
+          // --- 6. Wrong / expired keys are indistinguishable ------------------
+          const nobody = await handleRequest(req('/channel/dscr_' + 'a'.repeat(64), { method: 'GET' }), env, deps);
+          if (nobody.status !== 404 || (await nobody.json()).error !== CHANNEL_MESSAGES.noChannel) throw new Error('an unminted key must 404 with the named message');
+          store.delete('chan:' + readKey + ':meta');
+          const expired = await handleRequest(req('/channel/' + readKey, { method: 'GET' }), env, deps);
+          if (expired.status !== 404 || (await expired.json()).error !== CHANNEL_MESSAGES.noChannel) throw new Error('an expired channel must be indistinguishable from one that never existed');
+
+          console.log('channel ok: readKey=sha256(writeKey), split refused both ways by name, publish→2 non-consuming reads byte-identical with provenance echoed unread, meta=1 head without payload, seq monotonic, freshness guard names #older vs #applied and stays silent across channels and on paste, wrong/expired indistinguishable');
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (trip.status !== 0 || !trip.out.includes('channel ok:')) {
+        throw new Error(`channel round trip failed:\n${trip.out}`);
+      }
+
+      // The worker's own 24-case suite carries the transport-level detail
+      // (TTL on every write, caps by channel, kill-switch independence, the
+      // 4 MB cap, every malformed envelope refused by name).
+      const suite = run(TSX, ['--test', 'workers/assist/test/channel.test.ts']);
+      if (suite.status !== 0) throw new Error(`workers/assist channel suite failed:\n${suite.out.slice(-4000)}`);
+      for (const line of [
+        'split: a writeKey cannot READ and a readKey cannot WRITE — both refused 400 by name',
+        'read is NON-CONSUMING: the same delivery answers ten times and the keys survive',
+        'seq is MONOTONIC across publishes, last write wins on the payload',
+        'TTL: EVERY channel KV write carries the 30-day expirationTtl',
+        'caps: the publish cap is per CHANNEL — a churning CI IP is irrelevant, another channel is unaffected',
+        'kill switch: CHANNEL_ENABLED unset answers 503 everywhere and is INDEPENDENT of bridge + assist',
+        'isolation: the channel never disturbs the bridge (both live in one worker, one KV)',
+      ]) {
+        if (!suite.out.includes(line)) throw new Error(`missing channel worker test: ${line}`);
+      }
+      if (!/# fail 0/.test(suite.out)) throw new Error(`channel worker suite reports failures:\n${suite.out.slice(-2000)}`);
+
+      console.log(
+        'channel-round-trip: CLI pure core (provenance auto-detect, sibling envelope, dry-run plan) → real worker pipeline (claim/publish/non-consuming read, key split refused both ways) → plugin engine (apply log, provenance line, freshness guard closing the silent-downgrade hole) — zero network, plus the 24-case worker suite',
+      );
+    },
+  },
+  {
     // G6+G14 (docs/18): the brownfield onboarding ramps — draft capture-
     // config generation (refuses unreviewed drafts by name), the coverage
     // scorecard, bulk candidate acceptance (ledgered, refusals named), and

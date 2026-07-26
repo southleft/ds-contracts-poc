@@ -50,6 +50,8 @@ const CI_ONLY = {
   'code-led.yml': {
     'Commit the refreshed contracts back to the branch':
       'pushes with the workflow GITHUB_TOKEN — the scratch consumer is not a git remote; shell syntax-checked (bash -n)',
+    'Publish to the standing CI→Figma channel':
+      'needs a LIVE channel (a minted write key + the deployed worker) AND a CLI newer than the published 0.1.0 the other steps pin — `figma publish` ships in the next release. Shell syntax-checked (bash -n). The channel transport itself is pinned network-free by workers/assist/test/channel.test.ts (24 cases) and the `channel-round-trip` eval.',
   },
   'design-led.yml': {
     'Post the PR comment (plain GITHUB_TOKEN — no external services)':

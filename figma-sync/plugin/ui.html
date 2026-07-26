@@ -100,6 +100,14 @@
     font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
     width: 110px;
   }
+  /* Channel read key (dscr_ + 64 hex): long, lowercase, pasted once —
+     narrow enough to sit on the same row as its button, wide enough to show
+     the prefix and enough tail to tell two channels apart. */
+  .channel-key {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px; text-transform: lowercase;
+    width: 180px;
+  }
   button.secondary {
     appearance: none; font: inherit; font-weight: 600;
     color: var(--figma-color-text, #333);
@@ -158,6 +166,14 @@
     <button class="secondary" id="gen-receive">Receive by code</button>
     <span class="status" id="gen-receive-status"></span>
   </div>
+  <!-- G1 — THE STANDING CHANNEL. The pairing code above needs both people in
+       the same minute; this needs neither. Paste the read key once (it is
+       saved for you) and CI's latest bundle is always one button away. -->
+  <div class="row">
+    <input type="text" class="channel-key" id="gen-channel-key" spellcheck="false" autocomplete="off" placeholder="dscr_… (CI channel key — paste once)" />
+    <button class="secondary" id="gen-channel-check">Check for updates</button>
+    <span class="status" id="gen-channel-status"></span>
+  </div>
   <textarea id="gen-input" spellcheck="false"
     placeholder='// Paste a contract document ({ "id": "…", … }) or a CONTRACTS-BUNDLE here.'></textarea>
   <div class="row">
@@ -192,6 +208,15 @@
     <input type="text" class="pair-code" id="upd-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
     <button class="secondary" id="upd-receive">Receive by code</button>
     <span class="status" id="upd-receive-status"></span>
+  </div>
+  <!-- The same standing channel, mirrored here: this is where a channel
+       delivery usually belongs (an update to a library that already exists),
+       and it is the tab where the out-of-order guard can speak. One key, two
+       fields — typing in either updates both and saves once. -->
+  <div class="row">
+    <input type="text" class="channel-key" id="upd-channel-key" spellcheck="false" autocomplete="off" placeholder="dscr_… (CI channel key — paste once)" />
+    <button class="secondary" id="upd-channel-check">Check for updates</button>
+    <span class="status" id="upd-channel-status"></span>
   </div>
   <textarea id="upd-input" spellcheck="false"
     placeholder='// Paste a CONTRACTS-BUNDLE (or a single contract) here, or receive one by code above.'></textarea>
@@ -790,6 +815,142 @@
   }
   var bridgePollHandlers = {};
 
+  // --- the standing CI channel (G1) ----------------------------------------
+  // The pairing code above is the AD-HOC path: it needs a person on each end
+  // in the same 15 minutes. This is the standing one — CI publishes whenever,
+  // the designer checks whenever. There is deliberately NO TIMER: a Figma
+  // plugin has no background execution, so a poll loop would only run while
+  // this window is open and would lie about being a watcher. Two triggers:
+  // once when the plugin opens (a cheap head-only read) and this button.
+  var channelKeyInputs = ['gen-channel-key', 'upd-channel-key'];
+  var channelStatusIds = { 'gen-channel-key': 'gen-channel-status', 'upd-channel-key': 'upd-channel-status' };
+  var channelCheckPending = {};
+  var channelSeq = 0;
+  /** The delivery behind whatever is currently in the Update box — null for a
+   *  paste or a pairing-code receive, which carry no ordering and therefore
+   *  keep exactly today's behaviour. */
+  var lastChannelDelivery = null;
+
+  function channelKey() { return ($('gen-channel-key').value || $('upd-channel-key').value || '').trim(); }
+  function setChannelStatus(text) {
+    channelKeyInputs.forEach(function (id) { $(channelStatusIds[id]).textContent = text; });
+  }
+  // One key, two fields: typing in either mirrors to the other and saves.
+  channelKeyInputs.forEach(function (id) {
+    $(id).addEventListener('change', function () {
+      var value = $(id).value.trim();
+      channelKeyInputs.forEach(function (other) { if (other !== id) $(other).value = value; });
+      parent.postMessage({ pluginMessage: { type: 'channel-key-save', key: value } }, '*');
+    });
+  });
+
+  /** One non-consuming peek. cb(result) — result.status is
+   *  'current' | 'update' | 'error'. Asking twice is free by design. */
+  function channelCheck(opts, cb) {
+    var key = channelKey();
+    if (!key) {
+      cb({ status: 'error', message: 'No channel key yet — paste the read key (dscr_…) your engineer minted with `ds-contracts figma claim-channel`.' });
+      return;
+    }
+    var id = 'c' + (++channelSeq);
+    channelCheckPending[id] = cb;
+    parent.postMessage({ pluginMessage: {
+      type: 'channel-check', replyTo: id, key: key,
+      since: opts.since || 0, metaOnly: !!opts.metaOnly,
+    } }, '*');
+  }
+
+  /** This file's apply log, read through the same read-only engine-run path
+   *  the marker inventory uses. cb(log) — an unreadable log is "no history". */
+  function readApplyLog(cb) {
+    var DSC = engine();
+    if (!DSC || !DSC.applyLogScriptSource) { cb(DSC ? DSC.parseApplyLog(null) : null); return; }
+    engineRun(DSC.applyLogScriptSource(), { readOnly: true }, function (msg) {
+      cb(DSC.parseApplyLog(msg.ok && msg.result ? msg.result.applyLog : null));
+    });
+  }
+
+  /** CHECK-ON-OPEN: one head-only read (no bundle bytes) that reports
+   *  whether anything is waiting. It NEVER fills a box or plans anything —
+   *  opening the plugin must not stage work the designer did not ask for. */
+  function channelCheckOnOpen() {
+    if (!channelKey()) return;
+    var DSC = engine();
+    if (!DSC || !DSC.channelFingerprint) return;
+    readApplyLog(function (log) {
+      if (!log) return;
+      var fp = DSC.channelFingerprint(channelKey());
+      var last = DSC.lastAppliedSeq(log, fp);
+      channelCheck({ since: last === null ? 0 : last, metaOnly: true }, function (res) {
+        if (res.status === 'error') { setChannelStatus(res.message); return; }
+        if (res.status === 'current') {
+          setChannelStatus(res.seq === 0
+            ? 'Channel is live — CI has not published to it yet.'
+            : 'Up to date with CI (delivery #' + res.seq + ').');
+          return;
+        }
+        setChannelStatus('CI has an update waiting (delivery #' + res.seq + ') — press “Check for updates”.');
+      });
+    });
+  }
+
+  /** The explicit button: pull the full delivery, drop the bundle into the
+   *  named box, and run EXACTLY the path a pairing-code receive runs. */
+  function channelPull(targetInputId, onBundle) {
+    var DSC = engine();
+    if (!DSC) { setChannelStatus(NO_ENGINE); return; }
+    setChannelStatus('Checking the channel…');
+    readApplyLog(function (log) {
+      var fp = DSC.channelFingerprint(channelKey());
+      var last = DSC.lastAppliedSeq(log, fp);
+      channelCheck({ since: last === null ? 0 : last, metaOnly: false }, function (res) {
+        if (res.status === 'error') { setChannelStatus(res.message); return; }
+        if (res.status === 'current') {
+          setChannelStatus(res.seq === 0
+            ? 'Channel is live — CI has not published to it yet.'
+            : 'Nothing new: this file is already at CI delivery #' + res.seq + '.');
+          return;
+        }
+        if (!res.bundle || typeof res.bundle !== 'object') {
+          setChannelStatus('The channel answered without a bundle — ask your engineer to publish again.');
+          return;
+        }
+        // The freshness verdict is computed HERE, against this file's own
+        // apply log — the worker cannot know what this file already applied.
+        // …and it is bound to the BOX it landed in. A pull into the Generate
+        // box must never lend its delivery number to whatever happens to be
+        // sitting in the Update box (the report would claim an ordering that
+        // belongs to different bytes).
+        lastChannelDelivery = {
+          seq: res.seq,
+          publishedAt: res.publishedAt || null,
+          provenance: res.provenance || null,
+          bytes: res.bytes || null,
+          channel: fp,
+          target: targetInputId,
+          freshness: DSC.channelFreshness({ seq: res.seq }, log, fp),
+        };
+        $(targetInputId).value = JSON.stringify(res.bundle, null, 2);
+        setChannelStatus('Delivery #' + res.seq + ' received — ' +
+          DSC.provenanceLine(res.provenance || null, res.publishedAt || null, new Date()));
+        onBundle();
+      });
+    });
+  }
+
+  $('gen-channel-check').onclick = function () {
+    channelPull('gen-input', function () {
+      $('gen-channel-status').textContent += ' Review it below, then press Generate.';
+    });
+  };
+  $('upd-channel-check').onclick = function () {
+    updState = null;
+    updApply.disabled = true;
+    channelPull('upd-input', function () {
+      $('upd-channel-status').textContent += ' Now press “Check against this file”.';
+    });
+  };
+
   // --- Generate from contract ----------------------------------------------
   $('gen-receive').onclick = function () {
     receiveByCode('gen-code', 'gen-receive-status', function (bundle) {
@@ -872,8 +1033,16 @@
       $('upd-receive-status').textContent = 'Bundle received — press “Check against this file”.';
       updState = null;
       updApply.disabled = true;
+      // A pairing-code receive carries NO delivery number — drop any channel
+      // delivery still attached to the box so the report never claims an
+      // ordering this bundle does not have.
+      lastChannelDelivery = null;
     });
   };
+
+  // Hand-editing the box detaches it from the channel delivery for the same
+  // reason: the ordering belonged to the bytes that arrived, not to these.
+  $('upd-input').addEventListener('input', function () { lastChannelDelivery = null; });
 
   updCheck.onclick = function () {
     var DSC = engine();
@@ -895,8 +1064,20 @@
         return;
       }
       var inventory = (msg.result && msg.result.inventory) || [];
-      var plan = DSC.updatePlan(parsed.contracts, inventory, parsed.tokenSet || null, parsed.icons || null);
+      // G1/S2: a channel delivery brings an ORDERING with it. If it is not
+      // newer than what this file already applied from that channel, the
+      // guard fires by name and every box starts unchecked. A paste or a
+      // pairing-code receive passes null and behaves exactly as before.
+      var delivery = lastChannelDelivery && lastChannelDelivery.target === 'upd-input' ? lastChannelDelivery : null;
+      var plan = DSC.updatePlan(parsed.contracts, inventory, parsed.tokenSet || null, parsed.icons || null, delivery ? delivery.freshness : null);
       var box = resultBox('upd-result', null, 'Change report — nothing applied yet:');
+      // Provenance rides ABOVE the report: who published this, from what
+      // commit, when. It is echoed by the worker unread — the plugin is the
+      // first thing in the chain that even looks at it.
+      if (delivery) {
+        addLine(box, 'Delivery #' + delivery.seq + ' — ' + DSC.provenanceLine(
+          delivery.provenance, delivery.publishedAt, new Date()));
+      }
       var rowsWrap = document.createElement('div');
       rowsWrap.className = 'rows';
       plan.rows.forEach(function (row) {
@@ -944,7 +1125,7 @@
       });
       box.appendChild(rowsWrap);
       plan.lines.slice(plan.rows.length).forEach(function (l) { addLine(box, l); });
-      updState = { contracts: parsed.contracts, plan: plan, rowsWrap: rowsWrap, tokenSet: parsed.tokenSet || null, icons: parsed.icons || null };
+      updState = { contracts: parsed.contracts, plan: plan, rowsWrap: rowsWrap, tokenSet: parsed.tokenSet || null, icons: parsed.icons || null, delivery: delivery };
       updApply.disabled = !plan.rows.some(function (r) { return r.action === 'amend' || r.action === 'create'; });
     });
   };
@@ -981,6 +1162,28 @@
       box.firstChild.textContent = ok
         ? 'Applied — ' + amended + ' amended in place, ' + created + ' created, ' + skipped + ' already up to date. Instances keep their overrides (same nodes, same property ids).'
         : 'Stopped at the first failure — nothing after it ran; the failed script committed nothing.';
+      // G1/S2: give this FILE a memory. The apply log is what the freshness
+      // guard reads next time — without it every delivery looks new. Written
+      // only on a clean apply of a CHANNEL delivery; a partial run records
+      // nothing rather than claiming a delivery number it did not finish.
+      var delivery = updState && updState.delivery;
+      if (ok && delivery && DSC.recordApplyScriptSource) {
+        engineRun(DSC.recordApplyScriptSource({
+          source: 'channel',
+          channel: delivery.channel,
+          seq: delivery.seq,
+          publishedAt: delivery.publishedAt || null,
+          appliedAt: new Date().toISOString(),
+          contractIds: selected,
+          bytes: delivery.bytes || null,
+        }), {}, function (rec) {
+          addLine(box, rec.ok
+            ? 'Recorded delivery #' + delivery.seq + ' in this file’s apply log — a later, older delivery will now be caught.'
+            : 'Applied, but the apply log could not be written (' + rec.error + ') — the next check cannot detect an out-of-order delivery.',
+            rec.ok ? 'ok' : 'warn');
+          if (rec.ok) setChannelStatus('Up to date with CI (delivery #' + delivery.seq + ').');
+        });
+      }
     });
   };
 
@@ -1211,6 +1414,19 @@
     } else if (msg.type === 'bridge-poll-result') {
       var handler = bridgePollHandlers[msg.replyTo];
       if (handler) handler(msg);
+    } else if (msg.type === 'channel-key') {
+      // The stored read key, echoed into both fields. Then ONE head-only
+      // check-on-open — the only automatic network call this plugin makes.
+      var storedKey = msg.key || '';
+      channelKeyInputs.forEach(function (id) { $(id).value = storedKey; });
+      if (storedKey) channelCheckOnOpen();
+    } else if (msg.type === 'channel-key-saved') {
+      if (!msg.ok) { setChannelStatus(msg.message || 'Could not save the channel key.'); return; }
+      setChannelStatus(msg.key ? 'Channel key saved — checking…' : 'Channel key cleared.');
+      if (msg.key) channelCheckOnOpen();
+    } else if (msg.type === 'channel-check-result') {
+      var channelCb = channelCheckPending[msg.replyTo];
+      if (channelCb) { delete channelCheckPending[msg.replyTo]; channelCb(msg); }
     } else if (msg.type === 'proposal-push-result') {
       showProposalPushResult(msg);
     } else if (msg.type === 'paste-result') {
@@ -1258,6 +1474,10 @@
   // Ask code.js for the current file's key (it also posts one unprompted at
   // startup; this covers the race when the iframe loads after that post).
   parent.postMessage({ pluginMessage: { type: 'ui-ready' } }, '*');
+  // …and for the stored channel read key. If one comes back, the handler
+  // above runs a single head-only check — CHECK-ON-OPEN. Nothing else in
+  // this plugin reaches the network without a click.
+  parent.postMessage({ pluginMessage: { type: 'channel-key-load' } }, '*');
 </script>
 
 <!-- The repo's extract/figma/dump.plugin.js, embedded VERBATIM (read-only dump

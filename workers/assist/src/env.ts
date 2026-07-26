@@ -27,6 +27,15 @@ export interface Env {
   BRIDGE_ENABLED?: string;
   /** Per-IP daily cap for bridge session creation and uploads (each its own class). Default "40". */
   BRIDGE_IP_DAILY_LIMIT?: string;
+  /** Standing CI↔Figma channel kill switch — anything other than "true" answers 503.
+   *  Independent of BRIDGE_ENABLED and ASSIST_ENABLED. */
+  CHANNEL_ENABLED?: string;
+  /** Per-IP daily cap on MINTING channels (`POST /channel/claim`). A channel is
+   *  claimed once per repository, not per build. Default "10". */
+  CHANNEL_CLAIM_IP_DAILY_LIMIT?: string;
+  /** Per-CHANNEL daily publish cap — keyed by channel, NOT by IP, because CI
+   *  runners churn IP addresses and an IP cap would not hold. Default "200". */
+  CHANNEL_PUBLISH_DAILY_LIMIT?: string;
 }
 
 /** Injectable seams so tests run in plain node with no workerd and no network. */

@@ -182,6 +182,249 @@ export interface InventoryRow {
   drift: 'in-sync' | 'canvas-edited' | 'unstamped' | 'version-changed' | null;
 }
 
+// ---------------------------------------------------------------------------
+// THE STANDING CHANNEL — plugin side (docs/18 G1, slices S1+S2).
+//
+// Everything below is MODULE-LEVEL and PURE: no `figma`, no fetch, no engine
+// data. That is deliberate — the eval imports these functions directly under
+// tsx while the headless gate exercises the SAME functions through the built
+// bundle on `window.DSC`, so the two can never drift.
+//
+// THE HOLE THIS CLOSES (the round's named defect): `updatePlan` compared
+// specHash for EQUALITY only. No ordering existed anywhere, so receiving an
+// OLDER bundle applied as an ordinary, default-SELECTED change — a silent
+// downgrade, the canvas twin of docs/18's G4 silent revert. The channel's
+// monotonic `seq` gives the file something to compare against, and the
+// apply log gives it a memory.
+// ---------------------------------------------------------------------------
+
+/** CI-side facts that ride ALONGSIDE a channel delivery. Written by
+ *  `ds-contracts figma publish`, stored and echoed by the worker WITHOUT
+ *  being read, rendered here. Every field optional: a publish from a laptop
+ *  has none, and inventing them would be a lie the plugin then displays. */
+export interface ChannelProvenance {
+  repo?: string;
+  runId?: string;
+  runUrl?: string;
+  commit?: string;
+  ref?: string;
+  publishedAt?: string;
+}
+
+/** One `GET /channel/<readKey>` answer, as the UI receives it. */
+export interface ChannelDelivery {
+  status: 'current' | 'update';
+  seq: number;
+  publishedAt: string | null;
+  bytes?: number;
+  provenance?: ChannelProvenance | null;
+  /** Absent on `status: 'current'` and on a `meta=1` head read. */
+  bundle?: unknown;
+}
+
+/**
+ * ONE RECORD SHAPE, designed to be the seed of docs/18 G13's apply log: the
+ * entries array IS the log, this round just reads its head. Key names are
+ * chosen for that future (source / channel / seq / publishedAt / appliedAt /
+ * contractIds / bytes) so G13 adds a viewer, not a migration.
+ *
+ * It lives in ROOT pluginData — file-local, so it travels with the file and
+ * is readable by anyone who can open it. Which is why `channel` stores a
+ * FINGERPRINT of the read key and never the key.
+ */
+export interface ApplyLogEntry {
+  /** How the bundle arrived. 'channel' is new this round; the pairing-code
+   *  and paste paths are unchanged and do not write entries yet. */
+  source: 'channel' | 'bridge' | 'paste';
+  /** First 12 characters of the read key — enough to tell two channels
+   *  apart, useless as a credential. null for non-channel sources. */
+  channel: string | null;
+  /** The channel delivery number. null for sources that have no ordering
+   *  (a pairing-code receive, a paste) — which is exactly why those keep
+   *  today's behaviour: there is nothing honest to compare. */
+  seq: number | null;
+  publishedAt: string | null;
+  appliedAt: string;
+  contractIds: string[];
+  bytes: number | null;
+}
+
+export interface ApplyLog {
+  version: 1;
+  entries: ApplyLogEntry[];
+}
+
+/** Root pluginData key under the ds_contracts namespace. */
+export const APPLY_LOG_KEY = 'applyLog';
+/** Entries are capped so the record cannot grow without bound in a file
+ *  synced daily for a year. Newest first; the tail falls off. */
+export const APPLY_LOG_MAX_ENTRIES = 50;
+
+/** Channel identity WITHOUT the credential. */
+export const channelFingerprint = (readKey: string): string => String(readKey || '').slice(0, 12);
+
+export function emptyApplyLog(): ApplyLog {
+  return { version: 1, entries: [] };
+}
+
+/** Tolerant reader: anything unreadable is treated as "no history", never as
+ *  an error. A corrupt record must not be able to block an update. */
+export function parseApplyLog(raw: string | null | undefined): ApplyLog {
+  if (!raw) return emptyApplyLog();
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return emptyApplyLog();
+  }
+  if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) return emptyApplyLog();
+  const entries = (parsed as { entries?: unknown }).entries;
+  if (!Array.isArray(entries)) return emptyApplyLog();
+  const clean: ApplyLogEntry[] = [];
+  for (const e of entries) {
+    if (e === null || typeof e !== 'object' || Array.isArray(e)) continue;
+    const o = e as Record<string, unknown>;
+    clean.push({
+      source: o.source === 'channel' || o.source === 'bridge' || o.source === 'paste' ? o.source : 'paste',
+      channel: typeof o.channel === 'string' ? o.channel : null,
+      seq: typeof o.seq === 'number' && Number.isFinite(o.seq) ? o.seq : null,
+      publishedAt: typeof o.publishedAt === 'string' ? o.publishedAt : null,
+      appliedAt: typeof o.appliedAt === 'string' ? o.appliedAt : '',
+      contractIds: Array.isArray(o.contractIds) ? o.contractIds.filter((x): x is string => typeof x === 'string') : [],
+      bytes: typeof o.bytes === 'number' && Number.isFinite(o.bytes) ? o.bytes : null,
+    });
+  }
+  return { version: 1, entries: clean };
+}
+
+/** Newest first, capped. PURE — returns a new log. */
+export function appendApplyEntry(log: ApplyLog, entry: ApplyLogEntry): ApplyLog {
+  return { version: 1, entries: [entry, ...log.entries].slice(0, APPLY_LOG_MAX_ENTRIES) };
+}
+
+/** The highest delivery this FILE has applied from THIS channel. null = it
+ *  has never applied from this channel, so nothing can be compared and
+ *  nothing is claimed. Seq numbers from a DIFFERENT channel are deliberately
+ *  ignored: two channels number independently, so comparing them would
+ *  manufacture a warning out of nothing. */
+export function lastAppliedSeq(log: ApplyLog, channel: string | null): number | null {
+  if (!channel) return null;
+  let best: number | null = null;
+  for (const e of log.entries) {
+    if (e.source !== 'channel' || e.channel !== channel || e.seq === null) continue;
+    if (best === null || e.seq > best) best = e.seq;
+  }
+  return best;
+}
+
+export interface ChannelFreshness {
+  stale: boolean;
+  /** The named warning, or the reassurance. Rendered verbatim. */
+  line: string;
+  lastAppliedSeq: number | null;
+  seq: number;
+}
+
+/**
+ * THE FRESHNESS GUARD. Same posture as the drift-aware overwrite warning
+ * (G2): WARN AND DEFAULT-SAFE, never block. A designer who genuinely wants
+ * to roll back ticks the boxes themselves.
+ *
+ * It fires when a delivery is not newer than what this file already applied
+ * from this channel. With a monotonic worker that means one of:
+ *   - the channel expired (30 days without a publish) and was re-claimed, so
+ *     its numbering restarted at 1 while the file remembers 7;
+ *   - the read key was repointed at a different, lower-numbered channel;
+ *   - the same delivery is being applied twice.
+ */
+export function channelFreshness(
+  delivery: { seq: number },
+  log: ApplyLog,
+  channel: string | null,
+): ChannelFreshness {
+  const last = lastAppliedSeq(log, channel);
+  const seq = Number.isFinite(delivery.seq) ? delivery.seq : 0;
+  if (last === null || seq > last) {
+    return { stale: false, line: '', lastAppliedSeq: last, seq };
+  }
+  const line =
+    seq === last
+      ? `this delivery (#${seq}) is the one this file last applied — re-applying it changes nothing, so every box starts unchecked.`
+      : `this delivery (#${seq}) is older than what this file last applied (#${last}) — applying it would roll this library BACKWARDS. Every box starts unchecked; tick them only if rolling back is what you want.`;
+  return { stale: true, line, lastAppliedSeq: last, seq };
+}
+
+/** "4 minutes ago" / "2 days ago". Presentation only — never an artifact,
+ *  so a clock difference can never change a byte anyone commits. */
+export function relativeWhen(iso: string | null | undefined, now: Date): string {
+  if (!iso) return 'at an unrecorded time';
+  const then = Date.parse(iso);
+  if (!Number.isFinite(then)) return 'at an unrecorded time';
+  const secs = Math.round((now.getTime() - then) / 1000);
+  if (secs < 0) return 'just now';
+  if (secs < 60) return 'just now';
+  const mins = Math.round(secs / 60);
+  if (mins < 60) return `${mins} minute${mins === 1 ? '' : 's'} ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+  const days = Math.round(hours / 24);
+  return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
+/**
+ * The provenance line rendered ABOVE the update report:
+ *   "acme/design-system — CI run #17654321, commit 9f1c2ab, published 4 minutes ago"
+ * A delivery with no provenance says so plainly rather than showing blanks —
+ * "unattributed" is a fact a lead needs, not a gap to paper over.
+ */
+export function provenanceLine(
+  provenance: ChannelProvenance | null | undefined,
+  publishedAt: string | null,
+  now: Date,
+): string {
+  const when = `published ${relativeWhen(publishedAt ?? provenance?.publishedAt ?? null, now)}`;
+  if (!provenance || typeof provenance !== 'object') {
+    return `Unattributed delivery (no CI provenance was published with it) — ${when}.`;
+  }
+  const parts: string[] = [];
+  if (provenance.repo) parts.push(provenance.repo);
+  const tail: string[] = [];
+  if (provenance.runId) tail.push(`CI run #${provenance.runId}`);
+  if (provenance.commit) tail.push(`commit ${String(provenance.commit).slice(0, 7)}`);
+  if (provenance.ref) tail.push(String(provenance.ref).replace(/^refs\/heads\//, 'branch '));
+  tail.push(when);
+  if (parts.length === 0 && tail.length === 1) {
+    return `Unattributed delivery (no CI provenance was published with it) — ${when}.`;
+  }
+  return `${parts.length > 0 ? `${parts.join(' ')} — ` : ''}${tail.join(', ')}.`;
+}
+
+/** Read-only script: hand the UI this file's apply log. Runs through the
+ *  SAME engine-run path inventoryScriptSource uses; mutates nothing. */
+export function applyLogScriptSource(): string {
+  return `// ds-contracts plugin: read the file-local apply log (nothing changes).
+const raw = figma.root.getSharedPluginData('ds_contracts', ${JSON.stringify(APPLY_LOG_KEY)});
+return { applyLog: raw || null };
+`;
+}
+
+/** Write one entry, newest first, capped — the read-modify-write happens in
+ *  the script so the file is the single writer. */
+export function recordApplyScriptSource(entry: ApplyLogEntry): string {
+  return `// ds-contracts plugin: record this apply in the file-local apply log.
+const KEY = ${JSON.stringify(APPLY_LOG_KEY)};
+const MAX = ${APPLY_LOG_MAX_ENTRIES};
+let log = { version: 1, entries: [] };
+try {
+  const parsed = JSON.parse(figma.root.getSharedPluginData('ds_contracts', KEY) || 'null');
+  if (parsed && Array.isArray(parsed.entries)) log = { version: 1, entries: parsed.entries };
+} catch (e) { /* unreadable history is treated as none — never a blocker */ }
+log.entries = [${JSON.stringify(entry)}].concat(log.entries).slice(0, MAX);
+figma.root.setSharedPluginData('ds_contracts', KEY, JSON.stringify(log));
+return { applyLogEntries: log.entries.length, seq: ${JSON.stringify(entry.seq)} };
+`;
+}
+
 export function createPluginEngine(data: PluginEngineData) {
   const icons = new Map(Object.entries(data.icons));
   const engine = createFigmaEngine({ tokens: data.tokens, icons });
@@ -481,7 +724,24 @@ export function createPluginEngine(data: PluginEngineData) {
 
   /** Post-sync marker: the emitted runtime stores contractId + specHash;
    *  the plugin adds the VERSION so the next Update-library report can say
-   *  "1.4.0 → 1.5.0" instead of "(installed version not recorded)". */
+   *  "1.4.0 → 1.5.0" instead of "(installed version not recorded)".
+   *
+   *  STILL OPEN (G1 round, measured and deliberately NOT taken): the SCRIPT
+   *  path — a committed `*.figma.js` run through the paste box or the local
+   *  runner — never stamps `ds_contracts/version`, so a library synced that
+   *  way reports "(installed version not recorded)" forever and G8's
+   *  per-channel style diff (which needs the installed version to match a
+   *  baked contract) silently degrades to summary level.
+   *
+   *  Why it was not fixed here: `ComponentData` (core/emit-figma-script.ts)
+   *  carries no version field, and `specHash` is a djb2 over
+   *  `JSON.stringify(ComponentData)` — adding one would change the hash of
+   *  EVERY contract, so every generated set in every file would report as
+   *  changed on the next check. Threading a separate `CONTRACT_VERSIONS`
+   *  constant through `buildSyncScript` avoids that but rewrites every
+   *  committed `*.figma.js` (~100 files across figma-sync/ and examples/)
+   *  plus the golden manifest. That is a reviewable blast radius of its
+   *  own, not a rider on a channel round. */
   function versionMarkerScript(contractId: string, version: string): string {
     return `// ds-contracts plugin: record installed contract version (read-mostly follow-up).
 await figma.loadAllPagesAsync();
@@ -747,6 +1007,12 @@ return { inventory: rows };
     inventory: InventoryRow[],
     tokenSet: TokenSetPayload | null = null,
     bundleIcons: Record<string, string> | null = null,
+    /** G1/S2 FRESHNESS GUARD. Non-null only for a channel delivery that is
+     *  not newer than what this file already applied from that channel. A
+     *  pairing-code receive or a paste passes null and keeps EXACTLY today's
+     *  behaviour — they carry no ordering, so there is nothing honest to
+     *  compare and inventing a warning would be worse than none. */
+    freshness: ChannelFreshness | null = null,
   ): UpdatePlan {
     // A bundle-carried foreign token set (and any bundle-carried icons):
     // every incoming contract compiles against base + minted (the same
@@ -908,13 +1174,28 @@ return { inventory: rows };
       });
     });
 
+    // G1/S2: a stale channel delivery unchecks EVERY actionable row and says
+    // why on each one. Same posture as the canvas-edit warning above — warn
+    // and default-safe, never block; a deliberate rollback is still one
+    // click per component away.
+    if (freshness && freshness.stale) {
+      for (const row of rows) {
+        if (row.action !== 'amend' && row.action !== 'create') continue;
+        row.defaultSelected = false;
+        row.warning = row.warning ? `${row.warning} Also: ${freshness.line}` : freshness.line;
+      }
+    }
+
     const count = (a: UpdateRow['action']) => rows.filter((r) => r.action === a).length;
-    const warned = rows.filter((r) => r.warning);
+    const canvasWarned = rows.filter((r) => r.canvasEdited);
     const lines = [
       ...rows.map((r) => r.line),
-      ...(warned.length > 0
+      ...(freshness && freshness.stale
+        ? [`⚠ Out of order — ${freshness.line}`]
+        : []),
+      ...(canvasWarned.length > 0
         ? [
-            `⚠ ${warned.length} set${warned.length === 1 ? ' has' : 's have'} un-proposed canvas edits — applying overwrites the edits, so ${warned.length === 1 ? 'its box starts' : 'their boxes start'} unchecked.`,
+            `⚠ ${canvasWarned.length} set${canvasWarned.length === 1 ? ' has' : 's have'} un-proposed canvas edits — applying overwrites the edits, so ${canvasWarned.length === 1 ? 'its box starts' : 'their boxes start'} unchecked.`,
           ]
         : []),
       `${count('amend')} to update · ${count('create')} new · ${count('skip')} unchanged${count('refused') ? ` · ${count('refused')} refused` : ''}.`,
@@ -1207,6 +1488,19 @@ return { inventory: rows };
     inventoryScriptSource,
     updatePlan,
     updateApplySteps,
+    // THE STANDING CHANNEL (G1) — the same module-level pure functions the
+    // eval imports directly, re-exported here so ui.html reaches them on
+    // window.DSC and the two paths can never drift.
+    channelFingerprint,
+    parseApplyLog,
+    appendApplyEntry,
+    lastAppliedSeq,
+    channelFreshness,
+    provenanceLine,
+    relativeWhen,
+    applyLogScriptSource,
+    recordApplyScriptSource,
+    APPLY_LOG_MAX_ENTRIES,
     specHashOf: (raw: unknown) => {
       const v = validateOne(raw, labelOf(raw, 0));
       if (!v.ok) throw new Error(v.issues[0].headline);

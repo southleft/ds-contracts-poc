@@ -35,6 +35,22 @@ const TOKEN_STORAGE_KEY = 'ds_contracts_runner_token';
 const BRIDGE_BASE = 'https://ds-contracts-assist.southleft-llc.workers.dev';
 const BRIDGE_MAX_DUMP_BYTES = 4 * 1024 * 1024; // mirror of the worker's cap, checked before sending
 
+// THE STANDING CI↔FIGMA CHANNEL (docs/18 G1) — the same worker, a different
+// shape: CI publishes whenever it likes (`ds-contracts figma publish`), this
+// plugin CHECKS whenever the designer likes. No pairing code, no synchronous
+// window, and — deliberately — NO TIMER: a Figma plugin has no background
+// execution, so a poll loop would only run while the window is open and
+// would lie about being a "watcher". Two triggers instead: once when the
+// plugin opens, and the explicit "Check for updates" button.
+//
+// Same host as the bridge, so manifest.json's networkAccess.allowedDomains
+// is unchanged.
+const CHANNEL_BASE = BRIDGE_BASE;
+// The designer's READ key (dscr_…). Read-only by construction — it cannot
+// publish, which is the whole point of the write/read split, so storing it
+// in clientStorage carries the same weight as the runner token above.
+const CHANNEL_KEY_STORAGE_KEY = 'ds_contracts_channel_key';
+
 // ---------------------------------------------------------------------------
 // Pure-JS SHA-256 (the plugin sandbox has no WebCrypto). Standard FIPS 180-4
 // implementation over the UTF-8 bytes of the input string; returns lowercase
@@ -218,6 +234,65 @@ figma.ui.onmessage = async (msg) => {
       post({ type: 'bridge-poll-result', replyTo: msg.replyTo, status: 'waiting' });
     }
     return;
+  }
+  if (msg.type === 'channel-key-load') {
+    // Read-only, allowed anytime. The key is echoed back to the UI so the
+    // field shows what is stored — it is a READ key, it cannot publish.
+    let key = null;
+    try {
+      key = await figma.clientStorage.getAsync(CHANNEL_KEY_STORAGE_KEY);
+    } catch (e) { /* no storage — the field simply starts empty */ }
+    post({ type: 'channel-key', key: key || '' });
+    return;
+  }
+  if (msg.type === 'channel-key-save') {
+    const key = String(msg.key || '').trim();
+    try {
+      if (key) await figma.clientStorage.setAsync(CHANNEL_KEY_STORAGE_KEY, key);
+      else await figma.clientStorage.deleteAsync(CHANNEL_KEY_STORAGE_KEY);
+      post({ type: 'channel-key-saved', ok: true, key: key });
+    } catch (e) {
+      post({ type: 'channel-key-saved', ok: false, message: 'Could not save the channel key: ' + String(e && e.message ? e.message : e) });
+    }
+    return;
+  }
+  if (msg.type === 'channel-check') {
+    // Read-only network peek — allowed anytime, never blocked by a run. The
+    // read is NON-CONSUMING on the worker side: asking twice is free and
+    // changes nothing, unlike the pairing bridge's deliver-once GET.
+    const answer = (payload) => post(Object.assign({ type: 'channel-check-result', replyTo: msg.replyTo }, payload));
+    const key = String(msg.key || '').trim();
+    if (!key) return answer({ status: 'error', message: 'No channel key — paste the read key (dscr_…) your CI engineer minted with `ds-contracts figma claim-channel`.' });
+    try {
+      const since = Number.isFinite(Number(msg.since)) ? Number(msg.since) : 0;
+      // `meta=1` asks for the HEAD only (no bundle) — the check-on-open
+      // question is "is anything waiting?", and pulling up to 4 MB to answer
+      // it would be rude. The explicit button asks the full question.
+      const url = CHANNEL_BASE + '/channel/' + encodeURIComponent(key) +
+        '?since=' + encodeURIComponent(String(since)) + (msg.metaOnly ? '&meta=1' : '');
+      const res = await fetch(url);
+      if (res.ok) {
+        const body = await res.json();
+        return answer({
+          status: body && body.status === 'update' ? 'update' : 'current',
+          seq: body && typeof body.seq === 'number' ? body.seq : 0,
+          publishedAt: (body && body.publishedAt) || null,
+          bytes: (body && body.bytes) || null,
+          provenance: (body && body.provenance) || null,
+          bundle: body ? body.bundle : undefined,
+          metaOnly: !!msg.metaOnly,
+        });
+      }
+      // The worker's refusals are plain words already — show them verbatim.
+      let workerMessage = null;
+      try {
+        const parsed = await res.json();
+        if (parsed && typeof parsed.error === 'string') workerMessage = parsed.error;
+      } catch (e) { /* non-JSON error body */ }
+      return answer({ status: 'error', message: workerMessage || ('The channel answered HTTP ' + res.status + ' with no named message.') });
+    } catch (e) {
+      return answer({ status: 'error', message: 'Could not reach the channel (' + String(e && e.message ? e.message : e) + ') — check your connection and try again.' });
+    }
   }
   if (msg.type === 'push-proposal') {
     // Send-to-repo (the dev door): POST the Propose tab's export envelope to

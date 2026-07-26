@@ -39,3 +39,19 @@ BRIDGE_ENABLED = "true"
 # Per-IP daily cap for bridge session creation and uploads (each counted as
 # its own class). Playground polls are uncounted by design.
 BRIDGE_IP_DAILY_LIMIT = "40"
+
+# Standing CI↔Figma channel ("Check for updates" in the plugin, `ds-contracts
+# figma publish` in CI) — its own kill switch, independent of the bridge and
+# of assist. Ships "true" for the SAME reason BRIDGE_ENABLED does: the channel
+# costs KV reads/writes only and never an Anthropic token, so there is no
+# budget for the owner to approve first. See src/channel.ts.
+CHANNEL_ENABLED = "true"
+
+# Per-IP daily cap on MINTING channels (POST /channel/claim). A channel is
+# claimed once per repository, not per build.
+CHANNEL_CLAIM_IP_DAILY_LIMIT = "10"
+
+# Per-CHANNEL daily publish cap — keyed by channel, NOT by IP, because CI
+# runners churn IP addresses and an IP cap would not hold for the one caller
+# that matters. Channel READS are uncounted (unguessable key, no writes).
+CHANNEL_PUBLISH_DAILY_LIMIT = "200"

@@ -27,6 +27,15 @@
  *                  (a mutated base surfaces its +prop/default lines)
  *   6. pr        — the dry-run PR plan, exact lines, zero network
  *   (2b. G9 — the baked sample bundle parses, plans tokens-first, builds)
+ *   7. channel   — G1's plugin half: the apply log (root pluginData, key
+ *                  fingerprint never the key), the FRESHNESS GUARD that
+ *                  closes the silent-downgrade hole (an out-of-order
+ *                  delivery unchecks every row and names both numbers,
+ *                  while paste / pairing-code updates stay unchanged), and
+ *                  the provenance line. The worker half lives in
+ *                  workers/assist/test/channel.test.ts + the
+ *                  `channel-round-trip` eval — this file runs under plain
+ *                  node and cannot import the TypeScript worker.
  *
  * Every ✔ line below is pinned by evals (plugin-engine-bundle,
  * plugin-update-report, plugin-propose-dry-run).
@@ -849,6 +858,201 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
 }
 
+// --- N+4. THE STANDING CHANNEL, plugin side (G1 S1+S2) ----------------------
+// The WORKER half of this round (claim → publish → non-consuming read, the
+// write/read key split) is pinned by workers/assist/test/channel.test.ts and
+// by the `channel-round-trip` eval, which can import the TypeScript worker
+// under tsx. This gate — plain node, no TS loader — owns the PLUGIN half, and
+// owns it through the REAL BUILT BUNDLE, so `window.DSC` losing any of these
+// functions is a red gate rather than a runtime surprise in Figma.
+//
+// THE DEFECT THIS FLOW EXISTS FOR: before this round `updatePlan` compared
+// specHash for EQUALITY only. No ordering existed anywhere, so an OLDER
+// bundle applied as an ordinary, default-SELECTED change — a silent
+// downgrade. Pin 6 below is the one that would go red if that came back.
+{
+  const silentC = { log() {}, warn() {}, error() {} };
+  const mockC = createFigmaMock();
+  const runC = (code) =>
+    vm.runInContext(`(async () => {\n${code}\n})()`, vm.createContext({ figma: mockC.figma, console: silentC }), {
+      timeout: 120_000,
+    });
+
+  // 1. The bundle actually carries the channel surface.
+  for (const fn of [
+    'channelFingerprint', 'parseApplyLog', 'appendApplyEntry', 'lastAppliedSeq',
+    'channelFreshness', 'provenanceLine', 'relativeWhen', 'applyLogScriptSource',
+    'recordApplyScriptSource',
+  ]) {
+    assert(typeof DSC[fn] === 'function', `channel: window.DSC exposes ${fn}() — the built bundle, not just the source`);
+  }
+
+  // 2. The read key never reaches the file: the log stores a FINGERPRINT.
+  const READ_KEY = 'dscr_' + 'ab12cd34'.repeat(8);
+  const fp = DSC.channelFingerprint(READ_KEY);
+  assert(fp === 'dscr_ab12cd3' && READ_KEY.indexOf(fp) === 0 && fp.length === 12,
+    `channel: the apply log stores a 12-char fingerprint, never the key (got ${fp})`);
+
+  // 3. An unreadable apply log is "no history", never an error — a corrupt
+  //    record must never be able to block an update.
+  for (const junk of [null, undefined, '', 'not json', '[]', '{}', '{"entries":"nope"}', '{"entries":[1,"x",null]}']) {
+    const log = DSC.parseApplyLog(junk);
+    assert(log && log.version === 1 && Array.isArray(log.entries),
+      `channel: parseApplyLog(${JSON.stringify(junk)}) degrades to an empty log instead of throwing`);
+  }
+
+  // 4. Seq numbers are scoped PER CHANNEL — two channels number
+  //    independently, so comparing across them would manufacture warnings.
+  {
+    let log = DSC.parseApplyLog(null);
+    log = DSC.appendApplyEntry(log, { source: 'channel', channel: 'dscr_aaaaaaa', seq: 7, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+    log = DSC.appendApplyEntry(log, { source: 'channel', channel: 'dscr_bbbbbbb', seq: 2, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+    log = DSC.appendApplyEntry(log, { source: 'paste', channel: null, seq: null, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+    assert(DSC.lastAppliedSeq(log, 'dscr_aaaaaaa') === 7, 'channel: lastAppliedSeq reads its own channel');
+    assert(DSC.lastAppliedSeq(log, 'dscr_bbbbbbb') === 2, 'channel: a second channel keeps its own numbering');
+    assert(DSC.lastAppliedSeq(log, 'dscr_ccccccc') === null, 'channel: an unknown channel has NO history — nothing is claimed');
+    assert(DSC.lastAppliedSeq(log, null) === null, 'channel: a source without a channel (paste/pairing code) has no ordering');
+    // The cap is real, and newest-first.
+    let big = DSC.parseApplyLog(null);
+    for (let i = 1; i <= DSC.APPLY_LOG_MAX_ENTRIES + 10; i++) {
+      big = DSC.appendApplyEntry(big, { source: 'channel', channel: 'dscr_aaaaaaa', seq: i, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+    }
+    assert(big.entries.length === DSC.APPLY_LOG_MAX_ENTRIES && big.entries[0].seq === DSC.APPLY_LOG_MAX_ENTRIES + 10,
+      `channel: the apply log is capped at ${DSC.APPLY_LOG_MAX_ENTRIES}, newest first (got ${big.entries.length}, head #${big.entries[0].seq})`);
+  }
+
+  // 5. THE FRESHNESS VERDICTS, each named.
+  {
+    const empty = DSC.parseApplyLog(null);
+    const fresh0 = DSC.channelFreshness({ seq: 1 }, empty, fp);
+    assert(fresh0.stale === false && fresh0.lastAppliedSeq === null,
+      'channel: a first-ever delivery is NOT stale (nothing to compare) — the guard never fires on a fresh file');
+    const applied = DSC.appendApplyEntry(empty, { source: 'channel', channel: fp, seq: 7, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+    assert(DSC.channelFreshness({ seq: 8 }, applied, fp).stale === false, 'channel: a newer delivery is not stale');
+    const same = DSC.channelFreshness({ seq: 7 }, applied, fp);
+    assert(same.stale === true && same.line.includes('#7') && same.line.includes('last applied'),
+      `channel: re-delivering the SAME number is named (got "${same.line}")`);
+    const older = DSC.channelFreshness({ seq: 3 }, applied, fp);
+    assert(
+      older.stale === true && older.line.includes('#3') && older.line.includes('#7') && older.line.includes('BACKWARDS'),
+      `channel: an OLDER delivery names BOTH numbers and says which way it would move the library (got "${older.line}")`,
+    );
+  }
+
+  // 6. THE GUARD IN THE REPORT — the silent-downgrade fix itself. Build Badge
+  //    in a fresh mock, then plan a bumped version twice: once as a normal
+  //    delivery (default-SELECTED, today's behaviour, unchanged) and once as
+  //    a stale one (default-UNCHECKED, named).
+  {
+    const parsed = DSC.parseIncomingText(read('contracts/badge.contract.json'));
+    const genPlan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '' });
+    for (const step of genPlan.steps) await runC(step.code);
+    const inv = (await runC(DSC.inventoryScriptSource())).inventory;
+
+    const vNext = JSON.parse(read('contracts/badge.contract.json'));
+    vNext.version = '9.9.9';
+    vNext.props.push({
+      name: 'experimental',
+      description: 'Harness-added boolean prop (channel-guard fixture).',
+      type: 'boolean',
+      default: false,
+      bindings: { figma: { kind: 'BOOLEAN', property: 'Experimental' }, code: { prop: 'experimental' } },
+    });
+
+    // (a) No freshness argument at all — the paste / pairing-code path. This
+    //     is the REGRESSION pin: today's behaviour must not move an inch.
+    const planPlain = DSC.updatePlan([vNext], inv);
+    assert(planPlain.rows[0].action === 'amend' && planPlain.rows[0].defaultSelected === true,
+      'channel: a plain paste/pairing-code update still starts CHECKED — the guard cannot leak into the paths that carry no ordering');
+    assert(!planPlain.lines.some((l) => l.indexOf('Out of order') === 0),
+      'channel: no out-of-order banner appears without a channel delivery');
+
+    // (b) A FRESH channel delivery behaves identically.
+    const freshVerdict = DSC.channelFreshness({ seq: 9 }, DSC.parseApplyLog(null), fp);
+    const planFresh = DSC.updatePlan([vNext], inv, null, null, freshVerdict);
+    assert(planFresh.rows[0].defaultSelected === true, 'channel: a fresh delivery starts CHECKED like any other update');
+
+    // (c) A STALE delivery: every actionable row unchecked, named on the row
+    //     AND banner-lined above the counts.
+    const staleLog = DSC.appendApplyEntry(DSC.parseApplyLog(null), { source: 'channel', channel: fp, seq: 12, publishedAt: null, appliedAt: 'x', contractIds: [], bytes: null });
+    const staleVerdict = DSC.channelFreshness({ seq: 4 }, staleLog, fp);
+    const planStale = DSC.updatePlan([vNext], inv, null, null, staleVerdict);
+    const row = planStale.rows[0];
+    assert(row.action === 'amend', `channel: the stale delivery still plans as an amend (got ${row.action})`);
+    assert(row.defaultSelected === false,
+      'channel: THE SILENT-DOWNGRADE FIX — an out-of-order delivery starts UNCHECKED (before this round it started checked)');
+    assert(row.warning && row.warning.includes('#4') && row.warning.includes('#12'),
+      `channel: the row itself names both delivery numbers (got "${row.warning}")`);
+    const banner = planStale.lines.find((l) => l.indexOf('⚠ Out of order') === 0);
+    assert(banner && banner.includes('#4') && banner.includes('#12'),
+      `channel: the report carries an out-of-order banner naming both numbers (got "${banner}")`);
+    assert(planStale.lines[planStale.lines.length - 1] === 'Nothing has been applied — review the list, then Apply.',
+      'channel: the nothing-applied tail is still last — the guard warns, it never blocks');
+
+    // (d) The guard warns and DEFAULTS safe; it does not disable the machinery.
+    const applySteps = DSC.updateApplySteps([vNext], [vNext.id], { fileKey: '' });
+    assert(applySteps.ok === true,
+      'channel: a deliberate rollback is still possible — the guard unchecks boxes, it does not block Apply');
+  }
+
+  // 7. THE APPLY LOG round-trips through the REAL Plugin API scripts in the
+  //    mock file: read (empty) → write → read (populated) → cap holds.
+  {
+    const before = await runC(DSC.applyLogScriptSource());
+    assert(before.applyLog === null || before.applyLog === '',
+      'channel: a file with no history reads an empty apply log');
+    const entry = {
+      source: 'channel', channel: fp, seq: 5,
+      publishedAt: '2026-07-25T12:00:00.000Z', appliedAt: '2026-07-25T12:04:00.000Z',
+      contractIds: ['ds.badge'], bytes: 1234,
+    };
+    const wrote = await runC(DSC.recordApplyScriptSource(entry));
+    assert(wrote.applyLogEntries === 1 && wrote.seq === 5, `channel: the record script writes one entry (got ${JSON.stringify(wrote)})`);
+    const after = DSC.parseApplyLog((await runC(DSC.applyLogScriptSource())).applyLog);
+    assert(after.entries.length === 1 && after.entries[0].seq === 5 && after.entries[0].channel === fp,
+      'channel: the entry round-trips through root pluginData byte-for-byte');
+    assert(DSC.lastAppliedSeq(after, fp) === 5, 'channel: the file now REMEMBERS delivery #5');
+    // …and the memory is what makes the guard fire on the next delivery.
+    assert(DSC.channelFreshness({ seq: 5 }, after, fp).stale === true,
+      'channel: the freshness guard reads the record the apply just wrote — memory and guard are one loop');
+    assert(DSC.channelFreshness({ seq: 6 }, after, fp).stale === false, 'channel: the next real delivery passes');
+    // A second write is prepended, not appended.
+    await runC(DSC.recordApplyScriptSource({ ...entry, seq: 6 }));
+    const after2 = DSC.parseApplyLog((await runC(DSC.applyLogScriptSource())).applyLog);
+    assert(after2.entries.length === 2 && after2.entries[0].seq === 6, 'channel: the newest entry is the head');
+    // The key itself is NOWHERE in the file.
+    const stored = mockC.root.getSharedPluginData('ds_contracts', 'applyLog');
+    assert(stored.indexOf(READ_KEY) < 0 && stored.indexOf(fp) > 0,
+      'channel: the full read key never lands in the file — only the fingerprint does');
+  }
+
+  // 8. PROVENANCE rendering (S2): the exact line shown above the report, and
+  //    the honest fallback when CI published nothing about itself.
+  {
+    const now = new Date('2026-07-25T12:04:00Z');
+    const line = DSC.provenanceLine(
+      { repo: 'acme/design-system', runId: '17654321', commit: '9f1c2ab3d4e5f6', ref: 'refs/heads/main' },
+      '2026-07-25T12:00:00Z',
+      now,
+    );
+    assert(
+      line === 'acme/design-system — CI run #17654321, commit 9f1c2ab, branch main, published 4 minutes ago.',
+      `channel: the provenance line reads exactly "acme/design-system — CI run #17654321, commit 9f1c2ab, branch main, published 4 minutes ago." (got "${line}")`,
+    );
+    const none = DSC.provenanceLine(null, '2026-07-25T12:00:00Z', now);
+    assert(
+      none === 'Unattributed delivery (no CI provenance was published with it) — published 4 minutes ago.',
+      `channel: a delivery with no provenance says UNATTRIBUTED rather than showing blanks (got "${none}")`,
+    );
+    assert(DSC.relativeWhen(null, now) === 'at an unrecorded time', 'channel: a missing timestamp is named, never guessed');
+    assert(DSC.relativeWhen('2026-07-23T12:00:00Z', now) === '2 days ago', 'channel: relative time reads in days once it is old');
+  }
+
+  console.log(
+    '✔ standing channel (plugin side, through the built bundle): apply log stores a 12-char fingerprint not the key; a corrupt log degrades to "no history"; seq is scoped per channel and capped at 50 newest-first; the freshness guard is silent on a first/newer delivery and NAMES both numbers on an equal/older one; THE SILENT-DOWNGRADE FIX — a stale delivery unchecks every row and banners the report while paste/pairing-code updates stay byte-identically checked; the record script round-trips through root pluginData and is what the guard then reads; provenance renders exactly, unattributed deliveries say so',
+  );
+}
+
 // --- N+3. SIBLING BUNDLES (72b5075 follow-up): astryx + polaris + docs-theme
 // through the same real engine bundle path. Result-level pins: parse, plan
 // (tokenSet-first), execute in a fresh mock, marked-node + variable counts.
@@ -884,4 +1088,4 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned): the JSON-only rule holds for EVERY example round through the real engine path`);
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, sibling-bundles)');
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles)');

@@ -17,6 +17,7 @@ import { budgetSpent, chargeBudget, clientIp, reserveIpSlot } from './limits';
 import { AssistUpstreamError, callClaude, MODEL } from './anthropic';
 import { ENDPOINTS } from './endpoints';
 import { handleBridge } from './bridge';
+import { handleChannel } from './channel';
 
 export const MESSAGES = {
   disabled: 'assist is switched off — the owner has not enabled the shared budget yet',
@@ -49,6 +50,13 @@ export async function handleRequest(
   const url = new URL(request.url);
   if (url.pathname === '/bridge/session' || url.pathname.startsWith('/bridge/')) {
     return handleBridge(request, url, env, deps);
+  }
+  // The standing CI↔Figma channel (docs/18 G1) routes next, on the same
+  // terms: its own kill switch (CHANNEL_ENABLED), its own counters, any
+  // origin (both callers are origin-less — a CI runner and a Figma plugin),
+  // and never a single Anthropic token. See src/channel.ts.
+  if (url.pathname === '/channel/claim' || url.pathname.startsWith('/channel/')) {
+    return handleChannel(request, url, env, deps);
   }
 
   // CORS first: an origin we do not serve learns nothing else about us.

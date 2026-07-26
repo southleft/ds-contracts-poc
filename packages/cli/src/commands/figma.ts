@@ -22,6 +22,22 @@
  *       stays a dumb pipe: the payload is tagged, never inspected beyond
  *       "is it JSON / is it a well-formed bundle envelope".
  *
+ *   figma claim-channel [--bridge <url>]
+ *       mint a STANDING CI↔Figma channel: a { writeKey, readKey } pair.
+ *       The write key is a CI secret (it publishes); the read key —
+ *       sha256(writeKey) — is the half a designer pastes into the plugin.
+ *       One-way derivation, so a leaked Figma-side key can read but can
+ *       never inject. See workers/assist/src/channel.ts.
+ *
+ *   figma publish <bundle-or-contract.json> [--channel-key KEY] [--bridge <url>]
+ *       [--repo o/n] [--run-id ID] [--run-url URL] [--commit SHA] [--ref REF]
+ *       [--no-provenance] [--dry-run]
+ *       publish a CONTRACTS-BUNDLE to the standing channel. The designer's
+ *       plugin finds it waiting — no pairing code, no human courier, no
+ *       synchronous window. GitHub Actions context is auto-detected into a
+ *       provenance SIBLING of the bundle (never inside the bundle bytes, so
+ *       `figma bundle` output stays byte-deterministic).
+ *
  *   figma receive --out <contracts-dir> [--bridge <url>] [--apply]
  *       the DEV DOOR: open a bridge session, print the pairing code, wait
  *       for the plugin's Propose tab to send its CONTRACT-PROPOSAL under
@@ -235,6 +251,221 @@ async function pushCommand(argv: string[]): Promise<number> {
   }
   console.log(
     `✔ Pushed ${CONTRACTS_BUNDLE_TYPE} (${bundle.contracts.length} contract(s), ${body.length} bytes) under code ${code.toUpperCase()} — deliver-once, 15-minute TTL`,
+  );
+  return 0;
+}
+
+// ---------------------------------------------------------------------------
+// figma claim-channel / figma publish — THE STANDING CI↔FIGMA CHANNEL
+// (docs/18 G1, slice S1+S2). PURE CORE first (provenance detection, the
+// publish envelope, the dry-run plan — all unit/eval-pinnable with no I/O),
+// thin network shells at the bottom.
+//
+// KEY DISCIPLINE, copied verbatim from propose-pr.ts: the channel write key
+// comes from --channel-key or DS_CONTRACTS_CHANNEL_KEY, lives in ONE local
+// variable for the duration of the run, and is NEVER persisted, logged, or
+// echoed — only a masked prefix ever reaches stdout. --dry-run prints the
+// exact plan with no network call and no key required.
+// ---------------------------------------------------------------------------
+
+/** The CI-side facts that ride ALONGSIDE the bundle. Never inside it: the
+ *  bundle bytes stay exactly what `figma bundle` wrote, so its determinism
+ *  guarantee survives contact with the channel. */
+export interface ChannelProvenance {
+  repo?: string;
+  runId?: string;
+  runUrl?: string;
+  commit?: string;
+  ref?: string;
+  publishedAt: string;
+}
+
+/** GitHub Actions context → provenance. PURE: the environment and the clock
+ *  are both arguments. Overrides win over detection; a run with neither
+ *  yields null (a publish with no provenance is allowed and says so —
+ *  inventing "unknown" fields would be a lie the plugin then renders). */
+export function detectProvenance(
+  env: Record<string, string | undefined>,
+  overrides: {
+    repo?: string;
+    runId?: string;
+    runUrl?: string;
+    commit?: string;
+    ref?: string;
+  },
+  now: Date,
+): ChannelProvenance | null {
+  const repo = overrides.repo ?? env.GITHUB_REPOSITORY;
+  const runId = overrides.runId ?? env.GITHUB_RUN_ID;
+  const commit = overrides.commit ?? env.GITHUB_SHA;
+  const ref = overrides.ref ?? env.GITHUB_REF;
+  const server = env.GITHUB_SERVER_URL ?? 'https://github.com';
+  const runUrl =
+    overrides.runUrl ??
+    env.GITHUB_RUN_URL ??
+    (repo && runId ? `${server}/${repo}/actions/runs/${runId}` : undefined);
+  if (!repo && !runId && !commit && !ref) return null;
+  return {
+    ...(repo ? { repo } : {}),
+    ...(runId ? { runId } : {}),
+    ...(runUrl ? { runUrl } : {}),
+    ...(commit ? { commit } : {}),
+    ...(ref ? { ref } : {}),
+    publishedAt: now.toISOString(),
+  };
+}
+
+/** The publish envelope: bundle + optional provenance SIBLING. PURE. */
+export function buildPublishBody(
+  bundle: ContractsBundle,
+  provenance: ChannelProvenance | null,
+): { bundle: ContractsBundle; provenance?: ChannelProvenance } {
+  return provenance === null ? { bundle } : { bundle, provenance };
+}
+
+/** Everything a log line may ever show of a channel key: its kind prefix and
+ *  four characters. Enough to tell two channels apart, useless to a reader. */
+export const maskChannelKey = (key: string): string =>
+  key.length <= 9 ? '…' : `${key.slice(0, 9)}…`;
+
+/** The --dry-run text — the exact plan, no network, no key needed. PURE. */
+export function publishDryRunLines(
+  file: string,
+  base: string,
+  bundle: ContractsBundle,
+  provenance: ChannelProvenance | null,
+  bytes: number,
+): string[] {
+  return [
+    'DRY RUN — no request leaves this machine, no channel key required. The live run would:',
+    `  1. POST ${base}/channel/<writeKey>`,
+    `     body: { "bundle": <CONTRACTS-BUNDLE from ${file}>${provenance ? ', "provenance": {…}' : ''} }`,
+    `     ${bundle.contracts.length} contract(s), ${bytes} bytes of bundle JSON (cap 4 MB)`,
+    provenance
+      ? `  2. Provenance sibling (auto-detected, rides UNREAD through the worker): ${[
+          provenance.repo && `repo ${provenance.repo}`,
+          provenance.runId && `run ${provenance.runId}`,
+          provenance.commit && `commit ${provenance.commit.slice(0, 7)}`,
+          provenance.ref && `ref ${provenance.ref}`,
+        ]
+          .filter(Boolean)
+          .join(', ')}`
+      : '  2. No provenance — not a GitHub Actions run and no --repo/--commit given. The plugin will show the delivery as unattributed.',
+    '  3. The worker assigns the next seq and refreshes the channel\'s 30-day TTL. Nothing is delivered anywhere until the designer presses "Check for updates".',
+    '  Key source at run time: --channel-key, else DS_CONTRACTS_CHANNEL_KEY — used in memory only, never persisted, never logged.',
+  ];
+}
+
+const channelBase = (parsed: ReturnType<typeof parseFlags>): string =>
+  (flagString(parsed, 'bridge') ?? process.env.DS_CONTRACTS_BRIDGE_URL ?? DEFAULT_BRIDGE_URL).replace(
+    /\/$/,
+    '',
+  );
+
+async function claimChannelCommand(argv: string[]): Promise<number> {
+  const parsed = parseFlags(argv, { value: ['bridge'] });
+  const base = channelBase(parsed);
+  const res = await fetch(`${base}/channel/claim`, { method: 'POST' });
+  const answer = (await res.json().catch(() => ({}))) as {
+    writeKey?: string;
+    readKey?: string;
+    ttlSeconds?: number;
+    error?: string;
+  };
+  if (!res.ok || typeof answer.writeKey !== 'string' || typeof answer.readKey !== 'string') {
+    console.error(`✘ the channel refused the claim (${res.status}): ${answer.error ?? 'unnamed error'}`);
+    return 1;
+  }
+  const days = Math.round((answer.ttlSeconds ?? 30 * 24 * 60 * 60) / 86400);
+  console.log('✔ Channel claimed. Two keys, two different jobs — do not mix them up:\n');
+  console.log(`  WRITE KEY (a CI secret — it PUBLISHES; keep it out of Figma and out of git):`);
+  console.log(`    ${answer.writeKey}`);
+  console.log(`    → store as the repository secret DS_CONTRACTS_CHANNEL_KEY`);
+  console.log(`       (GitHub: Settings → Secrets and variables → Actions → New repository secret)\n`);
+  console.log(`  READ KEY (the designer's half — it only READS; paste it into the Figma plugin):`);
+  console.log(`    ${answer.readKey}`);
+  console.log(`    → Figma plugin → Generate or Update library → the channel key field\n`);
+  console.log(
+    `  The read key is sha256(write key): holding the write key you can compute the read key, but a\n` +
+      `  leaked read key can never publish. That is why a shared Figma file cannot inject into your\n` +
+      `  source of truth.\n`,
+  );
+  console.log(
+    `  The channel expires after ${days} days with no publish; every publish resets the clock.\n` +
+      `  Reads never extend it — a channel CI has abandoned dies on purpose.`,
+  );
+  return 0;
+}
+
+async function publishCommand(argv: string[]): Promise<number> {
+  const parsed = parseFlags(argv, {
+    value: ['channel-key', 'bridge', 'repo', 'run-id', 'run-url', 'commit', 'ref'],
+    bool: ['dry-run', 'no-provenance'],
+  });
+  const file = parsed.positionals[0];
+  if (!file) throw new CliUsageError('figma publish needs a bundle or contract JSON file');
+  const base = channelBase(parsed);
+  const bundle = toBundle(file);
+  const bundleBytes = JSON.stringify(bundle).length;
+
+  const provenance =
+    parsed.flags.get('no-provenance') === true
+      ? null
+      : detectProvenance(
+          process.env,
+          {
+            repo: flagString(parsed, 'repo'),
+            runId: flagString(parsed, 'run-id'),
+            runUrl: flagString(parsed, 'run-url'),
+            commit: flagString(parsed, 'commit'),
+            ref: flagString(parsed, 'ref'),
+          },
+          new Date(),
+        );
+
+  if (parsed.flags.get('dry-run') === true) {
+    for (const line of publishDryRunLines(file, base, bundle, provenance, bundleBytes)) {
+      console.log(line);
+    }
+    return 0;
+  }
+
+  const key = flagString(parsed, 'channel-key') ?? process.env.DS_CONTRACTS_CHANNEL_KEY;
+  if (!key) {
+    throw new CliUsageError(
+      'figma publish needs the channel WRITE key: --channel-key, or the DS_CONTRACTS_CHANNEL_KEY env var (in CI: a repository secret). Run `ds-contracts figma claim-channel` once to mint a pair. It is used in memory only — never stored, never logged.',
+    );
+  }
+
+  const body = JSON.stringify(buildPublishBody(bundle, provenance));
+  const res = await fetch(`${base}/channel/${encodeURIComponent(key)}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body,
+  });
+  const answer = (await res.json().catch(() => ({}))) as {
+    ok?: boolean;
+    seq?: number;
+    bytes?: number;
+    publishedAt?: string;
+    error?: string;
+  };
+  if (!res.ok) {
+    // The worker's refusals are plain words already — echo them verbatim, and
+    // never the key itself.
+    console.error(
+      `✘ the channel refused the publish to ${maskChannelKey(key)} (${res.status}): ${answer.error ?? 'unnamed error'}`,
+    );
+    return 1;
+  }
+  console.log(
+    `✔ Published delivery #${answer.seq} to channel ${maskChannelKey(key)} — ${bundle.contracts.length} contract(s), ${answer.bytes ?? bundleBytes} bytes, at ${answer.publishedAt ?? 'now'}.` +
+      (provenance
+        ? `\n  Provenance: ${[provenance.repo, provenance.runId && `run #${provenance.runId}`, provenance.commit && `commit ${provenance.commit.slice(0, 7)}`]
+            .filter(Boolean)
+            .join(' · ')}`
+        : '\n  No provenance attached (not a GitHub Actions run) — the plugin will show this delivery as unattributed.') +
+      `\n  The designer's plugin finds it on its next "Check for updates". Nothing applies without their review.`,
   );
   return 0;
 }
@@ -503,11 +734,15 @@ async function receiveCommand(argv: string[]): Promise<number> {
 export async function figmaCommand(argv: string[]): Promise<number> {
   if (argv[0] === 'bundle') return bundleCommand(argv.slice(1));
   if (argv[0] === 'push') return pushCommand(argv.slice(1));
+  if (argv[0] === 'claim-channel') return claimChannelCommand(argv.slice(1));
+  if (argv[0] === 'publish') return publishCommand(argv.slice(1));
   if (argv[0] === 'receive') return receiveCommand(argv.slice(1));
 
   const parsed = parseFlags(argv, { value: ['out', 'tokens', 'icons', 'file-key'] });
   if (parsed.positionals.length === 0) {
-    throw new CliUsageError('figma needs contract files/directories (or the `push` / `receive` subcommands)');
+    throw new CliUsageError(
+      'figma needs contract files/directories (or the `bundle` / `push` / `publish` / `claim-channel` / `receive` subcommands)',
+    );
   }
   const out = flagString(parsed, 'out');
   if (!out) throw new CliUsageError('figma needs --out <dir>');

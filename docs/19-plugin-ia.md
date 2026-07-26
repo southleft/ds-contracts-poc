@@ -18,8 +18,8 @@ users).
 
 | tab today | what it actually does | who needs it | proposed fate |
 |---|---|---|---|
-| **Generate** | paste contract JSON / bundle → build in file; sample library; receive by code | everyone | **KEEP** — becomes the "Build" home |
-| **Update library** | check a bundle against the file, per-set apply with drift warnings | everyone | **FOLD into Build** — "update" is just generate-when-sets-exist; one surface, the report decides create vs amend |
+| **Generate** | paste contract JSON / bundle → build in file; sample library; receive by code; **channel key + "Check for updates"** | everyone | **KEEP** — becomes the "Build" home |
+| **Update library** | check a bundle against the file, per-set apply with drift warnings; **the same channel row, mirrored** | everyone | **FOLD into Build** — "update" is just generate-when-sets-exist; one surface, the report decides create vs amend |
 | **Propose** | read a set back, diff vs contract, GitHub PR / send-to-repo | designers | **KEEP** — becomes "Send" (reached mainly FROM Drift, rarely opened cold) |
 | **Paste a script** | run a raw compiled .figma.js | developers of THIS tool | **DEMOTE to advanced drawer** — with foreign-token bundles, no end user ever needs it; it is a debug surface |
 | **Send to Playground** | POST a dump to the playground by code | tool developers / support | **DEMOTE to advanced drawer** |
@@ -70,6 +70,13 @@ users).
   Generate / Drift / Propose kept as-is but regrouped; rejected as jargon.)
 - Should Watch auto-run on plugin open when marked sets exist (one less
   click) or stay button-triggered (calmer)?
+  - *Data point, not a decision (G1 round):* the standing CI channel now
+    does BOTH — a cheap head-only **check-on-open** (no bundle bytes, one
+    request, result shown as a status line only) plus an explicit **Check
+    for updates** button that actually pulls. Nothing is ever staged in a
+    box without a click. Whether Watch's *drift* recompute — which reads
+    every marked set in the file, so it is far from free — should follow the
+    same pattern is still yours to decide. Flagged, not decided.
 - Does the sample library belong on an EMPTY-file first-run screen instead
   of a button inside Build?
 - Visual design: this doc is IA only — spacing/type/color is yours.
@@ -79,3 +86,13 @@ users).
 Re-housing + drawer + default-tab logic: SMALL (one focused pass, no engine
 changes). The foreign-token bundle round (rule 1's blocker) has landed —
 nothing blocks this pass now.
+
+One new surface arrived after this doc was written and will need a home in
+that pass: the **standing CI channel** (docs/18 G1) added a key field +
+"Check for updates" button to BOTH Generate and Update library, deliberately
+duplicated rather than redesigned, because the IA is yours to decide. Under
+the fold-Update-into-Build proposal it collapses to a single row. Two
+delivery routes now sit next to each other there — the pairing code (ad-hoc,
+both people at once) and the channel (standing, neither waits) — and whether
+a user should ever see both at the same time is an IA question, not an
+engine one.

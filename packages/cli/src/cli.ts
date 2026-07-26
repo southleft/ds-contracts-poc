@@ -46,7 +46,19 @@ Commands:
                                               as SVG text — required when refs exist;
                                               deterministic: same inputs → identical bytes)
   figma push <file> --code <CODE>             send a CONTRACTS-BUNDLE to the plugin bridge
-          [--bridge <url>]                    (pairing-code flow, deliver-once, 15-min TTL)
+          [--bridge <url>]                    (pairing-code flow, deliver-once, 15-min TTL —
+                                              the ad-hoc path: both people, same minute)
+  figma claim-channel [--bridge <url>]        mint a STANDING CI↔Figma channel: a write key
+                                              (a CI secret — it publishes) + a read key
+                                              (sha256 of it — the half the designer pastes
+                                              into the plugin; it can never publish)
+  figma publish <file> [--channel-key K]      publish a CONTRACTS-BUNDLE to that channel —
+          [--bridge <url>] [--dry-run]        CI pushes whenever, the designer checks
+          [--repo o/n] [--run-id] [--commit]  whenever, neither waits. GitHub Actions
+          [--ref] [--run-url]                 context auto-detects into a provenance
+          [--no-provenance]                   SIBLING (never inside the bundle bytes).
+                                              Key: --channel-key or DS_CONTRACTS_CHANNEL_KEY,
+                                              in memory only, never persisted or logged.
   figma receive --out <contracts-dir>         the dev door: print a pairing code, wait for the
           [--bridge <url>] [--apply]          plugin's proposed contract, land it as a reviewed
                                               local diff (writes NOTHING without --apply)
