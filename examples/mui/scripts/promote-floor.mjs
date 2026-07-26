@@ -1,5 +1,7 @@
 /**
- * MUI FLOOR PROMOTION — `node examples/mui/scripts/promote-floor.mjs`
+ * MUI FLOOR PROMOTION — `npx tsx examples/mui/scripts/promote-floor.mjs`
+ * (tsx, not bare node: the state-preview probe below calls the REAL
+ * TypeScript referee rather than re-implementing its rules.)
  *
  * The Astryx promote-floor pattern with one MUI-specific addition: the
  * SOURCE-ALIAS pass. MUI ships Emotion runtime styles, so there is no static
@@ -21,6 +23,9 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// STATE-PLANE PROJECTION round: the state-preview probe asks the REAL
+// referee, so this script runs under tsx (`npx tsx …/promote-floor.mjs`).
+import { validateContract } from '../../../core/emit-react.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EX = path.join(HERE, '..');
@@ -148,6 +153,41 @@ function aliasPass(node, segs, facts, componentName) {
   }
 }
 
+// ---- state previews (STATE-PLANE PROJECTION round) ----
+// The Polaris probe, ported verbatim in spirit: opt into `figmaStatePreviews`
+// wherever the REFEREE accepts it, so the canvas draws a State cell per
+// declared interaction state instead of pretending the component has only a
+// default plane. The referee — not this script — decides: a state with no
+// token overrides would render identically to Default, and that refusal is
+// PRINTED, never worked around. A refused contract simply ships unpreviewd
+// (its declared states still drive the code surface and declaredStates).
+const ICON_DIR = path.join(EX, 'assets', 'icons');
+const icons = new Map(
+  existsSync(ICON_DIR)
+    ? readdirSync(ICON_DIR)
+        .filter((f) => f.endsWith('.svg'))
+        .sort()
+        .map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ICON_DIR, f), 'utf8').trim()])
+    : [],
+);
+const stateRefusals = [];
+const statePreviewsOn = [];
+function statePreviewProbe(contract) {
+  if ((contract.states ?? []).length === 0 || contract.figmaStatePreviews) return;
+  const probe = structuredClone(contract);
+  probe.figmaStatePreviews = true;
+  const probeErrors = [];
+  validateContract(probe, new Map([[probe.id, probe]]), probeErrors, icons);
+  if (probeErrors.length === 0) {
+    contract.figmaStatePreviews = true;
+    statePreviewsOn.push(`${contract.id} (${contract.states.join(', ')})`);
+    console.log(`  · ${contract.id}: figmaStatePreviews ON (${contract.states.join(', ')})`);
+  } else {
+    stateRefusals.push(`${contract.id}: ${probeErrors[0]}`);
+    console.log(`  · ${contract.id}: figmaStatePreviews REFUSED by the referee (named): ${probeErrors[0]}`);
+  }
+}
+
 // ---- promotion ----
 const promoted = [];
 const promotedAssets = [];
@@ -162,7 +202,9 @@ for (const name of COMPONENTS) {
     mkdirSync(path.join(EX, 'assets', 'icons'), { recursive: true });
     for (const f of readdirSync(floorAssets).sort()) {
       if (!f.endsWith('.svg')) continue;
-      writeFileSync(path.join(EX, 'assets', 'icons', f), readFileSync(path.join(floorAssets, f), 'utf8'));
+      const body = readFileSync(path.join(floorAssets, f), 'utf8');
+      writeFileSync(path.join(EX, 'assets', 'icons', f), body);
+      icons.set(f.replace(/\.svg$/, ''), body.trim());
       promotedAssets.push(f);
     }
   }
@@ -180,6 +222,7 @@ for (const name of COMPONENTS) {
     `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
     `carries the named overflow.`;
 
+  statePreviewProbe(contract);
   writeFileSync(path.join(EX, 'contracts', `${stemOf(name)}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
   writeFileSync(path.join(EX, 'contracts', `${stemOf(name)}.extension.json`), JSON.stringify(extension, null, 2) + '\n');
   promoted.push(name);
@@ -271,3 +314,9 @@ writeFileSync(
 console.log(`✔ floor-promoted ${promoted.length} contract(s) → examples/mui/contracts (v0.2.0): ${promoted.join(', ')}`);
 if (promotedAssets.length > 0) console.log(`✔ ${promotedAssets.length} floor-reconstructed icon asset(s) → examples/mui/assets/icons/: ${promotedAssets.join(', ')}`);
 console.log(`✔ minted tree → examples/mui/tokens/mui-minted.dtcg.json (${aliased} source-aliased, ${literalKept} literal, ${aliasReceipts.length} named refusals)`);
+console.log(
+  `✔ figmaStatePreviews: ${statePreviewsOn.length} accepted by the referee` +
+    (statePreviewsOn.length ? ` (${statePreviewsOn.join('; ')})` : '') +
+    `, ${stateRefusals.length} REFUSED BY NAME` +
+    (stateRefusals.length ? `:\n${stateRefusals.map((r) => `    - ${r}`).join('\n')}` : ''),
+);

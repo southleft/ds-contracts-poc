@@ -29,6 +29,7 @@ import {
   type TokenLookup,
 } from '../examples/polaris/scripts/lib-css.js';
 import {
+  CONTRACT_STATES,
   ContractSchema,
   resolveTokens as schemaResolveTokens,
   type Contract as SchemaContract,
@@ -4413,10 +4414,13 @@ const cases: Case[] = [
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, MOLECULE round) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip, 1270 variables incl. 70
+        // path (same sets + standalone Menu/Tooltip, 1649 variables incl. 73
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(63), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(14), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1514 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
+        // AXIS now) and Button 63→75 (accepted State preview axis) — both
+        // survive the JSON-only paste identically to the script path.
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1649 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -5341,6 +5345,166 @@ const cases: Case[] = [
     },
   },
   {
+    // STATE-PLANE PROJECTION ROUND — the defect: `checked` was declared a
+    // capture-config stateProp with state "checked", OUTSIDE the closed
+    // contract state vocabulary. Nothing checked it (StateAxisSpec.state is a
+    // TypeScript annotation over cast JSON), so the captured deltas minted
+    // `<channel>-state-checked` names that stateOfMintProperty could not
+    // re-read and that landed as INERT channels: the Figma emitter dropped
+    // them silently and the CSS emitters wrote invalid declarations. Captured,
+    // minted, rendered by NOBODY.
+    //
+    // This eval pins the CLOSURE (checked is a real variant axis whose facts
+    // ride the base plane, on BOTH libraries), the GUARDRAIL that makes the
+    // class unrepeatable, and the ONE residual that stayed — honestly, as a
+    // fact, so the day it is fixed this eval speaks.
+    id: 'checked-axis-projection',
+    claim: 'C5-extraction',
+    run: () => {
+      type AnyPart = { parts?: Record<string, AnyPart>; tokens?: Record<string, string>; tokensByProp?: unknown };
+      const partsOf = (root: AnyPart): Array<[string, AnyPart]> => {
+        const out: Array<[string, AnyPart]> = [['root', root]];
+        const walk = (p: AnyPart) => {
+          for (const [k, v] of Object.entries(p.parts ?? {})) { out.push([k, v]); walk(v); }
+        };
+        walk(root);
+        return out;
+      };
+      const entriesOf = (p: AnyPart): Array<{ prop: string; map: Record<string, Record<string, string>> }> => {
+        const t = p.tokensByProp;
+        if (!t) return [];
+        return (Array.isArray(t) ? t : [t]) as Array<{ prop: string; map: Record<string, Record<string, string>> }>;
+      };
+
+      // ---- 1. the CLOSED vocabulary has exactly ONE spelling ----
+      if (CONTRACT_STATES.includes('checked' as never)) {
+        throw new Error('CONTRACT_STATES gained "checked" — a prop-selected rendering is a VARIANT AXIS, never a pseudo-class plane');
+      }
+
+      // ---- 2. the load-time REFEREE refuses an out-of-vocabulary config ----
+      const cfgPath = path.join(SCRATCH, 'bad-state-config.json');
+      const good = JSON.parse(readFileSync(path.join(ROOT, 'extract/computed/configs/mui.json'), 'utf8')) as {
+        components: Array<{ name: string; stateProps?: Array<{ prop: string; state: string }> }>;
+      };
+      const sw = good.components.find((c) => c.name === 'Switch')!;
+      // the exact pre-round spelling, restored
+      sw.stateProps = [{ prop: 'checked', state: 'checked' }, { prop: 'disabled', state: 'disabled' }];
+      mkdirSync(SCRATCH, { recursive: true });
+      writeFileSync(cfgPath, JSON.stringify(good, null, 2));
+      let refusal = '';
+      try {
+        loadCaptureConfig(ROOT, cfgPath);
+      } catch (e) {
+        refusal = (e as Error).message;
+      }
+      if (!refusal) throw new Error('loadConfig ACCEPTED stateProps state "checked" — the inert-channel class is reopened');
+      for (const frag of ['outside the closed contract state vocabulary', 'VARIANT AXIS', 'axisValueMap']) {
+        if (!refusal.includes(frag)) throw new Error(`config-state refusal is not NAMED enough (missing "${frag}"): ${refusal}`);
+      }
+      // …and the real configs pass it
+      for (const cfgName of ['mui.json', 'tailwind.json']) {
+        loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs', cfgName));
+      }
+
+      // ---- 3. MUI Switch: checked is an enum VARIANT prop, and its facts
+      //         are BASE-PLANE per-axis facts (not state suffixes) ----
+      const swc = JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/contracts/switch.contract.json'), 'utf8')) as {
+        props: Array<{ name: string; type: unknown; default?: unknown; bindings: { figma: { kind: string; property: string } } }>;
+        anatomy: { root: AnyPart };
+      };
+      const ck = swc.props.find((p) => p.name === 'checked');
+      if (!ck) throw new Error('mui.switch lost its `checked` prop');
+      if (typeof ck.type !== 'object' || !('enum' in (ck.type as object))) {
+        throw new Error('mui.switch `checked` is not an enum prop — a prop-selected rendering must be an axis, not a boolean state');
+      }
+      if ((ck.type as { enum: string[] }).enum.join(',') !== 'unchecked,checked') {
+        throw new Error(`mui.switch checked enum is ${(ck.type as { enum: string[] }).enum.join(',')}, expected unchecked,checked`);
+      }
+      if (ck.bindings.figma.kind !== 'VARIANT' || ck.bindings.figma.property !== 'Checked') {
+        throw new Error('mui.switch `checked` must bind a VARIANT property "Checked" (it drives the canvas grid)');
+      }
+      const swParts = new Map(partsOf(swc.anatomy.root));
+      const track = swParts.get('switch-track');
+      if (!track) throw new Error('mui.switch lost switch-track');
+      const trackChecked = entriesOf(track).find((e) => e.prop === 'checked');
+      if (!trackChecked) throw new Error('switch-track carries no tokensByProp[checked] — the checked plane is not a base-plane fact');
+      for (const v of ['checked', 'unchecked']) {
+        const ref = trackChecked.map[v]?.['background-color'];
+        if (!ref) throw new Error(`switch-track tokensByProp[checked].${v} carries no background-color — the checked track colour is unprojected`);
+        // NESTED TWO-AXIS CARRIAGE: the fact is f(color, checked); the map
+        // pins `checked` and keeps ONE placeholder naming the OTHER axis.
+        if (!ref.includes('{color}')) {
+          throw new Error(`switch-track checked ref "${ref}" lost the {color} substitution — the pair collapsed to one axis`);
+        }
+      }
+      if (trackChecked.map['checked']['background-color'] === trackChecked.map['unchecked']['background-color']) {
+        throw new Error('switch-track binds the SAME ref on both checked planes — the delta is gone');
+      }
+
+      // ---- 4. Tailwind ToggleSwitch: the same closure, single-axis case ----
+      const tsc = JSON.parse(readFileSync(path.join(ROOT, 'examples/tailwind/contracts/toggleswitch.contract.json'), 'utf8')) as {
+        props: Array<{ name: string; bindings: { figma: { kind: string; property: string } } }>;
+        anatomy: { root: AnyPart };
+      };
+      const tck = tsc.props.find((p) => p.name === 'checked');
+      if (!tck || tck.bindings.figma.kind !== 'VARIANT' || tck.bindings.figma.property !== 'Checked') {
+        throw new Error('flowbite.toggleswitch has no `checked` VARIANT prop');
+      }
+      const tsChecked = partsOf(tsc.anatomy.root)
+        .flatMap(([, p]) => entriesOf(p))
+        .filter((e) => e.prop === 'checked');
+      const tsFills = tsChecked.flatMap((e) => Object.values(e.map).map((m) => m['background-color']).filter(Boolean));
+      if (tsFills.length < 2 || new Set(tsFills).size < 2) {
+        throw new Error(`flowbite.toggleswitch carries no distinct per-checked track background-color (found ${tsFills.length})`);
+      }
+
+      // ---- 5. NO INERT CHANNEL SURVIVES anywhere in either promoted set ----
+      const scanned: string[] = [];
+      for (const dir of ['examples/mui/contracts', 'examples/tailwind/contracts']) {
+        for (const f of readdirSync(path.join(ROOT, dir)).sort()) {
+          if (!f.endsWith('.json')) continue;
+          const body = readFileSync(path.join(ROOT, dir, f), 'utf8');
+          if (body.includes('-state-checked')) throw new Error(`${dir}/${f} still carries an inert "-state-checked" channel name`);
+          scanned.push(`${dir}/${f}`);
+        }
+      }
+      for (const t of ['examples/mui/tokens/mui-minted.dtcg.json', 'examples/tailwind/tokens/tailwind-minted.dtcg.json',
+                       'examples/mui/figma/mui.bundle.json', 'examples/tailwind/figma/tailwind.bundle.json']) {
+        if (readFileSync(path.join(ROOT, t), 'utf8').includes('-state-checked')) {
+          throw new Error(`${t} still carries an inert "-state-checked" name — regenerate it`);
+        }
+      }
+
+      // ---- 6. THE NAMED RESIDUAL, pinned as a FACT (defect-first) ----
+      // MUI translates the checked thumb, but the overlay-cluster synthetic
+      // translate door only decomposes a matrix present on the BASE combo,
+      // and Switch's base is transform:none. Pinned so the residual cannot
+      // quietly change identity: it is a `transform` codeOnly channel, NOT a
+      // carried translate. See examples/mui/PROVENANCE.md.
+      const swExt = JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/contracts/switch.extension.json'), 'utf8')) as {
+        codeOnlyChannels: Array<{ part: string; channel: string; distinctValues: number }>;
+        stateOverflow: unknown[];
+      };
+      if (swExt.stateOverflow.length !== 0) {
+        throw new Error(`mui.switch stateOverflow is no longer empty (${swExt.stateOverflow.length}) — the checked deltas escaped the base plane again`);
+      }
+      const xf = swExt.codeOnlyChannels.find((c) => c.part === 'buttonbase-root' && c.channel === 'transform');
+      if (!xf) {
+        throw new Error('mui.switch buttonbase-root.transform is no longer a codeOnly channel — if the synthetic-translate door was generalised, update this pin, the compile-receipt thumb-position pin, and examples/mui/PROVENANCE.md together');
+      }
+      if (xf.distinctValues !== 3) {
+        throw new Error(`mui.switch buttonbase-root.transform now has ${xf.distinctValues} distinct values (expected 3: none + the two per-size checked matrices)`);
+      }
+      console.log(
+        `checked-axis-projection: \`checked\` is a VARIANT AXIS on both libraries (MUI Switch 14→28 cells, ToggleSwitch 3→6); ` +
+          `the checked track/thumb colours are BASE-PLANE facts (MUI's are nested two-axis maps keeping the {color} substitution); ` +
+          `${scanned.length} promoted contracts + 2 minted trees + 2 bundles carry ZERO "-state-checked" names; ` +
+          `an out-of-vocabulary stateProps state is REFUSED BY NAME at load; ` +
+          `residual pinned as fact: the checked thumb TRANSLATE stays codeOnly (the synthetic-translate door is keyed to the base combo, which is transform:none)`,
+      );
+    },
+  },
+  {
     id: 'mui-figma-genesis',
     claim: 'C8-journey',
     run: () => {
@@ -5366,12 +5530,12 @@ const cases: Case[] = [
       });
       const receipt = run(process.execPath, ['examples/mui/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`mui figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('14 scripts, 146 variants')) {
-        throw new Error(`mui figma compile receipt missing the 14-scripts/146-variants line:\n${receipt.out.slice(0, 800)}`);
+      if (!receipt.out.includes('14 scripts, 160 variants')) {
+        throw new Error(`mui figma compile receipt missing the 14-scripts/160-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(11 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1514 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1649 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -5396,7 +5560,7 @@ const cases: Case[] = [
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (146 variants, organism round: 11 sets + standalone TablePagination/Menu/Tooltip); token sync 1514 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 14 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1649 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 14 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
@@ -5416,12 +5580,12 @@ const cases: Case[] = [
       });
       const receipt = run(process.execPath, ['examples/tailwind/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`tailwind figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('5 scripts, 45 variants')) {
-        throw new Error(`tailwind compile receipt missing the 5-scripts/45-variants line:\n${receipt.out.slice(0, 800)}`);
+      if (!receipt.out.includes('5 scripts, 48 variants')) {
+        throw new Error(`tailwind compile receipt missing the 5-scripts/48-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/tailwind/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`tailwind genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(5 sets: Alert\(4\), Badge\(12\), Button\(25\), Card\(1\), ToggleSwitch\(3\); 344 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(5 sets: Alert\(4\), Badge\(24\), Button\(45\), Card\(1\), ToggleSwitch\(6\); 344 variables\)/.test(batch.out)) {
         throw new Error(`tailwind genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE freshness (single-mode variant — no modes dir):
@@ -5436,7 +5600,7 @@ const cases: Case[] = [
       const twRun = readFileSync(path.join(SCRATCH, 'examples/tailwind/figma/bundle-run.json'), 'utf8');
       const twCommitted = readFileSync(path.join(ROOT, 'examples/tailwind/figma/tailwind.bundle.json'), 'utf8');
       if (twRun !== twCommitted) throw new Error('committed examples/tailwind/figma/tailwind.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('tailwind-figma-genesis: 5/5 Tailwind-v4 scripts referee+execute headless (45 variants); reader bound the library\'s own utility tokens; one-paste batch mock-proven; committed tailwind.bundle.json fresh — tier-1 four-method guarantee complete');
+      console.log('tailwind-figma-genesis: 5/5 Tailwind-v4 scripts referee+execute headless (48 variants — ToggleSwitch 3→6 on the new Checked axis; Badge/Button carry accepted State preview axes); reader bound the library\'s own utility tokens; one-paste batch mock-proven; committed tailwind.bundle.json fresh — tier-1 four-method guarantee complete');
     },
   },
 ];

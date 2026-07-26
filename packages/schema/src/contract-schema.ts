@@ -27,6 +27,22 @@
  */
 import * as z from 'zod';
 
+/** THE CLOSED INTERACTION-STATE VOCABULARY. A `state` is a PSEUDO-CLASS
+ *  PLANE — a rendering the same component instance takes without any prop
+ *  changing. Anything a prop selects (checked, expanded, selected) is a
+ *  VARIANT AXIS, not a state, and must be modelled as an enum prop.
+ *
+ *  This constant is the SINGLE source of that list: the contract `states`
+ *  enum below, the extraction's mint-property suffix parser
+ *  (`extract/computed/fuse.ts` STATE_SUFFIXES) and the capture-config
+ *  load-time referee (`extract/computed/capture.ts` loadConfig) all read it.
+ *  Before the state-plane projection round they were three independent
+ *  spellings, and a config that named a state outside the list (MUI Switch's
+ *  `checked`) minted channels — `background-color-state-checked` — that
+ *  re-parsed as nothing and that NO emitter rendered. */
+export const CONTRACT_STATES = ['hover', 'active', 'focus-visible', 'disabled'] as const;
+export type ContractState = (typeof CONTRACT_STATES)[number];
+
 /** A DTCG token reference, optionally containing `{propName}` substitution
  *  placeholders that expand over an enum prop's values.
  *  e.g. "{color.action.{variant}.background}" */
@@ -860,7 +876,7 @@ export const ContractSchema = z.strictObject({
   }),
   props: z.array(PropSchema),
   events: z.array(EventSchema).optional(),
-  states: z.array(z.enum(['hover', 'active', 'focus-visible', 'disabled'])).default([]),
+  states: z.array(z.enum(CONTRACT_STATES)).default([]),
   /** How this contract manifests in Figma. 'component' (default) generates a
    *  component (set). 'native' means the concept maps to a native canvas
    *  capability (e.g. layout primitives ARE auto-layout) — no Figma component

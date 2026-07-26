@@ -1981,10 +1981,6 @@
         "$value": "0",
         "$type": "number"
       },
-      "color-ffffff": {
-        "$value": "#ffffff",
-        "$type": "color"
-      },
       "color-00000000": {
         "$value": "#00000000",
         "$type": "color"
@@ -1996,10 +1992,6 @@
       "size-7": {
         "$value": "7px",
         "$type": "dimension"
-      },
-      "color-f5f5f5": {
-        "$value": "#f5f5f5",
-        "$type": "color"
       },
       "color-545454": {
         "$value": "#545454",
@@ -2858,6 +2850,78 @@
             "$type": "dimension"
           }
         },
+        "color": {
+          "primary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-primary-main}",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-secondary-main}",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-error-main}",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-warning-main}",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-info-main}",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-success-main}",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
         "height": {
           "small": {
             "$value": "24px",
@@ -2918,6 +2982,78 @@
             "$type": "dimension"
           }
         },
+        "row-rule-color": {
+          "primary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1976d2",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0288d1",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
         "width": {
           "small": {
             "$value": "24px",
@@ -2933,72 +3069,292 @@
           "$type": "number"
         },
         "background-color-state-active": {
-          "$value": "#0000000a",
-          "$type": "color"
-        },
-        "color-state-checked": {
           "primary": {
-            "$value": "{palette-primary-main}",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1976d20a",
+              "$type": "color"
+            }
           },
           "secondary": {
-            "$value": "{palette-secondary-main}",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9c27b00a",
+              "$type": "color"
+            }
           },
           "error": {
-            "$value": "{palette-error-main}",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d32f2f0a",
+              "$type": "color"
+            }
           },
           "warning": {
-            "$value": "{palette-warning-main}",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ed6c020a",
+              "$type": "color"
+            }
           },
           "info": {
-            "$value": "{palette-info-main}",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0288d10a",
+              "$type": "color"
+            }
           },
           "success": {
-            "$value": "{palette-success-main}",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#2e7d320a",
+              "$type": "color"
+            }
           },
           "default": {
-            "$value": "#ffffff",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            }
           }
         },
-        "row-rule-color-state-checked": {
+        "color-state-disabled": {
           "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#a7caed",
+              "$type": "color"
+            }
           },
           "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d9ace0",
+              "$type": "color"
+            }
           },
           "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#eeafaf",
+              "$type": "color"
+            }
           },
           "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f8c79e",
+              "$type": "color"
+            }
           },
           "info": {
-            "$value": "#0288d1",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9ed1ed",
+              "$type": "color"
+            }
           },
           "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#afcdb1",
+              "$type": "color"
+            }
           },
           "default": {
-            "$value": "#ffffff",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            }
+          }
+        },
+        "row-rule-color-state-disabled": {
+          "primary": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#a7caed",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d9ace0",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#eeafaf",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f8c79e",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9ed1ed",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#afcdb1",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            }
           }
         },
         "background-color-state-hover": {
-          "$value": "#0000000a",
-          "$type": "color"
+          "primary": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1976d20a",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9c27b00a",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d32f2f0a",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ed6c020a",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0288d10a",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#2e7d320a",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0000000a",
+              "$type": "color"
+            }
+          }
         }
       },
       "switch-input": {
@@ -3064,6 +3420,78 @@
         }
       },
       "switch-thumb": {
+        "background-color": {
+          "primary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1976d2",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0288d1",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
         "border-bottom-left-radius": {
           "small": {
             "$value": "8px",
@@ -3108,6 +3536,78 @@
           "$value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
           "$type": "shadow"
         },
+        "color": {
+          "primary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1976d2",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0288d1",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        },
         "height": {
           "small": {
             "$value": "16px",
@@ -3116,6 +3616,78 @@
           "medium": {
             "$value": "20px",
             "$type": "dimension"
+          }
+        },
+        "row-rule-color": {
+          "primary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1976d2",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#0288d1",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
           }
         },
         "width": {
@@ -3128,101 +3700,295 @@
             "$type": "dimension"
           }
         },
-        "background-color-state-checked": {
+        "background-color-state-disabled": {
           "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#a7caed",
+              "$type": "color"
+            }
           },
           "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d9ace0",
+              "$type": "color"
+            }
           },
           "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#eeafaf",
+              "$type": "color"
+            }
           },
           "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f8c79e",
+              "$type": "color"
+            }
           },
           "info": {
-            "$value": "#0288d1",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9ed1ed",
+              "$type": "color"
+            }
           },
           "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#afcdb1",
+              "$type": "color"
+            }
           },
           "default": {
-            "$value": "#ffffff",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            }
           }
         },
-        "color-state-checked": {
+        "color-state-disabled": {
           "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#a7caed",
+              "$type": "color"
+            }
           },
           "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d9ace0",
+              "$type": "color"
+            }
           },
           "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#eeafaf",
+              "$type": "color"
+            }
           },
           "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f8c79e",
+              "$type": "color"
+            }
           },
           "info": {
-            "$value": "#0288d1",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9ed1ed",
+              "$type": "color"
+            }
           },
           "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#afcdb1",
+              "$type": "color"
+            }
           },
           "default": {
-            "$value": "#ffffff",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            }
           }
         },
-        "row-rule-color-state-checked": {
+        "row-rule-color-state-disabled": {
           "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#a7caed",
+              "$type": "color"
+            }
           },
           "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#d9ace0",
+              "$type": "color"
+            }
           },
           "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#eeafaf",
+              "$type": "color"
+            }
           },
           "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f8c79e",
+              "$type": "color"
+            }
           },
           "info": {
-            "$value": "#0288d1",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#9ed1ed",
+              "$type": "color"
+            }
           },
           "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#afcdb1",
+              "$type": "color"
+            }
           },
           "default": {
-            "$value": "#ffffff",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            }
           }
         }
       },
       "switch-track": {
         "background-color": {
-          "$value": "#000000",
-          "$type": "color"
+          "primary": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-primary-main}",
+              "$type": "color"
+            }
+          },
+          "secondary": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-secondary-main}",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-error-main}",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-warning-main}",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-info-main}",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "{palette-success-main}",
+              "$type": "color"
+            }
+          },
+          "default": {
+            "unchecked": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          }
         },
         "height": {
           "small": {
@@ -3235,8 +4001,14 @@
           }
         },
         "opacity": {
-          "$value": "0.38",
-          "$type": "number"
+          "unchecked": {
+            "$value": "0.38",
+            "$type": "number"
+          },
+          "checked": {
+            "$value": "0.5",
+            "$type": "number"
+          }
         },
         "width": {
           "small": {
@@ -3247,40 +4019,6 @@
             "$value": "34px",
             "$type": "dimension"
           }
-        },
-        "background-color-state-checked": {
-          "primary": {
-            "$value": "{palette-primary-main}",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "{palette-secondary-main}",
-            "$type": "color"
-          },
-          "error": {
-            "$value": "{palette-error-main}",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "{palette-warning-main}",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "{palette-info-main}",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "{palette-success-main}",
-            "$type": "color"
-          },
-          "default": {
-            "$value": "#000000",
-            "$type": "color"
-          }
-        },
-        "opacity-state-checked": {
-          "$value": "0.5",
-          "$type": "number"
         },
         "opacity-state-disabled": {
           "$value": "0.12",

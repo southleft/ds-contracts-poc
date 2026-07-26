@@ -9,7 +9,8 @@
       "combo": "primary.small.checked.enabled",
       "axisValues": {
         "color": "primary",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-primary-main",
       "varName": "--mui-palette-primary-main",
@@ -23,7 +24,8 @@
       "combo": "primary.medium.checked.enabled",
       "axisValues": {
         "color": "primary",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-primary-main",
       "varName": "--mui-palette-primary-main",
@@ -37,7 +39,8 @@
       "combo": "secondary.small.checked.enabled",
       "axisValues": {
         "color": "secondary",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-secondary-main",
       "varName": "--mui-palette-secondary-main",
@@ -51,7 +54,8 @@
       "combo": "secondary.medium.checked.enabled",
       "axisValues": {
         "color": "secondary",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-secondary-main",
       "varName": "--mui-palette-secondary-main",
@@ -65,7 +69,8 @@
       "combo": "error.small.checked.enabled",
       "axisValues": {
         "color": "error",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-error-main",
       "varName": "--mui-palette-error-main",
@@ -79,7 +84,8 @@
       "combo": "error.medium.checked.enabled",
       "axisValues": {
         "color": "error",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-error-main",
       "varName": "--mui-palette-error-main",
@@ -93,7 +99,8 @@
       "combo": "warning.small.checked.enabled",
       "axisValues": {
         "color": "warning",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-warning-main",
       "varName": "--mui-palette-warning-main",
@@ -107,7 +114,8 @@
       "combo": "warning.medium.checked.enabled",
       "axisValues": {
         "color": "warning",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-warning-main",
       "varName": "--mui-palette-warning-main",
@@ -121,7 +129,8 @@
       "combo": "info.small.checked.enabled",
       "axisValues": {
         "color": "info",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-info-main",
       "varName": "--mui-palette-info-main",
@@ -135,7 +144,8 @@
       "combo": "info.medium.checked.enabled",
       "axisValues": {
         "color": "info",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-info-main",
       "varName": "--mui-palette-info-main",
@@ -149,7 +159,8 @@
       "combo": "success.small.checked.enabled",
       "axisValues": {
         "color": "success",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-success-main",
       "varName": "--mui-palette-success-main",
@@ -163,7 +174,8 @@
       "combo": "success.medium.checked.enabled",
       "axisValues": {
         "color": "success",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-success-main",
       "varName": "--mui-palette-success-main",
@@ -177,7 +189,8 @@
       "combo": "primary.small.checked.enabled",
       "axisValues": {
         "color": "primary",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-primary-main",
       "varName": "--mui-palette-primary-main",
@@ -191,7 +204,8 @@
       "combo": "primary.small.checked.disabled",
       "axisValues": {
         "color": "primary",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-primary-main",
       "varName": "--mui-palette-primary-main",
@@ -205,7 +219,8 @@
       "combo": "primary.medium.checked.enabled",
       "axisValues": {
         "color": "primary",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-primary-main",
       "varName": "--mui-palette-primary-main",
@@ -219,7 +234,8 @@
       "combo": "primary.medium.checked.disabled",
       "axisValues": {
         "color": "primary",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-primary-main",
       "varName": "--mui-palette-primary-main",
@@ -233,7 +249,8 @@
       "combo": "secondary.small.checked.enabled",
       "axisValues": {
         "color": "secondary",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-secondary-main",
       "varName": "--mui-palette-secondary-main",
@@ -247,7 +264,8 @@
       "combo": "secondary.small.checked.disabled",
       "axisValues": {
         "color": "secondary",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-secondary-main",
       "varName": "--mui-palette-secondary-main",
@@ -261,7 +279,8 @@
       "combo": "secondary.medium.checked.enabled",
       "axisValues": {
         "color": "secondary",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-secondary-main",
       "varName": "--mui-palette-secondary-main",
@@ -275,7 +294,8 @@
       "combo": "secondary.medium.checked.disabled",
       "axisValues": {
         "color": "secondary",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-secondary-main",
       "varName": "--mui-palette-secondary-main",
@@ -289,7 +309,8 @@
       "combo": "error.small.checked.enabled",
       "axisValues": {
         "color": "error",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-error-main",
       "varName": "--mui-palette-error-main",
@@ -303,7 +324,8 @@
       "combo": "error.small.checked.disabled",
       "axisValues": {
         "color": "error",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-error-main",
       "varName": "--mui-palette-error-main",
@@ -317,7 +339,8 @@
       "combo": "error.medium.checked.enabled",
       "axisValues": {
         "color": "error",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-error-main",
       "varName": "--mui-palette-error-main",
@@ -331,7 +354,8 @@
       "combo": "error.medium.checked.disabled",
       "axisValues": {
         "color": "error",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-error-main",
       "varName": "--mui-palette-error-main",
@@ -345,7 +369,8 @@
       "combo": "warning.small.checked.enabled",
       "axisValues": {
         "color": "warning",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-warning-main",
       "varName": "--mui-palette-warning-main",
@@ -359,7 +384,8 @@
       "combo": "warning.small.checked.disabled",
       "axisValues": {
         "color": "warning",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-warning-main",
       "varName": "--mui-palette-warning-main",
@@ -373,7 +399,8 @@
       "combo": "warning.medium.checked.enabled",
       "axisValues": {
         "color": "warning",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-warning-main",
       "varName": "--mui-palette-warning-main",
@@ -387,7 +414,8 @@
       "combo": "warning.medium.checked.disabled",
       "axisValues": {
         "color": "warning",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-warning-main",
       "varName": "--mui-palette-warning-main",
@@ -401,7 +429,8 @@
       "combo": "info.small.checked.enabled",
       "axisValues": {
         "color": "info",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-info-main",
       "varName": "--mui-palette-info-main",
@@ -415,7 +444,8 @@
       "combo": "info.small.checked.disabled",
       "axisValues": {
         "color": "info",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-info-main",
       "varName": "--mui-palette-info-main",
@@ -429,7 +459,8 @@
       "combo": "info.medium.checked.enabled",
       "axisValues": {
         "color": "info",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-info-main",
       "varName": "--mui-palette-info-main",
@@ -443,7 +474,8 @@
       "combo": "info.medium.checked.disabled",
       "axisValues": {
         "color": "info",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-info-main",
       "varName": "--mui-palette-info-main",
@@ -457,7 +489,8 @@
       "combo": "success.small.checked.enabled",
       "axisValues": {
         "color": "success",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-success-main",
       "varName": "--mui-palette-success-main",
@@ -471,7 +504,8 @@
       "combo": "success.small.checked.disabled",
       "axisValues": {
         "color": "success",
-        "size": "small"
+        "size": "small",
+        "checked": "checked"
       },
       "token": "palette-success-main",
       "varName": "--mui-palette-success-main",
@@ -485,7 +519,8 @@
       "combo": "success.medium.checked.enabled",
       "axisValues": {
         "color": "success",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-success-main",
       "varName": "--mui-palette-success-main",
@@ -499,7 +534,8 @@
       "combo": "success.medium.checked.disabled",
       "axisValues": {
         "color": "success",
-        "size": "medium"
+        "size": "medium",
+        "checked": "checked"
       },
       "token": "palette-success-main",
       "varName": "--mui-palette-success-main",

@@ -406,8 +406,10 @@ async function main() {
     // Round 5c: carried-channel re-mints (defaultless-axis contest) ride the
     // styled-channel receipts into the extension block + the ledger.
     styledReceipts.push(...prep.remintReceipts);
-    const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes);
-    const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
+    // nestedPairs: applyMintToContract can spell a nested pair as a
+    // per-value tokensByProp map (state-plane projection round).
+    const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
+    const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes, { nestedPairs: true });
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       prep.declared, prep.declaredStates, prep.setPlaneLiterals,

@@ -3,7 +3,7 @@
   "component": "switch",
   "anchors": [
     {
-      "leaf": "imported.switch.buttonbase-root.color-state-checked.error",
+      "leaf": "imported.switch.buttonbase-root.color.error.checked",
       "token": "palette-error-main",
       "part": "buttonbase-root",
       "cssProperty": "color",
@@ -11,7 +11,7 @@
       "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
     },
     {
-      "leaf": "imported.switch.buttonbase-root.color-state-checked.info",
+      "leaf": "imported.switch.buttonbase-root.color.info.checked",
       "token": "palette-info-main",
       "part": "buttonbase-root",
       "cssProperty": "color",
@@ -19,7 +19,7 @@
       "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
     },
     {
-      "leaf": "imported.switch.buttonbase-root.color-state-checked.primary",
+      "leaf": "imported.switch.buttonbase-root.color.primary.checked",
       "token": "palette-primary-main",
       "part": "buttonbase-root",
       "cssProperty": "color",
@@ -27,7 +27,7 @@
       "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
     },
     {
-      "leaf": "imported.switch.buttonbase-root.color-state-checked.secondary",
+      "leaf": "imported.switch.buttonbase-root.color.secondary.checked",
       "token": "palette-secondary-main",
       "part": "buttonbase-root",
       "cssProperty": "color",
@@ -35,7 +35,7 @@
       "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
     },
     {
-      "leaf": "imported.switch.buttonbase-root.color-state-checked.success",
+      "leaf": "imported.switch.buttonbase-root.color.success.checked",
       "token": "palette-success-main",
       "part": "buttonbase-root",
       "cssProperty": "color",
@@ -43,7 +43,7 @@
       "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
     },
     {
-      "leaf": "imported.switch.buttonbase-root.color-state-checked.warning",
+      "leaf": "imported.switch.buttonbase-root.color.warning.checked",
       "token": "palette-warning-main",
       "part": "buttonbase-root",
       "cssProperty": "color",
@@ -51,7 +51,7 @@
       "selector": ".css-a8vsok-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked"
     },
     {
-      "leaf": "imported.switch.switch-track.background-color-state-checked.error",
+      "leaf": "imported.switch.switch-track.background-color.error.checked",
       "token": "palette-error-main",
       "part": "switch-track",
       "cssProperty": "background-color",
@@ -59,7 +59,7 @@
       "selector": ".css-fhl46z-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
     },
     {
-      "leaf": "imported.switch.switch-track.background-color-state-checked.info",
+      "leaf": "imported.switch.switch-track.background-color.info.checked",
       "token": "palette-info-main",
       "part": "switch-track",
       "cssProperty": "background-color",
@@ -67,7 +67,7 @@
       "selector": ".css-l9coqg-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
     },
     {
-      "leaf": "imported.switch.switch-track.background-color-state-checked.primary",
+      "leaf": "imported.switch.switch-track.background-color.primary.checked",
       "token": "palette-primary-main",
       "part": "switch-track",
       "cssProperty": "background-color",
@@ -75,7 +75,7 @@
       "selector": ".css-1wrya9v-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
     },
     {
-      "leaf": "imported.switch.switch-track.background-color-state-checked.secondary",
+      "leaf": "imported.switch.switch-track.background-color.secondary.checked",
       "token": "palette-secondary-main",
       "part": "switch-track",
       "cssProperty": "background-color",
@@ -83,7 +83,7 @@
       "selector": ".css-1i0ygjz-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
     },
     {
-      "leaf": "imported.switch.switch-track.background-color-state-checked.success",
+      "leaf": "imported.switch.switch-track.background-color.success.checked",
       "token": "palette-success-main",
       "part": "switch-track",
       "cssProperty": "background-color",
@@ -91,7 +91,7 @@
       "selector": ".css-184m5k0-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track"
     },
     {
-      "leaf": "imported.switch.switch-track.background-color-state-checked.warning",
+      "leaf": "imported.switch.switch-track.background-color.warning.checked",
       "token": "palette-warning-main",
       "part": "switch-track",
       "cssProperty": "background-color",

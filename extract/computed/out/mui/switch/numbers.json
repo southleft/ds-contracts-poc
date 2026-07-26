@@ -10,7 +10,7 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 18,
-    "buttonbase-root": 42,
+    "buttonbase-root": 43,
     "switch-input": 17,
     "switch-thumb": 30,
     "switch-track": 14
@@ -103,8 +103,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 218,
-    "mintedLeavesFolded": 121
+    "mintedLeavesUnfolded": 647,
+    "mintedLeavesFolded": 256
   },
   "bound": {
     "cellsChecked": 0,
@@ -113,13 +113,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 121,
+    "leaves": 256,
     "baseBindings": 69,
-    "stateBindings": 29,
+    "stateBindings": 22,
     "byShape": {
-      "uniform": 63,
-      "perAxis": 35,
-      "perPair": 0,
+      "uniform": 48,
+      "perAxis": 30,
+      "perPair": 13,
       "refused": 0
     }
   },
@@ -128,9 +128,9 @@
     "state": 7
   },
   "codeOnly": {
-    "base": 5,
-    "state": 1,
-    "overflowBindings": 16
+    "base": 6,
+    "state": 0,
+    "overflowBindings": 21
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
@@ -183,52 +183,52 @@
     },
     "worst": [
       {
-        "key": "success.medium.no-checked.enabled__hover",
+        "key": "success.medium.unchecked.enabled__hover",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "success.medium.no-checked.enabled__active",
+        "key": "success.medium.unchecked.enabled__active",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "default.medium.no-checked.enabled__hover",
+        "key": "default.medium.unchecked.enabled__hover",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "default.medium.no-checked.enabled__active",
+        "key": "default.medium.unchecked.enabled__active",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "error.medium.no-checked.disabled__hover",
+        "key": "error.medium.unchecked.disabled__hover",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       },
       {
-        "key": "error.medium.no-checked.disabled__focus-visible",
+        "key": "error.medium.unchecked.disabled__focus-visible",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       },
       {
-        "key": "error.medium.no-checked.disabled__active",
+        "key": "error.medium.unchecked.disabled__active",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       },
       {
-        "key": "warning.medium.no-checked.disabled__hover",
+        "key": "warning.medium.unchecked.disabled__hover",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 73.64864864864865,
+    "computedPctEqual": 77.67857142857143,
     "rowsFullyEqual": 0,
     "rows": 224,
-    "pixelPerfectExact": 56,
+    "pixelPerfectExact": 28,
     "pixelPerfectAA": 56,
     "pairs": 224
   },

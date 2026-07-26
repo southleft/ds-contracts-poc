@@ -157,6 +157,56 @@ for (const file of scripts) {
       const radOf2 = (n) => n.topLeftRadius ?? n.cornerRadius ?? 0;
       const badR2 = th2.find((n) => Math.round(radOf2(n)) !== 10);
       if (badR2) throw new Error(`switch-thumb radius pin: expected 10, found ${radOf2(badR2)}`);
+
+      // STATE-PLANE PROJECTION PINS: `checked` is a real VARIANT AXIS now,
+      // so the checked plane must be VISIBLE on canvas, not merely present
+      // in the JSON. Before this round its colours minted as
+      // `background-color-state-checked` — a channel no emitter rendered —
+      // and the grid had no Checked axis at all.
+      const variantsBy = (re) => mock.root.findAll((n) => n.type === 'COMPONENT' && re.test(n.name));
+      const checkedVs = variantsBy(/Checked=Checked/);
+      const uncheckedVs = variantsBy(/Checked=Unchecked/);
+      if (checkedVs.length === 0 || uncheckedVs.length === 0) {
+        throw new Error(`switch checked-axis pin: expected both Checked=Checked and Checked=Unchecked variants, found ${checkedVs.length}/${uncheckedVs.length}`);
+      }
+      if (checkedVs.length !== uncheckedVs.length) {
+        throw new Error(`switch checked-axis pin: the Checked axis must be orthogonal (equal cells per value), got ${checkedVs.length} vs ${uncheckedVs.length}`);
+      }
+      // The TRACK carries a DIFFERENT bound fill variable per checked value
+      // (MUI: black rail unchecked, palette colour checked) — the fact
+      // examples/tailwind/PROVENANCE.md and this file both recorded as
+      // "captured but projected by nobody".
+      const trackFillVar = (variant) => {
+        const tr = (variant.children ?? []).find((c) => c.name === 'switch-track');
+        if (!tr) return null;
+        const paint = (tr.fills ?? [])[0];
+        return paint?.boundVariables?.color?.id ?? null;
+      };
+      const primaryChecked = checkedVs.find((n) => /Color=Primary/.test(n.name) && /Size=Medium/.test(n.name));
+      const primaryUnchecked = uncheckedVs.find((n) => /Color=Primary/.test(n.name) && /Size=Medium/.test(n.name));
+      if (!primaryChecked || !primaryUnchecked) throw new Error('switch checked-axis pin: Color=Primary/Size=Medium cells missing on both Checked values');
+      const cFill = trackFillVar(primaryChecked);
+      const uFill = trackFillVar(primaryUnchecked);
+      if (!cFill || !uFill) throw new Error(`switch checked track-fill pin: the track must carry a BOUND fill variable on both checked planes (checked=${cFill}, unchecked=${uFill})`);
+      if (cFill === uFill) throw new Error('switch checked track-fill pin: checked and unchecked tracks bind the SAME variable — the checked colour is not projected');
+      // NAMED RESIDUAL, pinned as an EXPECTATION so the day it changes is
+      // visible: the checked thumb sits at the SAME x as the unchecked one.
+      // MUI translates it (matrix(1,0,0,1,20,0)) but the overlay-cluster
+      // synthetic translate-x/y door only decomposes a matrix present on the
+      // BASE combo, and Switch's base is transform:none — so the offset is
+      // never observed. See examples/mui/PROVENANCE.md.
+      const thumbX = (variant) => {
+        const bb = (variant.children ?? []).find((c) => /buttonbase/.test(c.name));
+        if (!bb) throw new Error('switch thumb-position residual pin: no buttonbase part in the variant');
+        const th = (bb.children ?? []).find((c) => c.name === 'switch-thumb');
+        if (!th) throw new Error('switch thumb-position residual pin: no switch-thumb under the buttonbase part');
+        return Math.round((bb.x ?? 0) + (th.x ?? 0));
+      };
+      const xc = thumbX(primaryChecked);
+      const xu = thumbX(primaryUnchecked);
+      if (xc !== xu) {
+        throw new Error(`switch thumb-position residual pin: the checked thumb moved (x ${xu} → ${xc}). If the translate door was generalised this pin is now WRONG — update it and PROVENANCE together.`);
+      }
     }
     // MOLECULE-ROUND STRUCTURAL PINS (2026-07-25): one per interactive
     // component — the specific structure each contract exists to carry;

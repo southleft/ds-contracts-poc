@@ -1,5 +1,7 @@
 /**
- * TAILWIND FLOOR PROMOTION — `node examples/tailwind/scripts/promote-floor.mjs`
+ * TAILWIND FLOOR PROMOTION — `npx tsx examples/tailwind/scripts/promote-floor.mjs`
+ * (tsx, not bare node: the state-preview probe below calls the REAL
+ * TypeScript referee rather than re-implementing its rules.)
  *
  * The Astryx promote-floor pattern with one MUI-specific addition: the
  * SOURCE-ALIAS pass. MUI ships Emotion runtime styles, so there is no static
@@ -18,9 +20,12 @@
  * own palette instead of anonymous imported literals. Leaves with no
  * agreeing fact stay literal; every refusal is receipted.
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// STATE-PLANE PROJECTION round: the state-preview probe asks the REAL
+// referee, so this script runs under tsx.
+import { validateContract } from '../../../core/emit-react.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EX = path.join(HERE, '..');
@@ -140,6 +145,39 @@ function aliasPass(node, segs, facts, componentName) {
   }
 }
 
+// ---- state previews (STATE-PLANE PROJECTION round) ----
+// The Polaris probe: opt into `figmaStatePreviews` wherever the REFEREE
+// accepts it, so the canvas draws a State cell per declared interaction state
+// instead of pretending the component has only a default plane. The referee —
+// not this script — decides; a refusal (a state with no token overrides would
+// render identically to Default) is PRINTED, never worked around.
+const ICON_DIR = path.join(EX, 'assets', 'icons');
+const icons = new Map(
+  existsSync(ICON_DIR)
+    ? readdirSync(ICON_DIR)
+        .filter((f) => f.endsWith('.svg'))
+        .sort()
+        .map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ICON_DIR, f), 'utf8').trim()])
+    : [],
+);
+const stateRefusals = [];
+const statePreviewsOn = [];
+function statePreviewProbe(contract) {
+  if ((contract.states ?? []).length === 0 || contract.figmaStatePreviews) return;
+  const probe = structuredClone(contract);
+  probe.figmaStatePreviews = true;
+  const probeErrors = [];
+  validateContract(probe, new Map([[probe.id, probe]]), probeErrors, icons);
+  if (probeErrors.length === 0) {
+    contract.figmaStatePreviews = true;
+    statePreviewsOn.push(`${contract.id} (${contract.states.join(', ')})`);
+    console.log(`  \u00b7 ${contract.id}: figmaStatePreviews ON (${contract.states.join(', ')})`);
+  } else {
+    stateRefusals.push(`${contract.id}: ${probeErrors[0]}`);
+    console.log(`  \u00b7 ${contract.id}: figmaStatePreviews REFUSED by the referee (named): ${probeErrors[0]}`);
+  }
+}
+
 // ---- promotion ----
 const promoted = [];
 for (const name of COMPONENTS) {
@@ -158,6 +196,7 @@ for (const name of COMPONENTS) {
     `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
     `carries the named overflow.`;
 
+  statePreviewProbe(contract);
   writeFileSync(path.join(EX, 'contracts', `${name}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
   writeFileSync(path.join(EX, 'contracts', `${name}.extension.json`), JSON.stringify(extension, null, 2) + '\n');
   promoted.push(name);
@@ -248,3 +287,9 @@ writeFileSync(
 );
 console.log(`✔ floor-promoted ${promoted.length} contract(s) → examples/tailwind/contracts (v0.2.0): ${promoted.join(', ')}`);
 console.log(`✔ minted tree → examples/tailwind/tokens/tailwind-minted.dtcg.json (${aliased} source-aliased, ${literalKept} literal, ${aliasReceipts.length} named refusals)`);
+console.log(
+  `\u2714 figmaStatePreviews: ${statePreviewsOn.length} accepted by the referee` +
+    (statePreviewsOn.length ? ` (${statePreviewsOn.join('; ')})` : '') +
+    `, ${stateRefusals.length} REFUSED BY NAME` +
+    (stateRefusals.length ? `:\n${stateRefusals.map((r) => `    - ${r}`).join('\n')}` : ''),
+);

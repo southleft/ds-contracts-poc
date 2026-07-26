@@ -83,10 +83,10 @@
   "minted": {
     "leaves": 31,
     "baseBindings": 25,
-    "stateBindings": 5,
+    "stateBindings": 4,
     "byShape": {
-      "uniform": 25,
-      "perAxis": 5,
+      "uniform": 23,
+      "perAxis": 6,
       "perPair": 0,
       "refused": 0
     }
@@ -134,22 +134,22 @@
     },
     "worst": [
       {
-        "key": "sm.no-checked__default",
+        "key": "sm.unchecked__default",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "sm.no-checked__hover",
+        "key": "sm.unchecked__hover",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "sm.no-checked__focus-visible",
+        "key": "sm.unchecked__focus-visible",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "sm.no-checked__active",
+        "key": "sm.unchecked__active",
         "pctExact": 0,
         "pctAA": 0
       },
@@ -176,7 +176,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 87.5,
+    "computedPctEqual": 88.88888888888889,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 0,

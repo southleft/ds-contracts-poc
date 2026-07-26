@@ -7,7 +7,7 @@ await (async () => {
 // Deterministic variable UPSERT (re-run safe): one "Tailwind" collection,
 // Light/Dark modes, 344 variables (21 Figma-native aliases from
 // the library's own CSS-variable references). Run BEFORE the component scripts.
-const TOKENS = [{"name":"animate-spin","type":"STRING","light":"spin 1s linear infinite","dark":"spin 1s linear infinite"},{"name":"blur-sm","type":"FLOAT","light":8,"dark":8},{"name":"blur-xs","type":"FLOAT","light":4,"dark":4},{"name":"color-black","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"color-cyan-100","type":"COLOR","light":{"r":0.807843137254902,"g":0.9803921568627451,"b":0.996078431372549,"a":1},"dark":{"r":0.807843137254902,"g":0.9803921568627451,"b":0.996078431372549,"a":1}},{"name":"color-cyan-200","type":"COLOR","light":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1},"dark":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1}},{"name":"color-cyan-300","type":"COLOR","light":{"r":0.3254901960784314,"g":0.9176470588235294,"b":0.9921568627450981,"a":1},"dark":{"r":0.3254901960784314,"g":0.9176470588235294,"b":0.9921568627450981,"a":1}},{"name":"color-cyan-400","type":"COLOR","light":{"r":0,"g":0.8274509803921568,"b":0.9490196078431372,"a":1},"dark":{"r":0,"g":0.8274509803921568,"b":0.9490196078431372,"a":1}},{"name":"color-cyan-50","type":"COLOR","light":{"r":0.9254901960784314,"g":0.996078431372549,"b":1,"a":1},"dark":{"r":0.9254901960784314,"g":0.996078431372549,"b":1,"a":1}},{"name":"color-cyan-500","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"color-cyan-600","type":"COLOR","light":{"r":0,"g":0.5725490196078431,"b":0.7215686274509804,"a":1},"dark":{"r":0,"g":0.5725490196078431,"b":0.7215686274509804,"a":1}},{"name":"color-cyan-700","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"color-cyan-800","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"color-cyan-900","type":"COLOR","light":{"r":0.06274509803921569,"g":0.3058823529411765,"b":0.39215686274509803,"a":1},"dark":{"r":0.06274509803921569,"g":0.3058823529411765,"b":0.39215686274509803,"a":1}},{"name":"color-lime-100","type":"COLOR","light":{"r":0.9254901960784314,"g":0.9882352941176471,"b":0.792156862745098,"a":1},"dark":{"r":0.9254901960784314,"g":0.9882352941176471,"b":0.792156862745098,"a":1}},{"name":"color-lime-200","type":"COLOR","light":{"r":0.8470588235294118,"g":0.9764705882352941,"b":0.6,"a":1},"dark":{"r":0.8470588235294118,"g":0.9764705882352941,"b":0.6,"a":1}},{"name":"color-lime-300","type":"COLOR","light":{"r":0.7333333333333333,"g":0.9568627450980393,"b":0.3176470588235294,"a":1},"dark":{"r":0.7333333333333333,"g":0.9568627450980393,"b":0.3176470588235294,"a":1}},{"name":"color-lime-400","type":"COLOR","light":{"r":0.6039215686274509,"g":0.9019607843137255,"b":0,"a":1},"dark":{"r":0.6039215686274509,"g":0.9019607843137255,"b":0,"a":1}},{"name":"color-lime-500","type":"COLOR","light":{"r":0.48627450980392156,"g":0.8117647058823529,"b":0,"a":1},"dark":{"r":0.48627450980392156,"g":0.8117647058823529,"b":0,"a":1}},{"name":"color-lime-600","type":"COLOR","light":{"r":0.3686274509803922,"g":0.6470588235294118,"b":0,"a":1},"dark":{"r":0.3686274509803922,"g":0.6470588235294118,"b":0,"a":1}},{"name":"color-lime-700","type":"COLOR","light":{"r":0.28627450980392155,"g":0.49019607843137253,"b":0,"a":1},"dark":{"r":0.28627450980392155,"g":0.49019607843137253,"b":0,"a":1}},{"name":"color-lime-800","type":"COLOR","light":{"r":0.23529411764705882,"g":0.38823529411764707,"b":0,"a":1},"dark":{"r":0.23529411764705882,"g":0.38823529411764707,"b":0,"a":1}},{"name":"color-lime-900","type":"COLOR","light":{"r":0.20784313725490197,"g":0.3254901960784314,"b":0.054901960784313725,"a":1},"dark":{"r":0.20784313725490197,"g":0.3254901960784314,"b":0.054901960784313725,"a":1}},{"name":"color-white","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"container-2xl","type":"FLOAT","light":672,"dark":672},{"name":"container-3xl","type":"FLOAT","light":768,"dark":768},{"name":"container-4xl","type":"FLOAT","light":896,"dark":896},{"name":"container-5xl","type":"FLOAT","light":1024,"dark":1024},{"name":"container-6xl","type":"FLOAT","light":1152,"dark":1152},{"name":"container-7xl","type":"FLOAT","light":1280,"dark":1280},{"name":"container-lg","type":"FLOAT","light":512,"dark":512},{"name":"container-md","type":"FLOAT","light":448,"dark":448},{"name":"container-sm","type":"FLOAT","light":384,"dark":384},{"name":"container-xl","type":"FLOAT","light":576,"dark":576},{"name":"container-xs","type":"FLOAT","light":320,"dark":320},{"name":"default-font-family","type":"STRING","light":"var(--font-sans)","dark":"var(--font-sans)"},{"name":"default-mono-font-family","type":"STRING","light":"var(--font-mono)","dark":"var(--font-mono)"},{"name":"default-transition-duration","type":"STRING","light":"150ms","dark":"150ms"},{"name":"default-transition-timing-function","type":"STRING","light":"cubic-bezier(0.4, 0, 0.2, 1)","dark":"cubic-bezier(0.4, 0, 0.2, 1)"},{"name":"drop-shadow-md","type":"STRING","light":"0 3px 3px rgb(0 0 0 / 0.12)","dark":"0 3px 3px rgb(0 0 0 / 0.12)"},{"name":"drop-shadow-sm","type":"STRING","light":"0 1px 2px rgb(0 0 0 / 0.15)","dark":"0 1px 2px rgb(0 0 0 / 0.15)"},{"name":"drop-shadow-xs","type":"STRING","light":"0 1px 1px rgb(0 0 0 / 0.05)","dark":"0 1px 1px rgb(0 0 0 / 0.05)"},{"name":"ease-in-out","type":"STRING","light":"cubic-bezier(0.4, 0, 0.2, 1)","dark":"cubic-bezier(0.4, 0, 0.2, 1)"},{"name":"ease-out","type":"STRING","light":"cubic-bezier(0, 0, 0.2, 1)","dark":"cubic-bezier(0, 0, 0.2, 1)"},{"name":"font-mono","type":"STRING","light":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\",\n      \"Courier New\", monospace","dark":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\",\n      \"Courier New\", monospace"},{"name":"font-sans","type":"STRING","light":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\",\n      \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\n      \"Segoe UI Symbol\", \"Noto Color Emoji\"","dark":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\",\n      \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\n      \"Segoe UI Symbol\", \"Noto Color Emoji\""},{"name":"font-weight-bold","type":"FLOAT","light":700,"dark":700},{"name":"font-weight-medium","type":"FLOAT","light":500,"dark":500},{"name":"font-weight-normal","type":"FLOAT","light":400,"dark":400},{"name":"font-weight-semibold","type":"FLOAT","light":600,"dark":600},{"name":"leading-tight","type":"FLOAT","light":1.25,"dark":1.25},{"name":"radius-lg","type":"FLOAT","light":8,"dark":8},{"name":"radius-md","type":"FLOAT","light":6,"dark":6},{"name":"radius-sm","type":"FLOAT","light":4,"dark":4},{"name":"radius-xs","type":"FLOAT","light":2,"dark":2},{"name":"spacing","type":"FLOAT","light":4,"dark":4},{"name":"text-2xl","type":"FLOAT","light":24,"dark":24},{"name":"text-2xl--line-height","type":"STRING","light":"calc(2 / 1.5)","dark":"calc(2 / 1.5)"},{"name":"text-base","type":"FLOAT","light":16,"dark":16},{"name":"text-base--line-height","type":"STRING","light":"calc(1.5 / 1)","dark":"calc(1.5 / 1)"},{"name":"text-lg","type":"FLOAT","light":18,"dark":18},{"name":"text-lg--line-height","type":"STRING","light":"calc(1.75 / 1.125)","dark":"calc(1.75 / 1.125)"},{"name":"text-sm","type":"FLOAT","light":14,"dark":14},{"name":"text-sm--line-height","type":"STRING","light":"calc(1.25 / 0.875)","dark":"calc(1.25 / 0.875)"},{"name":"text-xl","type":"FLOAT","light":20,"dark":20},{"name":"text-xl--line-height","type":"STRING","light":"calc(1.75 / 1.25)","dark":"calc(1.75 / 1.25)"},{"name":"text-xs","type":"FLOAT","light":12,"dark":12},{"name":"text-xs--line-height","type":"STRING","light":"calc(1 / 0.75)","dark":"calc(1 / 0.75)"},{"name":"imported/alert/label/color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/label/color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/label/color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/label/color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/label/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/alert/label/row-rule-color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/label/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/label/row-rule-color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/label/row-rule-color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/part-0/color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/part-0/color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/part-0/color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/part-0/color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/part-0/row-rule-color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/part-0/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/part-0/row-rule-color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/part-0/row-rule-color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/root/background-color/failure","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1},"dark":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1}},{"name":"imported/alert/root/background-color/info","type":"ALIAS","target":"color-cyan-100"},{"name":"imported/alert/root/background-color/success","type":"COLOR","light":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1},"dark":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1}},{"name":"imported/alert/root/background-color/warning","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1},"dark":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1}},{"name":"imported/alert/root/border-bottom-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-bottom-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-bottom-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-bottom-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/border-left-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-left-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-left-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-left-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/border-right-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-right-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-right-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-right-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/border-top-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-top-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-top-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-top-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/root/color/info","type":"ALIAS","target":"color-cyan-700"},{"name":"imported/alert/root/color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/root/color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/root/row-rule-color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/root/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/root/row-rule-color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/root/row-rule-color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/badge/label/color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/label/color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/label/color/info","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"imported/badge/label/color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/label/color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/label/color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/badge/label/font-size/sm","type":"FLOAT","light":14,"dark":14},{"name":"imported/badge/label/font-size/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/badge/label/font-weight","type":"FLOAT","light":600,"dark":600},{"name":"imported/badge/label/line-height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/badge/label/line-height/xs","type":"FLOAT","light":16,"dark":16},{"name":"imported/badge/label/row-rule-color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/label/row-rule-color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/label/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"imported/badge/label/row-rule-color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/label/row-rule-color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/label/row-rule-color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/badge/root/background-color-state-active/failure","type":"COLOR","light":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1},"dark":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1}},{"name":"imported/badge/root/background-color-state-active/indigo","type":"COLOR","light":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1},"dark":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1}},{"name":"imported/badge/root/background-color-state-active/info","type":"COLOR","light":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1},"dark":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1}},{"name":"imported/badge/root/background-color-state-active/pink","type":"COLOR","light":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1},"dark":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1}},{"name":"imported/badge/root/background-color-state-active/success","type":"COLOR","light":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1},"dark":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1}},{"name":"imported/badge/root/background-color-state-active/warning","type":"COLOR","light":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1},"dark":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1}},{"name":"imported/badge/root/background-color-state-hover/failure","type":"COLOR","light":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1},"dark":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1}},{"name":"imported/badge/root/background-color-state-hover/indigo","type":"COLOR","light":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1},"dark":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1}},{"name":"imported/badge/root/background-color-state-hover/info","type":"COLOR","light":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1},"dark":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1}},{"name":"imported/badge/root/background-color-state-hover/pink","type":"COLOR","light":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1},"dark":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1}},{"name":"imported/badge/root/background-color-state-hover/success","type":"COLOR","light":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1},"dark":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1}},{"name":"imported/badge/root/background-color-state-hover/warning","type":"COLOR","light":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1},"dark":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1}},{"name":"imported/badge/root/background-color/failure","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1},"dark":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1}},{"name":"imported/badge/root/background-color/indigo","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9294117647058824,"b":1,"a":1},"dark":{"r":0.8980392156862745,"g":0.9294117647058824,"b":1,"a":1}},{"name":"imported/badge/root/background-color/info","type":"ALIAS","target":"color-cyan-100"},{"name":"imported/badge/root/background-color/pink","type":"COLOR","light":{"r":0.9882352941176471,"g":0.9098039215686274,"b":0.9529411764705882,"a":1},"dark":{"r":0.9882352941176471,"g":0.9098039215686274,"b":0.9529411764705882,"a":1}},{"name":"imported/badge/root/background-color/success","type":"COLOR","light":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1},"dark":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1}},{"name":"imported/badge/root/background-color/warning","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1},"dark":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1}},{"name":"imported/badge/root/color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/root/color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/root/color/info","type":"ALIAS","target":"color-cyan-800"},{"name":"imported/badge/root/color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/root/color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/root/color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/badge/root/font-size/sm","type":"FLOAT","light":14,"dark":14},{"name":"imported/badge/root/font-size/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/badge/root/font-weight","type":"ALIAS","target":"font-weight-semibold"},{"name":"imported/badge/root/line-height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/badge/root/line-height/xs","type":"FLOAT","light":16,"dark":16},{"name":"imported/badge/root/padding-bottom","type":"FLOAT","light":2,"dark":2},{"name":"imported/badge/root/padding-left","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/padding-right","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/padding-top","type":"FLOAT","light":2,"dark":2},{"name":"imported/badge/root/row-rule-color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/root/row-rule-color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/root/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"imported/badge/root/row-rule-color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/root/row-rule-color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/root/row-rule-color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/button/root/background-color-state-active/alternative","type":"COLOR","light":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1},"dark":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1}},{"name":"imported/button/root/background-color-state-active/dark","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/background-color-state-active/default","type":"COLOR","light":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1},"dark":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1}},{"name":"imported/button/root/background-color-state-active/green","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/button/root/background-color-state-active/red","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/button/root/background-color-state-hover/alternative","type":"COLOR","light":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1},"dark":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1}},{"name":"imported/button/root/background-color-state-hover/dark","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/background-color-state-hover/default","type":"COLOR","light":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1},"dark":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1}},{"name":"imported/button/root/background-color-state-hover/green","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/button/root/background-color-state-hover/red","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/button/root/background-color/alternative","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/background-color/dark","type":"COLOR","light":{"r":0.12156862745098039,"g":0.1607843137254902,"b":0.21568627450980393,"a":1},"dark":{"r":0.12156862745098039,"g":0.1607843137254902,"b":0.21568627450980393,"a":1}},{"name":"imported/button/root/background-color/default","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/background-color/green","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/button/root/background-color/red","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/button/root/border-bottom-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-bottom-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-bottom-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-bottom-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-bottom-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-bottom-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-left-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-left-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-right-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-right-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-top-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-top-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/box-shadow-state-active/alternative","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/dark","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/default","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/green","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/red","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/alternative","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/dark","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/default","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/green","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/red","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/color-state-active/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/color-state-active/dark","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-active/default","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-active/green","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-active/red","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/color-state-hover/dark","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/default","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/green","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/red","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/alternative","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/color/dark","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/default","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/green","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/red","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/font-size/lg","type":"FLOAT","light":16,"dark":16},{"name":"imported/button/root/font-size/md","type":"FLOAT","light":14,"dark":14},{"name":"imported/button/root/font-size/sm","type":"FLOAT","light":14,"dark":14},{"name":"imported/button/root/font-size/xl","type":"FLOAT","light":16,"dark":16},{"name":"imported/button/root/font-size/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/font-weight","type":"ALIAS","target":"font-weight-medium"},{"name":"imported/button/root/line-height/lg","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/line-height/md","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/line-height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/line-height/xl","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/line-height/xs","type":"FLOAT","light":16,"dark":16},{"name":"imported/button/root/opacity-state-disabled","type":"FLOAT","light":0.5,"dark":0.5},{"name":"imported/button/root/outline-color-state-active/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/outline-color-state-active/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-active/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-active/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-active/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-focus-visible","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1}},{"name":"imported/button/root/outline-color-state-hover/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/outline-color-state-hover/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-hover/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-hover/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-hover/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/alternative","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/outline-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-width-state-focus-visible","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/padding-left/lg","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-left/md","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-left/sm","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-left/xl","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/padding-left/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-right/lg","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-right/md","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-right/sm","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-right/xl","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/padding-right/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/row-rule-color-state-active/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/alternative","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/row-rule-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/card/label/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/card/root/background-color","type":"ALIAS","target":"color-white"},{"name":"imported/card/root/box-shadow","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px"},{"name":"imported/shared/color-e5e7eb","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/shared/size-0","type":"FLOAT","light":0,"dark":0},{"name":"imported/shared/size-1","type":"FLOAT","light":1,"dark":1},{"name":"imported/shared/size-14","type":"FLOAT","light":14,"dark":14},{"name":"imported/shared/size-16","type":"FLOAT","light":16,"dark":16},{"name":"imported/shared/size-20","type":"FLOAT","light":20,"dark":20},{"name":"imported/shared/size-24","type":"FLOAT","light":24,"dark":24},{"name":"imported/shared/size-4","type":"FLOAT","light":4,"dark":4},{"name":"imported/shared/size-8","type":"FLOAT","light":8,"dark":8},{"name":"imported/shared/size-9999","type":"FLOAT","light":9999,"dark":9999},{"name":"imported/toggle-switch/label/color","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/toggle-switch/label/font-size","type":"FLOAT","light":14,"dark":14},{"name":"imported/toggle-switch/label/font-weight","type":"ALIAS","target":"font-weight-medium"},{"name":"imported/toggle-switch/label/line-height","type":"FLOAT","light":20,"dark":20},{"name":"imported/toggle-switch/label/margin-left","type":"FLOAT","light":12,"dark":12},{"name":"imported/toggle-switch/label/margin-top","type":"FLOAT","light":2,"dark":2},{"name":"imported/toggle-switch/label/row-rule-color","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/toggle-switch/part-0/background-color","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/toggle-switch/part-0/background-color-state-checked","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/toggle-switch/part-0/box-shadow-state-active","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/toggle-switch/part-0/box-shadow-state-focus-visible","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/toggle-switch/part-0/height/lg","type":"FLOAT","light":28,"dark":28},{"name":"imported/toggle-switch/part-0/height/md","type":"FLOAT","light":24,"dark":24},{"name":"imported/toggle-switch/part-0/height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/toggle-switch/part-0/min-width/lg","type":"FLOAT","light":52,"dark":52},{"name":"imported/toggle-switch/part-0/min-width/md","type":"FLOAT","light":44,"dark":44},{"name":"imported/toggle-switch/part-0/min-width/sm","type":"FLOAT","light":36,"dark":36},{"name":"imported/toggle-switch/part-0/width/lg","type":"FLOAT","light":52,"dark":52},{"name":"imported/toggle-switch/part-0/width/md","type":"FLOAT","light":44,"dark":44},{"name":"imported/toggle-switch/part-0/width/sm","type":"FLOAT","light":36,"dark":36},{"name":"imported/toggle-switch/root/height/lg","type":"FLOAT","light":28,"dark":28},{"name":"imported/toggle-switch/root/height/md","type":"FLOAT","light":24,"dark":24},{"name":"imported/toggle-switch/root/height/sm","type":"FLOAT","light":22,"dark":22},{"name":"imported/toggle-switch/root/outline-color-state-focus-visible","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1}},{"name":"imported/toggle-switch/root/outline-width-state-focus-visible","type":"FLOAT","light":1,"dark":1},{"name":"imported/toggle-switch/root/width/lg","type":"FLOAT","light":108.438,"dark":108.438},{"name":"imported/toggle-switch/root/width/md","type":"FLOAT","light":100.438,"dark":100.438},{"name":"imported/toggle-switch/root/width/sm","type":"FLOAT","light":92.4375,"dark":92.4375}];
+const TOKENS = [{"name":"animate-spin","type":"STRING","light":"spin 1s linear infinite","dark":"spin 1s linear infinite"},{"name":"blur-sm","type":"FLOAT","light":8,"dark":8},{"name":"blur-xs","type":"FLOAT","light":4,"dark":4},{"name":"color-black","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"color-cyan-100","type":"COLOR","light":{"r":0.807843137254902,"g":0.9803921568627451,"b":0.996078431372549,"a":1},"dark":{"r":0.807843137254902,"g":0.9803921568627451,"b":0.996078431372549,"a":1}},{"name":"color-cyan-200","type":"COLOR","light":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1},"dark":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1}},{"name":"color-cyan-300","type":"COLOR","light":{"r":0.3254901960784314,"g":0.9176470588235294,"b":0.9921568627450981,"a":1},"dark":{"r":0.3254901960784314,"g":0.9176470588235294,"b":0.9921568627450981,"a":1}},{"name":"color-cyan-400","type":"COLOR","light":{"r":0,"g":0.8274509803921568,"b":0.9490196078431372,"a":1},"dark":{"r":0,"g":0.8274509803921568,"b":0.9490196078431372,"a":1}},{"name":"color-cyan-50","type":"COLOR","light":{"r":0.9254901960784314,"g":0.996078431372549,"b":1,"a":1},"dark":{"r":0.9254901960784314,"g":0.996078431372549,"b":1,"a":1}},{"name":"color-cyan-500","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"color-cyan-600","type":"COLOR","light":{"r":0,"g":0.5725490196078431,"b":0.7215686274509804,"a":1},"dark":{"r":0,"g":0.5725490196078431,"b":0.7215686274509804,"a":1}},{"name":"color-cyan-700","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"color-cyan-800","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"color-cyan-900","type":"COLOR","light":{"r":0.06274509803921569,"g":0.3058823529411765,"b":0.39215686274509803,"a":1},"dark":{"r":0.06274509803921569,"g":0.3058823529411765,"b":0.39215686274509803,"a":1}},{"name":"color-lime-100","type":"COLOR","light":{"r":0.9254901960784314,"g":0.9882352941176471,"b":0.792156862745098,"a":1},"dark":{"r":0.9254901960784314,"g":0.9882352941176471,"b":0.792156862745098,"a":1}},{"name":"color-lime-200","type":"COLOR","light":{"r":0.8470588235294118,"g":0.9764705882352941,"b":0.6,"a":1},"dark":{"r":0.8470588235294118,"g":0.9764705882352941,"b":0.6,"a":1}},{"name":"color-lime-300","type":"COLOR","light":{"r":0.7333333333333333,"g":0.9568627450980393,"b":0.3176470588235294,"a":1},"dark":{"r":0.7333333333333333,"g":0.9568627450980393,"b":0.3176470588235294,"a":1}},{"name":"color-lime-400","type":"COLOR","light":{"r":0.6039215686274509,"g":0.9019607843137255,"b":0,"a":1},"dark":{"r":0.6039215686274509,"g":0.9019607843137255,"b":0,"a":1}},{"name":"color-lime-500","type":"COLOR","light":{"r":0.48627450980392156,"g":0.8117647058823529,"b":0,"a":1},"dark":{"r":0.48627450980392156,"g":0.8117647058823529,"b":0,"a":1}},{"name":"color-lime-600","type":"COLOR","light":{"r":0.3686274509803922,"g":0.6470588235294118,"b":0,"a":1},"dark":{"r":0.3686274509803922,"g":0.6470588235294118,"b":0,"a":1}},{"name":"color-lime-700","type":"COLOR","light":{"r":0.28627450980392155,"g":0.49019607843137253,"b":0,"a":1},"dark":{"r":0.28627450980392155,"g":0.49019607843137253,"b":0,"a":1}},{"name":"color-lime-800","type":"COLOR","light":{"r":0.23529411764705882,"g":0.38823529411764707,"b":0,"a":1},"dark":{"r":0.23529411764705882,"g":0.38823529411764707,"b":0,"a":1}},{"name":"color-lime-900","type":"COLOR","light":{"r":0.20784313725490197,"g":0.3254901960784314,"b":0.054901960784313725,"a":1},"dark":{"r":0.20784313725490197,"g":0.3254901960784314,"b":0.054901960784313725,"a":1}},{"name":"color-white","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"container-2xl","type":"FLOAT","light":672,"dark":672},{"name":"container-3xl","type":"FLOAT","light":768,"dark":768},{"name":"container-4xl","type":"FLOAT","light":896,"dark":896},{"name":"container-5xl","type":"FLOAT","light":1024,"dark":1024},{"name":"container-6xl","type":"FLOAT","light":1152,"dark":1152},{"name":"container-7xl","type":"FLOAT","light":1280,"dark":1280},{"name":"container-lg","type":"FLOAT","light":512,"dark":512},{"name":"container-md","type":"FLOAT","light":448,"dark":448},{"name":"container-sm","type":"FLOAT","light":384,"dark":384},{"name":"container-xl","type":"FLOAT","light":576,"dark":576},{"name":"container-xs","type":"FLOAT","light":320,"dark":320},{"name":"default-font-family","type":"STRING","light":"var(--font-sans)","dark":"var(--font-sans)"},{"name":"default-mono-font-family","type":"STRING","light":"var(--font-mono)","dark":"var(--font-mono)"},{"name":"default-transition-duration","type":"STRING","light":"150ms","dark":"150ms"},{"name":"default-transition-timing-function","type":"STRING","light":"cubic-bezier(0.4, 0, 0.2, 1)","dark":"cubic-bezier(0.4, 0, 0.2, 1)"},{"name":"drop-shadow-md","type":"STRING","light":"0 3px 3px rgb(0 0 0 / 0.12)","dark":"0 3px 3px rgb(0 0 0 / 0.12)"},{"name":"drop-shadow-sm","type":"STRING","light":"0 1px 2px rgb(0 0 0 / 0.15)","dark":"0 1px 2px rgb(0 0 0 / 0.15)"},{"name":"drop-shadow-xs","type":"STRING","light":"0 1px 1px rgb(0 0 0 / 0.05)","dark":"0 1px 1px rgb(0 0 0 / 0.05)"},{"name":"ease-in-out","type":"STRING","light":"cubic-bezier(0.4, 0, 0.2, 1)","dark":"cubic-bezier(0.4, 0, 0.2, 1)"},{"name":"ease-out","type":"STRING","light":"cubic-bezier(0, 0, 0.2, 1)","dark":"cubic-bezier(0, 0, 0.2, 1)"},{"name":"font-mono","type":"STRING","light":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\",\n      \"Courier New\", monospace","dark":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\",\n      \"Courier New\", monospace"},{"name":"font-sans","type":"STRING","light":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\",\n      \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\n      \"Segoe UI Symbol\", \"Noto Color Emoji\"","dark":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\",\n      \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\n      \"Segoe UI Symbol\", \"Noto Color Emoji\""},{"name":"font-weight-bold","type":"FLOAT","light":700,"dark":700},{"name":"font-weight-medium","type":"FLOAT","light":500,"dark":500},{"name":"font-weight-normal","type":"FLOAT","light":400,"dark":400},{"name":"font-weight-semibold","type":"FLOAT","light":600,"dark":600},{"name":"leading-tight","type":"FLOAT","light":1.25,"dark":1.25},{"name":"radius-lg","type":"FLOAT","light":8,"dark":8},{"name":"radius-md","type":"FLOAT","light":6,"dark":6},{"name":"radius-sm","type":"FLOAT","light":4,"dark":4},{"name":"radius-xs","type":"FLOAT","light":2,"dark":2},{"name":"spacing","type":"FLOAT","light":4,"dark":4},{"name":"text-2xl","type":"FLOAT","light":24,"dark":24},{"name":"text-2xl--line-height","type":"STRING","light":"calc(2 / 1.5)","dark":"calc(2 / 1.5)"},{"name":"text-base","type":"FLOAT","light":16,"dark":16},{"name":"text-base--line-height","type":"STRING","light":"calc(1.5 / 1)","dark":"calc(1.5 / 1)"},{"name":"text-lg","type":"FLOAT","light":18,"dark":18},{"name":"text-lg--line-height","type":"STRING","light":"calc(1.75 / 1.125)","dark":"calc(1.75 / 1.125)"},{"name":"text-sm","type":"FLOAT","light":14,"dark":14},{"name":"text-sm--line-height","type":"STRING","light":"calc(1.25 / 0.875)","dark":"calc(1.25 / 0.875)"},{"name":"text-xl","type":"FLOAT","light":20,"dark":20},{"name":"text-xl--line-height","type":"STRING","light":"calc(1.75 / 1.25)","dark":"calc(1.75 / 1.25)"},{"name":"text-xs","type":"FLOAT","light":12,"dark":12},{"name":"text-xs--line-height","type":"STRING","light":"calc(1 / 0.75)","dark":"calc(1 / 0.75)"},{"name":"imported/alert/label/color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/label/color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/label/color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/label/color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/label/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/alert/label/row-rule-color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/label/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/label/row-rule-color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/label/row-rule-color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/part-0/color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/part-0/color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/part-0/color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/part-0/color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/part-0/row-rule-color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/part-0/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/part-0/row-rule-color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/part-0/row-rule-color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/root/background-color/failure","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1},"dark":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1}},{"name":"imported/alert/root/background-color/info","type":"ALIAS","target":"color-cyan-100"},{"name":"imported/alert/root/background-color/success","type":"COLOR","light":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1},"dark":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1}},{"name":"imported/alert/root/background-color/warning","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1},"dark":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1}},{"name":"imported/alert/root/border-bottom-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-bottom-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-bottom-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-bottom-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/border-left-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-left-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-left-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-left-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/border-right-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-right-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-right-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-right-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/border-top-color/failure","type":"COLOR","light":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.9411764705882353,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"imported/alert/root/border-top-color/info","type":"COLOR","light":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1},"dark":{"r":0,"g":0.7215686274509804,"b":0.8588235294117647,"a":1}},{"name":"imported/alert/root/border-top-color/success","type":"COLOR","light":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1},"dark":{"r":0.054901960784313725,"g":0.6235294117647059,"b":0.43137254901960786,"a":1}},{"name":"imported/alert/root/border-top-color/warning","type":"COLOR","light":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1},"dark":{"r":0.7607843137254902,"g":0.47058823529411764,"b":0.011764705882352941,"a":1}},{"name":"imported/alert/root/color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/root/color/info","type":"ALIAS","target":"color-cyan-700"},{"name":"imported/alert/root/color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/root/color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/alert/root/row-rule-color/failure","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/alert/root/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1},"dark":{"r":0,"g":0.4588235294117647,"b":0.5843137254901961,"a":1}},{"name":"imported/alert/root/row-rule-color/success","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/alert/root/row-rule-color/warning","type":"COLOR","light":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1},"dark":{"r":0.5568627450980392,"g":0.29411764705882354,"b":0.06274509803921569,"a":1}},{"name":"imported/badge/label/color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/label/color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/label/color/info","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"imported/badge/label/color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/label/color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/label/color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/badge/label/font-size/sm","type":"FLOAT","light":14,"dark":14},{"name":"imported/badge/label/font-size/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/badge/label/font-weight","type":"FLOAT","light":600,"dark":600},{"name":"imported/badge/label/line-height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/badge/label/line-height/xs","type":"FLOAT","light":16,"dark":16},{"name":"imported/badge/label/row-rule-color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/label/row-rule-color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/label/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"imported/badge/label/row-rule-color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/label/row-rule-color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/label/row-rule-color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/badge/root/background-color-state-active/failure","type":"COLOR","light":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1},"dark":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1}},{"name":"imported/badge/root/background-color-state-active/indigo","type":"COLOR","light":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1},"dark":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1}},{"name":"imported/badge/root/background-color-state-active/info","type":"COLOR","light":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1},"dark":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1}},{"name":"imported/badge/root/background-color-state-active/pink","type":"COLOR","light":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1},"dark":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1}},{"name":"imported/badge/root/background-color-state-active/success","type":"COLOR","light":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1},"dark":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1}},{"name":"imported/badge/root/background-color-state-active/warning","type":"COLOR","light":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1},"dark":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1}},{"name":"imported/badge/root/background-color-state-hover/failure","type":"COLOR","light":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1},"dark":{"r":0.984313725490196,"g":0.8352941176470589,"b":0.8352941176470589,"a":1}},{"name":"imported/badge/root/background-color-state-hover/indigo","type":"COLOR","light":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1},"dark":{"r":0.803921568627451,"g":0.8588235294117647,"b":0.996078431372549,"a":1}},{"name":"imported/badge/root/background-color-state-hover/info","type":"COLOR","light":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1},"dark":{"r":0.6352941176470588,"g":0.9568627450980393,"b":0.9921568627450981,"a":1}},{"name":"imported/badge/root/background-color-state-hover/pink","type":"COLOR","light":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1},"dark":{"r":0.9803921568627451,"g":0.8196078431372549,"b":0.9098039215686274,"a":1}},{"name":"imported/badge/root/background-color-state-hover/success","type":"COLOR","light":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1},"dark":{"r":0.7372549019607844,"g":0.9411764705882353,"b":0.8549019607843137,"a":1}},{"name":"imported/badge/root/background-color-state-hover/warning","type":"COLOR","light":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1},"dark":{"r":0.9882352941176471,"g":0.9137254901960784,"b":0.41568627450980394,"a":1}},{"name":"imported/badge/root/background-color/failure","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1},"dark":{"r":0.9921568627450981,"g":0.9098039215686274,"b":0.9098039215686274,"a":1}},{"name":"imported/badge/root/background-color/indigo","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9294117647058824,"b":1,"a":1},"dark":{"r":0.8980392156862745,"g":0.9294117647058824,"b":1,"a":1}},{"name":"imported/badge/root/background-color/info","type":"ALIAS","target":"color-cyan-100"},{"name":"imported/badge/root/background-color/pink","type":"COLOR","light":{"r":0.9882352941176471,"g":0.9098039215686274,"b":0.9529411764705882,"a":1},"dark":{"r":0.9882352941176471,"g":0.9098039215686274,"b":0.9529411764705882,"a":1}},{"name":"imported/badge/root/background-color/success","type":"COLOR","light":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1},"dark":{"r":0.8705882352941177,"g":0.9686274509803922,"b":0.9254901960784314,"a":1}},{"name":"imported/badge/root/background-color/warning","type":"COLOR","light":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1},"dark":{"r":0.9921568627450981,"g":0.9647058823529412,"b":0.6980392156862745,"a":1}},{"name":"imported/badge/root/color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/root/color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/root/color/info","type":"ALIAS","target":"color-cyan-800"},{"name":"imported/badge/root/color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/root/color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/root/color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/badge/root/font-size/sm","type":"FLOAT","light":14,"dark":14},{"name":"imported/badge/root/font-size/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/badge/root/font-weight","type":"ALIAS","target":"font-weight-semibold"},{"name":"imported/badge/root/line-height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/badge/root/line-height/xs","type":"FLOAT","light":16,"dark":16},{"name":"imported/badge/root/padding-bottom","type":"FLOAT","light":2,"dark":2},{"name":"imported/badge/root/padding-left","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/padding-right","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/padding-top","type":"FLOAT","light":2,"dark":2},{"name":"imported/badge/root/row-rule-color/failure","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/badge/root/row-rule-color/indigo","type":"COLOR","light":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1},"dark":{"r":0.25882352941176473,"g":0.2196078431372549,"b":0.615686274509804,"a":1}},{"name":"imported/badge/root/row-rule-color/info","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.47058823529411764,"a":1}},{"name":"imported/badge/root/row-rule-color/pink","type":"COLOR","light":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1},"dark":{"r":0.6,"g":0.08235294117647059,"b":0.29411764705882354,"a":1}},{"name":"imported/badge/root/row-rule-color/success","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/badge/root/row-rule-color/warning","type":"COLOR","light":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1},"dark":{"r":0.4470588235294118,"g":0.23137254901960785,"b":0.07450980392156863,"a":1}},{"name":"imported/button/root/background-color-state-active/alternative","type":"COLOR","light":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1},"dark":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1}},{"name":"imported/button/root/background-color-state-active/dark","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/background-color-state-active/default","type":"COLOR","light":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1},"dark":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1}},{"name":"imported/button/root/background-color-state-active/green","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/button/root/background-color-state-active/red","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/button/root/background-color-state-hover/alternative","type":"COLOR","light":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1},"dark":{"r":0.9529411764705882,"g":0.9568627450980393,"b":0.9647058823529412,"a":1}},{"name":"imported/button/root/background-color-state-hover/dark","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/background-color-state-hover/default","type":"COLOR","light":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1},"dark":{"r":0.11764705882352941,"g":0.25882352941176473,"b":0.6235294117647059,"a":1}},{"name":"imported/button/root/background-color-state-hover/green","type":"COLOR","light":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1},"dark":{"r":0.011764705882352941,"g":0.32941176470588235,"b":0.24705882352941178,"a":1}},{"name":"imported/button/root/background-color-state-hover/red","type":"COLOR","light":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1},"dark":{"r":0.6078431372549019,"g":0.10980392156862745,"b":0.10980392156862745,"a":1}},{"name":"imported/button/root/background-color/alternative","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/background-color/dark","type":"COLOR","light":{"r":0.12156862745098039,"g":0.1607843137254902,"b":0.21568627450980393,"a":1},"dark":{"r":0.12156862745098039,"g":0.1607843137254902,"b":0.21568627450980393,"a":1}},{"name":"imported/button/root/background-color/default","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/background-color/green","type":"COLOR","light":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1},"dark":{"r":0.01568627450980392,"g":0.4235294117647059,"b":0.3058823529411765,"a":1}},{"name":"imported/button/root/background-color/red","type":"COLOR","light":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1},"dark":{"r":0.7843137254901961,"g":0.11764705882352941,"b":0.11764705882352941,"a":1}},{"name":"imported/button/root/border-bottom-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-bottom-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-bottom-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-bottom-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-bottom-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-bottom-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-bottom-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-left-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-left-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-left-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-left-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-right-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-right-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-right-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-right-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-color/alternative","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/button/root/border-top-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/border-top-width/alternative","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/border-top-width/dark","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-width/default","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/border-top-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/button/root/box-shadow-state-active/alternative","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/dark","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/default","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/green","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-active/red","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/alternative","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/dark","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/default","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/green","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/box-shadow-state-focus-visible/red","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/button/root/color-state-active/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/color-state-active/dark","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-active/default","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-active/green","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-active/red","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/color-state-hover/dark","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/default","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/green","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color-state-hover/red","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/alternative","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/color/dark","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/default","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/green","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/color/red","type":"ALIAS","target":"color-white"},{"name":"imported/button/root/font-size/lg","type":"FLOAT","light":16,"dark":16},{"name":"imported/button/root/font-size/md","type":"FLOAT","light":14,"dark":14},{"name":"imported/button/root/font-size/sm","type":"FLOAT","light":14,"dark":14},{"name":"imported/button/root/font-size/xl","type":"FLOAT","light":16,"dark":16},{"name":"imported/button/root/font-size/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/font-weight","type":"ALIAS","target":"font-weight-medium"},{"name":"imported/button/root/line-height/lg","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/line-height/md","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/line-height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/line-height/xl","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/line-height/xs","type":"FLOAT","light":16,"dark":16},{"name":"imported/button/root/opacity-state-disabled","type":"FLOAT","light":0.5,"dark":0.5},{"name":"imported/button/root/outline-color-state-active/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/outline-color-state-active/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-active/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-active/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-active/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-focus-visible","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1}},{"name":"imported/button/root/outline-color-state-hover/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/outline-color-state-hover/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-hover/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-hover/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color-state-hover/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/alternative","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/outline-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/outline-width-state-focus-visible","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/padding-left/lg","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-left/md","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-left/sm","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-left/xl","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/padding-left/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-right/lg","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-right/md","type":"FLOAT","light":20,"dark":20},{"name":"imported/button/root/padding-right/sm","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-right/xl","type":"FLOAT","light":24,"dark":24},{"name":"imported/button/root/padding-right/xs","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/row-rule-color-state-active/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-active/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/alternative","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color-state-hover/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/alternative","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/button/root/row-rule-color/dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/default","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/green","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/button/root/row-rule-color/red","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"imported/card/label/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/card/root/background-color","type":"ALIAS","target":"color-white"},{"name":"imported/card/root/box-shadow","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px"},{"name":"imported/shared/color-e5e7eb","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/shared/size-0","type":"FLOAT","light":0,"dark":0},{"name":"imported/shared/size-1","type":"FLOAT","light":1,"dark":1},{"name":"imported/shared/size-14","type":"FLOAT","light":14,"dark":14},{"name":"imported/shared/size-16","type":"FLOAT","light":16,"dark":16},{"name":"imported/shared/size-20","type":"FLOAT","light":20,"dark":20},{"name":"imported/shared/size-24","type":"FLOAT","light":24,"dark":24},{"name":"imported/shared/size-4","type":"FLOAT","light":4,"dark":4},{"name":"imported/shared/size-8","type":"FLOAT","light":8,"dark":8},{"name":"imported/shared/size-9999","type":"FLOAT","light":9999,"dark":9999},{"name":"imported/toggle-switch/label/color","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/toggle-switch/label/font-size","type":"FLOAT","light":14,"dark":14},{"name":"imported/toggle-switch/label/font-weight","type":"ALIAS","target":"font-weight-medium"},{"name":"imported/toggle-switch/label/line-height","type":"FLOAT","light":20,"dark":20},{"name":"imported/toggle-switch/label/margin-left","type":"FLOAT","light":12,"dark":12},{"name":"imported/toggle-switch/label/margin-top","type":"FLOAT","light":2,"dark":2},{"name":"imported/toggle-switch/label/row-rule-color","type":"COLOR","light":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1},"dark":{"r":0.06666666666666667,"g":0.09411764705882353,"b":0.15294117647058825,"a":1}},{"name":"imported/toggle-switch/part-0/background-color/checked","type":"COLOR","light":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1},"dark":{"r":0.10196078431372549,"g":0.33725490196078434,"b":0.8588235294117647,"a":1}},{"name":"imported/toggle-switch/part-0/background-color/unchecked","type":"COLOR","light":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1},"dark":{"r":0.8980392156862745,"g":0.9058823529411765,"b":0.9215686274509803,"a":1}},{"name":"imported/toggle-switch/part-0/box-shadow-state-active","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/toggle-switch/part-0/box-shadow-state-focus-visible","type":"STRING","light":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px","dark":"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"},{"name":"imported/toggle-switch/part-0/height/lg","type":"FLOAT","light":28,"dark":28},{"name":"imported/toggle-switch/part-0/height/md","type":"FLOAT","light":24,"dark":24},{"name":"imported/toggle-switch/part-0/height/sm","type":"FLOAT","light":20,"dark":20},{"name":"imported/toggle-switch/part-0/min-width/lg","type":"FLOAT","light":52,"dark":52},{"name":"imported/toggle-switch/part-0/min-width/md","type":"FLOAT","light":44,"dark":44},{"name":"imported/toggle-switch/part-0/min-width/sm","type":"FLOAT","light":36,"dark":36},{"name":"imported/toggle-switch/part-0/width/lg","type":"FLOAT","light":52,"dark":52},{"name":"imported/toggle-switch/part-0/width/md","type":"FLOAT","light":44,"dark":44},{"name":"imported/toggle-switch/part-0/width/sm","type":"FLOAT","light":36,"dark":36},{"name":"imported/toggle-switch/root/height/lg","type":"FLOAT","light":28,"dark":28},{"name":"imported/toggle-switch/root/height/md","type":"FLOAT","light":24,"dark":24},{"name":"imported/toggle-switch/root/height/sm","type":"FLOAT","light":22,"dark":22},{"name":"imported/toggle-switch/root/outline-color-state-focus-visible","type":"COLOR","light":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1},"dark":{"r":0,"g":0.37254901960784315,"b":0.8,"a":1}},{"name":"imported/toggle-switch/root/outline-width-state-focus-visible","type":"FLOAT","light":1,"dark":1},{"name":"imported/toggle-switch/root/width/lg","type":"FLOAT","light":108.438,"dark":108.438},{"name":"imported/toggle-switch/root/width/md","type":"FLOAT","light":100.438,"dark":100.438},{"name":"imported/toggle-switch/root/width/sm","type":"FLOAT","light":92.4375,"dark":92.4375}];
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 let col = collections.find((c) => c.name === 'Tailwind');
 if (!col) col = figma.variables.createVariableCollection('Tailwind');
@@ -1667,6 +1667,464 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/pink",
               "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      }
+    ],
+    "stateVariants": [
+      {
+        "name": "Color=Info, Size=Xs, State=Active",
+        "row": 0,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Info, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/info",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/info",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Failure, Size=Xs, State=Active",
+        "row": 1,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Failure, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/failure",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/failure",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Success, Size=Xs, State=Active",
+        "row": 2,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Success, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/success",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/success",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Warning, Size=Xs, State=Active",
+        "row": 3,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Warning, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/warning",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/warning",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Indigo, Size=Xs, State=Active",
+        "row": 4,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Indigo, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/indigo",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/indigo",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Pink, Size=Xs, State=Active",
+        "row": 5,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Pink, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/pink",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/pink",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Info, Size=Xs, State=Hover",
+        "row": 0,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Info, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/info",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/info",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Failure, Size=Xs, State=Hover",
+        "row": 1,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Failure, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/failure",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/failure",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Success, Size=Xs, State=Hover",
+        "row": 2,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Success, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/success",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/success",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Warning, Size=Xs, State=Hover",
+        "row": 3,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Warning, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/warning",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/warning",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Indigo, Size=Xs, State=Hover",
+        "row": 4,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Indigo, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/indigo",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/indigo",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Pink, Size=Xs, State=Hover",
+        "row": 5,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Pink, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/pink",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/pink",
+              "lineHeight": 16,
               "contentProp": "Content"
             }
           ]
@@ -3620,6 +4078,1403 @@ const COMPONENTS = [
         }
       }
     ],
+    "stateVariants": [
+      {
+        "name": "Color=Default, Size=Md, State=Disabled",
+        "row": 0,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/default",
+          "stroke": "imported/button/root/border-top-color/default",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Disabled",
+        "row": 1,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/alternative",
+          "stroke": "imported/button/root/border-top-color/alternative",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Disabled",
+        "row": 2,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/dark",
+          "stroke": "imported/button/root/border-top-color/dark",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Disabled",
+        "row": 3,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/green",
+          "stroke": "imported/button/root/border-top-color/green",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Disabled",
+        "row": 4,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/red",
+          "stroke": "imported/button/root/border-top-color/red",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Active",
+        "row": 0,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/default",
+          "stroke": "imported/button/root/border-top-color/default",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6431372549019608,
+                "g": 0.792156862745098,
+                "b": 0.996078431372549,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Active",
+        "row": 1,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/alternative",
+          "stroke": "imported/button/root/border-top-color/alternative",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9529411764705882,
+                "g": 0.9568627450980393,
+                "b": 0.9647058823529412,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Active",
+        "row": 2,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/dark",
+          "stroke": "imported/button/root/border-top-color/dark",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.8196078431372549,
+                "g": 0.8352941176470589,
+                "b": 0.8588235294117647,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Active",
+        "row": 3,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/green",
+          "stroke": "imported/button/root/border-top-color/green",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.5176470588235295,
+                "g": 0.8823529411764706,
+                "b": 0.7372549019607844,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Active",
+        "row": 4,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/red",
+          "stroke": "imported/button/root/border-top-color/red",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9725490196078431,
+                "g": 0.7058823529411765,
+                "b": 0.7058823529411765,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Focus Visible",
+        "row": 0,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/default",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6431372549019608,
+                "g": 0.792156862745098,
+                "b": 0.996078431372549,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Focus Visible",
+        "row": 1,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/alternative",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9529411764705882,
+                "g": 0.9568627450980393,
+                "b": 0.9647058823529412,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Focus Visible",
+        "row": 2,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/dark",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.8196078431372549,
+                "g": 0.8352941176470589,
+                "b": 0.8588235294117647,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Focus Visible",
+        "row": 3,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/green",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.5176470588235295,
+                "g": 0.8823529411764706,
+                "b": 0.7372549019607844,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Focus Visible",
+        "row": 4,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/red",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9725490196078431,
+                "g": 0.7058823529411765,
+                "b": 0.7058823529411765,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Hover",
+        "row": 0,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/default",
+          "stroke": "imported/button/root/border-top-color/default",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Hover",
+        "row": 1,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/alternative",
+          "stroke": "imported/button/root/border-top-color/alternative",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Hover",
+        "row": 2,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/dark",
+          "stroke": "imported/button/root/border-top-color/dark",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Hover",
+        "row": 3,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/green",
+          "stroke": "imported/button/root/border-top-color/green",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Hover",
+        "row": 4,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/red",
+          "stroke": "imported/button/root/border-top-color/red",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -3835,7 +5690,19 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
+    node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -3910,7 +5777,7 @@ async function buildNode(spec, registry) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
@@ -3956,6 +5823,8 @@ async function buildNode(spec, registry) {
     applyFrameSpec(node, spec);
   }
   node.name = spec.name;
+  // Node opacity (dump v1.2 channel): applies to every node kind.
+  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
@@ -5654,12 +7523,12 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Sizing=Md",
+        "name": "Sizing=Md, Checked=Unchecked",
         "row": 0,
         "col": 0,
         "spec": {
           "type": "root",
-          "name": "Sizing=Md",
+          "name": "Sizing=Md, Checked=Unchecked",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
@@ -5670,7 +7539,8 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
             "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8"
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
           },
           "fixedHeight": {
             "px": 24,
@@ -5682,21 +7552,6 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
-              "name": "label",
-              "margins": {
-                "left": 12,
-                "top": 2
-              },
-              "characters": "Toggle",
-              "fontSize": 14,
-              "fontStyle": "Medium",
-              "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
-              "contentProp": "Label",
-              "fillW": true
-            },
-            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -5704,7 +7559,6 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/toggle-switch/part-0/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-9999",
                 "bottomRightRadius": "imported/shared/size-9999",
@@ -5712,6 +7566,7 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-9999",
                 "minWidth": "imported/toggle-switch/part-0/min-width/md"
               },
+              "fill": "imported/toggle-switch/part-0/background-color/unchecked",
               "fixedHeight": {
                 "px": 24,
                 "varName": "imported/toggle-switch/part-0/height/md"
@@ -5721,17 +7576,31 @@ const COMPONENTS = [
                 "varName": "imported/toggle-switch/part-0/width/md"
               },
               "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
             }
           ]
         }
       },
       {
-        "name": "Sizing=Sm",
-        "row": 1,
-        "col": 0,
+        "name": "Sizing=Md, Checked=Checked",
+        "row": 0,
+        "col": 1,
         "spec": {
           "type": "root",
-          "name": "Sizing=Sm",
+          "name": "Sizing=Md, Checked=Checked",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
@@ -5742,7 +7611,80 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
             "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8"
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
+          },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/toggle-switch/root/height/md"
+          },
+          "fixedWidth": {
+            "px": 100.438,
+            "varName": "imported/toggle-switch/root/width/md"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-9999",
+                "bottomRightRadius": "imported/shared/size-9999",
+                "topLeftRadius": "imported/shared/size-9999",
+                "topRightRadius": "imported/shared/size-9999",
+                "minWidth": "imported/toggle-switch/part-0/min-width/md"
+              },
+              "fill": "imported/toggle-switch/part-0/background-color/checked",
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/toggle-switch/part-0/height/md"
+              },
+              "fixedWidth": {
+                "px": 44,
+                "varName": "imported/toggle-switch/part-0/width/md"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Sizing=Sm, Checked=Unchecked",
+        "row": 1,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Sizing=Sm, Checked=Unchecked",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
           },
           "fixedHeight": {
             "px": 22,
@@ -5754,21 +7696,6 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
-              "name": "label",
-              "margins": {
-                "left": 12,
-                "top": 2
-              },
-              "characters": "Toggle",
-              "fontSize": 14,
-              "fontStyle": "Medium",
-              "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
-              "contentProp": "Label",
-              "fillW": true
-            },
-            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -5776,7 +7703,6 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/toggle-switch/part-0/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-9999",
                 "bottomRightRadius": "imported/shared/size-9999",
@@ -5784,6 +7710,7 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-9999",
                 "minWidth": "imported/toggle-switch/part-0/min-width/sm"
               },
+              "fill": "imported/toggle-switch/part-0/background-color/unchecked",
               "fixedHeight": {
                 "px": 20,
                 "varName": "imported/toggle-switch/part-0/height/sm"
@@ -5793,17 +7720,31 @@ const COMPONENTS = [
                 "varName": "imported/toggle-switch/part-0/width/sm"
               },
               "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
             }
           ]
         }
       },
       {
-        "name": "Sizing=Lg",
-        "row": 2,
-        "col": 0,
+        "name": "Sizing=Sm, Checked=Checked",
+        "row": 1,
+        "col": 1,
         "spec": {
           "type": "root",
-          "name": "Sizing=Lg",
+          "name": "Sizing=Sm, Checked=Checked",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
@@ -5814,7 +7755,80 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
             "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8"
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
+          },
+          "fixedHeight": {
+            "px": 22,
+            "varName": "imported/toggle-switch/root/height/sm"
+          },
+          "fixedWidth": {
+            "px": 92.4375,
+            "varName": "imported/toggle-switch/root/width/sm"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-9999",
+                "bottomRightRadius": "imported/shared/size-9999",
+                "topLeftRadius": "imported/shared/size-9999",
+                "topRightRadius": "imported/shared/size-9999",
+                "minWidth": "imported/toggle-switch/part-0/min-width/sm"
+              },
+              "fill": "imported/toggle-switch/part-0/background-color/checked",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/toggle-switch/part-0/height/sm"
+              },
+              "fixedWidth": {
+                "px": 36,
+                "varName": "imported/toggle-switch/part-0/width/sm"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Sizing=Lg, Checked=Unchecked",
+        "row": 2,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Sizing=Lg, Checked=Unchecked",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
           },
           "fixedHeight": {
             "px": 28,
@@ -5826,21 +7840,6 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
-              "name": "label",
-              "margins": {
-                "left": 12,
-                "top": 2
-              },
-              "characters": "Toggle",
-              "fontSize": 14,
-              "fontStyle": "Medium",
-              "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
-              "contentProp": "Label",
-              "fillW": true
-            },
-            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -5848,7 +7847,6 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/toggle-switch/part-0/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-9999",
                 "bottomRightRadius": "imported/shared/size-9999",
@@ -5856,6 +7854,7 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-9999",
                 "minWidth": "imported/toggle-switch/part-0/min-width/lg"
               },
+              "fill": "imported/toggle-switch/part-0/background-color/unchecked",
               "fixedHeight": {
                 "px": 28,
                 "varName": "imported/toggle-switch/part-0/height/lg"
@@ -5865,6 +7864,92 @@ const COMPONENTS = [
                 "varName": "imported/toggle-switch/part-0/width/lg"
               },
               "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Sizing=Lg, Checked=Checked",
+        "row": 2,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Sizing=Lg, Checked=Checked",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/toggle-switch/root/height/lg"
+          },
+          "fixedWidth": {
+            "px": 108.438,
+            "varName": "imported/toggle-switch/root/width/lg"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-9999",
+                "bottomRightRadius": "imported/shared/size-9999",
+                "topLeftRadius": "imported/shared/size-9999",
+                "topRightRadius": "imported/shared/size-9999",
+                "minWidth": "imported/toggle-switch/part-0/min-width/lg"
+              },
+              "fill": "imported/toggle-switch/part-0/background-color/checked",
+              "fixedHeight": {
+                "px": 28,
+                "varName": "imported/toggle-switch/part-0/height/lg"
+              },
+              "fixedWidth": {
+                "px": 52,
+                "varName": "imported/toggle-switch/part-0/width/lg"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
             }
           ]
         }

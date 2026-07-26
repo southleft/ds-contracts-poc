@@ -1,6 +1,6 @@
 {
-  "passed": 152,
-  "total": 152,
+  "passed": 153,
+  "total": 153,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -750,6 +750,11 @@
     {
       "id": "astryx-figma-genesis",
       "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "checked-axis-projection",
+      "claim": "C5-extraction",
       "pass": true
     },
     {

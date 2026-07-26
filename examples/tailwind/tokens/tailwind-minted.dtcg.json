@@ -1155,8 +1155,14 @@
       },
       "part-0": {
         "background-color": {
-          "$value": "#e5e7eb",
-          "$type": "color"
+          "unchecked": {
+            "$value": "#e5e7eb",
+            "$type": "color"
+          },
+          "checked": {
+            "$value": "#1a56db",
+            "$type": "color"
+          }
         },
         "height": {
           "sm": {
@@ -1203,10 +1209,6 @@
         "box-shadow-state-active": {
           "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
           "$type": "shadow"
-        },
-        "background-color-state-checked": {
-          "$value": "#1a56db",
-          "$type": "color"
         },
         "box-shadow-state-focus-visible": {
           "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",

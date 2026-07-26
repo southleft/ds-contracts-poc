@@ -15,7 +15,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Page } from 'playwright-core';
-import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import { ContractSchema, CONTRACT_STATES, type Contract } from '../../scripts/contract-schema.js';
 import { DRAFT_MARKER_KEY, draftRefusalMessage } from '../draft-capture-config.js';
 import {
   enumerate,
@@ -249,6 +249,23 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
     for (const cs of walkChildSpecs(c.childrenSpec)) {
       if (cs.children && cs.text !== undefined) {
         throw new Error(`${c.name}: childrenSpec node "${cs.importName}" carries BOTH text and children — mutually exclusive (a node is a text leaf or a composition)`);
+      }
+    }
+    // STATE-PLANE PROJECTION round: `stateProps[].state` is a CLOSED
+    // vocabulary (CONTRACT_STATES) and JSON is cast, never checked — so the
+    // TypeScript annotation on StateAxisSpec protected nothing. An
+    // out-of-vocabulary state (MUI Switch declared `checked`) minted channel
+    // names `<channel>-state-checked` that the mint-property parser could
+    // not re-read and that NO emitter rendered: the values were captured,
+    // minted into the DTCG tree, and dropped on the floor SILENTLY. Refuse
+    // by name at load — a prop-selected rendering is a VARIANT AXIS
+    // (`axes` + `axisValueMap`), not a pseudo-class plane.
+    for (const s of c.stateProps ?? []) {
+      if (!(CONTRACT_STATES as readonly string[]).includes(s.state)) {
+        throw new Error(
+          `${c.name}: stateProps "${s.prop}" declares state "${s.state}", which is outside the closed contract state vocabulary (${CONTRACT_STATES.join(', ')}). ` +
+            `A state is a PSEUDO-CLASS plane the same instance takes without a prop changing; a rendering a prop selects is a VARIANT AXIS — model it in "axes" with an "axisValueMap" (see Checkbox/Switch).`,
+        );
       }
     }
   }

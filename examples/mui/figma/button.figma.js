@@ -3591,6 +3591,655 @@ const COMPONENTS = [
         }
       }
     ],
+    "stateVariants": [
+      {
+        "name": "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
+        "row": 0,
+        "col": 21,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color-state-disabled/text",
+          "stroke": "imported/button/root/border-top-color/text/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/text/medium",
+            "paddingLeft": "imported/button/root/padding-left/text/medium",
+            "paddingRight": "imported/button/root/padding-right/text/medium",
+            "paddingTop": "imported/button/root/padding-top/text/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/text",
+            "strokeLeftWeight": "imported/button/root/border-left-width/text",
+            "strokeRightWeight": "imported/button/root/border-right-width/text",
+            "strokeTopWeight": "imported/button/root/border-top-width/text"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-disabled",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
+        "row": 1,
+        "col": 21,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color-state-disabled/contained",
+          "stroke": "imported/button/root/border-top-color/contained/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/contained/medium",
+            "paddingLeft": "imported/button/root/padding-left/contained/medium",
+            "paddingRight": "imported/button/root/padding-right/contained/medium",
+            "paddingTop": "imported/button/root/padding-top/contained/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/contained",
+            "strokeLeftWeight": "imported/button/root/border-left-width/contained",
+            "strokeRightWeight": "imported/button/root/border-right-width/contained",
+            "strokeTopWeight": "imported/button/root/border-top-width/contained"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-disabled",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled",
+        "row": 2,
+        "col": 21,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color-state-disabled/outlined",
+          "stroke": "imported/button/root/border-top-color/outlined/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/outlined/medium",
+            "paddingLeft": "imported/button/root/padding-left/outlined/medium",
+            "paddingRight": "imported/button/root/padding-right/outlined/medium",
+            "paddingTop": "imported/button/root/padding-top/outlined/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/outlined",
+            "strokeLeftWeight": "imported/button/root/border-left-width/outlined",
+            "strokeRightWeight": "imported/button/root/border-right-width/outlined",
+            "strokeTopWeight": "imported/button/root/border-top-width/outlined"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-disabled",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Text, Color=Primary, Size=Medium, State=Active",
+        "row": 0,
+        "col": 22,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Text, Color=Primary, Size=Medium, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/text/primary",
+          "stroke": "imported/button/root/border-top-color/text/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/text/medium",
+            "paddingLeft": "imported/button/root/padding-left/text/medium",
+            "paddingRight": "imported/button/root/padding-right/text/medium",
+            "paddingTop": "imported/button/root/padding-top/text/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/text",
+            "strokeLeftWeight": "imported/button/root/border-left-width/text",
+            "strokeRightWeight": "imported/button/root/border-right-width/text",
+            "strokeTopWeight": "imported/button/root/border-top-width/text"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/text/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Contained, Color=Primary, Size=Medium, State=Active",
+        "row": 1,
+        "col": 22,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Contained, Color=Primary, Size=Medium, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/contained/primary",
+          "stroke": "imported/button/root/border-top-color/contained/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/contained/medium",
+            "paddingLeft": "imported/button/root/padding-left/contained/medium",
+            "paddingRight": "imported/button/root/padding-right/contained/medium",
+            "paddingTop": "imported/button/root/padding-top/contained/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/contained",
+            "strokeLeftWeight": "imported/button/root/border-left-width/contained",
+            "strokeRightWeight": "imported/button/root/border-right-width/contained",
+            "strokeTopWeight": "imported/button/root/border-top-width/contained"
+          },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 5,
+              "radius": 5,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.2
+              },
+              "spread": -3
+            },
+            {
+              "x": 0,
+              "y": 8,
+              "radius": 10,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.14
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 3,
+              "radius": 14,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.12
+              },
+              "spread": 2
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/contained/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Active",
+        "row": 2,
+        "col": 22,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/outlined/primary",
+          "stroke": "imported/button/root/border-top-color/outlined/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/outlined/medium",
+            "paddingLeft": "imported/button/root/padding-left/outlined/medium",
+            "paddingRight": "imported/button/root/padding-right/outlined/medium",
+            "paddingTop": "imported/button/root/padding-top/outlined/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/outlined",
+            "strokeLeftWeight": "imported/button/root/border-left-width/outlined",
+            "strokeRightWeight": "imported/button/root/border-right-width/outlined",
+            "strokeTopWeight": "imported/button/root/border-top-width/outlined"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/outlined/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Text, Color=Primary, Size=Medium, State=Focus Visible",
+        "row": 0,
+        "col": 23,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Text, Color=Primary, Size=Medium, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/text/primary",
+          "stroke": "imported/button/root/border-top-color/text/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/text/medium",
+            "paddingLeft": "imported/button/root/padding-left/text/medium",
+            "paddingRight": "imported/button/root/padding-right/text/medium",
+            "paddingTop": "imported/button/root/padding-top/text/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/text",
+            "strokeLeftWeight": "imported/button/root/border-left-width/text",
+            "strokeRightWeight": "imported/button/root/border-right-width/text",
+            "strokeTopWeight": "imported/button/root/border-top-width/text"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/text/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Contained, Color=Primary, Size=Medium, State=Focus Visible",
+        "row": 1,
+        "col": 23,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Contained, Color=Primary, Size=Medium, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/contained/primary",
+          "stroke": "imported/button/root/border-top-color/contained/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/contained/medium",
+            "paddingLeft": "imported/button/root/padding-left/contained/medium",
+            "paddingRight": "imported/button/root/padding-right/contained/medium",
+            "paddingTop": "imported/button/root/padding-top/contained/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/contained",
+            "strokeLeftWeight": "imported/button/root/border-left-width/contained",
+            "strokeRightWeight": "imported/button/root/border-right-width/contained",
+            "strokeTopWeight": "imported/button/root/border-top-width/contained"
+          },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 3,
+              "radius": 5,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.2
+              },
+              "spread": -1
+            },
+            {
+              "x": 0,
+              "y": 6,
+              "radius": 10,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.14
+              }
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 18,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.12
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/contained/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Focus Visible",
+        "row": 2,
+        "col": 23,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/outlined/primary",
+          "stroke": "imported/button/root/border-top-color/outlined/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/outlined/medium",
+            "paddingLeft": "imported/button/root/padding-left/outlined/medium",
+            "paddingRight": "imported/button/root/padding-right/outlined/medium",
+            "paddingTop": "imported/button/root/padding-top/outlined/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/outlined",
+            "strokeLeftWeight": "imported/button/root/border-left-width/outlined",
+            "strokeRightWeight": "imported/button/root/border-right-width/outlined",
+            "strokeTopWeight": "imported/button/root/border-top-width/outlined"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/outlined/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Text, Color=Primary, Size=Medium, State=Hover",
+        "row": 0,
+        "col": 24,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Text, Color=Primary, Size=Medium, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/text/primary",
+          "stroke": "imported/button/root/border-top-color/text/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/text/medium",
+            "paddingLeft": "imported/button/root/padding-left/text/medium",
+            "paddingRight": "imported/button/root/padding-right/text/medium",
+            "paddingTop": "imported/button/root/padding-top/text/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/text",
+            "strokeLeftWeight": "imported/button/root/border-left-width/text",
+            "strokeRightWeight": "imported/button/root/border-right-width/text",
+            "strokeTopWeight": "imported/button/root/border-top-width/text"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/text/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Contained, Color=Primary, Size=Medium, State=Hover",
+        "row": 1,
+        "col": 24,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Contained, Color=Primary, Size=Medium, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/contained/primary",
+          "stroke": "imported/button/root/border-top-color/contained/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/contained/medium",
+            "paddingLeft": "imported/button/root/padding-left/contained/medium",
+            "paddingRight": "imported/button/root/padding-right/contained/medium",
+            "paddingTop": "imported/button/root/padding-top/contained/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/contained",
+            "strokeLeftWeight": "imported/button/root/border-left-width/contained",
+            "strokeRightWeight": "imported/button/root/border-right-width/contained",
+            "strokeTopWeight": "imported/button/root/border-top-width/contained"
+          },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 2,
+              "radius": 4,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.2
+              },
+              "spread": -1
+            },
+            {
+              "x": 0,
+              "y": 4,
+              "radius": 5,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.14
+              }
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 10,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.12
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/contained/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Hover",
+        "row": 2,
+        "col": 24,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Outlined, Color=Primary, Size=Medium, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/button/root/background-color/outlined/primary",
+          "stroke": "imported/button/root/border-top-color/outlined/primary",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "minWidth": "imported/button/root/min-width",
+            "paddingBottom": "imported/button/root/padding-bottom/outlined/medium",
+            "paddingLeft": "imported/button/root/padding-left/outlined/medium",
+            "paddingRight": "imported/button/root/padding-right/outlined/medium",
+            "paddingTop": "imported/button/root/padding-top/outlined/medium",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/outlined",
+            "strokeLeftWeight": "imported/button/root/border-left-width/outlined",
+            "strokeRightWeight": "imported/button/root/border-right-width/outlined",
+            "strokeTopWeight": "imported/button/root/border-top-width/outlined"
+          },
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/outlined/primary",
+              "textCase": "UPPER",
+              "fontFamily": "Roboto",
+              "contentProp": "Label"
+            }
+          ]
+        }
+      }
+    ],
     "colW": 380
   }
 ];

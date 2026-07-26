@@ -56,12 +56,13 @@
       "axes": ["color"]
     },
     {
+      "__note": "STATE-PLANE PROJECTION ROUND — `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (same class as MUI Switch). It is a prop-selected rendering, not a pseudo-class plane, and it was outside the closed state vocabulary — its captured track-color delta minted `background-color-state-checked`, a name nothing re-read and no emitter rendered.",
       "name": "ToggleSwitch",
       "importName": "ToggleSwitch",
       "contract": "examples/tailwind/contracts-seed/toggleswitch.contract.json",
       "sampleText": "",
-      "axes": ["sizing"],
-      "stateProps": [{ "prop": "checked", "state": "checked" }],
+      "axes": ["sizing", "checked"],
+      "axisValueMap": { "checked": { "unchecked": false, "checked": true } },
       "fixedProps": { "label": "Toggle" },
       "callbackProps": ["onChange"]
     }

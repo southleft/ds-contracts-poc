@@ -197,7 +197,7 @@ type Classified =
 const pairKey = (a: string, b: string) => `${a}.${b}`;
 const comboKey = (values: string[]) => values.join('.');
 
-function classify(obs: MintObservation, axes: MintAxis[]): Classified {
+function classify(obs: MintObservation, axes: MintAxis[], nestedPairs: boolean): Classified {
   if (obs.occurrences.length === 0) return { kind: 'none', reason: 'no occurrences observed — nothing minted' };
   const values = obs.occurrences.map((o) => o.value);
   if (values.every((v) => v === values[0])) return { kind: 'uniform', value: values[0] };
@@ -218,13 +218,35 @@ function classify(obs: MintObservation, axes: MintAxis[]): Classified {
       return { kind: 'variant', axis, byValue };
     }
   }
-  // Two-axis correlation — ROOT tokens only (the emitters render a
-  // two-placeholder ref as compound enum classes on the root; nested parts
-  // support a single substitution, so a nested two-axis value stays a named
-  // refusal). Axis order = discovery order, deterministic; every combination
-  // of the two axes' values must be observed with a single value — the
-  // emitters expand a two-placeholder root ref over the full cartesian.
-  if (obs.part !== '') {
+  // Two-axis correlation. Axis order = discovery order, deterministic; every
+  // combination of the two axes' values must be observed with a single value.
+  //
+  // ROOT parts carry the pair as ONE two-placeholder ref (the emitters render
+  // it as compound enum classes). NESTED parts carry it as a per-value
+  // tokensByProp map on one axis whose refs keep the OTHER axis's
+  // placeholder — the already-reviewed S2 capability lift (validateContract:
+  // "a per-value map ref may carry AT MOST ONE placeholder naming a DIFFERENT
+  // declared enum prop"), which the pair-with-unset branch of
+  // applyMintToContract has used since the computed-capture floor.
+  //
+  // STATE-PLANE PROJECTION round: this classifier used to refuse EVERY
+  // nested two-axis value outright. That refusal was invisible while
+  // prop-selected renderings hid inside the state-suffix channel (MUI
+  // Switch's checked track color was f(color, checked) smuggled through
+  // `background-color-state-checked`); reclassifying `checked` to a real
+  // axis surfaced it — and would have DROPPED the unchecked track colour the
+  // canvas used to draw. The pair fit itself was always sound; only the
+  // carriage was missing, and it already existed one layer down.
+  //
+  // OPT-IN, and deliberately so: a nested pair is returned ONLY to a caller
+  // that declares `nestedPairs` — i.e. one whose binding placer can spell a
+  // per-value map. `extract/computed`'s `applyMintToContract` can; the
+  // DESIGN path (`core/propose-figma.ts`) binds `part.tokens` directly and
+  // would emit a two-placeholder ref onto a nested part, which the referee
+  // refuses by name. Handing a consumer a ref it cannot carry IS the bug
+  // this round is about, so the classifier never offers one.
+  const pairsAllowed = obs.part === '' || nestedPairs;
+  if (!pairsAllowed) {
     return {
       kind: 'none',
       reason: 'resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually',
@@ -250,9 +272,19 @@ function classify(obs: MintObservation, axes: MintAxis[]): Classified {
     }
   }
   // Three-axis correlation (live-gauntlet class ① — CBDS Chip's root fill is
-  // f(type, style, state), irreducible to any pair): same rules as the pair
-  // case — ROOT tokens only, discovery order, full cartesian coverage with a
-  // single value per combination. The emitters expand a three-placeholder
+  // f(type, style, state), irreducible to any pair). ROOT ONLY, and it stays
+  // root-only: a nested part's per-value map pins exactly ONE axis, leaving
+  // TWO placeholders in the ref — past the one-placeholder map rule. A
+  // nested triple is a named refusal.
+  if (obs.part !== '') {
+    return {
+      kind: 'none',
+      reason:
+        'resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually',
+    };
+  }
+  // Otherwise: same rules as the pair case — discovery order, full cartesian
+  // coverage with a single value per combination. The emitters expand a three-placeholder
   // root ref as compound enum classes (.type-brand.style-fill.state-hover);
   // the cartesian is bounded by the drawn variant count (every combination
   // must be OBSERVED), so no cap is invented. A contradiction on any third
@@ -295,13 +327,24 @@ function classify(obs: MintObservation, axes: MintAxis[]): Classified {
 // mintTokens
 // ---------------------------------------------------------------------------
 
+/** Options for {@link mintTokens}. */
+export interface MintOptions {
+  /** Allow TWO-AXIS classification on NESTED parts (default false). Set it
+   *  only when the caller's binding placer can spell a nested pair — a
+   *  per-value `tokensByProp` map whose refs keep ONE placeholder naming the
+   *  other axis. `extract/computed`'s `applyMintToContract` can; the design
+   *  path's direct `part.tokens` write cannot. */
+  nestedPairs?: boolean;
+}
+
 export function mintTokens(
   component: string,
   observations: MintObservation[],
   axes: MintAxis[],
+  opts?: MintOptions,
 ): MintResult {
   const comp = sanitizeSegment(component);
-  const classified = observations.map((o) => classify(o, axes));
+  const classified = observations.map((o) => classify(o, axes, opts?.nestedPairs === true));
 
   // Dedupe count: identical (kind, value) across UNIFORM usage sites.
   const siteCount = new Map<string, number>();

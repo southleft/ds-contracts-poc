@@ -1,21 +1,21 @@
 [
   {
-    "key": "sm.no-checked__default",
+    "key": "sm.unchecked__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "sm.no-checked__hover",
+    "key": "sm.unchecked__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "sm.no-checked__focus-visible",
+    "key": "sm.unchecked__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "sm.no-checked__active",
+    "key": "sm.unchecked__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -40,22 +40,22 @@
     "pctAA": 0
   },
   {
-    "key": "md.no-checked__default",
+    "key": "md.unchecked__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "md.no-checked__hover",
+    "key": "md.unchecked__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "md.no-checked__focus-visible",
+    "key": "md.unchecked__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "md.no-checked__active",
+    "key": "md.unchecked__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -80,22 +80,22 @@
     "pctAA": 0
   },
   {
-    "key": "lg.no-checked__default",
+    "key": "lg.unchecked__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "lg.no-checked__hover",
+    "key": "lg.unchecked__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "lg.no-checked__focus-visible",
+    "key": "lg.unchecked__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "lg.no-checked__active",
+    "key": "lg.unchecked__active",
     "pctExact": 0,
     "pctAA": 0
   },

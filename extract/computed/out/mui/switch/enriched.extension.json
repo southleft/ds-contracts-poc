@@ -14,10 +14,6 @@
           "$value": "0",
           "$type": "number"
         },
-        "color-ffffff": {
-          "$value": "#ffffff",
-          "$type": "color"
-        },
         "color-00000000": {
           "$value": "#00000000",
           "$type": "color"
@@ -29,10 +25,6 @@
         "size-7": {
           "$value": "7px",
           "$type": "dimension"
-        },
-        "color-f5f5f5": {
-          "$value": "#f5f5f5",
-          "$type": "color"
         },
         "color-545454": {
           "$value": "#545454",
@@ -143,6 +135,78 @@
               "$type": "dimension"
             }
           },
+          "color": {
+            "primary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d2",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d1",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
           "height": {
             "small": {
               "$value": "24px",
@@ -203,6 +267,78 @@
               "$type": "dimension"
             }
           },
+          "row-rule-color": {
+            "primary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d2",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d1",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
           "width": {
             "small": {
               "$value": "24px",
@@ -218,72 +354,292 @@
             "$type": "number"
           },
           "background-color-state-active": {
-            "$value": "#0000000a",
-            "$type": "color"
-          },
-          "color-state-checked": {
             "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d20a",
+                "$type": "color"
+              }
             },
             "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b00a",
+                "$type": "color"
+              }
             },
             "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f0a",
+                "$type": "color"
+              }
             },
             "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c020a",
+                "$type": "color"
+              }
             },
             "info": {
-              "$value": "#0288d1",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d10a",
+                "$type": "color"
+              }
             },
             "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d320a",
+                "$type": "color"
+              }
             },
             "default": {
-              "$value": "#ffffff",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              }
             }
           },
-          "row-rule-color-state-checked": {
+          "color-state-disabled": {
             "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#a7caed",
+                "$type": "color"
+              }
             },
             "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d9ace0",
+                "$type": "color"
+              }
             },
             "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#eeafaf",
+                "$type": "color"
+              }
             },
             "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f8c79e",
+                "$type": "color"
+              }
             },
             "info": {
-              "$value": "#0288d1",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9ed1ed",
+                "$type": "color"
+              }
             },
             "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#afcdb1",
+                "$type": "color"
+              }
             },
             "default": {
-              "$value": "#ffffff",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
+            }
+          },
+          "row-rule-color-state-disabled": {
+            "primary": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#a7caed",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d9ace0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#eeafaf",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f8c79e",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9ed1ed",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#afcdb1",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
             }
           },
           "background-color-state-hover": {
-            "$value": "#0000000a",
-            "$type": "color"
+            "primary": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d20a",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b00a",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f0a",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c020a",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d10a",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d320a",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0000000a",
+                "$type": "color"
+              }
+            }
           }
         },
         "switch-input": {
@@ -349,6 +705,78 @@
           }
         },
         "switch-thumb": {
+          "background-color": {
+            "primary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d2",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d1",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
           "border-bottom-left-radius": {
             "small": {
               "$value": "8px",
@@ -393,6 +821,78 @@
             "$value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
             "$type": "shadow"
           },
+          "color": {
+            "primary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d2",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d1",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
           "height": {
             "small": {
               "$value": "16px",
@@ -401,6 +901,78 @@
             "medium": {
               "$value": "20px",
               "$type": "dimension"
+            }
+          },
+          "row-rule-color": {
+            "primary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d2",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d1",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
             }
           },
           "width": {
@@ -413,101 +985,295 @@
               "$type": "dimension"
             }
           },
-          "background-color-state-checked": {
+          "background-color-state-disabled": {
             "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#a7caed",
+                "$type": "color"
+              }
             },
             "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d9ace0",
+                "$type": "color"
+              }
             },
             "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#eeafaf",
+                "$type": "color"
+              }
             },
             "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f8c79e",
+                "$type": "color"
+              }
             },
             "info": {
-              "$value": "#0288d1",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9ed1ed",
+                "$type": "color"
+              }
             },
             "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#afcdb1",
+                "$type": "color"
+              }
             },
             "default": {
-              "$value": "#ffffff",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
             }
           },
-          "color-state-checked": {
+          "color-state-disabled": {
             "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#a7caed",
+                "$type": "color"
+              }
             },
             "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d9ace0",
+                "$type": "color"
+              }
             },
             "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#eeafaf",
+                "$type": "color"
+              }
             },
             "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f8c79e",
+                "$type": "color"
+              }
             },
             "info": {
-              "$value": "#0288d1",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9ed1ed",
+                "$type": "color"
+              }
             },
             "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#afcdb1",
+                "$type": "color"
+              }
             },
             "default": {
-              "$value": "#ffffff",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
             }
           },
-          "row-rule-color-state-checked": {
+          "row-rule-color-state-disabled": {
             "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#a7caed",
+                "$type": "color"
+              }
             },
             "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d9ace0",
+                "$type": "color"
+              }
             },
             "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#eeafaf",
+                "$type": "color"
+              }
             },
             "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f8c79e",
+                "$type": "color"
+              }
             },
             "info": {
-              "$value": "#0288d1",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9ed1ed",
+                "$type": "color"
+              }
             },
             "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#afcdb1",
+                "$type": "color"
+              }
             },
             "default": {
-              "$value": "#ffffff",
-              "$type": "color"
+              "unchecked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              }
             }
           }
         },
         "switch-track": {
           "background-color": {
-            "$value": "#000000",
-            "$type": "color"
+            "primary": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#1976d2",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#0288d1",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              }
+            },
+            "default": {
+              "unchecked": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
           },
           "height": {
             "small": {
@@ -520,8 +1286,14 @@
             }
           },
           "opacity": {
-            "$value": "0.38",
-            "$type": "number"
+            "unchecked": {
+              "$value": "0.38",
+              "$type": "number"
+            },
+            "checked": {
+              "$value": "0.5",
+              "$type": "number"
+            }
           },
           "width": {
             "small": {
@@ -532,40 +1304,6 @@
               "$value": "34px",
               "$type": "dimension"
             }
-          },
-          "background-color-state-checked": {
-            "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#0288d1",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            },
-            "default": {
-              "$value": "#000000",
-              "$type": "color"
-            }
-          },
-          "opacity-state-checked": {
-            "$value": "0.5",
-            "$type": "number"
           },
           "opacity-state-disabled": {
             "$value": "0.12",
@@ -662,20 +1400,6 @@
     }
   ],
   "foldedStateSkips": [
-    "fold-carries-state-delta: [checked] buttonbase-root.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.border-left-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.border-right-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.border-top-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.caret-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.outline-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [checked] buttonbase-root.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [checked] switch-thumb.caret-color rides its source fact",
-    "fold-carries-state-delta: [checked] switch-thumb.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [checked] switch-thumb.outline-color rides its source fact",
-    "fold-carries-state-delta: [checked] switch-thumb.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [checked] switch-thumb.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [disabled] buttonbase-root.border-bottom-color rides its source fact",
     "fold-carries-state-delta: [disabled] buttonbase-root.border-left-color rides its source fact",
     "fold-carries-state-delta: [disabled] buttonbase-root.border-right-color rides its source fact",
@@ -907,6 +1631,13 @@
     },
     {
       "part": "buttonbase-root",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 3
+    },
+    {
+      "part": "buttonbase-root",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -934,21 +1665,27 @@
       "distinctValues": 1
     }
   ],
-  "stateOverflow": [
-    {
-      "state": "checked",
-      "part": "buttonbase-root",
-      "channel": "transform",
-      "sample": "matrix(1, 0, 0, 1, 16, 0)",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
-    }
-  ],
+  "stateOverflow": [],
   "overflowBindings": [
+    {
+      "part": "buttonbase-root",
+      "channel": "background-color",
+      "state": "active",
+      "ref": "{imported.switch.buttonbase-root.background-color-state-active.{color}.{checked}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.switch.buttonbase-root.color-state-disabled.{color}.{checked}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
     {
       "part": "buttonbase-root",
       "channel": "row-rule-color",
       "state": "disabled",
-      "ref": "{imported.shared.color-f5f5f5}",
+      "ref": "{imported.switch.buttonbase-root.row-rule-color-state-disabled.{color}.{checked}}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
@@ -1023,9 +1760,23 @@
     },
     {
       "part": "switch-thumb",
+      "channel": "background-color",
+      "state": "disabled",
+      "ref": "{imported.switch.switch-thumb.background-color-state-disabled.{color}.{checked}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "switch-thumb",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.switch.switch-thumb.color-state-disabled.{color}.{checked}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "switch-thumb",
       "channel": "row-rule-color",
       "state": "disabled",
-      "ref": "{imported.shared.color-f5f5f5}",
+      "ref": "{imported.switch.switch-thumb.row-rule-color-state-disabled.{color}.{checked}}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
@@ -1055,6 +1806,13 @@
       "state": "focus-visible",
       "ref": "{imported.switch.switch-input.outline-width-state-focus-visible}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "background-color",
+      "state": "hover",
+      "ref": "{imported.switch.buttonbase-root.background-color-state-hover.{color}.{checked}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     }
   ],
   "pairwiseRefusals": [],
@@ -1064,28 +1822,7 @@
     "totalFindings": 0
   },
   "bindingContradictions": [],
-  "interactionOnDisabled": [
-    "interaction-on-checked-changed: primary.small.checked.enabled hover buttonbase-root.background-color",
-    "interaction-on-checked-changed: primary.small.checked.enabled focus-visible switch-input.outline-color",
-    "interaction-on-checked-changed: primary.small.checked.enabled focus-visible switch-input.outline-offset",
-    "interaction-on-checked-changed: primary.small.checked.enabled focus-visible switch-input.outline-style",
-    "interaction-on-checked-changed: primary.small.checked.enabled focus-visible switch-input.outline-width",
-    "interaction-on-checked-changed: primary.small.checked.enabled active buttonbase-root.background-color",
-    "interaction-on-checked-changed: primary.medium.checked.enabled hover buttonbase-root.background-color",
-    "interaction-on-checked-changed: primary.medium.checked.enabled focus-visible switch-input.outline-color",
-    "interaction-on-checked-changed: primary.medium.checked.enabled focus-visible switch-input.outline-offset",
-    "interaction-on-checked-changed: primary.medium.checked.enabled focus-visible switch-input.outline-style",
-    "interaction-on-checked-changed: primary.medium.checked.enabled focus-visible switch-input.outline-width",
-    "interaction-on-checked-changed: primary.medium.checked.enabled active buttonbase-root.background-color",
-    "interaction-on-checked-changed: secondary.small.checked.enabled hover buttonbase-root.background-color",
-    "interaction-on-checked-changed: secondary.small.checked.enabled focus-visible switch-input.outline-color",
-    "interaction-on-checked-changed: secondary.small.checked.enabled focus-visible switch-input.outline-offset",
-    "interaction-on-checked-changed: secondary.small.checked.enabled focus-visible switch-input.outline-style",
-    "interaction-on-checked-changed: secondary.small.checked.enabled focus-visible switch-input.outline-width",
-    "interaction-on-checked-changed: secondary.small.checked.enabled active buttonbase-root.background-color",
-    "interaction-on-checked-changed: secondary.medium.checked.enabled hover buttonbase-root.background-color",
-    "interaction-on-checked-changed: secondary.medium.checked.enabled focus-visible switch-input.outline-color"
-  ],
+  "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
@@ -1177,6 +1914,12 @@
     "declared state fact carried: [disabled] switch-input.pointer-events = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] switch-thumb.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] switch-thumb.pointer-events = none (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] switch-input.outline-style = auto (v15 declared vocabulary)"
+    "declared state fact carried: [focus-visible] switch-input.outline-style = auto (v15 declared vocabulary)",
+    "nested pair carried: buttonbase-root.color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: buttonbase-root.row-rule-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: switch-thumb.background-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: switch-thumb.color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: switch-thumb.row-rule-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: switch-track.background-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
   ]
 }

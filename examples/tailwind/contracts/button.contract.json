@@ -264,5 +264,6 @@
       "importPath": "flowbite-react",
       "export": "Button"
     }
-  }
+  },
+  "figmaStatePreviews": true
 }

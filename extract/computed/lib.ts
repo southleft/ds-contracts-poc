@@ -16,6 +16,7 @@
  *     map (the verify.ts channel map, shared verbatim)
  */
 import type { MintObservation } from '../../core/mint-tokens.js';
+import type { ContractState } from '../../scripts/contract-schema.js';
 
 // ---------------------------------------------------------------------------
 // Captured data model + normalization (§3.2)
@@ -310,7 +311,11 @@ export interface StateAxisSpec {
   /** Boolean prop driven as a state (Button `disabled`). Participates as a
    *  2-value axis AND as a state guard (§2). */
   prop: string;
-  state: 'hover' | 'active' | 'focus-visible' | 'disabled';
+  /** MUST be a member of the closed CONTRACT_STATES vocabulary. The type
+   *  alone never protected anything — configs are JSON, cast on read — so
+   *  `loadConfig` refuses an out-of-vocabulary value BY NAME (state-plane
+   *  projection round). */
+  state: ContractState;
 }
 
 export interface Combo {

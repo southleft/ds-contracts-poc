@@ -1016,6 +1016,1403 @@ const COMPONENTS = [
         }
       }
     ],
+    "stateVariants": [
+      {
+        "name": "Color=Default, Size=Md, State=Disabled",
+        "row": 0,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/default",
+          "stroke": "imported/button/root/border-top-color/default",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Disabled",
+        "row": 1,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/alternative",
+          "stroke": "imported/button/root/border-top-color/alternative",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Disabled",
+        "row": 2,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/dark",
+          "stroke": "imported/button/root/border-top-color/dark",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Disabled",
+        "row": 3,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/green",
+          "stroke": "imported/button/root/border-top-color/green",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Disabled",
+        "row": 4,
+        "col": 5,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Disabled",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color/red",
+          "stroke": "imported/button/root/border-top-color/red",
+          "opacity": 0.5,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Active",
+        "row": 0,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/default",
+          "stroke": "imported/button/root/border-top-color/default",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6431372549019608,
+                "g": 0.792156862745098,
+                "b": 0.996078431372549,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Active",
+        "row": 1,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/alternative",
+          "stroke": "imported/button/root/border-top-color/alternative",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9529411764705882,
+                "g": 0.9568627450980393,
+                "b": 0.9647058823529412,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Active",
+        "row": 2,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/dark",
+          "stroke": "imported/button/root/border-top-color/dark",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.8196078431372549,
+                "g": 0.8352941176470589,
+                "b": 0.8588235294117647,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Active",
+        "row": 3,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/green",
+          "stroke": "imported/button/root/border-top-color/green",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.5176470588235295,
+                "g": 0.8823529411764706,
+                "b": 0.7372549019607844,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Active",
+        "row": 4,
+        "col": 6,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-active/red",
+          "stroke": "imported/button/root/border-top-color/red",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9725490196078431,
+                "g": 0.7058823529411765,
+                "b": 0.7058823529411765,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-active/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Focus Visible",
+        "row": 0,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/default",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6431372549019608,
+                "g": 0.792156862745098,
+                "b": 0.996078431372549,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Focus Visible",
+        "row": 1,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/alternative",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9529411764705882,
+                "g": 0.9568627450980393,
+                "b": 0.9647058823529412,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Focus Visible",
+        "row": 2,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/dark",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.8196078431372549,
+                "g": 0.8352941176470589,
+                "b": 0.8588235294117647,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Focus Visible",
+        "row": 3,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/green",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.5176470588235295,
+                "g": 0.8823529411764706,
+                "b": 0.7372549019607844,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Focus Visible",
+        "row": 4,
+        "col": 7,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Focus Visible",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md",
+            "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
+          },
+          "fill": "imported/button/root/background-color/red",
+          "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9725490196078431,
+                "g": 0.7058823529411765,
+                "b": 0.7058823529411765,
+                "a": 1
+              },
+              "spread": 4
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
+          "strokeOutside": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Hover",
+        "row": 0,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Default, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+            "strokeLeftWeight": "imported/button/root/border-left-width/default",
+            "strokeRightWeight": "imported/button/root/border-right-width/default",
+            "strokeTopWeight": "imported/button/root/border-top-width/default",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/default",
+          "stroke": "imported/button/root/border-top-color/default",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/default",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Hover",
+        "row": 1,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Alternative, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+            "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+            "strokeRightWeight": "imported/button/root/border-right-width/alternative",
+            "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/alternative",
+          "stroke": "imported/button/root/border-top-color/alternative",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/alternative",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Hover",
+        "row": 2,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Dark, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+            "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+            "strokeRightWeight": "imported/button/root/border-right-width/dark",
+            "strokeTopWeight": "imported/button/root/border-top-width/dark",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/dark",
+          "stroke": "imported/button/root/border-top-color/dark",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/dark",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Hover",
+        "row": 3,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Green, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+            "strokeLeftWeight": "imported/button/root/border-left-width/green",
+            "strokeRightWeight": "imported/button/root/border-right-width/green",
+            "strokeTopWeight": "imported/button/root/border-top-width/green",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/green",
+          "stroke": "imported/button/root/border-top-color/green",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/green",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Hover",
+        "row": 4,
+        "col": 8,
+        "spec": {
+          "type": "root",
+          "name": "Color=Red, Size=Md, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+            "strokeLeftWeight": "imported/button/root/border-left-width/red",
+            "strokeRightWeight": "imported/button/root/border-right-width/red",
+            "strokeTopWeight": "imported/button/root/border-top-width/red",
+            "paddingLeft": "imported/button/root/padding-left/md",
+            "paddingRight": "imported/button/root/padding-right/md"
+          },
+          "fill": "imported/button/root/background-color-state-hover/red",
+          "stroke": "imported/button/root/border-top-color/red",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/button/root/color-state-hover/red",
+              "lineHeight": 20,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -1231,7 +2628,19 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
+    node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -1306,7 +2715,7 @@ async function buildNode(spec, registry) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
@@ -1352,6 +2761,8 @@ async function buildNode(spec, registry) {
     applyFrameSpec(node, spec);
   }
   node.name = spec.name;
+  // Node opacity (dump v1.2 channel): applies to every node kind.
+  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }

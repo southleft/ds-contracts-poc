@@ -473,6 +473,464 @@ const COMPONENTS = [
         }
       }
     ],
+    "stateVariants": [
+      {
+        "name": "Color=Info, Size=Xs, State=Active",
+        "row": 0,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Info, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/info",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/info",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Failure, Size=Xs, State=Active",
+        "row": 1,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Failure, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/failure",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/failure",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Success, Size=Xs, State=Active",
+        "row": 2,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Success, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/success",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/success",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Warning, Size=Xs, State=Active",
+        "row": 3,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Warning, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/warning",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/warning",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Indigo, Size=Xs, State=Active",
+        "row": 4,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Indigo, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/indigo",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/indigo",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Pink, Size=Xs, State=Active",
+        "row": 5,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Color=Pink, Size=Xs, State=Active",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-active/pink",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/pink",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Info, Size=Xs, State=Hover",
+        "row": 0,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Info, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/info",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/info",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Failure, Size=Xs, State=Hover",
+        "row": 1,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Failure, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/failure",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/failure",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Success, Size=Xs, State=Hover",
+        "row": 2,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Success, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/success",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/success",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Warning, Size=Xs, State=Hover",
+        "row": 3,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Warning, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/warning",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/warning",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Indigo, Size=Xs, State=Hover",
+        "row": 4,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Indigo, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/indigo",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/indigo",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Color=Pink, Size=Xs, State=Hover",
+        "row": 5,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Color=Pink, Size=Xs, State=Hover",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-4",
+            "bottomRightRadius": "imported/shared/size-4",
+            "topLeftRadius": "imported/shared/size-4",
+            "topRightRadius": "imported/shared/size-4",
+            "itemSpacing": "imported/shared/size-4",
+            "paddingBottom": "imported/badge/root/padding-bottom",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
+            "paddingTop": "imported/badge/root/padding-top"
+          },
+          "fill": "imported/badge/root/background-color-state-hover/pink",
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Badge",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "textFill": "imported/badge/label/color/pink",
+              "lineHeight": 16,
+              "contentProp": "Content"
+            }
+          ]
+        }
+      }
+    ],
     "colW": 380
   }
 ];

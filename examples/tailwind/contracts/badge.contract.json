@@ -232,5 +232,6 @@
       "importPath": "flowbite-react",
       "export": "Badge"
     }
-  }
+  },
+  "figmaStatePreviews": true
 }

@@ -148,8 +148,8 @@ async function main() {
     const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
     const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
-    const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes);
-    const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
+    const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
+    const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes, { nestedPairs: true });
     // `?? []` keeps the runner executable against pre-v15 fusion builds — the
     // instrument-fidelity check runs it at the pre-lift commit for the
     // baseline number.

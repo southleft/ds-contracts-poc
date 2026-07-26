@@ -31,6 +31,29 @@
       }
     },
     {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
       "name": "label",
       "type": "text",
       "default": "Toggle",
@@ -48,7 +71,7 @@
   "$schema": "./contract.schema.json",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the Tailwind reader round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md).",
+  "description": "SEED contract for the Tailwind reader round \u2014 props/axes only; anatomy is promoted from captured DOM truth. STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md).",
   "anatomy": {
     "root": {}
   },

@@ -4,7 +4,7 @@
   "name": "Switch",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the MUI computed-floor round \u2014 props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "description": "SEED contract for the MUI computed-floor round \u2014 props/axes only; anatomy is promoted from captured DOM truth (Round 4). STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state \u2014 a rendering a prop selects is an axis, and `checked` was never in the closed state vocabulary. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
   "semantics": {
     "element": "span"
   },
@@ -67,12 +67,21 @@
     },
     {
       "name": "checked",
-      "type": "boolean",
-      "default": false,
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
       "bindings": {
         "figma": {
-          "kind": "BOOLEAN",
-          "property": "Checked"
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
         },
         "code": {
           "prop": "checked"

@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 864,
-    "cellsEqual": 756,
-    "pctEqual": 87.5,
+    "cellsEqual": 768,
+    "pctEqual": 88.88888888888889,
     "rowsFullyEqual": 0,
     "rows": 24
   },
@@ -16,9 +16,9 @@
     "pairs": 24,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 7.929144965277778,
-    "meanAA": 2.4148220486111116,
-    "maxAA": 5.078125
+    "meanExact": 7.254231770833333,
+    "meanAA": 2.3442925347222223,
+    "maxAA": 4.641927083333333
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -27,7 +27,7 @@
     "mintedLeaves": 31,
     "mintedLeavesUnfolded": 30,
     "baseBindings": 25,
-    "stateBindings": 5,
+    "stateBindings": 4,
     "codeOnlyChannels": 4,
     "overflowBindings": 2,
     "folds": 9
@@ -35,51 +35,51 @@
   "worstRows": [
     {
       "key": "lg.checked__focus-visible",
-      "pctAA": 5.078125,
-      "pctExact": 11.790364583333334,
-      "channelsMismatched": 5
+      "pctAA": 4.641927083333333,
+      "pctExact": 9.915364583333334,
+      "channelsMismatched": 4
     },
     {
       "key": "lg.checked__active",
-      "pctAA": 4.62890625,
-      "pctExact": 11.106770833333334,
-      "channelsMismatched": 5
+      "pctAA": 4.192708333333333,
+      "pctExact": 9.231770833333334,
+      "channelsMismatched": 4
     },
     {
       "key": "md.checked__focus-visible",
-      "pctAA": 4.192708333333333,
-      "pctExact": 9.541015625,
-      "channelsMismatched": 5
+      "pctAA": 3.8313802083333335,
+      "pctExact": 8.199869791666666,
+      "channelsMismatched": 4
     },
     {
       "key": "md.checked__active",
-      "pctAA": 3.798828125,
-      "pctExact": 8.958333333333334,
-      "channelsMismatched": 5
+      "pctAA": 3.4375,
+      "pctExact": 7.6171875,
+      "channelsMismatched": 4
     },
     {
       "key": "sm.checked__focus-visible",
-      "pctAA": 3.4700520833333335,
-      "pctExact": 8.004557291666666,
-      "channelsMismatched": 5
+      "pctAA": 3.26171875,
+      "pctExact": 7.171223958333333,
+      "channelsMismatched": 4
     },
     {
       "key": "lg.checked__default",
-      "pctAA": 3.0989583333333335,
-      "pctExact": 9.850260416666666,
-      "channelsMismatched": 5
+      "pctAA": 3.1217447916666665,
+      "pctExact": 7.975260416666667,
+      "channelsMismatched": 4
     },
     {
       "key": "lg.checked__hover",
-      "pctAA": 3.0989583333333335,
-      "pctExact": 9.850260416666666,
-      "channelsMismatched": 5
+      "pctAA": 3.1217447916666665,
+      "pctExact": 7.975260416666667,
+      "channelsMismatched": 4
     },
     {
       "key": "sm.checked__active",
-      "pctAA": 3.0013020833333335,
-      "pctExact": 7.34375,
-      "channelsMismatched": 5
+      "pctAA": 2.79296875,
+      "pctExact": 6.510416666666667,
+      "channelsMismatched": 4
     }
   ],
   "topMismatchedChannels": [
@@ -98,10 +98,6 @@
     [
       "part-0.border-top-right-radius",
       24
-    ],
-    [
-      "part-0.background-color",
-      12
     ]
   ],
   "namedLosses": [
@@ -115,7 +111,7 @@
   ],
   "rows": [
     {
-      "key": "sm.no-checked__default",
+      "key": "sm.unchecked__default",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 5.413411458333333,
@@ -148,7 +144,7 @@
       ]
     },
     {
-      "key": "sm.no-checked__hover",
+      "key": "sm.unchecked__hover",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 5.413411458333333,
@@ -181,7 +177,7 @@
       ]
     },
     {
-      "key": "sm.no-checked__focus-visible",
+      "key": "sm.unchecked__focus-visible",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 6.930338541666667,
@@ -214,7 +210,7 @@
       ]
     },
     {
-      "key": "sm.no-checked__active",
+      "key": "sm.unchecked__active",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 6.26953125,
@@ -249,16 +245,10 @@
     {
       "key": "sm.checked__default",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 6.487630208333333,
-      "pctAA": 1.953125,
+      "channelsEqual": 32,
+      "pctExact": 5.654296875,
+      "pctAA": 2.0638020833333335,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -288,16 +278,10 @@
     {
       "key": "sm.checked__hover",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 6.487630208333333,
-      "pctAA": 1.953125,
+      "channelsEqual": 32,
+      "pctExact": 5.654296875,
+      "pctAA": 2.0638020833333335,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -327,16 +311,10 @@
     {
       "key": "sm.checked__focus-visible",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 8.004557291666666,
-      "pctAA": 3.4700520833333335,
+      "channelsEqual": 32,
+      "pctExact": 7.171223958333333,
+      "pctAA": 3.26171875,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -366,16 +344,10 @@
     {
       "key": "sm.checked__active",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 7.34375,
-      "pctAA": 3.0013020833333335,
+      "channelsEqual": 32,
+      "pctExact": 6.510416666666667,
+      "pctAA": 2.79296875,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -403,7 +375,7 @@
       ]
     },
     {
-      "key": "md.no-checked__default",
+      "key": "md.unchecked__default",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 6.178385416666667,
@@ -436,7 +408,7 @@
       ]
     },
     {
-      "key": "md.no-checked__hover",
+      "key": "md.unchecked__hover",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 6.178385416666667,
@@ -469,7 +441,7 @@
       ]
     },
     {
-      "key": "md.no-checked__focus-visible",
+      "key": "md.unchecked__focus-visible",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 7.913411458333333,
@@ -502,7 +474,7 @@
       ]
     },
     {
-      "key": "md.no-checked__active",
+      "key": "md.unchecked__active",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 7.330729166666667,
@@ -537,16 +509,10 @@
     {
       "key": "md.checked__default",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 7.805989583333333,
-      "pctAA": 2.4967447916666665,
+      "channelsEqual": 32,
+      "pctExact": 6.46484375,
+      "pctAA": 2.5227864583333335,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -576,16 +542,10 @@
     {
       "key": "md.checked__hover",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 7.805989583333333,
-      "pctAA": 2.4967447916666665,
+      "channelsEqual": 32,
+      "pctExact": 6.46484375,
+      "pctAA": 2.5227864583333335,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -615,16 +575,10 @@
     {
       "key": "md.checked__focus-visible",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 9.541015625,
-      "pctAA": 4.192708333333333,
+      "channelsEqual": 32,
+      "pctExact": 8.199869791666666,
+      "pctAA": 3.8313802083333335,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -654,16 +608,10 @@
     {
       "key": "md.checked__active",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 8.958333333333334,
-      "pctAA": 3.798828125,
+      "channelsEqual": 32,
+      "pctExact": 7.6171875,
+      "pctAA": 3.4375,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -691,7 +639,7 @@
       ]
     },
     {
-      "key": "lg.no-checked__default",
+      "key": "lg.unchecked__default",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 7.610677083333333,
@@ -724,7 +672,7 @@
       ]
     },
     {
-      "key": "lg.no-checked__hover",
+      "key": "lg.unchecked__hover",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 7.610677083333333,
@@ -757,7 +705,7 @@
       ]
     },
     {
-      "key": "lg.no-checked__focus-visible",
+      "key": "lg.unchecked__focus-visible",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 9.55078125,
@@ -790,7 +738,7 @@
       ]
     },
     {
-      "key": "lg.no-checked__active",
+      "key": "lg.unchecked__active",
       "channelsCompared": 36,
       "channelsEqual": 32,
       "pctExact": 8.8671875,
@@ -825,16 +773,10 @@
     {
       "key": "lg.checked__default",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 9.850260416666666,
-      "pctAA": 3.0989583333333335,
+      "channelsEqual": 32,
+      "pctExact": 7.975260416666667,
+      "pctAA": 3.1217447916666665,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -864,16 +806,10 @@
     {
       "key": "lg.checked__hover",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 9.850260416666666,
-      "pctAA": 3.0989583333333335,
+      "channelsEqual": 32,
+      "pctExact": 7.975260416666667,
+      "pctAA": 3.1217447916666665,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -903,16 +839,10 @@
     {
       "key": "lg.checked__focus-visible",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 11.790364583333334,
-      "pctAA": 5.078125,
+      "channelsEqual": 32,
+      "pctExact": 9.915364583333334,
+      "pctAA": 4.641927083333333,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",
@@ -942,16 +872,10 @@
     {
       "key": "lg.checked__active",
       "channelsCompared": 36,
-      "channelsEqual": 31,
-      "pctExact": 11.106770833333334,
-      "pctAA": 4.62890625,
+      "channelsEqual": 32,
+      "pctExact": 9.231770833333334,
+      "pctAA": 4.192708333333333,
       "mismatches": [
-        {
-          "part": "part-0",
-          "channel": "background-color",
-          "ours": "rgba(229, 231, 235, 1)",
-          "theirs": "rgba(26, 86, 219, 1)"
-        },
         {
           "part": "part-0",
           "channel": "border-bottom-left-radius",

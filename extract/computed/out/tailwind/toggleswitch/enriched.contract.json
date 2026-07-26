@@ -4,7 +4,7 @@
   "name": "ToggleSwitch",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "button"
   },
@@ -31,6 +31,29 @@
         },
         "code": {
           "prop": "sizing"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
         }
       }
     },
@@ -69,7 +92,6 @@
             "text-align": "center"
           },
           "tokens": {
-            "background-color": "{imported.toggle-switch.part-0.background-color}",
             "border-bottom-left-radius": "{imported.shared.size-9999}",
             "border-bottom-right-radius": "{imported.shared.size-9999}",
             "border-top-left-radius": "{imported.shared.size-9999}",
@@ -77,10 +99,20 @@
             "bottom": "{imported.shared.size-0}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}",
-            "background-color-state-checked": "{imported.toggle-switch.part-0.background-color-state-checked}"
+            "top": "{imported.shared.size-0}"
           },
           "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.toggle-switch.part-0.background-color.checked}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.toggle-switch.part-0.background-color.unchecked}"
+                }
+              }
+            },
             {
               "prop": "sizing",
               "map": {

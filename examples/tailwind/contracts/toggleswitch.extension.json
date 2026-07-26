@@ -60,8 +60,14 @@
         },
         "part-0": {
           "background-color": {
-            "$value": "#e5e7eb",
-            "$type": "color"
+            "unchecked": {
+              "$value": "#e5e7eb",
+              "$type": "color"
+            },
+            "checked": {
+              "$value": "#1a56db",
+              "$type": "color"
+            }
           },
           "height": {
             "sm": {
@@ -108,10 +114,6 @@
           "box-shadow-state-active": {
             "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
             "$type": "shadow"
-          },
-          "background-color-state-checked": {
-            "$value": "#1a56db",
-            "$type": "color"
           },
           "box-shadow-state-focus-visible": {
             "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
@@ -297,7 +299,7 @@
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
-        "combo": "sm.no-checked",
+        "combo": "sm.unchecked",
         "interaction": "default",
         "part": "part-0",
         "pseudo": "::after",
@@ -315,7 +317,7 @@
         }
       },
       {
-        "combo": "md.no-checked",
+        "combo": "md.unchecked",
         "interaction": "default",
         "part": "part-0",
         "pseudo": "::after",
@@ -333,7 +335,7 @@
         }
       },
       {
-        "combo": "lg.no-checked",
+        "combo": "lg.unchecked",
         "interaction": "default",
         "part": "part-0",
         "pseudo": "::after",
@@ -354,28 +356,7 @@
     "totalFindings": 6
   },
   "bindingContradictions": [],
-  "interactionOnDisabled": [
-    "interaction-on-checked-changed: sm.checked focus-visible root.--tw-outline-style",
-    "interaction-on-checked-changed: sm.checked focus-visible root.outline-color",
-    "interaction-on-checked-changed: sm.checked focus-visible root.outline-width",
-    "interaction-on-checked-changed: sm.checked focus-visible part-0.--tw-ring-shadow",
-    "interaction-on-checked-changed: sm.checked focus-visible part-0.box-shadow",
-    "interaction-on-checked-changed: sm.checked active root.--tw-outline-style",
-    "interaction-on-checked-changed: sm.checked active part-0.--tw-ring-shadow",
-    "interaction-on-checked-changed: sm.checked active part-0.box-shadow",
-    "interaction-on-checked-changed: md.checked focus-visible root.--tw-outline-style",
-    "interaction-on-checked-changed: md.checked focus-visible root.outline-color",
-    "interaction-on-checked-changed: md.checked focus-visible root.outline-width",
-    "interaction-on-checked-changed: md.checked focus-visible part-0.--tw-ring-shadow",
-    "interaction-on-checked-changed: md.checked focus-visible part-0.box-shadow",
-    "interaction-on-checked-changed: md.checked active root.--tw-outline-style",
-    "interaction-on-checked-changed: md.checked active part-0.--tw-ring-shadow",
-    "interaction-on-checked-changed: md.checked active part-0.box-shadow",
-    "interaction-on-checked-changed: lg.checked focus-visible root.--tw-outline-style",
-    "interaction-on-checked-changed: lg.checked focus-visible root.outline-color",
-    "interaction-on-checked-changed: lg.checked focus-visible root.outline-width",
-    "interaction-on-checked-changed: lg.checked focus-visible part-0.--tw-ring-shadow"
-  ],
+  "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",

@@ -16,12 +16,12 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Sizing=Md",
+        "name": "Sizing=Md, Checked=Unchecked",
         "row": 0,
         "col": 0,
         "spec": {
           "type": "root",
-          "name": "Sizing=Md",
+          "name": "Sizing=Md, Checked=Unchecked",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
@@ -32,7 +32,8 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
             "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8"
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
           },
           "fixedHeight": {
             "px": 24,
@@ -44,21 +45,6 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
-              "name": "label",
-              "margins": {
-                "left": 12,
-                "top": 2
-              },
-              "characters": "Toggle",
-              "fontSize": 14,
-              "fontStyle": "Medium",
-              "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
-              "contentProp": "Label",
-              "fillW": true
-            },
-            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -66,7 +52,6 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/toggle-switch/part-0/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-9999",
                 "bottomRightRadius": "imported/shared/size-9999",
@@ -74,6 +59,7 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-9999",
                 "minWidth": "imported/toggle-switch/part-0/min-width/md"
               },
+              "fill": "imported/toggle-switch/part-0/background-color/unchecked",
               "fixedHeight": {
                 "px": 24,
                 "varName": "imported/toggle-switch/part-0/height/md"
@@ -83,17 +69,31 @@ const COMPONENTS = [
                 "varName": "imported/toggle-switch/part-0/width/md"
               },
               "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
             }
           ]
         }
       },
       {
-        "name": "Sizing=Sm",
-        "row": 1,
-        "col": 0,
+        "name": "Sizing=Md, Checked=Checked",
+        "row": 0,
+        "col": 1,
         "spec": {
           "type": "root",
-          "name": "Sizing=Sm",
+          "name": "Sizing=Md, Checked=Checked",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
@@ -104,7 +104,80 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
             "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8"
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
+          },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "imported/toggle-switch/root/height/md"
+          },
+          "fixedWidth": {
+            "px": 100.438,
+            "varName": "imported/toggle-switch/root/width/md"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-9999",
+                "bottomRightRadius": "imported/shared/size-9999",
+                "topLeftRadius": "imported/shared/size-9999",
+                "topRightRadius": "imported/shared/size-9999",
+                "minWidth": "imported/toggle-switch/part-0/min-width/md"
+              },
+              "fill": "imported/toggle-switch/part-0/background-color/checked",
+              "fixedHeight": {
+                "px": 24,
+                "varName": "imported/toggle-switch/part-0/height/md"
+              },
+              "fixedWidth": {
+                "px": 44,
+                "varName": "imported/toggle-switch/part-0/width/md"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Sizing=Sm, Checked=Unchecked",
+        "row": 1,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Sizing=Sm, Checked=Unchecked",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
           },
           "fixedHeight": {
             "px": 22,
@@ -116,21 +189,6 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
-              "name": "label",
-              "margins": {
-                "left": 12,
-                "top": 2
-              },
-              "characters": "Toggle",
-              "fontSize": 14,
-              "fontStyle": "Medium",
-              "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
-              "contentProp": "Label",
-              "fillW": true
-            },
-            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -138,7 +196,6 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/toggle-switch/part-0/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-9999",
                 "bottomRightRadius": "imported/shared/size-9999",
@@ -146,6 +203,7 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-9999",
                 "minWidth": "imported/toggle-switch/part-0/min-width/sm"
               },
+              "fill": "imported/toggle-switch/part-0/background-color/unchecked",
               "fixedHeight": {
                 "px": 20,
                 "varName": "imported/toggle-switch/part-0/height/sm"
@@ -155,17 +213,31 @@ const COMPONENTS = [
                 "varName": "imported/toggle-switch/part-0/width/sm"
               },
               "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
             }
           ]
         }
       },
       {
-        "name": "Sizing=Lg",
-        "row": 2,
-        "col": 0,
+        "name": "Sizing=Sm, Checked=Checked",
+        "row": 1,
+        "col": 1,
         "spec": {
           "type": "root",
-          "name": "Sizing=Lg",
+          "name": "Sizing=Sm, Checked=Checked",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
@@ -176,7 +248,80 @@ const COMPONENTS = [
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
             "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8"
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
+          },
+          "fixedHeight": {
+            "px": 22,
+            "varName": "imported/toggle-switch/root/height/sm"
+          },
+          "fixedWidth": {
+            "px": 92.4375,
+            "varName": "imported/toggle-switch/root/width/sm"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-9999",
+                "bottomRightRadius": "imported/shared/size-9999",
+                "topLeftRadius": "imported/shared/size-9999",
+                "topRightRadius": "imported/shared/size-9999",
+                "minWidth": "imported/toggle-switch/part-0/min-width/sm"
+              },
+              "fill": "imported/toggle-switch/part-0/background-color/checked",
+              "fixedHeight": {
+                "px": 20,
+                "varName": "imported/toggle-switch/part-0/height/sm"
+              },
+              "fixedWidth": {
+                "px": 36,
+                "varName": "imported/toggle-switch/part-0/width/sm"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Sizing=Lg, Checked=Unchecked",
+        "row": 2,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Sizing=Lg, Checked=Unchecked",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
           },
           "fixedHeight": {
             "px": 28,
@@ -188,21 +333,6 @@ const COMPONENTS = [
           },
           "children": [
             {
-              "type": "text",
-              "name": "label",
-              "margins": {
-                "left": 12,
-                "top": 2
-              },
-              "characters": "Toggle",
-              "fontSize": 14,
-              "fontStyle": "Medium",
-              "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
-              "contentProp": "Label",
-              "fillW": true
-            },
-            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -210,7 +340,6 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/toggle-switch/part-0/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-9999",
                 "bottomRightRadius": "imported/shared/size-9999",
@@ -218,6 +347,7 @@ const COMPONENTS = [
                 "topRightRadius": "imported/shared/size-9999",
                 "minWidth": "imported/toggle-switch/part-0/min-width/lg"
               },
+              "fill": "imported/toggle-switch/part-0/background-color/unchecked",
               "fixedHeight": {
                 "px": 28,
                 "varName": "imported/toggle-switch/part-0/height/lg"
@@ -227,6 +357,92 @@ const COMPONENTS = [
                 "varName": "imported/toggle-switch/part-0/width/lg"
               },
               "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Sizing=Lg, Checked=Checked",
+        "row": 2,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Sizing=Lg, Checked=Checked",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
+            "itemSpacing": "imported/toggle-switch/label/margin-left"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/toggle-switch/root/height/lg"
+          },
+          "fixedWidth": {
+            "px": 108.438,
+            "varName": "imported/toggle-switch/root/width/lg"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-9999",
+                "bottomRightRadius": "imported/shared/size-9999",
+                "topLeftRadius": "imported/shared/size-9999",
+                "topRightRadius": "imported/shared/size-9999",
+                "minWidth": "imported/toggle-switch/part-0/min-width/lg"
+              },
+              "fill": "imported/toggle-switch/part-0/background-color/checked",
+              "fixedHeight": {
+                "px": 28,
+                "varName": "imported/toggle-switch/part-0/height/lg"
+              },
+              "fixedWidth": {
+                "px": 52,
+                "varName": "imported/toggle-switch/part-0/width/lg"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "margins": {
+                "top": 2
+              },
+              "characters": "Toggle",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "textFill": "imported/toggle-switch/label/color",
+              "lineHeight": 20,
+              "contentProp": "Label",
+              "fillW": true
             }
           ]
         }

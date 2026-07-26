@@ -6,9 +6,10 @@
     {
       "part": "label",
       "channel": "font-size",
-      "combo": "sm.no-checked",
+      "combo": "sm.unchecked",
       "axisValues": {
-        "sizing": "sm"
+        "sizing": "sm",
+        "checked": "unchecked"
       },
       "token": "text-sm",
       "varName": "--text-sm",
@@ -21,7 +22,8 @@
       "channel": "font-size",
       "combo": "sm.checked",
       "axisValues": {
-        "sizing": "sm"
+        "sizing": "sm",
+        "checked": "checked"
       },
       "token": "text-sm",
       "varName": "--text-sm",
@@ -32,9 +34,10 @@
     {
       "part": "label",
       "channel": "font-size",
-      "combo": "md.no-checked",
+      "combo": "md.unchecked",
       "axisValues": {
-        "sizing": "md"
+        "sizing": "md",
+        "checked": "unchecked"
       },
       "token": "text-sm",
       "varName": "--text-sm",
@@ -47,7 +50,8 @@
       "channel": "font-size",
       "combo": "md.checked",
       "axisValues": {
-        "sizing": "md"
+        "sizing": "md",
+        "checked": "checked"
       },
       "token": "text-sm",
       "varName": "--text-sm",
@@ -58,9 +62,10 @@
     {
       "part": "label",
       "channel": "font-size",
-      "combo": "lg.no-checked",
+      "combo": "lg.unchecked",
       "axisValues": {
-        "sizing": "lg"
+        "sizing": "lg",
+        "checked": "unchecked"
       },
       "token": "text-sm",
       "varName": "--text-sm",
@@ -73,7 +78,8 @@
       "channel": "font-size",
       "combo": "lg.checked",
       "axisValues": {
-        "sizing": "lg"
+        "sizing": "lg",
+        "checked": "checked"
       },
       "token": "text-sm",
       "varName": "--text-sm",
@@ -84,9 +90,10 @@
     {
       "part": "label",
       "channel": "font-weight",
-      "combo": "sm.no-checked",
+      "combo": "sm.unchecked",
       "axisValues": {
-        "sizing": "sm"
+        "sizing": "sm",
+        "checked": "unchecked"
       },
       "token": "font-weight-medium",
       "varName": "--font-weight-medium",
@@ -99,7 +106,8 @@
       "channel": "font-weight",
       "combo": "sm.checked",
       "axisValues": {
-        "sizing": "sm"
+        "sizing": "sm",
+        "checked": "checked"
       },
       "token": "font-weight-medium",
       "varName": "--font-weight-medium",
@@ -110,9 +118,10 @@
     {
       "part": "label",
       "channel": "font-weight",
-      "combo": "md.no-checked",
+      "combo": "md.unchecked",
       "axisValues": {
-        "sizing": "md"
+        "sizing": "md",
+        "checked": "unchecked"
       },
       "token": "font-weight-medium",
       "varName": "--font-weight-medium",
@@ -125,7 +134,8 @@
       "channel": "font-weight",
       "combo": "md.checked",
       "axisValues": {
-        "sizing": "md"
+        "sizing": "md",
+        "checked": "checked"
       },
       "token": "font-weight-medium",
       "varName": "--font-weight-medium",
@@ -136,9 +146,10 @@
     {
       "part": "label",
       "channel": "font-weight",
-      "combo": "lg.no-checked",
+      "combo": "lg.unchecked",
       "axisValues": {
-        "sizing": "lg"
+        "sizing": "lg",
+        "checked": "unchecked"
       },
       "token": "font-weight-medium",
       "varName": "--font-weight-medium",
@@ -151,7 +162,8 @@
       "channel": "font-weight",
       "combo": "lg.checked",
       "axisValues": {
-        "sizing": "lg"
+        "sizing": "lg",
+        "checked": "checked"
       },
       "token": "font-weight-medium",
       "varName": "--font-weight-medium",

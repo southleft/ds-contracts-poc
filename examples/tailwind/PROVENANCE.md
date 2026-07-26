@@ -54,7 +54,7 @@ with NO new reader architecture. What the round DID need:
 npx tsx examples/tailwind/scripts/build-tokens.mjs   # tailwind.css :root vars → 68-token DTCG (oklch→hex)
 npm run extract:computed -- --harness examples/tailwind/.tw-sandbox \
   --config extract/computed/configs/tailwind.json --component <C> --out extract/computed/out/tailwind
-node examples/tailwind/scripts/promote-floor.mjs
+npx tsx examples/tailwind/scripts/promote-floor.mjs   # + figmaStatePreviews probe (referee decides; refusals printed)
 npx tsx packages/cli/src/cli.ts figma examples/tailwind/contracts --out examples/tailwind/figma \
   --tokens examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json
 node examples/tailwind/scripts/build-figma-tokens.mjs
@@ -75,9 +75,9 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/tailwind/contracts \
 | Badge | 12 | 90.650% | **48/48 perfect** |
 | Card | 1 | 72.414% | 0/4 |
 | Alert | 4 | 84.545% | **16/16 perfect** |
-| ToggleSwitch | 6 | 87.500% | 0/24 |
+| ToggleSwitch | 6 | 88.889% | 0/24 |
 
-Genesis: 45 variants, 344 variables (21 source-aliased), batch mock-proven.
+Genesis: 48 variants, 344 variables (21 source-aliased), batch mock-proven.
 Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
 `color-white`, radius tokens — the library's own utility vocabulary.
 
@@ -97,6 +97,34 @@ Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
   column whose spacing channels partially fold; un-triaged residue, named.
 - **ToggleSwitch source facts sparse** (12): its colors ride the inline
   primary palette (see above).
-- **Checked-state track color** carried as a state plane
-  (`background-color-state-checked`) but state planes are not yet projected
-  into genesis — the same state-round class as MUI.
+### STATE-PLANE PROJECTION round (2026-07-25) — CLOSED and newly named
+
+- **CLOSED — checked track color is projected.** `checked` was declared a
+  `stateProp` with `state: "checked"` — a value OUTSIDE the closed contract
+  state vocabulary (hover|active|focus-visible|disabled). Its captured delta
+  therefore minted `background-color-state-checked`, a channel name the
+  mint-property parser could not re-read and that NO emitter rendered: the
+  fact was captured, minted into the DTCG tree, and dropped on the floor
+  silently. `checked` is now a real VARIANT AXIS
+  (`axes: ["sizing", "checked"]` + `axisValueMap {unchecked:false,
+  checked:true}`, `Checked` VARIANT prop in the seed contract), so the delta
+  is an ordinary base-plane per-axis fact:
+  `part-0.tokensByProp[checked].{checked,unchecked}.background-color`.
+  ToggleSwitch **3 → 6 variants**; the compile receipt pins that the two
+  Checked cells bind DIFFERENT track fill variables (`figma-compile-receipt.mjs`).
+  A capture config can never make this mistake again — `loadConfig` refuses an
+  out-of-vocabulary `stateProps[].state` BY NAME
+  (`extract/computed/capture.ts`).
+- **State previews ON where the referee accepts.** `figmaStatePreviews` is
+  now probed at promotion for every contract: **Button and Badge accepted**
+  (State = Default|Hover|Focus Visible|Active|Disabled cells on canvas).
+  **ToggleSwitch REFUSED BY NAME** — `state "disabled" declares no token
+  overrides on anatomy.root.states (or any part's states), so its preview
+  variant would render identically to Default`. The refusal is printed by
+  the promotion, not worked around; the rule was not loosened and the
+  declared state was not pruned (it still drives the code surface).
+- **The thumb still draws nothing (unchanged, re-named).** This round colors
+  the TRACK only. Flowbite's toggle thumb is an `::after` pseudo-element with
+  unconditional placement and a per-sizing box — outside the v1 pseudo-decor
+  grammar on two counts (above). A checked toggle on canvas is a colored
+  track with no knob; the knob is a separate round.

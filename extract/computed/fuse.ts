@@ -26,6 +26,7 @@
  */
 import { mintTokens, type MintAxis, type MintObservation, type MintResult } from '../../core/mint-tokens.js';
 import {
+  CONTRACT_STATES,
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
   LITERAL_VALUE_RE,
@@ -836,7 +837,9 @@ export function setPlaneCandidates(
   return out;
 }
 
-const STATE_SUFFIXES = ['hover', 'active', 'focus-visible', 'disabled'] as const;
+/** ONE spelling of the closed state vocabulary, shared with the contract
+ *  schema and the capture-config referee (state-plane projection round). */
+const STATE_SUFFIXES = CONTRACT_STATES;
 export const stateOfMintProperty = (cssProperty: string): { channel: string; state: string } | null => {
   for (const s of STATE_SUFFIXES) {
     const suffix = `-state-${s}`;
@@ -1194,7 +1197,7 @@ export function prepareMint(
   // before→after: the unfolded mint (base + state observations, NO folding
   // pass) is the spike's leaf universe; the folded mint is what the
   // production module actually mints. Both counts are quoted.
-  const unfoldedMint = mintTokens(comp.name, [...unfolded.obs, ...stateObsAll.map((s) => s.obs)], axes);
+  const unfoldedMint = mintTokens(comp.name, [...unfolded.obs, ...stateObsAll.map((s) => s.obs)], axes, { nestedPairs: true });
 
   return {
     axes,
@@ -1441,10 +1444,6 @@ export function applyMintToContract(
         return;
       }
       if (phs.length === 2) {
-        if (partName !== 'root') {
-          overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: 'pair ref on a nested part — root-only in the emitters (mint refuses these upstream; guarded here too)' });
-          return;
-        }
         const [pa, pb] = phs; // leaf-path order (mint axis discovery order)
         if (space.presence.has(pa) || space.presence.has(pb)) {
           overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: 'presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)' });
@@ -1457,10 +1456,39 @@ export function applyMintToContract(
           return;
         }
         if (ua === undefined && ub === undefined) {
-          // both axes defaulted → their enum classes are always present; the
-          // two-placeholder root ref expands as compound modifier rules.
-          target.tokens ??= {};
-          if (!(channel in target.tokens)) target.tokens[channel] = b.ref;
+          if (partName === 'root') {
+            // both axes defaulted → their enum classes are always present;
+            // the two-placeholder root ref expands as compound modifier rules.
+            target.tokens ??= {};
+            if (!(channel in target.tokens)) target.tokens[channel] = b.ref;
+            return;
+          }
+          // STATE-PLANE PROJECTION round — NESTED defaulted pair. A nested
+          // part carries ≤1 placeholder per ref, so the pair is spelled as a
+          // per-value tokensByProp map on ONE axis whose refs keep the OTHER
+          // axis's placeholder. This is the SAME reviewed capability the
+          // one-unset branch below already uses (validateContract allows a
+          // per-value map ref carrying at most one placeholder naming a
+          // DIFFERENT enum prop; every emitter substitutes over the full
+          // prop subst at any depth).
+          //
+          // Map axis = the SECOND placeholder in leaf-path order (= mint
+          // axis discovery order = the capture config's `axes` order).
+          // Deterministic, no tie-break invented. Both axes are defaulted,
+          // so every map key is always present in `subst` — no plane is
+          // silently unreachable.
+          const keyProp = pb;
+          const keyAxis = space.axes.find((ax) => ax.prop === keyProp);
+          if (!keyAxis) {
+            overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `pair ref map axis "${keyProp}" is not an enumerated axis` });
+            return;
+          }
+          for (const kv of keyAxis.values) {
+            addPerAxis(partName, keyProp, kv, channel, `{${inner.replaceAll(`{${keyProp}}`, kv)}}`);
+          }
+          enrichmentNotes.push(
+            `nested pair carried: ${partName}.${channel} = per-${keyProp} map whose refs substitute ${pa === keyProp ? pb : pa} (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)`,
+          );
           return;
         }
         // ONE unset axis (S2 pair carriage): base plane = per-OTHER-axis map

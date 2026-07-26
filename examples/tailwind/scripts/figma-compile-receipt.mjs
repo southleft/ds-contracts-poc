@@ -83,6 +83,27 @@ for (const file of scripts) {
     if (name === 'toggle-switch') {
       const tracks = mock.root.findAll((n) => n.type === 'FRAME' && n.topLeftRadius > 6 && n.width > 20 && n.width < 80);
       if (tracks.length === 0) throw new Error('toggle pin: no rounded track frames found');
+      // STATE-PLANE PROJECTION PINS: `checked` is a VARIANT AXIS now, so the
+      // canvas carries a Checked cell whose TRACK binds a different fill
+      // variable. Before this round the delta minted as
+      // `background-color-state-checked` — captured, minted, rendered by
+      // NOBODY (examples/tailwind/PROVENANCE.md named it).
+      const cells = (re) => mock.root.findAll((n) => n.type === 'COMPONENT' && re.test(n.name));
+      const on = cells(/Checked=Checked/);
+      const off = cells(/Checked=Unchecked/);
+      if (on.length === 0 || off.length === 0) throw new Error(`toggle checked-axis pin: expected both Checked values, found ${on.length}/${off.length}`);
+      if (on.length !== off.length) throw new Error(`toggle checked-axis pin: axis not orthogonal (${on.length} vs ${off.length})`);
+      const trackFillVar = (variant) => {
+        const tr = (variant.children ?? []).find((c) => c.type === 'FRAME');
+        if (!tr) throw new Error('toggle checked track-fill pin: no track frame in the variant');
+        return ((tr.fills ?? [])[0]?.boundVariables?.color?.id) ?? null;
+      };
+      const md = (list) => list.find((n) => /Sizing=Md/.test(n.name));
+      const onMd = md(on); const offMd = md(off);
+      if (!onMd || !offMd) throw new Error('toggle checked-axis pin: Sizing=Md cells missing on both Checked values');
+      const f1 = trackFillVar(onMd); const f0 = trackFillVar(offMd);
+      if (!f1 || !f0) throw new Error(`toggle checked track-fill pin: the track must carry a BOUND fill variable on both planes (checked=${f1}, unchecked=${f0})`);
+      if (f1 === f0) throw new Error('toggle checked track-fill pin: both planes bind the SAME variable — the checked track colour is not projected');
     }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
     rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);

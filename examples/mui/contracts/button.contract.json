@@ -250,5 +250,6 @@
       "importPath": "@mui/material",
       "export": "Button"
     }
-  }
+  },
+  "figmaStatePreviews": true
 }

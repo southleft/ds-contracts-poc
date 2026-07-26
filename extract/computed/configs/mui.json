@@ -95,19 +95,23 @@
       "blockStage": true
     },
     {
+      "__note": "STATE-PLANE PROJECTION ROUND — `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (the Checkbox/Accordion precedent). `checked` is not a pseudo-class plane: it is a rendering a PROP selects, and it was outside the closed state vocabulary, so its captured deltas minted `<channel>-state-checked` names that re-parsed as nothing and that no emitter rendered. As an axis the same deltas become BASE-PLANE per-axis facts, the Figma variant grid picks the axis up, and the checked thumb's translate rides the overlay-cluster synthetic translate-x/y door.",
       "name": "Switch",
       "importName": "Switch",
       "contract": "examples/mui/contracts-seed/switch.contract.json",
       "sampleText": "",
       "axes": [
         "color",
-        "size"
+        "size",
+        "checked"
       ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
       "stateProps": [
-        {
-          "prop": "checked",
-          "state": "checked"
-        },
         {
           "prop": "disabled",
           "state": "disabled"

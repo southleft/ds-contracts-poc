@@ -4,7 +4,7 @@
   "name": "Switch",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state — a rendering a prop selects is an axis, and `checked` was never in the closed state vocabulary. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
   "semantics": {
     "element": "span"
   },
@@ -67,12 +67,21 @@
     },
     {
       "name": "checked",
-      "type": "boolean",
-      "default": false,
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
       "bindings": {
         "figma": {
-          "kind": "BOOLEAN",
-          "property": "Checked"
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
         },
         "code": {
           "prop": "checked"
@@ -205,7 +214,6 @@
                 }
               },
               "tokens": {
-                "background-color": "{imported.shared.color-ffffff}",
                 "border-bottom-color": "{imported.shared.color-00000000}",
                 "border-bottom-width": "{imported.shared.size-1}",
                 "border-left-color": "{imported.shared.color-00000000}",
@@ -214,54 +222,21 @@
                 "border-right-width": "{imported.shared.size-1}",
                 "border-top-color": "{imported.shared.color-00000000}",
                 "border-top-width": "{imported.shared.size-1}",
-                "box-shadow": "{imported.switch.switch-thumb.box-shadow}",
-                "color": "{imported.shared.color-ffffff}",
-                "row-rule-color": "{imported.shared.color-ffffff}"
-              },
-              "states": {
-                "disabled": {
-                  "background-color": "{imported.shared.color-f5f5f5}",
-                  "color": "{imported.shared.color-f5f5f5}"
-                }
+                "box-shadow": "{imported.switch.switch-thumb.box-shadow}"
               },
               "tokensByProp": [
                 {
-                  "prop": "color",
+                  "prop": "checked",
                   "map": {
-                    "default": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.default}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.default}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.default}"
+                    "checked": {
+                      "background-color": "{imported.switch.switch-thumb.background-color.{color}.checked}",
+                      "color": "{imported.switch.switch-thumb.color.{color}.checked}",
+                      "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.checked}"
                     },
-                    "error": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.error}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.error}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.error}"
-                    },
-                    "info": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.info}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.info}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.info}"
-                    },
-                    "primary": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.primary}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.primary}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.primary}"
-                    },
-                    "secondary": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.secondary}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.secondary}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.secondary}"
-                    },
-                    "success": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.success}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.success}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.success}"
-                    },
-                    "warning": {
-                      "background-color-state-checked": "{imported.switch.switch-thumb.background-color-state-checked.warning}",
-                      "color-state-checked": "{imported.switch.switch-thumb.color-state-checked.warning}",
-                      "row-rule-color-state-checked": "{imported.switch.switch-thumb.row-rule-color-state-checked.warning}"
+                    "unchecked": {
+                      "background-color": "{imported.switch.switch-thumb.background-color.{color}.unchecked}",
+                      "color": "{imported.switch.switch-thumb.color.{color}.unchecked}",
+                      "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.unchecked}"
                     }
                   }
                 },
@@ -297,57 +272,24 @@
           },
           "tokens": {
             "bottom": "{imported.shared.size-0}",
-            "color": "{imported.shared.color-ffffff}",
             "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}",
-            "row-rule-color": "{imported.shared.color-ffffff}",
             "top": "{imported.shared.size-0}",
             "z-index": "{imported.switch.buttonbase-root.z-index}"
           },
-          "states": {
-            "active": {
-              "background-color": "{imported.switch.buttonbase-root.background-color-state-active}"
-            },
-            "disabled": {
-              "color": "{imported.shared.color-f5f5f5}"
-            },
-            "hover": {
-              "background-color": "{imported.switch.buttonbase-root.background-color-state-hover}"
-            }
-          },
           "tokensByProp": [
             {
-              "prop": "color",
+              "prop": "checked",
               "map": {
-                "default": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.default}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.default}"
+                "checked": {
+                  "color": "{imported.switch.buttonbase-root.color.{color}.checked}",
+                  "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.checked}"
                 },
-                "error": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.error}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.error}"
-                },
-                "info": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.info}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.info}"
-                },
-                "primary": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.primary}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.primary}"
-                },
-                "secondary": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.secondary}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.secondary}"
-                },
-                "success": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.success}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.success}"
-                },
-                "warning": {
-                  "color-state-checked": "{imported.switch.buttonbase-root.color-state-checked.warning}",
-                  "row-rule-color-state-checked": "{imported.switch.buttonbase-root.row-rule-color-state-checked.warning}"
+                "unchecked": {
+                  "color": "{imported.switch.buttonbase-root.color.{color}.unchecked}",
+                  "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.unchecked}"
                 }
               }
             },
@@ -398,38 +340,22 @@
             "grow": true
           },
           "tokens": {
-            "background-color": "{imported.switch.switch-track.background-color}",
             "border-bottom-left-radius": "{imported.shared.size-7}",
             "border-bottom-right-radius": "{imported.shared.size-7}",
             "border-top-left-radius": "{imported.shared.size-7}",
-            "border-top-right-radius": "{imported.shared.size-7}",
-            "opacity": "{imported.switch.switch-track.opacity}",
-            "opacity-state-checked": "{imported.switch.switch-track.opacity-state-checked}"
+            "border-top-right-radius": "{imported.shared.size-7}"
           },
           "tokensByProp": [
             {
-              "prop": "color",
+              "prop": "checked",
               "map": {
-                "default": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.default}"
+                "checked": {
+                  "background-color": "{imported.switch.switch-track.background-color.{color}.checked}",
+                  "opacity": "{imported.switch.switch-track.opacity.checked}"
                 },
-                "error": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.error}"
-                },
-                "info": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.info}"
-                },
-                "primary": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.primary}"
-                },
-                "secondary": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.secondary}"
-                },
-                "success": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.success}"
-                },
-                "warning": {
-                  "background-color-state-checked": "{imported.switch.switch-track.background-color-state-checked.warning}"
+                "unchecked": {
+                  "background-color": "{imported.switch.switch-track.background-color.{color}.unchecked}",
+                  "opacity": "{imported.switch.switch-track.opacity.unchecked}"
                 }
               }
             },

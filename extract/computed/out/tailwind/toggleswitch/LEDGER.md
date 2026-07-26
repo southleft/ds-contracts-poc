@@ -35,8 +35,8 @@ Zero contradictions.
 
 ## Minted (no name recoverable — core/mint-tokens.ts, unchanged)
 
-- leaves: **31** · bindings: 25 base + 5 state
-- shape: 25 uniform · 5 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
+- leaves: **31** · bindings: 25 base + 4 state
+- shape: 23 uniform · 6 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
 
 ## Declared facts (v15 — carried, first-class)
 
@@ -62,6 +62,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **87.500%** (756/864 cells; 0/24 combo×state rows fully equal)
-- pixel: 0/24 pairs perfect at threshold 0 · 0/24 at the AA point (mean AA 2.415%, max 5.078%)
+- computed-equality (styled channels, contract-mediated): **88.889%** (768/864 cells; 0/24 combo×state rows fully equal)
+- pixel: 0/24 pairs perfect at threshold 0 · 0/24 at the AA point (mean AA 2.344%, max 4.642%)
 

@@ -628,8 +628,12 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       .join(', ');
   const shapeA = setShape(mockA);
   const shapeB = setShape(mockB);
+  // STATE-PLANE PROJECTION round: Switch 14 → 28 (`checked` reclassified from
+  // an out-of-vocabulary stateProp to a real VARIANT AXIS) and Button 63 → 75
+  // (the figmaStatePreviews probe accepted a State axis). Both must survive
+  // the JSON-only paste identically to the compiled-script path.
   assert(
-    shapeA === 'Accordion(4), Autocomplete(2), Button(63), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(14), Table(2), Tabs(6)',
+    shapeA === 'Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6)',
     `the bundle path builds the exact MUI set shape (got ${shapeA})`,
   );
   assert(shapeA === shapeB, `bundle path ≡ script path on component sets (${shapeA} vs ${shapeB})`);
@@ -653,8 +657,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       Object.values(v.valuesByMode).some((val) => val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS'),
     ).length;
   assert(
-    mockA.variables.length === 1514 && mockB.variables.length === 1514,
-    `both paths land 1514 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 1649 && mockB.variables.length === 1649,
+    `both paths land 1649 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 73 && aliasCountOf(mockB) === 73,
@@ -695,7 +699,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1514 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1649 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 }
 

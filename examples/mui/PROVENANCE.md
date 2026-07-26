@@ -46,7 +46,8 @@ node examples/mui/scripts/build-tokens.mjs          # theme → 150 DTCG tokens 
 npm run extract:computed -- --harness examples/mui/.mui-sandbox \
   --config extract/computed/configs/mui.json --component <C> --out extract/computed/out/mui
                                                     # capture (double-run byte-identity REQUIRED) + fidelity gate
-node examples/mui/scripts/promote-floor.mjs         # contracts v0.2.0 + minted tree + source-alias pass + resolution guard
+npx tsx examples/mui/scripts/promote-floor.mjs      # contracts v0.2.0 + minted tree + source-alias pass + resolution guard
+                                                    # + figmaStatePreviews probe (the REFEREE decides; refusals printed)
                                                     # + floor-reconstructed svg assets → assets/icons (molecule round)
 npx tsx packages/cli/src/cli.ts figma examples/mui/contracts --out examples/mui/figma \
   --icons examples/mui/assets/icons \
@@ -70,14 +71,21 @@ because a capture that reads its own promoted output stops minting the leaves
 the promoted bindings reference (the dangling-ref trap — now also caught by
 the promote-floor resolution guard).
 
-## Gates (default-state fidelity floor, pre-state rounds)
+## Gates (default-state fidelity floor)
+
+The "pre-state rounds" caveat this heading used to carry is CLOSED for the
+prop-selected plane: `checked` is a variant axis and its facts ride the base
+plane (see the state-plane projection round below). It is NOT closed for the
+pseudo-class planes — hover/active/focus-visible remain rendered on both
+sides of the gate but carried into the contract only where the v13 rules
+allow (root refs, plain color-kind refs on nested parts).
 
 | component | combos | computed equality | pixel rows |
 |---|---|---|---|
 | Button | 126 | 86.199% | AA perfect 0/504 |
 | Chip | 28 | 87.705% | AA perfect 0/112 |
 | Card | 4 | **100.000%** | AA perfect 0/16 |
-| Switch | 56 | 73.649% | AA perfect 0/224 |
+| Switch | 56 | **77.679%** | AA perfect **56/224** (state-plane projection round; was 73.649% / 0/224) |
 | Slider | 12 | 89.448% | AA perfect 0/48 |
 
 ### Molecule round (2026-07-25 — Tabs, Accordion, Autocomplete census; Dialog, Menu, Tooltip portal-swept)
@@ -111,7 +119,7 @@ text columns, a right-aligned action cell) and two body rows, one of them
 `selected` with a checked box.
 
 Genesis: **11 component sets + 3 standalone** (Menu, Tooltip, TablePagination
-— no variant axes), **146 variants, 1514 variables** (73 Figma-native source
+— no variant axes), **160 variants, 1649 variables** (73 Figma-native source
 aliases), 14 embedded icon assets — the exact `GENESIS-BATCH.figma.js` byte
 stream is executed against the mocked Figma before it is written (builder
 refuses otherwise), and `mui.bundle.json` is built twice byte-identically.
@@ -239,8 +247,9 @@ job and are not built yet.
   and the emitter lowers them to real absolute placement (STRETCH insets,
   measured sizes beat flex-grow). The compile receipt pins the REAL numbers
   headlessly: thumb 20×20, rail h4 stretched, track 34×14 — the class can
-  never pass silently again. Checked-state thumb POSITION stays a named
-  state-round residual (default-state placement only this round).
+  never pass silently again. Checked-state thumb POSITION is STILL a
+  residual, but it is now a PRECISELY LOCATED one — see the state-plane
+  projection round below.
 - **box-shadow source refs skipped**: `var(--mui-shadows-2)` raw values
   serialize differently from computed box-shadow (comma/space form) — value
   verification refuses, so shadows stay minted literals (named skip in
@@ -414,3 +423,133 @@ an engine receipt in `enriched.extension.json`.
   the end of its toolbar and Autocomplete's relative chips fell behind their
   input. Only `absolute` partitions now; the Switch/Slider overlay pins are
   unchanged and still green.
+
+### STATE-PLANE PROJECTION round (2026-07-25) — one class CLOSED, one class located
+
+**The defect this round fixes.** `checked` was declared a `stateProp` with
+`state: "checked"`, a value OUTSIDE the closed contract state vocabulary
+(`hover|active|focus-visible|disabled`). Nothing checked it: `StateAxisSpec.state`
+is a TypeScript annotation over JSON that is cast, never validated. So MUI
+Switch's checked colours minted as `background-color-state-checked` /
+`color-state-checked` — names the mint-property parser could not re-read
+(`stateOfMintProperty` returns null), which therefore landed as INERT channel
+names in `tokens`/`tokensByProp`. The Figma emitter's `applyTokens` dropped
+them silently; the CSS emitters wrote a literally invalid
+`background-color-state-checked:` declaration. The values were captured,
+minted into the DTCG tree, and rendered by NOBODY.
+
+**What changed.**
+
+1. **`checked` is a VARIANT AXIS** (the Checkbox/Accordion precedent):
+   `axes: ["color","size","checked"]` + `axisValueMap {unchecked:false,
+   checked:true}` in `extract/computed/configs/mui.json`; the seed contract's
+   `checked` prop is an enum `unchecked|checked` bound `VARIANT`/`Checked`.
+   `disabled` stays a stateProp — it IS a pseudo-class plane. The deltas are
+   now ordinary base-plane per-axis facts.
+2. **A load-time REFEREE for config states** (`extract/computed/capture.ts`
+   `loadConfig`): a `stateProps[].state` outside `CONTRACT_STATES` refuses BY
+   NAME, quoting the vocabulary and pointing at `axes`/`axisValueMap`. The
+   vocabulary now has exactly ONE spelling — `CONTRACT_STATES` in
+   `packages/schema/src/contract-schema.ts`, read by the contract `states`
+   enum, by `fuse.ts` STATE_SUFFIXES and by the new referee. Before, it was
+   three independent copies, which is why the hole existed.
+3. **NESTED TWO-AXIS TOKEN CARRIAGE** (the reclassification's honest
+   consequence, found by shipping it). MUI's checked colours are
+   f(color, checked) — a two-axis fact on a NESTED part. `classify()` in
+   `core/mint-tokens.ts` refused EVERY nested two-axis value outright
+   (`if (obs.part !== '') return none`), so the first pass of this round
+   *lost* the unchecked track colour the canvas used to draw: the gate fell
+   73.6% → 68.3%. The pair FIT was always sound; only the carriage was
+   missing, and it already existed one layer down — `validateContract` has
+   allowed a per-value `tokensByProp` map ref carrying at most ONE
+   placeholder naming a DIFFERENT enum prop since the computed-capture floor
+   (the "S2 capability lift"), and every emitter substitutes over the full
+   prop `subst` at any depth. So a nested pair is now spelled as a per-value
+   map on the SECOND placeholder's axis (leaf-path = mint discovery order —
+   deterministic, no tie-break invented) whose refs keep the other
+   placeholder:
+   `switch-track.tokensByProp[checked].checked["background-color"] =
+   "{imported.switch.switch-track.background-color.{color}.checked}"`.
+   A nested TRIPLE stays a named refusal (it would leave two placeholders).
+   Result: **gate 68.3% → 77.679%** (73.649% before the round) and **pixel AA
+   perfect 0/224 → 56/224** — the first non-zero pixel-perfect rows any MUI
+   component has produced.
+
+   The lift is **OPT-IN** (`mintTokens(…, { nestedPairs: true })`), and the
+   suite is why. `mintTokens` has TWO consumers: `extract/computed`'s
+   `applyMintToContract`, whose binding placer can spell a per-value map, and
+   the DESIGN path (`core/propose-figma.ts`), which binds `part.tokens`
+   directly. Enabling nested pairs globally made the design path emit a
+   two-placeholder ref onto a nested part — refused by name by the referee,
+   caught by `fill-matrix-depth-mint` and
+   `design-rest-degraded-minting-binds-styles`. Handing a consumer a ref it
+   cannot carry IS the bug this round is about, so the classifier now only
+   offers a nested pair to a caller that declares it can place one. The
+   design path's "uncorrelated nested fill mints NOTHING" invariant is
+   unchanged, and the committed capture artifacts are byte-identical under
+   the refactor (re-verified by recapture).
+4. **State previews probed at promotion.** The Polaris probe is ported into
+   `examples/mui/scripts/promote-floor.mjs` (which therefore runs under
+   `npx tsx`, so it asks the REAL referee instead of re-implementing it).
+   **mui.button accepted** — State = Default|Hover|Focus Visible|Active|
+   Disabled, Button 63 → 75 canvas cells. Seven contracts **REFUSED BY NAME**
+   and stay unpreviewd (switch, slider, checkbox, table on `focus-visible`;
+   tabs, accordion, autocomplete on `hover` — "declares no token overrides
+   … so its preview variant would render identically to Default"). The rule
+   was NOT loosened and the undeclared states were NOT pruned: they still
+   drive the code surface and `declaredStates`.
+
+**Counts.** MUI Switch **14 → 28 variants**; genesis **146 → 160 variants**,
+**1514 → 1649 variables**; `mui.bundle.json` 528,354 B, built twice
+byte-identically, genesis batch likewise.
+
+#### NAMED RESIDUAL — the checked thumb POSITION, now precisely located
+
+MUI translates the checked thumb (`matrix(1, 0, 0, 1, 20, 0)` at Size=Medium,
+`…16, 0` at Small). It is STILL not carried, and the reason is exact rather
+than vague: the overlay-cluster synthetic-translate door decomposes an
+identity-translate matrix into `translate-x`/`translate-y`
+(`extract/computed/lib.ts` `SYNTHETIC_CHANNELS` / `IDENTITY_MATRIX`), but
+`fuse.ts` admits those channels into the observation set only when the **BASE
+combo's** element already carries one:
+
+```
+if (a.baseFlat[pi].node.style['translate-x'] !== undefined) set.add(p);
+```
+
+Switch's base combo is `primary.medium.unchecked.enabled`, whose
+`buttonbase-root` computes `transform: none` — PROVEN from the committed
+capture: the identity matrix appears in exactly **112 of 223** captures and
+in **zero** unchecked ones. So the channel is never observed, and
+`buttonbase-root.transform` stays in `codeOnlyChannels` ("declared-channel
+value varies across combos"). Reclassifying `checked` was NECESSARY but not
+SUFFICIENT — the door is keyed to the base plane, not to the axis.
+
+The fix is a one-rule generalisation ("admit if ANY enabled combo carries a
+translate; a missing value is 0px, which is exactly what `transform: none`
+means"), and it is DELIBERATELY NOT TAKEN here: it re-opens fusion for every
+captured component with an absolute cluster — 10 MUI components plus
+ToggleSwitch — and four of them (`slider`, `autocomplete`, `tooltip`, plus
+Switch) carry identity matrices in committed truth, so it is a full recapture
+wave, not a patch. The compile receipt PINS the residual as an expectation
+(`switch thumb-position residual pin`), so the day the door is generalised the
+pin fails loudly and this paragraph gets rewritten with it.
+
+#### Other named residuals from this round
+
+- **Nested-part `states` still carry plain color-kind refs only** (v13). With
+  `checked` an axis, Switch's hover/active background deltas are now
+  correlated pairs rather than uncorrelated noise — but they resolve to refs
+  with a `{color}` placeholder, and `Part.states` on a nested part refuses
+  placeholders. 21 named `overflowBindings`, all of that one class. The
+  pseudo-class planes are not projected for Switch; only the prop-selected
+  plane is.
+- **Portal components gained NO State axis, by name.** Dialog, Menu and
+  Tooltip declare `states: []` (the portal sweep captures no interaction
+  planes — see the molecule-round residuals), so the probe never ran on them
+  and no preview axis exists. That absence is intended and pinned by the
+  contract, not by luck.
+- **STAYS EXCLUDED BY NAME** (unchanged this round): live hover behaviour
+  (prototype wiring); overlay/portal state planes; geometry deltas on
+  pseudo-class planes (`isFusable` still excludes GEOMETRY_CHANNELS there);
+  outline outside-stroke approximation.

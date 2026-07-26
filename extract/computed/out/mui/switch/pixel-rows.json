@@ -1,41 +1,41 @@
 [
   {
-    "key": "primary.small.no-checked.enabled__default",
+    "key": "primary.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.enabled__hover",
+    "key": "primary.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.enabled__focus-visible",
+    "key": "primary.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.enabled__active",
+    "key": "primary.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.disabled__default",
+    "key": "primary.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.disabled__hover",
+    "key": "primary.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.disabled__focus-visible",
+    "key": "primary.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.small.no-checked.disabled__active",
+    "key": "primary.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -80,42 +80,42 @@
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.enabled__default",
+    "key": "primary.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.enabled__hover",
+    "key": "primary.medium.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.enabled__focus-visible",
+    "key": "primary.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.enabled__active",
+    "key": "primary.medium.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.disabled__default",
+    "key": "primary.medium.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.disabled__hover",
+    "key": "primary.medium.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.disabled__focus-visible",
+    "key": "primary.medium.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "primary.medium.no-checked.disabled__active",
+    "key": "primary.medium.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -160,42 +160,42 @@
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.enabled__default",
+    "key": "secondary.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.enabled__hover",
+    "key": "secondary.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.enabled__focus-visible",
+    "key": "secondary.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.enabled__active",
+    "key": "secondary.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.disabled__default",
+    "key": "secondary.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.disabled__hover",
+    "key": "secondary.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.disabled__focus-visible",
+    "key": "secondary.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.small.no-checked.disabled__active",
+    "key": "secondary.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -240,42 +240,42 @@
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.enabled__default",
+    "key": "secondary.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.enabled__hover",
+    "key": "secondary.medium.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.enabled__focus-visible",
+    "key": "secondary.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.enabled__active",
+    "key": "secondary.medium.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.disabled__default",
+    "key": "secondary.medium.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.disabled__hover",
+    "key": "secondary.medium.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.disabled__focus-visible",
+    "key": "secondary.medium.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "secondary.medium.no-checked.disabled__active",
+    "key": "secondary.medium.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -320,42 +320,42 @@
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.enabled__default",
+    "key": "error.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.enabled__hover",
+    "key": "error.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.enabled__focus-visible",
+    "key": "error.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.enabled__active",
+    "key": "error.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.disabled__default",
+    "key": "error.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.disabled__hover",
+    "key": "error.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.disabled__focus-visible",
+    "key": "error.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.small.no-checked.disabled__active",
+    "key": "error.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -400,42 +400,42 @@
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.enabled__default",
+    "key": "error.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.enabled__hover",
+    "key": "error.medium.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.enabled__focus-visible",
+    "key": "error.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.enabled__active",
+    "key": "error.medium.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.disabled__default",
+    "key": "error.medium.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.disabled__hover",
+    "key": "error.medium.unchecked.disabled__hover",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.disabled__focus-visible",
+    "key": "error.medium.unchecked.disabled__focus-visible",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "error.medium.no-checked.disabled__active",
+    "key": "error.medium.unchecked.disabled__active",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
@@ -480,42 +480,42 @@
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.enabled__default",
+    "key": "warning.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.enabled__hover",
+    "key": "warning.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.enabled__focus-visible",
+    "key": "warning.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.enabled__active",
+    "key": "warning.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.disabled__default",
+    "key": "warning.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.disabled__hover",
+    "key": "warning.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.disabled__focus-visible",
+    "key": "warning.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.small.no-checked.disabled__active",
+    "key": "warning.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -560,42 +560,42 @@
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.enabled__default",
+    "key": "warning.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.enabled__hover",
+    "key": "warning.medium.unchecked.enabled__hover",
     "pctExact": 0.009765625,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.enabled__focus-visible",
+    "key": "warning.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.enabled__active",
+    "key": "warning.medium.unchecked.enabled__active",
     "pctExact": 0.009765625,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.disabled__default",
+    "key": "warning.medium.unchecked.disabled__default",
     "pctExact": 0.0032552083333333335,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.disabled__hover",
+    "key": "warning.medium.unchecked.disabled__hover",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.disabled__focus-visible",
+    "key": "warning.medium.unchecked.disabled__focus-visible",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "warning.medium.no-checked.disabled__active",
+    "key": "warning.medium.unchecked.disabled__active",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
@@ -640,42 +640,42 @@
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.enabled__default",
+    "key": "info.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.enabled__hover",
+    "key": "info.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.enabled__focus-visible",
+    "key": "info.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.enabled__active",
+    "key": "info.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.disabled__default",
+    "key": "info.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.disabled__hover",
+    "key": "info.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.disabled__focus-visible",
+    "key": "info.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.small.no-checked.disabled__active",
+    "key": "info.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -720,42 +720,42 @@
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.enabled__default",
+    "key": "info.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.enabled__hover",
+    "key": "info.medium.unchecked.enabled__hover",
     "pctExact": 0.009765625,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.enabled__focus-visible",
+    "key": "info.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.enabled__active",
+    "key": "info.medium.unchecked.enabled__active",
     "pctExact": 0.009765625,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.disabled__default",
+    "key": "info.medium.unchecked.disabled__default",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.disabled__hover",
+    "key": "info.medium.unchecked.disabled__hover",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.disabled__focus-visible",
+    "key": "info.medium.unchecked.disabled__focus-visible",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "info.medium.no-checked.disabled__active",
+    "key": "info.medium.unchecked.disabled__active",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
@@ -800,42 +800,42 @@
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.enabled__default",
+    "key": "success.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.enabled__hover",
+    "key": "success.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.enabled__focus-visible",
+    "key": "success.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.enabled__active",
+    "key": "success.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.disabled__default",
+    "key": "success.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.disabled__hover",
+    "key": "success.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.disabled__focus-visible",
+    "key": "success.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.small.no-checked.disabled__active",
+    "key": "success.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -880,42 +880,42 @@
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.enabled__default",
+    "key": "success.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.enabled__hover",
+    "key": "success.medium.unchecked.enabled__hover",
     "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.enabled__focus-visible",
+    "key": "success.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.enabled__active",
+    "key": "success.medium.unchecked.enabled__active",
     "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.disabled__default",
+    "key": "success.medium.unchecked.disabled__default",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.disabled__hover",
+    "key": "success.medium.unchecked.disabled__hover",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.disabled__focus-visible",
+    "key": "success.medium.unchecked.disabled__focus-visible",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "success.medium.no-checked.disabled__active",
+    "key": "success.medium.unchecked.disabled__active",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
@@ -960,42 +960,42 @@
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.enabled__default",
+    "key": "default.small.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.enabled__hover",
+    "key": "default.small.unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.enabled__focus-visible",
+    "key": "default.small.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.enabled__active",
+    "key": "default.small.unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.disabled__default",
+    "key": "default.small.unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.disabled__hover",
+    "key": "default.small.unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.disabled__focus-visible",
+    "key": "default.small.unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.small.no-checked.disabled__active",
+    "key": "default.small.unchecked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
@@ -1040,42 +1040,42 @@
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.enabled__default",
+    "key": "default.medium.unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.enabled__hover",
+    "key": "default.medium.unchecked.enabled__hover",
     "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.enabled__focus-visible",
+    "key": "default.medium.unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.enabled__active",
+    "key": "default.medium.unchecked.enabled__active",
     "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.disabled__default",
+    "key": "default.medium.unchecked.disabled__default",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.disabled__hover",
+    "key": "default.medium.unchecked.disabled__hover",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.disabled__focus-visible",
+    "key": "default.medium.unchecked.disabled__focus-visible",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
-    "key": "default.medium.no-checked.disabled__active",
+    "key": "default.medium.unchecked.disabled__active",
     "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
