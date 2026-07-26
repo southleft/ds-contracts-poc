@@ -3054,6 +3054,28 @@
             }
           }
         },
+        "translate-x": {
+          "small": {
+            "unchecked": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "checked": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "medium": {
+            "unchecked": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "checked": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
         "width": {
           "small": {
             "$value": "24px",

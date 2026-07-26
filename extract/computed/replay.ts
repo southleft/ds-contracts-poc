@@ -14,6 +14,7 @@
  * replays the COMMITTED Button capture offline from exactly this code.
  */
 import {
+  decomposeTranslate,
   flatten,
   normalizeValue,
   REPLAY_APPLY_EXCLUDE,
@@ -162,6 +163,21 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
       if (node) node.pseudo[m[2] as '::before' | '::after'] = style;
     }
     out.push({ combo, interaction, ...(cap.focusVisibleMatched !== undefined ? { focusVisibleMatched: cap.focusVisibleMatched } : {}), root });
+  }
+  // PSEUDO-DECOR v2 ROUND — apply the synthetic translate decomposition at
+  // the REPLAY read boundary too. Committed truth files store the raw
+  // `translate` longhand (Tailwind's knob: `100%`); the derived translate-x/y
+  // channels were only ever written at capture time, so re-fusing committed
+  // truth would have missed them. Same pure helper as normalizeNode, and
+  // IDEMPOTENT — captures that already carry decomposed transform matrices
+  // (MUI Switch) recompute byte-identical values.
+  for (const cap of out) {
+    const walk = (node: CapturedNode): void => {
+      decomposeTranslate(node.style);
+      for (const st of Object.values(node.pseudo)) if (st) decomposeTranslate(st as StyleMap);
+      for (const c of node.nodes) if (c.t === 'el') walk(c.el);
+    };
+    walk(cap.root);
   }
   return out;
 }

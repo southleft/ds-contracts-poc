@@ -71,15 +71,84 @@ export const normalizeValue = (v: string): string =>
 export const SYNTHETIC_CHANNELS = new Set(['translate-x', 'translate-y']);
 const IDENTITY_MATRIX = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/;
 
+/** PSEUDO-DECOR v2 ROUND — the `translate` LONGHAND joins the decomposition.
+ *  Tailwind v4's `translate-x-full` does NOT compile to `transform`: it sets
+ *  the INDEPENDENT `translate` property, which Chromium computes as `none`,
+ *  `<len|pct>`, or `<len|pct> <len|pct>` (the toggle knob's `100%`). Until
+ *  now only `transform` was decomposed, so a knob that moves via `translate`
+ *  looked motionless — "a checked toggle on canvas is a colored track with
+ *  no knob".
+ *
+ *  BOUNDED GRAMMAR (everything else refuses by name downstream):
+ *    · `none` — no contribution;
+ *    · one or two components, each `<n>px` or `<n>%`;
+ *    · a PERCENTAGE bakes against the element's OWN captured border box
+ *      (width for x, height for y) — the same idiom as the %-radius bake in
+ *      fuse.ts. A % with no px box to bake against contributes nothing and
+ *      leaves the raw `translate` value for the named downstream refusal.
+ *  `transform` AND `translate` both non-identity is OUTSIDE the grammar:
+ *    NEITHER synthetic channel is written (the raw values stay visible so the
+ *    consumer names `translate-and-transform-both-set`) — never silently
+ *    picking one. */
+const TRANSLATE_COMPONENT = /^(-?\d+(?:\.\d+)?)(px|%)$/;
+export const TRANSLATE_LONGHAND = /^(none|-?\d+(?:\.\d+)?(px|%)( -?\d+(?:\.\d+)?(px|%))?)$/;
+
+/** True when `transform` carries a real (non-identity-translate) matrix. */
+export const hasNonTranslateTransform = (t: string | undefined): boolean =>
+  t !== undefined && t !== 'none' && !IDENTITY_MATRIX.test(t);
+
+/** Decompose `transform`/`translate` into the synthetic translate-x/y px
+ *  channels, IN PLACE. Pure, deterministic, IDEMPOTENT (re-running on an
+ *  already-decomposed map recomputes the identical values) — applied at BOTH
+ *  read boundaries: capture (normalizeNode) and replay (reconstructCaptures),
+ *  ONE implementation. */
+export function decomposeTranslate(out: StyleMap): void {
+  const m = IDENTITY_MATRIX.exec(out['transform'] ?? '');
+  const tr = out['translate'] ?? 'none';
+  const trSet = tr !== 'none' && tr !== '';
+  // Outside the grammar: both spellings carry motion. Write nothing.
+  if (m && trSet) return;
+  if (m) {
+    out['translate-x'] = `${parseFloat(m[1])}px`;
+    out['translate-y'] = `${parseFloat(m[2])}px`;
+    return;
+  }
+  if (!trSet || !TRANSLATE_LONGHAND.test(tr)) return;
+  // A non-identity `transform` alongside `translate` is outside the grammar.
+  if (hasNonTranslateTransform(out['transform'])) return;
+  const parts = tr.split(' ');
+  const box = [out['width'], out['height']];
+  const resolved: number[] = [];
+  for (let i = 0; i < 2; i++) {
+    const c = parts[i];
+    if (c === undefined) { resolved.push(0); continue; }
+    const cm = TRANSLATE_COMPONENT.exec(c);
+    if (!cm) return;
+    if (cm[2] === 'px') { resolved.push(parseFloat(cm[1])); continue; }
+    // percentage: bake against this element's OWN captured border box
+    const bm = /^(-?\d+(?:\.\d+)?)px$/.exec(box[i] ?? '');
+    if (!bm) return; // no px box to bake against — leave undecomposed (named downstream)
+    resolved.push(Math.round((parseFloat(cm[1]) / 100) * parseFloat(bm[1]) * 1000) / 1000);
+  }
+  out['translate-x'] = `${resolved[0]}px`;
+  out['translate-y'] = `${resolved[1]}px`;
+}
+
+/** PILL SENTINEL (shared — pseudo-decor v2 round). `rounded-full` compiles to
+ *  `calc(infinity * 1px)`; Chromium clamps it to `3.35544e+07px`, scientific
+ *  notation that NO px grammar in this repo matches. fuse.ts has always
+ *  folded it to the 9999px pill sentinel for minted radii; the pseudo-decor
+ *  fold used a local px() regex that silently produced 0 instead — which
+ *  shipped a promoted pill thumb as a SQUARE. One implementation, both
+ *  consumers. */
+export const PILL_RADIUS_SENTINEL = '9999px';
+export const isAbsurdRadius = (v: string | undefined): boolean => /^[\d.]+e\+?\d+px$/.test(v ?? '');
+
 export function normalizeNode(n: CapturedNode): CapturedNode {
   const norm = (s: StyleMap): StyleMap => {
     const out: StyleMap = {};
     for (const k of Object.keys(s).sort()) out[k] = normalizeValue(s[k]);
-    const m = IDENTITY_MATRIX.exec(out['transform'] ?? '');
-    if (m) {
-      out['translate-x'] = `${parseFloat(m[1])}px`;
-      out['translate-y'] = `${parseFloat(m[2])}px`;
-    }
+    decomposeTranslate(out);
     return out;
   };
   return {

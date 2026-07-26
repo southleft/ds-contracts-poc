@@ -1,6 +1,6 @@
 {
-  "passed": 154,
-  "total": 154,
+  "passed": 155,
+  "total": 155,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -770,6 +770,11 @@
     {
       "id": "tailwind-figma-genesis",
       "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "generalized-translate-door",
+      "claim": "C5-extraction",
       "pass": true
     }
   ]

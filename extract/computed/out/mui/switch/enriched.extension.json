@@ -1,8 +1,8 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Difference vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; every other receipt is recomputed from the same truth.",
   "library": "@mui/material@9.2.0",
-  "browser": "149.0.7827.55",
+  "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "mintedTokens": {
     "imported": {
       "shared": {
@@ -336,6 +336,28 @@
               "checked": {
                 "$value": "#ffffff",
                 "$type": "color"
+              }
+            }
+          },
+          "translate-x": {
+            "small": {
+              "unchecked": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "checked": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "medium": {
+              "unchecked": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "checked": {
+                "$value": "20px",
+                "$type": "dimension"
               }
             }
           },
@@ -1830,6 +1852,7 @@
     "absolute-geometry-admitted: switch-input — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: switch-thumb — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: switch-track — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "translate-door-generalized: buttonbase-root — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
     "control-fallback: no control for <input> — span control used (part switch-input)"
   ],
   "anatomyJoin": {
@@ -1917,6 +1940,7 @@
     "declared state fact carried: [focus-visible] switch-input.outline-style = auto (v15 declared vocabulary)",
     "nested pair carried: buttonbase-root.color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: buttonbase-root.row-rule-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: buttonbase-root.translate-x = per-checked map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: switch-thumb.background-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: switch-thumb.color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: switch-thumb.row-rule-color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",

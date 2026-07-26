@@ -52,6 +52,7 @@ import {
   promoteMultiRootAnatomy,
 } from '../extract/computed/anatomy.js';
 import type { Capture as DepthCapture, CapturedNode as DepthNode } from '../extract/computed/lib.js';
+import { decomposeTranslate, isAbsurdRadius } from '../extract/computed/lib.js';
 import { kebab as depthKebab } from '../extract/types.js';
 
 const ROOT = process.cwd();
@@ -4532,13 +4533,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, MOLECULE round) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip, 1649 variables incl. 73
+        // path (same sets + standalone Menu/Tooltip, 1653 variables incl. 73
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1649 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1653 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -5653,7 +5654,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1649 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1653 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -5678,7 +5679,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1649 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 14 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1653 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 14 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
@@ -5719,6 +5720,93 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const twCommitted = readFileSync(path.join(ROOT, 'examples/tailwind/figma/tailwind.bundle.json'), 'utf8');
       if (twRun !== twCommitted) throw new Error('committed examples/tailwind/figma/tailwind.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log('tailwind-figma-genesis: 5/5 Tailwind-v4 scripts referee+execute headless (48 variants — ToggleSwitch 3→6 on the new Checked axis; Badge/Button carry accepted State preview axes); reader bound the library\'s own utility tokens; one-paste batch mock-proven; committed tailwind.bundle.json fresh — tier-1 four-method guarantee complete');
+    },
+  },
+  {
+    id: 'generalized-translate-door',
+    claim: 'C5-extraction',
+    run: () => {
+      // PSEUDO-DECOR v2 ROUND. Two things are pinned here:
+      //   (1) the `translate` LONGHAND decomposition (Tailwind v4's
+      //       translate-x-full compiles to `translate`, NOT `transform`),
+      //       including the %-bake against the element's OWN border box and
+      //       the both-spellings-set refusal;
+      //   (2) the GENERALIZED door: MUI Switch's checked thumb offset is a
+      //       base-plane-absent fact that now mints per {size}×checked, with
+      //       ABSENT ≡ 0px.
+
+      // ---- 1. `translate` longhand: px, %, two-component, none ----
+      const dec = (st: Record<string, string>) => { const c = { ...st }; decomposeTranslate(c); return c; };
+      const pxCase = dec({ translate: '12px', width: '16px', height: '16px' });
+      if (pxCase['translate-x'] !== '12px' || pxCase['translate-y'] !== '0px') {
+        throw new Error(`translate longhand px decomposition wrong: ${JSON.stringify(pxCase)}`);
+      }
+      // the toggle knob: 100% of its OWN 16px border box = 16px, y untouched
+      const pctCase = dec({ translate: '100%', width: '16px', height: '16px' });
+      if (pctCase['translate-x'] !== '16px' || pctCase['translate-y'] !== '0px') {
+        throw new Error(`translate %-bake must resolve against the element's own border box (16px), got ${JSON.stringify(pctCase)}`);
+      }
+      const pctBig = dec({ translate: '100%', width: '24px', height: '24px' });
+      if (pctBig['translate-x'] !== '24px') throw new Error(`%-bake must track the element's own width (24px), got ${pctBig['translate-x']}`);
+      const twoComp = dec({ translate: '50% 10px', width: '20px', height: '8px' });
+      if (twoComp['translate-x'] !== '10px' || twoComp['translate-y'] !== '10px') {
+        throw new Error(`two-component translate wrong: ${JSON.stringify(twoComp)}`);
+      }
+      if (dec({ translate: 'none', width: '16px', height: '16px' })['translate-x'] !== undefined) {
+        throw new Error('translate:none must contribute NO synthetic channel');
+      }
+      // a % with no px box to bake against contributes nothing (named residue)
+      if (dec({ translate: '100%', width: 'auto', height: 'auto' })['translate-x'] !== undefined) {
+        throw new Error('a %-translate with no px box must decompose to NOTHING, not to 0');
+      }
+      // ---- 2. both spellings set is OUTSIDE the grammar: write NEITHER ----
+      const both = dec({ transform: 'matrix(1, 0, 0, 1, 5, 0)', translate: '100%', width: '16px', height: '16px' });
+      if (both['translate-x'] !== undefined || both['translate-y'] !== undefined) {
+        throw new Error(`transform AND translate both set must decompose to NEITHER channel (never silently pick one), got ${JSON.stringify(both)}`);
+      }
+      // a non-translate transform stays outside too
+      const scaled = dec({ transform: 'matrix(2, 0, 0, 2, 0, 0)', width: '16px', height: '16px' });
+      if (scaled['translate-x'] !== undefined) throw new Error('a scale matrix must not decompose into translate channels');
+      // identity-translate transform still decomposes (v1 behaviour intact)
+      const mtx = dec({ transform: 'matrix(1, 0, 0, 1, 20, 0)', width: '20px', height: '20px' });
+      if (mtx['translate-x'] !== '20px' || mtx['translate-y'] !== '0px') {
+        throw new Error(`identity-matrix decomposition regressed: ${JSON.stringify(mtx)}`);
+      }
+      // decomposition is IDEMPOTENT (applied at BOTH read boundaries)
+      const once = dec({ transform: 'matrix(1, 0, 0, 1, 20, 0)', width: '20px', height: '20px' });
+      const twice = dec(once);
+      if (JSON.stringify(once) !== JSON.stringify(twice)) throw new Error('decomposeTranslate is not idempotent');
+
+      // ---- 3. the shared PILL SENTINEL (square-thumb trap) ----
+      if (!isAbsurdRadius('3.35544e+07px')) throw new Error('the clamped calc(infinity*1px) radius must read as the pill idiom');
+      if (isAbsurdRadius('8px')) throw new Error('an ordinary px radius must NOT read as a pill');
+
+      // ---- 4. MUI Switch: the checked thumb offset is CARRIED, per size ----
+      const swc = JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/contracts/switch.contract.json'), 'utf8')) as Record<string, unknown>;
+      const json = JSON.stringify(swc);
+      if (!json.includes('translate-x')) {
+        throw new Error('MUI Switch contract carries NO translate-x — the generalized door regressed and the checked thumb is motionless again');
+      }
+      for (const plane of ['checked', 'unchecked']) {
+        const ref = `{imported.switch.buttonbase-root.translate-x.{size}.${plane}}`;
+        if (!json.includes(ref)) throw new Error(`MUI Switch must bind ${ref} — the offset is a {size}×checked PRODUCT (single-prop stylesWhen could never express it)`);
+      }
+      // the minted VALUES are the real travel, and unchecked is exactly 0
+      const minted = JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/tokens/mui-minted.dtcg.json'), 'utf8')) as Record<string, unknown>;
+      const dig = (o: unknown, p: string): unknown => p.split('.').reduce<unknown>((a, k) => (a as Record<string, unknown>)?.[k], o);
+      const leaf = (p: string): string => {
+        const n = dig(minted, p) as { $value?: string } | undefined;
+        if (!n || n.$value === undefined) throw new Error(`minted leaf missing: ${p}`);
+        return n.$value;
+      };
+      const travels: Array<[string, string]> = [['medium', '20px'], ['small', '16px']];
+      for (const [size, want] of travels) {
+        const un = leaf(`imported.switch.buttonbase-root.translate-x.${size}.unchecked`);
+        const ch = leaf(`imported.switch.buttonbase-root.translate-x.${size}.checked`);
+        if (un !== '0px') throw new Error(`switch translate-x.${size}.unchecked must be 0px (ABSENT ≡ 0px — transform:none IS zero), got ${un}`);
+        if (ch !== want) throw new Error(`switch translate-x.${size}.checked must be ${want} (MUI's own translate for this size), got ${ch}`);
+      }
+      console.log('generalized-translate-door: `translate` longhand decomposes (px/%/two-component, %-baked against the own border box; both-spellings-set and scale matrices refuse by name, idempotent); pill sentinel shared; MUI Switch checked-thumb offset carried as a {size}×checked minted product (medium 0→20px, small 0→16px) — the state round\'s pinned residual is CLOSED');
     },
   },
 ];

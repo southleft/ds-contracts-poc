@@ -88,11 +88,37 @@ Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
   channels stay gracefully-degraded minted literals *by the library's own
   choice*. This is the designed degradation path working, not a gap in the
   reader.
-- **Toggle thumb (::after decor) not promoted**: drawn in every combo with
-  per-sizing geometry — outside the v1 pseudo-decor grammar on two counts
-  (unconditional placement; non-uniform box). The named next grammar
-  extension: per-axis decor geometry + unconditional absolute decor parts.
-  On canvas the toggle currently draws its track only.
+- **Toggle thumb (::after decor) not promoted** — STILL OPEN, now located to
+  the exact blocker. Drawn in every combo with per-sizing geometry: outside
+  the v1 pseudo-decor grammar on the two counts already named (unconditional
+  placement; non-uniform box) **and on a third, discovered in the pseudo-decor
+  v2 round and decisive**: the knob's x offset is a **two-axis product**.
+  Captured truth (`out/tailwind/toggleswitch/captured-truth.json`,
+  `part-0::after`) is `left: 2px` uniform with `translate: none | 100%`, and
+  the `100%` bakes against the knob's OWN border box — which is
+  `16|20|24px` by Sizing. So the resolved offset is a function of
+  `Sizing × Checked` (2, 18 / 2, 22 / 2, 28). `stylesWhen` conditions are
+  **single-prop**, and `literals`/`shape` are scalars: no spelling in the
+  decor grammar can express a product. Carrying it needs the pseudo
+  SYNTHESIZED INTO THE SWEEP as a real aligned part, so `prepareMint` planes
+  it and mints `{Sizing}×{Checked}` tokens — exactly how MUI Switch's thumb
+  offset is now carried (`translate-x.{size}.checked`). That is a capture/
+  alignment change, not a grammar tweak, and it is the named next round.
+  - Two prerequisites DID land this round: the `translate` longhand is now
+    decomposed into the synthetic `translate-x/y` channels with the `%`
+    baked against the element's own border box (Tailwind's `translate-x-full`
+    never touches `transform`, so it was previously invisible), and the pill
+    sentinel is shared with the decor fold — without which a promoted knob
+    would have shipped as a **square** (`rounded-full` computes to
+    `3.35544e+07px`, which the decor fold's local px regex silently read as
+    radius `0`).
+  - A cheaper alternative exists and is recorded for the next round: the
+    checked knob is exactly right-anchored (`left + translate + w ==
+    trackW - 2`), so an anchor-selection rule could spell the offset as
+    `Checked=checked → right: 2px` / `Checked=unchecked → left: 2px` —
+    single-axis, expressible today — leaving only per-axis width/height
+    (which needs the emitter's shape scalars to resolve per combo).
+  - On canvas the toggle still draws its track only.
 - **Card floor 72.4%**: lowest of the set — flowbite Card is a bordered flex
   column whose spacing channels partially fold; un-triaged residue, named.
 - **ToggleSwitch source facts sparse** (12): its colors ride the inline
@@ -126,5 +152,10 @@ Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
 - **The thumb still draws nothing (unchanged, re-named).** This round colors
   the TRACK only. Flowbite's toggle thumb is an `::after` pseudo-element with
   unconditional placement and a per-sizing box — outside the v1 pseudo-decor
-  grammar on two counts (above). A checked toggle on canvas is a colored
-  track with no knob; the knob is a separate round.
+  grammar on two counts (above), and on a THIRD count located in the
+  pseudo-decor v2 round: its x offset is a `Sizing × Checked` **product**,
+  which no single-prop `stylesWhen` or scalar literal can spell. See the
+  named-residual entry above for the full analysis, the two prerequisites
+  that did land (translate-longhand decomposition, shared pill sentinel),
+  and the two candidate paths for closing it. A checked toggle on canvas is
+  still a colored track with no knob; the knob is a separate round.

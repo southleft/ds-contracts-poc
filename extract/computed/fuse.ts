@@ -43,8 +43,11 @@ import {
   CHANNEL_TO_COMPUTED,
   flatten,
   isFusable,
+  isAbsurdRadius,
   kindOf,
   pairwiseCertificate,
+  PILL_RADIUS_SENTINEL,
+  SYNTHETIC_CHANNELS,
   type Capture,
   type Combo,
   type FlatEl,
@@ -429,10 +432,54 @@ export function styledChannels(
         if (el.node.style[p] !== a.baseFlat[pi].node.style[p]) set.add(p);
       }
     }
-    // synthetic translate channels live outside the browser enumeration
+    // Synthetic translate channels live outside the browser enumeration.
+    //
+    // PSEUDO-DECOR v2 ROUND — GENERALIZED TRANSLATE DOOR. The v1 door only
+    // admitted these when the BASE combo already carried the key
+    // (`baseFlat[pi].style['translate-x'] !== undefined`). MUI Switch's thumb
+    // is `transform: none` at base and only picks up matrix(1,0,0,1,20,0) on
+    // the Checked plane — so its motion was never observed and the checked
+    // thumb drew at the unchecked x (the state round's pinned residual).
+    //
+    // The door is now: an overlay-cluster member (absAdmit ∪ parentAdmit,
+    // minus table-lowered) whose EVERY enabled default-plane combo is inside
+    // the translate grammar (transform none|identity-translate, `translate`
+    // none|<len|pct> pairs, never both) admits the pair as soon as ANY combo
+    // carries motion. ABSENT ≡ '0px' (a combo with no translate is at rest,
+    // not unobserved) — prepareMint's per-combo read applies the same
+    // identity. Anything outside the grammar REFUSES BY NAME and admits
+    // nothing (never silently picking one spelling).
     if (!inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) {
-      for (const p of ['translate-x', 'translate-y']) {
-        if (a.baseFlat[pi].node.style[p] !== undefined) set.add(p);
+      const styles: StyleMap[] = [a.baseFlat[pi].node.style];
+      for (const combo of space.enumeration.combos) {
+        if (!isEnabled(combo)) continue;
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (el) styles.push(el.node.style);
+      }
+      let anyMotion = false;
+      let outside: string | null = null;
+      for (const st of styles) {
+        const tf = st['transform'] ?? 'none';
+        const tr = st['translate'] ?? 'none';
+        const tfSet = tf !== 'none';
+        const trSet = tr !== 'none' && tr !== '';
+        if (tfSet && trSet) { outside ??= `transform (${tf}) AND translate (${tr}) both set`; continue; }
+        if (tfSet && st['translate-x'] === undefined) { outside ??= `non-translate transform (${tf})`; continue; }
+        if (trSet && st['translate-x'] === undefined) { outside ??= `translate outside the bounded grammar (${tr})`; continue; }
+        const tx = st['translate-x'];
+        const ty = st['translate-y'];
+        if ((tx !== undefined && tx !== '0px') || (ty !== undefined && ty !== '0px')) anyMotion = true;
+      }
+      if (outside !== null) {
+        receipts.push(
+          `translate-door-refused: ${a.partNames[pi]} — ${outside}; the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round`,
+        );
+      } else if (anyMotion) {
+        set.add('translate-x');
+        set.add('translate-y');
+        receipts.push(
+          `translate-door-generalized: ${a.partNames[pi]} — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round`,
+        );
       }
     }
     // ORGANISM round: an admitted table cell ALWAYS carries width+height —
@@ -983,8 +1030,8 @@ export function prepareMint(
           // the px grammar). Any absurd radius IS the pill idiom — carried
           // as the 9999px pill sentinel (Figma clamps to half-box exactly
           // like the browser).
-          if (/^border-.*-radius$/.test(channel) && /^[\d.]+e\+?\d+px$/.test(v ?? '')) {
-            v = '9999px';
+          if (/^border-.*-radius$/.test(channel) && isAbsurdRadius(v)) {
+            v = PILL_RADIUS_SENTINEL;
           }
           // Absolute-position round: %-radii on cluster parts resolve
           // against the part's own captured box (CSS: 50% of a 20px square
@@ -999,6 +1046,15 @@ export function prepareMint(
           // (union-aligned parts that exist only under certain states).
           // `unk ??= undefined` is a no-op, so absence used to slip past the
           // unmintable guard and crash at kindOf — name it instead.
+          // PSEUDO-DECOR v2 ROUND — ABSENT ≡ '0px' for the SYNTHETIC translate
+          // channels. Under the generalized door a part is admitted because
+          // SOME combo carries motion; the combos with no transform/translate
+          // at all are AT REST, not unobserved. Without this identity the
+          // pair would hit the missing-value guard below and the whole fact
+          // would bail to unmintable — exactly what kept MUI Switch's checked
+          // thumb from moving. The identity is only ever applied to channels
+          // the door already admitted (SYNTHETIC_CHANNELS).
+          if (v === undefined && SYNTHETIC_CHANNELS.has(channel)) v = '0px';
           if (v === undefined) { unk ??= '<channel absent in this combo>'; continue; }
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
@@ -1070,6 +1126,18 @@ export function prepareMint(
   const inertOnDisabled: string[] = [];
   const foldedStateSkips: string[] = [];
 
+  /** PSEUDO-DECOR v2 ROUND — the STATE observation path is the THIRD consumer
+   *  of the ABSENT ≡ '0px' identity (after prepareMint's per-combo read and
+   *  absolutePartPlacement). Under the generalized translate door a part is
+   *  admitted because SOME combo carries motion, so an interaction plane with
+   *  no transform/translate at all reads `undefined` — which used to reach
+   *  kindOf() and CRASH inside the colour parser (astryx, offline re-fuse).
+   *  A synthetic channel absent on a plane is AT REST; any OTHER channel
+   *  absent on a plane is genuinely unobserved there and is skipped rather
+   *  than crashed (that guard is a pre-existing latent hole, now closed). */
+  const planeValue = (st: StyleMap, p: string): string | undefined =>
+    st[p] !== undefined ? st[p] : SYNTHETIC_CHANNELS.has(p) ? '0px' : undefined;
+
   const pushStateValue = (state: string, part: string, channel: string, combo: Combo, v: string) => {
     const key = `${state}|${part}|${channel}`;
     let d = stateDeltaChannels.get(key);
@@ -1099,13 +1167,16 @@ export function prepareMint(
         if (!d0 || !d1) continue;
         for (const p of allProps) {
           if (!isFusable(p)) continue;
-          if (d0.node.style[p] === d1.node.style[p]) continue;
+          const pv0 = planeValue(d0.node.style, p);
+          const pv1 = planeValue(d1.node.style, p);
+          if (pv0 === pv1) continue;
+          if (pv1 === undefined) continue; // channel unobserved on this interaction plane
           if (!isEnabled(combo)) {
             const flagged = Object.entries(combo.stateFlags).filter(([, f]) => f).map(([n]) => n).join('+');
             inertOnDisabled.push(`interaction-on-${flagged}-changed: ${combo.key} ${interaction} ${a.partNames[pi]}.${p}`);
             continue;
           }
-          pushStateValue(interaction, a.partNames[pi], p, combo, d1.node.style[p]);
+          pushStateValue(interaction, a.partNames[pi], p, combo, pv1);
         }
       }
     }
@@ -1128,8 +1199,11 @@ export function prepareMint(
         if (!d0[pi] || !d1[pi]) continue;
         for (const p of allProps) {
           if (!isFusable(p)) continue;
-          if (d0[pi]!.node.style[p] === d1[pi]!.node.style[p]) continue;
-          pushStateValue(s.state, a.partNames[pi], p, twin, d1[pi]!.node.style[p]);
+          const sv0 = planeValue(d0[pi]!.node.style, p);
+          const sv1 = planeValue(d1[pi]!.node.style, p);
+          if (sv0 === sv1) continue;
+          if (sv1 === undefined) continue; // channel unobserved on this state plane
+          pushStateValue(s.state, a.partNames[pi], p, twin, sv1);
         }
       }
     }

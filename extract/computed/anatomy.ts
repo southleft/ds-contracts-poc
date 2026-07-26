@@ -32,7 +32,7 @@
 import type { Contract, Part } from '../../scripts/contract-schema.js';
 import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
-import { signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
+import { isAbsurdRadius, PILL_RADIUS_SENTINEL, signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
 
 // ---------------------------------------------------------------------------
 // ORGANISM ROUND (Table) — TABLE-DISPLAY LOWERING
@@ -1174,7 +1174,14 @@ export function promoteAnatomy(
           top: (px(row.st['top']) ?? 0) + ty + bT,
           left: (px(row.st['left']) ?? 0) + tx + bL,
           bg: row.st['background-color'],
-          radius: px(row.st['border-top-left-radius']) ?? 0,
+          // PSEUDO-DECOR v2 (G3) — SQUARE-THUMB TRAP. `rounded-full` computes
+          // to 3.35544e+07px, which the local px() regex does not match, so
+          // the radius folded to 0 and the decor shipped as a RECT. Share the
+          // pill sentinel fuse.ts already uses for minted radii; the kind rule
+          // below (radius ≥ min(w,h)/2) then correctly reads it as an ellipse.
+          radius: isAbsurdRadius(row.st['border-top-left-radius'])
+            ? parseFloat(PILL_RADIUS_SENTINEL)
+            : (px(row.st['border-top-left-radius']) ?? 0),
         };
       };
       const folded = drawnRows.map(fold);

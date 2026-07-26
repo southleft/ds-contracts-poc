@@ -253,6 +253,18 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     canvas: 'draw',
     note: 'Identity-translate transform on an absolute part — folded into the canvas absolute offsets (tx/ty).',
   },
+  // PSEUDO-DECOR v2 ROUND: the INDEPENDENT `translate` longhand — what
+  // Tailwind v4's translate-x-full actually compiles to (the toggle knob),
+  // NOT `transform`. Bounded exactly like transform's grammar: one or two
+  // <len|pct> components, `none` for the resting spelling. Percentages bake
+  // against the element's own captured border box at the read boundary
+  // (decomposeTranslate); the canvas lowering folds tx/ty into absolute
+  // offsets through the very same synthetic translate-x/y channels.
+  translate: {
+    value: /^(none|-?[\d.]+(px|%)( -?[\d.]+(px|%))?)$/,
+    canvas: 'draw',
+    note: 'Independent translate longhand on an absolute part — folded into the canvas absolute offsets (tx/ty).',
+  },
   'box-sizing': {
     value: kw('border-box', 'content-box'),
     canvas: 'draw',

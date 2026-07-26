@@ -503,7 +503,40 @@ minted into the DTCG tree, and rendered by NOBODY.
 **1514 → 1649 variables**; `mui.bundle.json` 528,354 B, built twice
 byte-identically, genesis batch likewise.
 
-#### NAMED RESIDUAL — the checked thumb POSITION, now precisely located
+#### CLOSED (pseudo-decor v2 round) — the checked thumb POSITION
+
+**This residual is closed.** The checked thumb now sits where MUI puts it, and
+the compile receipt pins the displacement POSITIVELY, per size:
+
+```
+translate-x.medium.unchecked 0px → .checked 20px   (delta 20)
+translate-x.small.unchecked  0px → .checked 16px   (delta 16)
+```
+
+The fix is exactly the one-rule generalisation the paragraph below predicted.
+`fuse.ts` no longer keys the synthetic-translate door to the BASE plane; it
+admits `translate-x`/`translate-y` for any overlay-cluster part (`absAdmit ∪
+parentAdmit`, minus table-lowered) whose **entire enabled default plane** is
+inside the translate grammar — identity-translate `transform`, or the
+independent `translate` longhand, never both — as soon as ANY combo carries
+motion, with **ABSENT ≡ `0px`** (which is precisely what `transform: none`
+means). `prepareMint`'s per-combo read learned the same identity, so the pair
+no longer bails to unmintable. Anything outside the grammar refuses by name
+(`translate-door-refused`). The facts mint as a two-axis product
+(`{imported.switch.buttonbase-root.translate-x.{size}.checked}`), which is why
+`stylesWhen` could never have expressed them — single-prop conditions cannot
+carry a `{size}`×`checked` product.
+
+The recapture wave the paragraph below called a blocker was **not needed**:
+the round re-fused from committed captured truth via
+`extract/computed/regate.ts --write-enriched` (replay-sufficiency is
+byte-asserted at capture time), and the re-fuse of Switch's contract diffs to
+the translate facts **and nothing else** — the offline path is byte-faithful.
+
+The original analysis, kept because it is still the correct description of
+what was broken:
+
+#### (historical) NAMED RESIDUAL — the checked thumb POSITION, precisely located
 
 MUI translates the checked thumb (`matrix(1, 0, 0, 1, 20, 0)` at Size=Medium,
 `…16, 0` at Small). It is STILL not carried, and the reason is exact rather
@@ -527,13 +560,14 @@ SUFFICIENT — the door is keyed to the base plane, not to the axis.
 
 The fix is a one-rule generalisation ("admit if ANY enabled combo carries a
 translate; a missing value is 0px, which is exactly what `transform: none`
-means"), and it is DELIBERATELY NOT TAKEN here: it re-opens fusion for every
-captured component with an absolute cluster — 10 MUI components plus
-ToggleSwitch — and four of them (`slider`, `autocomplete`, `tooltip`, plus
-Switch) carry identity matrices in committed truth, so it is a full recapture
-wave, not a patch. The compile receipt PINS the residual as an expectation
-(`switch thumb-position residual pin`), so the day the door is generalised the
-pin fails loudly and this paragraph gets rewritten with it.
+means"). It was deferred at the state round because it re-opens fusion for
+every captured component with an absolute cluster — 10 MUI components plus
+ToggleSwitch. **It has since been taken** (see the CLOSED section above); the
+feared "full recapture wave" turned out to be an offline re-fuse from
+committed truth, and the measured blast radius across all 39 components is
+recorded in that round's report. The compile receipt's expectation pin fired
+exactly as designed the moment the door was generalised, and was rewritten
+into the positive travel pin in the same change.
 
 #### Other named residuals from this round
 

@@ -251,9 +251,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -579,9 +579,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -907,9 +907,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -1235,9 +1235,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -1563,9 +1563,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -1891,9 +1891,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -2219,9 +2219,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -2547,9 +2547,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -2875,9 +2875,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -3203,9 +3203,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -3531,9 +3531,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -3859,9 +3859,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -4187,9 +4187,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 20,
                 "bottom": 0,
-                "left": 0
+                "left": 20,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",
@@ -4515,9 +4515,9 @@ const COMPONENTS = [
               "insetOverlay": true,
               "insetOffsets": {
                 "top": 0,
-                "right": 16,
                 "bottom": 0,
-                "left": 0
+                "left": 16,
+                "right": 0
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0",

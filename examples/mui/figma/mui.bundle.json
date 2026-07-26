@@ -3877,6 +3877,28 @@
                 }
               }
             },
+            "translate-x": {
+              "small": {
+                "unchecked": {
+                  "$value": "0px",
+                  "$type": "dimension"
+                },
+                "checked": {
+                  "$value": "16px",
+                  "$type": "dimension"
+                }
+              },
+              "medium": {
+                "unchecked": {
+                  "$value": "0px",
+                  "$type": "dimension"
+                },
+                "checked": {
+                  "$value": "20px",
+                  "$type": "dimension"
+                }
+              }
+            },
             "width": {
               "small": {
                 "$value": "24px",
@@ -11275,6 +11297,7 @@
                 "min-width": "{imported.shared.size-0}",
                 "outline-width": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
+                "translate-y": "{imported.shared.size-0}",
                 "z-index": "{imported.switch.buttonbase-root.z-index}"
               },
               "tokensByProp": [
@@ -11283,11 +11306,13 @@
                   "map": {
                     "checked": {
                       "color": "{imported.switch.buttonbase-root.color.{color}.checked}",
-                      "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.checked}"
+                      "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.checked}",
+                      "translate-x": "{imported.switch.buttonbase-root.translate-x.{size}.checked}"
                     },
                     "unchecked": {
                       "color": "{imported.switch.buttonbase-root.color.{color}.unchecked}",
-                      "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.unchecked}"
+                      "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.unchecked}",
+                      "translate-x": "{imported.switch.buttonbase-root.translate-x.{size}.unchecked}"
                     }
                   }
                 },

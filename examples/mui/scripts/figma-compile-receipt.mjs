@@ -189,23 +189,41 @@ for (const file of scripts) {
       const uFill = trackFillVar(primaryUnchecked);
       if (!cFill || !uFill) throw new Error(`switch checked track-fill pin: the track must carry a BOUND fill variable on both checked planes (checked=${cFill}, unchecked=${uFill})`);
       if (cFill === uFill) throw new Error('switch checked track-fill pin: checked and unchecked tracks bind the SAME variable — the checked colour is not projected');
-      // NAMED RESIDUAL, pinned as an EXPECTATION so the day it changes is
-      // visible: the checked thumb sits at the SAME x as the unchecked one.
-      // MUI translates it (matrix(1,0,0,1,20,0)) but the overlay-cluster
-      // synthetic translate-x/y door only decomposes a matrix present on the
-      // BASE combo, and Switch's base is transform:none — so the offset is
-      // never observed. See examples/mui/PROVENANCE.md.
+      // CLOSED RESIDUAL (pseudo-decor v2 + generalized translate door round):
+      // the checked thumb now SITS WHERE MUI PUTS IT. MUI translates the
+      // switchBase by matrix(1,0,0,1,20,0) at Size=Medium and (…,16,0) at
+      // Size=Small; the v1 door only decomposed a matrix present on the BASE
+      // combo and Switch's base is transform:none, so the offset was never
+      // observed and both thumbs drew at the same x. The door now admits the
+      // synthetic translate-x/y pair for any overlay-cluster part whose whole
+      // enabled default plane is inside the translate grammar (ABSENT ≡ 0px),
+      // so the offset mints per {size}×checked:
+      //   translate-x.medium.unchecked 0px → .checked 20px
+      //   translate-x.small.unchecked  0px → .checked 16px
+      // This is now a POSITIVE pin: the displacement must equal the thumb
+      // travel exactly, per size. See examples/mui/PROVENANCE.md.
       const thumbX = (variant) => {
         const bb = (variant.children ?? []).find((c) => /buttonbase/.test(c.name));
-        if (!bb) throw new Error('switch thumb-position residual pin: no buttonbase part in the variant');
+        if (!bb) throw new Error('switch thumb-position pin: no buttonbase part in the variant');
         const th = (bb.children ?? []).find((c) => c.name === 'switch-thumb');
-        if (!th) throw new Error('switch thumb-position residual pin: no switch-thumb under the buttonbase part');
+        if (!th) throw new Error('switch thumb-position pin: no switch-thumb under the buttonbase part');
         return Math.round((bb.x ?? 0) + (th.x ?? 0));
       };
-      const xc = thumbX(primaryChecked);
-      const xu = thumbX(primaryUnchecked);
-      if (xc !== xu) {
-        throw new Error(`switch thumb-position residual pin: the checked thumb moved (x ${xu} → ${xc}). If the translate door was generalised this pin is now WRONG — update it and PROVENANCE together.`);
+      const travelPins = [
+        { size: 'Medium', travel: 20 },
+        { size: 'Small', travel: 16 },
+      ];
+      for (const { size, travel } of travelPins) {
+        const c = checkedVs.find((n) => /Color=Primary/.test(n.name) && new RegExp(`Size=${size}`).test(n.name));
+        const u = uncheckedVs.find((n) => /Color=Primary/.test(n.name) && new RegExp(`Size=${size}`).test(n.name));
+        if (!c || !u) throw new Error(`switch thumb-position pin: Color=Primary/Size=${size} cells missing on both Checked values`);
+        const xc = thumbX(c);
+        const xu = thumbX(u);
+        if (xc - xu !== travel) {
+          throw new Error(
+            `switch thumb-position pin (Size=${size}): the checked thumb must sit exactly ${travel}px right of the unchecked thumb (MUI's translate for this size) — got x ${xu} → ${xc} (delta ${xc - xu}). The generalized translate door regressed.`,
+          );
+        }
       }
     }
     // MOLECULE-ROUND STRUCTURAL PINS (2026-07-25): one per interactive
