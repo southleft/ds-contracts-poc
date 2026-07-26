@@ -1,0 +1,365 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Tooltip",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "root",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 17, 53)"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "label",
+        "channel": "transition-duration",
+        "value": "0.2s, 0.133s"
+      },
+      {
+        "part": "label",
+        "channel": "transition-property",
+        "value": "opacity, transform"
+      },
+      {
+        "part": "label",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "tooltip-arrow",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 29, 0)"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Tooltip",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 2,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 129,
+      "cellsEqual": 117,
+      "pctEqual": 90.69767441860465,
+      "rowsFullyEqual": 0,
+      "rows": 8
+    },
+    "pixel": {
+      "pairs": 6,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 100,
+      "meanAA": 100,
+      "maxAA": 100
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 30,
+      "mintedLeavesUnfolded": 29,
+      "baseBindings": 46,
+      "stateBindings": 0,
+      "codeOnlyChannels": 9,
+      "overflowBindings": 3,
+      "folds": 18
+    },
+    "worstRows": [
+      {
+        "key": "on__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 8
+      },
+      {
+        "key": "off__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "off__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "off__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "off__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "on__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "on__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "on__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "label.overflow-wrap",
+        2
+      ],
+      [
+        "label.transition-behavior",
+        2
+      ],
+      [
+        "root.bottom",
+        1
+      ],
+      [
+        "label.margin-bottom",
+        1
+      ],
+      [
+        "label.bottom",
+        1
+      ],
+      [
+        "label.left",
+        1
+      ],
+      [
+        "label.position",
+        1
+      ],
+      [
+        "label.right",
+        1
+      ],
+      [
+        "label.top",
+        1
+      ],
+      [
+        "tooltip-arrow.overflow-wrap",
+        1
+      ]
+    ],
+    "namedLosses": [
+      "overflow: root.bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
+      "code-only: label.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: label.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip-arrow.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "rows": [
+      {
+        "key": "off__default",
+        "channelsCompared": 51,
+        "channelsEqual": 47,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "bottom",
+            "ours": "963px",
+            "theirs": "961px"
+          },
+          {
+            "part": "label",
+            "channel": "margin-bottom",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "normal, normal"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "off__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "off__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "off__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "on__default",
+        "channelsCompared": 78,
+        "channelsEqual": 70,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "label",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "label",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "label",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "label",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "normal, normal"
+          },
+          {
+            "part": "tooltip-arrow",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "on__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "on__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "on__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      }
+    ]
+  }
+}

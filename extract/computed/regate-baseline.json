@@ -1,0 +1,330 @@
+{
+  "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
+  "recordedAt": "2026-07-26",
+  "rows": [
+    {
+      "library": "astryx",
+      "component": "Badge",
+      "rerunPctEqual": 96.29629629629629,
+      "cellsCompared": 1512,
+      "unresolvedTokenRefs": 1,
+      "committedPctEqual": 100,
+      "gapCause": "CONTRACT/MINT SKEW — 1 ref the frozen promoted contract carries ({imported.badge.root.line-height}) is no longer produced by the current mint; renders as an EMPTY custom property. Not an engine regression: astryx/Badge measured 96.296 at 0078020, the very commit that COMMITTED 100.000."
+    },
+    {
+      "library": "astryx",
+      "component": "Button",
+      "rerunPctEqual": 95.390625,
+      "cellsCompared": 11520,
+      "unresolvedTokenRefs": 22,
+      "committedPctEqual": 98.09895833333333,
+      "gapCause": "CONTRACT/MINT SKEW — 22 unresolved refs (imported.shared.*). Measured 94.766 at 0078020 (committed 98.099), improved to 95.391 by the absolute-positioning round f52c334."
+    },
+    {
+      "library": "astryx",
+      "component": "Card",
+      "rerunPctEqual": 98.25174825174825,
+      "cellsCompared": 1144,
+      "unresolvedTokenRefs": 54,
+      "committedPctEqual": 98.25174825174825,
+      "gapCause": "NO GAP, but 54 unresolved refs — named because the pair is counterfactual: astryx/Card is the same CONTRACT/MINT SKEW as Slider/Button/Badge (the frozen contract references imported.card.* leaves the current mint no longer produces) yet scores EXACTLY its committed 98.252. The affected channels (font-weight, line-height, per-tone border widths) are ones the gate already counted as mismatched or does not compare, so the empty custom properties cost nothing here. Skew presence is not skew impact — this row is why unresolvedTokenRefs is pinned SEPARATELY from pctEqual."
+    },
+    {
+      "library": "astryx",
+      "component": "Slider",
+      "rerunPctEqual": 55.29891304347826,
+      "cellsCompared": 2944,
+      "unresolvedTokenRefs": 44,
+      "committedPctEqual": 87.90760869565217,
+      "gapCause": "CONTRACT/MINT SKEW, worst case — 44 unresolved refs (imported.shared.color-*/size-*, imported.slider.label.color). Measured 52.853 at 0078020 (committed 87.908) and has IMPROVED since (53.397 at f52c334, 55.299 at 53792d3). The CANVAS is unaffected: examples/astryx/tokens/astryx-minted.dtcg.json carries all 237 leaves the shipped contract references."
+    },
+    {
+      "library": "astryx",
+      "component": "Switch",
+      "rerunPctEqual": 77.34375,
+      "cellsCompared": 1536,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 76.30208333333333,
+      "gapCause": "ENGINE IMPROVED — absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020."
+    },
+    {
+      "library": "mui",
+      "component": "Accordion",
+      "rerunPctEqual": 91.8125,
+      "cellsCompared": 6400,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 91.8125,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Autocomplete",
+      "rerunPctEqual": 95.11041009463722,
+      "cellsCompared": 2536,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 95.11041009463722,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Button",
+      "rerunPctEqual": 86.19929453262786,
+      "cellsCompared": 27216,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 86.19929453262786,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Card",
+      "rerunPctEqual": 100,
+      "cellsCompared": 704,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Checkbox",
+      "rerunPctEqual": 72.46376811594203,
+      "cellsCompared": 1656,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 72.46376811594203,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Chip",
+      "rerunPctEqual": 90.1639344262295,
+      "cellsCompared": 6832,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 87.70491803278688,
+      "gapCause": "ENGINE IMPROVED — state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f."
+    },
+    {
+      "library": "mui",
+      "component": "Dialog",
+      "rerunPctEqual": 95.6043956043956,
+      "cellsCompared": 455,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 95.6043956043956,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Menu",
+      "rerunPctEqual": 93.43434343434343,
+      "cellsCompared": 198,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 93.43434343434343,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Pagination",
+      "rerunPctEqual": 93.96984924623115,
+      "cellsCompared": 796,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 93.96984924623115,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Slider",
+      "rerunPctEqual": 89.44805194805195,
+      "cellsCompared": 7392,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 89.44805194805195,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Switch",
+      "rerunPctEqual": 77.67857142857143,
+      "cellsCompared": 25088,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 77.67857142857143,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Table",
+      "rerunPctEqual": 85.20077720207254,
+      "cellsCompared": 6176,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 85.20077720207254,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Tabs",
+      "rerunPctEqual": 93.75,
+      "cellsCompared": 4320,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 93.75,
+      "gapCause": ""
+    },
+    {
+      "library": "mui",
+      "component": "Tooltip",
+      "rerunPctEqual": 90.69767441860465,
+      "cellsCompared": 129,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 70.54263565891473,
+      "gapCause": "ENGINE IMPROVED — organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b."
+    },
+    {
+      "library": "polaris",
+      "component": "Avatar",
+      "rerunPctEqual": 70.65217391304348,
+      "cellsCompared": 1840,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 70.65217391304348,
+      "gapCause": ""
+    },
+    {
+      "library": "polaris",
+      "component": "Badge",
+      "rerunPctEqual": 95.15895953757226,
+      "cellsCompared": 22144,
+      "unresolvedTokenRefs": 2,
+      "committedPctEqual": 97.32658959537572,
+      "gapCause": "POLLUTED DECISION LEDGER — extract/computed/out/badge/decisions.json acks {font-size-sm} and {spacing-0}, REPO-convention names absent from the Polaris inventory (which spells {p.*}). Surfaced once regate began applying the ledger the harness applies. The SHIPPED contract is clean; the harness-local resolved.contract.json is not. Human-ack artifact — named, not silently rewritten."
+    },
+    {
+      "library": "polaris",
+      "component": "Banner",
+      "rerunPctEqual": 96.90054495912807,
+      "cellsCompared": 11744,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 96.90054495912807,
+      "gapCause": ""
+    },
+    {
+      "library": "polaris",
+      "component": "Button",
+      "rerunPctEqual": 85.85798816568047,
+      "cellsCompared": 81120,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 91.33136094674556,
+      "gapCause": "ENGINE REGRESSED — state-plane projection 53792d3 (91.095 → 85.621 offline). The nested-pair lift mints label/icon BASE color as tokensByProp ({imported.button.label.color.{variant}.critical}); that base binding blocks inheritance of the ROOT hover/focus state color and no nested per-state binding replaces it, so every hover/focus/active row renders the base colour. OPEN — its own round."
+    },
+    {
+      "library": "polaris",
+      "component": "Checkbox",
+      "rerunPctEqual": 80.81967213114754,
+      "cellsCompared": 2440,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 84.11602209944752,
+      "gapCause": "VOCABULARY CHANGE — live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 → 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
+    },
+    {
+      "library": "polaris",
+      "component": "ProgressBar",
+      "rerunPctEqual": 92.10526315789474,
+      "cellsCompared": 1824,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 92.10526315789474,
+      "gapCause": ""
+    },
+    {
+      "library": "polaris",
+      "component": "RadioButton",
+      "rerunPctEqual": 81.68604651162791,
+      "cellsCompared": 1376,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 81.68604651162791,
+      "gapCause": ""
+    },
+    {
+      "library": "polaris",
+      "component": "Spinner",
+      "rerunPctEqual": 100,
+      "cellsCompared": 8,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "polaris",
+      "component": "Tag",
+      "rerunPctEqual": 80.91935264517883,
+      "cellsCompared": 7353,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 82.05605158730158,
+      "gapCause": "VOCABULARY CHANGE — same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 → 7353."
+    },
+    {
+      "library": "polaris",
+      "component": "Text",
+      "rerunPctEqual": 100,
+      "cellsCompared": 22740,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "polaris",
+      "component": "TextField",
+      "rerunPctEqual": 81.85736677115987,
+      "cellsCompared": 40832,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 81.86239193083574,
+      "gapCause": "VOCABULARY CHANGE — same class (acb0342); cellsCompared 44416 → 40832, % within 0.005 of committed."
+    },
+    {
+      "library": "polaris",
+      "component": "Thumbnail",
+      "rerunPctEqual": 100,
+      "cellsCompared": 576,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "tailwind",
+      "component": "Alert",
+      "rerunPctEqual": 84.54545454545455,
+      "cellsCompared": 880,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 84.54545454545455,
+      "gapCause": ""
+    },
+    {
+      "library": "tailwind",
+      "component": "Badge",
+      "rerunPctEqual": 90.65040650406505,
+      "cellsCompared": 1968,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 90.65040650406505,
+      "gapCause": ""
+    },
+    {
+      "library": "tailwind",
+      "component": "Button",
+      "rerunPctEqual": 97.57575757575758,
+      "cellsCompared": 6600,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 97.57575757575758,
+      "gapCause": ""
+    },
+    {
+      "library": "tailwind",
+      "component": "Card",
+      "rerunPctEqual": 72.41379310344827,
+      "cellsCompared": 116,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 72.41379310344827,
+      "gapCause": ""
+    },
+    {
+      "library": "tailwind",
+      "component": "ToggleSwitch",
+      "rerunPctEqual": 88.88888888888889,
+      "cellsCompared": 864,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 88.88888888888889,
+      "gapCause": ""
+    }
+  ]
+}

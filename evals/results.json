@@ -1,6 +1,6 @@
 {
-  "passed": 157,
-  "total": 157,
+  "passed": 158,
+  "total": 158,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -785,6 +785,11 @@
     {
       "id": "generalized-translate-door",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "shipped-contract-refs-resolve",
+      "claim": "C2-refusal",
       "pass": true
     }
   ]

@@ -36,7 +36,7 @@ import {
   type Part as SchemaPart,
 } from '../scripts/contract-schema.js';
 import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
-import { emitReact as coreEmitReact, isMultiRoot as coreIsMultiRoot, validateContract as coreValidateContract } from '../core/emit-react.js';
+import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
@@ -6224,6 +6224,67 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (ch !== want) throw new Error(`switch translate-x.${size}.checked must be ${want} (MUI's own translate for this size), got ${ch}`);
       }
       console.log('generalized-translate-door: `translate` longhand decomposes (px/%/two-component, %-baked against the own border box; both-spellings-set and scale matrices refuse by name, idempotent); pill sentinel shared; MUI Switch checked-thumb offset carried as a {size}×checked minted product (medium 0→20px, small 0→16px) — the state round\'s pinned residual is CLOSED');
+    },
+  },
+  {
+    // REGATE-DRIFT TRIAGE. The gate page resolves token refs through CSS
+    // custom properties, and emit-html maps ANY `{a.b.c}` to `var(--a-b-c)`
+    // WITHOUT consulting the inventory — so a ref no token tree carries
+    // renders as an EMPTY custom property: black text, missing fills, a
+    // silently depressed score and no receipt naming why. That is exactly
+    // how an offline re-fuse of the astryx Slider read as a 32-point
+    // "engine regression" (it is contract/mint SKEW — the frozen promoted
+    // contract references 14 minted leaves the current mint no longer
+    // produces; extract/computed/regate-baseline.json names it).
+    //
+    // This pin is the CHEAP half of that guard — no Chromium, no capture,
+    // pure JSON: every SHIPPED contract must resolve every token ref
+    // against its own library's token trees, using the emitters' OWN
+    // referee (generateCss). The EXPENSIVE half — the offline gate numbers
+    // themselves, ~5 minutes of real Chromium — is the on-demand
+    // `npm run extract:computed:drift` (docs/20-regate-drift.md); it is
+    // deliberately NOT in this suite, and the reason is measured, not
+    // assumed.
+    id: 'shipped-contract-refs-resolve',
+    claim: 'C2-refusal',
+    run: () => {
+      const libs = ['polaris', 'astryx', 'mui', 'tailwind'];
+      let contracts = 0;
+      const findings: string[] = [];
+      for (const lib of libs) {
+        const tokensDir = path.join(ROOT, 'examples', lib, 'tokens');
+        const trees: Array<Record<string, unknown>> = [];
+        for (const f of readdirSync(tokensDir)) {
+          if (f.endsWith('.dtcg.json')) trees.push(JSON.parse(readFileSync(path.join(tokensDir, f), 'utf8')) as Record<string, unknown>);
+        }
+        if (trees.length === 0) throw new Error(`${lib}: no DTCG token trees found — the inventory would be vacuously satisfied`);
+        const inventory = tokenInventoryFromJson(trees);
+        const contractsDir = path.join(ROOT, 'examples', lib, 'contracts');
+        for (const f of readdirSync(contractsDir)) {
+          if (!f.endsWith('.contract.json')) continue;
+          contracts++;
+          const contract = JSON.parse(readFileSync(path.join(contractsDir, f), 'utf8'));
+          const errors: string[] = [];
+          coreGenerateCss(contract, inventory, errors);
+          for (const e of errors.filter((x) => x.includes('does not exist in tokens/'))) findings.push(`${lib}/${f}: ${e}`);
+        }
+      }
+      if (findings.length > 0) {
+        throw new Error(
+          `${findings.length} shipped contract token ref(s) resolve to NOTHING — they would render as empty custom properties:\n  - ${findings.slice(0, 6).join('\n  - ')}`,
+        );
+      }
+      // FALSIFIABLE: a planted bad ref must be caught, or the pin is decorative.
+      const probe = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/badge.contract.json'), 'utf8'));
+      probe.anatomy.root.tokens['font-size'] = '{font-size-sm}'; // the REPO spelling, not Polaris's {p.*}
+      const planted: string[] = [];
+      coreGenerateCss(probe, tokenInventoryFromJson([
+        JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-light.dtcg.json'), 'utf8')) as Record<string, unknown>,
+      ]), planted);
+      if (!planted.some((e) => e.includes('{font-size-sm}') && e.includes('does not exist in tokens/'))) {
+        throw new Error('planted cross-library token ref was NOT refused — the ref check is decorative');
+      }
+      console.log(`shipped-contract-refs-resolve: ${contracts} shipped contracts across 4 libraries resolve EVERY token ref against their own library trees (planted cross-library ref refused by name); the offline-gate number itself is pinned on demand by \`npm run extract:computed:drift\``);
     },
   },
 ];
