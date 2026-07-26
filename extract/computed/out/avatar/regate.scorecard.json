@@ -38,6 +38,9 @@
     ],
     "state": []
   },
+  "decisionsReapplied": [
+    "applied: initials.font-size [base] → {p.font-size-325}"
+  ],
   "scorecard": {
     "component": "Avatar",
     "generatedBy": "extract/computed/gate.ts",
@@ -53,20 +56,20 @@
       "rows": 40
     },
     "pixel": {
-      "pairs": 20,
+      "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 100,
-      "meanAA": 100,
-      "maxAA": 100
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
     },
     "fusion": {
       "boundConfirmed": 20,
       "boundCells": 40,
       "contradictions": 20,
-      "mintedLeaves": 23,
-      "mintedLeavesUnfolded": 59,
-      "baseBindings": 15,
+      "mintedLeaves": 43,
+      "mintedLeavesUnfolded": 79,
+      "baseBindings": 19,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 1,
@@ -187,6 +190,10 @@
     "namedLosses": [
       "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue)"
     ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
     "rows": [
       {
         "key": "xs.off__default",
@@ -242,7 +249,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.off__focus-visible",
@@ -298,7 +305,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.on__default",
@@ -606,7 +613,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.on__focus-visible",
@@ -914,7 +921,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__default",
@@ -970,7 +977,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__focus-visible",
@@ -1026,7 +1033,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__default",
@@ -1334,7 +1341,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__focus-visible",
@@ -1642,7 +1649,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.off__default",
@@ -1698,7 +1705,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.off__focus-visible",
@@ -1754,7 +1761,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.on__default",
@@ -2062,7 +2069,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.on__focus-visible",
@@ -2370,7 +2377,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.off__default",
@@ -2426,7 +2433,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.off__focus-visible",
@@ -2482,7 +2489,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.on__default",
@@ -2790,7 +2797,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.on__focus-visible",
@@ -3098,7 +3105,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.off__default",
@@ -3154,7 +3161,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.off__focus-visible",
@@ -3210,7 +3217,7 @@
             "theirs": "center"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.on__default",
@@ -3518,7 +3525,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.on__focus-visible",
@@ -3826,7 +3833,7 @@
             "theirs": "rgba(255, 246, 248, 1)"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       }
     ]
   }

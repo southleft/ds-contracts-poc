@@ -1,6 +1,6 @@
 {
   "_marker": "ASTRYX MINTED RE-ANCHORING — THE HUMAN LEDGER. Every row here is an explicit ack that a minted literal may be rewritten to a semantic token. Nothing is applied without a row AND an explicit `reanchor-minted.ts --apply <id>`; there is no --all. TO REVERT ANY ROW: delete it from `decisions` and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` — the minted tree is regenerated from the computed-floor capture and only the surviving rows are re-applied. Row shape follows extract/computed/out/*/decisions.json.",
-  "_provenance": "The 9 rows below were authored by the orchestrator in the re-anchoring round and are marked ackNote \"auto-clean: single candidate, exact name affinity, orchestrator-applied\". 1 leaf : 1 candidate : perfect name affinity + a corroborating sibling binding is the ONLY auto-alias the house precedent supports. The 54 AMBIGUOUS refs in tokens/reanchor-proposals.md are deliberately NOT here — they are the owner's review queue and no ranking may decide them.",
+  "_provenance": "The first 9 rows were authored by the orchestrator in the opening re-anchoring round (ackNote \"auto-clean: single candidate, exact name affinity, orchestrator-applied\"). Rows 10-19 and both \"literals\" receipts are the REVIEWED ROUND: the 5 ambiguous value groups were split PER LEAF and decided under owner delegation — ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26. Every row carries that provenance in its own `cause`. Three rows carry a `deviation` field: their target differs from the review rubric's predicted token because a COMMITTED BINDING on disk names a different one, and a recorded fact outranks a name-shaped prediction.",
   "_reviewQueue": "examples/astryx/tokens/reanchor-proposals.md",
   "decisions": [
     {
@@ -191,6 +191,373 @@
       "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value. There is no source-bindings.json for astryx by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run).",
       "ack": "explicit CLI --apply",
       "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied"
+    },
+    {
+      "ids": [
+        "RA-ffffff"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.error",
+        "imported.badge.root.row-rule-color.info",
+        "imported.badge.root.row-rule-color.success"
+      ],
+      "value": "#ffffff",
+      "candidates": [
+        "color-on-error",
+        "color-on-accent",
+        "color-on-success",
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-dark"
+      ],
+      "to": "color-on-accent",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.error}",
+        "badge:{imported.badge.root.row-rule-color.info}",
+        "badge:{imported.badge.root.row-rule-color.success}"
+      ],
+      "rationale": "Badge tone rules on the three FILLED status surfaces (variant info / success / error). Role-grade evidence class: THE COMMITTED SIBLING BINDING — the same class that landed the nine acked badge tone rows (RA-014975 … RA-7b0210), and the only signal in this join that is a recorded fact rather than a name heuristic. In examples/astryx/contracts/badge.contract.json the SAME contract cell (part `root`, prop `variant`, value info|success|error) binds `color` → {color-on-accent} while `row-rule-color` is the minted literal #ffffff, and CSS row-rule-color computes from currentColor — i.e. from that same `color`. Anchoring the rule to anything other than its own cell's `color` binding would make the rule and the text diverge the first time the two tokens differ, which is a bug this round would have INTRODUCED.",
+      "darkDelta": "MODE-SAFE on the neutral plane — {color-on-accent} is #FFFFFF light and #FFFFFF dark, identical to the frozen literal #ffffff, so NO pixel moves in either mode; this is a semantics-only change. It is NOT a no-op on a re-themed plane: under the docs theme {color-on-accent} is #FFFFFF light / #15110C dark (DOCS-THEME.md \"the theme delta\"), so these three tone rules now RE-THEME instead of staying frozen white — which is the point of the round.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ffffff (badge arm)",
+      "deviation": "DEVIATES from the review rubric's predicted target for two of these three leaves. The rubric split #ffffff by variant NAME (error → {color-on-error}, success → {color-on-success}); the FACT on disk is that astryx's own badge contract binds `color` → {color-on-accent} for ALL THREE of info/success/error — only Button splits on-accent vs on-error by variant. Forcing on-error/on-success here would have broken the currentColor invariant against a committed binding, i.e. laundered a name guess over a recorded fact — the exact failure this round exists to prevent. Reported rather than forced. Both candidates are #FFFFFF in BOTH modes on the neutral plane, so no neutral pixel differs either way; on a re-themed plane they CAN differ, which is why the committed binding decides. REVERT = delete this row and re-run promote-floor.ts."
+    },
+    {
+      "ids": [
+        "RA-ffffff"
+      ],
+      "leaves": [
+        "imported.button.label.color.primary",
+        "imported.button.label.row-rule-color.primary",
+        "imported.button.part-0.color.primary",
+        "imported.button.part-0.row-rule-color.primary",
+        "imported.button.part-1.color.primary",
+        "imported.button.part-1.row-rule-color.primary",
+        "imported.button.root.outline-color.primary",
+        "imported.button.root.row-rule-color.primary"
+      ],
+      "value": "#ffffff",
+      "candidates": [
+        "color-on-error",
+        "color-on-accent",
+        "color-on-success",
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-dark"
+      ],
+      "to": "color-on-accent",
+      "usedBy": [
+        "button:{imported.button.label.color.primary}",
+        "button:{imported.button.label.row-rule-color.primary}",
+        "button:{imported.button.part-0.color.primary}",
+        "button:{imported.button.part-0.row-rule-color.primary}",
+        "button:{imported.button.part-1.color.primary}",
+        "button:{imported.button.part-1.row-rule-color.primary}",
+        "button:{imported.button.root.outline-color.primary}",
+        "button:{imported.button.root.row-rule-color.primary}"
+      ],
+      "rationale": "Button variant=primary — white content on the ACCENT surface. Role-grade evidence (a) the variant-axis value names the role, corroborated by the committed binding: button.contract.json's root variant cell for `primary` binds background-color → {color-accent} and color → {color-on-accent}. These eight leaves are that ONE committed `color` observed from four rendered places: root's outline-color + row-rule-color (both currentColor-derived and sibling-corroborated inside that same cell), and part-0 / part-1 / label, whose own cells carry ONLY minted literals because the computed capture re-observed the INHERITED colour on each rendered element. Anchoring the whole subtree to the surface's own on-* token keeps one binding where the DOM has one inherited value.",
+      "darkDelta": "MODE-SAFE on the neutral plane — {color-on-accent} is #FFFFFF in both modes, identical to the frozen literal #ffffff; no neutral pixel moves. On a re-themed plane it moves deliberately (docs theme: #FFFFFF light / #15110C dark), which is exactly the half-retheme defect DOCS-THEME.md names for Button (32/41 of its colour refs rode literals before this round).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ffffff (button primary arm)"
+    },
+    {
+      "ids": [
+        "RA-ffffff"
+      ],
+      "leaves": [
+        "imported.button.label.color.destructive",
+        "imported.button.label.row-rule-color.destructive",
+        "imported.button.part-0.color.destructive",
+        "imported.button.part-0.row-rule-color.destructive",
+        "imported.button.part-1.color.destructive",
+        "imported.button.part-1.row-rule-color.destructive",
+        "imported.button.root.outline-color.destructive",
+        "imported.button.root.row-rule-color.destructive"
+      ],
+      "value": "#ffffff",
+      "candidates": [
+        "color-on-error",
+        "color-on-accent",
+        "color-on-success",
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-dark"
+      ],
+      "to": "color-on-error",
+      "usedBy": [
+        "button:{imported.button.label.color.destructive}",
+        "button:{imported.button.label.row-rule-color.destructive}",
+        "button:{imported.button.part-0.color.destructive}",
+        "button:{imported.button.part-0.row-rule-color.destructive}",
+        "button:{imported.button.part-1.color.destructive}",
+        "button:{imported.button.part-1.row-rule-color.destructive}",
+        "button:{imported.button.root.outline-color.destructive}",
+        "button:{imported.button.root.row-rule-color.destructive}"
+      ],
+      "rationale": "Button variant=destructive — white content on the ERROR surface. Role-grade evidence (a) the variant-axis value names the role (destructive = the danger role), corroborated by the committed binding: button.contract.json's root variant cell for `destructive` binds background-color → {color-error} and color → {color-on-error}. As with `primary`, the eight leaves are one inherited computed colour observed on root (outline-color + row-rule-color, currentColor-derived and sibling-corroborated in that cell) and on part-0 / part-1 / label.",
+      "darkDelta": "MODE-SAFE on the neutral plane — {color-on-error} is #FFFFFF light and #FFFFFF dark, identical to the frozen literal #ffffff; no neutral pixel moves in either mode. The change is semantic + re-themable: the destructive label now follows the error surface's own on-colour instead of a frozen white.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ffffff (button destructive arm)"
+    },
+    {
+      "ids": [
+        "RA-0a1317"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.warning"
+      ],
+      "value": "#0a1317",
+      "candidates": [
+        "color-text-gray",
+        "color-text-primary",
+        "color-on-warning",
+        "color-background-inverted",
+        "color-icon-primary"
+      ],
+      "to": "color-on-warning",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.warning}"
+      ],
+      "rationale": "Badge variant=warning — DARK content on the warning-yellow surface. Role-grade evidence class: THE COMMITTED SIBLING BINDING — the same class that landed the nine acked badge tone rows (RA-014975 … RA-7b0210), and the only signal in this join that is a recorded fact rather than a name heuristic. badge.contract.json's root/variant/warning cell binds background-color → {color-warning} and `color` → {color-on-warning}; the minted #0a1317 row-rule-color in that same cell computes from currentColor. The variant-axis value names the role AND the sibling binding confirms it — the two independent evidence classes agree.",
+      "darkDelta": "MODE-SAFE and MODE-FROZEN BY DESIGN — {color-on-warning} is #0A1317 in BOTH modes (it is one of the few base tokens with no dark override), so the requirement that this text stays DARK on the yellow warning surface in dark mode is preserved by construction, not by luck. No pixel moves in either mode; the two rival candidates ({color-text-gray} #E7EAED dark, {color-text-primary} #DFE2E5 dark) would each have INVERTED it to near-white on yellow — the concrete reason this leaf had to be split out of the #0a1317 group.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-0a1317 (badge warning arm)"
+    },
+    {
+      "ids": [
+        "RA-0a1317"
+      ],
+      "leaves": [
+        "imported.badge.root.row-rule-color.neutral"
+      ],
+      "value": "#0a1317",
+      "candidates": [
+        "color-text-gray",
+        "color-text-primary",
+        "color-on-warning",
+        "color-background-inverted",
+        "color-icon-primary"
+      ],
+      "to": "color-text-gray",
+      "usedBy": [
+        "badge:{imported.badge.root.row-rule-color.neutral}"
+      ],
+      "rationale": "Badge variant=neutral. Role-grade evidence class: THE COMMITTED SIBLING BINDING — the same class that landed the nine acked badge tone rows (RA-014975 … RA-7b0210), and the only signal in this join that is a recorded fact rather than a name heuristic. badge.contract.json binds `color` → {color-text-gray} for variant=neutral AND on the unconditioned root token block, while the minted #0a1317 row-rule-color sits in that same variant cell and computes from currentColor.",
+      "darkDelta": "DARK REPAIR — the leaf is mode-FROZEN at #0a1317 in both modes today; {color-text-gray} is #0A1317 light / #E7EAED dark, so the neutral badge's rule stops painting the light-mode near-black on a dark background. Deliberate; the light plane is unchanged (value-verified twice).",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-0a1317 (badge neutral arm)",
+      "deviation": "DEVIATES from the review rubric's predicted target. The rubric sent neutral TEXT channels to {color-text-primary} and said a text-primary-vs-text-gray choice with no distinguishing evidence must stay literal. For THIS leaf the distinguishing evidence exists and names the other token: badge binds {color-text-gray}, twice (variant cell + root block). The two are NOT interchangeable in dark (#E7EAED vs #DFE2E5, dE76 2.81 — small but real and not zero), so the committed binding is the only thing that decides it. Reported rather than forced; REVERT = delete this row and re-run promote-floor.ts."
+    },
+    {
+      "ids": [
+        "RA-0a1317"
+      ],
+      "leaves": [
+        "imported.button.label.color.ghost",
+        "imported.button.label.color.secondary",
+        "imported.button.label.row-rule-color.ghost",
+        "imported.button.label.row-rule-color.secondary",
+        "imported.button.part-0.color.ghost",
+        "imported.button.part-0.color.secondary",
+        "imported.button.part-0.row-rule-color.ghost",
+        "imported.button.part-0.row-rule-color.secondary",
+        "imported.button.part-1.color.ghost",
+        "imported.button.part-1.color.secondary",
+        "imported.button.part-1.row-rule-color.ghost",
+        "imported.button.part-1.row-rule-color.secondary",
+        "imported.button.root.outline-color.ghost",
+        "imported.button.root.outline-color.secondary",
+        "imported.button.root.row-rule-color.ghost",
+        "imported.button.root.row-rule-color.secondary"
+      ],
+      "value": "#0a1317",
+      "candidates": [
+        "color-text-gray",
+        "color-text-primary",
+        "color-on-warning",
+        "color-background-inverted",
+        "color-icon-primary"
+      ],
+      "to": "color-text-primary",
+      "usedBy": [
+        "button:{imported.button.label.color.ghost}",
+        "button:{imported.button.label.color.secondary}",
+        "button:{imported.button.label.row-rule-color.ghost}",
+        "button:{imported.button.label.row-rule-color.secondary}",
+        "button:{imported.button.part-0.color.ghost}",
+        "button:{imported.button.part-0.color.secondary}",
+        "button:{imported.button.part-0.row-rule-color.ghost}",
+        "button:{imported.button.part-0.row-rule-color.secondary}",
+        "button:{imported.button.part-1.color.ghost}",
+        "button:{imported.button.part-1.color.secondary}",
+        "button:{imported.button.part-1.row-rule-color.ghost}",
+        "button:{imported.button.part-1.row-rule-color.secondary}",
+        "button:{imported.button.root.outline-color.ghost}",
+        "button:{imported.button.root.outline-color.secondary}",
+        "button:{imported.button.root.row-rule-color.ghost}",
+        "button:{imported.button.root.row-rule-color.secondary}"
+      ],
+      "rationale": "Button variants ghost + secondary — the neutral text role. Role-grade evidence: button.contract.json's root variant cells bind `color` → {color-text-primary} for BOTH ghost and secondary, and button's unconditioned root token block binds `color` → {color-text-primary} as well. That committed binding is exactly the distinguishing evidence the rubric said the text-primary/text-gray pair usually lacks — here it exists and it names {color-text-primary}. The sixteen leaves are the two variants' one inherited computed colour observed on root (outline-color + row-rule-color, sibling-corroborated in the cell) and on part-0 / part-1 / label (cells carrying only minted literals, because the capture re-observed the inherited value per element).",
+      "darkDelta": "DARK REPAIR — the leaves are mode-FROZEN at #0a1317 in both modes today; {color-text-primary} is #0A1317 light / #DFE2E5 dark. Ghost and secondary button labels stop painting near-black on a dark surface, which is the visible half of Button's \"78% minted\" finding in DOCS-THEME.md. Deliberate pixel change in dark; light plane unchanged.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-0a1317 (button ghost+secondary arm)"
+    },
+    {
+      "ids": [
+        "RA-ccd3db"
+      ],
+      "leaves": [
+        "imported.card.root.border-bottom-color.default",
+        "imported.card.root.border-left-color.default",
+        "imported.card.root.border-right-color.default",
+        "imported.card.root.border-top-color.default"
+      ],
+      "value": "#ccd3db",
+      "candidates": [
+        "color-border-emphasized",
+        "color-skeleton",
+        "color-track"
+      ],
+      "to": "color-border-emphasized",
+      "usedBy": [
+        "card:{imported.card.root.border-bottom-color.default}",
+        "card:{imported.card.root.border-left-color.default}",
+        "card:{imported.card.root.border-right-color.default}",
+        "card:{imported.card.root.border-top-color.default}"
+      ],
+      "rationale": "Card's four REAL borders (variant=default, the only card variant whose border-*-width is 1px). Role-grade evidence (b): the channel names the role — border-<side>-color fires the named channel rule border-*-color → color-border-*, and exactly ONE of the three equal-valued candidates is in the border role class ({color-skeleton} is a loading-placeholder role, {color-track} is the slider-track role; neither is a border). The other twelve card variants' border colours are NOT here: they are refused by name as RA-X-cardborder-000000 (zero-width borders under a degraded capture) and this decision does not touch them.",
+      "darkDelta": "DARK REPAIR — the leaves are mode-FROZEN at #ccd3db in both modes today; {color-border-emphasized} is #CCD3DB light / #494D53 dark. Card's border stops painting a light-mode hairline on a dark surface. Deliberate; light plane unchanged.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ccd3db (card border arm)"
+    },
+    {
+      "ids": [
+        "RA-ccd3db"
+      ],
+      "leaves": [
+        "imported.slider.slider-track.background-color"
+      ],
+      "value": "#ccd3db",
+      "candidates": [
+        "color-border-emphasized",
+        "color-skeleton",
+        "color-track"
+      ],
+      "to": "color-track",
+      "usedBy": [
+        "slider:{imported.slider.slider-track.background-color}"
+      ],
+      "rationale": "The slider's unfilled track. Role-grade evidence (c): exactly one candidate matches the leaf's role class, and it matches it by NAME — the leaf IS the track (contract part `slider-track`, channel background-color) and {color-track} is the base token for that role. {color-border-emphasized} is a border role and {color-skeleton} a loading-placeholder role; both are contradicted by a background-color channel on a track part.",
+      "darkDelta": "DARK REPAIR — mode-FROZEN at #ccd3db today; {color-track} is #CCD3DB light / #5A5E66 dark, so the unfilled track follows the mode instead of staying light-grey on a dark surface. Note this is a DIFFERENT dark arm from the card borders in the same value group (#494D53) — the two roles genuinely diverge in dark, which is why one value group had to be split into two decisions.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ccd3db (slider track arm)"
+    },
+    {
+      "ids": [
+        "RA-0064e0"
+      ],
+      "leaves": [
+        "imported.shared.color-0064e0"
+      ],
+      "value": "#0064e0",
+      "candidates": [
+        "color-accent",
+        "color-border-blue",
+        "color-icon-accent",
+        "color-icon-blue",
+        "color-text-accent"
+      ],
+      "to": "color-accent",
+      "usedBy": [
+        "slider:{imported.shared.color-0064e0}",
+        "slider:{imported.shared.color-0064e0}",
+        "slider:{imported.shared.color-0064e0}"
+      ],
+      "rationale": "The slider's accent-blue FILL. The leaf is value-named (imported.shared.color-0064e0) so no path channel rule can fire — but all THREE of its axis-expanded refs are `background-color`, on the slider's filled track (part-1-0-1) and its two thumb renderings (slider-thumb, slider-thumb-2). One uniform fill role. Role-grade evidence (c): exactly one candidate is in that role class — {color-border-blue} is a border role, {color-icon-accent} and {color-icon-blue} are icon roles, {color-text-accent} is a text role, and all four are contradicted by three background-color refs. {color-accent} is the accent FILL token and is what Button `primary` already binds for the same surface role. DOCS-THEME.md names this leaf \"the single highest-leverage one\" in the queue.",
+      "darkDelta": "DARK REPAIR — the leaf is mode-FROZEN at #0064e0 in both modes today; {color-accent} is #0064E0 light / #2694FE dark, so the slider fill and thumb follow the accent into dark mode instead of holding the light-mode blue. Deliberate; light plane unchanged.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). FACT CORRECTION to the review premise: the rubric described this leaf as \"slider thumb bg + two value-display texts\" and asked for a {color-accent}-vs-{color-text-accent} dark-arm comparison before deciding, with a leaf-split refusal if the arms diverged. On disk all three refs are background-color fills (slider/part-1-0-1, slider-thumb, slider-thumb-2); the slider's two value displays bind imported.shared.color-ffffff and imported.shared.color-0a1317, NOT this leaf. So the fill/text role divergence the premise guarded against does not exist here and no split is needed. For the record, the comparison the rubric asked for: {color-accent} dark #2694FE vs {color-text-accent} dark #3E9EFB, dE76 8.81 — materially divergent, not \"within a few units\"; had the premise held, the refusal branch would have fired.",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed decision on value group RA-0064e0"
+    },
+    {
+      "ids": [
+        "RA-4e606f"
+      ],
+      "leaves": [
+        "imported.slider.label.color",
+        "imported.slider.label.row-rule-color"
+      ],
+      "value": "#4e606f",
+      "candidates": [
+        "color-text-secondary",
+        "color-icon-gray",
+        "color-icon-secondary"
+      ],
+      "to": "color-text-secondary",
+      "usedBy": [
+        "slider:{imported.slider.label.color}",
+        "slider:{imported.slider.label.row-rule-color}"
+      ],
+      "rationale": "The slider's label text (contract part `label`, channels color + row-rule-color, the latter currentColor-derived from the former). Role-grade evidence (b): the channel names the role — `color` fires the named channel rule color → color-text-*, and {color-text-secondary} is the only candidate in the text role class ({color-icon-gray} and {color-icon-secondary} are icon roles). Top affinity by score (3 vs 0 vs 0).",
+      "darkDelta": "DARK REPAIR, but a CHOICE-FREE one: all three candidates are byte-identical in BOTH planes (#4E606F light / #AAAFB5 dark), so the dark behaviour is the same whichever candidate wins and the decision carries zero pixel risk — only the semantic name differs, and the channel decides that. The leaves are mode-FROZEN at #4e606f today; after this they follow the mode.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed decision on value group RA-4e606f"
     }
-  ]
+  ],
+  "literals": [
+    {
+      "ids": [
+        "RA-ffffff"
+      ],
+      "leaves": [
+        "imported.shared.color-ffffff"
+      ],
+      "value": "#ffffff",
+      "consideredCandidates": [
+        "color-on-error",
+        "color-on-accent",
+        "color-on-success",
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-dark"
+      ],
+      "reason": "NO ROLE-GRADE EVIDENCE. Value-named SHARED leaf: the path spells no channel, it carries no variant axis, and its contract cells bind no sibling base token — so none of the three role-grade evidence classes fires. Its 4 axis-expanded refs are all content channels (color + row-rule-color) on the slider tooltip and its label-2, whose SURFACE is itself another unnamed minted literal (imported.shared.color-0a1317). Named near-miss, deliberately declined: {color-on-dark} is a plausible role match (white content on a dark surface) and is mode-safe in both planes, but nothing on disk GRADES the pairing — the surface it would be \"on\" is a literal, not a token — so anchoring it would be a name-shaped guess dressed as a fact. Named follow-up: name the tooltip surface first (split imported.shared.color-0a1317, below), then this leaf becomes decidable.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "decided-literal"
+    },
+    {
+      "ids": [
+        "RA-0a1317"
+      ],
+      "leaves": [
+        "imported.shared.color-0a1317"
+      ],
+      "value": "#0a1317",
+      "consideredCandidates": [
+        "color-text-gray",
+        "color-text-primary",
+        "color-on-warning",
+        "color-background-inverted",
+        "color-icon-primary"
+      ],
+      "reason": "ONE LEAF, TWO INCOMPATIBLE ROLES. This value-named shared leaf serves 3 axis-expanded refs that are not the same kind of thing: 1 is a SURFACE (slider tooltip background-color) and 2 are TEXT (slider label-3 color + row-rule-color). The surface role wants {color-background-inverted} (#0A1317 light / #FFFFFF dark) and the text role wants {color-text-primary} or {color-text-gray} (#0A1317 light / #DFE2E5 | #E7EAED dark) — these INVERT against each other in the dark plane, so no single alias can serve both and any choice would silently break one of the two. Fixing it requires SPLITTING the leaf into a surface leaf and a text leaf, which is a path change, which this round forbids. Kept literal with a named follow-up rather than half-fixed.",
+      "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value — astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
+      "ack": "decided-literal"
+    }
+  ],
+  "_literalsMarker": "THE OTHER HALF OF A REVIEW. `literals` rows write NOTHING to the minted tree — they receipt a leaf that was looked at and DELIBERATELY kept literal, so \"reviewed and refused\" stops being indistinguishable from \"nobody looked yet\". They are validated like aliases (right ack, leaf exists, leaf is not already aliased, value re-checked against the live tree) and they move the leaf out of the pending queue in `reanchor-proposals.md`. TO RE-OPEN a leaf: delete its row here and re-run --propose."
 }

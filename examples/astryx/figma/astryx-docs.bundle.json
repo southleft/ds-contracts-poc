@@ -1382,7 +1382,7 @@
             "$type": "dimension"
           },
           "color-0064e0": {
-            "$value": "#0064e0",
+            "$value": "{color-accent}",
             "$type": "color"
           },
           "color-0a1317": {
@@ -1406,37 +1406,37 @@
           "root": {
             "outline-color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             },
             "row-rule-color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             },
@@ -1482,37 +1482,37 @@
           "part-0": {
             "color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             },
             "row-rule-color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             }
@@ -1520,37 +1520,37 @@
           "label": {
             "color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             },
             "row-rule-color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             }
@@ -1572,19 +1572,19 @@
             },
             "color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             },
@@ -1594,19 +1594,19 @@
             },
             "row-rule-color": {
               "primary": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "secondary": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "ghost": {
-                "$value": "#0a1317",
+                "$value": "{color-text-primary}",
                 "$type": "color"
               },
               "destructive": {
-                "$value": "#ffffff",
+                "$value": "{color-on-error}",
                 "$type": "color"
               }
             }
@@ -1620,23 +1620,23 @@
             },
             "row-rule-color": {
               "neutral": {
-                "$value": "#0a1317",
+                "$value": "{color-text-gray}",
                 "$type": "color"
               },
               "info": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "success": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "warning": {
-                "$value": "#0a1317",
+                "$value": "{color-on-warning}",
                 "$type": "color"
               },
               "error": {
-                "$value": "#ffffff",
+                "$value": "{color-on-accent}",
                 "$type": "color"
               },
               "blue": {
@@ -1682,7 +1682,7 @@
           "root": {
             "border-bottom-color": {
               "default": {
-                "$value": "#ccd3db",
+                "$value": "{color-border-emphasized}",
                 "$type": "color"
               },
               "transparent": {
@@ -1790,7 +1790,7 @@
             },
             "border-left-color": {
               "default": {
-                "$value": "#ccd3db",
+                "$value": "{color-border-emphasized}",
                 "$type": "color"
               },
               "transparent": {
@@ -1898,7 +1898,7 @@
             },
             "border-right-color": {
               "default": {
-                "$value": "#ccd3db",
+                "$value": "{color-border-emphasized}",
                 "$type": "color"
               },
               "transparent": {
@@ -2006,7 +2006,7 @@
             },
             "border-top-color": {
               "default": {
-                "$value": "#ccd3db",
+                "$value": "{color-border-emphasized}",
                 "$type": "color"
               },
               "transparent": {
@@ -2125,7 +2125,7 @@
         "slider": {
           "label": {
             "color": {
-              "$value": "#4e606f",
+              "$value": "{color-text-secondary}",
               "$type": "color"
             },
             "font-weight": {
@@ -2133,13 +2133,13 @@
               "$type": "number"
             },
             "row-rule-color": {
-              "$value": "#4e606f",
+              "$value": "{color-text-secondary}",
               "$type": "color"
             }
           },
           "slider-track": {
             "background-color": {
-              "$value": "#ccd3db",
+              "$value": "{color-track}",
               "$type": "color"
             },
             "bottom": {

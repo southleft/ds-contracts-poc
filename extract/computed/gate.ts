@@ -22,6 +22,7 @@ import type { Page } from 'playwright-core';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { emitHtml } from '../../core/emit-html.js';
+import { generateCss } from '../../core/emit-react.js';
 import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { mintedTokenCss } from '../../core/mint-tokens.js';
 import { tokenInventoryFromJson } from '../../core/tokens.js';
@@ -80,6 +81,19 @@ export interface Scorecard {
   worstRows: Array<{ key: string; pctAA: number; pctExact: number; channelsMismatched: number }>;
   topMismatchedChannels: Array<[string, number]>;
   namedLosses: string[];
+  /** DEFECT FIXED (regate-drift triage): the gate page resolves a contract's
+   *  token refs through custom properties, and emit-html maps ANY `{a.b.c}`
+   *  to `var(--a-b-c)` without consulting the inventory — a ref the inventory
+   *  does not carry renders as an EMPTY custom property (black text, missing
+   *  fills) and the % simply falls, with no receipt naming why. Field case:
+   *  offline re-fuse of the astryx Slider re-minted 111 leaves that no longer
+   *  include the 14 (`imported.shared.color-0064e0`, `imported.slider.label
+   *  .color`, …) the FROZEN promoted contract still references — a 32-point
+   *  collapse that read as "engine regression". The census runs the emitters'
+   *  OWN referee (core/emit-react generateCss) over the same inventory the
+   *  page renders with, so an unresolvable ref is a NAMED number, never a
+   *  silent one. Zero here means every ref the page emits has a value. */
+  unresolvedTokenRefs: { count: number; refs: string[] };
   rows: GateRow[];
 }
 
@@ -144,6 +158,21 @@ export async function runGate(opts: {
     ...cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(repoRoot, p), 'utf8')) as Record<string, unknown>),
     mintedTree,
   ]);
+
+  // UNRESOLVED-REF CENSUS — see Scorecard.unresolvedTokenRefs. generateCss is
+  // the emitters' existing referee for "{path} does not exist in tokens/"; it
+  // collects into `errors` rather than throwing, so the census borrows the
+  // rule without inventing one and without gating the render (the number is
+  // the receipt; a re-fuse against a frozen contract is allowed to be
+  // measured, just never silently).
+  const refErrors: string[] = [];
+  generateCss(enriched, inventory, refErrors);
+  const unresolvedRefs = [...new Set(refErrors.filter((e) => e.includes('does not exist in tokens/')))].sort();
+  if (unresolvedRefs.length > 0) {
+    console.log(
+      `    ⚠ ${comp.name}: ${unresolvedRefs.length} token ref(s) in the gated contract are NOT in the gate inventory — they render as EMPTY custom properties and depress the computed %. First: ${unresolvedRefs[0]}`,
+    );
+  }
 
   // CSS is combo-independent (defaults only affect HTML) — emit once.
   const contracts = new Map<string, Contract>([[enriched.id, enriched]]);
@@ -351,6 +380,7 @@ ${stages.join('\n')}
       .map((r) => ({ key: r.key, pctAA: r.pctAA, pctExact: r.pctExact, channelsMismatched: r.mismatches.length })),
     topMismatchedChannels: [...mismatchByChannel.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15),
     namedLosses: opts.namedLosses,
+    unresolvedTokenRefs: { count: unresolvedRefs.length, refs: unresolvedRefs.slice(0, 40) },
     rows,
   };
   return scorecard;

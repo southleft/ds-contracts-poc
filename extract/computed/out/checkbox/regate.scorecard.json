@@ -47,6 +47,11 @@
       },
       {
         "part": "input",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "input",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -82,6 +87,11 @@
       },
       {
         "part": "backdrop",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "part": "backdrop",
         "channel": "transition-delay",
         "value": "0s, 0s, 0s"
       },
@@ -101,59 +111,74 @@
         "value": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "max-height",
         "value": "100%"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "max-width",
         "value": "100%"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "text-rendering",
         "value": "geometricprecision"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "position",
+        "value": "absolute"
       },
       {
         "part": "choice__label",
@@ -193,12 +218,6 @@
       },
       {
         "state": "disabled",
-        "part": "icon",
-        "channel": "cursor",
-        "value": "default"
-      },
-      {
-        "state": "disabled",
         "part": "label",
         "channel": "cursor",
         "value": "default"
@@ -223,6 +242,9 @@
       }
     ]
   },
+  "decisionsReapplied": [
+    "applied: backdrop.border-width [base] → {p.border-width-0}"
+  ],
   "scorecard": {
     "component": "Checkbox",
     "generatedBy": "extract/computed/gate.ts",
@@ -231,9 +253,9 @@
     "combos": 6,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 2896,
-      "cellsEqual": 2440,
-      "pctEqual": 84.25414364640883,
+      "cellsCompared": 2440,
+      "cellsEqual": 1972,
+      "pctEqual": 80.81967213114754,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -249,95 +271,91 @@
       "boundConfirmed": 0,
       "boundCells": 12,
       "contradictions": 12,
-      "mintedLeaves": 90,
-      "mintedLeavesUnfolded": 84,
-      "baseBindings": 66,
+      "mintedLeaves": 68,
+      "mintedLeavesUnfolded": 60,
+      "baseBindings": 94,
       "stateBindings": 47,
-      "codeOnlyChannels": 12,
-      "overflowBindings": 44,
-      "folds": 44
+      "codeOnlyChannels": 13,
+      "overflowBindings": 53,
+      "folds": 62
     },
     "worstRows": [
       {
         "key": "indeterminate.disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 33
       },
       {
         "key": "indeterminate.disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 33
       },
       {
         "key": "indeterminate.disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 33
       },
       {
         "key": "indeterminate.disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 33
       },
       {
         "key": "checked.disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 29
+        "channelsMismatched": 30
       },
       {
         "key": "checked.disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 29
+        "channelsMismatched": 30
       },
       {
         "key": "checked.disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 29
+        "channelsMismatched": 30
       },
       {
         "key": "checked.disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 29
+        "channelsMismatched": 30
       }
     ],
     "topMismatchedChannels": [
-      [
-        "backdrop.transform",
-        24
-      ],
       [
         "backdrop.transition-behavior",
         24
       ],
       [
         "backdrop.border-bottom-color",
-        21
+        22
       ],
       [
         "backdrop.border-left-color",
-        21
+        22
       ],
       [
         "backdrop.border-right-color",
-        21
+        22
       ],
       [
         "backdrop.border-top-color",
-        21
+        22
       ],
       [
-        "icon-2.overflow-clip-margin",
+        "icon-3.right",
         16
       ],
       [
-        "icon-2.shape-rendering",
+        "icon-3.top",
         16
       ],
       [
@@ -367,10 +385,23 @@
       [
         "input.border-bottom-color",
         12
+      ],
+      [
+        "input.border-left-color",
+        12
       ]
     ],
     "namedLosses": [
-      "overflow: icon-2.fill — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
+      "overflow: icon-3.bottom — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.height — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.left — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.margin-bottom — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.margin-left — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.margin-right — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.margin-top — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.right — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.top — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon-3.width — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "overflow: backdrop.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -415,23 +446,28 @@
       "overflow: backdrop.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.box-shadow [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: backdrop.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: backdrop.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: icon.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: icon.transition-delay — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: icon.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: icon.transition-property — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: icon.transition-timing-function — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: icon-2.shape-rendering — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only[disabled]: icon-2.cursor — declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
-      "code-only[disabled]: icon-3.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "code-only: icon-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: icon-3.transition-delay — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: icon-3.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: icon-3.transition-property — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: icon-3.transition-timing-function — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: icon-6.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: icon-6.shape-rendering — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only[disabled]: icon-3.cursor — declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[disabled]: icon-4.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[disabled]: icon-6.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[disabled]: icon.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
     ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
     "rows": [
       {
         "key": "unchecked.enabled__default",
-        "channelsCompared": 129,
-        "channelsEqual": 121,
+        "channelsCompared": 99,
+        "channelsEqual": 94,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -461,35 +497,17 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.enabled__hover",
-        "channelsCompared": 129,
-        "channelsEqual": 119,
+        "channelsCompared": 99,
+        "channelsEqual": 92,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -502,25 +520,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
           },
           {
@@ -531,35 +549,17 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.enabled__focus-visible",
-        "channelsCompared": 129,
-        "channelsEqual": 119,
+        "channelsCompared": 99,
+        "channelsEqual": 92,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -601,35 +601,17 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.enabled__active",
-        "channelsCompared": 129,
-        "channelsEqual": 119,
+        "channelsCompared": 99,
+        "channelsEqual": 92,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -642,25 +624,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
@@ -671,35 +653,17 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.disabled__default",
-        "channelsCompared": 129,
-        "channelsEqual": 101,
+        "channelsCompared": 99,
+        "channelsEqual": 75,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -825,12 +789,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
@@ -840,24 +798,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           },
           {
             "part": "choice__label",
@@ -876,8 +816,8 @@
       },
       {
         "key": "unchecked.disabled__hover",
-        "channelsCompared": 129,
-        "channelsEqual": 101,
+        "channelsCompared": 99,
+        "channelsEqual": 75,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -968,25 +908,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -1003,12 +943,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
@@ -1018,24 +952,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           },
           {
             "part": "choice__label",
@@ -1054,8 +970,8 @@
       },
       {
         "key": "unchecked.disabled__focus-visible",
-        "channelsCompared": 129,
-        "channelsEqual": 101,
+        "channelsCompared": 99,
+        "channelsEqual": 75,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1146,25 +1062,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(49, 49, 49, 1)",
+            "ours": "rgba(48, 48, 48, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(49, 49, 49, 1)",
+            "ours": "rgba(48, 48, 48, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(49, 49, 49, 1)",
+            "ours": "rgba(48, 48, 48, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(49, 49, 49, 1)",
+            "ours": "rgba(48, 48, 48, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -1181,12 +1097,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
@@ -1196,24 +1106,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           },
           {
             "part": "choice__label",
@@ -1232,8 +1124,8 @@
       },
       {
         "key": "unchecked.disabled__active",
-        "channelsCompared": 129,
-        "channelsEqual": 101,
+        "channelsCompared": 99,
+        "channelsEqual": 75,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1324,25 +1216,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(90, 90, 90, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(90, 90, 90, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(90, 90, 90, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(90, 90, 90, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -1359,12 +1251,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
@@ -1374,24 +1260,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
-            "ours": "0px",
-            "theirs": "content-box"
-          },
-          {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
           },
           {
             "part": "choice__label",
@@ -1410,17 +1278,11 @@
       },
       {
         "key": "checked.enabled__default",
-        "channelsCompared": 129,
-        "channelsEqual": 124,
+        "channelsCompared": 103,
+        "channelsEqual": 96,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
           {
             "part": "backdrop",
             "channel": "transition-behavior",
@@ -1428,62 +1290,74 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.enabled__hover",
-        "channelsCompared": 129,
-        "channelsEqual": 120,
+        "channelsCompared": 103,
+        "channelsEqual": 92,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(91, 91, 91, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(91, 91, 91, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(91, 91, 91, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(91, 91, 91, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
           },
           {
             "part": "backdrop",
@@ -1492,30 +1366,48 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.enabled__focus-visible",
-        "channelsCompared": 129,
-        "channelsEqual": 123,
+        "channelsCompared": 103,
+        "channelsEqual": 91,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1527,9 +1419,27 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+            "channel": "border-bottom-color",
+            "ours": "rgba(49, 49, 49, 1)",
+            "theirs": "rgba(48, 48, 48, 1)"
+          },
+          {
+            "part": "backdrop",
+            "channel": "border-left-color",
+            "ours": "rgba(49, 49, 49, 1)",
+            "theirs": "rgba(48, 48, 48, 1)"
+          },
+          {
+            "part": "backdrop",
+            "channel": "border-right-color",
+            "ours": "rgba(49, 49, 49, 1)",
+            "theirs": "rgba(48, 48, 48, 1)"
+          },
+          {
+            "part": "backdrop",
+            "channel": "border-top-color",
+            "ours": "rgba(49, 49, 49, 1)",
+            "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
@@ -1538,62 +1448,74 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.enabled__active",
-        "channelsCompared": 129,
-        "channelsEqual": 120,
+        "channelsCompared": 103,
+        "channelsEqual": 92,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
           },
           {
             "part": "backdrop",
@@ -1602,30 +1524,48 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.disabled__default",
-        "channelsCompared": 129,
-        "channelsEqual": 100,
+        "channelsCompared": 103,
+        "channelsEqual": 73,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1751,45 +1691,51 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -1808,8 +1754,8 @@
       },
       {
         "key": "checked.disabled__hover",
-        "channelsCompared": 129,
-        "channelsEqual": 100,
+        "channelsCompared": 103,
+        "channelsEqual": 73,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1900,25 +1846,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -1935,45 +1881,51 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -1992,8 +1944,8 @@
       },
       {
         "key": "checked.disabled__focus-visible",
-        "channelsCompared": 129,
-        "channelsEqual": 100,
+        "channelsCompared": 103,
+        "channelsEqual": 73,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -2084,25 +2036,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -2119,45 +2071,51 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -2176,8 +2134,8 @@
       },
       {
         "key": "checked.disabled__active",
-        "channelsCompared": 129,
-        "channelsEqual": 100,
+        "channelsCompared": 103,
+        "channelsEqual": 73,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -2268,25 +2226,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(94, 94, 94, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(94, 94, 94, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(94, 94, 94, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(94, 94, 94, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -2303,45 +2261,51 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon-2",
-            "channel": "cursor",
-            "ours": "pointer",
-            "theirs": "default"
-          },
-          {
-            "part": "icon-2",
-            "channel": "fill",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
-          {
-            "part": "icon-2",
-            "channel": "overflow-clip-margin",
+            "part": "icon-3",
+            "channel": "margin-bottom",
             "ours": "0px",
-            "theirs": "content-box"
+            "theirs": "2px"
           },
           {
-            "part": "icon-2",
-            "channel": "shape-rendering",
-            "ours": "auto",
-            "theirs": "geometricprecision"
+            "part": "icon-3",
+            "channel": "margin-left",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-right",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "margin-top",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "18px",
+            "theirs": "0px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -2360,17 +2324,11 @@
       },
       {
         "key": "indeterminate.enabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 97,
+        "channelsCompared": 103,
+        "channelsEqual": 93,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
           {
             "part": "backdrop",
             "channel": "transition-behavior",
@@ -2378,31 +2336,55 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -2412,40 +2394,34 @@
       },
       {
         "key": "indeterminate.enabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 93,
+        "channelsCompared": 103,
+        "channelsEqual": 89,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(85, 85, 85, 1)",
+            "ours": "rgba(88, 88, 88, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(85, 85, 85, 1)",
+            "ours": "rgba(88, 88, 88, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(85, 85, 85, 1)",
+            "ours": "rgba(88, 88, 88, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(85, 85, 85, 1)",
+            "ours": "rgba(88, 88, 88, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
           },
           {
             "part": "backdrop",
@@ -2454,31 +2430,55 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -2488,8 +2488,8 @@
       },
       {
         "key": "indeterminate.enabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 92,
+        "channelsCompared": 103,
+        "channelsEqual": 88,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -2502,32 +2502,26 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(50, 50, 50, 1)",
+            "ours": "rgba(49, 49, 49, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
           },
           {
             "part": "backdrop",
@@ -2536,31 +2530,55 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -2570,40 +2588,34 @@
       },
       {
         "key": "indeterminate.enabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 93,
+        "channelsCompared": 103,
+        "channelsEqual": 89,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(84, 84, 84, 1)",
+            "ours": "rgba(92, 92, 92, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
           },
           {
             "part": "backdrop",
@@ -2612,31 +2624,55 @@
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -2646,8 +2682,8 @@
       },
       {
         "key": "indeterminate.disabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 74,
+        "channelsCompared": 103,
+        "channelsEqual": 70,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -2773,48 +2809,66 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -2836,8 +2890,8 @@
       },
       {
         "key": "indeterminate.disabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 74,
+        "channelsCompared": 103,
+        "channelsEqual": 70,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -2928,25 +2982,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(88, 88, 88, 1)",
+            "ours": "rgba(89, 89, 89, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -2963,48 +3017,66 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -3026,8 +3098,8 @@
       },
       {
         "key": "indeterminate.disabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 74,
+        "channelsCompared": 103,
+        "channelsEqual": 70,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -3153,48 +3225,66 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
@@ -3216,8 +3306,8 @@
       },
       {
         "key": "indeterminate.disabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 74,
+        "channelsCompared": 103,
+        "channelsEqual": 70,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -3308,25 +3398,25 @@
           {
             "part": "backdrop",
             "channel": "border-bottom-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(90, 90, 90, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-left-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(90, 90, 90, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-right-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(90, 90, 90, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "backdrop",
             "channel": "border-top-color",
-            "ours": "rgba(89, 89, 89, 1)",
+            "ours": "rgba(90, 90, 90, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -3343,48 +3433,66 @@
           },
           {
             "part": "backdrop",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
-          },
-          {
-            "part": "backdrop",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "bottom",
+            "ours": "-22px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "right",
+            "ours": "-4px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
+            "channel": "top",
+            "ours": "18px",
+            "theirs": "-2px"
+          },
+          {
+            "part": "icon-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-delay",
             "ours": "0s",
             "theirs": "0s, 0s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-duration",
             "ours": "0s",
             "theirs": "0.15s, 0.15s"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-property",
             "ours": "all",
             "theirs": "opacity, transform"
           },
           {
-            "part": "icon",
+            "part": "icon-3",
             "channel": "transition-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"

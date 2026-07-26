@@ -1084,27 +1084,51 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   };
   const astryx = await exercise('examples/astryx/figma/astryx.bundle.json', 'Astryx', 13);
   assert(astryx.built === 13, `astryx bundle builds all 13 components (got ${astryx.built})`);
-  // The 9 re-anchored badge tone rules (examples/astryx/tokens/reanchor-decisions.json)
+  // The 54 re-anchored minted leaves (examples/astryx/tokens/reanchor-decisions.json:
+  // the 9 auto-clean badge tone rules + the 45 landed by the REVIEWED round)
   // arrive through the ENGINE path as Figma-native aliases and RESOLVE to the
   // same theme-neutral light values the literals carried — the light plane is
   // untouched; what changed is that they now FOLLOW the mode.
-  assert(astryx.aliases === 9, `astryx bundle carries the 9 re-anchored minted aliases (got ${astryx.aliases})`);
+  assert(astryx.aliases === 54, `astryx bundle carries the 54 re-anchored minted aliases (got ${astryx.aliases})`);
   const hex2 = (x) => Math.round((x || 0) * 255).toString(16).padStart(2, '0');
-  for (const [tone, want] of [['blue', '#042f97'], ['red', '#7b0210'], ['yellow', '#753f07']]) {
-    const v = astryx.byName.get(`imported/badge/root/row-rule-color/${tone}`);
-    assert(v, `astryx bundle emits imported/badge/root/row-rule-color/${tone}`);
+  // One pin per DECISION ARM, so a mis-targeted arm cannot hide behind a count:
+  // three of the original tone rules, plus one leaf from each of the reviewed
+  // round's five value groups.
+  for (const [leaf, want] of [
+    ['imported/badge/root/row-rule-color/blue', '#042f97'],
+    ['imported/badge/root/row-rule-color/red', '#7b0210'],
+    ['imported/badge/root/row-rule-color/yellow', '#753f07'],
+    ['imported/badge/root/row-rule-color/warning', '#0a1317'],
+    ['imported/button/label/color/primary', '#ffffff'],
+    ['imported/button/label/color/destructive', '#ffffff'],
+    ['imported/button/label/color/ghost', '#0a1317'],
+    ['imported/card/root/border-top-color/default', '#ccd3db'],
+    ['imported/slider/slider-track/background-color', '#ccd3db'],
+    ['imported/shared/color-0064e0', '#0064e0'],
+    ['imported/slider/label/color', '#4e606f'],
+  ]) {
+    const v = astryx.byName.get(leaf);
+    assert(v, `astryx bundle emits ${leaf}`);
     const first = v.valuesByMode[Object.keys(v.valuesByMode)[0]];
-    assert(first && first.type === 'VARIABLE_ALIAS', `badge tone=${tone} rule is a VARIABLE_ALIAS, not a frozen literal`);
+    assert(first && first.type === 'VARIABLE_ALIAS', `${leaf} is a VARIABLE_ALIAS, not a frozen literal`);
     const r = v.resolveForConsumer();
     const got = r && r.value ? `#${hex2(r.value.r)}${hex2(r.value.g)}${hex2(r.value.b)}` : '(unresolved)';
-    assert(got === want, `badge tone=${tone} rule resolves the unchanged neutral light value ${want} (got ${got})`);
+    assert(got === want, `${leaf} resolves the unchanged neutral light value ${want} (got ${got})`);
+  }
+  // …and the two leaves the review DECIDED to keep literal must still be
+  // literals: a resolved queue is not the same as an empty one.
+  for (const leaf of ['imported/shared/color-ffffff', 'imported/shared/color-0a1317']) {
+    const v = astryx.byName.get(leaf);
+    assert(v, `astryx bundle emits ${leaf}`);
+    const first = v.valuesByMode[Object.keys(v.valuesByMode)[0]];
+    assert(!(first && first.type === 'VARIABLE_ALIAS'), `${leaf} is DECIDED-LITERAL (tokens/reanchor-decisions.json "literals") and must stay a literal, not an alias`);
   }
   const polaris = await exercise('examples/polaris/figma/polaris.bundle.json', 'Polaris', 12);
   assert(polaris.built === 12, `polaris bundle builds all 12 components incl. icon-bearing ones (got ${polaris.built})`);
   const docs = await exercise('examples/astryx/figma/astryx-docs.bundle.json', 'Astryx (docs theme)', 13);
   assert(docs.built === 13 && docs.vars === astryx.vars, `docs-theme bundle builds the same 13 with the same variable count (${docs.built}, ${docs.vars} vs ${astryx.vars})`);
   assert(docs.aliases === astryx.aliases, `docs-theme bundle carries the SAME ${astryx.aliases} minted aliases — re-anchoring is what makes them re-theme (got ${docs.aliases})`);
-  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these 9 now DO re-theme): the JSON-only rule holds for EVERY example round through the real engine path`);
+  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these ${docs.aliases} now DO re-theme): the JSON-only rule holds for EVERY example round through the real engine path`);
 }
 
 console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles)');

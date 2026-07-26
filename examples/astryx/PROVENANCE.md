@@ -47,22 +47,30 @@ into a literal hex in the atomic class, which is why this example ships **no
 `source-bindings.json`** and cannot run MUI's evidence-driven alias pass
 (`examples/mui/scripts/promote-floor.mjs`).
 
-Nine of those leaves are no longer literals. Their provenance is a **human
-ledger**, not an extraction fact:
+Fifty-four of those leaves are no longer literals. Their provenance is a
+**human ledger**, not an extraction fact:
 
 | | |
 |---|---|
 | Pass | `scripts/reanchor-minted.ts` (`--propose` / `--apply`) |
 | Anchor plane | `tokens/astryx.dtcg.json` — THEME-NEUTRAL, value-fingerprinted; a re-themed anchor is refused by name |
-| Review queue | `tokens/reanchor-proposals.{json,md}` — 21 rows; the 54 ambiguous refs are a human's to decide and no ranking may decide them |
-| Ledger | `tokens/reanchor-decisions.json` — 9 acked rows, each with rationale, `darkDelta` ack and named cause |
-| Receipt | `tokens/MINTED.md` — N aliased / N literal / N named refusals |
+| Review queue | `tokens/reanchor-proposals.{json,md}` — 21 rows, **RESOLVED**: 0 pending. Every live leaf is either re-anchored or carries a named kept-literal receipt |
+| Ledger | `tokens/reanchor-decisions.json` — 19 acked alias rows + 2 `literals` receipt rows, each with rationale/reason, `darkDelta` ack, named cause and the review provenance |
+| Receipt | `tokens/MINTED.md` — N aliased / N literal / N kept-literal-by-decision / N named refusals |
 | Convergence | `scripts/promote-floor.ts` re-applies the ledger after regenerating the tree, so a re-run cannot silently revert a decision |
 
-The nine are **not vendor facts**. They are a value join (1 leaf : 1
-equal-valued semantic token) corroborated by a committed sibling binding in
-the same contract cell, then explicitly acked. Reverting one is deleting its
-row and re-running `promote-floor.ts`.
+The fifty-four are **not vendor facts**. Nine were auto-clean (1 leaf : 1
+equal-valued semantic token, corroborated by a committed sibling binding in
+the same contract cell). The other 45 came out of the REVIEWED round: the five
+ranked value groups were split PER LEAF and each leaf was anchored only where
+role-grade evidence existed — a committed sibling binding, a variant axis that
+names the role, a channel that names the role, or exactly one candidate in the
+leaf's role class. Two leaves were reviewed and DELIBERATELY kept literal,
+with receipts. Authority: **orchestrator-reviewed under owner delegation, TJ
+2026-07-26**, recorded in every row's `cause`. Two rows carry a `deviation`
+field where a committed binding named a different token than the review rubric
+predicted — the fact on disk won, and said so. Reverting any row is deleting it
+and re-running `promote-floor.ts`.
 
 ## License attribution
 

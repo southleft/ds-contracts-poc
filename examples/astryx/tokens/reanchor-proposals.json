@@ -9,18 +9,24 @@
   },
   "generatedBy": "examples/astryx/scripts/reanchor-minted.ts --propose",
   "summary": {
-    "applied": 9,
+    "applied": 63,
     "clean": 0,
-    "ambiguous": 54,
+    "ambiguous": 0,
     "noMatch": 0,
     "excluded": 50,
-    "rows": 21
+    "decidedLiteral": 0,
+    "rows": 21,
+    "literalReceipts": {
+      "rows": 2,
+      "leaves": 2,
+      "refs": 7
+    }
   },
   "rows": [
     {
       "id": "RA-0064e0",
-      "disposition": "ambiguous",
-      "value": "#0064e0",
+      "disposition": "applied",
+      "value": "#0064E0",
       "tuple": "0,100,224,1",
       "leaves": [
         "imported.shared.color-0064e0"
@@ -34,7 +40,7 @@
           "state": null,
           "axisValues": [],
           "refs": 3,
-          "aliasedTo": null
+          "aliasedTo": "color-accent"
         }
       ],
       "channelClasses": [
@@ -57,7 +63,7 @@
             "light": "#0064E0",
             "dark": "#2694FE",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0064e0 in BOTH modes today; aliasing to {color-accent} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0064E0 in BOTH modes today; aliasing to {color-accent} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -70,7 +76,7 @@
             "light": "#0064E0",
             "dark": "#2694FE",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0064e0 in BOTH modes today; aliasing to {color-border-blue} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0064E0 in BOTH modes today; aliasing to {color-border-blue} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -83,7 +89,7 @@
             "light": "#0064E0",
             "dark": "#2694FE",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0064e0 in BOTH modes today; aliasing to {color-icon-accent} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0064E0 in BOTH modes today; aliasing to {color-icon-accent} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -96,7 +102,7 @@
             "light": "#0064E0",
             "dark": "#2694FE",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0064e0 in BOTH modes today; aliasing to {color-icon-blue} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0064E0 in BOTH modes today; aliasing to {color-icon-blue} makes it #0064E0 light / #2694FE dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -109,16 +115,15 @@
             "light": "#0064E0",
             "dark": "#3E9EFB",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0064e0 in BOTH modes today; aliasing to {color-text-accent} makes it #0064E0 light / #3E9EFB dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0064E0 in BOTH modes today; aliasing to {color-text-accent} makes it #0064E0 light / #3E9EFB dark. This is a deliberate pixel change in dark mode."
           }
         }
       ],
-      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0064e0 (0,100,224,1) — re-verified at apply time against the then-current DTCG.",
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0064E0 (0,100,224,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "AMBIGUOUS: 5 base tokens share #0064e0. The value join CANNOT decide between them and this script will NOT try — ranking is presentation, not resolution.",
-        "StyleX compiled the source token name away, so no recorded fact says which one the literal came from.",
-        "THE DECIDING QUESTION IS USUALLY DARK MODE: the candidates below diverge in the dark plane. Pick the one whose dark behaviour is correct for this channel, then add a row to tokens/reanchor-decisions.json.",
-        "All leaves share one channel class (none — value-named shared leaf), so one target can cover the row."
+        "APPLIED: all 1 live leaf/leaves in this group already alias {color-accent} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
     },
     {
@@ -335,8 +340,8 @@
     },
     {
       "id": "RA-0a1317",
-      "disposition": "ambiguous",
-      "value": "#0a1317",
+      "disposition": "applied",
+      "value": "#0A1317",
       "tuple": "10,19,23,1",
       "leaves": [
         "imported.badge.root.row-rule-color.neutral",
@@ -370,7 +375,7 @@
             "neutral"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-gray"
         },
         {
           "leaf": "imported.badge.root.row-rule-color.warning",
@@ -382,7 +387,7 @@
             "warning"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-warning"
         },
         {
           "leaf": "imported.button.label.color.ghost",
@@ -394,7 +399,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.label.color.secondary",
@@ -406,7 +411,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.label.row-rule-color.ghost",
@@ -418,7 +423,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.label.row-rule-color.secondary",
@@ -430,7 +435,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-0.color.ghost",
@@ -442,7 +447,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-0.color.secondary",
@@ -454,7 +459,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-0.row-rule-color.ghost",
@@ -466,7 +471,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-0.row-rule-color.secondary",
@@ -478,7 +483,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-1.color.ghost",
@@ -490,7 +495,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-1.color.secondary",
@@ -502,7 +507,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-1.row-rule-color.ghost",
@@ -514,7 +519,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.part-1.row-rule-color.secondary",
@@ -526,7 +531,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.root.outline-color.ghost",
@@ -538,7 +543,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.root.outline-color.secondary",
@@ -550,7 +555,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.root.row-rule-color.ghost",
@@ -562,7 +567,7 @@
             "ghost"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.root.row-rule-color.secondary",
@@ -574,7 +579,7 @@
             "secondary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.shared.color-0a1317",
@@ -584,7 +589,8 @@
           "state": null,
           "axisValues": [],
           "refs": 3,
-          "aliasedTo": null
+          "aliasedTo": null,
+          "decidedLiteral": "ONE LEAF, TWO INCOMPATIBLE ROLES. This value-named shared leaf serves 3 axis-expanded refs that are not the same kind of thing: 1 is a SURFACE (slider tooltip background-color) and 2 are TEXT (slider label-3 color + row-rule-color). The surface role wants {color-background-inverted} (#0A1317 light / #FFFFFF dark) and the text role wants {color-text-primary} or {color-text-gray} (#0A1317 light / #DFE2E5 | #E7EAED dark) — these INVERT against each other in the dark plane, so no single alias can serve both and any choice would silently break one of the two. Fixing it requires SPLITTING the leaf into a surface leaf and a text leaf, which is a path change, which this round forbids. Kept literal with a named follow-up rather than half-fixed."
         }
       ],
       "channelClasses": [
@@ -629,7 +635,7 @@
             "light": "#0A1317",
             "dark": "#E7EAED",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0a1317 in BOTH modes today; aliasing to {color-text-gray} makes it #0A1317 light / #E7EAED dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-text-gray} makes it #0A1317 light / #E7EAED dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -643,7 +649,7 @@
             "light": "#0A1317",
             "dark": "#DFE2E5",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0a1317 in BOTH modes today; aliasing to {color-text-primary} makes it #0A1317 light / #DFE2E5 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-text-primary} makes it #0A1317 light / #DFE2E5 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -658,7 +664,7 @@
             "light": "#0A1317",
             "dark": "#0A1317",
             "modeVarying": false,
-            "effect": "mode-safe — {color-on-warning} is #0A1317 in both modes, identical to the frozen literal #0a1317; aliasing changes NO pixel in either mode (semantics only)."
+            "effect": "mode-safe — {color-on-warning} is #0A1317 in both modes, identical to the frozen literal #0A1317; aliasing changes NO pixel in either mode (semantics only)."
           }
         },
         {
@@ -671,7 +677,7 @@
             "light": "#0A1317",
             "dark": "#FFFFFF",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0a1317 in BOTH modes today; aliasing to {color-background-inverted} makes it #0A1317 light / #FFFFFF dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-background-inverted} makes it #0A1317 light / #FFFFFF dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -684,16 +690,16 @@
             "light": "#0A1317",
             "dark": "#DFE2E5",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0a1317 in BOTH modes today; aliasing to {color-icon-primary} makes it #0A1317 light / #DFE2E5 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-icon-primary} makes it #0A1317 light / #DFE2E5 dark. This is a deliberate pixel change in dark mode."
           }
         }
       ],
-      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0a1317 (10,19,23,1) — re-verified at apply time against the then-current DTCG.",
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0A1317 (10,19,23,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "AMBIGUOUS: 5 base tokens share #0a1317. The value join CANNOT decide between them and this script will NOT try — ranking is presentation, not resolution.",
-        "StyleX compiled the source token name away, so no recorded fact says which one the literal came from.",
-        "THE DECIDING QUESTION IS USUALLY DARK MODE: the candidates below diverge in the dark plane. Pick the one whose dark behaviour is correct for this channel, then add a row to tokens/reanchor-decisions.json.",
-        "SPLIT SIGNAL: these leaves span (none), color, outline-color, row-rule-color — different channel classes can legitimately want DIFFERENT targets. A decision row may name a SUBSET of this row's leaves; write one row per target."
+        "RESOLVED: 18 of 19 live leaves alias {color-on-warning}, {color-text-gray}, {color-text-primary} (landed from tokens/reanchor-decisions.json); the remaining 1 were REVIEWED AND KEPT LITERAL — receipts below. Nothing in this row is pending.",
+        "DECIDED LITERAL — `imported.shared.color-0a1317` (3 ref(s)): ONE LEAF, TWO INCOMPATIBLE ROLES. This value-named shared leaf serves 3 axis-expanded refs that are not the same kind of thing: 1 is a SURFACE (slider tooltip background-color) and 2 are TEXT (slider label-3 color + row-rule-color). The surface role wants {color-background-inverted} (#0A1317 light / #FFFFFF dark) and the text role wants {color-text-primary} or {color-text-gray} (#0A1317 light / #DFE2E5 | #E7EAED dark) — these INVERT against each other in the dark plane, so no single alias can serve both and any choice would silently break one of the two. Fixing it requires SPLITTING the leaf into a surface leaf and a text leaf, which is a path change, which this round forbids. Kept literal with a named follow-up rather than half-fixed.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
     },
     {
@@ -751,8 +757,8 @@
     },
     {
       "id": "RA-4e606f",
-      "disposition": "ambiguous",
-      "value": "#4e606f",
+      "disposition": "applied",
+      "value": "#4E606F",
       "tuple": "78,96,111,1",
       "leaves": [
         "imported.slider.label.color",
@@ -767,7 +773,7 @@
           "state": null,
           "axisValues": [],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-secondary"
         },
         {
           "leaf": "imported.slider.label.row-rule-color",
@@ -777,7 +783,7 @@
           "state": null,
           "axisValues": [],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-text-secondary"
         }
       ],
       "channelClasses": [
@@ -800,7 +806,7 @@
             "light": "#4E606F",
             "dark": "#AAAFB5",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #4e606f in BOTH modes today; aliasing to {color-text-secondary} makes it #4E606F light / #AAAFB5 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #4E606F in BOTH modes today; aliasing to {color-text-secondary} makes it #4E606F light / #AAAFB5 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -813,7 +819,7 @@
             "light": "#4E606F",
             "dark": "#AAAFB5",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #4e606f in BOTH modes today; aliasing to {color-icon-gray} makes it #4E606F light / #AAAFB5 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #4E606F in BOTH modes today; aliasing to {color-icon-gray} makes it #4E606F light / #AAAFB5 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -826,16 +832,15 @@
             "light": "#4E606F",
             "dark": "#AAAFB5",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #4e606f in BOTH modes today; aliasing to {color-icon-secondary} makes it #4E606F light / #AAAFB5 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #4E606F in BOTH modes today; aliasing to {color-icon-secondary} makes it #4E606F light / #AAAFB5 dark. This is a deliberate pixel change in dark mode."
           }
         }
       ],
-      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #4e606f (78,96,111,1) — re-verified at apply time against the then-current DTCG.",
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #4E606F (78,96,111,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "AMBIGUOUS: 3 base tokens share #4e606f. The value join CANNOT decide between them and this script will NOT try — ranking is presentation, not resolution.",
-        "StyleX compiled the source token name away, so no recorded fact says which one the literal came from.",
-        "THE DECIDING QUESTION IS USUALLY DARK MODE: the candidates below diverge in the dark plane. Pick the one whose dark behaviour is correct for this channel, then add a row to tokens/reanchor-decisions.json.",
-        "SPLIT SIGNAL: these leaves span color, row-rule-color — different channel classes can legitimately want DIFFERENT targets. A decision row may name a SUBSET of this row's leaves; write one row per target."
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-text-secondary} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
     },
     {
@@ -1052,8 +1057,8 @@
     },
     {
       "id": "RA-ccd3db",
-      "disposition": "ambiguous",
-      "value": "#ccd3db",
+      "disposition": "applied",
+      "value": "#CCD3DB",
       "tuple": "204,211,219,1",
       "leaves": [
         "imported.card.root.border-bottom-color.default",
@@ -1073,7 +1078,7 @@
             "default"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-border-emphasized"
         },
         {
           "leaf": "imported.card.root.border-left-color.default",
@@ -1085,7 +1090,7 @@
             "default"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-border-emphasized"
         },
         {
           "leaf": "imported.card.root.border-right-color.default",
@@ -1097,7 +1102,7 @@
             "default"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-border-emphasized"
         },
         {
           "leaf": "imported.card.root.border-top-color.default",
@@ -1109,7 +1114,7 @@
             "default"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-border-emphasized"
         },
         {
           "leaf": "imported.slider.slider-track.background-color",
@@ -1119,7 +1124,7 @@
           "state": null,
           "axisValues": [],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-track"
         }
       ],
       "channelClasses": [
@@ -1148,7 +1153,7 @@
             "light": "#CCD3DB",
             "dark": "#494D53",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #ccd3db in BOTH modes today; aliasing to {color-border-emphasized} makes it #CCD3DB light / #494D53 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #CCD3DB in BOTH modes today; aliasing to {color-border-emphasized} makes it #CCD3DB light / #494D53 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -1161,7 +1166,7 @@
             "light": "#CCD3DB",
             "dark": "#5A5E66",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #ccd3db in BOTH modes today; aliasing to {color-skeleton} makes it #CCD3DB light / #5A5E66 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #CCD3DB in BOTH modes today; aliasing to {color-skeleton} makes it #CCD3DB light / #5A5E66 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -1174,22 +1179,21 @@
             "light": "#CCD3DB",
             "dark": "#5A5E66",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #ccd3db in BOTH modes today; aliasing to {color-track} makes it #CCD3DB light / #5A5E66 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #CCD3DB in BOTH modes today; aliasing to {color-track} makes it #CCD3DB light / #5A5E66 dark. This is a deliberate pixel change in dark mode."
           }
         }
       ],
-      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #ccd3db (204,211,219,1) — re-verified at apply time against the then-current DTCG.",
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #CCD3DB (204,211,219,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "AMBIGUOUS: 3 base tokens share #ccd3db. The value join CANNOT decide between them and this script will NOT try — ranking is presentation, not resolution.",
-        "StyleX compiled the source token name away, so no recorded fact says which one the literal came from.",
-        "THE DECIDING QUESTION IS USUALLY DARK MODE: the candidates below diverge in the dark plane. Pick the one whose dark behaviour is correct for this channel, then add a row to tokens/reanchor-decisions.json.",
-        "SPLIT SIGNAL: these leaves span background-color, border-bottom-color, border-left-color, border-right-color, border-top-color — different channel classes can legitimately want DIFFERENT targets. A decision row may name a SUBSET of this row's leaves; write one row per target."
+        "APPLIED: all 5 live leaf/leaves in this group already alias {color-border-emphasized}, {color-track} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
     },
     {
       "id": "RA-ffffff",
-      "disposition": "ambiguous",
-      "value": "#ffffff",
+      "disposition": "applied",
+      "value": "#FFFFFF",
       "tuple": "255,255,255,1",
       "leaves": [
         "imported.badge.root.row-rule-color.error",
@@ -1224,7 +1228,7 @@
             "error"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.badge.root.row-rule-color.info",
@@ -1236,7 +1240,7 @@
             "info"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.badge.root.row-rule-color.success",
@@ -1248,7 +1252,7 @@
             "success"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.label.color.destructive",
@@ -1260,7 +1264,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.label.color.primary",
@@ -1272,7 +1276,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.label.row-rule-color.destructive",
@@ -1284,7 +1288,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.label.row-rule-color.primary",
@@ -1296,7 +1300,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.part-0.color.destructive",
@@ -1308,7 +1312,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.part-0.color.primary",
@@ -1320,7 +1324,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.part-0.row-rule-color.destructive",
@@ -1332,7 +1336,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.part-0.row-rule-color.primary",
@@ -1344,7 +1348,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.part-1.color.destructive",
@@ -1356,7 +1360,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.part-1.color.primary",
@@ -1368,7 +1372,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.part-1.row-rule-color.destructive",
@@ -1380,7 +1384,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.part-1.row-rule-color.primary",
@@ -1392,7 +1396,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.root.outline-color.destructive",
@@ -1404,7 +1408,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.root.outline-color.primary",
@@ -1416,7 +1420,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.button.root.row-rule-color.destructive",
@@ -1428,7 +1432,7 @@
             "destructive"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-error"
         },
         {
           "leaf": "imported.button.root.row-rule-color.primary",
@@ -1440,7 +1444,7 @@
             "primary"
           ],
           "refs": 1,
-          "aliasedTo": null
+          "aliasedTo": "color-on-accent"
         },
         {
           "leaf": "imported.shared.color-ffffff",
@@ -1450,7 +1454,8 @@
           "state": null,
           "axisValues": [],
           "refs": 4,
-          "aliasedTo": null
+          "aliasedTo": null,
+          "decidedLiteral": "NO ROLE-GRADE EVIDENCE. Value-named SHARED leaf: the path spells no channel, it carries no variant axis, and its contract cells bind no sibling base token — so none of the three role-grade evidence classes fires. Its 4 axis-expanded refs are all content channels (color + row-rule-color) on the slider tooltip and its label-2, whose SURFACE is itself another unnamed minted literal (imported.shared.color-0a1317). Named near-miss, deliberately declined: {color-on-dark} is a plausible role match (white content on a dark surface) and is mode-safe in both planes, but nothing on disk GRADES the pairing — the surface it would be \"on\" is a literal, not a token — so anchoring it would be a name-shaped guess dressed as a fact. Named follow-up: name the tooltip surface first (split imported.shared.color-0a1317, below), then this leaf becomes decidable."
         }
       ],
       "channelClasses": [
@@ -1498,7 +1503,7 @@
             "light": "#FFFFFF",
             "dark": "#FFFFFF",
             "modeVarying": false,
-            "effect": "mode-safe — {color-on-error} is #FFFFFF in both modes, identical to the frozen literal #ffffff; aliasing changes NO pixel in either mode (semantics only)."
+            "effect": "mode-safe — {color-on-error} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
           }
         },
         {
@@ -1512,7 +1517,7 @@
             "light": "#FFFFFF",
             "dark": "#FFFFFF",
             "modeVarying": false,
-            "effect": "mode-safe — {color-on-accent} is #FFFFFF in both modes, identical to the frozen literal #ffffff; aliasing changes NO pixel in either mode (semantics only)."
+            "effect": "mode-safe — {color-on-accent} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
           }
         },
         {
@@ -1526,7 +1531,7 @@
             "light": "#FFFFFF",
             "dark": "#FFFFFF",
             "modeVarying": false,
-            "effect": "mode-safe — {color-on-success} is #FFFFFF in both modes, identical to the frozen literal #ffffff; aliasing changes NO pixel in either mode (semantics only)."
+            "effect": "mode-safe — {color-on-success} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
           }
         },
         {
@@ -1539,7 +1544,7 @@
             "light": "#FFFFFF",
             "dark": "#1F1F22",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #ffffff in BOTH modes today; aliasing to {color-background-card} makes it #FFFFFF light / #1F1F22 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #FFFFFF in BOTH modes today; aliasing to {color-background-card} makes it #FFFFFF light / #1F1F22 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -1552,7 +1557,7 @@
             "light": "#FFFFFF",
             "dark": "#28292C",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #ffffff in BOTH modes today; aliasing to {color-background-popover} makes it #FFFFFF light / #28292C dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #FFFFFF in BOTH modes today; aliasing to {color-background-popover} makes it #FFFFFF light / #28292C dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -1565,7 +1570,7 @@
             "light": "#FFFFFF",
             "dark": "#1F1F22",
             "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #ffffff in BOTH modes today; aliasing to {color-background-surface} makes it #FFFFFF light / #1F1F22 dark. This is a deliberate pixel change in dark mode."
+            "effect": "DARK REPAIR — the leaf is frozen at #FFFFFF in BOTH modes today; aliasing to {color-background-surface} makes it #FFFFFF light / #1F1F22 dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -1578,16 +1583,16 @@
             "light": "#FFFFFF",
             "dark": "#FFFFFF",
             "modeVarying": false,
-            "effect": "mode-safe — {color-on-dark} is #FFFFFF in both modes, identical to the frozen literal #ffffff; aliasing changes NO pixel in either mode (semantics only)."
+            "effect": "mode-safe — {color-on-dark} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
           }
         }
       ],
-      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #ffffff (255,255,255,1) — re-verified at apply time against the then-current DTCG.",
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "AMBIGUOUS: 7 base tokens share #ffffff. The value join CANNOT decide between them and this script will NOT try — ranking is presentation, not resolution.",
-        "StyleX compiled the source token name away, so no recorded fact says which one the literal came from.",
-        "THE DECIDING QUESTION IS USUALLY DARK MODE: the candidates below diverge in the dark plane. Pick the one whose dark behaviour is correct for this channel, then add a row to tokens/reanchor-decisions.json.",
-        "SPLIT SIGNAL: these leaves span (none), color, outline-color, row-rule-color — different channel classes can legitimately want DIFFERENT targets. A decision row may name a SUBSET of this row's leaves; write one row per target."
+        "RESOLVED: 19 of 20 live leaves alias {color-on-accent}, {color-on-error} (landed from tokens/reanchor-decisions.json); the remaining 1 were REVIEWED AND KEPT LITERAL — receipts below. Nothing in this row is pending.",
+        "DECIDED LITERAL — `imported.shared.color-ffffff` (4 ref(s)): NO ROLE-GRADE EVIDENCE. Value-named SHARED leaf: the path spells no channel, it carries no variant axis, and its contract cells bind no sibling base token — so none of the three role-grade evidence classes fires. Its 4 axis-expanded refs are all content channels (color + row-rule-color) on the slider tooltip and its label-2, whose SURFACE is itself another unnamed minted literal (imported.shared.color-0a1317). Named near-miss, deliberately declined: {color-on-dark} is a plausible role match (white content on a dark surface) and is mode-safe in both planes, but nothing on disk GRADES the pairing — the surface it would be \"on\" is a literal, not a token — so anchoring it would be a name-shaped guess dressed as a fact. Named follow-up: name the tooltip surface first (split imported.shared.color-0a1317, below), then this leaf becomes decidable.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
     },
     {

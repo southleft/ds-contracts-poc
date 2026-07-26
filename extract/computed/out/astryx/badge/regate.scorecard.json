@@ -1,0 +1,1017 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Badge",
+  "config": "extract/computed/configs/astryx.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [],
+    "state": []
+  },
+  "decisionsReapplied": [
+    "applied: root.background-color [axis:variant=neutral] → {color-neutral}",
+    "applied: root.background-color [axis:variant=info] → {color-accent}",
+    "applied: root.background-color [axis:variant=success] → {color-success}",
+    "applied: root.background-color [axis:variant=warning] → {color-warning}",
+    "applied: root.background-color [axis:variant=error] → {color-error}",
+    "applied: root.padding-block [base] → {spacing-0}",
+    "applied: root.font-size [base] → {font-size-sm}",
+    "applied: root.color [axis:variant=error|info|success] → {color-on-accent}",
+    "applied: root.color [axis:variant=warning] → {color-on-warning}"
+  ],
+  "scorecard": {
+    "component": "Badge",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 14,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1512,
+      "cellsEqual": 1456,
+      "pctEqual": 96.29629629629629,
+      "rowsFullyEqual": 0,
+      "rows": 56
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 196,
+      "boundCells": 224,
+      "contradictions": 28,
+      "mintedLeaves": 14,
+      "mintedLeavesUnfolded": 140,
+      "baseBindings": 1,
+      "stateBindings": 0,
+      "codeOnlyChannels": 0,
+      "overflowBindings": 0,
+      "folds": 9
+    },
+    "worstRows": [
+      {
+        "key": "neutral__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "neutral__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "neutral__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "neutral__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "info__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "info__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "info__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "info__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.line-height",
+        56
+      ]
+    ],
+    "namedLosses": [],
+    "unresolvedTokenRefs": {
+      "count": 1,
+      "refs": [
+        "astryx.badge: anatomy.root.tokens.line-height references token \"{imported.badge.root.line-height}\" which does not exist in tokens/"
+      ]
+    },
+    "rows": [
+      {
+        "key": "neutral__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "neutral__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "neutral__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "neutral__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__default",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__hover",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__focus-visible",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__active",
+        "channelsCompared": 27,
+        "channelsEqual": 26,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "line-height",
+            "ours": "24px",
+            "theirs": "20.0004px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

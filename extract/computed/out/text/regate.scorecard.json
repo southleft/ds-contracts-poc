@@ -7,6 +7,7 @@
     "base": [],
     "state": []
   },
+  "decisionsReapplied": [],
   "scorecard": {
     "component": "Text",
     "generatedBy": "extract/computed/gate.ts",
@@ -33,12 +34,12 @@
       "boundConfirmed": 1584,
       "boundCells": 1584,
       "contradictions": 0,
-      "mintedLeaves": 96,
-      "mintedLeavesUnfolded": 204,
-      "baseBindings": 4,
+      "mintedLeaves": 156,
+      "mintedLeavesUnfolded": 264,
+      "baseBindings": 5,
       "stateBindings": 0,
       "codeOnlyChannels": 2,
-      "overflowBindings": 1,
+      "overflowBindings": 2,
       "folds": 9
     },
     "worstRows": [
@@ -95,9 +96,14 @@
     "namedLosses": [
       "promotion: static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
       "overflow: root.font-weight — pair ref over TWO unset axes — no carried spelling; named residue",
+      "overflow: root.width — pair ref over TWO unset axes — no carried spelling; named residue",
       "code-only: root.letter-spacing — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
     "rows": [
       {
         "key": "none.none.none__default",

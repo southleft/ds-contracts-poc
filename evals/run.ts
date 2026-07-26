@@ -5720,8 +5720,15 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const proposals = JSON.parse(readFileSync(T(OUTPUTS[0]), 'utf8'));
       const disp = (d: string) => proposals.rows.filter((r: any) => r.disposition === d);
       const refsOf = (d: string) => disp(d).reduce((a: number, r: any) => a + r.refs, 0);
-      if (refsOf('applied') !== 9 || refsOf('ambiguous') !== 54) {
-        throw new Error(`join moved: expected 9 applied / 54 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
+      // POST-REVIEW STATE: the queue is RESOLVED. 63 refs applied (9 auto-clean
+      // + the reviewed round's 47, of which 7 are DECIDED LITERAL receipts that
+      // ride inside otherwise-applied rows), 0 ambiguous.
+      if (refsOf('applied') !== 63 || refsOf('ambiguous') !== 0) {
+        throw new Error(`join moved: expected 63 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
+      }
+      const lit = proposals.summary.literalReceipts;
+      if (!lit || lit.rows !== 2 || lit.leaves !== 2 || lit.refs !== 7) {
+        throw new Error(`the decided-literal receipts moved: expected 2 rows / 2 leaves / 7 refs, got ${JSON.stringify(lit)}`);
       }
       const cardBorder = proposals.rows.find((r: any) => r.exclusion === 'card-border-degraded-capture');
       if (!cardBorder || cardBorder.refs !== 48) {
@@ -5730,6 +5737,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (disp('ambiguous').some((r: any) => r.candidates.length < 2)) {
         throw new Error('an "ambiguous" row has fewer than 2 candidates — the disposition is wrong');
       }
+      // NOTHING SILENTLY PENDING: every live leaf of every non-excluded row is
+      // either re-anchored or carries a named kept-literal receipt. This is the
+      // structural claim "the queue reads as RESOLVED", checked rather than
+      // asserted in prose.
+      const silent = proposals.rows
+        .filter((r: any) => r.disposition !== 'excluded')
+        .flatMap((r: any) => r.leafDetail.filter((d: any) => d.refs > 0 && !d.aliasedTo && d.decidedLiteral === undefined).map((d: any) => d.leaf));
+      if (silent.length > 0) throw new Error(`${silent.length} live leaf/leaves are pending with NO decision and NO receipt: ${silent.join(', ')}`);
 
       // --- 2. the anchor-plane guard ---------------------------------------
       const docsAnchor = run(TSX, [SCRIPT, '--propose', '--anchor', 'examples/astryx/tokens/astryx-docs.dtcg.json']);
@@ -5740,8 +5755,19 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // FALSIFIED by step 1: the NEUTRAL anchor is accepted (p1.status === 0).
 
       // --- 3. --apply is explicit-ack only ---------------------------------
-      const unacked = run(TSX, [SCRIPT, '--apply', 'RA-ffffff']);
-      if (unacked.status === 0) throw new Error('an UN-ACKED ambiguous id was applied');
+      // Every live row is acked now, so the un-acked path is falsified by
+      // UN-ACKING one: drop RA-ccd3db's two decisions from the scratch ledger
+      // and the id must refuse instead of landing on affinity.
+      const LEDGER = 'examples/astryx/tokens/reanchor-decisions.json';
+      const ledgerSrc = readFileSync(T(LEDGER), 'utf8');
+      const ledgerObj = JSON.parse(ledgerSrc);
+      writeFileSync(
+        T(LEDGER),
+        JSON.stringify({ ...ledgerObj, decisions: ledgerObj.decisions.filter((d: any) => !d.ids.includes('RA-ccd3db')) }, null, 2) + '\n',
+      );
+      const unacked = run(TSX, [SCRIPT, '--apply', 'RA-ccd3db']);
+      writeFileSync(T(LEDGER), ledgerSrc);
+      if (unacked.status === 0) throw new Error('an UN-ACKED row id was applied');
       if (!unacked.out.includes('un-acked ids never land')) throw new Error(`the un-acked refusal is not named:\n${unacked.out}`);
       const excluded = run(TSX, [SCRIPT, '--apply', 'RA-X-cardborder-000000']);
       if (excluded.status === 0) throw new Error('an EXCLUDED row was applied — exclusions must never be targets');
@@ -5762,15 +5788,61 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const mintedTree = JSON.parse(readFileSync(T(MINTED), 'utf8'));
       const at = (p: string) => p.split('.').reduce<any>((n, s) => (n ? n[s] : undefined), mintedTree);
       const norm = (v: string) => String(v).trim().toLowerCase();
-      if (ledger.length !== 9) throw new Error(`expected 9 ledger rows, got ${ledger.length}`);
+      if (ledger.length !== 19) throw new Error(`expected 19 ledger rows (9 auto-clean + 10 reviewed), got ${ledger.length}`);
+      let aliasedLeaves = 0;
       for (const d of ledger) {
         if (d.ack !== 'explicit CLI --apply') throw new Error(`ledger row ${d.ids} carries the wrong ack`);
         if (norm(base[d.to].$value) !== norm(d.value)) {
           throw new Error(`LIGHT PLANE MOVED: {${d.to}} is ${base[d.to].$value}, the ledger was acked against ${d.value}`);
         }
+        // THE DELEGATION PROVENANCE IS PART OF THE RECEIPT: the reviewed rows
+        // were acked by the orchestrator under an authority the owner granted
+        // on a named date, and a row that cannot say so is not a receipt.
+        if (!/auto-clean: single candidate/.test(d.ackNote ?? '') && !/ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26/.test(d.cause)) {
+          throw new Error(`ledger row ${d.ids} does not carry the delegation provenance in its cause`);
+        }
         for (const leaf of d.leaves) {
           if (at(leaf)?.$value !== `{${d.to}}`) throw new Error(`${leaf} is not aliased to {${d.to}}`);
+          aliasedLeaves++;
         }
+      }
+      if (aliasedLeaves !== 54) throw new Error(`expected 54 re-anchored leaves, got ${aliasedLeaves}`);
+
+      // PER-LEAF GRAIN. One value group splits into several decisions under one
+      // id (#ffffff answers to color-on-accent on badge+button-primary and to
+      // color-on-error on button-destructive). The applier must land EVERY row
+      // that names the id — the pre-round `find` would have landed one arm and
+      // reported success with the rest still literal.
+      const ffffff = ledger.filter((d: any) => d.ids.includes('RA-ffffff'));
+      if (ffffff.length !== 3) throw new Error(`RA-ffffff should split into 3 per-leaf decisions, got ${ffffff.length}`);
+      if (new Set(ffffff.map((d: any) => d.to)).size !== 2) throw new Error('the RA-ffffff split does not reach 2 distinct targets — the per-leaf grain is not exercised');
+      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 19) throw new Error('RA-ffffff does not cover its 19 re-anchored leaves');
+
+      // THE OTHER HALF OF THE REVIEW: kept-literal receipts.
+      const literals = JSON.parse(readFileSync(T(LEDGER), 'utf8')).literals;
+      if (!Array.isArray(literals) || literals.length !== 2) throw new Error(`expected 2 decided-literal receipts, got ${literals?.length}`);
+      for (const d of literals) {
+        if (d.ack !== 'decided-literal') throw new Error(`literal receipt ${d.ids} carries the wrong ack`);
+        if (!/ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26/.test(d.cause)) {
+          throw new Error(`literal receipt ${d.ids} does not carry the delegation provenance`);
+        }
+        for (const leaf of d.leaves) {
+          if (/^\{.+\}$/.test(String(at(leaf)?.$value))) throw new Error(`${leaf} is DECIDED-LITERAL but got aliased to ${at(leaf).$value}`);
+        }
+      }
+      // FALSIFY the literal-receipt guard: drift a kept-literal leaf's value in
+      // the tree and --propose must refuse BY NAME rather than keep printing a
+      // receipt that no longer describes the leaf it receipts. (A refusal that
+      // only checks the ALIASES would let the "decided" half rot silently.)
+      const mintedSrc = readFileSync(T(MINTED), 'utf8');
+      const drifted0a = mintedSrc.replace('"color-0a1317": {\n        "$value": "#0a1317"', '"color-0a1317": {\n        "$value": "#123456"');
+      if (drifted0a === mintedSrc) throw new Error('the decided-literal leaf imported.shared.color-0a1317 is not where the falsification expects it');
+      writeFileSync(T(MINTED), drifted0a);
+      const staleReceipt = run(TSX, [SCRIPT, '--propose']);
+      writeFileSync(T(MINTED), mintedSrc);
+      if (staleReceipt.status === 0) throw new Error('a DRIFTED decided-literal leaf was accepted under its old receipt');
+      if (!staleReceipt.out.includes('STALE LITERAL RECEIPT') || !staleReceipt.out.includes('imported.shared.color-0a1317')) {
+        throw new Error(`the stale-receipt refusal is not named:\n${staleReceipt.out}`);
       }
 
       // FALSIFY the byte-gate: move ONE byte of a committed component script
@@ -5800,10 +5872,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
 
       console.log(
         `astryx-reanchor-minted: value-identity join over the minted tree — --propose byte-stable ×2 AND byte-equal to the committed artifacts ` +
-          `(${proposals.rows.length} rows: 9 applied refs, 54 ambiguous refs left UNDECIDED for review, 48 card-border refs REFUSED by name for a degraded capture); ` +
+          `(${proposals.rows.length} rows, queue RESOLVED: 63 applied refs across 19 ledger rows / 54 leaves, 0 ambiguous, 7 refs on 2 leaves REVIEWED AND KEPT LITERAL with receipts, 48 card-border refs REFUSED by name for a degraded capture; no live leaf is pending without a decision or a receipt); ` +
+          `every reviewed row carries the delegation provenance (orchestrator-reviewed under owner delegation, TJ 2026-07-26); PER-LEAF GRAIN pinned — RA-ffffff splits into 3 decisions / 2 targets / 19 leaves under one id; ` +
           `a docs-plane anchor is refused BY NAME (the silent-no-op trap); --apply refuses an un-acked id AND an excluded row, and is idempotent on an acked one; ` +
-          `the 9 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
-          `Falsified: tampered script → BYTE-GATE refusal; drifted DTCG → STALE LEDGER refusal + moved proposals`,
+          `the 54 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
+          `Falsified: tampered script → BYTE-GATE refusal; drifted DTCG → STALE LEDGER refusal + moved proposals; drifted kept-literal leaf → STALE LITERAL RECEIPT refusal`,
       );
     },
   },

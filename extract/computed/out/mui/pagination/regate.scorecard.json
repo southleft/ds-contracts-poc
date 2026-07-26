@@ -1,0 +1,754 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Pagination",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "tablepagination-toolbar",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "inputbase-root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "inputbase-root",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "inputbase-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "inputbase-root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-align",
+        "value": "right"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "overflow-y",
+        "value": "clip"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "buttonbase-root",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "transition-property",
+        "value": "background-color"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "buttonbase-root-2",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Pagination",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 1,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 796,
+      "cellsEqual": 748,
+      "pctEqual": 93.96984924623115,
+      "rowsFullyEqual": 0,
+      "rows": 4
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 44,
+      "mintedLeavesUnfolded": 42,
+      "baseBindings": 167,
+      "stateBindings": 2,
+      "codeOnlyChannels": 13,
+      "overflowBindings": 2,
+      "folds": 144
+    },
+    "worstRows": [
+      {
+        "key": "__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 12
+      },
+      {
+        "key": "__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 12
+      },
+      {
+        "key": "__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 12
+      },
+      {
+        "key": "__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 12
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "tablepagination-spacer.flex-basis",
+        4
+      ],
+      [
+        "label-2.animation-duration",
+        4
+      ],
+      [
+        "label-2.animation-name",
+        4
+      ],
+      [
+        "label-2.text-align-last",
+        4
+      ],
+      [
+        "select-nativeinput.border-bottom-style",
+        4
+      ],
+      [
+        "select-nativeinput.border-bottom-width",
+        4
+      ],
+      [
+        "select-nativeinput.border-left-style",
+        4
+      ],
+      [
+        "select-nativeinput.border-left-width",
+        4
+      ],
+      [
+        "select-nativeinput.border-right-style",
+        4
+      ],
+      [
+        "select-nativeinput.border-right-width",
+        4
+      ],
+      [
+        "select-nativeinput.border-top-style",
+        4
+      ],
+      [
+        "select-nativeinput.border-top-width",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "overflow: label-2.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label-2.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: tablepagination-spacer.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.text-align-last — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: select-nativeinput.border-bottom-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.border-left-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.border-right-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.border-top-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: buttonbase-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: buttonbase-root-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "rows": [
+      {
+        "key": "__default",
+        "channelsCompared": 199,
+        "channelsEqual": 187,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "tablepagination-spacer",
+            "channel": "flex-basis",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-align-last",
+            "ours": "auto",
+            "theirs": "right"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__hover",
+        "channelsCompared": 199,
+        "channelsEqual": 187,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "tablepagination-spacer",
+            "channel": "flex-basis",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-align-last",
+            "ours": "auto",
+            "theirs": "right"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__focus-visible",
+        "channelsCompared": 199,
+        "channelsEqual": 187,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "tablepagination-spacer",
+            "channel": "flex-basis",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-align-last",
+            "ours": "auto",
+            "theirs": "right"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__active",
+        "channelsCompared": 199,
+        "channelsEqual": 187,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "tablepagination-spacer",
+            "channel": "flex-basis",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-align-last",
+            "ours": "auto",
+            "theirs": "right"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

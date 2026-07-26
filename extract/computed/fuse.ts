@@ -1645,11 +1645,42 @@ export function applyMintToContract(
   // existing entries (computed enrichment must not shadow reviewed bindings);
   // the v14 refusal rule (no two entries sharing BOTH prop and channel) is
   // honored by stripping channels a reviewed same-prop entry already maps.
+  //
+  // DEFECT FIXED (regate-drift triage): the v14 rule spans tokensByProp AND
+  // literalsByProp (core/emit-react.ts:405 — "in two entries (tokensByProp[i]
+  // and literalsByProp[j])"), but this merge only consulted tokensByProp and
+  // the set-plane-literal block above only consulted literalsByProp — neither
+  // looked ACROSS the two fields. Once the absolute-positioning round
+  // (f52c334) admitted geometry channels to fusion, the mint started emitting
+  // a per-size token for a channel a REVIEWED literalsByProp entry already
+  // owned, and the referee refused the whole contract: polaris Avatar,
+  // ProgressBar and Thumbnail have been UNFUSABLE since that commit (they
+  // re-fused exactly at 82d312f: 70.652 / 92.105 / 100.000). Same precedence
+  // as the same-field rule — the reviewed entry wins, the computed value is
+  // dropped with a NAMED note.
   for (const [partName, byProp] of perAxisAdditions) {
     const target = partByName.get(partName);
     if (!target) continue;
     const existing = tokensByPropEntries(target).map((e) => structuredClone(e));
+    const reviewedLiteralChannels = new Map<string, Set<string>>(); // prop → channels
+    for (const e of (target.literalsByProp ?? []) as Array<{ prop: string; map: Record<string, Record<string, string>> }>) {
+      const set = reviewedLiteralChannels.get(e.prop) ?? new Set<string>();
+      for (const m of Object.values(e.map)) for (const ch of Object.keys(m)) set.add(ch);
+      reviewedLiteralChannels.set(e.prop, set);
+    }
     for (const [prop, map] of [...byProp.entries()].sort((x, y) => x[0].localeCompare(y[0]))) {
+      const literalChannels = reviewedLiteralChannels.get(prop);
+      if (literalChannels) {
+        for (const val of Object.keys(map)) {
+          for (const ch of Object.keys(map[val])) {
+            if (literalChannels.has(ch)) {
+              delete map[val][ch];
+              enrichmentNotes.push(`tokensByProp conflict avoided: ${partName}.${ch} on prop ${prop} is carried by a reviewed literalsByProp entry — computed token not added (v14 cross-field rule)`);
+            }
+          }
+          if (Object.keys(map[val]).length === 0) delete map[val];
+        }
+      }
       for (const e of existing) {
         if (e.prop !== prop) continue;
         const reviewedChannels = new Set(Object.values(e.map).flatMap((m) => Object.keys(m)));

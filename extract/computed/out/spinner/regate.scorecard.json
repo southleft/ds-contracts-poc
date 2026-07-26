@@ -7,6 +7,7 @@
     "base": [],
     "state": []
   },
+  "decisionsReapplied": [],
   "scorecard": {
     "component": "Spinner",
     "generatedBy": "extract/computed/gate.ts",
@@ -33,9 +34,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 1,
-      "mintedLeavesUnfolded": 1,
-      "baseBindings": 1,
+      "mintedLeaves": 3,
+      "mintedLeavesUnfolded": 3,
+      "baseBindings": 2,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
@@ -96,6 +97,10 @@
       "promotion: static-part-unrendered: reviewed static part \"glyphLarge\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
       "promotion: static-part-unrendered: reviewed static part \"glyphSmall\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
     ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
     "rows": [
       {
         "key": "small__default",

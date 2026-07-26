@@ -210,6 +210,10 @@
       }
     ]
   },
+  "decisionsReapplied": [
+    "applied: root.background-color [base] → {p.color-bg-surface}",
+    "applied: root.color [base] → {p.color-text}"
+  ],
   "scorecard": {
     "component": "Banner",
     "generatedBy": "extract/computed/gate.ts",
@@ -219,8 +223,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 11744,
-      "cellsEqual": 11316,
-      "pctEqual": 96.35558583106267,
+      "cellsEqual": 11380,
+      "pctEqual": 96.90054495912807,
       "rowsFullyEqual": 0,
       "rows": 64
     },
@@ -236,12 +240,12 @@
       "boundConfirmed": 64,
       "boundCells": 96,
       "contradictions": 32,
-      "mintedLeaves": 53,
-      "mintedLeavesUnfolded": 268,
-      "baseBindings": 114,
+      "mintedLeaves": 80,
+      "mintedLeavesUnfolded": 295,
+      "baseBindings": 142,
       "stateBindings": 2,
-      "codeOnlyChannels": 3,
-      "overflowBindings": 0,
+      "codeOnlyChannels": 5,
+      "overflowBindings": 7,
       "folds": 108
     },
     "worstRows": [
@@ -249,56 +253,52 @@
         "key": "success.on.on__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 12
+        "channelsMismatched": 11
       },
       {
         "key": "info.on.on__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 12
+        "channelsMismatched": 11
       },
       {
         "key": "warning.on.on__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 12
+        "channelsMismatched": 11
       },
       {
         "key": "critical.on.on__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 12
+        "channelsMismatched": 11
       },
       {
         "key": "success.on.on__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 11
+        "channelsMismatched": 10
       },
       {
         "key": "success.on.on__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 11
+        "channelsMismatched": 10
       },
       {
         "key": "success.on.on__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 11
+        "channelsMismatched": 10
       },
       {
         "key": "info.on.on__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 11
+        "channelsMismatched": 10
       }
     ],
     "topMismatchedChannels": [
-      [
-        "root.background-color",
-        64
-      ],
       [
         "title.overflow-wrap",
         64
@@ -350,24 +350,31 @@
     ],
     "namedLosses": [
       "promotion: static-part-unrendered: reviewed static part \"body\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+      "overflow: root.height — presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: box.height — presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: blockstack.height — presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: box-2.height — presence-prop-driven styling (dismissible) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: inlinestack.height — presence-prop-driven styling (dismissible) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: box-3.height — presence-prop-driven styling (withAction) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: blockstack-2.height — presence-prop-driven styling (withAction) — boolean tokensByProp has no spelling (round 4 residue)",
       "code-only: title.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: title.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-0-0-1-0-0.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-0-0-1-0-0.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: buttongroup.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
     "rows": [
       {
         "key": "success.off.off__default",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -380,16 +387,10 @@
       {
         "key": "success.off.off__hover",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -402,16 +403,10 @@
       {
         "key": "success.off.off__focus-visible",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -424,16 +419,10 @@
       {
         "key": "success.off.off__active",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -446,16 +435,10 @@
       {
         "key": "success.off.on__default",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -498,16 +481,10 @@
       {
         "key": "success.off.on__hover",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -550,16 +527,10 @@
       {
         "key": "success.off.on__focus-visible",
         "channelsCompared": 183,
-        "channelsEqual": 175,
+        "channelsEqual": 176,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -608,16 +579,10 @@
       {
         "key": "success.off.on__active",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -660,16 +625,10 @@
       {
         "key": "success.on.off__default",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -706,16 +665,10 @@
       {
         "key": "success.on.off__hover",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -752,16 +705,10 @@
       {
         "key": "success.on.off__focus-visible",
         "channelsCompared": 184,
-        "channelsEqual": 177,
+        "channelsEqual": 178,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -804,16 +751,10 @@
       {
         "key": "success.on.off__active",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -850,16 +791,10 @@
       {
         "key": "success.on.on__default",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -926,16 +861,10 @@
       {
         "key": "success.on.on__hover",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1002,16 +931,10 @@
       {
         "key": "success.on.on__focus-visible",
         "channelsCompared": 246,
-        "channelsEqual": 234,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1084,16 +1007,10 @@
       {
         "key": "success.on.on__active",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(4, 123, 93, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1160,16 +1077,10 @@
       {
         "key": "info.off.off__default",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1182,16 +1093,10 @@
       {
         "key": "info.off.off__hover",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1204,16 +1109,10 @@
       {
         "key": "info.off.off__focus-visible",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1226,16 +1125,10 @@
       {
         "key": "info.off.off__active",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1248,16 +1141,10 @@
       {
         "key": "info.off.on__default",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1300,16 +1187,10 @@
       {
         "key": "info.off.on__hover",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1352,16 +1233,10 @@
       {
         "key": "info.off.on__focus-visible",
         "channelsCompared": 183,
-        "channelsEqual": 175,
+        "channelsEqual": 176,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1410,16 +1285,10 @@
       {
         "key": "info.off.on__active",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1462,16 +1331,10 @@
       {
         "key": "info.on.off__default",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1508,16 +1371,10 @@
       {
         "key": "info.on.off__hover",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1554,16 +1411,10 @@
       {
         "key": "info.on.off__focus-visible",
         "channelsCompared": 184,
-        "channelsEqual": 177,
+        "channelsEqual": 178,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1606,16 +1457,10 @@
       {
         "key": "info.on.off__active",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1652,16 +1497,10 @@
       {
         "key": "info.on.on__default",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1728,16 +1567,10 @@
       {
         "key": "info.on.on__hover",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1804,16 +1637,10 @@
       {
         "key": "info.on.on__focus-visible",
         "channelsCompared": 246,
-        "channelsEqual": 234,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1886,16 +1713,10 @@
       {
         "key": "info.on.on__active",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(145, 208, 255, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1962,16 +1783,10 @@
       {
         "key": "warning.off.off__default",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -1984,16 +1799,10 @@
       {
         "key": "warning.off.off__hover",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2006,16 +1815,10 @@
       {
         "key": "warning.off.off__focus-visible",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2028,16 +1831,10 @@
       {
         "key": "warning.off.off__active",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2050,16 +1847,10 @@
       {
         "key": "warning.off.on__default",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2102,16 +1893,10 @@
       {
         "key": "warning.off.on__hover",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2154,16 +1939,10 @@
       {
         "key": "warning.off.on__focus-visible",
         "channelsCompared": 183,
-        "channelsEqual": 175,
+        "channelsEqual": 176,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2212,16 +1991,10 @@
       {
         "key": "warning.off.on__active",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2264,16 +2037,10 @@
       {
         "key": "warning.on.off__default",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2310,16 +2077,10 @@
       {
         "key": "warning.on.off__hover",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2356,16 +2117,10 @@
       {
         "key": "warning.on.off__focus-visible",
         "channelsCompared": 184,
-        "channelsEqual": 177,
+        "channelsEqual": 178,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2408,16 +2163,10 @@
       {
         "key": "warning.on.off__active",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2454,16 +2203,10 @@
       {
         "key": "warning.on.on__default",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2530,16 +2273,10 @@
       {
         "key": "warning.on.on__hover",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2606,16 +2343,10 @@
       {
         "key": "warning.on.on__focus-visible",
         "channelsCompared": 246,
-        "channelsEqual": 234,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2688,16 +2419,10 @@
       {
         "key": "warning.on.on__active",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(255, 184, 0, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2764,16 +2489,10 @@
       {
         "key": "critical.off.off__default",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2786,16 +2505,10 @@
       {
         "key": "critical.off.off__hover",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2808,16 +2521,10 @@
       {
         "key": "critical.off.off__focus-visible",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2830,16 +2537,10 @@
       {
         "key": "critical.off.off__active",
         "channelsCompared": 121,
-        "channelsEqual": 119,
+        "channelsEqual": 120,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2852,16 +2553,10 @@
       {
         "key": "critical.off.on__default",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2904,16 +2599,10 @@
       {
         "key": "critical.off.on__hover",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -2956,16 +2645,10 @@
       {
         "key": "critical.off.on__focus-visible",
         "channelsCompared": 183,
-        "channelsEqual": 175,
+        "channelsEqual": 176,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3014,16 +2697,10 @@
       {
         "key": "critical.off.on__active",
         "channelsCompared": 183,
-        "channelsEqual": 176,
+        "channelsEqual": 177,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3066,16 +2743,10 @@
       {
         "key": "critical.on.off__default",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3112,16 +2783,10 @@
       {
         "key": "critical.on.off__hover",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3158,16 +2823,10 @@
       {
         "key": "critical.on.off__focus-visible",
         "channelsCompared": 184,
-        "channelsEqual": 177,
+        "channelsEqual": 178,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3210,16 +2869,10 @@
       {
         "key": "critical.on.off__active",
         "channelsCompared": 184,
-        "channelsEqual": 178,
+        "channelsEqual": 179,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3256,16 +2909,10 @@
       {
         "key": "critical.on.on__default",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3332,16 +2979,10 @@
       {
         "key": "critical.on.on__hover",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3408,16 +3049,10 @@
       {
         "key": "critical.on.on__focus-visible",
         "channelsCompared": 246,
-        "channelsEqual": 234,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",
@@ -3490,16 +3125,10 @@
       {
         "key": "critical.on.on__active",
         "channelsCompared": 246,
-        "channelsEqual": 235,
+        "channelsEqual": 236,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(199, 10, 36, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
-          },
           {
             "part": "title",
             "channel": "overflow-wrap",

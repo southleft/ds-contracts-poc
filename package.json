@@ -61,6 +61,7 @@
     "extract:accept": "tsx extract/accept-candidates.ts",
     "extract:computed": "tsx extract/computed/run.ts",
     "extract:computed:regate": "tsx extract/computed/regate.ts",
+    "extract:computed:drift": "tsx extract/computed/drift-check.ts",
     "extract:computed:resolve": "tsx extract/computed/resolve.ts",
     "extract:computed:scorecard": "tsx extract/computed/library-scorecard.ts",
     "test:onboarding": "tsx --test packages/cli/test/draft-capture-config.test.ts packages/cli/test/accept-candidates.test.ts packages/cli/test/init-detect.test.ts packages/cli/test/library-scorecard.test.ts",

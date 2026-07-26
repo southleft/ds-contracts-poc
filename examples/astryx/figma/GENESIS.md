@@ -22,10 +22,12 @@ each hosted on a named background Section:
 
 > Astryx's own token layer has **no primitive/alias tier** — the values are
 > literal `light-dark()` pairs — so all 186 base variables carry literal
-> values. **9 of the minted variables are now Figma-NATIVE aliases** onto base
+> values. **54 of the minted variables are now Figma-NATIVE aliases** onto base
 > tokens (`examples/astryx/scripts/reanchor-minted.ts`, receipt
-> `examples/astryx/tokens/MINTED.md`): the badge tone rules, which used to be
-> frozen at their light-mode hex in both modes and now follow the mode.
+> `examples/astryx/tokens/MINTED.md`): the 14 badge tone/status rules, all 32
+> Button label colours across the four variants, Card's real 1px border, and
+> Slider's track, label and accent fill. They used to be frozen at their
+> light-mode hex in both modes; they now follow the mode — and they re-theme.
 
 | Component | Grid | Notes |
 |---|---|---|

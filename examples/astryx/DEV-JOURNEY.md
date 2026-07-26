@@ -157,6 +157,11 @@ node examples/astryx/scripts/flagship-doc-crosscheck.mjs
 npx tsx examples/astryx/scripts/reanchor-minted.ts --propose   # review queue + tokens/MINTED.md
 #   then, for each row a HUMAN acked in tokens/reanchor-decisions.json:
 npx tsx examples/astryx/scripts/reanchor-minted.ts --apply "RA-042f97,…"
+#   A row may split PER LEAF: several decisions can share one id (one value
+#   group can answer to several roles), and --apply lands ALL of them.
+#   A leaf a reviewer decides to KEEP literal goes in the same file's
+#   `literals` array — a receipt, not a write; the queue only reads as
+#   RESOLVED when every live leaf is one or the other.
 #   (promote-floor.ts re-applies the committed ledger automatically, so a
 #    re-run of leg 1 cannot silently revert a decision)
 

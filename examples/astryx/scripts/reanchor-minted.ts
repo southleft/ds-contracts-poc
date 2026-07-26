@@ -108,7 +108,7 @@ interface RankedCandidate {
   };
 }
 
-type Disposition = 'clean' | 'ambiguous' | 'no-match' | 'excluded' | 'applied';
+type Disposition = 'clean' | 'ambiguous' | 'no-match' | 'excluded' | 'applied' | 'decided-literal';
 
 interface ProposalRow {
   id: string;
@@ -121,8 +121,11 @@ interface ProposalRow {
   leaves: string[];
   /** per-leaf parse + ref evidence — a row can span several channel classes,
    *  and a reviewer may legitimately split it (a decision may name a SUBSET of
-   *  these leaves; see applyDecisions). */
-  leafDetail: Array<{ leaf: string; component: string; part: string; channel: string | null; state: string | null; axisValues: string[]; refs: number; aliasedTo?: string | null }>;
+   *  these leaves; see applyDecisions).
+   *  `decidedLiteral` carries the REVIEWED REFUSAL for a leaf a human looked
+   *  at and deliberately kept literal — the difference between "decided" and
+   *  "still pending" must be visible in the artifact, not just in a head. */
+  leafDetail: Array<{ leaf: string; component: string; part: string; channel: string | null; state: string | null; axisValues: string[]; refs: number; aliasedTo?: string | null; decidedLiteral?: string }>;
   /** the distinct channel classes present — the split signal, stated up front */
   channelClasses: string[];
   /** axis-expanded contract refs across all leaves in this row */
@@ -143,6 +146,23 @@ interface Decision {
   usedBy: string[];
   rationale: string;
   darkDelta: string;
+  cause: string;
+  ack: string;
+}
+
+/** THE OTHER HALF OF A REVIEW. A row is only resolved when every live leaf is
+ *  either aliased or DELIBERATELY kept literal — and the second half needs a
+ *  receipt too, or "reviewed and refused" is indistinguishable from "nobody
+ *  looked yet". A literal decision writes NOTHING to the minted tree; it only
+ *  moves the leaf out of the pending queue and prints its named reason. */
+interface LiteralDecision {
+  ids: string[];
+  leaves: string[];
+  value: string;
+  /** the candidates the reviewer weighed and declined — a refusal that cannot
+   *  name what it declined is not a receipt */
+  consideredCandidates: string[];
+  reason: string;
   cause: string;
   ack: string;
 }
@@ -520,10 +540,14 @@ export interface JoinInput {
   dark: DtcgFlat;
   minted: DtcgTree;
   refs: Map<string, RefEvidence>;
+  /** leaf path → the acked LITERAL decision that covers it (see
+   *  LiteralDecision). Absent = the leaf is still pending review. */
+  literals?: Map<string, LiteralDecision>;
 }
 
 export function computeRows(input: JoinInput): ProposalRow[] {
   const { base, dark, minted, refs } = input;
+  const literals = input.literals ?? new Map<string, LiteralDecision>();
 
   // the anchor inventory: every base token whose $type is color, alias-resolved
   const baseColors = new Map<string, string>();
@@ -633,6 +657,7 @@ export function computeRows(input: JoinInput): ProposalRow[] {
         axisValues: l.axisValues,
         refs: l.usedBy.length,
         aliasedTo: l.aliasedTo,
+        ...(l.aliasedTo === null && literals.has(l.leaf) ? { decidedLiteral: literals.get(l.leaf)!.reason } : {}),
       })),
     channelClasses: [...new Set(ls.map((l) => l.channel ?? '(none — value-named shared leaf)'))].sort(),
     refs: ls.reduce((a, l) => a + l.usedBy.length, 0),
@@ -700,16 +725,29 @@ export function computeRows(input: JoinInput): ProposalRow[] {
       );
       continue;
     }
-    const pending = live.filter((l) => l.aliasedTo === null);
+    const keptLiteral = live.filter((l) => l.aliasedTo === null && literals.has(l.leaf));
+    const pending = live.filter((l) => l.aliasedTo === null && !literals.has(l.leaf));
     const landed = [...new Set(live.filter((l) => l.aliasedTo !== null).map((l) => l.aliasedTo as string))].sort();
     const disposition: Disposition =
-      pending.length === 0 ? 'applied' : candidateTokens.length === 1 ? 'clean' : 'ambiguous';
+      pending.length > 0 ? (candidateTokens.length === 1 ? 'clean' : 'ambiguous') : landed.length > 0 ? 'applied' : 'decided-literal';
+    const literalLines = keptLiteral.map(
+      (l) => `DECIDED LITERAL — \`${l.leaf}\` (${l.usedBy.length} ref(s)): ${literals.get(l.leaf)!.reason}`,
+    );
     const evidence =
       disposition === 'applied'
         ? [
-            `APPLIED: all ${live.length} live leaf/leaves in this group already alias {${landed.join('}, {')}} — landed from tokens/reanchor-decisions.json.`,
+            keptLiteral.length === 0
+              ? `APPLIED: all ${live.length} live leaf/leaves in this group already alias {${landed.join('}, {')}} — landed from tokens/reanchor-decisions.json.`
+              : `RESOLVED: ${live.length - keptLiteral.length} of ${live.length} live leaves alias {${landed.join('}, {')}} (landed from tokens/reanchor-decisions.json); the remaining ${keptLiteral.length} were REVIEWED AND KEPT LITERAL — receipts below. Nothing in this row is pending.`,
+            ...literalLines,
             'The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.',
             'TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).',
+          ]
+        : disposition === 'decided-literal'
+        ? [
+            `DECIDED LITERAL: every one of this group's ${live.length} live leaf/leaves was reviewed and deliberately kept literal — an acked refusal in tokens/reanchor-decisions.json ("literals"), NOT an unreviewed pending row.`,
+            ...literalLines,
+            'A literal decision writes nothing to the minted tree; it is a receipt. TO RE-OPEN: delete the row from the "literals" array and re-run --propose.',
           ]
         : disposition === 'clean'
         ? [
@@ -727,6 +765,9 @@ export function computeRows(input: JoinInput): ProposalRow[] {
             [...new Set(live.map((l) => l.channel ?? '(none)'))].length > 1
               ? `SPLIT SIGNAL: these leaves span ${[...new Set(live.map((l) => l.channel ?? '(none)'))].sort().join(', ')} — different channel classes can legitimately want DIFFERENT targets. A decision row may name a SUBSET of this row's leaves; write one row per target.`
               : `All leaves share one channel class (${live[0].channel ?? 'none — value-named shared leaf'}), so one target can cover the row.`,
+            ...(literalLines.length > 0
+              ? [`PARTIALLY DECIDED: ${keptLiteral.length} of this row's leaves are already acked as DECIDED LITERAL; ${pending.length} remain pending.`, ...literalLines]
+              : []),
           ];
     rows.push(
       mkRow(
@@ -770,8 +811,11 @@ function proposalsMarkdown(rows: ProposalRow[], anchorRel: string): string {
   L.push('# Astryx minted-literal re-anchoring — PROPOSALS (review queue)');
   L.push('');
   L.push('Generated by `npx tsx examples/astryx/scripts/reanchor-minted.ts --propose`.');
-  L.push('**Nothing here is applied.** Landing a row means adding it to');
-  L.push('`tokens/reanchor-decisions.json` and running `--apply <id>`.');
+  L.push('**This file applies nothing.** It REPORTS the state of the ledger. Landing a row');
+  L.push('means adding it to `tokens/reanchor-decisions.json` and running `--apply <id>`;');
+  L.push('deciding to KEEP a leaf literal means adding a row to that file\'s `literals` array.');
+  L.push('A row is only RESOLVED when every live leaf it holds is one or the other —');
+  L.push('`ambiguous` and `clean` rows are the ones still waiting on a human.');
   L.push('');
   L.push(`- **Anchor plane**: \`${anchorRel}\` — THEME-NEUTRAL, value-fingerprinted (${Object.entries(ANCHOR_PROBES).map(([k, v]) => `${k}=${v}`).join(', ')}). A re-themed anchor is refused by name.`);
   L.push(`- **Join**: normalized r,g,b,a tuple equality (\`tuple()\`/\`valueEq()\` copied verbatim from \`examples/mui/scripts/promote-floor.mjs\`), minted color leaf × alias-resolved base color token.`);
@@ -782,11 +826,11 @@ function proposalsMarkdown(rows: ProposalRow[], anchorRel: string): string {
   L.push('');
   L.push('| disposition | rows | leaves | axis-expanded refs |');
   L.push('|---|---|---|---|');
-  for (const d of ['applied', 'clean', 'ambiguous', 'no-match', 'excluded'] as Disposition[]) {
+  for (const d of ['applied', 'decided-literal', 'clean', 'ambiguous', 'no-match', 'excluded'] as Disposition[]) {
     L.push(`| ${d} | ${n(d).length} | ${n(d).reduce((a, r) => a + r.leaves.length, 0)} | ${refsOf(d)} |`);
   }
   L.push('');
-  for (const d of ['applied', 'clean', 'ambiguous', 'no-match', 'excluded'] as Disposition[]) {
+  for (const d of ['applied', 'decided-literal', 'clean', 'ambiguous', 'no-match', 'excluded'] as Disposition[]) {
     const set = n(d);
     if (set.length === 0) continue;
     L.push(`## ${d.toUpperCase()} — ${set.length} row(s), ${set.reduce((a, r) => a + r.refs, 0)} ref(s)`);
@@ -797,6 +841,10 @@ function proposalsMarkdown(rows: ProposalRow[], anchorRel: string): string {
       L.push(`- **leaves** (${r.leaves.length}): ${r.leaves.length <= 6 ? r.leaves.map((l) => `\`${l}\``).join(', ') : r.leaves.slice(0, 4).map((l) => `\`${l}\``).join(', ') + `, … (+${r.leaves.length - 4} more, see reanchor-proposals.json)`}`);
       L.push(`- **used by** (${r.refs} axis-expanded ref(s)): ${r.refs === 0 ? '_nothing_' : [...new Set(r.usedBy.map((u) => u.split(':')[0]))].sort().join(', ')}`);
       L.push(`- **channel classes**: ${r.channelClasses.map((c) => `\`${c}\``).join(', ')}`);
+      const kept = r.leafDetail.filter((d) => d.decidedLiteral !== undefined);
+      if (kept.length > 0) {
+        L.push(`- **decided literal** (${kept.length} leaf/leaves, ${kept.reduce((a, d) => a + d.refs, 0)} ref(s)): reviewed and deliberately NOT re-anchored — ${kept.map((d) => `\`${d.leaf}\``).join(', ')}`);
+      }
       L.push(`- **light-plane proof**: ${r.lightProof}`);
       if (r.candidates.length > 0) {
         L.push('');
@@ -836,7 +884,14 @@ function mintedMarkdown(rows: ProposalRow[], minted: DtcgTree): string {
   L.push(`- **${aliased.length} leaves re-anchored** to Astryx's own semantic tokens (value-verified twice: at \`--apply\`, and again by the byte-gate that re-emits the neutral figma scripts)`);
   L.push(`- **${all.length - aliased.length} leaves kept literal** (${all.length} total: ${byType('color')} color, ${byType('dimension')} dimension, ${byType('number')} number, ${byType('gradient')} gradient)`);
   L.push(`- **${excluded.length} named refusals** covering ${excluded.reduce((a, r) => a + r.leaves.length, 0)} leaves / ${excluded.reduce((a, r) => a + r.refs, 0)} axis-expanded refs`);
-  L.push(`- **${ambiguous.length} rows / ${ambiguous.reduce((a, r) => a + r.refs, 0)} refs AWAITING HUMAN REVIEW** — see \`reanchor-proposals.md\`. Not refused, not decided: a value join cannot pick between equal-valued tokens and this project does not guess.`);
+  const literalRows = loadLiteralDecisions();
+  const keptLeaves = rows.flatMap((r) => r.leafDetail.filter((d) => d.decidedLiteral !== undefined));
+  L.push(`- **${keptLeaves.length} leaves REVIEWED AND KEPT LITERAL** (${keptLeaves.reduce((a, d) => a + d.refs, 0)} axis-expanded refs, ${literalRows.length} acked receipt row(s)) — a refusal with a named reason, not a pending row`);
+  L.push(
+    ambiguous.length === 0
+      ? '- **0 rows awaiting human review** — the queue is RESOLVED: every live leaf is either re-anchored or decided-literal with a receipt.'
+      : `- **${ambiguous.length} rows / ${ambiguous.reduce((a, r) => a + r.refs, 0)} refs AWAITING HUMAN REVIEW** — see \`reanchor-proposals.md\`. Not refused, not decided: a value join cannot pick between equal-valued tokens and this project does not guess.`,
+  );
   L.push('');
   L.push('## Why astryx cannot run MUI\'s pass');
   L.push('');
@@ -857,6 +912,21 @@ function mintedMarkdown(rows: ProposalRow[], minted: DtcgTree): string {
     L.push(`| \`${p}\` | \`${String(leaf.$value)}\` | ${d ? d.ids.map((i) => `\`${i}\``).join(', ') : '**UNLEDGERED — investigate**'} |`);
   }
   L.push('');
+  if (keptLeaves.length > 0) {
+    L.push('## Reviewed and kept literal (decided, not pending)');
+    L.push('');
+    L.push('These leaves were looked at leaf-by-leaf and DELIBERATELY left as literals:');
+    L.push('the evidence on disk does not grade a semantic target, and a plausible-looking');
+    L.push('alias with no evidence behind it is the failure this whole round exists to avoid.');
+    L.push('');
+    L.push('| leaf | refs | reason | ledger row |');
+    L.push('|---|---|---|---|');
+    for (const d of keptLeaves.slice().sort((a, b) => a.leaf.localeCompare(b.leaf))) {
+      const row = literalRows.find((x) => x.leaves.includes(d.leaf));
+      L.push(`| \`${d.leaf}\` | ${d.refs} | ${d.decidedLiteral} | ${row ? row.ids.map((i) => `\`${i}\``).join(', ') : '**UNLEDGERED — investigate**'} |`);
+    }
+    L.push('');
+  }
   L.push('## Named refusals');
   L.push('');
   for (const r of excluded) {
@@ -869,7 +939,9 @@ function mintedMarkdown(rows: ProposalRow[], minted: DtcgTree): string {
 
 function propose(anchorPath: string): void {
   const { base, dark, minted, refs } = loadPlanes(anchorPath);
-  const rows = computeRows({ base, dark, minted, refs });
+  const literalRows = loadLiteralDecisions();
+  const literals = literalIndex(literalRows, minted);
+  const rows = computeRows({ base, dark, minted, refs, literals });
   const anchorRel = path.relative(REPO, anchorPath);
   const payload = {
     _marker:
@@ -883,7 +955,16 @@ function propose(anchorPath: string): void {
       ambiguous: rows.filter((r) => r.disposition === 'ambiguous').reduce((a, r) => a + r.refs, 0),
       noMatch: rows.filter((r) => r.disposition === 'no-match').reduce((a, r) => a + r.refs, 0),
       excluded: rows.filter((r) => r.disposition === 'excluded').reduce((a, r) => a + r.refs, 0),
+      decidedLiteral: rows.filter((r) => r.disposition === 'decided-literal').reduce((a, r) => a + r.refs, 0),
       rows: rows.length,
+      // The reviewed-and-kept-literal leaves, counted ACROSS dispositions: a
+      // resolved row can hold both aliases and receipts, so this number does
+      // not live in any single disposition bucket.
+      literalReceipts: {
+        rows: literalRows.length,
+        leaves: literals.size,
+        refs: rows.reduce((a, r) => a + r.leafDetail.filter((d) => d.decidedLiteral !== undefined).reduce((x, d) => x + d.refs, 0), 0),
+      },
     },
     rows,
   };
@@ -893,7 +974,8 @@ function propose(anchorPath: string): void {
   const s = payload.summary;
   console.log(
     `✔ proposals → examples/astryx/tokens/reanchor-proposals.{json,md} — ${rows.length} rows; ` +
-      `refs: ${s.applied} APPLIED (ledger), ${s.clean} clean-unapplied, ${s.ambiguous} ambiguous (REVIEW QUEUE — not decided), ${s.noMatch} no-match, ${s.excluded} excluded by name`,
+      `refs: ${s.applied} APPLIED (ledger), ${s.clean} clean-unapplied, ${s.ambiguous} ambiguous (REVIEW QUEUE — not decided), ${s.noMatch} no-match, ${s.excluded} excluded by name, ` +
+      `${s.literalReceipts.refs} DECIDED LITERAL (${s.literalReceipts.leaves} leaf/leaves, reviewed and kept literal with receipts)`,
   );
 }
 
@@ -903,6 +985,43 @@ function propose(anchorPath: string): void {
 
 export const DECISIONS_PATH = path.join(EX, 'tokens', 'reanchor-decisions.json');
 export const REQUIRED_ACK = 'explicit CLI --apply';
+export const REQUIRED_LITERAL_ACK = 'decided-literal';
+
+/** The acked LITERAL refusals, keyed by leaf. Same file, sibling array
+ *  `literals` — one ledger, two outcomes. Each row is VALUE-RE-CHECKED against
+ *  the live tree (below) so a receipt cannot go stale silently. */
+export function loadLiteralDecisions(): LiteralDecision[] {
+  if (!existsSync(DECISIONS_PATH)) return [];
+  const raw = readJson<unknown>(DECISIONS_PATH);
+  const rows = Array.isArray(raw) ? [] : ((raw as { literals?: unknown }).literals ?? []);
+  if (!Array.isArray(rows)) fail(`${path.relative(REPO, DECISIONS_PATH)}: "literals" must be an array of literal-decision rows.`);
+  return rows as LiteralDecision[];
+}
+
+/** leaf → its acked literal decision, with every guard a written alias gets:
+ *  right ack, the leaf exists, the leaf is NOT already aliased, and its
+ *  CURRENT value still equals the value the refusal was acked against. */
+export function literalIndex(rows: LiteralDecision[], minted: DtcgTree): Map<string, LiteralDecision> {
+  const index = new Map<string, LiteralDecision>();
+  for (const d of rows) {
+    if (d.ack !== REQUIRED_LITERAL_ACK) {
+      fail(`literal decision ${d.ids.join(',')} carries ack ${JSON.stringify(d.ack)} — only ${JSON.stringify(REQUIRED_LITERAL_ACK)} receipts a kept literal.`);
+    }
+    if (!d.reason || d.reason.length < 40) fail(`literal decision ${d.ids.join(',')}: a kept literal needs a NAMED reason, not a placeholder.`);
+    for (const leafPath of d.leaves) {
+      const leaf = leafAt(minted, leafPath);
+      if (!leaf) fail(`literal decision ${d.ids.join(',')}: leaf ${leafPath} is not in the minted tree.`);
+      const v = String(leaf.$value);
+      if (/^\{.+\}$/.test(v)) fail(`literal decision ${d.ids.join(',')}: leaf ${leafPath} is ALIASED to ${v} — a leaf cannot be both re-anchored and decided-literal.`);
+      if (!valueEq(v, d.value)) {
+        fail(`STALE LITERAL RECEIPT — ${d.ids.join(',')}: leaf ${leafPath} is ${v}, but the refusal was acked against ${d.value}. Re-run --propose and re-review.`);
+      }
+      if (index.has(leafPath)) fail(`literal decision ${d.ids.join(',')}: leaf ${leafPath} is covered twice.`);
+      index.set(leafPath, d);
+    }
+  }
+  return index;
+}
 
 export function loadDecisions(): Decision[] {
   if (!existsSync(DECISIONS_PATH)) return [];
@@ -927,16 +1046,21 @@ export function applyDecisions(
   base: DtcgFlat,
   ids: string[] | null,
 ): { applied: number, alreadyApplied: number, touched: string[] } {
-  const chosen = ids === null ? decisions : ids.map((id) => {
-    const d = decisions.find((x) => x.ids.includes(id));
-    if (!d) {
+  // PER-LEAF GRAIN: one proposal row may carry SEVERAL decisions, because one
+  // value group legitimately splits by leaf (badge tone rules and button
+  // variants share #ffffff but answer to different roles). So an id selects
+  // EVERY ledger row that names it — `find` would have silently landed only
+  // the first and left the rest of the row pending while reporting success.
+  const chosen = ids === null ? decisions : ids.flatMap((id) => {
+    const ds = decisions.filter((x) => x.ids.includes(id));
+    if (ds.length === 0) {
       fail(
         `id "${id}" is NOT in ${path.relative(REPO, DECISIONS_PATH)} — un-acked ids never land.\n` +
           `  Re-anchoring is explicit-ack only (the extract/computed/resolve.ts rule): add a row with\n` +
           `  "ack": ${JSON.stringify(REQUIRED_ACK)} and a named rationale + darkDelta, then re-run.`,
       );
     }
-    return d;
+    return ds;
   });
   let applied = 0;
   let alreadyApplied = 0;
@@ -1058,7 +1182,11 @@ function apply(idsArg: string): void {
   const ids = idsArg.split(',').map((s) => s.trim()).filter(Boolean);
   if (ids.length === 0) fail('--apply needs at least one row id — there is no --all.');
 
-  const rows = computeRows({ base, dark, minted, refs });
+  // literalIndex() is a GUARD, not decoration: it re-checks every kept-literal
+  // receipt against the live tree, so --apply refuses on a stale receipt for
+  // the same reason it refuses on a stale alias ledger.
+  const literals = literalIndex(loadLiteralDecisions(), minted);
+  const rows = computeRows({ base, dark, minted, refs, literals });
   const decisions = loadDecisions();
 
   // ORDER MATTERS. An id with NO ledger row is checked against the live join

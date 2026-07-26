@@ -22,6 +22,10 @@
  *     the same custom properties the gate page itself renders with. A drift
  *     between the two would surface as a contradiction-count drift vs the
  *     committed scorecard, which this runner PRINTS for exactly that reason.
+ *   · `--write-enriched` writes enriched.contract.json only; the harness also
+ *     writes the decision-applied resolved.contract.json. The GATE now scores
+ *     the resolved contract either way (below) — but an offline re-fuse leaves
+ *     resolved.contract.json stale, so a recapture still owns that artifact.
  *
  * Output: out/<component>/regate.scorecard.json + a console before→after of
  * the committed scorecard's computed % vs the re-run. Committed harness
@@ -36,6 +40,7 @@ import { flattenTokens } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import { loadConfig, propSpaceFor, INTERACTIONS, type SweepResult } from './capture.js';
+import { applyDecisions, type AckedDecision } from './decisions.js';
 import {
   alignSweep,
   applyMintToContract,
@@ -289,6 +294,33 @@ async function main() {
       console.log(`  ✔ ${comp.name}: enriched contract + extension REWRITTEN from committed truth (offline re-fuse)`);
     }
 
+    /** DEFECT FIXED (regate-drift triage): the runner scored the RAW fused
+     *  contract while the harness (run.ts:440-465) gates the DECISION-APPLIED
+     *  one — every component carrying a decisions.json ledger was therefore
+     *  compared against a scorecard produced from a DIFFERENT contract, and
+     *  the difference was read as engine drift. Measured cost of the omission
+     *  at c9242cc: astryx Slider 87.908 → 55.299 (3 acked decisions), astryx
+     *  Badge 100.000 → 96.296, astryx Button 98.099 → 95.391, polaris
+     *  Button/Tag/Banner/TextField ~0.2-1.4 each. Ledger-free components were
+     *  never affected — which is exactly why mui/tailwind reproduced exactly.
+     *  Mirrors run.ts: same file, same semantics, same referee, skips NAMED. */
+    let gated = enriched as Contract;
+    const decisionNotes: string[] = [];
+    const decisionsPath = path.join(outDir, 'decisions.json');
+    if (existsSync(decisionsPath)) {
+      const decisions = JSON.parse(readFileSync(decisionsPath, 'utf8')) as AckedDecision[];
+      const resolved = structuredClone(enriched) as Contract;
+      const { applied, skipped } = applyDecisions(resolved, decisions);
+      decisionNotes.push(...applied.map((a) => `applied: ${a}`), ...skipped.map((sk) => `SKIPPED: ${sk}`));
+      ContractSchema.parse(resolved);
+      const resolvedErrs: string[] = [];
+      validateContract(resolved, new Map([[resolved.id, resolved]]), resolvedErrs, iconAssetsMerged);
+      if (resolvedErrs.length > 0) {
+        throw new Error(`${comp.name}: decision-applied contract fails validateContract:\n${resolvedErrs.slice(0, 8).map((e) => `  - ${e}`).join('\n')}`);
+      }
+      gated = resolved;
+    }
+
     const namedLosses = [
       ...promotion.refusals.map((r) => `promotion: ${r}`),
       ...overflowBindings.map((o) => `overflow: ${o.part}.${o.channel}${o.state ? ` [${o.state}]` : ''} — ${o.refusal}`),
@@ -304,7 +336,7 @@ async function main() {
       comp,
       space,
       aligned,
-      enriched: enriched as Contract,
+      enriched: gated,
       mintedTree: mergedTree,
       styled,
       origShotsDir: path.join(outDir, '.no-orig-shots'), // absent by design — pixel not re-scored offline
@@ -335,6 +367,7 @@ async function main() {
       config: path.relative(REPO, CONFIG_PATH),
       capturedBrowser: sweep.browserVersion,
       declared: { base: declaredBase, state: declaredState },
+      decisionsReapplied: decisionNotes,
       scorecard: { ...scorecard, rows: scorecard.rows },
     };
     writeFileSync(path.join(outDir, 'regate.scorecard.json'), JSON.stringify(regate, null, 2) + '\n');
@@ -348,6 +381,7 @@ async function main() {
     console.log(`  committed gate (harness run): ${fmt(committed.computed.pctEqual)}% computed-equal (${committed.computed.cellsEqual}/${committed.computed.cellsCompared}; ${committed.computed.rowsFullyEqual}/${committed.computed.rows} rows fully equal)`);
     console.log(`  re-run gate (current code):   ${fmt(scorecard.computed.pctEqual)}% computed-equal (${scorecard.computed.cellsEqual}/${scorecard.computed.cellsCompared}; ${scorecard.computed.rowsFullyEqual}/${scorecard.computed.rows} rows fully equal)`);
     console.log(`  declared facts carried: ${declaredBase.length} base + ${declaredState.length} state · code-only remaining: ${prep.codeOnly.length} base + ${prep.stateCodeOnly.length} state`);
+    console.log(`  human-acked decisions re-applied: ${decisionNotes.filter((d) => d.startsWith('applied')).length}${decisionNotes.some((d) => d.startsWith('SKIPPED')) ? ` (${decisionNotes.filter((d) => d.startsWith('SKIPPED')).length} SKIPPED — named in regate.scorecard.json)` : ''} — the harness gates this same resolved contract (run.ts:440)`);
     console.log(`  bound contradictions: committed ${committed.fusion.contradictions} vs re-probe ${contradictions.length}${committed.fusion.contradictions === contradictions.length ? ' (probe context equivalent)' : '  ← PROBE-CONTEXT DRIFT — investigate before quoting'}`);
   }
 

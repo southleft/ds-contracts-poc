@@ -201,6 +201,7 @@
       }
     ]
   },
+  "decisionsReapplied": [],
   "scorecard": {
     "component": "RadioButton",
     "generatedBy": "extract/computed/gate.ts",
@@ -227,9 +228,9 @@
       "boundConfirmed": 16,
       "boundCells": 16,
       "contradictions": 0,
-      "mintedLeaves": 48,
-      "mintedLeavesUnfolded": 43,
-      "baseBindings": 38,
+      "mintedLeaves": 53,
+      "mintedLeavesUnfolded": 48,
+      "baseBindings": 48,
       "stateBindings": 51,
       "codeOnlyChannels": 2,
       "overflowBindings": 47,
@@ -398,6 +399,10 @@
       "code-only: input.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
     "rows": [
       {
         "key": "unchecked.enabled__default",
