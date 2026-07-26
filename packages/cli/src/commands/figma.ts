@@ -5,6 +5,16 @@
  *       emit one Figma Plugin API sync script per contract
  *       (core/emit-figma-script — referee-gated, same engine as the repo)
  *
+ *   figma bundle <contracts..> --tokens <base.dtcg.json[,minted.dtcg.json]>
+ *       [--modes <light.json[,dark.json]>] [--name <collection>] --out <file.json>
+ *       emit a SELF-CONTAINED CONTRACTS-BUNDLE (contracts + tokenSet) — the
+ *       one JSON a foreign-library user pastes into the plugin's Generate
+ *       tab. The tokenSet carries the flat DTCG base, optional light/dark
+ *       mode overrides, and the minted tree; the plugin syncs it as one
+ *       named variable collection (Light/Dark modes, Figma-native aliases
+ *       for {alias} minted leaves) and resolves the contracts against
+ *       base + minted. Deterministic: same inputs → byte-identical bundle.
+ *
  *   figma push <bundle-or-contract.json> --code <PAIRING-CODE> [--bridge <url>]
  *       send a CONTRACTS-BUNDLE through the plugin bridge under a pairing
  *       code (the reverse direction of Send-to-Playground). A single
@@ -42,10 +52,14 @@ export interface ContractsBundle {
   type: typeof CONTRACTS_BUNDLE_TYPE;
   version: 1;
   contracts: unknown[];
+  /** Foreign token set (figma bundle writes it) — rides through push
+   *  verbatim so the plugin can sync it; never inspected here. */
+  tokenSet?: unknown;
 }
 
 /** Read a file as a bundle: an existing CONTRACTS-BUNDLE envelope passes
- *  through; a single contract document (has id/name) is wrapped. */
+ *  through (its tokenSet included); a single contract document (has id/name)
+ *  is wrapped. */
 export function toBundle(filePath: string): ContractsBundle {
   let raw: unknown;
   try {
@@ -58,7 +72,13 @@ export function toBundle(filePath: string): ContractsBundle {
     if (!Array.isArray(contracts) || contracts.length === 0) {
       throw new CliUsageError(`${filePath}: a ${CONTRACTS_BUNDLE_TYPE} needs a non-empty "contracts" array`);
     }
-    return { type: CONTRACTS_BUNDLE_TYPE, version: 1, contracts };
+    const tokenSet = (raw as { tokenSet?: unknown }).tokenSet;
+    return {
+      type: CONTRACTS_BUNDLE_TYPE,
+      version: 1,
+      contracts,
+      ...(tokenSet !== undefined && tokenSet !== null ? { tokenSet } : {}),
+    };
   }
   if (raw && typeof raw === 'object' && typeof (raw as { id?: unknown }).id === 'string') {
     return { type: CONTRACTS_BUNDLE_TYPE, version: 1, contracts: [raw] };
@@ -66,6 +86,76 @@ export function toBundle(filePath: string): ContractsBundle {
   throw new CliUsageError(
     `${filePath}: neither a contract document (no "id") nor a ${CONTRACTS_BUNDLE_TYPE} envelope`,
   );
+}
+
+// ---------------------------------------------------------------------------
+// figma bundle — the self-contained foreign-library payload (JSON only).
+// ---------------------------------------------------------------------------
+
+const readJsonObject = (filePath: string): Record<string, unknown> => {
+  let raw: unknown;
+  try {
+    raw = JSON.parse(readFileSync(filePath, 'utf8'));
+  } catch (err) {
+    throw new CliUsageError(`${filePath}: not JSON — ${String(err instanceof Error ? err.message : err)}`);
+  }
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) {
+    throw new CliUsageError(`${filePath}: expected a JSON object (a DTCG token file)`);
+  }
+  return raw as Record<string, unknown>;
+};
+
+async function bundleCommand(argv: string[]): Promise<number> {
+  const parsed = parseFlags(argv, { value: ['tokens', 'modes', 'name', 'out'] });
+  if (parsed.positionals.length === 0) {
+    throw new CliUsageError('figma bundle needs contract files/directories');
+  }
+  const out = flagString(parsed, 'out');
+  if (!out) throw new CliUsageError('figma bundle needs --out <file.json>');
+  const tokenFiles = splitList(flagString(parsed, 'tokens'));
+  if (tokenFiles.length === 0 || tokenFiles.length > 2) {
+    throw new CliUsageError(
+      'figma bundle needs --tokens <base.dtcg.json[,minted.dtcg.json]> — the flat DTCG base first, the minted tree (optional) second',
+    );
+  }
+  const modeFiles = splitList(flagString(parsed, 'modes'));
+  if (modeFiles.length > 2) {
+    throw new CliUsageError('figma bundle takes --modes <light.json[,dark.json]> — light first, dark (optional) second');
+  }
+
+  // Contract referee first (loadContracts refuses violations by name), then
+  // embed the RAW documents — the bundle carries the files as written, not a
+  // schema-normalized copy ($schema keys and field order survive verbatim).
+  const files = expandContractArgs(parsed.positionals);
+  loadContracts(files);
+  const contracts = files.map((f) => JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>);
+
+  const base = readJsonObject(path.resolve(tokenFiles[0]));
+  const minted = tokenFiles[1] ? readJsonObject(path.resolve(tokenFiles[1])) : undefined;
+  const light = modeFiles[0] ? readJsonObject(path.resolve(modeFiles[0])) : undefined;
+  const dark = modeFiles[1] ? readJsonObject(path.resolve(modeFiles[1])) : undefined;
+  const name = flagString(parsed, 'name') ?? 'Tokens';
+
+  const bundle = {
+    type: CONTRACTS_BUNDLE_TYPE,
+    version: 1 as const,
+    tokenSet: {
+      name,
+      base,
+      ...(light || dark ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } } : {}),
+      ...(minted ? { minted } : {}),
+    },
+    contracts,
+  };
+  const text = JSON.stringify(bundle, null, 2) + '\n';
+  const outPath = path.resolve(out);
+  mkdirSync(path.dirname(outPath), { recursive: true });
+  writeFileSync(outPath, text);
+  const baseCount = Object.keys(base).length;
+  console.log(
+    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ', minted tree' : ''}${light || dark ? `, modes: ${[light && 'light', dark && 'dark'].filter(Boolean).join('/')}` : ''}; ${text.length} bytes). Paste it into the plugin's Generate tab — JSON is the only thing a user ever pastes.`,
+  );
+  return 0;
 }
 
 async function pushCommand(argv: string[]): Promise<number> {
@@ -363,6 +453,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
 }
 
 export async function figmaCommand(argv: string[]): Promise<number> {
+  if (argv[0] === 'bundle') return bundleCommand(argv.slice(1));
   if (argv[0] === 'push') return pushCommand(argv.slice(1));
   if (argv[0] === 'receive') return receiveCommand(argv.slice(1));
 

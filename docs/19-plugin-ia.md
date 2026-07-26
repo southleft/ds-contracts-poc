@@ -52,8 +52,10 @@ users).
 ## Rules the restructure must keep (non-negotiables)
 
 1. **JSON only, everywhere a user touches.** Compiled scripts are internal.
-   (Blocked on the foreign-token bundle round; once landed, the MUI test is
-   "paste mui.bundle.json into Build.")
+   (The foreign-token bundle round LANDED: `examples/mui/figma/mui.bundle.json`
+   pastes into Generate today — the equivalence gate in plugin-engine-check
+   pins it against the compiled-script path. The MUI test for the re-housed
+   IA is "paste mui.bundle.json into Build.")
 2. Every existing behavior keeps its receipt-gated semantics — this is a
    re-housing, not a rewrite; plugin-engine-check pins must stay green
    untouched.
@@ -75,4 +77,5 @@ users).
 ## Sizing
 
 Re-housing + drawer + default-tab logic: SMALL (one focused pass, no engine
-changes). Blocked only by the foreign-token bundle round for rule 1.
+changes). The foreign-token bundle round (rule 1's blocker) has landed —
+nothing blocks this pass now.

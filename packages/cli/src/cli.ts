@@ -38,6 +38,11 @@ Commands:
           [--tokens f,f] [--icons dir] [--stories] [--emitter <module>]
   figma <contracts..> --out <dir>             contract → Figma sync scripts
           [--tokens f,f] [--icons dir] [--file-key KEY]
+  figma bundle <contracts..> --out <file>     contracts + tokens → ONE self-contained
+          --tokens <base[,minted]>            CONTRACTS-BUNDLE JSON (the only thing a user
+          [--modes <light[,dark]>]            pastes into the plugin — it syncs the tokenSet
+          [--name <collection>]               as a named collection and builds the components;
+                                              deterministic: same inputs → identical bytes)
   figma push <file> --code <CODE>             send a CONTRACTS-BUNDLE to the plugin bridge
           [--bridge <url>]                    (pairing-code flow, deliver-once, 15-min TTL)
   figma receive --out <contracts-dir>         the dev door: print a pairing code, wait for the

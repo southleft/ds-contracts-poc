@@ -575,4 +575,107 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint)');
+// --- N+3. FOREIGN TOKEN SET — the JSON-only Generate for a foreign library -
+// The owner's wall, live: "I thought we were entering contracts as JSON but
+// you keep giving me JavaScript." A foreign round (MUI) is now ONE JSON
+// paste: examples/mui/figma/mui.bundle.json (contracts + tokenSet) through
+// the REAL engine bundle path must build EXACTLY what the compiled-script
+// path (GENESIS-BATCH.figma.js) builds — same component sets and variant
+// counts, same variable count including the Figma-native source aliases,
+// same bound values. Plus the refusal: a contract ref outside base + minted
+// still refuses BY NAME.
+{
+  const bundleText = read('examples/mui/figma/mui.bundle.json');
+  const parsed = DSC.parseIncomingText(bundleText);
+  assert(parsed.ok && parsed.kind === 'bundle', 'mui.bundle.json parses as a CONTRACTS-BUNDLE');
+  assert(parsed.tokenSet && parsed.tokenSet.name === 'MUI', 'the bundle surfaces its tokenSet (collection "MUI")');
+  const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet });
+  assert(plan.ok, `the foreign bundle plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
+  assert(
+    plan.steps[0].kind === 'tokens' && plan.steps[0].title.includes('"MUI"'),
+    `the tokens step syncs the bundle's own tokenSet first, named (got "${plan.steps[0].title}")`,
+  );
+  assert(
+    plan.steps.filter((s) => s.kind === 'tokens').length === 1,
+    'no baked deps ride along, so ONLY the tokenSet collection syncs — the repo collections stay out of a foreign file',
+  );
+
+  const silent = { log() {}, warn() {}, error() {} };
+  const runIn = (mock, code) =>
+    vm.runInContext(`(async () => {\n${code}\n})()`, vm.createContext({ figma: mock.figma, console: silent }), {
+      timeout: 300_000,
+    });
+
+  // Bundle path (fresh mock file A).
+  const mockA = createFigmaMock();
+  for (const step of plan.steps) await runIn(mockA, step.code);
+  // Script path (fresh mock file B) — the committed compiled-script journey.
+  const mockB = createFigmaMock();
+  await runIn(mockB, read('examples/mui/figma/GENESIS-BATCH.figma.js'));
+
+  const setShape = (mock) =>
+    mock.root
+      .findAll((n) => n.type === 'COMPONENT_SET')
+      .map((s) => `${s.name}(${s.children.length})`)
+      .sort()
+      .join(', ');
+  const shapeA = setShape(mockA);
+  const shapeB = setShape(mockB);
+  assert(
+    shapeA === 'Button(63), Card(4), Chip(28), Slider(12), Switch(14)',
+    `the bundle path builds the exact MUI set shape (got ${shapeA})`,
+  );
+  assert(shapeA === shapeB, `bundle path ≡ script path on component sets (${shapeA} vs ${shapeB})`);
+
+  const aliasCountOf = (mock) =>
+    mock.variables.filter((v) =>
+      Object.values(v.valuesByMode).some((val) => val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS'),
+    ).length;
+  assert(
+    mockA.variables.length === 982 && mockB.variables.length === 982,
+    `both paths land 982 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+  );
+  assert(
+    aliasCountOf(mockA) === 61 && aliasCountOf(mockB) === 61,
+    `both paths carry 61 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
+  );
+  const namesA = mockA.variables.map((v) => v.name).sort().join('\n');
+  const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
+  assert(namesA === namesB, 'bundle path ≡ script path on the full variable NAME inventory');
+
+  // Spot-check a bound value end to end: the contained-primary Button root
+  // fill must resolve (through the minted alias → base token) to MUI's
+  // palette-primary-main #1976d2.
+  const buttonSet = mockA.root.findOne((n) => n.type === 'COMPONENT_SET' && n.name === 'Button');
+  const contained = buttonSet.children.find((c) => c.name.includes('Variant=Contained') && c.name.includes('Color=Primary') && c.name.includes('Size=Medium'));
+  assert(contained, 'the Contained/Primary/Medium Button variant exists in the bundle-built set');
+  const fillBound = (contained.fills ?? []).find((f) => f.boundVariables && f.boundVariables.color);
+  assert(fillBound, 'the contained-primary Button root fill is variable-bound');
+  const fillVar = mockA.variables.find((v) => v.id === fillBound.boundVariables.color.id);
+  const resolved = fillVar.resolveForConsumer();
+  const hex = (x) => Math.round((x || 0) * 255).toString(16).padStart(2, '0');
+  const resolvedHex = resolved && resolved.value ? `#${hex(resolved.value.r)}${hex(resolved.value.g)}${hex(resolved.value.b)}` : '(unresolved)';
+  assert(
+    fillVar.name === 'imported/button/root/background-color/contained/primary' && resolvedHex === '#1976d2',
+    `the contained-primary fill binds ${fillVar.name} and resolves ${resolvedHex} (want #1976d2 via the palette-primary-main alias)`,
+  );
+
+  // The refusal: a contract ref outside base + minted refuses BY NAME at
+  // plan time (font-weight resolves LITERALLY — weight → Inter style name —
+  // so the emitter's own "Cannot resolve token" fires; purely bindable
+  // channels keep the runtime's named 'Missing variable' throw instead).
+  const broken = JSON.parse(JSON.stringify(parsed.contracts.find((c) => c.id === 'mui.button')));
+  broken.anatomy.root.tokens['font-weight'] = '{no.such.token}';
+  const refused = DSC.planGenerate([broken], { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet });
+  assert(!refused.ok, 'a contract ref outside base+minted is refused');
+  assert(
+    refused.issues.some((i) => i.headline.includes('Cannot resolve token') && i.headline.includes('no.such.token')),
+    `the refusal names the token (got: ${refused.ok ? '' : refused.issues.map((i) => i.headline).join('; ')})`,
+  );
+
+  console.log(
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} with 982 variables (61 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+  );
+}
+
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle)');

@@ -60,6 +60,11 @@ npx tsx packages/cli/src/cli.ts figma examples/tailwind/contracts --out examples
 node examples/tailwind/scripts/build-figma-tokens.mjs
 node examples/tailwind/scripts/figma-compile-receipt.mjs
 node examples/tailwind/scripts/build-genesis-batch.mjs
+npx tsx packages/cli/src/cli.ts figma bundle examples/tailwind/contracts \
+  --tokens examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json \
+  --name Tailwind --out examples/tailwind/figma/tailwind.bundle.json
+                     # tailwind.bundle.json — the ONE JSON a user pastes (contracts +
+                     # tokenSet, single-mode; freshness-pinned by tailwind-figma-genesis)
 ```
 
 ## Gates (default-state floor)

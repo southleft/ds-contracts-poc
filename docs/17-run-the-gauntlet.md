@@ -36,16 +36,22 @@ raw values it can't bind to tokens are listed with nearest-token candidates,
 never invented. That report is the tool telling you the truth about your own
 codebase; if it's noisy, that's a finding about the code, not a malfunction.
 
-Then emit the Figma sync scripts and paste:
+Then package contracts + tokens as ONE self-contained JSON bundle and paste:
 
 ```bash
-npx @ds-contracts/cli figma <your-contracts-dir> --out ./figma-sync --tokens <your-dtcg.json>
+npx @ds-contracts/cli figma bundle <your-contracts-dir> \
+  --tokens <base.dtcg.json[,minted.dtcg.json]> \
+  [--modes <light.json[,dark.json]>] --name <YourLibrary> --out ./my-library.bundle.json
 ```
 
-Open a blank Figma file → DS Contracts plugin → **Paste a script** tab →
-paste a generated `*.figma.js` → Run. Tokens script first if one was emitted
-(variables must exist before components bind them). Re-running a script
-amends in place — same node ids, no duplicates.
+Open a blank Figma file → DS Contracts plugin → **Generate** tab → paste the
+bundle JSON → Generate. The plugin syncs the token set first (one variable
+collection named after your library, Light/Dark modes, Figma-native aliases
+for `{alias}` minted leaves), then builds every component set against it.
+**The contract JSON is the only thing you ever paste** — no compiled
+`*.figma.js` scripts. Re-running amends in place — same node ids, no
+duplicates. (The per-contract script emitter, `figma <contracts> --out`,
+still exists for script-level workflows and CI diffing.)
 
 ### A2. The advanced path (runtime styling: Emotion, StyleX, …)
 
@@ -63,8 +69,9 @@ budget real time; or hand me the repo and I'll write the config with you.
 contract, each set on its own page in a labeled section; variant grids
 matching your prop axes; fills/radii/spacing bound to variables (inspect a
 fill and follow the alias). For the reference experience without your own
-code, paste `examples/mui/figma/GENESIS-BATCH.figma.js` into a blank file:
-MUI's default theme, 5 sets, 121 variants, 912 variables, ~30 seconds.
+code, paste `examples/mui/figma/mui.bundle.json` into the **Generate** tab of
+a blank file: MUI's default theme, 5 sets, 121 variants, 982 variables (61
+Figma-native source aliases), ~30 seconds — one JSON paste.
 
 ## Sequence B — canvas → contract → code
 

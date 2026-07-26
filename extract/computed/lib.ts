@@ -144,33 +144,11 @@ const rgbaRe = /^rgba\((\d+), (\d+), (\d+), ([\d.]+)\)$/;
 /** TAILWIND ROUND: deterministic oklch() → sRGB (the OKLab reference
  *  matrices, closed-form, fixed rounding). Tailwind v4 themes are oklch and
  *  Chromium KEEPS the space in computed values — without this, every
- *  Tailwind color is unmintable. Accepts L as % or decimal, optional
- *  `/ alpha`. Out-of-gamut clamps channel-wise (the browser's own fallback
- *  behavior for sRGB surfaces). */
-export function oklchToRgba(v: string): { r: number; g: number; b: number; a: number } | null {
-  const m = /^oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:deg)?\s*(?:\/\s*([\d.]+%?)\s*)?\)$/.exec(v.trim());
-  if (!m) return null;
-  const L = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-  const C = parseFloat(m[2]);
-  const H = (parseFloat(m[3]) * Math.PI) / 180;
-  const alpha = m[4] === undefined ? 1 : m[4].endsWith('%') ? parseFloat(m[4]) / 100 : parseFloat(m[4]);
-  const a = C * Math.cos(H);
-  const b = C * Math.sin(H);
-  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
-  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
-  const s_ = L - 0.0894841775 * a - 1.291485548 * b;
-  const l3 = l_ ** 3, m3 = m_ ** 3, s3 = s_ ** 3;
-  const lin = [
-    4.0767416621 * l3 - 3.3077115913 * m3 + 0.2309699292 * s3,
-    -1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3,
-    -0.0041960863 * l3 - 0.7034186147 * m3 + 1.707614701 * s3,
-  ];
-  const gamma = (c: number) => {
-    const x = Math.min(1, Math.max(0, c));
-    return x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055;
-  };
-  return { r: Math.round(gamma(lin[0]) * 255), g: Math.round(gamma(lin[1]) * 255), b: Math.round(gamma(lin[2]) * 255), a: alpha };
-}
+ *  Tailwind color is unmintable. MOVED to core/token-set.ts (the foreign-
+ *  tokenSet bundle path classifies colors with the same math) — re-exported
+ *  here so every existing importer keeps its path; ONE implementation. */
+export { oklchToRgba } from '../../core/token-set.js';
+import { oklchToRgba } from '../../core/token-set.js';
 const pxRe = /^(-?\d+(?:\.\d+)?)px$/;
 const numRe = /^\d*\.?\d+$/;
 

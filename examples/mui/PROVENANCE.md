@@ -48,9 +48,16 @@ npm run extract:computed -- --harness examples/mui/.mui-sandbox \
 node examples/mui/scripts/promote-floor.mjs         # contracts v0.2.0 + minted tree + source-alias pass + resolution guard
 npx tsx packages/cli/src/cli.ts figma examples/mui/contracts --out examples/mui/figma \
   --tokens examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json
-node examples/mui/scripts/build-figma-tokens.mjs    # 00-tokens.figma.js (912 vars, 61 native aliases)
+node examples/mui/scripts/build-figma-tokens.mjs    # 00-tokens.figma.js (982 vars, 61 native aliases)
 node examples/mui/scripts/figma-compile-receipt.mjs # referee + headless execute per script
 node examples/mui/scripts/build-genesis-batch.mjs   # GENESIS-BATCH.figma.js (refuses unless mock-proven)
+npx tsx packages/cli/src/cli.ts figma bundle examples/mui/contracts \
+  --tokens examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json \
+  --modes examples/mui/tokens/modes/mui.light.dtcg.json,examples/mui/tokens/modes/mui.dark.dtcg.json \
+  --name MUI --out examples/mui/figma/mui.bundle.json
+                                                    # mui.bundle.json — the ONE JSON a user pastes
+                                                    # (contracts + tokenSet; byte-deterministic,
+                                                    # freshness-pinned by the mui-figma-genesis eval)
 ```
 
 **Seeds vs promoted:** capture reads `contracts-seed/` (props/axes only, empty

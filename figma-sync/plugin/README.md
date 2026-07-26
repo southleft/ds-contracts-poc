@@ -13,7 +13,13 @@ the repo's tokens, contracts and icons baked in (`window.DSC`, built by
   the built set. Bundles sync in dependency order; referenced components the
   bundle doesn't carry are pulled from the baked repo scope and synced first.
   A "sync token variables first" checkbox (default on) upserts the token
-  collections so fresh files just work.
+  collections so fresh files just work. A bundle may carry a **`tokenSet`**
+  (a foreign library's flat DTCG base + optional light/dark modes + minted
+  tree, written by `ds-contracts figma bundle`): the plugin then syncs THAT
+  set as its own named collection (Light/Dark modes, Figma-native aliases
+  for `{alias}` minted leaves) and resolves the bundle's contracts against
+  base + minted — a foreign library is ONE JSON paste, never a compiled
+  script (see GET-STARTED.md for the shape).
 - **Update library** — receive a bundle (a CI artifact), then **Check
   against this file**: each contract is looked up by its identity marker
   (`ds_contracts/contractId`, the amend machinery's identity) and the plugin

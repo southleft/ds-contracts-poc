@@ -1,0 +1,2598 @@
+{
+  "type": "CONTRACTS-BUNDLE",
+  "version": 1,
+  "tokenSet": {
+    "name": "Tailwind",
+    "base": {
+      "animate-spin": {
+        "$type": "string",
+        "$value": "spin 1s linear infinite"
+      },
+      "blur-sm": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "blur-xs": {
+        "$type": "dimension",
+        "$value": "4px"
+      },
+      "color-black": {
+        "$type": "color",
+        "$value": "#000"
+      },
+      "color-cyan-100": {
+        "$type": "color",
+        "$value": "#cefafe",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(95.6% 0.045 203.388)"
+          }
+        }
+      },
+      "color-cyan-200": {
+        "$type": "color",
+        "$value": "#a2f4fd",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(91.7% 0.08 205.041)"
+          }
+        }
+      },
+      "color-cyan-300": {
+        "$type": "color",
+        "$value": "#53eafd",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(86.5% 0.127 207.078)"
+          }
+        }
+      },
+      "color-cyan-400": {
+        "$type": "color",
+        "$value": "#00d3f2",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(78.9% 0.154 211.53)"
+          }
+        }
+      },
+      "color-cyan-50": {
+        "$type": "color",
+        "$value": "#ecfeff",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(98.4% 0.019 200.873)"
+          }
+        }
+      },
+      "color-cyan-500": {
+        "$type": "color",
+        "$value": "#00b8db",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(71.5% 0.143 215.221)"
+          }
+        }
+      },
+      "color-cyan-600": {
+        "$type": "color",
+        "$value": "#0092b8",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(60.9% 0.126 221.723)"
+          }
+        }
+      },
+      "color-cyan-700": {
+        "$type": "color",
+        "$value": "#007595",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(52% 0.105 223.128)"
+          }
+        }
+      },
+      "color-cyan-800": {
+        "$type": "color",
+        "$value": "#005f78",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(45% 0.085 224.283)"
+          }
+        }
+      },
+      "color-cyan-900": {
+        "$type": "color",
+        "$value": "#104e64",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(39.8% 0.07 227.392)"
+          }
+        }
+      },
+      "color-lime-100": {
+        "$type": "color",
+        "$value": "#ecfcca",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(96.7% 0.067 122.328)"
+          }
+        }
+      },
+      "color-lime-200": {
+        "$type": "color",
+        "$value": "#d8f999",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(93.8% 0.127 124.321)"
+          }
+        }
+      },
+      "color-lime-300": {
+        "$type": "color",
+        "$value": "#bbf451",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(89.7% 0.196 126.665)"
+          }
+        }
+      },
+      "color-lime-400": {
+        "$type": "color",
+        "$value": "#9ae600",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(84.1% 0.238 128.85)"
+          }
+        }
+      },
+      "color-lime-500": {
+        "$type": "color",
+        "$value": "#7ccf00",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(76.8% 0.233 130.85)"
+          }
+        }
+      },
+      "color-lime-600": {
+        "$type": "color",
+        "$value": "#5ea500",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(64.8% 0.2 131.684)"
+          }
+        }
+      },
+      "color-lime-700": {
+        "$type": "color",
+        "$value": "#497d00",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(53.2% 0.157 131.589)"
+          }
+        }
+      },
+      "color-lime-800": {
+        "$type": "color",
+        "$value": "#3c6300",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(45.3% 0.124 130.933)"
+          }
+        }
+      },
+      "color-lime-900": {
+        "$type": "color",
+        "$value": "#35530e",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(40.5% 0.101 131.063)"
+          }
+        }
+      },
+      "color-white": {
+        "$type": "color",
+        "$value": "#fff"
+      },
+      "container-2xl": {
+        "$type": "dimension",
+        "$value": "42rem"
+      },
+      "container-3xl": {
+        "$type": "dimension",
+        "$value": "48rem"
+      },
+      "container-4xl": {
+        "$type": "dimension",
+        "$value": "56rem"
+      },
+      "container-5xl": {
+        "$type": "dimension",
+        "$value": "64rem"
+      },
+      "container-6xl": {
+        "$type": "dimension",
+        "$value": "72rem"
+      },
+      "container-7xl": {
+        "$type": "dimension",
+        "$value": "80rem"
+      },
+      "container-lg": {
+        "$type": "dimension",
+        "$value": "32rem"
+      },
+      "container-md": {
+        "$type": "dimension",
+        "$value": "28rem"
+      },
+      "container-sm": {
+        "$type": "dimension",
+        "$value": "24rem"
+      },
+      "container-xl": {
+        "$type": "dimension",
+        "$value": "36rem"
+      },
+      "container-xs": {
+        "$type": "dimension",
+        "$value": "20rem"
+      },
+      "default-font-family": {
+        "$type": "string",
+        "$value": "var(--font-sans)"
+      },
+      "default-mono-font-family": {
+        "$type": "string",
+        "$value": "var(--font-mono)"
+      },
+      "default-transition-duration": {
+        "$type": "string",
+        "$value": "150ms"
+      },
+      "default-transition-timing-function": {
+        "$type": "string",
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "drop-shadow-md": {
+        "$type": "string",
+        "$value": "0 3px 3px rgb(0 0 0 / 0.12)"
+      },
+      "drop-shadow-sm": {
+        "$type": "string",
+        "$value": "0 1px 2px rgb(0 0 0 / 0.15)"
+      },
+      "drop-shadow-xs": {
+        "$type": "string",
+        "$value": "0 1px 1px rgb(0 0 0 / 0.05)"
+      },
+      "ease-in-out": {
+        "$type": "string",
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "ease-out": {
+        "$type": "string",
+        "$value": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      "font-mono": {
+        "$type": "string",
+        "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\",\n      \"Courier New\", monospace"
+      },
+      "font-sans": {
+        "$type": "string",
+        "$value": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\",\n      \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\n      \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      },
+      "font-weight-bold": {
+        "$type": "number",
+        "$value": "700"
+      },
+      "font-weight-medium": {
+        "$type": "number",
+        "$value": "500"
+      },
+      "font-weight-normal": {
+        "$type": "number",
+        "$value": "400"
+      },
+      "font-weight-semibold": {
+        "$type": "number",
+        "$value": "600"
+      },
+      "leading-tight": {
+        "$type": "number",
+        "$value": "1.25"
+      },
+      "radius-lg": {
+        "$type": "dimension",
+        "$value": "0.5rem"
+      },
+      "radius-md": {
+        "$type": "dimension",
+        "$value": "0.375rem"
+      },
+      "radius-sm": {
+        "$type": "dimension",
+        "$value": "0.25rem"
+      },
+      "radius-xs": {
+        "$type": "dimension",
+        "$value": "0.125rem"
+      },
+      "spacing": {
+        "$type": "dimension",
+        "$value": "0.25rem"
+      },
+      "text-2xl": {
+        "$type": "dimension",
+        "$value": "1.5rem"
+      },
+      "text-2xl--line-height": {
+        "$type": "string",
+        "$value": "calc(2 / 1.5)"
+      },
+      "text-base": {
+        "$type": "dimension",
+        "$value": "1rem"
+      },
+      "text-base--line-height": {
+        "$type": "string",
+        "$value": "calc(1.5 / 1)"
+      },
+      "text-lg": {
+        "$type": "dimension",
+        "$value": "1.125rem"
+      },
+      "text-lg--line-height": {
+        "$type": "string",
+        "$value": "calc(1.75 / 1.125)"
+      },
+      "text-sm": {
+        "$type": "dimension",
+        "$value": "0.875rem"
+      },
+      "text-sm--line-height": {
+        "$type": "string",
+        "$value": "calc(1.25 / 0.875)"
+      },
+      "text-xl": {
+        "$type": "dimension",
+        "$value": "1.25rem"
+      },
+      "text-xl--line-height": {
+        "$type": "string",
+        "$value": "calc(1.75 / 1.25)"
+      },
+      "text-xs": {
+        "$type": "dimension",
+        "$value": "0.75rem"
+      },
+      "text-xs--line-height": {
+        "$type": "string",
+        "$value": "calc(1 / 0.75)"
+      }
+    },
+    "minted": {
+      "imported": {
+        "button": {
+          "root": {
+            "background-color": {
+              "default": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#1f2937",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              }
+            },
+            "border-bottom-color": {
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#e5e7eb",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "border-bottom-width": {
+              "default": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "alternative": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "dark": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "border-left-color": {
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#e5e7eb",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "border-left-width": {
+              "default": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "alternative": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "dark": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "border-right-color": {
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#e5e7eb",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "border-right-width": {
+              "default": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "alternative": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "dark": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "border-top-color": {
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#e5e7eb",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "border-top-width": {
+              "default": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "alternative": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "dark": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "green": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "red": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "color": {
+              "default": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#111827",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "{color-white}",
+                "$type": "color"
+              }
+            },
+            "font-size": {
+              "xs": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "xl": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            },
+            "line-height": {
+              "xs": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "xl": {
+                "$value": "24px",
+                "$type": "dimension"
+              }
+            },
+            "outline-color": {
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#111827",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "padding-left": {
+              "xs": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "xl": {
+                "$value": "24px",
+                "$type": "dimension"
+              }
+            },
+            "padding-right": {
+              "xs": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "xl": {
+                "$value": "24px",
+                "$type": "dimension"
+              }
+            },
+            "row-rule-color": {
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#111827",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "background-color-state-active": {
+              "default": {
+                "$value": "#1e429f",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#f3f4f6",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#111827",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#03543f",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#9b1c1c",
+                "$type": "color"
+              }
+            },
+            "box-shadow-state-active": {
+              "default": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "alternative": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "dark": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "green": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "red": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              }
+            },
+            "color-state-active": {
+              "alternative": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "{color-white}",
+                "$type": "color"
+              }
+            },
+            "outline-color-state-active": {
+              "alternative": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "row-rule-color-state-active": {
+              "alternative": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "box-shadow-state-focus-visible": {
+              "default": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "alternative": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(243, 244, 246, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "dark": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(209, 213, 219, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "green": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(132, 225, 188, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "red": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(248, 180, 180, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              }
+            },
+            "outline-color-state-focus-visible": {
+              "$value": "#005fcc",
+              "$type": "color"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "background-color-state-hover": {
+              "default": {
+                "$value": "#1e429f",
+                "$type": "color"
+              },
+              "alternative": {
+                "$value": "#f3f4f6",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#111827",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#03543f",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#9b1c1c",
+                "$type": "color"
+              }
+            },
+            "color-state-hover": {
+              "alternative": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "{color-white}",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "{color-white}",
+                "$type": "color"
+              }
+            },
+            "outline-color-state-hover": {
+              "alternative": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "row-rule-color-state-hover": {
+              "alternative": {
+                "$value": "#1a56db",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "dark": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "green": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "red": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "shared": {
+          "size-8": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "size-0": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "size-4": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "color-e5e7eb": {
+            "$value": "#e5e7eb",
+            "$type": "color"
+          },
+          "size-1": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "size-16": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "size-24": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "size-14": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "size-20": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "size-9999": {
+            "$value": "9999px",
+            "$type": "dimension"
+          }
+        },
+        "badge": {
+          "root": {
+            "background-color": {
+              "info": {
+                "$value": "{color-cyan-100}",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#fde8e8",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#def7ec",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fdf6b2",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#e5edff",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#fce8f3",
+                "$type": "color"
+              }
+            },
+            "color": {
+              "info": {
+                "$value": "{color-cyan-800}",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#9b1c1c",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#03543f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#723b13",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#42389d",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#99154b",
+                "$type": "color"
+              }
+            },
+            "font-size": {
+              "xs": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "{font-weight-semibold}",
+              "$type": "number"
+            },
+            "line-height": {
+              "xs": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "padding-bottom": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "padding-left": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "padding-right": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "padding-top": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "row-rule-color": {
+              "info": {
+                "$value": "#005f78",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#9b1c1c",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#03543f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#723b13",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#42389d",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#99154b",
+                "$type": "color"
+              }
+            },
+            "background-color-state-active": {
+              "info": {
+                "$value": "#a2f4fd",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#fbd5d5",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#bcf0da",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fce96a",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#cddbfe",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#fad1e8",
+                "$type": "color"
+              }
+            },
+            "background-color-state-hover": {
+              "info": {
+                "$value": "#a2f4fd",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#fbd5d5",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#bcf0da",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fce96a",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#cddbfe",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#fad1e8",
+                "$type": "color"
+              }
+            }
+          },
+          "label": {
+            "color": {
+              "info": {
+                "$value": "#005f78",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#9b1c1c",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#03543f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#723b13",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#42389d",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#99154b",
+                "$type": "color"
+              }
+            },
+            "font-size": {
+              "xs": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "600",
+              "$type": "number"
+            },
+            "line-height": {
+              "xs": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "row-rule-color": {
+              "info": {
+                "$value": "#005f78",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#9b1c1c",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#03543f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#723b13",
+                "$type": "color"
+              },
+              "indigo": {
+                "$value": "#42389d",
+                "$type": "color"
+              },
+              "pink": {
+                "$value": "#99154b",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "card": {
+          "root": {
+            "background-color": {
+              "$value": "{color-white}",
+              "$type": "color"
+            },
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px",
+              "$type": "shadow"
+            }
+          },
+          "label": {
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            }
+          }
+        },
+        "alert": {
+          "root": {
+            "background-color": {
+              "info": {
+                "$value": "{color-cyan-100}",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#fde8e8",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#def7ec",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fdf6b2",
+                "$type": "color"
+              }
+            },
+            "border-bottom-color": {
+              "info": {
+                "$value": "#00b8db",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#f05252",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0e9f6e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#c27803",
+                "$type": "color"
+              }
+            },
+            "border-left-color": {
+              "info": {
+                "$value": "#00b8db",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#f05252",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0e9f6e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#c27803",
+                "$type": "color"
+              }
+            },
+            "border-right-color": {
+              "info": {
+                "$value": "#00b8db",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#f05252",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0e9f6e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#c27803",
+                "$type": "color"
+              }
+            },
+            "border-top-color": {
+              "info": {
+                "$value": "#00b8db",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#f05252",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0e9f6e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#c27803",
+                "$type": "color"
+              }
+            },
+            "color": {
+              "info": {
+                "$value": "{color-cyan-700}",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#8e4b10",
+                "$type": "color"
+              }
+            },
+            "row-rule-color": {
+              "info": {
+                "$value": "#007595",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#8e4b10",
+                "$type": "color"
+              }
+            }
+          },
+          "part-0": {
+            "color": {
+              "info": {
+                "$value": "#007595",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#8e4b10",
+                "$type": "color"
+              }
+            },
+            "row-rule-color": {
+              "info": {
+                "$value": "#007595",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#8e4b10",
+                "$type": "color"
+              }
+            }
+          },
+          "label": {
+            "color": {
+              "info": {
+                "$value": "#007595",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#8e4b10",
+                "$type": "color"
+              }
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "row-rule-color": {
+              "info": {
+                "$value": "#007595",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#8e4b10",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "toggle-switch": {
+          "root": {
+            "height": {
+              "sm": {
+                "$value": "22px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "28px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "sm": {
+                "$value": "92.4375px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "100.438px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "108.438px",
+                "$type": "dimension"
+              }
+            },
+            "outline-color-state-focus-visible": {
+              "$value": "#005fcc",
+              "$type": "color"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "part-0": {
+            "background-color": {
+              "$value": "#e5e7eb",
+              "$type": "color"
+            },
+            "height": {
+              "sm": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "28px",
+                "$type": "dimension"
+              }
+            },
+            "min-width": {
+              "sm": {
+                "$value": "36px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "52px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "sm": {
+                "$value": "36px",
+                "$type": "dimension"
+              },
+              "md": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "52px",
+                "$type": "dimension"
+              }
+            },
+            "box-shadow-state-active": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "background-color-state-checked": {
+              "$value": "#1a56db",
+              "$type": "color"
+            },
+            "box-shadow-state-focus-visible": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(164, 202, 254, 1) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            }
+          },
+          "label": {
+            "color": {
+              "$value": "#111827",
+              "$type": "color"
+            },
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "margin-left": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "margin-top": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "row-rule-color": {
+              "$value": "#111827",
+              "$type": "color"
+            }
+          }
+        }
+      }
+    }
+  },
+  "contracts": [
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.alert",
+      "name": "Alert",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "color",
+          "type": {
+            "enum": [
+              "info",
+              "failure",
+              "success",
+              "warning"
+            ]
+          },
+          "default": "info",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Color",
+              "values": {
+                "info": "Info",
+                "failure": "Failure",
+                "success": "Success",
+                "warning": "Warning"
+              }
+            },
+            "code": {
+              "prop": "color"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Alert message",
+          "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "parts": {
+            "part-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "label": {
+                  "content": {
+                    "prop": "children"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "layout": {
+                    "grow": true
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.alert.label.font-weight}",
+                    "line-height": "{imported.shared.size-20}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "color",
+                      "map": {
+                        "failure": {
+                          "color": "{imported.alert.label.color.failure}",
+                          "row-rule-color": "{imported.alert.label.row-rule-color.failure}"
+                        },
+                        "info": {
+                          "color": "{imported.alert.label.color.info}",
+                          "row-rule-color": "{imported.alert.label.row-rule-color.info}"
+                        },
+                        "success": {
+                          "color": "{imported.alert.label.color.success}",
+                          "row-rule-color": "{imported.alert.label.row-rule-color.success}"
+                        },
+                        "warning": {
+                          "color": "{imported.alert.label.color.warning}",
+                          "row-rule-color": "{imported.alert.label.row-rule-color.warning}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "line-height": "{imported.shared.size-20}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "color",
+                  "map": {
+                    "failure": {
+                      "color": "{imported.alert.part-0.color.failure}",
+                      "row-rule-color": "{imported.alert.part-0.row-rule-color.failure}"
+                    },
+                    "info": {
+                      "color": "{imported.alert.part-0.color.info}",
+                      "row-rule-color": "{imported.alert.part-0.row-rule-color.info}"
+                    },
+                    "success": {
+                      "color": "{imported.alert.part-0.color.success}",
+                      "row-rule-color": "{imported.alert.part-0.row-rule-color.success}"
+                    },
+                    "warning": {
+                      "color": "{imported.alert.part-0.color.warning}",
+                      "row-rule-color": "{imported.alert.part-0.row-rule-color.warning}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "column-gap": "{imported.shared.size-8}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}",
+            "padding-bottom": "{imported.shared.size-16}",
+            "padding-left": "{imported.shared.size-16}",
+            "padding-right": "{imported.shared.size-16}",
+            "padding-top": "{imported.shared.size-16}",
+            "row-gap": "{imported.shared.size-8}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "failure": {
+                  "background-color": "{imported.alert.root.background-color.failure}",
+                  "border-bottom-color": "{imported.alert.root.border-bottom-color.failure}",
+                  "border-left-color": "{imported.alert.root.border-left-color.failure}",
+                  "border-right-color": "{imported.alert.root.border-right-color.failure}",
+                  "border-top-color": "{imported.alert.root.border-top-color.failure}",
+                  "color": "{imported.alert.root.color.failure}",
+                  "row-rule-color": "{imported.alert.root.row-rule-color.failure}"
+                },
+                "info": {
+                  "background-color": "{imported.alert.root.background-color.info}",
+                  "border-bottom-color": "{imported.alert.root.border-bottom-color.info}",
+                  "border-left-color": "{imported.alert.root.border-left-color.info}",
+                  "border-right-color": "{imported.alert.root.border-right-color.info}",
+                  "border-top-color": "{imported.alert.root.border-top-color.info}",
+                  "color": "{imported.alert.root.color.info}",
+                  "row-rule-color": "{imported.alert.root.row-rule-color.info}"
+                },
+                "success": {
+                  "background-color": "{imported.alert.root.background-color.success}",
+                  "border-bottom-color": "{imported.alert.root.border-bottom-color.success}",
+                  "border-left-color": "{imported.alert.root.border-left-color.success}",
+                  "border-right-color": "{imported.alert.root.border-right-color.success}",
+                  "border-top-color": "{imported.alert.root.border-top-color.success}",
+                  "color": "{imported.alert.root.color.success}",
+                  "row-rule-color": "{imported.alert.root.row-rule-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.alert.root.background-color.warning}",
+                  "border-bottom-color": "{imported.alert.root.border-bottom-color.warning}",
+                  "border-left-color": "{imported.alert.root.border-left-color.warning}",
+                  "border-right-color": "{imported.alert.root.border-right-color.warning}",
+                  "border-top-color": "{imported.alert.root.border-top-color.warning}",
+                  "color": "{imported.alert.root.color.warning}",
+                  "row-rule-color": "{imported.alert.root.row-rule-color.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "Alert"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.badge",
+      "name": "Badge",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "color",
+          "type": {
+            "enum": [
+              "info",
+              "failure",
+              "success",
+              "warning",
+              "indigo",
+              "pink"
+            ]
+          },
+          "default": "info",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Color",
+              "values": {
+                "info": "Info",
+                "failure": "Failure",
+                "success": "Success",
+                "warning": "Warning",
+                "indigo": "Indigo",
+                "pink": "Pink"
+              }
+            },
+            "code": {
+              "prop": "color"
+            }
+          }
+        },
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "xs",
+              "sm"
+            ]
+          },
+          "default": "xs",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "xs": "Xs",
+                "sm": "Sm"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Badge",
+          "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [
+        "active",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "label": {
+              "content": {
+                "prop": "children"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "layout": {
+                "grow": true
+              },
+              "tokens": {
+                "font-weight": "{imported.badge.label.font-weight}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "color",
+                  "map": {
+                    "failure": {
+                      "color": "{imported.badge.label.color.failure}",
+                      "row-rule-color": "{imported.badge.label.row-rule-color.failure}"
+                    },
+                    "indigo": {
+                      "color": "{imported.badge.label.color.indigo}",
+                      "row-rule-color": "{imported.badge.label.row-rule-color.indigo}"
+                    },
+                    "info": {
+                      "color": "{imported.badge.label.color.info}",
+                      "row-rule-color": "{imported.badge.label.row-rule-color.info}"
+                    },
+                    "pink": {
+                      "color": "{imported.badge.label.color.pink}",
+                      "row-rule-color": "{imported.badge.label.row-rule-color.pink}"
+                    },
+                    "success": {
+                      "color": "{imported.badge.label.color.success}",
+                      "row-rule-color": "{imported.badge.label.row-rule-color.success}"
+                    },
+                    "warning": {
+                      "color": "{imported.badge.label.color.warning}",
+                      "row-rule-color": "{imported.badge.label.row-rule-color.warning}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "sm": {
+                      "font-size": "{imported.badge.label.font-size.sm}",
+                      "line-height": "{imported.badge.label.line-height.sm}"
+                    },
+                    "xs": {
+                      "font-size": "{imported.badge.label.font-size.xs}",
+                      "line-height": "{imported.badge.label.line-height.xs}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "column-gap": "{imported.shared.size-4}",
+            "font-weight": "{imported.badge.root.font-weight}",
+            "padding-bottom": "{imported.badge.root.padding-bottom}",
+            "padding-left": "{imported.badge.root.padding-left}",
+            "padding-right": "{imported.badge.root.padding-right}",
+            "padding-top": "{imported.badge.root.padding-top}",
+            "row-gap": "{imported.shared.size-4}"
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.badge.root.background-color-state-active.{color}}"
+            },
+            "hover": {
+              "background-color": "{imported.badge.root.background-color-state-hover.{color}}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "failure": {
+                  "background-color": "{imported.badge.root.background-color.failure}",
+                  "color": "{imported.badge.root.color.failure}",
+                  "row-rule-color": "{imported.badge.root.row-rule-color.failure}"
+                },
+                "indigo": {
+                  "background-color": "{imported.badge.root.background-color.indigo}",
+                  "color": "{imported.badge.root.color.indigo}",
+                  "row-rule-color": "{imported.badge.root.row-rule-color.indigo}"
+                },
+                "info": {
+                  "background-color": "{imported.badge.root.background-color.info}",
+                  "color": "{imported.badge.root.color.info}",
+                  "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+                },
+                "pink": {
+                  "background-color": "{imported.badge.root.background-color.pink}",
+                  "color": "{imported.badge.root.color.pink}",
+                  "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+                },
+                "success": {
+                  "background-color": "{imported.badge.root.background-color.success}",
+                  "color": "{imported.badge.root.color.success}",
+                  "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.badge.root.background-color.warning}",
+                  "color": "{imported.badge.root.color.warning}",
+                  "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "sm": {
+                  "font-size": "{imported.badge.root.font-size.sm}",
+                  "line-height": "{imported.badge.root.line-height.sm}"
+                },
+                "xs": {
+                  "font-size": "{imported.badge.root.font-size.xs}",
+                  "line-height": "{imported.badge.root.line-height.xs}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "Badge"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.button",
+      "name": "Button",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "color",
+          "type": {
+            "enum": [
+              "default",
+              "alternative",
+              "dark",
+              "green",
+              "red"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Color",
+              "values": {
+                "default": "Default",
+                "alternative": "Alternative",
+                "dark": "Dark",
+                "green": "Green",
+                "red": "Red"
+              }
+            },
+            "code": {
+              "prop": "color"
+            }
+          }
+        },
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "default": "md",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "xs": "Xs",
+                "sm": "Sm",
+                "md": "Md",
+                "lg": "Lg",
+                "xl": "Xl"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Button",
+          "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [
+        "disabled",
+        "active",
+        "focus-visible",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "content": {
+            "prop": "children"
+          },
+          "declared": {
+            "position": "relative"
+          },
+          "declaredStates": {
+            "disabled": {
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "bottom": "{imported.shared.size-0}",
+            "font-weight": "{imported.button.root.font-weight}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.button.root.background-color-state-active.{color}}",
+              "box-shadow": "{imported.button.root.box-shadow-state-active.{color}}",
+              "color": "{imported.button.root.color-state-active.{color}}",
+              "outline-color": "{imported.button.root.outline-color-state-active.{color}}",
+              "row-rule-color": "{imported.button.root.row-rule-color-state-active.{color}}"
+            },
+            "disabled": {
+              "opacity": "{imported.button.root.opacity-state-disabled}"
+            },
+            "focus-visible": {
+              "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{color}}",
+              "outline-color": "{imported.button.root.outline-color-state-focus-visible}",
+              "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+            },
+            "hover": {
+              "background-color": "{imported.button.root.background-color-state-hover.{color}}",
+              "color": "{imported.button.root.color-state-hover.{color}}",
+              "outline-color": "{imported.button.root.outline-color-state-hover.{color}}",
+              "row-rule-color": "{imported.button.root.row-rule-color-state-hover.{color}}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "alternative": {
+                  "background-color": "{imported.button.root.background-color.alternative}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.alternative}",
+                  "border-bottom-width": "{imported.button.root.border-bottom-width.alternative}",
+                  "border-left-color": "{imported.button.root.border-left-color.alternative}",
+                  "border-left-width": "{imported.button.root.border-left-width.alternative}",
+                  "border-right-color": "{imported.button.root.border-right-color.alternative}",
+                  "border-right-width": "{imported.button.root.border-right-width.alternative}",
+                  "border-top-color": "{imported.button.root.border-top-color.alternative}",
+                  "border-top-width": "{imported.button.root.border-top-width.alternative}",
+                  "color": "{imported.button.root.color.alternative}",
+                  "outline-color": "{imported.button.root.outline-color.alternative}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.alternative}"
+                },
+                "dark": {
+                  "background-color": "{imported.button.root.background-color.dark}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.dark}",
+                  "border-bottom-width": "{imported.button.root.border-bottom-width.dark}",
+                  "border-left-color": "{imported.button.root.border-left-color.dark}",
+                  "border-left-width": "{imported.button.root.border-left-width.dark}",
+                  "border-right-color": "{imported.button.root.border-right-color.dark}",
+                  "border-right-width": "{imported.button.root.border-right-width.dark}",
+                  "border-top-color": "{imported.button.root.border-top-color.dark}",
+                  "border-top-width": "{imported.button.root.border-top-width.dark}",
+                  "color": "{imported.button.root.color.dark}",
+                  "outline-color": "{imported.button.root.outline-color.dark}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.dark}"
+                },
+                "default": {
+                  "background-color": "{imported.button.root.background-color.default}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.default}",
+                  "border-bottom-width": "{imported.button.root.border-bottom-width.default}",
+                  "border-left-color": "{imported.button.root.border-left-color.default}",
+                  "border-left-width": "{imported.button.root.border-left-width.default}",
+                  "border-right-color": "{imported.button.root.border-right-color.default}",
+                  "border-right-width": "{imported.button.root.border-right-width.default}",
+                  "border-top-color": "{imported.button.root.border-top-color.default}",
+                  "border-top-width": "{imported.button.root.border-top-width.default}",
+                  "color": "{imported.button.root.color.default}",
+                  "outline-color": "{imported.button.root.outline-color.default}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.default}"
+                },
+                "green": {
+                  "background-color": "{imported.button.root.background-color.green}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.green}",
+                  "border-bottom-width": "{imported.button.root.border-bottom-width.green}",
+                  "border-left-color": "{imported.button.root.border-left-color.green}",
+                  "border-left-width": "{imported.button.root.border-left-width.green}",
+                  "border-right-color": "{imported.button.root.border-right-color.green}",
+                  "border-right-width": "{imported.button.root.border-right-width.green}",
+                  "border-top-color": "{imported.button.root.border-top-color.green}",
+                  "border-top-width": "{imported.button.root.border-top-width.green}",
+                  "color": "{imported.button.root.color.green}",
+                  "outline-color": "{imported.button.root.outline-color.green}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.green}"
+                },
+                "red": {
+                  "background-color": "{imported.button.root.background-color.red}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.red}",
+                  "border-bottom-width": "{imported.button.root.border-bottom-width.red}",
+                  "border-left-color": "{imported.button.root.border-left-color.red}",
+                  "border-left-width": "{imported.button.root.border-left-width.red}",
+                  "border-right-color": "{imported.button.root.border-right-color.red}",
+                  "border-right-width": "{imported.button.root.border-right-width.red}",
+                  "border-top-color": "{imported.button.root.border-top-color.red}",
+                  "border-top-width": "{imported.button.root.border-top-width.red}",
+                  "color": "{imported.button.root.color.red}",
+                  "outline-color": "{imported.button.root.outline-color.red}",
+                  "row-rule-color": "{imported.button.root.row-rule-color.red}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "lg": {
+                  "font-size": "{imported.button.root.font-size.lg}",
+                  "line-height": "{imported.button.root.line-height.lg}",
+                  "padding-left": "{imported.button.root.padding-left.lg}",
+                  "padding-right": "{imported.button.root.padding-right.lg}"
+                },
+                "md": {
+                  "font-size": "{imported.button.root.font-size.md}",
+                  "line-height": "{imported.button.root.line-height.md}",
+                  "padding-left": "{imported.button.root.padding-left.md}",
+                  "padding-right": "{imported.button.root.padding-right.md}"
+                },
+                "sm": {
+                  "font-size": "{imported.button.root.font-size.sm}",
+                  "line-height": "{imported.button.root.line-height.sm}",
+                  "padding-left": "{imported.button.root.padding-left.sm}",
+                  "padding-right": "{imported.button.root.padding-right.sm}"
+                },
+                "xl": {
+                  "font-size": "{imported.button.root.font-size.xl}",
+                  "line-height": "{imported.button.root.line-height.xl}",
+                  "padding-left": "{imported.button.root.padding-left.xl}",
+                  "padding-right": "{imported.button.root.padding-right.xl}"
+                },
+                "xs": {
+                  "font-size": "{imported.button.root.font-size.xs}",
+                  "line-height": "{imported.button.root.line-height.xs}",
+                  "padding-left": "{imported.button.root.padding-left.xs}",
+                  "padding-right": "{imported.button.root.padding-right.xs}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "Button"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.card",
+      "name": "Card",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Card content",
+          "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "parts": {
+            "label": {
+              "content": {
+                "prop": "children"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "justify": "center"
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-16}",
+                "font-size": "{imported.shared.size-16}",
+                "font-weight": "{imported.card.label.font-weight}",
+                "line-height": "{imported.shared.size-24}",
+                "padding-bottom": "{imported.shared.size-24}",
+                "padding-left": "{imported.shared.size-24}",
+                "padding-right": "{imported.shared.size-24}",
+                "padding-top": "{imported.shared.size-24}",
+                "row-gap": "{imported.shared.size-16}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.card.root.background-color}",
+            "border-bottom-color": "{imported.shared.color-e5e7eb}",
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-e5e7eb}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-e5e7eb}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-e5e7eb}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "border-top-width": "{imported.shared.size-1}",
+            "box-shadow": "{imported.card.root.box-shadow}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "Card"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.toggleswitch",
+      "name": "ToggleSwitch",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "sizing",
+          "type": {
+            "enum": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "default": "md",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Sizing",
+              "values": {
+                "sm": "Sm",
+                "md": "Md",
+                "lg": "Lg"
+              }
+            },
+            "code": {
+              "prop": "sizing"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "default": "Toggle",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        }
+      ],
+      "states": [
+        "disabled",
+        "focus-visible",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "part-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "position": "relative",
+                "text-align": "center"
+              },
+              "tokens": {
+                "background-color": "{imported.toggle-switch.part-0.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-9999}",
+                "border-bottom-right-radius": "{imported.shared.size-9999}",
+                "border-top-left-radius": "{imported.shared.size-9999}",
+                "border-top-right-radius": "{imported.shared.size-9999}",
+                "bottom": "{imported.shared.size-0}",
+                "left": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "background-color-state-checked": "{imported.toggle-switch.part-0.background-color-state-checked}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "sizing",
+                  "map": {
+                    "lg": {
+                      "height": "{imported.toggle-switch.part-0.height.lg}",
+                      "min-width": "{imported.toggle-switch.part-0.min-width.lg}",
+                      "width": "{imported.toggle-switch.part-0.width.lg}"
+                    },
+                    "md": {
+                      "height": "{imported.toggle-switch.part-0.height.md}",
+                      "min-width": "{imported.toggle-switch.part-0.min-width.md}",
+                      "width": "{imported.toggle-switch.part-0.width.md}"
+                    },
+                    "sm": {
+                      "height": "{imported.toggle-switch.part-0.height.sm}",
+                      "min-width": "{imported.toggle-switch.part-0.min-width.sm}",
+                      "width": "{imported.toggle-switch.part-0.width.sm}"
+                    }
+                  }
+                }
+              ]
+            },
+            "label": {
+              "content": {
+                "prop": "label"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer"
+              },
+              "tokens": {
+                "color": "{imported.toggle-switch.label.color}",
+                "font-size": "{imported.toggle-switch.label.font-size}",
+                "font-weight": "{imported.toggle-switch.label.font-weight}",
+                "line-height": "{imported.toggle-switch.label.line-height}",
+                "margin-left": "{imported.toggle-switch.label.margin-left}",
+                "margin-top": "{imported.toggle-switch.label.margin-top}",
+                "row-rule-color": "{imported.toggle-switch.label.row-rule-color}"
+              }
+            }
+          },
+          "declared": {
+            "cursor": "pointer"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}"
+          },
+          "states": {
+            "focus-visible": {
+              "outline-color": "{imported.toggle-switch.root.outline-color-state-focus-visible}",
+              "outline-width": "{imported.toggle-switch.root.outline-width-state-focus-visible}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "sizing",
+              "map": {
+                "lg": {
+                  "height": "{imported.toggle-switch.root.height.lg}",
+                  "width": "{imported.toggle-switch.root.width.lg}"
+                },
+                "md": {
+                  "height": "{imported.toggle-switch.root.height.md}",
+                  "width": "{imported.toggle-switch.root.width.md}"
+                },
+                "sm": {
+                  "height": "{imported.toggle-switch.root.height.sm}",
+                  "width": "{imported.toggle-switch.root.width.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "ToggleSwitch"
+        }
+      }
+    }
+  ]
+}

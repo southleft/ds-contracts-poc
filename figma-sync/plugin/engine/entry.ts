@@ -16,9 +16,15 @@
  * rides `detail` fields.
  *
  * NAMED SCOPE (v1):
- *   - Token resolution is the repo token tree baked into the bundle. A
- *     contract that references tokens outside it is refused BY NAME (the
- *     emitter's own "Cannot resolve token" refusal, surfaced in plain words).
+ *   - Token resolution is the repo token tree baked into the bundle — OR,
+ *     when a CONTRACTS-BUNDLE carries a `tokenSet` section (a foreign
+ *     library's flat DTCG base + optional light/dark modes + minted tree),
+ *     that tokenSet: its contracts resolve against base + minted and the
+ *     tokens plan step syncs the literal set as one named collection
+ *     (Light/Dark modes, Figma-native aliases for minted {alias} leaves).
+ *     Either way a contract that references tokens outside its inventory is
+ *     refused BY NAME (the emitter's own "Cannot resolve token" refusal,
+ *     surfaced in plain words).
  *   - The propose diff is API-LEVEL (version, props, slots, variant axes)
  *     plus a single named line when anatomy/style bytes differ — interior
  *     style diffs are summarized, not itemized.
@@ -32,11 +38,15 @@ import {
   componentRefsOf,
   createFigmaEngine,
   dumpCapturesHidden,
+  emitTokenSetScript,
+  parseTokenSet,
   proposeBatchFromDump,
   slotsOf,
   sortByDependencies,
   tokenCorpusFromJson,
+  tokenSetTokenTrees,
   type Contract,
+  type TokenSetPayload,
 } from '../../../core/index.js';
 import { FINGERPRINT_SRC } from '../../../core/canvas-fingerprint.js';
 
@@ -98,7 +108,14 @@ export interface GenerateStep {
 }
 
 export type ParsedIncoming =
-  | { ok: true; kind: 'contract' | 'bundle'; contracts: unknown[] }
+  | {
+      ok: true;
+      kind: 'contract' | 'bundle';
+      contracts: unknown[];
+      /** The bundle's foreign token set (name + flat DTCG base + optional
+       *  modes/minted) — null when the paste rides the baked repo tokens. */
+      tokenSet: TokenSetPayload | null;
+    }
   | { ok: false; issue: PlainIssue };
 
 /** One per-channel style difference between the installed spec and the
@@ -210,10 +227,21 @@ export function createPluginEngine(data: PluginEngineData) {
           ),
         };
       }
-      return { ok: true, kind: 'bundle', contracts };
+      // Optional foreign token set: contracts + tokens in ONE JSON paste —
+      // the whole point is that JSON is the only thing a user ever pastes.
+      const rawTokenSet = (raw as { tokenSet?: unknown }).tokenSet;
+      let tokenSet: TokenSetPayload | null = null;
+      if (rawTokenSet !== undefined && rawTokenSet !== null) {
+        const parsedSet = parseTokenSet(rawTokenSet);
+        if (!parsedSet.ok) {
+          return { ok: false, issue: plain(`This bundle's token set does not parse — ${parsedSet.error}`) };
+        }
+        tokenSet = parsedSet.tokenSet;
+      }
+      return { ok: true, kind: 'bundle', contracts, tokenSet };
     }
     if (raw && typeof raw === 'object' && typeof (raw as { id?: unknown }).id === 'string') {
-      return { ok: true, kind: 'contract', contracts: [raw] };
+      return { ok: true, kind: 'contract', contracts: [raw], tokenSet: null };
     }
     return {
       ok: false,
@@ -290,13 +318,22 @@ export function createPluginEngine(data: PluginEngineData) {
   // stored marker, so drift between the two fails a pinned eval by name.
   // -------------------------------------------------------------------------
 
-  function specHashOf(contract: Contract, byId: Map<string, Contract>): string {
-    const compiled = engine.compileComponentData(contract, byId);
+  function specHashOf(contract: Contract, byId: Map<string, Contract>, eng: typeof engine = engine): string {
+    const compiled = eng.compileComponentData(contract, byId);
     const s = JSON.stringify(compiled);
     let h = 5381;
     for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
     return String(h);
   }
+
+  /** Engine over a bundle's foreign tokenSet — the SAME construction the CLI
+   *  applies for `figma <contracts> --tokens base,minted`, so the plugin's
+   *  bundle path and the script path compile IDENTICAL component data. The
+   *  token inventory is base + minted and NOTHING else — a contract ref
+   *  outside both keeps the emitter's own named "Cannot resolve token"
+   *  refusal. */
+  const foreignEngineFor = (tokenSet: TokenSetPayload): typeof engine =>
+    createFigmaEngine({ tokens: tokenSetTokenTrees(tokenSet), icons });
 
   // -------------------------------------------------------------------------
   // Generate from contract
@@ -310,6 +347,11 @@ export function createPluginEngine(data: PluginEngineData) {
      *  the set lands where the designer is looking. '' disables the guard
      *  (unshared drafts have no key). */
     fileKey?: string | null;
+    /** The bundle's foreign token set (parseIncoming* surfaces it). When
+     *  present, the tokens step syncs THAT set as its own named collection
+     *  and the bundle's contracts resolve against base + minted instead of
+     *  the baked repo tokens. */
+    tokenSet?: TokenSetPayload | null;
   }
 
   function planGenerate(rawContracts: unknown[], opts: PlanOptions = {}):
@@ -350,18 +392,37 @@ export function createPluginEngine(data: PluginEngineData) {
       );
     }
 
+    // Foreign token set (bundle-carried): its contracts compile against
+    // base + minted through an engine built EXACTLY the way the CLI builds
+    // one for `--tokens base,minted`; baked repo dependencies keep the
+    // baked engine (they were written against the repo tokens).
+    const tokenSet = opts.tokenSet ?? null;
+    const foreign = tokenSet ? foreignEngineFor(tokenSet) : null;
+
     const steps: GenerateStep[] = [];
     if (opts.withTokens !== false) {
-      steps.push({
-        kind: 'tokens',
-        title: 'Token variables (collections upserted — safe to re-run)',
-        code: engine.buildTokensScript(fileKey || null),
-      });
+      if (tokenSet) {
+        steps.push({
+          kind: 'tokens',
+          title: `Token variables — "${tokenSet.name}" collection from the bundle's token set (upserted — safe to re-run)`,
+          code: emitTokenSetScript(tokenSet, fileKey || null),
+        });
+      }
+      if (!tokenSet || deps.length > 0) {
+        // The repo collections: always for a repo paste; for a foreign
+        // bundle only when baked dependencies ride along (they bind these).
+        steps.push({
+          kind: 'tokens',
+          title: 'Token variables (collections upserted — safe to re-run)',
+          code: engine.buildTokensScript(fileKey || null),
+        });
+      }
     }
     for (const contract of ordered) {
+      const eng = foreign && incomingIds.has(contract.id) ? foreign : engine;
       let code: string;
       try {
-        code = engine.buildComponentScript(contract, byId, fileKey);
+        code = eng.buildComponentScript(contract, byId, fileKey);
       } catch (e) {
         // The emitter's referee refusal (named violations) or an
         // unresolvable token — both are the engine's own words.
@@ -453,8 +514,8 @@ return { inventory: rows };
   /** Expected property-name surface of a compiled contract (variant axes,
    *  boolean/text props, slot swap + visibility props) — the API the file's
    *  componentPropertyDefinitions should carry after a sync. */
-  function expectedProps(contract: Contract, byId: Map<string, Contract>): string[] {
-    const compiled = engine.compileComponentData(contract, byId);
+  function expectedProps(contract: Contract, byId: Map<string, Contract>, eng: typeof engine = engine): string[] {
+    const compiled = eng.compileComponentData(contract, byId);
     const names = new Set<string>();
     for (const bp of compiled.boolProps) names.add(bp.property);
     for (const tp of compiled.textProps) names.add(tp.property);
@@ -643,7 +704,15 @@ return { inventory: rows };
     }));
   }
 
-  function updatePlan(rawContracts: unknown[], inventory: InventoryRow[]): UpdatePlan {
+  function updatePlan(
+    rawContracts: unknown[],
+    inventory: InventoryRow[],
+    tokenSet: TokenSetPayload | null = null,
+  ): UpdatePlan {
+    // A bundle-carried foreign token set: every incoming contract compiles
+    // against base + minted (the same engine choice planGenerate makes).
+    const foreign = tokenSet ? foreignEngineFor(tokenSet) : null;
+    const eng = foreign ?? engine;
     const rows: UpdateRow[] = [];
     const incoming: Contract[] = [];
     const parsedByIndex = new Map<number, Contract>();
@@ -701,10 +770,10 @@ return { inventory: rows };
       let expected: string[] = [];
       let compiledIncoming: CompiledData | null = null;
       try {
-        compiledIncoming = engine.compileComponentData(contract, byId);
+        compiledIncoming = eng.compileComponentData(contract, byId);
         compiledVariants = compiledIncoming.variants.length + (compiledIncoming.stateVariants?.length ?? 0);
-        hash = specHashOf(contract, byId);
-        expected = expectedProps(contract, byId);
+        hash = specHashOf(contract, byId, eng);
+        expected = expectedProps(contract, byId, eng);
       } catch (e) {
         rows.push({
           contractId: contract.id,

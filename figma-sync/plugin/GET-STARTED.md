@@ -47,6 +47,44 @@ no re-import needed. The plugin header shows the running engine's build stamp
 That's it. The set appears, token-bound, styled, identity-marked. Run it again → the same
 bytes. Because it's a function of the contract, not a guess.
 
+## Foreign libraries: one JSON bundle (contracts + tokens)
+
+A foreign library (MUI, Tailwind, your own) doesn't use the repo's baked tokens — so its
+bundle **carries its own token set**. The CLI packages everything into one file:
+
+```bash
+npx @ds-contracts/cli figma bundle <contracts-dir> \
+  --tokens <base.dtcg.json[,minted.dtcg.json]> \
+  [--modes <light.json[,dark.json]>] --name <Collection> --out my-library.bundle.json
+```
+
+Paste that single JSON into the **Generate** tab. The plugin syncs the token set first —
+one variable collection named after the library, Light/Dark modes, Figma-native
+variable aliases for minted `{alias}` leaves — then builds every component set bound to
+it. **JSON is the only thing you ever paste**; there is no script step. Try it:
+`examples/mui/figma/mui.bundle.json` builds the MUI library (5 sets, 121 variants,
+982 variables) on a blank file in one paste.
+
+The bundle's `tokenSet` shape (the CLI writes it; refusals in the plugin restate it):
+
+```jsonc
+{
+  "type": "CONTRACTS-BUNDLE",
+  "version": 1,
+  "tokenSet": {
+    "name": "MUI",                                  // Figma variable-collection name
+    "base": { "<token>": { "$type": "…", "$value": "…" } },   // flat DTCG
+    "modes": { "light": { … }, "dark": { … } },     // optional per-mode overrides
+    "minted": { … }                                 // optional nested DTCG tree;
+  },                                                //   "{alias}" leaves alias base tokens
+  "contracts": [ … ]
+}
+```
+
+Contracts in such a bundle resolve their token refs against `base` + `minted` — a ref
+outside both is refused by name, exactly like a repo contract referencing an unknown
+repo token.
+
 ## The round-trip: canvas → contract (the other direction)
 
 1. Edit a generated set on the canvas (add a variant, tweak a prop).

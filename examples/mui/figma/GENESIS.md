@@ -4,13 +4,27 @@ Everything in this directory is **generated** (see `../PROVENANCE.md` for the
 chain). Nothing here was hand-drawn; the plugin executes these scripts
 verbatim — deterministic, no AI in the conversion.
 
-## One-paste path (recommended)
+## One-paste path (recommended): the JSON bundle
+
+1. Open a **blank Figma file**.
+2. Run the DS Contracts plugin → **Generate** tab.
+3. Paste the entire contents of `mui.bundle.json` → Generate.
+
+The bundle carries the 5 contracts **and** the MUI token set (base + light/
+dark modes + minted tree) in one JSON document — built by
+`ds-contracts figma bundle` (see `../PROVENANCE.md`). The plugin syncs the
+"MUI" collection first, then every set. The headless equivalence gate
+(`scripts/plugin-engine-check.mjs`, flow `foreign-token-bundle`) pins this
+paste against the compiled-script path below: same sets, same variants, same
+982 variables, same bound values.
+
+## Script path (debug / CI surface)
 
 1. Open a **blank Figma file**.
 2. Run the DS Contracts plugin → **Paste a script** tab.
 3. Paste the entire contents of `GENESIS-BATCH.figma.js` → Run.
 
-Result: a "MUI" variable collection (912 variables, Light/Dark modes — 61 of
+Result (either path): a "MUI" variable collection (982 variables, Light/Dark modes — 61 of
 them **real Figma aliases** into the palette, exactly the references MUI's own
 CSS declares) and 5 component sets on their own pages:
 

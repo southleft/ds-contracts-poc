@@ -92,6 +92,13 @@ function resetScratch() {
   cpSync(path.join(ROOT, 'examples', 'depth-composite'), path.join(SCRATCH, 'examples', 'depth-composite'), {
     recursive: true,
   });
+  // plugin-engine-check's foreign-token-bundle flow reads exactly these two
+  // MUI artifacts (the JSON-only bundle and the compiled-script path it must
+  // be equivalent to) — staged as files, not the whole examples/mui tree.
+  mkdirSync(path.join(SCRATCH, 'examples', 'mui', 'figma'), { recursive: true });
+  for (const f of ['mui.bundle.json', 'GENESIS-BATCH.figma.js']) {
+    cpSync(path.join(ROOT, 'examples', 'mui', 'figma', f), path.join(SCRATCH, 'examples', 'mui', 'figma', f));
+  }
   for (const file of ['package.json', 'tsconfig.json']) {
     cpSync(path.join(ROOT, file), path.join(SCRATCH, file));
   }
@@ -4258,6 +4265,13 @@ const cases: Case[] = [
         // ONE click, no paste, no repo (the designer's first trust moment).
         '✔ G9 sample library: the baked bundle (Card, Badge, Avatar, Button) parses, plans tokens-first, and builds in the mock',
         '✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)',
+        // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
+        // (contracts + tokenSet in ONE paste) through the real engine bundle
+        // path is EQUIVALENT to the compiled-script path (same sets/variants,
+        // 982 variables incl. 61 Figma-native aliases, contained-primary
+        // Button fill resolves #1976d2), and a contract ref outside
+        // base+minted refuses BY NAME.
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Button(63), Card(4), Chip(28), Slider(12), Switch(14) with 982 variables (61 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -5206,7 +5220,26 @@ const cases: Case[] = [
       if (!/mock-proven \(5 sets: Button\(63\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(14\); 982 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
-      console.log('mui-figma-genesis: 5/5 Emotion-runtime scripts referee+execute headless (121 variants); token sync 982 variables incl. 61 Figma-native source aliases; one-paste batch mock-proven');
+      // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
+      // byte-deterministic — two builds from the same inputs are identical —
+      // and the COMMITTED examples/mui/figma/mui.bundle.json is fresh
+      // (byte-equal to a rebuild). The engine-side equivalence gate lives in
+      // plugin-engine-check (pinned by plugin-engine-bundle).
+      const bundleArgs = [
+        'packages/cli/src/cli.ts', 'figma', 'bundle', 'examples/mui/contracts',
+        '--tokens', 'examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json',
+        '--modes', 'examples/mui/tokens/modes/mui.light.dtcg.json,examples/mui/tokens/modes/mui.dark.dtcg.json',
+        '--name', 'MUI',
+      ];
+      const b1 = run(TSX, [...bundleArgs, '--out', 'examples/mui/figma/bundle-run-a.json']);
+      const b2 = run(TSX, [...bundleArgs, '--out', 'examples/mui/figma/bundle-run-b.json']);
+      if (b1.status !== 0 || b2.status !== 0) throw new Error(`figma bundle failed:\n${(b1.out + b2.out).slice(0, 1200)}`);
+      const runA = readFileSync(path.join(SCRATCH, 'examples/mui/figma/bundle-run-a.json'), 'utf8');
+      const runB = readFileSync(path.join(SCRATCH, 'examples/mui/figma/bundle-run-b.json'), 'utf8');
+      if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
+      const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
+      if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
+      console.log('mui-figma-genesis: 5/5 Emotion-runtime scripts referee+execute headless (121 variants); token sync 982 variables incl. 61 Figma-native source aliases; one-paste batch mock-proven; figma bundle byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
@@ -5234,7 +5267,19 @@ const cases: Case[] = [
       if (!/mock-proven \(5 sets: Alert\(4\), Badge\(12\), Button\(25\), Card\(1\), ToggleSwitch\(3\); 344 variables\)/.test(batch.out)) {
         throw new Error(`tailwind genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
-      console.log('tailwind-figma-genesis: 5/5 Tailwind-v4 scripts referee+execute headless (45 variants); reader bound the library\'s own utility tokens; one-paste batch mock-proven — tier-1 four-method guarantee complete');
+      // FOREIGN-TOKEN BUNDLE freshness (single-mode variant — no modes dir):
+      // the committed tailwind.bundle.json is byte-equal to a fresh build.
+      const twBundle = run(TSX, [
+        'packages/cli/src/cli.ts', 'figma', 'bundle', 'examples/tailwind/contracts',
+        '--tokens', 'examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json',
+        '--name', 'Tailwind',
+        '--out', 'examples/tailwind/figma/bundle-run.json',
+      ]);
+      if (twBundle.status !== 0) throw new Error(`figma bundle (tailwind) failed:\n${twBundle.out.slice(0, 1200)}`);
+      const twRun = readFileSync(path.join(SCRATCH, 'examples/tailwind/figma/bundle-run.json'), 'utf8');
+      const twCommitted = readFileSync(path.join(ROOT, 'examples/tailwind/figma/tailwind.bundle.json'), 'utf8');
+      if (twRun !== twCommitted) throw new Error('committed examples/tailwind/figma/tailwind.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
+      console.log('tailwind-figma-genesis: 5/5 Tailwind-v4 scripts referee+execute headless (45 variants); reader bound the library\'s own utility tokens; one-paste batch mock-proven; committed tailwind.bundle.json fresh — tier-1 four-method guarantee complete');
     },
   },
 ];

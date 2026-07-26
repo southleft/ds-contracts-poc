@@ -57,6 +57,18 @@ export {
   type TokenTreeInput,
 } from './tokens.js';
 export { tokenCorpusFromJson, type TokenCorpus, type TokenCorpusInput, type DerivedTextStyle } from './token-corpus.js';
+// Foreign token sets — the CONTRACTS-BUNDLE tokenSet section (the literal-
+// set sync the MUI/Tailwind example scripts established, engine-owned).
+export {
+  compileTokenSetRows,
+  emitTokenSetScript,
+  oklchToRgba,
+  parseTokenSet,
+  tokenSetTokenTrees,
+  type CompiledTokenSet,
+  type TokenSetPayload,
+  type TokenSetRow,
+} from './token-set.js';
 export { inferDtcgType, wrapPlainTokensAsDtcg, type PlainWrapResult, type PlainWrapSkip } from './wrap-plain-tokens.js';
 // StyleX defineVars + light-dark() reader (Astryx round — BYO-token layer).
 export {
