@@ -403,6 +403,11 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
+      "leavesAdded": 933,
+      "divergent": []
+    },
     "rows": [
       {
         "key": "unchecked.enabled__default",

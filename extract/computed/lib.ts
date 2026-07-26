@@ -207,6 +207,89 @@ export const isFusable = (prop: string): boolean =>
 export const REPLAY_APPLY_EXCLUDE = new Set(['app-region', 'text-decoration', 'translate-x', 'translate-y']);
 
 // ---------------------------------------------------------------------------
+// GATE INVENTORY — fresh mint over the SHIPPED minted tree (task #21)
+// ---------------------------------------------------------------------------
+
+/** The result of laying a library's SHIPPED minted tree under a run's FRESH
+ *  mint. `added` are the shipped leaves the run no longer produces (the ones
+ *  a frozen reviewed layer still binds); `divergent` are leaves BOTH trees
+ *  carry with DIFFERENT values — fresh wins by rule, and each one is named
+ *  because a divergence is a candidate real regression, never a detail. */
+export interface MintedMerge {
+  tree: Record<string, unknown>;
+  added: string[];
+  divergent: Array<{ token: string; fresh: string; shipped: string }>;
+}
+
+/**
+ * PRECEDENCE, from first principles (docs/20-regate-drift.md):
+ *
+ *   FRESH FIRST, SHIPPED FALLBACK.
+ *
+ * The fresh mint is the run's own measured truth for every leaf it produces —
+ * scoring against a stale shipped value would measure the library as it was,
+ * not as it is. The shipped tree exists to fill the leaves the run NO LONGER
+ * mints, which a shipped contract's REVIEWED layer may still bind (that is
+ * the whole point of the static layer: fusion preserves reviewed bindings, so
+ * a recapture re-mints AROUND them and never re-creates them). Anything else
+ * would let a shipped value quietly overwrite a fresh measurement.
+ *
+ * The rule is only safe because collisions are REPORTED: a leaf whose fresh
+ * value differs from its shipped value is a fact about the library or the
+ * mint, and it rides `divergent` into the scorecard rather than being decided
+ * in silence.
+ *
+ * Pure (no fs) so the gate, the harness and the eval suite share one
+ * implementation. `fresh` is never mutated.
+ */
+export function mergeShippedMinted(
+  fresh: Record<string, unknown>,
+  shipped: Record<string, unknown>,
+): MintedMerge {
+  const tree = structuredClone(fresh);
+  const added: string[] = [];
+  const divergent: MintedMerge['divergent'] = [];
+  const isLeaf = (v: unknown): v is Record<string, unknown> =>
+    !!v && typeof v === 'object' && '$value' in (v as object);
+  const walk = (dst: Record<string, unknown>, src: Record<string, unknown>, prefix: string, inherited: string): void => {
+    const srcType = typeof src.$type === 'string' ? src.$type : inherited;
+    for (const [key, value] of Object.entries(src)) {
+      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
+      const node = value as Record<string, unknown>;
+      const dotted = prefix ? `${prefix}.${key}` : key;
+      const cur = dst[key];
+      if (isLeaf(node)) {
+        if (cur === undefined) {
+          const leaf = structuredClone(node);
+          if (typeof leaf.$type !== 'string' && srcType) leaf.$type = srcType;
+          dst[key] = leaf;
+          added.push(dotted);
+        } else if (isLeaf(cur)) {
+          if (String(cur.$value) !== String(node.$value)) {
+            divergent.push({ token: dotted, fresh: String(cur.$value), shipped: String(node.$value) });
+          }
+        } else {
+          // Shape divergence: shipped says leaf, fresh says group. Named, not
+          // merged — a group cannot be a value.
+          divergent.push({ token: dotted, fresh: '(group)', shipped: String(node.$value) });
+        }
+        continue;
+      }
+      if (cur === undefined) dst[key] = {};
+      else if (isLeaf(cur)) {
+        divergent.push({ token: dotted, fresh: String(cur.$value), shipped: '(group)' });
+        continue;
+      }
+      walk(dst[key] as Record<string, unknown>, node, dotted, srcType);
+    }
+  };
+  walk(tree, shipped, '', typeof shipped.$type === 'string' ? shipped.$type : '');
+  added.sort();
+  divergent.sort((a, b) => a.token.localeCompare(b.token));
+  return { tree, added, divergent };
+}
+
+// ---------------------------------------------------------------------------
 // Value kinds for minting (§5)
 // ---------------------------------------------------------------------------
 const rgbaRe = /^rgba\((\d+), (\d+), (\d+), ([\d.]+)\)$/;

@@ -159,6 +159,24 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+      "leavesAdded": 227,
+      "divergent": [
+        {
+          "token": "imported.alert.root.background-color.info",
+          "fresh": "#cefafe",
+          "shipped": "{color-cyan-100}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.alert.root.color.info",
+          "fresh": "#007595",
+          "shipped": "{color-cyan-700}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "info__default",

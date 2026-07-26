@@ -306,6 +306,30 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1469,
+      "divergent": [
+        {
+          "token": "imported.checkbox.root.color.checked",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.root.color.indeterminate",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.root.color.unchecked",
+          "fresh": "#00000099",
+          "shipped": "{palette-text-secondary}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "unchecked.enabled__default",

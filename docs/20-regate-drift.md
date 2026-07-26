@@ -6,6 +6,12 @@ offline re-fuse (`extract/computed/regate.ts`) produces different numbers for
 either fixed or left open with its cause located. Defect-first — the fixes
 are at the bottom because the findings matter more.*
 
+*Updated by the **GATE-INVENTORY FIX** (task #21): the fix this document
+proposed and deliberately did not execute has now LANDED. The gate's inventory
+is the token set the SHIPPED contract can actually see, the astryx three moved
+55.333 → 90.387, 96.296 → 100.000 and 95.391 → 98.724, and every unresolved ref
+across the 36 components is now zero. Start at "GATE-INVENTORY FIX" below.*
+
 *Updated by the **REPAIR WAVE** (task #19): 3 of the 4 open items are closed and
 the 4th is falsified — the astryx fix this document prescribed was executed and
 does not work, and the real cause is named. Only 5 of 36 components now differ
@@ -46,6 +52,125 @@ documented in `regate.ts`'s header; the third was NOT, and it was a defect:
    `decisions.json` ledger was therefore compared against a scorecard produced
    from a *different contract*. Fixed — the runner now mirrors run.ts exactly.
 
+## GATE-INVENTORY FIX (task #21) — the proposal landed
+
+The gate exists to measure the fidelity of the **shipped** truth. It was
+measuring it against an inventory the shipped contract could not see:
+`gate.ts` built both its token inventory AND its rendered custom properties
+from `cfg.tokens.dtcg` + the run's FRESH mint, never the library's SHIPPED
+minted tree. Every reviewed-layer ref the current mint no longer produces
+therefore rendered as an EMPTY custom property — black text, missing fills —
+and the percentage fell with no receipt saying why.
+
+**What moved.** All four sweeps re-run before and after; these are the only
+rows that changed, and none moved DOWN.
+
+| component | offline before → after | committed receipt before → after | unresolved refs | cellsCompared |
+|---|---|---|---|---|
+| astryx/Slider | 55.333 → **90.387** | 55.333 → **90.387** | 44 → **0** | 2944 (unchanged) |
+| astryx/Badge | 96.296 → **100.000** | 96.296 → **100.000** | 1 → **0** | 1512 (unchanged) |
+| astryx/Button | 95.391 → **98.724** | 95.391 → **98.724** | 22 → **0** | 11520 (unchanged) |
+| astryx/Card | 98.252 → **98.252** | 98.252 (not re-run) | 54 → **0** | 1144 (unchanged) |
+| the other 32 | **byte-identical numbers** | untouched | 0 → 0 | unchanged |
+
+Astryx Card is the counterfactual holding: 54 refs stopped rendering empty and
+**not one cell changed**, because those channels were already mismatched or
+uncompared. That is precisely why `unresolvedTokenRefs` is pinned SEPARATELY
+from `pctEqual` — presence of skew is not impact of skew, in either direction.
+
+The denominator never moved: no vocabulary changed, only what the page could
+resolve. And the pixels agree with the computed metric, which is the check
+that the gain is real rather than metric-shaped — astryx Badge's mean AA fell
+1.674 → 1.315 and Slider's 2.529 → 1.975 (Slider's *max* AA rose 4.782 →
+4.990: one row is marginally worse in pixels while the mean improves, named
+rather than averaged away). astryx Button's pixels are **identical** to three
+decimals — its 22 refs are `outline-color` / `row-rule-color` channels the
+gate stage does not paint, so the computed metric moved and the render did
+not. Both facts are the same fact stated at two instruments.
+
+**The precedence rule, from first principles: FRESH FIRST, SHIPPED FALLBACK.**
+The fresh mint is the run's own measured truth for every leaf it produces —
+letting a stale shipped value win would measure the library as it was, not as
+it is. The shipped tree exists to fill the leaves the run NO LONGER mints,
+which a shipped contract's reviewed layer may still bind (fusion preserves
+reviewed bindings by design, so a recapture re-mints *around* them and never
+re-creates them). The rule is only safe because collisions are REPORTED:
+`Scorecard.shippedMinted.divergent` names every leaf both trees carry with
+different values, so a leaf whose fresh value disagrees with the shipped one
+is a finding, never a silent choice.
+
+**Divergences found, all four libraries: 134 leaves across the 36 components,
+and 133 of them resolve to the identical value.** They are the alias passes'
+work — the shipped tree names an equal-valued semantic token where the fresh
+mint holds the literal (`#4e606f` vs `{color-text-secondary}` = `#4E606F`).
+The receipt carries `resolvedEqual` per row so a REAL disagreement cannot hide
+among them.
+
+*Colour notation is not colour, and the first cut of that comparator got it
+wrong: string equality called **34** of those pairs "different" — `#ffffff` vs
+`{color-white}` = `#fff`, `#00000099` vs `{palette-text-secondary}` =
+`rgba(0, 0, 0, 0.6)` — every one of them the same pixel. Colours are now
+canonicalized through the same `kindOf` the mint itself uses, so a false alarm
+of that size does not ride into the receipts.*
+
+**The one genuine divergence, named: polaris `imported.tag.button.left`.** The
+shipped tree carries a per-axis GROUP (`none: 0px`, `large: 53.9219px`); the
+current mint produces a UNIFORM leaf `53.9219px`. Fresh wins the path, so the
+shipped group's two children become unreachable in the merged tree — the one
+case where fresh-first has a cost, and the reason the row is reported rather
+than resolved in silence. It costs nothing today, and here is exactly why: the
+gate scores the RE-FUSED contract, which binds the new uniform spelling, while
+the SHIPPED contract binds `.none`/`.large` and resolves them against the
+SHIPPED tree (`shipped-contract-refs-resolve` passes). Both worlds are
+self-consistent; the drift is between them, and it is now on a receipt instead
+of in nobody's hands.
+
+**Two things had to be fixed alongside it, both named:**
+
+1. `mintedTokenCss` printed a DTCG alias verbatim
+   (`--imported-shared-color-0064e0: {color-accent};`) — invalid CSS, i.e. a
+   silent empty custom property wherever a shipped tree is rendered. It now
+   emits `var(--color-accent)`, which keeps the alias a reference so the
+   library's own stylesheet (and its modes) still decide the value. No
+   committed artifact contained such a declaration, so nothing regenerated;
+   the fresh mint emits literals only, which is why this never fired before a
+   shipped tree reached a renderer. **It is load-bearing, measured by
+   ablation**: with the shipped tree merged in but the aliases still printed
+   raw, astryx Slider scores **79.789**, not 90.387 — 10.6 of the 35 points
+   are that one line. (It also has a cost: `core/` is in the Figma plugin's
+   engine bundle, so `figma-sync/plugin/engine.receipt.json` needs
+   re-recording — see the report for this round.)
+2. The apply-time decision check in `run.ts` / `regate.ts` carried the comment
+   "the SAME inventory the gate renders with" and was true only by
+   coincidence. It is now true by construction — one exported function
+   (`gate.ts` `gateInventory`), three callers. Measured no-op today: no
+   committed ledger in any of the four libraries targets an `imported.*` ref
+   (`decision-ledger-value-check` pins that), so the widened inventory admits
+   nothing new — it removes a twin of the same defect before it can fire.
+
+**Config surface.** `tokens.minted` (repo-relative) on the capture config,
+added to all five configs. `loadConfig` REFUSES a declared-but-absent path by
+name, because the failure mode of this defect is precisely a silent fallback.
+The eval `gate-inventory-shipped-minted` pins that every config in
+`extract/computed/configs/` names an existing tree, that the gate inventory
+resolves the 44 astryx Slider refs the fresh mint alone cannot, and — the
+falsification — that withholding the shipped tree brings all 44 back.
+
+**Receipts re-stated, not drifted.** The astryx three were re-run through the
+REAL harness (pinned `@astryxdesign/core@0.1.6` sandbox, double-run
+byte-identity on `scorecard.json` and `numbers.json`), so the committed
+receipts carry the corrected measurement and agree with the offline instrument
+to three decimals. `captured-truth.json`, `enriched.contract.json` and
+`resolved.contract.json` came back BYTE-IDENTICAL — the recapture changed the
+measurement, not the artifact.
+
+**Left open, by name.** astryx **Card** and **Switch** were not re-run (out of
+the named scope, and the repair wave did not recapture them either), so their
+committed `scorecard.json` still records the pre-fix `unresolvedTokenRefs` (54
+and 0). Card's `pctEqual` is proven unmoved by the offline instrument, so a
+recapture there is cosmetic — but the 54 in that committed file is a stale
+number and this is the sentence that says so.
+
 ## Classification
 
 | component | committed → offline | class | cause, located |
@@ -58,10 +183,10 @@ documented in `regate.ts`'s header; the third was NOT, and it was a defect:
 | polaris/Tag | 82.056 → 80.919 | (c) vocabulary change | same class, `acb0342`. cells 8064 → 7353. |
 | polaris/TextField | 81.862 → 81.857 | (c) vocabulary change | same class, `acb0342`. cells 44416 → 40832; % within 0.005. |
 | polaris/Badge | 97.327 → 95.159 → **97.327** | **(c) FOREIGN ledger — FIXED (repair wave)** | not "polluted"; the file was the **astryx** Badge ledger, whole. Removed; 2 unresolved refs → 0, committed number reproduced EXACTLY. See below. |
-| astryx/Slider | 87.908 → **55.299** | (c) INSTRUMENT SCOPE (was misnamed "contract/mint skew") | 44 unresolved refs, **all 44 present in the shipped minted tree**. Recaptured — the number is now the honest 55.333 and the receipt agrees with the instrument. See below. |
-| astryx/Button | 98.099 → 95.391 | (c) INSTRUMENT SCOPE | 22 unresolved refs, all 22 in the shipped minted tree. Recaptured → committed 95.391. |
-| astryx/Badge | 100.000 → 96.296 | (c) INSTRUMENT SCOPE | 1 unresolved ref, present in the shipped minted tree. Recaptured → committed 96.296; the 100.000 was unreproducible by any current run. |
-| astryx/Card | 98.252 → **98.252** | — (counterfactual) | EXACT *despite* 54 unresolved refs — the affected channels are already mismatched or uncompared. Skew presence ≠ skew impact, which is why `unresolvedTokenRefs` is pinned SEPARATELY from `pctEqual`. |
+| astryx/Slider | 87.908 → 55.299 → **90.387** | (c) INSTRUMENT SCOPE — **FIXED (task #21)** | 44 unresolved refs, **all 44 present in the shipped minted tree**. The gate now carries that tree: 0 unresolved, 55.333 → 90.387, harness receipt re-run to match. |
+| astryx/Button | 98.099 → 95.391 → **98.724** | (c) INSTRUMENT SCOPE — **FIXED (task #21)** | 22 unresolved refs, all 22 in the shipped minted tree → 0. Harness receipt re-run to 98.724. |
+| astryx/Badge | 100.000 → 96.296 → **100.000** | (c) INSTRUMENT SCOPE — **FIXED (task #21)** | 1 unresolved ref, present in the shipped minted tree → 0. Back to 100.000 by measurement — the "unreproducible" number was the pre-defect one, and the defect is what made it unreproducible. |
+| astryx/Card | 98.252 → **98.252** | — (counterfactual, still exact) | EXACT *despite* 54 unresolved refs, and STILL exact now that all 54 resolve — the affected channels are already mismatched or uncompared. Skew presence ≠ skew impact, which is why `unresolvedTokenRefs` is pinned SEPARATELY from `pctEqual`. |
 | mui/Menu | 93.434 → **94.152** | (c) vocabulary change | MOLECULE LIVE-DEFECT ROUND (round 6). The portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root: the demotion drops 4 non-painting elements (the layer, the INVISIBLE `MuiBackdrop`, two classless focus-trap sentinels) and promotes the PAPER. `cellsCompared` 198 → 171; the surviving parts are the ones that draw, and they score better. Re-baselined with the cause in `regate-baseline.json`. |
 | mui/Dialog | 95.604 → **95.402** | (c) vocabulary change | Same round: the two classless focus-trap sentinels are dropped from the captured anatomy (they draw nothing, contain nothing, and lowered to full-bleed invisible frames over the component). `cellsCompared` 455 → 435. Those sentinel rows matched nearly perfectly, so removing them LOWERS the surviving percentage while the canvas strictly improves — the clearest case yet for pinning the denominator separately. |
 | **22 others** | **exact** | — | all of mui except Chip/Tooltip/Menu/Dialog, all of tailwind, polaris Avatar/Banner/ProgressBar/RadioButton/Spinner/Text/Thumbnail. |
@@ -116,13 +241,13 @@ The reason it cannot work, and the actual cause:
   minted, so it never needed to be" — is false for any contract whose reviewed
   layer carries minted refs from an earlier round.
 
-**Proposed fix (NOT executed here — it changes the measured meaning for all four
-libraries and rewrites committed harness receipts, which is an owner call):**
-give the gate the shipped minted tree as well as the fresh one, fresh winning on
-collision, for BOTH `tokenInventoryFromJson` and `mintedTokenCss`. Expected to
-take astryx's three rows to zero unresolved refs and to be a no-op for
-polaris/mui/tailwind (they already measure zero) — which is the falsification
-test the next wave should run first.
+**Proposed fix — EXECUTED (task #21), and the falsification test it named was
+run first.** Give the gate the shipped minted tree as well as the fresh one,
+fresh winning on collision, for BOTH `tokenInventoryFromJson` and
+`mintedTokenCss`. The prediction held on both halves: astryx's rows went to
+zero unresolved refs (44/22/1/54 → 0), and polaris/mui/tailwind did not move a
+single digit across 32 components. See "GATE-INVENTORY FIX" at the top for the
+numbers, the precedence rule, and what had to be fixed alongside it.
 
 What the recapture DID buy, and why it was kept: the committed astryx receipts
 were stale. `astryx/Badge` claimed **100.000**, a number no current engine can
@@ -130,7 +255,12 @@ produce. The three components now carry numbers a real harness run actually
 measured (96.296 / 95.391 / 55.333), each with double-run byte-identity, so
 committed and offline agree and the rows' `gapCause` is empty for the first
 time. Card and Switch were NOT recaptured (out of the named scope) and keep
-their existing gaps. `promote-floor` was deliberately NOT re-run for astryx: the
+their existing gaps. *(Task #21 superseded those three numbers with
+100.000 / 98.724 / 90.387 — same harness, same pinned sandbox, same
+double-run byte-identity, this time with the inventory defect fixed. The
+sentence above stays because it is what "Badge's 100.000 is unreproducible"
+looked like BEFORE the cause was found: the number was real, and the defect
+was what made it unreachable.)* `promote-floor` was deliberately NOT re-run for astryx: the
 shipped contracts already resolve every ref, so regenerating them would churn
 shipped artifacts and the bundle pins without closing anything.
 
@@ -371,6 +501,14 @@ round compares like with like:
 The repair wave re-recorded the baseline. Rows that went exact carry
 `gapCause: ""`; the astryx three carry a gapCause naming the INSTRUMENT cause
 rather than the disproven skew story.
+
+**Task #21 re-recorded it again**, and this time the astryx receipts were
+re-run by a REAL harness (the only instrument allowed to rewrite
+`scorecard.json` / `numbers.json`, double-run byte-identity included), so
+offline and committed agree to three decimals for all three. Their `gapCause`
+is now `repaired: gate now measures shipped inventory …`; astryx Card's names
+the one leftover — its committed receipt still records the pre-fix ref count
+because it was deliberately not re-run.
 
 ## Fixed this round
 

@@ -141,6 +141,11 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
+      "leavesAdded": 978,
+      "divergent": []
+    },
     "rows": [
       {
         "key": "extraSmall__default",

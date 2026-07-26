@@ -469,6 +469,18 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
+      "leavesAdded": 946,
+      "divergent": [
+        {
+          "token": "imported.tag.button.left",
+          "fresh": "53.9219px",
+          "shipped": "(group)",
+          "resolvedEqual": false
+        }
+      ]
+    },
     "rows": [
       {
         "key": "none.off.off.off.enabled__default",

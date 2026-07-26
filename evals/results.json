@@ -1,6 +1,6 @@
 {
-  "passed": 160,
-  "total": 160,
+  "passed": 161,
+  "total": 161,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -789,6 +789,11 @@
     },
     {
       "id": "shipped-contract-refs-resolve",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "gate-inventory-shipped-minted",
       "claim": "C2-refusal",
       "pass": true
     },

@@ -372,6 +372,84 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1238,
+      "divergent": [
+        {
+          "token": "imported.switch.buttonbase-root.color.error.checked",
+          "fresh": "#d32f2f",
+          "shipped": "{palette-error-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.buttonbase-root.color.info.checked",
+          "fresh": "#0288d1",
+          "shipped": "{palette-info-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.buttonbase-root.color.primary.checked",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.buttonbase-root.color.secondary.checked",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.buttonbase-root.color.success.checked",
+          "fresh": "#2e7d32",
+          "shipped": "{palette-success-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.buttonbase-root.color.warning.checked",
+          "fresh": "#ed6c02",
+          "shipped": "{palette-warning-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-track.background-color.error.checked",
+          "fresh": "#d32f2f",
+          "shipped": "{palette-error-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-track.background-color.info.checked",
+          "fresh": "#0288d1",
+          "shipped": "{palette-info-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-track.background-color.primary.checked",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-track.background-color.secondary.checked",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-track.background-color.success.checked",
+          "fresh": "#2e7d32",
+          "shipped": "{palette-success-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-track.background-color.warning.checked",
+          "fresh": "#ed6c02",
+          "shipped": "{palette-warning-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "primary.small.unchecked.enabled__default",

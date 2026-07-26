@@ -36,7 +36,7 @@ import path from 'node:path';
 import { chromium, type Browser } from 'playwright-core';
 import { chromiumExecutable } from '../figma/visual-parity/render.js';
 import { mintTokens } from '../../core/mint-tokens.js';
-import { flattenTokens, tokenInventoryFromJson } from '../../core/tokens.js';
+import { flattenTokens } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import { loadConfig, propSpaceFor, INTERACTIONS, type SweepResult } from './capture.js';
@@ -53,7 +53,7 @@ import {
 } from './fuse.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import { normalizeValue } from './lib.js';
-import { runGate } from './gate.js';
+import { gateInventory, runGate } from './gate.js';
 import { promoteAnatomy } from './anatomy.js';
 import { kebab } from '../types.js';
 
@@ -314,13 +314,10 @@ async function main() {
     if (existsSync(decisionsPath)) {
       const decisions = JSON.parse(readFileSync(decisionsPath, 'utf8')) as AckedDecision[];
       const resolved = structuredClone(enriched) as Contract;
-      // Apply-time value check: the SAME inventory the gate renders with
-      // (cfg.tokens.dtcg + the minted tree), so an acked resolution that
-      // cannot resolve is refused by name instead of rendering empty.
-      const decisionInventory = tokenInventoryFromJson([
-        ...cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(REPO, p), 'utf8')) as Record<string, unknown>),
-        mergedTree,
-      ]);
+      // Apply-time value check: the SAME inventory the gate renders with —
+      // literally the same function (gate.ts gateInventory), mirroring
+      // run.ts exactly. See the note there.
+      const { inventory: decisionInventory } = gateInventory(REPO, cfg, mergedTree);
       const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
       decisionNotes.push(...applied.map((a) => `applied: ${a}`), ...skipped.map((sk) => `SKIPPED: ${sk}`));
       ContractSchema.parse(resolved);

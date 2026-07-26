@@ -16,7 +16,8 @@
   },
   "tokens": {
     "dtcg": ["examples/polaris/tokens/polaris-light.dtcg.json"],
-    "css": "examples/polaris/generated/html/polaris-tokens.css"
+    "css": "examples/polaris/generated/html/polaris-tokens.css",
+    "minted": "examples/polaris/tokens/polaris-minted.dtcg.json"
   },
   "browser": { "viewport": { "width": 900, "height": 1000 }, "deviceScaleFactor": 1, "colorScheme": "light" },
   "stage": { "width": 320, "height": 96, "padding": 16 },

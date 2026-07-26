@@ -126,6 +126,18 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1486,
+      "divergent": [
+        {
+          "token": "imported.card.root.background-color",
+          "fresh": "#ffffff",
+          "shipped": "{palette-background-paper}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "0__default",

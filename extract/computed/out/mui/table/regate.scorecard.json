@@ -1027,6 +1027,11 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1302,
+      "divergent": []
+    },
     "rows": [
       {
         "key": "small__default",

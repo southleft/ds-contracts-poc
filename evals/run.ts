@@ -52,7 +52,7 @@ import {
   promoteMultiRootAnatomy,
 } from '../extract/computed/anatomy.js';
 import type { Capture as DepthCapture, CapturedNode as DepthNode } from '../extract/computed/lib.js';
-import { decomposeTranslate, isAbsurdRadius } from '../extract/computed/lib.js';
+import { decomposeTranslate, isAbsurdRadius, mergeShippedMinted } from '../extract/computed/lib.js';
 import { kebab as depthKebab } from '../extract/types.js';
 // POLARIS/ASTRYX REPAIR WAVE pins (both Chromium-free — the first replays the
 // COMMITTED capture through fusion, the second is pure JSON).
@@ -3664,6 +3664,16 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       cpSync(path.join(ROOT, 'examples', 'mui', 'contracts-seed'), path.join(SCRATCH, 'examples', 'mui', 'contracts-seed'), {
         recursive: true,
       });
+      // …and its SHIPPED minted tree (task #21): loadConfig refuses a config
+      // whose declared `tokens.minted` is missing, because a silent fallback
+      // to fresh-mint-only inventory is the defect that fix closed. Same
+      // scratch-hermeticity discipline — stage the file, don't weaken the
+      // referee.
+      mkdirSync(path.join(SCRATCH, 'examples', 'mui', 'tokens'), { recursive: true });
+      cpSync(
+        path.join(ROOT, 'examples', 'mui', 'tokens', 'mui-minted.dtcg.json'),
+        path.join(SCRATCH, 'examples', 'mui', 'tokens', 'mui-minted.dtcg.json'),
+      );
       const probe = run(TSX, ['-e', `
         import fs from 'node:fs';
         import { loadConfig, walkChildSpecs } from './extract/computed/capture.ts';
@@ -6298,6 +6308,97 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error('planted cross-library token ref was NOT refused — the ref check is decorative');
       }
       console.log(`shipped-contract-refs-resolve: ${contracts} shipped contracts across 4 libraries resolve EVERY token ref against their own library trees (planted cross-library ref refused by name); the offline-gate number itself is pinned on demand by \`npm run extract:computed:drift\``);
+    },
+  },
+  {
+    // GATE-INVENTORY FIX (task #21, docs/20-regate-drift.md).
+    //
+    // `shipped-contract-refs-resolve` (above) proves a shipped contract's
+    // refs resolve against its LIBRARY's trees. That pin passed all the way
+    // through the round in which astryx Slider measured 55.299 — because the
+    // FIDELITY GATE was not using the library's trees. It built its
+    // inventory (and its rendered custom properties) from `cfg.tokens.dtcg`
+    // + the run's FRESH mint only, never the SHIPPED minted tree, so every
+    // reviewed-layer ref the current mint no longer produces rendered as an
+    // EMPTY custom property and the score fell with no receipt saying why.
+    //
+    // This is the pin for that class, stated so it cannot pass vacuously:
+    // a ref that resolves in the shipped tree but is ABSENT from the fresh
+    // mint must NOT measure as unresolved. It runs on the committed astryx
+    // facts (the fresh mint from the harness's own extension block, the
+    // gated contract the harness scored) and falsifies itself twice — with
+    // the shipped tree withheld the 44 refs must come back, and a planted
+    // value divergence must be REPORTED rather than silently resolved.
+    id: 'gate-inventory-shipped-minted',
+    claim: 'C2-refusal',
+    run: () => {
+      // 1. Every capture config NAMES its library's shipped minted tree.
+      //    An absent declaration is exactly how the defect stayed invisible.
+      const cfgDir = path.join(ROOT, 'extract/computed/configs');
+      const configs = readdirSync(cfgDir).filter((f) => f.endsWith('.json'));
+      const undeclared: string[] = [];
+      for (const f of configs) {
+        const cfg = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { tokens?: { minted?: string } };
+        if (!cfg.tokens?.minted) undeclared.push(`${f}: no tokens.minted — the gate would score against fresh-mint-only inventory`);
+        else if (!existsSync(path.join(ROOT, cfg.tokens.minted))) undeclared.push(`${f}: tokens.minted does not exist (${cfg.tokens.minted})`);
+      }
+      if (undeclared.length > 0) throw new Error(`${undeclared.length} capture config(s) cannot see their shipped minted tree:\n  - ${undeclared.join('\n  - ')}`);
+
+      // …and loadConfig REFUSES a declared-but-absent tree BY NAME, so the
+      // fallback can never happen silently.
+      const bad = JSON.parse(readFileSync(path.join(cfgDir, 'astryx.json'), 'utf8')) as Record<string, unknown>;
+      (bad.tokens as Record<string, unknown>).minted = 'examples/astryx/tokens/does-not-exist.dtcg.json';
+      mkdirSync(path.join(ROOT, '.eval-tmp'), { recursive: true });
+      const badPath = path.join(ROOT, '.eval-tmp', 'gate-inventory.json');
+      writeFileSync(badPath, JSON.stringify(bad));
+      let refusal = '';
+      try { loadCaptureConfig(ROOT, badPath); } catch (e) { refusal = String((e as Error).message); }
+      rmSync(path.join(ROOT, '.eval-tmp'), { recursive: true, force: true });
+      if (!refusal.includes('tokens.minted not found')) {
+        throw new Error(`loadConfig ACCEPTED a config whose declared minted tree is missing — the gate would fall back to fresh-mint-only inventory in silence (got: ${refusal || 'no refusal'})`);
+      }
+
+      // 2. THE CLASS. astryx Slider's gated contract binds 44 refs that live
+      //    in the shipped tree and NOT in the run's own fresh mint.
+      const out = path.join(ROOT, 'extract/computed/out/astryx/slider');
+      const fresh = (JSON.parse(readFileSync(path.join(out, 'enriched.extension.json'), 'utf8')) as { mintedTokens: Record<string, unknown> }).mintedTokens;
+      const gated = JSON.parse(readFileSync(path.join(out, 'resolved.contract.json'), 'utf8'));
+      const base = JSON.parse(readFileSync(path.join(ROOT, 'examples/astryx/tokens/astryx.dtcg.json'), 'utf8')) as Record<string, unknown>;
+      const shipped = JSON.parse(readFileSync(path.join(ROOT, 'examples/astryx/tokens/astryx-minted.dtcg.json'), 'utf8')) as Record<string, unknown>;
+
+      const unresolved = (trees: Array<Record<string, unknown>>): string[] => {
+        const errors: string[] = [];
+        coreGenerateCss(gated, tokenInventoryFromJson(trees), errors);
+        return [...new Set(errors.filter((e) => e.includes('does not exist in tokens/')))];
+      };
+      const merged = mergeShippedMinted(fresh, shipped);
+      const withShipped = unresolved([base, merged.tree]);
+      if (withShipped.length > 0) {
+        throw new Error(`${withShipped.length} ref(s) of the gated astryx Slider contract still resolve to NOTHING against base + fresh mint + SHIPPED minted tree — they would render as empty custom properties:\n  - ${withShipped.slice(0, 5).join('\n  - ')}`);
+      }
+      // FALSIFIABLE (the defect itself): withhold the shipped tree and the
+      // same contract, the same referee, must report the refs again.
+      const withoutShipped = unresolved([base, fresh]);
+      if (withoutShipped.length === 0) {
+        throw new Error('withholding the shipped minted tree produced ZERO unresolved refs — this pin is decorative (the fixture no longer carries a reviewed-layer ref the fresh mint lacks)');
+      }
+
+      // 3. PRECEDENCE, both halves. Fresh wins a collision (the run's own
+      //    measurement), and a leaf whose value actually disagrees is
+      //    REPORTED rather than silently chosen.
+      const freshProbe = { imported: { probe: { c: { $value: '#111111', $type: 'color' } } } };
+      const shippedProbe = { imported: { probe: { c: { $value: '#222222', $type: 'color' }, only: { $value: '4px', $type: 'dimension' } } } };
+      const probe = mergeShippedMinted(freshProbe, shippedProbe);
+      const kept = ((probe.tree.imported as Record<string, Record<string, Record<string, unknown>>>).probe.c.$value);
+      if (kept !== '#111111') throw new Error(`shipped value overwrote the FRESH mint on collision (${String(kept)}) — precedence is fresh-first, shipped-fallback`);
+      if (!probe.added.includes('imported.probe.only')) throw new Error('a shipped-only leaf was NOT added to the inventory — the fallback half of the rule does nothing');
+      if (!probe.divergent.some((d) => d.token === 'imported.probe.c' && d.fresh === '#111111' && d.shipped === '#222222')) {
+        throw new Error('a fresh/shipped VALUE divergence was chosen SILENTLY — a real library regression looks exactly like this row');
+      }
+      if (structuredClone(freshProbe).imported.probe.c.$value !== '#111111' || 'only' in (freshProbe.imported.probe as object)) {
+        throw new Error('mergeShippedMinted MUTATED the caller‘s fresh tree — the harness writes that tree into the extension block');
+      }
+      console.log(`gate-inventory-shipped-minted: ${configs.length} capture configs name their shipped minted tree (absent path refused by name at load); the gate inventory = base + fresh mint + shipped tree resolves all ${withoutShipped.length} astryx Slider refs the FRESH MINT ALONE cannot (the 55.299 defect, falsified by withholding the tree); precedence fresh-first/shipped-fallback with value divergences named`);
     },
   },
   {

@@ -133,6 +133,96 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+      "leavesAdded": 140,
+      "divergent": [
+        {
+          "token": "imported.button.root.background-color.alternative",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-active.dark",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-active.default",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-active.green",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-active.red",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-hover.dark",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-hover.default",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-hover.green",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color-state-hover.red",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color.dark",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color.default",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color.green",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.color.red",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.font-weight",
+          "fresh": "500",
+          "shipped": "{font-weight-medium}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "default.xs.enabled__default",

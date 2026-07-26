@@ -149,6 +149,18 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+      "leavesAdded": 245,
+      "divergent": [
+        {
+          "token": "imported.toggle-switch.label.font-weight",
+          "fresh": "500",
+          "shipped": "{font-weight-medium}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "sm.unchecked__default",

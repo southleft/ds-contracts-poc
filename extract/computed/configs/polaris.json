@@ -18,7 +18,8 @@
     "dtcg": [
       "examples/polaris/tokens/polaris-light.dtcg.json"
     ],
-    "css": "examples/polaris/generated/html/polaris-tokens.css"
+    "css": "examples/polaris/generated/html/polaris-tokens.css",
+    "minted": "examples/polaris/tokens/polaris-minted.dtcg.json"
   },
   "icons": "examples/polaris/assets/icons",
   "browser": {

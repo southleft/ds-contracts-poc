@@ -420,6 +420,11 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1454,
+      "divergent": []
+    },
     "rows": [
       {
         "key": "__default",

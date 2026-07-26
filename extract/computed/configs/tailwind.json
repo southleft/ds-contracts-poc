@@ -16,7 +16,8 @@
   },
   "tokens": {
     "dtcg": ["examples/tailwind/tokens/tailwind.dtcg.json"],
-    "css": "examples/tailwind/tokens/tailwind.vars.css"
+    "css": "examples/tailwind/tokens/tailwind.vars.css",
+    "minted": "examples/tailwind/tokens/tailwind-minted.dtcg.json"
   },
   "browser": {
     "viewport": { "width": 900, "height": 1000 },

@@ -121,48 +121,37 @@
     ],
     "namedLosses": [],
     "unresolvedTokenRefs": {
-      "count": 54,
-      "refs": [
-        "astryx.card: anatomy.root.tokens.font-weight references token \"{imported.card.root.font-weight}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokens.line-height references token \"{imported.card.root.line-height}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.blue.border-bottom-width references token \"{imported.card.root.border-bottom-width.blue}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.blue.border-left-width references token \"{imported.card.root.border-left-width.blue}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.blue.border-right-width references token \"{imported.card.root.border-right-width.blue}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.blue.border-top-width references token \"{imported.card.root.border-top-width.blue}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.cyan.border-bottom-width references token \"{imported.card.root.border-bottom-width.cyan}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.cyan.border-left-width references token \"{imported.card.root.border-left-width.cyan}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.cyan.border-right-width references token \"{imported.card.root.border-right-width.cyan}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.cyan.border-top-width references token \"{imported.card.root.border-top-width.cyan}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.default.border-bottom-width references token \"{imported.card.root.border-bottom-width.default}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.default.border-left-width references token \"{imported.card.root.border-left-width.default}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.default.border-right-width references token \"{imported.card.root.border-right-width.default}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.default.border-top-width references token \"{imported.card.root.border-top-width.default}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.gray.border-bottom-width references token \"{imported.card.root.border-bottom-width.gray}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.gray.border-left-width references token \"{imported.card.root.border-left-width.gray}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.gray.border-right-width references token \"{imported.card.root.border-right-width.gray}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.gray.border-top-width references token \"{imported.card.root.border-top-width.gray}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.green.border-bottom-width references token \"{imported.card.root.border-bottom-width.green}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.green.border-left-width references token \"{imported.card.root.border-left-width.green}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.green.border-right-width references token \"{imported.card.root.border-right-width.green}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.green.border-top-width references token \"{imported.card.root.border-top-width.green}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.muted.border-bottom-width references token \"{imported.card.root.border-bottom-width.muted}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.muted.border-left-width references token \"{imported.card.root.border-left-width.muted}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.muted.border-right-width references token \"{imported.card.root.border-right-width.muted}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.muted.border-top-width references token \"{imported.card.root.border-top-width.muted}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.orange.border-bottom-width references token \"{imported.card.root.border-bottom-width.orange}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.orange.border-left-width references token \"{imported.card.root.border-left-width.orange}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.orange.border-right-width references token \"{imported.card.root.border-right-width.orange}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.orange.border-top-width references token \"{imported.card.root.border-top-width.orange}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.pink.border-bottom-width references token \"{imported.card.root.border-bottom-width.pink}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.pink.border-left-width references token \"{imported.card.root.border-left-width.pink}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.pink.border-right-width references token \"{imported.card.root.border-right-width.pink}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.pink.border-top-width references token \"{imported.card.root.border-top-width.pink}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.purple.border-bottom-width references token \"{imported.card.root.border-bottom-width.purple}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.purple.border-left-width references token \"{imported.card.root.border-left-width.purple}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.purple.border-right-width references token \"{imported.card.root.border-right-width.purple}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.purple.border-top-width references token \"{imported.card.root.border-top-width.purple}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.red.border-bottom-width references token \"{imported.card.root.border-bottom-width.red}\" which does not exist in tokens/",
-        "astryx.card: anatomy.root.tokensByProp.red.border-left-width references token \"{imported.card.root.border-left-width.red}\" which does not exist in tokens/"
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+      "leavesAdded": 185,
+      "divergent": [
+        {
+          "token": "imported.card.root.border-bottom-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.border-left-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.border-right-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.border-top-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": true
+        }
       ]
     },
     "rows": [

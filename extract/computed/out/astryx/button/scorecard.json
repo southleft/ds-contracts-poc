@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 11520,
-    "cellsEqual": 10989,
-    "pctEqual": 95.390625,
+    "cellsEqual": 11373,
+    "pctEqual": 98.72395833333333,
     "rowsFullyEqual": 0,
     "rows": 96
   },
@@ -37,70 +37,54 @@
       "key": "destructive.lg.no-isDisabled__focus-visible",
       "pctAA": 2.568359375,
       "pctExact": 3.984375,
-      "channelsMismatched": 6
+      "channelsMismatched": 2
     },
     {
       "key": "destructive.md.no-isDisabled__focus-visible",
       "pctAA": 2.5162760416666665,
       "pctExact": 3.9322916666666665,
-      "channelsMismatched": 6
+      "channelsMismatched": 2
     },
     {
       "key": "destructive.sm.no-isDisabled__focus-visible",
       "pctAA": 2.4641927083333335,
       "pctExact": 3.8802083333333335,
-      "channelsMismatched": 6
+      "channelsMismatched": 2
     },
     {
       "key": "primary.lg.no-isDisabled__focus-visible",
       "pctAA": 1.8294270833333333,
       "pctExact": 3.1380208333333335,
-      "channelsMismatched": 5
+      "channelsMismatched": 1
     },
     {
       "key": "ghost.lg.no-isDisabled__focus-visible",
       "pctAA": 1.826171875,
       "pctExact": 12.783203125,
-      "channelsMismatched": 6
+      "channelsMismatched": 2
     },
     {
       "key": "secondary.lg.no-isDisabled__focus-visible",
       "pctAA": 1.8196614583333333,
       "pctExact": 3.14453125,
-      "channelsMismatched": 5
+      "channelsMismatched": 1
     },
     {
       "key": "primary.md.no-isDisabled__focus-visible",
       "pctAA": 1.8033854166666667,
       "pctExact": 3.1119791666666665,
-      "channelsMismatched": 5
+      "channelsMismatched": 1
     },
     {
       "key": "ghost.md.no-isDisabled__focus-visible",
       "pctAA": 1.8001302083333333,
       "pctExact": 11.455078125,
-      "channelsMismatched": 6
+      "channelsMismatched": 2
     }
   ],
   "topMismatchedChannels": [
     [
-      "root.line-height",
-      96
-    ],
-    [
-      "part-0.line-height",
-      96
-    ],
-    [
-      "label.line-height",
-      96
-    ],
-    [
       "part-1.clip",
-      96
-    ],
-    [
-      "part-1.line-height",
       96
     ],
     [
@@ -123,163 +107,188 @@
     "code-only[active]: root.transform — value shape outside mintable kinds and outside the declared vocabulary"
   ],
   "unresolvedTokenRefs": {
-    "count": 22,
-    "refs": [
-      "astryx.button: anatomy.label.tokens.font-size references token \"{imported.shared.size-14}\" which does not exist in tokens/",
-      "astryx.button: anatomy.label.tokens.font-weight references token \"{imported.shared.num-500}\" which does not exist in tokens/",
-      "astryx.button: anatomy.label.tokens.line-height references token \"{imported.shared.size-20-0004}\" which does not exist in tokens/",
-      "astryx.button: anatomy.label.tokensByProp.destructive.color references token \"{imported.button.label.color.destructive}\" which does not exist in tokens/",
-      "astryx.button: anatomy.label.tokensByProp.ghost.color references token \"{imported.button.label.color.ghost}\" which does not exist in tokens/",
-      "astryx.button: anatomy.label.tokensByProp.primary.color references token \"{imported.button.label.color.primary}\" which does not exist in tokens/",
-      "astryx.button: anatomy.label.tokensByProp.secondary.color references token \"{imported.button.label.color.secondary}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokens.font-size references token \"{imported.shared.size-14}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokens.font-weight references token \"{imported.shared.num-500}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokens.line-height references token \"{imported.shared.size-20-0004}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokensByProp.destructive.color references token \"{imported.button.part-0.color.destructive}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokensByProp.ghost.color references token \"{imported.button.part-0.color.ghost}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokensByProp.primary.color references token \"{imported.button.part-0.color.primary}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-0.tokensByProp.secondary.color references token \"{imported.button.part-0.color.secondary}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokens.font-size references token \"{imported.shared.size-14}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokens.font-weight references token \"{imported.shared.num-500}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokens.line-height references token \"{imported.shared.size-20-0004}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokensByProp.destructive.color references token \"{imported.button.part-1.color.destructive}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokensByProp.ghost.color references token \"{imported.button.part-1.color.ghost}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokensByProp.primary.color references token \"{imported.button.part-1.color.primary}\" which does not exist in tokens/",
-      "astryx.button: anatomy.part-1.tokensByProp.secondary.color references token \"{imported.button.part-1.color.secondary}\" which does not exist in tokens/",
-      "astryx.button: anatomy.root.tokens.line-height references token \"{imported.shared.size-20-0004}\" which does not exist in tokens/"
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+    "leavesAdded": 202,
+    "divergent": [
+      {
+        "token": "imported.button.label.row-rule-color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.label.row-rule-color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.label.row-rule-color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.label.row-rule-color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-0.row-rule-color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-0.row-rule-color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-0.row-rule-color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-0.row-rule-color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-1.row-rule-color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-1.row-rule-color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-1.row-rule-color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-1.row-rule-color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.outline-color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.outline-color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.outline-color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.outline-color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.row-rule-color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.row-rule-color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.row-rule-color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.row-rule-color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": true
+      }
     ]
   },
   "rows": [
     {
       "key": "primary.sm.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.9895833333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 1.4908854166666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.0859375,
       "pctAA": 1.77734375,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7376302083333335,
       "pctAA": 1.4876302083333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -287,161 +296,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.sm.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.734375,
       "pctAA": 0.9537760416666666,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -449,161 +362,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.9895833333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 1.46484375,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.1119791666666665,
       "pctAA": 1.8033854166666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.763671875,
       "pctAA": 1.4778645833333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -611,161 +428,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.md.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7604166666666665,
       "pctAA": 0.9798177083333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -773,161 +494,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.9895833333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.75,
       "pctAA": 1.4778645833333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.1380208333333335,
       "pctAA": 1.8294270833333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 4.505208333333333,
       "pctAA": 1.4973958333333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -935,161 +560,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.8528645833333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "primary.lg.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7864583333333335,
       "pctAA": 1.005859375,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -1097,161 +626,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.9798177083333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.0729166666666665,
       "pctAA": 1.435546875,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.0924479166666665,
       "pctAA": 1.767578125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 3.76953125,
       "pctAA": 1.38671875,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -1259,161 +692,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.sm.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.71484375,
       "pctAA": 0.8170572916666666,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -1421,161 +758,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.9798177083333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 1.4192708333333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.1184895833333335,
       "pctAA": 1.7936197916666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7604166666666665,
       "pctAA": 1.376953125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -1583,161 +824,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.md.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7408854166666665,
       "pctAA": 0.8170572916666666,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -1745,161 +890,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.9798177083333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 2.216796875,
       "pctAA": 1.4029947916666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 3.14453125,
       "pctAA": 1.8196614583333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.978515625,
       "pctAA": 1.3606770833333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -1907,161 +956,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9466145833333333,
       "pctAA": 0.869140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "secondary.lg.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7669270833333335,
       "pctAA": 0.8170572916666666,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -2069,35 +1022,17 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 8.981119791666666,
       "pctAA": 0.986328125,
       "mismatches": [
@@ -2108,41 +1043,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 8.984375,
       "pctAA": 1.5006510416666667,
       "mismatches": [
@@ -2153,41 +1064,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 10.126953125,
       "pctAA": 1.7740885416666667,
       "mismatches": [
@@ -2198,41 +1085,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 113,
+      "channelsEqual": 117,
       "pctExact": 8.981119791666666,
       "pctAA": 1.4225260416666667,
       "mismatches": [
@@ -2244,46 +1107,22 @@
         },
         {
           "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "root",
           "channel": "transform",
           "ours": "matrix(1, 0, 0, 1, 0, 0)",
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 8.96484375,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -2294,41 +1133,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 8.96484375,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -2339,41 +1154,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 8.96484375,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -2384,41 +1175,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.sm.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 113,
+      "channelsEqual": 117,
       "pctExact": 8.981119791666666,
       "pctAA": 0.830078125,
       "mismatches": [
@@ -2430,46 +1197,22 @@
         },
         {
           "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "root",
           "channel": "transform",
           "ours": "matrix(1, 0, 0, 1, 0, 0)",
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 10.283203125,
       "pctAA": 0.986328125,
       "mismatches": [
@@ -2480,41 +1223,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 10.286458333333334,
       "pctAA": 1.50390625,
       "mismatches": [
@@ -2525,41 +1244,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 11.455078125,
       "pctAA": 1.8001302083333333,
       "mismatches": [
@@ -2570,41 +1265,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 113,
+      "channelsEqual": 117,
       "pctExact": 10.283203125,
       "pctAA": 1.4420572916666667,
       "mismatches": [
@@ -2616,46 +1287,22 @@
         },
         {
           "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "root",
           "channel": "transform",
           "ours": "matrix(1, 0, 0, 1, 0, 0)",
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 10.266927083333334,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -2666,41 +1313,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 10.266927083333334,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -2711,41 +1334,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 10.266927083333334,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -2756,41 +1355,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.md.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 113,
+      "channelsEqual": 117,
       "pctExact": 10.283203125,
       "pctAA": 0.830078125,
       "mismatches": [
@@ -2802,46 +1377,22 @@
         },
         {
           "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "root",
           "channel": "transform",
           "ours": "matrix(1, 0, 0, 1, 0, 0)",
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 11.585286458333334,
       "pctAA": 0.986328125,
       "mismatches": [
@@ -2852,41 +1403,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 11.588541666666666,
       "pctAA": 1.5006510416666667,
       "mismatches": [
@@ -2897,41 +1424,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 12.783203125,
       "pctAA": 1.826171875,
       "mismatches": [
@@ -2942,41 +1445,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 113,
+      "channelsEqual": 117,
       "pctExact": 11.585286458333334,
       "pctAA": 1.4029947916666667,
       "mismatches": [
@@ -2988,46 +1467,22 @@
         },
         {
           "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "root",
           "channel": "transform",
           "ours": "matrix(1, 0, 0, 1, 0, 0)",
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 11.569010416666666,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -3038,41 +1493,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 11.569010416666666,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -3083,41 +1514,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 11.569010416666666,
       "pctAA": 0.8723958333333334,
       "mismatches": [
@@ -3128,41 +1535,17 @@
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "ghost.lg.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 113,
+      "channelsEqual": 117,
       "pctExact": 11.585286458333334,
       "pctAA": 0.830078125,
       "mismatches": [
@@ -3174,133 +1557,55 @@
         },
         {
           "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "root",
           "channel": "transform",
           "ours": "matrix(1, 0, 0, 1, 0, 0)",
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.9895833333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 1.494140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 3.8802083333333335,
       "pctAA": 2.4641927083333335,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "outline-color",
@@ -3308,44 +1613,20 @@
           "theirs": "rgba(227, 25, 59, 1)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.734375,
       "pctAA": 1.5266927083333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -3353,161 +1634,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.sm.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.724609375,
       "pctAA": 0.9505208333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -3515,122 +1700,50 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.9895833333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 1.4973958333333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 3.9322916666666665,
       "pctAA": 2.5162760416666665,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "outline-color",
@@ -3638,44 +1751,20 @@
           "theirs": "rgba(227, 25, 59, 1)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7604166666666665,
       "pctAA": 1.5397135416666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -3683,161 +1772,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.md.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7506510416666665,
       "pctAA": 0.9765625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -3845,122 +1838,50 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.no-isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 0.9895833333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.no-isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.9401041666666667,
       "pctAA": 1.494140625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.no-isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 3.984375,
       "pctAA": 2.568359375,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "outline-color",
@@ -3968,44 +1889,20 @@
           "theirs": "rgba(227, 25, 59, 1)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.no-isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7864583333333335,
       "pctAA": 1.5494791666666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -4013,161 +1910,65 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.isDisabled__default",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.isDisabled__hover",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.isDisabled__focus-visible",
       "channelsCompared": 120,
-      "channelsEqual": 115,
+      "channelsEqual": 119,
       "pctExact": 1.904296875,
       "pctAA": 0.8333333333333334,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     },
     {
       "key": "destructive.lg.isDisabled__active",
       "channelsCompared": 120,
-      "channelsEqual": 114,
+      "channelsEqual": 118,
       "pctExact": 2.7766927083333335,
       "pctAA": 1.0026041666666667,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
         {
           "part": "root",
           "channel": "transform",
@@ -4175,28 +1976,10 @@
           "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
         },
         {
-          "part": "part-0",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
-          "part": "label",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
-        },
-        {
           "part": "part-1",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "part-1",
-          "channel": "line-height",
-          "ours": "24px",
-          "theirs": "20.0004px"
         }
       ]
     }

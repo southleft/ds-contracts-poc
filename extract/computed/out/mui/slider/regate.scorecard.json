@@ -293,6 +293,48 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1348,
+      "divergent": [
+        {
+          "token": "imported.slider.root.color.error",
+          "fresh": "#d32f2f",
+          "shipped": "{palette-error-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.root.color.info",
+          "fresh": "#0288d1",
+          "shipped": "{palette-info-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.root.color.primary",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.root.color.secondary",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.root.color.success",
+          "fresh": "#2e7d32",
+          "shipped": "{palette-success-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.root.color.warning",
+          "fresh": "#ed6c02",
+          "shipped": "{palette-warning-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "primary.small__default",

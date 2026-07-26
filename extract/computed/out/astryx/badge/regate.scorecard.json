@@ -27,9 +27,9 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 1512,
-      "cellsEqual": 1456,
-      "pctEqual": 96.29629629629629,
-      "rowsFullyEqual": 0,
+      "cellsEqual": 1512,
+      "pctEqual": 100,
+      "rowsFullyEqual": 56,
       "rows": 56
     },
     "pixel": {
@@ -57,959 +57,650 @@
         "key": "neutral__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "neutral__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "neutral__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "neutral__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "info__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "info__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "info__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       },
       {
         "key": "info__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 0
       }
     ],
-    "topMismatchedChannels": [
-      [
-        "root.line-height",
-        56
-      ]
-    ],
+    "topMismatchedChannels": [],
     "namedLosses": [],
     "unresolvedTokenRefs": {
-      "count": 1,
-      "refs": [
-        "astryx.badge: anatomy.root.tokens.line-height references token \"{imported.badge.root.line-height}\" which does not exist in tokens/"
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+      "leavesAdded": 223,
+      "divergent": [
+        {
+          "token": "imported.badge.root.row-rule-color.blue",
+          "fresh": "#042f97",
+          "shipped": "{color-text-blue}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.cyan",
+          "fresh": "#014975",
+          "shipped": "{color-text-cyan}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.error",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.green",
+          "fresh": "#09441f",
+          "shipped": "{color-text-green}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.info",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.neutral",
+          "fresh": "#0a1317",
+          "shipped": "{color-text-gray}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.orange",
+          "fresh": "#6b2203",
+          "shipped": "{color-text-orange}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.pink",
+          "fresh": "#650053",
+          "shipped": "{color-text-pink}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.purple",
+          "fresh": "#3e0697",
+          "shipped": "{color-text-purple}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.red",
+          "fresh": "#7b0210",
+          "shipped": "{color-text-red}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.success",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.teal",
+          "fresh": "#083943",
+          "shipped": "{color-text-teal}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.warning",
+          "fresh": "#0a1317",
+          "shipped": "{color-on-warning}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.row-rule-color.yellow",
+          "fresh": "#753f07",
+          "shipped": "{color-text-yellow}",
+          "resolvedEqual": true
+        }
       ]
     },
     "rows": [
       {
         "key": "neutral__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "blue__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "blue__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "blue__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "blue__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "cyan__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "cyan__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "cyan__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "cyan__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "orange__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "orange__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "orange__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "orange__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "pink__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "pink__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "pink__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "pink__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "purple__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "purple__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "purple__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "purple__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "teal__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "teal__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "teal__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "teal__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "yellow__default",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "yellow__hover",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "yellow__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "yellow__active",
         "channelsCompared": 27,
-        "channelsEqual": 26,
+        "channelsEqual": 27,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "line-height",
-            "ours": "24px",
-            "theirs": "20.0004px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

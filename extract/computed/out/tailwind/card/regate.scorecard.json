@@ -109,6 +109,18 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+      "leavesAdded": 268,
+      "divergent": [
+        {
+          "token": "imported.card.root.background-color",
+          "fresh": "#ffffff",
+          "shipped": "{color-white}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "__default",

@@ -25,12 +25,12 @@ import { emitHtml } from '../../core/emit-html.js';
 import { generateCss } from '../../core/emit-react.js';
 import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { mintedTokenCss } from '../../core/mint-tokens.js';
-import { tokenInventoryFromJson } from '../../core/tokens.js';
+import { flattenTokens, makeResolveLiteral, tokenInventoryFromJson, type TokenEntry } from '../../core/tokens.js';
 import { kebab } from '../types.js';
 import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
 import { INTERACTIONS, stageFor } from './capture.js';
-import { isFusable, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl } from './lib.js';
+import { isFusable, kindOf, mergeShippedMinted, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl, type MintedMerge } from './lib.js';
 import type { AlignedSweep } from './fuse.js';
 
 export interface GateRow {
@@ -92,8 +92,33 @@ export interface Scorecard {
    *  collapse that read as "engine regression". The census runs the emitters'
    *  OWN referee (core/emit-react generateCss) over the same inventory the
    *  page renders with, so an unresolvable ref is a NAMED number, never a
-   *  silent one. Zero here means every ref the page emits has a value. */
+   *  silent one. Zero here means every ref the page emits has a value.
+   *
+   *  The CAUSE that census exposed was fixed later, in task #21: the
+   *  inventory itself was wrong (see `shippedMinted` below). Every one of the
+   *  36 committed components now measures zero — so a non-zero count is a
+   *  genuinely dangling ref, not an artifact of what the gate can see. */
   unresolvedTokenRefs: { count: number; refs: string[] };
+  /** GATE-INVENTORY FIX (task #21). The gate measures the fidelity of the
+   *  SHIPPED truth, so its inventory must be the token set the shipped
+   *  contract can actually see: `cfg.tokens.dtcg` + this run's FRESH mint +
+   *  the library's SHIPPED minted tree (`cfg.tokens.minted`), fresh winning
+   *  every collision. Before the fix the shipped tree was in neither the
+   *  inventory nor the rendered custom properties, so every reviewed-layer
+   *  ref the current mint no longer produces rendered EMPTY and the score
+   *  fell silently (astryx Slider 55.299 with 44 such refs — all 44 present
+   *  in the shipped tree). `leavesAdded` is how many leaves the shipped tree
+   *  contributed; `divergent` names every leaf BOTH trees carry with
+   *  different values — fresh wins, but a divergence is a candidate real
+   *  regression and is never chosen in silence. */
+  shippedMinted: {
+    path: string;
+    leavesAdded: number;
+    /** `resolvedEqual` separates a RE-ANCHORING (the shipped tree aliases an
+     *  equal-valued semantic token — same paint, different spelling) from a
+     *  real value disagreement, which is the regression candidate. */
+    divergent: Array<{ token: string; fresh: string; shipped: string; resolvedEqual: boolean }>;
+  };
   rows: GateRow[];
 }
 
@@ -127,6 +152,31 @@ function withComboAsDefaults(contract: Contract, space: PropSpace, combo: Combo,
   return clone;
 }
 
+/**
+ * THE GATE'S TOKEN INVENTORY (task #21) — `cfg.tokens.dtcg` + this run's
+ * FRESH mint + the library's SHIPPED minted tree, fresh winning every
+ * collision. See `Scorecard.shippedMinted` for why the shipped tree belongs
+ * in it and `mergeShippedMinted` for why fresh wins.
+ *
+ * Exported because the harness (`run.ts`) and the offline runner
+ * (`regate.ts`) referee HUMAN-ACKED DECISIONS against "the SAME inventory the
+ * gate renders with" before handing the contract to the gate. That sentence
+ * was in both files as a comment and was true only by coincidence; it is now
+ * true by construction — one function, three callers.
+ */
+export function gateInventory(
+  repoRoot: string,
+  cfg: CaptureConfig,
+  mintedTree: Record<string, unknown>,
+): { inventory: Set<string>; merged: MintedMerge; baseTrees: Array<Record<string, unknown>> } {
+  const shipped = cfg.tokens.minted
+    ? (JSON.parse(readFileSync(path.join(repoRoot, cfg.tokens.minted), 'utf8')) as Record<string, unknown>)
+    : {};
+  const merged = mergeShippedMinted(mintedTree, shipped);
+  const baseTrees = cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(repoRoot, p), 'utf8')) as Record<string, unknown>);
+  return { inventory: tokenInventoryFromJson([...baseTrees, merged.tree]), merged, baseTrees };
+}
+
 export async function runGate(opts: {
   page: Page;
   repoRoot: string;
@@ -154,10 +204,54 @@ export async function runGate(opts: {
   const iconAssets = opts.iconAssets ?? new Map<string, string>();
   const k = kebab(enriched.name);
   const tokensCss = readFileSync(path.join(repoRoot, cfg.tokens.css), 'utf8');
-  const inventory = tokenInventoryFromJson([
-    ...cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(repoRoot, p), 'utf8')) as Record<string, unknown>),
-    mintedTree,
-  ]);
+  const { inventory, merged, baseTrees } = gateInventory(repoRoot, cfg, mintedTree);
+
+  // A divergence between the fresh and shipped spellings of the same leaf is
+  // only a REGRESSION CANDIDATE if the two RESOLVE differently: the
+  // re-anchoring/alias passes replaced literals with aliases to equal-valued
+  // semantic tokens ('#4e606f' → '{color-text-secondary}' = '#4E606F'), and
+  // reporting that as a value disagreement would cry wolf. Both classes are
+  // recorded; only the unequal ones are a finding.
+  //
+  // COLOUR NOTATION IS NOT COLOUR. The mint writes 8-digit hex, the libraries
+  // write '#fff' and 'rgba(0, 0, 0, 0.6)' — string comparison called 34 of
+  // those pairs "different" on the first cut when every one of them paints the
+  // identical pixel. Colours are canonicalized through the SAME kindOf the
+  // mint itself uses (rgba/oklch → hex, shorthand expanded, alpha explicit);
+  // anything that is not a colour compares as a trimmed lowercase string.
+  const all = new Map<string, TokenEntry>();
+  for (const t of [...baseTrees, merged.tree]) for (const [p, e] of flattenTokens(t)) all.set(p, e);
+  const resolve = makeResolveLiteral(all);
+  const canonColor = (s: string): string | null => {
+    const hex = /^#([0-9a-f]{3,8})$/i.exec(s);
+    if (hex) {
+      let h = hex[1].toLowerCase();
+      if (h.length === 3 || h.length === 4) h = [...h].map((c) => c + c).join('');
+      if (h.length === 6) h += 'ff';
+      return h.length === 8 ? h : null;
+    }
+    const k = kindOf('color', s);
+    if (!k || k.kind !== 'color') return null;
+    const h = String(k.value).toLowerCase();
+    return h.length === 6 ? `${h}ff` : h;
+  };
+  const literal = (v: string): string => {
+    const ref = /^\{([^}]+)\}$/.exec(v);
+    let raw: string;
+    try {
+      raw = String(ref ? resolve(ref[1]) : v).trim();
+    } catch {
+      return `UNRESOLVABLE(${v})`;
+    }
+    return canonColor(raw) ?? raw.toLowerCase();
+  };
+  const divergent = merged.divergent.map((d) => ({ ...d, resolvedEqual: literal(d.fresh) === literal(d.shipped) }));
+  const realDivergences = divergent.filter((d) => !d.resolvedEqual);
+  if (realDivergences.length > 0) {
+    console.log(
+      `    ⚠ ${comp.name}: ${realDivergences.length} minted leaf/leaves RESOLVE DIFFERENTLY between this run's FRESH mint and the SHIPPED tree — fresh wins (the run's own measurement) and each is named in the scorecard; a real library change looks exactly like this. First: ${realDivergences[0].token} fresh=${realDivergences[0].fresh} shipped=${realDivergences[0].shipped}`,
+    );
+  }
 
   // UNRESOLVED-REF CENSUS — see Scorecard.unresolvedTokenRefs. generateCss is
   // the emitters' existing referee for "{path} does not exist in tokens/"; it
@@ -194,7 +288,7 @@ export async function runGate(opts: {
   }
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 ${tokensCss}
-${mintedTokenCss(mintedTree)}
+${mintedTokenCss(merged.tree)}
 ${first.css}
 /* gate chrome (named): page font = the library's own sans token; the stage
    is byte-identical to the capture stage; the showcase chrome collapses via
@@ -381,6 +475,11 @@ ${stages.join('\n')}
     topMismatchedChannels: [...mismatchByChannel.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15),
     namedLosses: opts.namedLosses,
     unresolvedTokenRefs: { count: unresolvedRefs.length, refs: unresolvedRefs.slice(0, 40) },
+    shippedMinted: {
+      path: cfg.tokens.minted ?? '(none declared)',
+      leavesAdded: merged.added.length,
+      divergent,
+    },
     rows,
   };
   return scorecard;

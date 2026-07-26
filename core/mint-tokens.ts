@@ -55,7 +55,7 @@
  *
  * Pure module (no node:* imports) — part of the browser-importable core.
  */
-import { flattenTokens } from './tokens.js';
+import { aliasTarget, flattenTokens } from './tokens.js';
 
 /** Every minted path lives under this namespace — the receipt's invariant
  *  that no minted name can be mistaken for a semantic token. */
@@ -454,9 +454,19 @@ export function mintTokens(
  *  custom-property spelling the emitters reference (var(--a-b-c)), so a page
  *  that includes this block renders the minted bindings at literal fidelity. */
 export function mintedTokenCss(tree: Record<string, unknown>): string {
+  const dashed = (p: string) => p.split('.').join('-');
   const lines = [':root {'];
   for (const [path, entry] of flattenTokens(tree)) {
-    lines.push(`  --${path.split('.').join('-')}: ${String(entry.value)};`);
+    // DTCG ALIAS ({other.token}) — a fresh mint emits literals only, but a
+    // SHIPPED minted tree can carry aliases (astryx's re-anchoring round
+    // aliased 54 of 237 leaves; mui 73, tailwind 21). Printed raw they were
+    // invalid CSS (`--imported-shared-color-0064e0: {color-accent};`), which
+    // is a silent empty custom property wherever a shipped tree is rendered
+    // — including the fidelity gate now that it carries one (task #21).
+    // var() is the faithful spelling: it keeps the alias a REFERENCE, so the
+    // library's own stylesheet (and its modes) still decide the value.
+    const target = aliasTarget(entry.value);
+    lines.push(`  --${dashed(path)}: ${target ? `var(--${dashed(target)})` : String(entry.value)};`);
   }
   lines.push('}');
   return lines.join('\n');

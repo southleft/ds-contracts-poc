@@ -212,6 +212,120 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1385,
+      "divergent": [
+        {
+          "token": "imported.chip.root.background-color.filled.error",
+          "fresh": "#d32f2f",
+          "shipped": "{palette-error-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.background-color.filled.info",
+          "fresh": "#0288d1",
+          "shipped": "{palette-info-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.background-color.filled.primary",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.background-color.filled.secondary",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.background-color.filled.success",
+          "fresh": "#2e7d32",
+          "shipped": "{palette-success-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.background-color.filled.warning",
+          "fresh": "#ed6c02",
+          "shipped": "{palette-warning-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.filled.error",
+          "fresh": "#ffffff",
+          "shipped": "{palette-error-contrast-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.filled.info",
+          "fresh": "#ffffff",
+          "shipped": "{palette-info-contrast-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.filled.primary",
+          "fresh": "#ffffff",
+          "shipped": "{palette-primary-contrast-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.filled.secondary",
+          "fresh": "#ffffff",
+          "shipped": "{palette-secondary-contrast-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.filled.success",
+          "fresh": "#ffffff",
+          "shipped": "{palette-success-contrast-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.filled.warning",
+          "fresh": "#ffffff",
+          "shipped": "{palette-warning-contrast-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.outlined.error",
+          "fresh": "#d32f2f",
+          "shipped": "{palette-error-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.outlined.info",
+          "fresh": "#0288d1",
+          "shipped": "{palette-info-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.outlined.primary",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.outlined.secondary",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.outlined.success",
+          "fresh": "#2e7d32",
+          "shipped": "{palette-success-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.chip.root.color.outlined.warning",
+          "fresh": "#ed6c02",
+          "shipped": "{palette-warning-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "filled.default.small__default",

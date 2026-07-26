@@ -35,7 +35,7 @@ import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { chromiumExecutable } from '../figma/visual-parity/render.js';
 import { mintTokens } from '../../core/mint-tokens.js';
-import { flattenTokens, tokenInventoryFromJson } from '../../core/tokens.js';
+import { flattenTokens } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import {
@@ -72,7 +72,7 @@ import {
   type ReplaySpec,
   type TruthCaptureEntry,
 } from './replay.js';
-import { runGate } from './gate.js';
+import { gateInventory, runGate } from './gate.js';
 import { promoteAnatomy } from './anatomy.js';
 import { labeledPair } from './label-png.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
@@ -454,13 +454,16 @@ async function main() {
     if (existsSync(decisionsPath)) {
       const decisions = JSON.parse(readFileSync(decisionsPath, 'utf8')) as AckedDecision[];
       const resolved = structuredClone(enriched) as Contract;
-      // Apply-time value check: the SAME inventory the gate renders with
-      // (cfg.tokens.dtcg + the minted tree), so an acked resolution that
-      // cannot resolve is refused by name instead of rendering empty.
-      const decisionInventory = tokenInventoryFromJson([
-        ...cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(REPO, p), 'utf8')) as Record<string, unknown>),
-        mergedTree,
-      ]);
+      // Apply-time value check: the SAME inventory the gate renders with —
+      // now literally the same function (gate.ts gateInventory: cfg.tokens
+      // .dtcg + the fresh mint + the SHIPPED minted tree), so an acked
+      // resolution that cannot resolve is refused by name instead of
+      // rendering empty, and the two referees cannot drift apart. Measured
+      // no-op at the time it landed: no committed ledger in any of the four
+      // libraries targets an `imported.*` ref (pinned by
+      // decision-ledger-value-check), so the widened inventory admits
+      // nothing new today — it removes a twin of the gate defect.
+      const { inventory: decisionInventory } = gateInventory(REPO, cfg, mergedTree);
       const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
       decisionNotes = [
         ...applied.map((a) => `decision re-applied: ${a}`),

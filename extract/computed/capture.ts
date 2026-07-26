@@ -214,7 +214,29 @@ export interface CaptureConfig {
   };
   /** DTCG token files whose custom-property spellings the bound-probe and
    *  the fidelity gate resolve against (repo-relative). */
-  tokens: { dtcg: string[]; css: string };
+  tokens: {
+    dtcg: string[];
+    css: string;
+    /** The library's SHIPPED minted tree (`examples/<lib>/tokens/<lib>-minted
+     *  .dtcg.json`) — the `imported.*` leaves a PREVIOUS round promoted.
+     *
+     *  GATE-INVENTORY FIX (task #21, docs/20-regate-drift.md): a shipped
+     *  contract's REVIEWED layer binds those leaves, and fusion preserves
+     *  reviewed bindings by design — so a fresh run mints AROUND them and
+     *  never re-creates them. A gate whose inventory is base + fresh mint
+     *  only therefore scores the SHIPPED truth against a token set the
+     *  shipped contract was never promoted against: the refs render as EMPTY
+     *  custom properties (black text, missing fills) and the score falls
+     *  silently (astryx Slider measured 55.299 with 44 such refs, every one
+     *  of them present in the shipped tree). The gate merges this tree UNDER
+     *  the fresh mint — fresh wins, divergences are NAMED in the scorecard.
+     *
+     *  Optional only because a library that has never promoted a minted tree
+     *  has none; every library in `extract/computed/configs/` carries it and
+     *  the eval `gate-inventory-shipped-minted` refuses a config that does
+     *  not (an absent path is exactly how this defect stayed invisible). */
+    minted?: string;
+  };
   /** Optional repo-relative dir of committed icon assets (`<name>.svg`) —
    *  contracts whose anatomy carries `icon.asset` refs (Spinner) need the
    *  same asset map the showcase generators use for validation + the gate. */
@@ -236,6 +258,14 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
   // deletes it — the runner refuses by name, never captures from a draft.
   if ((cfg as unknown as Record<string, unknown>)[DRAFT_MARKER_KEY] !== undefined) {
     throw new Error(`REFUSED: ${draftRefusalMessage(configPath)}`);
+  }
+  // GATE-INVENTORY FIX (task #21): a MISSING shipped minted tree would drop
+  // the gate silently back to fresh-mint-only inventory — the exact defect —
+  // so a declared path that does not exist is refused by name at load.
+  if (cfg.tokens.minted && !existsSync(path.join(repoRoot, cfg.tokens.minted))) {
+    throw new Error(
+      `tokens.minted not found: ${cfg.tokens.minted} — the fidelity gate would fall back to the FRESH mint only and score the shipped contract's reviewed refs as unresolved (docs/20-regate-drift.md)`,
+    );
   }
   for (const c of cfg.components) {
     const contractPath = path.join(repoRoot, c.contract);

@@ -456,6 +456,6 @@ Minted leaves WITHOUT folding: **181** → WITH folding: **41** (35 folded chann
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **95.391%** (10989/11520 cells; 0/96 combo×state rows fully equal)
+- computed-equality (styled channels, contract-mediated): **98.724%** (11373/11520 cells; 0/96 combo×state rows fully equal)
 - pixel: 0/96 pairs perfect at threshold 0 · 0/96 at the AA point (mean AA 1.171%, max 2.568%)
 

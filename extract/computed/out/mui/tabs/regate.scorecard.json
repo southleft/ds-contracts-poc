@@ -394,6 +394,60 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1454,
+      "divergent": [
+        {
+          "token": "imported.tabs.label-2.color.primary",
+          "fresh": "#00000099",
+          "shipped": "{palette-text-secondary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.label-2.color.secondary",
+          "fresh": "#00000099",
+          "shipped": "{palette-text-secondary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.label-3.color.primary",
+          "fresh": "#00000099",
+          "shipped": "{palette-text-secondary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.label-3.color.secondary",
+          "fresh": "#00000099",
+          "shipped": "{palette-text-secondary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.label.color.primary",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.label.color.secondary",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.tabs-indicator.background-color.primary",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.tabs-indicator.background-color.secondary",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "primary.primary__default",

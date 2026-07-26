@@ -159,6 +159,30 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+      "leavesAdded": 219,
+      "divergent": [
+        {
+          "token": "imported.badge.root.background-color.info",
+          "fresh": "#cefafe",
+          "shipped": "{color-cyan-100}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.info",
+          "fresh": "#005f78",
+          "shipped": "{color-cyan-800}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.font-weight",
+          "fresh": "600",
+          "shipped": "{font-weight-semibold}",
+          "resolvedEqual": true
+        }
+      ]
+    },
     "rows": [
       {
         "key": "info.xs__default",

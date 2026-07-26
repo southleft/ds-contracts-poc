@@ -19,7 +19,8 @@
     "dtcg": [
       "examples/astryx/tokens/astryx.dtcg.json"
     ],
-    "css": "examples/astryx/tokens/astryx.vars.css"
+    "css": "examples/astryx/tokens/astryx.vars.css",
+    "minted": "examples/astryx/tokens/astryx-minted.dtcg.json"
   },
   "browser": {
     "viewport": {

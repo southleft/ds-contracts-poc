@@ -19,7 +19,8 @@
     "dtcg": [
       "examples/mui/tokens/mui.dtcg.json"
     ],
-    "css": "examples/mui/tokens/mui.vars.css"
+    "css": "examples/mui/tokens/mui.vars.css",
+    "minted": "examples/mui/tokens/mui-minted.dtcg.json"
   },
   "browser": {
     "viewport": {

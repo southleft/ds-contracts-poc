@@ -383,6 +383,11 @@
       "count": 0,
       "refs": []
     },
+    "shippedMinted": {
+      "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+      "leavesAdded": 213,
+      "divergent": []
+    },
     "rows": [
       {
         "key": "start.no-isDisabled__default",
